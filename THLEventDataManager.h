@@ -22,7 +22,13 @@
 - (void)cleanUpEvents;
 @end
 
+@class THLEventDataStore;
+@class THLEventFetchService;
 
 @interface THLEventDataManager : NSObject<THLEventDataManagerInterface>
+@property (nonatomic, readonly) THLEventDataStore *dataStore;
+@property (nonatomic, readonly) THLEventFetchService *fetchService;
 
+- (instancetype)initWithDataStore:(THLEventDataStore *)dataStore
+					 fetchService:(THLEventFetchService *)fetchService;
 @end
