@@ -196,7 +196,6 @@
 				21CCEDFD1B87D9380066CDAC /* Data Managers */,
 				21CCEDD21B87C27D0066CDAC /* Data Stores */,
 				21CCEDD11B87C24A0066CDAC /* Models */,
-				21E3A8B21B8644F10064685F /* Framework */,
 				2174A0661B863F6A006826D7 /* Hypelist2point0 */,
 				2174A0801B863F6A006826D7 /* Hypelist2point0Tests */,
 				2174A0651B863F6A006826D7 /* Products */,
@@ -390,13 +389,6 @@
 				21CCEDFF1B87D9560066CDAC /* THLEventDataManager.m */,
 			);
 			name = "Data Managers";
-			sourceTree = "<group>";
-		};
-		21E3A8B21B8644F10064685F /* Framework */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Framework;
 			sourceTree = "<group>";
 		};
 		21EBFBFD1B87AE9F006646E9 /* Parse Module */ = {
