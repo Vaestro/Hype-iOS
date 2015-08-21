@@ -1,0 +1,154 @@
+PODS:
+  - APAddressBook (0.1.11):
+    - APAddressBook/Core (= 0.1.11)
+  - APAddressBook/Core (0.1.11)
+  - BFKit (1.7.0)
+  - BlocksKit (2.2.5):
+    - BlocksKit/All (= 2.2.5)
+  - BlocksKit/All (2.2.5):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+    - BlocksKit/MessageUI
+    - BlocksKit/UIKit
+  - BlocksKit/Core (2.2.5)
+  - BlocksKit/DynamicDelegate (2.2.5)
+  - BlocksKit/MessageUI (2.2.5):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+  - BlocksKit/UIKit (2.2.5):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+  - Bolts (1.2.0):
+    - Bolts/AppLinks (= 1.2.0)
+    - Bolts/Tasks (= 1.2.0)
+  - Bolts/AppLinks (1.2.0):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.2.0)
+  - CocoaLumberjack (2.0.1):
+    - CocoaLumberjack/Default (= 2.0.1)
+    - CocoaLumberjack/Extensions (= 2.0.1)
+  - CocoaLumberjack/Core (2.0.1)
+  - CocoaLumberjack/Default (2.0.1):
+    - CocoaLumberjack/Core
+  - CocoaLumberjack/Extensions (2.0.1):
+    - CocoaLumberjack/Default
+  - Crashlytics (3.1.0)
+  - DateTools (1.6.1)
+  - Digits (1.9.0)
+  - EKAlgorithms (0.2)
+  - Fabric (1.2.8):
+    - Fabric/Base (= 1.2.8)
+  - Fabric/Base (1.2.8)
+  - FBSDKCoreKit (4.5.1):
+    - Bolts (~> 1.1)
+    - FBSDKCoreKit/arc (= 4.5.1)
+    - FBSDKCoreKit/no-arc (= 4.5.1)
+  - FBSDKCoreKit/arc (4.5.1):
+    - Bolts (~> 1.1)
+  - FBSDKCoreKit/no-arc (4.5.1):
+    - Bolts (~> 1.1)
+    - FBSDKCoreKit/arc
+  - FBSDKLoginKit (4.5.1):
+    - FBSDKCoreKit
+  - FBSDKShareKit (4.5.1):
+    - FBSDKCoreKit
+  - GCDObjC (0.2.0)
+  - Gizou (0.1.3)
+  - libPhoneNumber-iOS (0.8.7)
+  - LinqToObjectiveC (2.0.0)
+  - Masonry (0.6.2)
+  - NUI (0.5.5):
+    - NUIParse
+  - NUIParse (1.2.1)
+  - ObjectiveSugar (1.1.0)
+  - OCMock (3.1.2)
+  - Parse (1.7.5.3):
+    - Bolts/Tasks (>= 1.2.0)
+  - ParseFacebookUtilsV4 (1.7.5):
+    - Bolts/Tasks (>= 1.2.0)
+    - FBSDKCoreKit (~> 4.0)
+    - FBSDKLoginKit (~> 4.0)
+    - Parse (~> 1.7.5)
+  - ReactiveCocoa (2.5):
+    - ReactiveCocoa/UI (= 2.5)
+  - ReactiveCocoa/Core (2.5):
+    - ReactiveCocoa/no-arc
+  - ReactiveCocoa/no-arc (2.5)
+  - ReactiveCocoa/UI (2.5):
+    - ReactiveCocoa/Core
+  - ReflectableEnum (0.1.1)
+  - Reveal-iOS-SDK (1.5.1)
+  - SSDataSources (0.8.5)
+  - TwitterCore (1.9.0)
+  - YapDatabase (2.7.1):
+    - YapDatabase/standard (= 2.7.1)
+  - YapDatabase/standard (2.7.1):
+    - CocoaLumberjack (~> 2)
+  - YLMoment (0.2.0)
+
+DEPENDENCIES:
+  - APAddressBook
+  - BFKit
+  - BlocksKit (~> 2.2)
+  - Bolts
+  - CocoaLumberjack
+  - Crashlytics
+  - DateTools (~> 1.6)
+  - Digits
+  - EKAlgorithms (~> 0.2)
+  - Fabric
+  - FBSDKCoreKit
+  - FBSDKLoginKit
+  - FBSDKShareKit
+  - GCDObjC (~> 0.2)
+  - Gizou
+  - libPhoneNumber-iOS (~> 0.8)
+  - LinqToObjectiveC (~> 2.0)
+  - Masonry (~> 0.6)
+  - NUI (~> 0.5)
+  - ObjectiveSugar
+  - OCMock (~> 3.1)
+  - Parse
+  - ParseFacebookUtilsV4 (= 1.7.5)
+  - ReactiveCocoa
+  - ReflectableEnum
+  - Reveal-iOS-SDK
+  - SSDataSources (~> 0.8)
+  - TwitterCore
+  - YapDatabase (~> 2.7)
+  - YLMoment (~> 0.2.0)
+
+SPEC CHECKSUMS:
+  APAddressBook: 2c949367b190a993d2cce769a3b20bce8bcf000c
+  BFKit: d2d202d8b5775bc13c60c36692fdc288b0af45c8
+  BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
+  Bolts: d176cb1e0012175589e389a9db49b85e27787576
+  CocoaLumberjack: 019d1361244274a6138c788c6cb80baabc13fb8f
+  Crashlytics: 93e2f86363d53c002c6366a9d87e41f2eaee87c3
+  DateTools: 9bcc89e4f2f9004d8a7a2bd1b49269cf78968e65
+  Digits: be373967dc2c51917941228d79b231340e2a2dca
+  EKAlgorithms: 83488651734ba3a63956fcb783b10e82d2ec3388
+  Fabric: a9eabe53915e9f1db55a84dd2838737928675878
+  FBSDKCoreKit: f335eaf6865e1e1597dee1debfb533045500da47
+  FBSDKLoginKit: 225cc9a388a92916ee3f3bb14422017b6e44b65b
+  FBSDKShareKit: 642034ac9f30793dfd897851b724bb4281750266
+  GCDObjC: adcd9941029e3628de539347d3a6777470a65998
+  Gizou: 93853bf634a9382c257795db052aa9a75e972c43
+  libPhoneNumber-iOS: 1bccd3288375d954b0b904e26061cecaa0fb83d6
+  LinqToObjectiveC: 768f98c62d5b57cb6bdb7ab869e33d0a7a2da29c
+  Masonry: 362e8a1cc0beada4a4c4832d5e863da2a51533be
+  NUI: 53de7278003235deb2a375fe6f04c7a3aa3e49eb
+  NUIParse: 9b6d5a6b782dc654ac6c846d623885080306f07f
+  ObjectiveSugar: a6a25f23d657c19df0a0b972466d5b5ca9f5295c
+  OCMock: a10ea9f0a6e921651f96f78b6faee95ebc813b92
+  Parse: 373adbb1ad2e34d383542c3b28f678c49ebe4881
+  ParseFacebookUtilsV4: 3107725c6f2b69e3a03afe9c3aff35d6ee3e9ba5
+  ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
+  ReflectableEnum: bf9d36f8c35122242125140a22b8921d071989aa
+  Reveal-iOS-SDK: c9c55cad2729c85f6ced415f1b21857c9a2d8ef9
+  SSDataSources: b01170fb23b82acf0649194e9189b0bf5f702681
+  TwitterCore: 98ed97a6047c4ef109522840337e815683ead7e5
+  YapDatabase: e9ff9a189e99268a331575411e8462e4c6df2bc3
+  YLMoment: af44d9d402790049e5490fa6eae9585b89b4090b
+
+COCOAPODS: 0.37.2
