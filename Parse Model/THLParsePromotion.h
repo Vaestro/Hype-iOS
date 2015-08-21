@@ -18,4 +18,5 @@
 @property (nonatomic) int femaleRatio;
 @property (nonatomic, retain) THLParseUser *host;
 @property (nonatomic, retain) THLParseEvent *event;
+@property (nonatomic, retain) NSString *eventId;
 @end

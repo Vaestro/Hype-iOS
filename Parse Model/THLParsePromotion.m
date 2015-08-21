@@ -16,6 +16,7 @@
 @dynamic femaleRatio;
 @dynamic host;
 @dynamic event;
+@dynamic eventId;
 
 + (void)load {
 	[self registerSubclass];

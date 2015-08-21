@@ -6,8 +6,11 @@
 //  Copyright (c) 2015 Hypelist. All rights reserved.
 //
 
+
 #ifndef Hypelist2point0_THLParseModule_h
 #define Hypelist2point0_THLParseModule_h
 
+#import "THLParseMappingModule.h"
+#import "THLParseQueryModule.h"
 
 #endif
