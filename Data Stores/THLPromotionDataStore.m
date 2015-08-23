@@ -16,6 +16,8 @@
 @end
 
 @implementation THLPromotionDataStore
-
++ (NSString *)collectionKey {
+	return @"THLPromotionDataStoreCollectionKey";
+}
 
 @end

@@ -9,5 +9,7 @@
 #import "THLGuestDataStore.h"
 
 @implementation THLGuestDataStore
-
++ (NSString *)collectionKey {
+	return @"THLGuestDataStoreCollectionKey";
+}
 @end

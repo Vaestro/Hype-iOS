@@ -46,8 +46,8 @@
 	return [[self sharedManager] database];
 }
 
-+ (YapDatabaseConnection *)newConnection {
-	return [[self sharedDatabase] newConnection];
+- (YapDatabaseConnection *)newDatabaseConnection {
+	return [_database newConnection];
 }
 
 @end

@@ -7,9 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "THLEventFetchServiceInterface.h"
 
-@class BFTask;
-
-@interface THLEventFetchService : NSObject
-+ (BFTask *)fetchEventsStartingOn:(NSDate *)startDate endingOn:(NSDate *)endDate;
+@interface THLEventFetchService : NSObject<THLEventFetchServiceInterface>
 @end

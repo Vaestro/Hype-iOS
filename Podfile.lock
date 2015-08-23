@@ -2,6 +2,7 @@ PODS:
   - APAddressBook (0.1.11):
     - APAddressBook/Core (= 0.1.11)
   - APAddressBook/Core (0.1.11)
+  - AutoCoding (2.2.1)
   - BFKit (1.7.0)
   - BlocksKit (2.2.5):
     - BlocksKit/All (= 2.2.5)
@@ -88,6 +89,7 @@ PODS:
 
 DEPENDENCIES:
   - APAddressBook
+  - AutoCoding (~> 2.2)
   - BFKit
   - BlocksKit (~> 2.2)
   - Bolts
@@ -107,7 +109,7 @@ DEPENDENCIES:
   - Masonry (~> 0.6)
   - NUI (~> 0.5)
   - ObjectiveSugar
-  - OCMock (~> 3.1)
+  - OCMock (= 3.1.2)
   - Parse
   - ParseFacebookUtilsV4 (= 1.7.5)
   - ReactiveCocoa
@@ -120,6 +122,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   APAddressBook: 2c949367b190a993d2cce769a3b20bce8bcf000c
+  AutoCoding: b47e528426c84346371dd532b8e6458929e4da34
   BFKit: d2d202d8b5775bc13c60c36692fdc288b0af45c8
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   Bolts: d176cb1e0012175589e389a9db49b85e27787576

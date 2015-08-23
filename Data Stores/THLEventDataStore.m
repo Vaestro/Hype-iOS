@@ -7,7 +7,10 @@
 //
 
 #import "THLEventDataStore.h"
+#import "THLEvent.h"
 
 @implementation THLEventDataStore
-
++ (NSString *)collectionKey {
+	return @"THLEventDataStoreCollectionKey";
+}
 @end

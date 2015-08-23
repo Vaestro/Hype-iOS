@@ -14,5 +14,5 @@
 
 + (instancetype)sharedManager;
 + (YapDatabase *)sharedDatabase;
-+ (YapDatabaseConnection *)newConnection;
+- (YapDatabaseConnection *)newDatabaseConnection;
 @end

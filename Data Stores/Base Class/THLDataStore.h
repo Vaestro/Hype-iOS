@@ -7,15 +7,35 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "YapDatabase.h"
 
 @class THLEntity;
 
 typedef BOOL (^DataStoreEntityDomainTest)(THLEntity *entity);
 
-@class YapDatabaseConnection;
-
 @interface THLDataStore : NSObject
 @property (nonatomic, readonly) YapDatabaseConnection *rwConnection;
+@property (nonatomic, readonly) NSInteger numEntities;
+
 + (instancetype)sharedDataStore;
-- (void)processEntities:(NSArray *)entities inDomain:(DataStoreEntityDomainTest)domainTestBlock;
++ (NSString *)collectionKey;
+/**
+ *  Updates the entities in a given domain. If shouldRemove == YES, removes members in the domain 
+ *	who do not have a counterpart in the entites array.
+ */
+- (void)updateWithEntities:(NSArray *)entities
+				  inDomain:(DataStoreEntityDomainTest)domainTestBlock
+	  removeUnusedEntities:(BOOL)shouldRemove;
+
+/**
+ *  Updates the entities in a given domain and removes members in the domain who do not have a
+ *	counterpart in the entites array.
+ */
+- (void)updateWithEntities:(NSArray *)entities
+				  inDomain:(DataStoreEntityDomainTest)domainTest;
+- (NSArray *)entityKeysInDomain:(DataStoreEntityDomainTest)domainBlock;
+- (NSArray *)entitiesInDomain:(DataStoreEntityDomainTest)domainBlock;
+- (void)purge;
+- (void)removeEntitiesInDomain:(DataStoreEntityDomainTest)domainTestBlock;
+- (NSInteger)numEntitiesInDomain:(DataStoreEntityDomainTest)domainTestBlock;
 @end

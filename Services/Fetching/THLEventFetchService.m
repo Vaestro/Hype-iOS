@@ -11,7 +11,7 @@
 
 
 @implementation THLEventFetchService
-+ (BFTask *)fetchEventsStartingOn:(NSDate *)startDate endingOn:(NSDate *)endDate {
+- (BFTask *)fetchEventsStartingOn:(NSDate *)startDate endingOn:(NSDate *)endDate {
 	return [[[THLParseQueryFactory queryForEventsStartingOn:startDate endingOn:endDate] findObjectsInBackground] continueWithSuccessBlock:^id(BFTask *task) {
 		NSArray *events = [(NSArray *)task.result linq_select:^id(THLParseEvent *parseEvent) {
 			return [parseEvent map];

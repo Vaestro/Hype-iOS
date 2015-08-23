@@ -17,6 +17,7 @@ pod 'BFKit'
 pod 'DateTools', '~> 1.6'
 pod 'YapDatabase', '~> 2.7'
 pod 'EKAlgorithms', '~> 0.2'
+pod 'AutoCoding', '~> 2.2'
 
 #Sugar
 pod 'LinqToObjectiveC', '~> 2.0'
@@ -50,8 +51,7 @@ pod 'libPhoneNumber-iOS', '~> 0.8'
 end
 
 target 'Hypelist2point0Tests' do
-pod 'OCMock', '~> 3.1'
+pod 'OCMock', '3.1.2'
 pod "Gizou"
-pod 'PlaceKit'
 end
 

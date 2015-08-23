@@ -8,6 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-@interface THLEntity : NSObject
+@interface THLEntity : NSObject <NSCoding>
 @property (nonatomic, copy) NSString *objectId;
+
+/**
+ *  Updates the entity with another entity of newer information. Returns YES if any fields were 
+ *	changed, otherwise returns NO.
+ */
+//- (BOOL)updateWith:(THLEntity *)newEntity;
+- (BOOL)shouldUpdateWith:(THLEntity *)newEntity;
+- (BOOL)isEquivalentTo:(THLEntity *)cmpEntity;
+
 @end

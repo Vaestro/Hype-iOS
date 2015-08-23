@@ -9,11 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class THLEventDataManager;
-@protocol THLEventDataManagerDelegate <NSObject>
-- (void)eventDataManagerDidUpdateUpcomingEvents:(THLEventDataManager *)dataManager;
-- (void)eventDataManagerDidPurgeAllEvents:(THLEventDataManager *)dataManager;
-- (void)eventDataManagerDidCleanUpEvents:(THLEventDataManager *)dataManager;
-@end
+@protocol THLEventDataManagerDelegate;
 
 @protocol THLEventDataManagerInterface <NSObject>
 @property (nonatomic, weak) id<THLEventDataManagerDelegate> delegate;
@@ -22,13 +18,17 @@
 - (void)cleanUpEvents;
 @end
 
+@protocol THLEventDataManagerDelegate <NSObject>
+- (void)eventDataManagerDidUpdateUpcomingEvents:(THLEventDataManager *)dataManager;
+@end
+
 @class THLEventDataStore;
-@class THLEventFetchService;
+@protocol THLEventFetchServiceInterface;
 
 @interface THLEventDataManager : NSObject<THLEventDataManagerInterface>
 @property (nonatomic, readonly) THLEventDataStore *dataStore;
-@property (nonatomic, readonly) THLEventFetchService *fetchService;
+@property (nonatomic, readonly) id<THLEventFetchServiceInterface> fetchService;
 
 - (instancetype)initWithDataStore:(THLEventDataStore *)dataStore
-					 fetchService:(THLEventFetchService *)fetchService;
+					 fetchService:(id<THLEventFetchServiceInterface>)fetchService;
 @end

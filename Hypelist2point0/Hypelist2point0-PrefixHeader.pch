@@ -19,4 +19,6 @@
 #import "NSDictionary+LinqExtensions.h"
 #import "ObjectiveSugar.h"
 #import "ReflectableEnum.h"
+#import "DateTools.h"
+#import "Bolts.h"
 #endif
