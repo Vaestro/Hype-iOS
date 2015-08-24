@@ -27,13 +27,10 @@ typedef id   (^THLCellCreationBlock)  (id object,               // The object be
 									   id parentView,           // The parent table or collection view
 									   NSIndexPath *indexPath); // Index path for this cell
 
-
 @interface THLViewDataSource : NSObject
-
 <UITableViewDataSource,
 UICollectionViewDataSource>
 
-@property (nonatomic, readonly) YapDatabaseView *view;
 @property (nonatomic, readonly) YapDatabaseViewMappings *mappings;
 @property (nonatomic, readonly) YapDatabaseConnection *connection;
 
@@ -53,10 +50,10 @@ UICollectionViewDataSource>
 @property (nonatomic, weak) UICollectionView *collectionView;
 @property (nonatomic, weak) UITableView *tableView;
 
-- (instancetype)initWithView:(YapDatabaseView *)view
-					mappings:(YapDatabaseViewMappings *)mappings
-				  connection:(YapDatabaseConnection *)connection;
+- (instancetype)initWithMappings:(YapDatabaseViewMappings *)mappings
+						connection:(YapDatabaseConnection *)connection;
 
+- (id)untransformedItemAtIndexPath:(NSIndexPath *)indexPath;
 //- (NSInteger)numberOfSections;
 //- (NSInteger)numberOfItemsInSection:(NSInteger)section;
 //- (id)itemAtIndexPath:(NSIndexPath *)indexPath;

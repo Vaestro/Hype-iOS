@@ -9,10 +9,10 @@
 #ifndef Hypelist2point0_Hypelist2point0_PrefixHeader_pch
 #define Hypelist2point0_Hypelist2point0_PrefixHeader_pch
 
-// Include any system framework and library headers here that should be included in all compilation units.
-// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
-
+#define MAS_SHORTHAND_GLOBALS
+#define MAS_SHORTHAND
 #import "Masonry.h"
+
 #import "ReactiveCocoa.h"
 #import "BFKit.h"
 #import "NSArray+LinqExtensions.h"
@@ -21,4 +21,6 @@
 #import "ReflectableEnum.h"
 #import "DateTools.h"
 #import "Bolts.h"
+
+#import "NSDate+HypeListHelper.h"
 #endif

@@ -52,9 +52,12 @@
 	return _roConnection;
 }
 
+- (YapDatabase *)database {
+	return _databaseManager.database;
+}
 
 - (NSString *)collectionKey {
-	return [NSString stringWithFormat:@"k%@CollectionKey", NSStringFromClass([self class])];
+	return [self.class collectionKey];
 }
 
 - (void)updateWithEntities:(NSArray *)entities

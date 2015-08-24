@@ -11,6 +11,9 @@
 #import "THLEventDiscoveryView.h"
 #import "THLEventDiscoveryWireframe.h"
 #import "THLEventDiscoveryInteractor.h"
+#import "THLViewDataSource.h"
+#import "THLEvent.h"
+#import "THLEventDiscoveryCellViewModel.h"
 
 @interface THLEventDiscoveryPresenter()
 @property (nonatomic, weak) THLEventDiscoveryWireframe *wireframe;
@@ -28,10 +31,26 @@
 }
 
 - (void)configureView:(id<THLEventDiscoveryView>)view {
+	THLViewDataSource *dataSource = [_interactor generateDataSource];
+	dataSource.dataTransformBlock = ^id(THLEvent *event) {
+		return [[THLEventDiscoveryCellViewModel alloc] initWithEvent:event];
+	};
 
+	[view setDataSource:dataSource];
+
+	RACCommand *selectedIndexPathCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+		[self handleIndexPathSelection:(NSIndexPath *)input];
+		return [RACSignal empty];
+	}];
+
+	[view setSelectedIndexPathCommand:selectedIndexPathCommand];
 }
 
 - (void)presentEventDiscoveryInterfaceInWindow:(UIWindow *)window {
 
+}
+
+- (void)handleIndexPathSelection:(NSIndexPath *)indexPath {
+	NSLog(@"Selected indexPath: %@", indexPath);
 }
 @end

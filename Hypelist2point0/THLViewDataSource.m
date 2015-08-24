@@ -16,11 +16,9 @@
 @end
 
 @implementation THLViewDataSource
-- (instancetype)initWithView:(YapDatabaseView *)view
-					mappings:(YapDatabaseViewMappings *)mappings
-				  connection:(YapDatabaseConnection *)connection {
+- (instancetype)initWithMappings:(YapDatabaseViewMappings *)mappings
+					  connection:(YapDatabaseConnection *)connection {
 	if (self = [super init]) {
-		_view = view;
 		_mappings = mappings;
 		_connection = connection;
 		[self beginObservingChanges];
@@ -66,7 +64,7 @@
 	NSArray *sectionChanges = nil;
 	NSArray *rowChanges = nil;
 
-	[(id)_view getSectionChanges:&sectionChanges
+	[[_connection ext:_mappings.view] getSectionChanges:&sectionChanges
 					  rowChanges:&rowChanges
 				forNotifications:notifications
 					withMappings:_mappings];
@@ -82,16 +80,16 @@
 	}
 }
 #pragma mark - Item Accessing
-- (id)untransforedItemAtIndexPath:(NSIndexPath *)indexPath {
+- (id)untransformedItemAtIndexPath:(NSIndexPath *)indexPath {
 	__block id untransformedItem;
 	[_connection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
-		untransformedItem = [(id)_view objectAtIndexPath:indexPath withMappings:_mappings];
+		untransformedItem = [[transaction ext:_mappings.view]	objectAtIndexPath:indexPath withMappings:_mappings];
 	}];
 	return untransformedItem;
 }
 
 - (id)transformedItemAtIndexPath:(NSIndexPath *)indexPath {
-	id untransformedItem = [self untransforedItemAtIndexPath:indexPath];
+	id untransformedItem = [self untransformedItemAtIndexPath:indexPath];
 	return (self.dataTransformBlock) ? self.dataTransformBlock(untransformedItem) : untransformedItem;
 }
 

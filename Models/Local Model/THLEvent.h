@@ -7,8 +7,7 @@
 //
 
 #import "THLEntity.h"
-
-@class THLLocation;
+#import "THLLocation.h"
 
 @interface THLEvent : THLEntity
 @property (nonatomic, strong) NSDate *date;

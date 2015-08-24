@@ -7,7 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "THLEventDiscoveryModuleInterface.h"
 
-@interface THLEventDiscoveryWireframe : NSObject
+@class THLEventDataStore;
+@class THLExtensionManager;
+@protocol THLEventFetchServiceInterface;
+
+@interface THLEventDiscoveryWireframe : NSObject<THLEventDiscoveryModuleInterface>
+@property (nonatomic, readonly) THLEventDataStore *eventDataStore;
+@property (nonatomic, readonly) id<THLEventFetchServiceInterface> eventFetchService;
+@property (nonatomic, readonly) THLExtensionManager *extensionManager;
+
+- (instancetype)initWithDataStore:(THLEventDataStore *)dataStore
+					 fetchService:(id<THLEventFetchServiceInterface>)fetchService
+				 extensionManager:(THLExtensionManager *)extensionManager;
 
 @end

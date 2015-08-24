@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "THLEventDiscoveryView.h"
 
-@interface THLEventDiscoveryViewController : UIViewController
+@interface THLEventDiscoveryViewController : UIViewController<THLEventDiscoveryView>
 
 @end

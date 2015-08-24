@@ -7,31 +7,70 @@
 //
 
 #import "THLEventDiscoveryViewController.h"
+#import "THLViewDataSource.h"
+#import "THLEventDiscoveryCell.h"
+#import "THLEventDiscoveryCellViewModel.h"
 
-@interface THLEventDiscoveryViewController ()
-
+@interface THLEventDiscoveryViewController ()<UICollectionViewDelegate>
+@property (nonatomic, strong) UICollectionView *collectionView;
 @end
 
 @implementation THLEventDiscoveryViewController
+@synthesize selectedIndexPathCommand = _selectedIndexPathCommand;
+@synthesize dataSource = _dataSource;
 
+#pragma mark - THLEventDiscoveryView
+- (void)setDataSource:(THLViewDataSource *)dataSource {
+	[self configureDataSource:dataSource];
+	_dataSource = dataSource;
+}
+
+#pragma mark - VC Lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+	[self configureView];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)configureView {
+	_collectionView = [self newCollectionView];
+	[self.view addSubview:_collectionView];
+	[_collectionView makeConstraints:^(MASConstraintMaker *make) {
+		make.edges.insets(UIEdgeInsetsZero);
+	}];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - Constructors
+- (UICollectionView *)newCollectionView {
+	UICollectionViewFlowLayout *flowLayout = [UICollectionViewFlowLayout new];
+	flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+	UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
+	collectionView.alwaysBounceVertical = YES;
+	collectionView.delegate = self;
+	return collectionView;
 }
-*/
 
+- (void)configureDataSource:(THLViewDataSource *)dataSource {
+	_collectionView.dataSource = dataSource;
+
+	[self.collectionView registerClass:[THLEventDiscoveryCell class] forCellWithReuseIdentifier:[THLEventDiscoveryCell identifier]];
+
+	dataSource.cellCreationBlock = (^id(id object, UICollectionView* parentView, NSIndexPath *indexPath) {
+		if ([object isKindOfClass:[THLEventDiscoveryCellViewModel class]]) {
+			return [parentView dequeueReusableCellWithReuseIdentifier:[THLEventDiscoveryCell identifier] forIndexPath:indexPath];
+		}
+		return nil;
+	});
+
+	dataSource.cellConfigureBlock = (^(id cell, id object, id parentView, NSIndexPath *indexPath){
+		if ([object isKindOfClass:[THLEventDiscoveryCellViewModel class]] && [cell conformsToProtocol:@protocol(THLEventDiscoveryCellView)]) {
+			[(THLEventDiscoveryCellViewModel *)object configureView:(id<THLEventDiscoveryCellView>)cell];
+		}
+	});
+
+}
+
+#pragma mark - UICollectionViewDelegate
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+	[_selectedIndexPathCommand execute:indexPath];
+}
 @end

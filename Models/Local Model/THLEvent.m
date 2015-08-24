@@ -7,7 +7,6 @@
 //
 
 #import "THLEvent.h"
-#import "THLLocation.h"
 
 @implementation THLEvent
 - (BOOL)isEquivalentTo:(THLEntity *)cmpEntity {

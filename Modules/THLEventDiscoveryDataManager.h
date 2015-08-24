@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@class THLEventDataStore;
+@protocol THLEventFetchServiceInterface;
+
 @interface THLEventDiscoveryDataManager : NSObject
+@property (nonatomic, readonly) THLEventDataStore *dataStore;
+@property (nonatomic, readonly) id<THLEventFetchServiceInterface> fetchService;
+
+- (instancetype)initWithDataStore:(THLEventDataStore *)dataStore
+					 fetchService:(id<THLEventFetchServiceInterface>)fetchService;
 
 @end

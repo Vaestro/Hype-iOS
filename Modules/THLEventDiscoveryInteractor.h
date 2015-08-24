@@ -8,6 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-@interface THLEventDiscoveryInteractor : NSObject
+@class THLEventDiscoveryDataManager;
+@class THLViewDataSource;
+@class THLExtensionManager;
 
+@interface THLEventDiscoveryInteractor : NSObject
+@property (nonatomic, readonly) THLEventDiscoveryDataManager *dataManager;
+@property (nonatomic, readonly) THLExtensionManager *extensionManager;
+
+- (instancetype)initWithDataManager:(THLEventDiscoveryDataManager *)dataManager
+				   extensionManager:(THLExtensionManager *)extensionManager;
+
+- (THLViewDataSource *)generateDataSource;
 @end

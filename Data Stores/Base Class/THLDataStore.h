@@ -14,6 +14,7 @@
 typedef BOOL (^DataStoreEntityDomainTest)(THLEntity *entity);
 
 @interface THLDataStore : NSObject
+@property (nonatomic, readonly) YapDatabase *database;
 @property (nonatomic, readonly) YapDatabaseConnection *rwConnection;
 @property (nonatomic, readonly) NSInteger numEntities;
 

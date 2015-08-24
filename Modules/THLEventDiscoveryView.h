@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+@class THLViewDataSource;
 
 @protocol THLEventDiscoveryView <NSObject>
-
+@property (nonatomic, assign) THLViewDataSource *dataSource;
+@property (nonatomic, assign) RACCommand *selectedIndexPathCommand;
 @end
