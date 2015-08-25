@@ -9,9 +9,12 @@
 #import <Foundation/Foundation.h>
 @class YapDatabaseExtension;
 @class YapDatabaseConnection;
+@class THLDatabaseManager;
 
 @interface THLExtensionManager : NSObject
-+ (instancetype)sharedManager;
+@property (nonatomic, readonly) THLDatabaseManager *databaseManager;
+
+- (instancetype)initWithDatabaseManager:(THLDatabaseManager *)databaseManager;
 
 - (void)registerExtension:(YapDatabaseExtension *)extension forKey:(NSString *)key;
 - (YapDatabaseConnection *)newConnectionForExtension;

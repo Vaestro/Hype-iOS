@@ -12,7 +12,6 @@
 @interface THLDatabaseManager : NSObject
 @property (nonatomic, readonly) YapDatabase *database;
 
-+ (instancetype)sharedManager;
-+ (YapDatabase *)sharedDatabase;
+- (instancetype)init;
 - (YapDatabaseConnection *)newDatabaseConnection;
 @end

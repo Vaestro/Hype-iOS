@@ -13,27 +13,16 @@
 @interface THLDataStore()
 @property (nonatomic, strong) YapDatabaseConnection *rwConnection;
 @property (nonatomic, strong) YapDatabaseConnection *roConnection;
-@property (nonatomic ,strong) THLDatabaseManager *databaseManager;
 @end
 
 @implementation THLDataStore
-+ (instancetype)sharedDataStore {
-	static THLDataStore *_sharedDataStore = nil;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		_sharedDataStore = [self new];
-	});
-
-	return _sharedDataStore;
-}
-
 + (NSString *)collectionKey {
 	return @"THLDataStoreCollectionKey";
 }
 
-- (instancetype)init {
+- (instancetype)initWithDatabaseManager:(THLDatabaseManager *)databaseManager {
 	if (self = [super init]) {
-		_databaseManager = [THLDatabaseManager sharedManager];
+		_databaseManager = databaseManager;
 	}
 	return self;
 }

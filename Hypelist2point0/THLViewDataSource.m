@@ -46,7 +46,7 @@
 }
 
 - (void)finishObservingChanges {
-
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)yapDatabaseModified:(NSNotification *)notification

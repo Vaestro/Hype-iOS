@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2108A8851B8BBF4900B725F6 /* THLMasterWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 2108A8841B8BBF4900B725F6 /* THLMasterWireframe.m */; };
+		2108A8881B8BBF5B00B725F6 /* THLDependencyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2108A8871B8BBF5B00B725F6 /* THLDependencyManager.m */; };
 		2110058B1B8A1D7B00A540C6 /* THLEventDataManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2110058A1B8A1D7B00A540C6 /* THLEventDataManagerTests.m */; };
 		211005951B8A318400A540C6 /* THLEventDiscoveryPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 211005941B8A318400A540C6 /* THLEventDiscoveryPresenter.m */; };
 		211005981B8A319000A540C6 /* THLEventDiscoveryInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 211005971B8A319000A540C6 /* THLEventDiscoveryInteractor.m */; };
@@ -33,6 +35,7 @@
 		2133BFD21B877EBA002C1DA9 /* THLParsePromotion.m in Sources */ = {isa = PBXBuildFile; fileRef = 2133BFD11B877EBA002C1DA9 /* THLParsePromotion.m */; };
 		21444DB31B879D250016FCFD /* THLParseMapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 21444DB21B879D250016FCFD /* THLParseMapperTests.m */; };
 		21444DB91B879EFE0016FCFD /* THLParseMapperTestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 21444DB81B879EFE0016FCFD /* THLParseMapperTestsHelper.m */; };
+		215D88121B8BEF8F00A3329C /* THLAppearance.nss in Resources */ = {isa = PBXBuildFile; fileRef = 215D88101B8BEF8E00A3329C /* THLAppearance.nss */; };
 		2174A06A1B863F6A006826D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2174A0691B863F6A006826D7 /* main.m */; };
 		2174A06D1B863F6A006826D7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2174A06C1B863F6A006826D7 /* AppDelegate.m */; };
 		2174A0751B863F6A006826D7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2174A0741B863F6A006826D7 /* Images.xcassets */; };
@@ -78,6 +81,10 @@
 
 /* Begin PBXFileReference section */
 		0373A993FBE4FB590855BC00 /* libPods-Hypelist2point0Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hypelist2point0Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2108A8831B8BBF4900B725F6 /* THLMasterWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMasterWireframe.h; sourceTree = "<group>"; };
+		2108A8841B8BBF4900B725F6 /* THLMasterWireframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLMasterWireframe.m; sourceTree = "<group>"; };
+		2108A8861B8BBF5B00B725F6 /* THLDependencyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLDependencyManager.h; sourceTree = "<group>"; };
+		2108A8871B8BBF5B00B725F6 /* THLDependencyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLDependencyManager.m; sourceTree = "<group>"; };
 		2110058A1B8A1D7B00A540C6 /* THLEventDataManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventDataManagerTests.m; sourceTree = "<group>"; };
 		2110058E1B8A2FAC00A540C6 /* THLEventDiscoveryModuleInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventDiscoveryModuleInterface.h; sourceTree = "<group>"; };
 		2110058F1B8A2FCA00A540C6 /* THLEventDiscoveryModuleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventDiscoveryModuleDelegate.h; sourceTree = "<group>"; };
@@ -127,6 +134,11 @@
 		21444DB21B879D250016FCFD /* THLParseMapperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLParseMapperTests.m; sourceTree = "<group>"; };
 		21444DB71B879EFE0016FCFD /* THLParseMapperTestsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLParseMapperTestsHelper.h; sourceTree = "<group>"; };
 		21444DB81B879EFE0016FCFD /* THLParseMapperTestsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLParseMapperTestsHelper.m; sourceTree = "<group>"; };
+		215D880F1B8BEF2000A3329C /* CommonMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonMacros.h; sourceTree = "<group>"; };
+		215D88101B8BEF8E00A3329C /* THLAppearance.nss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = THLAppearance.nss; sourceTree = "<group>"; };
+		215D88111B8BEF8F00A3329C /* THLTweaksConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLTweaksConstants.h; sourceTree = "<group>"; };
+		215D88131B8BEFAD00A3329C /* THLConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLConstants.h; sourceTree = "<group>"; };
+		215D88141B8BEFE900A3329C /* THLStylingConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLStylingConstants.h; sourceTree = "<group>"; };
 		2174A0641B863F6A006826D7 /* Hypelist2point0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hypelist2point0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2174A0681B863F6A006826D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2174A0691B863F6A006826D7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -217,6 +229,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2108A8821B8BBE8100B725F6 /* Dependency Management */ = {
+			isa = PBXGroup;
+			children = (
+				2108A8831B8BBF4900B725F6 /* THLMasterWireframe.h */,
+				2108A8841B8BBF4900B725F6 /* THLMasterWireframe.m */,
+				2108A8861B8BBF5B00B725F6 /* THLDependencyManager.h */,
+				2108A8871B8BBF5B00B725F6 /* THLDependencyManager.m */,
+			);
+			name = "Dependency Management";
+			sourceTree = "<group>";
+		};
 		211005891B8A1D6400A540C6 /* Data Manager Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -238,8 +261,8 @@
 		211005901B8A2FDB00A540C6 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				211005A01B8A355D00A540C6 /* Presenter */,
 				211005A11B8A356200A540C6 /* Wireframe */,
+				211005A01B8A355D00A540C6 /* Presenter */,
 				211005A21B8A356600A540C6 /* View */,
 			);
 			name = UI;
@@ -437,10 +460,10 @@
 		2133BFCF1B877E80002C1DA9 /* Parse Model */ = {
 			isa = PBXGroup;
 			children = (
-				2133BFD01B877EBA002C1DA9 /* THLParsePromotion.h */,
-				2133BFD11B877EBA002C1DA9 /* THLParsePromotion.m */,
 				21BDAE531B878104009D02A3 /* THLParseUser.h */,
 				21BDAE541B878104009D02A3 /* THLParseUser.m */,
+				2133BFD01B877EBA002C1DA9 /* THLParsePromotion.h */,
+				2133BFD11B877EBA002C1DA9 /* THLParsePromotion.m */,
 				21BDAE561B878BD8009D02A3 /* THLParseEvent.h */,
 				21BDAE571B878BD8009D02A3 /* THLParseEvent.m */,
 				21BDAE591B878C4D009D02A3 /* THLParseLocation.h */,
@@ -452,6 +475,7 @@
 		2174A05B1B863F6A006826D7 = {
 			isa = PBXGroup;
 			children = (
+				2108A8821B8BBE8100B725F6 /* Dependency Management */,
 				21BDAE5C1B878E0E009D02A3 /* Modules */,
 				21CCEDEB1B87CDD00066CDAC /* Services */,
 				21CCEDFD1B87D9380066CDAC /* Data Managers */,
@@ -479,6 +503,11 @@
 			isa = PBXGroup;
 			children = (
 				21CCEDFC1B87D7350066CDAC /* Hypelist2point0-PrefixHeader.pch */,
+				215D880F1B8BEF2000A3329C /* CommonMacros.h */,
+				215D88131B8BEFAD00A3329C /* THLConstants.h */,
+				215D88101B8BEF8E00A3329C /* THLAppearance.nss */,
+				215D88111B8BEF8F00A3329C /* THLTweaksConstants.h */,
+				215D88141B8BEFE900A3329C /* THLStylingConstants.h */,
 				2174A06B1B863F6A006826D7 /* AppDelegate.h */,
 				2174A06C1B863F6A006826D7 /* AppDelegate.m */,
 				2174A0741B863F6A006826D7 /* Images.xcassets */,
@@ -797,6 +826,7 @@
 			files = (
 				2174A0781B863F6A006826D7 /* LaunchScreen.xib in Resources */,
 				2174A0751B863F6A006826D7 /* Images.xcassets in Resources */,
+				215D88121B8BEF8F00A3329C /* THLAppearance.nss in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -906,11 +936,13 @@
 				21CCEDE91B87C87B0066CDAC /* THLDataStore.m in Sources */,
 				21BDAE551B878104009D02A3 /* THLParseUser.m in Sources */,
 				21BDAE581B878BD8009D02A3 /* THLParseEvent.m in Sources */,
+				2108A8851B8BBF4900B725F6 /* THLMasterWireframe.m in Sources */,
 				211005981B8A319000A540C6 /* THLEventDiscoveryInteractor.m in Sources */,
 				21CCEDD61B87C2F60066CDAC /* THLPromotionDataStore.m in Sources */,
 				211005BA1B8A5DCC00A540C6 /* THLExtensionManager.m in Sources */,
 				2133BFC21B877C08002C1DA9 /* THLUser.m in Sources */,
 				211005A71B8A372600A540C6 /* THLEventDiscoveryDataManager.m in Sources */,
+				2108A8881B8BBF5B00B725F6 /* THLDependencyManager.m in Sources */,
 				2110059F1B8A351000A540C6 /* THLEventDiscoveryWireframe.m in Sources */,
 				2133BFC81B877C97002C1DA9 /* THLGuest.m in Sources */,
 				21CCEDDF1B87C4B10066CDAC /* THLHostDataStore.m in Sources */,

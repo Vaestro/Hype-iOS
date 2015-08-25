@@ -13,27 +13,18 @@
 
 @interface THLExtensionManager()
 @property (nonatomic, strong) YapDatabaseConnection *connection;
-@property (nonatomic, strong) THLDatabaseManager *databaseManager;
+
 @end
 
 @implementation THLExtensionManager
-+ (instancetype)sharedManager {
-    static THLExtensionManager *_sharedManager = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _sharedManager = [THLExtensionManager new];
-		_sharedManager.databaseManager = [THLDatabaseManager sharedManager];
-    });
-    
-    return _sharedManager;
+- (instancetype)initWithDatabaseManager:(THLDatabaseManager *)databaseManager {
+	if (self = [super init]) {
+		_databaseManager = databaseManager;
+	}
+	return self;
 }
 
-- (THLDatabaseManager *)databaseManager {
-	return [THLDatabaseManager sharedManager];
-}
-
-- (YapDatabaseConnection *)connection
-{
+- (YapDatabaseConnection *)connection {
 	if (!_connection) {
 		_connection = [_databaseManager newDatabaseConnection];
 	}

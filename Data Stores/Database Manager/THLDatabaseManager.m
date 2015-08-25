@@ -8,20 +8,9 @@
 
 #import "THLDatabaseManager.h"
 @interface THLDatabaseManager()
-@property (nonatomic, strong) YapDatabase *database;
 @end
 
 @implementation THLDatabaseManager
-+ (instancetype)sharedManager {
-    static THLDatabaseManager *_sharedManager = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-		_sharedManager = [THLDatabaseManager new];
-    });
-    
-    return _sharedManager;
-}
-
 - (instancetype)init {
 	if (self = [super init]) {
 		[self createDatabase];
@@ -40,10 +29,6 @@
 	NSString *baseDir = ([paths count] > 0) ? paths[0] : NSTemporaryDirectory();
 	NSString *databaseName = @"database.sqlite";
 	return [baseDir stringByAppendingPathComponent:databaseName];
-}
-
-+ (YapDatabase *)sharedDatabase {
-	return [[self sharedManager] database];
 }
 
 - (YapDatabaseConnection *)newDatabaseConnection {

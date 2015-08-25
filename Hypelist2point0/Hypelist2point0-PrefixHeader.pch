@@ -23,4 +23,6 @@
 #import "Bolts.h"
 
 #import "NSDate+HypeListHelper.h"
+#import "CommonMacros.h"
+
 #endif

@@ -10,16 +10,24 @@
 #import "YapDatabase.h"
 
 @class THLEntity;
+@class THLDatabaseManager;
 
 typedef BOOL (^DataStoreEntityDomainTest)(THLEntity *entity);
 
 @interface THLDataStore : NSObject
-@property (nonatomic, readonly) YapDatabase *database;
-@property (nonatomic, readonly) YapDatabaseConnection *rwConnection;
+@property (nonatomic, readonly) THLDatabaseManager *databaseManager;
 @property (nonatomic, readonly) NSInteger numEntities;
 
-+ (instancetype)sharedDataStore;
+
+- (instancetype)initWithDatabaseManager:(THLDatabaseManager *)databaseManager;
+
 + (NSString *)collectionKey;
+
+- (NSArray *)entityKeysInDomain:(DataStoreEntityDomainTest)domainBlock;
+- (NSArray *)entitiesInDomain:(DataStoreEntityDomainTest)domainBlock;
+- (void)removeEntitiesInDomain:(DataStoreEntityDomainTest)domainTestBlock;
+- (NSInteger)numEntitiesInDomain:(DataStoreEntityDomainTest)domainTestBlock;
+
 /**
  *  Updates the entities in a given domain. If shouldRemove == YES, removes members in the domain 
  *	who do not have a counterpart in the entites array.
@@ -34,9 +42,10 @@ typedef BOOL (^DataStoreEntityDomainTest)(THLEntity *entity);
  */
 - (void)updateWithEntities:(NSArray *)entities
 				  inDomain:(DataStoreEntityDomainTest)domainTest;
-- (NSArray *)entityKeysInDomain:(DataStoreEntityDomainTest)domainBlock;
-- (NSArray *)entitiesInDomain:(DataStoreEntityDomainTest)domainBlock;
+
+/**
+ *  Deletes all entities in the Data Store
+ */
 - (void)purge;
-- (void)removeEntitiesInDomain:(DataStoreEntityDomainTest)domainTestBlock;
-- (NSInteger)numEntitiesInDomain:(DataStoreEntityDomainTest)domainTestBlock;
+
 @end

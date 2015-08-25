@@ -8,9 +8,13 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
+#import "THLDependencyManager.h"
+#import "THLMasterWireframe.h"
+
 
 @interface AppDelegate ()
-
+@property (nonatomic, strong) THLMasterWireframe *masterWireframe;
+@property (nonatomic, strong) THLDependencyManager *dependencyManager;
 @end
 
 @implementation AppDelegate
@@ -24,6 +28,12 @@
 	// [Optional] Track statistics around application opens.
 	[PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
 
+	_dependencyManager = [[THLDependencyManager alloc] init];
+	_masterWireframe = [_dependencyManager masterWireframe];
+
+	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+	[_masterWireframe presentAppInWindow:self.window];
+	
 	return YES;
 }
 @end
