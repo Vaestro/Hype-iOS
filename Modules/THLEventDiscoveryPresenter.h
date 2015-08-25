@@ -7,13 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "THLEventDiscoveryModuleInterface.h"
 
 @protocol THLEventDiscoveryView;
 @class THLEventDiscoveryWireframe;
 @class THLEventDiscoveryInteractor;
 
-@interface THLEventDiscoveryPresenter : NSObject<THLEventDiscoveryModuleInterface>
+@interface THLEventDiscoveryPresenter : NSObject
 @property (nonatomic, weak, readonly) THLEventDiscoveryWireframe *wireframe;
 @property (nonatomic, strong, readonly) THLEventDiscoveryInteractor *interactor;
 

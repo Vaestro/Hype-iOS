@@ -10,6 +10,8 @@
 @class THLViewDataSource;
 
 @protocol THLEventDiscoveryView <NSObject>
-@property (nonatomic, assign) THLViewDataSource *dataSource;
-@property (nonatomic, assign) RACCommand *selectedIndexPathCommand;
+@property (nonatomic, strong) THLViewDataSource *dataSource;
+@property (nonatomic, strong) RACCommand *selectedIndexPathCommand;
+@property (nonatomic, strong) RACCommand *refreshCommand;
+@property (nonatomic) BOOL showRefreshAnimation;
 @end

@@ -20,7 +20,7 @@
 
 - (void)setUp {
     [super setUp];
-	_dataStore = [THLEventDataStore sharedDataStore];
+	_dataStore = nil;
 }
 
 - (void)tearDown {

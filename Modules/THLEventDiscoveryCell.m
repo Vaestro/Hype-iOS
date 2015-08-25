@@ -26,7 +26,7 @@
 }
 
 - (void)setupAndLayoutView {
-	
+	self.backgroundColor = [UIColor redColor];
 }
 
 + (NSString *)identifier {

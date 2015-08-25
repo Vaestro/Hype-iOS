@@ -10,6 +10,7 @@
 
 #import "THLEventDataStore.h"
 #import "THLEventFetchServiceInterface.h"
+#import "THLEvent.h"
 
 
 @interface THLEventDiscoveryDataManager()
@@ -26,8 +27,15 @@
 	return self;
 }
 
-- (DTTimePeriod *)eventDisplayPeriod {
-	return [DTTimePeriod timePeriodWithSize:DTTimePeriodSizeWeek amount:1 startingAt:[NSDate date]];
+- (BFTask *)fetchEventsFrom:(NSDate *)startDate to:(NSDate *)endDate {
+	return [[_fetchService fetchEventsStartingOn:startDate endingOn:endDate] continueWithSuccessBlock:^id(BFTask *task) {
+		[_dataStore updateWithEntities:task.result inDomain:^BOOL(THLEntity *entity) {
+			THLEvent *event = (THLEvent *)entity;
+			return ([event.date isLaterThanOrEqualTo:startDate] &&
+					[event.date isEarlierThanOrEqualTo:endDate]);
+		}];
+		return [BFTask taskWithResult:nil];
+	}];
 }
 
 @end

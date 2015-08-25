@@ -10,14 +10,17 @@
 #import "THLViewDataSource.h"
 #import "THLEventDiscoveryCell.h"
 #import "THLEventDiscoveryCellViewModel.h"
+#import "UIScrollView+SVPullToRefresh.h"
 
-@interface THLEventDiscoveryViewController ()<UICollectionViewDelegate>
+@interface THLEventDiscoveryViewController ()<UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 @property (nonatomic, strong) UICollectionView *collectionView;
 @end
 
 @implementation THLEventDiscoveryViewController
 @synthesize selectedIndexPathCommand = _selectedIndexPathCommand;
 @synthesize dataSource = _dataSource;
+@synthesize showRefreshAnimation = _showRefreshAnimation;
+@synthesize refreshCommand = _refreshCommand;
 
 #pragma mark - THLEventDiscoveryView
 - (void)setDataSource:(THLViewDataSource *)dataSource {
@@ -28,14 +31,40 @@
 #pragma mark - VC Lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-	[self configureView];
+	[self layoutView];
+	[self configureBindings];
 }
 
-- (void)configureView {
+- (void)layoutView {
 	_collectionView = [self newCollectionView];
 	[self.view addSubview:_collectionView];
 	[_collectionView makeConstraints:^(MASConstraintMaker *make) {
 		make.edges.insets(UIEdgeInsetsZero);
+	}];
+	self.automaticallyAdjustsScrollViewInsets = YES;
+	self.edgesForExtendedLayout = UIRectEdgeNone;
+}
+
+- (void)configureBindings {
+	WEAKSELF();
+	STRONGSELF();
+	[RACObserve(WSELF, dataSource) subscribeNext:^(THLViewDataSource *dataSource) {
+		[SSELF configureDataSource:dataSource];
+	}];
+
+	[RACObserve(WSELF, showRefreshAnimation) subscribeNext:^(NSNumber *val) {
+		BOOL shouldAnimate = [val boolValue];
+		if (shouldAnimate) {
+			[SSELF.collectionView.pullToRefreshView startAnimating];
+		} else {
+			[SSELF.collectionView.pullToRefreshView stopAnimating];
+		}
+	}];
+
+	[RACObserve(WSELF, refreshCommand) subscribeNext:^(RACCommand *command) {
+		[SSELF.collectionView addPullToRefreshWithActionHandler:^{
+			[command execute:nil];
+		}];
 	}];
 }
 
@@ -46,11 +75,13 @@
 	UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
 	collectionView.alwaysBounceVertical = YES;
 	collectionView.delegate = self;
+	collectionView.backgroundColor = [UIColor blueColor];
 	return collectionView;
 }
 
 - (void)configureDataSource:(THLViewDataSource *)dataSource {
 	_collectionView.dataSource = dataSource;
+	dataSource.collectionView = _collectionView;
 
 	[self.collectionView registerClass:[THLEventDiscoveryCell class] forCellWithReuseIdentifier:[THLEventDiscoveryCell identifier]];
 
@@ -72,5 +103,9 @@
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 	[_selectedIndexPathCommand execute:indexPath];
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+	return CGSizeMake(ViewWidth(collectionView), 200);
 }
 @end

@@ -15,9 +15,12 @@
 #import "THLEvent.h"
 #import "THLEventDiscoveryCellViewModel.h"
 
-@interface THLEventDiscoveryPresenter()
+@interface THLEventDiscoveryPresenter()<THLEventDiscoveryInteractorDelegate>
 @property (nonatomic, weak) THLEventDiscoveryWireframe *wireframe;
 @property (nonatomic, strong) THLEventDiscoveryInteractor *interactor;
+@property (nonatomic, weak) id<THLEventDiscoveryView> view;
+
+@property (nonatomic) BOOL refreshing;
 @end
 
 @implementation THLEventDiscoveryPresenter
@@ -26,6 +29,7 @@
 	if (self = [super init]) {
 		_wireframe = wireframe;
 		_interactor = interactor;
+		_interactor.delegate = self;
 	}
 	return self;
 }
@@ -44,6 +48,20 @@
 	}];
 
 	[view setSelectedIndexPathCommand:selectedIndexPathCommand];
+
+	RACCommand *refreshCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+		[self handleRefreshAction];
+		return [RACSignal empty];
+	}];
+
+	[view setRefreshCommand:refreshCommand];
+
+	_view = view;
+
+	[RACObserve(self, refreshing) subscribeNext:^(NSNumber *b) {
+		BOOL isRefreshing = [b boolValue];
+		[view setShowRefreshAnimation:isRefreshing];
+	}];
 }
 
 - (void)presentEventDiscoveryInterfaceInWindow:(UIWindow *)window {
@@ -52,5 +70,15 @@
 
 - (void)handleIndexPathSelection:(NSIndexPath *)indexPath {
 	NSLog(@"Selected indexPath: %@", indexPath);
+}
+
+- (void)handleRefreshAction {
+	self.refreshing = YES;
+	[_interactor updateEvents];
+}
+
+#pragma mark - InteractorDelegate
+- (void)interactor:(THLEventDiscoveryInteractor *)interactor didUpdateEventsWithSuccess:(BOOL)success error:(NSError *)error {
+	self.refreshing = NO;
 }
 @end

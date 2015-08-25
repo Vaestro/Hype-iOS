@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class THLEventDataStore;
+@class BFTask;
 @protocol THLEventFetchServiceInterface;
 
 @interface THLEventDiscoveryDataManager : NSObject
@@ -18,4 +19,5 @@
 - (instancetype)initWithDataStore:(THLEventDataStore *)dataStore
 					 fetchService:(id<THLEventFetchServiceInterface>)fetchService;
 
+- (BFTask *)fetchEventsFrom:(NSDate *)startDate to:(NSDate *)endDate;
 @end

@@ -22,7 +22,7 @@
 
 - (void)setUp {
     [super setUp];
-	THLExtensionManager *extensionManager = [THLExtensionManager sharedManager];
+	THLExtensionManager *extensionManager = nil;
 	id dataManagerMock = OCMClassMock([THLEventDiscoveryDataManager class]);
 	THLEventDiscoveryInteractor *interactor = [[THLEventDiscoveryInteractor alloc] initWithDataManager:dataManagerMock extensionManager:extensionManager];
 	_interactor = interactor;

@@ -36,6 +36,13 @@ static NSString *const kTHLEventDiscoveryModuleViewKey = @"kTHLEventDiscoveryMod
 	return [DTTimePeriod timePeriodWithSize:DTTimePeriodSizeWeek amount:1 startingAt:[NSDate date]];
 }
 
+- (void)updateEvents {
+	[[_dataManager fetchEventsFrom:self.eventDisplayPeriod.StartDate to:self.eventDisplayPeriod.EndDate] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+		[_delegate interactor:self didUpdateEventsWithSuccess:!task.faulted error:task.error];
+		return nil;
+	}];
+}
+
 
 #pragma mark - DataSource Construction
 - (THLViewDataSource *)generateDataSource {
