@@ -9,14 +9,16 @@
 #import <Foundation/Foundation.h>
 @class THLMasterWireframe;
 @class THLEventDiscoveryWireframe;
+@class THLEventDetailWireframe;
 
 @protocol THLWireframeFactory <NSObject>
 - (THLEventDiscoveryWireframe *)newEventDiscoveryWireframe;
+- (THLEventDetailWireframe *)newEventDetailWireframe;
 @end
 
 /**
  *  Manages all dependenies for the app.
  */
 @interface THLDependencyManager : NSObject<THLWireframeFactory>
-- (THLMasterWireframe *)masterWireframe;
+@property (NS_NONATOMIC_IOSONLY, readonly, strong) THLMasterWireframe *masterWireframe;
 @end

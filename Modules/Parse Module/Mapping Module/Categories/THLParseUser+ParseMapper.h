@@ -10,6 +10,6 @@
 @class THLUser;
 
 @interface THLParseUser (ParseMapper)
-- (THLUser *)map;
+@property (NS_NONATOMIC_IOSONLY, readonly, strong) THLUser *map;
 + (THLParseUser *)unmap:(THLUser *)user;
 @end

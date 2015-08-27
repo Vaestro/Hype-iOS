@@ -19,7 +19,7 @@ typedef BOOL (^DataStoreEntityDomainTest)(THLEntity *entity);
 @property (nonatomic, readonly) NSInteger numEntities;
 
 
-- (instancetype)initWithDatabaseManager:(THLDatabaseManager *)databaseManager;
+- (instancetype)initWithDatabaseManager:(THLDatabaseManager *)databaseManager NS_DESIGNATED_INITIALIZER;
 
 + (NSString *)collectionKey;
 

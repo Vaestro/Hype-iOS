@@ -17,7 +17,7 @@
 @property (nonatomic, readonly) id<THLEventFetchServiceInterface> fetchService;
 
 - (instancetype)initWithDataStore:(THLEventDataStore *)dataStore
-					 fetchService:(id<THLEventFetchServiceInterface>)fetchService;
+					 fetchService:(id<THLEventFetchServiceInterface>)fetchService NS_DESIGNATED_INITIALIZER;
 
 - (BFTask *)fetchEventsFrom:(NSDate *)startDate to:(NSDate *)endDate;
 @end

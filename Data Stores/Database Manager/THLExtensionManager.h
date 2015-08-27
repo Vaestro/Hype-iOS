@@ -14,8 +14,8 @@
 @interface THLExtensionManager : NSObject
 @property (nonatomic, readonly) THLDatabaseManager *databaseManager;
 
-- (instancetype)initWithDatabaseManager:(THLDatabaseManager *)databaseManager;
+- (instancetype)initWithDatabaseManager:(THLDatabaseManager *)databaseManager NS_DESIGNATED_INITIALIZER;
 
 - (void)registerExtension:(YapDatabaseExtension *)extension forKey:(NSString *)key;
-- (YapDatabaseConnection *)newConnectionForExtension;
+@property (NS_NONATOMIC_IOSONLY, readonly, strong) YapDatabaseConnection *newConnectionForExtension;
 @end

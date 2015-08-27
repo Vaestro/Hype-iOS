@@ -23,8 +23,8 @@
 @property (nonatomic, readonly) THLEventDiscoveryDataManager *dataManager;
 @property (nonatomic, readonly) THLExtensionManager *extensionManager;
 - (instancetype)initWithDataManager:(THLEventDiscoveryDataManager *)dataManager
-				   extensionManager:(THLExtensionManager *)extensionManager;
+				   extensionManager:(THLExtensionManager *)extensionManager NS_DESIGNATED_INITIALIZER;
 
-- (THLViewDataSource *)generateDataSource;
+@property (NS_NONATOMIC_IOSONLY, readonly, strong) THLViewDataSource *generateDataSource;
 - (void)updateEvents;
 @end

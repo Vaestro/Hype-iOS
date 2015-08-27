@@ -10,6 +10,6 @@
 @class THLEvent;
 
 @interface THLParseEvent (ParseMapper)
-- (THLEvent *)map;
+@property (NS_NONATOMIC_IOSONLY, readonly, strong) THLEvent *map;
 + (instancetype)unmap:(THLEvent *)event;
 @end

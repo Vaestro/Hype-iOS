@@ -9,7 +9,7 @@
 #import "THLEntity.h"
 
 @interface THLLocation : THLEntity
-@property (nonatomic, copy) NSString *imageURL;
+@property (nonatomic, copy) NSURL *imageURL;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *info;
 @property (nonatomic, copy) NSString *address;
@@ -19,4 +19,6 @@
 @property (nonatomic, copy) NSString *neighborhood;
 @property (nonatomic) double latitude;
 @property (nonatomic) double longitude;
+
+@property (nonatomic, readonly) NSString *fullAddress;
 @end

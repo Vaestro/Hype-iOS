@@ -37,28 +37,4 @@
 	}
 	return didUpdate;
 }
-
-- (BOOL)isEquivalentTo:(THLEntity *)cmpEntity {
-	if ([super isEquivalentTo:cmpEntity]) {
-		BOOL equivalent = YES;
-		THLPromotion *cmpPromotion = (THLPromotion *)cmpEntity;
-		if (![self.time isEqualToDate:cmpPromotion.time]) {
-			equivalent = NO;
-		}
-
-		if (self.maleRatio != cmpPromotion.maleRatio) {
-			equivalent = NO;
-		}
-
-		if (self.femaleRatio != cmpPromotion.femaleRatio) {
-			equivalent = NO;
-		}
-
-		if (![self.event isEquivalentTo:cmpPromotion.event]) {
-			equivalent = NO;
-		}
-		return equivalent;
-	}
-	return NO;
-}
 @end

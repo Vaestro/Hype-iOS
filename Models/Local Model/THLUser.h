@@ -12,7 +12,7 @@
 @property (nonatomic, copy) NSString *firstName;
 @property (nonatomic, copy) NSString *lastName;
 @property (nonatomic, copy) NSString *phoneNumber;
-@property (nonatomic, copy) NSString *imageURL;
+@property (nonatomic, copy) NSURL *imageURL;
 @property (nonatomic) float rating;
 
 @property (nonatomic, readonly) NSString *fullName;

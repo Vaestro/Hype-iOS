@@ -21,7 +21,7 @@
 
 - (BOOL)shouldUpdateWith:(THLEntity *)newEntity {
 	return ([newEntity isKindOfClass:[self class]] &&
-			![self isEquivalentTo:newEntity]);
+			![newEntity.updatedAt isLaterThanDate:self.updatedAt]);
 }
 
 - (BOOL)isEqual:(id)object {

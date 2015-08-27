@@ -10,6 +10,7 @@
 
 @interface THLEntity : NSObject <NSCoding>
 @property (nonatomic, copy) NSString *objectId;
+@property (nonatomic, copy) NSDate *updatedAt;
 
 /**
  *  Updates the entity with another entity of newer information. Returns YES if any fields were 

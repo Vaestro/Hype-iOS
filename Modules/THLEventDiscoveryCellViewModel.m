@@ -28,6 +28,7 @@
 	[cellView setEventName:_event.title];
 	[cellView setLocationNeighborhood:_event.location.neighborhood];
 	[cellView setTime:_event.date.thl_timeString];
+	[cellView setImageURL:_event.location.imageURL];
 }
 
 @end

@@ -18,6 +18,7 @@ pod 'DateTools', '~> 1.6'
 pod 'YapDatabase', '~> 2.7'
 pod 'EKAlgorithms', '~> 0.2'
 pod 'AutoCoding', '~> 2.2'
+pod 'SDWebImage', '~> 3.7'
 
 #Sugar
 pod 'LinqToObjectiveC', '~> 2.0'
@@ -47,7 +48,7 @@ pod 'libPhoneNumber-iOS', '~> 0.8'
 
 #UI
 pod 'SVPullToRefresh'
-
+pod "ORStackView"
 end
 
 target 'Hypelist2point0Tests' do

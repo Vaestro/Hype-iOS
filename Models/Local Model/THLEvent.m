@@ -21,7 +21,7 @@
 			equivalent = NO;
 		}
 
-		if (![self.promoImageURL isEqualToString:cmpEvent.promoImageURL]) {
+		if (![self.promoImageURL isEqual:cmpEvent.promoImageURL]) {
 			equivalent = NO;
 		}
 

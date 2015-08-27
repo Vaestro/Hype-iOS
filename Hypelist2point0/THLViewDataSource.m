@@ -39,6 +39,7 @@
 	[_connection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
 		[_mappings updateWithTransaction:transaction];
 	}];
+	
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(yapDatabaseModified:)
 												 name:YapDatabaseModifiedNotification
@@ -49,8 +50,7 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)yapDatabaseModified:(NSNotification *)notification
-{
+- (void)yapDatabaseModified:(NSNotification *)notification {
 	// Jump to the most recent commit.
 	// End & Re-Begin the long-lived transaction atomically.
 	// Also grab all the notifications for all the commits that I jump.

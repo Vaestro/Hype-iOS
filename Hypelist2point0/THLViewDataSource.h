@@ -51,7 +51,7 @@ UICollectionViewDataSource>
 @property (nonatomic, weak) UITableView *tableView;
 
 - (instancetype)initWithMappings:(YapDatabaseViewMappings *)mappings
-						connection:(YapDatabaseConnection *)connection;
+						connection:(YapDatabaseConnection *)connection NS_DESIGNATED_INITIALIZER;
 
 - (id)untransformedItemAtIndexPath:(NSIndexPath *)indexPath;
 //- (NSInteger)numberOfSections;

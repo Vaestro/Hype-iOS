@@ -14,7 +14,7 @@
 		BOOL equivalent = YES;
 		THLLocation *cmpLocation = (THLLocation *)cmpEntity;
 
-		if (![self.imageURL isEqualToString:cmpLocation.imageURL]) {
+		if (![self.imageURL isEqual:cmpLocation.imageURL]) {
 			equivalent = NO;
 		}
 
@@ -51,4 +51,7 @@
 	return NO;
 }
 
+- (NSString *)fullAddress {
+	return @"FULL ADDRESS!";
+}
 @end

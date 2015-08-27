@@ -10,6 +10,6 @@
 @class THLPromotion;
 
 @interface THLParsePromotion (ParseMapper)
-- (THLPromotion *)map;
+@property (NS_NONATOMIC_IOSONLY, readonly, strong) THLPromotion *map;
 + (instancetype)unmap:(THLPromotion *)promotion;
 @end

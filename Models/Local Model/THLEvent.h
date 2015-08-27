@@ -12,7 +12,7 @@
 @interface THLEvent : THLEntity
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSString *promoImageURL;
+@property (nonatomic, copy) NSURL *promoImageURL;
 @property (nonatomic, copy) NSString *promoInfo;
 @property (nonatomic) float maleCover;
 @property (nonatomic) float femaleCover;

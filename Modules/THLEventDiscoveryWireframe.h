@@ -13,13 +13,15 @@
 @class THLExtensionManager;
 @protocol THLEventFetchServiceInterface;
 
-@interface THLEventDiscoveryWireframe : NSObject<THLEventDiscoveryModuleInterface>
+@interface THLEventDiscoveryWireframe : NSObject
+@property (nonatomic, readonly) id<THLEventDiscoveryModuleInterface> moduleInterface;
+
 @property (nonatomic, readonly) THLEventDataStore *eventDataStore;
 @property (nonatomic, readonly) id<THLEventFetchServiceInterface> eventFetchService;
 @property (nonatomic, readonly) THLExtensionManager *extensionManager;
-
 - (instancetype)initWithDataStore:(THLEventDataStore *)dataStore
 					 fetchService:(id<THLEventFetchServiceInterface>)fetchService
-				 extensionManager:(THLExtensionManager *)extensionManager;
+				 extensionManager:(THLExtensionManager *)extensionManager NS_DESIGNATED_INITIALIZER;
 
+- (void)presentInWindow:(UIWindow *)window;
 @end

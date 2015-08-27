@@ -15,6 +15,6 @@
 @interface THLEventDiscoveryCellViewModel : NSObject
 @property (nonatomic, readonly) THLEvent *event;
 
-- (instancetype)initWithEvent:(THLEvent *)event;
+- (instancetype)initWithEvent:(THLEvent *)event NS_DESIGNATED_INITIALIZER;
 - (void)configureView:(id<THLEventDiscoveryCellView>)view;
 @end

@@ -22,11 +22,11 @@
 @synthesize showRefreshAnimation = _showRefreshAnimation;
 @synthesize refreshCommand = _refreshCommand;
 
-#pragma mark - THLEventDiscoveryView
-- (void)setDataSource:(THLViewDataSource *)dataSource {
-	[self configureDataSource:dataSource];
-	_dataSource = dataSource;
-}
+//#pragma mark - THLEventDiscoveryView
+//- (void)setDataSource:(THLViewDataSource *)dataSource {
+//	[self configureDataSource:dataSource];
+//	_dataSource = dataSource;
+//}
 
 #pragma mark - VC Lifecycle
 - (void)viewDidLoad {
@@ -35,13 +35,18 @@
 	[self configureBindings];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	[_collectionView reloadData];
+}
+
 - (void)layoutView {
 	_collectionView = [self newCollectionView];
 	[self.view addSubview:_collectionView];
 	[_collectionView makeConstraints:^(MASConstraintMaker *make) {
 		make.edges.insets(UIEdgeInsetsZero);
 	}];
-	self.automaticallyAdjustsScrollViewInsets = YES;
+//	self.automaticallyAdjustsScrollViewInsets = YES;
 	self.edgesForExtendedLayout = UIRectEdgeNone;
 }
 

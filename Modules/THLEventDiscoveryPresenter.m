@@ -14,6 +14,7 @@
 #import "THLViewDataSource.h"
 #import "THLEvent.h"
 #import "THLEventDiscoveryCellViewModel.h"
+#import "THLEventDiscoveryModuleInterface.h"
 
 @interface THLEventDiscoveryPresenter()<THLEventDiscoveryInteractorDelegate>
 @property (nonatomic, weak) THLEventDiscoveryWireframe *wireframe;
@@ -24,6 +25,8 @@
 @end
 
 @implementation THLEventDiscoveryPresenter
+@synthesize moduleDelegate;
+
 - (instancetype)initWithWireframe:(THLEventDiscoveryWireframe *)wireframe
 					   interactor:(THLEventDiscoveryInteractor *)interactor {
 	if (self = [super init]) {
@@ -32,6 +35,11 @@
 		_interactor.delegate = self;
 	}
 	return self;
+}
+
+#pragma mark - Module Interface
+- (void)presentEventDiscoveryInterfaceInWindow:(UIWindow *)window {
+	[_wireframe presentInWindow:window];
 }
 
 - (void)configureView:(id<THLEventDiscoveryView>)view {
@@ -64,12 +72,9 @@
 	}];
 }
 
-- (void)presentEventDiscoveryInterfaceInWindow:(UIWindow *)window {
-
-}
-
 - (void)handleIndexPathSelection:(NSIndexPath *)indexPath {
-	NSLog(@"Selected indexPath: %@", indexPath);
+	THLEvent *event = [[_view dataSource] untransformedItemAtIndexPath:indexPath];
+	[self.moduleDelegate eventDiscoveryModule:self userDidSelectEvent:event];
 }
 
 - (void)handleRefreshAction {

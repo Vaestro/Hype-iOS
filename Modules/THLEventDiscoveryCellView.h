@@ -13,4 +13,5 @@
 @property (nonatomic, copy) NSString *eventName;
 @property (nonatomic, copy) NSString *locationNeighborhood;
 @property (nonatomic, copy) NSString *time;
+@property (nonatomic, copy) NSURL *imageURL;
 @end

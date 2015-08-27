@@ -36,7 +36,7 @@
 	user.firstName = [GZNames firstName];
 	user.lastName = [GZNames lastName];
 	user.phoneNumber = [GZPhoneNumbers phoneNumber];
-	user.imageURL = [GZInternet url];
+	user.imageURL = [NSURL URLWithString:[GZInternet url]];
 	user.rating = [NSNumber randomIntBetweenMin:2 andMax:5];
 	return user;
 }
@@ -67,7 +67,7 @@
 	THLEvent *event = [THLEvent new];
 	event.objectId = [self randomObjectId];
 	event.title = [GZWords words:4];
-	event.promoImageURL = [GZInternet url];
+	event.promoImageURL = [NSURL URLWithString:[GZInternet url]];
 	event.promoInfo = [GZWords paragraphs];
 	event.maleCover = arc4random()%40;
 	event.femaleCover = arc4random()%10;
@@ -79,7 +79,7 @@
 - (THLLocation *)mockLocalLocation {
 	THLLocation *location = [THLLocation new];
 	location.objectId = [self randomObjectId];
-	location.imageURL = [GZInternet url];
+	location.imageURL = [NSURL URLWithString:[GZInternet url]];
 	location.name = [GZWords words:2+arc4random()%3];
 	location.info = [GZWords paragraphs];
 	location.address = [GZLocations streetAddress];

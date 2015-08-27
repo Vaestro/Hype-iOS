@@ -10,6 +10,6 @@
 @class THLLocation;
 
 @interface THLParseLocation (ParseMapper)
-- (THLLocation *)map;
+@property (NS_NONATOMIC_IOSONLY, readonly, strong) THLLocation *map;
 + (instancetype)unmap:(THLLocation *)location;
 @end

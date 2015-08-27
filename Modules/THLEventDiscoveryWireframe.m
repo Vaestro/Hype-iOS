@@ -42,10 +42,14 @@
 	_presenter = [[THLEventDiscoveryPresenter alloc] initWithWireframe:self interactor:_interactor];
 }
 
-- (void)presentEventDiscoveryInterfaceInWindow:(UIWindow *)window {
+- (void)presentInWindow:(UIWindow *)window {
 	_window = window;
 	[_presenter configureView:_view];
 	_window.rootViewController = [[UINavigationController alloc] initWithRootViewController:_view];
 	[_window makeKeyAndVisible];
+}
+
+- (id<THLEventDiscoveryModuleInterface>)moduleInterface {
+	return _presenter;
 }
 @end

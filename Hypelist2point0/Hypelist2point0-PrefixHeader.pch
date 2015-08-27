@@ -22,7 +22,7 @@
 #import "DateTools.h"
 #import "Bolts.h"
 
-#import "NSDate+HypeListHelper.h"
 #import "CommonMacros.h"
+#import "THLGlobalCategories.h"
 
 #endif

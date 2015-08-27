@@ -16,9 +16,10 @@
 + (THLEvent *)mapEvent:(THLParseEvent *)parseEvent {
 	THLEvent *event = [THLEvent new];
 	event.objectId = parseEvent.objectId;
+	event.updatedAt = parseEvent.updatedAt;
 	event.date = parseEvent.date;
 	event.title = parseEvent.title;
-	event.promoImageURL = parseEvent.promoImage.url;
+	event.promoImageURL = [NSURL URLWithString:parseEvent.promoImage.url];
 	event.promoInfo = parseEvent.promoInfo;
 	event.maleCover = parseEvent.maleCoverCharge;
 	event.femaleCover = parseEvent.femaleCoverCharge;
@@ -29,6 +30,7 @@
 + (THLPromotion *)mapPromotion:(THLParsePromotion *)parsePromotion {
 	THLPromotion *promotion = [THLPromotion new];
 	promotion.objectId = parsePromotion.objectId;
+	promotion.updatedAt = parsePromotion.updatedAt;
 	promotion.time = parsePromotion.time;
 	promotion.maleRatio = parsePromotion.maleRatio;
 	promotion.femaleRatio = parsePromotion.femaleRatio;
@@ -52,6 +54,8 @@
 	NSAssert(parseUser.type == THLParseUserTypeGuest || THLParseUserTypeAdmin, @"User must be a guest (or admin acting as a guest)");
 	THLGuest *guest = [THLGuest new];
 	guest.objectId = parseUser.objectId;
+	guest.updatedAt = parseUser.updatedAt;
+	guest.imageURL = [NSURL URLWithString:parseUser.image.url];
 	guest.firstName = parseUser.firstName;
 	guest.lastName = parseUser.lastName;
 	guest.phoneNumber = parseUser.phoneNumber;
@@ -63,6 +67,8 @@
 	NSAssert(parseUser.type == THLParseUserTypeHost || THLParseUserTypeAdmin, @"User must be a guest (or admin acting as a guest)");
 	THLHost *host = [THLHost new];
 	host.objectId = parseUser.objectId;
+	host.updatedAt = parseUser.updatedAt;
+	host.imageURL = [NSURL URLWithString:parseUser.image.url];
 	host.firstName = parseUser.firstName;
 	host.lastName = parseUser.lastName;
 	host.phoneNumber = parseUser.phoneNumber;
@@ -73,7 +79,8 @@
 + (THLLocation *)mapLocation:(THLParseLocation *)parseLocation {
 	THLLocation *location = [THLLocation new];
 	location.objectId = parseLocation.objectId;
-//	location.imageURL = parseLocation.image.url;
+	location.updatedAt = parseLocation.updatedAt;
+	location.imageURL = [NSURL URLWithString:parseLocation.image.url];
 	location.info = parseLocation.info;
 	location.name = parseLocation.name;
 	location.address = parseLocation.address;

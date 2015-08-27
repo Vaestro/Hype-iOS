@@ -10,5 +10,5 @@
 
 @class PFQuery;
 @interface PFObject (MatchingQuery)
-- (PFQuery *)matchingQuery;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) PFQuery *matchingQuery;
 @end

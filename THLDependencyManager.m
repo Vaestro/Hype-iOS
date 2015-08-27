@@ -11,17 +11,23 @@
 //Wireframes
 #import "THLMasterWireframe.h"
 #import "THLEventDiscoveryWireframe.h"
+#import "THLEventDetailWireframe.h"
 
 //Common
-#import "THLEventDataStore.h"
-#import "THLEventFetchService.h"
 #import "THLExtensionManager.h"
 #import "THLDatabaseManager.h"
+
+//Data Stores
+#import "THLEventDataStore.h"
+
+//Services
+#import "THLEventFetchService.h"
 
 @interface THLDependencyManager()
 //Wireframes
 @property (nonatomic, strong) THLMasterWireframe *masterWireframe;
 @property (nonatomic, strong) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
+@property (nonatomic, strong) THLEventDetailWireframe *eventDetailWireframe;
 
 //Common
 @property (nonatomic, strong) THLDatabaseManager *databaseManager;
@@ -35,12 +41,17 @@
 @end
 
 @implementation THLDependencyManager
-@synthesize eventDiscoveryWireframe = _eventDiscoveryWireframe;
 
 #pragma mark - THLWireframeFactory
 - (THLEventDiscoveryWireframe *)newEventDiscoveryWireframe {
 	THLEventDiscoveryWireframe *wireframe = [[THLEventDiscoveryWireframe alloc] initWithDataStore:self.eventDataStore fetchService:self.eventFetchService extensionManager:self.extensionManager];
 	self.eventDiscoveryWireframe = wireframe;
+	return wireframe;
+}
+
+- (THLEventDetailWireframe *)newEventDetailWireframe {
+	THLEventDetailWireframe *wireframe = [[THLEventDetailWireframe alloc] init];
+	self.eventDetailWireframe = wireframe;
 	return wireframe;
 }
 

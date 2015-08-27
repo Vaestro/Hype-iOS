@@ -8,7 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "THLEventDiscoveryModuleDelegate.h"
 
 @protocol THLEventDiscoveryModuleInterface <NSObject>
+@property (nonatomic, weak) id<THLEventDiscoveryModuleDelegate> moduleDelegate;
+
 - (void)presentEventDiscoveryInterfaceInWindow:(UIWindow *)window;
 @end

@@ -8,13 +8,14 @@
 
 
 @interface NSDate (HypeListHelper)
-- (BOOL)thl_isToday;
-- (BOOL)thl_isTomorrow;
+@property (NS_NONATOMIC_IOSONLY, readonly) BOOL thl_isToday;
+@property (NS_NONATOMIC_IOSONLY, readonly) BOOL thl_isTomorrow;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *thl_weekdayString;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *thl_dateString;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *thl_timeString;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *thl_dateTimeString;
 + (instancetype)thl_today;
 + (instancetype)thl_tomorrow;
 + (instancetype)thl_nextWeek;
-- (NSString *)thl_weekdayString;
-- (NSString *)thl_dateString;
-- (NSString *)thl_timeString;
-- (NSString *)thl_dateTimeString;
+
 @end

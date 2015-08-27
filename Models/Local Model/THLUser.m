@@ -42,28 +42,4 @@
 	return didUpdate;
 }
 
-- (BOOL)isEquivalentTo:(THLEntity *)cmpEntity {
-	if ([super isEquivalentTo:cmpEntity]) {
-		BOOL equivalent = YES;
-		THLUser *cmpUser = (THLUser *)cmpEntity;
-		if (![self.firstName isEqualToString:cmpUser.firstName]) {
-			equivalent = NO;
-		}
-
-		if (![self.lastName isEqualToString:cmpUser.lastName]) {
-			equivalent = NO;
-		}
-
-		if (![self.phoneNumber isEqualToString:cmpUser.phoneNumber]) {
-			equivalent = NO;
-		}
-
-		if (![self.firstName isEqualToString:cmpUser.firstName]) {
-			equivalent = NO;
-		}
-
-		return equivalent;
-	}
-	return NO;
-}
 @end

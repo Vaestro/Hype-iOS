@@ -7,7 +7,8 @@
 //
 
 #import "THLEventFetchService.h"
-#import "THLFetchService.h"
+#import "Bolts.h"
+#import "THLParseModule.h"
 
 
 @implementation THLEventFetchService

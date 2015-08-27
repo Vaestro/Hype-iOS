@@ -9,8 +9,14 @@
 #import "THLMasterWireframe.h"
 #import "THLEventDiscoveryWireframe.h"
 #import "THLDependencyManager.h"
+#import "THLEventDetailWireframe.h"
+#import "THLEventDiscoveryModuleDelegate.h"
 
 @interface THLMasterWireframe()
+<
+THLEventDetailModuleDelegate,
+THLEventDiscoveryModuleDelegate
+>
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) id currentWireframe;
 @end
@@ -25,14 +31,31 @@
 
 - (void)presentAppInWindow:(UIWindow *)window {
 	_window = window;
-	THLEventDiscoveryWireframe *eventDiscWireframe = [self newEventDiscoveryWireframe];
-	self.currentWireframe = eventDiscWireframe;
-	[eventDiscWireframe presentEventDiscoveryInterfaceInWindow:window];
+	[self presentEventDiscoveryInterface];
 }
 
-- (THLEventDiscoveryWireframe *)newEventDiscoveryWireframe {
-	THLEventDiscoveryWireframe *wireframe = [_factory newEventDiscoveryWireframe];
-	return wireframe;
+#pragma mark - Routing
+- (void)presentEventDiscoveryInterface {
+	THLEventDiscoveryWireframe *eventDiscWireframe = [_factory newEventDiscoveryWireframe];
+	_currentWireframe = eventDiscWireframe;
+	[eventDiscWireframe.moduleInterface setModuleDelegate:self];
+	[eventDiscWireframe.moduleInterface presentEventDiscoveryInterfaceInWindow:_window];
 }
+
+- (void)presentEventDetailInterfaceForEvent:(THLEvent *)event {
+	THLEventDetailWireframe *eventDetailWireframe = [_factory newEventDetailWireframe];
+	_currentWireframe = eventDetailWireframe;
+	[eventDetailWireframe.moduleInterface setModuleDelegate:self];
+	[eventDetailWireframe.moduleInterface presentEventDetailInterfaceForEvent:event inWindow:_window];
+}
+
+#pragma mark - THLEventDiscoveryModuleDelegate
+- (void)eventDiscoveryModule:(id<THLEventDiscoveryModuleInterface>)module
+		  userDidSelectEvent:(THLEvent *)event {
+	[self presentEventDetailInterfaceForEvent:event];
+}
+
+#pragma mark - THLEventDetailModuleDelegate
+//None
 
 @end

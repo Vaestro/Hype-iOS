@@ -12,6 +12,6 @@
 @interface THLDatabaseManager : NSObject
 @property (nonatomic, readonly) YapDatabase *database;
 
-- (instancetype)init;
-- (YapDatabaseConnection *)newDatabaseConnection;
+- (instancetype)init NS_DESIGNATED_INITIALIZER;
+@property (NS_NONATOMIC_IOSONLY, readonly, strong) YapDatabaseConnection *newDatabaseConnection;
 @end

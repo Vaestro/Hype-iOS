@@ -41,34 +41,34 @@
 // Comparing dates
 - (BOOL) isEqualToDateIgnoringTime: (NSDate *) aDate;
 
-- (BOOL) isToday;
-- (BOOL) isTomorrow;
-- (BOOL) isYesterday;
+@property (NS_NONATOMIC_IOSONLY, getter=isToday, readonly) BOOL today;
+@property (NS_NONATOMIC_IOSONLY, getter=isTomorrow, readonly) BOOL tomorrow;
+@property (NS_NONATOMIC_IOSONLY, getter=isYesterday, readonly) BOOL yesterday;
 
 - (BOOL) isSameWeekAsDate: (NSDate *) aDate;
-- (BOOL) isThisWeek;
-- (BOOL) isNextWeek;
-- (BOOL) isLastWeek;
+@property (NS_NONATOMIC_IOSONLY, getter=isThisWeek, readonly) BOOL thisWeek;
+@property (NS_NONATOMIC_IOSONLY, getter=isNextWeek, readonly) BOOL nextWeek;
+@property (NS_NONATOMIC_IOSONLY, getter=isLastWeek, readonly) BOOL lastWeek;
 
 - (BOOL) isSameMonthAsDate: (NSDate *) aDate;
-- (BOOL) isThisMonth;
-- (BOOL) isNextMonth;
-- (BOOL) isLastMonth;
+@property (NS_NONATOMIC_IOSONLY, getter=isThisMonth, readonly) BOOL thisMonth;
+@property (NS_NONATOMIC_IOSONLY, getter=isNextMonth, readonly) BOOL nextMonth;
+@property (NS_NONATOMIC_IOSONLY, getter=isLastMonth, readonly) BOOL lastMonth;
 
 - (BOOL) isSameYearAsDate: (NSDate *) aDate;
-- (BOOL) isThisYear;
-- (BOOL) isNextYear;
-- (BOOL) isLastYear;
+@property (NS_NONATOMIC_IOSONLY, getter=isThisYear, readonly) BOOL thisYear;
+@property (NS_NONATOMIC_IOSONLY, getter=isNextYear, readonly) BOOL nextYear;
+@property (NS_NONATOMIC_IOSONLY, getter=isLastYear, readonly) BOOL lastYear;
 
 - (BOOL) isEarlierThanDate: (NSDate *) aDate;
 - (BOOL) isLaterThanDate: (NSDate *) aDate;
 
-- (BOOL) isInFuture;
-- (BOOL) isInPast;
+@property (NS_NONATOMIC_IOSONLY, getter=isInFuture, readonly) BOOL inFuture;
+@property (NS_NONATOMIC_IOSONLY, getter=isInPast, readonly) BOOL inPast;
 
 // Date roles
-- (BOOL) isTypicallyWorkday;
-- (BOOL) isTypicallyWeekend;
+@property (NS_NONATOMIC_IOSONLY, getter=isTypicallyWorkday, readonly) BOOL typicallyWorkday;
+@property (NS_NONATOMIC_IOSONLY, getter=isTypicallyWeekend, readonly) BOOL typicallyWeekend;
 
 // Adjusting dates
 - (NSDate *) dateByAddingYears: (NSInteger) dYears;
@@ -83,8 +83,8 @@
 - (NSDate *) dateBySubtractingMinutes: (NSInteger) dMinutes;
 
 // Date extremes
-- (NSDate *) dateAtStartOfDay;
-- (NSDate *) dateAtEndOfDay;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSDate *dateAtStartOfDay;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSDate *dateAtEndOfDay;
 
 // Retrieving intervals
 - (NSInteger) minutesAfterDate: (NSDate *) aDate;
