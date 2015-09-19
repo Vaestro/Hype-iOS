@@ -12,5 +12,6 @@
 
 #import "THLParseMappingModule.h"
 #import "THLParseQueryModule.h"
+#import "THLParseAuthenticationModule.h"
 
 #endif

@@ -35,6 +35,9 @@ static CGFloat const kTHLBaseUnit = 5;
 
 static NSString *const kTHLNUIUndef = nil;
 
+#define kTHLUndefColor [UIColor blueColor];
+#define kTHLUndefTextColor [UIColor whiteColor];
+
 typedef NS_ENUM(NSInteger, THLUnit) {
 	THLUnitNone = 0,
 	THLUnitLow,

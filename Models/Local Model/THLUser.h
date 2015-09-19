@@ -16,4 +16,5 @@
 @property (nonatomic) float rating;
 
 @property (nonatomic, readonly) NSString *fullName;
+@property (nonatomic, readonly, getter=isNewUser) BOOL newUser;
 @end

@@ -42,4 +42,7 @@
 	return didUpdate;
 }
 
+- (BOOL)isNewUser {
+	return (self.phoneNumber.length == 0 || self.imageURL == nil);
+}
 @end

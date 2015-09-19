@@ -24,6 +24,12 @@
 		211005CC1B8A767C00A540C6 /* THLEventDiscoveryCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 211005CB1B8A767C00A540C6 /* THLEventDiscoveryCellViewModel.m */; };
 		211005D01B8A7D0200A540C6 /* NSDate+HypeListHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 211005CF1B8A7D0200A540C6 /* NSDate+HypeListHelper.m */; };
 		211005D51B8A7D2800A540C6 /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 211005D31B8A7D2800A540C6 /* NSDate+Utilities.m */; };
+		211892061BA9FF0600E8A11F /* THLLoginInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 211892051BA9FF0600E8A11F /* THLLoginInteractor.m */; };
+		211892131BAA048E00E8A11F /* THLParseLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 211892121BAA048E00E8A11F /* THLParseLogin.m */; };
+		211892171BAA059C00E8A11F /* THLUserLoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 211892161BAA059C00E8A11F /* THLUserLoginService.m */; };
+		2118921B1BAA084300E8A11F /* THLLoginPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2118921A1BAA084300E8A11F /* THLLoginPresenter.m */; };
+		2118921F1BAA088D00E8A11F /* THLLoginWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 2118921E1BAA088D00E8A11F /* THLLoginWireframe.m */; };
+		211892241BAA0C4400E8A11F /* THLLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 211892231BAA0C4400E8A11F /* THLLoginViewController.m */; };
 		211BB0D41B8CBE980068FD50 /* THLEventTitlesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 211BB0D31B8CBE980068FD50 /* THLEventTitlesView.m */; };
 		211BB0D81B8CC6DA0068FD50 /* UIView+AddSubviews.m in Sources */ = {isa = PBXBuildFile; fileRef = 211BB0D71B8CC6DA0068FD50 /* UIView+AddSubviews.m */; };
 		211D0BAD1B8CEE730073AFDD /* THLEventDetailWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 211D0BAC1B8CEE730073AFDD /* THLEventDetailWireframe.m */; };
@@ -41,6 +47,14 @@
 		2133BFD21B877EBA002C1DA9 /* THLParsePromotion.m in Sources */ = {isa = PBXBuildFile; fileRef = 2133BFD11B877EBA002C1DA9 /* THLParsePromotion.m */; };
 		21444DB31B879D250016FCFD /* THLParseMapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 21444DB21B879D250016FCFD /* THLParseMapperTests.m */; };
 		21444DB91B879EFE0016FCFD /* THLParseMapperTestsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 21444DB81B879EFE0016FCFD /* THLParseMapperTestsHelper.m */; };
+		215A428B1BAA1FFF00D03C35 /* THLNumberVerificationPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A428A1BAA1FFF00D03C35 /* THLNumberVerificationPresenter.m */; };
+		215A428E1BAA200E00D03C35 /* THLNumberVerificationWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A428D1BAA200E00D03C35 /* THLNumberVerificationWireframe.m */; };
+		215A429A1BAA25B000D03C35 /* THLFacebookPicturePresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A42991BAA25B000D03C35 /* THLFacebookPicturePresenter.m */; };
+		215A429D1BAA25E700D03C35 /* THLFacebookPictureWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A429C1BAA25E700D03C35 /* THLFacebookPictureWireframe.m */; };
+		215A42A11BAA26D500D03C35 /* THLFacebookPictureInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A42A01BAA26D500D03C35 /* THLFacebookPictureInteractor.m */; };
+		215A42A81BAA287900D03C35 /* THLFacebookProfilePictureFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A42A71BAA287900D03C35 /* THLFacebookProfilePictureFactory.m */; };
+		215A42AC1BAA2A1700D03C35 /* THLFacebookProfilePictureURLFetchService.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A42AB1BAA2A1700D03C35 /* THLFacebookProfilePictureURLFetchService.m */; };
+		215A42CA1BAA526200D03C35 /* THLOnboardingWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A42C91BAA526200D03C35 /* THLOnboardingWireframe.m */; };
 		215D88121B8BEF8F00A3329C /* THLAppearance.nss in Resources */ = {isa = PBXBuildFile; fileRef = 215D88101B8BEF8E00A3329C /* THLAppearance.nss */; };
 		2174A06A1B863F6A006826D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2174A0691B863F6A006826D7 /* main.m */; };
 		2174A06D1B863F6A006826D7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2174A06C1B863F6A006826D7 /* AppDelegate.m */; };
@@ -132,6 +146,23 @@
 		211005CF1B8A7D0200A540C6 /* NSDate+HypeListHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+HypeListHelper.m"; sourceTree = "<group>"; };
 		211005D31B8A7D2800A540C6 /* NSDate+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utilities.m"; sourceTree = "<group>"; };
 		211005D41B8A7D2800A540C6 /* NSDate+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utilities.h"; sourceTree = "<group>"; };
+		211892001BA9F89900E8A11F /* THLLoginModuleInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLLoginModuleInterface.h; sourceTree = "<group>"; };
+		211892011BA9FB8F00E8A11F /* THLLoginModuleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLLoginModuleDelegate.h; sourceTree = "<group>"; };
+		211892041BA9FF0600E8A11F /* THLLoginInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLLoginInteractor.h; sourceTree = "<group>"; };
+		211892051BA9FF0600E8A11F /* THLLoginInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLLoginInteractor.m; sourceTree = "<group>"; };
+		211892101BAA047800E8A11F /* THLParseAuthenticationModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLParseAuthenticationModule.h; sourceTree = "<group>"; };
+		211892111BAA048E00E8A11F /* THLParseLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLParseLogin.h; sourceTree = "<group>"; };
+		211892121BAA048E00E8A11F /* THLParseLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLParseLogin.m; sourceTree = "<group>"; };
+		211892141BAA059400E8A11F /* THLUserLoginServiceInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserLoginServiceInterface.h; sourceTree = "<group>"; };
+		211892151BAA059C00E8A11F /* THLUserLoginService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserLoginService.h; sourceTree = "<group>"; };
+		211892161BAA059C00E8A11F /* THLUserLoginService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLUserLoginService.m; sourceTree = "<group>"; };
+		211892191BAA084300E8A11F /* THLLoginPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLLoginPresenter.h; sourceTree = "<group>"; };
+		2118921A1BAA084300E8A11F /* THLLoginPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLLoginPresenter.m; sourceTree = "<group>"; };
+		2118921D1BAA088D00E8A11F /* THLLoginWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLLoginWireframe.h; sourceTree = "<group>"; };
+		2118921E1BAA088D00E8A11F /* THLLoginWireframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLLoginWireframe.m; sourceTree = "<group>"; };
+		211892211BAA0C3900E8A11F /* THLLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLLoginView.h; sourceTree = "<group>"; };
+		211892221BAA0C4400E8A11F /* THLLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLLoginViewController.h; sourceTree = "<group>"; };
+		211892231BAA0C4400E8A11F /* THLLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLLoginViewController.m; sourceTree = "<group>"; };
 		211BB0D21B8CBE980068FD50 /* THLEventTitlesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventTitlesView.h; sourceTree = "<group>"; };
 		211BB0D31B8CBE980068FD50 /* THLEventTitlesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventTitlesView.m; sourceTree = "<group>"; };
 		211BB0D51B8CC0D00068FD50 /* THLAppearanceConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLAppearanceConstants.h; sourceTree = "<group>"; };
@@ -169,6 +200,30 @@
 		21444DB21B879D250016FCFD /* THLParseMapperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLParseMapperTests.m; sourceTree = "<group>"; };
 		21444DB71B879EFE0016FCFD /* THLParseMapperTestsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLParseMapperTestsHelper.h; sourceTree = "<group>"; };
 		21444DB81B879EFE0016FCFD /* THLParseMapperTestsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLParseMapperTestsHelper.m; sourceTree = "<group>"; };
+		215A42841BAA1F1F00D03C35 /* THLNumberVerificationModuleInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLNumberVerificationModuleInterface.h; sourceTree = "<group>"; };
+		215A42851BAA1F2C00D03C35 /* THLNumberVerificationModuleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLNumberVerificationModuleDelegate.h; sourceTree = "<group>"; };
+		215A42891BAA1FFF00D03C35 /* THLNumberVerificationPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLNumberVerificationPresenter.h; sourceTree = "<group>"; };
+		215A428A1BAA1FFF00D03C35 /* THLNumberVerificationPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLNumberVerificationPresenter.m; sourceTree = "<group>"; };
+		215A428C1BAA200E00D03C35 /* THLNumberVerificationWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLNumberVerificationWireframe.h; sourceTree = "<group>"; };
+		215A428D1BAA200E00D03C35 /* THLNumberVerificationWireframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLNumberVerificationWireframe.m; sourceTree = "<group>"; };
+		215A42931BAA24C900D03C35 /* THLFacebookPictureModuleInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLFacebookPictureModuleInterface.h; sourceTree = "<group>"; };
+		215A42941BAA24D300D03C35 /* THLFacebookPictureModuleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLFacebookPictureModuleDelegate.h; sourceTree = "<group>"; };
+		215A42981BAA25B000D03C35 /* THLFacebookPicturePresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLFacebookPicturePresenter.h; sourceTree = "<group>"; };
+		215A42991BAA25B000D03C35 /* THLFacebookPicturePresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLFacebookPicturePresenter.m; sourceTree = "<group>"; };
+		215A429B1BAA25E700D03C35 /* THLFacebookPictureWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLFacebookPictureWireframe.h; sourceTree = "<group>"; };
+		215A429C1BAA25E700D03C35 /* THLFacebookPictureWireframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLFacebookPictureWireframe.m; sourceTree = "<group>"; };
+		215A429F1BAA26D500D03C35 /* THLFacebookPictureInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLFacebookPictureInteractor.h; sourceTree = "<group>"; };
+		215A42A01BAA26D500D03C35 /* THLFacebookPictureInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLFacebookPictureInteractor.m; sourceTree = "<group>"; };
+		215A42A31BAA278D00D03C35 /* THLFacebookModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLFacebookModule.h; sourceTree = "<group>"; };
+		215A42A51BAA27D300D03C35 /* THLFacebookProfilePictureModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLFacebookProfilePictureModule.h; sourceTree = "<group>"; };
+		215A42A61BAA287900D03C35 /* THLFacebookProfilePictureFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLFacebookProfilePictureFactory.h; sourceTree = "<group>"; };
+		215A42A71BAA287900D03C35 /* THLFacebookProfilePictureFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLFacebookProfilePictureFactory.m; sourceTree = "<group>"; };
+		215A42AA1BAA2A1700D03C35 /* THLFacebookProfilePictureURLFetchService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLFacebookProfilePictureURLFetchService.h; sourceTree = "<group>"; };
+		215A42AB1BAA2A1700D03C35 /* THLFacebookProfilePictureURLFetchService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLFacebookProfilePictureURLFetchService.m; sourceTree = "<group>"; };
+		215A42C61BAA51F700D03C35 /* THLOnboardingModuleInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLOnboardingModuleInterface.h; sourceTree = "<group>"; };
+		215A42C71BAA51FF00D03C35 /* THLOnboardingModuleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLOnboardingModuleDelegate.h; sourceTree = "<group>"; };
+		215A42C81BAA526200D03C35 /* THLOnboardingWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLOnboardingWireframe.h; sourceTree = "<group>"; };
+		215A42C91BAA526200D03C35 /* THLOnboardingWireframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLOnboardingWireframe.m; sourceTree = "<group>"; };
 		215D880F1B8BEF2000A3329C /* CommonMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonMacros.h; sourceTree = "<group>"; };
 		215D88101B8BEF8E00A3329C /* THLAppearance.nss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = THLAppearance.nss; sourceTree = "<group>"; };
 		215D88111B8BEF8F00A3329C /* THLTweaksConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLTweaksConstants.h; sourceTree = "<group>"; };
@@ -462,6 +517,108 @@
 			name = Logic;
 			sourceTree = "<group>";
 		};
+		211891FC1BA9F5E400E8A11F /* Login Module */ = {
+			isa = PBXGroup;
+			children = (
+				211891FF1BA9F87E00E8A11F /* UI */,
+				211891FE1BA9F87900E8A11F /* Logic */,
+				211891FD1BA9F87200E8A11F /* Interface */,
+			);
+			name = "Login Module";
+			sourceTree = "<group>";
+		};
+		211891FD1BA9F87200E8A11F /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				211892001BA9F89900E8A11F /* THLLoginModuleInterface.h */,
+				211892011BA9FB8F00E8A11F /* THLLoginModuleDelegate.h */,
+			);
+			name = Interface;
+			sourceTree = "<group>";
+		};
+		211891FE1BA9F87900E8A11F /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				211892031BA9FEB600E8A11F /* Interactor */,
+			);
+			name = Logic;
+			sourceTree = "<group>";
+		};
+		211891FF1BA9F87E00E8A11F /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				211892201BAA0C2D00E8A11F /* View */,
+				2118921C1BAA088600E8A11F /* Wireframe */,
+				211892181BAA083400E8A11F /* Presenter */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		211892031BA9FEB600E8A11F /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				211892041BA9FF0600E8A11F /* THLLoginInteractor.h */,
+				211892051BA9FF0600E8A11F /* THLLoginInteractor.m */,
+			);
+			name = Interactor;
+			sourceTree = "<group>";
+		};
+		2118920A1BAA039700E8A11F /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				2118920B1BAA039E00E8A11F /* User Login */,
+			);
+			name = Authentication;
+			sourceTree = "<group>";
+		};
+		2118920B1BAA039E00E8A11F /* User Login */ = {
+			isa = PBXGroup;
+			children = (
+				211892141BAA059400E8A11F /* THLUserLoginServiceInterface.h */,
+				211892151BAA059C00E8A11F /* THLUserLoginService.h */,
+				211892161BAA059C00E8A11F /* THLUserLoginService.m */,
+			);
+			name = "User Login";
+			sourceTree = "<group>";
+		};
+		2118920D1BAA03ED00E8A11F /* Authentication Module */ = {
+			isa = PBXGroup;
+			children = (
+				211892101BAA047800E8A11F /* THLParseAuthenticationModule.h */,
+				211892111BAA048E00E8A11F /* THLParseLogin.h */,
+				211892121BAA048E00E8A11F /* THLParseLogin.m */,
+			);
+			name = "Authentication Module";
+			sourceTree = "<group>";
+		};
+		211892181BAA083400E8A11F /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				211892191BAA084300E8A11F /* THLLoginPresenter.h */,
+				2118921A1BAA084300E8A11F /* THLLoginPresenter.m */,
+			);
+			name = Presenter;
+			sourceTree = "<group>";
+		};
+		2118921C1BAA088600E8A11F /* Wireframe */ = {
+			isa = PBXGroup;
+			children = (
+				2118921D1BAA088D00E8A11F /* THLLoginWireframe.h */,
+				2118921E1BAA088D00E8A11F /* THLLoginWireframe.m */,
+			);
+			name = Wireframe;
+			sourceTree = "<group>";
+		};
+		211892201BAA0C2D00E8A11F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				211892211BAA0C3900E8A11F /* THLLoginView.h */,
+				211892221BAA0C4400E8A11F /* THLLoginViewController.h */,
+				211892231BAA0C4400E8A11F /* THLLoginViewController.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		211BB0D11B8CBE690068FD50 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -488,6 +645,7 @@
 			children = (
 				211D0BA61B8CED970073AFDD /* THLEventDetailModuleInterface.h */,
 				211D0BA71B8CEDA10073AFDD /* THLEventDetailModuleDelegate.h */,
+				211D0BA81B8CEE4D0073AFDD /* Wireframe */,
 			);
 			name = Interface;
 			sourceTree = "<group>";
@@ -506,7 +664,6 @@
 			children = (
 				211D0BAA1B8CEE550073AFDD /* View */,
 				211D0BA91B8CEE510073AFDD /* Presenter */,
-				211D0BA81B8CEE4D0073AFDD /* Wireframe */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -640,6 +797,185 @@
 				21BDAE5A1B878C4D009D02A3 /* THLParseLocation.m */,
 			);
 			path = "Parse Model";
+			sourceTree = "<group>";
+		};
+		215A42741BAA182000D03C35 /* Onboarding Module */ = {
+			isa = PBXGroup;
+			children = (
+				215A42771BAA182D00D03C35 /* Interface */,
+				215A42751BAA182500D03C35 /* UI */,
+			);
+			name = "Onboarding Module";
+			sourceTree = "<group>";
+		};
+		215A42751BAA182500D03C35 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				215A427B1BAA192100D03C35 /* Wireframe */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		215A42771BAA182D00D03C35 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				215A42C61BAA51F700D03C35 /* THLOnboardingModuleInterface.h */,
+				215A42C71BAA51FF00D03C35 /* THLOnboardingModuleDelegate.h */,
+			);
+			name = Interface;
+			sourceTree = "<group>";
+		};
+		215A427B1BAA192100D03C35 /* Wireframe */ = {
+			isa = PBXGroup;
+			children = (
+				215A42C81BAA526200D03C35 /* THLOnboardingWireframe.h */,
+				215A42C91BAA526200D03C35 /* THLOnboardingWireframe.m */,
+			);
+			name = Wireframe;
+			sourceTree = "<group>";
+		};
+		215A42801BAA1EE100D03C35 /* Number Verification Module */ = {
+			isa = PBXGroup;
+			children = (
+				215A42831BAA1F0400D03C35 /* Logic */,
+				215A42821BAA1F0100D03C35 /* UI */,
+				215A42811BAA1EF300D03C35 /* Interface */,
+			);
+			name = "Number Verification Module";
+			sourceTree = "<group>";
+		};
+		215A42811BAA1EF300D03C35 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				215A42841BAA1F1F00D03C35 /* THLNumberVerificationModuleInterface.h */,
+				215A42851BAA1F2C00D03C35 /* THLNumberVerificationModuleDelegate.h */,
+			);
+			name = Interface;
+			sourceTree = "<group>";
+		};
+		215A42821BAA1F0100D03C35 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				215A42881BAA1FE800D03C35 /* Wireframe */,
+				215A42871BAA1FE500D03C35 /* Presenter */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		215A42831BAA1F0400D03C35 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Logic;
+			sourceTree = "<group>";
+		};
+		215A42871BAA1FE500D03C35 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				215A42891BAA1FFF00D03C35 /* THLNumberVerificationPresenter.h */,
+				215A428A1BAA1FFF00D03C35 /* THLNumberVerificationPresenter.m */,
+			);
+			name = Presenter;
+			sourceTree = "<group>";
+		};
+		215A42881BAA1FE800D03C35 /* Wireframe */ = {
+			isa = PBXGroup;
+			children = (
+				215A428C1BAA200E00D03C35 /* THLNumberVerificationWireframe.h */,
+				215A428D1BAA200E00D03C35 /* THLNumberVerificationWireframe.m */,
+			);
+			name = Wireframe;
+			sourceTree = "<group>";
+		};
+		215A428F1BAA248700D03C35 /* Facebook Picture Module */ = {
+			isa = PBXGroup;
+			children = (
+				215A42921BAA249A00D03C35 /* Logic */,
+				215A42911BAA249700D03C35 /* UI */,
+				215A42901BAA249300D03C35 /* Interface */,
+			);
+			name = "Facebook Picture Module";
+			sourceTree = "<group>";
+		};
+		215A42901BAA249300D03C35 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				215A42931BAA24C900D03C35 /* THLFacebookPictureModuleInterface.h */,
+				215A42941BAA24D300D03C35 /* THLFacebookPictureModuleDelegate.h */,
+			);
+			name = Interface;
+			sourceTree = "<group>";
+		};
+		215A42911BAA249700D03C35 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				215A42971BAA259000D03C35 /* Wireframe */,
+				215A42951BAA258B00D03C35 /* Presenter */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		215A42921BAA249A00D03C35 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				215A429E1BAA26C200D03C35 /* Interactor */,
+			);
+			name = Logic;
+			sourceTree = "<group>";
+		};
+		215A42951BAA258B00D03C35 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				215A42981BAA25B000D03C35 /* THLFacebookPicturePresenter.h */,
+				215A42991BAA25B000D03C35 /* THLFacebookPicturePresenter.m */,
+			);
+			name = Presenter;
+			sourceTree = "<group>";
+		};
+		215A42971BAA259000D03C35 /* Wireframe */ = {
+			isa = PBXGroup;
+			children = (
+				215A429B1BAA25E700D03C35 /* THLFacebookPictureWireframe.h */,
+				215A429C1BAA25E700D03C35 /* THLFacebookPictureWireframe.m */,
+			);
+			name = Wireframe;
+			sourceTree = "<group>";
+		};
+		215A429E1BAA26C200D03C35 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				215A429F1BAA26D500D03C35 /* THLFacebookPictureInteractor.h */,
+				215A42A01BAA26D500D03C35 /* THLFacebookPictureInteractor.m */,
+			);
+			name = Interactor;
+			sourceTree = "<group>";
+		};
+		215A42A21BAA276E00D03C35 /* Facebook Module */ = {
+			isa = PBXGroup;
+			children = (
+				215A42A31BAA278D00D03C35 /* THLFacebookModule.h */,
+				215A42A41BAA279200D03C35 /* Profile Picture Module */,
+			);
+			name = "Facebook Module";
+			sourceTree = "<group>";
+		};
+		215A42A41BAA279200D03C35 /* Profile Picture Module */ = {
+			isa = PBXGroup;
+			children = (
+				215A42A51BAA27D300D03C35 /* THLFacebookProfilePictureModule.h */,
+				215A42A61BAA287900D03C35 /* THLFacebookProfilePictureFactory.h */,
+				215A42A71BAA287900D03C35 /* THLFacebookProfilePictureFactory.m */,
+			);
+			name = "Profile Picture Module";
+			sourceTree = "<group>";
+		};
+		215A42A91BAA29A200D03C35 /* Facebook Image Fetching */ = {
+			isa = PBXGroup;
+			children = (
+				215A42AA1BAA2A1700D03C35 /* THLFacebookProfilePictureURLFetchService.h */,
+				215A42AB1BAA2A1700D03C35 /* THLFacebookProfilePictureURLFetchService.m */,
+			);
+			name = "Facebook Image Fetching";
 			sourceTree = "<group>";
 		};
 		2174A05B1B863F6A006826D7 = {
@@ -823,9 +1159,14 @@
 		21BDAE5C1B878E0E009D02A3 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				215A428F1BAA248700D03C35 /* Facebook Picture Module */,
+				215A42801BAA1EE100D03C35 /* Number Verification Module */,
+				215A42741BAA182000D03C35 /* Onboarding Module */,
+				211891FC1BA9F5E400E8A11F /* Login Module */,
 				21775F4F1B8E150E00609D39 /* Contacts Module */,
 				211D0BA11B8CED560073AFDD /* Event Detail Module */,
 				2110058D1B8A2F3A00A540C6 /* Event Discovery Module */,
+				215A42A21BAA276E00D03C35 /* Facebook Module */,
 				21EBFBFD1B87AE9F006646E9 /* Parse Module */,
 			);
 			path = Modules;
@@ -919,6 +1260,7 @@
 		21CCEDEB1B87CDD00066CDAC /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				2118920A1BAA039700E8A11F /* Authentication */,
 				21775F571B8E15E400609D39 /* Permissions Request */,
 				21CCEDEF1B87CE210066CDAC /* Fetching */,
 			);
@@ -928,6 +1270,7 @@
 		21CCEDEF1B87CE210066CDAC /* Fetching */ = {
 			isa = PBXGroup;
 			children = (
+				215A42A91BAA29A200D03C35 /* Facebook Image Fetching */,
 				21775F601B8E178100609D39 /* Address Book Fetching */,
 				21775F5E1B8E177600609D39 /* Event Fetching */,
 			);
@@ -958,6 +1301,7 @@
 			isa = PBXGroup;
 			children = (
 				21BDAE5D1B878E3A009D02A3 /* THLParseModule.h */,
+				2118920D1BAA03ED00E8A11F /* Authentication Module */,
 				21CCEDF11B87CF7F0066CDAC /* Query Module */,
 				21BDAE6D1B878FC2009D02A3 /* Mapping Module */,
 			);
@@ -1160,16 +1504,20 @@
 				21CCEDDC1B87C4AA0066CDAC /* THLGuestDataStore.m in Sources */,
 				2133BFC51B877C61002C1DA9 /* THLHost.m in Sources */,
 				21BDAE5B1B878C4D009D02A3 /* THLParseLocation.m in Sources */,
+				2118921F1BAA088D00E8A11F /* THLLoginWireframe.m in Sources */,
 				211D0BB31B8CEE8B0073AFDD /* THLEventDetailViewController.m in Sources */,
 				21775F561B8E15B400609D39 /* THLContactDataManager.m in Sources */,
 				2133BFCE1B877D11002C1DA9 /* THLLocation.m in Sources */,
 				211005CC1B8A767C00A540C6 /* THLEventDiscoveryCellViewModel.m in Sources */,
+				215A428B1BAA1FFF00D03C35 /* THLNumberVerificationPresenter.m in Sources */,
 				211005D51B8A7D2800A540C6 /* NSDate+Utilities.m in Sources */,
 				21BDAE631B878F70009D02A3 /* THLParsePromotion+ParseMapper.m in Sources */,
+				211892061BA9FF0600E8A11F /* THLLoginInteractor.m in Sources */,
 				211005D01B8A7D0200A540C6 /* NSDate+HypeListHelper.m in Sources */,
 				21775F631B8E17A300609D39 /* THLAddressBookEntryFetchService.m in Sources */,
 				219E32A81B8EA63D00214C85 /* THLEventNavigationBar.m in Sources */,
 				2174A06D1B863F6A006826D7 /* AppDelegate.m in Sources */,
+				211892241BAA0C4400E8A11F /* THLLoginViewController.m in Sources */,
 				2133BFBF1B877B82002C1DA9 /* THLPromotion.m in Sources */,
 				21CCEDE21B87C62F0066CDAC /* THLDatabaseManager.m in Sources */,
 				211BB0D81B8CC6DA0068FD50 /* UIView+AddSubviews.m in Sources */,
@@ -1186,24 +1534,34 @@
 				2133BFD21B877EBA002C1DA9 /* THLParsePromotion.m in Sources */,
 				21CCEDF51B87CFCB0066CDAC /* THLParseQueryFactory.m in Sources */,
 				211005BF1B8A70BF00A540C6 /* THLEventDiscoveryCell.m in Sources */,
+				215A42CA1BAA526200D03C35 /* THLOnboardingWireframe.m in Sources */,
 				21BDAE6C1B878FA3009D02A3 /* THLParseLocation+ParseMapper.m in Sources */,
+				211892131BAA048E00E8A11F /* THLParseLogin.m in Sources */,
 				21775F4B1B8E142E00609D39 /* THLContact.m in Sources */,
+				215A428E1BAA200E00D03C35 /* THLNumberVerificationWireframe.m in Sources */,
 				21775F4E1B8E148000609D39 /* THLContactDataStore.m in Sources */,
+				215A42A81BAA287900D03C35 /* THLFacebookProfilePictureFactory.m in Sources */,
+				215A429A1BAA25B000D03C35 /* THLFacebookPicturePresenter.m in Sources */,
 				211D0BBD1B8CEEDE0073AFDD /* THLEventDetailInteractor.m in Sources */,
 				211D0BB01B8CEE800073AFDD /* THLEventDetailPresenter.m in Sources */,
 				21CCEDE91B87C87B0066CDAC /* THLDataStore.m in Sources */,
 				21BDAE551B878104009D02A3 /* THLParseUser.m in Sources */,
 				21BDAE581B878BD8009D02A3 /* THLParseEvent.m in Sources */,
+				215A42A11BAA26D500D03C35 /* THLFacebookPictureInteractor.m in Sources */,
+				2118921B1BAA084300E8A11F /* THLLoginPresenter.m in Sources */,
 				211D0BAD1B8CEE730073AFDD /* THLEventDetailWireframe.m in Sources */,
 				21775F3C1B8CF93E00609D39 /* THLEventDetailsLocationInfoView.m in Sources */,
 				211D0BBA1B8CEED40073AFDD /* THLEventDetailDataManager.m in Sources */,
 				2108A8851B8BBF4900B725F6 /* THLMasterWireframe.m in Sources */,
 				211005981B8A319000A540C6 /* THLEventDiscoveryInteractor.m in Sources */,
+				215A42AC1BAA2A1700D03C35 /* THLFacebookProfilePictureURLFetchService.m in Sources */,
 				21CCEDD61B87C2F60066CDAC /* THLPromotionDataStore.m in Sources */,
 				21775F391B8CF93000609D39 /* THLEventDetailsPromotionInfoView.m in Sources */,
 				211005BA1B8A5DCC00A540C6 /* THLExtensionManager.m in Sources */,
 				2133BFC21B877C08002C1DA9 /* THLUser.m in Sources */,
+				211892171BAA059C00E8A11F /* THLUserLoginService.m in Sources */,
 				211005A71B8A372600A540C6 /* THLEventDiscoveryDataManager.m in Sources */,
+				215A429D1BAA25E700D03C35 /* THLFacebookPictureWireframe.m in Sources */,
 				2108A8881B8BBF5B00B725F6 /* THLDependencyManager.m in Sources */,
 				2110059F1B8A351000A540C6 /* THLEventDiscoveryWireframe.m in Sources */,
 				21775F361B8CF72B00609D39 /* THLTitledContentView.m in Sources */,
