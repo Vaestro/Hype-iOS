@@ -8,6 +8,12 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "PFFacebookUtils.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+#import <DigitsKit/DigitsKit.h>
+
 #import "THLDependencyManager.h"
 #import "THLMasterWireframe.h"
 
@@ -27,6 +33,10 @@
 
 	// [Optional] Track statistics around application opens.
 	[PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+	[PFFacebookUtils initializeFacebook];
+	[Fabric with:@[[Crashlytics class], [Digits class]]];
+
+
 
 	_dependencyManager = [[THLDependencyManager alloc] init];
 	_masterWireframe = [_dependencyManager masterWireframe];
@@ -34,6 +44,21 @@
 	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	[_masterWireframe presentAppInWindow:self.window];
 	
-	return YES;
+	return [[FBSDKApplicationDelegate sharedInstance] application:application
+									didFinishLaunchingWithOptions:launchOptions];
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+	[FBSDKAppEvents activateApp];
+}
+
+- (BOOL)application:(UIApplication *)application
+			openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+		 annotation:(id)annotation {
+	return [[FBSDKApplicationDelegate sharedInstance] application:application
+														  openURL:url
+												sourceApplication:sourceApplication
+													   annotation:annotation];
 }
 @end

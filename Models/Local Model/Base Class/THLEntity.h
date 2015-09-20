@@ -9,8 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface THLEntity : NSObject <NSCoding>
+
 @property (nonatomic, copy) NSString *objectId;
 @property (nonatomic, copy) NSDate *updatedAt;
+@property (nonatomic) BOOL inDatabase;
 
 /**
  *  Updates the entity with another entity of newer information. Returns YES if any fields were 

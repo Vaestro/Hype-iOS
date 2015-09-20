@@ -11,7 +11,7 @@ pod 'Masonry', '~> 0.6'
 pod 'NUI', '~> 0.5'
 pod 'CocoaLumberjack'
 pod 'Reveal-iOS-SDK', :configurations => ['Debug']
-pod 'ReactiveCocoa'
+pod 'ReactiveCocoa', '2.5'
 pod 'Bolts'
 pod 'BFKit'
 pod 'DateTools', '~> 1.6'
@@ -29,7 +29,7 @@ pod "ReflectableEnum"
 
 #Parse/Facebook/Digits
 pod 'Parse'
-pod 'ParseFacebookUtilsV4', '1.7.5'
+pod 'ParseFacebookUtils'
 pod 'FBSDKCoreKit'
 pod 'FBSDKLoginKit'
 pod 'FBSDKShareKit'

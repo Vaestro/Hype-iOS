@@ -5,8 +5,10 @@
 //  Created by Phil Meyers IV on 8/21/15.
 //  Copyright (c) 2015 Hypelist. All rights reserved.
 //
-
 #import "THLUser.h"
+#import <objc/runtime.h>
+
+
 
 @implementation THLUser
 
@@ -45,4 +47,6 @@
 - (BOOL)isNewUser {
 	return (self.phoneNumber.length == 0 || self.imageURL == nil);
 }
+
+
 @end
