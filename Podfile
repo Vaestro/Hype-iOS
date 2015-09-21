@@ -49,6 +49,7 @@ pod 'libPhoneNumber-iOS', '~> 0.8'
 #UI
 pod 'SVPullToRefresh'
 pod "ORStackView"
+pod 'Onboard'
 end
 
 target 'Hypelist2point0Tests' do
