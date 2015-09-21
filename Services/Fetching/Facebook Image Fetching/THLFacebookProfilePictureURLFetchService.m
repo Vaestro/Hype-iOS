@@ -12,8 +12,7 @@
 @implementation THLFacebookProfilePictureURLFetchService
 - (BFTask *)fetchCurrentProfilePictureURL {
 	return [[THLFacebookProfilePictureFactory taskForCurrentProfilePicture] continueWithSuccessBlock:^id(BFTask *task) {
-		NSArray *pictureNodes = [self pictureNodes:task.result];
-		NSString *pictureURL = [self pictureURL:[pictureNodes first]];
+		NSString *pictureURL = [task.result valueForKeyPath:@"picture.data.url"];
 		if (pictureURL) {
 			return pictureURL;
 		} else {
@@ -23,7 +22,7 @@
 }
 
 - (NSArray *)pictureNodes:(NSDictionary *)result {
-	return result[@"data"];
+	return [result valueForKeyPath:@"picture.data"];
 }
 
 - (NSString *)pictureURL:(NSDictionary *)pictureNode {
