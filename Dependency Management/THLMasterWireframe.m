@@ -16,19 +16,22 @@
 #import "THLOnboardingWireframe.h"
 #import "THLEventDiscoveryWireframe.h"
 #import "THLEventDetailWireframe.h"
+#import "THLChooseHostWireframe.h"
 
 //Delegates
 #import "THLLoginModuleDelegate.h"
 #import "THLOnboardingModuleDelegate.h"
 #import "THLEventDetailModuleDelegate.h"
 #import "THLEventDiscoveryModuleDelegate.h"
+#import "THLChooseHostModuleDelegate.h"
 
 @interface THLMasterWireframe()
 <
 THLLoginModuleDelegate,
 THLOnboardingModuleDelegate,
 THLEventDetailModuleDelegate,
-THLEventDiscoveryModuleDelegate
+THLEventDiscoveryModuleDelegate,
+THLChooseHostModuleDelegate
 >
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) id currentWireframe;
@@ -99,4 +102,8 @@ THLEventDiscoveryModuleDelegate
 #pragma mark - THLEventDetailModuleDelegate
 //None
 
+#pragma mark - THLChooseHostModuleDelegate
+- (void)chooseHostModule:(id<THLChooseHostModuleInterface>)module didSelectHost:(THLPromotion *)promotion {
+	
+}
 @end

@@ -16,6 +16,7 @@
 #import "THLNumberVerificationWireframe.h"
 #import "THLEventDiscoveryWireframe.h"
 #import "THLEventDetailWireframe.h"
+#import "THLChooseHostWireframe.h"
 
 //Common
 #import "THLExtensionManager.h"
@@ -28,6 +29,8 @@
 #import "THLEventFetchService.h"
 #import "THLFacebookProfilePictureURLFetchService.h"
 #import "THLUserLoginService.h"
+#import "THLParseEventService.h"
+
 
 @interface THLDependencyManager()
 //Wireframes
@@ -38,6 +41,7 @@
 @property (nonatomic, strong) THLNumberVerificationWireframe *numberVerificationWireframe;
 @property (nonatomic, strong) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
 @property (nonatomic, strong) THLEventDetailWireframe *eventDetailWireframe;
+@property (nonatomic, strong) THLChooseHostWireframe *chooseHostWireframe;
 
 //Common
 @property (nonatomic, strong) THLDatabaseManager *databaseManager;
@@ -50,6 +54,7 @@
 @property (nonatomic, strong) THLEventFetchService *eventFetchService;
 @property (nonatomic, strong) THLFacebookProfilePictureURLFetchService *facebookProfilePictureURLFetchService;
 @property (nonatomic, strong) THLUserLoginService *userLoginService;
+@property (nonatomic, strong) THLParseEventService *eventService;
 @end
 
 @implementation THLDependencyManager
@@ -89,6 +94,12 @@
 - (THLEventDetailWireframe *)newEventDetailWireframe {
 	THLEventDetailWireframe *wireframe = [[THLEventDetailWireframe alloc] init];
 	self.eventDetailWireframe = wireframe;
+	return wireframe;
+}
+
+- (THLChooseHostWireframe *)newChooseHostWireframe {
+	THLChooseHostWireframe *wireframe = [[THLChooseHostWireframe alloc] initWithEventService:self.eventService];
+	self.chooseHostWireframe = wireframe;
 	return wireframe;
 }
 
@@ -151,5 +162,13 @@
 		_userLoginService = service;
 	}
 	return _userLoginService;
+}
+
+- (THLParseEventService *)eventService {
+	if (!_eventService) {
+		THLParseEventService *service = [[THLParseEventService alloc] init];
+		_eventService = service;
+	}
+	return _eventService;
 }
 @end

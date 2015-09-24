@@ -14,6 +14,7 @@
 @class THLNumberVerificationWireframe;
 @class THLEventDiscoveryWireframe;
 @class THLEventDetailWireframe;
+@class THLChooseHostWireframe;
 
 @protocol THLWireframeFactory <NSObject>
 - (THLLoginWireframe *)newLoginWireframe;
@@ -22,6 +23,7 @@
 - (THLNumberVerificationWireframe *)newNumberVerificationWireframe;
 - (THLEventDiscoveryWireframe *)newEventDiscoveryWireframe;
 - (THLEventDetailWireframe *)newEventDetailWireframe;
+- (THLChooseHostWireframe *)newChooseHostWireframe;
 @end
 
 /**

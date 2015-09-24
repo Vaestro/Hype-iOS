@@ -50,6 +50,7 @@ pod 'libPhoneNumber-iOS', '~> 0.8'
 pod 'SVPullToRefresh'
 pod "ORStackView"
 pod 'Onboard'
+pod 'iCarousel', '~> 1.8'
 end
 
 target 'Hypelist2point0Tests' do

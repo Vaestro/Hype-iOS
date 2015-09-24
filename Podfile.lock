@@ -1,7 +1,7 @@
 PODS:
-  - APAddressBook (0.1.11):
-    - APAddressBook/Core (= 0.1.11)
-  - APAddressBook/Core (0.1.11)
+  - APAddressBook (0.1.13):
+    - APAddressBook/Core (= 0.1.13)
+  - APAddressBook/Core (0.1.13)
   - AutoCoding (2.2.1)
   - BFKit (1.7.0)
   - BlocksKit (2.2.5):
@@ -58,9 +58,10 @@ PODS:
   - FLKAutoLayout (0.2.1)
   - GCDObjC (0.2.0)
   - Gizou (0.1.3)
+  - iCarousel (1.8.2)
   - libPhoneNumber-iOS (0.8.7)
   - LinqToObjectiveC (2.0.0)
-  - Masonry (0.6.2)
+  - Masonry (0.6.3)
   - NUI (0.5.5):
     - NUIParse
   - NUIParse (1.2.1)
@@ -113,6 +114,7 @@ DEPENDENCIES:
   - FBSDKShareKit
   - GCDObjC (~> 0.2)
   - Gizou
+  - iCarousel (~> 1.8)
   - libPhoneNumber-iOS (~> 0.8)
   - LinqToObjectiveC (~> 2.0)
   - Masonry (~> 0.6)
@@ -134,7 +136,7 @@ DEPENDENCIES:
   - YLMoment (~> 0.2.0)
 
 SPEC CHECKSUMS:
-  APAddressBook: 2c949367b190a993d2cce769a3b20bce8bcf000c
+  APAddressBook: fcd5ee526abaabbf2c06bfa8d857016c95ba76f0
   AutoCoding: b47e528426c84346371dd532b8e6458929e4da34
   BFKit: d2d202d8b5775bc13c60c36692fdc288b0af45c8
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
@@ -152,9 +154,10 @@ SPEC CHECKSUMS:
   FLKAutoLayout: 9db6b30c2008d230da608e62c607b11c23b942e6
   GCDObjC: adcd9941029e3628de539347d3a6777470a65998
   Gizou: 93853bf634a9382c257795db052aa9a75e972c43
+  iCarousel: 67c8a43da5a46795b56aadfc96cd36a16f6149b2
   libPhoneNumber-iOS: 1bccd3288375d954b0b904e26061cecaa0fb83d6
   LinqToObjectiveC: 768f98c62d5b57cb6bdb7ab869e33d0a7a2da29c
-  Masonry: 362e8a1cc0beada4a4c4832d5e863da2a51533be
+  Masonry: ff105a956abcd19a618b2028b121cb638d7a8e2f
   NUI: 53de7278003235deb2a375fe6f04c7a3aa3e49eb
   NUIParse: 9b6d5a6b782dc654ac6c846d623885080306f07f
   ObjectiveSugar: a6a25f23d657c19df0a0b972466d5b5ca9f5295c
