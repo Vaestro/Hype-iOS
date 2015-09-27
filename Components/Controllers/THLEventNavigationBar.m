@@ -95,18 +95,18 @@ static CGRect const kTHLEventNavigationBarDismissButtonFrame = {{5,6},{37,30}};
 
 #pragma mark - Constructors
 - (UILabel *)newTitleLabel {
-	UILabel *label = THLNUILabel(kTHLNUIUndef);
+	UILabel *label = THLNUILabel(kTHLNUIBoldTitle);
 	return label;
 }
 
 - (UILabel *)newSubtitleLabel {
-	UILabel *label = THLNUILabel(kTHLNUIUndef);
+	UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
 	label.alpha = kTHLEventNavigationBarSublabelAlpha;
 	return label;
 }
 
 - (UILabel *)newDateLabel {
-	UILabel *label = THLNUILabel(kTHLNUIUndef);
+	UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
 	label.alpha = kTHLEventNavigationBarSublabelAlpha;
 	return label;
 }

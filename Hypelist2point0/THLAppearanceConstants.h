@@ -33,7 +33,13 @@ static float const kTHLGoldenRatioInverse = 0.61803398875f;
 static CGFloat const kTHLCornerRadius = 5;
 static CGFloat const kTHLBaseUnit = 5;
 
-static NSString *const kTHLNUIUndef = nil;
+static NSString *const kTHLNUIUndef = @"";
+static NSString *const kTHLNUIBoldTitle = @"BoldTitle";
+static NSString *const kTHLNUINavBarTitle = @"NavBarTitle";
+static NSString *const kTHLNUIRegularTitle = @"RegularTitle";
+static NSString *const kTHLNUIDetailTitle = @"DetailTitle";
+static NSString *const kTHLNUIButtonTitle = @"ButtonTitle";
+static NSString *const kTHLNUISectionTitle = @"SectionTitle";
 
 #define kTHLUndefColor [UIColor blueColor];
 #define kTHLUndefTextColor [UIColor whiteColor];
@@ -128,6 +134,7 @@ THLNUIView(NSString *nuiClass) {
 UIKIT_STATIC_INLINE UITextView*
 THLNUITextView(NSString *nuiClass) {
 	UITextView *textView = [UITextView new];
+	textView.backgroundColor = [UIColor clearColor];
 	if (nuiClass && nuiClass.length) {
 		textView.nuiClass = nuiClass;
 	}

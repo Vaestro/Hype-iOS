@@ -63,11 +63,15 @@
 }
 
 - (UILabel *)newTitleLabel {
-	return THLNUILabel(kTHLNUIUndef);
+	UILabel *label = THLNUILabel(kTHLNUISectionTitle);
+	label.alpha = 0.7;
+	return label;
 }
 
 - (UIView *)newSeparatorView {
 	UIView *view = [UIView new];
+	view.backgroundColor = [UIColor whiteColor];
+	view.alpha = 0.7;
 	return view;
 }
 

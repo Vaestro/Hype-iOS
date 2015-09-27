@@ -51,7 +51,7 @@
 	[navBar setTitleText:_eventEntity.location.name];
 	[navBar setSubtitleText:_eventEntity.title];
 	[navBar setDateText:_eventEntity.date.thl_weekdayString];
-//	[navBar setLocationImageURL:_event.location.imageURL];
+	[navBar setLocationImageURL:_eventEntity.location.imageURL];
 
 	RACCommand *command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
 		[self handleDismissAction];

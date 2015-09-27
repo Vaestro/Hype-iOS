@@ -16,6 +16,7 @@
 
 #import "THLDependencyManager.h"
 #import "THLMasterWireframe.h"
+#import "THLAppearanceUtils.h"
 
 
 @interface AppDelegate ()
@@ -36,7 +37,7 @@
 	[PFFacebookUtils initializeFacebook];
 	[Fabric with:@[[Crashlytics class], [Digits class]]];
 
-
+	[THLAppearanceUtils applyStyles];
 
 	_dependencyManager = [[THLDependencyManager alloc] init];
 	_masterWireframe = [_dependencyManager masterWireframe];

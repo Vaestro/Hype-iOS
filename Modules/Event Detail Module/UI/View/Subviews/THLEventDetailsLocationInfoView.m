@@ -36,7 +36,7 @@
 
 #pragma mark - Constructors
 - (UITextView *)newTextView {
-	UITextView *textView = THLNUITextView(kTHLNUIUndef);
+	UITextView *textView = THLNUITextView(kTHLNUIDetailTitle);
 	[textView setScrollEnabled:NO];
 	return textView;
 }

@@ -81,19 +81,19 @@ static CGFloat const kTHLEventTitlesViewSeparatorViewWidth = 112.5;
 
 #pragma mark - Constructors
 - (UILabel *)newTitleLabel {
-	return THLNUILabel(kTHLNUIUndef);
+	return THLNUILabel(kTHLNUIBoldTitle);
 }
 
 - (UILabel *)newDateLabel {
-	return THLNUILabel(kTHLNUIUndef);
+	return THLNUILabel(kTHLNUIDetailTitle);
 }
 
 - (UILabel *)newLocationNameLabel {
-	return THLNUILabel(kTHLNUIUndef);
+	return THLNUILabel(kTHLNUIRegularTitle);
 }
 
 - (UILabel *)newLocationNeighborhoodLabel {
-	return THLNUILabel(kTHLNUIUndef);
+	return THLNUILabel(kTHLNUIDetailTitle);
 }
 
 - (UIView *)newSeparatorView {

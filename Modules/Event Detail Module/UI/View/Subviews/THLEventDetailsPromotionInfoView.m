@@ -49,11 +49,24 @@ static CGFloat const kTHLEventDetailsPromotionInfoViewImageViewHeight = 92;
 	}] subscribeNext:^(NSURL *url) {
 		[_imageView sd_setImageWithURL:url];
 	}];
+
+	[RACObserve(self.promoImageURL, isValid) subscribeNext:^(id x) {
+		[self updateConstraints];
+	}];
+}
+
+- (void)updateConstraints {
+	[super updateConstraints];
+	
+	__block CGFloat height = (self.promoImageURL.isValid) ? kTHLEventDetailsPromotionInfoViewImageViewHeight : 0;
+	[_imageView updateConstraints:^(MASConstraintMaker *make) {
+		make.height.equalTo(height);
+	}];
 }
 
 #pragma mark - Constructors
 - (UITextView *)newTextView {
-	UITextView *textView = THLNUITextView(kTHLNUIUndef);
+	UITextView *textView = THLNUITextView(kTHLNUIDetailTitle);
 	[textView setScrollEnabled:NO];
 	return textView;
 }
