@@ -8,70 +8,77 @@
 
 #import "THLDependencyManager.h"
 
+//Dependency Management Protocols
+#import "THLEventFlowDependencyManager.h"
+
 //Wireframes
 #import "THLMasterWireframe.h"
 #import "THLLoginWireframe.h"
-#import "THLOnboardingWireframe.h"
 #import "THLFacebookPictureWireframe.h"
 #import "THLNumberVerificationWireframe.h"
 #import "THLEventDiscoveryWireframe.h"
 #import "THLEventDetailWireframe.h"
-#import "THLChooseHostWireframe.h"
+#import "THLPromotionSelectionWireframe.h"
+#import "THLEventFlowWireframe.h"
 
 //Common
-#import "THLExtensionManager.h"
-#import "THLDatabaseManager.h"
+#import "THLYapDatabaseManager.h"
+#import "THLEntityMapper.h"
+#import "THLViewDataSourceFactory.h"
+#import "THLParseQueryFactory.h"
+#import "THLEntities.h"
+#import "THLYapDatabaseViewFactory.h"
 
 //Data Stores
-#import "THLEventDataStore.h"
+#import "THLDataStore.h"
 
 //Services
-#import "THLEventFetchService.h"
+#import "THLLoginService.h"
+#import "THLEventService.h"
+#import "THLPromotionService.h"
 #import "THLFacebookProfilePictureURLFetchService.h"
-#import "THLUserLoginService.h"
-#import "THLParseEventService.h"
+
+
 
 
 @interface THLDependencyManager()
 //Wireframes
 @property (nonatomic, strong) THLMasterWireframe *masterWireframe;
-@property (nonatomic, strong) THLLoginWireframe *loginWireframe;
-@property (nonatomic, strong) THLOnboardingWireframe *onboardingWireframe;
-@property (nonatomic, strong) THLFacebookPictureWireframe *facebookPictureWireframe;
-@property (nonatomic, strong) THLNumberVerificationWireframe *numberVerificationWireframe;
-@property (nonatomic, strong) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
-@property (nonatomic, strong) THLEventDetailWireframe *eventDetailWireframe;
-@property (nonatomic, strong) THLChooseHostWireframe *chooseHostWireframe;
+@property (nonatomic, weak) THLLoginWireframe *loginWireframe;
+@property (nonatomic, weak) THLFacebookPictureWireframe *facebookPictureWireframe;
+@property (nonatomic, weak) THLNumberVerificationWireframe *numberVerificationWireframe;
+@property (nonatomic, weak) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
+@property (nonatomic, weak) THLEventDetailWireframe *eventDetailWireframe;
+@property (nonatomic, weak) THLPromotionSelectionWireframe *promotionSelectionWireframe;
+@property (nonatomic, weak) THLEventFlowWireframe *eventFlowWireframe;
 
 //Common
-@property (nonatomic, strong) THLDatabaseManager *databaseManager;
-@property (nonatomic, strong) THLExtensionManager *extensionManager;
+@property (nonatomic, strong) THLYapDatabaseManager *databaseManager;
+@property (nonatomic, strong) THLEntityMapper *entityMapper;
+@property (nonatomic, strong) THLViewDataSourceFactory *viewDataSourceFactory;
+@property (nonatomic, strong) THLYapDatabaseViewFactory *yapDatabaseViewFactory;
+@property (nonatomic, strong) THLParseQueryFactory *parseQueryFactory;
 
 //Data Stores
-@property (nonatomic, strong) THLEventDataStore *eventDataStore;
+@property (nonatomic, strong) THLDataStore *eventDataStore;
 
 //Services
-@property (nonatomic, strong) THLEventFetchService *eventFetchService;
+@property (nonatomic, strong) THLEventService *eventService;
 @property (nonatomic, strong) THLFacebookProfilePictureURLFetchService *facebookProfilePictureURLFetchService;
-@property (nonatomic, strong) THLUserLoginService *userLoginService;
-@property (nonatomic, strong) THLParseEventService *eventService;
+@property (nonatomic, strong) THLLoginService *loginService;
+@property (nonatomic, strong) THLPromotionService *promotionService;
 @end
 
 @implementation THLDependencyManager
-
-#pragma mark - THLWireframeFactory
+#pragma mark - Construction
 - (THLLoginWireframe *)newLoginWireframe {
-	THLLoginWireframe *wireframe = [[THLLoginWireframe alloc] initWithLoginService:self.userLoginService];
+	THLLoginWireframe *wireframe = [[THLLoginWireframe alloc] initWithLoginService:self.loginService
+														  numberVerificationModule:[self newNumberVerificationWireframe].moduleInterface
+															 facebookPictureModule:[self newFacebookPictureWireframe].moduleInterface];
 	self.loginWireframe = wireframe;
 	return wireframe;
 }
 
-- (THLOnboardingWireframe *)newOnboardingWireframe {
-	THLOnboardingWireframe *wireframe = [[THLOnboardingWireframe alloc] initWithFacebookPictureModule:[self newFacebookPictureWireframe].moduleInterface
-																			 numberVerificationModule:[self newNumberVerificationWireframe].moduleInterface];
-	self.onboardingWireframe = wireframe;
-	return wireframe;
-}
 
 - (THLFacebookPictureWireframe *)newFacebookPictureWireframe {
 	THLFacebookPictureWireframe *wireframe = [[THLFacebookPictureWireframe alloc] initWithFetchService:self.facebookProfilePictureURLFetchService];
@@ -86,7 +93,10 @@
 }
 
 - (THLEventDiscoveryWireframe *)newEventDiscoveryWireframe {
-	THLEventDiscoveryWireframe *wireframe = [[THLEventDiscoveryWireframe alloc] initWithDataStore:self.eventDataStore fetchService:self.eventFetchService extensionManager:self.extensionManager];
+	THLEventDiscoveryWireframe *wireframe = [[THLEventDiscoveryWireframe alloc] initWithDataStore:self.eventDataStore
+																					 entityMapper:self.entityMapper
+																					 eventService:self.eventService
+																			viewDataSourceFactory:self.viewDataSourceFactory];
 	self.eventDiscoveryWireframe = wireframe;
 	return wireframe;
 }
@@ -97,9 +107,15 @@
 	return wireframe;
 }
 
-- (THLChooseHostWireframe *)newChooseHostWireframe {
-	THLChooseHostWireframe *wireframe = [[THLChooseHostWireframe alloc] initWithEventService:self.eventService];
-	self.chooseHostWireframe = wireframe;
+- (THLPromotionSelectionWireframe *)newPromotionSelectionWireframe {
+	THLPromotionSelectionWireframe *wireframe = [[THLPromotionSelectionWireframe alloc] initWithEntityMapper:self.entityMapper promotionService:self.promotionService];
+	self.promotionSelectionWireframe = wireframe;
+	return nil;
+}
+
+- (THLEventFlowWireframe *)newEventFlowWireframe {
+	THLEventFlowWireframe *wireframe = [[THLEventFlowWireframe alloc] initWithDependencyManager:self];
+	self.eventFlowWireframe = wireframe;
 	return wireframe;
 }
 
@@ -107,68 +123,82 @@
 #pragma mark - Wireframes
 - (THLMasterWireframe *)masterWireframe {
 	if (!_masterWireframe) {
-		THLMasterWireframe *masterWireframe = [[THLMasterWireframe alloc] initWithFactory:self];
-		_masterWireframe = masterWireframe;
+		_masterWireframe = [[THLMasterWireframe alloc] initWithDependencyManager:self];
 	}
 	return _masterWireframe;
 }
 
 #pragma mark - Common
-- (THLExtensionManager *)extensionManager {
-	if (!_extensionManager) {
-		THLExtensionManager *extensionManager = [[THLExtensionManager alloc] initWithDatabaseManager:self.databaseManager];
-		_extensionManager = extensionManager;
-	}
-	return _extensionManager;
-}
-
-- (THLDatabaseManager *)databaseManager {
+- (THLYapDatabaseManager *)databaseManager {
 	if (!_databaseManager) {
-		THLDatabaseManager *databaseManager = [[THLDatabaseManager alloc] init];
-		_databaseManager = databaseManager;
+		_databaseManager = [[THLYapDatabaseManager alloc] init];
 	}
 	return _databaseManager;
 }
 
+- (THLEntityMapper *)entityMapper {
+	if (!_entityMapper) {
+		_entityMapper = [[THLEntityMapper alloc] init];
+	}
+	return _entityMapper;
+}
+
+- (THLViewDataSourceFactory *)viewDataSourceFactory {
+	if (!_viewDataSourceFactory) {
+		_viewDataSourceFactory = [[THLViewDataSourceFactory alloc] initWithViewFactory:self.yapDatabaseViewFactory
+																	   databaseManager:self.databaseManager];
+	}
+	return _viewDataSourceFactory;
+}
+
+- (THLYapDatabaseViewFactory *)yapDatabaseViewFactory {
+	if (!_yapDatabaseViewFactory) {
+		_yapDatabaseViewFactory = [[THLYapDatabaseViewFactory alloc] initWithDatabaseManager:self.databaseManager];
+	}
+	return _yapDatabaseViewFactory;
+}
+
+- (THLParseQueryFactory *)parseQueryFactory {
+	if (!_parseQueryFactory) {
+		_parseQueryFactory = [[THLParseQueryFactory alloc] init];
+	}
+	return _parseQueryFactory;
+}
+
 #pragma mark - Data Stores
-- (THLEventDataStore *)eventDataStore {
+- (THLDataStore *)eventDataStore {
 	if (!_eventDataStore) {
-		THLEventDataStore *dataStore = [[THLEventDataStore alloc] initWithDatabaseManager:self.databaseManager];
-		_eventDataStore = dataStore;
+		_eventDataStore = [[THLDataStore alloc] initForEntity:[THLEventEntity class] databaseManager:self.databaseManager];
 	}
 	return _eventDataStore;
 }
 
 #pragma mark - Services
-- (THLEventFetchService *)eventFetchService {
-	if (!_eventFetchService) {
-		THLEventFetchService *service = [[THLEventFetchService alloc] init];
-		_eventFetchService = service;
+- (THLEventService *)eventService {
+	if (!_eventService) {
+		_eventService = [[THLEventService alloc] initWithQueryFactory:self.parseQueryFactory];
 	}
-	return _eventFetchService;
+	return _eventService;
 }
 
 - (THLFacebookProfilePictureURLFetchService *)facebookProfilePictureURLFetchService {
 	if (!_facebookProfilePictureURLFetchService) {
-		THLFacebookProfilePictureURLFetchService *service = [[THLFacebookProfilePictureURLFetchService alloc] init];
-		_facebookProfilePictureURLFetchService = service;
+		_facebookProfilePictureURLFetchService = [[THLFacebookProfilePictureURLFetchService alloc] init];
 	}
 	return _facebookProfilePictureURLFetchService;
 }
 
-- (THLUserLoginService *)userLoginService {
-	if (!_userLoginService) {
-		THLUserLoginService *service = [[THLUserLoginService alloc] init];
-		_userLoginService = service;
+- (THLLoginService *)loginService {
+	if (!_loginService) {
+		_loginService = [[THLLoginService alloc] init];
 	}
-	return _userLoginService;
+	return _loginService;
 }
 
-- (THLParseEventService *)eventService {
-	if (!_eventService) {
-		THLParseEventService *service = [[THLParseEventService alloc] init];
-		_eventService = service;
+- (THLPromotionService *)promotionService {
+	if (!_promotionService) {
+		_promotionService = [[THLPromotionService alloc] initWithQueryFactory:self.parseQueryFactory];
 	}
-	return _eventService;
+	return _promotionService;
 }
 @end

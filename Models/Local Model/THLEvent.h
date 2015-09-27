@@ -6,15 +6,17 @@
 //  Copyright (c) 2015 Hypelist. All rights reserved.
 //
 
-#import "THLEntity.h"
+#import <Parse/Parse.h>
+#import <Parse/PFObject+Subclass.h>
+
 #import "THLLocation.h"
 
-@interface THLEvent : THLEntity
-@property (nonatomic, strong) NSDate *date;
-@property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSURL *promoImageURL;
-@property (nonatomic, copy) NSString *promoInfo;
-@property (nonatomic) float maleCover;
-@property (nonatomic) float femaleCover;
-@property (nonatomic, strong) THLLocation *location;
+@interface THLEvent : PFObject<PFSubclassing>
+@property (nonatomic, retain) NSDate *date;
+@property (nonatomic) float maleCoverCharge;
+@property (nonatomic) float femaleCoverCharge;
+@property (nonatomic, retain) NSString *title;
+@property (nonatomic, retain) NSString *promoInfo;
+@property (nonatomic, retain) PFFile *promoImage;
+@property (nonatomic, retain) THLLocation *location;
 @end

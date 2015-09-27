@@ -10,7 +10,7 @@
 #define Hypelist2point0_THLGlobalCategories_h
 
 #import "NSDate+Utilities.h"
-#import "NSDate+HypeListHelper.h"
+#import "NSDate+Hypelist.h"
 #import "UIView+AddSubviews.h"
 
 

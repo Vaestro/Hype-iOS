@@ -17,9 +17,10 @@ typedef NS_ENUM(NSInteger, THLStatus) {
 };
 
 typedef NS_ENUM(NSInteger, THLSex) {
-	THLSexUnspecified = 0,
+	THLSexUnreported = 0,
 	THLSexMale = 1,
-	THLSexFemale = 2
+	THLSexFemale = 2,
+	THLSex_Count
 };
 
 #define SafeString(string) (string != nil) ? string : @""
@@ -36,7 +37,7 @@ typedef NS_ENUM(NSInteger, THLSex) {
 //Inteded to be used when doing layout constraints with Masonry.
 //Calling MASONRY_HELPER2(); will include both msv and mrv, or can
 //just call MASONRY_HELPER(); to include msv
-#define MASONRY_HELPER(superview)		UIView *msv = superview; \
+//#define MASONRY_HELPER(superview)		UIView *msv = superview; \
 #define _MSV(superview)					msv = superview
 
 #define NAVIGATION_CONTROLLER_WRAPPER(viewController) [[UINavigationController alloc] initWithRootViewController:viewController]

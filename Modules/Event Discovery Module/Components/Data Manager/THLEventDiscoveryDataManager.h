@@ -8,16 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
-@class THLEventDataStore;
+@class THLDataStore;
+@class THLEntityMapper;
 @class BFTask;
-@protocol THLEventFetchServiceInterface;
+@protocol THLEventServiceInterface;
 
 @interface THLEventDiscoveryDataManager : NSObject
-@property (nonatomic, readonly) THLEventDataStore *dataStore;
-@property (nonatomic, readonly) id<THLEventFetchServiceInterface> fetchService;
-
-- (instancetype)initWithDataStore:(THLEventDataStore *)dataStore
-					 fetchService:(id<THLEventFetchServiceInterface>)fetchService NS_DESIGNATED_INITIALIZER;
+#pragma mark - Dependencies
+@property (nonatomic, readonly) THLDataStore *dataStore;
+@property (nonatomic, readonly) THLEntityMapper *entityMapper;
+@property (nonatomic, readonly) id<THLEventServiceInterface> eventService;
+- (instancetype)initWithDataStore:(THLDataStore *)dataStore
+					 entityMapper:(THLEntityMapper *)entityMapper
+					 eventService:(id<THLEventServiceInterface>)eventService;
 
 - (BFTask *)fetchEventsFrom:(NSDate *)startDate to:(NSDate *)endDate;
 @end

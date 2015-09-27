@@ -12,10 +12,10 @@
 #import "THLEventDetailInteractor.h"
 
 #import "THLEventNavigationBar.h"
-#import "THLEvent.h"
+#import "THLEventEntity.h"
 
 @interface THLEventDetailPresenter()
-@property (nonatomic, strong) THLEvent *event;
+@property (nonatomic, strong) THLEventEntity *eventEntity;
 @end
 
 @implementation THLEventDetailPresenter
@@ -31,13 +31,13 @@
 }
 
 - (void)configureView:(id<THLEventDetailView>)view {
-	[view setLocationImageURL:_event.location.imageURL];
-	[view setPromoImageURL:_event.promoImageURL];
-	[view setEventName:_event.title];
-	[view setPromoInfo:_event.promoInfo];
-	[view setLocationName:_event.location.name];
-	[view setLocationInfo:_event.location.info];
-	[view setLocationAddress:_event.location.fullAddress];
+//	[view setLocationImageURL:_event.location.imageURL];
+//	[view setPromoImageURL:_event.promoImageURL];
+	[view setEventName:_eventEntity.title];
+	[view setPromoInfo:_eventEntity.info];
+	[view setLocationName:_eventEntity.location.name];
+	[view setLocationInfo:_eventEntity.location.info];
+	[view setLocationAddress:_eventEntity.location.fullAddress];
 
 	RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
 		[self handleDismissAction];
@@ -48,10 +48,10 @@
 }
 
 - (void)configureNavigationBar:(THLEventNavigationBar *)navBar {
-	[navBar setTitleText:_event.location.name];
-	[navBar setSubtitleText:_event.title];
-	[navBar setDateText:_event.date.thl_weekdayString];
-	[navBar setLocationImageURL:_event.location.imageURL];
+	[navBar setTitleText:_eventEntity.location.name];
+	[navBar setSubtitleText:_eventEntity.title];
+	[navBar setDateText:_eventEntity.date.thl_weekdayString];
+//	[navBar setLocationImageURL:_event.location.imageURL];
 
 	RACCommand *command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
 		[self handleDismissAction];
@@ -62,8 +62,8 @@
 }
 
 
-- (void)presentEventDetailInterfaceForEvent:(THLEvent *)event inWindow:(UIWindow *)window {
-	_event = event;
+- (void)presentEventDetailInterfaceForEvent:(THLEventEntity *)eventEntity inWindow:(UIWindow *)window {
+	_eventEntity = eventEntity;
 	[_wireframe presentInterfaceInWindow:window];
 }
 

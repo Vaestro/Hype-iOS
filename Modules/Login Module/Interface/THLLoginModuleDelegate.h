@@ -11,6 +11,5 @@
 @class THLUser;
 @protocol THLLoginModuleInterface;
 @protocol THLLoginModuleDelegate <NSObject>
-- (void)loginModule:(id<THLLoginModuleInterface>)module didLoginUser:(THLUser *)user;
-- (void)loginModule:(id<THLLoginModuleInterface>)module didFailToLoginWithError:(NSError *)error;
+- (void)loginModule:(id<THLLoginModuleInterface>)module didLoginUser:(NSError *)error;
 @end

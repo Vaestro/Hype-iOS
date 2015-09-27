@@ -6,15 +6,30 @@
 //  Copyright (c) 2015 Hypelist. All rights reserved.
 //
 
-#import "THLEntity.h"
+#import <Parse/Parse.h>
+#import <Parse/PFObject+Subclass.h>
+#import "THLConstants.h"
+//@protocol PFSubclassing;
 
-@interface THLUser : THLEntity
-@property (nonatomic, copy) NSString *firstName;
-@property (nonatomic, copy) NSString *lastName;
-@property (nonatomic, copy) NSString *phoneNumber;
-@property (nonatomic, copy) NSURL *imageURL;
+typedef NS_ENUM(NSInteger, THLUserType) {
+	THLUserTypeGuest = 0,
+	THLUserTypeHost = 1,
+	THLUserTypeAdmin = 2,
+	THLUserType_Count
+};
+
+
+@interface THLUser : PFUser<PFSubclassing>
+@property (nonatomic, retain) NSString *fbId;
+@property (nonatomic, retain) NSString *fbEmail;
+@property (nonatomic, retain) NSDate *fbBirthday;
+@property (nonatomic, retain) PFFile *image;
+@property (nonatomic, retain) NSString *firstName;
+@property (nonatomic, retain) NSString *lastName;
+@property (nonatomic, retain) NSString *phoneNumber;
+@property (nonatomic) enum THLUserType type;
+@property (nonatomic) enum THLSex sex;
 @property (nonatomic) float rating;
 
-@property (nonatomic, readonly) NSString *fullName;
-@property (nonatomic, readonly, getter=isNewUser) BOOL newUser;
+@property (nonatomic, copy, readonly) NSString *fullName;
 @end

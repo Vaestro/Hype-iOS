@@ -7,25 +7,9 @@
 //
 
 #import "THLViewDataSource.h"
-#import "YapDatabase.h"
-#import "YapDatabaseView.h"
-#import "YapDatabaseViewMappings.h"
-
-@interface THLViewDataSource()
-- (void) _updateEmptyView;
-@end
+#import "THLViewDataSource_Private.h"
 
 @implementation THLViewDataSource
-- (instancetype)initWithMappings:(YapDatabaseViewMappings *)mappings
-					  connection:(YapDatabaseConnection *)connection {
-	if (self = [super init]) {
-		_mappings = mappings;
-		_connection = connection;
-		[self beginObservingChanges];
-	}
-	return self;
-}
-
 - (void)dealloc {
 	[self finishObservingChanges];
 
@@ -107,7 +91,7 @@
 		_collectionView = nil;
 	}
 
-	[self _updateEmptyView];
+	[self updateEmptyView];
 }
 
 - (void)setCollectionView:(UICollectionView *)collectionView {
@@ -118,7 +102,7 @@
 		_tableView = nil;
 	}
 
-	[self _updateEmptyView];
+	[self updateEmptyView];
 }
 
 - (NSInteger)numberOfSections {
@@ -189,10 +173,10 @@
 	_emptyView = emptyView;
 	self.emptyView.hidden = YES;
 
-	[self _updateEmptyView];
+	[self updateEmptyView];
 }
 
-- (void)_updateEmptyView {
+- (void)updateEmptyView {
 	if (!self.emptyView) {
 		return;
 	}
@@ -309,7 +293,7 @@
 
 	[self.collectionView insertItemsAtIndexPaths:indexPaths];
 
-	[self _updateEmptyView];
+	[self updateEmptyView];
 }
 
 - (void)deleteCellsAtIndexPaths:(NSArray *)indexPaths {
@@ -318,7 +302,7 @@
 
 	[self.collectionView deleteItemsAtIndexPaths:indexPaths];
 
-	[self _updateEmptyView];
+	[self updateEmptyView];
 }
 
 - (void)reloadCellsAtIndexPaths:(NSArray *)indexPaths {
@@ -350,7 +334,7 @@
 
 	[self.collectionView insertSections:indexes];
 
-	[self _updateEmptyView];
+	[self updateEmptyView];
 }
 
 - (void)deleteSectionsAtIndexes:(NSIndexSet *)indexes {
@@ -359,7 +343,7 @@
 
 	[self.collectionView deleteSections:indexes];
 
-	[self _updateEmptyView];
+	[self updateEmptyView];
 }
 
 - (void)reloadSectionsAtIndexes:(NSIndexSet *)indexes {
@@ -373,7 +357,7 @@
 	[self.tableView reloadData];
 	[self.collectionView reloadData];
 
-	[self _updateEmptyView];
+	[self updateEmptyView];
 }
 
 @end

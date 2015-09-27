@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol THLWireframeFactory;
+@class THLDependencyManager;
 
 @interface THLMasterWireframe : NSObject
-@property (nonatomic, weak) id<THLWireframeFactory> factory;
+#pragma mark - Dependencies
+@property (nonatomic, weak, readonly) THLDependencyManager *dependencyManager;
+- (instancetype)initWithDependencyManager:(THLDependencyManager *)dependencyManager;
 
-- (instancetype)initWithFactory:(id<THLWireframeFactory>)factory NS_DESIGNATED_INITIALIZER;
 - (void)presentAppInWindow:(UIWindow *)window;
 @end

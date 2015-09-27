@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-@class THLEvent;
+@class THLEventEntity;
 @protocol THLEventDiscoveryModuleInterface;
 
 @protocol THLEventDiscoveryModuleDelegate <NSObject>
-- (void)eventDiscoveryModule:(id<THLEventDiscoveryModuleInterface>)module userDidSelectEvent:(THLEvent *)event;
+- (void)eventDiscoveryModule:(id<THLEventDiscoveryModuleInterface>)module userDidSelectEventEntity:(THLEventEntity *)eventEntity;
 @end

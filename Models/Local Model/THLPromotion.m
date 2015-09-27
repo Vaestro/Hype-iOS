@@ -7,34 +7,20 @@
 //
 
 #import "THLPromotion.h"
-#import "THLEvent.h"
-#import "THLLocation.h"
 
 @implementation THLPromotion
-- (BOOL)updateWith:(THLEntity *)newEntity {
-	BOOL didUpdate = NO;
-	if ([self shouldUpdateWith:newEntity]) {
-		THLPromotion *newPromotion = (THLPromotion *)newEntity;
-		if (![self.time isEqualToDate:newPromotion.time]) {
-			self.time = newPromotion.time;
-			didUpdate = YES;
-		}
+@dynamic time;
+@dynamic maleRatio;
+@dynamic femaleRatio;
+@dynamic host;
+@dynamic event;
+@dynamic eventId;
 
-		if (self.maleRatio != newPromotion.maleRatio) {
-			self.maleRatio = newPromotion.maleRatio;
-			didUpdate = YES;
-		}
++ (void)load {
+	[self registerSubclass];
+}
 
-		if (self.femaleRatio != newPromotion.femaleRatio) {
-			self.femaleRatio = newPromotion.femaleRatio;
-			didUpdate = YES;
-		}
-
-		if (![self.event isEquivalentTo:newPromotion.event]) {
-			self.event = newPromotion.event;
-			didUpdate = YES;
-		}
-	}
-	return didUpdate;
++ (NSString *)parseClassName {
+	return @"Promotion";
 }
 @end

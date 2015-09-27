@@ -8,18 +8,28 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol THLUserLoginServiceInterface;
+@class THLLoginDataManager;
 @class THLLoginInteractor;
 @class THLUser;
 
 @protocol THLLoginInteractorDelegate <NSObject>
-- (void)interactor:(THLLoginInteractor *)interactor didLoginUser:(THLUser *)user error:(NSError *)error;
+- (void)interactor:(THLLoginInteractor *)interactor didLoginUser:(NSError *)error;
+- (void)interactor:(THLLoginInteractor *)interactor didAddVerifiedPhoneNumber:(NSError *)error;
+- (void)interactor:(THLLoginInteractor *)interactor didAddProfileImage:(NSError *)error;
 @end
 
 @interface THLLoginInteractor : NSObject
 @property (nonatomic, weak) id<THLLoginInteractorDelegate> delegate;
-@property (nonatomic, strong, readonly) id<THLUserLoginServiceInterface> loginService;
 
-- (instancetype)initWithLoginService:(id<THLUserLoginServiceInterface>)loginService;
+#pragma mark - Dependencies
+@property (nonatomic, readonly) THLLoginDataManager *dataManager;
+- (instancetype)initWithDataManager:(THLLoginDataManager *)dataManager;
+
+- (BOOL)shouldLogin;
+- (BOOL)shouldVerifyPhoneNumber;
+- (BOOL)shouldPickProfileImage;
+
 - (void)login;
+- (void)addVerifiedPhoneNumber:(NSString *)phoneNumber;
+- (void)addProfileImage:(UIImage *)profileImage;
 @end

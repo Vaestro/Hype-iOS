@@ -11,8 +11,6 @@
 
 #import "THLPromotion.h"
 #import "THLUser.h"
-#import "THLHost.h"
-#import "THLGuest.h"
 #import "THLEvent.h"
 #import "THLLocation.h"
 

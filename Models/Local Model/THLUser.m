@@ -11,42 +11,22 @@
 
 
 @implementation THLUser
+@dynamic fbId;
+@dynamic fbEmail;
+@dynamic fbBirthday;
+@dynamic image;
+@dynamic firstName;
+@dynamic lastName;
+@dynamic phoneNumber;
+@dynamic type;
+@dynamic sex;
+@dynamic rating;
+
++ (void)load {
+	[self registerSubclass];
+}
 
 - (NSString *)fullName {
-	return [[NSString stringWithFormat:@"%@ %@", _firstName, _lastName] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+	return @"";
 }
-
-
-- (BOOL)updateWith:(THLEntity *)newEntity {
-	BOOL didUpdate = NO;
-	if ([self shouldUpdateWith:newEntity]) {
-		THLUser *newUser = (THLUser *)newEntity;
-		if (![self.firstName isEqualToString:newUser.firstName]) {
-			self.firstName = newUser.firstName;
-			didUpdate = YES;
-		}
-
-		if (![self.lastName isEqualToString:newUser.lastName]) {
-			self.lastName = newUser.lastName;
-			didUpdate = YES;
-		}
-
-		if (![self.phoneNumber isEqualToString:newUser.phoneNumber]) {
-			self.phoneNumber = newUser.phoneNumber;
-			didUpdate = YES;
-		}
-
-		if (![self.firstName isEqualToString:newUser.firstName]) {
-			self.firstName = newUser.firstName;
-			didUpdate = YES;
-		}
-	}
-	return didUpdate;
-}
-
-- (BOOL)isNewUser {
-	return (self.phoneNumber.length == 0 || self.imageURL == nil);
-}
-
-
 @end

@@ -7,13 +7,13 @@
 //
 
 #import "THLParseQueryFactory.h"
-
-#import "THLParseModels.h"
 #import "PFObject+MatchingQuery.h"
+#import "PFQuery.h"
+#import "THLLocalModels.h"
 
 @implementation THLParseQueryFactory
 #pragma mark - Event Queries
-+ (PFQuery *)queryForEventsStartingOn:(NSDate *)startDate endingOn:(NSDate *)endDate {
+- (PFQuery *)queryForEventsStartingOn:(NSDate *)startDate endingOn:(NSDate *)endDate {
 	PFQuery *query = [self baseEventQuery];
 	[query whereKey:@"date" greaterThanOrEqualTo:startDate];
 	[query whereKey:@"date" lessThanOrEqualTo:endDate];
@@ -21,7 +21,7 @@
 	return query;
 }
 
-+ (PFQuery *)queryForPromotionsStartingOn:(NSDate *)startDate endingOn:(NSDate *)endDate {
+- (PFQuery *)queryForPromotionsStartingOn:(NSDate *)startDate endingOn:(NSDate *)endDate {
 	PFQuery *eventQuery = [self baseEventQuery];
 	[eventQuery whereKey:@"date" greaterThanOrEqualTo:startDate];
 	[eventQuery whereKey:@"date" lessThanOrEqualTo:endDate];
@@ -32,7 +32,7 @@
 
 }
 
-+ (PFQuery *)queryForPromotionsForEvent:(THLParseEvent *)event {
+- (PFQuery *)queryForPromotionsForEvent:(THLEvent *)event {
 	PFQuery *query = [self basePromotionQuery];
 	[query whereKey:@"event" matchesQuery:[event matchingQuery]];
 	return query;
@@ -40,31 +40,31 @@
 
 #pragma mark - Class Queries
 /**
- *  Generic query for THLParsePromotion.
+ *  Generic query for THLPromotion.
  *	Includes: host, event
  */
-+ (PFQuery *)basePromotionQuery {
-	PFQuery *query = [THLParsePromotion query];
+- (PFQuery *)basePromotionQuery {
+	PFQuery *query = [THLPromotion query];
 	[query includeKey:@"host"];
 	[query includeKey:@"event"];
 	return query;
 }
 
 /**
- *  Generic query for THLParseUser.
+ *  Generic query for THLUser.
  *	Includes: (none)
  */
-+ (PFQuery *)baseUserQuery {
-	PFQuery *query = [THLParseUser query];
+- (PFQuery *)baseUserQuery {
+	PFQuery *query = [THLUser query];
 	return query;
 }
 
 /**
- *  Generic query for THLParseEvent
+ *  Generic query for THLEvent
  *	Includes: location
  */
-+ (PFQuery *)baseEventQuery {
-	PFQuery *query = [THLParseEvent query];
+- (PFQuery *)baseEventQuery {
+	PFQuery *query = [THLEvent query];
 	[query includeKey:@"location"];
 	return query;
 }
@@ -73,8 +73,8 @@
  *  Generic query for THLParseLocation
  *	Includes: (none)
  */
-+ (PFQuery *)baseLocationQuery {
-	PFQuery *query = [THLParseLocation query];
+- (PFQuery *)baseLocationQuery {
+	PFQuery *query = [THLLocation query];
 	return query;
 }
 @end

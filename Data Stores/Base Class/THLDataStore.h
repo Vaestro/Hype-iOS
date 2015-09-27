@@ -10,38 +10,31 @@
 #import "YapDatabase.h"
 
 @class THLEntity;
-@class THLDatabaseManager;
-
-typedef BOOL (^DataStoreEntityDomainTest)(THLEntity *entity);
+@class THLYapDatabaseManager;
+@class THLDataStoreDomain;
 
 @interface THLDataStore : NSObject
-@property (nonatomic, readonly) THLDatabaseManager *databaseManager;
-@property (nonatomic, readonly) NSInteger numEntities;
 
+#pragma mark - Dependencies
+@property (nonatomic, readonly) THLYapDatabaseManager *databaseManager;
+- (instancetype)initForEntity:(Class)entityClass
+			  databaseManager:(THLYapDatabaseManager *)databaseManager;
 
-- (instancetype)initWithDatabaseManager:(THLDatabaseManager *)databaseManager NS_DESIGNATED_INITIALIZER;
-
-+ (NSString *)collectionKey;
-
-- (NSArray *)entityKeysInDomain:(DataStoreEntityDomainTest)domainBlock;
-- (NSArray *)entitiesInDomain:(DataStoreEntityDomainTest)domainBlock;
-- (void)removeEntitiesInDomain:(DataStoreEntityDomainTest)domainTestBlock;
-- (NSInteger)numEntitiesInDomain:(DataStoreEntityDomainTest)domainTestBlock;
+- (NSSet *)entityKeysInDomain:(THLDataStoreDomain *)domain;
+- (NSSet *)entitiesInDomain:(THLDataStoreDomain *)domain;
+- (void)removeEntitiesInDomain:(THLDataStoreDomain *)domain;
+- (NSInteger)countEntitiesInDomain:(THLDataStoreDomain *)domain;
 
 /**
- *  Updates the entities in a given domain. If shouldRemove == YES, removes members in the domain 
- *	who do not have a counterpart in the entites array.
+ *  Updates or adds the entities in the datastore.
  */
-- (void)updateWithEntities:(NSArray *)entities
-				  inDomain:(DataStoreEntityDomainTest)domainTestBlock
-	  removeUnusedEntities:(BOOL)shouldRemove;
+- (void)updateOrAddEntities:(NSSet *)entities;
 
 /**
- *  Updates the entities in a given domain and removes members in the domain who do not have a
- *	counterpart in the entites array.
+ *  Updates the domain with a set of entities. Adds new entities and removes entities that are no
+ *	longer present.
  */
-- (void)updateWithEntities:(NSArray *)entities
-				  inDomain:(DataStoreEntityDomainTest)domainTest;
+- (void)refreshDomain:(THLDataStoreDomain *)domain withEntities:(NSSet *)entities;
 
 /**
  *  Deletes all entities in the Data Store

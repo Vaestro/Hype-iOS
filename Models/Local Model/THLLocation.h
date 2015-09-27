@@ -6,19 +6,19 @@
 //  Copyright (c) 2015 Hypelist. All rights reserved.
 //
 
-#import "THLEntity.h"
+#import <Parse/Parse.h>
+#import <Parse/PFObject+Subclass.h>
 
-@interface THLLocation : THLEntity
-@property (nonatomic, copy) NSURL *imageURL;
-@property (nonatomic, copy) NSString *name;
-@property (nonatomic, copy) NSString *info;
-@property (nonatomic, copy) NSString *address;
-@property (nonatomic, copy) NSString *city;
-@property (nonatomic, copy) NSString *state;
-@property (nonatomic, copy) NSString *zipcode;
-@property (nonatomic, copy) NSString *neighborhood;
-@property (nonatomic) double latitude;
-@property (nonatomic) double longitude;
 
-@property (nonatomic, readonly) NSString *fullAddress;
+@interface THLLocation : PFObject<PFSubclassing>
+@property (nonatomic, retain) PFFile *image;
+@property (nonatomic, retain) NSString *name;
+@property (nonatomic, retain) NSString *info;
+@property (nonatomic, retain) NSString *address;
+@property (nonatomic, retain) NSString *city;
+@property (nonatomic, retain) NSString *stateCode;
+@property (nonatomic, retain) NSString *zipcode;
+@property (nonatomic, retain) NSString *neighborhood;
+@property (nonatomic, retain) PFGeoPoint *coordinate;
+
 @end

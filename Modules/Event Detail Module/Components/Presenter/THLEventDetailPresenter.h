@@ -15,11 +15,11 @@
 @class THLEventNavigationBar;
 
 @interface THLEventDetailPresenter : NSObject<THLEventDetailModuleInterface>
+#pragma mark - Dependencies
 @property (nonatomic, readonly, weak) THLEventDetailWireframe *wireframe;
 @property (nonatomic, readonly) THLEventDetailInteractor *interactor;
-
 - (instancetype)initWithInteractor:(THLEventDetailInteractor *)interactor
-						 wireframe:(THLEventDetailWireframe *)wireframe NS_DESIGNATED_INITIALIZER;
+						 wireframe:(THLEventDetailWireframe *)wireframe;
 
 - (void)configureView:(id<THLEventDetailView>)view;
 - (void)configureNavigationBar:(THLEventNavigationBar *)navBar;

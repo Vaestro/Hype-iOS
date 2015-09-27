@@ -10,34 +10,41 @@
 #import "THLLoginInteractor.h"
 #import "THLLoginPresenter.h"
 #import "THLLoginViewController.h"
+#import "THLLoginDataManager.h"
 
-//@class THLLoginInteractor;
-//@class THLLoginPresenter;
+#import "THLNumberVerificationModuleInterface.h"
+#import "THLFacebookPictureModuleInterface.h"
 
 @interface THLLoginWireframe()
 @property (nonatomic, strong) UIWindow *window;
 
+@property (nonatomic, strong) THLLoginDataManager *dataManager;
 @property (nonatomic, strong) THLLoginInteractor *interactor;
 @property (nonatomic, strong) THLLoginPresenter *presenter;
 @property (nonatomic, strong) THLLoginViewController *view;
-
 @end
-@implementation THLLoginWireframe
 
-- (instancetype)initWithLoginService:(id<THLUserLoginServiceInterface>)loginService {
+@implementation THLLoginWireframe
+- (instancetype)initWithLoginService:(id<THLLoginServiceInterface>)loginService
+				 numberVerificationModule:(id<THLNumberVerificationModuleInterface>)numberVerificationModule
+					facebookPictureModule:(id<THLFacebookPictureModuleInterface>)facebookPictureModule {
 	if (self = [super init]) {
 		_loginService = loginService;
+		_numberVerificationModule = numberVerificationModule;
+		_facebookPictureModule = facebookPictureModule;
 		[self buildModule];
 	}
 	return self;
 }
 
 - (void)buildModule {
-	_interactor = [[THLLoginInteractor alloc] initWithLoginService:_loginService];
+	_dataManager = [[THLLoginDataManager alloc] initWithLoginService:_loginService];
+	_interactor = [[THLLoginInteractor alloc] initWithDataManager:_dataManager];
 	_presenter = [[THLLoginPresenter alloc] initWithWireframe:self interactor:_interactor];
 	_view = [[THLLoginViewController alloc] initWithNibName:nil bundle:nil];
 }
 
+#pragma mark - Interface
 - (id<THLLoginModuleInterface>)moduleInterface {
 	return _presenter;
 }
@@ -48,4 +55,15 @@
 	_window.rootViewController = _view;
 	[_window makeKeyAndVisible];
 }
+
+- (void)presentNumberVerificationInterface:(id<THLNumberVerificationModuleDelegate>)interfaceDelegate {
+	[_numberVerificationModule setModuleDelegate:interfaceDelegate];
+	[_numberVerificationModule presentNumberVerificationInterfaceInWindow:_window];
+}
+
+- (void)presentFacebookPictureInterface:(id<THLFacebookPictureModuleDelegate>)interfaceDelegate {
+	[_facebookPictureModule setModuleDelegate:interfaceDelegate];
+	[_facebookPictureModule presentFacebookPictureInterfaceInWindow:_window];
+}
+
 @end

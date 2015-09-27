@@ -7,13 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-@class PFQuery;
+#import "PFQuery.h"
 
-//Parse Models
-@class THLParseEvent;
-@class THLParsePromotion;
-@class THLParseUser;
-
+@class THLEvent;
 
 /**
  *  Interface for constructing all queries for Parse servers.
@@ -23,9 +19,10 @@
 /**
  *  Query for events with at least one promotion.
  */
-+ (PFQuery *)queryForEventsStartingOn:(NSDate *)startDate endingOn:(NSDate *)endDate;
+- (PFQuery *)queryForEventsStartingOn:(NSDate *)startDate endingOn:(NSDate *)endDate;
 
 #pragma mark - Promotion Queries
-+ (PFQuery *)queryForPromotionsStartingOn:(NSDate *)startDate endingOn:(NSDate *)endDate;
-+ (PFQuery *)queryForPromotionsForEvent:(THLParseEvent *)event;
+- (PFQuery *)queryForPromotionsStartingOn:(NSDate *)startDate endingOn:(NSDate *)endDate;
+- (PFQuery *)queryForPromotionsForEvent:(THLEvent *)event;
+
 @end

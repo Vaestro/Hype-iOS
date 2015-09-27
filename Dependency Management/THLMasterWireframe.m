@@ -13,34 +13,27 @@
 
 //Wireframes
 #import "THLLoginWireframe.h"
-#import "THLOnboardingWireframe.h"
-#import "THLEventDiscoveryWireframe.h"
-#import "THLEventDetailWireframe.h"
-#import "THLChooseHostWireframe.h"
+#import "THLEventFlowWireframe.h"
+#import "THLPromotionSelectionWireframe.h"
 
 //Delegates
 #import "THLLoginModuleDelegate.h"
-#import "THLOnboardingModuleDelegate.h"
-#import "THLEventDetailModuleDelegate.h"
-#import "THLEventDiscoveryModuleDelegate.h"
-#import "THLChooseHostModuleDelegate.h"
+#import "THLPromotionSelectionModuleDelegate.h"
+
 
 @interface THLMasterWireframe()
 <
 THLLoginModuleDelegate,
-THLOnboardingModuleDelegate,
-THLEventDetailModuleDelegate,
-THLEventDiscoveryModuleDelegate,
-THLChooseHostModuleDelegate
+        THLPromotionSelectionModuleDelegate
 >
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) id currentWireframe;
 @end
 
 @implementation THLMasterWireframe
-- (instancetype)initWithFactory:(id<THLWireframeFactory>)factory {
+- (instancetype)initWithDependencyManager:(THLDependencyManager *)dependencyManager {
 	if (self = [super init]) {
-		_factory = factory;
+		_dependencyManager = dependencyManager;
 	}
 	return self;
 }
@@ -52,58 +45,27 @@ THLChooseHostModuleDelegate
 
 #pragma mark - Routing
 - (void)presentLoginInterface {
-	THLLoginWireframe *loginWireframe = [_factory newLoginWireframe];
+	THLLoginWireframe *loginWireframe = [_dependencyManager newLoginWireframe];
 	_currentWireframe = loginWireframe;
 	[loginWireframe.moduleInterface setModuleDelegate:self];
 	[loginWireframe.moduleInterface presentLoginModuleInterfaceInWindow:_window];
 }
 
-- (void)presentOnboardingInterfaceForUser:(THLUser *)user {
-	THLOnboardingWireframe *onboardingWireframe = [_factory newOnboardingWireframe];
-	_currentWireframe = onboardingWireframe;
-	[onboardingWireframe.moduleInterface setModuleDelegate:self];
-	[onboardingWireframe.moduleInterface presentInterfaceForOnboardingUser:user inWindow:_window];
-}
-
-- (void)presentEventDiscoveryInterface {
-	THLEventDiscoveryWireframe *eventDiscWireframe = [_factory newEventDiscoveryWireframe];
-	_currentWireframe = eventDiscWireframe;
-	[eventDiscWireframe.moduleInterface setModuleDelegate:self];
-	[eventDiscWireframe.moduleInterface presentEventDiscoveryInterfaceInWindow:_window];
-}
-
-- (void)presentEventDetailInterfaceForEvent:(THLEvent *)event {
-	THLEventDetailWireframe *eventDetailWireframe = [_factory newEventDetailWireframe];
-	_currentWireframe = eventDetailWireframe;
-	[eventDetailWireframe.moduleInterface setModuleDelegate:self];
-	[eventDetailWireframe.moduleInterface presentEventDetailInterfaceForEvent:event inWindow:_window];
+- (void)presentEventFlow {
+	THLEventFlowWireframe *eventWireframe = [_dependencyManager newEventFlowWireframe];
+	_currentWireframe = eventWireframe;
+	[eventWireframe presentEventFlowInWindow:_window];
 }
 
 #pragma mark - THLLoginModuleDelegate
-- (void)loginModule:(id<THLLoginModuleInterface>)module didLoginUser:(THLUser *)user {
-	[self presentOnboardingInterfaceForUser:user];
+- (void)loginModule:(id<THLLoginModuleInterface>)module didLoginUser:(NSError *)error {
+	if (!error) {
+		[self presentEventFlow];
+	}
 }
 
-- (void)loginModule:(id<THLLoginModuleInterface>)module didFailToLoginWithError:(NSError *)error  {
-	[self presentLoginInterface];
-}
-
-#pragma mark - THLOnboardingModuleDelegate
-- (void)onboardingModule:(id<THLOnboardingModuleInterface>)module didOnboardUser:(THLUser *)user {
-	[self presentEventDiscoveryInterface];
-}
-
-#pragma mark - THLEventDiscoveryModuleDelegate
-- (void)eventDiscoveryModule:(id<THLEventDiscoveryModuleInterface>)module
-		  userDidSelectEvent:(THLEvent *)event {
-	[self presentEventDetailInterfaceForEvent:event];
-}
-
-#pragma mark - THLEventDetailModuleDelegate
-//None
-
-#pragma mark - THLChooseHostModuleDelegate
-- (void)chooseHostModule:(id<THLChooseHostModuleInterface>)module didSelectHost:(THLPromotion *)promotion {
+#pragma mark - THLPromotionSelectionModuleDelegate
+- (void)promotionSelectionModule:(id<THLPromotionSelectionModuleInterface>)module didSelectPromotion:(THLPromotionEntity *)promotionEntity {
 	
 }
 @end

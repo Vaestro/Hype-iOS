@@ -7,21 +7,23 @@
 //
 
 #import "THLDataStore.h"
-#import "THLDatabaseManager.h"
+#import "THLYapDatabaseManager.h"
 #import "THLEntity.h"
+#import "THLDataStoreDomain.h"
+#import "THLEntity+DataStore.h"
 
 @interface THLDataStore()
 @property (nonatomic, strong) YapDatabaseConnection *rwConnection;
 @property (nonatomic, strong) YapDatabaseConnection *roConnection;
+@property (nonatomic, readonly, copy) NSString *collectionKey;
+@property (nonatomic) Class entityClass;
 @end
 
 @implementation THLDataStore
-+ (NSString *)collectionKey {
-	return @"THLDataStoreCollectionKey";
-}
-
-- (instancetype)initWithDatabaseManager:(THLDatabaseManager *)databaseManager {
+- (instancetype)initForEntity:(Class)entityClass
+			  databaseManager:(THLYapDatabaseManager *)databaseManager {
 	if (self = [super init]) {
+		_entityClass = entityClass;
 		_databaseManager = databaseManager;
 	}
 	return self;
@@ -46,79 +48,14 @@
 }
 
 - (NSString *)collectionKey {
-	return [self.class collectionKey];
+	return [NSString stringWithFormat:@"k%@DataStoreKey", NSStringFromClass(_entityClass)];
 }
 
-- (void)updateWithEntities:(NSArray *)entities
-				  inDomain:(DataStoreEntityDomainTest)domainTestBlock
-	  removeUnusedEntities:(BOOL)shouldRemove {
-
-	__block NSArray *keysInDomain = [self entityKeysInDomain:domainTestBlock];
-	[self.rwConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-		__block NSMutableSet *entitiesForUpdates = [NSMutableSet new];
-		__block NSMutableSet *keysForRemoval = [NSMutableSet new];
-
-		//Mapping entities array to a dictionary of @{ entity.objectId : entity}
-		//for faster access in the following enumeration
-		NSDictionary *entityDict = [entities linq_toDictionaryWithKeySelector:^id(THLEntity *entity) {
-			return entity.objectId;
-		}];
-		[transaction enumerateObjectsForKeys:keysInDomain inCollection:self.collectionKey unorderedUsingBlock:^(NSUInteger keyIndex, THLEntity *entity, BOOL *stop) {
-			THLEntity *updatedEntity = entityDict[entity.objectId];
-			if (!updatedEntity) {
-				//No updated entity -> entity was removed from the domain
-				[keysForRemoval addObject:keysInDomain[keyIndex]];
-			} else if ([entity shouldUpdateWith:updatedEntity]) {
-				[entitiesForUpdates addObject:updatedEntity];
-			}
-		}];
-
-		//Update entities that need updating
-		for (THLEntity *entity in entitiesForUpdates) {
-			[transaction setObject:entity forKey:entity.objectId inCollection:self.collectionKey];
-		}
-
-
-		//Add new entities to the data store
-		NSMutableSet *newEntities = [NSMutableSet setWithArray:entities];
-		[newEntities minusSet:entitiesForUpdates];
-		for (THLEntity *entity in newEntities) {
-			[transaction setObject:entity forKey:entity.objectId inCollection:self.collectionKey];
-		}
-
-		//If shouldRemove, remove all old entities from the data store
-		if (shouldRemove) {
-			[transaction removeObjectsForKeys:keysForRemoval.allObjects inCollection:self.collectionKey];
-		}
-	}];
-}
-
-- (void)updateWithEntities:(NSArray *)entities inDomain:(DataStoreEntityDomainTest)domainTest {
-	[self updateWithEntities:entities inDomain:domainTest removeUnusedEntities:YES];
-}
-
-- (void)purge {
-	[self.rwConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-		[transaction removeAllObjectsInCollection:self.collectionKey];
-	}];
-}
-
-- (NSArray *)entitiesInDomain:(DataStoreEntityDomainTest)domainBlock {
-	__block NSArray *keys = [self entityKeysInDomain:domainBlock];
-	__block NSMutableArray *entities = [NSMutableArray new];
-	[self.roConnection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
-		[transaction enumerateObjectsForKeys:keys inCollection:self.collectionKey unorderedUsingBlock:^(NSUInteger keyIndex, THLEntity *entity, BOOL *stop) {
-			[entities addObject:entity];
-		}];
-	}];
-	return entities;
-}
-
-- (NSArray *)entityKeysInDomain:(DataStoreEntityDomainTest)domainBlock {
-	__block NSMutableArray *keys = [NSMutableArray new];
-	[self.roConnection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
-		[transaction enumerateKeysAndObjectsInCollection:self.collectionKey usingBlock:^(NSString *key, id object, BOOL *stop) {
-			if (domainBlock && domainBlock((THLEntity *)object)) {
+- (NSSet *)entityKeysInDomain:(THLDataStoreDomain *)domain {
+	__block NSMutableSet *keys = [NSMutableSet new];
+	[self.roConnection readWithBlock:^(YapDatabaseReadTransaction * _Nonnull transaction) {
+		[transaction enumerateKeysAndObjectsInCollection:self.collectionKey usingBlock:^(NSString * _Nonnull key, id  _Nonnull object, BOOL * _Nonnull stop) {
+			if ([domain containsMember:(THLEntity *)object]) {
 				[keys addObject:key];
 			}
 		}];
@@ -126,22 +63,69 @@
 	return keys;
 }
 
-- (void)removeEntitiesInDomain:(DataStoreEntityDomainTest)domainTestBlock {
-	NSArray *keysToRemove = [self entityKeysInDomain:domainTestBlock];
-	if (keysToRemove.count) {
-		[self.rwConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-			[transaction removeObjectsForKeys:keysToRemove inCollection:self.collectionKey];
+- (NSSet *)entitiesInDomain:(THLDataStoreDomain *)domain {
+	__block NSMutableSet *entities = [NSMutableSet new];
+	[self.roConnection readWithBlock:^(YapDatabaseReadTransaction * _Nonnull transaction) {
+		[transaction enumerateKeysAndObjectsInCollection:self.collectionKey usingBlock:^(NSString * _Nonnull key, id  _Nonnull object, BOOL * _Nonnull stop) {
+			if ([domain containsMember:(THLEntity *)object]) {
+				[entities addObject:object];
+			}
 		}];
-	}
+	}];
+	return entities;
 }
 
-- (NSInteger)numEntitiesInDomain:(DataStoreEntityDomainTest)domainTestBlock {
-	return [self entityKeysInDomain:domainTestBlock].count;
+- (void)removeEntitiesInDomain:(THLDataStoreDomain *)domain {
+	__block NSArray *keys = [[self entityKeysInDomain:domain] allObjects];
+	[self.rwConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {
+		[transaction removeObjectsForKeys:keys inCollection:self.collectionKey];
+	}];
 }
 
-- (NSInteger)numEntities {
-	return [self numEntitiesInDomain:^BOOL(THLEntity *entity) {
-		return YES;
+- (NSInteger)countEntitiesInDomain:(THLDataStoreDomain *)domain {
+	return [self entityKeysInDomain:domain].count;
+}
+
+- (void)updateOrAddEntities:(NSSet *)entities {
+	THLDataStoreDomain *domain = [[THLDataStoreDomain alloc] initWithMembers:[entities allObjects]];
+	[self refreshDomain:domain withEntities:entities];
+}
+
+- (void)refreshDomain:(THLDataStoreDomain *)domain withEntities:(NSSet *)entities {
+	__block NSArray *keys = [[self entityKeysInDomain:domain] allObjects];
+	__block NSMutableSet *unprocessedEntities = [entities mutableCopy];
+	__block NSMutableSet *entitiesToUpdate = [NSMutableSet new];
+	__block NSMutableSet *entitiesToRemove = [NSMutableSet new];
+
+	[self.rwConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {
+		[transaction enumerateObjectsForKeys:keys inCollection:self.collectionKey unorderedUsingBlock:^(NSUInteger keyIndex, id  _Nonnull object, BOOL * _Nonnull stop) {
+			THLEntity *oldEntity = (THLEntity *)object;
+			THLEntity *newEntity = [entities member:oldEntity];
+			if (!newEntity) {
+				//No corresponding entity -> remove entity from domain
+				[entitiesToRemove addObject:object];
+			} else if ([oldEntity shouldUpdateWith:newEntity]) {
+				[entitiesToUpdate addObject:object];
+			}
+
+			[unprocessedEntities removeObject:object];
+		}];
+
+		[entitiesToUpdate unionSet:unprocessedEntities];
+		for (THLEntity *entity in entitiesToUpdate) {
+			[transaction setObject:entity forKey:entity.key inCollection:self.collectionKey];
+		}
+
+		NSArray *keysToRemove = [entitiesToRemove valueForKey:@"key"];
+		if (keysToRemove.count) {
+			[transaction removeObjectsForKeys:keysToRemove inCollection:self.collectionKey];
+		}
+	}];
+}
+
+- (void)purge {
+	[self.rwConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+		[transaction removeAllObjectsInCollection:self.collectionKey];
 	}];
 }
 

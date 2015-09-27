@@ -1,0 +1,20 @@
+//
+//  THLUserEntity.h
+//  Hypelist2point0
+//
+//  Created by Phil Meyers IV on 9/26/15.
+//  Copyright © 2015 Hypelist. All rights reserved.
+//
+
+#import "THLEntity.h"
+
+@interface THLUserEntity : THLEntity
+@property (nonatomic, strong) NSString *firstName;
+@property (nonatomic, strong) NSString *lastName;
+@property (nonatomic, strong) NSString *phoneNumber;
+@property (nonatomic, strong) NSURL *imageURL;
+@property (nonatomic) enum THLSex sex;
+@property (nonatomic) float rating;
+
+@property (nonatomic, readonly) NSString *fullName;
+@end

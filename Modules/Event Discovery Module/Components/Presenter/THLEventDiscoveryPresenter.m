@@ -7,18 +7,15 @@
 //
 
 #import "THLEventDiscoveryPresenter.h"
-
 #import "THLEventDiscoveryView.h"
 #import "THLEventDiscoveryWireframe.h"
 #import "THLEventDiscoveryInteractor.h"
+
 #import "THLViewDataSource.h"
-#import "THLEvent.h"
+#import "THLEventEntity.h"
 #import "THLEventDiscoveryCellViewModel.h"
-#import "THLEventDiscoveryModuleInterface.h"
 
 @interface THLEventDiscoveryPresenter()<THLEventDiscoveryInteractorDelegate>
-@property (nonatomic, weak) THLEventDiscoveryWireframe *wireframe;
-@property (nonatomic, strong) THLEventDiscoveryInteractor *interactor;
 @property (nonatomic, weak) id<THLEventDiscoveryView> view;
 
 @property (nonatomic) BOOL refreshing;
@@ -44,8 +41,8 @@
 
 - (void)configureView:(id<THLEventDiscoveryView>)view {
 	THLViewDataSource *dataSource = [_interactor generateDataSource];
-	dataSource.dataTransformBlock = ^id(THLEvent *event) {
-		return [[THLEventDiscoveryCellViewModel alloc] initWithEvent:event];
+	dataSource.dataTransformBlock = ^id(id item) {
+		return [[THLEventDiscoveryCellViewModel alloc] initWithEvent:(THLEventEntity *)item];
 	};
 
 	[view setDataSource:dataSource];
@@ -73,8 +70,8 @@
 }
 
 - (void)handleIndexPathSelection:(NSIndexPath *)indexPath {
-	THLEvent *event = [[_view dataSource] untransformedItemAtIndexPath:indexPath];
-	[self.moduleDelegate eventDiscoveryModule:self userDidSelectEvent:event];
+	THLEventEntity *eventEntity = [[_view dataSource] untransformedItemAtIndexPath:indexPath];
+	[self.moduleDelegate eventDiscoveryModule:self userDidSelectEventEntity:eventEntity];
 }
 
 - (void)handleRefreshAction {
@@ -83,7 +80,7 @@
 }
 
 #pragma mark - InteractorDelegate
-- (void)interactor:(THLEventDiscoveryInteractor *)interactor didUpdateEventsWithSuccess:(BOOL)success error:(NSError *)error {
+- (void)interactor:(THLEventDiscoveryInteractor *)interactor didUpdateEvents:(NSError *)error {
 	self.refreshing = NO;
 }
 @end

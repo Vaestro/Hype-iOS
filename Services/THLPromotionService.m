@@ -1,0 +1,24 @@
+//
+//  THLPromotionService.m
+//  Hypelist2point0
+//
+//  Created by Phil Meyers IV on 9/26/15.
+//  Copyright © 2015 Hypelist. All rights reserved.
+//
+
+#import "THLPromotionService.h"
+#import "THLParseQueryFactory.h"
+
+@implementation THLPromotionService
+- (instancetype)initWithQueryFactory:(THLParseQueryFactory *)queryFactory {
+	if (self = [super init]) {
+		_queryFactory = queryFactory;
+	}
+	return self;
+}
+
+- (BFTask *)fetchPromotionsForEvent:(THLEvent *)event {
+	return [[_queryFactory queryForPromotionsForEvent:event] findObjectsInBackground];
+}
+
+@end

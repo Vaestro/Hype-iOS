@@ -8,27 +8,22 @@
 
 #import "THLEventDiscoveryCellViewModel.h"
 #import "THLEventDiscoveryCellView.h"
-#import "THLEvent.h"
-
-@interface THLEventDiscoveryCellViewModel()
-@property (nonatomic, strong) THLEvent *event;
-@end
-
+#import "THLEventEntity.h"
 
 @implementation THLEventDiscoveryCellViewModel
-- (instancetype)initWithEvent:(THLEvent *)event {
+- (instancetype)initWithEvent:(THLEventEntity *)eventEntity {
 	if (self = [super init]) {
-		_event = event;
+		_eventEntity = eventEntity;
 	}
 	return self;
 }
 
 - (void)configureView:(id<THLEventDiscoveryCellView>)cellView {
-	[cellView setLocationName:_event.location.name];
-	[cellView setEventName:_event.title];
-	[cellView setLocationNeighborhood:_event.location.neighborhood];
-	[cellView setTime:_event.date.thl_timeString];
-	[cellView setImageURL:_event.location.imageURL];
+	[cellView setLocationName:_eventEntity.location.name];
+	[cellView setEventName:_eventEntity.title];
+	[cellView setLocationNeighborhood:_eventEntity.location.neighborhood];
+	[cellView setTime:_eventEntity.date.thl_timeString];
+	[cellView setImageURL:_eventEntity.location.imageURL];
 }
 
 @end

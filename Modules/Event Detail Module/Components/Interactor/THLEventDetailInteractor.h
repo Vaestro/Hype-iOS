@@ -10,7 +10,7 @@
 @class THLEventDetailDataManager;
 
 @interface THLEventDetailInteractor : NSObject
+#pragma mark - Dependencies
 @property (nonatomic, readonly) THLEventDetailDataManager *dataManager;
-
-- (instancetype)initWithDataManager:(THLEventDetailDataManager *)dataManager NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithDataManager:(THLEventDetailDataManager *)dataManager;
 @end

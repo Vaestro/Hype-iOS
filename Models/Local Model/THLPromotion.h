@@ -6,14 +6,16 @@
 //  Copyright (c) 2015 Hypelist. All rights reserved.
 //
 
-#import "THLEntity.h"
+#import <Parse/Parse.h>
+#import <Parse/PFObject+Subclass.h>
 @class THLEvent;
-@class THLHost;
+@class THLUser;
 
-@interface THLPromotion : THLEntity
-@property (nonatomic, strong) NSDate *time;
+@interface THLPromotion : PFObject<PFSubclassing>
+@property (nonatomic, retain) NSDate *time;
 @property (nonatomic) int maleRatio;
 @property (nonatomic) int femaleRatio;
-@property (nonatomic, strong) THLEvent *event;
-@property (nonatomic, strong) THLHost *host;
+@property (nonatomic, retain) THLUser *host;
+@property (nonatomic, retain) THLEvent *event;
+@property (nonatomic, retain) NSString *eventId;
 @end

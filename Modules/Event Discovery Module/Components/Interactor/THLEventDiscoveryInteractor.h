@@ -10,21 +10,22 @@
 
 @class THLEventDiscoveryDataManager;
 @class THLViewDataSource;
-@class THLExtensionManager;
+@protocol THLViewDataSourceFactoryInterface;
 
 @class THLEventDiscoveryInteractor;
 @protocol THLEventDiscoveryInteractorDelegate <NSObject>
-- (void)interactor:(THLEventDiscoveryInteractor *)interactor didUpdateEventsWithSuccess:(BOOL)success error:(NSError *)error;
+- (void)interactor:(THLEventDiscoveryInteractor *)interactor didUpdateEvents:(NSError *)error;
 @end
 
 @interface THLEventDiscoveryInteractor : NSObject
 @property (nonatomic, weak) id<THLEventDiscoveryInteractorDelegate> delegate;
 
+#pragma mark - Dependencies
 @property (nonatomic, readonly) THLEventDiscoveryDataManager *dataManager;
-@property (nonatomic, readonly) THLExtensionManager *extensionManager;
+@property (nonatomic, readonly) id<THLViewDataSourceFactoryInterface> viewDataSourceFactory;
 - (instancetype)initWithDataManager:(THLEventDiscoveryDataManager *)dataManager
-				   extensionManager:(THLExtensionManager *)extensionManager NS_DESIGNATED_INITIALIZER;
+			  viewDataSourceFactory:(id<THLViewDataSourceFactoryInterface>)viewDataSourceFactory;
 
-@property (NS_NONATOMIC_IOSONLY, readonly, strong) THLViewDataSource *generateDataSource;
 - (void)updateEvents;
+- (THLViewDataSource *)generateDataSource;
 @end

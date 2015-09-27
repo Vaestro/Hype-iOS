@@ -23,23 +23,30 @@
 @end
 
 @implementation THLEventDiscoveryWireframe
-- (instancetype)initWithDataStore:(THLEventDataStore *)dataStore
-					 fetchService:(id<THLEventFetchServiceInterface>)fetchService
-				 extensionManager:(THLExtensionManager *)extensionManager {
+- (instancetype)initWithDataStore:(THLDataStore *)dataStore
+					 entityMapper:(THLEntityMapper *)entityMapper
+					 eventService:(id<THLEventServiceInterface>)eventService
+			viewDataSourceFactory:(id<THLViewDataSourceFactoryInterface>)viewDataSourceFactory {
 	if (self = [super init]) {
-		_eventDataStore = dataStore;
-		_eventFetchService = fetchService;
-		_extensionManager = extensionManager;
+		_dataStore = dataStore;
+		_entityMapper = entityMapper;
+		_eventService = eventService;
+		_viewDataSourceFactory = viewDataSourceFactory;
 		[self buildModule];
 	}
 	return self;
 }
 
 - (void)buildModule {
-	_dataManager = [[THLEventDiscoveryDataManager alloc] initWithDataStore:_eventDataStore fetchService:_eventFetchService];
-	_interactor = [[THLEventDiscoveryInteractor alloc] initWithDataManager:_dataManager extensionManager:_extensionManager];
+	_dataManager = [[THLEventDiscoveryDataManager alloc] initWithDataStore:_dataStore entityMapper:_entityMapper eventService:_eventService];
+	_interactor = [[THLEventDiscoveryInteractor alloc] initWithDataManager:_dataManager viewDataSourceFactory:_viewDataSourceFactory];
 	_view = [[THLEventDiscoveryViewController alloc] initWithNibName:nil bundle:nil];
 	_presenter = [[THLEventDiscoveryPresenter alloc] initWithWireframe:self interactor:_interactor];
+}
+
+#pragma mark - Interface
+- (id<THLEventDiscoveryModuleInterface>)moduleInterface {
+	return _presenter;
 }
 
 - (void)presentInWindow:(UIWindow *)window {
@@ -47,9 +54,5 @@
 	[_presenter configureView:_view];
 	_window.rootViewController = [[UINavigationController alloc] initWithRootViewController:_view];
 	[_window makeKeyAndVisible];
-}
-
-- (id<THLEventDiscoveryModuleInterface>)moduleInterface {
-	return _presenter;
 }
 @end

@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "THLEventDetailModuleDelegate.h"
-@class THLEvent;
+@class THLEventEntity;
 
 @protocol THLEventDetailModuleInterface <NSObject>
 @property (nonatomic, weak) id<THLEventDetailModuleDelegate> moduleDelegate;
 
-- (void)presentEventDetailInterfaceForEvent:(THLEvent *)event inWindow:(UIWindow *)window;
+- (void)presentEventDetailInterfaceForEvent:(THLEventEntity *)eventEntity inWindow:(UIWindow *)window;
 
 @end

@@ -10,11 +10,11 @@
 #import "THLEventDiscoveryCellView.h"
 
 @protocol THLEventDiscoveryCellView;
-@class THLEvent;
+@class THLEventEntity;
 
 @interface THLEventDiscoveryCellViewModel : NSObject
-@property (nonatomic, readonly) THLEvent *event;
+@property (nonatomic, readonly) THLEventEntity *eventEntity;
 
-- (instancetype)initWithEvent:(THLEvent *)event NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithEvent:(THLEventEntity *)event;
 - (void)configureView:(id<THLEventDiscoveryCellView>)view;
 @end

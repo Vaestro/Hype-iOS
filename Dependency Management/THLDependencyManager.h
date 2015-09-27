@@ -7,28 +7,33 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "THLEventFlowDependencyManager.h"
+
+
+
 @class THLMasterWireframe;
 @class THLLoginWireframe;
-@class THLOnboardingWireframe;
 @class THLFacebookPictureWireframe;
 @class THLNumberVerificationWireframe;
 @class THLEventDiscoveryWireframe;
 @class THLEventDetailWireframe;
-@class THLChooseHostWireframe;
-
-@protocol THLWireframeFactory <NSObject>
-- (THLLoginWireframe *)newLoginWireframe;
-- (THLOnboardingWireframe *)newOnboardingWireframe;
-- (THLFacebookPictureWireframe *)newFacebookPictureWireframe;
-- (THLNumberVerificationWireframe *)newNumberVerificationWireframe;
-- (THLEventDiscoveryWireframe *)newEventDiscoveryWireframe;
-- (THLEventDetailWireframe *)newEventDetailWireframe;
-- (THLChooseHostWireframe *)newChooseHostWireframe;
-@end
+@class THLPromotionSelectionWireframe;
+@class THLEventFlowWireframe;
 
 /**
  *  Manages all dependenies for the app.
  */
-@interface THLDependencyManager : NSObject<THLWireframeFactory>
-@property (NS_NONATOMIC_IOSONLY, readonly, strong) THLMasterWireframe *masterWireframe;
+@interface THLDependencyManager : NSObject
+<
+THLEventFlowDependencyManager
+>
+@property (nonatomic, readonly, strong) THLMasterWireframe *masterWireframe;
+
+- (THLLoginWireframe *)newLoginWireframe;
+- (THLFacebookPictureWireframe *)newFacebookPictureWireframe;
+- (THLNumberVerificationWireframe *)newNumberVerificationWireframe;
+- (THLEventFlowWireframe *)newEventFlowWireframe;
+- (THLEventDiscoveryWireframe *)newEventDiscoveryWireframe;
+- (THLEventDetailWireframe *)newEventDetailWireframe;
+- (THLPromotionSelectionWireframe *)newPromotionSelectionWireframe;
 @end

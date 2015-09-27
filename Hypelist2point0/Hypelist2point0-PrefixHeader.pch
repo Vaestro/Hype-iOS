@@ -23,6 +23,6 @@
 #import "Bolts.h"
 
 #import "CommonMacros.h"
+#import "THLConstants.h"
 #import "THLGlobalCategories.h"
-
 #endif
