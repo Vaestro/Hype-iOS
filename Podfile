@@ -19,6 +19,7 @@ pod 'YapDatabase', '~> 2.7'
 pod 'EKAlgorithms', '~> 0.2'
 pod 'AutoCoding', '~> 2.2'
 pod 'SDWebImage', '~> 3.7'
+pod 'FormatterKit', '~> 1.8'
 
 #Sugar
 pod 'LinqToObjectiveC', '~> 2.0'
@@ -45,12 +46,16 @@ pod 'SSDataSources', '~> 0.8'
 pod 'YLMoment', '~> 0.2.0'
 pod 'APAddressBook'
 pod 'libPhoneNumber-iOS', '~> 0.8'
+pod 'LMGeocoder'
+
 
 #UI
 pod 'SVPullToRefresh'
 pod "ORStackView"
 pod 'Onboard'
 pod 'iCarousel', '~> 1.8'
+pod 'MJRefresh'
+
 end
 
 target 'Hypelist2point0Tests' do

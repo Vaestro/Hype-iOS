@@ -16,5 +16,6 @@
 @property (nonatomic, copy) NSString *locationName;
 @property (nonatomic, copy) NSString *locationInfo;
 @property (nonatomic, copy) NSString *locationAddress;
+@property (nonatomic, strong) CLPlacemark *locationPlacemark;
 @property (nonatomic, strong) RACCommand *dismissCommand;
 @end

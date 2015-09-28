@@ -11,5 +11,5 @@
 @interface THLEventDetailsMapView : THLTitledContentView
 @property (nonatomic, copy) NSString *locationName;
 @property (nonatomic, copy) NSString *locationAddress;
-
+@property (nonatomic, copy) CLPlacemark *locationPlacemark;
 @end

@@ -48,6 +48,7 @@
 		2133BFC21B877C08002C1DA9 /* THLUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2133BFC11B877C08002C1DA9 /* THLUser.m */; };
 		2133BFCB1B877CAB002C1DA9 /* THLEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2133BFCA1B877CAB002C1DA9 /* THLEvent.m */; };
 		2133BFCE1B877D11002C1DA9 /* THLLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2133BFCD1B877D11002C1DA9 /* THLLocation.m */; };
+		213CE1131BB8D22D00054A2C /* THLLocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 213CE1121BB8D22D00054A2C /* THLLocationService.m */; settings = {ASSET_TAGS = (); }; };
 		215A428B1BAA1FFF00D03C35 /* THLNumberVerificationPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A428A1BAA1FFF00D03C35 /* THLNumberVerificationPresenter.m */; };
 		215A428E1BAA200E00D03C35 /* THLNumberVerificationWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A428D1BAA200E00D03C35 /* THLNumberVerificationWireframe.m */; };
 		215A429A1BAA25B000D03C35 /* THLFacebookPicturePresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A42991BAA25B000D03C35 /* THLFacebookPicturePresenter.m */; };
@@ -225,6 +226,9 @@
 		2133BFCA1B877CAB002C1DA9 /* THLEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THLEvent.m; path = "Local Model/THLEvent.m"; sourceTree = "<group>"; };
 		2133BFCC1B877D11002C1DA9 /* THLLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THLLocation.h; path = "Local Model/THLLocation.h"; sourceTree = "<group>"; };
 		2133BFCD1B877D11002C1DA9 /* THLLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THLLocation.m; path = "Local Model/THLLocation.m"; sourceTree = "<group>"; };
+		213CE1111BB8D22D00054A2C /* THLLocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLLocationService.h; sourceTree = "<group>"; };
+		213CE1121BB8D22D00054A2C /* THLLocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLLocationService.m; sourceTree = "<group>"; };
+		213CE1141BB8D23900054A2C /* THLLocationServiceInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLLocationServiceInterface.h; sourceTree = "<group>"; };
 		215A42841BAA1F1F00D03C35 /* THLNumberVerificationModuleInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLNumberVerificationModuleInterface.h; sourceTree = "<group>"; };
 		215A42851BAA1F2C00D03C35 /* THLNumberVerificationModuleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLNumberVerificationModuleDelegate.h; sourceTree = "<group>"; };
 		215A42891BAA1FFF00D03C35 /* THLNumberVerificationPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLNumberVerificationPresenter.h; sourceTree = "<group>"; };
@@ -876,6 +880,16 @@
 			name = THLRoundImageView;
 			sourceTree = "<group>";
 		};
+		213CE1101BB8D21D00054A2C /* THLLocation Service */ = {
+			isa = PBXGroup;
+			children = (
+				213CE1141BB8D23900054A2C /* THLLocationServiceInterface.h */,
+				213CE1111BB8D22D00054A2C /* THLLocationService.h */,
+				213CE1121BB8D22D00054A2C /* THLLocationService.m */,
+			);
+			name = "THLLocation Service";
+			sourceTree = "<group>";
+		};
 		215A42801BAA1EE100D03C35 /* Number Verification Module */ = {
 			isa = PBXGroup;
 			children = (
@@ -1237,6 +1251,7 @@
 		21937F2D1BB5D0F2005E949E /* Model Services */ = {
 			isa = PBXGroup;
 			children = (
+				213CE1101BB8D21D00054A2C /* THLLocation Service */,
 				217EBEA71BB7A92F006044B6 /* THLPromotion Service */,
 				218AF3411BB7390E00AFAEBF /* THLEvent Service */,
 			);
@@ -1520,6 +1535,7 @@
 		2174A05C1B863F6A006826D7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = THL;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Hypelist;
 				TargetAttributes = {
@@ -1706,6 +1722,7 @@
 				21CCEDE21B87C62F0066CDAC /* THLYapDatabaseManager.m in Sources */,
 				211BB0D81B8CC6DA0068FD50 /* UIView+AddSubviews.m in Sources */,
 				217EBEB71BB7AB54006044B6 /* THLUserEntity.m in Sources */,
+				213CE1131BB8D22D00054A2C /* THLLocationService.m in Sources */,
 				2133BFCB1B877CAB002C1DA9 /* THLEvent.m in Sources */,
 				211BB0D41B8CBE980068FD50 /* THLEventTitlesView.m in Sources */,
 				21192D881BB3279000B176AA /* THLPromotionSelectionDataManager.m in Sources */,
@@ -1890,7 +1907,7 @@
 				INFOPLIST_FILE = "Hypelist2point0/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Hypelist.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Hypelist.Hypelist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1916,7 +1933,7 @@
 				INFOPLIST_FILE = "Hypelist2point0/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Hypelist.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Hypelist.Hypelist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

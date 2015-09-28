@@ -36,10 +36,8 @@
 #import "THLLoginService.h"
 #import "THLEventService.h"
 #import "THLPromotionService.h"
+#import "THLLocationService.h"
 #import "THLFacebookProfilePictureURLFetchService.h"
-
-
-
 
 @interface THLDependencyManager()
 //Wireframes
@@ -58,6 +56,7 @@
 @property (nonatomic, strong) THLViewDataSourceFactory *viewDataSourceFactory;
 @property (nonatomic, strong) THLYapDatabaseViewFactory *yapDatabaseViewFactory;
 @property (nonatomic, strong) THLParseQueryFactory *parseQueryFactory;
+@property (nonatomic, strong) CLGeocoder *geocoder;
 
 //Data Stores
 @property (nonatomic, strong) THLDataStore *eventDataStore;
@@ -67,6 +66,7 @@
 @property (nonatomic, strong) THLFacebookProfilePictureURLFetchService *facebookProfilePictureURLFetchService;
 @property (nonatomic, strong) THLLoginService *loginService;
 @property (nonatomic, strong) THLPromotionService *promotionService;
+@property (nonatomic, strong) THLLocationService *locationService;
 @end
 
 @implementation THLDependencyManager
@@ -102,7 +102,7 @@
 }
 
 - (THLEventDetailWireframe *)newEventDetailWireframe {
-	THLEventDetailWireframe *wireframe = [[THLEventDetailWireframe alloc] init];
+	THLEventDetailWireframe *wireframe = [[THLEventDetailWireframe alloc] initWithLocationService:self.locationService];
 	self.eventDetailWireframe = wireframe;
 	return wireframe;
 }
@@ -165,6 +165,13 @@
 	return _parseQueryFactory;
 }
 
+- (CLGeocoder *)geocoder {
+	if (!_geocoder) {
+		_geocoder = [[CLGeocoder alloc] init];
+	}
+	return _geocoder;
+}
+
 #pragma mark - Data Stores
 - (THLDataStore *)eventDataStore {
 	if (!_eventDataStore) {
@@ -200,5 +207,12 @@
 		_promotionService = [[THLPromotionService alloc] initWithQueryFactory:self.parseQueryFactory];
 	}
 	return _promotionService;
+}
+
+- (THLLocationService *)locationService {
+	if (!_locationService) {
+		_locationService = [[THLLocationService alloc] initWithGeocoder:self.geocoder];
+	}
+	return _locationService;
 }
 @end

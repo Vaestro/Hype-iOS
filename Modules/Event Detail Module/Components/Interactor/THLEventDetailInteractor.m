@@ -7,6 +7,8 @@
 //
 
 #import "THLEventDetailInteractor.h"
+#import "THLEventDetailDataManager.h"
+#import "THLLocationEntity.h"
 
 @implementation THLEventDetailInteractor
 - (instancetype)initWithDataManager:(THLEventDetailDataManager *)dataManager {
@@ -16,6 +18,12 @@
 	return self;
 }
 
+- (void)getPlacemarkForLocation:(THLLocationEntity *)locationEntity {
+	[[_dataManager fetchPlacemarkForAddress:locationEntity.fullAddress] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask<CLPlacemark *> *task) {
+		[_delegate interactor:self didGetPlacemark:task.result forLocation:locationEntity error:task.error];
+		return nil;
+	}];
+}
 
 
 @end

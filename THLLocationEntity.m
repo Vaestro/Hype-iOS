@@ -7,9 +7,20 @@
 //
 
 #import "THLLocationEntity.h"
+#import <FormatterKit/TTTAddressFormatter.h>
 
 @implementation THLLocationEntity
++ (TTTAddressFormatter *)sharedAddressFormatter {
+    static TTTAddressFormatter *_sharedFormatter = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _sharedFormatter = [TTTAddressFormatter new];
+    });
+    
+    return _sharedFormatter;
+}
+
 - (NSString *)fullAddress {
-	return @"FULL ADDRESS!";
+	return [[[self class] sharedAddressFormatter] stringFromAddressWithStreet:self.address locality:self.city region:self.stateCode postalCode:self.zipcode country:nil];
 }
 @end

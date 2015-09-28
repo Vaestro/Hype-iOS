@@ -40,6 +40,7 @@ static NSString *const kTHLNUIRegularTitle = @"RegularTitle";
 static NSString *const kTHLNUIDetailTitle = @"DetailTitle";
 static NSString *const kTHLNUIButtonTitle = @"ButtonTitle";
 static NSString *const kTHLNUISectionTitle = @"SectionTitle";
+static NSString *const kTHLNUIBackgroundView = @"BackgroundView";
 
 #define kTHLUndefColor [UIColor blueColor];
 #define kTHLUndefTextColor [UIColor whiteColor];

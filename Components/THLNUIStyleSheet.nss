@@ -66,3 +66,7 @@ font-name: @secondaryRegularFontName;
 font-size: 18;
 font-color: @primaryFontColor;
 }
+
+BackgroundView {
+background-color: #1A1F25;
+}

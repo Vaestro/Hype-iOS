@@ -10,5 +10,5 @@
 
 @interface THLEventDetailsLocationInfoView : THLTitledContentView
 @property (nonatomic, copy) NSString *locationInfo;
-
+@property (nonatomic, copy) NSString *locationName;
 @end

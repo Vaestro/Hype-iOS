@@ -32,6 +32,7 @@
 @synthesize locationInfo;
 @synthesize locationAddress;
 @synthesize dismissCommand;
+@synthesize locationPlacemark;
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
@@ -53,7 +54,7 @@
 }
 
 - (void)layoutView {
-	self.view.backgroundColor = [UIColor blackColor];
+	self.view.nuiClass = kTHLNUIBackgroundView;
 
 	[self.view addSubviews:@[_scrollView]];
 	[_scrollView makeConstraints:^(MASConstraintMaker *make) {
@@ -82,13 +83,7 @@
 
 	RAC(self.mapView, locationName) = RACObserve(self, locationName);
 	RAC(self.mapView, locationAddress) = RACObserve(self, locationAddress);
-
-//	[[[RACObserve(self, promoInfo) merge:RACObserve(self, promoImageURL)] map:^id(id value) {
-//		return @([(NSArray *)value count] > 0);
-//	}] subscribeNext:^(NSNumber *b) {
-//		BOOL show = [b boolValue];
-//
-//	}];
+	RAC(self.mapView, locationPlacemark) = RACObserve(self, locationPlacemark);
 }
 
 #pragma mark - Constructors

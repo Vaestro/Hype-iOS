@@ -15,7 +15,11 @@
 #import "THLEventEntity.h"
 
 @interface THLEventDetailPresenter()
+<
+THLEventDetailInteractorDelegate
+>
 @property (nonatomic, strong) THLEventEntity *eventEntity;
+@property (nonatomic, strong) id<THLEventDetailView> view;
 @end
 
 @implementation THLEventDetailPresenter
@@ -25,14 +29,17 @@
 						 wireframe:(THLEventDetailWireframe *)wireframe {
 	if (self = [super init]) {
 		_interactor = interactor;
+		_interactor.delegate = self;
 		_wireframe = wireframe;
 	}
 	return self;
 }
 
 - (void)configureView:(id<THLEventDetailView>)view {
-//	[view setLocationImageURL:_event.location.imageURL];
-//	[view setPromoImageURL:_event.promoImageURL];
+	_view = view;
+
+	[view setLocationImageURL:_eventEntity.location.imageURL];
+	[view setPromoImageURL:_eventEntity.imageURL];
 	[view setEventName:_eventEntity.title];
 	[view setPromoInfo:_eventEntity.info];
 	[view setLocationName:_eventEntity.location.name];
@@ -45,6 +52,7 @@
 	}];
 
 	[view setDismissCommand:dismissCommand];
+	[_interactor getPlacemarkForLocation:_eventEntity.location];
 }
 
 - (void)configureNavigationBar:(THLEventNavigationBar *)navBar {
@@ -69,5 +77,12 @@
 
 - (void)handleDismissAction {
 	[_wireframe dismissInterface];
+}
+
+#pragma mark - THLEventDetailInteractorDelegate
+- (void)interactor:(THLEventDetailInteractor *)interactor didGetPlacemark:(CLPlacemark *)placemark forLocation:(THLLocationEntity *)locationEntity error:(NSError *)error {
+	if (!error && placemark) {
+		[_view setLocationPlacemark:placemark];
+	}
 }
 @end

@@ -23,15 +23,16 @@
 @end
 
 @implementation THLEventDetailWireframe
-- (instancetype)init {
+- (instancetype)initWithLocationService:(id<THLLocationServiceInterface>)locationService {
 	if (self = [super init]) {
+		_locationService = locationService;
 		[self buildModule];
 	}
 	return self;
 }
 
 - (void)buildModule {
-	_dataManager = [[THLEventDetailDataManager alloc] init];
+	_dataManager = [[THLEventDetailDataManager alloc] initWithLocationService:_locationService];
 	_interactor = [[THLEventDetailInteractor alloc] initWithDataManager:_dataManager];
 	_view = [[THLEventDetailViewController alloc] initWithNibName:nil bundle:nil];
 	_presenter = [[THLEventDetailPresenter alloc] initWithInteractor:_interactor wireframe:self];

@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface THLEventDetailDataManager : NSObject
+@class BFTask;
+@protocol THLLocationServiceInterface;
 
+@interface THLEventDetailDataManager : NSObject
+#pragma mark - Dependencies
+@property (nonatomic, readonly) id<THLLocationServiceInterface> locationService;
+- (instancetype)initWithLocationService:(id<THLLocationServiceInterface>)locationService;
+
+- (BFTask<CLPlacemark *> *)fetchPlacemarkForAddress:(NSString *)address;
 @end

@@ -9,8 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "THLEventDetailModuleInterface.h"
 
+@protocol THLLocationServiceInterface;
+
 @interface THLEventDetailWireframe : NSObject
 @property (nonatomic, readonly) id<THLEventDetailModuleInterface> moduleInterface;
+#pragma mark - Dependencies
+@property (nonatomic, readonly) id<THLLocationServiceInterface> locationService;
+- (instancetype)initWithLocationService:(id<THLLocationServiceInterface>)locationService;
 
 - (void)presentInterfaceInWindow:(UIWindow *)window;
 - (void)dismissInterface;

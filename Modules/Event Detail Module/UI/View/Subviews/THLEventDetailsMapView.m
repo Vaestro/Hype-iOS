@@ -10,6 +10,8 @@
 #import "THLAppearanceConstants.h"
 @import MapKit;
 
+static CGFloat MAPVIEW_METERS = 1000;
+
 @interface THLEventDetailsMapView()
 @property (nonatomic, strong) MKMapView *mapView;
 @property (nonatomic, strong) UITextView *textView;
@@ -47,17 +49,33 @@
 	}];
 
 	RAC(self.textView, text) = RACObserve(self, locationAddress);
+
+	[[RACObserve(self, locationPlacemark) filter:^BOOL(id value) {
+		return value != nil;
+	}] subscribeNext:^(id x) {
+		[self displayPlacemark:(CLPlacemark *)x];
+	}];
+}
+
+- (void)displayPlacemark:(CLPlacemark *)placemark {
+	MKPlacemark *locationPlacemark = [[MKPlacemark alloc] initWithPlacemark:placemark];
+	[_mapView addAnnotation:locationPlacemark];
+	[_mapView setRegion:MKCoordinateRegionMakeWithDistance(locationPlacemark.coordinate, MAPVIEW_METERS, MAPVIEW_METERS) animated:NO];
 }
 
 #pragma mark - Constructors
 - (MKMapView *)newMapView {
 	MKMapView *mapView = [[MKMapView alloc] init];
+	mapView.clipsToBounds = YES;
+	mapView.userInteractionEnabled = NO;
 	return mapView;
 }
 
 - (UITextView *)newTextView {
 	UITextView *textView = THLNUITextView(kTHLNUIDetailTitle);
 	[textView setScrollEnabled:NO];
+	textView.editable = NO;
+	textView.dataDetectorTypes = UIDataDetectorTypeAll;
 	return textView;
 }
 @end

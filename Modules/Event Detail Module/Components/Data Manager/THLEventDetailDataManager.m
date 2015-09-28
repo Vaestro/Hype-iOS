@@ -7,7 +7,18 @@
 //
 
 #import "THLEventDetailDataManager.h"
+#import "THLLocationServiceInterface.h"
 
 @implementation THLEventDetailDataManager
+- (instancetype)initWithLocationService:(id<THLLocationServiceInterface>)locationService {
+	if (self = [super init]) {
+		_locationService = locationService;
+	}
+	return self;
+}
+
+- (BFTask<CLPlacemark *> *)fetchPlacemarkForAddress:(NSString *)address {
+	return [_locationService geocodeAddress:address];
+}
 
 @end

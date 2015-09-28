@@ -11,6 +11,7 @@
 #import "THLEventDiscoveryCell.h"
 #import "THLEventDiscoveryCellViewModel.h"
 #import "UIScrollView+SVPullToRefresh.h"
+#import "THLAppearanceConstants.h"
 
 @interface THLEventDiscoveryViewController ()<UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -33,6 +34,7 @@
     [super viewDidLoad];
 	[self layoutView];
 	[self configureBindings];
+	[_refreshCommand execute:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -41,13 +43,14 @@
 }
 
 - (void)layoutView {
+	self.edgesForExtendedLayout = UIRectEdgeNone;
+	self.automaticallyAdjustsScrollViewInsets = YES;
+
 	_collectionView = [self newCollectionView];
 	[self.view addSubview:_collectionView];
 	[_collectionView makeConstraints:^(MASConstraintMaker *make) {
 		make.edges.insets(UIEdgeInsetsZero);
 	}];
-//	self.automaticallyAdjustsScrollViewInsets = YES;
-	self.edgesForExtendedLayout = UIRectEdgeNone;
 }
 
 - (void)configureBindings {
@@ -78,9 +81,9 @@
 	UICollectionViewFlowLayout *flowLayout = [UICollectionViewFlowLayout new];
 	flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
 	UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
+	collectionView.nuiClass = kTHLNUIBackgroundView;
 	collectionView.alwaysBounceVertical = YES;
 	collectionView.delegate = self;
-	collectionView.backgroundColor = [UIColor blueColor];
 	return collectionView;
 }
 
