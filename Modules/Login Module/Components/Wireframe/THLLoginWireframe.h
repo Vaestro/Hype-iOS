@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "THLLoginModuleInterface.h"
 
+@class THLUserManager;
 @protocol THLLoginServiceInterface;
 @protocol THLNumberVerificationModuleInterface;
 @protocol THLNumberVerificationModuleDelegate;
@@ -20,9 +21,13 @@
 
 #pragma mark - Dependencies
 @property (nonatomic, readonly) id<THLLoginServiceInterface> loginService;
+@property (nonatomic, readonly) THLUserManager *userManager;
 @property (nonatomic, readonly) id<THLNumberVerificationModuleInterface> numberVerificationModule;
 @property (nonatomic, readonly) id<THLFacebookPictureModuleInterface> facebookPictureModule;
+
+
 - (instancetype)initWithLoginService:(id<THLLoginServiceInterface>)loginService
+						 userManager:(THLUserManager *)userManager
 			numberVerificationModule:(id<THLNumberVerificationModuleInterface>)numberVerificationModule
 			   facebookPictureModule:(id<THLFacebookPictureModuleInterface>)facebookPictureModule;
 

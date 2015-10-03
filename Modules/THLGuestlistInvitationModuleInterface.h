@@ -1,0 +1,13 @@
+//
+//  THLGuestlistInvitationModuleInterface.h
+//  Hypelist2point0
+//
+//  Created by Phil Meyers IV on 10/2/15.
+//  Copyright © 2015 Hypelist. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@protocol THLGuestlistInvitationModuleInterface <NSObject>
+- (void)presentGuestlistInvitationInterfaceForGuestlist:(NSString *)guestlistId inWindow:(UIWindow *)window;
+@end

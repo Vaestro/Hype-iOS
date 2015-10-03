@@ -20,6 +20,7 @@
 #import "THLEventDetailWireframe.h"
 #import "THLPromotionSelectionWireframe.h"
 #import "THLEventFlowWireframe.h"
+#import "THLGuestlistInvitationWireframe.h"
 
 //Common
 #import "THLYapDatabaseManager.h"
@@ -28,6 +29,7 @@
 #import "THLParseQueryFactory.h"
 #import "THLEntities.h"
 #import "THLYapDatabaseViewFactory.h"
+#import "THLUserManager.h"
 
 //Data Stores
 #import "THLDataStore.h"
@@ -38,6 +40,7 @@
 #import "THLPromotionService.h"
 #import "THLLocationService.h"
 #import "THLFacebookProfilePictureURLFetchService.h"
+#import "THLGuestlistService.h"
 
 @interface THLDependencyManager()
 //Wireframes
@@ -49,9 +52,11 @@
 @property (nonatomic, weak) THLEventDetailWireframe *eventDetailWireframe;
 @property (nonatomic, weak) THLPromotionSelectionWireframe *promotionSelectionWireframe;
 @property (nonatomic, weak) THLEventFlowWireframe *eventFlowWireframe;
+@property (nonatomic, weak) THLGuestlistInvitationWireframe *guestlistInvitationWireframe;
 
 //Common
 @property (nonatomic, strong) THLYapDatabaseManager *databaseManager;
+@property (nonatomic, strong) THLUserManager *userManager;
 @property (nonatomic, strong) THLEntityMapper *entityMapper;
 @property (nonatomic, strong) THLViewDataSourceFactory *viewDataSourceFactory;
 @property (nonatomic, strong) THLYapDatabaseViewFactory *yapDatabaseViewFactory;
@@ -67,12 +72,14 @@
 @property (nonatomic, strong) THLLoginService *loginService;
 @property (nonatomic, strong) THLPromotionService *promotionService;
 @property (nonatomic, strong) THLLocationService *locationService;
+@property (nonatomic, strong) THLGuestlistService *guestlistService;
 @end
 
 @implementation THLDependencyManager
 #pragma mark - Construction
 - (THLLoginWireframe *)newLoginWireframe {
 	THLLoginWireframe *wireframe = [[THLLoginWireframe alloc] initWithLoginService:self.loginService
+																	   userManager:self.userManager
 														  numberVerificationModule:[self newNumberVerificationWireframe].moduleInterface
 															 facebookPictureModule:[self newFacebookPictureWireframe].moduleInterface];
 	self.loginWireframe = wireframe;
@@ -102,7 +109,9 @@
 }
 
 - (THLEventDetailWireframe *)newEventDetailWireframe {
-	THLEventDetailWireframe *wireframe = [[THLEventDetailWireframe alloc] initWithLocationService:self.locationService];
+	THLEventDetailWireframe *wireframe = [[THLEventDetailWireframe alloc] initWithLocationService:self.locationService
+																				 promotionService:self.promotionService
+																					entityMappper:self.entityMapper];
 	self.eventDetailWireframe = wireframe;
 	return wireframe;
 }
@@ -111,6 +120,12 @@
 	THLPromotionSelectionWireframe *wireframe = [[THLPromotionSelectionWireframe alloc] initWithEntityMapper:self.entityMapper promotionService:self.promotionService];
 	self.promotionSelectionWireframe = wireframe;
 	return nil;
+}
+
+- (THLGuestlistInvitationWireframe *)newGuestlistInvitationWireframe {
+	THLGuestlistInvitationWireframe *wireframe = [[THLGuestlistInvitationWireframe alloc] initWithGuestlistService:self.guestlistService];
+	self.guestlistInvitationWireframe = wireframe;
+	return wireframe;
 }
 
 - (THLEventFlowWireframe *)newEventFlowWireframe {
@@ -134,6 +149,13 @@
 		_databaseManager = [[THLYapDatabaseManager alloc] init];
 	}
 	return _databaseManager;
+}
+
+- (THLUserManager *)userManager {
+	if (!_userManager) {
+		_userManager = [[THLUserManager alloc] init];
+	}
+	return _userManager;
 }
 
 - (THLEntityMapper *)entityMapper {
@@ -214,5 +236,12 @@
 		_locationService = [[THLLocationService alloc] initWithGeocoder:self.geocoder];
 	}
 	return _locationService;
+}
+
+- (THLGuestlistService *)guestlistService {
+	if (!_guestlistService) {
+		_guestlistService = [[THLGuestlistService alloc] initWithQueryFactory:self.parseQueryFactory];
+	}
+	return _guestlistService;
 }
 @end

@@ -9,12 +9,20 @@
 #import <Foundation/Foundation.h>
 
 @class BFTask;
+@class THLEvent;
+@class THLEntityMapper;
 @protocol THLLocationServiceInterface;
+@protocol THLPromotionServiceInterface;
 
 @interface THLEventDetailDataManager : NSObject
 #pragma mark - Dependencies
 @property (nonatomic, readonly) id<THLLocationServiceInterface> locationService;
-- (instancetype)initWithLocationService:(id<THLLocationServiceInterface>)locationService;
+@property (nonatomic, readonly) id<THLPromotionServiceInterface> promotionService;
+@property (nonatomic, readonly) THLEntityMapper *entityMapper;
+- (instancetype)initWithLocationService:(id<THLLocationServiceInterface>)locationService
+					   promotionService:(id<THLPromotionServiceInterface>)promotionService
+						  entityMappper:(THLEntityMapper *)entityMapper;
 
 - (BFTask<CLPlacemark *> *)fetchPlacemarkForAddress:(NSString *)address;
+- (BFTask *)fetchPromotionsForEvent:(THLEvent *)event;
 @end

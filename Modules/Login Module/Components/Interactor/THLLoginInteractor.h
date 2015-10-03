@@ -10,6 +10,7 @@
 
 @class THLLoginDataManager;
 @class THLLoginInteractor;
+@class THLUserManager;
 @class THLUser;
 
 @protocol THLLoginInteractorDelegate <NSObject>
@@ -23,7 +24,9 @@
 
 #pragma mark - Dependencies
 @property (nonatomic, readonly) THLLoginDataManager *dataManager;
-- (instancetype)initWithDataManager:(THLLoginDataManager *)dataManager;
+@property (nonatomic, readonly) THLUserManager *userManager;
+- (instancetype)initWithDataManager:(THLLoginDataManager *)dataManager
+						userManager:(THLUserManager *)userManager;
 
 - (BOOL)shouldLogin;
 - (BOOL)shouldVerifyPhoneNumber;

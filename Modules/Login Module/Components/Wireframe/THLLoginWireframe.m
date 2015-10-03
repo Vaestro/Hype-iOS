@@ -26,10 +26,12 @@
 
 @implementation THLLoginWireframe
 - (instancetype)initWithLoginService:(id<THLLoginServiceInterface>)loginService
-				 numberVerificationModule:(id<THLNumberVerificationModuleInterface>)numberVerificationModule
-					facebookPictureModule:(id<THLFacebookPictureModuleInterface>)facebookPictureModule {
+						 userManager:(THLUserManager *)userManager
+			numberVerificationModule:(id<THLNumberVerificationModuleInterface>)numberVerificationModule
+			   facebookPictureModule:(id<THLFacebookPictureModuleInterface>)facebookPictureModule {
 	if (self = [super init]) {
 		_loginService = loginService;
+		_userManager = userManager;
 		_numberVerificationModule = numberVerificationModule;
 		_facebookPictureModule = facebookPictureModule;
 		[self buildModule];
@@ -39,7 +41,7 @@
 
 - (void)buildModule {
 	_dataManager = [[THLLoginDataManager alloc] initWithLoginService:_loginService];
-	_interactor = [[THLLoginInteractor alloc] initWithDataManager:_dataManager];
+	_interactor = [[THLLoginInteractor alloc] initWithDataManager:_dataManager userManager:_userManager];
 	_presenter = [[THLLoginPresenter alloc] initWithWireframe:self interactor:_interactor];
 	_view = [[THLLoginViewController alloc] initWithNibName:nil bundle:nil];
 }

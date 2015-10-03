@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "THLEventFlowDependencyManager.h"
 
-
-
 @class THLMasterWireframe;
 @class THLLoginWireframe;
 @class THLFacebookPictureWireframe;
@@ -19,7 +17,7 @@
 @class THLEventDetailWireframe;
 @class THLPromotionSelectionWireframe;
 @class THLEventFlowWireframe;
-
+@class THLGuestlistInvitationWireframe;
 /**
  *  Manages all dependenies for the app.
  */
@@ -36,4 +34,5 @@ THLEventFlowDependencyManager
 - (THLEventDiscoveryWireframe *)newEventDiscoveryWireframe;
 - (THLEventDetailWireframe *)newEventDetailWireframe;
 - (THLPromotionSelectionWireframe *)newPromotionSelectionWireframe;
+- (THLGuestlistInvitationWireframe *)newGuestlistInvitationWireframe;
 @end

@@ -20,6 +20,10 @@ pod 'EKAlgorithms', '~> 0.2'
 pod 'AutoCoding', '~> 2.2'
 pod 'SDWebImage', '~> 3.7'
 pod 'FormatterKit', '~> 1.8'
+pod 'Typhoon', '~> 3.3'
+
+#Debugging
+
 
 #Sugar
 pod 'LinqToObjectiveC', '~> 2.0'
@@ -55,7 +59,8 @@ pod "ORStackView"
 pod 'Onboard'
 pod 'iCarousel', '~> 1.8'
 pod 'MJRefresh'
-
+pod 'SVProgressHUD'
+pod 'THContactPicker', '~> 1.2'
 end
 
 target 'Hypelist2point0Tests' do

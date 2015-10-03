@@ -9,13 +9,19 @@
 #import <Foundation/Foundation.h>
 #import "THLEventDetailModuleInterface.h"
 
+@class THLEntityMapper;
 @protocol THLLocationServiceInterface;
+@protocol THLPromotionServiceInterface;
 
 @interface THLEventDetailWireframe : NSObject
 @property (nonatomic, readonly) id<THLEventDetailModuleInterface> moduleInterface;
 #pragma mark - Dependencies
 @property (nonatomic, readonly) id<THLLocationServiceInterface> locationService;
-- (instancetype)initWithLocationService:(id<THLLocationServiceInterface>)locationService;
+@property (nonatomic, readonly) id<THLPromotionServiceInterface> promotionService;
+@property (nonatomic, readonly) THLEntityMapper *entityMapper;
+- (instancetype)initWithLocationService:(id<THLLocationServiceInterface>)locationService
+					   promotionService:(id<THLPromotionServiceInterface>)promotionService
+						  entityMappper:(THLEntityMapper *)entityMapper;
 
 - (void)presentInterfaceInWindow:(UIWindow *)window;
 - (void)dismissInterface;

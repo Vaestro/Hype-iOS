@@ -9,17 +9,31 @@
 #import "THLLoginInteractor.h"
 #import "THLLoginDataManager.h"
 #import "THLUser.h"
+#import "THLUserManager.h"
 
 @interface THLLoginInteractor()
 @property (nonatomic, strong) THLUser *user;
 @end
 
 @implementation THLLoginInteractor
-- (instancetype)initWithDataManager:(THLLoginDataManager *)dataManager {
+- (instancetype)initWithDataManager:(THLLoginDataManager *)dataManager
+						userManager:(THLUserManager *)userManager {
 	if (self = [super init]) {
 		_dataManager = dataManager;
+		_userManager = userManager;
 	}
 	return self;
+}
+
+- (void)setDelegate:(id<THLLoginInteractorDelegate>)delegate {
+	_delegate = delegate;
+	[self checkForExistingUser];
+}
+
+- (void)checkForExistingUser {
+	if ([_userManager userLoggedIn]) {
+		[_delegate interactor:self didLoginUser:nil];
+	}
 }
 
 - (BOOL)shouldLogin {

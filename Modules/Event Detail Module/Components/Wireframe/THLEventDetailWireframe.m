@@ -23,16 +23,22 @@
 @end
 
 @implementation THLEventDetailWireframe
-- (instancetype)initWithLocationService:(id<THLLocationServiceInterface>)locationService {
+- (instancetype)initWithLocationService:(id<THLLocationServiceInterface>)locationService
+					   promotionService:(id<THLPromotionServiceInterface>)promotionService
+						  entityMappper:(THLEntityMapper *)entityMapper {
 	if (self = [super init]) {
 		_locationService = locationService;
+		_promotionService = promotionService;
+		_entityMapper = entityMapper;
 		[self buildModule];
 	}
 	return self;
 }
 
 - (void)buildModule {
-	_dataManager = [[THLEventDetailDataManager alloc] initWithLocationService:_locationService];
+	_dataManager = [[THLEventDetailDataManager alloc] initWithLocationService:_locationService
+															 promotionService:_promotionService
+																entityMappper:_entityMapper];
 	_interactor = [[THLEventDetailInteractor alloc] initWithDataManager:_dataManager];
 	_view = [[THLEventDetailViewController alloc] initWithNibName:nil bundle:nil];
 	_presenter = [[THLEventDetailPresenter alloc] initWithInteractor:_interactor wireframe:self];
