@@ -16,10 +16,14 @@
 					  standardConnection:(YapDatabaseConnection *)standardConnection
 						searchConnection:(YapDatabaseConnection *)searchConnection
 						 searchExtensionKey:(NSString *)extKey {
-	if (self = [super initWithMappings:searchMappings connection:standardConnection]) {
+	if (self = [super init]) {
+		self.standardMappings = standardMappings;
 		self.searchMappings = searchMappings;
+		self.connection = standardConnection;
 		self.searchConnection = searchConnection;
 		self.searchExtKey = extKey;
+		self.searchQueue = [[YapDatabaseSearchQueue alloc] init];
+		[self beginObservingChanges];
 	}
 	return self;
 }

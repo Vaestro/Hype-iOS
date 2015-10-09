@@ -13,12 +13,11 @@
 @implementation THLGuestEntity
 @synthesize objectId = _objectId;
 
-
 - (instancetype)initWithContact:(APContact *)contact {
 	if (self = [super init]) {
-		_firstName = contact.firstName;
-		_lastName = contact.lastName;
-		_phoneNumber = [contact.phones first];
+		_firstName = [contact.firstName copy];
+		_lastName = [contact.lastName copy];
+		_phoneNumber = [[contact.phones first] copy];
 		_type = THLGuestEntityTypeLocalContact;
 		_objectId = [NSString stringWithFormat:@"contact%lu", (unsigned long)self.phoneNumber.hash];
 	}
@@ -27,11 +26,11 @@
 
 - (instancetype)initWithUser:(THLUserEntity *)user {
 	if (self = [super init]) {
-		_firstName = user.firstName;
-		_lastName = user.lastName;
-		_phoneNumber = user.phoneNumber;
+		_firstName = [user.firstName copy];
+		_lastName = [user.lastName copy];
+		_phoneNumber = [user.phoneNumber copy];
 		_type = THLGuestEntityTypeRemoteUser;
-		_objectId = user.objectId;
+		_objectId = [user.objectId copy];
 	}
 	return self;
 }
@@ -46,5 +45,7 @@
 	return entity;
 }
 
-
+- (NSString *)fullName {
+	return [[NSString stringWithFormat:@"%@ %@", _firstName, _lastName] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+}
 @end

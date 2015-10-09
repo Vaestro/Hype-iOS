@@ -130,7 +130,7 @@
 
 #pragma mark - THContactPickerDelegate
 - (void)contactPickerTextViewDidChange:(NSString *)textViewText {
-	[self.dataSource setSearchText:textViewText];
+	[self.dataSource setSearchString:textViewText];
 }
 
 - (void)contactPickerDidResize:(THContactPickerView *)contactPickerView {

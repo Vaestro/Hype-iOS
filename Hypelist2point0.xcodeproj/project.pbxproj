@@ -1066,6 +1066,8 @@
 				216BDD561BC71F1800BBF713 /* THLSearchViewDataSource.h */,
 				216BDD571BC71F1800BBF713 /* THLSearchViewDataSource.m */,
 				216BDD681BC7712900BBF713 /* THLSearchViewDataSource_Private.h */,
+				216BDD651BC770CA00BBF713 /* THLSearchViewDataSource+Factory.h */,
+				216BDD661BC770CA00BBF713 /* THLSearchViewDataSource+Factory.m */,
 				216BDD5E1BC72A3300BBF713 /* THLSearchResultsViewDataSourceHandler */,
 			);
 			name = THLSearchViewDataSource;
@@ -1307,8 +1309,6 @@
 				217EBE931BB78F22006044B6 /* THLViewDataSourceFactory.m */,
 				CBE54163EA2D6D75F647F7B1 /* THLViewDataSource+Factory.h */,
 				CBE545A9A3C66339456E0A06 /* THLViewDataSource+Factory.m */,
-				216BDD651BC770CA00BBF713 /* THLSearchViewDataSource+Factory.h */,
-				216BDD661BC770CA00BBF713 /* THLSearchViewDataSource+Factory.m */,
 			);
 			name = THLViewDataSourceFactory;
 			sourceTree = "<group>";
