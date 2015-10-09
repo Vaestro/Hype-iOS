@@ -14,7 +14,7 @@
 
 @interface THLGuestlistInvitationPresenter : NSObject<THLGuestlistInvitationModuleInterface>
 #pragma mark - Dependencies
-@property (nonatomic, readonly) THLGuestlistInvitationWireframe *wireframe;
+@property (nonatomic, weak, readonly) THLGuestlistInvitationWireframe *wireframe;
 @property (nonatomic, readonly) THLGuestlistInvitationInteractor *interactor;
 - (instancetype)initWithWireframe:(THLGuestlistInvitationWireframe *)wireframe
 					   interactor:(THLGuestlistInvitationInteractor *)interactor;

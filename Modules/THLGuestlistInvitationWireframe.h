@@ -7,13 +7,25 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "THLGuestlistInvitationModuleInterface.h"
 
 @protocol THLGuestlistServiceInterface;
+@class APAddressBook;
+@class THLDataStore;
+@protocol THLViewDataSourceFactoryInterface;
 
 @interface THLGuestlistInvitationWireframe : NSObject
+@property (nonatomic, readonly) id<THLGuestlistInvitationModuleInterface> moduleInterface;
+
 #pragma mark - Dependencies
 @property (nonatomic, readonly) id<THLGuestlistServiceInterface> guestlistService;
-- (instancetype)initWithGuestlistService:(id<THLGuestlistServiceInterface>)guestlistService;
+@property (nonatomic, readonly) id<THLViewDataSourceFactoryInterface> viewDataSourceFactory;
+@property (nonatomic, readonly) APAddressBook *addressBook;
+@property (nonatomic, readonly) THLDataStore *dataStore;
+- (instancetype)initWithGuestlistService:(id<THLGuestlistServiceInterface>)guestlistService
+				   viewDataSourceFactory:(id<THLViewDataSourceFactoryInterface>)viewDataSourceFactory
+							 addressBook:(APAddressBook *)addressBook
+							   dataStore:(THLDataStore *)dataStore;
 
-- (void)presentInterfaceInViewController:(UIViewController *)controller;
+- (void)presentInterfaceInWindow:(UIWindow *)window;
 @end

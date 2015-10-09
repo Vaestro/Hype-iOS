@@ -8,9 +8,20 @@
 
 #import <Foundation/Foundation.h>
 @class THLViewDataSource;
+@class THLSearchViewDataSource;
+
 #import "THLViewDataSourceGrouping.h"
 #import "THLViewDataSourceSorting.h"
+#import "THLSearchResultsViewDataSourceHandler.h"
 
 @protocol THLViewDataSourceFactoryInterface <NSObject>
-- (THLViewDataSource *)createDataSourceWithGrouping:(THLViewDataSourceGrouping *)grouping sorting:(THLViewDataSourceSorting *)sorting key:(NSString *)key;
+- (THLViewDataSource *)createDataSourceWithGrouping:(THLViewDataSourceGrouping *)grouping
+											sorting:(THLViewDataSourceSorting *)sorting
+												key:(NSString *)key;
+
+- (THLSearchViewDataSource *)createSearchDataSourceWithGrouping:(THLViewDataSourceGrouping *)grouping
+														sorting:(THLViewDataSourceSorting *)sorting
+														handler:(THLSearchResultsViewDataSourceHandler *)handler
+										   searchableProperties:(NSArray *)properties
+															key:(NSString *)key;
 @end

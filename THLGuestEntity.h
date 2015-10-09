@@ -7,9 +7,12 @@
 //
 
 #import "THLEntity.h"
+@class APContact;
+@class THLUserEntity;
 
 typedef NS_ENUM(NSInteger, THLGuestEntityType) {
 	THLGuestEntityTypeLocalContact = 0,
+	THLGuestEntityTypeRemoteUser,
 	THLGuestEntityType_Count
 };
 
@@ -20,4 +23,7 @@ typedef NS_ENUM(NSInteger, THLGuestEntityType) {
 @property (nonatomic, readonly) NSURL *imageURL;
 @property (nonatomic, readonly) NSString *fullName;
 @property (nonatomic, readonly) THLGuestEntityType type;
+
++ (instancetype)fromContact:(APContact *)contact;
++ (instancetype)fromUser:(THLUserEntity *)user;
 @end

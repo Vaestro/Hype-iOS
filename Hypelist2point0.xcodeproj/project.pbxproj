@@ -56,6 +56,10 @@
 		215A42A11BAA26D500D03C35 /* THLFacebookPictureInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A42A01BAA26D500D03C35 /* THLFacebookPictureInteractor.m */; };
 		215A42A81BAA287900D03C35 /* THLFacebookProfilePictureFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A42A71BAA287900D03C35 /* THLFacebookProfilePictureFactory.m */; };
 		215A42AC1BAA2A1700D03C35 /* THLFacebookProfilePictureURLFetchService.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A42AB1BAA2A1700D03C35 /* THLFacebookProfilePictureURLFetchService.m */; };
+		216BDD521BC6F4A700BBF713 /* THLContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 216BDD511BC6F4A700BBF713 /* THLContactTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		216BDD581BC71F1800BBF713 /* THLSearchViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 216BDD571BC71F1800BBF713 /* THLSearchViewDataSource.m */; settings = {ASSET_TAGS = (); }; };
+		216BDD611BC72F9100BBF713 /* THLSearchResultsViewDataSourceHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 216BDD601BC72F9100BBF713 /* THLSearchResultsViewDataSourceHandler.m */; settings = {ASSET_TAGS = (); }; };
+		216BDD671BC770CA00BBF713 /* THLSearchViewDataSource+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = 216BDD661BC770CA00BBF713 /* THLSearchViewDataSource+Factory.m */; settings = {ASSET_TAGS = (); }; };
 		2174A06A1B863F6A006826D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2174A0691B863F6A006826D7 /* main.m */; };
 		2174A06D1B863F6A006826D7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2174A06C1B863F6A006826D7 /* AppDelegate.m */; };
 		2174A0751B863F6A006826D7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2174A0741B863F6A006826D7 /* Images.xcassets */; };
@@ -263,6 +267,15 @@
 		215D88111B8BEF8F00A3329C /* THLTweaksConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLTweaksConstants.h; sourceTree = "<group>"; };
 		215D88131B8BEFAD00A3329C /* THLConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLConstants.h; sourceTree = "<group>"; };
 		215D88141B8BEFE900A3329C /* THLStylingConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLStylingConstants.h; sourceTree = "<group>"; };
+		216BDD501BC6F4A700BBF713 /* THLContactTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLContactTableViewCell.h; sourceTree = "<group>"; };
+		216BDD511BC6F4A700BBF713 /* THLContactTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLContactTableViewCell.m; sourceTree = "<group>"; };
+		216BDD561BC71F1800BBF713 /* THLSearchViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLSearchViewDataSource.h; sourceTree = "<group>"; };
+		216BDD571BC71F1800BBF713 /* THLSearchViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLSearchViewDataSource.m; sourceTree = "<group>"; };
+		216BDD5F1BC72F9100BBF713 /* THLSearchResultsViewDataSourceHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLSearchResultsViewDataSourceHandler.h; sourceTree = "<group>"; };
+		216BDD601BC72F9100BBF713 /* THLSearchResultsViewDataSourceHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLSearchResultsViewDataSourceHandler.m; sourceTree = "<group>"; };
+		216BDD651BC770CA00BBF713 /* THLSearchViewDataSource+Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "THLSearchViewDataSource+Factory.h"; sourceTree = "<group>"; };
+		216BDD661BC770CA00BBF713 /* THLSearchViewDataSource+Factory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "THLSearchViewDataSource+Factory.m"; sourceTree = "<group>"; };
+		216BDD681BC7712900BBF713 /* THLSearchViewDataSource_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLSearchViewDataSource_Private.h; sourceTree = "<group>"; };
 		2174A0641B863F6A006826D7 /* Hypelist2point0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hypelist2point0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2174A0681B863F6A006826D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2174A0691B863F6A006826D7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -515,9 +528,10 @@
 		211005A81B8A3D5800A540C6 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				217EBE891BB78A57006044B6 /* THLViewDataSource */,
+				216BDD541BC71EE500BBF713 /* THLSearchViewDataSource */,
 				21CE05F61BB84026004D10BB /* THLEventNavigationController */,
 				21CE05F71BB84032004D10BB /* THLEventNavigationBar */,
-				217EBE891BB78A57006044B6 /* THLViewDataSource */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -724,6 +738,7 @@
 				2121736A1BB34D4F007D817A /* THLTitledContentView */,
 				2121735C1BB34239007D817A /* Promotion Card View */,
 				212173721BB34F19007D817A /* THLRoundImageView */,
+				216BDD531BC6FA2000BBF713 /* THLContactTableViewCell */,
 			);
 			name = Views;
 			path = Components/Views;
@@ -1036,6 +1051,35 @@
 			path = "Facebook Image Fetching";
 			sourceTree = "<group>";
 		};
+		216BDD531BC6FA2000BBF713 /* THLContactTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				216BDD501BC6F4A700BBF713 /* THLContactTableViewCell.h */,
+				216BDD511BC6F4A700BBF713 /* THLContactTableViewCell.m */,
+			);
+			name = THLContactTableViewCell;
+			sourceTree = "<group>";
+		};
+		216BDD541BC71EE500BBF713 /* THLSearchViewDataSource */ = {
+			isa = PBXGroup;
+			children = (
+				216BDD561BC71F1800BBF713 /* THLSearchViewDataSource.h */,
+				216BDD571BC71F1800BBF713 /* THLSearchViewDataSource.m */,
+				216BDD681BC7712900BBF713 /* THLSearchViewDataSource_Private.h */,
+				216BDD5E1BC72A3300BBF713 /* THLSearchResultsViewDataSourceHandler */,
+			);
+			name = THLSearchViewDataSource;
+			sourceTree = "<group>";
+		};
+		216BDD5E1BC72A3300BBF713 /* THLSearchResultsViewDataSourceHandler */ = {
+			isa = PBXGroup;
+			children = (
+				216BDD5F1BC72F9100BBF713 /* THLSearchResultsViewDataSourceHandler.h */,
+				216BDD601BC72F9100BBF713 /* THLSearchResultsViewDataSourceHandler.m */,
+			);
+			name = THLSearchResultsViewDataSourceHandler;
+			sourceTree = "<group>";
+		};
 		21721FB31BAE07E500D754D6 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
@@ -1073,7 +1117,7 @@
 				217DC6551BBB7A2500332174 /* Flows */,
 				21BDAE5C1B878E0E009D02A3 /* Modules */,
 				21CCEDEB1B87CDD00066CDAC /* Services */,
-				21CCEDD21B87C27D0066CDAC /* Data Store */,
+				21CCEDD21B87C27D0066CDAC /* Data Stores */,
 				218AF34F1BB7420900AFAEBF /* Entities */,
 				21CCEDD11B87C24A0066CDAC /* Parse Models */,
 				217EBE8A1BB78A9D006044B6 /* Factories, Managers, et. All */,
@@ -1261,8 +1305,10 @@
 				217EBE911BB78F16006044B6 /* THLViewDataSourceFactoryInterface.h */,
 				217EBE921BB78F22006044B6 /* THLViewDataSourceFactory.h */,
 				217EBE931BB78F22006044B6 /* THLViewDataSourceFactory.m */,
-				CBE545A9A3C66339456E0A06 /* THLViewDataSource+Factory.m */,
 				CBE54163EA2D6D75F647F7B1 /* THLViewDataSource+Factory.h */,
+				CBE545A9A3C66339456E0A06 /* THLViewDataSource+Factory.m */,
+				216BDD651BC770CA00BBF713 /* THLSearchViewDataSource+Factory.h */,
+				216BDD661BC770CA00BBF713 /* THLSearchViewDataSource+Factory.m */,
 			);
 			name = THLViewDataSourceFactory;
 			sourceTree = "<group>";
@@ -1395,7 +1441,7 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		21CCEDD21B87C27D0066CDAC /* Data Store */ = {
+		21CCEDD21B87C27D0066CDAC /* Data Stores */ = {
 			isa = PBXGroup;
 			children = (
 				21CCEDE71B87C87B0066CDAC /* THLDataStore.h */,
@@ -1405,7 +1451,6 @@
 				217EBE861BB77ED7006044B6 /* THLEntity+DataStore.h */,
 				217EBE871BB77ED7006044B6 /* THLEntity+DataStore.m */,
 			);
-			name = "Data Store";
 			path = "Data Stores";
 			sourceTree = "<group>";
 		};
@@ -1901,12 +1946,14 @@
 				211892061BA9FF0600E8A11F /* THLLoginInteractor.m in Sources */,
 				211005D01B8A7D0200A540C6 /* NSDate+Hypelist.m in Sources */,
 				21E402D21BBF768F001D0C2C /* THLGuestlistInvitationDataManager.m in Sources */,
+				216BDD611BC72F9100BBF713 /* THLSearchResultsViewDataSourceHandler.m in Sources */,
 				21775F631B8E17A300609D39 /* THLAddressBookEntryFetchService.m in Sources */,
 				219E32A81B8EA63D00214C85 /* THLEventNavigationBar.m in Sources */,
 				2174A06D1B863F6A006826D7 /* AppDelegate.m in Sources */,
 				21CE06241BB86995004D10BB /* THLAppearanceUtils.m in Sources */,
 				21E402CF1BBF7688001D0C2C /* THLGuestlistInvitationInteractor.m in Sources */,
 				218AF3441BB7391B00AFAEBF /* THLEventService.m in Sources */,
+				216BDD671BC770CA00BBF713 /* THLSearchViewDataSource+Factory.m in Sources */,
 				211892241BAA0C4400E8A11F /* THLLoginViewController.m in Sources */,
 				2133BFBF1B877B82002C1DA9 /* THLPromotion.m in Sources */,
 				218AF3551BB7440800AFAEBF /* THLLocationEntity.m in Sources */,
@@ -1923,11 +1970,13 @@
 				217EBE881BB77ED7006044B6 /* THLEntity+DataStore.m in Sources */,
 				212173601BB34261007D817A /* THLPromotionCardInfoCell.m in Sources */,
 				2174A06A1B863F6A006826D7 /* main.m in Sources */,
+				216BDD581BC71F1800BBF713 /* THLSearchViewDataSource.m in Sources */,
 				217EBEA51BB7A106006044B6 /* THLLoginService.m in Sources */,
 				219E32A51B8EA62700214C85 /* THLEventNavigationController.m in Sources */,
 				217EBE941BB78F22006044B6 /* THLViewDataSourceFactory.m in Sources */,
 				212173491BB32B22007D817A /* THLPromotionSelectionInfoCardView.m in Sources */,
 				21192D7F1BB3277500B176AA /* THLPromotionSelectionWireframe.m in Sources */,
+				216BDD521BC6F4A700BBF713 /* THLContactTableViewCell.m in Sources */,
 				212173631BB3451F007D817A /* THLPromotionCardInfoView.m in Sources */,
 				21E402CC1BBF767D001D0C2C /* THLGuestlistInvitationPresenter.m in Sources */,
 				21CCEDF51B87CFCB0066CDAC /* THLParseQueryFactory.m in Sources */,

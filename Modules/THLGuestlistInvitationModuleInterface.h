@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "THLGuestlistInvitationModuleDelegate.h"
 
 @protocol THLGuestlistInvitationModuleInterface <NSObject>
+@property (nonatomic, weak) id<THLGuestlistInvitationModuleDelegate> moduleDelegate;
+
 - (void)presentGuestlistInvitationInterfaceForGuestlist:(NSString *)guestlistId inWindow:(UIWindow *)window;
 @end

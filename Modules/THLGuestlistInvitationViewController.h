@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "THLGuestlistInvitationView.h"
 
 @class THContactPickerView;
 @protocol THLGuestlistInvitationView;
@@ -16,7 +17,6 @@
 <
 THLGuestlistInvitationView,
 UITableViewDelegate,
-UITableViewDataSource,
 THContactPickerDelegate
 >
 @property (nonatomic, strong) UITableView *tableView;

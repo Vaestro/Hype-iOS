@@ -10,15 +10,22 @@
 #import "THLGuestlistInvitationWireframe.h"
 #import "THLGuestlistInvitationInteractor.h"
 #import "THLGuestlistInvitationView.h"
+#import "THLGuestlistInvitationViewEventHandler.h"
 
-@interface THLGuestlistInvitationPresenter ()<THLGuestlistInvitationInteractorDelegate>
-
+@interface THLGuestlistInvitationPresenter ()
+<
+THLGuestlistInvitationInteractorDelegate,
+THLGuestlistInvitationViewEventHandler
+>
+@property (nonatomic, weak) id<THLGuestlistInvitationView> view;
 @end
 
 @implementation THLGuestlistInvitationPresenter
+@synthesize moduleDelegate;
+
 - (instancetype)initWithWireframe:(THLGuestlistInvitationWireframe *)wireframe
 					   interactor:(THLGuestlistInvitationInteractor *)interactor {
-	if (self = [self init]) {
+	if (self = [super init]) {
 		_wireframe = wireframe;
 		_interactor = interactor;
 		_interactor.delegate = self;
@@ -28,20 +35,28 @@
 
 #pragma mark - THLGuestlistModuleInterface
 - (void)presentGuestlistInvitationInterfaceForGuestlist:(NSString *)guestlistId inWindow:(UIWindow *)window {
-	[_wireframe presentInterfaceInViewController:window.rootViewController];
 	_interactor.guestlistId = guestlistId;
+	[_wireframe presentInterfaceInWindow:window];
 }
 
 - (void)configureView:(id<THLGuestlistInvitationView>)view {
-	
+	_view = view;
+	[view setEventHandler:self];
+	[view setDataSource:[_interactor getDataSource]];
 }
+
 
 #pragma mark - THLGuestlistInvitationInteractorDelegate
 - (void)interactor:(THLGuestlistInvitationInteractor *)interactor didCommitChangesToGuestlist:(NSString *)guestlistId error:(NSError *)error {
 
 }
 
-- (void)interactor:(THLGuestlistInvitationInteractor *)interactor didGetInvitableUsers:(NSArray<THLUserEntity *> *)users error:(NSError *)error {
+#pragma mark - THLGuestlistInvitationViewEventHandler 
+- (void)view:(id<THLGuestlistInvitationView>)view didAddGuest:(THLGuestEntity *)guest {
+	[_interactor addGuest:guest];
+}
 
+- (void)view:(id<THLGuestlistInvitationView>)view didRemoveGuest:(THLGuestEntity *)guest {
+	[_interactor removeGuest:guest];
 }
 @end

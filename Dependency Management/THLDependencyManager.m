@@ -30,6 +30,7 @@
 #import "THLEntities.h"
 #import "THLYapDatabaseViewFactory.h"
 #import "THLUserManager.h"
+#import "APAddressBook.h"
 
 //Data Stores
 #import "THLDataStore.h"
@@ -41,6 +42,10 @@
 #import "THLLocationService.h"
 #import "THLFacebookProfilePictureURLFetchService.h"
 #import "THLGuestlistService.h"
+
+//Classes
+#import "THLGuestEntity.h"
+
 
 @interface THLDependencyManager()
 //Wireframes
@@ -62,9 +67,11 @@
 @property (nonatomic, strong) THLYapDatabaseViewFactory *yapDatabaseViewFactory;
 @property (nonatomic, strong) THLParseQueryFactory *parseQueryFactory;
 @property (nonatomic, strong) CLGeocoder *geocoder;
+@property (nonatomic, strong) APAddressBook *addressBook;
 
 //Data Stores
 @property (nonatomic, strong) THLDataStore *eventDataStore;
+@property (nonatomic, strong) THLDataStore *guestDataStore;
 
 //Services
 @property (nonatomic, strong) THLEventService *eventService;
@@ -123,7 +130,10 @@
 }
 
 - (THLGuestlistInvitationWireframe *)newGuestlistInvitationWireframe {
-	THLGuestlistInvitationWireframe *wireframe = [[THLGuestlistInvitationWireframe alloc] initWithGuestlistService:self.guestlistService];
+	THLGuestlistInvitationWireframe *wireframe = [[THLGuestlistInvitationWireframe alloc] initWithGuestlistService:self.guestlistService
+																							 viewDataSourceFactory:self.viewDataSourceFactory
+																									   addressBook:self.addressBook
+																										 dataStore:self.guestDataStore];
 	self.guestlistInvitationWireframe = wireframe;
 	return wireframe;
 }
@@ -194,12 +204,26 @@
 	return _geocoder;
 }
 
+- (APAddressBook *)addressBook {
+	if (!_addressBook) {
+		_addressBook = [[APAddressBook alloc] init];
+	}
+	return _addressBook;
+}
+
 #pragma mark - Data Stores
 - (THLDataStore *)eventDataStore {
 	if (!_eventDataStore) {
 		_eventDataStore = [[THLDataStore alloc] initForEntity:[THLEventEntity class] databaseManager:self.databaseManager];
 	}
 	return _eventDataStore;
+}
+
+- (THLDataStore *)guestDataStore {
+	if (!_guestDataStore) {
+		_guestDataStore = [[THLDataStore alloc] initForEntity:[THLGuestEntity class] databaseManager:self.databaseManager];
+	}
+	return _guestDataStore;
 }
 
 #pragma mark - Services

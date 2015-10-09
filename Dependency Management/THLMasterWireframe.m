@@ -15,16 +15,20 @@
 #import "THLLoginWireframe.h"
 #import "THLEventFlowWireframe.h"
 #import "THLPromotionSelectionWireframe.h"
+#import "THLGuestlistInvitationWireframe.h"
 
 //Delegates
 #import "THLLoginModuleDelegate.h"
 #import "THLPromotionSelectionModuleDelegate.h"
+#import "THLGuestlistInvitationModuleDelegate.h"
+
 
 
 @interface THLMasterWireframe()
 <
 THLLoginModuleDelegate,
-        THLPromotionSelectionModuleDelegate
+THLPromotionSelectionModuleDelegate,
+THLGuestlistInvitationModuleDelegate
 >
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) id currentWireframe;
@@ -57,10 +61,18 @@ THLLoginModuleDelegate,
 	[eventWireframe presentEventFlowInWindow:_window];
 }
 
+- (void)presentGuestlistInvitationInterface {
+	THLGuestlistInvitationWireframe *guestlistWireframe = [_dependencyManager newGuestlistInvitationWireframe];
+	_currentWireframe = guestlistWireframe;
+	[guestlistWireframe.moduleInterface setModuleDelegate:self];
+	[guestlistWireframe.moduleInterface presentGuestlistInvitationInterfaceForGuestlist:@"1" inWindow:_window];
+}
+
 #pragma mark - THLLoginModuleDelegate
 - (void)loginModule:(id<THLLoginModuleInterface>)module didLoginUser:(NSError *)error {
 	if (!error) {
-		[self presentEventFlow];
+		[self presentGuestlistInvitationInterface];
+//		[self presentEventFlow];
 	}
 }
 

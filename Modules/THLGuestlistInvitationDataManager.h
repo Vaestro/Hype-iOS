@@ -8,13 +8,21 @@
 
 #import <Foundation/Foundation.h>
 @class BFTask;
+@class THLDataStore;
+@class APAddressBook;
 @protocol THLGuestlistServiceInterface;
 
 @interface THLGuestlistInvitationDataManager : NSObject
 #pragma mark - Dependencies
 @property (nonatomic, readonly) id<THLGuestlistServiceInterface> guestlistService;
-- (instancetype)initWithGuestlistService:(id<THLGuestlistServiceInterface>)guestlistService;
+@property (nonatomic, readonly) THLDataStore *dataStore;
+@property (nonatomic, readonly) APAddressBook *addressBook;
+- (instancetype)initWithGuestlistService:(id<THLGuestlistServiceInterface>)guestlistService
+							   dataStore:(THLDataStore *)dataStore
+							 addressBook:(APAddressBook *)addressBook;
+
 
 - (BFTask *)fetchMembersOnGuestlist:(NSString *)guestlistId;
+- (void)loadContacts;
 
 @end

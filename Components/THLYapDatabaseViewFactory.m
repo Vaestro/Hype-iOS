@@ -10,6 +10,8 @@
 #import "THLYapDatabaseManager.h"
 #import "YapDatabaseExtension.h"
 #import "YapDatabaseView.h"
+#import "YapDatabaseFullTextSearch.h"
+#import "YapDatabaseSearchResultsView.h"
 
 @implementation THLYapDatabaseViewFactory
 - (instancetype)initWithDatabaseManager:(THLYapDatabaseManager *)databaseManager {
@@ -26,6 +28,27 @@
 - (void)createViewWithGrouping:(YapDatabaseViewGrouping *)grouping sorting:(YapDatabaseViewSorting *)sorting key:(NSString *)key {
 	YapDatabaseView *view = [[YapDatabaseView alloc] initWithGrouping:grouping sorting:sorting];
 	[self registerExtension:view forKey:key];
+}
+
+- (void)createSearchResultsViewWithGrouping:(YapDatabaseViewGrouping *)grouping
+									sorting:(YapDatabaseViewSorting *)sorting
+					   fullTextSearchHander:(YapDatabaseFullTextSearchHandler *)handler
+							 ftsColumnNames:(NSArray *)columnNames
+									viewKey:(NSString *)viewKey
+									 ftsKey:(NSString *)ftsKey {
+
+
+	YapDatabaseFullTextSearch *ftsExtension = [[YapDatabaseFullTextSearch alloc] initWithColumnNames:columnNames handler:handler];
+	[self registerExtension:ftsExtension forKey:ftsKey];
+
+	NSString *parentViewKey = [NSString stringWithFormat:@"%@_ParentView", viewKey];
+	[self createViewWithGrouping:grouping sorting:sorting key:parentViewKey];
+
+	YapDatabaseSearchResultsViewOptions *options = [[YapDatabaseSearchResultsViewOptions alloc] init];
+	options.isPersistent = NO;
+	YapDatabaseSearchResultsView *searchResultsView = [[YapDatabaseSearchResultsView alloc] initWithFullTextSearchName:ftsKey parentViewName:parentViewKey versionTag:@"1" options:options];
+
+	[self registerExtension:searchResultsView forKey:viewKey];
 }
 
 @end

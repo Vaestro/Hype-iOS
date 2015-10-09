@@ -9,11 +9,13 @@
 #import <Foundation/Foundation.h>
 
 @class THLGuestlistInvitationDataManager;
-@class THLUserEntity;
 @class THLGuestlistInvitationInteractor;
+@class APAddressBook;
+@class THLSearchViewDataSource;
+@class THLGuestEntity;
+@protocol THLViewDataSourceFactoryInterface;
 
 @protocol THLGuestlistInvitationInteractorDelegate <NSObject>
-- (void)interactor:(THLGuestlistInvitationInteractor *)interactor didGetInvitableUsers:(NSArray<THLUserEntity *> *)users error:(NSError *)error;
 - (void)interactor:(THLGuestlistInvitationInteractor *)interactor didCommitChangesToGuestlist:(NSString *)guestlistId error:(NSError *)error;
 @end
 
@@ -24,13 +26,15 @@
 
 #pragma mark - Dependencies
 @property (nonatomic, readonly) THLGuestlistInvitationDataManager *dataManager;
-- (instancetype)initWithDataManager:(THLGuestlistInvitationDataManager *)dataManager;
+@property (nonatomic, readonly) id<THLViewDataSourceFactoryInterface> viewDataSourceFactory;
+- (instancetype)initWithDataManager:(THLGuestlistInvitationDataManager *)dataManager
+			  viewDataSourceFactory:(id<THLViewDataSourceFactoryInterface>)viewDataSourceFactory;
 
-- (void)getInvitableUsers;
-- (BOOL)isGuestInvited:(THLUserEntity *)guest;
-- (BOOL)canAddGuest:(THLUserEntity *)guest;
-- (BOOL)canRemoveGuest:(THLUserEntity *)guest;
-- (void)addGuest:(THLUserEntity *)guest;
-- (void)removeGuest:(THLUserEntity *)guest;
+- (THLSearchViewDataSource *)getDataSource;
+- (BOOL)isGuestInvited:(THLGuestEntity *)guest;
+- (BOOL)canAddGuest:(THLGuestEntity *)guest;
+- (BOOL)canRemoveGuest:(THLGuestEntity *)guest;
+- (void)addGuest:(THLGuestEntity *)guest;
+- (void)removeGuest:(THLGuestEntity *)guest;
 - (void)commitChangesToGuestlist;
 @end

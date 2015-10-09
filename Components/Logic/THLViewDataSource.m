@@ -63,6 +63,7 @@
 		} completion:NULL];
 	}
 }
+
 #pragma mark - Item Accessing
 - (id)untransformedItemAtIndexPath:(NSIndexPath *)indexPath {
 	__block id untransformedItem;

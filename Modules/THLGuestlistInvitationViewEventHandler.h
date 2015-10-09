@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-@class THLUserEntity;
+@class THLGuestEntity;
 @protocol THLGuestlistInvitationView;
 @protocol THLGuestlistInvitationViewEventHandler <NSObject>
-- (void)view:(id<THLGuestlistInvitationView>)view didAddGuest:(THLUserEntity *)guest;
-- (void)view:(id<THLGuestlistInvitationView>)view didRemoveGuest:(THLUserEntity *)guest;
+- (void)view:(id<THLGuestlistInvitationView>)view didAddGuest:(THLGuestEntity *)guest;
+- (void)view:(id<THLGuestlistInvitationView>)view didRemoveGuest:(THLGuestEntity *)guest;
 @end
