@@ -31,9 +31,6 @@
 			  viewDataSourceFactory:(id<THLViewDataSourceFactoryInterface>)viewDataSourceFactory;
 
 - (THLSearchViewDataSource *)getDataSource;
-- (BOOL)isGuestInvited:(THLGuestEntity *)guest;
-- (BOOL)canAddGuest:(THLGuestEntity *)guest;
-- (BOOL)canRemoveGuest:(THLGuestEntity *)guest;
 - (void)addGuest:(THLGuestEntity *)guest;
 - (void)removeGuest:(THLGuestEntity *)guest;
 - (void)commitChangesToGuestlist;

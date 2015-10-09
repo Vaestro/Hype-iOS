@@ -59,4 +59,12 @@ THLGuestlistInvitationViewEventHandler
 - (void)view:(id<THLGuestlistInvitationView>)view didRemoveGuest:(THLGuestEntity *)guest {
 	[_interactor removeGuest:guest];
 }
+
+- (void)viewDidCancelInvitations:(id<THLGuestlistInvitationView>)view {
+
+}
+
+- (void)viewDidCommitInvitations:(id<THLGuestlistInvitationView>)view {
+	[_interactor commitChangesToGuestlist];
+}
 @end

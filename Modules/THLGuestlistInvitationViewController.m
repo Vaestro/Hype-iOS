@@ -16,16 +16,10 @@
 #import "THLSearchViewDataSource.h"
 #import "THLGuestEntity.h"
 
-#define kContactPickerViewHeight 65
-
-@interface THLGuestlistInvitationViewController()
-@property (nonatomic, strong) NSDictionary *guestDictionary;
-@end
-
+#define kContactPickerViewHeight 100.0
 
 @implementation THLGuestlistInvitationViewController
-@synthesize addedGuests;
-@synthesize allGuests;
+@synthesize existingGuests;
 @synthesize eventHandler;
 @synthesize dataSource = _dataSource;
 
@@ -37,23 +31,36 @@
     [self bindView];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+
+	/*Register for keyboard notifications*/
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - View Setup
 - (void)constructView {
 	_tableView = [self newTableView];
 	_contactPickerView = [self newContactPickerView];
+	_cancelButton = [self newCancelBarButtonItem];
+	_cancelButton.rac_command = [self newCancelCommand];
+	_commitButton = [self newCommitBarButtonItem];
+	_commitButton.rac_command = [self newCommitCommand];
+	_addedGuests = [NSMutableSet new];
 }
 
 - (void)layoutView {
 	[self.view addSubviews:@[_tableView, _contactPickerView]];
-	[_contactPickerView makeConstraints:^(MASConstraintMaker *make) {
-		make.top.left.right.insets(kTHLEdgeInsetsNone());
-		make.height.equalTo(kContactPickerViewHeight);
-	}];
-	[_tableView makeConstraints:^(MASConstraintMaker *make) {
-		make.top.equalTo(_contactPickerView.mas_bottom).insets(kTHLEdgeInsetsNone());
-		make.bottom.left.right.insets(kTHLEdgeInsetsNone());
-	}];
-
-	self.view.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:0.5];
+	self.navigationItem.leftBarButtonItem = _cancelButton;
+	self.navigationItem.rightBarButtonItem = _commitButton;
 }
 
 - (void)configureDataSource {
@@ -62,6 +69,7 @@
 
 	[_tableView registerClass:[THLContactTableViewCell class] forCellReuseIdentifier:[[THLContactTableViewCell class] identifier]];
 
+
 	_dataSource.cellCreationBlock = (^id(id object, UITableView* parentView, NSIndexPath *indexPath) {
 		if ([object isKindOfClass:[THLGuestEntity class]]) {
 			return [parentView dequeueReusableCellWithIdentifier:[THLContactTableViewCell identifier] forIndexPath:indexPath];
@@ -69,6 +77,7 @@
 		return nil;
 	});
 
+	WEAKSELF();
 	_dataSource.cellConfigureBlock = (^(id cell, id object, id parentView, NSIndexPath *indexPath){
 		if ([object isKindOfClass:[THLGuestEntity class]] && [cell isKindOfClass:[THLContactTableViewCell class]]) {
 			THLContactTableViewCell *tvCell = (THLContactTableViewCell *)cell;
@@ -78,10 +87,15 @@
 			tvCell.name = guest.fullName;
 			tvCell.phoneNumber = guest.phoneNumber;
 
-			if ([self.addedGuests containsObject:guest]) {
+			if ([WSELF.addedGuests containsObject:guest]) {
 				tvCell.accessoryType = UITableViewCellAccessoryCheckmark;
 			} else {
 				tvCell.accessoryType = UITableViewCellAccessoryNone;
+			}
+
+			if ([WSELF.existingGuests containsObject:guest]) {
+				tvCell.userInteractionEnabled = NO;
+				tvCell.alpha = 0.5;
 			}
 		}
 	});
@@ -93,18 +107,106 @@
 	}];
 }
 
-
 #pragma mark - Constructors
 - (UITableView *)newTableView {
-	UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+	CGRect tableFrame = CGRectMake(0, self.contactPickerView.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - self.contactPickerView.frame.size.height);
+	UITableView *tableView = [[UITableView alloc] initWithFrame:tableFrame style:UITableViewStyleGrouped];
+	tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 	tableView.delegate = self;
 	return tableView;
 }
 
 - (THContactPickerView *)newContactPickerView {
-	THContactPickerView *pickerView = [[THContactPickerView alloc] initWithFrame:CGRectZero];
+	THContactPickerView *pickerView = [[THContactPickerView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, kContactPickerViewHeight)];
+	pickerView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleWidth;
 	pickerView.delegate = self;
 	return pickerView;
+}
+
+- (UIBarButtonItem *)newCancelBarButtonItem {
+	UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:NULL];
+	return item;
+}
+
+- (UIBarButtonItem *)newCommitBarButtonItem {
+	UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Invite" style:UIBarButtonItemStylePlain target:self action:NULL];
+	return item;
+}
+
+- (RACCommand *)newCommitCommand {
+	WEAKSELF();
+	RACCommand *command = [[RACCommand alloc] initWithEnabled:[RACObserve(self, addedGuests) map:^id(NSSet *value) {
+		return @(value.count > 0);
+	}] signalBlock:^RACSignal *(id input) {
+		[WSELF.eventHandler viewDidCommitInvitations:WSELF];
+		return [RACSignal empty];
+	}];
+	return command;
+}
+
+- (RACCommand *)newCancelCommand {
+	WEAKSELF();
+	RACCommand *command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+		[WSELF.eventHandler viewDidCancelInvitations:WSELF];
+		return [RACSignal empty];
+	}];
+	return command;
+}
+#pragma mark - Layout
+- (void)viewDidLayoutSubviews {
+	[self adjustTableFrame];
+}
+
+- (void)adjustTableFrame {
+	CGFloat yOffset = self.contactPickerView.frame.origin.y + self.contactPickerView.frame.size.height;
+
+	CGRect tableFrame = CGRectMake(0, yOffset, self.view.frame.size.width, self.view.frame.size.height - yOffset);
+	self.tableView.frame = tableFrame;
+}
+
+- (void)adjustTableViewInsetTop:(CGFloat)topInset {
+	[self adjustTableViewInsetTop:topInset bottom:self.tableView.contentInset.bottom];
+}
+
+- (void)adjustTableViewInsetBottom:(CGFloat)bottomInset {
+	[self adjustTableViewInsetTop:self.tableView.contentInset.top bottom:bottomInset];
+}
+
+- (void)adjustTableViewInsetTop:(CGFloat)topInset bottom:(CGFloat)bottomInset {
+	self.tableView.contentInset = UIEdgeInsetsMake(topInset,
+												   self.tableView.contentInset.left,
+												   bottomInset,
+												   self.tableView.contentInset.right);
+	self.tableView.scrollIndicatorInsets = self.tableView.contentInset;
+}
+
+
+
+#pragma  mark - NSNotificationCenter
+- (void)keyboardDidShow:(NSNotification *)notification {
+	NSDictionary *info = [notification userInfo];
+	CGRect kbRect = [self.view convertRect:[[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue] fromView:self.view.window];
+	[self adjustTableViewInsetBottom:self.tableView.frame.origin.y + self.tableView.frame.size.height - kbRect.origin.y];
+}
+
+- (void)keyboardDidHide:(NSNotification *)notification {
+	NSDictionary *info = [notification userInfo];
+	CGRect kbRect = [self.view convertRect:[[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue] fromView:self.view.window];
+	[self adjustTableViewInsetBottom:self.tableView.frame.origin.y + self.tableView.frame.size.height - kbRect.origin.y];
+}
+
+#pragma mark - Adding/Removing
+- (void)addGuest:(THLGuestEntity *)guest {
+	[self willChangeValueForKey:@"addedGuests"];
+	[self.addedGuests addObject:guest];
+	[self didChangeValueForKey:@"addedGuests"];
+}
+
+- (void)removeGuest:(THLGuestEntity *)guest {
+	[self willChangeValueForKey:@"addedGuests"];
+	[self.addedGuests removeObject:guest];
+	[self didChangeValueForKey:@"addedGuests"];
+
 }
 
 #pragma mark - UITableViewDelegate
@@ -116,10 +218,12 @@
 
 	if (![self.addedGuests containsObject:guest]) {
 		[self.eventHandler view:self didAddGuest:guest];
+		[self addGuest:guest];
 		cell.accessoryType = UITableViewCellAccessoryCheckmark;
 		[_contactPickerView addContact:guest withName:guest.fullName];
 	} else {
 		[self.eventHandler view:self didRemoveGuest:guest];
+		[self removeGuest:guest];
 		cell.accessoryType = UITableViewCellAccessoryNone;
 		[_contactPickerView removeContact:guest];
 	}
@@ -134,13 +238,14 @@
 }
 
 - (void)contactPickerDidResize:(THContactPickerView *)contactPickerView {
-
+	CGRect frame = self.tableView.frame;
+	frame.origin.y = contactPickerView.frame.size.height + contactPickerView.frame.origin.y;
+	self.tableView.frame = frame;
 }
 
 - (void)contactPickerDidRemoveContact:(id)contact {
-	NSInteger index = [self.allGuests indexOfObject:contact];
-	UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
-	cell.accessoryType = UITableViewCellAccessoryNone;
+	[self removeGuest:contact];
+	[_tableView reloadData];
 }
 
 - (BOOL)contactPickerTextFieldShouldReturn:(UITextField *)textField {

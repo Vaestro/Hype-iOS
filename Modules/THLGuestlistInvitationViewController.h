@@ -12,6 +12,7 @@
 @class THContactPickerView;
 @protocol THLGuestlistInvitationView;
 @protocol THContactPickerDelegate;
+@class RACCommand;
 
 @interface THLGuestlistInvitationViewController : UIViewController
 <
@@ -21,5 +22,9 @@ THContactPickerDelegate
 >
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) THContactPickerView *contactPickerView;
-
+@property (nonatomic) BOOL newAdditions;
+@property (nonatomic, strong) NSMutableSet *addedGuests;
+@property (nonatomic, strong) UIBarButtonItem *cancelButton;
+@property (nonatomic, strong) UIBarButtonItem *commitButton;
+@property (nonatomic, strong) RACCommand *commitCommand;
 @end

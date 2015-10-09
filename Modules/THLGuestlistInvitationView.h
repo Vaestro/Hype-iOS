@@ -10,12 +10,10 @@
 
 @class THLGuestEntity;
 @class THLSearchViewDataSource;
-
 @protocol THLGuestlistInvitationViewEventHandler;
 
 @protocol THLGuestlistInvitationView <NSObject>
 @property (nonatomic, weak) id<THLGuestlistInvitationViewEventHandler> eventHandler;
-@property (nonatomic, strong) NSMutableArray<THLGuestEntity *> *addedGuests;
-@property (nonatomic, strong) NSArray<THLGuestEntity *> *allGuests;
+@property (nonatomic, strong) NSSet<THLGuestEntity *> *existingGuests;
 @property (nonatomic, strong) THLSearchViewDataSource *dataSource;
 @end
