@@ -10,6 +10,7 @@
 
 //Utilities
 #import "THLDependencyManager.h"
+#import "THLSessionService.h"
 
 //Wireframes
 #import "THLLoginWireframe.h"
@@ -32,19 +33,26 @@ THLGuestlistInvitationModuleDelegate
 >
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) id currentWireframe;
+@property (nonatomic, strong) THLSessionService *sessionService;
 @end
 
 @implementation THLMasterWireframe
 - (instancetype)initWithDependencyManager:(THLDependencyManager *)dependencyManager {
 	if (self = [super init]) {
-		_dependencyManager = dependencyManager;
+        _dependencyManager = dependencyManager;
 	}
 	return self;
 }
 
 - (void)presentAppInWindow:(UIWindow *)window {
 	_window = window;
-	[self presentLoginInterface];
+    
+    if (![self.sessionService isUserCached] || ![self.sessionService checkUserSessionValidity]) {
+        [self presentLoginInterface];
+    }else {
+        [self presentEventFlow];
+    }
+	
 }
 
 #pragma mark - Routing
@@ -80,4 +88,5 @@ THLGuestlistInvitationModuleDelegate
 - (void)promotionSelectionModule:(id<THLPromotionSelectionModuleInterface>)module didSelectPromotion:(THLPromotionEntity *)promotionEntity {
 	
 }
+
 @end

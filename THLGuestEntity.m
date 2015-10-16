@@ -8,15 +8,16 @@
 
 #import "THLGuestEntity.h"
 #import "APContact.h"
+#import "APName.h"
 #import "THLUserEntity.h"
 
 @implementation THLGuestEntity
 @synthesize objectId = _objectId;
 
 - (instancetype)initWithContact:(APContact *)contact {
-	if (self = [super init]) {
-		_firstName = [contact.firstName copy];
-		_lastName = [contact.lastName copy];
+	if (self = [super init]) {   
+		_firstName = [contact.name.firstName copy];
+		_lastName = [contact.name.lastName copy];
 		_phoneNumber = [[contact.phones first] copy];
 		_type = THLGuestEntityTypeLocalContact;
 		_objectId = [NSString stringWithFormat:@"contact%lu", (unsigned long)self.phoneNumber.hash];
