@@ -76,7 +76,14 @@
 }
 
 - (void)bindView {
-	RAC(self.promotionInfoView, promotionInfo) = RACObserve(self, promoInfo);
+	RAC(self.promotionInfoView, promotionInfo) = [RACObserve(self, promoInfo) map:^id(NSString *value) {
+		if (value.length) {
+			return value;
+		} else {
+			return @"No info";
+		}
+	}];
+
 	RAC(self.promotionInfoView, promoImageURL) = RACObserve(self, promoImageURL);
 
 	RAC(self.locationInfoView, locationInfo) = RACObserve(self, locationInfo);
