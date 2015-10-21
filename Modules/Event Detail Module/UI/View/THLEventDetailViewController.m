@@ -35,89 +35,85 @@
 @synthesize locationPlacemark;
 
 - (void)viewDidLoad {
-	[super viewDidLoad];
-	[self constructView];
-	[self layoutView];
-	[self bindView];
-	self.edgesForExtendedLayout = UIRectEdgeNone;
+    [super viewDidLoad];
+    [self constructView];
+    [self layoutView];
+    [self bindView];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:animated];
+    [super viewWillAppear:animated];
 }
 
 - (void)constructView {
-	_scrollView = [self newScrollView];
-	_promotionInfoView = [self newPromotionInfoView];
-	_locationInfoView = [self newLocationInfoView];
-	_mapView = [self newMapView];
+    _scrollView = [self newScrollView];
+    _promotionInfoView = [self newPromotionInfoView];
+    _locationInfoView = [self newLocationInfoView];
+    _mapView = [self newMapView];
 }
 
 - (void)layoutView {
-	self.view.nuiClass = kTHLNUIBackgroundView;
-
-	[self.view addSubviews:@[_scrollView]];
-	[_scrollView makeConstraints:^(MASConstraintMaker *make) {
-		make.left.right.insets(kTHLEdgeInsetsHigh());
-		make.top.bottom.insets(kTHLEdgeInsetsNone());
-	}];
-
-	for (UIView *view in @[_promotionInfoView,
-						   _locationInfoView,
-						   _mapView]) {
-		[_scrollView.stackView addSubview:view
-					  withPrecedingMargin:2*kTHLPaddingHigh()
-							   sideMargin:2*kTHLPaddingHigh()];
-//		[view makeConstraints:^(MASConstraintMaker *make) {
-//			make.left.right.insets(kTHLEdgeInsetsHigh());
-//		}];
-//		prevView = view;
-	}
+    self.view.nuiClass = kTHLNUIBackgroundView;
+    
+    [self.view addSubviews:@[_scrollView]];
+    [_scrollView makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.insets(kTHLEdgeInsetsHigh());
+        make.top.bottom.insets(kTHLEdgeInsetsHigh());
+    }];
+    
+    for (UIView *view in @[_promotionInfoView,
+                           _locationInfoView,
+                           _mapView]) {
+        [_scrollView.stackView addSubview:view
+                      withPrecedingMargin:2*kTHLPaddingHigh()
+                               sideMargin:2*kTHLPaddingHigh()];
+        //		[view makeConstraints:^(MASConstraintMaker *make) {
+        //			make.left.right.insets(kTHLEdgeInsetsHigh());
+        //		}];
+        //		prevView = view;
+    }
 }
 
 - (void)bindView {
-	RAC(self.promotionInfoView, promotionInfo) = [RACObserve(self, promoInfo) map:^id(NSString *value) {
-		if (value.length) {
-			return value;
-		} else {
-			return @"No info";
-		}
-	}];
-
-	RAC(self.promotionInfoView, promoImageURL) = RACObserve(self, promoImageURL);
-
-	RAC(self.locationInfoView, locationInfo) = RACObserve(self, locationInfo);
-
-	RAC(self.mapView, locationName) = RACObserve(self, locationName);
-	RAC(self.mapView, locationAddress) = RACObserve(self, locationAddress);
-	RAC(self.mapView, locationPlacemark) = RACObserve(self, locationPlacemark);
+    RAC(self.promotionInfoView, promotionInfo) = RACObserve(self, promoInfo);
+    RAC(self.promotionInfoView, promoImageURL) = RACObserve(self, promoImageURL);
+    
+    RAC(self.locationInfoView, locationInfo) = RACObserve(self, locationInfo);
+    
+    RAC(self.mapView, locationName) = RACObserve(self, locationName);
+    RAC(self.mapView, locationAddress) = RACObserve(self, locationAddress);
+    RAC(self.mapView, locationPlacemark) = RACObserve(self, locationPlacemark);
 }
 
 #pragma mark - Constructors
 - (ORStackScrollView *)newScrollView {
-	ORStackScrollView *scrollView = [ORStackScrollView new];
-	scrollView.stackView.lastMarginHeight = kTHLPaddingHigh();
-	return scrollView;
+    ORStackScrollView *scrollView = [ORStackScrollView new];
+    scrollView.stackView.lastMarginHeight = kTHLPaddingHigh();
+    return scrollView;
 }
 
 - (THLEventDetailsLocationInfoView *)newLocationInfoView {
-	THLEventDetailsLocationInfoView *infoView = [THLEventDetailsLocationInfoView new];
-	infoView.title = NSLocalizedString(@"VENUE", nil);
-	infoView.translatesAutoresizingMaskIntoConstraints = NO;
-	return infoView;
+    THLEventDetailsLocationInfoView *infoView = [THLEventDetailsLocationInfoView new];
+    infoView.title = NSLocalizedString(@"VENUE DESCRIPTION", nil);
+    infoView.translatesAutoresizingMaskIntoConstraints = NO;
+    infoView.dividerColor = [UIColor whiteColor];
+    return infoView;
 }
 
 - (THLEventDetailsMapView *)newMapView {
-	THLEventDetailsMapView *mapView = [THLEventDetailsMapView new];
-	mapView.title = NSLocalizedString(@"ADDRESS", nil);
-	mapView.translatesAutoresizingMaskIntoConstraints = NO;
-	return mapView;
+    THLEventDetailsMapView *mapView = [THLEventDetailsMapView new];
+    mapView.title = NSLocalizedString(@"ADDRESS", nil);
+    mapView.translatesAutoresizingMaskIntoConstraints = NO;
+    mapView.dividerColor = [UIColor whiteColor];
+    return mapView;
 }
 
 - (THLEventDetailsPromotionInfoView *)newPromotionInfoView {
-	THLEventDetailsPromotionInfoView *promoInfoView = [THLEventDetailsPromotionInfoView new];
-	promoInfoView.title = NSLocalizedString(@"DETAILS", nil);
-	promoInfoView.translatesAutoresizingMaskIntoConstraints = NO;
-	return promoInfoView;
+    THLEventDetailsPromotionInfoView *promoInfoView = [THLEventDetailsPromotionInfoView new];
+    promoInfoView.title = NSLocalizedString(@"EVENT DETAILS", nil);
+    promoInfoView.translatesAutoresizingMaskIntoConstraints = NO;
+    promoInfoView.dividerColor = [UIColor whiteColor];
+    return promoInfoView;
 }
 @end

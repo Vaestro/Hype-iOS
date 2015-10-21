@@ -18,6 +18,7 @@ BoldTitle {
 font-name: @primaryBoldFontName;
 font-color: @primaryFontColor;
 font-size: 24;
+text-transform: uppercase;
 }
 
 NavBarTitle {
@@ -29,13 +30,15 @@ font-size: 20;
 RegularTitle {
 font-name: @primaryMediumFontName;
 font-color: @primaryFontColor;
-font-size: 18;
+font-size: 20;
+text-transform: uppercase;
 }
 
 DetailTitle {
-font-name: @secondaryRegularFontName;
+font-name: @primaryRegularFontName;
 font-color: @primaryFontColor;
 font-size: 16;
+text-transform: uppercase;
 }
 
 ButtonTitle {

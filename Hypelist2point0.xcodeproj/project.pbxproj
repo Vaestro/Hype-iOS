@@ -125,6 +125,7 @@
 		21E402EE1BBF9A8B001D0C2C /* THLGuestEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E402ED1BBF9A8B001D0C2C /* THLGuestEntity.m */; settings = {ASSET_TAGS = (); }; };
 		21EED1001BB5F842001325A7 /* THLEventFlowWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 21EED0FF1BB5F842001325A7 /* THLEventFlowWireframe.m */; settings = {ASSET_TAGS = (); }; };
 		76FA20541BCF854000BB480A /* THLSessionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 76FA20531BCF854000BB480A /* THLSessionService.m */; settings = {ASSET_TAGS = (); }; };
+		794208281BD82641009B86FA /* UIView+DimView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794208271BD82641009B86FA /* UIView+DimView.m */; settings = {ASSET_TAGS = (); }; };
 		B771256D2B58EBFF817CDC12 /* libPods-Hypelist2point0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D059D2904940E14B1AF40EE3 /* libPods-Hypelist2point0.a */; };
 		CBE5403C8B7732B36D5ECB5E /* THLViewDataSourceGrouping.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE54FC98A366F3761F89F63 /* THLViewDataSourceGrouping.m */; settings = {ASSET_TAGS = (); }; };
 		CBE54720F63BA2DE2136B454 /* THLViewDataSource+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE545A9A3C66339456E0A06 /* THLViewDataSource+Factory.m */; settings = {ASSET_TAGS = (); }; };
@@ -402,6 +403,8 @@
 		76FA20511BCF851400BB480A /* THLSessionServiceInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLSessionServiceInterface.h; sourceTree = "<group>"; };
 		76FA20521BCF854000BB480A /* THLSessionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLSessionService.h; sourceTree = "<group>"; };
 		76FA20531BCF854000BB480A /* THLSessionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLSessionService.m; sourceTree = "<group>"; };
+		794208261BD82641009B86FA /* UIView+DimView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DimView.h"; sourceTree = "<group>"; };
+		794208271BD82641009B86FA /* UIView+DimView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DimView.m"; sourceTree = "<group>"; };
 		BA51F1731F25286C41A13B20 /* Pods-Hypelist2point0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hypelist2point0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hypelist2point0/Pods-Hypelist2point0.debug.xcconfig"; sourceTree = "<group>"; };
 		C6B634BC51A4BB10D6261492 /* Pods-Hypelist2point0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hypelist2point0.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hypelist2point0/Pods-Hypelist2point0.release.xcconfig"; sourceTree = "<group>"; };
 		CB878AA95A320C00B4227BCE /* Pods-Hypelist2point0Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hypelist2point0Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hypelist2point0Tests/Pods-Hypelist2point0Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -570,6 +573,8 @@
 				211005D41B8A7D2800A540C6 /* NSDate+Utilities.h */,
 				211005CE1B8A7D0200A540C6 /* NSDate+Hypelist.h */,
 				211005CF1B8A7D0200A540C6 /* NSDate+Hypelist.m */,
+				794208261BD82641009B86FA /* UIView+DimView.h */,
+				794208271BD82641009B86FA /* UIView+DimView.m */,
 			);
 			name = Categories;
 			path = Components/Categories;
@@ -2003,6 +2008,7 @@
 				21B9894A1BC05AF500428B6A /* THLGuestlistInvitationViewController.m in Sources */,
 				215A429A1BAA25B000D03C35 /* THLFacebookPicturePresenter.m in Sources */,
 				21E402D91BBF80E6001D0C2C /* THLGuestlist.m in Sources */,
+				794208281BD82641009B86FA /* UIView+DimView.m in Sources */,
 				211D0BBD1B8CEEDE0073AFDD /* THLEventDetailInteractor.m in Sources */,
 				211D0BB01B8CEE800073AFDD /* THLEventDetailPresenter.m in Sources */,
 				21E402DC1BBF8155001D0C2C /* THLGuestlistInvite.m in Sources */,

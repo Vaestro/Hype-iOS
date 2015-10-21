@@ -114,6 +114,6 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-	return CGSizeMake(ViewWidth(collectionView), 200);
+	return CGSizeMake(ViewWidth(collectionView), DiscoveryCellHeight(ViewWidth(collectionView)));
 }
 @end

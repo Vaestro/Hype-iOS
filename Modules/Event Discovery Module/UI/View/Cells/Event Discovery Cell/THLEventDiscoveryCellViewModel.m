@@ -12,18 +12,18 @@
 
 @implementation THLEventDiscoveryCellViewModel
 - (instancetype)initWithEvent:(THLEventEntity *)eventEntity {
-	if (self = [super init]) {
-		_eventEntity = eventEntity;
-	}
-	return self;
+    if (self = [super init]) {
+        _eventEntity = eventEntity;
+    }
+    return self;
 }
 
 - (void)configureView:(id<THLEventDiscoveryCellView>)cellView {
-	[cellView setLocationName:_eventEntity.location.name];
-	[cellView setEventName:_eventEntity.title];
-	[cellView setLocationNeighborhood:_eventEntity.location.neighborhood];
-	[cellView setTime:_eventEntity.date.thl_timeString];
-	[cellView setImageURL:_eventEntity.location.imageURL];
+    [cellView setLocationName:_eventEntity.location.name];
+    [cellView setEventName:_eventEntity.title];
+    [cellView setLocationNeighborhood:_eventEntity.location.neighborhood];
+    [cellView setTime:_eventEntity.date.thl_weekdayString];
+    [cellView setImageURL:_eventEntity.location.imageURL];
 }
 
 @end

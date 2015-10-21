@@ -41,9 +41,17 @@ static NSString *const kTHLNUIDetailTitle = @"DetailTitle";
 static NSString *const kTHLNUIButtonTitle = @"ButtonTitle";
 static NSString *const kTHLNUISectionTitle = @"SectionTitle";
 static NSString *const kTHLNUIBackgroundView = @"BackgroundView";
+static NSString *const kTHLNUITableCell = @"TableCell";
+static NSString *const kTHLNUITableCellDetail = @"TableCellDetail";
 
-#define kTHLUndefColor [UIColor blueColor];
-#define kTHLUndefTextColor [UIColor whiteColor];
+#define kTHLNUIAccentColor [UIColor colorWithRed:0.169 green:0.769 blue:0.592 alpha:1] /*#2bc497*/
+#define kTHLNUIPendingColor [UIColor colorWithRed:0.984 green:0.89 blue:0.22 alpha:1] /*#fbe338*/
+#define kTHLNUIRedColor [UIColor colorWithRed:0.969 green:0.114 blue:0.333 alpha:1] /*#f71d55*/
+#define kTHLNUIBlueColor [UIColor colorWithRed:0.29 green:0.565 blue:0.886 alpha:1] /*#4a90e2*/
+#define kTHLNUIPrimaryBackgroundColor [UIColor colorWithRed:0 green:0 blue:0 alpha:1] /*#000000*/
+#define kTHLNUISecondaryBackgroundColor [UIColor colorWithRed:0.102 green:0.122 blue:0.145 alpha:1] /*#1a1f25*/
+#define kTHLNUIPrimaryFontColor [UIColor colorWithRed:1 green:1 blue:1 alpha:1] /*#ffffff*/
+#define kTHLNUIGrayFontColor [UIColor colorWithRed:1 green:1 blue:1 alpha:0.7] /*#ffffff*/
 
 typedef NS_ENUM(NSInteger, THLUnit) {
 	THLUnitNone = 0,

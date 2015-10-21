@@ -20,62 +20,63 @@ static CGFloat MAPVIEW_METERS = 1000;
 @implementation THLEventDetailsMapView
 
 - (void)constructView {
-	[super constructView];
-	_mapView = [self newMapView];
-	_textView = [self newTextView];
+    [super constructView];
+    _mapView = [self newMapView];
+    _textView = [self newTextView];
 }
 
 - (void)layoutView {
-	[super layoutView];
-	[self.contentView addSubviews:@[_mapView,
-									_textView]];
-
-	[_mapView makeConstraints:^(MASConstraintMaker *make) {
-		make.top.left.right.insets(kTHLEdgeInsetsNone());
-		make.height.equalTo(_mapView.mas_width).dividedBy(kTHLGoldenRatio);
-	}];
-
-	[_textView makeConstraints:^(MASConstraintMaker *make) {
-		make.left.right.bottom.insets(kTHLEdgeInsetsNone());
-		make.top.equalTo(_mapView.mas_bottom).insets(kTHLEdgeInsetsLow());
-	}];
+    [super layoutView];
+    [self.contentView addSubviews:@[_mapView,
+                                    _textView]];
+    
+    [_mapView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(kTHLEdgeInsetsNone());
+        make.left.right.equalTo(kTHLEdgeInsetsLow());
+        make.height.equalTo(_mapView.mas_width).dividedBy(kTHLGoldenRatio);
+    }];
+    
+    [_textView makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.insets(kTHLEdgeInsetsNone());
+        make.top.equalTo(_mapView.mas_bottom).insets(kTHLEdgeInsetsLow());
+    }];
 }
 
 - (void)bindView {
-	[super bindView];
-
-	[RACObserve(self, locationAddress) subscribeNext:^(id x) {
-
-	}];
-
-	RAC(self.textView, text) = RACObserve(self, locationAddress);
-
-	[[RACObserve(self, locationPlacemark) filter:^BOOL(id value) {
-		return value != nil;
-	}] subscribeNext:^(id x) {
-		[self displayPlacemark:(CLPlacemark *)x];
-	}];
+    [super bindView];
+    
+    [RACObserve(self, locationAddress) subscribeNext:^(id x) {
+        
+    }];
+    
+    RAC(self.textView, text) = RACObserve(self, locationAddress);
+    
+    [[RACObserve(self, locationPlacemark) filter:^BOOL(id value) {
+        return value != nil;
+    }] subscribeNext:^(id x) {
+        [self displayPlacemark:(CLPlacemark *)x];
+    }];
 }
 
 - (void)displayPlacemark:(CLPlacemark *)placemark {
-	MKPlacemark *locationPlacemark = [[MKPlacemark alloc] initWithPlacemark:placemark];
-	[_mapView addAnnotation:locationPlacemark];
-	[_mapView setRegion:MKCoordinateRegionMakeWithDistance(locationPlacemark.coordinate, MAPVIEW_METERS, MAPVIEW_METERS) animated:NO];
+    MKPlacemark *locationPlacemark = [[MKPlacemark alloc] initWithPlacemark:placemark];
+    [_mapView addAnnotation:locationPlacemark];
+    [_mapView setRegion:MKCoordinateRegionMakeWithDistance(locationPlacemark.coordinate, MAPVIEW_METERS, MAPVIEW_METERS) animated:NO];
 }
 
 #pragma mark - Constructors
 - (MKMapView *)newMapView {
-	MKMapView *mapView = [[MKMapView alloc] init];
-	mapView.clipsToBounds = YES;
-	mapView.userInteractionEnabled = NO;
-	return mapView;
+    MKMapView *mapView = [[MKMapView alloc] init];
+    mapView.clipsToBounds = YES;
+    mapView.userInteractionEnabled = NO;
+    return mapView;
 }
 
 - (UITextView *)newTextView {
-	UITextView *textView = THLNUITextView(kTHLNUIDetailTitle);
-	[textView setScrollEnabled:NO];
-	textView.editable = NO;
-	textView.dataDetectorTypes = UIDataDetectorTypeAll;
-	return textView;
+    UITextView *textView = THLNUITextView(kTHLNUIDetailTitle);
+    [textView setScrollEnabled:NO];
+    textView.editable = NO;
+    textView.dataDetectorTypes = UIDataDetectorTypeAll;
+    return textView;
 }
 @end

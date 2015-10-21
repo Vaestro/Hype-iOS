@@ -8,6 +8,8 @@
 
 #import "THLEventNavigationBar.h"
 #import "THLAppearanceConstants.h"
+#import "UIView+DimView.h"
+
 
 @interface THLEventNavigationBar()
 @property (nonatomic, strong) UIButton *dismissButton;
@@ -24,104 +26,105 @@ static CGRect const kTHLEventNavigationBarDismissButtonFrame = {{5,6},{37,30}};
 
 @implementation THLEventNavigationBar
 - (instancetype)initWithFrame:(CGRect)frame {
-	if (self = [super initWithFrame:frame]) {
-		[self constructView];
-		[self layoutView];
-		[self bindView];
-	}
-	return self;
+    if (self = [super initWithFrame:frame]) {
+        [self constructView];
+        [self layoutView];
+        [self bindView];
+    }
+    return self;
 }
 
 - (void)constructView {
-	_dismissButton = [self newDismissButton];
-	_titleLabel = [self newTitleLabel];
-	_subtitleLabel = [self newSubtitleLabel];
-	_dateLabel = [self newDateLabel];
-	_imageView = [self newImageView];
+    _dismissButton = [self newDismissButton];
+    _titleLabel = [self newTitleLabel];
+    _subtitleLabel = [self newSubtitleLabel];
+    _dateLabel = [self newDateLabel];
+    _imageView = [self newImageView];
 }
 
 - (void)layoutView {
-	[self addSubviews:@[_imageView, _dismissButton, _dateLabel]];
-
-	[_imageView makeConstraints:^(MASConstraintMaker *make) {
-		make.left.right.bottom.insets(UIEdgeInsetsZero);
-		make.top.offset(-20);
-	}];
-
-	[_dateLabel makeConstraints:^(MASConstraintMaker *make) {
-		make.bottom.right.insets(kTHLEdgeInsetsHigh());
-		make.width.lessThanOrEqualTo(kTHLEventNavigationBarDateLabelMaxWidth);
-	}];
-
-	UIView *titleContainerView = [UIView new];
-	[titleContainerView addSubviews:@[_titleLabel,
-									  _subtitleLabel]];
-
-	[_titleLabel makeConstraints:^(MASConstraintMaker *make) {
-		make.left.right.top.insets(kTHLEdgeInsetsNone());
-		make.bottom.equalTo(_subtitleLabel.mas_top);
-	}];
-
-	[_subtitleLabel makeConstraints:^(MASConstraintMaker *make) {
-		make.left.bottom.insets(kTHLEdgeInsetsNone());
-	}];
-
-	[self addSubview:titleContainerView];
-	[titleContainerView makeConstraints:^(MASConstraintMaker *make) {
-		make.left.bottom.insets(kTHLEdgeInsetsHigh());
-		make.right.lessThanOrEqualTo(_dateLabel.mas_left);
-		make.top.greaterThanOrEqualTo(_dismissButton.mas_bottom).insets(kTHLEdgeInsetsHigh());
-	}];
+    [self addSubviews:@[_imageView, _dismissButton, _dateLabel]];
+    
+    [_imageView makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.insets(UIEdgeInsetsZero);
+        make.top.offset(-20);
+    }];
+    
+    [_dateLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.right.insets(kTHLEdgeInsetsHigh());
+        make.width.lessThanOrEqualTo(kTHLEventNavigationBarDateLabelMaxWidth);
+    }];
+    
+    UIView *titleContainerView = [UIView new];
+    [titleContainerView addSubviews:@[_titleLabel,
+                                      _subtitleLabel]];
+    
+    [_titleLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.insets(kTHLEdgeInsetsNone());
+        make.bottom.equalTo(_subtitleLabel.mas_top);
+    }];
+    
+    [_subtitleLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.left.bottom.insets(kTHLEdgeInsetsNone());
+    }];
+    
+    [self addSubview:titleContainerView];
+    [titleContainerView makeConstraints:^(MASConstraintMaker *make) {
+        make.left.bottom.insets(kTHLEdgeInsetsHigh());
+        make.right.lessThanOrEqualTo(_dateLabel.mas_left);
+        make.top.greaterThanOrEqualTo(_dismissButton.mas_bottom).insets(kTHLEdgeInsetsHigh());
+    }];
 }
 
 - (void)bindView {
-	RAC(self.titleLabel, text, @"") = RACObserve(self, titleText);
-	RAC(self.subtitleLabel, text, @"") = RACObserve(self, subtitleText);
-	RAC(self.dateLabel, text, @"") = RACObserve(self, dateText);
-	RAC(self.dismissButton, rac_command) = RACObserve(self, dismissCommand);
-	
-	RACSignal *imageURLSignal = [RACObserve(self, locationImageURL) filter:^BOOL(NSURL *url) {
-		return url.isValid;
-	}];
-
-	[imageURLSignal subscribeNext:^(NSURL *url) {
-		[_imageView sd_setImageWithURL:url];
-	}];
+    RAC(self.titleLabel, text, @"") = RACObserve(self, titleText);
+    RAC(self.subtitleLabel, text, @"") = RACObserve(self, subtitleText);
+    RAC(self.dateLabel, text, @"") = RACObserve(self, dateText);
+    RAC(self.dismissButton, rac_command) = RACObserve(self, dismissCommand);
+    
+    RACSignal *imageURLSignal = [RACObserve(self, locationImageURL) filter:^BOOL(NSURL *url) {
+        return url.isValid;
+    }];
+    
+    [imageURLSignal subscribeNext:^(NSURL *url) {
+        [_imageView sd_setImageWithURL:url];
+    }];
 }
 
 - (CGSize)sizeThatFits:(CGSize)size {
-	return CGSizeMake([super sizeThatFits:size].width, kTHLEventNavigationBarHeight);
+    return CGSizeMake([super sizeThatFits:size].width, kTHLEventNavigationBarHeight);
 }
 
 #pragma mark - Constructors
 - (UILabel *)newTitleLabel {
-	UILabel *label = THLNUILabel(kTHLNUIBoldTitle);
-	return label;
+    UILabel *label = THLNUILabel(kTHLNUIBoldTitle);
+    return label;
 }
 
 - (UILabel *)newSubtitleLabel {
-	UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
-	label.alpha = kTHLEventNavigationBarSublabelAlpha;
-	return label;
+    UILabel *label = THLNUILabel(kTHLNUIRegularTitle);
+    label.alpha = kTHLEventNavigationBarSublabelAlpha;
+    return label;
 }
 
 - (UILabel *)newDateLabel {
-	UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
-	label.alpha = kTHLEventNavigationBarSublabelAlpha;
-	return label;
+    UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
+    label.alpha = kTHLEventNavigationBarSublabelAlpha;
+    return label;
 }
 
 - (UIImageView *)newImageView {
-	UIImageView *imageView = [UIImageView new];
-	imageView.clipsToBounds = YES;
-	imageView.contentMode = UIViewContentModeScaleAspectFill;
-	return imageView;
+    UIImageView *imageView = [UIImageView new];
+    imageView.clipsToBounds = YES;
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    [imageView dimView];
+    return imageView;
 }
 
 - (UIButton *)newDismissButton {
-	UIButton *button = [[UIButton alloc]initWithFrame:kTHLEventNavigationBarDismissButtonFrame];
-	[button setImage:[UIImage imageNamed:@"Cancel X Icon"] forState:UIControlStateNormal];
-	return button;
+    UIButton *button = [[UIButton alloc]initWithFrame:kTHLEventNavigationBarDismissButtonFrame];
+    [button setImage:[UIImage imageNamed:@"Cancel X Icon"] forState:UIControlStateNormal];
+    return button;
 }
 
 @end

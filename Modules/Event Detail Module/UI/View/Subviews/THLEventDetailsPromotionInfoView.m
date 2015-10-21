@@ -19,63 +19,65 @@ static CGFloat const kTHLEventDetailsPromotionInfoViewImageViewHeight = 92;
 @implementation THLEventDetailsPromotionInfoView
 
 - (void)constructView {
-	[super constructView];
-	_textView = [self newTextView];
-	_imageView = [self newImageView];
+    [super constructView];
+    _textView = [self newTextView];
+    _imageView = [self newImageView];
 }
 
 - (void)layoutView {
-	[super layoutView];
-	[self.contentView addSubviews:@[_textView,
-									_imageView]];
-
-	[_textView makeConstraints:^(MASConstraintMaker *make) {
-		make.top.left.right.equalTo(kTHLEdgeInsetsNone());
-	}];
-
-	[_imageView makeConstraints:^(MASConstraintMaker *make) {
-		make.bottom.left.right.equalTo(kTHLEdgeInsetsNone());
-		make.top.equalTo(_textView.mas_bottom).insets(kTHLEdgeInsetsHigh());
-		make.height.equalTo(kTHLEventDetailsPromotionInfoViewImageViewHeight);
-	}];
+    [super layoutView];
+    [self.contentView addSubviews:@[_textView,
+                                    _imageView]];
+    
+    [_textView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(kTHLEdgeInsetsNone());
+        make.left.right.equalTo(kTHLEdgeInsetsLow());
+    }];
+    
+    [_imageView makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.left.right.equalTo(kTHLEdgeInsetsNone());
+        make.top.equalTo(_textView.mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.height.equalTo(kTHLEventDetailsPromotionInfoViewImageViewHeight);
+    }];
 }
 
 - (void)bindView {
-	[super bindView];
-	RAC(self.textView, text) = RACObserve(self, promotionInfo);
-
-	[[RACObserve(self, promoImageURL) filter:^BOOL(NSURL *url) {
-		return [url isValid];
-	}] subscribeNext:^(NSURL *url) {
-		[_imageView sd_setImageWithURL:url];
-	}];
-
-	[RACObserve(self.promoImageURL, isValid) subscribeNext:^(id x) {
-		[self updateConstraints];
-	}];
+    [super bindView];
+    RAC(self.textView, text) = RACObserve(self, promotionInfo);
+    
+    [[RACObserve(self, promoImageURL) filter:^BOOL(NSURL *url) {
+        return [url isValid];
+    }] subscribeNext:^(NSURL *url) {
+        [_imageView sd_setImageWithURL:url];
+    }];
+    
+    [RACObserve(self.promoImageURL, isValid) subscribeNext:^(id x) {
+        [self updateConstraints];
+    }];
 }
 
 - (void)updateConstraints {
-	[super updateConstraints];
-	
-	__block CGFloat height = (self.promoImageURL.isValid) ? kTHLEventDetailsPromotionInfoViewImageViewHeight : 0;
-	[_imageView updateConstraints:^(MASConstraintMaker *make) {
-		make.height.equalTo(height);
-	}];
+    [super updateConstraints];
+    
+    __block CGFloat height = (self.promoImageURL.isValid) ? kTHLEventDetailsPromotionInfoViewImageViewHeight : 0;
+    [_imageView updateConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(height);
+    }];
 }
 
 #pragma mark - Constructors
 - (UITextView *)newTextView {
-	UITextView *textView = THLNUITextView(kTHLNUIDetailTitle);
-	[textView setScrollEnabled:NO];
-	return textView;
+    UITextView *textView = THLNUITextView(kTHLNUIDetailTitle);
+    [textView setScrollEnabled:NO];
+    [textView setEditable:NO];
+    return textView;
 }
 
 - (UIImageView *)newImageView {
-	UIImageView *imageView = [UIImageView new];
-	imageView.contentMode = UIViewContentModeScaleAspectFill;
-	imageView.clipsToBounds = YES;
-	return imageView;
+    UIImageView *imageView = [UIImageView new];
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    imageView.clipsToBounds = YES;
+    return imageView;
 }
 
 @end

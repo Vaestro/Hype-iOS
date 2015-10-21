@@ -43,8 +43,8 @@
 #pragma mark - Construction
 - (DGTAppearance *)newDigitsAppearance {
 	DGTAppearance *appearance = [DGTAppearance new];
-	appearance.backgroundColor = kTHLUndefColor;
-	appearance.accentColor = kTHLUndefTextColor;
+	appearance.backgroundColor = kTHLNUIBlueColor;
+	appearance.accentColor = kTHLNUIAccentColor;
 	appearance.logoImage = [UIImage imageNamed:@"HypeList Icon"];
 	return appearance;
 }

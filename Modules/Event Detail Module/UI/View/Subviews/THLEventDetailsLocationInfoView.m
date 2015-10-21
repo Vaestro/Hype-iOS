@@ -15,29 +15,32 @@
 
 @implementation THLEventDetailsLocationInfoView
 - (void)constructView {
-	[super constructView];
-	_textView = [self newTextView];
+    [super constructView];
+    _textView = [self newTextView];
 }
 
 - (void)layoutView {
-	[super layoutView];
-	[self.contentView addSubviews:@[_textView]];
-
-	[_textView makeConstraints:^(MASConstraintMaker *make) {
-		make.edges.insets(kTHLEdgeInsetsNone());
-	}];
+    [super layoutView];
+    [self.contentView addSubviews:@[_textView]];
+    
+    [_textView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(kTHLEdgeInsetsNone());
+        make.left.right.equalTo(kTHLEdgeInsetsLow());
+        make.bottom.equalTo(kTHLEdgeInsetsHigh());
+    }];
 }
 
 - (void)bindView {
-	[super bindView];
-
-	RAC(self.textView, text) = RACObserve(self, locationInfo);
+    [super bindView];
+    
+    RAC(self.textView, text) = RACObserve(self, locationInfo);
 }
 
 #pragma mark - Constructors
 - (UITextView *)newTextView {
-	UITextView *textView = THLNUITextView(kTHLNUIDetailTitle);
-	[textView setScrollEnabled:NO];
-	return textView;
+    UITextView *textView = THLNUITextView(kTHLNUIDetailTitle);
+    [textView setScrollEnabled:NO];
+    [textView setSelectable:NO];
+    return textView;
 }
 @end

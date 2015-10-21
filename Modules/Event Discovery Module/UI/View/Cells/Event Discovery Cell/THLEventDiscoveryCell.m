@@ -8,6 +8,7 @@
 
 #import "THLEventDiscoveryCell.h"
 #import "THLEventTitlesView.h"
+#import "UIView+DimView.h"
 #import "THLAppearanceConstants.h"
 
 @interface THLEventDiscoveryCell()
@@ -23,60 +24,62 @@
 @synthesize imageURL;
 
 - (instancetype)initWithFrame:(CGRect)frame {
-	if (self = [super initWithFrame:frame]) {
-		[self constructView];
-		[self layoutView];
-		[self bindView];
-	}
-	return self;
+    if (self = [super initWithFrame:frame]) {
+        [self constructView];
+        [self layoutView];
+        [self bindView];
+    }
+    return self;
 }
 
 - (void)constructView {
-	_titlesView = [self newTitlesView];
-	_imageView = [self newImageView];
+    _titlesView = [self newTitlesView];
+    _imageView = [self newImageView];
 }
 
 - (void)layoutView {
-	[self.contentView addSubviews:@[_imageView,
-									_titlesView]];
-
-	[_titlesView makeConstraints:^(MASConstraintMaker *make) {
-		make.center.centerOffset(CGPointZero);
-		make.top.left.greaterThanOrEqualTo(SV(_titlesView)).insets(kTHLEdgeInsetsHigh());
-		make.bottom.right.lessThanOrEqualTo(SV(_titlesView)).insets(kTHLEdgeInsetsHigh());
-	}];
-
-	[_imageView makeConstraints:^(MASConstraintMaker *make) {
-		make.edges.insets(kTHLEdgeInsetsNone());
-	}];
+    [self.contentView addSubviews:@[_imageView,
+                                    _titlesView]];
+    
+    [_titlesView makeConstraints:^(MASConstraintMaker *make) {
+        make.center.centerOffset(CGPointZero);
+        make.top.left.greaterThanOrEqualTo(SV(_titlesView)).insets(kTHLEdgeInsetsHigh());
+        make.bottom.right.lessThanOrEqualTo(SV(_titlesView)).insets(kTHLEdgeInsetsHigh());
+    }];
+    
+    [_imageView makeConstraints:^(MASConstraintMaker *make) {
+        make.center.centerOffset(CGPointZero);
+        make.edges.insets(kTHLEdgeInsetsNone());
+    }];
 }
 
 - (void)bindView {
-	RAC(self.titlesView, titleText) = RACObserve(self, eventName);
-	RAC(self.titlesView, dateText) = RACObserve(self, time);
-	RAC(self.titlesView, locationNameText) = RACObserve(self, locationName);
-	RAC(self.titlesView, locationNeighborhoodText) = RACObserve(self, locationNeighborhood);
-	[[RACObserve(self, imageURL) filter:^BOOL(NSURL *url) {
-		return [url isValid];
-	}] subscribeNext:^(NSURL *url) {
-		[self.imageView sd_setImageWithURL:url];
-	}];
+    RAC(self.titlesView, titleText) = RACObserve(self, eventName);
+    RAC(self.titlesView, dateText) = RACObserve(self, time);
+    RAC(self.titlesView, locationNameText) = RACObserve(self, locationName);
+    RAC(self.titlesView, locationNeighborhoodText) = RACObserve(self, locationNeighborhood);
+    [[RACObserve(self, imageURL) filter:^BOOL(NSURL *url) {
+        return [url isValid];
+    }] subscribeNext:^(NSURL *url) {
+        [self.imageView sd_setImageWithURL:url];
+    }];
 }
 
 #pragma mark - Constructors
 - (THLEventTitlesView *)newTitlesView {
-	THLEventTitlesView *titlesView = [THLEventTitlesView new];
-	titlesView.separatorColor = [UIColor whiteColor];
-	return titlesView;
+    THLEventTitlesView *titlesView = [THLEventTitlesView new];
+    titlesView.separatorColor = [UIColor whiteColor];
+    return titlesView;
 }
 
 - (UIImageView *)newImageView {
-	UIImageView *imageView = [UIImageView new];
-	imageView.contentMode = UIViewContentModeScaleAspectFill;
-	return imageView;
+    UIImageView *imageView = [UIImageView new];
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    [imageView dimView];
+    return imageView;
 }
 
 + (NSString *)identifier {
-	return NSStringFromClass(self);
+    return NSStringFromClass(self);
 }
 @end
