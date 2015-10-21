@@ -11,33 +11,33 @@
 #import "PFFacebookUtils.h"
 #import "FBSDKCoreKit.h"
 
-@implementation THLSessionService
+@implementation THLSessionService : NSObject
 
 
-- (BFTask *)checkUserSessionValidity {
-    return [self sendRequest];
-}
+//- (BFTask *)checkUserSessionValidity {
+//    return [self sendRequest];
+//}
 
-- (BFTask *)sendRequest {
-    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil];
-    
-    BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
-    
-    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-        
-        if (!error) {
-            [completionSource setResult:result];
-        }else if ([[error userInfo][@"error"][@"type"] isEqualToString:@"OAuthException"]) {
-            NSLog(@"facebook session invalidated");
-            [PFFacebookUtils unlinkUserInBackground:[THLUser currentUser]];
-        }else {
-            NSLog(@"Error: %@", error);
-            [completionSource setError:error];
-        }
-        
-    }];
-    return completionSource.task;
-}
+//- (BFTask *)sendRequest {
+//    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil];
+//
+//    BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
+//
+//    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+//
+//        if (!error) {
+//            [completionSource setResult:result];
+//        }else if ([[error userInfo][@"error"][@"type"] isEqualToString:@"OAuthException"]) {
+//            NSLog(@"facebook session invalidated");
+//            [PFFacebookUtils unlinkUserInBackground:[THLUser currentUser]];
+//        }else {
+//            NSLog(@"Error: %@", error);
+//            [completionSource setError:error];
+//        }
+//
+//    }];
+//    return completionSource.task;
+//}
 
 - (BOOL)isUserCached {
     return [THLUser currentUser] || [self isFacebookLinkedWithUser];

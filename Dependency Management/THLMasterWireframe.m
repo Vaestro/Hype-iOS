@@ -40,6 +40,8 @@ THLGuestlistInvitationModuleDelegate
 - (instancetype)initWithDependencyManager:(THLDependencyManager *)dependencyManager {
 	if (self = [super init]) {
         _dependencyManager = dependencyManager;
+        // Initialize Session
+        _sessionService = [[THLSessionService alloc] init];
 	}
 	return self;
 }
@@ -47,10 +49,10 @@ THLGuestlistInvitationModuleDelegate
 - (void)presentAppInWindow:(UIWindow *)window {
 	_window = window;
     
-    if (![self.sessionService isUserCached] || ![self.sessionService checkUserSessionValidity]) {
-        [self presentLoginInterface];
-    }else {
+    if ([_sessionService isUserCached]) {
         [self presentEventFlow];
+    }else {
+        [self presentLoginInterface];
     }
 	
 }

@@ -11,7 +11,7 @@
 
 @protocol THLSessionServiceInterface <NSObject>
 
-- (BFTask *)checkUserSessionValidity;
+//- (BFTask *)checkUserSessionValidity;
 - (BOOL)isUserCached;
 - (void)logUserOut;
 
