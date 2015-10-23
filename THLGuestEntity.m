@@ -9,6 +9,7 @@
 #import "THLGuestEntity.h"
 #import "APContact.h"
 #import "APName.h"
+#import "APPhone.h"
 #import "THLUserEntity.h"
 
 @implementation THLGuestEntity
@@ -18,7 +19,7 @@
 	if (self = [super init]) {   
 		_firstName = [contact.name.firstName copy];
 		_lastName = [contact.name.lastName copy];
-		_phoneNumber = [[contact.phones first] copy];
+		_phoneNumber = [[contact.phones objectAtIndex:0].number copy];
 		_type = THLGuestEntityTypeLocalContact;
 		_objectId = [NSString stringWithFormat:@"contact%lu", (unsigned long)self.phoneNumber.hash];
 	}

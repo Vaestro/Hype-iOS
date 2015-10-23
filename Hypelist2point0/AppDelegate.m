@@ -34,7 +34,7 @@
 
 	// [Optional] Track statistics around application opens.
 	[PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
-	[PFFacebookUtils initializeFacebook];
+    [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:nil];
 	[Fabric with:@[[Crashlytics class], [Digits class]]];
 
 	[THLAppearanceUtils applyStyles];

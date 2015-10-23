@@ -34,7 +34,7 @@ pod "ReflectableEnum"
 
 #Parse/Facebook/Digits
 pod 'Parse'
-pod 'ParseFacebookUtils'
+pod 'ParseFacebookUtilsV4'
 pod 'FBSDKCoreKit'
 pod 'FBSDKLoginKit'
 pod 'FBSDKShareKit'
@@ -48,7 +48,7 @@ pod 'Crashlytics'
 #Helpers
 pod 'SSDataSources', '~> 0.8'
 pod 'YLMoment', '~> 0.2.0'
-pod 'APAddressBook', '~> 0.1.14'
+pod 'APAddressBook', '~> 0.2.1’
 pod 'libPhoneNumber-iOS', '~> 0.8'
 pod 'LMGeocoder'
 

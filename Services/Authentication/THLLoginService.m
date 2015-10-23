@@ -15,7 +15,7 @@
 }
 
 - (BFTask *)loginWithFacebook {
-	return [PFFacebookUtils logInWithPermissionsInBackground:[self facebookLoginPermissions]];
+	return [PFFacebookUtils logInInBackgroundWithReadPermissions:[self facebookLoginPermissions]];
 }
 
 - (NSArray *)facebookLoginPermissions {
