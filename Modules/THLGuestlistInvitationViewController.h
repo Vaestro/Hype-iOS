@@ -26,5 +26,6 @@ THContactPickerDelegate
 @property (nonatomic, strong) NSMutableSet *addedGuests;
 @property (nonatomic, strong) UIBarButtonItem *cancelButton;
 @property (nonatomic, strong) UIBarButtonItem *commitButton;
+@property (nonatomic, strong) RACCommand *cancelCommand;
 @property (nonatomic, strong) RACCommand *commitCommand;
 @end

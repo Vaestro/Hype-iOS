@@ -61,6 +61,7 @@
 	[self.view addSubviews:@[_tableView, _contactPickerView]];
 	self.navigationItem.leftBarButtonItem = _cancelButton;
 	self.navigationItem.rightBarButtonItem = _commitButton;
+    self.navigationItem.title = @"INVITE";
 }
 
 - (void)configureDataSource {
@@ -113,23 +114,43 @@
 	UITableView *tableView = [[UITableView alloc] initWithFrame:tableFrame style:UITableViewStyleGrouped];
 	tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 	tableView.delegate = self;
+    tableView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
+    tableView.separatorColor = kTHLNUIPrimaryBackgroundColor;
+//    [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 	return tableView;
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60;
+}
+
 
 - (THContactPickerView *)newContactPickerView {
 	THContactPickerView *pickerView = [[THContactPickerView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, kContactPickerViewHeight)];
 	pickerView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleWidth;
 	pickerView.delegate = self;
+    pickerView.backgroundColor = kTHLNUISecondaryBackgroundColor;
+    [pickerView setPlaceholderLabelText:@"Type a name or phone number"];
+    [pickerView setPlaceholderLabelTextColor:kTHLNUIGrayFontColor];
 	return pickerView;
 }
 
 - (UIBarButtonItem *)newCancelBarButtonItem {
 	UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:NULL];
+    [item setTitleTextAttributes:
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
+                        forState:UIControlStateNormal];
 	return item;
 }
 
 - (UIBarButtonItem *)newCommitBarButtonItem {
-	UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Invite" style:UIBarButtonItemStylePlain target:self action:NULL];
+	UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Submit " style:UIBarButtonItemStylePlain target:self action:NULL];
+    [item setTitleTextAttributes:
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
+                        forState:UIControlStateNormal];
 	return item;
 }
 

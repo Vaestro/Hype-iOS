@@ -43,6 +43,12 @@ THLGuestlistInvitationViewEventHandler
 	_view = view;
 	[view setEventHandler:self];
 	[view setDataSource:[_interactor getDataSource]];
+//    RACCommand *cancelCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+//        [self handleCancelAction];
+//        return [RACSignal empty];
+//    }];
+//    
+//    [navBar setDismissCommand:cancelCommand];
 }
 
 
@@ -61,7 +67,7 @@ THLGuestlistInvitationViewEventHandler
 }
 
 - (void)viewDidCancelInvitations:(id<THLGuestlistInvitationView>)view {
-
+    [_wireframe dismissInterface];
 }
 
 - (void)viewDidCommitInvitations:(id<THLGuestlistInvitationView>)view {
