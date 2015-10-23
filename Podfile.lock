@@ -115,9 +115,9 @@ PODS:
   - THContactPicker (1.2)
   - TOMSMorphingLabel (0.5.1)
   - TwitterCore (1.12.0)
-  - Typhoon (3.3.3):
-    - Typhoon/no-arc (= 3.3.3)
-  - Typhoon/no-arc (3.3.3)
+  - Typhoon (3.3.4):
+    - Typhoon/no-arc (= 3.3.4)
+  - Typhoon/no-arc (3.3.4)
   - YapDatabase (2.7.3):
     - YapDatabase/standard (= 2.7.3)
   - YapDatabase/standard (2.7.3):
@@ -213,8 +213,8 @@ SPEC CHECKSUMS:
   THContactPicker: e723f7c6ab6e1d6d10d59d618322ab8bfcb00365
   TOMSMorphingLabel: 3e88a2bf5257f8993ebc51fb3109187a0bfb2c4d
   TwitterCore: a1feadb793512962003ed2bad23e846c8daa4efd
-  Typhoon: df3d23f59dccc8eda3e6535e58afd160ae60567e
+  Typhoon: 555e580d7edaaf61c5367c2a80c15a0ddb368406
   YapDatabase: 6d6a30e97face6c3158830823c27614afe83e1e0
   YLMoment: af44d9d402790049e5490fa6eae9585b89b4090b
 
-COCOAPODS: 0.37.2
+COCOAPODS: 0.39.0
