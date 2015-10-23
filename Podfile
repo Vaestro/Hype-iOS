@@ -48,7 +48,7 @@ pod 'Crashlytics'
 #Helpers
 pod 'SSDataSources', '~> 0.8'
 pod 'YLMoment', '~> 0.2.0'
-pod 'APAddressBook'
+pod 'APAddressBook', '~> 0.1.14'
 pod 'libPhoneNumber-iOS', '~> 0.8'
 pod 'LMGeocoder'
 
@@ -61,6 +61,7 @@ pod 'iCarousel', '~> 1.8'
 pod 'MJRefresh'
 pod 'SVProgressHUD'
 pod 'THContactPicker', '~> 1.2'
+pod "TOMSMorphingLabel", "~> 0.5"
 end
 
 target 'Hypelist2point0Tests' do

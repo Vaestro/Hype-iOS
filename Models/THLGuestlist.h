@@ -15,4 +15,5 @@
 @interface THLGuestlist : PFObject<PFSubclassing>
 @property (nonatomic, retain) THLUser *owner;
 @property (nonatomic, retain) THLPromotion *promotion;
+@property (nonatomic, retain) NSString *eventId;
 @end

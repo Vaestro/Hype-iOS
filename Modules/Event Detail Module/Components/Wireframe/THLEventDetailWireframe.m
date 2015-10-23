@@ -25,10 +25,12 @@
 @implementation THLEventDetailWireframe
 - (instancetype)initWithLocationService:(id<THLLocationServiceInterface>)locationService
 					   promotionService:(id<THLPromotionServiceInterface>)promotionService
+                       guestlistService:(id<THLGuestlistServiceInterface>)guestlistService
 						  entityMappper:(THLEntityMapper *)entityMapper {
 	if (self = [super init]) {
 		_locationService = locationService;
 		_promotionService = promotionService;
+        _guestlistService = guestlistService;
 		_entityMapper = entityMapper;
 		[self buildModule];
 	}
@@ -38,6 +40,7 @@
 - (void)buildModule {
 	_dataManager = [[THLEventDetailDataManager alloc] initWithLocationService:_locationService
 															 promotionService:_promotionService
+                                                             guestlistService:_guestlistService
 																entityMappper:_entityMapper];
 	_interactor = [[THLEventDetailInteractor alloc] initWithDataManager:_dataManager];
 	_view = [[THLEventDetailViewController alloc] initWithNibName:nil bundle:nil];

@@ -12,15 +12,18 @@
 @class THLEntityMapper;
 @protocol THLLocationServiceInterface;
 @protocol THLPromotionServiceInterface;
+@protocol THLGuestlistServiceInterface;
 
 @interface THLEventDetailWireframe : NSObject
 @property (nonatomic, readonly) id<THLEventDetailModuleInterface> moduleInterface;
 #pragma mark - Dependencies
 @property (nonatomic, readonly) id<THLLocationServiceInterface> locationService;
 @property (nonatomic, readonly) id<THLPromotionServiceInterface> promotionService;
+@property (nonatomic, readonly) id<THLGuestlistServiceInterface> guestlistService;
 @property (nonatomic, readonly) THLEntityMapper *entityMapper;
 - (instancetype)initWithLocationService:(id<THLLocationServiceInterface>)locationService
 					   promotionService:(id<THLPromotionServiceInterface>)promotionService
+                       guestlistService:(id<THLGuestlistServiceInterface>)guestlistService
 						  entityMappper:(THLEntityMapper *)entityMapper;
 
 - (void)presentInterfaceInWindow:(UIWindow *)window;

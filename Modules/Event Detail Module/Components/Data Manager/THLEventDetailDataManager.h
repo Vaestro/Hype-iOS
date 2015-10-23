@@ -10,19 +10,25 @@
 
 @class BFTask;
 @class THLEvent;
+@class THLUser;
 @class THLEntityMapper;
 @protocol THLLocationServiceInterface;
 @protocol THLPromotionServiceInterface;
+@protocol THLGuestlistServiceInterface;
 
 @interface THLEventDetailDataManager : NSObject
 #pragma mark - Dependencies
 @property (nonatomic, readonly) id<THLLocationServiceInterface> locationService;
 @property (nonatomic, readonly) id<THLPromotionServiceInterface> promotionService;
+@property (nonatomic, readonly) id<THLGuestlistServiceInterface> guestlistService;
 @property (nonatomic, readonly) THLEntityMapper *entityMapper;
 - (instancetype)initWithLocationService:(id<THLLocationServiceInterface>)locationService
 					   promotionService:(id<THLPromotionServiceInterface>)promotionService
+                       guestlistService:(id<THLGuestlistServiceInterface>)guestlistService
 						  entityMappper:(THLEntityMapper *)entityMapper;
 
 - (BFTask<CLPlacemark *> *)fetchPlacemarkForAddress:(NSString *)address;
 - (BFTask *)fetchPromotionsForEvent:(THLEvent *)event;
+- (BFTask *)fetchGuestlistForGuest:(THLUser *)guest forEvent:(NSString *)eventId;
+
 @end

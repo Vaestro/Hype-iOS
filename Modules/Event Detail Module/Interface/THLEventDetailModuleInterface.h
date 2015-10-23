@@ -12,7 +12,5 @@
 
 @protocol THLEventDetailModuleInterface <NSObject>
 @property (nonatomic, weak) id<THLEventDetailModuleDelegate> moduleDelegate;
-
 - (void)presentEventDetailInterfaceForEvent:(THLEventEntity *)eventEntity inWindow:(UIWindow *)window;
-
 @end

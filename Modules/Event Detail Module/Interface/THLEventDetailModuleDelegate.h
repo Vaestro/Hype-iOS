@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @protocol THLEventDetailModuleInterface;
-
 @protocol THLEventDetailModuleDelegate <NSObject>
-
+- (void)eventDetailModule:(id<THLEventDetailModuleInterface>)module;
 @end

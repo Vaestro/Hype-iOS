@@ -29,13 +29,22 @@
 	PFQuery *query = [self basePromotionQuery];
 	[query whereKey:@"event" matchesQuery:eventQuery];
 	return query;
-
 }
 
 - (PFQuery *)queryForPromotionsForEvent:(THLEvent *)event {
 	PFQuery *query = [self basePromotionQuery];
 	[query whereKey:@"event" matchesQuery:[event matchingQuery]];
 	return query;
+}
+
+- (PFQuery *)queryForGuestlistForGuest:(THLUser *)guest forEvent:(NSString *)eventId {
+    PFQuery *guestlistQuery = [self baseGuestlistQuery];
+    [guestlistQuery whereKey:@"owner" matchesQuery:[guest matchingQuery]];
+    [guestlistQuery whereKey:@"eventID" equalTo:eventId];
+    
+    PFQuery *query = [self baseGuestlistQuery];
+    [query whereKey:@"guestlist" matchesQuery:guestlistQuery];
+    return query;
 }
 
 #pragma mark - Class Queries
@@ -67,6 +76,17 @@
 	PFQuery *query = [THLEvent query];
 	[query includeKey:@"location"];
 	return query;
+}
+
+/**
+ *  Generic query for THLGuestlist
+ *	Includes: guest, promotion
+ */
+- (PFQuery *)baseGuestlistQuery {
+    PFQuery *query = [THLGuestlist query];
+    [query includeKey:@"guest"];
+    [query includeKey:@"promotion"];
+    return query;
 }
 
 /**

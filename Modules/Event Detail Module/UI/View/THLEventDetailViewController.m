@@ -13,12 +13,14 @@
 #import "THLEventDetailsLocationInfoView.h"
 #import "THLEventDetailsMapView.h"
 #import "THLEventDetailsPromotionInfoView.h"
+#import "THLActionBarButton.h"
 
 @interface THLEventDetailViewController()
 @property (nonatomic, strong) ORStackScrollView *scrollView;
 @property (nonatomic, strong) THLEventDetailsLocationInfoView *locationInfoView;
 @property (nonatomic, strong) THLEventDetailsMapView *mapView;
 @property (nonatomic, strong) THLEventDetailsPromotionInfoView *promotionInfoView;
+@property (nonatomic, strong) THLActionBarButton *bottomBar;
 @property (nonatomic) BOOL showPromotionInfoView;
 @end
 
@@ -33,6 +35,8 @@
 @synthesize locationAddress;
 @synthesize dismissCommand;
 @synthesize locationPlacemark;
+@synthesize guestlistStatus;
+@synthesize createGuestlistCommand;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -51,15 +55,16 @@
     _promotionInfoView = [self newPromotionInfoView];
     _locationInfoView = [self newLocationInfoView];
     _mapView = [self newMapView];
+    _bottomBar = [self newBottomBar];
 }
 
 - (void)layoutView {
     self.view.nuiClass = kTHLNUIBackgroundView;
     
-    [self.view addSubviews:@[_scrollView]];
+    [self.view addSubviews:@[_scrollView, _bottomBar]];
     [_scrollView makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.insets(kTHLEdgeInsetsHigh());
-        make.top.bottom.insets(kTHLEdgeInsetsHigh());
+        make.top.insets(kTHLEdgeInsetsHigh());
     }];
     
     for (UIView *view in @[_promotionInfoView,
@@ -73,6 +78,11 @@
         //		}];
         //		prevView = view;
     }
+    
+    [_bottomBar makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.left.right.insets(kTHLEdgeInsetsNone());
+        make.top.equalTo(_scrollView.mas_bottom);
+    }];
 }
 
 - (void)bindView {
@@ -84,6 +94,9 @@
     RAC(self.mapView, locationName) = RACObserve(self, locationName);
     RAC(self.mapView, locationAddress) = RACObserve(self, locationAddress);
     RAC(self.mapView, locationPlacemark) = RACObserve(self, locationPlacemark);
+//    RAC(self, guestlistStatus) = RACObserve(self, guestlistStatus);
+    RAC(self.bottomBar, rac_command) = RACObserve(self, createGuestlistCommand);
+
 }
 
 #pragma mark - Constructors
@@ -115,5 +128,11 @@
     promoInfoView.translatesAutoresizingMaskIntoConstraints = NO;
     promoInfoView.dividerColor = [UIColor whiteColor];
     return promoInfoView;
+}
+
+- (THLActionBarButton *)newBottomBar {
+    THLActionBarButton *bottomBar = [THLActionBarButton new];
+    [bottomBar.morphingLabel setTextWithoutMorphing:NSLocalizedString(guestlistStatus, nil)];
+    return bottomBar;
 }
 @end

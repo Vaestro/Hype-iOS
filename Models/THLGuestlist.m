@@ -11,6 +11,7 @@
 @implementation THLGuestlist
 @dynamic owner;
 @dynamic promotion;
+@dynamic eventId;
 
 + (void)load {
 	[self registerSubclass];

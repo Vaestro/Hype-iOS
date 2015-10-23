@@ -10,6 +10,7 @@
 #import "PFQuery.h"
 
 @class THLEvent;
+@class THLUser;
 
 /**
  *  Interface for constructing all queries for Parse servers.
@@ -24,7 +25,7 @@
 #pragma mark - Promotion Queries
 - (PFQuery *)queryForPromotionsStartingOn:(NSDate *)startDate endingOn:(NSDate *)endDate;
 - (PFQuery *)queryForPromotionsForEvent:(THLEvent *)event;
-
+- (PFQuery *)queryForGuestlistForGuest:(THLUser *)guest forEvent:(NSString *)eventId;
 
 #pragma mark - Guestlist Queries
 @end

@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "THLGuestlistInvitationView.h"
 
-@class THContactPickerView;
-@protocol THLGuestlistInvitationView;
 @protocol THContactPickerDelegate;
+@protocol THLGuestlistInvitationView;
+@class THContactPickerView;
 @class RACCommand;
 
 @interface THLGuestlistInvitationViewController : UIViewController

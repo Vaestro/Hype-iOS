@@ -118,6 +118,7 @@
 - (THLEventDetailWireframe *)newEventDetailWireframe {
 	THLEventDetailWireframe *wireframe = [[THLEventDetailWireframe alloc] initWithLocationService:self.locationService
 																				 promotionService:self.promotionService
+                                                                                 guestlistService:self.guestlistService
 																					entityMappper:self.entityMapper];
 	self.eventDetailWireframe = wireframe;
 	return wireframe;

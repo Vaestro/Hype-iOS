@@ -9,12 +9,14 @@
 #import "THLEventFlowWireframe.h"
 #import "THLEventDetailWireframe.h"
 #import "THLEventDiscoveryWireframe.h"
+#import "THLGuestlistInvitationWireframe.h"
 #import "THLEventFlowDependencyManager.h"
 
 @interface THLEventFlowWireframe()
 <
 THLEventDiscoveryModuleDelegate,
-THLEventDetailModuleDelegate
+THLEventDetailModuleDelegate,
+THLGuestlistInvitationModuleDelegate
 >
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
@@ -47,9 +49,19 @@ THLEventDetailModuleDelegate
 	[_eventDetailWireframe.moduleInterface presentEventDetailInterfaceForEvent:eventEntity inWindow:_window];
 }
 
+- (void)presentGuestlistInvitationInterface {
+    THLGuestlistInvitationWireframe *guestlistWireframe = [_dependencyManager newGuestlistInvitationWireframe];
+    [guestlistWireframe.moduleInterface setModuleDelegate:self];
+    [guestlistWireframe.moduleInterface presentGuestlistInvitationInterfaceForGuestlist:@"1" inWindow:_window];
+}
+
 #pragma mark - THLEventDiscoveryModuleDelegate
 - (void)eventDiscoveryModule:(id<THLEventDiscoveryModuleInterface>)module userDidSelectEventEntity:(THLEventEntity *)eventEntity {
 	[self presentEventDetailInterfaceForEvent:eventEntity];
+}
+
+- (void)eventDetailModule:(id<THLEventDetailModuleInterface>)module {
+    [self presentGuestlistInvitationInterface];
 }
 
 #pragma mark - THLEventDetailModuleDelegate

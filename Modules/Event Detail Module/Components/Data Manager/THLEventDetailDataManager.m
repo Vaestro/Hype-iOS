@@ -9,6 +9,7 @@
 #import "THLEventDetailDataManager.h"
 #import "THLLocationServiceInterface.h"
 #import "THLPromotionServiceInterface.h"
+#import "THLGuestlistServiceInterface.h"
 #import "THLPromotion.h"
 #import "THLPromotionEntity.h"
 #import "THLEntityMapper.h"
@@ -16,10 +17,12 @@
 @implementation THLEventDetailDataManager
 - (instancetype)initWithLocationService:(id<THLLocationServiceInterface>)locationService
 					   promotionService:(id<THLPromotionServiceInterface>)promotionService
+                       guestlistService:(id<THLGuestlistServiceInterface>)guestlistService
 						  entityMappper:(THLEntityMapper *)entityMapper {
 	if (self = [super init]) {
 		_locationService = locationService;
 		_promotionService = promotionService;
+        _guestlistService = guestlistService;
 		_entityMapper = entityMapper;
 	}
 	return self;
@@ -37,4 +40,7 @@
 	}];
 }
 
+- (BFTask *)fetchGuestlistForGuest:(THLUser *)guest forEvent:(NSString *)eventId {
+    return [_guestlistService fetchGuestlistForGuest:guest forEvent:eventId];
+}
 @end

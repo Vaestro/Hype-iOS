@@ -13,5 +13,6 @@
 #import "THLUser.h"
 #import "THLEvent.h"
 #import "THLLocation.h"
+#import "THLGuestlist.h"
 
 #endif

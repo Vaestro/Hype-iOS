@@ -126,6 +126,10 @@
 		21EED1001BB5F842001325A7 /* THLEventFlowWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 21EED0FF1BB5F842001325A7 /* THLEventFlowWireframe.m */; settings = {ASSET_TAGS = (); }; };
 		76FA20541BCF854000BB480A /* THLSessionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 76FA20531BCF854000BB480A /* THLSessionService.m */; settings = {ASSET_TAGS = (); }; };
 		794208281BD82641009B86FA /* UIView+DimView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794208271BD82641009B86FA /* UIView+DimView.m */; settings = {ASSET_TAGS = (); }; };
+		7942082C1BD82AF6009B86FA /* THLActionBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7942082B1BD82AF6009B86FA /* THLActionBarButton.m */; settings = {ASSET_TAGS = (); }; };
+		7942082F1BD8C250009B86FA /* THLGuestlistEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7942082E1BD8C250009B86FA /* THLGuestlistEntity.m */; settings = {ASSET_TAGS = (); }; };
+		794208321BD9A300009B86FA /* THLEventFlowModuleInterface.h in Sources */ = {isa = PBXBuildFile; fileRef = 794208311BD9A300009B86FA /* THLEventFlowModuleInterface.h */; settings = {ASSET_TAGS = (); }; };
+		794208341BD9A348009B86FA /* THLEventFlowModuleDelegate.h in Sources */ = {isa = PBXBuildFile; fileRef = 794208331BD9A348009B86FA /* THLEventFlowModuleDelegate.h */; settings = {ASSET_TAGS = (); }; };
 		B771256D2B58EBFF817CDC12 /* libPods-Hypelist2point0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D059D2904940E14B1AF40EE3 /* libPods-Hypelist2point0.a */; };
 		CBE5403C8B7732B36D5ECB5E /* THLViewDataSourceGrouping.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE54FC98A366F3761F89F63 /* THLViewDataSourceGrouping.m */; settings = {ASSET_TAGS = (); }; };
 		CBE54720F63BA2DE2136B454 /* THLViewDataSource+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE545A9A3C66339456E0A06 /* THLViewDataSource+Factory.m */; settings = {ASSET_TAGS = (); }; };
@@ -405,6 +409,12 @@
 		76FA20531BCF854000BB480A /* THLSessionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLSessionService.m; sourceTree = "<group>"; };
 		794208261BD82641009B86FA /* UIView+DimView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DimView.h"; sourceTree = "<group>"; };
 		794208271BD82641009B86FA /* UIView+DimView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DimView.m"; sourceTree = "<group>"; };
+		7942082A1BD82AF6009B86FA /* THLActionBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLActionBarButton.h; sourceTree = "<group>"; };
+		7942082B1BD82AF6009B86FA /* THLActionBarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLActionBarButton.m; sourceTree = "<group>"; };
+		7942082D1BD8C250009B86FA /* THLGuestlistEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistEntity.h; sourceTree = "<group>"; };
+		7942082E1BD8C250009B86FA /* THLGuestlistEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestlistEntity.m; sourceTree = "<group>"; };
+		794208311BD9A300009B86FA /* THLEventFlowModuleInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventFlowModuleInterface.h; sourceTree = "<group>"; };
+		794208331BD9A348009B86FA /* THLEventFlowModuleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventFlowModuleDelegate.h; sourceTree = "<group>"; };
 		BA51F1731F25286C41A13B20 /* Pods-Hypelist2point0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hypelist2point0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hypelist2point0/Pods-Hypelist2point0.debug.xcconfig"; sourceTree = "<group>"; };
 		C6B634BC51A4BB10D6261492 /* Pods-Hypelist2point0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hypelist2point0.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hypelist2point0/Pods-Hypelist2point0.release.xcconfig"; sourceTree = "<group>"; };
 		CB878AA95A320C00B4227BCE /* Pods-Hypelist2point0Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hypelist2point0Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hypelist2point0Tests/Pods-Hypelist2point0Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -535,6 +545,7 @@
 		211005A81B8A3D5800A540C6 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				794208291BD82ADB009B86FA /* THLActionBar */,
 				217EBE891BB78A57006044B6 /* THLViewDataSource */,
 				216BDD541BC71EE500BBF713 /* THLSearchViewDataSource */,
 				21CE05F61BB84026004D10BB /* THLEventNavigationController */,
@@ -1236,6 +1247,7 @@
 		217DC6541BBB7A0900332174 /* Event Flow */ = {
 			isa = PBXGroup;
 			children = (
+				794208301BD9A2E1009B86FA /* Interface */,
 				217DC6591BBB7A8200332174 /* Presenter */,
 				217DC6571BBB7A4500332174 /* Dependency Management */,
 				217DC6561BBB7A3C00332174 /* Wireframe */,
@@ -1379,6 +1391,8 @@
 				217EBEB91BB7AB68006044B6 /* THLHostEntity.m */,
 				21E402EC1BBF9A8B001D0C2C /* THLGuestEntity.h */,
 				21E402ED1BBF9A8B001D0C2C /* THLGuestEntity.m */,
+				7942082D1BD8C250009B86FA /* THLGuestlistEntity.h */,
+				7942082E1BD8C250009B86FA /* THLGuestlistEntity.m */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -1713,6 +1727,24 @@
 			name = Session;
 			sourceTree = "<group>";
 		};
+		794208291BD82ADB009B86FA /* THLActionBar */ = {
+			isa = PBXGroup;
+			children = (
+				7942082A1BD82AF6009B86FA /* THLActionBarButton.h */,
+				7942082B1BD82AF6009B86FA /* THLActionBarButton.m */,
+			);
+			name = THLActionBar;
+			sourceTree = "<group>";
+		};
+		794208301BD9A2E1009B86FA /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				794208311BD9A300009B86FA /* THLEventFlowModuleInterface.h */,
+				794208331BD9A348009B86FA /* THLEventFlowModuleDelegate.h */,
+			);
+			name = Interface;
+			sourceTree = "<group>";
+		};
 		CBE54BB68ECECF48FD57301C /* THLViewDataSourceGrouping */ = {
 			isa = PBXGroup;
 			children = (
@@ -2012,6 +2044,8 @@
 				211D0BBD1B8CEEDE0073AFDD /* THLEventDetailInteractor.m in Sources */,
 				211D0BB01B8CEE800073AFDD /* THLEventDetailPresenter.m in Sources */,
 				21E402DC1BBF8155001D0C2C /* THLGuestlistInvite.m in Sources */,
+				7942082F1BD8C250009B86FA /* THLGuestlistEntity.m in Sources */,
+				794208321BD9A300009B86FA /* THLEventFlowModuleInterface.h in Sources */,
 				21CCEDE91B87C87B0066CDAC /* THLDataStore.m in Sources */,
 				21EED1001BB5F842001325A7 /* THLEventFlowWireframe.m in Sources */,
 				215A42A11BAA26D500D03C35 /* THLFacebookPictureInteractor.m in Sources */,
@@ -2036,12 +2070,14 @@
 				2121736E1BB34DD3007D817A /* THLStarRatingView.m in Sources */,
 				2108A8881B8BBF5B00B725F6 /* THLDependencyManager.m in Sources */,
 				2110059F1B8A351000A540C6 /* THLEventDiscoveryWireframe.m in Sources */,
+				7942082C1BD82AF6009B86FA /* THLActionBarButton.m in Sources */,
 				218AF3521BB7422100AFAEBF /* THLEventEntity.m in Sources */,
 				21775F361B8CF72B00609D39 /* THLTitledContentView.m in Sources */,
 				211005951B8A318400A540C6 /* THLEventDiscoveryPresenter.m in Sources */,
 				21E402C91BBF7675001D0C2C /* THLGuestlistInvitationWireframe.m in Sources */,
 				CBE54720F63BA2DE2136B454 /* THLViewDataSource+Factory.m in Sources */,
 				CBE5403C8B7732B36D5ECB5E /* THLViewDataSourceGrouping.m in Sources */,
+				794208341BD9A348009B86FA /* THLEventFlowModuleDelegate.h in Sources */,
 				CBE547FB5677C373C1DE74C7 /* THLViewDataSourceSorting.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

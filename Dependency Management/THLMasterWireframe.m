@@ -20,10 +20,9 @@
 
 //Delegates
 #import "THLLoginModuleDelegate.h"
+#import "THLEventDetailModuleDelegate.h"
 #import "THLPromotionSelectionModuleDelegate.h"
 #import "THLGuestlistInvitationModuleDelegate.h"
-
-
 
 @interface THLMasterWireframe()
 <
@@ -50,7 +49,8 @@ THLGuestlistInvitationModuleDelegate
 	_window = window;
     
     if ([_sessionService isUserCached]) {
-        [self presentEventFlow];
+//        [self presentEventFlow];
+    [self presentGuestlistInvitationInterface];
     }else {
         [self presentLoginInterface];
     }
@@ -81,10 +81,14 @@ THLGuestlistInvitationModuleDelegate
 #pragma mark - THLLoginModuleDelegate
 - (void)loginModule:(id<THLLoginModuleInterface>)module didLoginUser:(NSError *)error {
 	if (!error) {
-		[self presentGuestlistInvitationInterface];
-//		[self presentEventFlow];
+		[self presentEventFlow];
 	}
 }
+
+#pragma mark - THLEventDetailModuleDelegate
+//- (void)eventFlowModule:(id<THLEventFlowModuleInterface>)module {
+//    [self presentGuestlistInvitationInterface];
+//}
 
 #pragma mark - THLPromotionSelectionModuleDelegate
 - (void)promotionSelectionModule:(id<THLPromotionSelectionModuleInterface>)module didSelectPromotion:(THLPromotionEntity *)promotionEntity {

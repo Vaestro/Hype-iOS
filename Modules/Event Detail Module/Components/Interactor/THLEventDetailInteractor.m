@@ -25,5 +25,12 @@
 	}];
 }
 
+- (void)getGuestlistForGuest:(THLUser *)guest forEvent:(NSString *)eventId {
+    [[_dataManager fetchGuestlistForGuest:guest forEvent:eventId] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+        [_delegate interactor:self didGetGuestlist:task.result forGuest:guest forEvent:eventId error:task.error];
+        return nil;
+    }];
+}
+
 
 @end

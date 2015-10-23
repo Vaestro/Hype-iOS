@@ -13,12 +13,15 @@
 
 #import "THLEventNavigationBar.h"
 #import "THLEventEntity.h"
+#import "THLUser.h"
+#import "THLGuestlistEntity.h"
 
 @interface THLEventDetailPresenter()
 <
 THLEventDetailInteractorDelegate
 >
 @property (nonatomic, strong) THLEventEntity *eventEntity;
+@property (nonatomic, strong) THLGuestlistEntity *guestlistEntity;
 @property (nonatomic, strong) id<THLEventDetailView> view;
 @end
 
@@ -45,14 +48,22 @@ THLEventDetailInteractorDelegate
 	[view setLocationName:_eventEntity.location.name];
 	[view setLocationInfo:_eventEntity.location.info];
 	[view setLocationAddress:_eventEntity.location.fullAddress];
+    [view setGuestlistStatus:@"JOIN A GUESTLIST BITCH"];
 
 	RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
 		[self handleDismissAction];
 		return [RACSignal empty];
 	}];
-
+    
+    RACCommand *createGuestlistCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [self handleCreateGuestlistAction];
+        return [RACSignal empty];
+    }];
+    
+    [view setCreateGuestlistCommand:createGuestlistCommand];
 	[view setDismissCommand:dismissCommand];
 	[_interactor getPlacemarkForLocation:_eventEntity.location];
+    [_interactor getGuestlistForGuest:[THLUser currentUser] forEvent:_eventEntity.objectId];
 }
 
 - (void)configureNavigationBar:(THLEventNavigationBar *)navBar {
@@ -79,10 +90,30 @@ THLEventDetailInteractorDelegate
 	[_wireframe dismissInterface];
 }
 
+- (void)handleCreateGuestlistAction {
+    [self.moduleDelegate eventDetailModule:self];
+}
+
 #pragma mark - THLEventDetailInteractorDelegate
 - (void)interactor:(THLEventDetailInteractor *)interactor didGetPlacemark:(CLPlacemark *)placemark forLocation:(THLLocationEntity *)locationEntity error:(NSError *)error {
 	if (!error && placemark) {
 		[_view setLocationPlacemark:placemark];
 	}
+}
+- (void)interactor:(THLEventDetailInteractor *)interactor didGetGuestlist:(THLGuestlistEntity *)guestlist forGuest:(THLUser *)guest forEvent:(NSString *)eventId error:(NSError *)error {
+    if (!error && guestlist) {
+        _guestlistEntity = guestlist;
+        if (*_guestlistEntity.reviewStatus == 0) {
+            [_view setGuestlistStatus:@"VIEW PENDING GUESTLIST"];
+        }
+        else if (*_guestlistEntity.reviewStatus == 1) {
+            [_view setGuestlistStatus:@"VIEW GUESTLIST"];
+        }
+        else if (*_guestlistEntity.reviewStatus == 2) {
+            [_view setGuestlistStatus:@"DECLINED GUESTLIST"];
+        }
+    } else if (!guestlist) {
+        [_view setGuestlistStatus:@"PLEASE JOIN BITCH"];
+    }
 }
 @end

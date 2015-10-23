@@ -17,4 +17,8 @@
 	return self;
 }
 
+- (BFTask *)fetchGuestlistForGuest:(THLUser *)guest forEvent:(NSString *)eventId {
+    return [[_queryFactory queryForGuestlistForGuest:guest forEvent:eventId] findObjectsInBackground];
+}
+
 @end
