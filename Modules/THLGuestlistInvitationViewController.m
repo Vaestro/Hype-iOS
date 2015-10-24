@@ -51,9 +51,7 @@
 	_tableView = [self newTableView];
 	_contactPickerView = [self newContactPickerView];
 	_cancelButton = [self newCancelBarButtonItem];
-	_cancelButton.rac_command = [self newCancelCommand];
 	_commitButton = [self newCommitBarButtonItem];
-	_commitButton.rac_command = [self newCommitCommand];
 	_addedGuests = [NSMutableSet new];
 }
 
@@ -138,7 +136,7 @@
 }
 
 - (UIBarButtonItem *)newCancelBarButtonItem {
-	UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:NULL];
+	UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(handleCancelAction:)];
     [item setTitleTextAttributes:
      [NSDictionary dictionaryWithObjectsAndKeys:
       kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
@@ -147,7 +145,7 @@
 }
 
 - (UIBarButtonItem *)newCommitBarButtonItem {
-	UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Submit " style:UIBarButtonItemStylePlain target:self action:NULL];
+	UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Submit " style:UIBarButtonItemStylePlain target:self action:@selector(handleCommitAction:)];
     [item setTitleTextAttributes:
      [NSDictionary dictionaryWithObjectsAndKeys:
       kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
@@ -155,25 +153,34 @@
 	return item;
 }
 
-- (RACCommand *)newCommitCommand {
-	WEAKSELF();
-	RACCommand *command = [[RACCommand alloc] initWithEnabled:[RACObserve(self, addedGuests) map:^id(NSSet *value) {
-		return @(value.count > 0);
-	}] signalBlock:^RACSignal *(id input) {
-		[WSELF.eventHandler viewDidCommitInvitations:WSELF];
-		return [RACSignal empty];
-	}];
-	return command;
+- (void)handleCancelAction:(id)sender {
+	[self.eventHandler viewDidCancelInvitations:self];
 }
 
-- (RACCommand *)newCancelCommand {
-	WEAKSELF();
-	RACCommand *command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-		[WSELF.eventHandler viewDidCancelInvitations:WSELF];
-		return [RACSignal empty];
-	}];
-	return command;
+- (void)handleCommitAction:(id)sender {
+	[self.eventHandler viewDidCommitInvitations:self];
 }
+//
+//- (RACCommand *)newCommitCommand {
+//	WEAKSELF();
+//	RACCommand *command = [[RACCommand alloc] initWithEnabled:[RACObserve(self, addedGuests) map:^id(NSSet *value) {
+//		return @(value.count > 0);
+//	}] signalBlock:^RACSignal *(id input) {
+//		[WSELF.eventHandler viewDidCommitInvitations:WSELF];
+//		return [RACSignal empty];
+//	}];
+//	return command;
+//}
+//
+//- (RACCommand *)newCancelCommand {
+//	WEAKSELF();
+//	RACCommand *command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+//		[WSELF.eventHandler viewDidCancelInvitations:WSELF];
+//		return [RACSignal empty];
+//	}];
+//	return command;
+//}
+
 #pragma mark - Layout
 - (void)viewDidLayoutSubviews {
 	[self adjustTableFrame];
