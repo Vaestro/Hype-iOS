@@ -21,4 +21,17 @@
     return [[_queryFactory queryForGuestlistForGuest:guest forEvent:eventId] findObjectsInBackground];
 }
 
+//- (BFTask *)createGuestlistForPromotion:(THLPromotion *)promotion forOwner:(THLUser *)owner {
+//    PFObject *guestlist = [PFObject objectWithClassName:@"Guestlist"];
+//    guestlist[@"owner"] = owner;
+//    guestlist[@"promotion"] = promotion;
+//    [guestlist saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//        if (succeeded) {
+//            return TRUE;
+//        } else {
+//            return error;
+//        }
+//    }];
+//}
+
 @end

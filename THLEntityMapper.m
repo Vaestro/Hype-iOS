@@ -90,6 +90,18 @@
 	entity.rating = user.rating;
 	return entity;
 }
+
+- (THLUser *)unmapUser:(THLUserEntity *)userEntity {
+    NSAssert([userEntity isKindOfClass:[THLUser class]], @"Must be of type THLUser to map!");
+    THLUser *user = [THLUser new];
+    user.firstName = userEntity.firstName;
+    user.lastName = userEntity.lastName;
+    user.phoneNumber = userEntity.phoneNumber;
+    user.sex = userEntity.sex;
+    user.rating = userEntity.rating;
+    return user;
+}
+
 - (NSArray *)mapUsers:(NSArray *)users {
 	return [users linq_select:^id(THLUser *user) {
 		return [self mapUser:user];

@@ -10,6 +10,7 @@
 #import "THLGuestlistInvitationModuleInterface.h"
 
 @protocol THLGuestlistServiceInterface;
+@protocol THLPromotionServiceInterface;
 @class APAddressBook;
 @class THLDataStore;
 @protocol THLViewDataSourceFactoryInterface;
@@ -19,10 +20,12 @@
 
 #pragma mark - Dependencies
 @property (nonatomic, readonly) id<THLGuestlistServiceInterface> guestlistService;
+@property (nonatomic, readonly) id<THLPromotionServiceInterface> promotionService;
 @property (nonatomic, readonly) id<THLViewDataSourceFactoryInterface> viewDataSourceFactory;
 @property (nonatomic, readonly) APAddressBook *addressBook;
 @property (nonatomic, readonly) THLDataStore *dataStore;
 - (instancetype)initWithGuestlistService:(id<THLGuestlistServiceInterface>)guestlistService
+                               promotion:(id<THLPromotionServiceInterface>)promotionService
 				   viewDataSourceFactory:(id<THLViewDataSourceFactoryInterface>)viewDataSourceFactory
 							 addressBook:(APAddressBook *)addressBook
 							   dataStore:(THLDataStore *)dataStore;

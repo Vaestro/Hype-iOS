@@ -22,7 +22,9 @@
 - (THLEventEntity *)mapEvent:(THLEvent *)event;
 - (THLLocationEntity *)mapLocation:(THLLocation *)location;
 - (THLUserEntity *)mapUser:(THLUser *)user;
+- (THLUser *)unmapUser:(THLUserEntity *)userEntity;
 - (THLPromotionEntity *)mapPromotion:(THLPromotion *)promotion;
+- (THLPromotion *)unmapPromotion:(THLPromotionEntity *)promotionEntity;
 
 - (NSArray<THLEventEntity*> *)mapEvents:(NSArray *)events;
 - (NSArray<THLLocationEntity*> *)mapLocations:(NSArray *)locations;

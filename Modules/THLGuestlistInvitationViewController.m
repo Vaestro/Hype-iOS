@@ -106,6 +106,7 @@
 	[RACObserve(self, dataSource) subscribeNext:^(id x) {
 		[self configureDataSource];
 	}];
+    
 }
 
 #pragma mark - Constructors

@@ -10,6 +10,7 @@
 
 @class BFTask;
 @class THLGuestlist;
+@class THLPromotion;
 @class THLUser;
 @class THLEvent;
 @class THLGuestlistInvite;
@@ -17,5 +18,5 @@
 @protocol THLGuestlistServiceInterface <NSObject>
 - (BFTask *)fetchInvitesOnGuestlist:(THLGuestlist *)guestlist;
 - (BFTask *)fetchGuestlistForGuest:(THLUser *)guest forEvent:(NSString *)eventId;
-
+//- (BFTask *)createGuestlistForPromotion:(THLPromotion *)promotion forOwner:(THLUser *)owner;
 @end

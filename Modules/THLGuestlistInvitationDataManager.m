@@ -12,14 +12,19 @@
 #import "THLGuestEntity.h"
 #import "THLDataStore.h"
 #import "THLGuestlistServiceInterface.h"
+#import "THLPromotionServiceInterface.h"
 #import "THLGuestlist.h"
+#import "THLGuestlistEntity.h"
+//#import "THLEntityMapper.h"
 
 @implementation THLGuestlistInvitationDataManager
 - (instancetype)initWithGuestlistService:(id<THLGuestlistServiceInterface>)guestlistService
+                               promotion:(id<THLPromotionServiceInterface>)promotionService
 							   dataStore:(THLDataStore *)dataStore
 							 addressBook:(APAddressBook *)addressBook {
 	if (self = [super init]) {
 		_guestlistService = guestlistService;
+        _promotionService = promotionService;
 		_dataStore = dataStore;
 		_addressBook = addressBook;
 	}
@@ -33,6 +38,20 @@
 		return [BFTask taskWithResult:guests];
 	}];
 }
+
+- (BFTask *)fetchPromotionForEvent:(THLEvent *)event {
+    return [[_promotionService fetchPromotionsForEvent:event] continueWithSuccessBlock:^id(BFTask *task) {
+        THLPromotion *fetchedPromotion = task.result[0];
+        return fetchedPromotion;
+    }];
+}
+
+//- (BFTask *)submitGuestlistForPromotion:(THLPromotion *)promotion forOwner:(THLUser *)owner {
+//    
+//    return [[_guestlistService createGuestlistForPromotion:promotion forOwner:owner] continueWithSuccessBlock:^id(BFTask *task) {
+//        return [BFTask taskWithResult:task.result];
+//    }];
+//}
 
 - (void)loadContacts {
 	[[self getContactsTasks] continueWithSuccessBlock:^id(BFTask *task) {
