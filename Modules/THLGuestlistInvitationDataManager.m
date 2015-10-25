@@ -19,12 +19,10 @@
 
 @implementation THLGuestlistInvitationDataManager
 - (instancetype)initWithGuestlistService:(id<THLGuestlistServiceInterface>)guestlistService
-                               promotion:(id<THLPromotionServiceInterface>)promotionService
 							   dataStore:(THLDataStore *)dataStore
 							 addressBook:(APAddressBook *)addressBook {
 	if (self = [super init]) {
 		_guestlistService = guestlistService;
-        _promotionService = promotionService;
 		_dataStore = dataStore;
 		_addressBook = addressBook;
 	}
@@ -37,13 +35,6 @@
 		[self storeGuests:guests];
 		return [BFTask taskWithResult:guests];
 	}];
-}
-
-- (BFTask *)fetchPromotionForEvent:(THLEvent *)event {
-    return [[_promotionService fetchPromotionsForEvent:event] continueWithSuccessBlock:^id(BFTask *task) {
-        THLPromotion *fetchedPromotion = task.result[0];
-        return fetchedPromotion;
-    }];
 }
 
 //- (BFTask *)submitGuestlistForPromotion:(THLPromotion *)promotion forOwner:(THLUser *)owner {

@@ -49,10 +49,10 @@ THLGuestlistInvitationModuleDelegate
 	[_eventDetailWireframe.moduleInterface presentEventDetailInterfaceForEvent:eventEntity inWindow:_window];
 }
 
-- (void)presentGuestlistInvitationInterface {
+- (void)presentGuestlistInvitationInterfaceForPromotion:(THLPromotionEntity *)promotionEntity {
     THLGuestlistInvitationWireframe *guestlistWireframe = [_dependencyManager newGuestlistInvitationWireframe];
     [guestlistWireframe.moduleInterface setModuleDelegate:self];
-    [guestlistWireframe.moduleInterface presentGuestlistInvitationInterfaceForGuestlist:@"1" inWindow:_window];
+    [guestlistWireframe.moduleInterface presentGuestlistInvitationInterfaceForPromotion:promotionEntity forGuestlist:@"1" inWindow:_window];
 }
 
 #pragma mark - THLEventDiscoveryModuleDelegate
@@ -60,9 +60,9 @@ THLGuestlistInvitationModuleDelegate
 	[self presentEventDetailInterfaceForEvent:eventEntity];
 }
 
-- (void)eventDetailModule:(id<THLEventDetailModuleInterface>)module {
-    [self presentGuestlistInvitationInterface];
-}
+- (void)eventDetailModule:(id<THLEventDetailModuleInterface>)module promotion:(THLPromotionEntity *)promotionEntity {
+    [self presentGuestlistInvitationInterfaceForPromotion:promotionEntity];
+}   
 
 #pragma mark - THLEventDetailModuleDelegate
 //None

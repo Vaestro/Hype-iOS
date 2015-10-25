@@ -34,7 +34,8 @@ THLGuestlistInvitationViewEventHandler
 }
 
 #pragma mark - THLGuestlistModuleInterface
-- (void)presentGuestlistInvitationInterfaceForGuestlist:(NSString *)guestlistId inWindow:(UIWindow *)window {
+- (void)presentGuestlistInvitationInterfaceForPromotion:(THLPromotionEntity *)promotionEntity forGuestlist:(NSString *)guestlistId inWindow:(UIWindow *)window {
+    _interactor.promotionEntity = promotionEntity;
 	_interactor.guestlistId = guestlistId;
 	[_wireframe presentInterfaceInWindow:window];
 }

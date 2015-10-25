@@ -15,6 +15,7 @@
 #import "THLEventEntity.h"
 #import "THLUser.h"
 #import "THLGuestlistEntity.h"
+#import "THLPromotionEntity.h"
 
 @interface THLEventDetailPresenter()
 <
@@ -22,6 +23,7 @@ THLEventDetailInteractorDelegate
 >
 @property (nonatomic, strong) THLEventEntity *eventEntity;
 @property (nonatomic, strong) THLGuestlistEntity *guestlistEntity;
+@property (nonatomic, strong) THLPromotionEntity *promotionEntity;
 @property (nonatomic, strong) id<THLEventDetailView> view;
 @end
 
@@ -83,6 +85,7 @@ THLEventDetailInteractorDelegate
 
 - (void)presentEventDetailInterfaceForEvent:(THLEventEntity *)eventEntity inWindow:(UIWindow *)window {
 	_eventEntity = eventEntity;
+    [_interactor getPromotionForEvent:_eventEntity.objectId];
 	[_wireframe presentInterfaceInWindow:window];
 }
 
@@ -91,7 +94,7 @@ THLEventDetailInteractorDelegate
 }
 
 - (void)handleCreateGuestlistAction {
-    [self.moduleDelegate eventDetailModule:self];
+    [self.moduleDelegate eventDetailModule:self promotion:_promotionEntity];
 }
 
 #pragma mark - THLEventDetailInteractorDelegate
@@ -100,6 +103,13 @@ THLEventDetailInteractorDelegate
 		[_view setLocationPlacemark:placemark];
 	}
 }
+
+- (void)interactor:(THLEventDetailInteractor *)interactor didGetPromotion:(THLPromotionEntity *)promotionEntity forEvent:(THLEventEntity *)eventEntity error:(NSError *)error {
+    if (!error && promotionEntity) {
+        _promotionEntity = promotionEntity;
+    }
+}
+
 - (void)interactor:(THLEventDetailInteractor *)interactor didGetGuestlist:(THLGuestlistEntity *)guestlist forGuest:(THLUser *)guest forEvent:(NSString *)eventId error:(NSError *)error {
     if (!error && guestlist) {
         _guestlistEntity = guestlist;

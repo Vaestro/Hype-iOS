@@ -22,13 +22,11 @@
 
 @implementation THLGuestlistInvitationWireframe
 - (instancetype)initWithGuestlistService:(id<THLGuestlistServiceInterface>)guestlistService
-                               promotion:(id<THLPromotionServiceInterface>)promotionService
 				   viewDataSourceFactory:(id<THLViewDataSourceFactoryInterface>)viewDataSourceFactory
 							 addressBook:(APAddressBook *)addressBook
 dataStore:(THLDataStore *)dataStore{
 	if (self = [super init]) {
 		_guestlistService = guestlistService;
-        _promotionService = promotionService;
 		_viewDataSourceFactory = viewDataSourceFactory;
 		_addressBook = addressBook;
 		_dataStore = dataStore;
@@ -38,7 +36,7 @@ dataStore:(THLDataStore *)dataStore{
 }
 
 - (void)buildModule {
-    _dataManager = [[THLGuestlistInvitationDataManager alloc] initWithGuestlistService:_guestlistService promotion:_promotionService dataStore:_dataStore addressBook:_addressBook];
+    _dataManager = [[THLGuestlistInvitationDataManager alloc] initWithGuestlistService:_guestlistService dataStore:_dataStore addressBook:_addressBook];
 	_interactor = [[THLGuestlistInvitationInteractor alloc] initWithDataManager:_dataManager viewDataSourceFactory:_viewDataSourceFactory];
 	_view = [[THLGuestlistInvitationViewController alloc] initWithNibName:nil bundle:nil];
 	_presenter = [[THLGuestlistInvitationPresenter alloc] initWithWireframe:self

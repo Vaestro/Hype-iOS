@@ -22,13 +22,12 @@
 @property (nonatomic, readonly) THLDataStore *dataStore;
 @property (nonatomic, readonly) APAddressBook *addressBook;
 - (instancetype)initWithGuestlistService:(id<THLGuestlistServiceInterface>)guestlistService
-                               promotion:(id<THLPromotionServiceInterface>)promotionService
 							   dataStore:(THLDataStore *)dataStore
 							 addressBook:(APAddressBook *)addressBook;
 
 
 - (BFTask *)fetchMembersOnGuestlist:(NSString *)guestlistId;
-- (BFTask *)submitGuestlistForPromotion:(THLPromotionEntity *)promotion forOwner:(THLUser *)owner;
+//- (BFTask *)submitGuestlistForPromotion:(THLPromotionEntity *)promotion forOwner:(THLUser *)owner;
 - (void)loadContacts;
 
 @end

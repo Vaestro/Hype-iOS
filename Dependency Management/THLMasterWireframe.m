@@ -54,7 +54,7 @@ THLGuestlistInvitationModuleDelegate
     }else {
         [self presentLoginInterface];
     }
-	
+
 }
 
 #pragma mark - Routing

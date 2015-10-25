@@ -12,6 +12,7 @@
 #import "THLGuestEntity.h"
 #import "THLGuestlistEntity.h"
 #import "THLGuestlistInvite.h"
+#import "THLPromotionEntity.h"
 
 static NSString *const kGuestEntityFirstNameKey = @"firstName";
 static NSString *const kGuestEntityLastNameKey = @"lastName";
@@ -32,6 +33,13 @@ static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInv
 		_addedGuests = [NSMutableArray new];
 	}
 	return self;
+}
+
+- (void)setPromotionEntity:(THLPromotionEntity *)promotionEntity {
+    _promotionEntity = promotionEntity;
+//    [PFCloud callFunctionInBackground:@"createGuestlist"
+//                       withParameters:@{@"promotionId": promotionEntity.objectId}
+//                                block:^(NSArray *results, NSError *error){}];
 }
 
 - (void)setGuestlistId:(NSString *)guestlistId {

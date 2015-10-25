@@ -25,6 +25,14 @@
 	}];
 }
 
+//Get One Promotion for Event (MVP ONLY)
+- (void)getPromotionForEvent:(NSString *)eventId {
+    [[_dataManager fetchPromotionsForEvent:eventId] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+        [_delegate interactor:self didGetPromotion:task.result[0] forEvent:eventId error:task.error];
+        return nil;
+    }];
+}
+
 - (void)getGuestlistForGuest:(THLUser *)guest forEvent:(NSString *)eventId {
     [[_dataManager fetchGuestlistForGuest:guest forEvent:eventId] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
         [_delegate interactor:self didGetGuestlist:task.result forGuest:guest forEvent:eventId error:task.error];

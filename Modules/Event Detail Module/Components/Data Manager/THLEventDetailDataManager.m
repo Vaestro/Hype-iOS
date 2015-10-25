@@ -32,13 +32,14 @@
 	return [_locationService geocodeAddress:address];
 }
 
-- (BFTask *)fetchPromotionsForEvent:(THLEvent *)event {
-	return [[_promotionService fetchPromotionsForEvent:event] continueWithSuccessBlock:^id(BFTask *task) {
+- (BFTask *)fetchPromotionsForEvent:(NSString *)eventId {
+	return [[_promotionService fetchPromotionsForEvent:eventId] continueWithSuccessBlock:^id(BFTask *task) {
 		NSArray<THLPromotion *> *fetchedPromotions = task.result;
 		NSArray<THLPromotionEntity *> *mappedPromotions = [_entityMapper mapPromotions:fetchedPromotions];
 		return mappedPromotions;
 	}];
 }
+
 
 - (BFTask *)fetchGuestlistForGuest:(THLUser *)guest forEvent:(NSString *)eventId {
     return [_guestlistService fetchGuestlistForGuest:guest forEvent:eventId];

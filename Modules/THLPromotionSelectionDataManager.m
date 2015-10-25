@@ -23,11 +23,11 @@
 	return self;
 }
 
-- (BFTask *)getPromotionsForEvent:(THLEventEntity *)eventEntity {
-	THLEvent *parseEvent = [THLEvent objectWithoutDataWithObjectId:eventEntity.objectId];
-	return [[_promotionService fetchPromotionsForEvent:parseEvent] continueWithSuccessBlock:^id(BFTask *task) {
-		return [_entityMapper mapPromotions:task.result];
-	}];
-}
+//- (BFTask *)getPromotionsForEvent:(THLEventEntity *)eventEntity {
+//	THLEvent *parseEvent = [THLEvent objectWithoutDataWithObjectId:eventEntity.objectId];
+//	return [[_promotionService fetchPromotionsForEvent:parseEvent] continueWithSuccessBlock:^id(BFTask *task) {
+//		return [_entityMapper mapPromotions:task.result];
+//	}];
+//}
 
 @end

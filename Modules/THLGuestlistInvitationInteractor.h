@@ -13,6 +13,7 @@
 @class APAddressBook;
 @class THLSearchViewDataSource;
 @class THLGuestEntity;
+@class THLPromotionEntity;
 @protocol THLViewDataSourceFactoryInterface;
 
 @protocol THLGuestlistInvitationInteractorDelegate <NSObject>
@@ -23,6 +24,7 @@
 @interface THLGuestlistInvitationInteractor : NSObject
 @property (nonatomic, weak) id<THLGuestlistInvitationInteractorDelegate> delegate;
 @property (nonatomic, copy) NSString *guestlistId;
+@property (nonatomic, strong) THLPromotionEntity *promotionEntity;
 
 #pragma mark - Dependencies
 @property (nonatomic, readonly) THLGuestlistInvitationDataManager *dataManager;

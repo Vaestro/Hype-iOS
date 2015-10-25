@@ -123,6 +123,7 @@
 	entity.femaleRatio = promotion.femaleRatio;
 	entity.host = (THLHostEntity *)[self mapUser:promotion.host];
 	entity.event = [self mapEvent:promotion.event];
+    entity.eventId = promotion.eventId;
 	return entity;
 }
 

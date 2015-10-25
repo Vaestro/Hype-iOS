@@ -31,9 +31,10 @@
 	return query;
 }
 
-- (PFQuery *)queryForPromotionsForEvent:(THLEvent *)event {
+- (PFQuery *)queryForPromotionsForEvent:(NSString *)eventId {
 	PFQuery *query = [self basePromotionQuery];
-	[query whereKey:@"event" matchesQuery:[event matchingQuery]];
+	[query whereKey:@"eventId" equalTo:eventId];
+    [query includeKey:@"event.location"];
 	return query;
 }
 
