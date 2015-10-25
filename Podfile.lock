@@ -53,6 +53,7 @@ PODS:
     - FBSDKCoreKit
   - FBSDKShareKit (4.7.0):
     - FBSDKCoreKit
+  - FLEX (2.1.0)
   - FLKAutoLayout (0.2.1)
   - FormatterKit (1.8.0):
     - FormatterKit/AddressFormatter (= 1.8.0)
@@ -138,6 +139,7 @@ DEPENDENCIES:
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
+  - FLEX (~> 2.0)
   - FormatterKit (~> 1.8)
   - GCDObjC (~> 0.2)
   - Gizou
@@ -183,6 +185,7 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: eb580bfc2040ad44f4c0b4f4d0befb1d35bce59c
   FBSDKLoginKit: 028c5a205990441123764609fe795e65027c447f
   FBSDKShareKit: 1f927bb05e4d36a99d5d5bf2f4b1ff294ce3e15c
+  FLEX: 8b469d7b103ddce41110fe2f0d8a9398c03759a8
   FLKAutoLayout: 9db6b30c2008d230da608e62c607b11c23b942e6
   FormatterKit: bddde83e054edf9d9ee14f9de3b3a5103db256f4
   GCDObjC: adcd9941029e3628de539347d3a6777470a65998

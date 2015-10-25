@@ -10,7 +10,6 @@ pod 'CocoaLumberjack'
 pod 'Masonry', '~> 0.6'
 pod 'NUI', '~> 0.5'
 pod 'CocoaLumberjack'
-pod 'Reveal-iOS-SDK', :configurations => ['Debug']
 pod 'ReactiveCocoa', '2.5'
 pod 'Bolts'
 pod 'BFKit'
@@ -23,7 +22,8 @@ pod 'FormatterKit', '~> 1.8'
 pod 'Typhoon', '~> 3.3'
 
 #Debugging
-
+pod 'FLEX', '~> 2.0', :configurations => ['Debug']
+pod 'Reveal-iOS-SDK', :configurations => ['Debug']
 
 #Sugar
 pod 'LinqToObjectiveC', '~> 2.0'
