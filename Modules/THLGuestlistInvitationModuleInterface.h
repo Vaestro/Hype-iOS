@@ -13,4 +13,5 @@
 @property (nonatomic, weak) id<THLGuestlistInvitationModuleDelegate> moduleDelegate;
 
 - (void)presentGuestlistInvitationInterfaceForGuestlist:(NSString *)guestlistId inWindow:(UIWindow *)window;
+- (void)presentGuestlistInvitationInterfaceForGuestlist:(NSString *)guestlistId inController:(UIViewController *)controller;
 @end

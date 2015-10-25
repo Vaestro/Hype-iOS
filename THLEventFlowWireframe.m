@@ -21,6 +21,7 @@ THLGuestlistInvitationModuleDelegate
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
 @property (nonatomic, strong) THLEventDetailWireframe  *eventDetailWireframe;
+@property (nonatomic, strong) THLGuestlistInvitationWireframe *guestlistInvitationWireframe;
 @end
 
 @implementation THLEventFlowWireframe
@@ -50,18 +51,26 @@ THLGuestlistInvitationModuleDelegate
 }
 
 - (void)presentGuestlistInvitationInterface {
-    THLGuestlistInvitationWireframe *guestlistWireframe = [_dependencyManager newGuestlistInvitationWireframe];
-    [guestlistWireframe.moduleInterface setModuleDelegate:self];
-    [guestlistWireframe.moduleInterface presentGuestlistInvitationInterfaceForGuestlist:@"1" inWindow:_window];
+	_guestlistInvitationWireframe = [_dependencyManager newGuestlistInvitationWireframe];
+    [_guestlistInvitationWireframe.moduleInterface setModuleDelegate:self];
+    [_guestlistInvitationWireframe.moduleInterface presentGuestlistInvitationInterfaceForGuestlist:@"1" inWindow:_window];
 }
+
+- (void)presentGuestlistInvitationInterfaceInController:(UIViewController *)controller {
+	_guestlistInvitationWireframe = [_dependencyManager newGuestlistInvitationWireframe];
+	[_guestlistInvitationWireframe.moduleInterface setModuleDelegate:self];
+	[_guestlistInvitationWireframe.moduleInterface presentGuestlistInvitationInterfaceForGuestlist:@"1" inController:controller];
+}
+
 
 #pragma mark - THLEventDiscoveryModuleDelegate
 - (void)eventDiscoveryModule:(id<THLEventDiscoveryModuleInterface>)module userDidSelectEventEntity:(THLEventEntity *)eventEntity {
 	[self presentEventDetailInterfaceForEvent:eventEntity];
 }
 
-- (void)eventDetailModule:(id<THLEventDetailModuleInterface>)module {
-    [self presentGuestlistInvitationInterface];
+- (void)eventDetailModule:(id<THLEventDetailModuleInterface>)module presentGuestlistInvitationInterfaceOnController:(UIViewController *)controller{
+//    [self presentGuestlistInvitationInterface]; Bad
+	[self presentGuestlistInvitationInterfaceInController:controller];
 }
 
 #pragma mark - THLEventDetailModuleDelegate

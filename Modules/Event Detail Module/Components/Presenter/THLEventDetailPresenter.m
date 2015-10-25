@@ -91,7 +91,7 @@ THLEventDetailInteractorDelegate
 }
 
 - (void)handleCreateGuestlistAction {
-    [self.moduleDelegate eventDetailModule:self];
+    [self.moduleDelegate eventDetailModule:self presentGuestlistInvitationInterfaceOnController:(UIViewController *)_view];
 }
 
 #pragma mark - THLEventDetailInteractorDelegate

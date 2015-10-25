@@ -19,8 +19,8 @@
 #define kContactPickerViewHeight 100.0
 
 @implementation THLGuestlistInvitationViewController
-@synthesize existingGuests;
-@synthesize eventHandler;
+@synthesize existingGuests = _existingGuests;
+@synthesize eventHandler = _eventHandler;
 @synthesize dataSource = _dataSource;
 
 #pragma mark - VC Lifecycle
@@ -29,6 +29,10 @@
 	[self constructView];
     [self layoutView];
     [self bindView];
+}
+
+- (void)dealloc {
+	_eventHandler = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -46,12 +50,18 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)setEventHandler:(id<THLGuestlistInvitationViewEventHandler>)eventHandler {
+	_eventHandler = eventHandler;
+}
+
 #pragma mark - View Setup
 - (void)constructView {
 	_tableView = [self newTableView];
 	_contactPickerView = [self newContactPickerView];
 	_cancelButton = [self newCancelBarButtonItem];
+	_cancelButton.rac_command = [self newCancelCommand];
 	_commitButton = [self newCommitBarButtonItem];
+	_commitButton.rac_command = [self newCommitCommand];
 	_addedGuests = [NSMutableSet new];
 }
 
@@ -135,7 +145,9 @@
 }
 
 - (UIBarButtonItem *)newCancelBarButtonItem {
-	UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(handleCancelAction:)];
+	UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:nil action:NULL];
+//	UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(handleCancelAction:)];
+
     [item setTitleTextAttributes:
      [NSDictionary dictionaryWithObjectsAndKeys:
       kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
@@ -144,7 +156,9 @@
 }
 
 - (UIBarButtonItem *)newCommitBarButtonItem {
-	UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Submit " style:UIBarButtonItemStylePlain target:self action:@selector(handleCommitAction:)];
+	UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Submit " style:UIBarButtonItemStylePlain target:nil action:NULL];
+//	UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Submit " style:UIBarButtonItemStylePlain target:self action:@selector(handleCommitAction:)];
+
     [item setTitleTextAttributes:
      [NSDictionary dictionaryWithObjectsAndKeys:
       kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
@@ -152,33 +166,34 @@
 	return item;
 }
 
-- (void)handleCancelAction:(id)sender {
-	[self.eventHandler viewDidCancelInvitations:self];
+//- (void)handleCancelAction:(id)sender {
+//	[self.eventHandler viewDidCancelInvitations:self];
+//}
+//
+//- (void)handleCommitAction:(id)sender {
+//	[self.eventHandler viewDidCommitInvitations:self];
+//}
+
+
+- (RACCommand *)newCommitCommand {
+	WEAKSELF();
+	RACCommand *command = [[RACCommand alloc] initWithEnabled:[RACObserve(self, addedGuests) map:^id(NSSet *value) {
+		return @(value.count > 0);
+	}] signalBlock:^RACSignal *(id input) {
+		[WSELF.eventHandler viewDidCommitInvitations:WSELF];
+		return [RACSignal empty];
+	}];
+	return command;
 }
 
-- (void)handleCommitAction:(id)sender {
-	[self.eventHandler viewDidCommitInvitations:self];
+- (RACCommand *)newCancelCommand {
+	WEAKSELF();
+	RACCommand *command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+		[WSELF.eventHandler viewDidCancelInvitations:WSELF];
+		return [RACSignal empty];
+	}];
+	return command;
 }
-//
-//- (RACCommand *)newCommitCommand {
-//	WEAKSELF();
-//	RACCommand *command = [[RACCommand alloc] initWithEnabled:[RACObserve(self, addedGuests) map:^id(NSSet *value) {
-//		return @(value.count > 0);
-//	}] signalBlock:^RACSignal *(id input) {
-//		[WSELF.eventHandler viewDidCommitInvitations:WSELF];
-//		return [RACSignal empty];
-//	}];
-//	return command;
-//}
-//
-//- (RACCommand *)newCancelCommand {
-//	WEAKSELF();
-//	RACCommand *command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-//		[WSELF.eventHandler viewDidCancelInvitations:WSELF];
-//		return [RACSignal empty];
-//	}];
-//	return command;
-//}
 
 #pragma mark - Layout
 - (void)viewDidLayoutSubviews {

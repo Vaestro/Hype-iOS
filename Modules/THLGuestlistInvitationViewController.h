@@ -20,6 +20,7 @@ THLGuestlistInvitationView,
 UITableViewDelegate,
 THContactPickerDelegate
 >
+//@property (nonatomic, strong) id<THLGuestlistInvitationViewEventHandler> eventHandler;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) THContactPickerView *contactPickerView;
 @property (nonatomic) BOOL newAdditions;

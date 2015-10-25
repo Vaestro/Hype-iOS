@@ -28,5 +28,6 @@
 							   dataStore:(THLDataStore *)dataStore;
 
 - (void)presentInterfaceInWindow:(UIWindow *)window;
+- (void)presentInterfaceInController:(UIViewController *)controller;
 - (void)dismissInterface;
 @end

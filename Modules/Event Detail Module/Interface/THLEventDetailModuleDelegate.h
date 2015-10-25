@@ -10,5 +10,5 @@
 
 @protocol THLEventDetailModuleInterface;
 @protocol THLEventDetailModuleDelegate <NSObject>
-- (void)eventDetailModule:(id<THLEventDetailModuleInterface>)module;
+- (void)eventDetailModule:(id<THLEventDetailModuleInterface>)module presentGuestlistInvitationInterfaceOnController:(UIViewController *)controller;
 @end

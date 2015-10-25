@@ -39,6 +39,11 @@ THLGuestlistInvitationViewEventHandler
 	[_wireframe presentInterfaceInWindow:window];
 }
 
+- (void)presentGuestlistInvitationInterfaceForGuestlist:(NSString *)guestlistId inController:(UIViewController *)controller {
+	_interactor.guestlistId = guestlistId;
+	[_wireframe presentInterfaceInController:controller];
+}
+
 - (void)configureView:(id<THLGuestlistInvitationView>)view {
 	_view = view;
 	[view setEventHandler:self];
