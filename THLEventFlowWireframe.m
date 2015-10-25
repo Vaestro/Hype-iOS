@@ -21,6 +21,7 @@ THLGuestlistInvitationModuleDelegate
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
 @property (nonatomic, strong) THLEventDetailWireframe  *eventDetailWireframe;
+@property (nonatomic, strong) THLGuestlistInvitationWireframe *guestlistInvitationWireframe;
 @end
 
 @implementation THLEventFlowWireframe
@@ -49,20 +50,22 @@ THLGuestlistInvitationModuleDelegate
 	[_eventDetailWireframe.moduleInterface presentEventDetailInterfaceForEvent:eventEntity inWindow:_window];
 }
 
-- (void)presentGuestlistInvitationInterfaceForPromotion:(THLPromotionEntity *)promotionEntity {
-    THLGuestlistInvitationWireframe *guestlistWireframe = [_dependencyManager newGuestlistInvitationWireframe];
-    [guestlistWireframe.moduleInterface setModuleDelegate:self];
-    [guestlistWireframe.moduleInterface presentGuestlistInvitationInterfaceForPromotion:promotionEntity forGuestlist:@"1" inWindow:_window];
+
+- (void)presentGuestlistInvitationInterfaceForPromotion:(THLPromotionEntity *)promotionEntity inController:(UIViewController *)controller {
+	_guestlistInvitationWireframe = [_dependencyManager newGuestlistInvitationWireframe];
+	[_guestlistInvitationWireframe.moduleInterface setModuleDelegate:self];
+	[_guestlistInvitationWireframe.moduleInterface presentGuestlistInvitationInterfaceForPromotion:promotionEntity forGuestlist:@"1" inController:controller];
 }
+
 
 #pragma mark - THLEventDiscoveryModuleDelegate
 - (void)eventDiscoveryModule:(id<THLEventDiscoveryModuleInterface>)module userDidSelectEventEntity:(THLEventEntity *)eventEntity {
 	[self presentEventDetailInterfaceForEvent:eventEntity];
 }
 
-- (void)eventDetailModule:(id<THLEventDetailModuleInterface>)module promotion:(THLPromotionEntity *)promotionEntity {
-    [self presentGuestlistInvitationInterfaceForPromotion:promotionEntity];
-}   
+- (void)eventDetailModule:(id<THLEventDetailModuleInterface>)module promotion:(THLPromotionEntity *)promotionEntity presentGuestlistInvitationInterfaceOnController:(UIViewController *)controller{
+    [self presentGuestlistInvitationInterfaceForPromotion:promotionEntity inController:controller];
+}
 
 #pragma mark - THLEventDetailModuleDelegate
 //None

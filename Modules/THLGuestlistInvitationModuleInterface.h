@@ -13,5 +13,6 @@
 @protocol THLGuestlistInvitationModuleInterface <NSObject>
 @property (nonatomic, weak) id<THLGuestlistInvitationModuleDelegate> moduleDelegate;
 
-- (void)presentGuestlistInvitationInterfaceForPromotion:(THLPromotionEntity *)promotionEntity forGuestlist:(NSString *)guestlistId inWindow:(UIWindow *)window;
+- (void)presentGuestlistInvitationInterfaceForPromotion:(THLPromotionEntity *)promotionEntity forGuestlist:(NSString *)guestlistId inController:(UIViewController *)controller;
+
 @end

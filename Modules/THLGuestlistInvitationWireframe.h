@@ -28,6 +28,7 @@
 							 addressBook:(APAddressBook *)addressBook
 							   dataStore:(THLDataStore *)dataStore;
 
-- (void)presentInterfaceInWindow:(UIWindow *)window;
+//- (void)presentInterfaceInWindow:(UIWindow *)window;
+- (void)presentInterfaceInController:(UIViewController *)controller;
 - (void)dismissInterface;
 @end

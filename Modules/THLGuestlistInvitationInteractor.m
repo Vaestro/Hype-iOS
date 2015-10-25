@@ -37,9 +37,6 @@ static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInv
 
 - (void)setPromotionEntity:(THLPromotionEntity *)promotionEntity {
     _promotionEntity = promotionEntity;
-//    [PFCloud callFunctionInBackground:@"createGuestlist"
-//                       withParameters:@{@"promotionId": promotionEntity.objectId}
-//                                block:^(NSArray *results, NSError *error){}];
 }
 
 - (void)setGuestlistId:(NSString *)guestlistId {
@@ -148,8 +145,8 @@ static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInv
 - (void)commitChangesToGuestlist {
 	[self checkForGuestlist];
 //    Cloud Code Function here that will take Params: Owner ID, Promotion ID, and Array of Guest Phone Numbers to create Guestlist, Guestlist Invites, and send out Invites
-//    [PFCloud callFunctionInBackground:@"inviteGuests"
-//                   withParameters:@{@"guestDigits": @[@"9178686312"]}
+//    [PFCloud callFunctionInBackground:@"createGuestlist"
+//                       withParameters:@{@"promotionId": _promotionEntity.objectId}
 //                                block:^(NSArray *results, NSError *error){}];
 	[_delegate interactor:self didCommitChangesToGuestlist:_guestlistId error:nil];
 }
