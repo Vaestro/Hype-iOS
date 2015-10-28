@@ -17,12 +17,12 @@
 	return self;
 }
 
-- (void)getPromotionsForEvent:(THLEventEntity *)eventEntity {
-	[[_dataManager getPromotionsForEvent:eventEntity] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
-		[_delegate interactor:self didGetPromotions:task.result forEvent:eventEntity error:task.error];
-		return nil;
-	}];
-}
+//- (void)getPromotionsForEvent:(THLEventEntity *)eventEntity {
+//	[[_dataManager getPromotionsForEvent:eventEntity] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+//		[_delegate interactor:self didGetPromotions:task.result forEvent:eventEntity error:task.error];
+//		return nil;
+//	}];
+//}
 
 
 @end

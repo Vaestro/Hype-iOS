@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+@protocol THLGuestlistInvitationModuleInterface;
 @protocol THLGuestlistInvitationModuleDelegate <NSObject>
-
+//- (void)guestlistInvitationModule:(id<THLGuestlistInvitationModuleInterface>)module userDidCommitChangesToGuestlist:(NSString *)guestlistId;
 @end

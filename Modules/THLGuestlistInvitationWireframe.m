@@ -14,6 +14,7 @@
 
 @interface THLGuestlistInvitationWireframe()
 @property (nonatomic, strong) UIWindow *window;
+
 @property (nonatomic, strong) UIViewController *controller;
 @property (nonatomic, strong) THLGuestlistInvitationPresenter *presenter;
 @property (nonatomic, strong) THLGuestlistInvitationInteractor *interactor;
@@ -23,12 +24,14 @@
 
 @implementation THLGuestlistInvitationWireframe
 - (instancetype)initWithGuestlistService:(id<THLGuestlistServiceInterface>)guestlistService
+                            entityMapper:(THLEntityMapper *)entityMapper
 				   viewDataSourceFactory:(id<THLViewDataSourceFactoryInterface>)viewDataSourceFactory
 							 addressBook:(APAddressBook *)addressBook
 dataStore:(THLDataStore *)dataStore{
 	if (self = [super init]) {
 		_guestlistService = guestlistService;
 		_viewDataSourceFactory = viewDataSourceFactory;
+        _entityMapper = entityMapper;
 		_addressBook = addressBook;
 		_dataStore = dataStore;
 		[self buildModule];
@@ -37,7 +40,7 @@ dataStore:(THLDataStore *)dataStore{
 }
 
 - (void)buildModule {
-    _dataManager = [[THLGuestlistInvitationDataManager alloc] initWithGuestlistService:_guestlistService dataStore:_dataStore addressBook:_addressBook];
+    _dataManager = [[THLGuestlistInvitationDataManager alloc] initWithGuestlistService:_guestlistService entityMapper: _entityMapper dataStore:_dataStore addressBook:_addressBook];
 	_interactor = [[THLGuestlistInvitationInteractor alloc] initWithDataManager:_dataManager viewDataSourceFactory:_viewDataSourceFactory];
 	_view = [[THLGuestlistInvitationViewController alloc] initWithNibName:nil bundle:nil];
 	_presenter = [[THLGuestlistInvitationPresenter alloc] initWithWireframe:self

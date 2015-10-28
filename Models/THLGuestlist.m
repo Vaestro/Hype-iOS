@@ -12,6 +12,7 @@
 @dynamic owner;
 @dynamic promotion;
 @dynamic eventId;
+@dynamic reviewStatus;
 
 + (void)load {
 	[self registerSubclass];

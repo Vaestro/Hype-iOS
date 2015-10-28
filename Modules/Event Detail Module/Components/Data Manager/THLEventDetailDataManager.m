@@ -10,8 +10,6 @@
 #import "THLLocationServiceInterface.h"
 #import "THLPromotionServiceInterface.h"
 #import "THLGuestlistServiceInterface.h"
-#import "THLPromotion.h"
-#import "THLPromotionEntity.h"
 #import "THLEntityMapper.h"
 
 @implementation THLEventDetailDataManager
@@ -40,8 +38,11 @@
 	}];
 }
 
-
-- (BFTask *)fetchGuestlistForGuest:(THLUser *)guest forEvent:(NSString *)eventId {
-    return [_guestlistService fetchGuestlistForGuest:guest forEvent:eventId];
+- (BFTask *)fetchGuestlistForGuest:(NSString *)guestId forEvent:(NSString *)eventId {
+    return [[_guestlistService fetchGuestlistForGuest:guestId forEvent:eventId] continueWithSuccessBlock:^id(BFTask *task) {
+        NSArray<THLGuestlist *> *fetchedGuestlists = task.result;
+        NSArray<THLGuestlistEntity *> *mappedGuestlists = [_entityMapper mapGuestlists:fetchedGuestlists];
+        return mappedGuestlists;
+    }];
 }
 @end

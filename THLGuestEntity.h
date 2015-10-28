@@ -22,6 +22,8 @@ typedef NS_ENUM(NSInteger, THLGuestEntityType) {
 @property (nonatomic, readonly) NSString *phoneNumber;
 @property (nonatomic, readonly) NSURL *imageURL;
 @property (nonatomic, readonly) NSString *fullName;
+@property (nonatomic, readonly) NSString *intPhoneNumberFormat;
+
 @property (nonatomic, readonly) THLGuestEntityType type;
 
 + (instancetype)fromContact:(APContact *)contact;

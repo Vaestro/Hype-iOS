@@ -125,6 +125,8 @@
 		21E402EE1BBF9A8B001D0C2C /* THLGuestEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E402ED1BBF9A8B001D0C2C /* THLGuestEntity.m */; };
 		21EED1001BB5F842001325A7 /* THLEventFlowWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 21EED0FF1BB5F842001325A7 /* THLEventFlowWireframe.m */; };
 		76FA20541BCF854000BB480A /* THLSessionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 76FA20531BCF854000BB480A /* THLSessionService.m */; };
+		7905CC3F1BE0251000E56878 /* THLGuestlistInviteEntity.h in Sources */ = {isa = PBXBuildFile; fileRef = 7905CC3E1BE0251000E56878 /* THLGuestlistInviteEntity.h */; };
+		7905CC411BE0252700E56878 /* THLGuestlistInviteEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7905CC401BE0252700E56878 /* THLGuestlistInviteEntity.m */; };
 		794208281BD82641009B86FA /* UIView+DimView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794208271BD82641009B86FA /* UIView+DimView.m */; };
 		7942082C1BD82AF6009B86FA /* THLActionBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7942082B1BD82AF6009B86FA /* THLActionBarButton.m */; };
 		7942082F1BD8C250009B86FA /* THLGuestlistEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7942082E1BD8C250009B86FA /* THLGuestlistEntity.m */; };
@@ -407,6 +409,8 @@
 		76FA20511BCF851400BB480A /* THLSessionServiceInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLSessionServiceInterface.h; sourceTree = "<group>"; };
 		76FA20521BCF854000BB480A /* THLSessionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLSessionService.h; sourceTree = "<group>"; };
 		76FA20531BCF854000BB480A /* THLSessionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLSessionService.m; sourceTree = "<group>"; };
+		7905CC3E1BE0251000E56878 /* THLGuestlistInviteEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistInviteEntity.h; sourceTree = "<group>"; };
+		7905CC401BE0252700E56878 /* THLGuestlistInviteEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestlistInviteEntity.m; sourceTree = "<group>"; };
 		794208261BD82641009B86FA /* UIView+DimView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DimView.h"; sourceTree = "<group>"; };
 		794208271BD82641009B86FA /* UIView+DimView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DimView.m"; sourceTree = "<group>"; };
 		7942082A1BD82AF6009B86FA /* THLActionBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLActionBarButton.h; sourceTree = "<group>"; };
@@ -1393,6 +1397,8 @@
 				21E402ED1BBF9A8B001D0C2C /* THLGuestEntity.m */,
 				7942082D1BD8C250009B86FA /* THLGuestlistEntity.h */,
 				7942082E1BD8C250009B86FA /* THLGuestlistEntity.m */,
+				7905CC3E1BE0251000E56878 /* THLGuestlistInviteEntity.h */,
+				7905CC401BE0252700E56878 /* THLGuestlistInviteEntity.m */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -1830,6 +1836,11 @@
 					2174A0631B863F6A006826D7 = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = 8QRD6SFSHS;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 0;
+							};
+						};
 					};
 					2174A07C1B863F6A006826D7 = {
 						CreatedOnToolsVersion = 6.4;
@@ -2029,6 +2040,7 @@
 				217EBE8D1BB78AB4006044B6 /* THLYapDatabaseViewFactory.m in Sources */,
 				211892061BA9FF0600E8A11F /* THLLoginInteractor.m in Sources */,
 				211005D01B8A7D0200A540C6 /* NSDate+Hypelist.m in Sources */,
+				7905CC411BE0252700E56878 /* THLGuestlistInviteEntity.m in Sources */,
 				21E402D21BBF768F001D0C2C /* THLGuestlistInvitationDataManager.m in Sources */,
 				216BDD611BC72F9100BBF713 /* THLSearchResultsViewDataSourceHandler.m in Sources */,
 				21775F631B8E17A300609D39 /* THLAddressBookEntryFetchService.m in Sources */,
@@ -2101,6 +2113,7 @@
 				215A429D1BAA25E700D03C35 /* THLFacebookPictureWireframe.m in Sources */,
 				2121736E1BB34DD3007D817A /* THLStarRatingView.m in Sources */,
 				2108A8881B8BBF5B00B725F6 /* THLDependencyManager.m in Sources */,
+				7905CC3F1BE0251000E56878 /* THLGuestlistInviteEntity.h in Sources */,
 				2110059F1B8A351000A540C6 /* THLEventDiscoveryWireframe.m in Sources */,
 				7942082C1BD82AF6009B86FA /* THLActionBarButton.m in Sources */,
 				218AF3521BB7422100AFAEBF /* THLEventEntity.m in Sources */,
@@ -2245,7 +2258,7 @@
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_SHADOW = YES;
 				INFOPLIST_FILE = "Hypelist2point0/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Hypelist.Hypelist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2274,7 +2287,7 @@
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_SHADOW = YES;
 				INFOPLIST_FILE = "Hypelist2point0/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Hypelist.Hypelist;
 				PRODUCT_NAME = "$(TARGET_NAME)";

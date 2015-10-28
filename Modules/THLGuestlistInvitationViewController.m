@@ -15,6 +15,8 @@
 #import "THLContactTableViewCell.h"
 #import "THLSearchViewDataSource.h"
 #import "THLGuestEntity.h"
+#import "SVProgressHUD.h"
+
 
 #define kContactPickerViewHeight 100.0
 
@@ -22,6 +24,7 @@
 @synthesize existingGuests = _existingGuests;
 @synthesize eventHandler = _eventHandler;
 @synthesize dataSource = _dataSource;
+@synthesize showActivityIndicator = _showActivityIndicator;
 
 #pragma mark - VC Lifecycle
 - (void)viewDidLoad {
@@ -111,10 +114,20 @@
 }
 
 - (void)bindView {
+    WEAKSELF();
+
 	[RACObserve(self, dataSource) subscribeNext:^(id x) {
 		[self configureDataSource];
 	}];
     
+    [RACObserve(WSELF, showActivityIndicator) subscribeNext:^(NSNumber *val) {
+        BOOL shouldAnimate = [val boolValue];
+        if (shouldAnimate) {
+            [SVProgressHUD show];
+        } else {
+            [SVProgressHUD dismiss];
+        }
+    }];
 }
 
 #pragma mark - Constructors

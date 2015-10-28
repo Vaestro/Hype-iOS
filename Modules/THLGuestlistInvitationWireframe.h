@@ -11,6 +11,7 @@
 
 @protocol THLGuestlistServiceInterface;
 @protocol THLPromotionServiceInterface;
+@class THLEntityMapper;
 @class APAddressBook;
 @class THLDataStore;
 @protocol THLViewDataSourceFactoryInterface;
@@ -23,7 +24,10 @@
 @property (nonatomic, readonly) id<THLViewDataSourceFactoryInterface> viewDataSourceFactory;
 @property (nonatomic, readonly) APAddressBook *addressBook;
 @property (nonatomic, readonly) THLDataStore *dataStore;
+@property (nonatomic, readonly) THLEntityMapper *entityMapper;
+
 - (instancetype)initWithGuestlistService:(id<THLGuestlistServiceInterface>)guestlistService
+                            entityMapper:(THLEntityMapper *)entityMapper
 				   viewDataSourceFactory:(id<THLViewDataSourceFactoryInterface>)viewDataSourceFactory
 							 addressBook:(APAddressBook *)addressBook
 							   dataStore:(THLDataStore *)dataStore;

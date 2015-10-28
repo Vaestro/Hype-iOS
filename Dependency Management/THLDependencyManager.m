@@ -132,6 +132,7 @@
 
 - (THLGuestlistInvitationWireframe *)newGuestlistInvitationWireframe {
 	THLGuestlistInvitationWireframe *wireframe = [[THLGuestlistInvitationWireframe alloc] initWithGuestlistService:self.guestlistService
+                                                                                                      entityMapper:self.entityMapper
 																							 viewDataSourceFactory:self.viewDataSourceFactory
 																									   addressBook:self.addressBook
 																										 dataStore:self.guestDataStore];

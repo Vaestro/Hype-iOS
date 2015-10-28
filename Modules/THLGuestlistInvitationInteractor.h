@@ -17,7 +17,7 @@
 @protocol THLViewDataSourceFactoryInterface;
 
 @protocol THLGuestlistInvitationInteractorDelegate <NSObject>
-- (void)interactor:(THLGuestlistInvitationInteractor *)interactor didCommitChangesToGuestlist:(NSString *)guestlistId error:(NSError *)error;
+- (void)interactor:(THLGuestlistInvitationInteractor *)interactor didCommitChangesToGuestlist:(NSError *)error;
 @end
 
 

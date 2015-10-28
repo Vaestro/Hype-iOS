@@ -29,6 +29,6 @@
 
 - (BFTask<CLPlacemark *> *)fetchPlacemarkForAddress:(NSString *)address;
 - (BFTask *)fetchPromotionsForEvent:(NSString *)eventId;
-- (BFTask *)fetchGuestlistForGuest:(THLUser *)guest forEvent:(NSString *)eventId;
+- (BFTask *)fetchGuestlistForGuest:(NSString *)guestId forEvent:(NSString *)eventId;
 
 @end

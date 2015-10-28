@@ -33,9 +33,9 @@
     }];
 }
 
-- (void)getGuestlistForGuest:(THLUser *)guest forEvent:(NSString *)eventId {
-    [[_dataManager fetchGuestlistForGuest:guest forEvent:eventId] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
-        [_delegate interactor:self didGetGuestlist:task.result forGuest:guest forEvent:eventId error:task.error];
+- (void)getGuestlistForGuest:(NSString *)guestId forEvent:(NSString *)eventId {
+    [[_dataManager fetchGuestlistForGuest:guestId forEvent:eventId] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+        [_delegate interactor:self didGetGuestlist:task.result[0] forGuest:guestId forEvent:eventId error:task.error];
         return nil;
     }];
 }

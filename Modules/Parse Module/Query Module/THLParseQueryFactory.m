@@ -38,13 +38,10 @@
 	return query;
 }
 
-- (PFQuery *)queryForGuestlistForGuest:(THLUser *)guest forEvent:(NSString *)eventId {
-    PFQuery *guestlistQuery = [self baseGuestlistQuery];
-    [guestlistQuery whereKey:@"owner" matchesQuery:[guest matchingQuery]];
-    [guestlistQuery whereKey:@"eventID" equalTo:eventId];
-    
+- (PFQuery *)queryForGuestlistForGuest:(NSString *)guestId forEvent:(NSString *)eventId {
     PFQuery *query = [self baseGuestlistQuery];
-    [query whereKey:@"guestlist" matchesQuery:guestlistQuery];
+//    [query whereKey:@"owner" equalTo:guestId];
+    [query whereKey:@"eventId" equalTo:eventId];
     return query;
 }
 
@@ -85,8 +82,10 @@
  */
 - (PFQuery *)baseGuestlistQuery {
     PFQuery *query = [THLGuestlist query];
-    [query includeKey:@"guest"];
+    [query includeKey:@"owner"];
     [query includeKey:@"promotion"];
+    [query includeKey:@"promotion.event"];
+    [query includeKey:@"promotion.event.location"];
     return query;
 }
 

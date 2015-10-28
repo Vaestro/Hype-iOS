@@ -37,6 +37,14 @@
     [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:nil];
 	[Fabric with:@[[Crashlytics class], [Digits class]]];
 
+    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
+                                                    UIUserNotificationTypeBadge |
+                                                    UIUserNotificationTypeSound);
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
+                                                                             categories:nil];
+    [application registerUserNotificationSettings:settings];
+    [application registerForRemoteNotifications];
+    
 	[THLAppearanceUtils applyStyles];
 
 	_dependencyManager = [[THLDependencyManager alloc] init];
@@ -48,6 +56,47 @@
 	return [[FBSDKApplicationDelegate sharedInstance] application:application
 									didFinishLaunchingWithOptions:launchOptions];
 }
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    // Store the deviceToken in the current installation and save it to Parse.
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    currentInstallation.deviceToken = @"";
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    currentInstallation.channels = @[ @"global" ];
+    [[currentInstallation saveInBackground] continueWithBlock:^id(BFTask *task) {
+        
+        return nil;
+    }];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [PFPush handlePush:userInfo];
+}
+
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
+    //register to receive notifications
+    [application registerForRemoteNotifications];
+}
+
+//For interactive notification only
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void(^)())completionHandler
+{
+    //handle the actions
+    if ([identifier isEqualToString:@"declineAction"]){
+    }
+    else if ([identifier isEqualToString:@"answerAction"]){
+    }
+}
+
+//- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+//    [[THLPushNotificationManager handlePushNotification:userInfo] continueWithBlock:^id(BFTask *task) {
+//        if (completionHandler) {
+//            UIBackgroundFetchResult result = (!task.faulted) ? UIBackgroundFetchResultNewData : UIBackgroundFetchResultFailed;
+//            completionHandler(result);
+//        }
+//        return nil;
+//    }];
+//}
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
 	[FBSDKAppEvents activateApp];

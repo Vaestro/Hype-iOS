@@ -35,8 +35,8 @@
 @synthesize locationAddress;
 @synthesize dismissCommand;
 @synthesize locationPlacemark;
-@synthesize guestlistStatus;
-@synthesize createGuestlistCommand;
+@synthesize actionBarButtonStatus;
+@synthesize actionBarButtonCommand;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -94,8 +94,8 @@
     RAC(self.mapView, locationName) = RACObserve(self, locationName);
     RAC(self.mapView, locationAddress) = RACObserve(self, locationAddress);
     RAC(self.mapView, locationPlacemark) = RACObserve(self, locationPlacemark);
-//    RAC(self, guestlistStatus) = RACObserve(self, guestlistStatus);
-    RAC(self.bottomBar, rac_command) = RACObserve(self, createGuestlistCommand);
+//    RAC(self, bottomBar) = RACObserve(self, actionBarButtonStatus);
+    RAC(self.bottomBar, rac_command) = RACObserve(self, actionBarButtonCommand);
 
 }
 
@@ -132,7 +132,7 @@
 
 - (THLActionBarButton *)newBottomBar {
     THLActionBarButton *bottomBar = [THLActionBarButton new];
-    [bottomBar.morphingLabel setTextWithoutMorphing:NSLocalizedString(guestlistStatus, nil)];
+    [bottomBar.morphingLabel setTextWithoutMorphing:NSLocalizedString(actionBarButtonStatus, nil)];
     return bottomBar;
 }
 @end

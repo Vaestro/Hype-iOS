@@ -13,7 +13,7 @@
 @class THLUser;
 
 typedef NS_ENUM(NSInteger, THLGuestlistInviteResponse) {
-	THLGuestlistInviteResponseInvited = 0,
+	THLGuestlistInviteResponsePending = 0,
 	THLGuestlistInviteResponseAccepted,
 	THLGuestlistInviteResponseRejected,
 	THLGuestlistInviteResponse_Count

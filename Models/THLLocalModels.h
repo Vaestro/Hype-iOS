@@ -9,10 +9,11 @@
 #ifndef Hypelist2point0_THLLocalModels_h
 #define Hypelist2point0_THLLocalModels_h
 
-#import "THLPromotion.h"
 #import "THLUser.h"
+#import "THLPromotion.h"
 #import "THLEvent.h"
 #import "THLLocation.h"
 #import "THLGuestlist.h"
+#import "THLGuestlistInvite.h"
 
 #endif

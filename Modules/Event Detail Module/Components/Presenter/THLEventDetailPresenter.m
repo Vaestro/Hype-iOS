@@ -25,6 +25,11 @@ THLEventDetailInteractorDelegate
 @property (nonatomic, strong) THLGuestlistEntity *guestlistEntity;
 @property (nonatomic, strong) THLPromotionEntity *promotionEntity;
 @property (nonatomic, strong) id<THLEventDetailView> view;
+typedef NS_ENUM(NSInteger, guestlistReviewStatus) {
+    guestlistReviewStatusPending = 0,
+    guestlistReviewStatusSuccess,
+    guestlistReviewStatusFailure,
+};
 @end
 
 @implementation THLEventDetailPresenter
@@ -50,22 +55,32 @@ THLEventDetailInteractorDelegate
 	[view setLocationName:_eventEntity.location.name];
 	[view setLocationInfo:_eventEntity.location.info];
 	[view setLocationAddress:_eventEntity.location.fullAddress];
-    [view setGuestlistStatus:@"JOIN A GUESTLIST BITCH"];
 
 	RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
 		[self handleDismissAction];
 		return [RACSignal empty];
 	}];
     
-    RACCommand *createGuestlistCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+	[view setDismissCommand:dismissCommand];
+	[_interactor getPlacemarkForLocation:_eventEntity.location];
+    [_interactor getGuestlistForGuest:[THLUser currentUser].objectId forEvent:_eventEntity.objectId];
+    if (self.guestlistEntity) {
+        [view setActionBarButtonStatus:@"VIEW YOUR PARTY BITCH"];
+    } else {
+        [view setActionBarButtonStatus:@"JOIN A GUESTLIST BITCH"];
+    }
+
+    RACCommand *actionBarButtonCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         [self handleCreateGuestlistAction];
         return [RACSignal empty];
     }];
     
-    [view setCreateGuestlistCommand:createGuestlistCommand];
-	[view setDismissCommand:dismissCommand];
-	[_interactor getPlacemarkForLocation:_eventEntity.location];
-    [_interactor getGuestlistForGuest:[THLUser currentUser] forEvent:_eventEntity.objectId];
+//    [RACObserve(self, guestlistReviewStatus) subscribeNext:^(NSInteger *b) {
+//        BOOL isSubmitting = [b boolValue];
+//        [view setShowActivityIndicator:isSubmitting];
+//    }];
+    
+    [view setActionBarButtonCommand:actionBarButtonCommand];
 }
 
 - (void)configureNavigationBar:(THLEventNavigationBar *)navBar {
@@ -110,20 +125,9 @@ THLEventDetailInteractorDelegate
     }
 }
 
-- (void)interactor:(THLEventDetailInteractor *)interactor didGetGuestlist:(THLGuestlistEntity *)guestlist forGuest:(THLUser *)guest forEvent:(NSString *)eventId error:(NSError *)error {
+- (void)interactor:(THLEventDetailInteractor *)interactor didGetGuestlist:(THLGuestlistEntity *)guestlist forGuest:(NSString *)guestId forEvent:(NSString *)eventId error:(NSError *)error {
     if (!error && guestlist) {
         _guestlistEntity = guestlist;
-        if (*_guestlistEntity.reviewStatus == 0) {
-            [_view setGuestlistStatus:@"VIEW PENDING GUESTLIST"];
-        }
-        else if (*_guestlistEntity.reviewStatus == 1) {
-            [_view setGuestlistStatus:@"VIEW GUESTLIST"];
-        }
-        else if (*_guestlistEntity.reviewStatus == 2) {
-            [_view setGuestlistStatus:@"DECLINED GUESTLIST"];
-        }
-    } else if (!guestlist) {
-        [_view setGuestlistStatus:@"PLEASE JOIN BITCH"];
     }
 }
 @end

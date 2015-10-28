@@ -22,6 +22,7 @@ static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInv
 @interface THLGuestlistInvitationInteractor ()
 @property (nonatomic, strong) NSArray *currentGuests;
 @property (nonatomic, strong) NSMutableArray *addedGuests;
+@property (nonatomic, strong) NSMutableArray *addedGuestDigits;
 @end
 
 @implementation THLGuestlistInvitationInteractor
@@ -127,28 +128,20 @@ static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInv
 	}
 }
 
-//- (void)saveGuestlist:(THLGuestEntity *)owner promotion:(THLPromotionEntity *)promotion {
-//    THLGuestlistEntity *guestlist = [[THLGuestlistEntity alloc] init];
-//    guestlist.owner = owner;
-//    guestlist.promotion = promotion;
-//}
-//
-//- (NSArray<THLGuestlistInvite *> *)convertGuests:(NSArray<THLGuestEntity *> *)guests {
-//    return [guests linq_select:^id(id item) {
-//        THLGuestlistInvite *guestlistInvite = [[THLGuestlistInvite alloc] init];
-//        guestlistInvite.sender = [THLUserEntity currentUser];
-//        
-//        return [THLGuestlistInviteEntity fromGuest:(THLGuestEntity *)item];
-//    }];
-//}
+
+- (NSArray *)obtainDigits:(NSArray<THLGuestEntity *> *)addedGuests {
+    return [addedGuests linq_select:^id(id guest) {
+        return [guest intPhoneNumberFormat];
+    }];
+}
 
 - (void)commitChangesToGuestlist {
 	[self checkForGuestlist];
-//    Cloud Code Function here that will take Params: Owner ID, Promotion ID, and Array of Guest Phone Numbers to create Guestlist, Guestlist Invites, and send out Invites
-//    [PFCloud callFunctionInBackground:@"createGuestlist"
-//                       withParameters:@{@"promotionId": _promotionEntity.objectId}
-//                                block:^(NSArray *results, NSError *error){}];
-	[_delegate interactor:self didCommitChangesToGuestlist:_guestlistId error:nil];
+
+    [[_dataManager submitGuestlistForPromotion:_promotionEntity.objectId withInvites:[self obtainDigits:_addedGuests]] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+        [_delegate interactor:self didCommitChangesToGuestlist:task.error];
+        return nil;
+    }];
 }
 
 @end

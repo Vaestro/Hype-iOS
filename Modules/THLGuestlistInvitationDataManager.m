@@ -15,14 +15,17 @@
 #import "THLPromotionServiceInterface.h"
 #import "THLGuestlist.h"
 #import "THLGuestlistEntity.h"
-//#import "THLEntityMapper.h"
+#import "THLEntityMapper.h"
+#import "THLDataStoreDomain.h"
 
 @implementation THLGuestlistInvitationDataManager
 - (instancetype)initWithGuestlistService:(id<THLGuestlistServiceInterface>)guestlistService
+                            entityMapper:(THLEntityMapper *)entityMapper
 							   dataStore:(THLDataStore *)dataStore
 							 addressBook:(APAddressBook *)addressBook {
 	if (self = [super init]) {
 		_guestlistService = guestlistService;
+        _entityMapper = entityMapper;
 		_dataStore = dataStore;
 		_addressBook = addressBook;
 	}
@@ -37,12 +40,22 @@
 	}];
 }
 
-//- (BFTask *)submitGuestlistForPromotion:(THLPromotion *)promotion forOwner:(THLUser *)owner {
-//    
-//    return [[_guestlistService createGuestlistForPromotion:promotion forOwner:owner] continueWithSuccessBlock:^id(BFTask *task) {
-//        return [BFTask taskWithResult:task.result];
-//    }];
-//}
+- (BFTask *)submitGuestlistForPromotion:(NSString *)promotionId withInvites:(NSArray *)guestPhoneNumbers {
+    return [[_guestlistService createGuestlistForPromotion:promotionId withInvites:guestPhoneNumbers] continueWithSuccessBlock:^id(BFTask *task) {
+        THLDataStoreDomain *domain = [self domainForGuestlistInvite];
+        NSSet *entities = [NSSet setWithArray:[_entityMapper mapGuestlistInvites:@[task.result]]];
+        [_dataStore refreshDomain:domain withEntities:entities];
+        return [BFTask taskWithResult:nil];
+    }];
+}
+
+- (THLDataStoreDomain *)domainForGuestlistInvite {
+    THLDataStoreDomain *domain = [[THLDataStoreDomain alloc] initWithMemberTestBlock:^BOOL(THLEntity *entity) {
+        THLGuestlistInviteEntity *guestlistInviteEntity = (THLGuestlistInviteEntity *)entity;
+        return guestlistInviteEntity;
+    }];
+    return domain;
+}
 
 - (void)loadContacts {
 	[[self getContactsTasks] continueWithSuccessBlock:^id(BFTask *task) {

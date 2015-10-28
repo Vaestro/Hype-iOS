@@ -18,6 +18,12 @@ THLGuestlistInvitationInteractorDelegate,
 THLGuestlistInvitationViewEventHandler
 >
 @property (nonatomic, weak) id<THLGuestlistInvitationView> view;
+@property (nonatomic) BOOL submitting;
+//typedef NS_ENUM(NSInteger, guestlistSubmissionStatus) {
+//    guestlistSubmissionStatusPending = 0,
+//    guestlistSubmissionStatusSuccess,
+//    guestlistSubmissionStatusFailure,
+//};
 @end
 
 @implementation THLGuestlistInvitationPresenter
@@ -44,18 +50,22 @@ THLGuestlistInvitationViewEventHandler
 	_view = view;
 	[view setEventHandler:self];
 	[view setDataSource:[_interactor getDataSource]];
-//    RACCommand *cancelCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-//        [self handleCancelAction];
-//        return [RACSignal empty];
-//    }];
-//    
-//    [navBar setDismissCommand:cancelCommand];
+    
+    [RACObserve(self, submitting) subscribeNext:^(NSNumber *b) {
+        BOOL isSubmitting = [b boolValue];
+        [view setShowActivityIndicator:isSubmitting];
+    }];
 }
 
 
 #pragma mark - THLGuestlistInvitationInteractorDelegate
-- (void)interactor:(THLGuestlistInvitationInteractor *)interactor didCommitChangesToGuestlist:(NSString *)guestlistId error:(NSError *)error {
-
+- (void)interactor:(THLGuestlistInvitationInteractor *)interactor didCommitChangesToGuestlist:(NSError *)error {
+    self.submitting = NO;
+    if(!error) {
+        [_wireframe dismissInterface];
+    } else {
+        
+    }
 }
 
 #pragma mark - THLGuestlistInvitationViewEventHandler 
@@ -72,6 +82,7 @@ THLGuestlistInvitationViewEventHandler
 }
 
 - (void)viewDidCommitInvitations:(id<THLGuestlistInvitationView>)view {
+    self.submitting = YES;
 	[_interactor commitChangesToGuestlist];
 }
 @end

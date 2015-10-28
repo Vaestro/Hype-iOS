@@ -16,4 +16,6 @@
 @property (nonatomic, weak) id<THLGuestlistInvitationViewEventHandler> eventHandler;
 @property (nonatomic, strong) NSSet<THLGuestEntity *> *existingGuests;
 @property (nonatomic, strong) THLSearchViewDataSource *dataSource;
+@property (nonatomic) BOOL showActivityIndicator;
+
 @end

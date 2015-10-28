@@ -20,5 +20,5 @@
 - (instancetype)initWithEntityMapper:(THLEntityMapper *)entityMapper
 					promotionService:(id<THLPromotionServiceInterface>)promotionService;
 
-- (BFTask *)getPromotionsForEvent:(THLEventEntity *)eventEntity;
+//- (BFTask *)getPromotionsForEvent:(THLEventEntity *)eventEntity;
 @end

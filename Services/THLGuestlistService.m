@@ -8,8 +8,10 @@
 
 #import "THLGuestlistService.h"
 #import "THLParseQueryFactory.h"
+#import "Parse.h"
 
 @implementation THLGuestlistService
+
 - (instancetype)initWithQueryFactory:(THLParseQueryFactory *)queryFactory {
 	if (self = [super init]) {
 		_queryFactory = queryFactory;
@@ -17,21 +19,13 @@
 	return self;
 }
 
-- (BFTask *)fetchGuestlistForGuest:(THLUser *)guest forEvent:(NSString *)eventId {
-    return [[_queryFactory queryForGuestlistForGuest:guest forEvent:eventId] findObjectsInBackground];
+- (BFTask *)fetchGuestlistForGuest:(NSString *)guestId forEvent:(NSString *)eventId {
+    return [[_queryFactory queryForGuestlistForGuest:guestId forEvent:eventId] findObjectsInBackground];
 }
 
-//- (BFTask *)createGuestlistForPromotion:(THLPromotion *)promotion forOwner:(THLUser *)owner {
-//    PFObject *guestlist = [PFObject objectWithClassName:@"Guestlist"];
-//    guestlist[@"owner"] = owner;
-//    guestlist[@"promotion"] = promotion;
-//    [guestlist saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//        if (succeeded) {
-//            return TRUE;
-//        } else {
-//            return error;
-//        }
-//    }];
-//}
+- (BFTask *)createGuestlistForPromotion:(NSString *)promotionId withInvites:(NSArray *)guestPhoneNumbers {
+    return [PFCloud callFunctionInBackground:@"createGuestlist"
+                       withParameters:@{@"promotionId": promotionId, @"guestDigits": guestPhoneNumbers}];
+}
 
 @end

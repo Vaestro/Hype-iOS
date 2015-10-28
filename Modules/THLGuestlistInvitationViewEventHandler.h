@@ -14,4 +14,5 @@
 - (void)view:(id<THLGuestlistInvitationView>)view didRemoveGuest:(THLGuestEntity *)guest;
 - (void)viewDidCancelInvitations:(id<THLGuestlistInvitationView>)view;
 - (void)viewDidCommitInvitations:(id<THLGuestlistInvitationView>)view;
+
 @end
