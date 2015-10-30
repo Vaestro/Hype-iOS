@@ -74,7 +74,7 @@
 	BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
 
 	_addressBook.filterBlock = ^BOOL(APContact *contact) {
-		return (contact.phones.count > 0);
+		return ((contact.name.firstName != NULL || contact.name.lastName != NULL) && contact.phones.count > 0);
 	};
 
 	[_addressBook loadContacts:^(NSArray *contacts, NSError *error) {

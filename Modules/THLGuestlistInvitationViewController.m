@@ -109,6 +109,14 @@
 				tvCell.userInteractionEnabled = NO;
 				tvCell.alpha = 0.5;
 			}
+            
+            if ([tvCell respondsToSelector:@selector(setSeparatorInset:)]) {
+                [tvCell setSeparatorInset:UIEdgeInsetsZero];
+            }
+            
+            if ([tvCell respondsToSelector:@selector(setLayoutMargins:)]) {
+                [tvCell setLayoutMargins:UIEdgeInsetsZero];
+            }
 		}
 	});
 }
@@ -138,7 +146,13 @@
 	tableView.delegate = self;
     tableView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     tableView.separatorColor = kTHLNUIPrimaryBackgroundColor;
-//    [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    if ([tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [tableView setLayoutMargins:UIEdgeInsetsZero];
+    }
 	return tableView;
 }
 

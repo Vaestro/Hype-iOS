@@ -49,7 +49,15 @@
 }
 
 - (NSString *)fullName {
-	return [[NSString stringWithFormat:@"%@ %@", _firstName, _lastName] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *fullName;
+    if (_firstName != NULL && _lastName != NULL) {
+        fullName = [[NSString stringWithFormat:@"%@ %@", _firstName, _lastName] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    } else if (_firstName != NULL && _lastName == NULL){
+        fullName = _firstName;
+    } else if (_firstName == NULL && _lastName != NULL){
+        fullName = _lastName;
+    }
+    return fullName;
 }
 
 - (NSString *)intPhoneNumberFormat {
