@@ -42,20 +42,19 @@
 
 - (BFTask *)submitGuestlistForPromotion:(NSString *)promotionId withInvites:(NSArray *)guestPhoneNumbers {
     return [[_guestlistService createGuestlistForPromotion:promotionId withInvites:guestPhoneNumbers] continueWithSuccessBlock:^id(BFTask *task) {
-        THLDataStoreDomain *domain = [self domainForGuestlistInvite];
-        NSSet *entities = [NSSet setWithArray:[_entityMapper mapGuestlistInvites:@[task.result]]];
-        [_dataStore refreshDomain:domain withEntities:entities];
-        return [BFTask taskWithResult:nil];
+        NSArray<THLGuestlistEntity *> *guestlist = [_entityMapper mapGuestlists:@[task.result]];
+        [self storeGuestlist:guestlist];
+        return [BFTask taskWithResult:guestlist];
     }];
 }
 
-- (THLDataStoreDomain *)domainForGuestlistInvite {
-    THLDataStoreDomain *domain = [[THLDataStoreDomain alloc] initWithMemberTestBlock:^BOOL(THLEntity *entity) {
-        THLGuestlistInviteEntity *guestlistInviteEntity = (THLGuestlistInviteEntity *)entity;
-        return guestlistInviteEntity;
-    }];
-    return domain;
-}
+//- (THLDataStoreDomain *)domainForGuestlistInvite {
+//    THLDataStoreDomain *domain = [[THLDataStoreDomain alloc] initWithMemberTestBlock:^BOOL(THLEntity *entity) {
+//        THLGuestlistInviteEntity *guestlistInviteEntity = (THLGuestlistInviteEntity *)entity;
+//        return guestlistInviteEntity;
+//    }];
+//    return domain;
+//}
 
 - (void)loadContacts {
 	[[self getContactsTasks] continueWithSuccessBlock:^id(BFTask *task) {
@@ -118,4 +117,7 @@
 	[_dataStore updateOrAddEntities:[NSSet setWithArray:guests]];
 }
 
+- (void)storeGuestlist:(NSArray<THLGuestlistEntity *> *)guestlist {
+    [_dataStore updateOrAddEntities:[NSSet setWithArray:guestlist]];
+}
 @end

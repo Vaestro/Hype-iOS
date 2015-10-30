@@ -33,9 +33,20 @@
     }];
 }
 
+//- (void)getGuestlistForGuest:(NSString *)guestId forEvent:(NSString *)eventId {
+//    [[_dataManager fetchGuestlistForGuest:guestId forEvent:eventId] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+//        [_delegate interactor:self didGetGuestlist:task.result[0] forGuest:guestId forEvent:eventId error:task.error];
+//        return nil;
+//    }];
+//}
+
 - (void)getGuestlistForGuest:(NSString *)guestId forEvent:(NSString *)eventId {
     [[_dataManager fetchGuestlistForGuest:guestId forEvent:eventId] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
-        [_delegate interactor:self didGetGuestlist:task.result[0] forGuest:guestId forEvent:eventId error:task.error];
+        if ([task.result count] == 0) {
+            [_delegate interactor:self didGetGuestlist:nil forGuest:guestId forEvent:eventId error:task.error];
+        } else {
+            [_delegate interactor:self didGetGuestlist:task.result[0] forGuest:guestId forEvent:eventId error:task.error];
+        }
         return nil;
     }];
 }

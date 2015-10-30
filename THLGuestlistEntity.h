@@ -10,8 +10,15 @@
 @class THLGuestEntity;
 @class THLPromotionEntity;
 
+typedef NS_ENUM(NSInteger, THLGuestlistEntityReviewStatus) {
+    THLGuestlistEntityReviewStatusPending = 0,
+    THLGuestlistEntityReviewStatusAccepted,
+    THLGuestlistEntityReviewStatusRejected,
+    THLGuestlistEntityReviewStatus_Count
+};
+
 @interface THLGuestlistEntity : THLEntity
-@property(nonatomic) int *reviewStatus;
+@property(nonatomic) THLGuestlistEntityReviewStatus reviewStatus;
 @property(nonatomic, strong) NSString *eventId;
 @property(nonatomic, strong) THLGuestEntity *owner;
 @property(nonatomic, strong) THLPromotionEntity *promotion;

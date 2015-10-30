@@ -1838,7 +1838,7 @@
 						DevelopmentTeam = 8QRD6SFSHS;
 						SystemCapabilities = {
 							com.apple.Push = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -2260,7 +2260,7 @@
 				INFOPLIST_FILE = "Hypelist2point0/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Hypelist.Hypelist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hypelist.hype;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -2289,7 +2289,7 @@
 				INFOPLIST_FILE = "Hypelist2point0/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Hypelist.Hypelist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hypelist.hype;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

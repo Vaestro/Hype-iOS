@@ -21,15 +21,13 @@
 <
 THLEventDetailInteractorDelegate
 >
+
 @property (nonatomic, strong) THLEventEntity *eventEntity;
 @property (nonatomic, strong) THLGuestlistEntity *guestlistEntity;
 @property (nonatomic, strong) THLPromotionEntity *promotionEntity;
 @property (nonatomic, strong) id<THLEventDetailView> view;
-typedef NS_ENUM(NSInteger, guestlistReviewStatus) {
-    guestlistReviewStatusPending = 0,
-    guestlistReviewStatusSuccess,
-    guestlistReviewStatusFailure,
-};
+@property (nonatomic) BOOL guestlistReviewStatus;
+
 @end
 
 @implementation THLEventDetailPresenter
@@ -64,21 +62,16 @@ typedef NS_ENUM(NSInteger, guestlistReviewStatus) {
 	[view setDismissCommand:dismissCommand];
 	[_interactor getPlacemarkForLocation:_eventEntity.location];
     [_interactor getGuestlistForGuest:[THLUser currentUser].objectId forEvent:_eventEntity.objectId];
-    if (self.guestlistEntity) {
-        [view setActionBarButtonStatus:@"VIEW YOUR PARTY BITCH"];
-    } else {
-        [view setActionBarButtonStatus:@"JOIN A GUESTLIST BITCH"];
-    }
 
     RACCommand *actionBarButtonCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         [self handleCreateGuestlistAction];
         return [RACSignal empty];
     }];
     
-//    [RACObserve(self, guestlistReviewStatus) subscribeNext:^(NSInteger *b) {
-//        BOOL isSubmitting = [b boolValue];
-//        [view setShowActivityIndicator:isSubmitting];
-//    }];
+    [RACObserve(self, guestlistReviewStatus) subscribeNext:^(NSNumber *b) {
+        BOOL activeGuestlist = [b boolValue];
+        [view setActionBarButtonStatus:activeGuestlist];
+    }];
     
     [view setActionBarButtonCommand:actionBarButtonCommand];
 }
@@ -128,6 +121,11 @@ typedef NS_ENUM(NSInteger, guestlistReviewStatus) {
 - (void)interactor:(THLEventDetailInteractor *)interactor didGetGuestlist:(THLGuestlistEntity *)guestlist forGuest:(NSString *)guestId forEvent:(NSString *)eventId error:(NSError *)error {
     if (!error && guestlist) {
         _guestlistEntity = guestlist;
+        if (!_guestlistEntity) {
+            self.guestlistReviewStatus = NO;
+        } else {
+            self.guestlistReviewStatus = YES;
+        }
     }
 }
 @end

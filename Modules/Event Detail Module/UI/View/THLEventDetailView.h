@@ -16,7 +16,7 @@
 @property (nonatomic, copy) NSString *locationName;
 @property (nonatomic, copy) NSString *locationInfo;
 @property (nonatomic, copy) NSString *locationAddress;
-@property (nonatomic, copy) NSString *actionBarButtonStatus;
+@property (nonatomic) BOOL actionBarButtonStatus;
 @property (nonatomic, strong) CLPlacemark *locationPlacemark;
 @property (nonatomic, strong) RACCommand *actionBarButtonCommand;
 @property (nonatomic, strong) RACCommand *dismissCommand;

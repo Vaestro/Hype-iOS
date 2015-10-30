@@ -10,8 +10,15 @@
 @class THLGuestEntity;
 @class THLGuestlistEntity;
 
+typedef NS_ENUM(NSInteger, THLGuestlistInviteEntityResponse) {
+    THLGuestlistInviteEntityResponsePending = 0,
+    THLGuestlistInviteEntityResponseAccepted,
+    THLGuestlistInviteEntityResponseRejected,
+    THLGuestlistInviteEntityResponse_Count
+};
+
 @interface THLGuestlistInviteEntity : THLEntity
-@property(nonatomic) int *response;
+@property(nonatomic) THLGuestlistInviteEntityResponse *response;
 @property(nonatomic) int *checkInStatus;
 @property(nonatomic, strong) NSString *eventId;
 @property(nonatomic, strong) THLGuestEntity *guest;

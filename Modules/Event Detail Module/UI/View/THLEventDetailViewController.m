@@ -48,6 +48,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+//    [self updateBottomBarText];
+
 }
 
 - (void)constructView {
@@ -85,7 +87,19 @@
     }];
 }
 
+//- (void)updateBottomBarText {
+//    NSString *barText;
+//    if (actionBarButtonStatus == 0) {
+//        barText =  @"JOIN A GUESTLIST";
+//    } else {
+//        barText =  @"VIEW YOUR GUESTLIST";
+//    }
+//    
+//    [_bottomBar.morphingLabel setTextWithoutMorphing:barText];
+//}
+
 - (void)bindView {
+    WEAKSELF();
     RAC(self.promotionInfoView, promotionInfo) = RACObserve(self, promoInfo);
     RAC(self.promotionInfoView, promoImageURL) = RACObserve(self, promoImageURL);
     
@@ -95,6 +109,14 @@
     RAC(self.mapView, locationAddress) = RACObserve(self, locationAddress);
     RAC(self.mapView, locationPlacemark) = RACObserve(self, locationPlacemark);
 //    RAC(self, bottomBar) = RACObserve(self, actionBarButtonStatus);
+    [RACObserve(WSELF, actionBarButtonStatus) subscribeNext:^(NSNumber *val) {
+        BOOL guestlistStatus = [val boolValue];
+        if (guestlistStatus) {
+            [_bottomBar.morphingLabel setTextWithoutMorphing:NSLocalizedString(@"VIEW YOUR GUESTLIST", nil)];
+        } else {
+            [_bottomBar.morphingLabel setTextWithoutMorphing:NSLocalizedString(@"CREATE A GUESTLIST", nil)];
+        }
+    }];
     RAC(self.bottomBar, rac_command) = RACObserve(self, actionBarButtonCommand);
 
 }
@@ -132,7 +154,7 @@
 
 - (THLActionBarButton *)newBottomBar {
     THLActionBarButton *bottomBar = [THLActionBarButton new];
-    [bottomBar.morphingLabel setTextWithoutMorphing:NSLocalizedString(actionBarButtonStatus, nil)];
+//    [bottomBar.morphingLabel setTextWithoutMorphing:NSLocalizedString(actionBarButtonStatus, nil)];
     return bottomBar;
 }
 @end
