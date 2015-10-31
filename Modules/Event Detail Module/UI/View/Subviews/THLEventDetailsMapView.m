@@ -33,7 +33,8 @@ static CGFloat MAPVIEW_METERS = 1000;
     [_mapView makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(kTHLEdgeInsetsNone());
         make.left.right.equalTo(kTHLEdgeInsetsLow());
-        make.height.equalTo(_mapView.mas_width).dividedBy(kTHLGoldenRatio);
+//        make.height.equalTo(_mapView.mas_width).dividedBy(kTHLGoldenRatio);
+        make.height.equalTo(_mapView.mas_width).dividedBy(3);
     }];
     
     [_textView makeConstraints:^(MASConstraintMaker *make) {
