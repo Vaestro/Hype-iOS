@@ -9,7 +9,7 @@
 #import "THLEventDetailsPromotionInfoView.h"
 #import "THLAppearanceConstants.h"
 
-static CGFloat const kTHLEventDetailsPromotionInfoViewImageViewHeight = 92;
+static CGFloat const kTHLEventDetailsPromotionInfoViewImageViewHeight = 150;
 
 @interface THLEventDetailsPromotionInfoView()
 @property (nonatomic, strong) UITextView *textView;
@@ -35,9 +35,11 @@ static CGFloat const kTHLEventDetailsPromotionInfoViewImageViewHeight = 92;
     }];
     
     [_imageView makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.left.right.equalTo(kTHLEdgeInsetsNone());
+        make.left.right.equalTo(kTHLEdgeInsetsNone());
         make.top.equalTo(_textView.mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.bottom.equalTo(kTHLEdgeInsetsHigh());
         make.height.equalTo(kTHLEventDetailsPromotionInfoViewImageViewHeight);
+
     }];
 }
 
