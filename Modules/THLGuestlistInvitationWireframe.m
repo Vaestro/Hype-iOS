@@ -13,8 +13,6 @@
 #import "THLGuestlistInvitationViewController.h"
 
 @interface THLGuestlistInvitationWireframe()
-@property (nonatomic, strong) UIWindow *window;
-
 @property (nonatomic, strong) UIViewController *controller;
 @property (nonatomic, strong) THLGuestlistInvitationPresenter *presenter;
 @property (nonatomic, strong) THLGuestlistInvitationInteractor *interactor;

@@ -26,6 +26,7 @@
 
 //Template
 //#define kTHLNUI<#Style Name#>    @"<#Style Name#>";
+static CGFloat const kTHLInset = 20;
 
 static float const kTHLGoldenRatio = 1.61803398875f;
 static float const kTHLGoldenRatioInverse = 0.61803398875f;

@@ -11,6 +11,7 @@
 
 @class THLEvent;
 @class THLUser;
+@class THLGuestlist;
 
 /**
  *  Interface for constructing all queries for Parse servers.
@@ -26,6 +27,7 @@
 - (PFQuery *)queryForPromotionsStartingOn:(NSDate *)startDate endingOn:(NSDate *)endDate;
 - (PFQuery *)queryForPromotionsForEvent:(NSString *)eventId;
 - (PFQuery *)queryForGuestlistForGuest:(NSString *)guestId forEvent:(NSString *)eventId;
+- (PFQuery *)queryForInvitesOnGuestlist:(THLGuestlist *)guestlist;
 
 #pragma mark - Guestlist Queries
 @end

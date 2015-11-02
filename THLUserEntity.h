@@ -12,6 +12,7 @@
 @property (nonatomic, strong) NSString *firstName;
 @property (nonatomic, strong) NSString *lastName;
 @property (nonatomic, strong) NSString *phoneNumber;
+@property (nonatomic, readonly) UIImage *thumbnail;
 @property (nonatomic, strong) NSURL *imageURL;
 @property (nonatomic) enum THLSex sex;
 @property (nonatomic) float rating;

@@ -45,6 +45,12 @@
     return query;
 }
 
+- (PFQuery *)queryForInvitesOnGuestlist:(THLGuestlist *)guestlist {
+    PFQuery *query = [self baseGuestlistInviteQuery];
+    [query whereKey:@"guestlist" equalTo:guestlist];
+    return query;
+}
+
 #pragma mark - Class Queries
 /**
  *  Generic query for THLPromotion.
@@ -86,6 +92,12 @@
     [query includeKey:@"promotion"];
     [query includeKey:@"promotion.event"];
     [query includeKey:@"promotion.event.location"];
+    return query;
+}
+
+- (PFQuery *)baseGuestlistInviteQuery {
+    PFQuery *query = [THLGuestlistInvite query];
+    [query includeKey:@"guest"];
     return query;
 }
 

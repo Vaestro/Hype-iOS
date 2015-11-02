@@ -19,6 +19,10 @@
 	return self;
 }
 
+- (BFTask *)fetchInvitesOnGuestlist:(THLGuestlist *)guestlist {
+    return [[_queryFactory queryForInvitesOnGuestlist:guestlist] findObjectsInBackground];
+}
+
 - (BFTask *)fetchGuestlistForGuest:(NSString *)guestId forEvent:(NSString *)eventId {
     return [[_queryFactory queryForGuestlistForGuest:guestId forEvent:eventId] findObjectsInBackground];
 }

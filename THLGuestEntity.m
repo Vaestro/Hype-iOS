@@ -21,6 +21,7 @@
 		_firstName = [contact.name.firstName copy];
 		_lastName = [contact.name.lastName copy];
 		_phoneNumber = [[contact.phones objectAtIndex:0].number copy];
+        _thumbnail = [contact.thumbnail copy];
 		_type = THLGuestEntityTypeLocalContact;
 		_objectId = [NSString stringWithFormat:@"contact%lu", (unsigned long)self.phoneNumber.hash];
 	}
@@ -32,6 +33,7 @@
 		_firstName = [user.firstName copy];
 		_lastName = [user.lastName copy];
 		_phoneNumber = [user.phoneNumber copy];
+        _imageURL = [user.imageURL copy];
 		_type = THLGuestEntityTypeRemoteUser;
 		_objectId = [user.objectId copy];
 	}

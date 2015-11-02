@@ -76,7 +76,9 @@
 	_addressBook.filterBlock = ^BOOL(APContact *contact) {
 		return ((contact.name.firstName != NULL || contact.name.lastName != NULL) && contact.phones.count > 0);
 	};
-
+    
+    _addressBook.fieldsMask = APContactFieldDefault | APContactFieldThumbnail;
+    
 	[_addressBook loadContacts:^(NSArray *contacts, NSError *error) {
 		if (error) {
 			[completionSource setError:error];

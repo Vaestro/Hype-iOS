@@ -8,7 +8,7 @@
 
 #import "THLContactTableViewCell.h"
 #import "THLAppearanceConstants.h"
-#import "UIImageView+WebCache.h"
+
 
 @interface THLContactTableViewCell()
 @property (nonatomic, strong) UIImageView *iconImageView;
@@ -54,8 +54,8 @@
 }
 
 - (void)bindView {
-    [RACObserve(self, iconImageURL) subscribeNext:^(id x) {
-        [_iconImageView sd_setImageWithURL:(NSURL *)x];
+    [RACObserve(self, thumbnail) subscribeNext:^(id x) {
+        [_iconImageView setImage:(UIImage *)x];
     }];
     
     RAC(self.nameLabel, text) = RACObserve(self, name);
