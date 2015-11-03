@@ -8,20 +8,22 @@
 
 #import <Parse/Parse.h>
 #import <Parse/PFObject+Subclass.h>
+#import "THLGuestlist.h"
+#import "THLUser.h"
 
-@class THLGuestlist;
-@class THLUser;
-
-typedef NS_ENUM(NSInteger, THLGuestlistInviteResponse) {
-	THLGuestlistInviteResponsePending = 0,
-	THLGuestlistInviteResponseAccepted,
-	THLGuestlistInviteResponseRejected,
-	THLGuestlistInviteResponse_Count
+typedef NS_ENUM(NSInteger, THLGuestlistInviteReviewStatus) {
+	THLGuestlistInviteReviewStatusPending = 0,
+	THLGuestlistInviteReviewStatusAccepted,
+	THLGuestlistInviteReviewStatusRejected,
+	THLGuestlistInviteReviewStatus_Count
 };
 
 @interface THLGuestlistInvite : PFObject<PFSubclassing>
-@property (nonatomic, retain) THLUser *sender;
-@property (nonatomic, retain) THLUser *recipient;
+@property (nonatomic, retain) THLUser *guest;
 @property (nonatomic, retain) THLGuestlist *guestlist;
-@property (nonatomic) THLGuestlistInviteResponse response;
+//TODO: Rename reviewStatus to Response
+@property (nonatomic) THLGuestlistInviteReviewStatus reviewStatus;
+//TODO: Change CheckInStatus to BOOLEAN
+@property (nonatomic, retain) NSNumber *checkInStatus;
+
 @end

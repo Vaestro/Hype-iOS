@@ -29,13 +29,12 @@
               viewDataSourceFactory:(id<THLViewDataSourceFactoryInterface>)viewDataSourceFactory;
 
 - (THLViewDataSource *)generateDataSource;
+- (void)commitChangesToGuestlist;
+- (void)updateGuestlistInvites;
+
 - (void)acceptGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInviteEntity;
 - (void)declineGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInviteEntity;
 - (void)confirmGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInviteEntity;
 - (void)acceptGuestlist:(THLGuestlistEntity *)guestlistEntity;
 - (void)declineGuestlist:(THLGuestlistEntity *)guestlistEntity;
-
-- (void)commitChangesToGuestlist;
-- (void)updateGuestlistInvites;
-
 @end

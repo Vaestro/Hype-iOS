@@ -19,7 +19,7 @@ typedef NS_ENUM(NSInteger, THLGuestlistInviteEntityResponse) {
 
 @interface THLGuestlistInviteEntity : THLEntity
 @property(nonatomic) THLGuestlistInviteEntityResponse *response;
-@property(nonatomic) int *checkInStatus;
+@property(nonatomic) NSNumber *checkInStatus;
 @property(nonatomic, strong) NSString *eventId;
 @property(nonatomic, strong) THLGuestEntity *guest;
 @property(nonatomic, strong) THLGuestlistEntity *guestlist;

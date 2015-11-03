@@ -10,6 +10,7 @@
 #define THLEntities_h
 #import "THLEventEntity.h"
 #import "THLLocationEntity.h"
-
+#import "THLGuestlistEntity.h"
+#import "THLGuestlistInviteEntity.h"
 
 #endif /* THLEntities_h */

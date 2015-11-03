@@ -18,4 +18,6 @@
 @property (nonatomic) float rating;
 
 @property (nonatomic, readonly) NSString *fullName;
+@property (nonatomic, readonly) NSString *intPhoneNumberFormat;
+
 @end

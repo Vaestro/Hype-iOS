@@ -8,17 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+@class BFTask;
 @class THLDataStore;
 @class THLEntityMapper;
-@class BFTask;
 @class THLGuestlistEntity;
 @protocol THLGuestlistServiceInterface;
 
 @interface THLGuestlistReviewDataManager : NSObject
 #pragma mark - Dependencies
+@property (nonatomic, readonly) id<THLGuestlistServiceInterface> guestlistService;
 @property (nonatomic, readonly) THLDataStore *dataStore;
 @property (nonatomic, readonly) THLEntityMapper *entityMapper;
-@property (nonatomic, readonly) id<THLGuestlistServiceInterface> guestlistService;
+
 - (instancetype)initWithGuestlistService:(id<THLGuestlistServiceInterface>)guestlistService
                             entityMapper:(THLEntityMapper *)entityMapper
                                dataStore:(THLDataStore *)dataStore;

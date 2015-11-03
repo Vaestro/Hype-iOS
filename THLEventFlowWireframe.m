@@ -11,17 +11,20 @@
 #import "THLEventDiscoveryWireframe.h"
 #import "THLGuestlistInvitationWireframe.h"
 #import "THLEventFlowDependencyManager.h"
+#import "THLGuestlistReviewWireframe.h"
 
 @interface THLEventFlowWireframe()
 <
 THLEventDiscoveryModuleDelegate,
 THLEventDetailModuleDelegate,
-THLGuestlistInvitationModuleDelegate
+THLGuestlistInvitationModuleDelegate,
+THLGuestlistReviewModuleDelegate
 >
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
 @property (nonatomic, strong) THLEventDetailWireframe  *eventDetailWireframe;
 @property (nonatomic, strong) THLGuestlistInvitationWireframe *guestlistInvitationWireframe;
+@property (nonatomic, strong) THLGuestlistReviewWireframe *guestlistReviewWireframe;
 @end
 
 @implementation THLEventFlowWireframe
@@ -57,6 +60,12 @@ THLGuestlistInvitationModuleDelegate
 	[_guestlistInvitationWireframe.moduleInterface presentGuestlistInvitationInterfaceForPromotion:promotionEntity forGuestlist:@"1" inController:controller];
 }
 
+- (void)presentGuestlistReviewInterfaceForGuestlist:(THLGuestlistEntity *)guestlistEntity inController:(UIViewController *)controller {
+    _guestlistReviewWireframe = [_dependencyManager newGuestlistReviewWireframe];
+    [_guestlistReviewWireframe.moduleInterface setModuleDelegate:self];
+    [_guestlistReviewWireframe.moduleInterface presentGuestlistReviewInterfaceForGuestlist:guestlistEntity forReviewer:@"Guest" inController:controller];
+}
+
 
 #pragma mark - THLEventDiscoveryModuleDelegate
 - (void)eventDiscoveryModule:(id<THLEventDiscoveryModuleInterface>)module userDidSelectEventEntity:(THLEventEntity *)eventEntity {
@@ -65,6 +74,10 @@ THLGuestlistInvitationModuleDelegate
 
 - (void)eventDetailModule:(id<THLEventDetailModuleInterface>)module promotion:(THLPromotionEntity *)promotionEntity presentGuestlistInvitationInterfaceOnController:(UIViewController *)controller{
     [self presentGuestlistInvitationInterfaceForPromotion:promotionEntity inController:controller];
+}
+
+- (void)eventDetailModule:(id<THLEventDetailModuleInterface>)module guestlist:(THLGuestlistEntity *)guestlistEntity presentGuestlistReviewInterfaceOnController:(UIViewController *)controller {
+    [self presentGuestlistReviewInterfaceForGuestlist:guestlistEntity inController:controller];
 }
 
 #pragma mark - THLEventDetailModuleDelegate

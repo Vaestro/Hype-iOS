@@ -13,7 +13,7 @@
 @property (nonatomic, strong) THLViewDataSource *dataSource;
 @property (nonatomic) BOOL showRefreshAnimation;
 @property (nonatomic, strong) RACCommand *refreshCommand;
-@property (nonatomic, strong) UIBarButtonItem *backButton;
-@property (nonatomic, strong) RACCommand *backCommand;
+@property (nonatomic, strong) UIBarButtonItem *dismissButton;
+@property (nonatomic, strong) RACCommand *dismissCommand;
 
 @end

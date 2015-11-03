@@ -17,6 +17,7 @@
 
 #import "THLEntities.h"
 #import "THLUserEntity.h"
+#import "THLGuestEntity.h"
 #import "THLHostEntity.h"
 #import "THLPromotionEntity.h"
 #import "THLGuestlistEntity.h"
@@ -71,95 +72,114 @@
 	}];
 }
 
-- (THLUserEntity *)mapUser:(THLUser *)user {
-	THLUserEntity *entity;
-	switch (user.type) {
-		case THLUserTypeGuest: {
-			return nil;
-			break;
-		}
-		case THLUserTypeHost: {
-			entity = [THLHostEntity new];
-			break;
-		}
-		default: {
-			break;
-		}
-	}
-
-	[self mapBaseValuesFromModel:user toEntity:entity];
-	entity.firstName = user.firstName;
-	entity.lastName = user.lastName;
-	entity.phoneNumber = user.phoneNumber;
-	entity.imageURL = [NSURL URLWithString:user.image.url];
-	entity.sex = user.sex;
-	entity.rating = user.rating;
-	return entity;
-}
-
-//- (THLUser *)unmapUser:(THLUserEntity *)userEntity {
-//    NSAssert([userEntity isKindOfClass:[THLUser class]], @"Must be of type THLUser to map!");
-//    THLUser *user = [THLUser new];
-//    user.firstName = userEntity.firstName;
-//    user.lastName = userEntity.lastName;
-//    user.phoneNumber = userEntity.phoneNumber;
-//    user.sex = userEntity.sex;
-//    user.rating = userEntity.rating;
-//    return user;
+//- (THLUserEntity *)mapUser:(THLUser *)user {
+////    NSAssert([user isKindOfClass:[THLUser class]], @"Must be of type THLUser to map!");
+//	THLUserEntity *entity;
+//	switch (user.type) {
+//		case THLUserTypeGuest: {
+//            return nil;
+//			break;
+//		}
+//		case THLUserTypeHost: {
+//			entity = [THLHostEntity new];
+//			break;
+//		}
+//		default: {
+//			break;
+//		}
+//	}
+//
+//	[self mapBaseValuesFromModel:user toEntity:entity];
+//	entity.firstName = user.firstName;
+//	entity.lastName = user.lastName;
+//	entity.phoneNumber = user.phoneNumber;
+//	entity.imageURL = [NSURL URLWithString:user.image.url];
+//	entity.sex = user.sex;
+//	entity.rating = user.rating;
+//	return entity;
 //}
 
-- (NSArray *)mapUsers:(NSArray *)users {
-	return [users linq_select:^id(THLUser *user) {
-		return [self mapUser:user];
-	}];
+//- (NSArray *)mapUsers:(NSArray *)users {
+//	return [users linq_select:^id(THLUser *user) {
+//		return [self mapUser:user];
+//	}];
+//}
+
+- (THLGuestEntity *)mapGuest:(THLUser *)user {
+    //    NSAssert([user isKindOfClass:[THLUser class]], @"Must be of type THLUser to map!");
+    THLGuestEntity *entity = [THLGuestEntity new];
+    [self mapBaseValuesFromModel:user toEntity:entity];
+    entity.firstName = user.firstName;
+    entity.lastName = user.lastName;
+    entity.phoneNumber = user.phoneNumber;
+    entity.imageURL = [NSURL URLWithString:user.image.url];
+    entity.sex = user.sex;
+    entity.rating = user.rating;
+    return entity;
 }
 
-- (NSArray *)mapPromotions:(NSArray *)promotions {
-	return [promotions linq_select:^id(THLPromotion *promotion) {
-		return [self mapPromotion:promotion];
-	}];
+- (THLHostEntity *)mapHost:(THLUser *)user {
+    //    NSAssert([user isKindOfClass:[THLUser class]], @"Must be of type THLUser to map!");
+    THLHostEntity *entity = [THLHostEntity new];
+    [self mapBaseValuesFromModel:user toEntity:entity];
+    entity.firstName = user.firstName;
+    entity.lastName = user.lastName;
+    entity.phoneNumber = user.phoneNumber;
+    entity.imageURL = [NSURL URLWithString:user.image.url];
+    entity.sex = user.sex;
+    entity.rating = user.rating;
+    return entity;
 }
-
 
 - (THLPromotionEntity *)mapPromotion:(THLPromotion *)promotion {
+//    NSAssert([promotion isKindOfClass:[THLPromotion class]], @"Must be of type THLPromotion to map!");
 	THLPromotionEntity *entity = [THLPromotionEntity new];
 	[self mapBaseValuesFromModel:promotion toEntity:entity];
 	entity.time = promotion.time;
 	entity.maleRatio = promotion.maleRatio;
 	entity.femaleRatio = promotion.femaleRatio;
-	entity.host = (THLHostEntity *)[self mapUser:promotion.host];
+//	entity.host = (THLHostEntity *)[self mapUser:promotion.host];
 	entity.event = [self mapEvent:promotion.event];
     entity.eventId = promotion.eventId;
 	return entity;
 }
 
+- (NSArray<THLPromotionEntity *> *)mapPromotions:(NSArray *)promotions {
+    return [promotions linq_select:^id(THLPromotion *promotion) {
+        return [self mapPromotion:promotion];
+    }];
+}
+
 - (THLGuestlistEntity *)mapGuestlist:(THLGuestlist *)guestlist {
+//    NSAssert([guestlist isKindOfClass:[THLGuestlist class]], @"Must be of type THLGuestlist to map!");
     THLGuestlistEntity *entity = [THLGuestlistEntity new];
     [self mapBaseValuesFromModel:guestlist toEntity:entity];
     entity.eventId = guestlist.eventId;
     entity.reviewStatus = guestlist.reviewStatus;
-    entity.owner = (THLGuestEntity *)[self mapUser:guestlist.owner];
+    entity.owner = [self mapGuest:guestlist.owner];
 //TODO: Fix mapping guestlist's promotion
 //    entity.promotion = [self mapPromotion:guestlist.promotion];
     return entity;
 }
 
-- (NSArray *)mapGuestlists:(NSArray *)guestlists {
+- (NSArray<THLGuestlistEntity *> *)mapGuestlists:(NSArray *)guestlists {
     return [guestlists linq_select:^id(THLGuestlist *guestlist) {
         return [self mapGuestlist:guestlist];
     }];
 }
 
 - (THLGuestlistInviteEntity *)mapGuestlistInvite:(THLGuestlistInvite *)guestlistInvite {
+    NSAssert([guestlistInvite isKindOfClass:[THLGuestlistInvite class]], @"Must be of type THLGuestlistInvite to map!");
     THLGuestlistInviteEntity *entity = [THLGuestlistInviteEntity new];
     [self mapBaseValuesFromModel:guestlistInvite toEntity:entity];
-    entity.response = guestlistInvite.response;
+//    entity.response = guestlistInvite.reviewStatus;
+    entity.checkInStatus = guestlistInvite.checkInStatus;
+    entity.guest = [self mapGuest:guestlistInvite.guest];
     entity.guestlist = [self mapGuestlist:guestlistInvite.guestlist];
-    entity.guest = (THLGuestEntity *)[self mapUser:guestlistInvite.recipient];
     return entity;
 }
 
-- (NSArray *)mapGuestlistInvites:(NSArray *)guestlistInvites {
+- (NSArray<THLGuestlistInviteEntity *> *)mapGuestlistInvites:(NSArray *)guestlistInvites {
     return [guestlistInvites linq_select:^id(THLGuestlistInvite *guestlistInvite) {
         return [self mapGuestlistInvite:guestlistInvite];
     }];

@@ -12,7 +12,7 @@
 #import "THLGuestlistReviewView.h"
 
 #import "THLViewDataSource.h"
-//#import "THLGuestlistEntity.h"
+#import "THLGuestlistInviteEntity.h"
 #import "THLGuestlistReviewCellViewModel.h"
 
 @interface THLGuestlistReviewPresenter()
@@ -38,7 +38,7 @@ THLGuestlistReviewInteractorDelegate
 }
 
 #pragma mark - THLGuestlistReviewModuleInterface
-- (void)presentGuestlistReviewModuleForGuestlist:(THLGuestlistEntity *)guestlistEntity forReviewer:(NSString *)reviewer inController:(UIViewController *)controller {
+- (void)presentGuestlistReviewInterfaceForGuestlist:(THLGuestlistEntity *)guestlistEntity forReviewer:(NSString *)reviewer inController:(UIViewController *)controller {
     _interactor.guestlistEntity = guestlistEntity;
 //    _interactor.reviewer = reviewer;
     [_wireframe presentInterfaceInController:controller];
@@ -46,14 +46,25 @@ THLGuestlistReviewInteractorDelegate
 
 - (void)configureView:(id<THLGuestlistReviewView>)view {
     _view = view;
-    [view setDataSource:[_interactor generateDataSource]];
-
+    THLViewDataSource *dataSource = [_interactor generateDataSource];
+    dataSource.dataTransformBlock = ^id(id item) {
+        return [[THLGuestlistReviewCellViewModel alloc] initWithGuestlistInviteEntity:(THLGuestlistInviteEntity *)item];
+    };
+    
+    [view setDataSource:dataSource];
+    
 //    RACCommand *selectedIndexPathCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
 //        [self handleIndexPathSelection:(NSIndexPath *)input];
 //        return [RACSignal empty];
 //    }];
 //    
 //    [view setSelectedIndexPathCommand:selectedIndexPathCommand];
+    RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [self handleDismissAction];
+        return [RACSignal empty];
+    }];
+    
+    [view setDismissCommand:dismissCommand];
     
     RACCommand *refreshCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         [self handleRefreshAction];
@@ -71,6 +82,10 @@ THLGuestlistReviewInteractorDelegate
 //TODO: Create Configure Review Options
 
 #pragma mark - Event Handling
+
+- (void)handleDismissAction {
+    [_wireframe dismissInterface];
+}
 
 - (void)handleRefreshAction {
     self.refreshing = YES;

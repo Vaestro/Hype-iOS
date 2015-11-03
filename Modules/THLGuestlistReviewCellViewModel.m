@@ -20,7 +20,7 @@
 }
 
 - (void)configureView:(id<THLGuestlistReviewCellView>)cellView {
-    [cellView setNameLabel:_guestlistInviteEntity.guest.fullName];
+    [cellView setNameText:_guestlistInviteEntity.guest.firstName];
     [cellView setImageURL:_guestlistInviteEntity.guest.imageURL];
 }
 

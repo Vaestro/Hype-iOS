@@ -29,13 +29,14 @@ UICollectionViewDelegateFlowLayout
 @synthesize dataSource = _dataSource;
 @synthesize showRefreshAnimation = _showRefreshAnimation;
 @synthesize refreshCommand = _refreshCommand;
-@synthesize backButton = _backButton;
-@synthesize backCommand = _backCommand;
+@synthesize dismissButton = _dismissButton;
+@synthesize dismissCommand = _dismissCommand;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self constructView];
     [self layoutView];
-    [self configureBindings];
+    [self bindView];
     [_refreshCommand execute:nil];
 }
 
@@ -46,29 +47,31 @@ UICollectionViewDelegateFlowLayout
 
 - (void)constructView {
     _collectionView = [self newCollectionView];
-    _backButton = [self newBackBarButtonItem];
+    _dismissButton = [self newBackBarButtonItem];
 }
 
 - (void)layoutView {
+    [self.view addSubview:_collectionView];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.automaticallyAdjustsScrollViewInsets = YES;
     
-    _collectionView = [self newCollectionView];
-    self.navigationItem.leftBarButtonItem = _backButton;
+    self.navigationItem.leftBarButtonItem = _dismissButton;
     self.navigationItem.title = @"YOUR PARTY";
-    [self.view addSubview:_collectionView];
+    
     [_collectionView makeConstraints:^(MASConstraintMaker *make) {
         make.edges.insets(UIEdgeInsetsZero);
     }];
 }
 
-- (void)configureBindings {
+- (void)bindView {
     WEAKSELF();
     STRONGSELF();
-    [RACObserve(self, dataSource) subscribeNext:^(id x) {
-        [self configureDataSource];
+    [RACObserve(WSELF, dataSource) subscribeNext:^(THLViewDataSource *dataSource) {
+        [SSELF configureDataSource:dataSource];
     }];
     
+    RAC(self.dismissButton, rac_command) = RACObserve(self, dismissCommand);
+
     [RACObserve(WSELF, showRefreshAnimation) subscribeNext:^(NSNumber *val) {
         BOOL shouldAnimate = [val boolValue];
         if (shouldAnimate) {
@@ -85,7 +88,7 @@ UICollectionViewDelegateFlowLayout
     }];
 }
 
-- (void)configureDataSource {
+- (void)configureDataSource:(THLViewDataSource *)dataSource {
     _collectionView.dataSource = _dataSource;
     _dataSource.collectionView = _collectionView;
     
@@ -112,6 +115,7 @@ UICollectionViewDelegateFlowLayout
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
     collectionView.nuiClass = kTHLNUIBackgroundView;
+    collectionView.backgroundColor = kTHLNUISecondaryBackgroundColor;
     collectionView.alwaysBounceVertical = YES;
     collectionView.delegate = self;
     return collectionView;

@@ -11,6 +11,7 @@
 #import "THLPromotionServiceInterface.h"
 #import "THLGuestlistServiceInterface.h"
 #import "THLEntityMapper.h"
+#import "THLUser.h"
 
 @implementation THLEventDetailDataManager
 - (instancetype)initWithLocationService:(id<THLLocationServiceInterface>)locationService
@@ -39,7 +40,7 @@
 }
 
 - (BFTask *)fetchGuestlistForGuest:(NSString *)guestId forEvent:(NSString *)eventId {
-    return [[_guestlistService fetchGuestlistForGuest:guestId forEvent:eventId] continueWithSuccessBlock:^id(BFTask *task) {
+    return [[_guestlistService fetchGuestlistForGuest:[THLUser objectWithoutDataWithObjectId:guestId] forEvent:eventId] continueWithSuccessBlock:^id(BFTask *task) {
         NSArray<THLGuestlist *> *fetchedGuestlists = task.result;
         NSArray<THLGuestlistEntity *> *mappedGuestlists = [_entityMapper mapGuestlists:fetchedGuestlists];
         return mappedGuestlists;

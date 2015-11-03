@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @protocol THLGuestlistReviewCellView <NSObject>
-@property (nonatomic, copy) NSString *nameLabel;
+@property (nonatomic, copy) NSString *nameText;
 @property (nonatomic, copy) NSURL *imageURL;
 @end

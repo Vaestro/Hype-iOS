@@ -30,6 +30,7 @@
         _entityMapper = entityMapper;
         _dataStore = dataStore;
         _viewDataSourceFactory = viewDataSourceFactory;
+        [self buildModule];
     }
     return self;
 }

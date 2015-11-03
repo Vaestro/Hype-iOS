@@ -7,8 +7,9 @@
 //
 
 #import "THLEntity.h"
+#import "THLUserEntity.h"
+
 @class APContact;
-@class THLUserEntity;
 
 typedef NS_ENUM(NSInteger, THLGuestEntityType) {
 	THLGuestEntityTypeLocalContact = 0,
@@ -16,14 +17,7 @@ typedef NS_ENUM(NSInteger, THLGuestEntityType) {
 	THLGuestEntityType_Count
 };
 
-@interface THLGuestEntity : THLEntity
-@property (nonatomic, readonly) NSString *firstName;
-@property (nonatomic, readonly) NSString *lastName;
-@property (nonatomic, readonly) NSString *phoneNumber;
-@property (nonatomic, readonly) NSURL *imageURL;
-@property (nonatomic, readonly) UIImage *thumbnail;
-@property (nonatomic, readonly) NSString *fullName;
-@property (nonatomic, readonly) NSString *intPhoneNumberFormat;
+@interface THLGuestEntity : THLUserEntity
 
 @property (nonatomic, readonly) THLGuestEntityType type;
 

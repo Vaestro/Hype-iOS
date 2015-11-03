@@ -9,10 +9,10 @@
 #import "THLGuestlistInvite.h"
 
 @implementation THLGuestlistInvite
-@dynamic sender;
-@dynamic recipient;
+@dynamic guest;
 @dynamic guestlist;
-@dynamic response;
+@dynamic reviewStatus;
+@dynamic checkInStatus;
 
 + (void)load {
 	[self registerSubclass];

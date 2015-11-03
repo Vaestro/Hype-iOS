@@ -143,6 +143,7 @@
 		79B9593B1BE67B3700B87799 /* THLGuestlistReviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B9593A1BE67B3700B87799 /* THLGuestlistReviewCell.m */; };
 		79B9593E1BE7173D00B87799 /* THLGuestlistReviewCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B9593D1BE7173D00B87799 /* THLGuestlistReviewCellViewModel.m */; };
 		79B959401BE7175100B87799 /* THLGuestlistReviewCellView.h in Sources */ = {isa = PBXBuildFile; fileRef = 79B9593F1BE7175100B87799 /* THLGuestlistReviewCellView.h */; };
+		79B959441BE8308600B87799 /* THLPersonIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959431BE8308600B87799 /* THLPersonIconView.m */; };
 		B771256D2B58EBFF817CDC12 /* libPods-Hypelist2point0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D059D2904940E14B1AF40EE3 /* libPods-Hypelist2point0.a */; };
 		CBE5403C8B7732B36D5ECB5E /* THLViewDataSourceGrouping.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE54FC98A366F3761F89F63 /* THLViewDataSourceGrouping.m */; };
 		CBE54720F63BA2DE2136B454 /* THLViewDataSource+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE545A9A3C66339456E0A06 /* THLViewDataSource+Factory.m */; };
@@ -448,6 +449,8 @@
 		79B9593C1BE7173D00B87799 /* THLGuestlistReviewCellViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THLGuestlistReviewCellViewModel.h; path = Modules/THLGuestlistReviewCellViewModel.h; sourceTree = SOURCE_ROOT; };
 		79B9593D1BE7173D00B87799 /* THLGuestlistReviewCellViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THLGuestlistReviewCellViewModel.m; path = Modules/THLGuestlistReviewCellViewModel.m; sourceTree = SOURCE_ROOT; };
 		79B9593F1BE7175100B87799 /* THLGuestlistReviewCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THLGuestlistReviewCellView.h; path = Modules/THLGuestlistReviewCellView.h; sourceTree = SOURCE_ROOT; };
+		79B959421BE8308600B87799 /* THLPersonIconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPersonIconView.h; sourceTree = "<group>"; };
+		79B959431BE8308600B87799 /* THLPersonIconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPersonIconView.m; sourceTree = "<group>"; };
 		BA51F1731F25286C41A13B20 /* Pods-Hypelist2point0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hypelist2point0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hypelist2point0/Pods-Hypelist2point0.debug.xcconfig"; sourceTree = "<group>"; };
 		C6B634BC51A4BB10D6261492 /* Pods-Hypelist2point0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hypelist2point0.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hypelist2point0/Pods-Hypelist2point0.release.xcconfig"; sourceTree = "<group>"; };
 		CB878AA95A320C00B4227BCE /* Pods-Hypelist2point0Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hypelist2point0Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hypelist2point0Tests/Pods-Hypelist2point0Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -791,6 +794,7 @@
 				2121736A1BB34D4F007D817A /* THLTitledContentView */,
 				2121735C1BB34239007D817A /* Promotion Card View */,
 				212173721BB34F19007D817A /* THLRoundImageView */,
+				79B959411BE8306300B87799 /* THLPersonIconView */,
 				216BDD531BC6FA2000BBF713 /* THLContactTableViewCell */,
 			);
 			name = Views;
@@ -1887,6 +1891,15 @@
 			name = "Guestlist Review Cell";
 			sourceTree = "<group>";
 		};
+		79B959411BE8306300B87799 /* THLPersonIconView */ = {
+			isa = PBXGroup;
+			children = (
+				79B959421BE8308600B87799 /* THLPersonIconView.h */,
+				79B959431BE8308600B87799 /* THLPersonIconView.m */,
+			);
+			name = THLPersonIconView;
+			sourceTree = "<group>";
+		};
 		CBE54BB68ECECF48FD57301C /* THLViewDataSourceGrouping */ = {
 			isa = PBXGroup;
 			children = (
@@ -2255,6 +2268,7 @@
 				2133BFC21B877C08002C1DA9 /* THLUser.m in Sources */,
 				217EBE821BB75FD5006044B6 /* THLDataStoreDomain.m in Sources */,
 				211005A71B8A372600A540C6 /* THLEventDiscoveryDataManager.m in Sources */,
+				79B959441BE8308600B87799 /* THLPersonIconView.m in Sources */,
 				217EBEAA1BB7A940006044B6 /* THLPromotionService.m in Sources */,
 				215A429D1BAA25E700D03C35 /* THLFacebookPictureWireframe.m in Sources */,
 				79B959341BE5821B00B87799 /* THLGuestlistReviewViewController.m in Sources */,

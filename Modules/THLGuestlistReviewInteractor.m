@@ -58,8 +58,8 @@ static NSString *const kTHLGuestlistReviewModuleViewKey = @"kTHLGuestlistReviewM
 
 - (THLViewDataSourceSorting *)viewSorting {
     return [THLViewDataSourceSorting withSortingBlock:^NSComparisonResult(THLEntity *entity1, THLEntity *entity2) {
-        THLGuestlistInviteEntity *guestlistInvite1 = (THLGuestlistInviteEntity *)guestlistInvite1;
-        THLGuestlistInviteEntity *guestlistInvite2 = (THLGuestlistInviteEntity *)guestlistInvite2;
+        THLGuestlistInviteEntity *guestlistInvite1 = (THLGuestlistInviteEntity *)entity1;
+        THLGuestlistInviteEntity *guestlistInvite2 = (THLGuestlistInviteEntity *)entity2;
         return [guestlistInvite1.guest.firstName compare:guestlistInvite2.guest.firstName];
     }];
 }

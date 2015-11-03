@@ -13,10 +13,12 @@
 @class THLEventDiscoveryWireframe;
 @class THLPromotionSelectionWireframe;
 @class THLGuestlistInvitationWireframe;
+@class THLGuestlistReviewWireframe;
 
 @protocol THLEventFlowDependencyManager <NSObject>
 - (THLEventDiscoveryWireframe *)newEventDiscoveryWireframe;
 - (THLEventDetailWireframe *)newEventDetailWireframe;
 - (THLPromotionSelectionWireframe *)newPromotionSelectionWireframe;
 - (THLGuestlistInvitationWireframe *)newGuestlistInvitationWireframe;
+- (THLGuestlistReviewWireframe *)newGuestlistReviewWireframe;
 @end

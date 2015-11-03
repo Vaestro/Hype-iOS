@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+
 @class THLUser;
 @class THLEvent;
 @class THLLocation;
@@ -15,6 +16,7 @@
 @class THLGuestlistInvite;
 
 @class THLUserEntity;
+@class THLGuestEntity;
 @class THLHostEntity;
 @class THLEventEntity;
 @class THLLocationEntity;
@@ -25,17 +27,18 @@
 @interface THLEntityMapper : NSObject
 - (THLEventEntity *)mapEvent:(THLEvent *)event;
 - (THLLocationEntity *)mapLocation:(THLLocation *)location;
-- (THLUserEntity *)mapUser:(THLUser *)user;
-//- (THLUser *)unmapUser:(THLUserEntity *)userEntity;
+//- (THLUserEntity *)mapUser:(THLUser *)user;
+- (THLGuestEntity *)mapGuest:(THLUser *)user;
+- (THLHostEntity *)mapHost:(THLUser *)user;
 - (THLPromotionEntity *)mapPromotion:(THLPromotion *)promotion;
 - (THLGuestlistEntity *)mapGuestlist:(THLGuestlist *)guestlist;
 - (THLGuestlistInviteEntity *)mapGuestlistInvite:(THLGuestlistInvite *)guestlistInvite;
 
+- (NSArray *)mapUsers:(NSArray *)users;
 - (NSArray<THLEventEntity*> *)mapEvents:(NSArray *)events;
 - (NSArray<THLLocationEntity*> *)mapLocations:(NSArray *)locations;
-- (NSArray *)mapUsers:(NSArray *)users;
-- (NSArray *)mapPromotions:(NSArray *)promotions;
-- (NSArray *)mapGuestlists:(NSArray *)guestlists;
-- (NSArray *)mapGuestlistInvites:(NSArray *)guestlistInvites;
+- (NSArray<THLPromotionEntity*> *)mapPromotions:(NSArray *)promotions;
+- (NSArray<THLGuestlistEntity*> *)mapGuestlists:(NSArray *)guestlists;
+- (NSArray<THLGuestlistInviteEntity*> *)mapGuestlistInvites:(NSArray *)guestlistInvites;
 
 @end

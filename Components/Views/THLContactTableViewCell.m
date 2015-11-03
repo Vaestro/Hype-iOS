@@ -35,7 +35,7 @@
 
 - (void)layoutView {
     [self addSubviews:@[_iconImageView, _nameLabel, _phoneNumberLabel]];
-    
+
     [_iconImageView makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.left.insets(kTHLEdgeInsetsHigh());
         make.width.equalTo(_iconImageView.mas_height);
@@ -62,10 +62,19 @@
     RAC(self.phoneNumberLabel, text) = RACObserve(self, phoneNumber);
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    _iconImageView.layer.cornerRadius = ViewWidth(_iconImageView)/2.0;
+}
+
 #pragma mark - Constructors
 - (UIImageView *)newIconImageView {
     UIImageView *imageView = [UIImageView new];
+    imageView.clipsToBounds = YES;
+    imageView.tintColor = kTHLNUIPrimaryBackgroundColor;
     imageView.contentMode = UIViewContentModeScaleAspectFill;
+    imageView.layer.borderColor = kTHLNUIGrayFontColor.CGColor;
+    imageView.layer.borderWidth = 0.5;
     return imageView;
 }
 

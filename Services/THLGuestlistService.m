@@ -20,11 +20,39 @@
 }
 
 - (BFTask *)fetchInvitesOnGuestlist:(THLGuestlist *)guestlist {
-    return [[_queryFactory queryForInvitesOnGuestlist:guestlist] findObjectsInBackground];
+    BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
+    NSMutableArray *completedGuestlistInvites = [NSMutableArray new];
+    [[_queryFactory queryForInvitesOnGuestlist:guestlist] findObjectsInBackgroundWithBlock:^(NSArray *guestlistInvites, NSError *error) {
+        // GuestlistInvites now contains the Guestlist Invites on the Guestlist, and the "Guest" field
+        // has been populated. For example:
+        for (PFObject *guestlistInvite in guestlistInvites) {
+            // This does not require a network access.
+            PFObject *guest = guestlistInvite[@"Guest"];
+//            PFObject *parentGuestlist = guestlistInvite[@"Guestlist"];
+//            PFObject *parentGuestlistOwner = guestlistInvite[@"Guestlist"][@"Owner"];
+//            [parentGuestlist setObject:parentGuestlistOwner forKey:@"owner"];
+            [guestlistInvite setObject:guest forKey:@"guest"];
+//            [guestlistInvite setObject:parentGuestlist forKey:@"guestlist"];
+            [completedGuestlistInvites addObject:guestlistInvite];
+        }
+        [completionSource setResult:completedGuestlistInvites];
+    }];
+    return completionSource.task;
+
 }
 
-- (BFTask *)fetchGuestlistForGuest:(NSString *)guestId forEvent:(NSString *)eventId {
-    return [[_queryFactory queryForGuestlistForGuest:guestId forEvent:eventId] findObjectsInBackground];
+- (BFTask *)fetchGuestlistForGuest:(THLUser *)guest forEvent:(NSString *)eventId {
+    BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
+    NSMutableArray *completedGuestlists = [NSMutableArray new];
+    [[_queryFactory queryForGuestlistForGuest:guest forEvent:eventId] findObjectsInBackgroundWithBlock:^(NSArray *guestlists, NSError *error) {
+        for (PFObject *guestlist in guestlists) {
+            PFObject *owner = guestlist[@"Owner"];
+            [guestlist setObject:owner forKey:@"owner"];
+            [completedGuestlists addObject:guestlist];
+        }
+        [completionSource setResult:completedGuestlists];
+    }];
+    return completionSource.task;
 }
 
 - (BFTask *)createGuestlistForPromotion:(NSString *)promotionId withInvites:(NSArray *)guestPhoneNumbers {

@@ -11,18 +11,19 @@
 #import "UIImageView+WebCache.h"
 
 //#import "THLStatusView.h"
-//#import "THLPersonIconView.h"
+#import "THLPersonIconView.h"
 
 @interface THLGuestlistReviewCell()
-@property (nonatomic, strong) UIImageView *iconImageView;
+@property (nonatomic, strong) THLPersonIconView *iconImageView;
 @property (nonatomic, strong) UILabel *nameLabel;
 //@property (nonatomic, strong) THLStatusView *statusView;
-
 @end
 
 static CGFloat const STATUS_VIEW_DIMENSION = 20;
 
 @implementation THLGuestlistReviewCell
+@synthesize nameText;
+@synthesize imageURL;
 //TODO: Initiate with identifier
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
@@ -42,24 +43,23 @@ static CGFloat const STATUS_VIEW_DIMENSION = 20;
 - (void)layoutView {
     self.layer.cornerRadius = kTHLCornerRadius;
     self.clipsToBounds = YES;
-    self.contentView.backgroundColor = kTHLNUISecondaryBackgroundColor;
+    self.contentView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
 
     [self addSubviews:@[_iconImageView, _nameLabel]];
     
-    [_nameLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.left.right.insets(kTHLEdgeInsetsHigh());
-//        [_nameLabel c_makeRequiredContentCompressionResistanceAndContentHuggingPriority];
-    }];
-    
     [_iconImageView makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(_nameLabel.mas_top).insets(kTHLEdgeInsetsHigh());
         make.top.insets(kTHLEdgeInsetsHigh()).priorityHigh();
-        make.left.top.insets(kTHLEdgeInsetsLow());
-        make.right.insets(kTHLEdgeInsetsLow());
+        make.left.top.greaterThanOrEqualTo(SV(_iconImageView)).insets(kTHLEdgeInsetsHigh());
+        make.right.lessThanOrEqualTo(SV(_iconImageView)).insets(kTHLEdgeInsetsHigh());
         make.width.equalTo(_iconImageView.mas_height);
         make.centerX.offset(0);
     }];
     
+    [_nameLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_iconImageView.mas_bottom).insets(kTHLEdgeInsetsLow());
+        make.bottom.left.right.insets(kTHLEdgeInsetsHigh());
+        //        [_nameLabel c_makeRequiredContentCompressionResistanceAndContentHuggingPriority];
+    }];
 //    [_statusView makeConstraints:^(MASConstraintMaker *make) {
 //        make.top.left.insets(kTHLEdgePadding);
 //        make.size.equalTo(CGSizeMake1(STATUS_VIEW_DIMENSION));
@@ -67,24 +67,25 @@ static CGFloat const STATUS_VIEW_DIMENSION = 20;
 }
 
 - (void)bindView {
-    [RACObserve(self, iconImageURL) subscribeNext:^(id x) {
-        [_iconImageView sd_setImageWithURL:(NSURL *)x];
-    }];
+    RAC(self.iconImageView, imageURL) = RACObserve(self, imageURL);
+//    [[RACObserve(self, imageURL) filter:^BOOL(NSURL *url) {
+//        return [url isValid];
+//    }] subscribeNext:^(NSURL *url) {
+//        [self.iconImageView sd_setImageWithURL:url];
+//    }];
     
-    RAC(self.nameLabel, text) = RACObserve(self, name);
+    RAC(self.nameLabel, text) = RACObserve(self, nameText);
 //    RAC(self.statusView, view) = RACObserve(self, statusView);
 }
 
 #pragma mark - Constructors
-- (UIImageView *)newIconImageView {
-    UIImageView *imageView = [UIImageView new];
-    imageView.contentMode = UIViewContentModeScaleAspectFill;
-    return imageView;
+- (THLPersonIconView *)newIconImageView {
+    THLPersonIconView *iconView = [THLPersonIconView new];
+    return iconView;
 }
 
 - (UILabel *)newNameLabel {
-    UILabel *label = [[UILabel alloc] init];
-    label.nuiClass = kTHLNUIRegularTitle;
+    UILabel *label = THLNUILabel(kTHLNUIRegularTitle);
     label.adjustsFontSizeToFitWidth = YES;
     label.minimumScaleFactor = 0.5;
     label.textAlignment = NSTextAlignmentCenter;

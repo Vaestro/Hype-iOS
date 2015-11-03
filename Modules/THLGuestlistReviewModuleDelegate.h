@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@protocol THLGuestlistReviewModuleInterface;
 @protocol THLGuestlistReviewModuleDelegate <NSObject>
 
 @end

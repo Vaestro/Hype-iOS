@@ -34,20 +34,19 @@
 - (PFQuery *)queryForPromotionsForEvent:(NSString *)eventId {
 	PFQuery *query = [self basePromotionQuery];
 	[query whereKey:@"eventId" equalTo:eventId];
-    [query includeKey:@"event.location"];
 	return query;
 }
 
-- (PFQuery *)queryForGuestlistForGuest:(NSString *)guestId forEvent:(NSString *)eventId {
+- (PFQuery *)queryForGuestlistForGuest:(THLUser *)guest forEvent:(NSString *)eventId {
     PFQuery *query = [self baseGuestlistQuery];
-//    [query whereKey:@"owner" equalTo:guestId];
+    [query whereKey:@"Owner" equalTo:guest];
     [query whereKey:@"eventId" equalTo:eventId];
     return query;
 }
 
 - (PFQuery *)queryForInvitesOnGuestlist:(THLGuestlist *)guestlist {
     PFQuery *query = [self baseGuestlistInviteQuery];
-    [query whereKey:@"guestlist" equalTo:guestlist];
+    [query whereKey:@"Guestlist" equalTo:guestlist];
     return query;
 }
 
@@ -60,6 +59,7 @@
 	PFQuery *query = [THLPromotion query];
 	[query includeKey:@"host"];
 	[query includeKey:@"event"];
+    [query includeKey:@"event.location"];
 	return query;
 }
 
@@ -88,16 +88,21 @@
  */
 - (PFQuery *)baseGuestlistQuery {
     PFQuery *query = [THLGuestlist query];
-    [query includeKey:@"owner"];
+    [query includeKey:@"Owner"];
     [query includeKey:@"promotion"];
     [query includeKey:@"promotion.event"];
     [query includeKey:@"promotion.event.location"];
     return query;
 }
 
+/**
+ *  Generic query for THLGuestlistInvite
+ *	Includes: guest, guestlist
+ */
 - (PFQuery *)baseGuestlistInviteQuery {
     PFQuery *query = [THLGuestlistInvite query];
-    [query includeKey:@"guest"];
+    [query includeKey:@"Guestlist"];
+    [query includeKey:@"Guest"];
     return query;
 }
 

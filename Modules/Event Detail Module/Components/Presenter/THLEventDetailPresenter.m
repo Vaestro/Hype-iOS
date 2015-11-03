@@ -53,6 +53,7 @@ THLEventDetailInteractorDelegate
 	[view setLocationName:_eventEntity.location.name];
 	[view setLocationInfo:_eventEntity.location.info];
 	[view setLocationAddress:_eventEntity.location.fullAddress];
+    [_interactor getPlacemarkForLocation:_eventEntity.location];
 
 	RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
 		[self handleDismissAction];
@@ -60,17 +61,21 @@ THLEventDetailInteractorDelegate
 	}];
     
 	[view setDismissCommand:dismissCommand];
-	[_interactor getPlacemarkForLocation:_eventEntity.location];
+    
     [_interactor getGuestlistForGuest:[THLUser currentUser].objectId forEvent:_eventEntity.objectId];
-
-    RACCommand *actionBarButtonCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [self handleCreateGuestlistAction];
-        return [RACSignal empty];
-    }];
     
     [RACObserve(self, guestlistReviewStatus) subscribeNext:^(NSNumber *b) {
         BOOL activeGuestlist = [b boolValue];
         [view setActionBarButtonStatus:activeGuestlist];
+    }];
+    
+    RACCommand *actionBarButtonCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        if (_guestlistReviewStatus) {
+            [self handleViewGuestlistAction];
+        } else {
+            [self handleCreateGuestlistAction];
+        }
+        return [RACSignal empty];
     }];
     
     [view setActionBarButtonCommand:actionBarButtonCommand];
@@ -99,6 +104,10 @@ THLEventDetailInteractorDelegate
 
 - (void)handleDismissAction {
 	[_wireframe dismissInterface];
+}
+
+- (void)handleViewGuestlistAction {
+    [self.moduleDelegate eventDetailModule:self guestlist:_guestlistEntity presentGuestlistReviewInterfaceOnController:(UIViewController *)_view];
 }
 
 - (void)handleCreateGuestlistAction {

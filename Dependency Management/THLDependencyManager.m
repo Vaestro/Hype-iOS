@@ -21,13 +21,13 @@
 #import "THLPromotionSelectionWireframe.h"
 #import "THLEventFlowWireframe.h"
 #import "THLGuestlistInvitationWireframe.h"
+#import "THLGuestlistReviewWireframe.h"
 
 //Common
 #import "THLYapDatabaseManager.h"
 #import "THLEntityMapper.h"
 #import "THLViewDataSourceFactory.h"
 #import "THLParseQueryFactory.h"
-#import "THLEntities.h"
 #import "THLYapDatabaseViewFactory.h"
 #import "THLUserManager.h"
 #import "APAddressBook.h"
@@ -44,7 +44,9 @@
 #import "THLGuestlistService.h"
 
 //Classes
+#import "THLEntities.h"
 #import "THLGuestEntity.h"
+#import "THLGuestlistInviteEntity.h"
 
 
 @interface THLDependencyManager()
@@ -58,6 +60,7 @@
 @property (nonatomic, weak) THLPromotionSelectionWireframe *promotionSelectionWireframe;
 @property (nonatomic, weak) THLEventFlowWireframe *eventFlowWireframe;
 @property (nonatomic, weak) THLGuestlistInvitationWireframe *guestlistInvitationWireframe;
+@property (nonatomic, weak) THLGuestlistReviewWireframe *guestlistReviewWireframe;
 
 //Common
 @property (nonatomic, strong) THLYapDatabaseManager *databaseManager;
@@ -72,6 +75,7 @@
 //Data Stores
 @property (nonatomic, strong) THLDataStore *eventDataStore;
 @property (nonatomic, strong) THLDataStore *guestDataStore;
+@property (nonatomic, strong) THLDataStore *guestlistInviteDataStore;
 
 //Services
 @property (nonatomic, strong) THLEventService *eventService;
@@ -138,6 +142,15 @@
 																										 dataStore:self.guestDataStore];
 	self.guestlistInvitationWireframe = wireframe;
 	return wireframe;
+}
+
+- (THLGuestlistReviewWireframe *)newGuestlistReviewWireframe {
+    THLGuestlistReviewWireframe *wireframe = [[THLGuestlistReviewWireframe alloc] initWithGuestlistService:self.guestlistService
+                                                                                                      entityMapper:self.entityMapper
+                                                                                                 dataStore:self.guestlistInviteDataStore
+                                                                                             viewDataSourceFactory:self.viewDataSourceFactory];
+    self.guestlistReviewWireframe = wireframe;
+    return wireframe;
 }
 
 - (THLEventFlowWireframe *)newEventFlowWireframe {
@@ -226,6 +239,13 @@
 		_guestDataStore = [[THLDataStore alloc] initForEntity:[THLGuestEntity class] databaseManager:self.databaseManager];
 	}
 	return _guestDataStore;
+}
+
+- (THLDataStore *)guestlistInviteDataStore {
+    if (!_guestlistInviteDataStore) {
+        _guestlistInviteDataStore = [[THLDataStore alloc] initForEntity:[THLGuestlistInviteEntity class] databaseManager:self.databaseManager];
+    }
+    return _guestlistInviteDataStore;
 }
 
 #pragma mark - Services

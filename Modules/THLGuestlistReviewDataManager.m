@@ -22,7 +22,7 @@
 @implementation THLGuestlistReviewDataManager
 - (instancetype)initWithGuestlistService:(id<THLGuestlistServiceInterface>)guestlistService
                             entityMapper:(THLEntityMapper *)entityMapper
-                               datastore:(THLDataStore *)dataStore {
+                               dataStore:(THLDataStore *)dataStore {
     if (self = [super init]) {
         _dataStore = dataStore;
         _entityMapper = entityMapper;
