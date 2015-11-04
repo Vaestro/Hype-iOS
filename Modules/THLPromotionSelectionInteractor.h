@@ -27,5 +27,5 @@
 @property (nonatomic, readonly) THLPromotionSelectionDataManager *dataManager;
 - (instancetype)initWithDataManager:(THLPromotionSelectionDataManager *)dataManager;
 
-- (void)getPromotionsForEvent:(THLEventEntity *)eventEntity;
+//- (void)getPromotionsForEvent:(THLEventEntity *)eventEntity;
 @end

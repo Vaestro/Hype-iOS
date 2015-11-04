@@ -14,7 +14,8 @@
 
 - (BFTask *)requestPermissions {
 	BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
-	[APAddressBook requestAccess:^(BOOL granted, NSError *error) {
+    APAddressBook *addressBook = [APAddressBook new];
+	[addressBook requestAccess:^(BOOL granted, NSError *error) {
 		if (granted) {
 			[completionSource setResult:@(granted)];
 		} else {

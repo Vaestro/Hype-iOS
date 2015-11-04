@@ -158,7 +158,7 @@
     entity.reviewStatus = guestlist.reviewStatus;
     entity.owner = [self mapGuest:guestlist.owner];
 //TODO: Fix mapping guestlist's promotion
-//    entity.promotion = [self mapPromotion:guestlist.promotion];
+    entity.promotion = [self mapPromotion:guestlist.promotion];
     return entity;
 }
 

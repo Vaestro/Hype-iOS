@@ -35,7 +35,7 @@
 
 - (void)presentPromotionSelectionInterfaceForEvent:(THLEventEntity *)eventEntity inViewController:(UIViewController *)controller {
 	[_wireframe presentInterfaceInViewController:controller];
-	[_interactor getPromotionsForEvent:eventEntity];
+//	[_interactor getPromotionsForEvent:eventEntity];
 }
 
 - (void)configureView:(id<THLPromotionSelectionView>)view {

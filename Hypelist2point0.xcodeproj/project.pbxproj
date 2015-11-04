@@ -125,25 +125,24 @@
 		21E402EE1BBF9A8B001D0C2C /* THLGuestEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E402ED1BBF9A8B001D0C2C /* THLGuestEntity.m */; };
 		21EED1001BB5F842001325A7 /* THLEventFlowWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 21EED0FF1BB5F842001325A7 /* THLEventFlowWireframe.m */; };
 		76FA20541BCF854000BB480A /* THLSessionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 76FA20531BCF854000BB480A /* THLSessionService.m */; };
-		7905CC3F1BE0251000E56878 /* THLGuestlistInviteEntity.h in Sources */ = {isa = PBXBuildFile; fileRef = 7905CC3E1BE0251000E56878 /* THLGuestlistInviteEntity.h */; };
 		7905CC411BE0252700E56878 /* THLGuestlistInviteEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7905CC401BE0252700E56878 /* THLGuestlistInviteEntity.m */; };
 		794208281BD82641009B86FA /* UIView+DimView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794208271BD82641009B86FA /* UIView+DimView.m */; };
 		7942082C1BD82AF6009B86FA /* THLActionBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7942082B1BD82AF6009B86FA /* THLActionBarButton.m */; };
 		7942082F1BD8C250009B86FA /* THLGuestlistEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7942082E1BD8C250009B86FA /* THLGuestlistEntity.m */; };
-		794208321BD9A300009B86FA /* THLEventFlowModuleInterface.h in Sources */ = {isa = PBXBuildFile; fileRef = 794208311BD9A300009B86FA /* THLEventFlowModuleInterface.h */; };
-		794208341BD9A348009B86FA /* THLEventFlowModuleDelegate.h in Sources */ = {isa = PBXBuildFile; fileRef = 794208331BD9A348009B86FA /* THLEventFlowModuleDelegate.h */; };
-		79B9591C1BE5783500B87799 /* THLGuestlistReviewModuleInterface.h in Sources */ = {isa = PBXBuildFile; fileRef = 79B9591B1BE5783500B87799 /* THLGuestlistReviewModuleInterface.h */; };
-		79B9591E1BE578A200B87799 /* THLGuestlistReviewModuleDelegate.h in Sources */ = {isa = PBXBuildFile; fileRef = 79B9591D1BE578A200B87799 /* THLGuestlistReviewModuleDelegate.h */; };
 		79B959231BE57C9D00B87799 /* THLGuestlistReviewWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959221BE57C9D00B87799 /* THLGuestlistReviewWireframe.m */; };
 		79B959291BE581A800B87799 /* THLGuestlistReviewDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959281BE581A800B87799 /* THLGuestlistReviewDataManager.m */; };
 		79B9592C1BE581BB00B87799 /* THLGuestlistReviewInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B9592B1BE581BB00B87799 /* THLGuestlistReviewInteractor.m */; };
 		79B9592F1BE581CC00B87799 /* THLGuestlistReviewPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B9592E1BE581CC00B87799 /* THLGuestlistReviewPresenter.m */; };
 		79B959341BE5821B00B87799 /* THLGuestlistReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959331BE5821B00B87799 /* THLGuestlistReviewViewController.m */; };
-		79B959361BE5822A00B87799 /* THLGuestlistReviewView.h in Sources */ = {isa = PBXBuildFile; fileRef = 79B959351BE5822A00B87799 /* THLGuestlistReviewView.h */; };
 		79B9593B1BE67B3700B87799 /* THLGuestlistReviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B9593A1BE67B3700B87799 /* THLGuestlistReviewCell.m */; };
 		79B9593E1BE7173D00B87799 /* THLGuestlistReviewCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B9593D1BE7173D00B87799 /* THLGuestlistReviewCellViewModel.m */; };
-		79B959401BE7175100B87799 /* THLGuestlistReviewCellView.h in Sources */ = {isa = PBXBuildFile; fileRef = 79B9593F1BE7175100B87799 /* THLGuestlistReviewCellView.h */; };
 		79B959441BE8308600B87799 /* THLPersonIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959431BE8308600B87799 /* THLPersonIconView.m */; };
+		79B959481BE894B800B87799 /* THLPopupNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959471BE894B800B87799 /* THLPopupNotificationView.m */; };
+		79B9594D1BE8966300B87799 /* KLCPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B9594C1BE8966300B87799 /* KLCPopup.m */; };
+		79B959541BE91AE300B87799 /* THLPopupNotificationWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959531BE91AE300B87799 /* THLPopupNotificationWireframe.m */; };
+		79B959571BE9298800B87799 /* THLPopupNotificationPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959561BE9298800B87799 /* THLPopupNotificationPresenter.m */; };
+		79B9595A1BE92FBA00B87799 /* THLPopupNotificationInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959591BE92FBA00B87799 /* THLPopupNotificationInteractor.m */; };
+		79B9595D1BE934C000B87799 /* THLPopupNotificationDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B9595C1BE934C000B87799 /* THLPopupNotificationDataManager.m */; };
 		B771256D2B58EBFF817CDC12 /* libPods-Hypelist2point0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D059D2904940E14B1AF40EE3 /* libPods-Hypelist2point0.a */; };
 		CBE5403C8B7732B36D5ECB5E /* THLViewDataSourceGrouping.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE54FC98A366F3761F89F63 /* THLViewDataSourceGrouping.m */; };
 		CBE54720F63BA2DE2136B454 /* THLViewDataSource+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE545A9A3C66339456E0A06 /* THLViewDataSource+Factory.m */; };
@@ -451,6 +450,20 @@
 		79B9593F1BE7175100B87799 /* THLGuestlistReviewCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THLGuestlistReviewCellView.h; path = Modules/THLGuestlistReviewCellView.h; sourceTree = SOURCE_ROOT; };
 		79B959421BE8308600B87799 /* THLPersonIconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPersonIconView.h; sourceTree = "<group>"; };
 		79B959431BE8308600B87799 /* THLPersonIconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPersonIconView.m; sourceTree = "<group>"; };
+		79B959471BE894B800B87799 /* THLPopupNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPopupNotificationView.m; sourceTree = "<group>"; };
+		79B9594B1BE8966300B87799 /* KLCPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLCPopup.h; sourceTree = "<group>"; };
+		79B9594C1BE8966300B87799 /* KLCPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLCPopup.m; sourceTree = "<group>"; };
+		79B9594F1BE919DA00B87799 /* THLPopupNotificationModuleInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPopupNotificationModuleInterface.h; sourceTree = "<group>"; };
+		79B959501BE919DA00B87799 /* THLPopupNotificationModuleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPopupNotificationModuleDelegate.h; sourceTree = "<group>"; };
+		79B959521BE91AE300B87799 /* THLPopupNotificationWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPopupNotificationWireframe.h; sourceTree = "<group>"; };
+		79B959531BE91AE300B87799 /* THLPopupNotificationWireframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPopupNotificationWireframe.m; sourceTree = "<group>"; };
+		79B959551BE9298800B87799 /* THLPopupNotificationPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPopupNotificationPresenter.h; sourceTree = "<group>"; };
+		79B959561BE9298800B87799 /* THLPopupNotificationPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPopupNotificationPresenter.m; sourceTree = "<group>"; };
+		79B959581BE92FBA00B87799 /* THLPopupNotificationInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPopupNotificationInteractor.h; sourceTree = "<group>"; };
+		79B959591BE92FBA00B87799 /* THLPopupNotificationInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPopupNotificationInteractor.m; sourceTree = "<group>"; };
+		79B9595B1BE934C000B87799 /* THLPopupNotificationDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPopupNotificationDataManager.h; sourceTree = "<group>"; };
+		79B9595C1BE934C000B87799 /* THLPopupNotificationDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPopupNotificationDataManager.m; sourceTree = "<group>"; };
+		79B9595E1BE93C1B00B87799 /* THLPopupNotificationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLPopupNotificationView.h; sourceTree = "<group>"; };
 		BA51F1731F25286C41A13B20 /* Pods-Hypelist2point0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hypelist2point0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hypelist2point0/Pods-Hypelist2point0.debug.xcconfig"; sourceTree = "<group>"; };
 		C6B634BC51A4BB10D6261492 /* Pods-Hypelist2point0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hypelist2point0.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hypelist2point0/Pods-Hypelist2point0.release.xcconfig"; sourceTree = "<group>"; };
 		CB878AA95A320C00B4227BCE /* Pods-Hypelist2point0Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hypelist2point0Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hypelist2point0Tests/Pods-Hypelist2point0Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -581,6 +594,7 @@
 		211005A81B8A3D5800A540C6 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				79B959491BE8961800B87799 /* Alien */,
 				794208291BD82ADB009B86FA /* THLActionBar */,
 				217EBE891BB78A57006044B6 /* THLViewDataSource */,
 				216BDD541BC71EE500BBF713 /* THLSearchViewDataSource */,
@@ -1479,6 +1493,7 @@
 				21192D931BB327D200B176AA /* Promotion Selection Module */,
 				215A42A21BAA276E00D03C35 /* Facebook Module */,
 				21EBFBFD1B87AE9F006646E9 /* Parse Module */,
+				79B9594E1BE919A700B87799 /* Popup Notification Module */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -1900,6 +1915,51 @@
 			name = THLPersonIconView;
 			sourceTree = "<group>";
 		};
+		79B959451BE8949200B87799 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				79B9595E1BE93C1B00B87799 /* THLPopupNotificationView.h */,
+				79B959471BE894B800B87799 /* THLPopupNotificationView.m */,
+			);
+			name = View;
+			path = ../Components/Views;
+			sourceTree = "<group>";
+		};
+		79B959491BE8961800B87799 /* Alien */ = {
+			isa = PBXGroup;
+			children = (
+				79B9594A1BE8964700B87799 /* KLCPopup */,
+			);
+			name = Alien;
+			sourceTree = "<group>";
+		};
+		79B9594A1BE8964700B87799 /* KLCPopup */ = {
+			isa = PBXGroup;
+			children = (
+				79B9594B1BE8966300B87799 /* KLCPopup.h */,
+				79B9594C1BE8966300B87799 /* KLCPopup.m */,
+			);
+			name = KLCPopup;
+			sourceTree = "<group>";
+		};
+		79B9594E1BE919A700B87799 /* Popup Notification Module */ = {
+			isa = PBXGroup;
+			children = (
+				79B9594F1BE919DA00B87799 /* THLPopupNotificationModuleInterface.h */,
+				79B959501BE919DA00B87799 /* THLPopupNotificationModuleDelegate.h */,
+				79B959521BE91AE300B87799 /* THLPopupNotificationWireframe.h */,
+				79B959531BE91AE300B87799 /* THLPopupNotificationWireframe.m */,
+				79B959551BE9298800B87799 /* THLPopupNotificationPresenter.h */,
+				79B959561BE9298800B87799 /* THLPopupNotificationPresenter.m */,
+				79B959581BE92FBA00B87799 /* THLPopupNotificationInteractor.h */,
+				79B959591BE92FBA00B87799 /* THLPopupNotificationInteractor.m */,
+				79B9595B1BE934C000B87799 /* THLPopupNotificationDataManager.h */,
+				79B9595C1BE934C000B87799 /* THLPopupNotificationDataManager.m */,
+				79B959451BE8949200B87799 /* View */,
+			);
+			name = "Popup Notification Module";
+			sourceTree = "<group>";
+		};
 		CBE54BB68ECECF48FD57301C /* THLViewDataSourceGrouping */ = {
 			isa = PBXGroup;
 			children = (
@@ -1986,6 +2046,9 @@
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = 8QRD6SFSHS;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -2177,7 +2240,6 @@
 				21192D911BB327C200B176AA /* THLPromotionSelectionViewController.m in Sources */,
 				218AF3591BB7455500AFAEBF /* THLEntityMapper.m in Sources */,
 				212173661BB34D22007D817A /* HCSStarRatingView.m in Sources */,
-				79B9591C1BE5783500B87799 /* THLGuestlistReviewModuleInterface.h in Sources */,
 				2118921F1BAA088D00E8A11F /* THLLoginWireframe.m in Sources */,
 				2121734C1BB32B92007D817A /* THLPromotionSelectionInfoCardViewModel.m in Sources */,
 				211D0BB31B8CEE8B0073AFDD /* THLEventDetailViewController.m in Sources */,
@@ -2186,13 +2248,14 @@
 				217EBEAE1BB7AB1B006044B6 /* THLPromotionEntity.m in Sources */,
 				212173711BB34F15007D817A /* THLRoundImageView.m in Sources */,
 				211005CC1B8A767C00A540C6 /* THLEventDiscoveryCellViewModel.m in Sources */,
+				79B9595D1BE934C000B87799 /* THLPopupNotificationDataManager.m in Sources */,
 				215A428B1BAA1FFF00D03C35 /* THLNumberVerificationPresenter.m in Sources */,
 				211005D51B8A7D2800A540C6 /* NSDate+Utilities.m in Sources */,
 				218AF34B1BB740DB00AFAEBF /* THLEntity.m in Sources */,
 				79B9592F1BE581CC00B87799 /* THLGuestlistReviewPresenter.m in Sources */,
+				79B959571BE9298800B87799 /* THLPopupNotificationPresenter.m in Sources */,
 				21192D851BB3278700B176AA /* THLPromotionSelectionInteractor.m in Sources */,
 				217EBE8D1BB78AB4006044B6 /* THLYapDatabaseViewFactory.m in Sources */,
-				79B959401BE7175100B87799 /* THLGuestlistReviewCellView.h in Sources */,
 				211892061BA9FF0600E8A11F /* THLLoginInteractor.m in Sources */,
 				211005D01B8A7D0200A540C6 /* NSDate+Hypelist.m in Sources */,
 				7905CC411BE0252700E56878 /* THLGuestlistInviteEntity.m in Sources */,
@@ -2213,7 +2276,6 @@
 				217EBEB71BB7AB54006044B6 /* THLUserEntity.m in Sources */,
 				213CE1131BB8D22D00054A2C /* THLLocationService.m in Sources */,
 				2133BFCB1B877CAB002C1DA9 /* THLEvent.m in Sources */,
-				79B959361BE5822A00B87799 /* THLGuestlistReviewView.h in Sources */,
 				211BB0D41B8CBE980068FD50 /* THLEventTitlesView.m in Sources */,
 				21192D881BB3279000B176AA /* THLPromotionSelectionDataManager.m in Sources */,
 				2121735B1BB34215007D817A /* THLPromotionCardView.m in Sources */,
@@ -2223,6 +2285,7 @@
 				212173601BB34261007D817A /* THLPromotionCardInfoCell.m in Sources */,
 				2174A06A1B863F6A006826D7 /* main.m in Sources */,
 				216BDD581BC71F1800BBF713 /* THLSearchViewDataSource.m in Sources */,
+				79B9595A1BE92FBA00B87799 /* THLPopupNotificationInteractor.m in Sources */,
 				217EBEA51BB7A106006044B6 /* THLLoginService.m in Sources */,
 				219E32A51B8EA62700214C85 /* THLEventNavigationController.m in Sources */,
 				217EBE941BB78F22006044B6 /* THLViewDataSourceFactory.m in Sources */,
@@ -2243,11 +2306,10 @@
 				21E402D91BBF80E6001D0C2C /* THLGuestlist.m in Sources */,
 				794208281BD82641009B86FA /* UIView+DimView.m in Sources */,
 				211D0BBD1B8CEEDE0073AFDD /* THLEventDetailInteractor.m in Sources */,
-				79B9591E1BE578A200B87799 /* THLGuestlistReviewModuleDelegate.h in Sources */,
+				79B959541BE91AE300B87799 /* THLPopupNotificationWireframe.m in Sources */,
 				211D0BB01B8CEE800073AFDD /* THLEventDetailPresenter.m in Sources */,
 				21E402DC1BBF8155001D0C2C /* THLGuestlistInvite.m in Sources */,
 				7942082F1BD8C250009B86FA /* THLGuestlistEntity.m in Sources */,
-				794208321BD9A300009B86FA /* THLEventFlowModuleInterface.h in Sources */,
 				21CCEDE91B87C87B0066CDAC /* THLDataStore.m in Sources */,
 				21EED1001BB5F842001325A7 /* THLEventFlowWireframe.m in Sources */,
 				79B959291BE581A800B87799 /* THLGuestlistReviewDataManager.m in Sources */,
@@ -2257,6 +2319,7 @@
 				21775F3C1B8CF93E00609D39 /* THLEventDetailsLocationInfoView.m in Sources */,
 				211D0BBA1B8CEED40073AFDD /* THLEventDetailDataManager.m in Sources */,
 				217DC6531BBB77AC00332174 /* THLUserManager.m in Sources */,
+				79B9594D1BE8966300B87799 /* KLCPopup.m in Sources */,
 				2108A8851B8BBF4900B725F6 /* THLMasterWireframe.m in Sources */,
 				217EBEBA1BB7AB68006044B6 /* THLHostEntity.m in Sources */,
 				211005981B8A319000A540C6 /* THLEventDiscoveryInteractor.m in Sources */,
@@ -2274,7 +2337,6 @@
 				79B959341BE5821B00B87799 /* THLGuestlistReviewViewController.m in Sources */,
 				2121736E1BB34DD3007D817A /* THLStarRatingView.m in Sources */,
 				2108A8881B8BBF5B00B725F6 /* THLDependencyManager.m in Sources */,
-				7905CC3F1BE0251000E56878 /* THLGuestlistInviteEntity.h in Sources */,
 				2110059F1B8A351000A540C6 /* THLEventDiscoveryWireframe.m in Sources */,
 				7942082C1BD82AF6009B86FA /* THLActionBarButton.m in Sources */,
 				218AF3521BB7422100AFAEBF /* THLEventEntity.m in Sources */,
@@ -2283,8 +2345,8 @@
 				21E402C91BBF7675001D0C2C /* THLGuestlistInvitationWireframe.m in Sources */,
 				CBE54720F63BA2DE2136B454 /* THLViewDataSource+Factory.m in Sources */,
 				CBE5403C8B7732B36D5ECB5E /* THLViewDataSourceGrouping.m in Sources */,
-				794208341BD9A348009B86FA /* THLEventFlowModuleDelegate.h in Sources */,
 				CBE547FB5677C373C1DE74C7 /* THLViewDataSourceSorting.m in Sources */,
+				79B959481BE894B800B87799 /* THLPopupNotificationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

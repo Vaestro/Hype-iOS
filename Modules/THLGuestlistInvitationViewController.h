@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "THLGuestlistInvitationView.h"
+#import "THContactPickerView.h"
 
 @protocol THContactPickerDelegate;
 @protocol THLGuestlistInvitationView;

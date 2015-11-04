@@ -34,7 +34,7 @@
 - (THLGuestlistEntity *)mapGuestlist:(THLGuestlist *)guestlist;
 - (THLGuestlistInviteEntity *)mapGuestlistInvite:(THLGuestlistInvite *)guestlistInvite;
 
-- (NSArray *)mapUsers:(NSArray *)users;
+//- (NSArray *)mapUsers:(NSArray *)users;
 - (NSArray<THLEventEntity*> *)mapEvents:(NSArray *)events;
 - (NSArray<THLLocationEntity*> *)mapLocations:(NSArray *)locations;
 - (NSArray<THLPromotionEntity*> *)mapPromotions:(NSArray *)promotions;

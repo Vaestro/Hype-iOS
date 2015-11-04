@@ -56,6 +56,6 @@
 }
 
 - (id<THLGuestlistReviewModuleInterface>)moduleInterface {
-    return self.presenter;
+    return _presenter;
 }
 @end

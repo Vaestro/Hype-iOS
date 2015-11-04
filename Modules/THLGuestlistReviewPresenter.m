@@ -40,7 +40,7 @@ THLGuestlistReviewInteractorDelegate
 #pragma mark - THLGuestlistReviewModuleInterface
 - (void)presentGuestlistReviewInterfaceForGuestlist:(THLGuestlistEntity *)guestlistEntity forReviewer:(NSString *)reviewer inController:(UIViewController *)controller {
     _interactor.guestlistEntity = guestlistEntity;
-//    _interactor.reviewer = reviewer;
+    _reviewer = reviewer;
     [_wireframe presentInterfaceInController:controller];
 }
 
@@ -52,19 +52,27 @@ THLGuestlistReviewInteractorDelegate
     };
     
     [view setDataSource:dataSource];
-    
-//    RACCommand *selectedIndexPathCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-//        [self handleIndexPathSelection:(NSIndexPath *)input];
-//        return [RACSignal empty];
-//    }];
-//    
-//    [view setSelectedIndexPathCommand:selectedIndexPathCommand];
+
     RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         [self handleDismissAction];
         return [RACSignal empty];
     }];
     
     [view setDismissCommand:dismissCommand];
+    
+    RACCommand *acceptCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [self handleAcceptAction];
+        return [RACSignal empty];
+    }];
+    
+//    [view setAcceptCommand:acceptCommand];
+    
+    RACCommand *declineCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [self handleDeclineAction];
+        return [RACSignal empty];
+    }];
+    
+//    [view setDeclineCommand:declineCommand];
     
     RACCommand *refreshCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         [self handleRefreshAction];
@@ -77,6 +85,13 @@ THLGuestlistReviewInteractorDelegate
         BOOL isRefreshing = [b boolValue];
         [view setShowRefreshAnimation:isRefreshing];
     }];
+    
+    //    RACCommand *selectedIndexPathCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+    //        [self handleIndexPathSelection:(NSIndexPath *)input];
+    //        return [RACSignal empty];
+    //    }];
+    //
+    //    [view setSelectedIndexPathCommand:selectedIndexPathCommand];
 }
 
 //TODO: Create Configure Review Options
@@ -92,16 +107,16 @@ THLGuestlistReviewInteractorDelegate
     [_interactor updateGuestlistInvites];
 }
 
-//- (void)handleAcceptInviteAction {
-////    self.showActivityIndicator = YES;
+- (void)handleAcceptAction {
+//    self.showActivityIndicator = YES;
 //    [_interactor updateGuestlistInviteResponse:@"Accepted"];
-//}
-//
-//- (void)handleDeclineInviteAction {
-//    //    self.showActivityIndicator = YES;
+}
+
+- (void)handleDeclineAction {
+    //    self.showActivityIndicator = YES;
 //    [_interactor updateGuestlistInviteResponse:@"Declined"];
-//}
-//
+}
+
 //- (void)handleAddGuestAction {
 //    [self.moduleDelegate guestlistReviewModule:self promotion:_guestlistEntity.promotion presentGuestlistInvitationInterfaceOnController:(UIViewController *)_view];
 //}

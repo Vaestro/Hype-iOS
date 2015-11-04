@@ -13,11 +13,13 @@
 @class THLLoginWireframe;
 @class THLFacebookPictureWireframe;
 @class THLNumberVerificationWireframe;
+@class THLEventFlowWireframe;
 @class THLEventDiscoveryWireframe;
 @class THLEventDetailWireframe;
 @class THLPromotionSelectionWireframe;
-@class THLEventFlowWireframe;
 @class THLGuestlistInvitationWireframe;
+@class THLGuestlistReviewWireframe;
+@class THLPopupNotificationWireframe;
 /**
  *  Manages all dependenies for the app.
  */
@@ -35,4 +37,6 @@ THLEventFlowDependencyManager
 - (THLEventDetailWireframe *)newEventDetailWireframe;
 - (THLPromotionSelectionWireframe *)newPromotionSelectionWireframe;
 - (THLGuestlistInvitationWireframe *)newGuestlistInvitationWireframe;
+- (THLGuestlistReviewWireframe *)newGuestlistReviewWireframe;
+- (THLPopupNotificationWireframe *)newPopupNotificationWireframe;
 @end

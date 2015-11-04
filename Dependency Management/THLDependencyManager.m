@@ -22,8 +22,10 @@
 #import "THLEventFlowWireframe.h"
 #import "THLGuestlistInvitationWireframe.h"
 #import "THLGuestlistReviewWireframe.h"
+#import "THLPopupNotificationWireframe.h"
 
 //Common
+//#import "THLPushNotificationManager.h"
 #import "THLYapDatabaseManager.h"
 #import "THLEntityMapper.h"
 #import "THLViewDataSourceFactory.h"
@@ -61,6 +63,7 @@
 @property (nonatomic, weak) THLEventFlowWireframe *eventFlowWireframe;
 @property (nonatomic, weak) THLGuestlistInvitationWireframe *guestlistInvitationWireframe;
 @property (nonatomic, weak) THLGuestlistReviewWireframe *guestlistReviewWireframe;
+@property (nonatomic, weak) THLPopupNotificationWireframe *popupNotificationWireframe;
 
 //Common
 @property (nonatomic, strong) THLYapDatabaseManager *databaseManager;
@@ -157,6 +160,13 @@
 	THLEventFlowWireframe *wireframe = [[THLEventFlowWireframe alloc] initWithDependencyManager:self];
 	self.eventFlowWireframe = wireframe;
 	return wireframe;
+}
+
+- (THLPopupNotificationWireframe *)newPopupNotificationWireframe {
+    THLPopupNotificationWireframe *wireframe = [[THLPopupNotificationWireframe alloc] initWithGuestlistService:self.guestlistService
+                                                                                                  entityMapper:self.entityMapper];
+    self.popupNotificationWireframe = wireframe;
+    return wireframe;
 }
 
 #pragma mark - Lazy Instantiation

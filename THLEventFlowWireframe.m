@@ -41,6 +41,11 @@ THLGuestlistReviewModuleDelegate
 	[self presentEventDiscoveryInterface];
 }
 
+- (void)presentEventFlowInWindow:(UIWindow *)window forEventDetail:(THLEventEntity *)eventEntity {
+    _window = window;
+    [self presentEventDetailInterfaceForEvent:eventEntity];
+}
+
 - (void)presentEventDiscoveryInterface {
 	_eventDiscoveryWireframe = [_dependencyManager newEventDiscoveryWireframe];
 	[_eventDiscoveryWireframe.moduleInterface setModuleDelegate:self];

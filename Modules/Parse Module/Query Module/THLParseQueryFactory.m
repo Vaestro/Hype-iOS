@@ -50,6 +50,14 @@
     return query;
 }
 
+- (PFQuery *)queryForGuestlistInviteWithId {
+    PFQuery *query = [self baseGuestlistInviteQuery];
+    [query includeKey:@"Guestlist.Promotion"];
+    [query includeKey:@"Guestlist.Promotion.event"];
+    [query includeKey:@"Guestlist.Promotion.event.location"];
+    return query;
+}
+
 #pragma mark - Class Queries
 /**
  *  Generic query for THLPromotion.

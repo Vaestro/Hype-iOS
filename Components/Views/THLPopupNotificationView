@@ -1,0 +1,126 @@
+//
+//  THLGuestlistInviteModalView.m
+//  Hypelist2point0
+//
+//  Created by Edgar Li on 11/3/15.
+//  Copyright © 2015 Hypelist. All rights reserved.
+//
+
+#import "THLGuestlistInvitePopupView.h"
+#import "THLPersonIconView.h"
+#import "THLActionBarButton.h"
+#import "DateTools.h"
+#import "UITextView+NUI.h"
+#import "THLAppearanceConstants.h"
+#import "THLGuestlistEntity.h"
+#import "THLGuestEntity.h"
+#import "THLPromotionEntity.h"
+#import "THLEventEntity.h"
+
+@interface THLGuestlistInvitePopupView()
+@property (nonatomic, strong) THLPersonIconView *iconView;
+@property (nonatomic, strong) UITextView *textView;
+@property (nonatomic, strong) THLActionBarButton *button;
+@property (nonatomic, copy) THLGuestlistInvitePopupCallback callbackBlock;
+@property (nonatomic, weak) KLCPopup *presenter;
+@end
+
+static CGFloat const ICON_VIEW_DIMENSION = 50;
+
+@implementation THLGuestlistInvitePopupView
++ (KLCPopup *)popupForGuestlist:(THLGuestlistEntity *)guestlistEntity callbackBlock:(THLGuestlistInvitePopupCallback)callback {
+    THLGuestlistInvitePopupView *contentView = [THLGuestlistInvitePopupView new];
+    [contentView configureWithGuestlist:guestlistEntity callback:callback];
+    
+    [contentView layoutSubviews];
+    [contentView updateConstraints];
+    
+    contentView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    KLCPopup *popupWrapper = [KLCPopup popupWithContentView:contentView
+                                                   showType:KLCPopupShowTypeBounceIn
+                                                dismissType:KLCPopupDismissTypeBounceOut
+                                                   maskType:KLCPopupMaskTypeDimmed
+                                   dismissOnBackgroundTouch:YES
+                                      dismissOnContentTouch:YES];
+    
+    contentView.presenter = popupWrapper;
+    return popupWrapper;
+}
+
++ (void)showPopupForGuestlist:(THLGuestlistEntity *)guestlistEntity callbackBlock:(THLGuestlistInvitePopupCallback)callback {
+    [[self popupForGuestlist:guestlistEntity callbackBlock:callback] show];
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
+        [self setupAndLayoutView];
+    }
+    return self;
+}
+
+- (void)setupAndLayoutView {
+    self.backgroundColor = kTHLNUIPrimaryBackgroundColor;
+    
+    _iconView = [self newIconView];
+    _textView = [self newTextView];
+    _button = [self newButton];
+    
+    [self addSubviews:@[_iconView,
+                        _textView,
+                        _button]];
+    
+    [_iconView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.insets(kTHLEdgeInsetsHigh());
+        make.centerX.equalTo(0);
+        make.width.equalTo(ICON_VIEW_DIMENSION);
+        make.height.equalTo(ICON_VIEW_DIMENSION);
+    }];
+    
+    [_textView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_iconView.mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.left.right.insets(kTHLEdgeInsetsHigh());
+        make.bottom.equalTo(_button.mas_top).insets(kTHLEdgeInsetsHigh());
+        make.width.equalTo(ScreenWidth-4*kTHLInset);
+    }];
+    
+    [_button makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.insets(kTHLEdgeInsetsHigh());
+    }];
+}
+
+- (THLPersonIconView *)newIconView {
+    THLPersonIconView *iconView = [THLPersonIconView new];
+    return iconView;
+}
+
+- (UITextView *)newTextView {
+    UITextView *textView = THLNUITextView(kTHLNUIDetailTitle);
+    [textView setScrollEnabled:NO];
+    [textView setEditable:NO];
+    textView.textAlignment = NSTextAlignmentCenter;
+    textView.userInteractionEnabled = NO;
+    textView.backgroundColor = [UIColor clearColor];
+    return textView;
+}
+
+- (THLActionBarButton *)newButton {
+    THLActionBarButton *button = [THLActionBarButton new];
+    [button setTitle:@"VIEW EVENT" animateChanges:NO];
+    [button addTarget:self action:@selector(handleButtonTap) forControlEvents:UIControlEventTouchUpInside];
+    return button;
+}
+
+- (void)configureWithGuestlist:(THLGuestlistEntity *)guestlistEntity callback:(THLGuestlistInvitePopupCallback)block {
+    _iconView.imageURL = guestlistEntity.owner.imageURL;
+    _textView.text = [self textForPromotion:guestlistEntity.promotion invitationSender:guestlistEntity.owner];
+    _callbackBlock = block;
+}
+
+- (NSString *)textForPromotion:(THLPromotionEntity *)promotion invitationSender:(THLGuestEntity *)sender {
+    NSString *invitationString = [NSString stringWithFormat: @"You're invited to %@", promotion.event.location.name];
+    NSString *timeString = [NSString stringWithFormat:@"Tonight at %@", [promotion.time formattedDateWithFormat:@"HH:mm"]];
+    NSString *partyString = [NSString stringWithFormat:@"With %@'s Party", sender.firstName];
+    return [@[invitationString, timeString, partyString] componentsJoinedByString:@"\n"];
+}
+@end

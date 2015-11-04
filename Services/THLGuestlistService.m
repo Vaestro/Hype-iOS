@@ -55,6 +55,29 @@
     return completionSource.task;
 }
 
+- (BFTask *)fetchGuestlistInviteWithId:(NSString *)guestlistInviteId {
+    BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
+    [[_queryFactory queryForGuestlistInviteWithId] getObjectInBackgroundWithId:guestlistInviteId block:^(PFObject *guestlistInvite, NSError *error) {
+        if (!error) {
+            PFObject *guestlist = guestlistInvite[@"Guestlist"];
+            [guestlistInvite setObject:guestlist forKey:@"Guestlist"];
+            PFObject *owner = guestlistInvite[@"Guestlist"][@"Owner"];
+            [guestlist setObject:owner forKey:@"Owner"];
+            PFObject *promotion = guestlistInvite[@"Guestlist"][@"Promotion"];
+            [guestlist setObject:promotion forKey:@"Promotion"];
+            PFObject *event = guestlistInvite[@"Guestlist"][@"Promotion"][@"event"];
+            [promotion setObject:event forKey:@"event"];
+            PFObject *location = guestlistInvite[@"Guestlist"][@"Promotion"][@"event"][@"location"];
+            [event setObject:location forKey:@"location"];
+            [guestlistInvite pinInBackground];
+            [completionSource setResult:guestlistInvite];
+        } else {
+            [completionSource setError:error];
+        }
+    }];
+    return completionSource.task;
+}
+
 - (BFTask *)createGuestlistForPromotion:(NSString *)promotionId withInvites:(NSArray *)guestPhoneNumbers {
     return [PFCloud callFunctionInBackground:@"createGuestlist"
                        withParameters:@{@"promotionId": promotionId, @"guestDigits": guestPhoneNumbers}];

@@ -22,7 +22,9 @@
 
 - (void)presentNumberVerificationInterfaceInWindow:(UIWindow *)window {
 	WEAKSELF();
-	[[Digits sharedInstance] authenticateWithDigitsAppearance:[self newDigitsAppearance] viewController:window.rootViewController title:NSLocalizedString(@"Number Verification", nil) completion:^(DGTSession *session, NSError *error) {
+    DGTAuthenticationConfiguration *configuration = [DGTAuthenticationConfiguration new];
+    configuration.title = NSLocalizedString(@"Number Verification", nil);
+	[[Digits sharedInstance] authenticateWithViewController:window.rootViewController configuration:configuration completion:^(DGTSession *session, NSError *error) {
 		if (error) {
 			[WSELF handleNumberVerificationFailure:error];
 		} else {

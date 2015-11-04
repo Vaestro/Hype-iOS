@@ -18,5 +18,7 @@
 @protocol THLGuestlistServiceInterface <NSObject>
 - (BFTask *)fetchInvitesOnGuestlist:(THLGuestlist *)guestlist;
 - (BFTask *)fetchGuestlistForGuest:(THLUser *)guest forEvent:(NSString *)eventId;
+- (BFTask *)fetchGuestlistInviteWithId:(NSString *)guestlistInviteId;
+
 - (BFTask *)createGuestlistForPromotion:promotionId withInvites:guestPhoneNumbers;
 @end

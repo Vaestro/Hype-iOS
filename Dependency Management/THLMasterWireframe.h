@@ -16,4 +16,5 @@
 - (instancetype)initWithDependencyManager:(THLDependencyManager *)dependencyManager;
 
 - (void)presentAppInWindow:(UIWindow *)window;
+- (BFTask *)handlePushNotification:(NSDictionary *)pushInfo;
 @end

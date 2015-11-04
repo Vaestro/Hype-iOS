@@ -28,7 +28,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
 	// Initialize Parse.
+    [Parse enableLocalDatastore];
 	[Parse setApplicationId:@"D0AnOPXqqfz7bfE70WvdlE8dK7Qj1kxgf4rPm8rX"
 				  clientKey:@"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq"];
 
@@ -88,15 +90,15 @@
     }
 }
 
-//- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-//    [[THLPushNotificationManager handlePushNotification:userInfo] continueWithBlock:^id(BFTask *task) {
-//        if (completionHandler) {
-//            UIBackgroundFetchResult result = (!task.faulted) ? UIBackgroundFetchResultNewData : UIBackgroundFetchResultFailed;
-//            completionHandler(result);
-//        }
-//        return nil;
-//    }];
-//}
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    [[_masterWireframe handlePushNotification:userInfo] continueWithBlock:^id(BFTask *task) {
+        if (completionHandler) {
+            UIBackgroundFetchResult result = (!task.faulted) ? UIBackgroundFetchResultNewData : UIBackgroundFetchResultFailed;
+            completionHandler(result);
+        }
+        return nil;
+    }];
+}
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
 	[FBSDKAppEvents activateApp];
