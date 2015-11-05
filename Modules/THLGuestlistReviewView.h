@@ -12,8 +12,9 @@
 @protocol THLGuestlistReviewView <NSObject>
 @property (nonatomic, strong) THLViewDataSource *dataSource;
 @property (nonatomic) BOOL showRefreshAnimation;
+@property (nonatomic) NSInteger showActivityIndicator;
 @property (nonatomic, strong) RACCommand *refreshCommand;
-@property (nonatomic, strong) UIBarButtonItem *dismissButton;
 @property (nonatomic, strong) RACCommand *dismissCommand;
-
+@property (nonatomic, strong) RACCommand *acceptCommand;
+@property (nonatomic, strong) RACCommand *declineCommand;
 @end

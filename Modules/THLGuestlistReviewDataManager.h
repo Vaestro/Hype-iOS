@@ -25,4 +25,5 @@
                                dataStore:(THLDataStore *)dataStore;
 
 - (BFTask *)fetchGuestlistInvitesForGuestlist:(NSString *)guestlistId;
+- (BFTask *)updateGuestlistInvite:(NSString *)guestlistInviteId withResponse:(THLStatus)response;
 @end

@@ -56,11 +56,21 @@
 }
 
 - (void)dismissInterface {
-	[_view dismissViewControllerAnimated:YES completion:NULL];
+    [_view.navigationController dismissViewControllerAnimated:YES completion:^{
+//        _dataManager = nil;
+//        _interactor = nil;
+//        _view = nil;
+        [_presenter.moduleDelegate dismissWireframe];
+//        _presenter = nil;
+    }];
+
 }
 
 - (id<THLEventDetailModuleInterface>)moduleInterface {
 	return _presenter;
 }
 
+- (void)dealloc {
+    NSLog(@"WIREFRAME WAS DEALLOCATED BITCH");
+}
 @end

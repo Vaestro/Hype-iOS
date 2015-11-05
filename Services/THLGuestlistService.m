@@ -41,16 +41,12 @@
 
 }
 
-- (BFTask *)fetchGuestlistForGuest:(THLUser *)guest forEvent:(NSString *)eventId {
+- (BFTask *)fetchGuestlistForEvent:(NSString *)eventId {
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
-    NSMutableArray *completedGuestlists = [NSMutableArray new];
-    [[_queryFactory queryForGuestlistForGuest:guest forEvent:eventId] findObjectsInBackgroundWithBlock:^(NSArray *guestlists, NSError *error) {
-        for (PFObject *guestlist in guestlists) {
-            PFObject *owner = guestlist[@"Owner"];
-            [guestlist setObject:owner forKey:@"owner"];
-            [completedGuestlists addObject:guestlist];
-        }
-        [completionSource setResult:completedGuestlists];
+    [[_queryFactory queryForGuestlistForEvent:eventId] getFirstObjectInBackgroundWithBlock:^(PFObject *guestlist, NSError *error) {
+        PFObject *owner = guestlist[@"Owner"];
+        [guestlist setObject:owner forKey:@"owner"];
+        [completionSource setResult:guestlist];
     }];
     return completionSource.task;
 }

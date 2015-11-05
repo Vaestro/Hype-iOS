@@ -17,7 +17,7 @@
 @interface THLEventDetailPresenter : NSObject<THLEventDetailModuleInterface>
 #pragma mark - Dependencies
 @property (nonatomic, readonly, weak) THLEventDetailWireframe *wireframe;
-@property (nonatomic, readonly) THLEventDetailInteractor *interactor;
+@property (nonatomic, readonly, weak) THLEventDetailInteractor *interactor;
 - (instancetype)initWithInteractor:(THLEventDetailInteractor *)interactor
 						 wireframe:(THLEventDetailWireframe *)wireframe;
 

@@ -19,37 +19,32 @@
 }
 
 - (void)getPlacemarkForLocation:(THLLocationEntity *)locationEntity {
+    WEAKSELF();
 	[[_dataManager fetchPlacemarkForAddress:locationEntity.fullAddress] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask<CLPlacemark *> *task) {
-		[_delegate interactor:self didGetPlacemark:task.result forLocation:locationEntity error:task.error];
+		[_delegate interactor:WSELF didGetPlacemark:task.result forLocation:locationEntity error:task.error];
 		return nil;
 	}];
 }
 
 //Get One Promotion for Event (MVP ONLY)
 - (void)getPromotionForEvent:(NSString *)eventId {
-    [[_dataManager fetchPromotionsForEvent:eventId] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
-        [_delegate interactor:self didGetPromotion:task.result[0] forEvent:eventId error:task.error];
+    [[_dataManager fetchPromotionForEvent:eventId] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+        WEAKSELF();
+        [_delegate interactor:WSELF didGetPromotion:task.result forEvent:eventId error:task.error];
         return nil;
     }];
 }
 
-//- (void)getGuestlistForGuest:(NSString *)guestId forEvent:(NSString *)eventId {
-//    [[_dataManager fetchGuestlistForGuest:guestId forEvent:eventId] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
-//        [_delegate interactor:self didGetGuestlist:task.result[0] forGuest:guestId forEvent:eventId error:task.error];
-//        return nil;
-//    }];
-//}
-
-- (void)getGuestlistForGuest:(NSString *)guestId forEvent:(NSString *)eventId {
-    [[_dataManager fetchGuestlistForGuest:guestId forEvent:eventId] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
-        if ([task.result count] == 0) {
-            [_delegate interactor:self didGetGuestlist:nil forGuest:guestId forEvent:eventId error:task.error];
-        } else {
-            [_delegate interactor:self didGetGuestlist:task.result[0] forGuest:guestId forEvent:eventId error:task.error];
-        }
+- (void)checkValidGuestlistEvent:(NSString *)eventId {
+    WEAKSELF();
+    [[_dataManager checkValidGuestlistForEvent:eventId] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+        [_delegate interactor:WSELF didGetGuestlist:task.result forEvent:eventId error:task.error];
         return nil;
     }];
 }
 
+- (void)dealloc {
+    NSLog(@"INTERACTOR WAS DEALLOCATED BITCH");
+}
 
 @end

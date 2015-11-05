@@ -109,12 +109,27 @@
     RAC(self.mapView, locationAddress) = RACObserve(self, locationAddress);
     RAC(self.mapView, locationPlacemark) = RACObserve(self, locationPlacemark);
 //    RAC(self, bottomBar) = RACObserve(self, actionBarButtonStatus);
-    [RACObserve(WSELF, actionBarButtonStatus) subscribeNext:^(NSNumber *val) {
-        BOOL guestlistStatus = [val boolValue];
-        if (guestlistStatus) {
-            [_bottomBar.morphingLabel setTextWithoutMorphing:NSLocalizedString(@"VIEW YOUR GUESTLIST", nil)];
-        } else {
-            [_bottomBar.morphingLabel setTextWithoutMorphing:NSLocalizedString(@"CREATE A GUESTLIST", nil)];
+    [RACObserve(WSELF, actionBarButtonStatus) subscribeNext:^(id _) {
+        switch (actionBarButtonStatus) {
+            case THLStatusPending:
+                [_bottomBar.morphingLabel setTextWithoutMorphing:NSLocalizedString(@"VIEW PENDING GUESTLIST", nil)];
+                _bottomBar.backgroundColor = kTHLNUIPendingColor;
+                break;
+            
+            case THLStatusAccepted:
+                [_bottomBar.morphingLabel setTextWithoutMorphing:NSLocalizedString(@"VIEW YOUR GUESTLIST", nil)];
+                _bottomBar.backgroundColor = kTHLNUIAccentColor;
+                break;
+                
+            case THLStatusDeclined:
+                [_bottomBar.morphingLabel setTextWithoutMorphing:NSLocalizedString(@"CREATE A GUESTLIST", nil)];
+                _bottomBar.backgroundColor = kTHLNUIAccentColor;
+                break;
+                
+            default:
+                [_bottomBar.morphingLabel setTextWithoutMorphing:NSLocalizedString(@"CREATE A GUESTLIST", nil)];
+                _bottomBar.backgroundColor = kTHLNUIAccentColor;
+                break;
         }
     }];
     RAC(self.bottomBar, rac_command) = RACObserve(self, actionBarButtonCommand);
@@ -156,5 +171,9 @@
     THLActionBarButton *bottomBar = [THLActionBarButton new];
 //    [bottomBar.morphingLabel setTextWithoutMorphing:NSLocalizedString(actionBarButtonStatus, nil)];
     return bottomBar;
+}
+
+- (void)dealloc {
+    NSLog(@"VIEW CONTROLLER WAS DEALLOCATED BITCH");
 }
 @end

@@ -26,7 +26,7 @@ THLEventDetailInteractorDelegate
 @property (nonatomic, strong) THLGuestlistEntity *guestlistEntity;
 @property (nonatomic, strong) THLPromotionEntity *promotionEntity;
 @property (nonatomic, strong) id<THLEventDetailView> view;
-@property (nonatomic) BOOL guestlistReviewStatus;
+@property (nonatomic) THLStatus guestlistReviewStatus;
 
 @end
 
@@ -44,51 +44,48 @@ THLEventDetailInteractorDelegate
 }
 
 - (void)configureView:(id<THLEventDetailView>)view {
+    WEAKSELF();
 	_view = view;
-
-	[view setLocationImageURL:_eventEntity.location.imageURL];
-	[view setPromoImageURL:_eventEntity.imageURL];
-	[view setEventName:_eventEntity.title];
-	[view setPromoInfo:_eventEntity.info];
-	[view setLocationName:_eventEntity.location.name];
-	[view setLocationInfo:_eventEntity.location.info];
-	[view setLocationAddress:_eventEntity.location.fullAddress];
-    [_interactor getPlacemarkForLocation:_eventEntity.location];
-
-	RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-		[self handleDismissAction];
-		return [RACSignal empty];
-	}];
     
-	[view setDismissCommand:dismissCommand];
-    
-    [_interactor getGuestlistForGuest:[THLUser currentUser].objectId forEvent:_eventEntity.objectId];
-    
-    [RACObserve(self, guestlistReviewStatus) subscribeNext:^(NSNumber *b) {
-        BOOL activeGuestlist = [b boolValue];
-        [view setActionBarButtonStatus:activeGuestlist];
+    RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [WSELF handleDismissAction];
+        return [RACSignal empty];
     }];
     
     RACCommand *actionBarButtonCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        if (_guestlistReviewStatus) {
-            [self handleViewGuestlistAction];
+        if (_guestlistReviewStatus == THLStatusAccepted || THLStatusPending) {
+            [WSELF handleViewGuestlistAction];
         } else {
-            [self handleCreateGuestlistAction];
+//            TODO: Create logic so that Guests with Declined Guestlists can have another guestlist invite to the same event if their other one is declined
+            [WSELF handleCreateGuestlistAction];
         }
         return [RACSignal empty];
     }];
     
-    [view setActionBarButtonCommand:actionBarButtonCommand];
+    [RACObserve(self, guestlistReviewStatus) subscribeNext:^(id _) {
+        [_view setActionBarButtonStatus:_guestlistReviewStatus];
+    }];
+    
+    [_view setDismissCommand:dismissCommand];
+	[_view setLocationImageURL:_eventEntity.location.imageURL];
+	[_view setPromoImageURL:_eventEntity.imageURL];
+	[_view setEventName:_eventEntity.title];
+	[_view setPromoInfo:_eventEntity.info];
+	[_view setLocationName:_eventEntity.location.name];
+	[_view setLocationInfo:_eventEntity.location.info];
+	[_view setLocationAddress:_eventEntity.location.fullAddress];
+    [_view setActionBarButtonCommand:actionBarButtonCommand];
 }
 
 - (void)configureNavigationBar:(THLEventNavigationBar *)navBar {
+    WEAKSELF();
 	[navBar setTitleText:_eventEntity.location.name];
 	[navBar setSubtitleText:_eventEntity.title];
 	[navBar setDateText:_eventEntity.date.thl_weekdayString];
 	[navBar setLocationImageURL:_eventEntity.location.imageURL];
 
 	RACCommand *command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-		[self handleDismissAction];
+		[WSELF handleDismissAction];
 		return [RACSignal empty];
 	}];
 
@@ -97,7 +94,11 @@ THLEventDetailInteractorDelegate
 
 
 - (void)presentEventDetailInterfaceForEvent:(THLEventEntity *)eventEntity inWindow:(UIWindow *)window {
-	_eventEntity = eventEntity;
+    _eventEntity = eventEntity;
+    _guestlistReviewStatus = THLStatusNone;
+    
+    [_interactor getPlacemarkForLocation:_eventEntity.location];
+    [_interactor checkValidGuestlistEvent:_eventEntity.objectId];
     [_interactor getPromotionForEvent:_eventEntity.objectId];
 	[_wireframe presentInterfaceInWindow:window];
 }
@@ -127,14 +128,30 @@ THLEventDetailInteractorDelegate
     }
 }
 
-- (void)interactor:(THLEventDetailInteractor *)interactor didGetGuestlist:(THLGuestlistEntity *)guestlist forGuest:(NSString *)guestId forEvent:(NSString *)eventId error:(NSError *)error {
+- (void)interactor:(THLEventDetailInteractor *)interactor didGetGuestlist:(THLGuestlistEntity *)guestlist forEvent:(NSString *)eventId error:(NSError *)error {
     if (!error && guestlist) {
         _guestlistEntity = guestlist;
-        if (!_guestlistEntity) {
-            self.guestlistReviewStatus = NO;
-        } else {
-            self.guestlistReviewStatus = YES;
+        switch (_guestlistEntity.reviewStatus) {
+            case THLStatusPending: {
+                self.guestlistReviewStatus = THLStatusPending;
+                break;
+            }
+            case THLStatusAccepted: {
+                self.guestlistReviewStatus = THLStatusAccepted;
+                break;
+            }
+            case THLStatusDeclined: {
+                self.guestlistReviewStatus = THLStatusDeclined;
+                break;
+            }
+            default: {
+                break;
+            }
         }
     }
+}
+
+- (void)dealloc {
+    NSLog(@"PRESENTER WAS DEALLOCATED BITCH");
 }
 @end

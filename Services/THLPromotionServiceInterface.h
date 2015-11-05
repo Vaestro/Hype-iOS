@@ -11,5 +11,5 @@
 @class THLEvent;
 
 @protocol THLPromotionServiceInterface <NSObject>
-- (BFTask *)fetchPromotionsForEvent:(NSString *)eventId;
+- (BFTask *)fetchPromotionForEvent:(NSString *)eventId;
 @end

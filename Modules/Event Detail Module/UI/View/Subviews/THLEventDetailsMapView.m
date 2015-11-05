@@ -44,6 +44,7 @@ static CGFloat MAPVIEW_METERS = 1000;
 }
 
 - (void)bindView {
+    WEAKSELF();
     [super bindView];
     
     [RACObserve(self, locationAddress) subscribeNext:^(id x) {
@@ -55,7 +56,7 @@ static CGFloat MAPVIEW_METERS = 1000;
     [[RACObserve(self, locationPlacemark) filter:^BOOL(id value) {
         return value != nil;
     }] subscribeNext:^(id x) {
-        [self displayPlacemark:(CLPlacemark *)x];
+        [WSELF displayPlacemark:(CLPlacemark *)x];
     }];
 }
 

@@ -11,7 +11,7 @@
 @implementation THLGuestlistInvite
 @dynamic guest;
 @dynamic guestlist;
-@dynamic reviewStatus;
+@dynamic response;
 @dynamic checkInStatus;
 
 + (void)load {

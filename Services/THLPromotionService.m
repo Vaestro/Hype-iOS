@@ -17,8 +17,8 @@
 	return self;
 }
 
-- (BFTask *)fetchPromotionsForEvent:(NSString *)eventId {
-	return [[_queryFactory queryForPromotionsForEvent:eventId] findObjectsInBackground];
+- (BFTask *)fetchPromotionForEvent:(NSString *)eventId {
+	return [[_queryFactory queryForPromotionForEvent:eventId] getFirstObjectInBackground];
 }
 
 @end

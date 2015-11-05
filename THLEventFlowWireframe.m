@@ -13,6 +13,15 @@
 #import "THLEventFlowDependencyManager.h"
 #import "THLGuestlistReviewWireframe.h"
 
+typedef NS_OPTIONS(NSInteger, THLGuestlistReviewOptions) {
+    THLGuestlistReviewOptionsAcceptDeclineGuestlistInvite = 0,
+    THLGuestlistReviewOptionsLeaveGuestlist,
+    THLGuestlistReviewOptionsAddRemoveGuests,
+    THLGuestlistReviewOptionsAcceptDeclineGuestlist,
+    THLGuestlistReviewOptionsConfirmGuestlistInvites,
+    THLGuestlistReviewOptions_Count
+};
+
 @interface THLEventFlowWireframe()
 <
 THLEventDiscoveryModuleDelegate,
@@ -75,6 +84,10 @@ THLGuestlistReviewModuleDelegate
 #pragma mark - THLEventDiscoveryModuleDelegate
 - (void)eventDiscoveryModule:(id<THLEventDiscoveryModuleInterface>)module userDidSelectEventEntity:(THLEventEntity *)eventEntity {
 	[self presentEventDetailInterfaceForEvent:eventEntity];
+}
+
+- (void)dismissWireframe {
+    _eventDetailWireframe = nil;
 }
 
 - (void)eventDetailModule:(id<THLEventDetailModuleInterface>)module promotion:(THLPromotionEntity *)promotionEntity presentGuestlistInvitationInterfaceOnController:(UIViewController *)controller{

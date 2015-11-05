@@ -11,16 +11,25 @@
 #define The_HypeList_THLConstants_h
 
 typedef NS_ENUM(NSInteger, THLStatus) {
-	THLStatusUnknown = 0,
-	THLStatusAccepted = 1,
-	THLStatusRejected = 2
+	THLStatusPending = 0,
+	THLStatusAccepted,
+	THLStatusDeclined,
+    THLStatusNone
 };
 
 typedef NS_ENUM(NSInteger, THLSex) {
 	THLSexUnreported = 0,
-	THLSexMale = 1,
-	THLSexFemale = 2,
+	THLSexMale,
+	THLSexFemale,
 	THLSex_Count
+};
+
+typedef NS_OPTIONS(NSInteger, THLActivityStatus) {
+    THLActivityStatusNone = 0,
+    THLActivityStatusInProgress,
+    THLActivityStatusSuccess,
+    THLActivityStatusError,
+    THLActivityStatus_Count
 };
 
 #define SafeString(string) (string != nil) ? string : @""

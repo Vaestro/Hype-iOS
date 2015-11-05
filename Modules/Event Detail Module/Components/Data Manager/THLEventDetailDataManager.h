@@ -28,7 +28,6 @@
 						  entityMappper:(THLEntityMapper *)entityMapper;
 
 - (BFTask<CLPlacemark *> *)fetchPlacemarkForAddress:(NSString *)address;
-- (BFTask *)fetchPromotionsForEvent:(NSString *)eventId;
-- (BFTask *)fetchGuestlistForGuest:(NSString *)guestId forEvent:(NSString *)eventId;
-
+- (BFTask *)fetchPromotionForEvent:(NSString *)eventId;
+- (BFTask *)checkValidGuestlistForEvent:(NSString *)eventId;
 @end

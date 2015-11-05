@@ -47,4 +47,9 @@
     }];
     return domain;
 }
+
+- (BFTask *)updateGuestlistInvite:(NSString *)guestlistInviteId withResponse:(THLStatus)response {
+    return [_guestlistService updateGuestlistInvite:guestlistInviteId withResponse:response];
+}
+
 @end

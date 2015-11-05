@@ -12,6 +12,8 @@
 #import "THLGuestlistReviewCellViewModel.h"
 #import "UIScrollView+SVPullToRefresh.h"
 #import "THLAppearanceConstants.h"
+#import "THLActionContainerView.h"
+#import "SVProgressHUD.h"
 
 static UIEdgeInsets const COLLECTION_VIEW_EDGEINSETS = {kTHLInset, kTHLInset, kTHLInset, kTHLInset};
 static CGFloat const CELL_SPACING = kTHLInset;
@@ -22,15 +24,18 @@ UICollectionViewDelegate,
 UICollectionViewDelegateFlowLayout
 >
 @property (nonatomic, strong) UICollectionView *collectionView;
-
+@property (nonatomic, strong) THLActionContainerView *actionContainerView;
+@property (nonatomic, strong) UIBarButtonItem *dismissButton;
 @end
 
 @implementation THLGuestlistReviewViewController
 @synthesize dataSource = _dataSource;
 @synthesize showRefreshAnimation = _showRefreshAnimation;
 @synthesize refreshCommand = _refreshCommand;
-@synthesize dismissButton = _dismissButton;
 @synthesize dismissCommand = _dismissCommand;
+@synthesize acceptCommand = _acceptCommand;
+@synthesize declineCommand = _declineCommand;
+@synthesize showActivityIndicator = _showActivityIndicator;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -47,11 +52,13 @@ UICollectionViewDelegateFlowLayout
 
 - (void)constructView {
     _collectionView = [self newCollectionView];
+    _actionContainerView = [self newActionContainerView];
     _dismissButton = [self newBackBarButtonItem];
 }
 
 - (void)layoutView {
-    [self.view addSubview:_collectionView];
+    [self.view addSubviews:@[_collectionView, _actionContainerView]];
+    
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.automaticallyAdjustsScrollViewInsets = YES;
     
@@ -59,7 +66,13 @@ UICollectionViewDelegateFlowLayout
     self.navigationItem.title = @"YOUR PARTY";
     
     [_collectionView makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.insets(UIEdgeInsetsZero);
+        make.top.insets(kTHLEdgeInsetsNone());
+        make.left.right.insets(kTHLEdgeInsetsNone());
+    }];
+    
+    [_actionContainerView makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.insets(kTHLEdgeInsetsNone());
+        make.top.equalTo(_collectionView.mas_bottom);
     }];
 }
 
@@ -85,6 +98,28 @@ UICollectionViewDelegateFlowLayout
         [SSELF.collectionView addPullToRefreshWithActionHandler:^{
             [command execute:nil];
         }];
+    }];
+    
+    RAC(WSELF.actionContainerView.acceptButton, rac_command) = RACObserve(self, acceptCommand);
+    RAC(WSELF.actionContainerView.declineButton, rac_command) = RACObserve(self, declineCommand);
+    
+    [RACObserve(WSELF, showActivityIndicator) subscribeNext:^(id _) {
+        switch (_showActivityIndicator) {
+            case 0:
+                [SVProgressHUD dismiss];
+                break;
+            case 1:
+                [SVProgressHUD show];
+                break;
+            case 2:
+                [SVProgressHUD showSuccessWithStatus:@"Success!"];
+                break;
+            case 3:
+                [SVProgressHUD showErrorWithStatus:@"Error!"];
+                break;
+            default:
+                break;
+        }
     }];
 }
 
@@ -132,6 +167,11 @@ UICollectionViewDelegateFlowLayout
     return item;
 }
 
+- (THLActionContainerView *)newActionContainerView {
+    THLActionContainerView *actionContainerView = [THLActionContainerView new];
+    return actionContainerView;
+}
+
 #pragma mark - UICollectionViewDelegate
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat width = ([self contentViewWithInsetsWidth] - CELL_SPACING)/2.0;
@@ -144,60 +184,5 @@ UICollectionViewDelegateFlowLayout
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     return COLLECTION_VIEW_EDGEINSETS;
 }
-
-//- (THLActionBarButton *)newHostAcceptButton {
-//    THLActionBarButton *button = [THLActionBarButton new];
-//    button.userInteractionEnabled = NO;
-//    [button setTitle:@"ACCEPT" animateChanges:NO];
-//    button.backgroundColor = [button tealColor];
-//    [button addTarget:self action:@selector(handleHostAcceptAction) forControlEvents:UIControlEventTouchUpInside];
-//    return button;
-//    
-//}
-//
-//- (THLActionBarButton *)newHostRejectButton {
-//    THLActionBarButton *button = [THLActionBarButton new];
-//    button.userInteractionEnabled = NO;
-//    [button setTitle:@"REJECT" animateChanges:NO];
-//    button.backgroundColor = [button redColor];
-//    [button addTarget:self action:@selector(handleHostRejectAction) forControlEvents:UIControlEventTouchUpInside];
-//    return button;
-//}
-//
-//- (UIView *)newHostActionGuardView {
-//    UIView *view = [UIView new];
-//    //	UITapGestureRecognizer *tapGR = [UITapGestureRecognizer bk_performBlock:^{
-//    //		[KVNProgress showWithStatus:@"Please review the entire guestlist before deciding!"];
-//    //	} afterDelay:0];
-//    //	[view addGestureRecognizer:tapGR];
-//    return view;
-//}
-
-//- (UIView *)newHostActionContainerView {
-//    self.hostAcceptButton = [self newHostAcceptButton];
-//    self.hostRejectButton = [self newHostRejectButton];
-//    self.hostActionGuardView = [self newHostActionGuardView];
-//    
-//    UIView *view = [UIView new];
-//    [view addSubviews:@[self.hostAcceptButton,
-//                        self.hostRejectButton,
-//                        self.hostActionGuardView]];
-//    
-//    [self.hostAcceptButton makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.bottom.left.insets(UIEdgeInsetsZero);
-//        make.right.equalTo(self.hostRejectButton.mas_left);
-//        make.width.equalTo(self.hostRejectButton);
-//    }];
-//    
-//    [self.hostRejectButton makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.right.bottom.insets(UIEdgeInsetsZero);
-//    }];
-//    
-//    [self.hostActionGuardView makeConstraints:^(MASConstraintMaker *make) {
-//        make.edges.insets(UIEdgeInsetsZero);
-//    }];
-//    
-//    return view;
-//}
 
 @end

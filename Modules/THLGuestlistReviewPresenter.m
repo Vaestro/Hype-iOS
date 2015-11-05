@@ -15,13 +15,24 @@
 #import "THLGuestlistInviteEntity.h"
 #import "THLGuestlistReviewCellViewModel.h"
 
+typedef NS_OPTIONS(NSInteger, THLGuestlistReviewerStatus) {
+    THLGuestlistTHLGuestlistReviewerStatusPendingGuest = 0,
+    THLGuestlistReviewerStatusAttendingGuest,
+    THLGuestlistReviewerStatusOwner,
+    THLGuestlistReviewerStatusPendingHost,
+    THLGuestlistReviewerStatusHost,
+    THLGuestlistReviewOptions_Count
+};
+
 @interface THLGuestlistReviewPresenter()
 <
 THLGuestlistReviewInteractorDelegate
 >
 @property (nonatomic, weak) id<THLGuestlistReviewView> view;
 @property (nonatomic, copy) NSString *reviewer;
+@property (nonatomic) THLGuestlistReviewerStatus reviewerStatus;
 @property (nonatomic) BOOL refreshing;
+@property (nonatomic) THLActivityStatus activityStatus;
 @end
 
 @implementation THLGuestlistReviewPresenter
@@ -40,7 +51,7 @@ THLGuestlistReviewInteractorDelegate
 #pragma mark - THLGuestlistReviewModuleInterface
 - (void)presentGuestlistReviewInterfaceForGuestlist:(THLGuestlistEntity *)guestlistEntity forReviewer:(NSString *)reviewer inController:(UIViewController *)controller {
     _interactor.guestlistEntity = guestlistEntity;
-    _reviewer = reviewer;
+    _reviewerStatus = 0;
     [_wireframe presentInterfaceInController:controller];
 }
 
@@ -65,14 +76,14 @@ THLGuestlistReviewInteractorDelegate
         return [RACSignal empty];
     }];
     
-//    [view setAcceptCommand:acceptCommand];
+    [view setAcceptCommand:acceptCommand];
     
     RACCommand *declineCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         [self handleDeclineAction];
         return [RACSignal empty];
     }];
     
-//    [view setDeclineCommand:declineCommand];
+    [view setDeclineCommand:declineCommand];
     
     RACCommand *refreshCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         [self handleRefreshAction];
@@ -86,6 +97,9 @@ THLGuestlistReviewInteractorDelegate
         [view setShowRefreshAnimation:isRefreshing];
     }];
     
+    [RACObserve(self, activityStatus) subscribeNext:^(id _) {
+        [view setShowActivityIndicator:_activityStatus];
+    }];
     //    RACCommand *selectedIndexPathCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
     //        [self handleIndexPathSelection:(NSIndexPath *)input];
     //        return [RACSignal empty];
@@ -108,13 +122,13 @@ THLGuestlistReviewInteractorDelegate
 }
 
 - (void)handleAcceptAction {
-//    self.showActivityIndicator = YES;
-//    [_interactor updateGuestlistInviteResponse:@"Accepted"];
+    self.activityStatus = THLActivityStatusInProgress;
+//    [_interactor updateGuestlistInvite:_guestlistInviteEntity withResponse:THLStatusAccepted];
 }
 
 - (void)handleDeclineAction {
-    //    self.showActivityIndicator = YES;
-//    [_interactor updateGuestlistInviteResponse:@"Declined"];
+    self.activityStatus = THLActivityStatusInProgress;
+//    [_interactor updateGuestlistInvite:_guestlistInviteEntity withResponse:THLStatusDeclined];
 }
 
 //- (void)handleAddGuestAction {
@@ -134,5 +148,15 @@ THLGuestlistReviewInteractorDelegate
 #pragma mark - InteractorDelegate
 - (void)interactor:(THLGuestlistReviewInteractor *)interactor didUpdateGuestlistInvites:(NSError *)error {
     self.refreshing = NO;
+}
+
+- (void)interactor:(THLGuestlistReviewInteractor *)interactor didUpdateGuestlistInviteResponse:(NSError *)error to:(THLStatus)response {
+    if (!error && response == THLStatusAccepted) {
+        self.reviewerStatus = THLGuestlistReviewerStatusAttendingGuest;
+        self.activityStatus = THLActivityStatusNone;
+    } else if (!error && response == THLStatusDeclined) {
+        self.activityStatus = THLActivityStatusNone;
+        [_wireframe dismissInterface];
+    }
 }
 @end

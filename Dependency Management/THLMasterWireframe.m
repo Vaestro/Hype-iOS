@@ -82,9 +82,14 @@ THLGuestlistInvitationModuleDelegate
 //}
 
 - (BFTask *)handlePushNotification:(NSDictionary *)pushInfo {
-    THLPopupNotificationWireframe *popupNotificationWireframe = [_dependencyManager newPopupNotificationWireframe];
-    [popupNotificationWireframe.moduleInterface setModuleDelegate:self];
-    return [popupNotificationWireframe.moduleInterface presentPopupNotificationModuleInterfaceWithPushInfo:pushInfo];
+    if ([pushInfo objectForKey:@"notificationText"]) {
+        THLPopupNotificationWireframe *popupNotificationWireframe = [_dependencyManager newPopupNotificationWireframe];
+        [popupNotificationWireframe.moduleInterface setModuleDelegate:self];
+        return [popupNotificationWireframe.moduleInterface presentPopupNotificationModuleInterfaceWithPushInfo:pushInfo];
+    } else {
+        NSLog(@"Notification did not have any text");
+        return [BFTask taskWithResult:nil];
+    }
 }
 
 #pragma mark - Routing

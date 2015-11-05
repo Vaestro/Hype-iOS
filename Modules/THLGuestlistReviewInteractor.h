@@ -16,6 +16,7 @@
 
 @protocol THLGuestlistReviewInteractorDelegate <NSObject>
 - (void)interactor:(THLGuestlistReviewInteractor *)interactor didUpdateGuestlistInvites:(NSError *)error;
+- (void)interactor:(THLGuestlistReviewInteractor *)interactor didUpdateGuestlistInviteResponse:(NSError *)error to:(THLStatus)response;
 @end
 
 @interface THLGuestlistReviewInteractor : NSObject
@@ -32,9 +33,7 @@
 - (void)commitChangesToGuestlist;
 - (void)updateGuestlistInvites;
 
-- (void)acceptGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInviteEntity;
-- (void)declineGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInviteEntity;
-- (void)confirmGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInviteEntity;
-- (void)acceptGuestlist:(THLGuestlistEntity *)guestlistEntity;
-- (void)declineGuestlist:(THLGuestlistEntity *)guestlistEntity;
+- (void)updateGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite withResponse:(THLStatus)response;
+- (void)updateGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite withCheckInStatus:(BOOL)checkInStatus;
+- (void)updateGuestlist:(THLGuestlistEntity *)guestlistEntity withReviewStatus:(THLStatus)reviewStatus;
 @end

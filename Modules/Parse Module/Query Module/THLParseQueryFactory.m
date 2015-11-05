@@ -21,6 +21,7 @@
 	return query;
 }
 
+#pragma mark - Promotion Queries
 - (PFQuery *)queryForPromotionsStartingOn:(NSDate *)startDate endingOn:(NSDate *)endDate {
 	PFQuery *eventQuery = [self baseEventQuery];
 	[eventQuery whereKey:@"date" greaterThanOrEqualTo:startDate];
@@ -31,15 +32,16 @@
 	return query;
 }
 
-- (PFQuery *)queryForPromotionsForEvent:(NSString *)eventId {
+- (PFQuery *)queryForPromotionForEvent:(NSString *)eventId {
 	PFQuery *query = [self basePromotionQuery];
 	[query whereKey:@"eventId" equalTo:eventId];
 	return query;
 }
 
-- (PFQuery *)queryForGuestlistForGuest:(THLUser *)guest forEvent:(NSString *)eventId {
+#pragma mark - Guestlist Queries
+- (PFQuery *)queryForGuestlistForEvent:(NSString *)eventId {
     PFQuery *query = [self baseGuestlistQuery];
-    [query whereKey:@"Owner" equalTo:guest];
+    [query fromLocalDatastore];
     [query whereKey:@"eventId" equalTo:eventId];
     return query;
 }
@@ -97,9 +99,9 @@
 - (PFQuery *)baseGuestlistQuery {
     PFQuery *query = [THLGuestlist query];
     [query includeKey:@"Owner"];
-    [query includeKey:@"promotion"];
-    [query includeKey:@"promotion.event"];
-    [query includeKey:@"promotion.event.location"];
+    [query includeKey:@"Promotion"];
+    [query includeKey:@"Promotion.event"];
+    [query includeKey:@"Promotion.event.location"];
     return query;
 }
 
@@ -110,6 +112,10 @@
 - (PFQuery *)baseGuestlistInviteQuery {
     PFQuery *query = [THLGuestlistInvite query];
     [query includeKey:@"Guestlist"];
+    [query includeKey:@"Guestlist.Owner"];
+    [query includeKey:@"Guestlist.Promotion"];
+    [query includeKey:@"Guestlist.Promotion.event"];
+    [query includeKey:@"Guestlist.Promotion.event.location"];
     [query includeKey:@"Guest"];
     return query;
 }

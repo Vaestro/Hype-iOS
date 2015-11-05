@@ -31,19 +31,23 @@
 	return [_locationService geocodeAddress:address];
 }
 
-- (BFTask *)fetchPromotionsForEvent:(NSString *)eventId {
-	return [[_promotionService fetchPromotionsForEvent:eventId] continueWithSuccessBlock:^id(BFTask *task) {
-		NSArray<THLPromotion *> *fetchedPromotions = task.result;
-		NSArray<THLPromotionEntity *> *mappedPromotions = [_entityMapper mapPromotions:fetchedPromotions];
-		return mappedPromotions;
+- (BFTask *)fetchPromotionForEvent:(NSString *)eventId {
+	return [[_promotionService fetchPromotionForEvent:eventId] continueWithSuccessBlock:^id(BFTask *task) {
+		THLPromotion *fetchedPromotion = task.result;
+		THLPromotionEntity *mappedPromotion = [_entityMapper mapPromotion:fetchedPromotion];
+		return mappedPromotion;
 	}];
 }
 
-- (BFTask *)fetchGuestlistForGuest:(NSString *)guestId forEvent:(NSString *)eventId {
-    return [[_guestlistService fetchGuestlistForGuest:[THLUser objectWithoutDataWithObjectId:guestId] forEvent:eventId] continueWithSuccessBlock:^id(BFTask *task) {
-        NSArray<THLGuestlist *> *fetchedGuestlists = task.result;
-        NSArray<THLGuestlistEntity *> *mappedGuestlists = [_entityMapper mapGuestlists:fetchedGuestlists];
-        return mappedGuestlists;
+- (BFTask *)checkValidGuestlistForEvent:(NSString *)eventId {
+    return [[_guestlistService fetchGuestlistForEvent:eventId] continueWithSuccessBlock:^id(BFTask *task) {
+        THLGuestlist *fetchedGuestlist = task.result;
+        THLGuestlistEntity *mappedGuestlist = [_entityMapper mapGuestlist:fetchedGuestlist];
+        return mappedGuestlist;
     }];
+}
+
+- (void)dealloc {
+    NSLog(@"DATA MANAGER WAS DEALLOCATED BITCH");
 }
 @end

@@ -44,6 +44,7 @@ static CGFloat const kTHLEventDetailsPromotionInfoViewImageViewHeight = 150;
 }
 
 - (void)bindView {
+    WEAKSELF();
     [super bindView];
     RAC(self.textView, text) = RACObserve(self, promotionInfo);
     
@@ -54,7 +55,7 @@ static CGFloat const kTHLEventDetailsPromotionInfoViewImageViewHeight = 150;
     }];
     
     [RACObserve(self.promoImageURL, isValid) subscribeNext:^(id x) {
-        [self updateConstraints];
+        [WSELF updateConstraints];
     }];
 }
 

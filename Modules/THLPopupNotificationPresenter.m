@@ -46,6 +46,8 @@ THLPopupNotificationInteractorDelegate
     return [[_interactor handleNotificationData:pushInfo] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
         if (!task.faulted) {
             _notificationText = pushInfo[kPushInfoKeyNotficationText];
+//            _notificationImageURL = pushInfo[kPushInfoKeyNotficationText];
+//            _notificationEvent = pushInfo[kPushInfoKeyNotficationText];
             _guestlistInviteEntity = task.result;
             _eventEntity = _guestlistInviteEntity.guestlist.promotion.event;
             [_wireframe presentInterface];

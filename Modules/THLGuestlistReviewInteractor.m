@@ -14,6 +14,7 @@
 #import "THLGuestEntity.h"
 
 static NSString *const kTHLGuestlistReviewModuleViewKey = @"kTHLGuestlistReviewModuleViewKey";
+@class THLGuestlistInviteEntity;
 
 @interface THLGuestlistReviewInteractor()
 
@@ -63,5 +64,14 @@ static NSString *const kTHLGuestlistReviewModuleViewKey = @"kTHLGuestlistReviewM
         return [guestlistInvite1.guest.firstName compare:guestlistInvite2.guest.firstName];
     }];
 }
+
+#pragma mark - Handle Presenter Events
+- (void)updateGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite withResponse:(THLStatus)response {
+    [[_dataManager updateGuestlistInvite:guestlistInvite.objectId withResponse:response] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+        [_delegate interactor:self didUpdateGuestlistInviteResponse:task.error to:response];
+        return nil;
+    }];
+}
+
 
 @end

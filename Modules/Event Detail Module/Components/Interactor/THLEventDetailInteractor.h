@@ -18,7 +18,7 @@
 
 @protocol THLEventDetailInteractorDelegate <NSObject>
 - (void)interactor:(THLEventDetailInteractor *)interactor didGetPlacemark:(CLPlacemark *)placemark forLocation:(THLLocationEntity *)locationEntity error:(NSError *)error;
-- (void)interactor:(THLEventDetailInteractor *)interactor didGetGuestlist:(THLGuestlistEntity *)guestlist forGuest:(NSString *)guestId forEvent:(NSString *)eventId error:(NSError *)error;
+- (void)interactor:(THLEventDetailInteractor *)interactor didGetGuestlist:(THLGuestlistEntity *)guestlist forEvent:(NSString *)eventId error:(NSError *)error;
 - (void)interactor:(THLEventDetailInteractor *)interactor didGetPromotion:(THLPromotionEntity *)promotionEntity forEvent:(NSString *)eventId error:(NSError *)error;
 @end
 
@@ -26,11 +26,11 @@
 @property (nonatomic, weak) id<THLEventDetailInteractorDelegate> delegate;
 
 #pragma mark - Dependencies
-@property (nonatomic, readonly) THLEventDetailDataManager *dataManager;
+@property (nonatomic, readonly, weak) THLEventDetailDataManager *dataManager;
 - (instancetype)initWithDataManager:(THLEventDetailDataManager *)dataManager;
 
 - (void)getPlacemarkForLocation:(THLLocationEntity *)locationEntity;
 - (void)getPromotionForEvent:(NSString *)eventId;
 
-- (void)getGuestlistForGuest:(NSString *)guestId forEvent:(NSString *)eventId;
+- (void)checkValidGuestlistEvent:(NSString *)eventId;
 @end

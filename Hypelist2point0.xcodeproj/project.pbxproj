@@ -143,6 +143,7 @@
 		79B959571BE9298800B87799 /* THLPopupNotificationPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959561BE9298800B87799 /* THLPopupNotificationPresenter.m */; };
 		79B9595A1BE92FBA00B87799 /* THLPopupNotificationInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959591BE92FBA00B87799 /* THLPopupNotificationInteractor.m */; };
 		79B9595D1BE934C000B87799 /* THLPopupNotificationDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B9595C1BE934C000B87799 /* THLPopupNotificationDataManager.m */; };
+		79B959611BE9A90B00B87799 /* THLActionContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959601BE9A90B00B87799 /* THLActionContainerView.m */; };
 		B771256D2B58EBFF817CDC12 /* libPods-Hypelist2point0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D059D2904940E14B1AF40EE3 /* libPods-Hypelist2point0.a */; };
 		CBE5403C8B7732B36D5ECB5E /* THLViewDataSourceGrouping.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE54FC98A366F3761F89F63 /* THLViewDataSourceGrouping.m */; };
 		CBE54720F63BA2DE2136B454 /* THLViewDataSource+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE545A9A3C66339456E0A06 /* THLViewDataSource+Factory.m */; };
@@ -464,6 +465,8 @@
 		79B9595B1BE934C000B87799 /* THLPopupNotificationDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPopupNotificationDataManager.h; sourceTree = "<group>"; };
 		79B9595C1BE934C000B87799 /* THLPopupNotificationDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPopupNotificationDataManager.m; sourceTree = "<group>"; };
 		79B9595E1BE93C1B00B87799 /* THLPopupNotificationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLPopupNotificationView.h; sourceTree = "<group>"; };
+		79B9595F1BE9A90B00B87799 /* THLActionContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLActionContainerView.h; sourceTree = "<group>"; };
+		79B959601BE9A90B00B87799 /* THLActionContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLActionContainerView.m; sourceTree = "<group>"; };
 		BA51F1731F25286C41A13B20 /* Pods-Hypelist2point0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hypelist2point0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hypelist2point0/Pods-Hypelist2point0.debug.xcconfig"; sourceTree = "<group>"; };
 		C6B634BC51A4BB10D6261492 /* Pods-Hypelist2point0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hypelist2point0.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hypelist2point0/Pods-Hypelist2point0.release.xcconfig"; sourceTree = "<group>"; };
 		CB878AA95A320C00B4227BCE /* Pods-Hypelist2point0Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hypelist2point0Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hypelist2point0Tests/Pods-Hypelist2point0Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -810,6 +813,7 @@
 				212173721BB34F19007D817A /* THLRoundImageView */,
 				79B959411BE8306300B87799 /* THLPersonIconView */,
 				216BDD531BC6FA2000BBF713 /* THLContactTableViewCell */,
+				79B959621BE9A90F00B87799 /* THLActionContainerView */,
 			);
 			name = Views;
 			path = Components/Views;
@@ -1960,6 +1964,15 @@
 			name = "Popup Notification Module";
 			sourceTree = "<group>";
 		};
+		79B959621BE9A90F00B87799 /* THLActionContainerView */ = {
+			isa = PBXGroup;
+			children = (
+				79B9595F1BE9A90B00B87799 /* THLActionContainerView.h */,
+				79B959601BE9A90B00B87799 /* THLActionContainerView.m */,
+			);
+			name = THLActionContainerView;
+			sourceTree = "<group>";
+		};
 		CBE54BB68ECECF48FD57301C /* THLViewDataSourceGrouping */ = {
 			isa = PBXGroup;
 			children = (
@@ -2283,6 +2296,7 @@
 				21937F361BB5D20E005E949E /* THLLoginDataManager.m in Sources */,
 				217EBE881BB77ED7006044B6 /* THLEntity+DataStore.m in Sources */,
 				212173601BB34261007D817A /* THLPromotionCardInfoCell.m in Sources */,
+				79B959611BE9A90B00B87799 /* THLActionContainerView.m in Sources */,
 				2174A06A1B863F6A006826D7 /* main.m in Sources */,
 				216BDD581BC71F1800BBF713 /* THLSearchViewDataSource.m in Sources */,
 				79B9595A1BE92FBA00B87799 /* THLPopupNotificationInteractor.m in Sources */,
