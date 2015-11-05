@@ -11,9 +11,10 @@
 #import "THLDataStore.h"
 #import "THLGuestlistServiceInterface.h"
 #import "THLGuestlist.h"
-#import "THLGuestlistInviteEntity.h"
 #import "THLDataStoreDomain.h"
 #import "THLEntityMapper.h"
+#import "THLGuestlistInvite.h"
+#import "THLGuestlistInviteEntity.h"
 
 @interface THLGuestlistReviewDataManager()
 
@@ -48,8 +49,8 @@
     return domain;
 }
 
-- (BFTask *)updateGuestlistInvite:(NSString *)guestlistInviteId withResponse:(THLStatus)response {
-    return [_guestlistService updateGuestlistInvite:guestlistInviteId withResponse:response];
+- (BFTask *)updateGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite withResponse:(THLStatus)response {
+    return [_guestlistService updateGuestlistInvite:[THLGuestlistInvite objectWithoutDataWithObjectId:guestlistInvite.objectId] withResponse:response];
 }
 
 @end

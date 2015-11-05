@@ -16,35 +16,59 @@
 @implementation THLActionContainerView
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        [self constructView];
-        [self layoutView];
-        [self bindView];
+        [self reloadView];
     }
     return self;
 }
 
+- (void)reloadView {
+    [self constructView];
+    [self layoutView];
+    [self bindView];
+}
+
 - (void)constructView {
-    _acceptButton = [self newAcceptButton];
-    _declineButton = [self newRejectButton];
+    if (_status == THLActionContainerViewStatusAcceptOrDecline) {
+        _acceptButton = [self newAcceptButton];
+        _declineButton = [self newRejectButton];
+    } else if (_status == THLActionContainerViewStatusAccept) {
+        _acceptButton = [self newAcceptButton];
+    } else if (_status == THLActionContainerViewStatusDecline) {
+        _declineButton = [self newRejectButton];
+    }
 }
 
 - (void)layoutView {
-    [self addSubviews:@[self.acceptButton,
-                        self.declineButton]];
-    
-    [self.acceptButton makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.left.insets(UIEdgeInsetsZero);
-        make.right.equalTo(self.declineButton.mas_left);
-        make.width.equalTo(self.declineButton);
-    }];
-    
-    [self.declineButton makeConstraints:^(MASConstraintMaker *make) {
-        make.top.right.bottom.insets(UIEdgeInsetsZero);
-    }];
+    if (_status == THLActionContainerViewStatusAcceptOrDecline) {
+        [self addSubviews:@[self.acceptButton,
+                            self.declineButton]];
+
+        [self.acceptButton makeConstraints:^(MASConstraintMaker *make) {
+            make.top.bottom.left.insets(UIEdgeInsetsZero);
+            make.right.equalTo(self.declineButton.mas_left);
+            make.width.equalTo(self.declineButton);
+        }];
+        
+        [self.declineButton makeConstraints:^(MASConstraintMaker *make) {
+            make.top.right.bottom.insets(UIEdgeInsetsZero);
+        }];
+    } else if (_status == THLActionContainerViewStatusAccept){
+        [self addSubview:self.acceptButton];
+        [self.acceptButton makeConstraints:^(MASConstraintMaker *make) {
+            make.top.bottom.left.right.insets(UIEdgeInsetsZero);
+        }];
+    }  else if (_status == THLActionContainerViewStatusDecline){
+        [self addSubview:self.declineButton];
+        [self.declineButton makeConstraints:^(MASConstraintMaker *make) {
+            make.top.bottom.left.right.insets(UIEdgeInsetsZero);
+        }];
+    }
 }
 
 - (void)bindView {
-//    RAC(self.acceptButton, rac_command) = RACObserve(self, acceptCommand);
+//    [RACObserve(self, status) subscribeNext:^(id _) {
+//        [self setNeedsDisplay];
+//    }];
 //    RAC(self.declineButton, rac_command) = RACObserve(self, declineCommand);
 }
 

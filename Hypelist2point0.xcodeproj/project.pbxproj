@@ -129,6 +129,7 @@
 		794208281BD82641009B86FA /* UIView+DimView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794208271BD82641009B86FA /* UIView+DimView.m */; };
 		7942082C1BD82AF6009B86FA /* THLActionBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7942082B1BD82AF6009B86FA /* THLActionBarButton.m */; };
 		7942082F1BD8C250009B86FA /* THLGuestlistEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7942082E1BD8C250009B86FA /* THLGuestlistEntity.m */; };
+		79752ADE1BEBD8B500D09B2E /* THLConfirmationPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79752ADD1BEBD8B500D09B2E /* THLConfirmationPopupView.m */; };
 		79B959231BE57C9D00B87799 /* THLGuestlistReviewWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959221BE57C9D00B87799 /* THLGuestlistReviewWireframe.m */; };
 		79B959291BE581A800B87799 /* THLGuestlistReviewDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959281BE581A800B87799 /* THLGuestlistReviewDataManager.m */; };
 		79B9592C1BE581BB00B87799 /* THLGuestlistReviewInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B9592B1BE581BB00B87799 /* THLGuestlistReviewInteractor.m */; };
@@ -431,6 +432,8 @@
 		7942082E1BD8C250009B86FA /* THLGuestlistEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestlistEntity.m; sourceTree = "<group>"; };
 		794208311BD9A300009B86FA /* THLEventFlowModuleInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventFlowModuleInterface.h; sourceTree = "<group>"; };
 		794208331BD9A348009B86FA /* THLEventFlowModuleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventFlowModuleDelegate.h; sourceTree = "<group>"; };
+		79752ADC1BEBD8B500D09B2E /* THLConfirmationPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLConfirmationPopupView.h; sourceTree = "<group>"; };
+		79752ADD1BEBD8B500D09B2E /* THLConfirmationPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLConfirmationPopupView.m; sourceTree = "<group>"; };
 		79B9591B1BE5783500B87799 /* THLGuestlistReviewModuleInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistReviewModuleInterface.h; sourceTree = "<group>"; };
 		79B9591D1BE578A200B87799 /* THLGuestlistReviewModuleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistReviewModuleDelegate.h; sourceTree = "<group>"; };
 		79B959211BE57C9D00B87799 /* THLGuestlistReviewWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistReviewWireframe.h; sourceTree = "<group>"; };
@@ -813,6 +816,8 @@
 				212173721BB34F19007D817A /* THLRoundImageView */,
 				2121736B1BB34D68007D817A /* THLStarRatingView */,
 				2121736A1BB34D4F007D817A /* THLTitledContentView */,
+				79752ADC1BEBD8B500D09B2E /* THLConfirmationPopupView.h */,
+				79752ADD1BEBD8B500D09B2E /* THLConfirmationPopupView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2251,6 +2256,7 @@
 				79B959571BE9298800B87799 /* THLPopupNotificationPresenter.m in Sources */,
 				21192D851BB3278700B176AA /* THLPromotionSelectionInteractor.m in Sources */,
 				217EBE8D1BB78AB4006044B6 /* THLYapDatabaseViewFactory.m in Sources */,
+				79752ADE1BEBD8B500D09B2E /* THLConfirmationPopupView.m in Sources */,
 				211892061BA9FF0600E8A11F /* THLLoginInteractor.m in Sources */,
 				211005D01B8A7D0200A540C6 /* NSDate+Hypelist.m in Sources */,
 				7905CC411BE0252700E56878 /* THLGuestlistInviteEntity.m in Sources */,

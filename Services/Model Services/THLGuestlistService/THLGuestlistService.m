@@ -9,6 +9,7 @@
 #import "THLGuestlistService.h"
 #import "THLParseQueryFactory.h"
 #import "Parse.h"
+#import "THLGuestlistInvite.h"
 
 @implementation THLGuestlistService
 
@@ -41,14 +42,8 @@
 
 }
 
-- (BFTask *)fetchGuestlistForEvent:(NSString *)eventId {
-    BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
-    [[_queryFactory queryForGuestlistForEvent:eventId] getFirstObjectInBackgroundWithBlock:^(PFObject *guestlist, NSError *error) {
-        PFObject *owner = guestlist[@"Owner"];
-        [guestlist setObject:owner forKey:@"owner"];
-        [completionSource setResult:guestlist];
-    }];
-    return completionSource.task;
+- (BFTask *)fetchGuestlistInviteForEvent:(NSString *)eventId {
+    return [[_queryFactory queryForGuestlistInviteForEvent:eventId] getFirstObjectInBackground];
 }
 
 - (BFTask *)fetchGuestlistInviteWithId:(NSString *)guestlistInviteId {
@@ -77,6 +72,22 @@
 - (BFTask *)createGuestlistForPromotion:(NSString *)promotionId withInvites:(NSArray *)guestPhoneNumbers {
     return [PFCloud callFunctionInBackground:@"createGuestlist"
                        withParameters:@{@"promotionId": promotionId, @"guestDigits": guestPhoneNumbers}];
+}
+
+- (BFTask *)updateGuestlistInvite:(THLGuestlistInvite *)guestlistInvite withResponse:(THLStatus)response {
+//    BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
+    NSNumber *castedResponse = [[NSNumber alloc] initWithInt:response];
+//    [PFCloud callFunctionInBackground:@"updateGuestlistInvite" withParameters:@{@"guestlistInviteId":guestlistInvite.objectId, @"response":castedResponse} block:^(id _, NSError *error) {
+//        if (!error) {
+    guestlistInvite[@"response"] = castedResponse;
+    [guestlistInvite saveInBackground];
+//            [completionSource setResult:nil];
+//        } else {
+//            [completionSource setError:error];
+//        }
+//    }];
+//    return completionSource.task;
+    return [BFTask taskWithResult:nil];
 }
 
 @end

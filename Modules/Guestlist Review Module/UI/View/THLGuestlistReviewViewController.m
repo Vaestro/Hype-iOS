@@ -14,6 +14,8 @@
 #import "THLAppearanceConstants.h"
 #import "THLActionContainerView.h"
 #import "SVProgressHUD.h"
+#import "THLConfirmationPopupView.h"
+#import "KLCPopup.h"
 
 static UIEdgeInsets const COLLECTION_VIEW_EDGEINSETS = {kTHLInset, kTHLInset, kTHLInset, kTHLInset};
 static CGFloat const CELL_SPACING = kTHLInset;
@@ -25,6 +27,7 @@ UICollectionViewDelegateFlowLayout
 >
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) THLActionContainerView *actionContainerView;
+@property (nonatomic, strong) THLConfirmationPopupView *confirmationPopupView;
 @property (nonatomic, strong) UIBarButtonItem *dismissButton;
 @end
 
@@ -35,7 +38,9 @@ UICollectionViewDelegateFlowLayout
 @synthesize dismissCommand = _dismissCommand;
 @synthesize acceptCommand = _acceptCommand;
 @synthesize declineCommand = _declineCommand;
+@synthesize confirmCommand = _confirmCommand;
 @synthesize showActivityIndicator = _showActivityIndicator;
+@synthesize reviewerStatus = _reviewerStatus;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -52,8 +57,9 @@ UICollectionViewDelegateFlowLayout
 
 - (void)constructView {
     _collectionView = [self newCollectionView];
-    _actionContainerView = [self newActionContainerView];
     _dismissButton = [self newBackBarButtonItem];
+    _actionContainerView = [self newActionContainerView];
+    _confirmationPopupView = [self newConfirmationPopupView];
 }
 
 - (void)layoutView {
@@ -83,7 +89,7 @@ UICollectionViewDelegateFlowLayout
         [SSELF configureDataSource:dataSource];
     }];
     
-    RAC(self.dismissButton, rac_command) = RACObserve(self, dismissCommand);
+    RAC(WSELF.dismissButton, rac_command) = RACObserve(WSELF, dismissCommand);
 
     [RACObserve(WSELF, showRefreshAnimation) subscribeNext:^(NSNumber *val) {
         BOOL shouldAnimate = [val boolValue];
@@ -100,9 +106,10 @@ UICollectionViewDelegateFlowLayout
         }];
     }];
     
-    RAC(WSELF.actionContainerView.acceptButton, rac_command) = RACObserve(self, acceptCommand);
-    RAC(WSELF.actionContainerView.declineButton, rac_command) = RACObserve(self, declineCommand);
-    
+    RAC(WSELF.actionContainerView.acceptButton, rac_command) = RACObserve(WSELF, acceptCommand);
+    RAC(WSELF.actionContainerView.declineButton, rac_command) = RACObserve(WSELF, confirmCommand);
+    RAC(WSELF.confirmationPopupView, confirmCommand) = RACObserve(WSELF, declineCommand);
+
     [RACObserve(WSELF, showActivityIndicator) subscribeNext:^(id _) {
         switch (_showActivityIndicator) {
             case 0:
@@ -119,6 +126,16 @@ UICollectionViewDelegateFlowLayout
                 break;
             default:
                 break;
+        }
+    }];
+    
+    [RACObserve(self, reviewerStatus) subscribeNext:^(id _) {
+        if (_reviewerStatus == THLGuestlistReviewerStatusAttendingGuest) {
+            _actionContainerView.status = THLActionContainerViewStatusDecline;
+            [_actionContainerView reloadView];
+            [_actionContainerView.declineButton.morphingLabel setTextWithoutMorphing:NSLocalizedString(@"LEAVE GUESTLIST", nil)];
+            RAC(_actionContainerView.declineButton, rac_command) = RACObserve(WSELF, confirmCommand);
+            [_actionContainerView setNeedsDisplay];
         }
     }];
 }
@@ -170,6 +187,23 @@ UICollectionViewDelegateFlowLayout
 - (THLActionContainerView *)newActionContainerView {
     THLActionContainerView *actionContainerView = [THLActionContainerView new];
     return actionContainerView;
+}
+
+- (THLConfirmationPopupView *)newConfirmationPopupView {
+    THLConfirmationPopupView *confirmationPopupView = [THLConfirmationPopupView new];
+    return confirmationPopupView;
+}
+
+#pragma mark - Action Guard
+- (void)confirmActionWithMessage:(NSString *)text {
+    KLCPopup *popup = [KLCPopup popupWithContentView:_confirmationPopupView
+                                            showType:KLCPopupShowTypeBounceIn
+                                         dismissType:KLCPopupDismissTypeBounceOut
+                                            maskType:KLCPopupMaskTypeDimmed
+                            dismissOnBackgroundTouch:NO
+                               dismissOnContentTouch:NO];
+    _confirmationPopupView.confirmationText = text;
+    [popup show];
 }
 
 #pragma mark - UICollectionViewDelegate

@@ -7,6 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+typedef NS_OPTIONS(NSInteger, THLGuestlistStatus) {
+    THLGuestlistStatusNone = 0,
+    THLGuestlistStatusPendingInvite,
+    THLGuestlistStatusAccepted,
+    THLGuestlistStatusPendingHost,
+    THLGuestlistStatusDeclined
+};
 
 @protocol THLEventDetailView <NSObject>
 @property (nonatomic, copy) NSURL *locationImageURL;
@@ -16,7 +23,7 @@
 @property (nonatomic, copy) NSString *locationName;
 @property (nonatomic, copy) NSString *locationInfo;
 @property (nonatomic, copy) NSString *locationAddress;
-@property (nonatomic) THLStatus actionBarButtonStatus;
+@property (nonatomic) THLGuestlistStatus actionBarButtonStatus;
 @property (nonatomic, strong) CLPlacemark *locationPlacemark;
 @property (nonatomic, strong) RACCommand *actionBarButtonCommand;
 @property (nonatomic, strong) RACCommand *dismissCommand;

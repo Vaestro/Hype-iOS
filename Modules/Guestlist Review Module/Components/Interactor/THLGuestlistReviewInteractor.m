@@ -67,7 +67,7 @@ static NSString *const kTHLGuestlistReviewModuleViewKey = @"kTHLGuestlistReviewM
 
 #pragma mark - Handle Presenter Events
 - (void)updateGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite withResponse:(THLStatus)response {
-    [[_dataManager updateGuestlistInvite:guestlistInvite.objectId withResponse:response] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+    [[_dataManager updateGuestlistInvite:guestlistInvite withResponse:response] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
         [_delegate interactor:self didUpdateGuestlistInviteResponse:task.error to:response];
         return nil;
     }];

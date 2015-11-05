@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "THLGuestlistReviewModuleDelegate.h"
-
+@class THLGuestlistInviteEntity;
 @class THLGuestlistEntity;
 @protocol THLGuestlistReviewModuleInterface <NSObject>
 @property (nonatomic, weak) id<THLGuestlistReviewModuleDelegate> moduleDelegate;
 
-- (void)presentGuestlistReviewInterfaceForGuestlist:(THLGuestlistEntity *)guestlistEntity forReviewer:(NSString *)reviewer inController:(UIViewController *)controller;
+- (void)presentGuestlistReviewInterfaceForGuestlist:(THLGuestlistEntity *)guestlistEntity withGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInviteEntity inController:(UIViewController *)controller;
 
 @end

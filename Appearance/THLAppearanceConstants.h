@@ -57,7 +57,8 @@ static NSString *const kTHLNUITableCellDetail = @"TableCellDetail";
 typedef NS_ENUM(NSInteger, THLUnit) {
 	THLUnitNone = 0,
 	THLUnitLow,
-	THLUnitHigh
+	THLUnitHigh,
+    THLUnitSuperHigh
 };
 
 NS_INLINE UIView*
@@ -71,6 +72,7 @@ THLPadding(THLUnit unit) {
 		case THLUnitNone: return 0;
 		case THLUnitLow: return kTHLBaseUnit;
 		case THLUnitHigh: return kTHLBaseUnit * 2;
+        case THLUnitSuperHigh: return kTHLBaseUnit * 4;
 		default: return THLPadding(THLUnitHigh);
 	}
 }
@@ -112,7 +114,10 @@ kTHLEdgeInsetsHigh() {
 	return THLEdgeInsets(THLUnitHigh);
 }
 
-
+UIKIT_STATIC_INLINE UIEdgeInsets
+kTHLEdgeInsetsSuperHigh() {
+    return THLEdgeInsets(THLUnitSuperHigh);
+}
 
 UIKIT_STATIC_INLINE UILabel*
 THLNUILabel(NSString *nuiClass) {

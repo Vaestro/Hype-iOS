@@ -39,11 +39,11 @@
 	}];
 }
 
-- (BFTask *)checkValidGuestlistForEvent:(NSString *)eventId {
-    return [[_guestlistService fetchGuestlistForEvent:eventId] continueWithSuccessBlock:^id(BFTask *task) {
-        THLGuestlist *fetchedGuestlist = task.result;
-        THLGuestlistEntity *mappedGuestlist = [_entityMapper mapGuestlist:fetchedGuestlist];
-        return mappedGuestlist;
+- (BFTask *)checkValidGuestlistInviteForEvent:(NSString *)eventId {
+    return [[_guestlistService fetchGuestlistInviteForEvent:eventId] continueWithSuccessBlock:^id(BFTask *task) {
+        THLGuestlistInvite *fetchedGuestlistInvite = task.result;
+        THLGuestlistInviteEntity *mappedGuestlistInvite = [_entityMapper mapGuestlistInvite:fetchedGuestlistInvite];
+        return mappedGuestlistInvite;
     }];
 }
 

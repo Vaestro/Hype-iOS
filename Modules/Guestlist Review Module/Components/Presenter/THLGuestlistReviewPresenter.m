@@ -15,15 +15,6 @@
 #import "THLGuestlistInviteEntity.h"
 #import "THLGuestlistReviewCellViewModel.h"
 
-typedef NS_OPTIONS(NSInteger, THLGuestlistReviewerStatus) {
-    THLGuestlistTHLGuestlistReviewerStatusPendingGuest = 0,
-    THLGuestlistReviewerStatusAttendingGuest,
-    THLGuestlistReviewerStatusOwner,
-    THLGuestlistReviewerStatusPendingHost,
-    THLGuestlistReviewerStatusHost,
-    THLGuestlistReviewOptions_Count
-};
-
 @interface THLGuestlistReviewPresenter()
 <
 THLGuestlistReviewInteractorDelegate
@@ -33,6 +24,7 @@ THLGuestlistReviewInteractorDelegate
 @property (nonatomic) THLGuestlistReviewerStatus reviewerStatus;
 @property (nonatomic) BOOL refreshing;
 @property (nonatomic) THLActivityStatus activityStatus;
+@property (nonatomic, strong) THLGuestlistInviteEntity *guestlistInviteEntity;
 @end
 
 @implementation THLGuestlistReviewPresenter
@@ -49,13 +41,15 @@ THLGuestlistReviewInteractorDelegate
 }
 
 #pragma mark - THLGuestlistReviewModuleInterface
-- (void)presentGuestlistReviewInterfaceForGuestlist:(THLGuestlistEntity *)guestlistEntity forReviewer:(NSString *)reviewer inController:(UIViewController *)controller {
+- (void)presentGuestlistReviewInterfaceForGuestlist:(THLGuestlistEntity *)guestlistEntity withGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInviteEntity inController:(UIViewController *)controller {
     _interactor.guestlistEntity = guestlistEntity;
-    _reviewerStatus = 0;
+    _guestlistInviteEntity = guestlistInviteEntity;
+    [self updateReviewStatus];
     [_wireframe presentInterfaceInController:controller];
 }
 
 - (void)configureView:(id<THLGuestlistReviewView>)view {
+    WEAKSELF();
     _view = view;
     THLViewDataSource *dataSource = [_interactor generateDataSource];
     dataSource.dataTransformBlock = ^id(id item) {
@@ -85,20 +79,31 @@ THLGuestlistReviewInteractorDelegate
     
     [view setDeclineCommand:declineCommand];
     
+    RACCommand *confirmCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [self handleConfirmAction];
+        return [RACSignal empty];
+    }];
+    
+    [view setConfirmCommand:confirmCommand];
+    
     RACCommand *refreshCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [self handleRefreshAction];
+        [WSELF handleRefreshAction];
         return [RACSignal empty];
     }];
     
     [view setRefreshCommand:refreshCommand];
     
-    [RACObserve(self, refreshing) subscribeNext:^(NSNumber *b) {
+    [RACObserve(WSELF, refreshing) subscribeNext:^(NSNumber *b) {
         BOOL isRefreshing = [b boolValue];
         [view setShowRefreshAnimation:isRefreshing];
     }];
     
-    [RACObserve(self, activityStatus) subscribeNext:^(id _) {
+    [RACObserve(WSELF, activityStatus) subscribeNext:^(id _) {
         [view setShowActivityIndicator:_activityStatus];
+    }];
+    
+    [RACObserve(WSELF, reviewerStatus) subscribeNext:^(id _) {
+        [view setReviewerStatus:_reviewerStatus];
     }];
     //    RACCommand *selectedIndexPathCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
     //        [self handleIndexPathSelection:(NSIndexPath *)input];
@@ -109,7 +114,12 @@ THLGuestlistReviewInteractorDelegate
 }
 
 //TODO: Create Configure Review Options
-
+- (void)updateReviewStatus {
+    WEAKSELF();
+    if (_guestlistInviteEntity.response == THLStatusAccepted) {
+        WSELF.reviewerStatus = THLGuestlistReviewerStatusAttendingGuest;
+    }
+}
 #pragma mark - Event Handling
 
 - (void)handleDismissAction {
@@ -123,12 +133,21 @@ THLGuestlistReviewInteractorDelegate
 
 - (void)handleAcceptAction {
     self.activityStatus = THLActivityStatusInProgress;
-//    [_interactor updateGuestlistInvite:_guestlistInviteEntity withResponse:THLStatusAccepted];
+    [_interactor updateGuestlistInvite:_guestlistInviteEntity withResponse:THLStatusAccepted];
 }
 
 - (void)handleDeclineAction {
     self.activityStatus = THLActivityStatusInProgress;
-//    [_interactor updateGuestlistInvite:_guestlistInviteEntity withResponse:THLStatusDeclined];
+    [_interactor updateGuestlistInvite:_guestlistInviteEntity withResponse:THLStatusDeclined];
+}
+
+- (void)handleConfirmAction {
+    if (_guestlistInviteEntity.response == THLStatusAccepted) {
+        [_view confirmActionWithMessage:@"Are you sure you want to leave the Guestlist?"];
+    }
+    if (_guestlistInviteEntity.response == THLStatusPending) {
+        [_view confirmActionWithMessage:@"Are you sure you want to decline your Invite?"];
+    }
 }
 
 //- (void)handleAddGuestAction {
@@ -151,11 +170,12 @@ THLGuestlistReviewInteractorDelegate
 }
 
 - (void)interactor:(THLGuestlistReviewInteractor *)interactor didUpdateGuestlistInviteResponse:(NSError *)error to:(THLStatus)response {
+    WEAKSELF();
     if (!error && response == THLStatusAccepted) {
-        self.reviewerStatus = THLGuestlistReviewerStatusAttendingGuest;
-        self.activityStatus = THLActivityStatusNone;
+        [self updateReviewStatus];
+        WSELF.activityStatus = THLActivityStatusNone;
     } else if (!error && response == THLStatusDeclined) {
-        self.activityStatus = THLActivityStatusNone;
+        WSELF.activityStatus = THLActivityStatusNone;
         [_wireframe dismissInterface];
     }
 }

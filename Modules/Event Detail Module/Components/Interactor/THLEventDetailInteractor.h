@@ -10,15 +10,15 @@
 @class THLEventDetailDataManager;
 @class THLEventDetailInteractor;
 @class THLLocationEntity;
-@class THLPromotionEntity;
 @class THLUser;
 @class THLEvent;
 @class THLEventEntity;
-@class THLGuestlistEntity;
+@class THLPromotionEntity;
+@class THLGuestlistInviteEntity;
 
 @protocol THLEventDetailInteractorDelegate <NSObject>
 - (void)interactor:(THLEventDetailInteractor *)interactor didGetPlacemark:(CLPlacemark *)placemark forLocation:(THLLocationEntity *)locationEntity error:(NSError *)error;
-- (void)interactor:(THLEventDetailInteractor *)interactor didGetGuestlist:(THLGuestlistEntity *)guestlist forEvent:(NSString *)eventId error:(NSError *)error;
+- (void)interactor:(THLEventDetailInteractor *)interactor didGetGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite forEvent:(NSString *)eventId error:(NSError *)error;
 - (void)interactor:(THLEventDetailInteractor *)interactor didGetPromotion:(THLPromotionEntity *)promotionEntity forEvent:(NSString *)eventId error:(NSError *)error;
 @end
 
@@ -31,6 +31,5 @@
 
 - (void)getPlacemarkForLocation:(THLLocationEntity *)locationEntity;
 - (void)getPromotionForEvent:(NSString *)eventId;
-
-- (void)checkValidGuestlistEvent:(NSString *)eventId;
+- (void)checkValidGuestlistInviteForEvent:(NSString *)eventId;
 @end

@@ -16,6 +16,7 @@
 #import "THLUser.h"
 #import "THLGuestlistEntity.h"
 #import "THLPromotionEntity.h"
+#import "THLGuestlistInviteEntity.h"
 
 @interface THLEventDetailPresenter()
 <
@@ -23,10 +24,11 @@ THLEventDetailInteractorDelegate
 >
 
 @property (nonatomic, strong) THLEventEntity *eventEntity;
+@property (nonatomic, strong) THLGuestlistInviteEntity *guestlistInviteEntity;
 @property (nonatomic, strong) THLGuestlistEntity *guestlistEntity;
 @property (nonatomic, strong) THLPromotionEntity *promotionEntity;
 @property (nonatomic, strong) id<THLEventDetailView> view;
-@property (nonatomic) THLStatus guestlistReviewStatus;
+@property (nonatomic) THLGuestlistStatus guestlistReviewStatus;
 
 @end
 
@@ -53,7 +55,10 @@ THLEventDetailInteractorDelegate
     }];
     
     RACCommand *actionBarButtonCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        if (_guestlistReviewStatus == THLStatusAccepted || THLStatusPending) {
+        if (WSELF.guestlistReviewStatus == THLGuestlistStatusAccepted ||
+            WSELF.guestlistReviewStatus  == THLGuestlistStatusPendingHost ||
+            WSELF.guestlistReviewStatus == THLGuestlistStatusPendingInvite)
+        {
             [WSELF handleViewGuestlistAction];
         } else {
 //            TODO: Create logic so that Guests with Declined Guestlists can have another guestlist invite to the same event if their other one is declined
@@ -62,7 +67,7 @@ THLEventDetailInteractorDelegate
         return [RACSignal empty];
     }];
     
-    [RACObserve(self, guestlistReviewStatus) subscribeNext:^(id _) {
+    [RACObserve(WSELF, guestlistReviewStatus) subscribeNext:^(id _) {
         [_view setActionBarButtonStatus:_guestlistReviewStatus];
     }];
     
@@ -95,10 +100,9 @@ THLEventDetailInteractorDelegate
 
 - (void)presentEventDetailInterfaceForEvent:(THLEventEntity *)eventEntity inWindow:(UIWindow *)window {
     _eventEntity = eventEntity;
-    _guestlistReviewStatus = THLStatusNone;
     
     [_interactor getPlacemarkForLocation:_eventEntity.location];
-    [_interactor checkValidGuestlistEvent:_eventEntity.objectId];
+    [_interactor checkValidGuestlistInviteForEvent:_eventEntity.objectId];
     [_interactor getPromotionForEvent:_eventEntity.objectId];
 	[_wireframe presentInterfaceInWindow:window];
 }
@@ -108,7 +112,7 @@ THLEventDetailInteractorDelegate
 }
 
 - (void)handleViewGuestlistAction {
-    [self.moduleDelegate eventDetailModule:self guestlist:_guestlistEntity presentGuestlistReviewInterfaceOnController:(UIViewController *)_view];
+    [self.moduleDelegate eventDetailModule:self guestlist:_guestlistEntity guestlistInvite:_guestlistInviteEntity presentGuestlistReviewInterfaceOnController:(UIViewController *)_view];
 }
 
 - (void)handleCreateGuestlistAction {
@@ -128,25 +132,22 @@ THLEventDetailInteractorDelegate
     }
 }
 
-- (void)interactor:(THLEventDetailInteractor *)interactor didGetGuestlist:(THLGuestlistEntity *)guestlist forEvent:(NSString *)eventId error:(NSError *)error {
-    if (!error && guestlist) {
-        _guestlistEntity = guestlist;
-        switch (_guestlistEntity.reviewStatus) {
-            case THLStatusPending: {
-                self.guestlistReviewStatus = THLStatusPending;
-                break;
-            }
-            case THLStatusAccepted: {
-                self.guestlistReviewStatus = THLStatusAccepted;
-                break;
-            }
-            case THLStatusDeclined: {
-                self.guestlistReviewStatus = THLStatusDeclined;
-                break;
-            }
-            default: {
-                break;
-            }
+- (void)interactor:(THLEventDetailInteractor *)interactor didGetGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite forEvent:(NSString *)eventId error:(NSError *)error {
+    WEAKSELF();
+    if (!error && guestlistInvite) {
+        _guestlistInviteEntity = guestlistInvite;
+        _guestlistEntity = _guestlistInviteEntity.guestlist;
+        if (_guestlistInviteEntity.response == THLStatusPending) {
+            WSELF.guestlistReviewStatus = THLGuestlistStatusPendingInvite;
+        }
+        else if (_guestlistEntity.reviewStatus == THLStatusPending) {
+            WSELF.guestlistReviewStatus = THLGuestlistStatusPendingHost;
+        }
+        else if (_guestlistEntity.reviewStatus == THLStatusAccepted) {
+            WSELF.guestlistReviewStatus = THLGuestlistStatusAccepted;
+        }
+        else if (_guestlistEntity.reviewStatus == THLStatusDeclined) {
+            WSELF.guestlistReviewStatus = THLGuestlistStatusDeclined;
         }
     }
 }

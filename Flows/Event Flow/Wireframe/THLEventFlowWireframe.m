@@ -74,10 +74,10 @@ THLGuestlistReviewModuleDelegate
 	[_guestlistInvitationWireframe.moduleInterface presentGuestlistInvitationInterfaceForPromotion:promotionEntity forGuestlist:@"1" inController:controller];
 }
 
-- (void)presentGuestlistReviewInterfaceForGuestlist:(THLGuestlistEntity *)guestlistEntity inController:(UIViewController *)controller {
+- (void)presentGuestlistReviewInterfaceForGuestlist:(THLGuestlistEntity *)guestlistEntity withGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInviteEntity inController:(UIViewController *)controller {
     _guestlistReviewWireframe = [_dependencyManager newGuestlistReviewWireframe];
     [_guestlistReviewWireframe.moduleInterface setModuleDelegate:self];
-    [_guestlistReviewWireframe.moduleInterface presentGuestlistReviewInterfaceForGuestlist:guestlistEntity forReviewer:@"Guest" inController:controller];
+    [_guestlistReviewWireframe.moduleInterface presentGuestlistReviewInterfaceForGuestlist:guestlistEntity withGuestlistInvite:guestlistInviteEntity inController:controller];
 }
 
 
@@ -94,8 +94,8 @@ THLGuestlistReviewModuleDelegate
     [self presentGuestlistInvitationInterfaceForPromotion:promotionEntity inController:controller];
 }
 
-- (void)eventDetailModule:(id<THLEventDetailModuleInterface>)module guestlist:(THLGuestlistEntity *)guestlistEntity presentGuestlistReviewInterfaceOnController:(UIViewController *)controller {
-    [self presentGuestlistReviewInterfaceForGuestlist:guestlistEntity inController:controller];
+- (void)eventDetailModule:(id<THLEventDetailModuleInterface>)module guestlist:(THLGuestlistEntity *)guestlistEntity guestlistInvite:(THLGuestlistInviteEntity *)guestlistInviteEntity presentGuestlistReviewInterfaceOnController:(UIViewController *)controller {
+    [self presentGuestlistReviewInterfaceForGuestlist:guestlistEntity withGuestlistInvite:guestlistInviteEntity inController:controller];
 }
 
 #pragma mark - THLEventDetailModuleDelegate

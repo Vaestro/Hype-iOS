@@ -7,14 +7,27 @@
 //
 
 #import <Foundation/Foundation.h>
+
+typedef NS_OPTIONS(NSInteger, THLGuestlistReviewerStatus) {
+    THLGuestlistReviewerStatusPendingGuest = 0,
+    THLGuestlistReviewerStatusAttendingGuest,
+    THLGuestlistReviewerStatusOwner,
+    THLGuestlistReviewerStatusPendingHost,
+    THLGuestlistReviewerStatusHost,
+    THLGuestlistReviewerStatus_Count
+};
+
 @class THLViewDataSource;
 
 @protocol THLGuestlistReviewView <NSObject>
 @property (nonatomic, strong) THLViewDataSource *dataSource;
 @property (nonatomic) BOOL showRefreshAnimation;
+@property (nonatomic) THLGuestlistReviewerStatus reviewerStatus;
 @property (nonatomic) NSInteger showActivityIndicator;
 @property (nonatomic, strong) RACCommand *refreshCommand;
 @property (nonatomic, strong) RACCommand *dismissCommand;
 @property (nonatomic, strong) RACCommand *acceptCommand;
 @property (nonatomic, strong) RACCommand *declineCommand;
+@property (nonatomic, strong) RACCommand *confirmCommand;
+- (void)confirmActionWithMessage:(NSString *)text;
 @end

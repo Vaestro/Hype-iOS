@@ -111,17 +111,22 @@
 //    RAC(self, bottomBar) = RACObserve(self, actionBarButtonStatus);
     [RACObserve(WSELF, actionBarButtonStatus) subscribeNext:^(id _) {
         switch (actionBarButtonStatus) {
-            case THLStatusPending:
-                [_bottomBar.morphingLabel setTextWithoutMorphing:NSLocalizedString(@"VIEW PENDING GUESTLIST", nil)];
+            case THLGuestlistStatusPendingInvite:
+                [_bottomBar.morphingLabel setTextWithoutMorphing:NSLocalizedString(@"VIEW GUESTLIST", nil)];
                 _bottomBar.backgroundColor = kTHLNUIPendingColor;
                 break;
             
-            case THLStatusAccepted:
+            case THLGuestlistStatusPendingHost:
+                [_bottomBar.morphingLabel setTextWithoutMorphing:NSLocalizedString(@"VIEW PENDING GUESTLIST", nil)];
+                _bottomBar.backgroundColor = kTHLNUIPendingColor;
+                break;
+                
+            case THLGuestlistStatusAccepted:
                 [_bottomBar.morphingLabel setTextWithoutMorphing:NSLocalizedString(@"VIEW YOUR GUESTLIST", nil)];
                 _bottomBar.backgroundColor = kTHLNUIAccentColor;
                 break;
                 
-            case THLStatusDeclined:
+            case THLGuestlistStatusDeclined:
                 [_bottomBar.morphingLabel setTextWithoutMorphing:NSLocalizedString(@"CREATE A GUESTLIST", nil)];
                 _bottomBar.backgroundColor = kTHLNUIAccentColor;
                 break;

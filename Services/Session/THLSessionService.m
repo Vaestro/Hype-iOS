@@ -51,4 +51,13 @@
     [THLUser logOut];
 }
 
+- (BFTask *)makeCurrentInstallation {
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    if (![[currentInstallation objectForKey:@"User"] isEqual:[THLUser currentUser]]) {
+        [currentInstallation setObject:[THLUser currentUser] forKey:@"User"];
+        return [currentInstallation saveInBackground];
+    }
+    return [BFTask taskWithResult:nil];
+}
+
 @end

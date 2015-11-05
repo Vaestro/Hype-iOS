@@ -17,10 +17,10 @@
 
 @protocol THLGuestlistServiceInterface <NSObject>
 - (BFTask *)fetchInvitesOnGuestlist:(THLGuestlist *)guestlist;
-- (BFTask *)fetchGuestlistForEvent:(NSString *)eventId;
+- (BFTask *)fetchGuestlistInviteForEvent:(NSString *)eventId;
 - (BFTask *)fetchGuestlistInviteWithId:(NSString *)guestlistInviteId;
 
-- (BFTask *)updateGuestlistInvite:(NSString *)guestlistInviteId withResponse:(THLStatus)response;
+- (BFTask *)updateGuestlistInvite:(THLGuestlistInvite *)guestlistInvite withResponse:(THLStatus)response;
 
 - (BFTask *)createGuestlistForPromotion:promotionId withInvites:guestPhoneNumbers;
 @end

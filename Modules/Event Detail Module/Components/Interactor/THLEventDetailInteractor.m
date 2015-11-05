@@ -35,10 +35,10 @@
     }];
 }
 
-- (void)checkValidGuestlistEvent:(NSString *)eventId {
+- (void)checkValidGuestlistInviteForEvent:(NSString *)eventId {
     WEAKSELF();
-    [[_dataManager checkValidGuestlistForEvent:eventId] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
-        [_delegate interactor:WSELF didGetGuestlist:task.result forEvent:eventId error:task.error];
+    [[_dataManager checkValidGuestlistInviteForEvent:eventId] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+        [_delegate interactor:WSELF didGetGuestlistInvite:task.result forEvent:eventId error:task.error];
         return nil;
     }];
 }

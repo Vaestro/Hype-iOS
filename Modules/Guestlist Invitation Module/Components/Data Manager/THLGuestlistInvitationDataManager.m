@@ -42,9 +42,8 @@
 
 - (BFTask *)submitGuestlistForPromotion:(NSString *)promotionId withInvites:(NSArray *)guestPhoneNumbers {
     return [[_guestlistService createGuestlistForPromotion:promotionId withInvites:guestPhoneNumbers] continueWithSuccessBlock:^id(BFTask *task) {
-        NSArray<THLGuestlistEntity *> *guestlist = [_entityMapper mapGuestlists:@[task.result]];
-        [self storeGuestlist:guestlist];
-        return [BFTask taskWithResult:guestlist];
+//        NSArray<THLGuestlistEntity *> *guestlist = [_entityMapper mapGuestlists:@[task.result]];
+        return [BFTask taskWithResult:nil];
     }];
 }
 
@@ -117,9 +116,5 @@
 
 - (void)storeGuests:(NSArray<THLGuestEntity *> *)guests {
 	[_dataStore updateOrAddEntities:[NSSet setWithArray:guests]];
-}
-
-- (void)storeGuestlist:(NSArray<THLGuestlistEntity *> *)guestlist {
-    [_dataStore updateOrAddEntities:[NSSet setWithArray:guestlist]];
 }
 @end

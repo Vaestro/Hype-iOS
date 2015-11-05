@@ -52,34 +52,13 @@ THLGuestlistInvitationModuleDelegate
 	_window = window;
     
     if ([_sessionService isUserCached]) {
+//        Potentially Necessasy to update Installation everytime User opens app
+//        [_sessionService makeCurrentInstallation];
         [self presentEventFlow];
     }else {
         [self presentLoginInterface];
     }
-
 }
-
-//- (BFTask *)handlePushNotification:(NSDictionary *)pushInfo {
-//    NSString *guestlistInviteId = pushInfo[kPushInfoKeyGuestlistInviteId];
-//    _guestlistService = [[THLGuestlistService alloc] initWithQueryFactory:self.parseQueryFactory];
-//    _entityMapper = [[THLEntityMapper alloc] init];
-//    return [[_guestlistService fetchGuestlistInviteWithId:guestlistInviteId] continueWithSuccessBlock:^id(BFTask *task) {
-//        if (!task.faulted) {
-//            THLGuestlistInvite *fetchedGuestlistInvite = task.result;
-//            THLGuestlistInviteEntity *mappedGuestlistInvite = [_entityMapper mapGuestlistInvite:fetchedGuestlistInvite];
-//            [self showPopupForGuestListInviteEntity:mappedGuestlistInvite];
-//        }
-//        return task;
-//    }];
-//}
-
-//- (void)showPopupForGuestListInviteEntity:(THLGuestlistInviteEntity *)guestlistInviteEntity {
-//    [THLGuestlistInvitePopupView showPopupForGuestlist:guestlistInviteEntity.guestlist callbackBlock:^(BOOL displayGuestList) {
-//        if (displayGuestList) {
-//            [self presentEventFlowInWindow:guestlistInviteEntity.guestlist.promotion.event];
-//        }
-//    }];
-//}
 
 - (BFTask *)handlePushNotification:(NSDictionary *)pushInfo {
     if ([pushInfo objectForKey:@"notificationText"]) {
@@ -127,6 +106,7 @@ THLGuestlistInvitationModuleDelegate
 #pragma mark - THLLoginModuleDelegate
 - (void)loginModule:(id<THLLoginModuleInterface>)module didLoginUser:(NSError *)error {
 	if (!error) {
+        [_sessionService makeCurrentInstallation];
 		[self presentEventFlow];
 	}
 }

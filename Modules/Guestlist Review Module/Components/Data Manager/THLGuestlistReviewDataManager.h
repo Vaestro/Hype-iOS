@@ -12,6 +12,7 @@
 @class THLDataStore;
 @class THLEntityMapper;
 @class THLGuestlistEntity;
+@class THLGuestlistInviteEntity;
 @protocol THLGuestlistServiceInterface;
 
 @interface THLGuestlistReviewDataManager : NSObject
@@ -25,5 +26,5 @@
                                dataStore:(THLDataStore *)dataStore;
 
 - (BFTask *)fetchGuestlistInvitesForGuestlist:(NSString *)guestlistId;
-- (BFTask *)updateGuestlistInvite:(NSString *)guestlistInviteId withResponse:(THLStatus)response;
+- (BFTask *)updateGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite withResponse:(THLStatus)response;
 @end

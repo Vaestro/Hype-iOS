@@ -14,5 +14,5 @@
 //- (BFTask *)checkUserSessionValidity;
 - (BOOL)isUserCached;
 - (void)logUserOut;
-
+- (BFTask *)makeCurrentInstallation;
 @end
