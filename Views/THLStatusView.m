@@ -28,7 +28,7 @@
 }
 
 - (void)layoutView {
-    [[self layer] addSublayer:_shapeView];
+    [self.layer addSublayer:_shapeView];
 }
 
 //- (void)layoutSubviews {
@@ -51,14 +51,17 @@
     switch (_status) {
         case THLStatusPending: {
             [_shapeView setPath:[self pendingPath].CGPath];
+            _shapeView.fillColor = [kTHLNUIPendingColor CGColor];
             break;
         }
         case THLStatusAccepted: {
             [_shapeView setPath:[self acceptedPath].CGPath];
+            _shapeView.fillColor = [kTHLNUIAccentColor CGColor];
             break;
         }
         case THLStatusDeclined: {
             [_shapeView setPath:[self declinedPath].CGPath];
+            _shapeView.fillColor = [kTHLNUIRedColor CGColor];
             break;
         }
         default: {
@@ -85,8 +88,8 @@
     [bezierPath addCurveToPoint: CGPointMake(9, 0) controlPoint1: CGPointMake(1.06, 3.05) controlPoint2: CGPointMake(4.67, 0)];
     [bezierPath addCurveToPoint: CGPointMake(18, 9) controlPoint1: CGPointMake(13.97, 0) controlPoint2: CGPointMake(18, 4.03)];
     [bezierPath closePath];
-    [kTHLNUIAccentColor setFill];
-    [bezierPath fill];
+//    [kTHLNUIAccentColor setFill];
+//    [bezierPath fill];
     return bezierPath;
 }
 
@@ -99,8 +102,8 @@
     [ovalPath addCurveToPoint: CGPointMake(10, 0) controlPoint1: CGPointMake(0, 4.48) controlPoint2: CGPointMake(4.48, 0)];
     [ovalPath addCurveToPoint: CGPointMake(20, 10) controlPoint1: CGPointMake(15.52, 0) controlPoint2: CGPointMake(20, 4.48)];
     [ovalPath closePath];
-    [kTHLNUIPendingColor setFill];
-    [ovalPath fill];
+//    [kTHLNUIPendingColor setFill];
+//    [ovalPath fill];
     return ovalPath;
 }
 
@@ -113,8 +116,8 @@
     [ovalPath addCurveToPoint: CGPointMake(10, 0) controlPoint1: CGPointMake(0, 4.48) controlPoint2: CGPointMake(4.48, 0)];
     [ovalPath addCurveToPoint: CGPointMake(20, 10) controlPoint1: CGPointMake(15.52, 0) controlPoint2: CGPointMake(20, 4.48)];
     [ovalPath closePath];
-    [kTHLNUIRedColor setFill];
-    [ovalPath fill];
+//    [kTHLNUIRedColor setFill];
+//    [ovalPath fill];
     return ovalPath;
 }
 @end

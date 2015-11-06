@@ -8,10 +8,10 @@
 
 #import "THLContactTableViewCell.h"
 #import "THLAppearanceConstants.h"
-
+#import "THLPersonIconView.h"
 
 @interface THLContactTableViewCell()
-@property (nonatomic, strong) UIImageView *iconImageView;
+@property (nonatomic, strong) THLPersonIconView *iconImageView;
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UILabel *phoneNumberLabel;
 @end
@@ -54,12 +54,9 @@
 }
 
 - (void)bindView {
-    [RACObserve(self, thumbnail) subscribeNext:^(id x) {
-        [_iconImageView setImage:(UIImage *)x];
-    }];
-    
-    RAC(self.nameLabel, text) = RACObserve(self, name);
-    RAC(self.phoneNumberLabel, text) = RACObserve(self, phoneNumber);
+    RAC(_iconImageView, image) = RACObserve(self, thumbnail);
+    RAC(_nameLabel, text) = RACObserve(self, name);
+    RAC(_phoneNumberLabel, text) = RACObserve(self, phoneNumber);
 }
 
 - (void)layoutSubviews {
@@ -68,13 +65,8 @@
 }
 
 #pragma mark - Constructors
-- (UIImageView *)newIconImageView {
-    UIImageView *imageView = [UIImageView new];
-    imageView.clipsToBounds = YES;
-    imageView.tintColor = kTHLNUIPrimaryBackgroundColor;
-    imageView.contentMode = UIViewContentModeScaleAspectFill;
-    imageView.layer.borderColor = kTHLNUIGrayFontColor.CGColor;
-    imageView.layer.borderWidth = 0.5;
+- (THLPersonIconView *)newIconImageView {
+    THLPersonIconView *imageView = [THLPersonIconView new];
     return imageView;
 }
 

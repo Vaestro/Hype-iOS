@@ -13,4 +13,5 @@
 @end
 
 @implementation THLAddressBookEntryFetchService
+
 @end

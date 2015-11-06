@@ -118,6 +118,6 @@
 }
 
 - (void)dealloc {
-    NSLog(@"Bitch, app deallocated %@", self);
+    NSLog(@"Destroyed %@", self);
 }
 @end

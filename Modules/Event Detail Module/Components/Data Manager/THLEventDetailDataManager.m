@@ -48,6 +48,6 @@
 }
 
 - (void)dealloc {
-    NSLog(@"DATA MANAGER WAS DEALLOCATED BITCH");
+    NSLog(@"Destroyed %@", self);
 }
 @end

@@ -12,6 +12,6 @@
 
 @interface THLAddressBookEntryFetchService : NSObject
 
-- (BFTask *)fetchAllEntries:(BOOL)includeThumbnails;
+//- (BFTask *)fetchAllEntries:(BOOL)includeThumbnails;
 
 @end

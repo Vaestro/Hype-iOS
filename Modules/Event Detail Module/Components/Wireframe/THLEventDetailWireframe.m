@@ -71,6 +71,6 @@
 }
 
 - (void)dealloc {
-    NSLog(@"WIREFRAME WAS DEALLOCATED BITCH");
+    NSLog(@"Destroyed %@", self);
 }
 @end

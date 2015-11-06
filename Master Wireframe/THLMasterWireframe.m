@@ -30,8 +30,9 @@
 <
 THLLoginModuleDelegate,
 THLPromotionSelectionModuleDelegate,
-THLGuestlistInvitationModuleDelegate
+THLPopupNotificationModuleDelegate
 >
+
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) UIViewController *viewController;
 @property (nonatomic, strong) id currentWireframe;
@@ -85,7 +86,7 @@ THLGuestlistInvitationModuleDelegate
 	[eventWireframe presentEventFlowInWindow:_window];
 }
 
-- (void)presentEventFlowInWindow:(THLEventEntity *)eventEntity {
+- (void)presentEventFlowForEvent:(THLEventEntity *)eventEntity {
     THLEventFlowWireframe *eventWireframe = [_dependencyManager newEventFlowWireframe];
     _currentWireframe = eventWireframe;
     [eventWireframe presentEventFlowInWindow:_window forEventDetail:eventEntity];
@@ -102,6 +103,11 @@ THLGuestlistInvitationModuleDelegate
 //	[guestlistWireframe.moduleInterface setModuleDelegate:self];
 //	[guestlistWireframe.moduleInterface presentGuestlistInvitationInterfaceForGuestlist:@"1" inWindow:_window];
 //}
+
+#pragma mark - THLPopupNotifcationDelegate
+- (void)popupNotificationModule:(id<THLPopupNotificationModuleInterface>)module userDidAcceptReviewForEvent:(THLEventEntity *)eventEntity {
+    [self presentEventFlowForEvent:eventEntity];
+}
 
 #pragma mark - THLLoginModuleDelegate
 - (void)loginModule:(id<THLLoginModuleInterface>)module didLoginUser:(NSError *)error {

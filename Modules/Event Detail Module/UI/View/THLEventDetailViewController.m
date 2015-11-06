@@ -179,6 +179,6 @@
 }
 
 - (void)dealloc {
-    NSLog(@"VIEW CONTROLLER WAS DEALLOCATED BITCH");
+    NSLog(@"Destroyed %@", self);
 }
 @end

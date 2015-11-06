@@ -62,7 +62,6 @@
 		216BDD671BC770CA00BBF713 /* THLSearchViewDataSource+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = 216BDD661BC770CA00BBF713 /* THLSearchViewDataSource+Factory.m */; };
 		2174A06A1B863F6A006826D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2174A0691B863F6A006826D7 /* main.m */; };
 		2174A06D1B863F6A006826D7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2174A06C1B863F6A006826D7 /* AppDelegate.m */; };
-		2174A0751B863F6A006826D7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2174A0741B863F6A006826D7 /* Images.xcassets */; };
 		2174A0781B863F6A006826D7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2174A0761B863F6A006826D7 /* LaunchScreen.xib */; };
 		21775F361B8CF72B00609D39 /* THLTitledContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21775F351B8CF72B00609D39 /* THLTitledContentView.m */; };
 		21775F391B8CF93000609D39 /* THLEventDetailsPromotionInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21775F381B8CF93000609D39 /* THLEventDetailsPromotionInfoView.m */; };
@@ -130,6 +129,8 @@
 		7942082C1BD82AF6009B86FA /* THLActionBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7942082B1BD82AF6009B86FA /* THLActionBarButton.m */; };
 		7942082F1BD8C250009B86FA /* THLGuestlistEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7942082E1BD8C250009B86FA /* THLGuestlistEntity.m */; };
 		794483041BEC5B5D00EABE23 /* THLStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794483031BEC5B5D00EABE23 /* THLStatusView.m */; };
+		794483081BEC8A6000EABE23 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 794483071BEC8A6000EABE23 /* libsqlite3.dylib */; };
+		7944830A1BEC8CF600EABE23 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 794483091BEC8CF600EABE23 /* Images.xcassets */; };
 		79752ADE1BEBD8B500D09B2E /* THLConfirmationPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79752ADD1BEBD8B500D09B2E /* THLConfirmationPopupView.m */; };
 		79B959231BE57C9D00B87799 /* THLGuestlistReviewWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959221BE57C9D00B87799 /* THLGuestlistReviewWireframe.m */; };
 		79B959291BE581A800B87799 /* THLGuestlistReviewDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959281BE581A800B87799 /* THLGuestlistReviewDataManager.m */; };
@@ -303,7 +304,6 @@
 		2174A0691B863F6A006826D7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2174A06B1B863F6A006826D7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2174A06C1B863F6A006826D7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		2174A0741B863F6A006826D7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2174A0771B863F6A006826D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		2174A07D1B863F6A006826D7 /* Hypelist2point0Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Hypelist2point0Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2174A0821B863F6A006826D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -435,6 +435,8 @@
 		794208331BD9A348009B86FA /* THLEventFlowModuleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventFlowModuleDelegate.h; sourceTree = "<group>"; };
 		794483021BEC5B5D00EABE23 /* THLStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLStatusView.h; sourceTree = "<group>"; };
 		794483031BEC5B5D00EABE23 /* THLStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLStatusView.m; sourceTree = "<group>"; };
+		794483071BEC8A6000EABE23 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = ../../../../usr/lib/libsqlite3.dylib; sourceTree = "<group>"; };
+		794483091BEC8CF600EABE23 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		79752ADC1BEBD8B500D09B2E /* THLConfirmationPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLConfirmationPopupView.h; sourceTree = "<group>"; };
 		79752ADD1BEBD8B500D09B2E /* THLConfirmationPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLConfirmationPopupView.m; sourceTree = "<group>"; };
 		79B9591B1BE5783500B87799 /* THLGuestlistReviewModuleInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistReviewModuleInterface.h; sourceTree = "<group>"; };
@@ -491,6 +493,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				794483081BEC8A6000EABE23 /* libsqlite3.dylib in Frameworks */,
 				B771256D2B58EBFF817CDC12 /* libPods-Hypelist2point0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1234,7 +1237,6 @@
 				215D880F1B8BEF2000A3329C /* CommonMacros.h */,
 				21CCEDFC1B87D7350066CDAC /* Hypelist2point0-PrefixHeader.pch */,
 				21775F431B8D4BDE00609D39 /* Hypelist2point0.strings */,
-				2174A0741B863F6A006826D7 /* Images.xcassets */,
 				2174A0761B863F6A006826D7 /* LaunchScreen.xib */,
 				215D88131B8BEFAD00A3329C /* THLConstants.h */,
 				215D88141B8BEFE900A3329C /* THLStylingConstants.h */,
@@ -1606,6 +1608,7 @@
 			isa = PBXGroup;
 			children = (
 				21CE05F91BB86911004D10BB /* raleway */,
+				794483091BEC8CF600EABE23 /* Images.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1986,6 +1989,7 @@
 		F3E081FDB7C0DB50ADEBB991 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				794483071BEC8A6000EABE23 /* libsqlite3.dylib */,
 				D059D2904940E14B1AF40EE3 /* libPods-Hypelist2point0.a */,
 				0373A993FBE4FB590855BC00 /* libPods-Hypelist2point0Tests.a */,
 			);
@@ -2090,6 +2094,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				21CE061A1BB86911004D10BB /* Raleway-SemiBold.ttf in Resources */,
+				7944830A1BEC8CF600EABE23 /* Images.xcassets in Resources */,
 				21CE06131BB86911004D10BB /* Raleway-ExtraLightItalic.ttf in Resources */,
 				21CE06171BB86911004D10BB /* Raleway-Medium.ttf in Resources */,
 				21CE060E1BB86911004D10BB /* Raleway-Bold.ttf in Resources */,
@@ -2104,7 +2109,6 @@
 				21CE060F1BB86911004D10BB /* Raleway-BoldItalic.ttf in Resources */,
 				21CE06141BB86911004D10BB /* Raleway-Italic.ttf in Resources */,
 				21CE060D1BB86911004D10BB /* Raleway-BlackItalic.ttf in Resources */,
-				2174A0751B863F6A006826D7 /* Images.xcassets in Resources */,
 				21CE06111BB86911004D10BB /* Raleway-ExtraBoldItalic.ttf in Resources */,
 				21CE061D1BB86911004D10BB /* Raleway-ThinItalic.ttf in Resources */,
 				21CE06101BB86911004D10BB /* Raleway-ExtraBold.ttf in Resources */,
@@ -2474,6 +2478,7 @@
 			baseConfigurationReference = BA51F1731F25286C41A13B20 /* Pods-Hypelist2point0.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_ASSIGN_ENUM = NO;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = NO;
@@ -2503,6 +2508,7 @@
 			baseConfigurationReference = C6B634BC51A4BB10D6261492 /* Pods-Hypelist2point0.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_WARN_ASSIGN_ENUM = NO;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = NO;

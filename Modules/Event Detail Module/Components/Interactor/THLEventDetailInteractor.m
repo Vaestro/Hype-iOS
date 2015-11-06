@@ -44,7 +44,7 @@
 }
 
 - (void)dealloc {
-    NSLog(@"INTERACTOR WAS DEALLOCATED BITCH");
+    NSLog(@"Destroyed %@", self);
 }
 
 @end

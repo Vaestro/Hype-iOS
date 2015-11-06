@@ -19,7 +19,7 @@
 @property (nonatomic, strong) UILabel *nameLabel;
 @end
 
-static CGFloat const STATUS_VIEW_DIMENSION = 20;
+//static CGFloat const STATUS_VIEW_DIMENSION = 20;
 
 @implementation THLGuestlistReviewCell
 @synthesize nameText;
@@ -50,7 +50,7 @@ static CGFloat const STATUS_VIEW_DIMENSION = 20;
     [self addSubviews:@[_iconImageView, _nameLabel, _statusView]];
     
     [_iconImageView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.insets(kTHLEdgeInsetsHigh()).priorityHigh();
+        make.top.insets(kTHLEdgeInsetsSuperHigh()).priorityHigh();
         make.left.top.greaterThanOrEqualTo(SV(_iconImageView)).insets(kTHLEdgeInsetsHigh());
         make.right.lessThanOrEqualTo(SV(_iconImageView)).insets(kTHLEdgeInsetsHigh());
         make.width.equalTo(_iconImageView.mas_height);
@@ -90,6 +90,7 @@ static CGFloat const STATUS_VIEW_DIMENSION = 20;
 
 - (THLStatusView *)newStatusView {
     THLStatusView *statusView = [THLStatusView new];
+//    statusView.clipsToBounds = YES;
     return statusView;
 }
 

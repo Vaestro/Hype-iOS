@@ -30,10 +30,10 @@
               viewDataSourceFactory:(id<THLViewDataSourceFactoryInterface>)viewDataSourceFactory;
 
 - (THLViewDataSource *)generateDataSource;
-- (void)commitChangesToGuestlist;
+//- (void)commitChangesToGuestlist;
 - (void)updateGuestlistInvites;
 
 - (void)updateGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite withResponse:(THLStatus)response;
-- (void)updateGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite withCheckInStatus:(BOOL)checkInStatus;
-- (void)updateGuestlist:(THLGuestlistEntity *)guestlistEntity withReviewStatus:(THLStatus)reviewStatus;
+//- (void)updateGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite withCheckInStatus:(BOOL)checkInStatus;
+//- (void)updateGuestlist:(THLGuestlistEntity *)guestlistEntity withReviewStatus:(THLStatus)reviewStatus;
 @end

@@ -36,7 +36,7 @@
 
 - (void)dealloc {
 	_eventHandler = nil;
-    NSLog(@"Bitch, app deallocated %@", self);
+    NSLog(@"Destroyed %@", self);
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -153,6 +153,6 @@ THLEventDetailInteractorDelegate
 }
 
 - (void)dealloc {
-    NSLog(@"PRESENTER WAS DEALLOCATED BITCH");
+    NSLog(@"Destroyed %@", self);
 }
 @end
