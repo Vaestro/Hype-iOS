@@ -37,7 +37,7 @@
         THLDataStoreDomain *domain = [self domainForGuestlistInvites];
         NSSet *entities = [NSSet setWithArray:[_entityMapper mapGuestlistInvites:task.result]];
         [_dataStore refreshDomain:domain withEntities:entities];
-        return [BFTask taskWithResult:nil];
+        return [BFTask taskWithResult:entities];
     }];
 }
 

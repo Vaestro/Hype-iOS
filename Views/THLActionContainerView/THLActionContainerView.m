@@ -44,23 +44,24 @@
                             self.declineButton]];
 
         [self.acceptButton makeConstraints:^(MASConstraintMaker *make) {
-            make.top.bottom.left.insets(UIEdgeInsetsZero);
-            make.right.equalTo(self.declineButton.mas_left);
+            make.top.bottom.left.insets(kTHLEdgeInsetsHigh());
+            make.right.equalTo(self.declineButton.mas_left).insets(kTHLEdgeInsetsHigh());
             make.width.equalTo(self.declineButton);
         }];
         
         [self.declineButton makeConstraints:^(MASConstraintMaker *make) {
-            make.top.right.bottom.insets(UIEdgeInsetsZero);
+            make.top.right.bottom.insets(kTHLEdgeInsetsHigh());
+            make.left.equalTo(self.acceptButton.mas_right).insets(kTHLEdgeInsetsHigh());
         }];
     } else if (_status == THLActionContainerViewStatusAccept){
         [self addSubview:self.acceptButton];
         [self.acceptButton makeConstraints:^(MASConstraintMaker *make) {
-            make.top.bottom.left.right.insets(UIEdgeInsetsZero);
+            make.top.bottom.left.right.insets(kTHLEdgeInsetsHigh());
         }];
     }  else if (_status == THLActionContainerViewStatusDecline){
         [self addSubview:self.declineButton];
         [self.declineButton makeConstraints:^(MASConstraintMaker *make) {
-            make.top.bottom.left.right.insets(UIEdgeInsetsZero);
+            make.top.bottom.left.right.insets(kTHLEdgeInsetsHigh());
         }];
     }
 }

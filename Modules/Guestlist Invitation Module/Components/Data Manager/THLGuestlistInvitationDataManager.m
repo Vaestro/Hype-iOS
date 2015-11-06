@@ -47,13 +47,12 @@
     }];
 }
 
-//- (THLDataStoreDomain *)domainForGuestlistInvite {
-//    THLDataStoreDomain *domain = [[THLDataStoreDomain alloc] initWithMemberTestBlock:^BOOL(THLEntity *entity) {
-//        THLGuestlistInviteEntity *guestlistInviteEntity = (THLGuestlistInviteEntity *)entity;
-//        return guestlistInviteEntity;
-//    }];
-//    return domain;
-//}
+- (BFTask *)updateGuestlist:(NSString *)guestlistId withInvites:(NSArray *)guestPhoneNumbers {
+    return [[_guestlistService updateGuestlist:guestlistId withInvites:guestPhoneNumbers] continueWithSuccessBlock:^id(BFTask *task) {
+        //        NSArray<THLGuestlistEntity *> *guestlist = [_entityMapper mapGuestlists:@[task.result]];
+        return [BFTask taskWithResult:nil];
+    }];
+}
 
 - (void)loadContacts {
 	[[self getContactsTasks] continueWithSuccessBlock:^id(BFTask *task) {
@@ -116,5 +115,9 @@
 
 - (void)storeGuests:(NSArray<THLGuestEntity *> *)guests {
 	[_dataStore updateOrAddEntities:[NSSet setWithArray:guests]];
+}
+
+- (void)dealloc {
+    NSLog(@"Bitch, app deallocated %@", self);
 }
 @end

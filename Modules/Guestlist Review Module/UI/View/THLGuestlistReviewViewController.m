@@ -135,8 +135,8 @@ UICollectionViewDelegateFlowLayout
             [_actionContainerView reloadView];
             [_actionContainerView.declineButton.morphingLabel setTextWithoutMorphing:NSLocalizedString(@"LEAVE GUESTLIST", nil)];
             RAC(_actionContainerView.declineButton, rac_command) = RACObserve(WSELF, confirmCommand);
-            [_actionContainerView setNeedsDisplay];
         }
+        [WSELF.view setNeedsDisplay];
     }];
 }
 
@@ -186,6 +186,7 @@ UICollectionViewDelegateFlowLayout
 
 - (THLActionContainerView *)newActionContainerView {
     THLActionContainerView *actionContainerView = [THLActionContainerView new];
+    actionContainerView.backgroundColor = kTHLNUISecondaryBackgroundColor;
     return actionContainerView;
 }
 

@@ -20,6 +20,35 @@
 	return self;
 }
 
+#pragma mark - Guestlist Services
+
+- (BFTask *)createGuestlistForPromotion:(NSString *)promotionId withInvites:(NSArray *)guestPhoneNumbers {
+    return [PFCloud callFunctionInBackground:@"ownerGuestSubmission"
+                              withParameters:@{@"promotionId": promotionId, @"guestDigits": guestPhoneNumbers}];
+}
+
+- (BFTask *)updateGuestlist:(NSString *)guestlistId withInvites:(NSArray *)guestPhoneNumbers {
+    [PFCloud callFunctionInBackground:@"updateGuestlist"
+                              withParameters:@{@"guestlistId": guestlistId,
+                                               @"guestDigits": guestPhoneNumbers}
+                                block:^(id guestlistInvite, NSError *error) {
+                                  PFObject *guestlist = guestlistInvite[@"Guestlist"];
+                                  [guestlistInvite setObject:guestlist forKey:@"Guestlist"];
+                                  PFObject *owner = guestlistInvite[@"Guestlist"][@"Owner"];
+                                  [guestlist setObject:owner forKey:@"Owner"];
+                                  PFObject *promotion = guestlistInvite[@"Guestlist"][@"Promotion"];
+                                  [guestlist setObject:promotion forKey:@"Promotion"];
+                                  PFObject *event = guestlistInvite[@"Guestlist"][@"Promotion"][@"event"];
+                                  [promotion setObject:event forKey:@"event"];
+                                  PFObject *location = guestlistInvite[@"Guestlist"][@"Promotion"][@"event"][@"location"];
+                                  [event setObject:location forKey:@"location"];
+                                  [guestlistInvite pinInBackgroundWithName:@"GuestlistInvites"];
+                              }];
+    return [BFTask taskWithResult:nil];
+}
+
+#pragma mark - Guestlist Invite Services
+
 - (BFTask *)fetchInvitesOnGuestlist:(THLGuestlist *)guestlist {
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
     NSMutableArray *completedGuestlistInvites = [NSMutableArray new];
@@ -32,7 +61,9 @@
 //            PFObject *parentGuestlist = guestlistInvite[@"Guestlist"];
 //            PFObject *parentGuestlistOwner = guestlistInvite[@"Guestlist"][@"Owner"];
 //            [parentGuestlist setObject:parentGuestlistOwner forKey:@"owner"];
-            [guestlistInvite setObject:guest forKey:@"guest"];
+            if (guest != nil) {
+                [guestlistInvite setObject:guest forKey:@"guest"];
+            }
 //            [guestlistInvite setObject:parentGuestlist forKey:@"guestlist"];
             [completedGuestlistInvites addObject:guestlistInvite];
         }
@@ -60,7 +91,7 @@
             [promotion setObject:event forKey:@"event"];
             PFObject *location = guestlistInvite[@"Guestlist"][@"Promotion"][@"event"][@"location"];
             [event setObject:location forKey:@"location"];
-            [guestlistInvite pinInBackground];
+            [guestlistInvite pinInBackgroundWithName:@"GuestlistInvites"];
             [completionSource setResult:guestlistInvite];
         } else {
             [completionSource setError:error];
@@ -69,24 +100,10 @@
     return completionSource.task;
 }
 
-- (BFTask *)createGuestlistForPromotion:(NSString *)promotionId withInvites:(NSArray *)guestPhoneNumbers {
-    return [PFCloud callFunctionInBackground:@"createGuestlist"
-                       withParameters:@{@"promotionId": promotionId, @"guestDigits": guestPhoneNumbers}];
-}
-
 - (BFTask *)updateGuestlistInvite:(THLGuestlistInvite *)guestlistInvite withResponse:(THLStatus)response {
-//    BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
     NSNumber *castedResponse = [[NSNumber alloc] initWithInt:response];
-//    [PFCloud callFunctionInBackground:@"updateGuestlistInvite" withParameters:@{@"guestlistInviteId":guestlistInvite.objectId, @"response":castedResponse} block:^(id _, NSError *error) {
-//        if (!error) {
     guestlistInvite[@"response"] = castedResponse;
     [guestlistInvite saveInBackground];
-//            [completionSource setResult:nil];
-//        } else {
-//            [completionSource setError:error];
-//        }
-//    }];
-//    return completionSource.task;
     return [BFTask taskWithResult:nil];
 }
 

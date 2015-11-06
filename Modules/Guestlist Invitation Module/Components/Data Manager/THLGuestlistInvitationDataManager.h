@@ -31,6 +31,7 @@
 
 - (BFTask *)fetchMembersOnGuestlist:(NSString *)guestlistId;
 - (BFTask *)submitGuestlistForPromotion:(NSString *)promotionId withInvites:(NSArray *)guestPhoneNumbers;
+- (BFTask *)updateGuestlist:(NSString *)guestlistId withInvites:(NSArray *)guestPhoneNumbers;
 - (void)loadContacts;
 
 @end

@@ -36,6 +36,7 @@
 
 - (void)dealloc {
 	_eventHandler = nil;
+    NSLog(@"Bitch, app deallocated %@", self);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -59,8 +60,8 @@
 
 #pragma mark - View Setup
 - (void)constructView {
+    _contactPickerView = [self newContactPickerView];
 	_tableView = [self newTableView];
-	_contactPickerView = [self newContactPickerView];
 	_cancelButton = [self newCancelBarButtonItem];
 	_cancelButton.rac_command = [self newCancelCommand];
 	_commitButton = [self newCommitBarButtonItem];
@@ -125,7 +126,7 @@
     WEAKSELF();
 
 	[RACObserve(self, dataSource) subscribeNext:^(id x) {
-		[self configureDataSource];
+		[WSELF configureDataSource];
 	}];
     
     [RACObserve(WSELF, showActivityIndicator) subscribeNext:^(NSNumber *val) {
@@ -140,7 +141,7 @@
 
 #pragma mark - Constructors
 - (UITableView *)newTableView {
-	CGRect tableFrame = CGRectMake(0, self.contactPickerView.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - self.contactPickerView.frame.size.height);
+	CGRect tableFrame = CGRectMake(0, _contactPickerView.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - self.contactPickerView.frame.size.height);
 	UITableView *tableView = [[UITableView alloc] initWithFrame:tableFrame style:UITableViewStyleGrouped];
 	tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 	tableView.delegate = self;
@@ -160,7 +161,6 @@
 {
     return 60;
 }
-
 
 - (THContactPickerView *)newContactPickerView {
 	THContactPickerView *pickerView = [[THContactPickerView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, kContactPickerViewHeight)];
@@ -229,26 +229,26 @@
 }
 
 - (void)adjustTableFrame {
-	CGFloat yOffset = self.contactPickerView.frame.origin.y + self.contactPickerView.frame.size.height;
+	CGFloat yOffset = _contactPickerView.frame.origin.y + _contactPickerView.frame.size.height;
 
 	CGRect tableFrame = CGRectMake(0, yOffset, self.view.frame.size.width, self.view.frame.size.height - yOffset);
-	self.tableView.frame = tableFrame;
+	_tableView.frame = tableFrame;
 }
 
 - (void)adjustTableViewInsetTop:(CGFloat)topInset {
-	[self adjustTableViewInsetTop:topInset bottom:self.tableView.contentInset.bottom];
+	[self adjustTableViewInsetTop:topInset bottom:_tableView.contentInset.bottom];
 }
 
 - (void)adjustTableViewInsetBottom:(CGFloat)bottomInset {
-	[self adjustTableViewInsetTop:self.tableView.contentInset.top bottom:bottomInset];
+	[self adjustTableViewInsetTop:_tableView.contentInset.top bottom:bottomInset];
 }
 
 - (void)adjustTableViewInsetTop:(CGFloat)topInset bottom:(CGFloat)bottomInset {
-	self.tableView.contentInset = UIEdgeInsetsMake(topInset,
-												   self.tableView.contentInset.left,
+	_tableView.contentInset = UIEdgeInsetsMake(topInset,
+												   _tableView.contentInset.left,
 												   bottomInset,
-												   self.tableView.contentInset.right);
-	self.tableView.scrollIndicatorInsets = self.tableView.contentInset;
+												   _tableView.contentInset.right);
+	_tableView.scrollIndicatorInsets = _tableView.contentInset;
 }
 
 
@@ -257,25 +257,25 @@
 - (void)keyboardDidShow:(NSNotification *)notification {
 	NSDictionary *info = [notification userInfo];
 	CGRect kbRect = [self.view convertRect:[[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue] fromView:self.view.window];
-	[self adjustTableViewInsetBottom:self.tableView.frame.origin.y + self.tableView.frame.size.height - kbRect.origin.y];
+	[self adjustTableViewInsetBottom:_tableView.frame.origin.y + _tableView.frame.size.height - kbRect.origin.y];
 }
 
 - (void)keyboardDidHide:(NSNotification *)notification {
 	NSDictionary *info = [notification userInfo];
 	CGRect kbRect = [self.view convertRect:[[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue] fromView:self.view.window];
-	[self adjustTableViewInsetBottom:self.tableView.frame.origin.y + self.tableView.frame.size.height - kbRect.origin.y];
+	[self adjustTableViewInsetBottom:_tableView.frame.origin.y + _tableView.frame.size.height - kbRect.origin.y];
 }
 
 #pragma mark - Adding/Removing
 - (void)addGuest:(THLGuestEntity *)guest {
 	[self willChangeValueForKey:@"addedGuests"];
-	[self.addedGuests addObject:guest];
+	[_addedGuests addObject:guest];
 	[self didChangeValueForKey:@"addedGuests"];
 }
 
 - (void)removeGuest:(THLGuestEntity *)guest {
 	[self willChangeValueForKey:@"addedGuests"];
-	[self.addedGuests removeObject:guest];
+	[_addedGuests removeObject:guest];
 	[self didChangeValueForKey:@"addedGuests"];
 
 }
@@ -287,13 +287,13 @@
 	THLGuestEntity *guest = [_dataSource untransformedItemAtIndexPath:indexPath];
 	UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
 
-	if (![self.addedGuests containsObject:guest]) {
-		[self.eventHandler view:self didAddGuest:guest];
+	if (![_addedGuests containsObject:guest]) {
+		[_eventHandler view:self didAddGuest:guest];
 		[self addGuest:guest];
 		cell.accessoryType = UITableViewCellAccessoryCheckmark;
 		[_contactPickerView addContact:guest withName:guest.fullName];
 	} else {
-		[self.eventHandler view:self didRemoveGuest:guest];
+		[_eventHandler view:self didRemoveGuest:guest];
 		[self removeGuest:guest];
 		cell.accessoryType = UITableViewCellAccessoryNone;
 		[_contactPickerView removeContact:guest];
@@ -305,18 +305,19 @@
 
 #pragma mark - THContactPickerDelegate
 - (void)contactPickerTextViewDidChange:(NSString *)textViewText {
-	[self.dataSource setSearchString:textViewText];
+	[_dataSource setSearchString:textViewText];
 }
 
 - (void)contactPickerDidResize:(THContactPickerView *)contactPickerView {
-	CGRect frame = self.tableView.frame;
+	CGRect frame = _tableView.frame;
 	frame.origin.y = contactPickerView.frame.size.height + contactPickerView.frame.origin.y;
-	self.tableView.frame = frame;
+	_tableView.frame = frame;
 }
 
 - (void)contactPickerDidRemoveContact:(id)contact {
-	[self removeGuest:contact];
-	[_tableView reloadData];
+    [_eventHandler view:self didRemoveGuest:contact];
+    [self removeGuest:contact];
+    [_tableView reloadData];
 }
 
 - (BOOL)contactPickerTextFieldShouldReturn:(UITextField *)textField {

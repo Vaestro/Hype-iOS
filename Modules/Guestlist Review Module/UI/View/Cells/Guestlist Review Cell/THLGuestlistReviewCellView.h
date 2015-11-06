@@ -11,4 +11,5 @@
 @protocol THLGuestlistReviewCellView <NSObject>
 @property (nonatomic, copy) NSString *nameText;
 @property (nonatomic, copy) NSURL *imageURL;
+@property (nonatomic) THLStatus guestlistInviteStatus;
 @end

@@ -19,7 +19,10 @@ static NSString *const kGuestEntityLastNameKey = @"lastName";
 static NSString *const kGuestEntityPhoneNumberKey = @"phoneNumber";
 static NSString *const kGuestEntityObjectIdKey = @"objectId";
 static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInvitationSearchViewKey";
+@class THLGuestlistInviteEntity;
+
 @interface THLGuestlistInvitationInteractor ()
+@property (nonatomic, copy) NSString *guestlistId;
 @property (nonatomic, strong) NSArray *currentGuests;
 @property (nonatomic, strong) NSMutableArray *addedGuests;
 @property (nonatomic, strong) NSMutableArray *addedGuestDigits;
@@ -38,12 +41,13 @@ static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInv
 
 - (void)setPromotionEntity:(THLPromotionEntity *)promotionEntity {
     _promotionEntity = promotionEntity;
+    [_addedGuestDigits removeAllObjects];
+    _currentGuests = nil;
 }
 
-- (void)setGuestlistId:(NSString *)guestlistId {
+- (void)loadGuestlist:(NSString *)guestlistId withCurrentGuests:(NSArray<THLGuestEntity *> *)currentGuests {
 	_guestlistId = [guestlistId copy];
-	_currentGuests = nil;
-	[_addedGuests removeAllObjects];
+	_currentGuests = currentGuests;
 }
 
 - (void)checkForGuestlist {
@@ -100,32 +104,32 @@ static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInv
 }
 
 - (BOOL)isGuestInvited:(THLGuestEntity *)guest {
-	[self checkForGuestlist];
+//	[self checkForGuestlist];
 	return [_currentGuests containsObject:guest] || [_addedGuests containsObject:guest];
 }
 
 - (BOOL)canAddGuest:(THLGuestEntity *)guest {
-	[self checkForGuestlist];
+//	[self checkForGuestlist];
 	return ![self isGuestInvited:guest];
 }
 
 - (BOOL)canRemoveGuest:(THLGuestEntity *)guest {
-	[self checkForGuestlist];
+//	[self checkForGuestlist];
 	return [_addedGuests containsObject:guest];
 }
 
 - (void)addGuest:(THLGuestEntity *)guest {
-	[self checkForGuestlist];
+//	[self checkForGuestlist];
 	if ([self canAddGuest:guest]) {
 		[_addedGuests addObject:guest];
-	}
+    }
 }
 
 - (void)removeGuest:(THLGuestEntity *)guest {
-	[self checkForGuestlist];
+//	[self checkForGuestlist];
 	if ([self canRemoveGuest:guest]) {
 		[_addedGuests removeObject:guest];
-	}
+    }
 }
 
 
@@ -136,12 +140,22 @@ static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInv
 }
 
 - (void)commitChangesToGuestlist {
-	[self checkForGuestlist];
-
-    [[_dataManager submitGuestlistForPromotion:_promotionEntity.objectId withInvites:[self obtainDigits:_addedGuests]] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
-        [_delegate interactor:self didCommitChangesToGuestlist:task.error];
-        return nil;
-    }];
+    WEAKSELF();
+//	[self checkForGuestlist];
+    if (_guestlistId == nil) {
+        [[_dataManager submitGuestlistForPromotion:_promotionEntity.objectId withInvites:[self obtainDigits:_addedGuests]] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+            [_delegate interactor:WSELF didCommitChangesToGuestlist:task.error];
+            return nil;
+        }];
+    } else if (_guestlistId != nil) {
+        [[_dataManager updateGuestlist:_guestlistId withInvites:[self obtainDigits:_addedGuests]] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+            [_delegate interactor:WSELF didCommitChangesToGuestlist:task.error];
+            return nil;
+        }];
+    }
 }
 
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
+}
 @end

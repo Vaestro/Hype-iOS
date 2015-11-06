@@ -63,15 +63,15 @@ THLGuestlistReviewModuleDelegate
 
 - (void)presentEventDetailInterfaceForEvent:(THLEventEntity *)eventEntity {
 	_eventDetailWireframe = [_dependencyManager newEventDetailWireframe];
-	[_eventDetailWireframe.moduleInterface setModuleDelegate:self];
+    [_eventDetailWireframe.moduleInterface setModuleDelegate:self];
 	[_eventDetailWireframe.moduleInterface presentEventDetailInterfaceForEvent:eventEntity inWindow:_window];
 }
 
 
 - (void)presentGuestlistInvitationInterfaceForPromotion:(THLPromotionEntity *)promotionEntity inController:(UIViewController *)controller {
 	_guestlistInvitationWireframe = [_dependencyManager newGuestlistInvitationWireframe];
-	[_guestlistInvitationWireframe.moduleInterface setModuleDelegate:self];
-	[_guestlistInvitationWireframe.moduleInterface presentGuestlistInvitationInterfaceForPromotion:promotionEntity forGuestlist:@"1" inController:controller];
+    [_guestlistInvitationWireframe.moduleInterface setModuleDelegate:self];
+	[_guestlistInvitationWireframe.moduleInterface presentGuestlistInvitationInterfaceForPromotion:promotionEntity inController:controller];
 }
 
 - (void)presentGuestlistReviewInterfaceForGuestlist:(THLGuestlistEntity *)guestlistEntity withGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInviteEntity inController:(UIViewController *)controller {
@@ -86,9 +86,7 @@ THLGuestlistReviewModuleDelegate
 	[self presentEventDetailInterfaceForEvent:eventEntity];
 }
 
-- (void)dismissWireframe {
-    _eventDetailWireframe = nil;
-}
+#pragma mark - THLEventDetailModuleDelegate
 
 - (void)eventDetailModule:(id<THLEventDetailModuleInterface>)module promotion:(THLPromotionEntity *)promotionEntity presentGuestlistInvitationInterfaceOnController:(UIViewController *)controller{
     [self presentGuestlistInvitationInterfaceForPromotion:promotionEntity inController:controller];
@@ -98,10 +96,14 @@ THLGuestlistReviewModuleDelegate
     [self presentGuestlistReviewInterfaceForGuestlist:guestlistEntity withGuestlistInvite:guestlistInviteEntity inController:controller];
 }
 
-#pragma mark - THLEventDetailModuleDelegate
-//None
+- (void)dismissEventDetailWireframe {
+    _eventDetailWireframe = nil;
+}
 
-
+#pragma mark - THLGuestlistInvitationModuleDelegate
+- (void)dismissGuestlistInvitationWireframe {
+    _guestlistInvitationWireframe = nil;
+}
 
 
 @end

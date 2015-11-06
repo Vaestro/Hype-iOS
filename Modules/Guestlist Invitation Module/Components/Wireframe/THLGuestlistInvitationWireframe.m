@@ -65,11 +65,17 @@ dataStore:(THLDataStore *)dataStore{
 }
 
 - (void)dismissInterface {
-	[_view dismissViewControllerAnimated:YES completion:NULL];
+	[_view.navigationController dismissViewControllerAnimated:YES completion:^{
+        [_presenter.moduleDelegate dismissGuestlistInvitationWireframe];
+    }];
 }
 
 - (id<THLGuestlistInvitationModuleInterface>)moduleInterface {
-	return self.presenter;
+	return _presenter;
+}
+
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
 }
 
 @end

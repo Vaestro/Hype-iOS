@@ -60,7 +60,7 @@
 //        _dataManager = nil;
 //        _interactor = nil;
 //        _view = nil;
-        [_presenter.moduleDelegate dismissWireframe];
+        [_presenter.moduleDelegate dismissEventDetailWireframe];
 //        _presenter = nil;
     }];
 

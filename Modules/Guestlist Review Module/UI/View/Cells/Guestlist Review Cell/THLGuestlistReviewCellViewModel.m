@@ -22,6 +22,7 @@
 - (void)configureView:(id<THLGuestlistReviewCellView>)cellView {
     [cellView setNameText:_guestlistInviteEntity.guest.firstName];
     [cellView setImageURL:_guestlistInviteEntity.guest.imageURL];
+    [cellView setGuestlistInviteStatus:_guestlistInviteEntity.response];
 }
 
 @end

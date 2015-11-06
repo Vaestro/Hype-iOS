@@ -40,9 +40,16 @@ THLGuestlistInvitationViewEventHandler
 }
 
 #pragma mark - THLGuestlistModuleInterface
-- (void)presentGuestlistInvitationInterfaceForPromotion:(THLPromotionEntity *)promotionEntity forGuestlist:(NSString *)guestlistId inController:(UIViewController *)controller {
+//For Creating A new Guestlist
+- (void)presentGuestlistInvitationInterfaceForPromotion:(THLPromotionEntity *)promotionEntity inController:(UIViewController *)controller {
     _interactor.promotionEntity = promotionEntity;
-	_interactor.guestlistId = guestlistId;
+    [_wireframe presentInterfaceInController:controller];
+}
+
+//For Updating An Existing Guestlist
+- (void)presentGuestlistInvitationInterfaceForPromotion:(THLPromotionEntity *)promotionEntity withGuestlistId:(NSString *)guestlistId andGuests:(NSArray<THLGuestEntity *> *)guests inController:(UIViewController *)controller {
+    _interactor.promotionEntity = promotionEntity;
+    [_interactor loadGuestlist:guestlistId withCurrentGuests:guests];
     [_wireframe presentInterfaceInController:controller];
 }
 
@@ -84,5 +91,9 @@ THLGuestlistInvitationViewEventHandler
 - (void)viewDidCommitInvitations:(id<THLGuestlistInvitationView>)view {
     self.submitting = YES;
 	[_interactor commitChangesToGuestlist];
+}
+
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
 }
 @end

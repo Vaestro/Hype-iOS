@@ -10,13 +10,13 @@
 #import "THLAppearanceConstants.h"
 #import "UIImageView+WebCache.h"
 
-//#import "THLStatusView.h"
 #import "THLPersonIconView.h"
+#import "THLStatusView.h"
 
 @interface THLGuestlistReviewCell()
 @property (nonatomic, strong) THLPersonIconView *iconImageView;
+@property (nonatomic, strong) THLStatusView *statusView;
 @property (nonatomic, strong) UILabel *nameLabel;
-//@property (nonatomic, strong) THLStatusView *statusView;
 @end
 
 static CGFloat const STATUS_VIEW_DIMENSION = 20;
@@ -24,6 +24,8 @@ static CGFloat const STATUS_VIEW_DIMENSION = 20;
 @implementation THLGuestlistReviewCell
 @synthesize nameText;
 @synthesize imageURL;
+@synthesize guestlistInviteStatus;
+
 //TODO: Initiate with identifier
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
@@ -37,7 +39,7 @@ static CGFloat const STATUS_VIEW_DIMENSION = 20;
 - (void)constructView {
     _iconImageView = [self newIconImageView];
     _nameLabel = [self newNameLabel];
-//    _statusView = [self newStatusView];
+    _statusView = [self newStatusView];
 }
 
 - (void)layoutView {
@@ -45,7 +47,7 @@ static CGFloat const STATUS_VIEW_DIMENSION = 20;
     self.clipsToBounds = YES;
     self.contentView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
 
-    [self addSubviews:@[_iconImageView, _nameLabel]];
+    [self addSubviews:@[_iconImageView, _nameLabel, _statusView]];
     
     [_iconImageView makeConstraints:^(MASConstraintMaker *make) {
         make.top.insets(kTHLEdgeInsetsHigh()).priorityHigh();
@@ -60,22 +62,16 @@ static CGFloat const STATUS_VIEW_DIMENSION = 20;
         make.bottom.left.right.insets(kTHLEdgeInsetsHigh());
         //        [_nameLabel c_makeRequiredContentCompressionResistanceAndContentHuggingPriority];
     }];
-//    [_statusView makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.left.insets(kTHLEdgePadding);
+    [_statusView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.insets(kTHLEdgeInsetsHigh());
 //        make.size.equalTo(CGSizeMake1(STATUS_VIEW_DIMENSION));
-//    }];
+    }];
 }
 
 - (void)bindView {
-    RAC(self.iconImageView, imageURL) = RACObserve(self, imageURL);
-//    [[RACObserve(self, imageURL) filter:^BOOL(NSURL *url) {
-//        return [url isValid];
-//    }] subscribeNext:^(NSURL *url) {
-//        [self.iconImageView sd_setImageWithURL:url];
-//    }];
-    
-    RAC(self.nameLabel, text) = RACObserve(self, nameText);
-//    RAC(self.statusView, view) = RACObserve(self, statusView);
+    RAC(_iconImageView, imageURL) = RACObserve(self, imageURL);
+    RAC(_nameLabel, text) = RACObserve(self, nameText);
+    RAC(_statusView, status) = RACObserve(self, guestlistInviteStatus);
 }
 
 #pragma mark - Constructors
@@ -92,10 +88,10 @@ static CGFloat const STATUS_VIEW_DIMENSION = 20;
     return label;
 }
 
-//- (THLStatusView *)newStatusView {
-//    THLStatusView *statusView = [THLStatusView new];
-//    return statusView;
-//}
+- (THLStatusView *)newStatusView {
+    THLStatusView *statusView = [THLStatusView new];
+    return statusView;
+}
 
 #pragma mark - Public Interface
 + (NSString *)identifier {

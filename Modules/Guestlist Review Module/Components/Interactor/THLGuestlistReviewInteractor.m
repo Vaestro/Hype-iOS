@@ -17,7 +17,7 @@ static NSString *const kTHLGuestlistReviewModuleViewKey = @"kTHLGuestlistReviewM
 @class THLGuestlistInviteEntity;
 
 @interface THLGuestlistReviewInteractor()
-
+@property (nonatomic, strong) THLGuestlistInviteEntity *guestlistInvites;
 @end
 
 @implementation THLGuestlistReviewInteractor
@@ -36,6 +36,8 @@ static NSString *const kTHLGuestlistReviewModuleViewKey = @"kTHLGuestlistReviewM
 
 - (void)updateGuestlistInvites {
     [[_dataManager fetchGuestlistInvitesForGuestlist:_guestlistEntity.objectId] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+//        Store guestlist Invites in Memory In case User wants to Add more Guests
+        _guestlistInvites = task.result;
         [_delegate interactor:self didUpdateGuestlistInvites:task.error];
         return nil;
     }];
