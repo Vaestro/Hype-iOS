@@ -25,35 +25,37 @@ PODS:
   - Bolts/AppLinks (1.4.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.4.0)
-  - CocoaLumberjack (2.1.0):
-    - CocoaLumberjack/Default (= 2.1.0)
-    - CocoaLumberjack/Extensions (= 2.1.0)
-  - CocoaLumberjack/Core (2.1.0)
-  - CocoaLumberjack/Default (2.1.0):
+  - CocoaLumberjack (2.2.0):
+    - CocoaLumberjack/Default (= 2.2.0)
+    - CocoaLumberjack/Extensions (= 2.2.0)
+  - CocoaLumberjack/Core (2.2.0)
+  - CocoaLumberjack/Default (2.2.0):
     - CocoaLumberjack/Core
-  - CocoaLumberjack/Extensions (2.1.0):
+  - CocoaLumberjack/Extensions (2.2.0):
     - CocoaLumberjack/Default
-  - Crashlytics (3.3.4)
+  - Crashlytics (3.4.0):
+    - Fabric (~> 1.6.0)
   - DateTools (1.7.0)
-  - Digits (1.12.0)
+  - Digits (1.12.1):
+    - TwitterCore (= 1.12.1)
   - EKAlgorithms (0.2)
-  - Fabric (1.5.5):
-    - Fabric/Base (= 1.5.5)
-  - Fabric/Base (1.5.5)
-  - FBSDKCoreKit (4.7.0):
+  - Fabric (1.6.0):
+    - Fabric/Base (= 1.6.0)
+  - Fabric/Base (1.6.0)
+  - FBSDKCoreKit (4.7.1):
     - Bolts (~> 1.1)
-    - FBSDKCoreKit/arc (= 4.7.0)
-    - FBSDKCoreKit/no-arc (= 4.7.0)
-  - FBSDKCoreKit/arc (4.7.0):
+    - FBSDKCoreKit/arc (= 4.7.1)
+    - FBSDKCoreKit/no-arc (= 4.7.1)
+  - FBSDKCoreKit/arc (4.7.1):
     - Bolts (~> 1.1)
-  - FBSDKCoreKit/no-arc (4.7.0):
+  - FBSDKCoreKit/no-arc (4.7.1):
     - Bolts (~> 1.1)
     - FBSDKCoreKit/arc
-  - FBSDKLoginKit (4.7.0.1):
+  - FBSDKLoginKit (4.7.1):
     - FBSDKCoreKit
-  - FBSDKShareKit (4.7.0):
+  - FBSDKShareKit (4.7.1):
     - FBSDKCoreKit
-  - FLEX (2.1.0)
+  - FLEX (2.1.1)
   - FLKAutoLayout (0.2.1)
   - FormatterKit (1.8.0):
     - FormatterKit/AddressFormatter (= 1.8.0)
@@ -81,7 +83,7 @@ PODS:
   - LinqToObjectiveC (2.0.0)
   - LMGeocoder (1.0.3)
   - Masonry (0.6.3)
-  - MJRefresh (2.4.12)
+  - MJRefresh (2.5.0)
   - NUI (0.5.5):
     - NUIParse
   - NUIParse (1.2.1)
@@ -114,13 +116,14 @@ PODS:
   - SVPullToRefresh (0.4.1)
   - THContactPicker (1.2)
   - TOMSMorphingLabel (0.5.1)
-  - TwitterCore (1.12.0)
-  - Typhoon (3.3.4):
-    - Typhoon/no-arc (= 3.3.4)
-  - Typhoon/no-arc (3.3.4)
-  - YapDatabase (2.7.3):
-    - YapDatabase/standard (= 2.7.3)
-  - YapDatabase/standard (2.7.3):
+  - TwitterCore (1.12.1):
+    - Fabric
+  - Typhoon (3.4.1):
+    - Typhoon/no-arc (= 3.4.1)
+  - Typhoon/no-arc (3.4.1)
+  - YapDatabase (2.7.4):
+    - YapDatabase/standard (= 2.7.4)
+  - YapDatabase/standard (2.7.4):
     - CocoaLumberjack (~> 2)
   - YLMoment (0.2.0)
 
@@ -176,16 +179,16 @@ SPEC CHECKSUMS:
   BFKit: 3ba74d912325cc8a6bf83ebe1e7e3d9bdc87e817
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   Bolts: 0e9bce58b9b9f5e8a7a4d47b16d2fabec289072b
-  CocoaLumberjack: d6627e7ad42e14d41a4fa2e6c7ae42489d5f3e8b
-  Crashlytics: 41c082440d2e14da444186fff65e79c0b4b35d4c
+  CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
+  Crashlytics: 1ee87895c37472eb3f01f409ea1654a464d2f8d4
   DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
-  Digits: b443a43657c6cbaa6b31fedddc0e8c15133a978f
+  Digits: 197c120e044fef0634d3abcf4fc7325351911484
   EKAlgorithms: 83488651734ba3a63956fcb783b10e82d2ec3388
-  Fabric: 190bf1a6eb65f7500de1347d027d2e59a7e53db1
-  FBSDKCoreKit: eb580bfc2040ad44f4c0b4f4d0befb1d35bce59c
-  FBSDKLoginKit: 028c5a205990441123764609fe795e65027c447f
-  FBSDKShareKit: 1f927bb05e4d36a99d5d5bf2f4b1ff294ce3e15c
-  FLEX: 8b469d7b103ddce41110fe2f0d8a9398c03759a8
+  Fabric: d737eda3a26ac940a5430230eedb35f16b226131
+  FBSDKCoreKit: 9141b70960a37930850370495fe565f4a27ac141
+  FBSDKLoginKit: c11ed3c2833472db3bb4a4aecf27af4a6f69b173
+  FBSDKShareKit: 213adf63e073f41a346b0e7a689805880dc5150e
+  FLEX: 27b768fcae23a313a1eb115076d429180ca9b472
   FLKAutoLayout: 9db6b30c2008d230da608e62c607b11c23b942e6
   FormatterKit: bddde83e054edf9d9ee14f9de3b3a5103db256f4
   GCDObjC: adcd9941029e3628de539347d3a6777470a65998
@@ -195,7 +198,7 @@ SPEC CHECKSUMS:
   LinqToObjectiveC: 768f98c62d5b57cb6bdb7ab869e33d0a7a2da29c
   LMGeocoder: 100572f9e572a26d3506ee0604d6629bea391767
   Masonry: ff105a956abcd19a618b2028b121cb638d7a8e2f
-  MJRefresh: ca8e9589895977df32d379d46e6b8a5450b3ff44
+  MJRefresh: 4bce3b592ae052ff89473b2907278bf8a80abdd3
   NUI: 53de7278003235deb2a375fe6f04c7a3aa3e49eb
   NUIParse: 9b6d5a6b782dc654ac6c846d623885080306f07f
   ObjectiveSugar: a6a25f23d657c19df0a0b972466d5b5ca9f5295c
@@ -213,9 +216,9 @@ SPEC CHECKSUMS:
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
   THContactPicker: e723f7c6ab6e1d6d10d59d618322ab8bfcb00365
   TOMSMorphingLabel: 3e88a2bf5257f8993ebc51fb3109187a0bfb2c4d
-  TwitterCore: a1feadb793512962003ed2bad23e846c8daa4efd
-  Typhoon: 555e580d7edaaf61c5367c2a80c15a0ddb368406
-  YapDatabase: 6d6a30e97face6c3158830823c27614afe83e1e0
+  TwitterCore: 2b1bdd58dfba3f21b416d2a0d1ca74173e3b0eea
+  Typhoon: b754e413d64c4182fcf76e22aacd5f9a66e34f2f
+  YapDatabase: 41d80eefb2959fc7cf064c487f2bfa3cf68a5704
   YLMoment: af44d9d402790049e5490fa6eae9585b89b4090b
 
 COCOAPODS: 0.39.0

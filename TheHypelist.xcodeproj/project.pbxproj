@@ -60,14 +60,10 @@
 		216BDD581BC71F1800BBF713 /* THLSearchViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 216BDD571BC71F1800BBF713 /* THLSearchViewDataSource.m */; };
 		216BDD611BC72F9100BBF713 /* THLSearchResultsViewDataSourceHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 216BDD601BC72F9100BBF713 /* THLSearchResultsViewDataSourceHandler.m */; };
 		216BDD671BC770CA00BBF713 /* THLSearchViewDataSource+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = 216BDD661BC770CA00BBF713 /* THLSearchViewDataSource+Factory.m */; };
-		2174A06A1B863F6A006826D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2174A0691B863F6A006826D7 /* main.m */; };
-		2174A06D1B863F6A006826D7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2174A06C1B863F6A006826D7 /* AppDelegate.m */; };
-		2174A0781B863F6A006826D7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2174A0761B863F6A006826D7 /* LaunchScreen.xib */; };
 		21775F361B8CF72B00609D39 /* THLTitledContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21775F351B8CF72B00609D39 /* THLTitledContentView.m */; };
 		21775F391B8CF93000609D39 /* THLEventDetailsPromotionInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21775F381B8CF93000609D39 /* THLEventDetailsPromotionInfoView.m */; };
 		21775F3C1B8CF93E00609D39 /* THLEventDetailsLocationInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21775F3B1B8CF93E00609D39 /* THLEventDetailsLocationInfoView.m */; };
 		21775F3F1B8CF95300609D39 /* THLEventDetailsMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21775F3E1B8CF95300609D39 /* THLEventDetailsMapView.m */; };
-		21775F441B8D4BDE00609D39 /* Hypelist2point0.strings in Resources */ = {isa = PBXBuildFile; fileRef = 21775F431B8D4BDE00609D39 /* Hypelist2point0.strings */; };
 		21775F5D1B8E169500609D39 /* THLAddressBookPermissionsRequestService.m in Sources */ = {isa = PBXBuildFile; fileRef = 21775F5C1B8E169500609D39 /* THLAddressBookPermissionsRequestService.m */; };
 		21775F631B8E17A300609D39 /* THLAddressBookEntryFetchService.m in Sources */ = {isa = PBXBuildFile; fileRef = 21775F621B8E17A300609D39 /* THLAddressBookEntryFetchService.m */; };
 		217DC6531BBB77AC00332174 /* THLUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 217DC6521BBB77AC00332174 /* THLUserManager.m */; };
@@ -93,24 +89,6 @@
 		21CCEDE91B87C87B0066CDAC /* THLDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CCEDE81B87C87B0066CDAC /* THLDataStore.m */; };
 		21CCEDF51B87CFCB0066CDAC /* THLParseQueryFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CCEDF41B87CFCB0066CDAC /* THLParseQueryFactory.m */; };
 		21CCEDFA1B87D5060066CDAC /* PFObject+MatchingQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CCEDF91B87D5060066CDAC /* PFObject+MatchingQuery.m */; };
-		21CE060C1BB86911004D10BB /* Raleway-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21CE05FA1BB86911004D10BB /* Raleway-Black.ttf */; };
-		21CE060D1BB86911004D10BB /* Raleway-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21CE05FB1BB86911004D10BB /* Raleway-BlackItalic.ttf */; };
-		21CE060E1BB86911004D10BB /* Raleway-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21CE05FC1BB86911004D10BB /* Raleway-Bold.ttf */; };
-		21CE060F1BB86911004D10BB /* Raleway-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21CE05FD1BB86911004D10BB /* Raleway-BoldItalic.ttf */; };
-		21CE06101BB86911004D10BB /* Raleway-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21CE05FE1BB86911004D10BB /* Raleway-ExtraBold.ttf */; };
-		21CE06111BB86911004D10BB /* Raleway-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21CE05FF1BB86911004D10BB /* Raleway-ExtraBoldItalic.ttf */; };
-		21CE06121BB86911004D10BB /* Raleway-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21CE06001BB86911004D10BB /* Raleway-ExtraLight.ttf */; };
-		21CE06131BB86911004D10BB /* Raleway-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21CE06011BB86911004D10BB /* Raleway-ExtraLightItalic.ttf */; };
-		21CE06141BB86911004D10BB /* Raleway-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21CE06021BB86911004D10BB /* Raleway-Italic.ttf */; };
-		21CE06151BB86911004D10BB /* Raleway-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21CE06031BB86911004D10BB /* Raleway-Light.ttf */; };
-		21CE06161BB86911004D10BB /* Raleway-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21CE06041BB86911004D10BB /* Raleway-LightItalic.ttf */; };
-		21CE06171BB86911004D10BB /* Raleway-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21CE06051BB86911004D10BB /* Raleway-Medium.ttf */; };
-		21CE06181BB86911004D10BB /* Raleway-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21CE06061BB86911004D10BB /* Raleway-MediumItalic.ttf */; };
-		21CE06191BB86911004D10BB /* Raleway-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21CE06071BB86911004D10BB /* Raleway-Regular.ttf */; };
-		21CE061A1BB86911004D10BB /* Raleway-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21CE06081BB86911004D10BB /* Raleway-SemiBold.ttf */; };
-		21CE061B1BB86911004D10BB /* Raleway-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21CE06091BB86911004D10BB /* Raleway-SemiBoldItalic.ttf */; };
-		21CE061C1BB86911004D10BB /* Raleway-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21CE060A1BB86911004D10BB /* Raleway-Thin.ttf */; };
-		21CE061D1BB86911004D10BB /* Raleway-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21CE060B1BB86911004D10BB /* Raleway-ThinItalic.ttf */; };
 		21CE06241BB86995004D10BB /* THLAppearanceUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CE06231BB86995004D10BB /* THLAppearanceUtils.m */; };
 		21CE06261BB87F15004D10BB /* THLAppearance.nss in Resources */ = {isa = PBXBuildFile; fileRef = 21CE06251BB87F15004D10BB /* THLAppearance.nss */; };
 		21CE06281BB87FE8004D10BB /* THLNUIStyleSheet.nss in Resources */ = {isa = PBXBuildFile; fileRef = 21CE06271BB87FE8004D10BB /* THLNUIStyleSheet.nss */; };
@@ -130,8 +108,31 @@
 		7942082F1BD8C250009B86FA /* THLGuestlistEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7942082E1BD8C250009B86FA /* THLGuestlistEntity.m */; };
 		794483041BEC5B5D00EABE23 /* THLStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794483031BEC5B5D00EABE23 /* THLStatusView.m */; };
 		794483081BEC8A6000EABE23 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 794483071BEC8A6000EABE23 /* libsqlite3.dylib */; };
-		7944830A1BEC8CF600EABE23 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 794483091BEC8CF600EABE23 /* Images.xcassets */; };
 		79752ADE1BEBD8B500D09B2E /* THLConfirmationPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79752ADD1BEBD8B500D09B2E /* THLConfirmationPopupView.m */; };
+		79A466811BED371900AC975B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 79A466601BED371900AC975B /* AppDelegate.m */; };
+		79A466821BED371900AC975B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79A466611BED371900AC975B /* LaunchScreen.xib */; };
+		79A466831BED371900AC975B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79A466651BED371900AC975B /* Images.xcassets */; };
+		79A466841BED371900AC975B /* Raleway-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79A466671BED371900AC975B /* Raleway-Black.ttf */; };
+		79A466851BED371900AC975B /* Raleway-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79A466681BED371900AC975B /* Raleway-BlackItalic.ttf */; };
+		79A466861BED371900AC975B /* Raleway-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79A466691BED371900AC975B /* Raleway-Bold.ttf */; };
+		79A466871BED371900AC975B /* Raleway-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79A4666A1BED371900AC975B /* Raleway-BoldItalic.ttf */; };
+		79A466881BED371900AC975B /* Raleway-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79A4666B1BED371900AC975B /* Raleway-ExtraBold.ttf */; };
+		79A466891BED371900AC975B /* Raleway-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79A4666C1BED371900AC975B /* Raleway-ExtraBoldItalic.ttf */; };
+		79A4668A1BED371900AC975B /* Raleway-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79A4666D1BED371900AC975B /* Raleway-ExtraLight.ttf */; };
+		79A4668B1BED371900AC975B /* Raleway-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79A4666E1BED371900AC975B /* Raleway-ExtraLightItalic.ttf */; };
+		79A4668C1BED371900AC975B /* Raleway-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79A4666F1BED371900AC975B /* Raleway-Italic.ttf */; };
+		79A4668D1BED371900AC975B /* Raleway-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79A466701BED371900AC975B /* Raleway-Light.ttf */; };
+		79A4668E1BED371900AC975B /* Raleway-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79A466711BED371900AC975B /* Raleway-LightItalic.ttf */; };
+		79A4668F1BED371900AC975B /* Raleway-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79A466721BED371900AC975B /* Raleway-Medium.ttf */; };
+		79A466901BED371900AC975B /* Raleway-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79A466731BED371900AC975B /* Raleway-MediumItalic.ttf */; };
+		79A466911BED371900AC975B /* Raleway-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79A466741BED371900AC975B /* Raleway-Regular.ttf */; };
+		79A466921BED371900AC975B /* Raleway-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79A466751BED371900AC975B /* Raleway-SemiBold.ttf */; };
+		79A466931BED371900AC975B /* Raleway-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79A466761BED371900AC975B /* Raleway-SemiBoldItalic.ttf */; };
+		79A466941BED371900AC975B /* Raleway-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79A466771BED371900AC975B /* Raleway-Thin.ttf */; };
+		79A466951BED371900AC975B /* Raleway-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79A466781BED371900AC975B /* Raleway-ThinItalic.ttf */; };
+		79A466971BED371900AC975B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 79A4667B1BED371900AC975B /* main.m */; };
+		79A466981BED371900AC975B /* TheHypelist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79A4667D1BED371900AC975B /* TheHypelist.strings */; };
+		79A4669C1BED372400AC975B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79A4669B1BED372400AC975B /* Info.plist */; };
 		79B959231BE57C9D00B87799 /* THLGuestlistReviewWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959221BE57C9D00B87799 /* THLGuestlistReviewWireframe.m */; };
 		79B959291BE581A800B87799 /* THLGuestlistReviewDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959281BE581A800B87799 /* THLGuestlistReviewDataManager.m */; };
 		79B9592C1BE581BB00B87799 /* THLGuestlistReviewInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B9592B1BE581BB00B87799 /* THLGuestlistReviewInteractor.m */; };
@@ -147,11 +148,12 @@
 		79B9595A1BE92FBA00B87799 /* THLPopupNotificationInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959591BE92FBA00B87799 /* THLPopupNotificationInteractor.m */; };
 		79B9595D1BE934C000B87799 /* THLPopupNotificationDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B9595C1BE934C000B87799 /* THLPopupNotificationDataManager.m */; };
 		79B959611BE9A90B00B87799 /* THLActionContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959601BE9A90B00B87799 /* THLActionContainerView.m */; };
-		B771256D2B58EBFF817CDC12 /* libPods-Hypelist2point0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D059D2904940E14B1AF40EE3 /* libPods-Hypelist2point0.a */; };
+		8500CA18DF5736B9764E20A9 /* libPods-TheHypelist.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A63D387799ADEA3D66DC04C6 /* libPods-TheHypelist.a */; };
 		CBE5403C8B7732B36D5ECB5E /* THLViewDataSourceGrouping.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE54FC98A366F3761F89F63 /* THLViewDataSourceGrouping.m */; };
 		CBE54720F63BA2DE2136B454 /* THLViewDataSource+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE545A9A3C66339456E0A06 /* THLViewDataSource+Factory.m */; };
 		CBE547FB5677C373C1DE74C7 /* THLViewDataSourceSorting.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE5404991A434142507D7B0 /* THLViewDataSourceSorting.m */; };
-		D6FD0F92FFA5D74C85804729 /* libPods-Hypelist2point0Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0373A993FBE4FB590855BC00 /* libPods-Hypelist2point0Tests.a */; };
+		D6FD0F92FFA5D74C85804729 /* libPods-TheHypelistTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0373A993FBE4FB590855BC00 /* libPods-TheHypelistTests.a */; };
+		EB877D7BC8037FE5F00AA5AB /* libPods-TheHypelistTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B1D8F11B82791A43C481CAE /* libPods-TheHypelistTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,12 +162,12 @@
 			containerPortal = 2174A05C1B863F6A006826D7 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 2174A0631B863F6A006826D7;
-			remoteInfo = Hypelist2point0;
+			remoteInfo = TheHypelist;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0373A993FBE4FB590855BC00 /* libPods-Hypelist2point0Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hypelist2point0Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0373A993FBE4FB590855BC00 /* libPods-TheHypelistTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TheHypelistTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2108A8831B8BBF4900B725F6 /* THLMasterWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMasterWireframe.h; sourceTree = "<group>"; };
 		2108A8841B8BBF4900B725F6 /* THLMasterWireframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLMasterWireframe.m; sourceTree = "<group>"; };
 		2108A8861B8BBF5B00B725F6 /* THLDependencyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLDependencyManager.h; sourceTree = "<group>"; };
@@ -286,10 +288,6 @@
 		215A42A71BAA287900D03C35 /* THLFacebookProfilePictureFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLFacebookProfilePictureFactory.m; sourceTree = "<group>"; };
 		215A42AA1BAA2A1700D03C35 /* THLFacebookProfilePictureURLFetchService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLFacebookProfilePictureURLFetchService.h; sourceTree = "<group>"; };
 		215A42AB1BAA2A1700D03C35 /* THLFacebookProfilePictureURLFetchService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLFacebookProfilePictureURLFetchService.m; sourceTree = "<group>"; };
-		215D880F1B8BEF2000A3329C /* CommonMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonMacros.h; sourceTree = "<group>"; };
-		215D88111B8BEF8F00A3329C /* THLTweaksConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLTweaksConstants.h; sourceTree = "<group>"; };
-		215D88131B8BEFAD00A3329C /* THLConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLConstants.h; sourceTree = "<group>"; };
-		215D88141B8BEFE900A3329C /* THLStylingConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLStylingConstants.h; sourceTree = "<group>"; };
 		216BDD501BC6F4A700BBF713 /* THLContactTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLContactTableViewCell.h; sourceTree = "<group>"; };
 		216BDD511BC6F4A700BBF713 /* THLContactTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLContactTableViewCell.m; sourceTree = "<group>"; };
 		216BDD561BC71F1800BBF713 /* THLSearchViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLSearchViewDataSource.h; sourceTree = "<group>"; };
@@ -299,14 +297,8 @@
 		216BDD651BC770CA00BBF713 /* THLSearchViewDataSource+Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "THLSearchViewDataSource+Factory.h"; sourceTree = "<group>"; };
 		216BDD661BC770CA00BBF713 /* THLSearchViewDataSource+Factory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "THLSearchViewDataSource+Factory.m"; sourceTree = "<group>"; };
 		216BDD681BC7712900BBF713 /* THLSearchViewDataSource_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLSearchViewDataSource_Private.h; sourceTree = "<group>"; };
-		2174A0641B863F6A006826D7 /* Hypelist2point0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hypelist2point0.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		2174A0681B863F6A006826D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2174A0691B863F6A006826D7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		2174A06B1B863F6A006826D7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		2174A06C1B863F6A006826D7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		2174A0771B863F6A006826D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		2174A07D1B863F6A006826D7 /* Hypelist2point0Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Hypelist2point0Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2174A0821B863F6A006826D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2174A0641B863F6A006826D7 /* TheHypelist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheHypelist.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2174A07D1B863F6A006826D7 /* TheHypelist.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheHypelist.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		21775F341B8CF72B00609D39 /* THLTitledContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLTitledContentView.h; sourceTree = "<group>"; };
 		21775F351B8CF72B00609D39 /* THLTitledContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLTitledContentView.m; sourceTree = "<group>"; };
 		21775F371B8CF93000609D39 /* THLEventDetailsPromotionInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventDetailsPromotionInfoView.h; sourceTree = "<group>"; };
@@ -315,7 +307,6 @@
 		21775F3B1B8CF93E00609D39 /* THLEventDetailsLocationInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventDetailsLocationInfoView.m; sourceTree = "<group>"; };
 		21775F3D1B8CF95300609D39 /* THLEventDetailsMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventDetailsMapView.h; sourceTree = "<group>"; };
 		21775F3E1B8CF95300609D39 /* THLEventDetailsMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventDetailsMapView.m; sourceTree = "<group>"; };
-		21775F431B8D4BDE00609D39 /* Hypelist2point0.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Hypelist2point0.strings; sourceTree = "<group>"; };
 		21775F5B1B8E169500609D39 /* THLAddressBookPermissionsRequestService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLAddressBookPermissionsRequestService.h; sourceTree = "<group>"; };
 		21775F5C1B8E169500609D39 /* THLAddressBookPermissionsRequestService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLAddressBookPermissionsRequestService.m; sourceTree = "<group>"; };
 		21775F611B8E17A300609D39 /* THLAddressBookEntryFetchService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLAddressBookEntryFetchService.h; sourceTree = "<group>"; };
@@ -373,25 +364,6 @@
 		21CCEDF71B87D0260066CDAC /* THLLocalModels.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLLocalModels.h; sourceTree = "<group>"; };
 		21CCEDF81B87D5060066CDAC /* PFObject+MatchingQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PFObject+MatchingQuery.h"; sourceTree = "<group>"; };
 		21CCEDF91B87D5060066CDAC /* PFObject+MatchingQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PFObject+MatchingQuery.m"; sourceTree = "<group>"; };
-		21CCEDFC1B87D7350066CDAC /* Hypelist2point0-PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hypelist2point0-PrefixHeader.pch"; sourceTree = "<group>"; };
-		21CE05FA1BB86911004D10BB /* Raleway-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Black.ttf"; sourceTree = "<group>"; };
-		21CE05FB1BB86911004D10BB /* Raleway-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-BlackItalic.ttf"; sourceTree = "<group>"; };
-		21CE05FC1BB86911004D10BB /* Raleway-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Bold.ttf"; sourceTree = "<group>"; };
-		21CE05FD1BB86911004D10BB /* Raleway-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-BoldItalic.ttf"; sourceTree = "<group>"; };
-		21CE05FE1BB86911004D10BB /* Raleway-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-ExtraBold.ttf"; sourceTree = "<group>"; };
-		21CE05FF1BB86911004D10BB /* Raleway-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
-		21CE06001BB86911004D10BB /* Raleway-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-ExtraLight.ttf"; sourceTree = "<group>"; };
-		21CE06011BB86911004D10BB /* Raleway-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
-		21CE06021BB86911004D10BB /* Raleway-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Italic.ttf"; sourceTree = "<group>"; };
-		21CE06031BB86911004D10BB /* Raleway-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Light.ttf"; sourceTree = "<group>"; };
-		21CE06041BB86911004D10BB /* Raleway-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-LightItalic.ttf"; sourceTree = "<group>"; };
-		21CE06051BB86911004D10BB /* Raleway-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Medium.ttf"; sourceTree = "<group>"; };
-		21CE06061BB86911004D10BB /* Raleway-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-MediumItalic.ttf"; sourceTree = "<group>"; };
-		21CE06071BB86911004D10BB /* Raleway-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Regular.ttf"; sourceTree = "<group>"; };
-		21CE06081BB86911004D10BB /* Raleway-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-SemiBold.ttf"; sourceTree = "<group>"; };
-		21CE06091BB86911004D10BB /* Raleway-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
-		21CE060A1BB86911004D10BB /* Raleway-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Thin.ttf"; sourceTree = "<group>"; };
-		21CE060B1BB86911004D10BB /* Raleway-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-ThinItalic.ttf"; sourceTree = "<group>"; };
 		21CE06221BB86995004D10BB /* THLAppearanceUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLAppearanceUtils.h; sourceTree = "<group>"; };
 		21CE06231BB86995004D10BB /* THLAppearanceUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLAppearanceUtils.m; sourceTree = "<group>"; };
 		21CE06251BB87F15004D10BB /* THLAppearance.nss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = THLAppearance.nss; sourceTree = "<group>"; };
@@ -420,6 +392,7 @@
 		21EED0FE1BB5F842001325A7 /* THLEventFlowWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventFlowWireframe.h; sourceTree = "<group>"; };
 		21EED0FF1BB5F842001325A7 /* THLEventFlowWireframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventFlowWireframe.m; sourceTree = "<group>"; };
 		21EED1011BB5F8A7001325A7 /* THLEventFlowDependencyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventFlowDependencyManager.h; sourceTree = "<group>"; };
+		2B1D8F11B82791A43C481CAE /* libPods-TheHypelistTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TheHypelistTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		76FA20511BCF851400BB480A /* THLSessionServiceInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLSessionServiceInterface.h; sourceTree = "<group>"; };
 		76FA20521BCF854000BB480A /* THLSessionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLSessionService.h; sourceTree = "<group>"; };
 		76FA20531BCF854000BB480A /* THLSessionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLSessionService.m; sourceTree = "<group>"; };
@@ -436,9 +409,39 @@
 		794483021BEC5B5D00EABE23 /* THLStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLStatusView.h; sourceTree = "<group>"; };
 		794483031BEC5B5D00EABE23 /* THLStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLStatusView.m; sourceTree = "<group>"; };
 		794483071BEC8A6000EABE23 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = ../../../../usr/lib/libsqlite3.dylib; sourceTree = "<group>"; };
-		794483091BEC8CF600EABE23 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		79752ADC1BEBD8B500D09B2E /* THLConfirmationPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLConfirmationPopupView.h; sourceTree = "<group>"; };
 		79752ADD1BEBD8B500D09B2E /* THLConfirmationPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLConfirmationPopupView.m; sourceTree = "<group>"; };
+		79A4665F1BED371900AC975B /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		79A466601BED371900AC975B /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		79A466621BED371900AC975B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		79A466631BED371900AC975B /* CommonMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonMacros.h; sourceTree = "<group>"; };
+		79A466651BED371900AC975B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		79A466671BED371900AC975B /* Raleway-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Black.ttf"; sourceTree = "<group>"; };
+		79A466681BED371900AC975B /* Raleway-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-BlackItalic.ttf"; sourceTree = "<group>"; };
+		79A466691BED371900AC975B /* Raleway-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Bold.ttf"; sourceTree = "<group>"; };
+		79A4666A1BED371900AC975B /* Raleway-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-BoldItalic.ttf"; sourceTree = "<group>"; };
+		79A4666B1BED371900AC975B /* Raleway-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-ExtraBold.ttf"; sourceTree = "<group>"; };
+		79A4666C1BED371900AC975B /* Raleway-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		79A4666D1BED371900AC975B /* Raleway-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-ExtraLight.ttf"; sourceTree = "<group>"; };
+		79A4666E1BED371900AC975B /* Raleway-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		79A4666F1BED371900AC975B /* Raleway-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Italic.ttf"; sourceTree = "<group>"; };
+		79A466701BED371900AC975B /* Raleway-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Light.ttf"; sourceTree = "<group>"; };
+		79A466711BED371900AC975B /* Raleway-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-LightItalic.ttf"; sourceTree = "<group>"; };
+		79A466721BED371900AC975B /* Raleway-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Medium.ttf"; sourceTree = "<group>"; };
+		79A466731BED371900AC975B /* Raleway-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-MediumItalic.ttf"; sourceTree = "<group>"; };
+		79A466741BED371900AC975B /* Raleway-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Regular.ttf"; sourceTree = "<group>"; };
+		79A466751BED371900AC975B /* Raleway-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-SemiBold.ttf"; sourceTree = "<group>"; };
+		79A466761BED371900AC975B /* Raleway-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		79A466771BED371900AC975B /* Raleway-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Thin.ttf"; sourceTree = "<group>"; };
+		79A466781BED371900AC975B /* Raleway-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-ThinItalic.ttf"; sourceTree = "<group>"; };
+		79A4667A1BED371900AC975B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		79A4667B1BED371900AC975B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		79A4667C1BED371900AC975B /* TheHypelist-PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TheHypelist-PrefixHeader.pch"; sourceTree = "<group>"; };
+		79A4667D1BED371900AC975B /* TheHypelist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = TheHypelist.strings; sourceTree = "<group>"; };
+		79A4667E1BED371900AC975B /* THLConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLConstants.h; sourceTree = "<group>"; };
+		79A4667F1BED371900AC975B /* THLStylingConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLStylingConstants.h; sourceTree = "<group>"; };
+		79A466801BED371900AC975B /* THLTweaksConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLTweaksConstants.h; sourceTree = "<group>"; };
+		79A4669B1BED372400AC975B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79B9591B1BE5783500B87799 /* THLGuestlistReviewModuleInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistReviewModuleInterface.h; sourceTree = "<group>"; };
 		79B9591D1BE578A200B87799 /* THLGuestlistReviewModuleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistReviewModuleDelegate.h; sourceTree = "<group>"; };
 		79B959211BE57C9D00B87799 /* THLGuestlistReviewWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistReviewWireframe.h; sourceTree = "<group>"; };
@@ -475,17 +478,18 @@
 		79B9595E1BE93C1B00B87799 /* THLPopupNotificationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLPopupNotificationView.h; sourceTree = "<group>"; };
 		79B9595F1BE9A90B00B87799 /* THLActionContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLActionContainerView.h; sourceTree = "<group>"; };
 		79B959601BE9A90B00B87799 /* THLActionContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLActionContainerView.m; sourceTree = "<group>"; };
-		BA51F1731F25286C41A13B20 /* Pods-Hypelist2point0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hypelist2point0.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hypelist2point0/Pods-Hypelist2point0.debug.xcconfig"; sourceTree = "<group>"; };
-		C6B634BC51A4BB10D6261492 /* Pods-Hypelist2point0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hypelist2point0.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hypelist2point0/Pods-Hypelist2point0.release.xcconfig"; sourceTree = "<group>"; };
-		CB878AA95A320C00B4227BCE /* Pods-Hypelist2point0Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hypelist2point0Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hypelist2point0Tests/Pods-Hypelist2point0Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		A63D387799ADEA3D66DC04C6 /* libPods-TheHypelist.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TheHypelist.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA51F1731F25286C41A13B20 /* Pods-TheHypelist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheHypelist.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TheHypelist/Pods-TheHypelist.debug.xcconfig"; sourceTree = "<group>"; };
+		C6B634BC51A4BB10D6261492 /* Pods-TheHypelist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheHypelist.release.xcconfig"; path = "Pods/Target Support Files/Pods-TheHypelist/Pods-TheHypelist.release.xcconfig"; sourceTree = "<group>"; };
+		CB878AA95A320C00B4227BCE /* Pods-TheHypelistTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheHypelistTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TheHypelistTests/Pods-TheHypelistTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CBE5404991A434142507D7B0 /* THLViewDataSourceSorting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLViewDataSourceSorting.m; sourceTree = "<group>"; };
 		CBE54163EA2D6D75F647F7B1 /* THLViewDataSource+Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "THLViewDataSource+Factory.h"; sourceTree = "<group>"; };
 		CBE545A9A3C66339456E0A06 /* THLViewDataSource+Factory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "THLViewDataSource+Factory.m"; sourceTree = "<group>"; };
 		CBE549410DF951286E27016A /* THLViewDataSourceSorting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLViewDataSourceSorting.h; sourceTree = "<group>"; };
 		CBE54FC98A366F3761F89F63 /* THLViewDataSourceGrouping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLViewDataSourceGrouping.m; sourceTree = "<group>"; };
 		CBE54FD0B5A148F6494B7A84 /* THLViewDataSourceGrouping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLViewDataSourceGrouping.h; sourceTree = "<group>"; };
-		CD3467C7B268F167916C18BA /* Pods-Hypelist2point0Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hypelist2point0Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hypelist2point0Tests/Pods-Hypelist2point0Tests.release.xcconfig"; sourceTree = "<group>"; };
-		D059D2904940E14B1AF40EE3 /* libPods-Hypelist2point0.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hypelist2point0.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD3467C7B268F167916C18BA /* Pods-TheHypelistTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheHypelistTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TheHypelistTests/Pods-TheHypelistTests.release.xcconfig"; sourceTree = "<group>"; };
+		D059D2904940E14B1AF40EE3 /* libPods-TheHypelist.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TheHypelist.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -494,7 +498,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				794483081BEC8A6000EABE23 /* libsqlite3.dylib in Frameworks */,
-				B771256D2B58EBFF817CDC12 /* libPods-Hypelist2point0.a in Frameworks */,
+				8500CA18DF5736B9764E20A9 /* libPods-TheHypelist.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,7 +506,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6FD0F92FFA5D74C85804729 /* libPods-Hypelist2point0Tests.a in Frameworks */,
+				D6FD0F92FFA5D74C85804729 /* libPods-TheHypelistTests.a in Frameworks */,
+				EB877D7BC8037FE5F00AA5AB /* libPods-TheHypelistTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1197,6 +1202,8 @@
 		2174A05B1B863F6A006826D7 = {
 			isa = PBXGroup;
 			children = (
+				79A4665E1BED371900AC975B /* TheHypelist */,
+				79A466991BED372400AC975B /* TheHypelistTests */,
 				21CE061E1BB86939004D10BB /* Appearance */,
 				211005D11B8A7D0400A540C6 /* Categories */,
 				211005A81B8A3D5800A540C6 /* Components */,
@@ -1206,8 +1213,6 @@
 				217EBE8A1BB78A9D006044B6 /* Factories, Managers, et. All */,
 				217DC6551BBB7A2500332174 /* Flows */,
 				F3E081FDB7C0DB50ADEBB991 /* Frameworks */,
-				2174A0661B863F6A006826D7 /* Hypelist2point0 */,
-				2174A0801B863F6A006826D7 /* Hypelist2point0Tests */,
 				21EED0F91BB5F341001325A7 /* Master Wireframe */,
 				21BDAE5C1B878E0E009D02A3 /* Modules */,
 				21CCEDD11B87C24A0066CDAC /* Parse Models */,
@@ -1221,53 +1226,10 @@
 		2174A0651B863F6A006826D7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2174A0641B863F6A006826D7 /* Hypelist2point0.app */,
-				2174A07D1B863F6A006826D7 /* Hypelist2point0Tests.xctest */,
+				2174A0641B863F6A006826D7 /* TheHypelist.app */,
+				2174A07D1B863F6A006826D7 /* TheHypelist.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		2174A0661B863F6A006826D7 /* Hypelist2point0 */ = {
-			isa = PBXGroup;
-			children = (
-				21CE05F81BB868CF004D10BB /* Resources */,
-				2174A0671B863F6A006826D7 /* Supporting Files */,
-				2174A06B1B863F6A006826D7 /* AppDelegate.h */,
-				2174A06C1B863F6A006826D7 /* AppDelegate.m */,
-				215D880F1B8BEF2000A3329C /* CommonMacros.h */,
-				21CCEDFC1B87D7350066CDAC /* Hypelist2point0-PrefixHeader.pch */,
-				21775F431B8D4BDE00609D39 /* Hypelist2point0.strings */,
-				2174A0761B863F6A006826D7 /* LaunchScreen.xib */,
-				215D88131B8BEFAD00A3329C /* THLConstants.h */,
-				215D88141B8BEFE900A3329C /* THLStylingConstants.h */,
-				215D88111B8BEF8F00A3329C /* THLTweaksConstants.h */,
-			);
-			path = Hypelist2point0;
-			sourceTree = "<group>";
-		};
-		2174A0671B863F6A006826D7 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				2174A0681B863F6A006826D7 /* Info.plist */,
-				2174A0691B863F6A006826D7 /* main.m */,
-			);
-			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		2174A0801B863F6A006826D7 /* Hypelist2point0Tests */ = {
-			isa = PBXGroup;
-			children = (
-				2174A0811B863F6A006826D7 /* Supporting Files */,
-			);
-			path = Hypelist2point0Tests;
-			sourceTree = "<group>";
-		};
-		2174A0811B863F6A006826D7 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				2174A0821B863F6A006826D7 /* Info.plist */,
-			);
-			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		21775F571B8E15E400609D39 /* Permissions Request */ = {
@@ -1604,40 +1566,6 @@
 			path = THLEventNavigationBar;
 			sourceTree = "<group>";
 		};
-		21CE05F81BB868CF004D10BB /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				21CE05F91BB86911004D10BB /* raleway */,
-				794483091BEC8CF600EABE23 /* Images.xcassets */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		21CE05F91BB86911004D10BB /* raleway */ = {
-			isa = PBXGroup;
-			children = (
-				21CE05FA1BB86911004D10BB /* Raleway-Black.ttf */,
-				21CE05FB1BB86911004D10BB /* Raleway-BlackItalic.ttf */,
-				21CE05FC1BB86911004D10BB /* Raleway-Bold.ttf */,
-				21CE05FD1BB86911004D10BB /* Raleway-BoldItalic.ttf */,
-				21CE05FE1BB86911004D10BB /* Raleway-ExtraBold.ttf */,
-				21CE05FF1BB86911004D10BB /* Raleway-ExtraBoldItalic.ttf */,
-				21CE06001BB86911004D10BB /* Raleway-ExtraLight.ttf */,
-				21CE06011BB86911004D10BB /* Raleway-ExtraLightItalic.ttf */,
-				21CE06021BB86911004D10BB /* Raleway-Italic.ttf */,
-				21CE06031BB86911004D10BB /* Raleway-Light.ttf */,
-				21CE06041BB86911004D10BB /* Raleway-LightItalic.ttf */,
-				21CE06051BB86911004D10BB /* Raleway-Medium.ttf */,
-				21CE06061BB86911004D10BB /* Raleway-MediumItalic.ttf */,
-				21CE06071BB86911004D10BB /* Raleway-Regular.ttf */,
-				21CE06081BB86911004D10BB /* Raleway-SemiBold.ttf */,
-				21CE06091BB86911004D10BB /* Raleway-SemiBoldItalic.ttf */,
-				21CE060A1BB86911004D10BB /* Raleway-Thin.ttf */,
-				21CE060B1BB86911004D10BB /* Raleway-ThinItalic.ttf */,
-			);
-			path = raleway;
-			sourceTree = "<group>";
-		};
 		21CE061E1BB86939004D10BB /* Appearance */ = {
 			isa = PBXGroup;
 			children = (
@@ -1765,10 +1693,10 @@
 		70242A51DBC534988B8EA34F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				BA51F1731F25286C41A13B20 /* Pods-Hypelist2point0.debug.xcconfig */,
-				C6B634BC51A4BB10D6261492 /* Pods-Hypelist2point0.release.xcconfig */,
-				CB878AA95A320C00B4227BCE /* Pods-Hypelist2point0Tests.debug.xcconfig */,
-				CD3467C7B268F167916C18BA /* Pods-Hypelist2point0Tests.release.xcconfig */,
+				BA51F1731F25286C41A13B20 /* Pods-TheHypelist.debug.xcconfig */,
+				C6B634BC51A4BB10D6261492 /* Pods-TheHypelist.release.xcconfig */,
+				CB878AA95A320C00B4227BCE /* Pods-TheHypelistTests.debug.xcconfig */,
+				CD3467C7B268F167916C18BA /* Pods-TheHypelistTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1799,6 +1727,83 @@
 				794208311BD9A300009B86FA /* THLEventFlowModuleInterface.h */,
 			);
 			path = Interface;
+			sourceTree = "<group>";
+		};
+		79A4665E1BED371900AC975B /* TheHypelist */ = {
+			isa = PBXGroup;
+			children = (
+				79A4665F1BED371900AC975B /* AppDelegate.h */,
+				79A466601BED371900AC975B /* AppDelegate.m */,
+				79A466611BED371900AC975B /* LaunchScreen.xib */,
+				79A466631BED371900AC975B /* CommonMacros.h */,
+				79A466641BED371900AC975B /* Resources */,
+				79A466791BED371900AC975B /* Supporting Files */,
+				79A4667C1BED371900AC975B /* TheHypelist-PrefixHeader.pch */,
+				79A4667D1BED371900AC975B /* TheHypelist.strings */,
+				79A4667E1BED371900AC975B /* THLConstants.h */,
+				79A4667F1BED371900AC975B /* THLStylingConstants.h */,
+				79A466801BED371900AC975B /* THLTweaksConstants.h */,
+			);
+			path = TheHypelist;
+			sourceTree = "<group>";
+		};
+		79A466641BED371900AC975B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				79A466651BED371900AC975B /* Images.xcassets */,
+				79A466661BED371900AC975B /* raleway */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		79A466661BED371900AC975B /* raleway */ = {
+			isa = PBXGroup;
+			children = (
+				79A466671BED371900AC975B /* Raleway-Black.ttf */,
+				79A466681BED371900AC975B /* Raleway-BlackItalic.ttf */,
+				79A466691BED371900AC975B /* Raleway-Bold.ttf */,
+				79A4666A1BED371900AC975B /* Raleway-BoldItalic.ttf */,
+				79A4666B1BED371900AC975B /* Raleway-ExtraBold.ttf */,
+				79A4666C1BED371900AC975B /* Raleway-ExtraBoldItalic.ttf */,
+				79A4666D1BED371900AC975B /* Raleway-ExtraLight.ttf */,
+				79A4666E1BED371900AC975B /* Raleway-ExtraLightItalic.ttf */,
+				79A4666F1BED371900AC975B /* Raleway-Italic.ttf */,
+				79A466701BED371900AC975B /* Raleway-Light.ttf */,
+				79A466711BED371900AC975B /* Raleway-LightItalic.ttf */,
+				79A466721BED371900AC975B /* Raleway-Medium.ttf */,
+				79A466731BED371900AC975B /* Raleway-MediumItalic.ttf */,
+				79A466741BED371900AC975B /* Raleway-Regular.ttf */,
+				79A466751BED371900AC975B /* Raleway-SemiBold.ttf */,
+				79A466761BED371900AC975B /* Raleway-SemiBoldItalic.ttf */,
+				79A466771BED371900AC975B /* Raleway-Thin.ttf */,
+				79A466781BED371900AC975B /* Raleway-ThinItalic.ttf */,
+			);
+			path = raleway;
+			sourceTree = "<group>";
+		};
+		79A466791BED371900AC975B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				79A4667A1BED371900AC975B /* Info.plist */,
+				79A4667B1BED371900AC975B /* main.m */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		79A466991BED372400AC975B /* TheHypelistTests */ = {
+			isa = PBXGroup;
+			children = (
+				79A4669A1BED372400AC975B /* Supporting Files */,
+			);
+			path = TheHypelistTests;
+			sourceTree = "<group>";
+		};
+		79A4669A1BED372400AC975B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				79A4669B1BED372400AC975B /* Info.plist */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		79B959191BE5780F00B87799 /* Guestlist Review Module */ = {
@@ -1990,8 +1995,10 @@
 			isa = PBXGroup;
 			children = (
 				794483071BEC8A6000EABE23 /* libsqlite3.dylib */,
-				D059D2904940E14B1AF40EE3 /* libPods-Hypelist2point0.a */,
-				0373A993FBE4FB590855BC00 /* libPods-Hypelist2point0Tests.a */,
+				D059D2904940E14B1AF40EE3 /* libPods-TheHypelist.a */,
+				0373A993FBE4FB590855BC00 /* libPods-TheHypelistTests.a */,
+				A63D387799ADEA3D66DC04C6 /* libPods-TheHypelist.a */,
+				2B1D8F11B82791A43C481CAE /* libPods-TheHypelistTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1999,9 +2006,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2174A0631B863F6A006826D7 /* Hypelist2point0 */ = {
+		2174A0631B863F6A006826D7 /* TheHypelist */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2174A0871B863F6A006826D7 /* Build configuration list for PBXNativeTarget "Hypelist2point0" */;
+			buildConfigurationList = 2174A0871B863F6A006826D7 /* Build configuration list for PBXNativeTarget "TheHypelist" */;
 			buildPhases = (
 				6FEE326EF98C94C7EA7C32B9 /* Check Pods Manifest.lock */,
 				2174A0601B863F6A006826D7 /* Sources */,
@@ -2010,19 +2017,20 @@
 				D86684AEA6207E01201FB42F /* Copy Pods Resources */,
 				21C6D0091BAE5E3F00DEDDA3 /* Run Script */,
 				FF4CF68A505442300CE188FD /* Embed Pods Frameworks */,
+				797031FA1BED30EF008D9C59 /* Run Script */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = Hypelist2point0;
-			productName = Hypelist2point0;
-			productReference = 2174A0641B863F6A006826D7 /* Hypelist2point0.app */;
+			name = TheHypelist;
+			productName = TheHypelist;
+			productReference = 2174A0641B863F6A006826D7 /* TheHypelist.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2174A07C1B863F6A006826D7 /* Hypelist2point0Tests */ = {
+		2174A07C1B863F6A006826D7 /* TheHypelistTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2174A08A1B863F6A006826D7 /* Build configuration list for PBXNativeTarget "Hypelist2point0Tests" */;
+			buildConfigurationList = 2174A08A1B863F6A006826D7 /* Build configuration list for PBXNativeTarget "TheHypelistTests" */;
 			buildPhases = (
 				EB85E791A1ECFA32CCA9B09E /* Check Pods Manifest.lock */,
 				2174A0791B863F6A006826D7 /* Sources */,
@@ -2036,9 +2044,9 @@
 			dependencies = (
 				2174A07F1B863F6A006826D7 /* PBXTargetDependency */,
 			);
-			name = Hypelist2point0Tests;
-			productName = Hypelist2point0Tests;
-			productReference = 2174A07D1B863F6A006826D7 /* Hypelist2point0Tests.xctest */;
+			name = TheHypelistTests;
+			productName = TheHypelistTests;
+			productReference = 2174A07D1B863F6A006826D7 /* TheHypelist.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -2048,7 +2056,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = THL;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = Hypelist;
 				TargetAttributes = {
 					2174A0631B863F6A006826D7 = {
@@ -2069,7 +2077,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2174A05F1B863F6A006826D7 /* Build configuration list for PBXProject "Hypelist2point0" */;
+			buildConfigurationList = 2174A05F1B863F6A006826D7 /* Build configuration list for PBXProject "TheHypelist" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -2082,8 +2090,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2174A0631B863F6A006826D7 /* Hypelist2point0 */,
-				2174A07C1B863F6A006826D7 /* Hypelist2point0Tests */,
+				2174A0631B863F6A006826D7 /* TheHypelist */,
+				2174A07C1B863F6A006826D7 /* TheHypelistTests */,
 			);
 		};
 /* End PBXProject section */
@@ -2093,29 +2101,30 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21CE061A1BB86911004D10BB /* Raleway-SemiBold.ttf in Resources */,
-				7944830A1BEC8CF600EABE23 /* Images.xcassets in Resources */,
-				21CE06131BB86911004D10BB /* Raleway-ExtraLightItalic.ttf in Resources */,
-				21CE06171BB86911004D10BB /* Raleway-Medium.ttf in Resources */,
-				21CE060E1BB86911004D10BB /* Raleway-Bold.ttf in Resources */,
+				79A466921BED371900AC975B /* Raleway-SemiBold.ttf in Resources */,
+				79A4668B1BED371900AC975B /* Raleway-ExtraLightItalic.ttf in Resources */,
+				79A4668F1BED371900AC975B /* Raleway-Medium.ttf in Resources */,
+				79A466861BED371900AC975B /* Raleway-Bold.ttf in Resources */,
+				79A4668E1BED371900AC975B /* Raleway-LightItalic.ttf in Resources */,
+				79A466931BED371900AC975B /* Raleway-SemiBoldItalic.ttf in Resources */,
+				79A466941BED371900AC975B /* Raleway-Thin.ttf in Resources */,
 				21CE06281BB87FE8004D10BB /* THLNUIStyleSheet.nss in Resources */,
-				21CE06161BB86911004D10BB /* Raleway-LightItalic.ttf in Resources */,
-				21CE061B1BB86911004D10BB /* Raleway-SemiBoldItalic.ttf in Resources */,
-				21CE061C1BB86911004D10BB /* Raleway-Thin.ttf in Resources */,
+				79A4668D1BED371900AC975B /* Raleway-Light.ttf in Resources */,
+				79A466831BED371900AC975B /* Images.xcassets in Resources */,
+				79A466871BED371900AC975B /* Raleway-BoldItalic.ttf in Resources */,
+				79A4668C1BED371900AC975B /* Raleway-Italic.ttf in Resources */,
+				79A466851BED371900AC975B /* Raleway-BlackItalic.ttf in Resources */,
+				79A466821BED371900AC975B /* LaunchScreen.xib in Resources */,
+				79A466891BED371900AC975B /* Raleway-ExtraBoldItalic.ttf in Resources */,
+				79A466951BED371900AC975B /* Raleway-ThinItalic.ttf in Resources */,
+				79A466881BED371900AC975B /* Raleway-ExtraBold.ttf in Resources */,
+				79A466911BED371900AC975B /* Raleway-Regular.ttf in Resources */,
+				79A4668A1BED371900AC975B /* Raleway-ExtraLight.ttf in Resources */,
 				21CE06261BB87F15004D10BB /* THLAppearance.nss in Resources */,
-				2174A0781B863F6A006826D7 /* LaunchScreen.xib in Resources */,
-				21CE06151BB86911004D10BB /* Raleway-Light.ttf in Resources */,
-				21775F441B8D4BDE00609D39 /* Hypelist2point0.strings in Resources */,
-				21CE060F1BB86911004D10BB /* Raleway-BoldItalic.ttf in Resources */,
-				21CE06141BB86911004D10BB /* Raleway-Italic.ttf in Resources */,
-				21CE060D1BB86911004D10BB /* Raleway-BlackItalic.ttf in Resources */,
-				21CE06111BB86911004D10BB /* Raleway-ExtraBoldItalic.ttf in Resources */,
-				21CE061D1BB86911004D10BB /* Raleway-ThinItalic.ttf in Resources */,
-				21CE06101BB86911004D10BB /* Raleway-ExtraBold.ttf in Resources */,
-				21CE06191BB86911004D10BB /* Raleway-Regular.ttf in Resources */,
-				21CE06121BB86911004D10BB /* Raleway-ExtraLight.ttf in Resources */,
-				21CE060C1BB86911004D10BB /* Raleway-Black.ttf in Resources */,
-				21CE06181BB86911004D10BB /* Raleway-MediumItalic.ttf in Resources */,
+				79A466841BED371900AC975B /* Raleway-Black.ttf in Resources */,
+				79A466981BED371900AC975B /* TheHypelist.strings in Resources */,
+				79A4669C1BED372400AC975B /* Info.plist in Resources */,
+				79A466901BED371900AC975B /* Raleway-MediumItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2141,7 +2150,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hypelist2point0Tests/Pods-Hypelist2point0Tests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TheHypelistTests/Pods-TheHypelistTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		21C6D0091BAE5E3F00DEDDA3 /* Run Script */ = {
@@ -2170,7 +2179,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hypelist2point0Tests/Pods-Hypelist2point0Tests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TheHypelistTests/Pods-TheHypelistTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6FEE326EF98C94C7EA7C32B9 /* Check Pods Manifest.lock */ = {
@@ -2188,6 +2197,20 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		797031FA1BED30EF008D9C59 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 59e4c5cc715a727c29c12850d2ec4cdd9e6c7d65 461d29ada9ef911416346454692039fabbf73c31c449d2485609dbe7e97c18b0";
+		};
 		D86684AEA6207E01201FB42F /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2200,7 +2223,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hypelist2point0/Pods-Hypelist2point0-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TheHypelist/Pods-TheHypelist-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EB85E791A1ECFA32CCA9B09E /* Check Pods Manifest.lock */ = {
@@ -2230,7 +2253,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hypelist2point0/Pods-Hypelist2point0-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TheHypelist/Pods-TheHypelist-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2252,6 +2275,7 @@
 				2118921F1BAA088D00E8A11F /* THLLoginWireframe.m in Sources */,
 				2121734C1BB32B92007D817A /* THLPromotionSelectionInfoCardViewModel.m in Sources */,
 				211D0BB31B8CEE8B0073AFDD /* THLEventDetailViewController.m in Sources */,
+				79A466971BED371900AC975B /* main.m in Sources */,
 				79B9593E1BE7173D00B87799 /* THLGuestlistReviewCellViewModel.m in Sources */,
 				2133BFCE1B877D11002C1DA9 /* THLLocation.m in Sources */,
 				217EBEAE1BB7AB1B006044B6 /* THLPromotionEntity.m in Sources */,
@@ -2273,7 +2297,6 @@
 				216BDD611BC72F9100BBF713 /* THLSearchResultsViewDataSourceHandler.m in Sources */,
 				21775F631B8E17A300609D39 /* THLAddressBookEntryFetchService.m in Sources */,
 				219E32A81B8EA63D00214C85 /* THLEventNavigationBar.m in Sources */,
-				2174A06D1B863F6A006826D7 /* AppDelegate.m in Sources */,
 				21CE06241BB86995004D10BB /* THLAppearanceUtils.m in Sources */,
 				21E402CF1BBF7688001D0C2C /* THLGuestlistInvitationInteractor.m in Sources */,
 				218AF3441BB7391B00AFAEBF /* THLEventService.m in Sources */,
@@ -2294,12 +2317,12 @@
 				217EBE881BB77ED7006044B6 /* THLEntity+DataStore.m in Sources */,
 				212173601BB34261007D817A /* THLPromotionCardInfoCell.m in Sources */,
 				79B959611BE9A90B00B87799 /* THLActionContainerView.m in Sources */,
-				2174A06A1B863F6A006826D7 /* main.m in Sources */,
 				216BDD581BC71F1800BBF713 /* THLSearchViewDataSource.m in Sources */,
 				79B9595A1BE92FBA00B87799 /* THLPopupNotificationInteractor.m in Sources */,
 				217EBEA51BB7A106006044B6 /* THLLoginService.m in Sources */,
 				219E32A51B8EA62700214C85 /* THLEventNavigationController.m in Sources */,
 				217EBE941BB78F22006044B6 /* THLViewDataSourceFactory.m in Sources */,
+				79A466811BED371900AC975B /* AppDelegate.m in Sources */,
 				212173491BB32B22007D817A /* THLPromotionSelectionInfoCardView.m in Sources */,
 				794483041BEC5B5D00EABE23 /* THLStatusView.m in Sources */,
 				21192D7F1BB3277500B176AA /* THLPromotionSelectionWireframe.m in Sources */,
@@ -2374,19 +2397,18 @@
 /* Begin PBXTargetDependency section */
 		2174A07F1B863F6A006826D7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2174A0631B863F6A006826D7 /* Hypelist2point0 */;
+			target = 2174A0631B863F6A006826D7 /* TheHypelist */;
 			targetProxy = 2174A07E1B863F6A006826D7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		2174A0761B863F6A006826D7 /* LaunchScreen.xib */ = {
+		79A466611BED371900AC975B /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				2174A0771B863F6A006826D7 /* Base */,
+				79A466621BED371900AC975B /* Base */,
 			);
 			name = LaunchScreen.xib;
-			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -2475,7 +2497,7 @@
 		};
 		2174A0881B863F6A006826D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BA51F1731F25286C41A13B20 /* Pods-Hypelist2point0.debug.xcconfig */;
+			baseConfigurationReference = BA51F1731F25286C41A13B20 /* Pods-TheHypelist.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -2490,22 +2512,22 @@
 				ENABLE_BITCODE = NO;
 				EXCLUDED_SOURCE_FILE_NAMES = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/Hypelist2point0/Hypelist2point0-PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/TheHypelist/TheHypelist-PrefixHeader.pch";
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_SHADOW = YES;
-				INFOPLIST_FILE = "Hypelist2point0/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/TheHypelist/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hypelist.hype;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = TheHypelist;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
 		2174A0891B863F6A006826D7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C6B634BC51A4BB10D6261492 /* Pods-Hypelist2point0.release.xcconfig */;
+			baseConfigurationReference = C6B634BC51A4BB10D6261492 /* Pods-TheHypelist.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -2520,22 +2542,22 @@
 				ENABLE_BITCODE = NO;
 				EXCLUDED_SOURCE_FILE_NAMES = "FLEX*";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/Hypelist2point0/Hypelist2point0-PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/TheHypelist/TheHypelist-PrefixHeader.pch";
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_SHADOW = YES;
-				INFOPLIST_FILE = "Hypelist2point0/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/TheHypelist/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hypelist.hype;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = TheHypelist;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
 		2174A08B1B863F6A006826D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CB878AA95A320C00B4227BCE /* Pods-Hypelist2point0Tests.debug.xcconfig */;
+			baseConfigurationReference = CB878AA95A320C00B4227BCE /* Pods-TheHypelistTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2546,35 +2568,35 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "Hypelist2point0Tests/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "TheHypelist/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Hypelist.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hypelist2point0.app/Hypelist2point0";
+				PRODUCT_NAME = TheHypelist;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TheHypelist.app/TheHypelist";
 			};
 			name = Debug;
 		};
 		2174A08C1B863F6A006826D7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CD3467C7B268F167916C18BA /* Pods-Hypelist2point0Tests.release.xcconfig */;
+			baseConfigurationReference = CD3467C7B268F167916C18BA /* Pods-TheHypelistTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "Hypelist2point0Tests/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "TheHypelist/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Hypelist.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hypelist2point0.app/Hypelist2point0";
+				PRODUCT_NAME = TheHypelist;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TheHypelist.app/TheHypelist";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2174A05F1B863F6A006826D7 /* Build configuration list for PBXProject "Hypelist2point0" */ = {
+		2174A05F1B863F6A006826D7 /* Build configuration list for PBXProject "TheHypelist" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2174A0851B863F6A006826D7 /* Debug */,
@@ -2583,7 +2605,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2174A0871B863F6A006826D7 /* Build configuration list for PBXNativeTarget "Hypelist2point0" */ = {
+		2174A0871B863F6A006826D7 /* Build configuration list for PBXNativeTarget "TheHypelist" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2174A0881B863F6A006826D7 /* Debug */,
@@ -2592,7 +2614,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2174A08A1B863F6A006826D7 /* Build configuration list for PBXNativeTarget "Hypelist2point0Tests" */ = {
+		2174A08A1B863F6A006826D7 /* Build configuration list for PBXNativeTarget "TheHypelistTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2174A08B1B863F6A006826D7 /* Debug */,

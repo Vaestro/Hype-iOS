@@ -44,7 +44,7 @@
 - (THLDataStoreDomain *)domainForGuestlistInvites {
     THLDataStoreDomain *domain = [[THLDataStoreDomain alloc] initWithMemberTestBlock:^BOOL(THLEntity *entity) {
         THLGuestlistInviteEntity *guestlistInviteEntity = (THLGuestlistInviteEntity *)entity;
-        return guestlistInviteEntity;
+        return (guestlistInviteEntity.response != THLStatusDeclined);
     }];
     return domain;
 }
