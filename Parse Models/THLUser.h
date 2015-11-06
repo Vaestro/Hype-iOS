@@ -28,6 +28,9 @@ typedef NS_ENUM(NSInteger, THLUserType) {
 @property (nonatomic, retain) NSString *firstName;
 @property (nonatomic, retain) NSString *lastName;
 @property (nonatomic, retain) NSString *phoneNumber;
+@property (nonatomic, retain) NSString *location;
+@property (nonatomic) BOOL fbVerified;
+
 @property (nonatomic) enum THLUserType type;
 @property (nonatomic) enum THLSex sex;
 @property (nonatomic) float rating;

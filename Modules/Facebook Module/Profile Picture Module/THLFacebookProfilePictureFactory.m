@@ -16,8 +16,8 @@
 	// with `FBSDKShareOpenGraphContent`
 	/* make the API call */
 	FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
-								  initWithGraphPath:@"me?fields=picture"
-								  parameters:nil
+								  initWithGraphPath:@"me"
+                                  parameters:@{@"fields": @"picture.type(large)"}
 								  HTTPMethod:@"GET"];
 	BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
 	[request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,

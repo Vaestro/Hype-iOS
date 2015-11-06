@@ -67,6 +67,10 @@ THLNumberVerificationModuleDelegate
 	[self reroute];
 }
 
+- (void)handleAddFacebookInformationSuccess {
+    [self reroute];
+}
+
 - (void)handleAddVerifiedNumberSuccess {
 	[self reroute];
 }
@@ -78,7 +82,10 @@ THLNumberVerificationModuleDelegate
 
 #pragma mark - Routing
 - (void)reroute {
-	if ([_interactor shouldVerifyPhoneNumber]) {
+    if ([_interactor shouldAddFacebookInformation]) {
+        [_interactor addFacebookInformation];
+    }
+    else if ([_interactor shouldVerifyPhoneNumber]) {
 		[self routeToNumberVerificationInterface];
 	} else if ([_interactor shouldPickProfileImage]) {
 		[self routeToPickProfilePictureInterface];
@@ -106,6 +113,14 @@ THLNumberVerificationModuleDelegate
 	} else {
 		[self handleLoginSuccess];
 	}
+}
+
+- (void)interactor:(THLLoginInteractor *)interactor didAddFacebookInformation:(NSError *)error {
+    if (error) {
+        [self handleError:error];
+    } else {
+        [self handleAddFacebookInformationSuccess];
+    }
 }
 
 - (void)interactor:(THLLoginInteractor *)interactor didAddVerifiedPhoneNumber:(NSError *)error {

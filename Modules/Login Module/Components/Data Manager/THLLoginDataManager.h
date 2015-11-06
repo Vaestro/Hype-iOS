@@ -16,4 +16,5 @@
 - (instancetype)initWithLoginService:(id<THLLoginServiceInterface>)loginService;
 
 - (BFTask *)login;
+- (BFTask *)getFacebookInformation;
 @end

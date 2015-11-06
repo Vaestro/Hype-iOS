@@ -22,6 +22,8 @@
 @dynamic type;
 @dynamic sex;
 @dynamic rating;
+@dynamic fbVerified;
+@dynamic location;
 
 + (void)load {
 	[self registerSubclass];

@@ -10,6 +10,7 @@
 #import "THLLoginDataManager.h"
 #import "THLUser.h"
 #import "THLUserManager.h"
+#import "YLMoment.h"
 
 @interface THLLoginInteractor()
 @property (nonatomic, strong) THLUser *user;
@@ -40,6 +41,10 @@
 	return _user == nil;
 }
 
+- (BOOL)shouldAddFacebookInformation {
+    return _user.firstName == nil;
+}
+
 - (BOOL)shouldVerifyPhoneNumber {
 	return _user.phoneNumber == nil;
 }
@@ -56,6 +61,25 @@
 	}];
 }
 
+- (void)addFacebookInformation {
+    [[_dataManager getFacebookInformation] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+        NSDictionary *userDictionary = task.result;
+        _user.firstName = userDictionary[@"first_name"];
+        _user.lastName = userDictionary[@"last_name"];
+        _user.sex = ([userDictionary[@"gender"] isEqualToString:@"male"]) ? THLSexMale : THLSexFemale;
+        _user.fbBirthday = [[[YLMoment alloc] initWithDateAsString:userDictionary[@"birthday"]] date];
+        _user.email = userDictionary[@"email"];
+        _user.fbId = userDictionary[@"id"];
+        _user.location = userDictionary[@"location"];
+        _user.fbVerified = userDictionary[@"verified"];
+        _user.type = THLUserTypeGuest;
+        [[_user saveInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask<NSNumber *> *saveTask) {
+            [_delegate interactor:self didAddFacebookInformation:saveTask.error];
+            return nil;
+        }];
+        return nil;
+    }];
+}
 
 - (void)addVerifiedPhoneNumber:(NSString *)phoneNumber {
 	_user.phoneNumber = phoneNumber;

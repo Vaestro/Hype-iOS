@@ -11,26 +11,6 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "SDWebImageManager.h"
 
-NSString *const kTHLFBSDKIdKey					= @"id";
-NSString *const kTHLFBSDKAboutKey				= @"about";
-NSString *const kTHLFBSDKAddressKey				= @"address";
-NSString *const kTHLFBSDKAge_rangeKey			= @"age_range";
-NSString *const kTHLFBSDKBioKey					= @"bio";
-NSString *const kTHLFBSDKBirthdayKey			= @"birthday";
-NSString *const kTHLFBSDKCurrencyKey			= @"currency";
-NSString *const kTHLFBSDKFirst_nameKey			= @"first_name";
-NSString *const kTHLFBSDKGenderKey				= @"gender";
-NSString *const kTHLFBSDKLast_nameKey			= @"last_name";
-NSString *const kTHLFBSDKHometownKey			= @"hometown";
-NSString *const kTHLFBSDKLocationKey			= @"location";
-NSString *const kTHLFBSDKLocaleKey				= @"locale";
-NSString *const kTHLFBSDKName_formatKey			= @"name_format";
-NSString *const kTHLFBSDKFullNameKey			= @"name";
-NSString *const kTHLFBSDKRelationship_statusKey = @"relationship_status";
-NSString *const kTHLFBSDKVerifiedKey			= @"verified";
-NSString *const kTHLFBSDKCoverKey				= @"cover";
-NSString *const kTHLFBSDKEmailKey				= @"email";
-
 @implementation THLLoginService
 - (BFTask *)login {
 	return [self loginWithFacebook];

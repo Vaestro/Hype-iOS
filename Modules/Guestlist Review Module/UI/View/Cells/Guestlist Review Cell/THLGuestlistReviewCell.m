@@ -53,7 +53,7 @@
         make.top.insets(kTHLEdgeInsetsSuperHigh()).priorityHigh();
         make.left.top.greaterThanOrEqualTo(SV(_iconImageView)).insets(kTHLEdgeInsetsHigh());
         make.right.lessThanOrEqualTo(SV(_iconImageView)).insets(kTHLEdgeInsetsHigh());
-        make.width.equalTo(_iconImageView.mas_height);
+        make.height.equalTo(_iconImageView.mas_width);
         make.centerX.offset(0);
     }];
     
