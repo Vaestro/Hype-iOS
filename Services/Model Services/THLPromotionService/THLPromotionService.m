@@ -21,4 +21,8 @@
 	return [[_queryFactory queryForPromotionForEvent:eventId] getFirstObjectInBackground];
 }
 
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
+}
+
 @end

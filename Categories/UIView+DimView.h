@@ -6,9 +6,11 @@
 //  Copyright © 2015 Hypelist. All rights reserved.
 //
 
-#import "UIView+DimView.m"
+#import <UIKit/UIKit.h>
 
 @interface UIView (DimView)
 @property (nonatomic, strong) UIView *dimmingView;
 - (void)dimView;
+- (void)undimView;
+
 @end

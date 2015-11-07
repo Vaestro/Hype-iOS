@@ -107,4 +107,7 @@
     return [BFTask taskWithResult:nil];
 }
 
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
+}
 @end

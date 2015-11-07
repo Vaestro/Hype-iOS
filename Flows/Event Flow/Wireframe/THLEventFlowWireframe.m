@@ -5,12 +5,12 @@
 //  Created by Phil Meyers IV on 9/25/15.
 //  Copyright © 2015 Hypelist. All rights reserved.
 //
+#import "THLEventFlowDependencyManager.h"
 
 #import "THLEventFlowWireframe.h"
 #import "THLEventDetailWireframe.h"
 #import "THLEventDiscoveryWireframe.h"
 #import "THLGuestlistInvitationWireframe.h"
-#import "THLEventFlowDependencyManager.h"
 #import "THLGuestlistReviewWireframe.h"
 
 typedef NS_OPTIONS(NSInteger, THLGuestlistReviewOptions) {

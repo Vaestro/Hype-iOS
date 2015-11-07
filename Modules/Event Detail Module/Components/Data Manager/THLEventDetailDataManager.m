@@ -7,10 +7,13 @@
 //
 
 #import "THLEventDetailDataManager.h"
+
+//Services
 #import "THLLocationServiceInterface.h"
 #import "THLPromotionServiceInterface.h"
 #import "THLGuestlistServiceInterface.h"
 #import "THLEntityMapper.h"
+
 #import "THLUser.h"
 
 @implementation THLEventDetailDataManager
@@ -32,22 +35,24 @@
 }
 
 - (BFTask *)fetchPromotionForEvent:(NSString *)eventId {
+    WEAKSELF();
 	return [[_promotionService fetchPromotionForEvent:eventId] continueWithSuccessBlock:^id(BFTask *task) {
 		THLPromotion *fetchedPromotion = task.result;
-		THLPromotionEntity *mappedPromotion = [_entityMapper mapPromotion:fetchedPromotion];
+		THLPromotionEntity *mappedPromotion = [WSELF.entityMapper mapPromotion:fetchedPromotion];
 		return mappedPromotion;
 	}];
 }
 
 - (BFTask *)checkValidGuestlistInviteForEvent:(NSString *)eventId {
+    WEAKSELF();
     return [[_guestlistService fetchGuestlistInviteForEvent:eventId] continueWithSuccessBlock:^id(BFTask *task) {
         THLGuestlistInvite *fetchedGuestlistInvite = task.result;
-        THLGuestlistInviteEntity *mappedGuestlistInvite = [_entityMapper mapGuestlistInvite:fetchedGuestlistInvite];
+        THLGuestlistInviteEntity *mappedGuestlistInvite = [WSELF.entityMapper mapGuestlistInvite:fetchedGuestlistInvite];
         return mappedGuestlistInvite;
     }];
 }
 
-- (void)dealloc {
-    NSLog(@"Destroyed %@", self);
-}
+//- (void)dealloc {
+//    NSLog(@"Destroyed %@", self);
+//}
 @end

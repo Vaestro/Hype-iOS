@@ -44,7 +44,7 @@
     [guestlistQuery whereKey:@"eventId" equalTo:eventId];
     
     PFQuery *query = [self baseGuestlistInviteQuery];
-    [query fromLocalDatastore];
+//    [query fromLocalDatastore];
     [query whereKey:@"Guestlist" matchesQuery:guestlistQuery];
     return query;
 }

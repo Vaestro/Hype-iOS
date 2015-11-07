@@ -109,6 +109,7 @@
 		794483041BEC5B5D00EABE23 /* THLStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794483031BEC5B5D00EABE23 /* THLStatusView.m */; };
 		794483081BEC8A6000EABE23 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 794483071BEC8A6000EABE23 /* libsqlite3.dylib */; };
 		79752ADE1BEBD8B500D09B2E /* THLConfirmationPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79752ADD1BEBD8B500D09B2E /* THLConfirmationPopupView.m */; };
+		798650A41BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 798650A31BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m */; };
 		79A466811BED371900AC975B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 79A466601BED371900AC975B /* AppDelegate.m */; };
 		79A466821BED371900AC975B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79A466611BED371900AC975B /* LaunchScreen.xib */; };
 		79A466831BED371900AC975B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79A466651BED371900AC975B /* Images.xcassets */; };
@@ -411,6 +412,8 @@
 		794483071BEC8A6000EABE23 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = ../../../../usr/lib/libsqlite3.dylib; sourceTree = "<group>"; };
 		79752ADC1BEBD8B500D09B2E /* THLConfirmationPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLConfirmationPopupView.h; sourceTree = "<group>"; };
 		79752ADD1BEBD8B500D09B2E /* THLConfirmationPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLConfirmationPopupView.m; sourceTree = "<group>"; };
+		798650A21BEDDC2D0032A661 /* CAGradientLayer+THLGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAGradientLayer+THLGradient.h"; sourceTree = "<group>"; };
+		798650A31BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAGradientLayer+THLGradient.m"; sourceTree = "<group>"; };
 		79A4665F1BED371900AC975B /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		79A466601BED371900AC975B /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		79A466621BED371900AC975B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -653,6 +656,8 @@
 				211BB0D71B8CC6DA0068FD50 /* UIView+AddSubviews.m */,
 				794208261BD82641009B86FA /* UIView+DimView.h */,
 				794208271BD82641009B86FA /* UIView+DimView.m */,
+				798650A21BEDDC2D0032A661 /* CAGradientLayer+THLGradient.h */,
+				798650A31BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -2264,6 +2269,7 @@
 				79B9593E1BE7173D00B87799 /* THLGuestlistReviewCellViewModel.m in Sources */,
 				2133BFCE1B877D11002C1DA9 /* THLLocation.m in Sources */,
 				217EBEAE1BB7AB1B006044B6 /* THLPromotionEntity.m in Sources */,
+				798650A41BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m in Sources */,
 				212173711BB34F15007D817A /* THLRoundImageView.m in Sources */,
 				211005CC1B8A767C00A540C6 /* THLEventDiscoveryCellViewModel.m in Sources */,
 				79B9595D1BE934C000B87799 /* THLPopupNotificationDataManager.m in Sources */,

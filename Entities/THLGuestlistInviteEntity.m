@@ -10,5 +10,7 @@
 #import "THLGuestlistEntity.h"
 
 @implementation THLGuestlistInviteEntity
-
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
+}
 @end

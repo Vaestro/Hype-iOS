@@ -10,7 +10,6 @@
 #import "THLAppearanceConstants.h"
 #import "UIView+DimView.h"
 
-
 @interface THLEventNavigationBar()
 @property (nonatomic, strong) UIButton *dismissButton;
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -45,10 +44,16 @@ static CGRect const kTHLEventNavigationBarDismissButtonFrame = {{5,6},{37,30}};
 - (void)layoutView {
     [self addSubviews:@[_imageView, _dismissButton, _dateLabel]];
     
+    WEAKSELF();
     [_imageView makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.insets(UIEdgeInsetsZero);
         make.top.offset(-20);
     }];
+    
+//    TODO:Add Gradient Layer to ImageView
+//    CAGradientLayer *backgroundLayer = [CAGradientLayer dimGradientLayer];
+//    backgroundLayer.frame = _imageView.frame;
+//    [_imageView.layer insertSublayer:backgroundLayer atIndex:0];
     
     [_dateLabel makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.right.insets(kTHLEdgeInsetsHigh());
@@ -61,7 +66,7 @@ static CGRect const kTHLEventNavigationBarDismissButtonFrame = {{5,6},{37,30}};
     
     [_titleLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.insets(kTHLEdgeInsetsNone());
-        make.bottom.equalTo(_subtitleLabel.mas_top);
+        make.bottom.equalTo([WSELF subtitleLabel].mas_top);
     }];
     
     [_subtitleLabel makeConstraints:^(MASConstraintMaker *make) {
@@ -71,12 +76,13 @@ static CGRect const kTHLEventNavigationBarDismissButtonFrame = {{5,6},{37,30}};
     [self addSubview:titleContainerView];
     [titleContainerView makeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.insets(kTHLEdgeInsetsHigh());
-        make.right.lessThanOrEqualTo(_dateLabel.mas_left);
-        make.top.greaterThanOrEqualTo(_dismissButton.mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.right.lessThanOrEqualTo([WSELF.dateLabel mas_left]);
+        make.top.greaterThanOrEqualTo([WSELF.dismissButton mas_bottom]).insets(kTHLEdgeInsetsHigh());
     }];
 }
 
 - (void)bindView {
+    WEAKSELF();
     RAC(self.titleLabel, text, @"") = RACObserve(self, titleText);
     RAC(self.subtitleLabel, text, @"") = RACObserve(self, subtitleText);
     RAC(self.dateLabel, text, @"") = RACObserve(self, dateText);
@@ -87,7 +93,7 @@ static CGRect const kTHLEventNavigationBarDismissButtonFrame = {{5,6},{37,30}};
     }];
     
     [imageURLSignal subscribeNext:^(NSURL *url) {
-        [_imageView sd_setImageWithURL:url];
+        [WSELF.imageView sd_setImageWithURL:url];
     }];
 }
 
@@ -127,4 +133,7 @@ static CGRect const kTHLEventNavigationBarDismissButtonFrame = {{5,6},{37,30}};
     return button;
 }
 
+//- (void)dealloc {
+//    NSLog(@"Destroyed %@", self);
+//}
 @end

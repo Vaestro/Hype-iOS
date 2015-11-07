@@ -8,12 +8,14 @@
 
 #import "THLEventDetailViewController.h"
 #import "ORStackScrollView.h"
-#import "THLAppearanceConstants.h"
 
+//Subviews
 #import "THLEventDetailsLocationInfoView.h"
 #import "THLEventDetailsMapView.h"
 #import "THLEventDetailsPromotionInfoView.h"
 #import "THLActionBarButton.h"
+
+#import "THLAppearanceConstants.h"
 
 @interface THLEventDetailViewController()
 @property (nonatomic, strong) ORStackScrollView *scrollView;
@@ -62,10 +64,10 @@
 
 - (void)layoutView {
     self.view.nuiClass = kTHLNUIBackgroundView;
-    
     [self.view addSubviews:@[_scrollView, _bottomBar]];
+    
     [_scrollView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.insets(kTHLEdgeInsetsHigh());
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
         make.top.insets(kTHLEdgeInsetsHigh());
     }];
     
@@ -108,37 +110,43 @@
     RAC(self.mapView, locationName) = RACObserve(self, locationName);
     RAC(self.mapView, locationAddress) = RACObserve(self, locationAddress);
     RAC(self.mapView, locationPlacemark) = RACObserve(self, locationPlacemark);
-//    RAC(self, bottomBar) = RACObserve(self, actionBarButtonStatus);
+    
     [RACObserve(WSELF, actionBarButtonStatus) subscribeNext:^(id _) {
-        switch (actionBarButtonStatus) {
-            case THLGuestlistStatusPendingInvite:
-                [_bottomBar.morphingLabel setTextWithoutMorphing:NSLocalizedString(@"VIEW GUESTLIST", nil)];
-                _bottomBar.backgroundColor = kTHLNUIPendingColor;
-                break;
-            
-            case THLGuestlistStatusPendingHost:
-                [_bottomBar.morphingLabel setTextWithoutMorphing:NSLocalizedString(@"VIEW PENDING GUESTLIST", nil)];
-                _bottomBar.backgroundColor = kTHLNUIPendingColor;
-                break;
-                
-            case THLGuestlistStatusAccepted:
-                [_bottomBar.morphingLabel setTextWithoutMorphing:NSLocalizedString(@"VIEW YOUR GUESTLIST", nil)];
-                _bottomBar.backgroundColor = kTHLNUIAccentColor;
-                break;
-                
-            case THLGuestlistStatusDeclined:
-                [_bottomBar.morphingLabel setTextWithoutMorphing:NSLocalizedString(@"CREATE A GUESTLIST", nil)];
-                _bottomBar.backgroundColor = kTHLNUIAccentColor;
-                break;
-                
-            default:
-                [_bottomBar.morphingLabel setTextWithoutMorphing:NSLocalizedString(@"CREATE A GUESTLIST", nil)];
-                _bottomBar.backgroundColor = kTHLNUIAccentColor;
-                break;
-        }
+        [WSELF updateBottomBar];
     }];
+    
     RAC(self.bottomBar, rac_command) = RACObserve(self, actionBarButtonCommand);
 
+}
+
+- (void)updateBottomBar {
+    WEAKSELF();
+    switch (actionBarButtonStatus) {
+        case THLGuestlistStatusPendingInvite:
+            [[WSELF bottomBar].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"VIEW GUESTLIST", nil)];
+            [WSELF bottomBar].backgroundColor = kTHLNUIPendingColor;
+            break;
+            
+        case THLGuestlistStatusPendingHost:
+            [[WSELF bottomBar].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"VIEW PENDING GUESTLIST", nil)];
+            [WSELF bottomBar].backgroundColor = kTHLNUIPendingColor;
+            break;
+            
+        case THLGuestlistStatusAccepted:
+            [[WSELF bottomBar].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"VIEW YOUR GUESTLIST", nil)];
+            [WSELF bottomBar].backgroundColor = kTHLNUIAccentColor;
+            break;
+            
+        case THLGuestlistStatusDeclined:
+            [[WSELF bottomBar].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"CREATE A GUESTLIST", nil)];
+            [WSELF bottomBar].backgroundColor = kTHLNUIAccentColor;
+            break;
+            
+        default:
+            [[WSELF bottomBar].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"CREATE A GUESTLIST", nil)];
+            [WSELF bottomBar].backgroundColor = kTHLNUIAccentColor;
+            break;
+    }
 }
 
 #pragma mark - Constructors
@@ -178,7 +186,7 @@
     return bottomBar;
 }
 
-- (void)dealloc {
-    NSLog(@"Destroyed %@", self);
-}
+//- (void)dealloc {
+//    NSLog(@"Destroyed %@", self);
+//}
 @end

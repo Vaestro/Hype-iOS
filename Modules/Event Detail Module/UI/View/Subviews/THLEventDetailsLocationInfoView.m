@@ -32,7 +32,6 @@
 
 - (void)bindView {
     [super bindView];
-    
     RAC(self.textView, text) = RACObserve(self, locationInfo);
 }
 
@@ -43,4 +42,8 @@
     [textView setSelectable:NO];
     return textView;
 }
+
+//- (void)dealloc {
+//    NSLog(@"Destroyed %@", self);
+//}
 @end

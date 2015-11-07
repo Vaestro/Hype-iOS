@@ -47,8 +47,9 @@
 }
 
 - (NSArray<THLEventEntity *> *)mapEvents:(NSArray *)events {
+    WEAKSELF();
 	return [events linq_select:^id(THLEvent *event) {
-		return [self mapEvent:event];
+		return [WSELF mapEvent:event];
 	}];
 }
 
@@ -73,8 +74,9 @@
 }
 
 - (NSArray<THLLocationEntity *> *)mapLocations:(NSArray *)locations {
+    WEAKSELF();
 	return [locations linq_select:^id(THLLocation *location) {
-		return [self mapLocation:location];
+		return [WSELF mapLocation:location];
 	}];
 }
 
@@ -158,8 +160,9 @@
 }
 
 - (NSArray<THLPromotionEntity *> *)mapPromotions:(NSArray *)promotions {
+    WEAKSELF();
     return [promotions linq_select:^id(THLPromotion *promotion) {
-        return [self mapPromotion:promotion];
+        return [WSELF mapPromotion:promotion];
     }];
 }
 
@@ -179,8 +182,9 @@
 }
 
 - (NSArray<THLGuestlistEntity *> *)mapGuestlists:(NSArray *)guestlists {
+    WEAKSELF();
     return [guestlists linq_select:^id(THLGuestlist *guestlist) {
-        return [self mapGuestlist:guestlist];
+        return [WSELF mapGuestlist:guestlist];
     }];
 }
 
@@ -199,9 +203,13 @@
 }
 
 - (NSArray<THLGuestlistInviteEntity *> *)mapGuestlistInvites:(NSArray *)guestlistInvites {
+    WEAKSELF();
     return [guestlistInvites linq_select:^id(THLGuestlistInvite *guestlistInvite) {
-        return [self mapGuestlistInvite:guestlistInvite];
+        return [WSELF mapGuestlistInvite:guestlistInvite];
     }];
 }
 
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
+}
 @end

@@ -7,13 +7,14 @@
 //
 
 #import "THLEventDetailPresenter.h"
-#import "THLEventDetailView.h"
 #import "THLEventDetailWireframe.h"
 #import "THLEventDetailInteractor.h"
 
 #import "THLEventNavigationBar.h"
-#import "THLEventEntity.h"
+#import "THLEventDetailView.h"
+
 #import "THLUser.h"
+#import "THLEventEntity.h"
 #import "THLGuestlistEntity.h"
 #import "THLPromotionEntity.h"
 #import "THLGuestlistInviteEntity.h"
@@ -22,13 +23,12 @@
 <
 THLEventDetailInteractorDelegate
 >
+@property (nonatomic, strong) id<THLEventDetailView> view;
+@property (nonatomic) THLGuestlistStatus guestlistReviewStatus;
 
 @property (nonatomic, strong) THLEventEntity *eventEntity;
 @property (nonatomic, strong) THLGuestlistInviteEntity *guestlistInviteEntity;
-@property (nonatomic, strong) THLGuestlistEntity *guestlistEntity;
 @property (nonatomic, strong) THLPromotionEntity *promotionEntity;
-@property (nonatomic, strong) id<THLEventDetailView> view;
-@property (nonatomic) THLGuestlistStatus guestlistReviewStatus;
 
 @end
 
@@ -47,12 +47,12 @@ THLEventDetailInteractorDelegate
 
 - (void)configureView:(id<THLEventDetailView>)view {
     WEAKSELF();
-	_view = view;
+	self.view = view;
     
-    RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [WSELF handleDismissAction];
-        return [RACSignal empty];
-    }];
+//    RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+//        [WSELF handleDismissAction];
+//        return [RACSignal empty];
+//    }];
     
     RACCommand *actionBarButtonCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         if (WSELF.guestlistReviewStatus == THLGuestlistStatusAccepted ||
@@ -67,19 +67,19 @@ THLEventDetailInteractorDelegate
         return [RACSignal empty];
     }];
     
-    [RACObserve(WSELF, guestlistReviewStatus) subscribeNext:^(id _) {
-        [_view setActionBarButtonStatus:_guestlistReviewStatus];
+    [RACObserve(self, guestlistReviewStatus) subscribeNext:^(id _) {
+        [WSELF.view setActionBarButtonStatus:WSELF.guestlistReviewStatus];
     }];
     
-    [_view setDismissCommand:dismissCommand];
-	[_view setLocationImageURL:_eventEntity.location.imageURL];
-	[_view setPromoImageURL:_eventEntity.imageURL];
-	[_view setEventName:_eventEntity.title];
-	[_view setPromoInfo:_eventEntity.info];
-	[_view setLocationName:_eventEntity.location.name];
-	[_view setLocationInfo:_eventEntity.location.info];
-	[_view setLocationAddress:_eventEntity.location.fullAddress];
-    [_view setActionBarButtonCommand:actionBarButtonCommand];
+//    [_view setDismissCommand:dismissCommand];
+	[self.view setLocationImageURL:_eventEntity.location.imageURL];
+	[self.view setPromoImageURL:_eventEntity.imageURL];
+	[self.view setEventName:_eventEntity.title];
+	[self.view setPromoInfo:_eventEntity.info];
+	[self.view setLocationName:_eventEntity.location.name];
+	[self.view setLocationInfo:_eventEntity.location.info];
+	[self.view setLocationAddress:_eventEntity.location.fullAddress];
+    [self.view setActionBarButtonCommand:actionBarButtonCommand];
 }
 
 - (void)configureNavigationBar:(THLEventNavigationBar *)navBar {
@@ -112,17 +112,17 @@ THLEventDetailInteractorDelegate
 }
 
 - (void)handleViewGuestlistAction {
-    [self.moduleDelegate eventDetailModule:self guestlist:_guestlistEntity guestlistInvite:_guestlistInviteEntity presentGuestlistReviewInterfaceOnController:(UIViewController *)_view];
+    [self.moduleDelegate eventDetailModule:self guestlist:_guestlistInviteEntity.guestlist guestlistInvite:_guestlistInviteEntity presentGuestlistReviewInterfaceOnController:(UIViewController *)self.view];
 }
 
 - (void)handleCreateGuestlistAction {
-    [self.moduleDelegate eventDetailModule:self promotion:_promotionEntity presentGuestlistInvitationInterfaceOnController:(UIViewController *)_view];
+    [self.moduleDelegate eventDetailModule:self promotion:_promotionEntity presentGuestlistInvitationInterfaceOnController:(UIViewController *)self.view];
 }
 
 #pragma mark - THLEventDetailInteractorDelegate
 - (void)interactor:(THLEventDetailInteractor *)interactor didGetPlacemark:(CLPlacemark *)placemark forLocation:(THLLocationEntity *)locationEntity error:(NSError *)error {
 	if (!error && placemark) {
-		[_view setLocationPlacemark:placemark];
+		[self.view setLocationPlacemark:placemark];
 	}
 }
 
@@ -133,26 +133,25 @@ THLEventDetailInteractorDelegate
 }
 
 - (void)interactor:(THLEventDetailInteractor *)interactor didGetGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite forEvent:(NSString *)eventId error:(NSError *)error {
-    WEAKSELF();
     if (!error && guestlistInvite) {
         _guestlistInviteEntity = guestlistInvite;
-        _guestlistEntity = _guestlistInviteEntity.guestlist;
+        THLGuestlistEntity *guestlistEntity = _guestlistInviteEntity.guestlist;
         if (_guestlistInviteEntity.response == THLStatusPending) {
-            WSELF.guestlistReviewStatus = THLGuestlistStatusPendingInvite;
+            self.guestlistReviewStatus = THLGuestlistStatusPendingInvite;
         }
-        else if (_guestlistEntity.reviewStatus == THLStatusPending) {
-            WSELF.guestlistReviewStatus = THLGuestlistStatusPendingHost;
+        else if (guestlistEntity.reviewStatus == THLStatusPending) {
+            self.guestlistReviewStatus = THLGuestlistStatusPendingHost;
         }
-        else if (_guestlistEntity.reviewStatus == THLStatusAccepted) {
-            WSELF.guestlistReviewStatus = THLGuestlistStatusAccepted;
+        else if (guestlistEntity.reviewStatus == THLStatusAccepted) {
+            self.guestlistReviewStatus = THLGuestlistStatusAccepted;
         }
-        else if (_guestlistEntity.reviewStatus == THLStatusDeclined) {
-            WSELF.guestlistReviewStatus = THLGuestlistStatusDeclined;
+        else if (guestlistEntity.reviewStatus == THLStatusDeclined) {
+            self.guestlistReviewStatus = THLGuestlistStatusDeclined;
         }
     }
 }
 
-- (void)dealloc {
-    NSLog(@"Destroyed %@", self);
-}
+//- (void)dealloc {
+//    NSLog(@"Destroyed %@", self);
+//}
 @end

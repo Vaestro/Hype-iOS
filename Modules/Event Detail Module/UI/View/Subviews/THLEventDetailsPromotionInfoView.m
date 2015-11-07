@@ -28,7 +28,7 @@ static CGFloat const kTHLEventDetailsPromotionInfoViewImageViewHeight = 150;
     [super layoutView];
     [self.contentView addSubviews:@[_textView,
                                     _imageView]];
-    
+    WEAKSELF();
     [_textView makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(kTHLEdgeInsetsNone());
         make.left.right.equalTo(kTHLEdgeInsetsLow());
@@ -36,7 +36,7 @@ static CGFloat const kTHLEventDetailsPromotionInfoViewImageViewHeight = 150;
     
     [_imageView makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(kTHLEdgeInsetsNone());
-        make.top.equalTo(_textView.mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.top.equalTo([WSELF textView].mas_bottom).insets(kTHLEdgeInsetsHigh());
         make.bottom.equalTo(kTHLEdgeInsetsHigh());
         make.height.equalTo(kTHLEventDetailsPromotionInfoViewImageViewHeight);
 
@@ -51,7 +51,7 @@ static CGFloat const kTHLEventDetailsPromotionInfoViewImageViewHeight = 150;
     [[RACObserve(self, promoImageURL) filter:^BOOL(NSURL *url) {
         return [url isValid];
     }] subscribeNext:^(NSURL *url) {
-        [_imageView sd_setImageWithURL:url];
+        [WSELF.imageView sd_setImageWithURL:url];
     }];
     
     [RACObserve(self.promoImageURL, isValid) subscribeNext:^(id x) {
@@ -82,5 +82,9 @@ static CGFloat const kTHLEventDetailsPromotionInfoViewImageViewHeight = 150;
     imageView.clipsToBounds = YES;
     return imageView;
 }
+
+//- (void)dealloc {
+//    NSLog(@"Destroyed %@", self);
+//}
 
 @end

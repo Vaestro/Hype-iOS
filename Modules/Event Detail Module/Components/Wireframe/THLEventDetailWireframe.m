@@ -57,11 +57,7 @@
 
 - (void)dismissInterface {
     [_view.navigationController dismissViewControllerAnimated:YES completion:^{
-//        _dataManager = nil;
-//        _interactor = nil;
-//        _view = nil;
         [_presenter.moduleDelegate dismissEventDetailWireframe];
-//        _presenter = nil;
     }];
 
 }
@@ -70,7 +66,7 @@
 	return _presenter;
 }
 
-- (void)dealloc {
-    NSLog(@"Destroyed %@", self);
-}
+//- (void)dealloc {
+//    NSLog(@"Destroyed %@", self);
+//}
 @end

@@ -30,16 +30,17 @@ static CGFloat MAPVIEW_METERS = 1000;
     [self.contentView addSubviews:@[_mapView,
                                     _textView]];
     
+    WEAKSELF();
     [_mapView makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(kTHLEdgeInsetsNone());
         make.left.right.equalTo(kTHLEdgeInsetsLow());
 //        make.height.equalTo(_mapView.mas_width).dividedBy(kTHLGoldenRatio);
-        make.height.equalTo(_mapView.mas_width).dividedBy(3);
+        make.height.equalTo([WSELF mapView].mas_width).dividedBy(3);
     }];
     
     [_textView makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.insets(kTHLEdgeInsetsNone());
-        make.top.equalTo(_mapView.mas_bottom).insets(kTHLEdgeInsetsLow());
+        make.top.equalTo([WSELF mapView].mas_bottom).insets(kTHLEdgeInsetsLow());
     }];
 }
 
@@ -47,9 +48,9 @@ static CGFloat MAPVIEW_METERS = 1000;
     WEAKSELF();
     [super bindView];
     
-    [RACObserve(self, locationAddress) subscribeNext:^(id x) {
-        
-    }];
+//    [RACObserve(self, locationAddress) subscribeNext:^(id x) {
+//        
+//    }];
     
     RAC(self.textView, text) = RACObserve(self, locationAddress);
     
@@ -81,4 +82,8 @@ static CGFloat MAPVIEW_METERS = 1000;
     textView.dataDetectorTypes = UIDataDetectorTypeAll;
     return textView;
 }
+
+//- (void)dealloc {
+//    NSLog(@"Destroyed %@", self);
+//}
 @end
