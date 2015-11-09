@@ -42,7 +42,7 @@
 }
 
 - (BOOL)shouldAddFacebookInformation {
-    return _user.firstName == nil;
+    return _user.fbId == nil;
 }
 
 - (BOOL)shouldVerifyPhoneNumber {

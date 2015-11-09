@@ -28,7 +28,8 @@ UICollectionViewDelegate,
 UICollectionViewDelegateFlowLayout
 >
 @property (nonatomic, strong) UICollectionView *collectionView;
-@property (nonatomic, strong) THLActionContainerView *actionContainerView;
+//@property (nonatomic, strong) THLActionContainerView *actionContainerView;
+@property (nonatomic, strong) THLActionBarButton *actionBarButton;
 @property (nonatomic, strong) THLConfirmationPopupView *confirmationPopupView;
 @property (nonatomic, strong) UIBarButtonItem *dismissButton;
 @end
@@ -40,9 +41,10 @@ UICollectionViewDelegateFlowLayout
 @synthesize dismissCommand = _dismissCommand;
 @synthesize acceptCommand = _acceptCommand;
 @synthesize declineCommand = _declineCommand;
-@synthesize confirmCommand = _confirmCommand;
+@synthesize decisionCommand = _decisionCommand;
 @synthesize showActivityIndicator = _showActivityIndicator;
 @synthesize reviewerStatus = _reviewerStatus;
+@synthesize popup = _popup;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -60,12 +62,13 @@ UICollectionViewDelegateFlowLayout
 - (void)constructView {
     _collectionView = [self newCollectionView];
     _dismissButton = [self newBackBarButtonItem];
-    _actionContainerView = [self newActionContainerView];
+//    _actionContainerView = [self newActionContainerView];
+    _actionBarButton = [self newActionBarButton];
     _confirmationPopupView = [self newConfirmationPopupView];
 }
 
 - (void)layoutView {
-    [self.view addSubviews:@[_collectionView, _actionContainerView]];
+    [self.view addSubviews:@[_collectionView, _actionBarButton]];
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.automaticallyAdjustsScrollViewInsets = YES;
@@ -79,7 +82,7 @@ UICollectionViewDelegateFlowLayout
         make.left.right.insets(kTHLEdgeInsetsNone());
     }];
     
-    [_actionContainerView makeConstraints:^(MASConstraintMaker *make) {
+    [_actionBarButton makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.insets(kTHLEdgeInsetsNone());
         make.top.equalTo([WSELF collectionView].mas_bottom);
     }];
@@ -108,9 +111,11 @@ UICollectionViewDelegateFlowLayout
         }];
     }];
     
-    RAC([self.actionContainerView acceptButton], rac_command) = RACObserve(self, acceptCommand);
-    RAC([self.actionContainerView declineButton], rac_command) = RACObserve(self, confirmCommand);
-    RAC(self.confirmationPopupView, confirmCommand) = RACObserve(self, declineCommand);
+//    RAC([self.actionContainerView acceptButton], rac_command) = RACObserve(self, acceptCommand);
+//    RAC([self.actionContainerView declineButton], rac_command) = RACObserve(self, declineCommand);
+    RAC(self.actionBarButton, rac_command) = RACObserve(self, decisionCommand);
+    RAC(self.confirmationPopupView, acceptCommand) = RACObserve(self, acceptCommand);
+    RAC(self.confirmationPopupView, declineCommand) = RACObserve(self, declineCommand);
 
     [RACObserve(self, showActivityIndicator) subscribeNext:^(id _) {
         switch (WSELF.showActivityIndicator) {
@@ -133,9 +138,10 @@ UICollectionViewDelegateFlowLayout
     
     [RACObserve(self, reviewerStatus) subscribeNext:^(id _) {
         if (WSELF.reviewerStatus == THLGuestlistReviewerStatusAttendingGuest) {
-            [WSELF actionContainerView].status = THLActionContainerViewStatusDecline;
-            [WSELF.actionContainerView reloadView];
-            [[[WSELF actionContainerView] declineButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"LEAVE GUESTLIST", nil)];
+//            [WSELF actionContainerView].status = THLActionContainerViewStatusDecline;
+//            [WSELF.actionContainerView reloadView];
+            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"LEAVE GUESTLIST", nil)];
+            [WSELF actionBarButton].backgroundColor = kTHLNUIRedColor;
 //            TODO: Set Decline Command without creating Memory Leak
 //            RAC([SSELF actionContainerView].declineButton, rac_command) = RACObserve(SSELF, confirmCommand);
         }
@@ -185,10 +191,16 @@ UICollectionViewDelegateFlowLayout
     return item;
 }
 
-- (THLActionContainerView *)newActionContainerView {
-    THLActionContainerView *actionContainerView = [THLActionContainerView new];
-    actionContainerView.backgroundColor = kTHLNUISecondaryBackgroundColor;
-    return actionContainerView;
+//- (THLActionContainerView *)newActionContainerView {
+//    THLActionContainerView *actionContainerView = [THLActionContainerView new];
+//    actionContainerView.backgroundColor = kTHLNUISecondaryBackgroundColor;
+//    return actionContainerView;
+//}
+
+- (THLActionBarButton *)newActionBarButton {
+    THLActionBarButton *actionBarButton = [THLActionBarButton new];
+    [actionBarButton.morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Accept or Decline Invite", nil)];
+    return actionBarButton;
 }
 
 - (THLConfirmationPopupView *)newConfirmationPopupView {
@@ -197,15 +209,18 @@ UICollectionViewDelegateFlowLayout
 }
 
 #pragma mark - Action Guard
-- (void)confirmActionWithMessage:(NSString *)text {
-    KLCPopup *popup = [KLCPopup popupWithContentView:_confirmationPopupView
+- (void)confirmActionWithMessage:(NSString *)text acceptTitle:(NSString *)acceptTitle declineTitle:(NSString *)declineTitle {
+    _popup = [KLCPopup popupWithContentView:_confirmationPopupView
                                             showType:KLCPopupShowTypeBounceIn
                                          dismissType:KLCPopupDismissTypeBounceOut
                                             maskType:KLCPopupMaskTypeDimmed
                             dismissOnBackgroundTouch:NO
                                dismissOnContentTouch:NO];
     _confirmationPopupView.confirmationText = text;
-    [popup show];
+    [_confirmationPopupView.acceptButton setTitle:acceptTitle animateChanges:NO];
+    [_confirmationPopupView.declineButton setTitle:declineTitle animateChanges:NO];
+    _popup.dimmedMaskAlpha = 0.9;
+    [_popup show];
 }
 
 #pragma mark - UICollectionViewDelegate

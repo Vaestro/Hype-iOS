@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "KLCPopup.h"
 
 typedef NS_OPTIONS(NSInteger, THLGuestlistReviewerStatus) {
     THLGuestlistReviewerStatusPendingGuest = 0,
@@ -26,11 +27,12 @@ typedef NS_OPTIONS(NSInteger, THLGuestlistReviewerStatus) {
 @property (nonatomic) BOOL showRefreshAnimation;
 @property (nonatomic) NSInteger showActivityIndicator;
 
+@property (nonatomic, strong) KLCPopup *popup;
 @property (nonatomic, strong) RACCommand *acceptCommand;
 @property (nonatomic, strong) RACCommand *declineCommand;
-@property (nonatomic, strong) RACCommand *confirmCommand;
+@property (nonatomic, strong) RACCommand *decisionCommand;
 @property (nonatomic, strong) RACCommand *refreshCommand;
 @property (nonatomic, strong) RACCommand *dismissCommand;
 
-- (void)confirmActionWithMessage:(NSString *)text;
+- (void)confirmActionWithMessage:(NSString *)text acceptTitle:(NSString *)acceptTitle declineTitle:(NSString *)declineTitle;
 @end

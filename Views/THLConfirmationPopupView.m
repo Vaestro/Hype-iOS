@@ -7,13 +7,10 @@
 //
 
 #import "THLConfirmationPopupView.h"
-#import "THLActionBarButton.h"
 #import "THLAppearanceConstants.h"
 
 @interface THLConfirmationPopupView()
 @property (nonatomic, strong) UITextView *textView;
-@property (nonatomic, strong) THLActionBarButton *confirmButton;
-@property (nonatomic, strong) THLActionBarButton *cancelButton;
 @end
 
 
@@ -32,33 +29,48 @@
     self.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     
     _textView = [self newTextView];
-    _confirmButton = [self newConfirmButton];
-    _cancelButton = [self newCancelButton];
+    _acceptButton = [self newAcceptButton];
+    _declineButton = [self newDeclineButton];
 }
 
 - (void)layoutView {
     [self addSubviews:@[_textView,
-                        _confirmButton,
-                        _cancelButton]];
+                        _acceptButton,
+                        _declineButton]];
     
     WEAKSELF();
     [_textView makeConstraints:^(MASConstraintMaker *make) {
         make.top.insets(kTHLEdgeInsetsSuperHigh());
-        make.left.right.insets(kTHLEdgeInsetsHigh());
-        make.width.equalTo(ScreenWidth-4*kTHLInset);
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
-    [_confirmButton makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF textView].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
-        make.bottom.left.insets(UIEdgeInsetsZero).insets(kTHLEdgeInsetsHigh());
-        make.right.equalTo([WSELF cancelButton].mas_left).insets(kTHLEdgeInsetsHigh());
-        make.width.equalTo(WSELF.cancelButton);
-    }];
+        [_acceptButton makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo([WSELF textView].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+            make.left.right.insets(UIEdgeInsetsZero).insets(kTHLEdgeInsetsSuperHigh());
+            make.width.equalTo(ScreenWidth*0.67);
+        }];
     
-    [_cancelButton makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF textView].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
-        make.right.bottom.insets(UIEdgeInsetsZero).insets(kTHLEdgeInsetsHigh());
-    }];
+        [_declineButton makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo([WSELF acceptButton].mas_bottom).insets(kTHLEdgeInsetsHigh());
+            make.right.left.bottom.insets(UIEdgeInsetsZero).insets(kTHLEdgeInsetsSuperHigh());
+            make.width.equalTo(_acceptButton.mas_width);
+        }];
+    
+    /**
+     *  Side By Side Layout
+     */
+    
+//    [_acceptButton makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo([WSELF textView].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+//        make.bottom.left.insets(UIEdgeInsetsZero).insets(kTHLEdgeInsetsHigh());
+//        make.right.equalTo([WSELF declineButton].mas_left).insets(kTHLEdgeInsetsHigh());
+//        make.width.equalTo(WSELF.declineButton);
+//    }];
+//    
+//    [_declineButton makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo([WSELF textView].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+//        make.right.bottom.insets(UIEdgeInsetsZero).insets(kTHLEdgeInsetsHigh());
+//    }];
 }
 
 - (void)layoutSubviews {
@@ -72,11 +84,12 @@
 - (void)bindView {
     WEAKSELF();
     RAC(self.textView, text) = RACObserve(WSELF, confirmationText);
-    RAC(self.confirmButton, rac_command) = RACObserve(WSELF, confirmCommand);
-    [[self.confirmButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+    RAC(self.acceptButton, rac_command) = RACObserve(WSELF, acceptCommand);
+    [[self.acceptButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         [WSELF dismissPresentingPopup];
     }];
-    [[self.cancelButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+    RAC(self.declineButton, rac_command) = RACObserve(WSELF, declineCommand);
+    [[self.declineButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         [WSELF dismissPresentingPopup];
     }];
 }
@@ -92,19 +105,17 @@
     return textView;
 }
 
-- (THLActionBarButton *)newConfirmButton {
-    THLActionBarButton *confirmButton = [THLActionBarButton new];
-    [confirmButton setTitle:@"YES" animateChanges:NO];
-    confirmButton.backgroundColor = kTHLNUIAccentColor;
-    return confirmButton;
+- (THLActionBarButton *)newAcceptButton {
+    THLActionBarButton *acceptButton = [THLActionBarButton new];
+    acceptButton.backgroundColor = kTHLNUIAccentColor;
+    return acceptButton;
 }
 
-- (THLActionBarButton *)newCancelButton {
-    THLActionBarButton *cancelButton = [THLActionBarButton new];
-    [cancelButton setTitle:@"NO" animateChanges:NO];
-    cancelButton.backgroundColor = kTHLNUIRedColor;
+- (THLActionBarButton *)newDeclineButton {
+    THLActionBarButton *declineButton = [THLActionBarButton new];
+    declineButton.backgroundColor = kTHLNUIRedColor;
     
-    return cancelButton;
+    return declineButton;
 }
 
 - (void)dealloc {

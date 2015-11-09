@@ -60,8 +60,8 @@
 }
 
 - (void)handleSelectionAction {
-	THLPromotionEntity *selectedPromotionEntity = _promotions[_view.selectedIndex];
-	[self.moduleDelegate promotionSelectionModule:self didSelectPromotion:selectedPromotionEntity];
+//	THLPromotionEntity *selectedPromotionEntity = _promotions[_view.selectedIndex];
+//	[self.moduleDelegate promotionSelectionModule:self didSelectPromotion:selectedPromotionEntity];
 	[_wireframe dismissInterface];
 }
 

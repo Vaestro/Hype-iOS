@@ -31,5 +31,5 @@
 
 - (void)getPlacemarkForLocation:(THLLocationEntity *)locationEntity;
 - (void)getPromotionForEvent:(NSString *)eventId;
-- (void)checkValidGuestlistInviteForEvent:(NSString *)eventId;
+- (void)checkValidGuestlistInviteForUser:(THLUser *)user atEvent:(NSString *)eventId;
 @end

@@ -35,9 +35,9 @@
     }];
 }
 
-- (void)checkValidGuestlistInviteForEvent:(NSString *)eventId {
+- (void)checkValidGuestlistInviteForUser:(THLUser *)user atEvent:(NSString *)eventId {
     WEAKSELF();
-    [[_dataManager checkValidGuestlistInviteForEvent:eventId] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+    [[_dataManager fetchGuestlistInviteForUser:user atEvent:eventId] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
         [_delegate interactor:WSELF didGetGuestlistInvite:task.result forEvent:eventId error:task.error];
         return nil;
     }];

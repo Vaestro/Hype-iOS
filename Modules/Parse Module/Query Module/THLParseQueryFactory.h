@@ -28,7 +28,7 @@
 - (PFQuery *)queryForPromotionForEvent:(NSString *)eventId;
 
 #pragma mark - Guestlist Queries
-- (PFQuery *)queryForGuestlistInviteForEvent:(NSString *)eventId;
+- (PFQuery *)queryForGuestlistInviteForUser:(THLUser *)user atEvent:(NSString *)eventId;
 - (PFQuery *)queryForInvitesOnGuestlist:(THLGuestlist *)guestlist;
 - (PFQuery *)queryForGuestlistInviteWithId;
 @end

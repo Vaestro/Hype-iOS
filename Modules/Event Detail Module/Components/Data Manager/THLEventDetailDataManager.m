@@ -43,9 +43,9 @@
 	}];
 }
 
-- (BFTask *)checkValidGuestlistInviteForEvent:(NSString *)eventId {
+- (BFTask *)fetchGuestlistInviteForUser:(THLUser *)user atEvent:(NSString *)eventId {
     WEAKSELF();
-    return [[_guestlistService fetchGuestlistInviteForEvent:eventId] continueWithSuccessBlock:^id(BFTask *task) {
+    return [[_guestlistService fetchGuestlistInviteForUser:user atEvent:eventId] continueWithSuccessBlock:^id(BFTask *task) {
         THLGuestlistInvite *fetchedGuestlistInvite = task.result;
         THLGuestlistInviteEntity *mappedGuestlistInvite = [WSELF.entityMapper mapGuestlistInvite:fetchedGuestlistInvite];
         return mappedGuestlistInvite;

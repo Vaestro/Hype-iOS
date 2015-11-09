@@ -11,5 +11,5 @@
 @class THLPromotionEntity;
 @protocol THLPromotionSelectionModuleInterface;
 @protocol THLPromotionSelectionModuleDelegate <NSObject>
-- (void)promotionSelectionModule:(id<THLPromotionSelectionModuleInterface>)module didSelectPromotion:(THLPromotionEntity *)promotionEntity;
+//- (void)promotionSelectionModule:(id<THLPromotionSelectionModuleInterface>)module didSelectPromotion:(THLPromotionEntity *)promotionEntity;
 @end

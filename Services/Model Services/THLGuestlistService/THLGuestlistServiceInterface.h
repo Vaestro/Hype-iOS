@@ -25,7 +25,7 @@
 #pragma mark - Guestlist Invite Services
 
 - (BFTask *)fetchInvitesOnGuestlist:(THLGuestlist *)guestlist;
-- (BFTask *)fetchGuestlistInviteForEvent:(NSString *)eventId;
+- (BFTask *)fetchGuestlistInviteForUser:(THLUser *)user atEvent:(NSString *)eventId;
 - (BFTask *)fetchGuestlistInviteWithId:(NSString *)guestlistInviteId;
 - (BFTask *)updateGuestlistInvite:(THLGuestlistInvite *)guestlistInvite withResponse:(THLStatus)response;
 

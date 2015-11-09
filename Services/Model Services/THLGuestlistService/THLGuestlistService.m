@@ -75,8 +75,8 @@
 
 }
 
-- (BFTask *)fetchGuestlistInviteForEvent:(NSString *)eventId {
-    return [[_queryFactory queryForGuestlistInviteForEvent:eventId] getFirstObjectInBackground];
+- (BFTask *)fetchGuestlistInviteForUser:(THLUser *)user atEvent:(NSString *)eventId {
+    return [[_queryFactory queryForGuestlistInviteForUser:user atEvent:eventId] getFirstObjectInBackground];
 }
 
 - (BFTask *)fetchGuestlistInviteWithId:(NSString *)guestlistInviteId {

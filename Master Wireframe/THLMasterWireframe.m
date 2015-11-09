@@ -92,17 +92,27 @@ THLPopupNotificationModuleDelegate
     [guestWireframe presentGuestFlowInWindow:_window forEventDetail:eventEntity];
 }
 
-#pragma mark - THLLoginModuleDelegate
-- (void)loginModule:(id<THLLoginModuleInterface>)module didLoginUser:(NSError *)error {
-    if (!error) {
-        [_sessionService makeCurrentInstallation];
-        [self presentGuestFlow];
-    }
-}
-
 #pragma mark - THLPopupNotifcationDelegate
 - (void)popupNotificationModule:(id<THLPopupNotificationModuleInterface>)module userDidAcceptReviewForEvent:(THLEventEntity *)eventEntity {
     [self presentGuestFlowForEvent:eventEntity];
+}
+
+#pragma mark - THLLoginModuleDelegate
+- (void)loginModule:(id<THLLoginModuleInterface>)module didLoginUser:(NSError *)error {
+	if (!error) {
+        [_sessionService makeCurrentInstallation];
+		[self presentGuestFlow];
+	}
+}
+
+#pragma mark - THLEventDetailModuleDelegate
+//- (void)guestFlowModule:(id<THLGuestFlowModuleInterface>)module {
+//    [self presentGuestlistInvitationInterface];
+//}
+
+#pragma mark - THLPromotionSelectionModuleDelegate
+- (void)promotionSelectionModule:(id<THLPromotionSelectionModuleInterface>)module didSelectPromotion:(THLPromotionEntity *)promotionEntity {
+	
 }
 
 @end

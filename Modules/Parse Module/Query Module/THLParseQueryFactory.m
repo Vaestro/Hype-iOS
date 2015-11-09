@@ -40,13 +40,14 @@
 
 #pragma mark - Guestlist Queries
 //TODO: Query for Guestlist Invite for User for Event
-- (PFQuery *)queryForGuestlistInviteForEvent:(NSString *)eventId {
+- (PFQuery *)queryForGuestlistInviteForUser:(THLUser *)user atEvent:(NSString *)eventId {
     PFQuery *guestlistQuery = [self baseGuestlistQuery];
     [guestlistQuery whereKey:@"eventId" equalTo:eventId];
     
     PFQuery *query = [self baseGuestlistInviteQuery];
-//    [query fromLocalDatastore];
+    [query whereKey:@"Guest" equalTo:user];
     [query whereKey:@"Guestlist" matchesQuery:guestlistQuery];
+    [query whereKey:@"response" notEqualTo:[NSNumber numberWithInteger:2]];
     return query;
 }
 

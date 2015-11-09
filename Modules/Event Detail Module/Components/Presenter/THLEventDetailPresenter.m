@@ -102,7 +102,7 @@ THLEventDetailInteractorDelegate
     _eventEntity = eventEntity;
     
     [_interactor getPlacemarkForLocation:_eventEntity.location];
-    [_interactor checkValidGuestlistInviteForEvent:_eventEntity.objectId];
+    [_interactor checkValidGuestlistInviteForUser:[THLUser currentUser] atEvent:_eventEntity.objectId];
     [_interactor getPromotionForEvent:_eventEntity.objectId];
 	[_wireframe presentInterfaceInWindow:window];
 }
