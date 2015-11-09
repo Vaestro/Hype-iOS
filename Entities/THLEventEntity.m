@@ -9,7 +9,7 @@
 #import "THLEventEntity.h"
 
 @implementation THLEventEntity
-- (void)dealloc {
-    NSLog(@"Destroyed %@", self);
-}
+//- (void)dealloc {
+//    NSLog(@"Destroyed %@", self);
+//}
 @end

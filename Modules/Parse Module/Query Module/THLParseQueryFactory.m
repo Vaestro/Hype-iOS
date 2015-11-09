@@ -39,6 +39,7 @@
 }
 
 #pragma mark - Guestlist Queries
+//TODO: Query for Guestlist Invite for User for Event
 - (PFQuery *)queryForGuestlistInviteForEvent:(NSString *)eventId {
     PFQuery *guestlistQuery = [self baseGuestlistQuery];
     [guestlistQuery whereKey:@"eventId" equalTo:eventId];

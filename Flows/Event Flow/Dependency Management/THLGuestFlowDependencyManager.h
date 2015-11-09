@@ -1,8 +1,8 @@
 //
-//  THLEventFlowDependencyManager.h
+//  THLGuestFlowDependencyManager.h
 //  Hypelist2point0
 //
-//  Created by Phil Meyers IV on 9/25/15.
+//  Created by Edgar Li on 9/25/15.
 //  Copyright © 2015 Hypelist. All rights reserved.
 //
 
@@ -15,7 +15,7 @@
 @class THLGuestlistInvitationWireframe;
 @class THLGuestlistReviewWireframe;
 
-@protocol THLEventFlowDependencyManager <NSObject>
+@protocol THLGuestFlowDependencyManager <NSObject>
 - (THLEventDiscoveryWireframe *)newEventDiscoveryWireframe;
 - (THLEventDetailWireframe *)newEventDetailWireframe;
 - (THLPromotionSelectionWireframe *)newPromotionSelectionWireframe;

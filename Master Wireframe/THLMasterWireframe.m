@@ -14,7 +14,7 @@
 
 //Wireframes
 #import "THLLoginWireframe.h"
-#import "THLEventFlowWireframe.h"
+#import "THLGuestFlowWireframe.h"
 #import "THLEventDetailWireframe.h"
 #import "THLPromotionSelectionWireframe.h"
 #import "THLGuestlistInvitationWireframe.h"
@@ -55,7 +55,7 @@ THLPopupNotificationModuleDelegate
     if ([_sessionService isUserCached]) {
 //        Potentially Necessasy to update Installation everytime User opens app
 //        [_sessionService makeCurrentInstallation];
-        [self presentEventFlow];
+        [self presentGuestFlow];
     }else {
         [self presentLoginInterface];
     }
@@ -80,51 +80,29 @@ THLPopupNotificationModuleDelegate
 	[loginWireframe.moduleInterface presentLoginModuleInterfaceInWindow:_window];
 }
 
-- (void)presentEventFlow {
-	THLEventFlowWireframe *eventWireframe = [_dependencyManager newEventFlowWireframe];
-	_currentWireframe = eventWireframe;
-	[eventWireframe presentEventFlowInWindow:_window];
+- (void)presentGuestFlow {
+	THLGuestFlowWireframe *guestWireframe = [_dependencyManager newGuestFlowWireframe];
+	_currentWireframe = guestWireframe;
+	[guestWireframe presentGuestFlowInWindow:_window];
 }
 
-- (void)presentEventFlowForEvent:(THLEventEntity *)eventEntity {
-    THLEventFlowWireframe *eventWireframe = [_dependencyManager newEventFlowWireframe];
-    _currentWireframe = eventWireframe;
-    [eventWireframe presentEventFlowInWindow:_window forEventDetail:eventEntity];
-}
-//- (void)presentEventDetailInterfaceForEvent:(THLEventEntity *)eventEntity {
-//    THLEventDetailWireframe *eventDetailWireframe = [_dependencyManager newEventDetailWireframe];
-//    [eventDetailWireframe.moduleInterface setModuleDelegate:self];
-//    [eventDetailWireframe.moduleInterface presentEventDetailInterfaceForEvent:eventEntity inWindow:_window];
-//}
-
-//- (void)presentGuestlistInvitationInterface {
-//	THLGuestlistInvitationWireframe *guestlistWireframe = [_dependencyManager newGuestlistInvitationWireframe];
-//	_currentWireframe = guestlistWireframe;
-//	[guestlistWireframe.moduleInterface setModuleDelegate:self];
-//	[guestlistWireframe.moduleInterface presentGuestlistInvitationInterfaceForGuestlist:@"1" inWindow:_window];
-//}
-
-#pragma mark - THLPopupNotifcationDelegate
-- (void)popupNotificationModule:(id<THLPopupNotificationModuleInterface>)module userDidAcceptReviewForEvent:(THLEventEntity *)eventEntity {
-    [self presentEventFlowForEvent:eventEntity];
+- (void)presentGuestFlowForEvent:(THLEventEntity *)eventEntity {
+    THLGuestFlowWireframe *guestWireframe = [_dependencyManager newGuestFlowWireframe];
+    _currentWireframe = guestWireframe;
+    [guestWireframe presentGuestFlowInWindow:_window forEventDetail:eventEntity];
 }
 
 #pragma mark - THLLoginModuleDelegate
 - (void)loginModule:(id<THLLoginModuleInterface>)module didLoginUser:(NSError *)error {
-	if (!error) {
+    if (!error) {
         [_sessionService makeCurrentInstallation];
-		[self presentEventFlow];
-	}
+        [self presentGuestFlow];
+    }
 }
 
-#pragma mark - THLEventDetailModuleDelegate
-//- (void)eventFlowModule:(id<THLEventFlowModuleInterface>)module {
-//    [self presentGuestlistInvitationInterface];
-//}
-
-#pragma mark - THLPromotionSelectionModuleDelegate
-- (void)promotionSelectionModule:(id<THLPromotionSelectionModuleInterface>)module didSelectPromotion:(THLPromotionEntity *)promotionEntity {
-	
+#pragma mark - THLPopupNotifcationDelegate
+- (void)popupNotificationModule:(id<THLPopupNotificationModuleInterface>)module userDidAcceptReviewForEvent:(THLEventEntity *)eventEntity {
+    [self presentGuestFlowForEvent:eventEntity];
 }
 
 @end

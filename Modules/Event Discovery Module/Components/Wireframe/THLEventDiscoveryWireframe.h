@@ -15,13 +15,13 @@
 @protocol THLViewDataSourceFactoryInterface;
 
 @interface THLEventDiscoveryWireframe : NSObject
-@property (nonatomic, readonly) id<THLEventDiscoveryModuleInterface> moduleInterface;
+@property (nonatomic, readonly, weak) id<THLEventDiscoveryModuleInterface> moduleInterface;
 
 #pragma mark - Dependencies
-@property (nonatomic, readonly) THLDataStore *dataStore;
-@property (nonatomic, readonly) THLEntityMapper *entityMapper;
-@property (nonatomic, readonly) id<THLEventServiceInterface> eventService;
-@property (nonatomic, readonly) id<THLViewDataSourceFactoryInterface> viewDataSourceFactory;
+@property (nonatomic, readonly, weak) THLDataStore *dataStore;
+@property (nonatomic, readonly, weak) THLEntityMapper *entityMapper;
+@property (nonatomic, readonly, weak) id<THLEventServiceInterface> eventService;
+@property (nonatomic, readonly, weak) id<THLViewDataSourceFactoryInterface> viewDataSourceFactory;
 - (instancetype)initWithDataStore:(THLDataStore *)dataStore
 					 entityMapper:(THLEntityMapper *)entityMapper
 					 eventService:(id<THLEventServiceInterface>)eventService

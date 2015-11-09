@@ -23,9 +23,10 @@
 
 #pragma mark - Interface
 - (BFTask *)fetchGuestlistInviteWithId:(NSString *)guestlistInviteId {
+    WEAKSELF();
     return [[_guestlistService fetchGuestlistInviteWithId:guestlistInviteId] continueWithSuccessBlock:^id(BFTask *task) {
             THLGuestlistInvite *fetchedGuestlistInvite = task.result;
-            THLGuestlistInviteEntity *mappedGuestlistInvite = [_entityMapper mapGuestlistInvite:fetchedGuestlistInvite];
+            THLGuestlistInviteEntity *mappedGuestlistInvite = [WSELF.entityMapper mapGuestlistInvite:fetchedGuestlistInvite];
             return mappedGuestlistInvite;
     }];
 }

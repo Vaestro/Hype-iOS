@@ -9,5 +9,7 @@
 #import <Foundation/Foundation.h>
 @protocol THLGuestlistReviewModuleInterface;
 @protocol THLGuestlistReviewModuleDelegate <NSObject>
+- (void)dismissGuestlistReviewWireframe;
+
 
 @end

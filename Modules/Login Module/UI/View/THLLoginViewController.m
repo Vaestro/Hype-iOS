@@ -106,13 +106,14 @@ static CGFloat const PRIVACY_IMAGEVIEW_DIMENSION = 14;
     [view addSubviews:@[_privacyImageView,
                         _privacyLabel]];
     
+    WEAKSELF();
     [_privacyImageView makeConstraints:^(MASConstraintMaker *make) {
         make.size.equalTo(CGSizeMake1(PRIVACY_IMAGEVIEW_DIMENSION));
         make.centerY.offset(0);
     }];
     
     [_privacyLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_privacyImageView.mas_right).offset(kTHLEdgeInsetsHigh());
+        make.left.equalTo([WSELF privacyImageView].mas_right).offset(kTHLEdgeInsetsHigh());
         make.centerY.offset(0);
         make.top.bottom.insets(UIEdgeInsetsZero);
     }];
@@ -132,8 +133,9 @@ static CGFloat const PRIVACY_IMAGEVIEW_DIMENSION = 14;
         make.height.equalTo(LOGIN_BUTTON_HEIGHT);
     }];
     
+    WEAKSELF();
     [privacyContainerView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_facebookLoginButton.mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.top.equalTo([WSELF facebookLoginButton].mas_bottom).insets(kTHLEdgeInsetsHigh());
         make.centerX.offset(0);
         make.bottom.insets(kTHLEdgeInsetsNone());
     }];

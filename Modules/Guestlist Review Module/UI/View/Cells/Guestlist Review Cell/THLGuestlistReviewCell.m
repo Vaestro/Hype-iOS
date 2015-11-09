@@ -49,16 +49,17 @@
 
     [self addSubviews:@[_iconImageView, _nameLabel, _statusView]];
     
+    WEAKSELF();
     [_iconImageView makeConstraints:^(MASConstraintMaker *make) {
         make.top.insets(kTHLEdgeInsetsSuperHigh()).priorityHigh();
-        make.left.top.greaterThanOrEqualTo(SV(_iconImageView)).insets(kTHLEdgeInsetsHigh());
-        make.right.lessThanOrEqualTo(SV(_iconImageView)).insets(kTHLEdgeInsetsHigh());
-        make.height.equalTo(_iconImageView.mas_width);
+        make.left.top.greaterThanOrEqualTo(SV(WSELF.iconImageView)).insets(kTHLEdgeInsetsHigh());
+        make.right.lessThanOrEqualTo(SV(WSELF.iconImageView)).insets(kTHLEdgeInsetsHigh());
+        make.height.equalTo([WSELF iconImageView].mas_width);
         make.centerX.offset(0);
     }];
     
     [_nameLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_iconImageView.mas_bottom).insets(kTHLEdgeInsetsLow());
+        make.top.equalTo([WSELF iconImageView].mas_bottom).insets(kTHLEdgeInsetsLow());
         make.bottom.left.right.insets(kTHLEdgeInsetsHigh());
         //        [_nameLabel c_makeRequiredContentCompressionResistanceAndContentHuggingPriority];
     }];
@@ -99,4 +100,7 @@
     return NSStringFromClass(self.class);
 }
 
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
+}
 @end

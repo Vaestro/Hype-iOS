@@ -10,7 +10,7 @@
 #import "THLNumberVerificationModuleInterface.h"
 
 @interface THLNumberVerificationWireframe : NSObject
-@property (nonatomic, readonly) id<THLNumberVerificationModuleInterface> moduleInterface;
+@property (nonatomic, readonly, weak) id<THLNumberVerificationModuleInterface> moduleInterface;
 
 - (instancetype)init;
 @end

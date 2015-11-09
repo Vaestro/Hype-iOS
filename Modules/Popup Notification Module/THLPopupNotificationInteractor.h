@@ -19,7 +19,7 @@
 @property (nonatomic, weak) id<THLPopupNotificationInteractorDelegate> delegate;
 
 #pragma mark - Dependencies
-@property (nonatomic, readonly) THLPopupNotificationDataManager *dataManager;
+@property (nonatomic, readonly, weak) THLPopupNotificationDataManager *dataManager;
 - (instancetype)initWithDataManager:(THLPopupNotificationDataManager *)dataManager;
 
 - (BFTask *)handleNotificationData:(NSDictionary *)pushInfo;

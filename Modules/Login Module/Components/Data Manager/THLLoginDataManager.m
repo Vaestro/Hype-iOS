@@ -31,6 +31,8 @@
     return [_loginService getFacebookUserDictionary];
 }
 
-
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
+}
 
 @end

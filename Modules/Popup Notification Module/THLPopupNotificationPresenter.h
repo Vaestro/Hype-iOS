@@ -15,8 +15,8 @@
 
 @interface THLPopupNotificationPresenter : NSObject<THLPopupNotificationModuleInterface>
 #pragma mark - Dependencies
-@property (nonatomic, readonly) THLPopupNotificationWireframe *wireframe;
-@property (nonatomic, readonly) THLPopupNotificationInteractor *interactor;
+@property (nonatomic, readonly, weak) THLPopupNotificationWireframe *wireframe;
+@property (nonatomic, readonly, weak) THLPopupNotificationInteractor *interactor;
 - (instancetype)initWithWireframe:(THLPopupNotificationWireframe *)wireframe
                        interactor:(THLPopupNotificationInteractor *)interactor;
 

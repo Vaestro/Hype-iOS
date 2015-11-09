@@ -43,22 +43,24 @@ THLPopupNotificationInteractorDelegate
 }
 
 - (BFTask *)presentPopupNotificationModuleInterfaceWithPushInfo:(NSDictionary *)pushInfo {
+    WEAKSELF();
     return [[_interactor handleNotificationData:pushInfo] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
         if (!task.faulted) {
-            _notificationText = pushInfo[kPushInfoKeyNotficationText];
+            WSELF.notificationText = pushInfo[kPushInfoKeyNotficationText];
 //            _notificationImageURL = pushInfo[kPushInfoKeyNotficationText];
 //            _notificationEvent = pushInfo[kPushInfoKeyNotficationText];
-            _guestlistInviteEntity = task.result;
-            _eventEntity = _guestlistInviteEntity.guestlist.promotion.event;
-            [_wireframe presentInterface];
+            WSELF.guestlistInviteEntity = task.result;
+            WSELF.eventEntity = WSELF.guestlistInviteEntity.guestlist.promotion.event;
+            [WSELF.wireframe presentInterface];
         }
         return task;
     }];
 }
 
 - (void)configureView:(THLPopupNotificationView *)view {
+    WEAKSELF();
     RACCommand *acceptCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [self handlePopupAcceptAction];
+        [WSELF handlePopupAcceptAction];
         return [RACSignal empty];
     }];
     

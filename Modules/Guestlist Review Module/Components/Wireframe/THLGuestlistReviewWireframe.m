@@ -52,10 +52,16 @@
 }
 
 - (void)dismissInterface {
-    [_view dismissViewControllerAnimated:YES completion:NULL];
+    [_view.navigationController dismissViewControllerAnimated:YES completion:^{
+        [_presenter.moduleDelegate dismissGuestlistReviewWireframe];
+    }];
 }
 
 - (id<THLGuestlistReviewModuleInterface>)moduleInterface {
     return _presenter;
+}
+
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
 }
 @end

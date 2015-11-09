@@ -24,8 +24,8 @@
 @property (nonatomic, weak) id<THLLoginInteractorDelegate> delegate;
 
 #pragma mark - Dependencies
-@property (nonatomic, readonly) THLLoginDataManager *dataManager;
-@property (nonatomic, readonly) THLUserManager *userManager;
+@property (nonatomic, readonly, weak) THLLoginDataManager *dataManager;
+@property (nonatomic, readonly, weak) THLUserManager *userManager;
 - (instancetype)initWithDataManager:(THLLoginDataManager *)dataManager
 						userManager:(THLUserManager *)userManager;
 

@@ -1,13 +1,13 @@
 //
-//  THLEventFlowWireframe.m
+//  THLGuestFlowWireframe.m
 //  Hypelist2point0
 //
 //  Created by Phil Meyers IV on 9/25/15.
 //  Copyright © 2015 Hypelist. All rights reserved.
 //
-#import "THLEventFlowDependencyManager.h"
+#import "THLGuestFlowDependencyManager.h"
 
-#import "THLEventFlowWireframe.h"
+#import "THLGuestFlowWireframe.h"
 #import "THLEventDetailWireframe.h"
 #import "THLEventDiscoveryWireframe.h"
 #import "THLGuestlistInvitationWireframe.h"
@@ -22,7 +22,7 @@ typedef NS_OPTIONS(NSInteger, THLGuestlistReviewOptions) {
     THLGuestlistReviewOptions_Count
 };
 
-@interface THLEventFlowWireframe()
+@interface THLGuestFlowWireframe()
 <
 THLEventDiscoveryModuleDelegate,
 THLEventDetailModuleDelegate,
@@ -36,8 +36,8 @@ THLGuestlistReviewModuleDelegate
 @property (nonatomic, strong) THLGuestlistReviewWireframe *guestlistReviewWireframe;
 @end
 
-@implementation THLEventFlowWireframe
-- (instancetype)initWithDependencyManager:(id<THLEventFlowDependencyManager>)dependencyManager {
+@implementation THLGuestFlowWireframe
+- (instancetype)initWithDependencyManager:(id<THLGuestFlowDependencyManager>)dependencyManager {
 	if (self = [super init]) {
 		_dependencyManager = dependencyManager;
 	}
@@ -45,12 +45,12 @@ THLGuestlistReviewModuleDelegate
 }
 
 #pragma mark - Routing
-- (void)presentEventFlowInWindow:(UIWindow *)window {
+- (void)presentGuestFlowInWindow:(UIWindow *)window {
 	_window = window;
 	[self presentEventDiscoveryInterface];
 }
 
-- (void)presentEventFlowInWindow:(UIWindow *)window forEventDetail:(THLEventEntity *)eventEntity {
+- (void)presentGuestFlowInWindow:(UIWindow *)window forEventDetail:(THLEventEntity *)eventEntity {
     _window = window;
     [self presentEventDetailInterfaceForEvent:eventEntity];
 }
@@ -105,5 +105,9 @@ THLGuestlistReviewModuleDelegate
     _guestlistInvitationWireframe = nil;
 }
 
+#pragma mark - THLGuestlistReviewModuleDelegate
+- (void)dismissGuestlistReviewWireframe {
+    _guestlistReviewWireframe = nil;
+}
 
 @end

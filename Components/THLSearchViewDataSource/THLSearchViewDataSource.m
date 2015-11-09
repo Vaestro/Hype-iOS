@@ -21,10 +21,11 @@
 }
 
 - (void)beginObservingChanges {
+    WEAKSELF();
 	[_connection beginLongLivedReadTransaction];
 	[_connection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
-		[_standardMappings updateWithTransaction:transaction];
-		[_searchMappings updateWithTransaction:transaction];
+		[WSELF.standardMappings updateWithTransaction:transaction];
+		[WSELF.searchMappings updateWithTransaction:transaction];
 	}];
 
 	[[NSNotificationCenter defaultCenter] addObserver:self
@@ -68,14 +69,14 @@
 		sectionChanges = standardSectionChanges;
 		rowChanges = standardRowChanges;
 	}
-
+    WEAKSELF();
 	if (self.tableView) {
 		[self.tableView beginUpdates];
 		[self updateWithSectionChanges:sectionChanges rowChanges:rowChanges];
 		[self.tableView endUpdates];
 	} else if (self.collectionView) {
 		[self.collectionView performBatchUpdates:^{
-			[self updateWithSectionChanges:sectionChanges rowChanges:rowChanges];
+			[WSELF updateWithSectionChanges:sectionChanges rowChanges:rowChanges];
 		} completion:NULL];
 	}
 }
@@ -96,9 +97,10 @@
 
 #pragma mark - Item Accessing
 - (id)untransformedItemAtIndexPath:(NSIndexPath *)indexPath {
+    WEAKSELF();
 	__block id untransformedItem;
 	[_connection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
-		untransformedItem = [[transaction ext:self.currentMappings.view] objectAtIndexPath:indexPath withMappings:self.currentMappings];
+		untransformedItem = [[transaction ext:WSELF.currentMappings.view] objectAtIndexPath:indexPath withMappings:WSELF.currentMappings];
 	}];
 	return untransformedItem;
 }
@@ -422,9 +424,10 @@
 
 	YapDatabaseSearchQueue *searchQueue = self.searchQueue;
 	[searchQueue enqueueQuery:query];
-
+    
+    WEAKSELF();
 	[self.searchConnection asyncReadWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {
-		[[transaction ext:_searchExtKey] performSearchWithQueue:searchQueue];
+		[[transaction ext:WSELF.searchExtKey] performSearchWithQueue:searchQueue];
 	}];
 }
 @end

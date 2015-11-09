@@ -14,8 +14,8 @@
 @class THLEventDiscoveryInteractor;
 
 @interface THLEventDiscoveryPresenter : NSObject<THLEventDiscoveryModuleInterface>
-@property (nonatomic, readonly) THLEventDiscoveryWireframe *wireframe;
-@property (nonatomic, readonly) THLEventDiscoveryInteractor *interactor;
+@property (nonatomic, readonly, weak) THLEventDiscoveryWireframe *wireframe;
+@property (nonatomic, readonly, weak) THLEventDiscoveryInteractor *interactor;
 
 - (instancetype)initWithWireframe:(THLEventDiscoveryWireframe *)wireframe
 					   interactor:(THLEventDiscoveryInteractor *)interactor;

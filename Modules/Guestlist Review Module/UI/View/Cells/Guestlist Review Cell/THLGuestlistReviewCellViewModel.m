@@ -20,9 +20,14 @@
 }
 
 - (void)configureView:(id<THLGuestlistReviewCellView>)cellView {
-    [cellView setNameText:_guestlistInviteEntity.guest.firstName];
-    [cellView setImageURL:_guestlistInviteEntity.guest.imageURL];
     [cellView setGuestlistInviteStatus:_guestlistInviteEntity.response];
+    if (_guestlistInviteEntity.response != THLStatusNone) {
+        [cellView setNameText:_guestlistInviteEntity.guest.firstName];
+        [cellView setImageURL:_guestlistInviteEntity.guest.imageURL];
+    }
+    else {
+        [cellView setNameText:@"Unregistered User"];
+    }
 }
 
 @end

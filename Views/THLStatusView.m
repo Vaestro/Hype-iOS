@@ -48,20 +48,21 @@
 }
 
 - (void)drawingForStatus {
+    WEAKSELF();
     switch (_status) {
         case THLStatusPending: {
-            [_shapeView setPath:[self pendingPath].CGPath];
-            _shapeView.fillColor = [kTHLNUIPendingColor CGColor];
+            [WSELF.shapeView setPath:[self pendingPath].CGPath];
+            WSELF.shapeView.fillColor = [kTHLNUIPendingColor CGColor];
             break;
         }
         case THLStatusAccepted: {
-            [_shapeView setPath:[self acceptedPath].CGPath];
-            _shapeView.fillColor = [kTHLNUIAccentColor CGColor];
+            [WSELF.shapeView setPath:[self acceptedPath].CGPath];
+            WSELF.shapeView.fillColor = [kTHLNUIAccentColor CGColor];
             break;
         }
         case THLStatusDeclined: {
-            [_shapeView setPath:[self declinedPath].CGPath];
-            _shapeView.fillColor = [kTHLNUIRedColor CGColor];
+            [WSELF.shapeView setPath:[self declinedPath].CGPath];
+            WSELF.shapeView.fillColor = [kTHLNUIRedColor CGColor];
             break;
         }
         default: {
@@ -119,5 +120,9 @@
 //    [kTHLNUIRedColor setFill];
 //    [ovalPath fill];
     return ovalPath;
+}
+
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
 }
 @end

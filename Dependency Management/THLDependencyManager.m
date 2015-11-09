@@ -9,7 +9,7 @@
 #import "THLDependencyManager.h"
 
 //Dependency Management Protocols
-#import "THLEventFlowDependencyManager.h"
+#import "THLGuestFlowDependencyManager.h"
 
 //Wireframes
 #import "THLMasterWireframe.h"
@@ -19,7 +19,7 @@
 #import "THLEventDiscoveryWireframe.h"
 #import "THLEventDetailWireframe.h"
 #import "THLPromotionSelectionWireframe.h"
-#import "THLEventFlowWireframe.h"
+#import "THLGuestFlowWireframe.h"
 #import "THLGuestlistInvitationWireframe.h"
 #import "THLGuestlistReviewWireframe.h"
 #import "THLPopupNotificationWireframe.h"
@@ -60,7 +60,7 @@
 @property (nonatomic, weak) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
 @property (nonatomic, weak) THLEventDetailWireframe *eventDetailWireframe;
 @property (nonatomic, weak) THLPromotionSelectionWireframe *promotionSelectionWireframe;
-@property (nonatomic, weak) THLEventFlowWireframe *eventFlowWireframe;
+@property (nonatomic, weak) THLGuestFlowWireframe *guestFlowWireframe;
 @property (nonatomic, weak) THLGuestlistInvitationWireframe *guestlistInvitationWireframe;
 @property (nonatomic, weak) THLGuestlistReviewWireframe *guestlistReviewWireframe;
 @property (nonatomic, weak) THLPopupNotificationWireframe *popupNotificationWireframe;
@@ -156,9 +156,9 @@
     return wireframe;
 }
 
-- (THLEventFlowWireframe *)newEventFlowWireframe {
-	THLEventFlowWireframe *wireframe = [[THLEventFlowWireframe alloc] initWithDependencyManager:self];
-	self.eventFlowWireframe = wireframe;
+- (THLGuestFlowWireframe *)newGuestFlowWireframe {
+	THLGuestFlowWireframe *wireframe = [[THLGuestFlowWireframe alloc] initWithDependencyManager:self];
+	self.guestFlowWireframe = wireframe;
 	return wireframe;
 }
 

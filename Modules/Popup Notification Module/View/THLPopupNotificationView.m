@@ -45,21 +45,22 @@ static CGFloat const ICON_VIEW_DIMENSION = 50;
                         _textView,
                         _button]];
     
+    WEAKSELF();
     [_iconView makeConstraints:^(MASConstraintMaker *make) {
         make.top.insets(kTHLEdgeInsetsHigh());
         make.centerX.equalTo(0);
         make.height.equalTo(ICON_VIEW_DIMENSION);
-        make.width.equalTo(_iconView.mas_height);
+        make.width.equalTo([WSELF iconView].mas_height);
     }];
     
     [_textView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_iconView.mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.top.equalTo([WSELF iconView].mas_bottom).insets(kTHLEdgeInsetsHigh());
         make.left.right.insets(kTHLEdgeInsetsHigh());
         make.width.equalTo(ScreenWidth-4*kTHLInset);
     }];
     
     [_button makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_textView.mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.top.equalTo([WSELF textView].mas_bottom).insets(kTHLEdgeInsetsHigh());
         make.left.right.bottom.insets(kTHLEdgeInsetsHigh());
     }];
 }

@@ -42,10 +42,11 @@ THLNumberVerificationModuleDelegate
 }
 
 - (void)configureView:(id<THLLoginView>)view {
+    WEAKSELF();
 	[view setLoginText:NSLocalizedString(@"Login with Facebook", @"Facebook login")];
 
 	RACCommand *loginCommand = [[RACCommand alloc] initWithEnabled:RACObserve(self.interactor, shouldLogin) signalBlock:^RACSignal *(id input) {
-		[self handleUserLoginAction];
+		[WSELF handleUserLoginAction];
 		return [RACSignal empty];
 
 	}];
@@ -153,4 +154,7 @@ THLNumberVerificationModuleDelegate
 	[self handleError:error];
 }
 
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
+}
 @end

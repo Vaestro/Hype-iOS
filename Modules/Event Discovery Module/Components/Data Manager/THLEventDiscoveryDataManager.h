@@ -15,9 +15,9 @@
 
 @interface THLEventDiscoveryDataManager : NSObject
 #pragma mark - Dependencies
-@property (nonatomic, readonly) THLDataStore *dataStore;
-@property (nonatomic, readonly) THLEntityMapper *entityMapper;
-@property (nonatomic, readonly) id<THLEventServiceInterface> eventService;
+@property (nonatomic, readonly, weak) THLDataStore *dataStore;
+@property (nonatomic, readonly, weak) THLEntityMapper *entityMapper;
+@property (nonatomic, readonly, weak) id<THLEventServiceInterface> eventService;
 - (instancetype)initWithDataStore:(THLDataStore *)dataStore
 					 entityMapper:(THLEntityMapper *)entityMapper
 					 eventService:(id<THLEventServiceInterface>)eventService;

@@ -21,13 +21,16 @@ typedef NS_OPTIONS(NSInteger, THLGuestlistReviewerStatus) {
 
 @protocol THLGuestlistReviewView <NSObject>
 @property (nonatomic, strong) THLViewDataSource *dataSource;
-@property (nonatomic) BOOL showRefreshAnimation;
+
 @property (nonatomic) THLGuestlistReviewerStatus reviewerStatus;
+@property (nonatomic) BOOL showRefreshAnimation;
 @property (nonatomic) NSInteger showActivityIndicator;
-@property (nonatomic, strong) RACCommand *refreshCommand;
-@property (nonatomic, strong) RACCommand *dismissCommand;
+
 @property (nonatomic, strong) RACCommand *acceptCommand;
 @property (nonatomic, strong) RACCommand *declineCommand;
 @property (nonatomic, strong) RACCommand *confirmCommand;
+@property (nonatomic, strong) RACCommand *refreshCommand;
+@property (nonatomic, strong) RACCommand *dismissCommand;
+
 - (void)confirmActionWithMessage:(NSString *)text;
 @end

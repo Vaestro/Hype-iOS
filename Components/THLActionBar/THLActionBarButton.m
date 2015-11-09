@@ -24,8 +24,9 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     [self addSubview:self.morphingLabel];
+    WEAKSELF();
     [_morphingLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(self.titleEdgeInsets);
+        make.edges.mas_equalTo(WSELF.titleEdgeInsets);
     }];
 }
 

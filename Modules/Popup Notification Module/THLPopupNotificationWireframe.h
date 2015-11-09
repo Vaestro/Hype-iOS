@@ -13,11 +13,11 @@
 @protocol THLGuestlistServiceInterface;
 
 @interface THLPopupNotificationWireframe : NSObject
-@property (nonatomic, readonly) id<THLPopupNotificationModuleInterface> moduleInterface;
+@property (nonatomic, readonly, weak) id<THLPopupNotificationModuleInterface> moduleInterface;
 
 #pragma mark - Dependencies
-@property (nonatomic, readonly) id<THLGuestlistServiceInterface> guestlistService;
-@property (nonatomic, readonly) THLEntityMapper *entityMapper;
+@property (nonatomic, readonly, weak) id<THLGuestlistServiceInterface> guestlistService;
+@property (nonatomic, readonly, weak) THLEntityMapper *entityMapper;
 
 - (instancetype)initWithGuestlistService:(id<THLGuestlistServiceInterface>)guestlistService
                         entityMapper:(THLEntityMapper *)entityMapper;

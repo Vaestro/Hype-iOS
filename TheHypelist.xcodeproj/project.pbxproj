@@ -100,7 +100,7 @@
 		21E402DC1BBF8155001D0C2C /* THLGuestlistInvite.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E402DB1BBF8155001D0C2C /* THLGuestlistInvite.m */; };
 		21E402E01BBF8371001D0C2C /* THLGuestlistService.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E402DF1BBF8371001D0C2C /* THLGuestlistService.m */; };
 		21E402EE1BBF9A8B001D0C2C /* THLGuestEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E402ED1BBF9A8B001D0C2C /* THLGuestEntity.m */; };
-		21EED1001BB5F842001325A7 /* THLEventFlowWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 21EED0FF1BB5F842001325A7 /* THLEventFlowWireframe.m */; };
+		21EED1001BB5F842001325A7 /* THLGuestFlowWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 21EED0FF1BB5F842001325A7 /* THLGuestFlowWireframe.m */; };
 		76FA20541BCF854000BB480A /* THLSessionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 76FA20531BCF854000BB480A /* THLSessionService.m */; };
 		7905CC411BE0252700E56878 /* THLGuestlistInviteEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7905CC401BE0252700E56878 /* THLGuestlistInviteEntity.m */; };
 		794208281BD82641009B86FA /* UIView+DimView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794208271BD82641009B86FA /* UIView+DimView.m */; };
@@ -153,8 +153,6 @@
 		CBE5403C8B7732B36D5ECB5E /* THLViewDataSourceGrouping.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE54FC98A366F3761F89F63 /* THLViewDataSourceGrouping.m */; };
 		CBE54720F63BA2DE2136B454 /* THLViewDataSource+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE545A9A3C66339456E0A06 /* THLViewDataSource+Factory.m */; };
 		CBE547FB5677C373C1DE74C7 /* THLViewDataSourceSorting.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE5404991A434142507D7B0 /* THLViewDataSourceSorting.m */; };
-		D6FD0F92FFA5D74C85804729 /* libPods-TheHypelistTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0373A993FBE4FB590855BC00 /* libPods-TheHypelistTests.a */; };
-		EB877D7BC8037FE5F00AA5AB /* libPods-TheHypelistTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B1D8F11B82791A43C481CAE /* libPods-TheHypelistTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -168,7 +166,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0373A993FBE4FB590855BC00 /* libPods-TheHypelistTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TheHypelistTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2108A8831B8BBF4900B725F6 /* THLMasterWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMasterWireframe.h; sourceTree = "<group>"; };
 		2108A8841B8BBF4900B725F6 /* THLMasterWireframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLMasterWireframe.m; sourceTree = "<group>"; };
 		2108A8861B8BBF5B00B725F6 /* THLDependencyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLDependencyManager.h; sourceTree = "<group>"; };
@@ -390,10 +387,9 @@
 		21E402E81BBF947D001D0C2C /* THLGuestlistInvitationViewEventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistInvitationViewEventHandler.h; sourceTree = "<group>"; };
 		21E402EC1BBF9A8B001D0C2C /* THLGuestEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestEntity.h; sourceTree = "<group>"; };
 		21E402ED1BBF9A8B001D0C2C /* THLGuestEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestEntity.m; sourceTree = "<group>"; };
-		21EED0FE1BB5F842001325A7 /* THLEventFlowWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventFlowWireframe.h; sourceTree = "<group>"; };
-		21EED0FF1BB5F842001325A7 /* THLEventFlowWireframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventFlowWireframe.m; sourceTree = "<group>"; };
-		21EED1011BB5F8A7001325A7 /* THLEventFlowDependencyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventFlowDependencyManager.h; sourceTree = "<group>"; };
-		2B1D8F11B82791A43C481CAE /* libPods-TheHypelistTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TheHypelistTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		21EED0FE1BB5F842001325A7 /* THLGuestFlowWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestFlowWireframe.h; sourceTree = "<group>"; };
+		21EED0FF1BB5F842001325A7 /* THLGuestFlowWireframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestFlowWireframe.m; sourceTree = "<group>"; };
+		21EED1011BB5F8A7001325A7 /* THLGuestFlowDependencyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestFlowDependencyManager.h; sourceTree = "<group>"; };
 		76FA20511BCF851400BB480A /* THLSessionServiceInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLSessionServiceInterface.h; sourceTree = "<group>"; };
 		76FA20521BCF854000BB480A /* THLSessionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLSessionService.h; sourceTree = "<group>"; };
 		76FA20531BCF854000BB480A /* THLSessionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLSessionService.m; sourceTree = "<group>"; };
@@ -405,8 +401,8 @@
 		7942082B1BD82AF6009B86FA /* THLActionBarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLActionBarButton.m; sourceTree = "<group>"; };
 		7942082D1BD8C250009B86FA /* THLGuestlistEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistEntity.h; sourceTree = "<group>"; };
 		7942082E1BD8C250009B86FA /* THLGuestlistEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestlistEntity.m; sourceTree = "<group>"; };
-		794208311BD9A300009B86FA /* THLEventFlowModuleInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventFlowModuleInterface.h; sourceTree = "<group>"; };
-		794208331BD9A348009B86FA /* THLEventFlowModuleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventFlowModuleDelegate.h; sourceTree = "<group>"; };
+		794208311BD9A300009B86FA /* THLGuestFlowModuleInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestFlowModuleInterface.h; sourceTree = "<group>"; };
+		794208331BD9A348009B86FA /* THLGuestFlowModuleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestFlowModuleDelegate.h; sourceTree = "<group>"; };
 		794483021BEC5B5D00EABE23 /* THLStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLStatusView.h; sourceTree = "<group>"; };
 		794483031BEC5B5D00EABE23 /* THLStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLStatusView.m; sourceTree = "<group>"; };
 		794483071BEC8A6000EABE23 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = ../../../../usr/lib/libsqlite3.dylib; sourceTree = "<group>"; };
@@ -509,8 +505,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6FD0F92FFA5D74C85804729 /* libPods-TheHypelistTests.a in Frameworks */,
-				EB877D7BC8037FE5F00AA5AB /* libPods-TheHypelistTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1272,7 +1266,7 @@
 			path = THLUserManager;
 			sourceTree = "<group>";
 		};
-		217DC6541BBB7A0900332174 /* Event Flow */ = {
+		217DC6541BBB7A0900332174 /* Guest Flow */ = {
 			isa = PBXGroup;
 			children = (
 				217DC6571BBB7A4500332174 /* Dependency Management */,
@@ -1280,13 +1274,14 @@
 				217DC6591BBB7A8200332174 /* Presenter */,
 				217DC6561BBB7A3C00332174 /* Wireframe */,
 			);
+			name = "Guest Flow";
 			path = "Event Flow";
 			sourceTree = "<group>";
 		};
 		217DC6551BBB7A2500332174 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
-				217DC6541BBB7A0900332174 /* Event Flow */,
+				217DC6541BBB7A0900332174 /* Guest Flow */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -1294,8 +1289,8 @@
 		217DC6561BBB7A3C00332174 /* Wireframe */ = {
 			isa = PBXGroup;
 			children = (
-				21EED0FE1BB5F842001325A7 /* THLEventFlowWireframe.h */,
-				21EED0FF1BB5F842001325A7 /* THLEventFlowWireframe.m */,
+				21EED0FE1BB5F842001325A7 /* THLGuestFlowWireframe.h */,
+				21EED0FF1BB5F842001325A7 /* THLGuestFlowWireframe.m */,
 			);
 			path = Wireframe;
 			sourceTree = "<group>";
@@ -1303,7 +1298,7 @@
 		217DC6571BBB7A4500332174 /* Dependency Management */ = {
 			isa = PBXGroup;
 			children = (
-				21EED1011BB5F8A7001325A7 /* THLEventFlowDependencyManager.h */,
+				21EED1011BB5F8A7001325A7 /* THLGuestFlowDependencyManager.h */,
 			);
 			path = "Dependency Management";
 			sourceTree = "<group>";
@@ -1586,8 +1581,8 @@
 		21E402C01BBF75EF001D0C2C /* Guestlist Invitation Module */ = {
 			isa = PBXGroup;
 			children = (
-				21E402C21BBF761D001D0C2C /* Components */,
 				21E402C31BBF7627001D0C2C /* Interface */,
+				21E402C21BBF761D001D0C2C /* Components */,
 				21E402C11BBF7619001D0C2C /* UI */,
 			);
 			path = "Guestlist Invitation Module";
@@ -1604,10 +1599,10 @@
 		21E402C21BBF761D001D0C2C /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				21E402D61BBF76A2001D0C2C /* Data Manager */,
-				21E402D51BBF769E001D0C2C /* Interactor */,
-				21E402D41BBF769B001D0C2C /* Presenter */,
 				21E402D31BBF7698001D0C2C /* Wireframe */,
+				21E402D41BBF769B001D0C2C /* Presenter */,
+				21E402D51BBF769E001D0C2C /* Interactor */,
+				21E402D61BBF76A2001D0C2C /* Data Manager */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1728,8 +1723,8 @@
 		794208301BD9A2E1009B86FA /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				794208331BD9A348009B86FA /* THLEventFlowModuleDelegate.h */,
-				794208311BD9A300009B86FA /* THLEventFlowModuleInterface.h */,
+				794208331BD9A348009B86FA /* THLGuestFlowModuleDelegate.h */,
+				794208311BD9A300009B86FA /* THLGuestFlowModuleInterface.h */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -1814,8 +1809,8 @@
 		79B959191BE5780F00B87799 /* Guestlist Review Module */ = {
 			isa = PBXGroup;
 			children = (
-				79B9591F1BE57C4F00B87799 /* Components */,
 				79B9591A1BE5782700B87799 /* Interface */,
+				79B9591F1BE57C4F00B87799 /* Components */,
 				79B959301BE581D700B87799 /* UI */,
 			);
 			path = "Guestlist Review Module";
@@ -1833,10 +1828,10 @@
 		79B9591F1BE57C4F00B87799 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				79B959241BE5810C00B87799 /* Data Manager */,
-				79B959261BE5812B00B87799 /* Interactor */,
-				79B959251BE5812000B87799 /* Presenter */,
 				79B959201BE57C6200B87799 /* Wireframe */,
+				79B959251BE5812000B87799 /* Presenter */,
+				79B959261BE5812B00B87799 /* Interactor */,
+				79B959241BE5810C00B87799 /* Data Manager */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -2001,9 +1996,7 @@
 			children = (
 				794483071BEC8A6000EABE23 /* libsqlite3.dylib */,
 				D059D2904940E14B1AF40EE3 /* libPods-TheHypelist.a */,
-				0373A993FBE4FB590855BC00 /* libPods-TheHypelistTests.a */,
 				A63D387799ADEA3D66DC04C6 /* libPods-TheHypelist.a */,
-				2B1D8F11B82791A43C481CAE /* libPods-TheHypelistTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2337,7 +2330,7 @@
 				21E402DC1BBF8155001D0C2C /* THLGuestlistInvite.m in Sources */,
 				7942082F1BD8C250009B86FA /* THLGuestlistEntity.m in Sources */,
 				21CCEDE91B87C87B0066CDAC /* THLDataStore.m in Sources */,
-				21EED1001BB5F842001325A7 /* THLEventFlowWireframe.m in Sources */,
+				21EED1001BB5F842001325A7 /* THLGuestFlowWireframe.m in Sources */,
 				79B959291BE581A800B87799 /* THLGuestlistReviewDataManager.m in Sources */,
 				215A42A11BAA26D500D03C35 /* THLFacebookPictureInteractor.m in Sources */,
 				2118921B1BAA084300E8A11F /* THLLoginPresenter.m in Sources */,
@@ -2508,8 +2501,12 @@
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_SHADOW = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/TheHypelist/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hypelist.hype;
 				PRODUCT_NAME = TheHypelist;
 				PROVISIONING_PROFILE = "";
@@ -2538,8 +2535,12 @@
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_SHADOW = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/TheHypelist/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hypelist.hype;
 				PRODUCT_NAME = TheHypelist;
 				PROVISIONING_PROFILE = "";

@@ -52,9 +52,10 @@
 }
 
 - (NSSet *)entityKeysInDomain:(THLDataStoreDomain *)domain {
+    WEAKSELF();
 	__block NSMutableSet *keys = [NSMutableSet new];
 	[self.roConnection readWithBlock:^(YapDatabaseReadTransaction * _Nonnull transaction) {
-		[transaction enumerateKeysAndObjectsInCollection:self.collectionKey usingBlock:^(NSString * _Nonnull key, id  _Nonnull object, BOOL * _Nonnull stop) {
+		[transaction enumerateKeysAndObjectsInCollection:WSELF.collectionKey usingBlock:^(NSString * _Nonnull key, id  _Nonnull object, BOOL * _Nonnull stop) {
 			if ([domain containsMember:(THLEntity *)object]) {
 				[keys addObject:key];
 			}
@@ -64,9 +65,10 @@
 }
 
 - (NSSet *)entitiesInDomain:(THLDataStoreDomain *)domain {
+    WEAKSELF();
 	__block NSMutableSet *entities = [NSMutableSet new];
 	[self.roConnection readWithBlock:^(YapDatabaseReadTransaction * _Nonnull transaction) {
-		[transaction enumerateKeysAndObjectsInCollection:self.collectionKey usingBlock:^(NSString * _Nonnull key, id  _Nonnull object, BOOL * _Nonnull stop) {
+		[transaction enumerateKeysAndObjectsInCollection:WSELF.collectionKey usingBlock:^(NSString * _Nonnull key, id  _Nonnull object, BOOL * _Nonnull stop) {
 			if ([domain containsMember:(THLEntity *)object]) {
 				[entities addObject:object];
 			}
@@ -76,9 +78,10 @@
 }
 
 - (void)removeEntitiesInDomain:(THLDataStoreDomain *)domain {
+    WEAKSELF();
 	__block NSArray *keys = [[self entityKeysInDomain:domain] allObjects];
 	[self.rwConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {
-		[transaction removeObjectsForKeys:keys inCollection:self.collectionKey];
+        [transaction removeObjectsForKeys:keys inCollection:WSELF.collectionKey];
 	}];
 }
 
@@ -96,9 +99,11 @@
 	__block NSMutableSet *unprocessedEntities = [entities mutableCopy];
 	__block NSMutableSet *entitiesToUpdate = [NSMutableSet new];
 	__block NSMutableSet *entitiesToRemove = [NSMutableSet new];
-
+    
+    WEAKSELF();
+    STRONGSELF();
 	[self.rwConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {
-		[transaction enumerateObjectsForKeys:keys inCollection:self.collectionKey unorderedUsingBlock:^(NSUInteger keyIndex, id  _Nonnull object, BOOL * _Nonnull stop) {
+		[transaction enumerateObjectsForKeys:keys inCollection:SSELF.collectionKey unorderedUsingBlock:^(NSUInteger keyIndex, id  _Nonnull object, BOOL * _Nonnull stop) {
 			THLEntity *oldEntity = (THLEntity *)object;
 			THLEntity *newEntity = [entities member:oldEntity];
 			if (!newEntity) {
@@ -124,8 +129,9 @@
 }
 
 - (void)purge {
+    WEAKSELF();
 	[self.rwConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-		[transaction removeAllObjectsInCollection:self.collectionKey];
+		[transaction removeAllObjectsInCollection:WSELF.collectionKey];
 	}];
 }
 

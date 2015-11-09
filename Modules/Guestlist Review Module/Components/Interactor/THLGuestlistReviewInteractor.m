@@ -17,7 +17,7 @@ static NSString *const kTHLGuestlistReviewModuleViewKey = @"kTHLGuestlistReviewM
 @class THLGuestlistInviteEntity;
 
 @interface THLGuestlistReviewInteractor()
-@property (nonatomic, strong) THLGuestlistInviteEntity *guestlistInvites;
+@property (nonatomic, strong) NSArray<THLGuestlistInviteEntity *> *guestlistInvites;
 @end
 
 @implementation THLGuestlistReviewInteractor
@@ -35,10 +35,11 @@ static NSString *const kTHLGuestlistReviewModuleViewKey = @"kTHLGuestlistReviewM
 }
 
 - (void)updateGuestlistInvites {
+    WEAKSELF();
     [[_dataManager fetchGuestlistInvitesForGuestlist:_guestlistEntity.objectId] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
 //        Store guestlist Invites in Memory In case User wants to Add more Guests
-        _guestlistInvites = task.result;
-        [_delegate interactor:self didUpdateGuestlistInvites:task.error];
+//        WSELF.guestlistInvites = task.result;
+        [WSELF.delegate interactor:WSELF didUpdateGuestlistInvites:task.error];
         return nil;
     }];
 }
@@ -69,11 +70,14 @@ static NSString *const kTHLGuestlistReviewModuleViewKey = @"kTHLGuestlistReviewM
 
 #pragma mark - Handle Presenter Events
 - (void)updateGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite withResponse:(THLStatus)response {
+    WEAKSELF();
     [[_dataManager updateGuestlistInvite:guestlistInvite withResponse:response] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
-        [_delegate interactor:self didUpdateGuestlistInviteResponse:task.error to:response];
+        [WSELF.delegate interactor:WSELF didUpdateGuestlistInviteResponse:task.error to:response];
         return nil;
     }];
 }
 
-
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
+}
 @end

@@ -14,7 +14,7 @@
 
 @interface THLGuestlistReviewPresenter : NSObject<THLGuestlistReviewModuleInterface>
 @property (nonatomic, weak, readonly) THLGuestlistReviewWireframe *wireframe;
-@property (nonatomic, readonly) THLGuestlistReviewInteractor *interactor;
+@property (nonatomic, weak, readonly) THLGuestlistReviewInteractor *interactor;
 
 - (instancetype)initWithWireframe:(THLGuestlistReviewWireframe *)wireframe
                        interactor:(THLGuestlistReviewInteractor *)interactor;

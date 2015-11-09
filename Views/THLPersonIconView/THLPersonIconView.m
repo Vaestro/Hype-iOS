@@ -87,6 +87,10 @@
     UIImage *image = [[UIImage imageNamed:@"Hypelist-Icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     return image;
 }
+
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
+}
 //- (UIImage *)placeHolderImage {
 //    // adjust bounds to account for extra space needed for lineWidth
 //    CGFloat width = self.bounds.size.width;

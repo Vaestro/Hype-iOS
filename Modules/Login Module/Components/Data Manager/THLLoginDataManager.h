@@ -12,7 +12,7 @@
 
 @interface THLLoginDataManager : NSObject
 #pragma mark - Dependencies
-@property (nonatomic, readonly) id<THLLoginServiceInterface> loginService;
+@property (nonatomic, readonly, weak) id<THLLoginServiceInterface> loginService;
 - (instancetype)initWithLoginService:(id<THLLoginServiceInterface>)loginService;
 
 - (BFTask *)login;

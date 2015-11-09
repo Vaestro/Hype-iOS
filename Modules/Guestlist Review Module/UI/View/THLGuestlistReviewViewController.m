@@ -8,13 +8,15 @@
 
 #import "THLGuestlistReviewViewController.h"
 #import "THLViewDataSource.h"
+
 #import "THLGuestlistReviewCell.h"
 #import "THLGuestlistReviewCellViewModel.h"
-#import "UIScrollView+SVPullToRefresh.h"
-#import "THLAppearanceConstants.h"
 #import "THLActionContainerView.h"
-#import "SVProgressHUD.h"
 #import "THLConfirmationPopupView.h"
+
+#import "THLAppearanceConstants.h"
+#import "UIScrollView+SVPullToRefresh.h"
+#import "SVProgressHUD.h"
 #import "KLCPopup.h"
 
 static UIEdgeInsets const COLLECTION_VIEW_EDGEINSETS = {kTHLInset, kTHLInset, kTHLInset, kTHLInset};
@@ -52,7 +54,7 @@ UICollectionViewDelegateFlowLayout
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [_collectionView reloadData];
+//    [_collectionView reloadData];
 }
 
 - (void)constructView {
@@ -71,6 +73,7 @@ UICollectionViewDelegateFlowLayout
     self.navigationItem.leftBarButtonItem = _dismissButton;
     self.navigationItem.title = @"YOUR PARTY";
     
+    WEAKSELF();
     [_collectionView makeConstraints:^(MASConstraintMaker *make) {
         make.top.insets(kTHLEdgeInsetsNone());
         make.left.right.insets(kTHLEdgeInsetsNone());
@@ -78,40 +81,39 @@ UICollectionViewDelegateFlowLayout
     
     [_actionContainerView makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.insets(kTHLEdgeInsetsNone());
-        make.top.equalTo(_collectionView.mas_bottom);
+        make.top.equalTo([WSELF collectionView].mas_bottom);
     }];
 }
 
 - (void)bindView {
     WEAKSELF();
-    STRONGSELF();
-    [RACObserve(WSELF, dataSource) subscribeNext:^(THLViewDataSource *dataSource) {
-        [SSELF configureDataSource:dataSource];
+    [RACObserve(self, dataSource) subscribeNext:^(THLViewDataSource *dataSource) {
+        [WSELF configureDataSource:WSELF.dataSource];
     }];
     
-    RAC(WSELF.dismissButton, rac_command) = RACObserve(WSELF, dismissCommand);
+    RAC(self.dismissButton, rac_command) = RACObserve(self, dismissCommand);
 
-    [RACObserve(WSELF, showRefreshAnimation) subscribeNext:^(NSNumber *val) {
+    [RACObserve(self, showRefreshAnimation) subscribeNext:^(NSNumber *val) {
         BOOL shouldAnimate = [val boolValue];
         if (shouldAnimate) {
-            [SSELF.collectionView.pullToRefreshView startAnimating];
+            [[WSELF collectionView].pullToRefreshView startAnimating];
         } else {
-            [SSELF.collectionView.pullToRefreshView stopAnimating];
+            [[WSELF collectionView].pullToRefreshView stopAnimating];
         }
     }];
     
-    [RACObserve(WSELF, refreshCommand) subscribeNext:^(RACCommand *command) {
-        [SSELF.collectionView addPullToRefreshWithActionHandler:^{
+    [RACObserve(self, refreshCommand) subscribeNext:^(RACCommand *command) {
+        [WSELF.collectionView addPullToRefreshWithActionHandler:^{
             [command execute:nil];
         }];
     }];
     
-    RAC(WSELF.actionContainerView.acceptButton, rac_command) = RACObserve(WSELF, acceptCommand);
-    RAC(WSELF.actionContainerView.declineButton, rac_command) = RACObserve(WSELF, confirmCommand);
-    RAC(WSELF.confirmationPopupView, confirmCommand) = RACObserve(WSELF, declineCommand);
+    RAC([self.actionContainerView acceptButton], rac_command) = RACObserve(self, acceptCommand);
+    RAC([self.actionContainerView declineButton], rac_command) = RACObserve(self, confirmCommand);
+    RAC(self.confirmationPopupView, confirmCommand) = RACObserve(self, declineCommand);
 
-    [RACObserve(WSELF, showActivityIndicator) subscribeNext:^(id _) {
-        switch (_showActivityIndicator) {
+    [RACObserve(self, showActivityIndicator) subscribeNext:^(id _) {
+        switch (WSELF.showActivityIndicator) {
             case 0:
                 [SVProgressHUD dismiss];
                 break;
@@ -130,18 +132,19 @@ UICollectionViewDelegateFlowLayout
     }];
     
     [RACObserve(self, reviewerStatus) subscribeNext:^(id _) {
-        if (_reviewerStatus == THLGuestlistReviewerStatusAttendingGuest) {
-            _actionContainerView.status = THLActionContainerViewStatusDecline;
-            [_actionContainerView reloadView];
-            [_actionContainerView.declineButton.morphingLabel setTextWithoutMorphing:NSLocalizedString(@"LEAVE GUESTLIST", nil)];
-            RAC(_actionContainerView.declineButton, rac_command) = RACObserve(WSELF, confirmCommand);
+        if (WSELF.reviewerStatus == THLGuestlistReviewerStatusAttendingGuest) {
+            [WSELF actionContainerView].status = THLActionContainerViewStatusDecline;
+            [WSELF.actionContainerView reloadView];
+            [[[WSELF actionContainerView] declineButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"LEAVE GUESTLIST", nil)];
+//            TODO: Set Decline Command without creating Memory Leak
+//            RAC([SSELF actionContainerView].declineButton, rac_command) = RACObserve(SSELF, confirmCommand);
         }
         [WSELF.view setNeedsDisplay];
     }];
 }
 
 - (void)configureDataSource:(THLViewDataSource *)dataSource {
-    _collectionView.dataSource = _dataSource;
+    _collectionView.dataSource = dataSource;
     _dataSource.collectionView = _collectionView;
     
     [_collectionView registerClass:[THLGuestlistReviewCell class] forCellWithReuseIdentifier:[THLGuestlistReviewCell identifier]];
@@ -175,8 +178,6 @@ UICollectionViewDelegateFlowLayout
 
 - (UIBarButtonItem *)newBackBarButtonItem {
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:NULL];
-    //	UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(handleCancelAction:)];
-    
     [item setTitleTextAttributes:
      [NSDictionary dictionaryWithObjectsAndKeys:
       kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
@@ -220,4 +221,7 @@ UICollectionViewDelegateFlowLayout
     return COLLECTION_VIEW_EDGEINSETS;
 }
 
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
+}
 @end

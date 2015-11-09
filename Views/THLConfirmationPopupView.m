@@ -41,6 +41,7 @@
                         _confirmButton,
                         _cancelButton]];
     
+    WEAKSELF();
     [_textView makeConstraints:^(MASConstraintMaker *make) {
         make.top.insets(kTHLEdgeInsetsSuperHigh());
         make.left.right.insets(kTHLEdgeInsetsHigh());
@@ -48,14 +49,14 @@
     }];
     
     [_confirmButton makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_textView.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+        make.top.equalTo([WSELF textView].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
         make.bottom.left.insets(UIEdgeInsetsZero).insets(kTHLEdgeInsetsHigh());
-        make.right.equalTo(_cancelButton.mas_left).insets(kTHLEdgeInsetsHigh());
-        make.width.equalTo(_cancelButton);
+        make.right.equalTo([WSELF cancelButton].mas_left).insets(kTHLEdgeInsetsHigh());
+        make.width.equalTo(WSELF.cancelButton);
     }];
     
     [_cancelButton makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_textView.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+        make.top.equalTo([WSELF textView].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
         make.right.bottom.insets(UIEdgeInsetsZero).insets(kTHLEdgeInsetsHigh());
     }];
 }
@@ -70,12 +71,12 @@
 
 - (void)bindView {
     WEAKSELF();
-    RAC(WSELF.textView, text) = RACObserve(WSELF, confirmationText);
-    RAC(WSELF.confirmButton, rac_command) = RACObserve(WSELF, confirmCommand);
-    [[WSELF.confirmButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+    RAC(self.textView, text) = RACObserve(WSELF, confirmationText);
+    RAC(self.confirmButton, rac_command) = RACObserve(WSELF, confirmCommand);
+    [[self.confirmButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         [WSELF dismissPresentingPopup];
     }];
-    [[WSELF.cancelButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+    [[self.cancelButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         [WSELF dismissPresentingPopup];
     }];
 }
@@ -104,5 +105,9 @@
     cancelButton.backgroundColor = kTHLNUIRedColor;
     
     return cancelButton;
+}
+
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
 }
 @end

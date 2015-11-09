@@ -13,7 +13,12 @@
 #import "UIScrollView+SVPullToRefresh.h"
 #import "THLAppearanceConstants.h"
 
-@interface THLEventDiscoveryViewController ()<UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface THLEventDiscoveryViewController ()
+<
+UICollectionViewDelegate,
+UICollectionViewDelegateFlowLayout
+>
+
 @property (nonatomic, strong) UICollectionView *collectionView;
 @end
 

@@ -14,7 +14,7 @@
 
 @interface THLGuestlistReviewCellViewModel : NSObject
 
-@property (nonatomic, readonly) THLGuestlistInviteEntity *guestlistInviteEntity;
+@property (nonatomic, readonly, weak) THLGuestlistInviteEntity *guestlistInviteEntity;
 
 - (instancetype)initWithGuestlistInviteEntity:(THLGuestlistInviteEntity *)guestlistInvite;
 - (void)configureView:(id<THLGuestlistReviewCellView>)view;

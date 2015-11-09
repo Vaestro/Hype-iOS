@@ -13,6 +13,5 @@
 @property (nonatomic, strong) RACCommand *acceptCommand;
 @property (nonatomic, copy) NSString *notificationText;
 @property (nonatomic, copy) NSURL *notificationImageURL;
-@property (nonatomic, weak) KLCPopup *presenter;
 @end
 

@@ -21,8 +21,8 @@
 @property (nonatomic, weak) id<THLEventDiscoveryInteractorDelegate> delegate;
 
 #pragma mark - Dependencies
-@property (nonatomic, readonly) THLEventDiscoveryDataManager *dataManager;
-@property (nonatomic, readonly) id<THLViewDataSourceFactoryInterface> viewDataSourceFactory;
+@property (nonatomic, readonly, weak) THLEventDiscoveryDataManager *dataManager;
+@property (nonatomic, readonly, weak) id<THLViewDataSourceFactoryInterface> viewDataSourceFactory;
 - (instancetype)initWithDataManager:(THLEventDiscoveryDataManager *)dataManager
 			  viewDataSourceFactory:(id<THLViewDataSourceFactoryInterface>)viewDataSourceFactory;
 

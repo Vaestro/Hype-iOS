@@ -9,7 +9,7 @@
 #import "THLPromotionEntity.h"
 
 @implementation THLPromotionEntity
-- (void)dealloc {
-    NSLog(@"Destroyed %@", self);
-}
+//- (void)dealloc {
+//    NSLog(@"Destroyed %@", self);
+//}
 @end

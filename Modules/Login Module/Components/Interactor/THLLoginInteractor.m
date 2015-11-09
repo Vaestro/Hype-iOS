@@ -54,27 +54,29 @@
 }
 
 - (void)login {
+    WEAKSELF();
 	[[_dataManager login] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
-		_user = task.result;
-		[_delegate interactor:self didLoginUser:task.error];
+		WSELF.user = task.result;
+		[_delegate interactor:WSELF didLoginUser:task.error];
 		return nil;
 	}];
 }
 
 - (void)addFacebookInformation {
+    WEAKSELF();
     [[_dataManager getFacebookInformation] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
         NSDictionary *userDictionary = task.result;
-        _user.firstName = userDictionary[@"first_name"];
-        _user.lastName = userDictionary[@"last_name"];
-        _user.sex = ([userDictionary[@"gender"] isEqualToString:@"male"]) ? THLSexMale : THLSexFemale;
-        _user.fbBirthday = [[[YLMoment alloc] initWithDateAsString:userDictionary[@"birthday"]] date];
-        _user.email = userDictionary[@"email"];
-        _user.fbId = userDictionary[@"id"];
-        _user.location = userDictionary[@"location"];
-        _user.fbVerified = userDictionary[@"verified"];
-        _user.type = THLUserTypeGuest;
-        [[_user saveInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask<NSNumber *> *saveTask) {
-            [_delegate interactor:self didAddFacebookInformation:saveTask.error];
+        [WSELF user].firstName = userDictionary[@"first_name"];
+        [WSELF user].lastName = userDictionary[@"last_name"];
+        [WSELF user].sex = ([userDictionary[@"gender"] isEqualToString:@"male"]) ? THLSexMale : THLSexFemale;
+        [WSELF user].fbBirthday = [[[YLMoment alloc] initWithDateAsString:userDictionary[@"birthday"]] date];
+        [WSELF user].email = userDictionary[@"email"];
+        [WSELF user].fbId = userDictionary[@"id"];
+        [WSELF user].location = userDictionary[@"location"];
+        [WSELF user].fbVerified = userDictionary[@"verified"];
+        [WSELF user].type = THLUserTypeGuest;
+        [[WSELF.user saveInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask<NSNumber *> *saveTask) {
+            [_delegate interactor:WSELF didAddFacebookInformation:saveTask.error];
             return nil;
         }];
         return nil;
@@ -83,8 +85,9 @@
 
 - (void)addVerifiedPhoneNumber:(NSString *)phoneNumber {
 	_user.phoneNumber = phoneNumber;
+    WEAKSELF();
 	[[_user saveInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask<NSNumber *> *task) {
-		[_delegate interactor:self didAddVerifiedPhoneNumber:task.error];
+		[WSELF.delegate interactor:WSELF didAddVerifiedPhoneNumber:task.error];
 		return nil;
 	}];
 }
@@ -92,8 +95,9 @@
 - (void)addProfileImage:(UIImage *)profileImage {
 	PFFile *profileImageFile = [self profileImageFileForUser:_user withImage:profileImage];
 	_user.image = profileImageFile;
+    WEAKSELF();
 	[[_user saveInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask<NSNumber *> *task) {
-		[_delegate interactor:self didAddProfileImage:task.error];
+		[_delegate interactor:WSELF didAddProfileImage:task.error];
 		return nil;
 	}];
 }
@@ -111,4 +115,7 @@
 	return [nameComponents componentsJoinedByString:@"_"];
 }
 
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
+}
 @end

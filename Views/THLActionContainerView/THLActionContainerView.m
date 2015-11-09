@@ -42,17 +42,19 @@
     if (_status == THLActionContainerViewStatusAcceptOrDecline) {
         [self addSubviews:@[self.acceptButton,
                             self.declineButton]];
-
+        
+        WEAKSELF();
         [self.acceptButton makeConstraints:^(MASConstraintMaker *make) {
             make.top.bottom.left.insets(kTHLEdgeInsetsHigh());
-            make.right.equalTo(self.declineButton.mas_left).insets(kTHLEdgeInsetsHigh());
-            make.width.equalTo(self.declineButton);
+            make.right.equalTo([WSELF declineButton].mas_left).insets(kTHLEdgeInsetsHigh());
+            make.width.equalTo(WSELF.declineButton);
         }];
         
         [self.declineButton makeConstraints:^(MASConstraintMaker *make) {
             make.top.right.bottom.insets(kTHLEdgeInsetsHigh());
-            make.left.equalTo(self.acceptButton.mas_right).insets(kTHLEdgeInsetsHigh());
+            make.left.equalTo([WSELF acceptButton].mas_right).insets(kTHLEdgeInsetsHigh());
         }];
+        
     } else if (_status == THLActionContainerViewStatusAccept){
         [self addSubview:self.acceptButton];
         [self.acceptButton makeConstraints:^(MASConstraintMaker *make) {
@@ -86,5 +88,8 @@
     [button setTitle:@"REJECT" animateChanges:NO];
     button.backgroundColor = [button redColor];
     return button;
+}
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
 }
 @end

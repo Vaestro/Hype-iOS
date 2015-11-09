@@ -10,7 +10,8 @@
 
 @class BFTask;
 @class THLGuestlist;
-@class THLPromotion;
+
+@class THLPromotionEntity;
 @class THLUser;
 @class THLEvent;
 @class THLGuestlistInvite;
@@ -18,7 +19,7 @@
 @protocol THLGuestlistServiceInterface <NSObject>
 
 #pragma mark - Guestlist Services
-- (BFTask *)createGuestlistForPromotion:(NSString *)promotionId withInvites:(NSArray *)guestPhoneNumbers;
+- (BFTask *)createGuestlistForPromotion:(THLPromotionEntity *)promotionEntity withInvites:(NSArray *)guestPhoneNumbers;
 - (BFTask *)updateGuestlist:(NSString *)guestlistId withInvites:(NSArray *)guestPhoneNumbers;
 
 #pragma mark - Guestlist Invite Services

@@ -68,4 +68,7 @@
 	[_facebookPictureModule presentFacebookPictureInterfaceInWindow:_window];
 }
 
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
+}
 @end

@@ -7,13 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "THLEventFlowDependencyManager.h"
+#import "THLGuestFlowDependencyManager.h"
 
 @class THLMasterWireframe;
 @class THLLoginWireframe;
 @class THLFacebookPictureWireframe;
 @class THLNumberVerificationWireframe;
-@class THLEventFlowWireframe;
+@class THLGuestFlowWireframe;
 @class THLEventDiscoveryWireframe;
 @class THLEventDetailWireframe;
 @class THLPromotionSelectionWireframe;
@@ -25,14 +25,14 @@
  */
 @interface THLDependencyManager : NSObject
 <
-THLEventFlowDependencyManager
+THLGuestFlowDependencyManager
 >
 @property (nonatomic, readonly, strong) THLMasterWireframe *masterWireframe;
 
 - (THLLoginWireframe *)newLoginWireframe;
 - (THLFacebookPictureWireframe *)newFacebookPictureWireframe;
 - (THLNumberVerificationWireframe *)newNumberVerificationWireframe;
-- (THLEventFlowWireframe *)newEventFlowWireframe;
+- (THLGuestFlowWireframe *)newGuestFlowWireframe;
 - (THLEventDiscoveryWireframe *)newEventDiscoveryWireframe;
 - (THLEventDetailWireframe *)newEventDetailWireframe;
 - (THLPromotionSelectionWireframe *)newPromotionSelectionWireframe;

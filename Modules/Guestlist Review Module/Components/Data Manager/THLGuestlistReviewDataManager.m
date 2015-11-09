@@ -33,10 +33,14 @@
 }
 
 - (BFTask *)fetchGuestlistInvitesForGuestlist:(NSString *)guestlistId {
+    WEAKSELF();
     return [[_guestlistService fetchInvitesOnGuestlist:[THLGuestlist objectWithoutDataWithObjectId:guestlistId]] continueWithSuccessBlock:^id(BFTask *task) {
-        THLDataStoreDomain *domain = [self domainForGuestlistInvites];
-        NSSet *entities = [NSSet setWithArray:[_entityMapper mapGuestlistInvites:task.result]];
-        [_dataStore refreshDomain:domain withEntities:entities];
+        THLDataStoreDomain *domain = [WSELF domainForGuestlistInvites];
+        NSSet *entities = [NSSet setWithArray:[WSELF.entityMapper mapGuestlistInvites:task.result]];
+#warning Hackaround to fix data store from causing problems when accessing guestlist invites from different guestlists
+        [WSELF.dataStore purge];
+        
+        [WSELF.dataStore refreshDomain:domain withEntities:entities];
         return [BFTask taskWithResult:entities];
     }];
 }
@@ -53,4 +57,7 @@
     return [_guestlistService updateGuestlistInvite:[THLGuestlistInvite objectWithoutDataWithObjectId:guestlistInvite.objectId] withResponse:response];
 }
 
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
+}
 @end

@@ -41,10 +41,11 @@
     [self.contentView addSubviews:@[_imageView,
                                     _titlesView]];
     
+    WEAKSELF();
     [_titlesView makeConstraints:^(MASConstraintMaker *make) {
         make.center.centerOffset(CGPointZero);
-        make.top.left.greaterThanOrEqualTo(SV(_titlesView)).insets(kTHLEdgeInsetsHigh());
-        make.bottom.right.lessThanOrEqualTo(SV(_titlesView)).insets(kTHLEdgeInsetsHigh());
+        make.top.left.greaterThanOrEqualTo(SV(WSELF.titlesView)).insets(kTHLEdgeInsetsHigh());
+        make.bottom.right.lessThanOrEqualTo(SV(WSELF.titlesView)).insets(kTHLEdgeInsetsHigh());
     }];
     
     [_imageView makeConstraints:^(MASConstraintMaker *make) {
@@ -58,10 +59,11 @@
     RAC(self.titlesView, dateText) = RACObserve(self, time);
     RAC(self.titlesView, locationNameText) = RACObserve(self, locationName);
     RAC(self.titlesView, locationNeighborhoodText) = RACObserve(self, locationNeighborhood);
+    WEAKSELF();
     [[RACObserve(self, imageURL) filter:^BOOL(NSURL *url) {
         return [url isValid];
     }] subscribeNext:^(NSURL *url) {
-        [self.imageView sd_setImageWithURL:url];
+        [WSELF.imageView sd_setImageWithURL:url];
     }];
 }
 

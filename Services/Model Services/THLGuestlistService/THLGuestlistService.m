@@ -10,6 +10,8 @@
 #import "THLParseQueryFactory.h"
 #import "Parse.h"
 #import "THLGuestlistInvite.h"
+#import "THLPromotionEntity.h"
+#import "THLEventEntity.h"
 
 @implementation THLGuestlistService
 
@@ -22,9 +24,9 @@
 
 #pragma mark - Guestlist Services
 
-- (BFTask *)createGuestlistForPromotion:(NSString *)promotionId withInvites:(NSArray *)guestPhoneNumbers {
+- (BFTask *)createGuestlistForPromotion:(THLPromotionEntity *)promotionEntity withInvites:(NSArray *)guestPhoneNumbers {
     return [PFCloud callFunctionInBackground:@"ownerGuestSubmission"
-                              withParameters:@{@"promotionId": promotionId, @"guestDigits": guestPhoneNumbers}];
+                              withParameters:@{@"promotionId": promotionEntity.objectId, @"eventName":promotionEntity.event.location.name, @"promotionTime":promotionEntity.time, @"guestDigits": guestPhoneNumbers}];
 }
 
 - (BFTask *)updateGuestlist:(NSString *)guestlistId withInvites:(NSArray *)guestPhoneNumbers {

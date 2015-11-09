@@ -20,10 +20,11 @@
 THLGuestlistReviewInteractorDelegate
 >
 @property (nonatomic, weak) id<THLGuestlistReviewView> view;
-@property (nonatomic, copy) NSString *reviewer;
-@property (nonatomic) THLGuestlistReviewerStatus reviewerStatus;
+
 @property (nonatomic) BOOL refreshing;
+@property (nonatomic) THLGuestlistReviewerStatus reviewerStatus;
 @property (nonatomic) THLActivityStatus activityStatus;
+
 @property (nonatomic, strong) THLGuestlistInviteEntity *guestlistInviteEntity;
 @end
 
@@ -49,61 +50,62 @@ THLGuestlistReviewInteractorDelegate
 }
 
 - (void)configureView:(id<THLGuestlistReviewView>)view {
-    WEAKSELF();
     _view = view;
+    
     THLViewDataSource *dataSource = [_interactor generateDataSource];
     dataSource.dataTransformBlock = ^id(id item) {
         return [[THLGuestlistReviewCellViewModel alloc] initWithGuestlistInviteEntity:(THLGuestlistInviteEntity *)item];
     };
     
-    [view setDataSource:dataSource];
+    [_view setDataSource:dataSource];
 
+    WEAKSELF();
     RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [self handleDismissAction];
+        [WSELF handleDismissAction];
         return [RACSignal empty];
     }];
     
-    [view setDismissCommand:dismissCommand];
+    [_view setDismissCommand:dismissCommand];
     
     RACCommand *acceptCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [self handleAcceptAction];
+        [WSELF handleAcceptAction];
         return [RACSignal empty];
     }];
     
-    [view setAcceptCommand:acceptCommand];
+    [_view setAcceptCommand:acceptCommand];
     
     RACCommand *declineCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [self handleDeclineAction];
+        [WSELF handleDeclineAction];
         return [RACSignal empty];
     }];
     
-    [view setDeclineCommand:declineCommand];
+    [_view setDeclineCommand:declineCommand];
     
     RACCommand *confirmCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [self handleConfirmAction];
+        [WSELF handleConfirmAction];
         return [RACSignal empty];
     }];
     
-    [view setConfirmCommand:confirmCommand];
+    [_view setConfirmCommand:confirmCommand];
     
     RACCommand *refreshCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         [WSELF handleRefreshAction];
         return [RACSignal empty];
     }];
     
-    [view setRefreshCommand:refreshCommand];
+    [_view setRefreshCommand:refreshCommand];
     
-    [RACObserve(WSELF, refreshing) subscribeNext:^(NSNumber *b) {
+    [RACObserve(self, refreshing) subscribeNext:^(NSNumber *b) {
         BOOL isRefreshing = [b boolValue];
-        [view setShowRefreshAnimation:isRefreshing];
+        [WSELF.view setShowRefreshAnimation:isRefreshing];
     }];
     
-    [RACObserve(WSELF, activityStatus) subscribeNext:^(id _) {
-        [view setShowActivityIndicator:_activityStatus];
+    [RACObserve(self, activityStatus) subscribeNext:^(id _) {
+        [WSELF.view setShowActivityIndicator:WSELF.activityStatus];
     }];
     
-    [RACObserve(WSELF, reviewerStatus) subscribeNext:^(id _) {
-        [view setReviewerStatus:_reviewerStatus];
+    [RACObserve(self, reviewerStatus) subscribeNext:^(id _) {
+        [WSELF.view setReviewerStatus:WSELF.reviewerStatus];
     }];
     //    RACCommand *selectedIndexPathCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
     //        [self handleIndexPathSelection:(NSIndexPath *)input];
@@ -115,9 +117,8 @@ THLGuestlistReviewInteractorDelegate
 
 //TODO: Create Configure Review Options
 - (void)updateReviewStatus {
-    WEAKSELF();
     if (_guestlistInviteEntity.response == THLStatusAccepted) {
-        WSELF.reviewerStatus = THLGuestlistReviewerStatusAttendingGuest;
+        self.reviewerStatus = THLGuestlistReviewerStatusAttendingGuest;
     }
 }
 #pragma mark - Event Handling
@@ -170,13 +171,16 @@ THLGuestlistReviewInteractorDelegate
 }
 
 - (void)interactor:(THLGuestlistReviewInteractor *)interactor didUpdateGuestlistInviteResponse:(NSError *)error to:(THLStatus)response {
-    WEAKSELF();
     if (!error && response == THLStatusAccepted) {
         [self updateReviewStatus];
-        WSELF.activityStatus = THLActivityStatusNone;
+        self.activityStatus = THLActivityStatusNone;
     } else if (!error && response == THLStatusDeclined) {
-        WSELF.activityStatus = THLActivityStatusNone;
+        self.activityStatus = THLActivityStatusNone;
         [_wireframe dismissInterface];
     }
+}
+
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
 }
 @end

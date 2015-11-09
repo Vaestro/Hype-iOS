@@ -7,16 +7,21 @@
 //
 
 #import "THLGuestlistInvitationViewController.h"
+#import "THLGuestlistInvitationViewEventHandler.h"
+#import "THLSearchViewDataSource.h"
+
+//Views
 #import "THLGuestlistInvitationView.h"
 #import "THContactPickerView.h"
-#import "THLAppearanceConstants.h"
-#import "THLUserEntity.h"
-#import "THLGuestlistInvitationViewEventHandler.h"
 #import "THLContactTableViewCell.h"
-#import "THLSearchViewDataSource.h"
-#import "THLGuestEntity.h"
-#import "SVProgressHUD.h"
 
+//Utilities
+#import "SVProgressHUD.h"
+#import "THLAppearanceConstants.h"
+
+//Entities
+#import "THLUserEntity.h"
+#import "THLGuestEntity.h"
 
 #define kContactPickerViewHeight 100.0
 

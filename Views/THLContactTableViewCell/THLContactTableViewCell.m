@@ -34,21 +34,22 @@
 }
 
 - (void)layoutView {
+    WEAKSELF();
     [self addSubviews:@[_iconImageView, _nameLabel, _phoneNumberLabel]];
 
     [_iconImageView makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.left.insets(kTHLEdgeInsetsHigh());
-        make.width.equalTo(_iconImageView.mas_height);
+        make.width.equalTo([WSELF iconImageView].mas_height);
     }];
     
     [_nameLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.right.insets(kTHLEdgeInsetsHigh());
-        make.left.equalTo(_iconImageView.mas_right).insets(kTHLEdgeInsetsHigh());
+        make.left.equalTo([WSELF iconImageView].mas_right).insets(kTHLEdgeInsetsHigh());
     }];
     
     [_phoneNumberLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_nameLabel.mas_baseline).insets(kTHLEdgeInsetsHigh());
-        make.left.equalTo(_iconImageView.mas_right).insets(kTHLEdgeInsetsHigh());
+        make.top.equalTo([WSELF nameLabel].mas_baseline).insets(kTHLEdgeInsetsHigh());
+        make.left.equalTo([WSELF iconImageView].mas_right).insets(kTHLEdgeInsetsHigh());
         make.bottom.right.insets(kTHLEdgeInsetsHigh());
     }];
 }
@@ -84,5 +85,9 @@
 #pragma mark - Public Interface
 + (NSString *)identifier {
     return NSStringFromClass(self.class);
+}
+
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
 }
 @end

@@ -55,12 +55,13 @@ THLGuestlistInvitationViewEventHandler
 
 - (void)configureView:(id<THLGuestlistInvitationView>)view {
 	_view = view;
-	[view setEventHandler:self];
-	[view setDataSource:[_interactor getDataSource]];
+	[_view setEventHandler:self];
+	[_view setDataSource:[_interactor getDataSource]];
     
+    WEAKSELF();
     [RACObserve(self, submitting) subscribeNext:^(NSNumber *b) {
         BOOL isSubmitting = [b boolValue];
-        [view setShowActivityIndicator:isSubmitting];
+        [WSELF.view setShowActivityIndicator:isSubmitting];
     }];
 }
 
