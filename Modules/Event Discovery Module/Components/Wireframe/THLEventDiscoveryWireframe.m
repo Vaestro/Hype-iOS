@@ -51,7 +51,7 @@
 
 - (void)presentInWindow:(UIWindow *)window {
 	_window = window;
-	[_presenter configureView:_view];
+  	[_presenter configureView:_view];
 	_window.rootViewController = [[UINavigationController alloc] initWithRootViewController:_view];
 	[_window makeKeyAndVisible];
 }

@@ -66,13 +66,13 @@
     WEAKSELF();
     [[_dataManager getFacebookInformation] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
         NSDictionary *userDictionary = task.result;
+        [WSELF user].fbId = userDictionary[@"id"];
         [WSELF user].firstName = userDictionary[@"first_name"];
         [WSELF user].lastName = userDictionary[@"last_name"];
         [WSELF user].sex = ([userDictionary[@"gender"] isEqualToString:@"male"]) ? THLSexMale : THLSexFemale;
-        [WSELF user].fbBirthday = [[[YLMoment alloc] initWithDateAsString:userDictionary[@"birthday"]] date];
-        [WSELF user].email = userDictionary[@"email"];
-        [WSELF user].fbId = userDictionary[@"id"];
-        [WSELF user].location = userDictionary[@"location"];
+//TODO: Add Location and Birthday upon Facebook Approval
+//        [WSELF user].fbBirthday = [[[YLMoment alloc] initWithDateAsString:userDictionary[@"birthday"]] date];
+//        [WSELF user].location = userDictionary[@"location"];
         [WSELF user].fbVerified = userDictionary[@"verified"];
         [WSELF user].type = THLUserTypeGuest;
         [[WSELF.user saveInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask<NSNumber *> *saveTask) {

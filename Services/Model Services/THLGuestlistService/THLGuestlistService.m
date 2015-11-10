@@ -24,6 +24,10 @@
 
 #pragma mark - Guestlist Services
 
+- (BFTask *)fetchGuestlistsForPromotion {
+    return [[_queryFactory queryForGuestlistsForPromotion] findObjectsInBackground];
+}
+
 - (BFTask *)createGuestlistForPromotion:(THLPromotionEntity *)promotionEntity withInvites:(NSArray *)guestPhoneNumbers {
     return [PFCloud callFunctionInBackground:@"ownerGuestSubmission"
                               withParameters:@{@"promotionId": promotionEntity.objectId, @"eventName":promotionEntity.event.location.name, @"promotionTime":promotionEntity.time, @"guestDigits": guestPhoneNumbers}];

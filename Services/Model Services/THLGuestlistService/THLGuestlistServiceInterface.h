@@ -19,6 +19,7 @@
 @protocol THLGuestlistServiceInterface <NSObject>
 
 #pragma mark - Guestlist Services
+- (BFTask *)fetchGuestlistsForPromotion;
 - (BFTask *)createGuestlistForPromotion:(THLPromotionEntity *)promotionEntity withInvites:(NSArray *)guestPhoneNumbers;
 - (BFTask *)updateGuestlist:(NSString *)guestlistId withInvites:(NSArray *)guestPhoneNumbers;
 

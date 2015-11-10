@@ -14,5 +14,5 @@
 @property (nonatomic, weak) id<THLGuestlistReviewModuleDelegate> moduleDelegate;
 
 - (void)presentGuestlistReviewInterfaceForGuestlist:(THLGuestlistEntity *)guestlistEntity withGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInviteEntity inController:(UIViewController *)controller;
-
+- (void)presentGuestlistReviewInterfaceForGuestlist:(THLGuestlistEntity *)guestlistEntity inController:(UIViewController *)controller;
 @end

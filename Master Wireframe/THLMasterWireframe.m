@@ -15,6 +15,7 @@
 //Wireframes
 #import "THLLoginWireframe.h"
 #import "THLGuestFlowWireframe.h"
+#import "THLHostFlowWireframe.h"
 #import "THLEventDetailWireframe.h"
 #import "THLPromotionSelectionWireframe.h"
 #import "THLGuestlistInvitationWireframe.h"
@@ -25,11 +26,11 @@
 #import "THLEventDetailModuleDelegate.h"
 #import "THLPromotionSelectionModuleDelegate.h"
 #import "THLGuestlistInvitationModuleDelegate.h"
+#import "THLUser.h"
 
 @interface THLMasterWireframe()
 <
 THLLoginModuleDelegate,
-THLPromotionSelectionModuleDelegate,
 THLPopupNotificationModuleDelegate
 >
 
@@ -51,16 +52,19 @@ THLPopupNotificationModuleDelegate
 
 - (void)presentAppInWindow:(UIWindow *)window {
 	_window = window;
-    
-    if ([_sessionService isUserCached]) {
-//        Potentially Necessasy to update Installation everytime User opens app
-//        [_sessionService makeCurrentInstallation];
+    [_sessionService isUserCached] ? [self routeUserFlow] : [self presentLoginInterface];
+}
+
+- (void)routeUserFlow {
+    if ([THLUser currentUser].type == THLUserTypeGuest) {
         [self presentGuestFlow];
-    }else {
-        [self presentLoginInterface];
+    }
+    else if ([THLUser currentUser].type == THLUserTypeHost) {
+        [self presentHostFlow];
     }
 }
 
+#pragma mark - Push Notifications
 - (BFTask *)handlePushNotification:(NSDictionary *)pushInfo {
     if ([pushInfo objectForKey:@"notificationText"]) {
         THLPopupNotificationWireframe *popupNotificationWireframe = [_dependencyManager newPopupNotificationWireframe];
@@ -75,14 +79,14 @@ THLPopupNotificationModuleDelegate
 #pragma mark - Routing
 - (void)presentLoginInterface {
 	THLLoginWireframe *loginWireframe = [_dependencyManager newLoginWireframe];
-	_currentWireframe = loginWireframe;
+    _currentWireframe = loginWireframe;
 	[loginWireframe.moduleInterface setModuleDelegate:self];
 	[loginWireframe.moduleInterface presentLoginModuleInterfaceInWindow:_window];
 }
 
 - (void)presentGuestFlow {
 	THLGuestFlowWireframe *guestWireframe = [_dependencyManager newGuestFlowWireframe];
-	_currentWireframe = guestWireframe;
+    _currentWireframe = guestWireframe;
 	[guestWireframe presentGuestFlowInWindow:_window];
 }
 
@@ -91,6 +95,13 @@ THLPopupNotificationModuleDelegate
     _currentWireframe = guestWireframe;
     [guestWireframe presentGuestFlowInWindow:_window forEventDetail:eventEntity];
 }
+
+- (void)presentHostFlow {
+    THLHostFlowWireframe *hostWireframe = [_dependencyManager newHostFlowWireframe];
+    _currentWireframe = hostWireframe;
+    [hostWireframe presentHostFlowInWindow:_window];
+}
+
 
 #pragma mark - THLPopupNotifcationDelegate
 - (void)popupNotificationModule:(id<THLPopupNotificationModuleInterface>)module userDidAcceptReviewForEvent:(THLEventEntity *)eventEntity {
@@ -102,7 +113,9 @@ THLPopupNotificationModuleDelegate
 	if (!error) {
         [_sessionService makeCurrentInstallation];
 		[self presentGuestFlow];
-	}
+    } else {
+        NSLog(@"Login Error:%@", error);
+    }
 }
 
 #pragma mark - THLEventDetailModuleDelegate

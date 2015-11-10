@@ -49,6 +49,12 @@ THLGuestlistReviewInteractorDelegate
 - (void)presentGuestlistReviewInterfaceForGuestlist:(THLGuestlistEntity *)guestlistEntity withGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInviteEntity inController:(UIViewController *)controller {
     _interactor.guestlistEntity = guestlistEntity;
     _guestlistInviteEntity = guestlistInviteEntity;
+    [self updateReviewStatus]; 
+    [_wireframe presentInterfaceInController:controller];
+}
+
+- (void)presentGuestlistReviewInterfaceForGuestlist:(THLGuestlistEntity *)guestlistEntity inController:(UIViewController *)controller {
+    _interactor.guestlistEntity = guestlistEntity;
     [self updateReviewStatus];
     [_wireframe presentInterfaceInController:controller];
 }

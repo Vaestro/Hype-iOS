@@ -36,7 +36,7 @@ static NSString *const kTHLGuestlistReviewModuleViewKey = @"kTHLGuestlistReviewM
 
 - (void)updateGuestlistInvites {
     WEAKSELF();
-    [[_dataManager fetchGuestlistInvitesForGuestlist:_guestlistEntity.objectId] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+    [[_dataManager fetchGuestlistInvitesForGuestlist:_guestlistEntity] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
 //        Store guestlist Invites in Memory In case User wants to Add more Guests
 //        WSELF.guestlistInvites = task.result;
         [WSELF.delegate interactor:WSELF didUpdateGuestlistInvites:task.error];

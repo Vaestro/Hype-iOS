@@ -21,6 +21,7 @@ THLFacebookPictureModuleDelegate,
 THLNumberVerificationModuleDelegate
 >
 @property (nonatomic) BOOL busy;
+//@property (nonatomic) THLActivityStatus activityStatus;
 @end
 
 @implementation THLLoginPresenter
@@ -43,20 +44,25 @@ THLNumberVerificationModuleDelegate
 
 - (void)configureView:(id<THLLoginView>)view {
     WEAKSELF();
-	[view setLoginText:NSLocalizedString(@"Login with Facebook", @"Facebook login")];
 
 	RACCommand *loginCommand = [[RACCommand alloc] initWithEnabled:RACObserve(self.interactor, shouldLogin) signalBlock:^RACSignal *(id input) {
 		[WSELF handleUserLoginAction];
 		return [RACSignal empty];
 
 	}];
-
+    
+//    [RACObserve(self, activityStatus) subscribeNext:^(id _) {
+//        [view setActivityIndicator:WSELF.activityStatus];
+//    }];
+    
+    [view setLoginText:NSLocalizedString(@"Login with Facebook", @"Facebook login")];
 	[view setLoginCommand:loginCommand];
 }
 
 #pragma mark - Action Handling
 - (void)handleError:(NSError *)error {
 	DLog(@"Error: %@", error);
+//    _activityStatus = THLActivityStatusError;
 	[self reroute];
 }
 
@@ -77,9 +83,9 @@ THLNumberVerificationModuleDelegate
 }
 
 - (void)handleAddProfilePictureSuccess {
+//    _activityStatus = THLActivityStatusInProgress;
 	[self reroute];
 }
-
 
 #pragma mark - Routing
 - (void)reroute {
@@ -104,6 +110,7 @@ THLNumberVerificationModuleDelegate
 }
 
 - (void)finishLoginInterface {
+//    _activityStatus = THLActivityStatusSuccess;
 	[self.moduleDelegate loginModule:self didLoginUser:nil];
 }
 

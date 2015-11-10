@@ -14,10 +14,22 @@
 @implementation THLParseQueryFactory
 #pragma mark - Event Queries
 - (PFQuery *)queryForEventsStartingOn:(NSDate *)startDate endingOn:(NSDate *)endDate {
-	PFQuery *query = [self baseEventQuery];
-	[query whereKey:@"date" greaterThanOrEqualTo:startDate];
-	[query whereKey:@"date" lessThanOrEqualTo:endDate];
-	[query whereKey:@"objectId" matchesKey:@"eventId" inQuery:[self basePromotionQuery]];
+    THLUser *currentUser = [THLUser currentUser];
+    PFQuery *query = [self baseEventQuery];
+    [query whereKey:@"date" greaterThanOrEqualTo:startDate];
+    [query whereKey:@"date" lessThanOrEqualTo:endDate];
+    /**
+     *  If User is a Guest fetch all events. If User is Host, only fetch Events that they have a promotion for.
+     */
+    if (currentUser.type == THLUserTypeGuest) {
+        [query whereKey:@"objectId" matchesKey:@"eventId" inQuery:[self basePromotionQuery]];
+    }
+    else if (currentUser.type == THLUserTypeHost) {
+        PFQuery *promotionQuery = [self basePromotionQuery];
+        [promotionQuery whereKey:@"host" equalTo:[THLUser currentUser]];
+        [query whereKey:@"objectId" matchesKey:@"eventId" inQuery:promotionQuery];
+    }
+
 	return query;
 }
 
@@ -39,6 +51,15 @@
 }
 
 #pragma mark - Guestlist Queries
+- (PFQuery *)queryForGuestlistsForPromotion {
+    PFQuery *promotionQuery = [self basePromotionQuery];
+    [promotionQuery whereKey:@"host" equalTo:[THLUser currentUser]];
+    
+    PFQuery *query = [self baseGuestlistQuery];
+    [query whereKey:@"Promotion" matchesQuery:promotionQuery];
+    return query;
+}
+
 //TODO: Query for Guestlist Invite for User for Event
 - (PFQuery *)queryForGuestlistInviteForUser:(THLUser *)user atEvent:(NSString *)eventId {
     PFQuery *guestlistQuery = [self baseGuestlistQuery];

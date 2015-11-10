@@ -9,6 +9,7 @@
 #import "THLLoginViewController.h"
 #import "THLAppearanceConstants.h"
 #import "OnboardingViewController.h"
+#import "SVProgressHUD.h"
 
 static CGFloat const LOGIN_BUTTON_HEIGHT = 50;
 static CGFloat const PRIVACY_IMAGEVIEW_DIMENSION = 14;
@@ -23,6 +24,7 @@ static CGFloat const PRIVACY_IMAGEVIEW_DIMENSION = 14;
 @end
 
 @implementation THLLoginViewController
+//@synthesize activityIndicator;
 @synthesize loginCommand;
 @synthesize loginText;
 
@@ -51,9 +53,10 @@ static CGFloat const PRIVACY_IMAGEVIEW_DIMENSION = 14;
     
     [self.view addSubviews:@[_facebookLoginContainerView]];
     
+    WEAKSELF();
     [_onboardingVC.view makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.insets(UIEdgeInsetsZero);
-        make.bottom.equalTo(_facebookLoginContainerView.mas_top).insets(UIEdgeInsetsZero);
+        make.bottom.equalTo([WSELF facebookLoginContainerView].mas_top).insets(UIEdgeInsetsZero);
     }];
     
     [_facebookLoginContainerView makeConstraints:^(MASConstraintMaker *make) {
@@ -65,6 +68,26 @@ static CGFloat const PRIVACY_IMAGEVIEW_DIMENSION = 14;
 - (void)bindView {
     RAC(self.facebookLoginButton, rac_command) = RACObserve(self, loginCommand);
     RAC(self.facebookLoginButton, titleLabel.text) = RACObserve(self, loginText);
+//    [RACObserve(self, activityIndicator) subscribeNext:^(id _) {
+//        switch (WSELF.activityIndicator) {
+//            case THLActivityStatusNone: {
+//                [SVProgressHUD dismiss];
+//                break;
+//            }
+//            case THLActivityStatusInProgress: {
+//                [SVProgressHUD show];
+//                break;
+//            }
+//            case THLActivityStatusSuccess: {
+//                [SVProgressHUD showSuccessWithStatus:@"Success!"];
+//                break;
+//            }
+//            case THLActivityStatusError: {
+//                [SVProgressHUD showErrorWithStatus:@"Error!"];
+//                break;
+//            }
+//        }
+//    }];
 }
 
 #pragma mark - Constructors

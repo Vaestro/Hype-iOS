@@ -13,37 +13,32 @@
 
 @implementation THLLoginService
 - (BFTask *)login {
-	return [self loginWithFacebook];
+    return [PFFacebookUtils logInInBackgroundWithReadPermissions:[self facebookLoginPermissions]];
 }
 
-- (BFTask *)loginWithFacebook {
-	return [PFFacebookUtils logInInBackgroundWithReadPermissions:[self facebookLoginPermissions]];
-}
-
+//TODO:Add User Location and Birthday after getting approval from Facebook
+//           @"user_location",
+//			 @"user_birthday",
 - (NSArray *)facebookLoginPermissions {
-	return @[@"user_location",
-			 @"user_photos",
-			 @"user_birthday",
-			 @"email",
-			 @"public_profile",
+	return @[@"public_profile",
+             @"user_photos",
+             @"email",
 			 @"user_friends"];
 }
 
 - (BFTask *)getFacebookUserDictionary {
+    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
+                                  initWithGraphPath:@"me"
+                                  parameters:@{@"fields": @"id,first_name,last_name,name,gender,verified,email"}
+                                  HTTPMethod:@"GET"];
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
-    FBSDKAccessToken *token = [FBSDKAccessToken currentAccessToken];
-    if (token) {
-        [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me?fields=id,age_range,birthday,currency,first_name,gender,last_name,location,name_format,name,verified,cover,email" parameters:nil]
-         startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-             if (error) {
-                 [completionSource setError:error];
-             } else {
-                 [completionSource setResult:result];
-             }
-         }];
-    } else {
-        [completionSource setError:[NSError errorWithDomain:@"com.THLHypeListFramework.Facebook.getUserDictionary: FBSDKAccessToken not found!" code:0 userInfo:nil]];
-    }
+    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+        if (!error) {
+            [completionSource setResult:result];
+        } else {
+            [completionSource setError:error];
+        }
+    }];
     return completionSource.task;
 }
 

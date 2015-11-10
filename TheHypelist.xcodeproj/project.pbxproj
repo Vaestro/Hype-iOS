@@ -103,13 +103,21 @@
 		21EED1001BB5F842001325A7 /* THLGuestFlowWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 21EED0FF1BB5F842001325A7 /* THLGuestFlowWireframe.m */; };
 		76FA20541BCF854000BB480A /* THLSessionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 76FA20531BCF854000BB480A /* THLSessionService.m */; };
 		7905CC411BE0252700E56878 /* THLGuestlistInviteEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7905CC401BE0252700E56878 /* THLGuestlistInviteEntity.m */; };
+		791C1F7D1BF13AD300CCF803 /* THLEventHostingPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 791C1F7C1BF13AD300CCF803 /* THLEventHostingPresenter.m */; };
+		791C1F831BF13AEA00CCF803 /* THLEventHostingDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 791C1F821BF13AEA00CCF803 /* THLEventHostingDataManager.m */; };
+		791C1F861BF13AF500CCF803 /* THLEventHostingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 791C1F851BF13AF500CCF803 /* THLEventHostingViewController.m */; };
+		791C1F8A1BF13BC300CCF803 /* THLEventHostingTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 791C1F891BF13BC300CCF803 /* THLEventHostingTableCell.m */; };
+		791C1F8D1BF13BD900CCF803 /* THLEventHostingTableCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 791C1F8C1BF13BD900CCF803 /* THLEventHostingTableCellViewModel.m */; };
 		794208281BD82641009B86FA /* UIView+DimView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794208271BD82641009B86FA /* UIView+DimView.m */; };
 		7942082C1BD82AF6009B86FA /* THLActionBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7942082B1BD82AF6009B86FA /* THLActionBarButton.m */; };
 		7942082F1BD8C250009B86FA /* THLGuestlistEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7942082E1BD8C250009B86FA /* THLGuestlistEntity.m */; };
 		794483041BEC5B5D00EABE23 /* THLStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794483031BEC5B5D00EABE23 /* THLStatusView.m */; };
 		794483081BEC8A6000EABE23 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 794483071BEC8A6000EABE23 /* libsqlite3.dylib */; };
+		79527CF01BF188F80074AF38 /* THLEventHostingInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 79527CEF1BF188F80074AF38 /* THLEventHostingInteractor.m */; };
 		79752ADE1BEBD8B500D09B2E /* THLConfirmationPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79752ADD1BEBD8B500D09B2E /* THLConfirmationPopupView.m */; };
 		798650A41BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 798650A31BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m */; };
+		798B5FCB1BF11BD2002EBCB6 /* THLHostFlowWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 798B5FCA1BF11BD2002EBCB6 /* THLHostFlowWireframe.m */; };
+		798B5FD11BF12D2C002EBCB6 /* THLEventHostingWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 798B5FD01BF12D2C002EBCB6 /* THLEventHostingWireframe.m */; };
 		79A466811BED371900AC975B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 79A466601BED371900AC975B /* AppDelegate.m */; };
 		79A466821BED371900AC975B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79A466611BED371900AC975B /* LaunchScreen.xib */; };
 		79A466831BED371900AC975B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79A466651BED371900AC975B /* Images.xcassets */; };
@@ -395,6 +403,18 @@
 		76FA20531BCF854000BB480A /* THLSessionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLSessionService.m; sourceTree = "<group>"; };
 		7905CC3E1BE0251000E56878 /* THLGuestlistInviteEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistInviteEntity.h; sourceTree = "<group>"; };
 		7905CC401BE0252700E56878 /* THLGuestlistInviteEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestlistInviteEntity.m; sourceTree = "<group>"; };
+		791C1F7B1BF13AD300CCF803 /* THLEventHostingPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventHostingPresenter.h; sourceTree = "<group>"; };
+		791C1F7C1BF13AD300CCF803 /* THLEventHostingPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventHostingPresenter.m; sourceTree = "<group>"; };
+		791C1F811BF13AEA00CCF803 /* THLEventHostingDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventHostingDataManager.h; sourceTree = "<group>"; };
+		791C1F821BF13AEA00CCF803 /* THLEventHostingDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventHostingDataManager.m; sourceTree = "<group>"; };
+		791C1F841BF13AF500CCF803 /* THLEventHostingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventHostingViewController.h; sourceTree = "<group>"; };
+		791C1F851BF13AF500CCF803 /* THLEventHostingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventHostingViewController.m; sourceTree = "<group>"; };
+		791C1F871BF13B9D00CCF803 /* THLEventHostingView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLEventHostingView.h; sourceTree = "<group>"; };
+		791C1F881BF13BC300CCF803 /* THLEventHostingTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventHostingTableCell.h; sourceTree = "<group>"; };
+		791C1F891BF13BC300CCF803 /* THLEventHostingTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventHostingTableCell.m; sourceTree = "<group>"; };
+		791C1F8B1BF13BD900CCF803 /* THLEventHostingTableCellViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventHostingTableCellViewModel.h; sourceTree = "<group>"; };
+		791C1F8C1BF13BD900CCF803 /* THLEventHostingTableCellViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventHostingTableCellViewModel.m; sourceTree = "<group>"; };
+		791C1F8E1BF13BEE00CCF803 /* THLEventHostingTableCellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLEventHostingTableCellView.h; sourceTree = "<group>"; };
 		794208261BD82641009B86FA /* UIView+DimView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DimView.h"; sourceTree = "<group>"; };
 		794208271BD82641009B86FA /* UIView+DimView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DimView.m"; sourceTree = "<group>"; };
 		7942082A1BD82AF6009B86FA /* THLActionBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLActionBarButton.h; sourceTree = "<group>"; };
@@ -406,10 +426,19 @@
 		794483021BEC5B5D00EABE23 /* THLStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLStatusView.h; sourceTree = "<group>"; };
 		794483031BEC5B5D00EABE23 /* THLStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLStatusView.m; sourceTree = "<group>"; };
 		794483071BEC8A6000EABE23 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = ../../../../usr/lib/libsqlite3.dylib; sourceTree = "<group>"; };
+		79527CEE1BF188F80074AF38 /* THLEventHostingInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventHostingInteractor.h; sourceTree = "<group>"; };
+		79527CEF1BF188F80074AF38 /* THLEventHostingInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventHostingInteractor.m; sourceTree = "<group>"; };
 		79752ADC1BEBD8B500D09B2E /* THLConfirmationPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLConfirmationPopupView.h; sourceTree = "<group>"; };
 		79752ADD1BEBD8B500D09B2E /* THLConfirmationPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLConfirmationPopupView.m; sourceTree = "<group>"; };
 		798650A21BEDDC2D0032A661 /* CAGradientLayer+THLGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAGradientLayer+THLGradient.h"; sourceTree = "<group>"; };
 		798650A31BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAGradientLayer+THLGradient.m"; sourceTree = "<group>"; };
+		798B5FC81BF11B31002EBCB6 /* THLHostFlowDependencyManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLHostFlowDependencyManager.h; sourceTree = "<group>"; };
+		798B5FC91BF11BD2002EBCB6 /* THLHostFlowWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLHostFlowWireframe.h; sourceTree = "<group>"; };
+		798B5FCA1BF11BD2002EBCB6 /* THLHostFlowWireframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLHostFlowWireframe.m; sourceTree = "<group>"; };
+		798B5FCD1BF12A85002EBCB6 /* THLEventHostingModuleInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLEventHostingModuleInterface.h; sourceTree = "<group>"; };
+		798B5FCE1BF12A9B002EBCB6 /* THLEventHostingModuleDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLEventHostingModuleDelegate.h; sourceTree = "<group>"; };
+		798B5FCF1BF12D2C002EBCB6 /* THLEventHostingWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventHostingWireframe.h; sourceTree = "<group>"; };
+		798B5FD01BF12D2C002EBCB6 /* THLEventHostingWireframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventHostingWireframe.m; sourceTree = "<group>"; };
 		79A4665F1BED371900AC975B /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		79A466601BED371900AC975B /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		79A466621BED371900AC975B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -837,8 +866,8 @@
 		211D0BA11B8CED560073AFDD /* Event Detail Module */ = {
 			isa = PBXGroup;
 			children = (
-				211D0BA41B8CED670073AFDD /* Components */,
 				211D0BA21B8CED600073AFDD /* Interface */,
+				211D0BA41B8CED670073AFDD /* Components */,
 				211D0BA51B8CED6A0073AFDD /* UI */,
 			);
 			path = "Event Detail Module";
@@ -856,10 +885,10 @@
 		211D0BA41B8CED670073AFDD /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				211D0BA81B8CEE4D0073AFDD /* Wireframe */,
+				211D0BA91B8CEE510073AFDD /* Presenter */,
 				211D0BB71B8CEEC50073AFDD /* Data Manager */,
 				211D0BB61B8CEEBF0073AFDD /* Interactor */,
-				211D0BA91B8CEE510073AFDD /* Presenter */,
-				211D0BA81B8CEE4D0073AFDD /* Wireframe */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1269,8 +1298,8 @@
 		217DC6541BBB7A0900332174 /* Guest Flow */ = {
 			isa = PBXGroup;
 			children = (
-				217DC6571BBB7A4500332174 /* Dependency Management */,
 				794208301BD9A2E1009B86FA /* Interface */,
+				217DC6571BBB7A4500332174 /* Dependency Management */,
 				217DC6591BBB7A8200332174 /* Presenter */,
 				217DC6561BBB7A3C00332174 /* Wireframe */,
 			);
@@ -1282,6 +1311,7 @@
 			isa = PBXGroup;
 			children = (
 				217DC6541BBB7A0900332174 /* Guest Flow */,
+				798B5FC71BF11B03002EBCB6 /* Host Flow */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -1451,8 +1481,9 @@
 		21BDAE5C1B878E0E009D02A3 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				211D0BA11B8CED560073AFDD /* Event Detail Module */,
 				2110058D1B8A2F3A00A540C6 /* Event Discovery Module */,
+				211D0BA11B8CED560073AFDD /* Event Detail Module */,
+				798B5FCC1BF12085002EBCB6 /* Event Hosting Module */,
 				215A42A21BAA276E00D03C35 /* Facebook Module */,
 				215A428F1BAA248700D03C35 /* Facebook Picture Module */,
 				21E402C01BBF75EF001D0C2C /* Guestlist Invitation Module */,
@@ -1727,6 +1758,41 @@
 				794208311BD9A300009B86FA /* THLGuestFlowModuleInterface.h */,
 			);
 			path = Interface;
+			sourceTree = "<group>";
+		};
+		798B5FC71BF11B03002EBCB6 /* Host Flow */ = {
+			isa = PBXGroup;
+			children = (
+				798B5FC81BF11B31002EBCB6 /* THLHostFlowDependencyManager.h */,
+				798B5FC91BF11BD2002EBCB6 /* THLHostFlowWireframe.h */,
+				798B5FCA1BF11BD2002EBCB6 /* THLHostFlowWireframe.m */,
+			);
+			name = "Host Flow";
+			sourceTree = "<group>";
+		};
+		798B5FCC1BF12085002EBCB6 /* Event Hosting Module */ = {
+			isa = PBXGroup;
+			children = (
+				798B5FCD1BF12A85002EBCB6 /* THLEventHostingModuleInterface.h */,
+				798B5FCE1BF12A9B002EBCB6 /* THLEventHostingModuleDelegate.h */,
+				798B5FCF1BF12D2C002EBCB6 /* THLEventHostingWireframe.h */,
+				798B5FD01BF12D2C002EBCB6 /* THLEventHostingWireframe.m */,
+				791C1F7B1BF13AD300CCF803 /* THLEventHostingPresenter.h */,
+				791C1F7C1BF13AD300CCF803 /* THLEventHostingPresenter.m */,
+				79527CEE1BF188F80074AF38 /* THLEventHostingInteractor.h */,
+				79527CEF1BF188F80074AF38 /* THLEventHostingInteractor.m */,
+				791C1F811BF13AEA00CCF803 /* THLEventHostingDataManager.h */,
+				791C1F821BF13AEA00CCF803 /* THLEventHostingDataManager.m */,
+				791C1F871BF13B9D00CCF803 /* THLEventHostingView.h */,
+				791C1F841BF13AF500CCF803 /* THLEventHostingViewController.h */,
+				791C1F851BF13AF500CCF803 /* THLEventHostingViewController.m */,
+				791C1F881BF13BC300CCF803 /* THLEventHostingTableCell.h */,
+				791C1F891BF13BC300CCF803 /* THLEventHostingTableCell.m */,
+				791C1F8E1BF13BEE00CCF803 /* THLEventHostingTableCellView.h */,
+				791C1F8B1BF13BD900CCF803 /* THLEventHostingTableCellViewModel.h */,
+				791C1F8C1BF13BD900CCF803 /* THLEventHostingTableCellViewModel.m */,
+			);
+			name = "Event Hosting Module";
 			sourceTree = "<group>";
 		};
 		79A4665E1BED371900AC975B /* TheHypelist */ = {
@@ -2269,6 +2335,7 @@
 				215A428B1BAA1FFF00D03C35 /* THLNumberVerificationPresenter.m in Sources */,
 				211005D51B8A7D2800A540C6 /* NSDate+Utilities.m in Sources */,
 				218AF34B1BB740DB00AFAEBF /* THLEntity.m in Sources */,
+				79527CF01BF188F80074AF38 /* THLEventHostingInteractor.m in Sources */,
 				79B9592F1BE581CC00B87799 /* THLGuestlistReviewPresenter.m in Sources */,
 				79B959571BE9298800B87799 /* THLPopupNotificationPresenter.m in Sources */,
 				21192D851BB3278700B176AA /* THLPromotionSelectionInteractor.m in Sources */,
@@ -2278,11 +2345,13 @@
 				211005D01B8A7D0200A540C6 /* NSDate+Hypelist.m in Sources */,
 				7905CC411BE0252700E56878 /* THLGuestlistInviteEntity.m in Sources */,
 				21E402D21BBF768F001D0C2C /* THLGuestlistInvitationDataManager.m in Sources */,
+				791C1F861BF13AF500CCF803 /* THLEventHostingViewController.m in Sources */,
 				216BDD611BC72F9100BBF713 /* THLSearchResultsViewDataSourceHandler.m in Sources */,
 				21775F631B8E17A300609D39 /* THLAddressBookEntryFetchService.m in Sources */,
 				219E32A81B8EA63D00214C85 /* THLEventNavigationBar.m in Sources */,
 				21CE06241BB86995004D10BB /* THLAppearanceUtils.m in Sources */,
 				21E402CF1BBF7688001D0C2C /* THLGuestlistInvitationInteractor.m in Sources */,
+				798B5FCB1BF11BD2002EBCB6 /* THLHostFlowWireframe.m in Sources */,
 				218AF3441BB7391B00AFAEBF /* THLEventService.m in Sources */,
 				216BDD671BC770CA00BBF713 /* THLSearchViewDataSource+Factory.m in Sources */,
 				211892241BAA0C4400E8A11F /* THLLoginViewController.m in Sources */,
@@ -2292,12 +2361,14 @@
 				211BB0D81B8CC6DA0068FD50 /* UIView+AddSubviews.m in Sources */,
 				217EBEB71BB7AB54006044B6 /* THLUserEntity.m in Sources */,
 				213CE1131BB8D22D00054A2C /* THLLocationService.m in Sources */,
+				791C1F7D1BF13AD300CCF803 /* THLEventHostingPresenter.m in Sources */,
 				2133BFCB1B877CAB002C1DA9 /* THLEvent.m in Sources */,
 				211BB0D41B8CBE980068FD50 /* THLEventTitlesView.m in Sources */,
 				21192D881BB3279000B176AA /* THLPromotionSelectionDataManager.m in Sources */,
 				2121735B1BB34215007D817A /* THLPromotionCardView.m in Sources */,
 				2110059B1B8A34AB00A540C6 /* THLEventDiscoveryViewController.m in Sources */,
 				21937F361BB5D20E005E949E /* THLLoginDataManager.m in Sources */,
+				791C1F8D1BF13BD900CCF803 /* THLEventHostingTableCellViewModel.m in Sources */,
 				217EBE881BB77ED7006044B6 /* THLEntity+DataStore.m in Sources */,
 				212173601BB34261007D817A /* THLPromotionCardInfoCell.m in Sources */,
 				79B959611BE9A90B00B87799 /* THLActionContainerView.m in Sources */,
@@ -2316,6 +2387,7 @@
 				21CCEDF51B87CFCB0066CDAC /* THLParseQueryFactory.m in Sources */,
 				211005BF1B8A70BF00A540C6 /* THLEventDiscoveryCell.m in Sources */,
 				76FA20541BCF854000BB480A /* THLSessionService.m in Sources */,
+				798B5FD11BF12D2C002EBCB6 /* THLEventHostingWireframe.m in Sources */,
 				212173581BB33BC7007D817A /* THLPromotionSelectionViewModel.m in Sources */,
 				215A428E1BAA200E00D03C35 /* THLNumberVerificationWireframe.m in Sources */,
 				215A42A81BAA287900D03C35 /* THLFacebookProfilePictureFactory.m in Sources */,
@@ -2332,6 +2404,7 @@
 				21CCEDE91B87C87B0066CDAC /* THLDataStore.m in Sources */,
 				21EED1001BB5F842001325A7 /* THLGuestFlowWireframe.m in Sources */,
 				79B959291BE581A800B87799 /* THLGuestlistReviewDataManager.m in Sources */,
+				791C1F831BF13AEA00CCF803 /* THLEventHostingDataManager.m in Sources */,
 				215A42A11BAA26D500D03C35 /* THLFacebookPictureInteractor.m in Sources */,
 				2118921B1BAA084300E8A11F /* THLLoginPresenter.m in Sources */,
 				211D0BAD1B8CEE730073AFDD /* THLEventDetailWireframe.m in Sources */,
@@ -2362,6 +2435,7 @@
 				21775F361B8CF72B00609D39 /* THLTitledContentView.m in Sources */,
 				211005951B8A318400A540C6 /* THLEventDiscoveryPresenter.m in Sources */,
 				21E402C91BBF7675001D0C2C /* THLGuestlistInvitationWireframe.m in Sources */,
+				791C1F8A1BF13BC300CCF803 /* THLEventHostingTableCell.m in Sources */,
 				CBE54720F63BA2DE2136B454 /* THLViewDataSource+Factory.m in Sources */,
 				CBE5403C8B7732B36D5ECB5E /* THLViewDataSourceGrouping.m in Sources */,
 				CBE547FB5677C373C1DE74C7 /* THLViewDataSourceSorting.m in Sources */,

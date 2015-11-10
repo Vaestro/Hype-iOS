@@ -20,10 +20,10 @@
 @property (nonatomic, readonly, weak) id<THLLoginModuleInterface> moduleInterface;
 
 #pragma mark - Dependencies
-@property (nonatomic, readonly, weak) id<THLLoginServiceInterface> loginService;
-@property (nonatomic, readonly, weak) THLUserManager *userManager;
-@property (nonatomic, readonly, weak) id<THLNumberVerificationModuleInterface> numberVerificationModule;
-@property (nonatomic, readonly, weak) id<THLFacebookPictureModuleInterface> facebookPictureModule;
+@property (nonatomic, readonly) id<THLLoginServiceInterface> loginService;
+@property (nonatomic, readonly) THLUserManager *userManager;
+@property (nonatomic, readonly) id<THLNumberVerificationModuleInterface> numberVerificationModule;
+@property (nonatomic, readonly) id<THLFacebookPictureModuleInterface> facebookPictureModule;
 
 
 - (instancetype)initWithLoginService:(id<THLLoginServiceInterface>)loginService

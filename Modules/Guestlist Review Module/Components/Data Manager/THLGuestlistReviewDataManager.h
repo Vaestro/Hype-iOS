@@ -25,6 +25,6 @@
                             entityMapper:(THLEntityMapper *)entityMapper
                                dataStore:(THLDataStore *)dataStore;
 
-- (BFTask *)fetchGuestlistInvitesForGuestlist:(NSString *)guestlistId;
+- (BFTask *)fetchGuestlistInvitesForGuestlist:(THLGuestlistEntity *)guestlist;
 - (BFTask *)updateGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite withResponse:(THLStatus)response;
 @end

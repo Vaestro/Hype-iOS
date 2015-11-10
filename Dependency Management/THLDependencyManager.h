@@ -8,15 +8,19 @@
 
 #import <Foundation/Foundation.h>
 #import "THLGuestFlowDependencyManager.h"
+#import "THLHostFlowDependencyManager.h"
 
 @class THLMasterWireframe;
 @class THLLoginWireframe;
 @class THLFacebookPictureWireframe;
 @class THLNumberVerificationWireframe;
 @class THLGuestFlowWireframe;
+@class THLHostFlowWireframe;
 @class THLEventDiscoveryWireframe;
 @class THLEventDetailWireframe;
+@class THLEventHostingWireframe;
 @class THLPromotionSelectionWireframe;
+@class THLGuestlistWireframe;
 @class THLGuestlistInvitationWireframe;
 @class THLGuestlistReviewWireframe;
 @class THLPopupNotificationWireframe;
@@ -25,7 +29,8 @@
  */
 @interface THLDependencyManager : NSObject
 <
-THLGuestFlowDependencyManager
+THLGuestFlowDependencyManager,
+THLHostFlowDependencyManager
 >
 @property (nonatomic, readonly, strong) THLMasterWireframe *masterWireframe;
 
@@ -33,8 +38,10 @@ THLGuestFlowDependencyManager
 - (THLFacebookPictureWireframe *)newFacebookPictureWireframe;
 - (THLNumberVerificationWireframe *)newNumberVerificationWireframe;
 - (THLGuestFlowWireframe *)newGuestFlowWireframe;
+- (THLHostFlowWireframe *)newHostFlowWireframe;
 - (THLEventDiscoveryWireframe *)newEventDiscoveryWireframe;
 - (THLEventDetailWireframe *)newEventDetailWireframe;
+- (THLEventHostingWireframe *)newEventHostingWireframe;
 - (THLPromotionSelectionWireframe *)newPromotionSelectionWireframe;
 - (THLGuestlistInvitationWireframe *)newGuestlistInvitationWireframe;
 - (THLGuestlistReviewWireframe *)newGuestlistReviewWireframe;

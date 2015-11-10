@@ -11,14 +11,6 @@
 #import "THLConstants.h"
 //@protocol PFSubclassing;
 
-typedef NS_ENUM(NSInteger, THLUserType) {
-	THLUserTypeGuest = 0,
-	THLUserTypeHost = 1,
-	THLUserTypeAdmin = 2,
-	THLUserType_Count
-};
-
-
 @interface THLUser : PFUser<PFSubclassing>
 @property (nonatomic, retain) NSString *fbId;
 @property (nonatomic, retain) NSString *fbEmail;

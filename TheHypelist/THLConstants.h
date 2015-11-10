@@ -10,6 +10,14 @@
 #ifndef The_HypeList_THLConstants_h
 #define The_HypeList_THLConstants_h
 
+
+typedef NS_ENUM(NSInteger, THLUserType) {
+    THLUserTypeGuest = 0,
+    THLUserTypeHost = 1,
+    THLUserTypeAdmin = 2,
+    THLUserType_Count
+};
+
 typedef NS_ENUM(NSInteger, THLStatus) {
 	THLStatusPending = 0,
 	THLStatusAccepted,
@@ -29,7 +37,6 @@ typedef NS_OPTIONS(NSInteger, THLActivityStatus) {
     THLActivityStatusInProgress,
     THLActivityStatusSuccess,
     THLActivityStatusError,
-    THLActivityStatus_Count
 };
 
 #define SafeString(string) (string != nil) ? string : @""

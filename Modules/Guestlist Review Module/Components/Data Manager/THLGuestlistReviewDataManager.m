@@ -15,6 +15,7 @@
 #import "THLEntityMapper.h"
 #import "THLGuestlistInvite.h"
 #import "THLGuestlistInviteEntity.h"
+#import "THLGuestlistEntity.h"
 
 @interface THLGuestlistReviewDataManager()
 
@@ -32,23 +33,23 @@
     return self;
 }
 
-- (BFTask *)fetchGuestlistInvitesForGuestlist:(NSString *)guestlistId {
+- (BFTask *)fetchGuestlistInvitesForGuestlist:(THLGuestlistEntity *)guestlist {
     WEAKSELF();
-    return [[_guestlistService fetchInvitesOnGuestlist:[THLGuestlist objectWithoutDataWithObjectId:guestlistId]] continueWithSuccessBlock:^id(BFTask *task) {
-        THLDataStoreDomain *domain = [WSELF domainForGuestlistInvites];
+    return [[_guestlistService fetchInvitesOnGuestlist:[THLGuestlist objectWithoutDataWithObjectId:guestlist.objectId]] continueWithSuccessBlock:^id(BFTask *task) {
+        THLDataStoreDomain *domain = [WSELF domainForGuestlistInvitesForGuestlist:guestlist];
         NSSet *entities = [NSSet setWithArray:[WSELF.entityMapper mapGuestlistInvites:task.result]];
 #warning Hackaround to fix data store from causing problems when accessing guestlist invites from different guestlists
-        [WSELF.dataStore purge];
+//        [WSELF.dataStore purge];
         
         [WSELF.dataStore refreshDomain:domain withEntities:entities];
         return [BFTask taskWithResult:entities];
     }];
 }
 
-- (THLDataStoreDomain *)domainForGuestlistInvites {
+- (THLDataStoreDomain *)domainForGuestlistInvitesForGuestlist:(THLGuestlistEntity *)guestlist {
     THLDataStoreDomain *domain = [[THLDataStoreDomain alloc] initWithMemberTestBlock:^BOOL(THLEntity *entity) {
         THLGuestlistInviteEntity *guestlistInviteEntity = (THLGuestlistInviteEntity *)entity;
-        return (guestlistInviteEntity.response != THLStatusDeclined);
+        return (guestlistInviteEntity.guestlist == guestlist);
     }];
     return domain;
 }

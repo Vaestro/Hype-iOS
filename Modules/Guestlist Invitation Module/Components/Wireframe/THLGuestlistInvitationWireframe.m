@@ -45,18 +45,6 @@ dataStore:(THLDataStore *)dataStore{
 																 interactor:_interactor];
 }
 
-// Bad code for this module usage because we're supplanting the old VC flow. No good because we
-// can never return from this interface/module because there's nothing to return to since we're
-// now the base VC.
-//- (void)presentInterfaceInWindow:(UIWindow *)window {
-//	_window = window;
-//	[_presenter configureView:_view];
-//	_window.rootViewController = [[UINavigationController alloc] initWithRootViewController:_view];
-//	[_window makeKeyAndVisible];
-//}
-
-// Good code for this module because we're pushing a modal VC ontop of it, which means we can
-// always go back once we are done.
 - (void)presentInterfaceInController:(UIViewController *)controller {
 	_controller = controller;
 	[_presenter configureView:_view];

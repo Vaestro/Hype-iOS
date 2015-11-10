@@ -20,11 +20,7 @@
 
 #pragma mark - Interface
 - (BFTask *)login {
-	THLUser *currentUser = [THLUser currentUser];
-	if (!currentUser) {
-		return [_loginService login];
-	}
-	return [BFTask taskWithResult:currentUser];
+    return [_loginService login];
 }
 
 - (BFTask *)getFacebookInformation {

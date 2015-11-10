@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_OPTIONS(NSInteger, THLStatusViewSize) {
+    THLStatusViewSizeSmall = 0,
+    THLStatusViewSizeMedium,
+    THLStatusViewSizeLarge
+};
+
 @interface THLStatusView : UIView
 @property (nonatomic) THLStatus status;
+@property (nonatomic, assign) CGFloat scale;
 @end

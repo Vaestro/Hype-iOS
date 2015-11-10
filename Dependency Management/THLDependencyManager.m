@@ -10,16 +10,20 @@
 
 //Dependency Management Protocols
 #import "THLGuestFlowDependencyManager.h"
+#import "THLHostFlowDependencyManager.h"
 
 //Wireframes
 #import "THLMasterWireframe.h"
 #import "THLLoginWireframe.h"
 #import "THLFacebookPictureWireframe.h"
 #import "THLNumberVerificationWireframe.h"
+#import "THLGuestFlowWireframe.h"
+#import "THLHostFlowWireframe.h"
+
 #import "THLEventDiscoveryWireframe.h"
 #import "THLEventDetailWireframe.h"
+#import "THLEventHostingWireframe.h"
 #import "THLPromotionSelectionWireframe.h"
-#import "THLGuestFlowWireframe.h"
 #import "THLGuestlistInvitationWireframe.h"
 #import "THLGuestlistReviewWireframe.h"
 #import "THLPopupNotificationWireframe.h"
@@ -57,10 +61,12 @@
 @property (nonatomic, weak) THLLoginWireframe *loginWireframe;
 @property (nonatomic, weak) THLFacebookPictureWireframe *facebookPictureWireframe;
 @property (nonatomic, weak) THLNumberVerificationWireframe *numberVerificationWireframe;
+@property (nonatomic, weak) THLGuestFlowWireframe *guestFlowWireframe;
+@property (nonatomic, weak) THLHostFlowWireframe *hostFlowWireframe;
 @property (nonatomic, weak) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
 @property (nonatomic, weak) THLEventDetailWireframe *eventDetailWireframe;
+@property (nonatomic, weak) THLEventHostingWireframe *eventHostingWireframe;
 @property (nonatomic, weak) THLPromotionSelectionWireframe *promotionSelectionWireframe;
-@property (nonatomic, weak) THLGuestFlowWireframe *guestFlowWireframe;
 @property (nonatomic, weak) THLGuestlistInvitationWireframe *guestlistInvitationWireframe;
 @property (nonatomic, weak) THLGuestlistReviewWireframe *guestlistReviewWireframe;
 @property (nonatomic, weak) THLPopupNotificationWireframe *popupNotificationWireframe;
@@ -78,6 +84,7 @@
 //Data Stores
 @property (nonatomic, strong) THLDataStore *eventDataStore;
 @property (nonatomic, strong) THLDataStore *guestDataStore;
+@property (nonatomic, strong) THLDataStore *guestlistDataStore;
 @property (nonatomic, strong) THLDataStore *guestlistInviteDataStore;
 
 //Services
@@ -131,6 +138,15 @@
 	return wireframe;
 }
 
+- (THLEventHostingWireframe *)newEventHostingWireframe {
+    THLEventHostingWireframe *wireframe = [[THLEventHostingWireframe alloc] initWithDataStore:self.guestlistDataStore
+                                                                             guestlistService:self.guestlistService
+                                                                        viewDataSourceFactory:self.viewDataSourceFactory
+                                                                                entityMappper:self.entityMapper];
+    self.eventHostingWireframe = wireframe;
+    return wireframe;
+}
+
 - (THLPromotionSelectionWireframe *)newPromotionSelectionWireframe {
 	THLPromotionSelectionWireframe *wireframe = [[THLPromotionSelectionWireframe alloc] initWithEntityMapper:self.entityMapper promotionService:self.promotionService];
 	self.promotionSelectionWireframe = wireframe;
@@ -160,6 +176,12 @@
 	THLGuestFlowWireframe *wireframe = [[THLGuestFlowWireframe alloc] initWithDependencyManager:self];
 	self.guestFlowWireframe = wireframe;
 	return wireframe;
+}
+
+- (THLHostFlowWireframe *)newHostFlowWireframe {
+    THLHostFlowWireframe *wireframe = [[THLHostFlowWireframe alloc] initWithDependencyManager:self];
+    self.hostFlowWireframe = wireframe;
+    return wireframe;
 }
 
 - (THLPopupNotificationWireframe *)newPopupNotificationWireframe {
@@ -249,6 +271,13 @@
 		_guestDataStore = [[THLDataStore alloc] initForEntity:[THLGuestEntity class] databaseManager:self.databaseManager];
 	}
 	return _guestDataStore;
+}
+
+- (THLDataStore *)guestlistDataStore {
+    if (!_guestlistDataStore) {
+        _guestlistDataStore = [[THLDataStore alloc] initForEntity:[THLGuestlistEntity class] databaseManager:self.databaseManager];
+    }
+    return _guestlistDataStore;
 }
 
 - (THLDataStore *)guestlistInviteDataStore {

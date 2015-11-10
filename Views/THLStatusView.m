@@ -19,6 +19,7 @@
         [self constructView];
         [self layoutView];
         [self bindView];
+        _scale = 0.5;
     }
     return self;
 }
@@ -91,6 +92,7 @@
     [bezierPath closePath];
 //    [kTHLNUIAccentColor setFill];
 //    [bezierPath fill];
+    [bezierPath applyTransform:CGAffineTransformMakeScale(_scale, _scale)];
     return bezierPath;
 }
 
@@ -105,6 +107,7 @@
     [ovalPath closePath];
 //    [kTHLNUIPendingColor setFill];
 //    [ovalPath fill];
+    [ovalPath applyTransform:CGAffineTransformMakeScale(_scale, _scale)];
     return ovalPath;
 }
 
@@ -119,6 +122,7 @@
     [ovalPath closePath];
 //    [kTHLNUIRedColor setFill];
 //    [ovalPath fill];
+    [ovalPath applyTransform:CGAffineTransformMakeScale(_scale, _scale)];
     return ovalPath;
 }
 
