@@ -121,7 +121,6 @@ PODS:
   - Typhoon (3.4.1):
     - Typhoon/no-arc (= 3.4.1)
   - Typhoon/no-arc (3.4.1)
-  - UIImageView-Letters (1.1.4)
   - YapDatabase (2.7.4):
     - YapDatabase/standard (= 2.7.4)
   - YapDatabase/standard (2.7.4):
@@ -171,7 +170,6 @@ DEPENDENCIES:
   - TOMSMorphingLabel (~> 0.5)
   - TwitterCore
   - Typhoon (~> 3.3)
-  - UIImageView-Letters
   - YapDatabase (~> 2.7)
   - YLMoment (~> 0.2.0)
 
@@ -220,7 +218,6 @@ SPEC CHECKSUMS:
   TOMSMorphingLabel: 3e88a2bf5257f8993ebc51fb3109187a0bfb2c4d
   TwitterCore: 2b1bdd58dfba3f21b416d2a0d1ca74173e3b0eea
   Typhoon: b754e413d64c4182fcf76e22aacd5f9a66e34f2f
-  UIImageView-Letters: f62db28076797adf3560ab7410647dc6899b9eef
   YapDatabase: 41d80eefb2959fc7cf064c487f2bfa3cf68a5704
   YLMoment: af44d9d402790049e5490fa6eae9585b89b4090b
 

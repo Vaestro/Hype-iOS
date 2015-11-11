@@ -31,7 +31,7 @@ static NSString *const kTHLEventHostingModuleViewKey = @"kTHLEventHostingModuleV
 
 - (void)updateGuestlists {
     WEAKSELF();
-    [[_dataManager fetchGuestlistsForPromotion] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+    [[_dataManager fetchGuestlistsForPromotionAtEvent:_eventEntity.objectId] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
         [WSELF.delegate interactor:WSELF didUpdateGuestlists:task.error];
         return nil;
     }];

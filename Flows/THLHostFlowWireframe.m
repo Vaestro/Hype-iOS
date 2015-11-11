@@ -12,6 +12,7 @@
 #import "THLEventDiscoveryWireframe.h"
 #import "THLEventHostingWireframe.h"
 #import "THLGuestlistReviewWireframe.h"
+#import "THLGuestFlowNavigationController.h"
 
 @interface THLHostFlowWireframe()
 <
@@ -37,7 +38,14 @@ THLGuestlistReviewModuleDelegate
 #pragma mark - Routing
 - (void)presentHostFlowInWindow:(UIWindow *)window {
     _window = window;
-    [self presentEventDiscoveryInterface];
+    UIViewController *discovery = [[UIViewController alloc] init];
+    UIViewController *profile = [[UIViewController alloc] init];
+    [self presentEventDiscoveryInterfaceInViewController:discovery];
+//    [self presentUserProfileInterfaceInViewController:profile];
+    THLGuestFlowNavigationController *guestFlowNavController = [[THLGuestFlowNavigationController alloc] initWithMainViewController:discovery
+                                                                                                            rightSideViewController:profile];
+    _window.rootViewController = guestFlowNavController;
+    [_window makeKeyAndVisible];
 }
 //
 //- (void)presentHostFlowInWindow:(UIWindow *)window forEventHosting:(THLEventEntity *)eventEntity {
@@ -50,11 +58,11 @@ THLGuestlistReviewModuleDelegate
 //    }
 //}
 
-- (void)presentEventDiscoveryInterface {
+- (void)presentEventDiscoveryInterfaceInViewController:(UIViewController *)viewController {
     _eventDiscoveryWireframe = [_dependencyManager newEventDiscoveryWireframe];
     _currentWireframe = _eventDiscoveryWireframe;
     [_eventDiscoveryWireframe.moduleInterface setModuleDelegate:self];
-//    [_eventDiscoveryWireframe.moduleInterface presentEventDiscoveryInterfaceInWindow:_window];
+    [_eventDiscoveryWireframe.moduleInterface presentEventDiscoveryInterfaceInViewController:viewController];
 }
 
 - (void)presentEventHostingInterfaceForEvent:(THLEventEntity *)eventEntity {

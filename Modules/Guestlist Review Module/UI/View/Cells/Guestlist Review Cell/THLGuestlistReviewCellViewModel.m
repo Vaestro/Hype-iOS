@@ -26,8 +26,10 @@
         [cellView setImageURL:_guestlistInviteEntity.guest.imageURL];
     }
     else {
-        [cellView setNameText:@"Unregistered User"];
+//        TODO: Hack to get placeholder image to show, this logic should not be here
+        UIImage *image = [[UIImage imageNamed:@"Hypelist-Icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        [cellView setNameText:@"Pending Signup"];
+        [cellView setImage:image];
     }
 }
-
 @end

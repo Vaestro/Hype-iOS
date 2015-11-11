@@ -22,6 +22,7 @@
 //static CGFloat const STATUS_VIEW_DIMENSION = 20;
 
 @implementation THLGuestlistReviewCell
+@synthesize image;
 @synthesize nameText;
 @synthesize imageURL;
 @synthesize guestlistInviteStatus;
@@ -51,10 +52,10 @@
     
     WEAKSELF();
     [_iconImageView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.insets(kTHLEdgeInsetsSuperHigh()).priorityHigh();
+        make.top.insets(kTHLEdgeInsetsHigh()).priorityHigh();
         make.left.top.greaterThanOrEqualTo(SV(WSELF.iconImageView)).insets(kTHLEdgeInsetsHigh());
         make.right.lessThanOrEqualTo(SV(WSELF.iconImageView)).insets(kTHLEdgeInsetsHigh());
-        make.height.equalTo([WSELF iconImageView].mas_width);
+        make.size.equalTo(SV(WSELF.iconImageView)).sizeOffset(CGSizeMake(-50, -50));
         make.centerX.offset(0);
     }];
     
@@ -71,6 +72,7 @@
 
 - (void)bindView {
     RAC(_iconImageView, imageURL) = RACObserve(self, imageURL);
+    RAC(_iconImageView, image) = RACObserve(self, image);
     RAC(_nameLabel, text) = RACObserve(self, nameText);
     RAC(_statusView, status) = RACObserve(self, guestlistInviteStatus);
 }
@@ -91,6 +93,7 @@
 
 - (THLStatusView *)newStatusView {
     THLStatusView *statusView = [THLStatusView new];
+    [statusView setScale:1.0];
 //    statusView.clipsToBounds = YES;
     return statusView;
 }

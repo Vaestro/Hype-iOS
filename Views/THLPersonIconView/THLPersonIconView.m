@@ -46,9 +46,7 @@
         [WSELF.imageView sd_setImageWithURL:url];
     }];
     
-    [[RACObserve(self, placeholderImageText) filter:^BOOL(NSString *text) {
-        return text != nil;
-    }] subscribeCompleted:^{
+    [RACObserve(self, placeholderImageText) subscribeNext:^(id x) {
         [WSELF.imageView setImageWithString:WSELF.placeholderImageText color:kTHLNUIPrimaryBackgroundColor];
     }];
 }
@@ -63,17 +61,17 @@
     imageView.clipsToBounds = YES;
     imageView.tintColor = kTHLNUIPrimaryBackgroundColor;
     imageView.contentMode = UIViewContentModeScaleAspectFill;
-    imageView.layer.borderColor = kTHLNUIGrayFontColor.CGColor;
-    imageView.layer.borderWidth = 0.5;
+//    imageView.layer.borderColor = kTHLNUIGrayFontColor.CGColor;
+//    imageView.layer.borderWidth = 0.5;
     imageView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
-
+//    imageView.image = [self placeHolderImage];
 //    FBTweakBind(imageView.layer, borderWidth, kTHLFBTweaksCategoryMainKey, kTHLFBTweaksGroupGuestListInvitationPopup, @"Border Radius", 1.0, 0.0, 5.0);
     return imageView;
 }
 
-- (void)setPlaceholderImageText:(NSString *)text {
-    [_imageView setImageWithString:text];
-}
+//- (void)setPlaceholderImageText:(NSString *)text {
+//    [_imageView setImageWithString:text color:kTHLNUIPrimaryBackgroundColor circular:TRUE];
+//}
 //- (void)setPerson:(id<THLPerson>)person {
 //    _person = person;
 //    _imageView.image = [self placeHolderImage];
@@ -81,18 +79,19 @@
 //}
 
 - (void)setImage:(UIImage *)image {
-//    if (image) {
+    if (image != nil) {
     _imageView.image = image;
-//    } else {
-//        image = [self placeHolderImage];
-//    }
+    } else {
+        image = [self placeHolderImage];
+    }
 }
 
 - (UIImage *)image {
     return _imageView.image;
 }
 
-- (void)dealloc {
-    NSLog(@"Destroyed %@", self);
+- (UIImage *)placeHolderImage {
+    UIImage *image = [[UIImage imageNamed:@"Profile Icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    return image;
 }
 @end

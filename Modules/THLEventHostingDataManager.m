@@ -32,9 +32,9 @@
 
 
 
-- (BFTask *)fetchGuestlistsForPromotion {
+- (BFTask *)fetchGuestlistsForPromotionAtEvent:(NSString *)eventId {
     WEAKSELF();
-    return [[_guestlistService fetchGuestlistsForPromotion] continueWithSuccessBlock:^id(BFTask *task) {
+    return [[_guestlistService fetchGuestlistsForPromotionAtEvent:eventId] continueWithSuccessBlock:^id(BFTask *task) {
         THLDataStoreDomain *domain = [WSELF domainForGuestlistsForPromotion];
         NSSet *entities = [NSSet setWithArray:[WSELF.entityMapper mapGuestlists:task.result]];
 #warning Hackaround to fix data store from causing problems when accessing guestlist invites from different guestlists

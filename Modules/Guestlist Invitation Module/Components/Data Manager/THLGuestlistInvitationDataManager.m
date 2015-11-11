@@ -42,7 +42,7 @@
 
 - (BFTask *)submitGuestlistForPromotion:(THLPromotionEntity *)promotionEntity withInvites:(NSArray *)guestPhoneNumbers {
     return [[_guestlistService createGuestlistForPromotion:promotionEntity withInvites:guestPhoneNumbers] continueWithSuccessBlock:^id(BFTask *task) {
-//        NSArray<THLGuestlistEntity *> *guestlist = [_entityMapper mapGuestlists:@[task.result]];
+//        THLGuestlistInviteEntity *guestlistInviteEntity = [_entityMapper mapGuestlistInvite:task.result];
         return [BFTask taskWithResult:nil];
     }];
 }

@@ -22,5 +22,5 @@
                      guestlistService:(id<THLGuestlistServiceInterface>)guestlistService
                      entityMapper:(THLEntityMapper *)entityMapper;
 
-- (BFTask *)fetchGuestlistsForPromotion;
+- (BFTask *)fetchGuestlistsForPromotionAtEvent:(NSString *)eventId;
 @end

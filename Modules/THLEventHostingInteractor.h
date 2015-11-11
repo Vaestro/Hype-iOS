@@ -11,6 +11,7 @@
 @class THLEventHostingDataManager;
 @class THLEventHostingInteractor;
 @class THLViewDataSource;
+@class THLEventEntity;
 @protocol THLViewDataSourceFactoryInterface;
 
 @protocol THLEventHostingInteractorDelegate <NSObject>
@@ -19,6 +20,7 @@
 
 @interface THLEventHostingInteractor : NSObject
 @property (nonatomic, weak) id<THLEventHostingInteractorDelegate> delegate;
+@property (nonatomic, strong) THLEventEntity *eventEntity;
 
 #pragma mark - Dependencies
 @property (nonatomic, readonly, weak) THLEventHostingDataManager *dataManager;

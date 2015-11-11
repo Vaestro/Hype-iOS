@@ -51,8 +51,9 @@
 }
 
 #pragma mark - Guestlist Queries
-- (PFQuery *)queryForGuestlistsForPromotion {
+- (PFQuery *)queryForGuestlistsForPromotionAtEvent:(NSString *)eventId {
     PFQuery *promotionQuery = [self basePromotionQuery];
+    [promotionQuery whereKey:@"eventId" equalTo:eventId];
     [promotionQuery whereKey:@"host" equalTo:[THLUser currentUser]];
     
     PFQuery *query = [self baseGuestlistQuery];

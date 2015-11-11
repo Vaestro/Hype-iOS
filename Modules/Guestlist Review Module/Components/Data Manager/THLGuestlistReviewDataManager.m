@@ -39,7 +39,7 @@
         THLDataStoreDomain *domain = [WSELF domainForGuestlistInvitesForGuestlist:guestlist];
         NSSet *entities = [NSSet setWithArray:[WSELF.entityMapper mapGuestlistInvites:task.result]];
 #warning Hackaround to fix data store from causing problems when accessing guestlist invites from different guestlists
-//        [WSELF.dataStore purge];
+        [WSELF.dataStore purge];
         
         [WSELF.dataStore refreshDomain:domain withEntities:entities];
         return [BFTask taskWithResult:entities];
@@ -49,7 +49,7 @@
 - (THLDataStoreDomain *)domainForGuestlistInvitesForGuestlist:(THLGuestlistEntity *)guestlist {
     THLDataStoreDomain *domain = [[THLDataStoreDomain alloc] initWithMemberTestBlock:^BOOL(THLEntity *entity) {
         THLGuestlistInviteEntity *guestlistInviteEntity = (THLGuestlistInviteEntity *)entity;
-        return (guestlistInviteEntity.guestlist == guestlist);
+        return (guestlistInviteEntity.response != THLStatusDeclined);
     }];
     return domain;
 }

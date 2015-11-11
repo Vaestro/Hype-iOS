@@ -46,28 +46,27 @@
 	dataSource.dataTransformBlock = ^id(id item) {
 		return [[THLEventDiscoveryCellViewModel alloc] initWithEvent:(THLEventEntity *)item];
 	};
-
-	[_view setDataSource:dataSource];
-
-	RACCommand *selectedIndexPathCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-		[self handleIndexPathSelection:(NSIndexPath *)input];
-		return [RACSignal empty];
-	}];
-
-	[_view setSelectedIndexPathCommand:selectedIndexPathCommand];
-
-	RACCommand *refreshCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-		[self handleRefreshAction];
-		return [RACSignal empty];
-	}];
-
-	[_view setRefreshCommand:refreshCommand];
+    
+    RACCommand *selectedIndexPathCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [self handleIndexPathSelection:(NSIndexPath *)input];
+        return [RACSignal empty];
+    }];
+    
+    RACCommand *refreshCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [self handleRefreshAction];
+        return [RACSignal empty];
+    }];
     
     WEAKSELF();
-	[RACObserve(self, refreshing) subscribeNext:^(NSNumber *b) {
-		BOOL isRefreshing = [b boolValue];
-		[WSELF.view setShowRefreshAnimation:isRefreshing];
-	}];
+    [RACObserve(self, refreshing) subscribeNext:^(NSNumber *b) {
+        BOOL isRefreshing = [b boolValue];
+        [WSELF.view setShowRefreshAnimation:isRefreshing];
+    }];
+    
+	[_view setDataSource:dataSource];
+	[_view setSelectedIndexPathCommand:selectedIndexPathCommand];
+	[_view setRefreshCommand:refreshCommand];
+    
 }
 
 - (void)handleIndexPathSelection:(NSIndexPath *)indexPath {

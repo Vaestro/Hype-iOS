@@ -85,6 +85,7 @@
 
 - (void)presentEventHostingInterfaceForEvent:(THLEventEntity *)eventEntity inWindow:(UIWindow *)window {
     _eventEntity = eventEntity;
+    _interactor.eventEntity = _eventEntity;
     [_wireframe presentInterfaceInWindow:window];
 }
 

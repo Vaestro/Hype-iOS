@@ -12,6 +12,7 @@
 #import "THLGuestlistInvite.h"
 #import "THLPromotionEntity.h"
 #import "THLEventEntity.h"
+#import "THLPromotion.h"
 
 @implementation THLGuestlistService
 
@@ -24,13 +25,47 @@
 
 #pragma mark - Guestlist Services
 
-- (BFTask *)fetchGuestlistsForPromotion {
-    return [[_queryFactory queryForGuestlistsForPromotion] findObjectsInBackground];
+- (BFTask *)fetchGuestlistsForPromotionAtEvent:(NSString *)eventId {
+    return [[_queryFactory queryForGuestlistsForPromotionAtEvent:eventId] findObjectsInBackground];
 }
 
 - (BFTask *)createGuestlistForPromotion:(THLPromotionEntity *)promotionEntity withInvites:(NSArray *)guestPhoneNumbers {
-    return [PFCloud callFunctionInBackground:@"ownerGuestSubmission"
-                              withParameters:@{@"promotionId": promotionEntity.objectId, @"eventName":promotionEntity.event.location.name, @"promotionTime":promotionEntity.time, @"guestDigits": guestPhoneNumbers}];
+    BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
+    THLUser *currentUser = [THLUser currentUser];
+
+    PFObject *guestlist = [PFObject objectWithClassName:@"Guestlist"];
+    PFObject *guestlistInvite = [PFObject objectWithClassName:@"GuestlistInvite"];
+    guestlist[@"Promotion"] = [THLPromotion objectWithoutDataWithObjectId:promotionEntity.objectId];
+    guestlist[@"Owner"] = currentUser;
+    guestlist[@"reviewStatus"] =  [NSNumber numberWithInt:0];
+    guestlist[@"eventId"] = promotionEntity.eventId;
+    [guestlist saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            [PFCloud callFunctionInBackground:@"sendOutNotifications"
+                               withParameters:@{@"promotionId": promotionEntity.objectId,
+                                                @"eventName":promotionEntity.event.location.name,
+                                                @"promotionTime":promotionEntity.time,
+                                                @"guestPhoneNumbers": guestPhoneNumbers,
+                                                @"guestlistId": guestlist.objectId}
+                                        block:^(id object, NSError *cloudError) {
+                                            
+                                            if (!cloudError){
+                                                guestlistInvite[@"Guest"] = currentUser;
+                                                guestlistInvite[@"Guestlist"] = guestlist;
+                                                guestlistInvite[@"phoneNumber"] = currentUser.phoneNumber;
+                                                guestlistInvite[@"response"] = [NSNumber numberWithInt:1];
+                                                [guestlistInvite saveInBackground];
+                                                
+                                                [completionSource setResult:nil];
+                                            }else {
+                                                [completionSource setError:cloudError];
+                                            }
+                                        }];
+        } else {
+            [completionSource setError:error];
+        }
+    }];
+    return completionSource.task;
 }
 
 - (BFTask *)updateGuestlist:(NSString *)guestlistId withInvites:(NSArray *)guestPhoneNumbers {
