@@ -75,7 +75,7 @@
 		return ((contact.name.firstName != NULL || contact.name.lastName != NULL) && contact.phones.count > 0);
 	};
     
-    _addressBook.fieldsMask = APContactFieldDefault | APContactFieldThumbnail;
+    _addressBook.fieldsMask = APContactFieldDefault;
     
 	[_addressBook loadContacts:^(NSArray *contacts, NSError *error) {
 		if (error) {

@@ -50,7 +50,7 @@
                                                    maskType:KLCPopupMaskTypeDimmed
                                    dismissOnBackgroundTouch:YES
                                       dismissOnContentTouch:YES];
-    
+    popup.dimmedMaskAlpha = 0.8;
     [popup show];
 }
 

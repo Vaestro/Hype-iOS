@@ -11,4 +11,6 @@
 @interface THLPersonIconView : UIView
 @property (nonatomic, copy) NSURL *imageURL;
 @property (nonatomic, strong) UIImage *image;
+@property (nonatomic, copy) NSString *placeholderImageText;
+//- (void)setPlaceholderImageText:(NSString *)text;
 @end

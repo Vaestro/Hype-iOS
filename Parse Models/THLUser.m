@@ -15,7 +15,7 @@
 @dynamic fbEmail;
 @dynamic fbBirthday;
 @dynamic image;
-@dynamic thumbnail;
+//@dynamic thumbnail;
 @dynamic firstName;
 @dynamic lastName;
 @dynamic phoneNumber;

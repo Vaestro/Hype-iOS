@@ -14,7 +14,7 @@
 #import "THLEventDiscoveryViewController.h"
 
 @interface THLEventDiscoveryWireframe()
-@property (nonatomic, strong) UIWindow *window;
+@property (nonatomic, strong) UIViewController *viewController;
 
 @property (nonatomic, strong) THLEventDiscoveryInteractor *interactor;
 @property (nonatomic, strong) THLEventDiscoveryDataManager *dataManager;
@@ -49,10 +49,9 @@
 	return _presenter;
 }
 
-- (void)presentInWindow:(UIWindow *)window {
-	_window = window;
+- (void)presentInViewController:(UIViewController *)viewController {
+	_viewController = viewController;
   	[_presenter configureView:_view];
-	_window.rootViewController = [[UINavigationController alloc] initWithRootViewController:_view];
-	[_window makeKeyAndVisible];
+    [_viewController.view addSubview:_view.view];
 }
 @end

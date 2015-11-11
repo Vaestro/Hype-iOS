@@ -16,7 +16,7 @@
 @property (nonatomic, retain) NSString *fbEmail;
 @property (nonatomic, retain) NSDate *fbBirthday;
 @property (nonatomic, retain) PFFile *image;
-@property (nonatomic, retain) UIImage *thumbnail;
+//@property (nonatomic, retain) UIImage *thumbnail;
 @property (nonatomic, retain) NSString *firstName;
 @property (nonatomic, retain) NSString *lastName;
 @property (nonatomic, retain) NSString *phoneNumber;

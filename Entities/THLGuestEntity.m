@@ -18,18 +18,23 @@
 @synthesize firstName = _firstName;
 @synthesize lastName = _lastName;
 @synthesize phoneNumber = _phoneNumber;
-@synthesize thumbnail = _thumbnail;
+//@synthesize thumbnail = _thumbnail;
 @synthesize imageURL = _imageURL;
 @synthesize sex = _sex;
 //@synthesize fullName = _fullName;
 //@synthesize intPhoneNumberFormat;
 
+/**
+ *  Initiate Guest Entities from User's Contacts
+ *
+ *  NOTICE: Removed showing thumbnails as it takes up too much memory
+ */
 - (instancetype)initWithContact:(APContact *)contact {
 	if (self = [super init]) {   
 		_firstName = [contact.name.firstName copy];
 		_lastName = [contact.name.lastName copy];
 		_phoneNumber = [[contact.phones objectAtIndex:0].number copy];
-        _thumbnail = [contact.thumbnail copy];
+//        _thumbnail = [contact.thumbnail copy];
 		_type = THLGuestEntityTypeLocalContact;
 		_objectId = [NSString stringWithFormat:@"contact%lu", (unsigned long)self.phoneNumber.hash];
 	}

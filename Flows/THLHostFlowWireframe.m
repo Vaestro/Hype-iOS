@@ -54,7 +54,7 @@ THLGuestlistReviewModuleDelegate
     _eventDiscoveryWireframe = [_dependencyManager newEventDiscoveryWireframe];
     _currentWireframe = _eventDiscoveryWireframe;
     [_eventDiscoveryWireframe.moduleInterface setModuleDelegate:self];
-    [_eventDiscoveryWireframe.moduleInterface presentEventDiscoveryInterfaceInWindow:_window];
+//    [_eventDiscoveryWireframe.moduleInterface presentEventDiscoveryInterfaceInWindow:_window];
 }
 
 - (void)presentEventHostingInterfaceForEvent:(THLEventEntity *)eventEntity {

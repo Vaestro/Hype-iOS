@@ -168,40 +168,48 @@ static CGFloat const PRIVACY_IMAGEVIEW_DIMENSION = 14;
 
 - (OnboardingViewController *)newOnboardingViewController {
     OnboardingViewController *onboardingVC = [OnboardingViewController onboardWithBackgroundImage:nil contents:[self onboardingContentViewControllers]];
-    onboardingVC.fontName = @"Helvetica-Light";
-    onboardingVC.titleFontSize = 28;
-    onboardingVC.bodyFontSize = 22;
-    onboardingVC.topPadding = 20;
-    onboardingVC.underIconPadding = 10;
-    onboardingVC.underTitlePadding = 15;
-    onboardingVC.bottomPadding = 20;
+    onboardingVC.fontName = @"Raleway-Bold";
+    onboardingVC.titleFontSize = 24;
+    onboardingVC.subtitleFontSize = 40;
+    onboardingVC.bodyFontSize = 24;
+    onboardingVC.topPadding = 10;
+    onboardingVC.underIconPadding = 67;
+    onboardingVC.underTitlePadding = 0;
+    onboardingVC.underSubtitlePadding = SCREEN_HEIGHT/4;
+    onboardingVC.bottomPadding = 10;
     return onboardingVC;
 }
 
 
 - (NSArray *)onboardingContentViewControllers {
-    OnboardingContentViewController *firstPage = [OnboardingContentViewController contentWithTitle:@"WELCOME TO THE HYPELIST"
+    OnboardingContentViewController *firstPage = [OnboardingContentViewController contentWithTitle:@"WELCOME TO"
+                                                                                          subtitle:@"THE HYPELIST"
                                                                                               body:@"DISCOVER THE MOST EXCLUSIVE EVENTS HAPPENING IN NYC"
                                                                                              image:nil
                                                                                         buttonText:nil
                                                                                             action:^{
                                                                                                 
                                                                                             }];
-    OnboardingContentViewController *secondPage = [OnboardingContentViewController contentWithTitle:@"CHOOSE THE PERFECT HOST"
+    OnboardingContentViewController *secondPage = [OnboardingContentViewController contentWithTitle:@"CHOOSE THE"
+                                                                                           subtitle:@"PERFECT HOST"
+
                                                                                                body:@"ALL OF OUR HOSTS ARE VETTED PROFESSIONALS WHO KNOW HOW TO THROW THE BEST PARTIES"
                                                                                               image:nil
                                                                                          buttonText:nil
                                                                                              action:^{
                                                                                                  
                                                                                              }];
-    OnboardingContentViewController *thirdPage = [OnboardingContentViewController contentWithTitle:@"SUBMIT YOUR GUESTLIST"
+    OnboardingContentViewController *thirdPage = [OnboardingContentViewController contentWithTitle:@"SUBMIT YOUR"
+                                                                                          subtitle:@"GUESTLIST"
+
                                                                                               body:@"INVITE YOUR FRIENDS TO JOIN THE PARTY AND REQUEST TO BE ADDED TO THE GUESTLIST"
                                                                                              image:nil
                                                                                         buttonText:nil
                                                                                             action:^{
                                                                                                 
                                                                                             }];
-    OnboardingContentViewController *fourthPage = [OnboardingContentViewController contentWithTitle:@"GET READY FOR THE PARTY"
+    OnboardingContentViewController *fourthPage = [OnboardingContentViewController contentWithTitle:@"GET READY FOR"
+                                                                                           subtitle:@"THE PARTY"
                                                                                                body:@"RULE 1: APPROPRIATE ATTIRE\nRULE 2: HOST KNOWS BEST\n RULE 3: VENUE IS KING"
                                                                                               image:nil
                                                                                          buttonText:nil

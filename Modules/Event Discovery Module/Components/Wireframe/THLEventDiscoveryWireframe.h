@@ -27,5 +27,5 @@
 					 eventService:(id<THLEventServiceInterface>)eventService
 			viewDataSourceFactory:(id<THLViewDataSourceFactoryInterface>)viewDataSourceFactory;
 
-- (void)presentInWindow:(UIWindow *)window;
+- (void)presentInViewController:(UIViewController *)viewController;
 @end

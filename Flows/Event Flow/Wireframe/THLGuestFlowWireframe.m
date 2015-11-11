@@ -9,10 +9,12 @@
 
 #import "THLGuestFlowWireframe.h"
 
-#import "THLEventDetailWireframe.h"
 #import "THLEventDiscoveryWireframe.h"
+#import "THLUserProfileWireframe.h"
+#import "THLEventDetailWireframe.h"
 #import "THLGuestlistInvitationWireframe.h"
 #import "THLGuestlistReviewWireframe.h"
+#import "THLGuestFlowNavigationController.h"
 
 typedef NS_OPTIONS(NSInteger, THLGuestlistReviewOptions) {
     THLGuestlistReviewOptionsAcceptDeclineGuestlistInvite = 0,
@@ -26,6 +28,7 @@ typedef NS_OPTIONS(NSInteger, THLGuestlistReviewOptions) {
 @interface THLGuestFlowWireframe()
 <
 THLEventDiscoveryModuleDelegate,
+THLUserProfileModuleDelegate,
 THLEventDetailModuleDelegate,
 THLGuestlistInvitationModuleDelegate,
 THLGuestlistReviewModuleDelegate
@@ -33,6 +36,7 @@ THLGuestlistReviewModuleDelegate
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) id currentWireframe;
 @property (nonatomic, strong) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
+@property (nonatomic, strong) THLUserProfileWireframe *userProfileWireframe;
 @property (nonatomic, strong) THLEventDetailWireframe  *eventDetailWireframe;
 @property (nonatomic, strong) THLGuestlistInvitationWireframe *guestlistInvitationWireframe;
 @property (nonatomic, strong) THLGuestlistReviewWireframe *guestlistReviewWireframe;
@@ -46,10 +50,22 @@ THLGuestlistReviewModuleDelegate
 	return self;
 }
 
-#pragma mark - Routing
+//#pragma mark - Routing
+//- (void)presentGuestFlowInWindow:(UIWindow *)window {
+//	_window = window;
+//	[self presentEventDiscoveryInterface];
+//}
+
 - (void)presentGuestFlowInWindow:(UIWindow *)window {
-	_window = window;
-	[self presentEventDiscoveryInterface];
+    _window = window;
+    UIViewController *discovery = [[UIViewController alloc] init];
+    UIViewController *profile = [[UIViewController alloc] init];
+    [self presentEventDiscoveryInterfaceInViewController:discovery];
+    [self presentUserProfileInterfaceInViewController:profile];
+    THLGuestFlowNavigationController *guestFlowNavController = [[THLGuestFlowNavigationController alloc] initWithMainViewController:discovery
+                                                                                                              rightSideViewController:profile];
+    _window.rootViewController = guestFlowNavController;
+    [_window makeKeyAndVisible];
 }
 
 - (void)presentGuestFlowInWindow:(UIWindow *)window forEventDetail:(THLEventEntity *)eventEntity {
@@ -62,12 +78,20 @@ THLGuestlistReviewModuleDelegate
     }
 }
 
-- (void)presentEventDiscoveryInterface {
+- (void)presentEventDiscoveryInterfaceInViewController:(UIViewController *)viewController {
 	_eventDiscoveryWireframe = [_dependencyManager newEventDiscoveryWireframe];
     _currentWireframe = _eventDiscoveryWireframe;
 	[_eventDiscoveryWireframe.moduleInterface setModuleDelegate:self];
-	[_eventDiscoveryWireframe.moduleInterface presentEventDiscoveryInterfaceInWindow:_window];
+	[_eventDiscoveryWireframe.moduleInterface presentEventDiscoveryInterfaceInViewController:viewController];
 }
+
+- (void)presentUserProfileInterfaceInViewController:(UIViewController *)viewController {
+    _userProfileWireframe = [_dependencyManager newUserProfileWireframe];
+    _currentWireframe = _userProfileWireframe;
+    [_userProfileWireframe.moduleInterface setModuleDelegate:self];
+    [_userProfileWireframe.moduleInterface presentUserProfileInterfaceInViewController:viewController];
+}
+
 
 - (void)presentEventDetailInterfaceForEvent:(THLEventEntity *)eventEntity {
 	_eventDetailWireframe = [_dependencyManager newEventDetailWireframe];
@@ -121,4 +145,25 @@ THLGuestlistReviewModuleDelegate
     _guestlistReviewWireframe = nil;
 }
 
+#pragma mark - THLUserProfileModuleDelegate
+- (void)userProfileModule:(id<THLUserProfileModuleInterface>)module didLogOutUser:(NSError *)error {
+    if (!error) {
+//        TODO: Sign user out
+    }
+}
+//- (UIView *)newDiscoveryNavBarItem {
+//    UIImageView *imageView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"Hypelist-Icon"]
+//                                                                 imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+//    imageView.frame = CGRectMake(0, 0, 20, 20);
+//    imageView.contentMode = UIViewContentModeScaleAspectFit;
+//    imageView.tintColor = kTHLNUIGrayFontColor;
+//    return imageView;
+//}
+//
+//- (UIView *)newGuestProfileNavBarItem {
+//    UIImageView *imageView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"Profile Icon"]
+//                                                                 imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+//    imageView.tintColor = kTHLNUIGrayFontColor;
+//    return imageView;
+//}
 @end

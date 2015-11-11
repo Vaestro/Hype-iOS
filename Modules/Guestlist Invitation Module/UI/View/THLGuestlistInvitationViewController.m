@@ -101,7 +101,7 @@
 			THLContactTableViewCell *tvCell = (THLContactTableViewCell *)cell;
 			THLGuestEntity *guest = (THLGuestEntity *)object;
 
-			tvCell.thumbnail = guest.thumbnail;
+//			tvCell.thumbnail = guest.thumbnail;
 			tvCell.name = guest.fullName;
 			tvCell.phoneNumber = guest.phoneNumber;
 

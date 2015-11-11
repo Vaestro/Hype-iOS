@@ -13,5 +13,5 @@
 @protocol THLEventDiscoveryModuleInterface <NSObject>
 @property (nonatomic, weak) id<THLEventDiscoveryModuleDelegate> moduleDelegate;
 
-- (void)presentEventDiscoveryInterfaceInWindow:(UIWindow *)window;
+- (void)presentEventDiscoveryInterfaceInViewController:(UIViewController *)viewController;
 @end

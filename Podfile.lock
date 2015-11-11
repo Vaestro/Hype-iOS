@@ -89,7 +89,6 @@ PODS:
   - NUIParse (1.2.1)
   - ObjectiveSugar (1.1.0)
   - OCMock (3.1.2)
-  - Onboard (2.1.7)
   - ORStackView (3.0.1):
     - FLKAutoLayout (~> 0.2)
   - Parse (1.9.1):
@@ -111,6 +110,7 @@ PODS:
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
+  - SLPagingView (0.0.5)
   - SSDataSources (0.8.5)
   - SVProgressHUD (1.1.3)
   - SVPullToRefresh (0.4.1)
@@ -121,6 +121,7 @@ PODS:
   - Typhoon (3.4.1):
     - Typhoon/no-arc (= 3.4.1)
   - Typhoon/no-arc (3.4.1)
+  - UIImageView-Letters (1.1.4)
   - YapDatabase (2.7.4):
     - YapDatabase/standard (= 2.7.4)
   - YapDatabase/standard (2.7.4):
@@ -155,7 +156,6 @@ DEPENDENCIES:
   - NUI (~> 0.5)
   - ObjectiveSugar
   - OCMock (= 3.1.2)
-  - Onboard
   - ORStackView
   - Parse
   - ParseFacebookUtilsV4
@@ -163,6 +163,7 @@ DEPENDENCIES:
   - ReflectableEnum
   - Reveal-iOS-SDK
   - SDWebImage (~> 3.7)
+  - SLPagingView
   - SSDataSources (~> 0.8)
   - SVProgressHUD
   - SVPullToRefresh
@@ -170,6 +171,7 @@ DEPENDENCIES:
   - TOMSMorphingLabel (~> 0.5)
   - TwitterCore
   - Typhoon (~> 3.3)
+  - UIImageView-Letters
   - YapDatabase (~> 2.7)
   - YLMoment (~> 0.2.0)
 
@@ -203,7 +205,6 @@ SPEC CHECKSUMS:
   NUIParse: 9b6d5a6b782dc654ac6c846d623885080306f07f
   ObjectiveSugar: a6a25f23d657c19df0a0b972466d5b5ca9f5295c
   OCMock: a10ea9f0a6e921651f96f78b6faee95ebc813b92
-  Onboard: 87648089e1b76d13b4f5bf8f7a1cdb144092f0af
   ORStackView: a1bb52748cd0ae29891c140baf22ff8972fb363c
   Parse: 54a965c8c19a6dde90284ab654dbcc77ef8c001b
   ParseFacebookUtilsV4: aadebfaaaf4a45bf0a0992863bf48c8fc49189e3
@@ -211,6 +212,7 @@ SPEC CHECKSUMS:
   ReflectableEnum: bf9d36f8c35122242125140a22b8921d071989aa
   Reveal-iOS-SDK: ceae964076cebe3efe63e5e9abe3152efce46aa8
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
+  SLPagingView: ba9bb6102cb318ce56f23d0a7e49a46ddcdad7e3
   SSDataSources: b01170fb23b82acf0649194e9189b0bf5f702681
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
@@ -218,6 +220,7 @@ SPEC CHECKSUMS:
   TOMSMorphingLabel: 3e88a2bf5257f8993ebc51fb3109187a0bfb2c4d
   TwitterCore: 2b1bdd58dfba3f21b416d2a0d1ca74173e3b0eea
   Typhoon: b754e413d64c4182fcf76e22aacd5f9a66e34f2f
+  UIImageView-Letters: f62db28076797adf3560ab7410647dc6899b9eef
   YapDatabase: 41d80eefb2959fc7cf064c487f2bfa3cf68a5704
   YLMoment: af44d9d402790049e5490fa6eae9585b89b4090b
 

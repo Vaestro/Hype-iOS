@@ -8,14 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-@class THLEventDetailWireframe;
 @class THLEventDiscoveryWireframe;
+@class THLUserProfileWireframe;
+@class THLEventDetailWireframe;
 @class THLPromotionSelectionWireframe;
 @class THLGuestlistInvitationWireframe;
 @class THLGuestlistReviewWireframe;
 
 @protocol THLGuestFlowDependencyManager <NSObject>
 - (THLEventDiscoveryWireframe *)newEventDiscoveryWireframe;
+- (THLUserProfileWireframe *)newUserProfileWireframe;
 - (THLEventDetailWireframe *)newEventDetailWireframe;
 - (THLPromotionSelectionWireframe *)newPromotionSelectionWireframe;
 - (THLGuestlistInvitationWireframe *)newGuestlistInvitationWireframe;

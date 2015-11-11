@@ -54,18 +54,18 @@ pod 'LMGeocoder'
 
 
 #UI
+pod 'SLPagingView'
 pod 'SVPullToRefresh'
 pod "ORStackView"
-pod 'Onboard'
 pod 'iCarousel', '~> 1.8'
 pod 'MJRefresh'
 pod 'SVProgressHUD'
 pod 'THContactPicker', '~> 1.2'
 pod "TOMSMorphingLabel", "~> 0.5"
+pod "UIImageView-Letters"
 end
 
 target 'TheHypelistTests' do
 pod 'OCMock', '3.1.2'
 pod "Gizou"
 end
-

@@ -22,6 +22,7 @@
 
 #import "THLEventDiscoveryWireframe.h"
 #import "THLEventDetailWireframe.h"
+#import "THLUserProfileWireframe.h"
 #import "THLEventHostingWireframe.h"
 #import "THLPromotionSelectionWireframe.h"
 #import "THLGuestlistInvitationWireframe.h"
@@ -64,6 +65,7 @@
 @property (nonatomic, weak) THLGuestFlowWireframe *guestFlowWireframe;
 @property (nonatomic, weak) THLHostFlowWireframe *hostFlowWireframe;
 @property (nonatomic, weak) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
+@property (nonatomic, weak) THLUserProfileWireframe *userProfileWireframe;
 @property (nonatomic, weak) THLEventDetailWireframe *eventDetailWireframe;
 @property (nonatomic, weak) THLEventHostingWireframe *eventHostingWireframe;
 @property (nonatomic, weak) THLPromotionSelectionWireframe *promotionSelectionWireframe;
@@ -127,6 +129,12 @@
 																			viewDataSourceFactory:self.viewDataSourceFactory];
 	self.eventDiscoveryWireframe = wireframe;
 	return wireframe;
+}
+
+- (THLUserProfileWireframe *)newUserProfileWireframe {
+    THLUserProfileWireframe *wireframe = [[THLUserProfileWireframe alloc] init];
+    self.userProfileWireframe = wireframe;
+    return wireframe;
 }
 
 - (THLEventDetailWireframe *)newEventDetailWireframe {

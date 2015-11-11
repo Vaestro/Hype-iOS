@@ -55,7 +55,8 @@
 }
 
 - (void)bindView {
-    RAC(_iconImageView, image) = RACObserve(self, thumbnail);
+//    RAC(_iconImageView, image) = RACObserve(self, thumbnail);
+    RAC(_iconImageView, placeholderImageText) = RACObserve(self, name);
     RAC(_nameLabel, text) = RACObserve(self, name);
     RAC(_phoneNumberLabel, text) = RACObserve(self, phoneNumber);
 }
