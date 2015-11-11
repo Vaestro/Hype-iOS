@@ -157,7 +157,7 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     tableView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     tableView.separatorColor = [UIColor clearColor];
-//    tableView.dataSource = self;
+    tableView.dataSource = self;
     tableView.delegate = self;
     return tableView;
 }

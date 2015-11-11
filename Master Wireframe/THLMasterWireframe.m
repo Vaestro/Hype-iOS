@@ -52,7 +52,7 @@ THLPopupNotificationModuleDelegate
 
 - (void)presentAppInWindow:(UIWindow *)window {
 	_window = window;
-    ![_sessionService isUserCached] ? [self routeUserFlow] : [self presentLoginInterface];
+    [_sessionService isUserCached] ? [self routeUserFlow] : [self presentLoginInterface];
 }
 
 - (void)routeUserFlow {
