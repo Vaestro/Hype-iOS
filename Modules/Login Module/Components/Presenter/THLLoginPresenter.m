@@ -20,8 +20,9 @@ THLLoginInteractorDelegate,
 THLFacebookPictureModuleDelegate,
 THLNumberVerificationModuleDelegate
 >
+@property (nonatomic, weak) id<THLLoginView> view;
 @property (nonatomic) BOOL busy;
-//@property (nonatomic) THLActivityStatus activityStatus;
+@property (nonatomic) THLActivityStatus activityStatus;
 @end
 
 @implementation THLLoginPresenter
@@ -43,26 +44,25 @@ THLNumberVerificationModuleDelegate
 }
 
 - (void)configureView:(id<THLLoginView>)view {
+    _view = view;
+    
     WEAKSELF();
-
 	RACCommand *loginCommand = [[RACCommand alloc] initWithEnabled:RACObserve(self.interactor, shouldLogin) signalBlock:^RACSignal *(id input) {
 		[WSELF handleUserLoginAction];
 		return [RACSignal empty];
-
 	}];
+    [RACObserve(self, activityStatus) subscribeNext:^(NSNumber *x) {
+        [WSELF.view setShowActivityIndicator:x];
+    }];
     
-//    [RACObserve(self, activityStatus) subscribeNext:^(id _) {
-//        [view setActivityIndicator:WSELF.activityStatus];
-//    }];
-    
-    [view setLoginText:NSLocalizedString(@"Login with Facebook", @"Facebook login")];
-	[view setLoginCommand:loginCommand];
+    [_view setLoginText:NSLocalizedString(@"Login with Facebook", @"Facebook login")];
+	[_view setLoginCommand:loginCommand];
 }
 
 #pragma mark - Action Handling
 - (void)handleError:(NSError *)error {
+    self.activityStatus = THLActivityStatusError;
 	DLog(@"Error: %@", error);
-//    _activityStatus = THLActivityStatusError;
 	[self reroute];
 }
 
@@ -83,20 +83,23 @@ THLNumberVerificationModuleDelegate
 }
 
 - (void)handleAddProfilePictureSuccess {
-//    _activityStatus = THLActivityStatusInProgress;
 	[self reroute];
 }
 
 #pragma mark - Routing
 - (void)reroute {
     if ([_interactor shouldAddFacebookInformation]) {
+        self.activityStatus = THLActivityStatusInProgress;
         [_interactor addFacebookInformation];
     }
     else if ([_interactor shouldVerifyPhoneNumber]) {
+        self.activityStatus = THLActivityStatusNone;
 		[self routeToNumberVerificationInterface];
 	} else if ([_interactor shouldPickProfileImage]) {
+        self.activityStatus = THLActivityStatusInProgress;
 		[self routeToPickProfilePictureInterface];
 	} else {
+        self.activityStatus = THLActivityStatusNone;
 		[self finishLoginInterface];
 	}
 }
@@ -110,7 +113,6 @@ THLNumberVerificationModuleDelegate
 }
 
 - (void)finishLoginInterface {
-//    _activityStatus = THLActivityStatusSuccess;
 	[self.moduleDelegate loginModule:self didLoginUser:nil];
 }
 
@@ -162,6 +164,6 @@ THLNumberVerificationModuleDelegate
 }
 
 - (void)dealloc {
-    NSLog(@"Destroyed %@", self);
+    DLog(@"Destroyed %@", self);
 }
 @end

@@ -57,7 +57,7 @@
     WEAKSELF();
 	[[_dataManager login] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
 		WSELF.user = task.result;
-		[_delegate interactor:WSELF didLoginUser:task.error];
+		[WSELF.delegate interactor:WSELF didLoginUser:task.error];
 		return nil;
 	}];
 }
@@ -69,11 +69,17 @@
         [WSELF user].fbId = userDictionary[@"id"];
         [WSELF user].firstName = userDictionary[@"first_name"];
         [WSELF user].lastName = userDictionary[@"last_name"];
+        [WSELF user].email = userDictionary[@"email"];
         [WSELF user].sex = ([userDictionary[@"gender"] isEqualToString:@"male"]) ? THLSexMale : THLSexFemale;
 //TODO: Add Location and Birthday upon Facebook Approval
 //        [WSELF user].fbBirthday = [[[YLMoment alloc] initWithDateAsString:userDictionary[@"birthday"]] date];
 //        [WSELF user].location = userDictionary[@"location"];
-        [WSELF user].fbVerified = userDictionary[@"verified"];
+        if (userDictionary[@"verified"]) {
+            [WSELF user].fbVerified = TRUE;
+        }
+        else {
+            [WSELF user].fbVerified = FALSE;
+        }
         [WSELF user].type = THLUserTypeGuest;
         [[WSELF.user saveInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask<NSNumber *> *saveTask) {
             [_delegate interactor:WSELF didAddFacebookInformation:saveTask.error];
@@ -116,6 +122,6 @@
 }
 
 - (void)dealloc {
-    NSLog(@"Destroyed %@", self);
+    DLog(@"Destroyed %@", self);
 }
 @end

@@ -719,8 +719,8 @@
 		211891FC1BA9F5E400E8A11F /* Login Module */ = {
 			isa = PBXGroup;
 			children = (
-				21721FB61BAE081F00D754D6 /* Components */,
 				211891FD1BA9F87200E8A11F /* Interface */,
+				21721FB61BAE081F00D754D6 /* Components */,
 				211891FF1BA9F87E00E8A11F /* UI */,
 			);
 			path = "Login Module";
@@ -1251,10 +1251,10 @@
 		21721FB61BAE081F00D754D6 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				21937F331BB5D1F5005E949E /* Data Manager */,
-				211892031BA9FEB600E8A11F /* Interactor */,
-				211892181BAA083400E8A11F /* Presenter */,
 				2118921C1BAA088600E8A11F /* Wireframe */,
+				211892181BAA083400E8A11F /* Presenter */,
+				211892031BA9FEB600E8A11F /* Interactor */,
+				21937F331BB5D1F5005E949E /* Data Manager */,
 			);
 			path = Components;
 			sourceTree = "<group>";

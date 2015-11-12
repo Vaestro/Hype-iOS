@@ -34,4 +34,8 @@
 - (void)interactor:(THLFacebookPictureInteractor *)interactor didGetProfileImage:(UIImage *)image error:(NSError *)error {
 	[self.moduleDelegate facebookPictureModule:self didSelectImage:image];
 }
+
+- (void)dealloc {
+    DLog(@"Destroyed %@", self);
+}
 @end

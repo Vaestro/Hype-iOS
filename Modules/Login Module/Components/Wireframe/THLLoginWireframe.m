@@ -69,6 +69,6 @@
 }
 
 - (void)dealloc {
-    NSLog(@"Destroyed %@", self);
+    DLog(@"Destroyed %@", self);
 }
 @end

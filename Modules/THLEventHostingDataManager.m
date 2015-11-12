@@ -48,7 +48,8 @@
 - (THLDataStoreDomain *)domainForGuestlistsForPromotion {
     THLDataStoreDomain *domain = [[THLDataStoreDomain alloc] initWithMemberTestBlock:^BOOL(THLEntity *entity) {
         THLGuestlistInviteEntity *guestlistEntity = (THLGuestlistInviteEntity *)entity;
-        return guestlistEntity;
+//        TODO: Basic Hack to make function work
+        return (guestlistEntity != nil);
     }];
     return domain;
 }

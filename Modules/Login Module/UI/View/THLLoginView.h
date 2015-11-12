@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @protocol THLLoginView <NSObject>
-//@property (nonatomic) THLActivityStatus activityIndicator;
+@property (nonatomic) NSNumber *showActivityIndicator;
 @property (nonatomic, strong) RACCommand *loginCommand;
 @property (nonatomic, copy) NSString *loginText;
 @end

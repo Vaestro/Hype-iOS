@@ -24,7 +24,7 @@ static CGFloat const PRIVACY_IMAGEVIEW_DIMENSION = 14;
 @end
 
 @implementation THLLoginViewController
-//@synthesize activityIndicator;
+@synthesize showActivityIndicator;
 @synthesize loginCommand;
 @synthesize loginText;
 
@@ -68,26 +68,17 @@ static CGFloat const PRIVACY_IMAGEVIEW_DIMENSION = 14;
 - (void)bindView {
     RAC(self.facebookLoginButton, rac_command) = RACObserve(self, loginCommand);
     RAC(self.facebookLoginButton, titleLabel.text) = RACObserve(self, loginText);
-//    [RACObserve(self, activityIndicator) subscribeNext:^(id _) {
-//        switch (WSELF.activityIndicator) {
-//            case THLActivityStatusNone: {
-//                [SVProgressHUD dismiss];
-//                break;
-//            }
-//            case THLActivityStatusInProgress: {
-//                [SVProgressHUD show];
-//                break;
-//            }
-//            case THLActivityStatusSuccess: {
-//                [SVProgressHUD showSuccessWithStatus:@"Success!"];
-//                break;
-//            }
-//            case THLActivityStatusError: {
-//                [SVProgressHUD showErrorWithStatus:@"Error!"];
-//                break;
-//            }
-//        }
-//    }];
+    [RACObserve(self, showActivityIndicator) subscribeNext:^(NSNumber *activityStatus) {
+        if (activityStatus == [NSNumber numberWithInt:0]) {
+            [SVProgressHUD dismiss];
+        }
+        else if (activityStatus == [NSNumber numberWithInt:1]) {
+            [SVProgressHUD show];
+        }
+        else if (activityStatus == [NSNumber numberWithInt:3]) {
+            [SVProgressHUD showErrorWithStatus:@"Error Logging In, Please Try Again."];
+        }
+    }];
 }
 
 #pragma mark - Constructors
@@ -220,6 +211,10 @@ static CGFloat const PRIVACY_IMAGEVIEW_DIMENSION = 14;
              secondPage,
              thirdPage,
              fourthPage];
+}
+
+- (void)dealloc {
+    DLog(@"Destroyed %@", self);
 }
 
 @end

@@ -57,4 +57,8 @@
 	appearance.logoImage = [UIImage imageNamed:@"HypeList Icon"];
 	return appearance;
 }
+
+- (void)dealloc {
+    DLog(@"Destroyed %@", self);
+}
 @end

@@ -42,4 +42,8 @@
     return completionSource.task;
 }
 
+- (void)dealloc {
+    DLog(@"Destroyed %@", self);
+}
+
 @end
