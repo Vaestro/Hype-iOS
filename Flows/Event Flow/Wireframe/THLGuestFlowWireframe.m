@@ -35,6 +35,7 @@ THLGuestlistReviewModuleDelegate
 >
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) id currentWireframe;
+@property (nonatomic, strong) THLGuestFlowNavigationController *navigationController;
 @property (nonatomic, strong) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
 @property (nonatomic, strong) THLUserProfileWireframe *userProfileWireframe;
 @property (nonatomic, strong) THLEventDetailWireframe  *eventDetailWireframe;
@@ -49,12 +50,6 @@ THLGuestlistReviewModuleDelegate
 	}
 	return self;
 }
-
-//#pragma mark - Routing
-//- (void)presentGuestFlowInWindow:(UIWindow *)window {
-//	_window = window;
-//	[self presentEventDiscoveryInterface];
-//}
 
 - (void)presentGuestFlowInWindow:(UIWindow *)window {
     _window = window;
@@ -72,10 +67,8 @@ THLGuestlistReviewModuleDelegate
     /**
      *  Prevents popup notification from instantiating another event detail module if one is already instantiated
      */
-    if (_currentWireframe != _eventDetailWireframe) {
-        _window = window;
-        [self presentEventDetailInterfaceForEvent:eventEntity];
-    }
+    [_navigationController popToRootViewControllerAnimated:NO];
+    [self presentEventDetailInterfaceForEvent:eventEntity];
 }
 
 - (void)presentEventDiscoveryInterfaceInViewController:(UIViewController *)viewController {

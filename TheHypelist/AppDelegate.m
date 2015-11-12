@@ -69,8 +69,12 @@
 	
     // Extract the notification data
     NSDictionary *notificationPayload = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
-    
-    [_masterWireframe handlePushNotification:notificationPayload];
+    if (notificationPayload) {
+        NSLog(@"app recieved notification from remote%@", notificationPayload);
+        [_masterWireframe handlePushNotification:notificationPayload];
+    } else{
+        NSLog(@"app did not recieve notification");
+    }
     
 	return [[FBSDKApplicationDelegate sharedInstance] application:application
 									didFinishLaunchingWithOptions:launchOptions];

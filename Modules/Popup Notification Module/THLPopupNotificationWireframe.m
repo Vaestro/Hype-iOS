@@ -54,4 +54,7 @@
     [popup show];
 }
 
+- (void)dealloc {
+    DLog(@"Destroyed %@", self);
+}
 @end

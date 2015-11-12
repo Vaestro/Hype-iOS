@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "KLCPopup.h"
+#import "THLPopupNotificationViewModel.h"
 
-@interface THLPopupNotificationView : UIView
-@property (nonatomic, strong) RACCommand *acceptCommand;
-@property (nonatomic, copy) NSString *notificationText;
-@property (nonatomic, copy) NSURL *notificationImageURL;
+@protocol THLPopupNotificationViewModel;
+@interface THLPopupNotificationView : UIView<THLPopupNotificationViewModel>
+
 @end
 

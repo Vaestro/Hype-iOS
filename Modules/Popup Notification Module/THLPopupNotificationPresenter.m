@@ -9,7 +9,7 @@
 #import "THLPopupNotificationPresenter.h"
 #import "THLPopupNotificationInteractor.h"
 #import "THLPopupNotificationWireframe.h"
-#import "THLPopupNotificationView.h"
+#import "THLPopupNotificationViewModel.h"
 
 #import "THLEventEntity.h"
 #import "THLPromotionEntity.h"
@@ -18,6 +18,7 @@
 #import "THLGuestEntity.h"
 
 static NSString *const kPushInfoKeyNotficationText = @"notificationText";
+static NSString *const kPushInfoKeyImageURL = @"imageURL";
 
 @interface THLPopupNotificationPresenter()
 <
@@ -25,7 +26,9 @@ THLPopupNotificationInteractorDelegate
 >
 @property (nonatomic, strong) THLEventEntity *eventEntity;
 @property (nonatomic, strong) THLGuestlistInviteEntity *guestlistInviteEntity;
+@property (nonatomic, weak) id<THLPopupNotificationViewModel> view;
 @property (nonatomic, copy) NSString *notificationText;
+@property (nonatomic, copy) NSURL *imageURL;
 @end
 
 @implementation THLPopupNotificationPresenter
@@ -47,8 +50,7 @@ THLPopupNotificationInteractorDelegate
     return [[_interactor handleNotificationData:pushInfo] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
         if (!task.faulted) {
             WSELF.notificationText = pushInfo[kPushInfoKeyNotficationText];
-//            _notificationImageURL = pushInfo[kPushInfoKeyNotficationText];
-//            _notificationEvent = pushInfo[kPushInfoKeyNotficationText];
+            WSELF.imageURL = pushInfo[kPushInfoKeyImageURL];
             WSELF.guestlistInviteEntity = task.result;
             WSELF.eventEntity = WSELF.guestlistInviteEntity.guestlist.promotion.event;
             [WSELF.wireframe presentInterface];
@@ -57,21 +59,32 @@ THLPopupNotificationInteractorDelegate
     }];
 }
 
-- (void)configureView:(THLPopupNotificationView *)view {
+- (void)configureView:(id<THLPopupNotificationViewModel>)view {
+    _view = view;
+    
     WEAKSELF();
     RACCommand *acceptCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         [WSELF handlePopupAcceptAction];
         return [RACSignal empty];
     }];
     
-    [view setNotificationText:_notificationText];
-    [view setNotificationImageURL:_guestlistInviteEntity.guestlist.owner.imageURL];
-    [view setAcceptCommand:acceptCommand];
+    if (_guestlistInviteEntity != nil) {
+        [[WSELF view] setImageURL:_guestlistInviteEntity.guestlist.owner.imageURL];
+    }
+    else {
+        [[WSELF view] setImage:[[UIImage imageNamed:@"Hypelist-Icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    }
+    
+    [_view setNotificationText:_notificationText];
+    [_view setAcceptCommand:acceptCommand];
 }
 
 - (void)handlePopupAcceptAction {
     [self.moduleDelegate popupNotificationModule:self userDidAcceptReviewForEvent:_eventEntity];
 }
 
+- (void)dealloc {
+    DLog(@"Destroyed %@", self);
+}
 @end
 

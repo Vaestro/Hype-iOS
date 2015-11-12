@@ -22,6 +22,11 @@ static CGFloat const ICON_VIEW_DIMENSION = 50;
 
 
 @implementation THLPopupNotificationView
+@synthesize acceptCommand = _acceptCommand;
+@synthesize notificationText = _notificationText;
+@synthesize imageURL = _imageURL;
+@synthesize image = _image;
+
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         [self constructView];
@@ -57,12 +62,16 @@ static CGFloat const ICON_VIEW_DIMENSION = 50;
         make.top.equalTo([WSELF iconView].mas_bottom).insets(kTHLEdgeInsetsHigh());
         make.left.right.insets(kTHLEdgeInsetsHigh());
         make.width.equalTo(ScreenWidth-4*kTHLInset);
+        make.bottom.insets(kTHLEdgeInsetsHigh());
     }];
     
-    [_button makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF textView].mas_bottom).insets(kTHLEdgeInsetsHigh());
-        make.left.right.bottom.insets(kTHLEdgeInsetsHigh());
-    }];
+    if (_button.rac_command != nil) {
+        [_button makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo([WSELF textView].mas_bottom).insets(kTHLEdgeInsetsHigh());
+            make.left.right.bottom.insets(kTHLEdgeInsetsHigh());
+        }];
+    }
+
 }
 
 - (void)layoutSubviews {
@@ -74,7 +83,8 @@ static CGFloat const ICON_VIEW_DIMENSION = 50;
 }
 
 - (void)bindView {
-    RAC(self.iconView, imageURL) = RACObserve(self, notificationImageURL);
+    RAC(self.iconView, imageURL) = RACObserve(self, imageURL);
+    RAC(self.iconView, image) = RACObserve(self, image);
     RAC(self.textView, text) = RACObserve(self, notificationText);
     RAC(self.button, rac_command) = RACObserve(self, acceptCommand);
 }
@@ -101,4 +111,7 @@ static CGFloat const ICON_VIEW_DIMENSION = 50;
     return button;
 }
 
+- (void)dealloc {
+    DLog(@"Destroyed %@", self);
+}
 @end

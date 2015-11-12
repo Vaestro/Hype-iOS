@@ -28,4 +28,7 @@ static NSString *const kPushInfoKeyGuestlistInviteId = @"guestlistInviteId";
     return [_dataManager fetchGuestlistInviteWithId:guestlistInviteId];
 }
 
+- (void)dealloc {
+    DLog(@"Destroyed %@", self);
+}
 @end
