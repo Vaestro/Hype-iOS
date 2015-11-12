@@ -10,6 +10,8 @@
 #import "THLUser.h"
 #import "PFFacebookUtils.h"
 #import "FBSDKCoreKit.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 @implementation THLSessionService : NSObject
 
@@ -49,6 +51,13 @@
 
 - (void)logUserOut{
     [THLUser logOut];
+}
+
+- (void) logCrashlyticsUser {
+    // You can call any combination of these three methods
+    [CrashlyticsKit setUserIdentifier:[NSString stringWithFormat:@"%@", [THLUser currentUser].objectId]];
+    [CrashlyticsKit setUserEmail:[THLUser currentUser].email];
+    [CrashlyticsKit setUserName:[THLUser currentUser].fullName];
 }
 
 - (void)handleInvalidatedSession {

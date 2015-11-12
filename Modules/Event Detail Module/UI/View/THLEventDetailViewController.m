@@ -39,6 +39,9 @@
 @synthesize locationPlacemark;
 @synthesize actionBarButtonStatus;
 @synthesize actionBarButtonCommand;
+@synthesize viewAppeared;
+
+#pragma mark VC Lifecycle 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -50,8 +53,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//    [self updateBottomBarText];
+    self.viewAppeared = TRUE;
+}
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.viewAppeared = FALSE;
 }
 
 - (void)constructView {

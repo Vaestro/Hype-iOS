@@ -27,6 +27,9 @@
 #import "THLPromotionSelectionModuleDelegate.h"
 #import "THLGuestlistInvitationModuleDelegate.h"
 #import "THLUser.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
 
 @interface THLMasterWireframe()
 <
@@ -112,7 +115,9 @@ THLPopupNotificationModuleDelegate
 - (void)loginModule:(id<THLLoginModuleInterface>)module didLoginUser:(NSError *)error {
 	if (!error) {
         [_sessionService makeCurrentInstallation];
+        [_sessionService logCrashlyticsUser];
 		[self presentGuestFlow];
+
     } else {
         NSLog(@"Login Error:%@", error);
     }

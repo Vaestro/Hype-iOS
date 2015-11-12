@@ -18,17 +18,46 @@
 
 @protocol THLGuestlistServiceInterface <NSObject>
 
-#pragma mark - Guestlist Services
+//----------------------------------------------------------------
+#pragma mark - Fetch Guestlists For Host at a Event/Promotion
+//----------------------------------------------------------------
 - (BFTask *)fetchGuestlistsForPromotionAtEvent:(NSString *)eventId;
+
+//----------------------------------------------------------------
+#pragma mark - Create Guestlist For Promotion
+//----------------------------------------------------------------
 - (BFTask *)createGuestlistForPromotion:(THLPromotionEntity *)promotionEntity withInvites:(NSArray *)guestPhoneNumbers;
+
+//----------------------------------------------------------------
+#pragma mark - Create Additional Guestlist Invites for an Existing Guestlist
+//----------------------------------------------------------------
 - (BFTask *)updateGuestlist:(NSString *)guestlistId withInvites:(NSArray *)guestPhoneNumbers;
 
-#pragma mark - Guestlist Invite Services
+//----------------------------------------------------------------
+#pragma mark - Fetch Guestlists Invites For Guestlist
+//----------------------------------------------------------------
 
 - (BFTask *)fetchInvitesOnGuestlist:(THLGuestlist *)guestlist;
+
+//----------------------------------------------------------------
+#pragma mark - Fetch Guestlist For Guest For a Event/Promotion
+//----------------------------------------------------------------
 - (BFTask *)fetchGuestlistInviteForUser:(THLUser *)user atEvent:(NSString *)eventId;
+
+//----------------------------------------------------------------
+#pragma mark - Fetch Guestlists For Guest Using The Guestlist Invite ID
+//----------------------------------------------------------------
 - (BFTask *)fetchGuestlistInviteWithId:(NSString *)guestlistInviteId;
+
+//----------------------------------------------------------------
+#pragma mark - Update Guest's Guestlist Invite Response Status
+//----------------------------------------------------------------
 - (BFTask *)updateGuestlistInvite:(THLGuestlistInvite *)guestlistInvite withResponse:(THLStatus)response;
+
+//----------------------------------------------------------------
+#pragma mark - Update a Guestlist's Review Status
+//----------------------------------------------------------------
+- (BFTask *)updateGuestlist:(THLGuestlist *)guestlist withReviewStatus:(THLStatus)reviewStatus;
 
 
 @end

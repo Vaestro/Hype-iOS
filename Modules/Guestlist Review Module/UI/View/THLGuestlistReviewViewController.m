@@ -119,16 +119,16 @@ UICollectionViewDelegateFlowLayout
 
     [RACObserve(self, showActivityIndicator) subscribeNext:^(id _) {
         switch (WSELF.showActivityIndicator) {
-            case 0:
+            case THLActivityStatusNone:
                 [SVProgressHUD dismiss];
                 break;
-            case 1:
+            case THLActivityStatusInProgress:
                 [SVProgressHUD show];
                 break;
-            case 2:
+            case THLActivityStatusSuccess:
                 [SVProgressHUD showSuccessWithStatus:@"Success!"];
                 break;
-            case 3:
+            case THLActivityStatusError:
                 [SVProgressHUD showErrorWithStatus:@"Error!"];
                 break;
             default:
@@ -136,14 +136,22 @@ UICollectionViewDelegateFlowLayout
         }
     }];
     
-    [RACObserve(self, reviewerStatus) subscribeNext:^(id _) {
-        if (WSELF.reviewerStatus == THLGuestlistReviewerStatusAttendingGuest) {
-//            [WSELF actionContainerView].status = THLActionContainerViewStatusDecline;
-//            [WSELF.actionContainerView reloadView];
+    [RACObserve(self, reviewerStatus) subscribeNext:^(NSNumber *status) {
+        if (status == [NSNumber numberWithInteger:0]) {
+            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Accept or Decline Invite", nil)];
+            [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
+        }
+        else if (status == [NSNumber numberWithInteger:1]) {
             [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"LEAVE GUESTLIST", nil)];
             [WSELF actionBarButton].backgroundColor = kTHLNUIRedColor;
-//            TODO: Set Decline Command without creating Memory Leak
-//            RAC([SSELF actionContainerView].declineButton, rac_command) = RACObserve(SSELF, confirmCommand);
+        }
+        else if (status == [NSNumber numberWithInteger:3]) {
+            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Accept or Decline Guestlist", nil)];
+            [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
+        }
+        else if (status == [NSNumber numberWithInteger:4]) {
+            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Check In Guests", nil)];
+            [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
         }
         [WSELF.view setNeedsDisplay];
     }];

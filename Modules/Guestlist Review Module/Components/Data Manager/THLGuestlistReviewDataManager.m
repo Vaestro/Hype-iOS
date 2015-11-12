@@ -49,13 +49,17 @@
 - (THLDataStoreDomain *)domainForGuestlistInvitesForGuestlist:(THLGuestlistEntity *)guestlist {
     THLDataStoreDomain *domain = [[THLDataStoreDomain alloc] initWithMemberTestBlock:^BOOL(THLEntity *entity) {
         THLGuestlistInviteEntity *guestlistInviteEntity = (THLGuestlistInviteEntity *)entity;
-        return (guestlistInviteEntity.response != THLStatusDeclined);
+        return ([guestlistInviteEntity guestlist].objectId == guestlist.objectId);
     }];
     return domain;
 }
 
 - (BFTask *)updateGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite withResponse:(THLStatus)response {
     return [_guestlistService updateGuestlistInvite:[THLGuestlistInvite objectWithoutDataWithObjectId:guestlistInvite.objectId] withResponse:response];
+}
+
+- (BFTask *)updateGuestlist:(THLGuestlistEntity *)guestlist withReviewStatus:(THLStatus)reviewStatus {
+    return [_guestlistService updateGuestlist:[THLGuestlist objectWithoutDataWithObjectId:guestlist.objectId] withReviewStatus:reviewStatus];
 }
 
 - (void)dealloc {

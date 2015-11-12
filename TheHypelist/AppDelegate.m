@@ -123,7 +123,7 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-	[FBSDKAppEvents activateApp];
+	[FBSDKAppEvents activateApp];   
     
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     if (currentInstallation.badge != 0) {

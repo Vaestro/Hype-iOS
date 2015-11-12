@@ -38,7 +38,7 @@
         THLDataStoreDomain *domain = [WSELF domainForGuestlistsForPromotion];
         NSSet *entities = [NSSet setWithArray:[WSELF.entityMapper mapGuestlists:task.result]];
 #warning Hackaround to fix data store from causing problems when accessing guestlist invites from different guestlists
-        //        [WSELF.dataStore purge];
+        [WSELF.dataStore purge];
         
         [WSELF.dataStore refreshDomain:domain withEntities:entities];
         return [BFTask taskWithResult:entities];

@@ -14,7 +14,7 @@ typedef NS_OPTIONS(NSInteger, THLGuestlistReviewerStatus) {
     THLGuestlistReviewerStatusAttendingGuest,
     THLGuestlistReviewerStatusOwner,
     THLGuestlistReviewerStatusPendingHost,
-    THLGuestlistReviewerStatusHost,
+    THLGuestlistReviewerStatusActiveHost,
     THLGuestlistReviewerStatus_Count
 };
 
@@ -23,9 +23,9 @@ typedef NS_OPTIONS(NSInteger, THLGuestlistReviewerStatus) {
 @protocol THLGuestlistReviewView <NSObject>
 @property (nonatomic, strong) THLViewDataSource *dataSource;
 
-@property (nonatomic) THLGuestlistReviewerStatus reviewerStatus;
+@property (nonatomic) NSNumber *reviewerStatus;
 @property (nonatomic) BOOL showRefreshAnimation;
-@property (nonatomic) NSInteger showActivityIndicator;
+@property (nonatomic) THLActivityStatus showActivityIndicator;
 
 @property (nonatomic, strong) KLCPopup *popup;
 @property (nonatomic, strong) RACCommand *acceptCommand;

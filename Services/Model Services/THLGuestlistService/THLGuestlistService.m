@@ -25,9 +25,17 @@
 
 #pragma mark - Guestlist Services
 
+//----------------------------------------------------------------
+#pragma mark - Fetch Guestlists For Host at a Event/Promotion
+//----------------------------------------------------------------
+
 - (BFTask *)fetchGuestlistsForPromotionAtEvent:(NSString *)eventId {
     return [[_queryFactory queryForGuestlistsForPromotionAtEvent:eventId] findObjectsInBackground];
 }
+
+//----------------------------------------------------------------
+#pragma mark - Create Guestlist For Promotion
+//----------------------------------------------------------------
 
 - (BFTask *)createGuestlistForPromotion:(THLPromotionEntity *)promotionEntity withInvites:(NSArray *)guestPhoneNumbers {
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
@@ -54,6 +62,7 @@
                                                 guestlistInvite[@"Guestlist"] = guestlist;
                                                 guestlistInvite[@"phoneNumber"] = currentUser.phoneNumber;
                                                 guestlistInvite[@"response"] = [NSNumber numberWithInt:1];
+                                                guestlistInvite[@"checkInStatus"] = [NSNumber numberWithBool:FALSE];
                                                 [guestlistInvite saveInBackground];
                                                 
                                                 [completionSource setResult:nil];
@@ -90,6 +99,10 @@
 
 #pragma mark - Guestlist Invite Services
 
+//----------------------------------------------------------------
+#pragma mark - Fetch Guestlists Invites For Guestlist
+//----------------------------------------------------------------
+
 - (BFTask *)fetchInvitesOnGuestlist:(THLGuestlist *)guestlist {
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
     NSMutableArray *completedGuestlistInvites = [NSMutableArray new];
@@ -114,9 +127,17 @@
 
 }
 
+//----------------------------------------------------------------
+#pragma mark - Fetch Guestlist For Guest For a Event/Promotion
+//----------------------------------------------------------------
+
 - (BFTask *)fetchGuestlistInviteForUser:(THLUser *)user atEvent:(NSString *)eventId {
     return [[_queryFactory queryForGuestlistInviteForUser:user atEvent:eventId] getFirstObjectInBackground];
 }
+
+//----------------------------------------------------------------
+#pragma mark - Fetch Guestlists For Guest Using The Guestlist Invite ID
+//----------------------------------------------------------------
 
 - (BFTask *)fetchGuestlistInviteWithId:(NSString *)guestlistInviteId {
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
@@ -141,12 +162,27 @@
     return completionSource.task;
 }
 
+//----------------------------------------------------------------
+#pragma mark - Update Guest's Guestlist Invite Response Status
+//----------------------------------------------------------------
+
 - (BFTask *)updateGuestlistInvite:(THLGuestlistInvite *)guestlistInvite withResponse:(THLStatus)response {
     NSNumber *castedResponse = [[NSNumber alloc] initWithInt:response];
     guestlistInvite[@"response"] = castedResponse;
     [guestlistInvite saveInBackground];
     return [BFTask taskWithResult:nil];
 }
+
+//----------------------------------------------------------------
+#pragma mark - Update a Guestlist's Review Status
+//----------------------------------------------------------------
+
+- (BFTask *)updateGuestlist:(THLGuestlist *)guestlist withReviewStatus:(THLStatus)reviewStatus {
+    guestlist[@"reviewStatus"] = [NSNumber numberWithInt:reviewStatus];
+    [guestlist saveInBackground];
+    return [BFTask taskWithResult:nil];
+}
+
 
 - (void)dealloc {
     NSLog(@"Destroyed %@", self);

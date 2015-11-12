@@ -49,10 +49,12 @@ THLEventDetailInteractorDelegate
     WEAKSELF();
 	self.view = view;
     
-//    RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-//        [WSELF handleDismissAction];
-//        return [RACSignal empty];
-//    }];
+    [[RACObserve(self.view, viewAppeared) filter:^BOOL(NSNumber *b) {
+        BOOL viewIsAppearing = [b boolValue];
+        return viewIsAppearing == TRUE;
+    }] subscribeNext:^(id x) {
+        [WSELF checkForInvite];
+    }];
     
     RACCommand *actionBarButtonCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         if (WSELF.guestlistReviewStatus == THLGuestlistStatusAccepted ||
@@ -102,9 +104,12 @@ THLEventDetailInteractorDelegate
     _eventEntity = eventEntity;
     
     [_interactor getPlacemarkForLocation:_eventEntity.location];
-    [_interactor checkValidGuestlistInviteForUser:[THLUser currentUser] atEvent:_eventEntity.objectId];
     [_interactor getPromotionForEvent:_eventEntity.objectId];
 	[_wireframe presentInterfaceInWindow:window];
+}
+
+- (void)checkForInvite {
+    [_interactor checkValidGuestlistInviteForUser:[THLUser currentUser] atEvent:_eventEntity.objectId];
 }
 
 - (void)handleDismissAction {
@@ -145,9 +150,9 @@ THLEventDetailInteractorDelegate
         else if (guestlistEntity.reviewStatus == THLStatusAccepted) {
             self.guestlistReviewStatus = THLGuestlistStatusAccepted;
         }
-        else if (guestlistEntity.reviewStatus == THLStatusDeclined) {
-            self.guestlistReviewStatus = THLGuestlistStatusDeclined;
-        }
+    }
+    else {
+        self.guestlistReviewStatus = THLGuestlistStatusDeclined;
     }
 }
 

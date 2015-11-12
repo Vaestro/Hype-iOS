@@ -77,6 +77,14 @@ static NSString *const kTHLGuestlistReviewModuleViewKey = @"kTHLGuestlistReviewM
     }];
 }
 
+- (void)updateGuestlist:(THLGuestlistEntity *)guestlist withReviewStatus:(THLStatus)reviewStatus {
+    WEAKSELF();
+    [[_dataManager updateGuestlist:guestlist withReviewStatus:reviewStatus] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+        [WSELF.delegate interactor:WSELF didUpdateGuestlistReviewStatus:task.error to:reviewStatus];
+        return nil;
+    }];
+}
+
 - (void)dealloc {
     NSLog(@"Destroyed %@", self);
 }

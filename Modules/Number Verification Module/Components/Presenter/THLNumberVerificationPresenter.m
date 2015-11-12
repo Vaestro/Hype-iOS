@@ -10,6 +10,11 @@
 #import <DigitsKit/DigitsKit.h>
 #import "THLAppearanceConstants.h"
 
+@interface THLNumberVerificationPresenter ()
+@property (nonatomic, strong) DGTAppearance *digitsApperance;
+
+@end
+
 @implementation THLNumberVerificationPresenter
 @synthesize moduleDelegate;
 
@@ -24,6 +29,7 @@
 	WEAKSELF();
     DGTAuthenticationConfiguration *configuration = [DGTAuthenticationConfiguration new];
     configuration.title = NSLocalizedString(@"Number Verification", nil);
+    configuration.appearance = _digitsApperance;
 	[[Digits sharedInstance] authenticateWithViewController:window.rootViewController configuration:configuration completion:^(DGTSession *session, NSError *error) {
 		if (error) {
 			[WSELF handleNumberVerificationFailure:error];
@@ -32,6 +38,7 @@
 		}
 	}];
 }
+
 #pragma mark - Logic
 - (void)handleNumberVerificationSuccess:(DGTSession *)session {
 	NSString *phoneNumber = session.phoneNumber;

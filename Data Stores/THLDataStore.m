@@ -128,6 +128,40 @@
 	}];
 }
 
+//- (void)refreshDomain:(THLDataStoreDomain *)domain withRelatedEntities:(NSSet *)entities forEntity:(THLEntity *)entity {
+//    __block NSArray *keys = [[self entityKeysInDomain:domain] allObjects];
+//    __block NSMutableSet *unprocessedEntities = [entities mutableCopy];
+//    __block NSMutableSet *entitiesToUpdate = [NSMutableSet new];
+//    __block NSMutableSet *entitiesToRemove = [NSMutableSet new];
+//    
+//    WEAKSELF();
+//    STRONGSELF();
+//    [self.rwConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {
+//        [transaction enumerateObjectsForKeys:keys inCollection:SSELF.collectionKey unorderedUsingBlock:^(NSUInteger keyIndex, id  _Nonnull object, BOOL * _Nonnull stop) {
+//            THLEntity *oldEntity = (THLEntity *)object;
+//            THLEntity *newEntity = [entities member:oldEntity];
+//            if (!newEntity) {
+//                //No corresponding entity -> remove entity from domain
+//                [entitiesToRemove addObject:object];
+//            } else if ([oldEntity shouldUpdateWith:newEntity]) {
+//                [entitiesToUpdate addObject:object];
+//            }
+//            
+//            [unprocessedEntities removeObject:object];
+//        }];
+//        
+//        [entitiesToUpdate unionSet:unprocessedEntities];
+//        for (THLEntity *entity in entitiesToUpdate) {
+//            [transaction setObject:entity forKey:entity.key inCollection:self.collectionKey];
+//        }
+//        
+//        NSArray *keysToRemove = [entitiesToRemove valueForKey:@"key"];
+//        if (keysToRemove.count) {
+//            [transaction removeObjectsForKeys:keysToRemove inCollection:self.collectionKey];
+//        }
+//    }];
+//}
+
 - (void)purge {
     WEAKSELF();
 	[self.rwConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {

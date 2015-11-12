@@ -13,6 +13,7 @@
 
 //- (BFTask *)checkUserSessionValidity;
 - (BOOL)isUserCached;
+- (void) logCrashlyticsUser;
 - (void)logUserOut;
 - (BFTask *)makeCurrentInstallation;
 @end
