@@ -77,24 +77,23 @@
     return completionSource.task;
 }
 
-- (BFTask *)updateGuestlist:(NSString *)guestlistId withInvites:(NSArray *)guestPhoneNumbers {
-    [PFCloud callFunctionInBackground:@"updateGuestlist"
-                              withParameters:@{@"guestlistId": guestlistId,
-                                               @"guestDigits": guestPhoneNumbers}
-                                block:^(id guestlistInvite, NSError *error) {
-                                  PFObject *guestlist = guestlistInvite[@"Guestlist"];
-                                  [guestlistInvite setObject:guestlist forKey:@"Guestlist"];
-                                  PFObject *owner = guestlistInvite[@"Guestlist"][@"Owner"];
-                                  [guestlist setObject:owner forKey:@"Owner"];
-                                  PFObject *promotion = guestlistInvite[@"Guestlist"][@"Promotion"];
-                                  [guestlist setObject:promotion forKey:@"Promotion"];
-                                  PFObject *event = guestlistInvite[@"Guestlist"][@"Promotion"][@"event"];
-                                  [promotion setObject:event forKey:@"event"];
-                                  PFObject *location = guestlistInvite[@"Guestlist"][@"Promotion"][@"event"][@"location"];
-                                  [event setObject:location forKey:@"location"];
-                                  [guestlistInvite pinInBackgroundWithName:@"GuestlistInvites"];
-                              }];
-    return [BFTask taskWithResult:nil];
+- (BFTask *)updateGuestlist:(NSString *)guestlistId withInvites:(NSArray *)guestPhoneNumbers forPromotion:(THLPromotionEntity *)promotionEntity {
+    BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
+    [PFCloud callFunctionInBackground:@"sendOutNotifications"
+                       withParameters:@{@"promotionId": promotionEntity.objectId,
+                                        @"eventName":promotionEntity.event.location.name,
+                                        @"promotionTime":promotionEntity.time,
+                                        @"guestPhoneNumbers": guestPhoneNumbers,
+                                        @"guestlistId": guestlistId}
+                                block:^(id object, NSError *error) {
+                                    
+                                    if (!error){
+                                        [completionSource setResult:nil];
+                                    }else {
+                                        [completionSource setError:error];
+                                    }
+                                }];
+    return completionSource.task;
 }
 
 #pragma mark - Guestlist Invite Services

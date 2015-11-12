@@ -47,8 +47,8 @@
     }];
 }
 
-- (BFTask *)updateGuestlist:(NSString *)guestlistId withInvites:(NSArray *)guestPhoneNumbers {
-    return [[_guestlistService updateGuestlist:guestlistId withInvites:guestPhoneNumbers] continueWithSuccessBlock:^id(BFTask *task) {
+- (BFTask *)updateGuestlist:(NSString *)guestlistId withInvites:(NSArray *)guestPhoneNumbers forPromotion:(THLPromotionEntity *)promotionEntity {
+    return [[_guestlistService updateGuestlist:guestlistId withInvites:guestPhoneNumbers forPromotion:promotionEntity] continueWithSuccessBlock:^id(BFTask *task) {
         //        NSArray<THLGuestlistEntity *> *guestlist = [_entityMapper mapGuestlists:@[task.result]];
         return [BFTask taskWithResult:nil];
     }];

@@ -38,7 +38,6 @@ DetailTitle {
 font-name: @primaryRegularFontName;
 font-color: @primaryFontColor;
 font-size: 16;
-text-transform: uppercase;
 }
 
 ButtonTitle {

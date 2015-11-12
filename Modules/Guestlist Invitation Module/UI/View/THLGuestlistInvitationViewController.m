@@ -22,6 +22,7 @@
 //Entities
 #import "THLUserEntity.h"
 #import "THLGuestEntity.h"
+#import "UIView+DimView.h"
 
 #define kContactPickerViewHeight 100.0
 
@@ -106,14 +107,19 @@
 			tvCell.phoneNumber = guest.phoneNumber;
 
 			if ([WSELF.addedGuests containsObject:guest]) {
+                tvCell.tintColor = kTHLNUIAccentColor;
 				tvCell.accessoryType = UITableViewCellAccessoryCheckmark;
 			} else {
 				tvCell.accessoryType = UITableViewCellAccessoryNone;
 			}
 
-			if ([WSELF.existingGuests containsObject:guest]) {
+			if ([WSELF.existingGuests containsObject:guest.intPhoneNumberFormat]) {
+                tvCell.name = [NSString stringWithFormat:@"%@ (Already Invited!)", guest.fullName];
+//                tvCell.phoneNumber = @"This Guest is already invited to your event!";
 				tvCell.userInteractionEnabled = NO;
 				tvCell.alpha = 0.5;
+                [tvCell maskView].alpha = 0.5;
+//                [tvCell dimView];
 			}
             
             if ([tvCell respondsToSelector:@selector(setSeparatorInset:)]) {
@@ -174,6 +180,10 @@
     pickerView.backgroundColor = kTHLNUISecondaryBackgroundColor;
     [pickerView setPlaceholderLabelText:@"Type a name or phone number"];
     [pickerView setPlaceholderLabelTextColor:kTHLNUIGrayFontColor];
+    THContactViewStyle *contactViewStyle = [[THContactViewStyle alloc] initWithTextColor:kTHLNUIPrimaryFontColor backgroundColor:kTHLNUIAccentColor cornerRadiusFactor:0];
+    THContactViewStyle *selectedContactViewStyle = [[THContactViewStyle alloc] initWithTextColor:kTHLNUIPrimaryFontColor backgroundColor:[kTHLNUIAccentColor colorWithAlphaComponent:0.67f] cornerRadiusFactor:0];
+    
+    [pickerView setContactViewStyle:contactViewStyle selectedStyle:selectedContactViewStyle];
 	return pickerView;
 }
 

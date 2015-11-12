@@ -48,26 +48,26 @@ static CGFloat const kTHLEventTitlesViewSeparatorViewWidth = 112.5;
     [_locationNameLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.insets(kTHLEdgeInsetsNone());
     }];
-    
+    WEAKSELF();
     [_titleLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.insets(kTHLEdgeInsetsNone());
-        make.top.equalTo(_locationNameLabel.mas_baseline).insets(kTHLEdgeInsetsLow());
+        make.top.equalTo([WSELF locationNameLabel].mas_baseline).insets(kTHLEdgeInsetsLow());
     }];
     
     [_separatorView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_titleLabel.mas_baseline).insets(kTHLEdgeInsetsHigh());
+        make.top.equalTo([WSELF titleLabel].mas_baseline).insets(kTHLEdgeInsetsHigh());
         make.size.equalTo(CGSizeMake(kTHLEventTitlesViewSeparatorViewWidth, kTHLEventTitlesViewSeparatorViewHeight));
         make.centerX.offset(0);
     }];
     
     [_locationNeighborhoodLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.insets(kTHLEdgeInsetsNone());
-        make.top.equalTo(_separatorView.mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.top.equalTo([WSELF separatorView].mas_bottom).insets(kTHLEdgeInsetsHigh());
     }];
     
     [_dateLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.insets(kTHLEdgeInsetsNone());
-        make.top.equalTo(_locationNeighborhoodLabel.mas_baseline).insets(kTHLEdgeInsetsLow());
+        make.top.equalTo([WSELF locationNeighborhoodLabel].mas_baseline).insets(kTHLEdgeInsetsLow());
     }];
 }
 

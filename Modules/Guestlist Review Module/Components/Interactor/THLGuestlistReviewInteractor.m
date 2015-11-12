@@ -17,7 +17,6 @@ static NSString *const kTHLGuestlistReviewModuleViewKey = @"kTHLGuestlistReviewM
 @class THLGuestlistInviteEntity;
 
 @interface THLGuestlistReviewInteractor()
-@property (nonatomic, strong) NSArray<THLGuestlistInviteEntity *> *guestlistInvites;
 @end
 
 @implementation THLGuestlistReviewInteractor
@@ -37,10 +36,17 @@ static NSString *const kTHLGuestlistReviewModuleViewKey = @"kTHLGuestlistReviewM
 - (void)updateGuestlistInvites {
     WEAKSELF();
     [[_dataManager fetchGuestlistInvitesForGuestlist:_guestlistEntity] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
-//        Store guestlist Invites in Memory In case User wants to Add more Guests
-//        WSELF.guestlistInvites = task.result;
+//        Store guests in Memory In case User wants to Add more Guests
+        [self collectGuestsPhoneNumbers:task.result];
         [WSELF.delegate interactor:WSELF didUpdateGuestlistInvites:task.error];
         return nil;
+    }];
+}
+
+- (void)collectGuestsPhoneNumbers:(NSSet *)guestlistInvites {
+    NSArray *invitesArray = [guestlistInvites allObjects];
+    _guests = [invitesArray linq_select:^id(THLGuestlistInviteEntity *guestlistInvite) {
+        return guestlistInvite.guest.phoneNumber;
     }];
 }
 

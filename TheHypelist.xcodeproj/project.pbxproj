@@ -112,7 +112,6 @@
 		7942082C1BD82AF6009B86FA /* THLActionBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7942082B1BD82AF6009B86FA /* THLActionBarButton.m */; };
 		7942082F1BD8C250009B86FA /* THLGuestlistEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7942082E1BD8C250009B86FA /* THLGuestlistEntity.m */; };
 		794483041BEC5B5D00EABE23 /* THLStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794483031BEC5B5D00EABE23 /* THLStatusView.m */; };
-		794483081BEC8A6000EABE23 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 794483071BEC8A6000EABE23 /* libsqlite3.dylib */; };
 		794DCCAC1BF3B31E0037A03D /* UIImageView+Letters.m in Sources */ = {isa = PBXBuildFile; fileRef = 794DCCAB1BF3B31E0037A03D /* UIImageView+Letters.m */; };
 		79527CF01BF188F80074AF38 /* THLEventHostingInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 79527CEF1BF188F80074AF38 /* THLEventHostingInteractor.m */; };
 		79752ADE1BEBD8B500D09B2E /* THLConfirmationPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79752ADD1BEBD8B500D09B2E /* THLConfirmationPopupView.m */; };
@@ -555,7 +554,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				794483081BEC8A6000EABE23 /* libsqlite3.dylib in Frameworks */,
 				8500CA18DF5736B9764E20A9 /* libPods-TheHypelist.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2016,10 +2014,10 @@
 		79B959311BE581FE00B87799 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				79B959371BE67AFD00B87799 /* Cells */,
 				79B959351BE5822A00B87799 /* THLGuestlistReviewView.h */,
 				79B959321BE5821B00B87799 /* THLGuestlistReviewViewController.h */,
 				79B959331BE5821B00B87799 /* THLGuestlistReviewViewController.m */,
+				79B959371BE67AFD00B87799 /* Cells */,
 			);
 			path = View;
 			sourceTree = "<group>";

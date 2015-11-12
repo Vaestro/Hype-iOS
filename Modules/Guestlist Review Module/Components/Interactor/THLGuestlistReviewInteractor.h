@@ -10,6 +10,8 @@
 @class THLGuestlistReviewDataManager;
 @class THLGuestlistReviewInteractor;
 @class THLViewDataSource;
+@class THLGuestEntity;
+
 @class THLGuestlistEntity;
 @class THLGuestlistInviteEntity;
 @protocol THLViewDataSourceFactoryInterface;
@@ -23,6 +25,7 @@
 @interface THLGuestlistReviewInteractor : NSObject
 @property (nonatomic, weak) id<THLGuestlistReviewInteractorDelegate> delegate;
 @property (nonatomic, strong) THLGuestlistEntity *guestlistEntity;
+@property (nonatomic, strong) NSArray *guests;
 
 #pragma mark - Dependencies
 @property (nonatomic, readonly, weak) THLGuestlistReviewDataManager *dataManager;

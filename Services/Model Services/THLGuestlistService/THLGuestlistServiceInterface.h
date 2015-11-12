@@ -31,7 +31,7 @@
 //----------------------------------------------------------------
 #pragma mark - Create Additional Guestlist Invites for an Existing Guestlist
 //----------------------------------------------------------------
-- (BFTask *)updateGuestlist:(NSString *)guestlistId withInvites:(NSArray *)guestPhoneNumbers;
+- (BFTask *)updateGuestlist:(NSString *)guestlistId withInvites:(NSArray *)guestPhoneNumbers forPromotion:(THLPromotionEntity *)promotionEntity;
 
 //----------------------------------------------------------------
 #pragma mark - Fetch Guestlists Invites For Guestlist

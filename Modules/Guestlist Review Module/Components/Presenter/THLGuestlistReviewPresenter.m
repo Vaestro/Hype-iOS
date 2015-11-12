@@ -130,7 +130,11 @@ THLGuestlistReviewInteractorDelegate
 }
 
 - (void)updateGuestReviewStatus {
-    if (_guestlistInviteEntity.response == THLStatusAccepted) {
+    NSString *currentUserId = [THLUser currentUser].objectId;
+    if ([_guestlistInviteEntity.guestlist.owner.objectId isEqualToString:currentUserId]) {
+        self.reviewerStatus = THLGuestlistReviewerStatusOwner;
+    }
+    else if (_guestlistInviteEntity.response == THLStatusAccepted) {
         self.reviewerStatus = THLGuestlistReviewerStatusAttendingGuest;
     }
     else if (_guestlistInviteEntity.response == THLStatusPending) {
@@ -213,19 +217,31 @@ THLGuestlistReviewInteractorDelegate
     NSString *eventName =_guestlistInviteEntity.guestlist.promotion.event.title;
     NSString *promotionTime =_guestlistInviteEntity.guestlist.promotion.time.thl_timeString;
     NSString *promotionDate =_guestlistInviteEntity.guestlist.promotion.time.thl_weekdayString;
-
-    if (_reviewerStatus == THLGuestlistReviewerStatusAttendingGuest) {
-        [_view confirmActionWithMessage:[NSString stringWithFormat:@"Are you sure you want to leave %@'s party for %@?", ownerName, eventName] acceptTitle:@"YES" declineTitle:@"NO"];
-    }
-    else if (_reviewerStatus == THLGuestlistReviewerStatusPendingGuest) {
-        [_view confirmActionWithMessage:[NSString stringWithFormat:@"%@ would like you to join their guestlist for %@, %@ at %@", ownerName, eventName, promotionDate, promotionTime] acceptTitle:@"ACCEPT" declineTitle:@"DECLINE"];
-    }
     
-    if (_reviewerStatus == THLGuestlistReviewerStatusPendingHost) {
-        [_view confirmActionWithMessage:[NSString stringWithFormat:@"%@'s party would like to join to your guestlist for %@, %@ at %@", ownerName, eventName,promotionDate, promotionTime] acceptTitle:@"ACCEPT" declineTitle:@"DECLINE"];
-    }
-    else if (_reviewerStatus == THLGuestlistReviewerStatusActiveHost) {
-//        [_view confirmActionWithMessage:[NSString stringWithFormat:@"%@ would like you to join their guestlist for %@, %@ at %@", ownerName, eventName, promotionDate, promotionTime] acceptTitle:@"ACCEPT" declineTitle:@"DECLINE"];
+    switch (_reviewerStatus) {
+        case THLGuestlistReviewerStatusPendingGuest: {
+            [_view confirmActionWithMessage:[NSString stringWithFormat:@"%@ would like you to join their guestlist for %@, %@ at %@", ownerName, eventName, promotionDate, promotionTime] acceptTitle:@"ACCEPT" declineTitle:@"DECLINE"];
+            break;
+        }
+        case THLGuestlistReviewerStatusAttendingGuest: {
+            [_view confirmActionWithMessage:[NSString stringWithFormat:@"Are you sure you want to leave %@'s party for %@?", ownerName, eventName] acceptTitle:@"YES" declineTitle:@"NO"];
+            break;
+        }
+        case THLGuestlistReviewerStatusOwner: {
+            [self handleAddGuestsAction];
+            break;
+        }
+        case THLGuestlistReviewerStatusPendingHost: {
+            [_view confirmActionWithMessage:[NSString stringWithFormat:@"%@'s party would like to join to your guestlist for %@, %@ at %@", ownerName, eventName,promotionDate, promotionTime] acceptTitle:@"ACCEPT" declineTitle:@"DECLINE"];
+            break;
+        }
+        case THLGuestlistReviewerStatusActiveHost: {
+            [_view confirmActionWithMessage:[NSString stringWithFormat:@"Are you sure you want to check in %@'s party for %@?", ownerName, eventName] acceptTitle:@"YES" declineTitle:@"NO"];
+            break;
+        }
+        default: {
+            break;
+        }
     }
 }
 
@@ -242,6 +258,10 @@ THLGuestlistReviewInteractorDelegate
 //    //    self.showActivityIndicator = YES;
 //    [_interactor updateGuestlistReviewStatus:@"Declined"];
 //}
+
+- (void)handleAddGuestsAction {
+    [self.moduleDelegate guestlistReviewModule:self promotion:_guestlistInviteEntity.guestlist.promotion withGuestlistId:_guestlistInviteEntity.guestlist.objectId andGuests:[_interactor guests] presentGuestlistInvitationInterfaceOnController:(UIViewController *)self.view];
+}
 
 #pragma mark - InteractorDelegate
 - (void)interactor:(THLGuestlistReviewInteractor *)interactor didUpdateGuestlistInvites:(NSError *)error {

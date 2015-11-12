@@ -24,6 +24,8 @@
 @interface THLGuestlistInvitationInteractor : NSObject
 @property (nonatomic, weak) id<THLGuestlistInvitationInteractorDelegate> delegate;
 @property (nonatomic, strong) THLPromotionEntity *promotionEntity;
+@property (nonatomic, strong) NSArray *currentGuests;
+
 
 #pragma mark - Dependencies
 @property (nonatomic, readonly) THLGuestlistInvitationDataManager *dataManager;
@@ -32,7 +34,7 @@
 			  viewDataSourceFactory:(id<THLViewDataSourceFactoryInterface>)viewDataSourceFactory;
 
 - (THLSearchViewDataSource *)getDataSource;
-- (void)loadGuestlist:(NSString *)guestlistId withCurrentGuests:(NSArray<THLGuestEntity *> *)currentGuests;
+- (void)loadGuestlist:(NSString *)guestlistId withCurrentGuests:(NSArray *)currentGuests;
 - (void)addGuest:(THLGuestEntity *)guest;
 - (void)removeGuest:(THLGuestEntity *)guest;
 - (void)commitChangesToGuestlist;

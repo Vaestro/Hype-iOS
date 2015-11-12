@@ -47,7 +47,7 @@ THLGuestlistInvitationViewEventHandler
 }
 
 //For Updating An Existing Guestlist
-- (void)presentGuestlistInvitationInterfaceForPromotion:(THLPromotionEntity *)promotionEntity withGuestlistId:(NSString *)guestlistId andGuests:(NSArray<THLGuestEntity *> *)guests inController:(UIViewController *)controller {
+- (void)presentGuestlistInvitationInterfaceForPromotion:(THLPromotionEntity *)promotionEntity withGuestlistId:(NSString *)guestlistId andGuests:(NSArray *)guests inController:(UIViewController *)controller {
     _interactor.promotionEntity = promotionEntity;
     [_interactor loadGuestlist:guestlistId withCurrentGuests:guests];
     [_wireframe presentInterfaceInController:controller];
@@ -57,7 +57,7 @@ THLGuestlistInvitationViewEventHandler
 	_view = view;
 	[_view setEventHandler:self];
 	[_view setDataSource:[_interactor getDataSource]];
-    
+    [_view setExistingGuests:[_interactor currentGuests]];
     WEAKSELF();
     [RACObserve(self, submitting) subscribeNext:^(NSNumber *b) {
         BOOL isSubmitting = [b boolValue];

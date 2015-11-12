@@ -23,7 +23,6 @@ static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInv
 
 @interface THLGuestlistInvitationInteractor ()
 @property (nonatomic, copy) NSString *guestlistId;
-@property (nonatomic, strong) NSArray *currentGuests;
 @property (nonatomic, strong) NSMutableArray *addedGuests;
 @property (nonatomic, strong) NSMutableArray *addedGuestDigits;
 @end
@@ -45,7 +44,7 @@ static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInv
     _currentGuests = nil;
 }
 
-- (void)loadGuestlist:(NSString *)guestlistId withCurrentGuests:(NSArray<THLGuestEntity *> *)currentGuests {
+- (void)loadGuestlist:(NSString *)guestlistId withCurrentGuests:(NSArray *)currentGuests {
 	_guestlistId = [guestlistId copy];
 	_currentGuests = currentGuests;
 }
@@ -105,12 +104,12 @@ static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInv
 
 - (BOOL)isGuestInvited:(THLGuestEntity *)guest {
 //	[self checkForGuestlist];
-	return [_currentGuests containsObject:guest] || [_addedGuests containsObject:guest];
+	return [_currentGuests containsObject:guest.intPhoneNumberFormat] || [_addedGuests containsObject:guest];
 }
 
 - (BOOL)canAddGuest:(THLGuestEntity *)guest {
 //	[self checkForGuestlist];
-	return ![self isGuestInvited:guest];
+    return ![self isGuestInvited:guest];
 }
 
 - (BOOL)canRemoveGuest:(THLGuestEntity *)guest {
@@ -123,6 +122,9 @@ static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInv
 	if ([self canAddGuest:guest]) {
 		[_addedGuests addObject:guest];
     }
+//    else
+//        [WSELF.delegate interactor:WSELF unableToAddGuest:guest];
+//    }
 }
 
 - (void)removeGuest:(THLGuestEntity *)guest {
@@ -148,7 +150,7 @@ static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInv
             return nil;
         }];
     } else if (_guestlistId != nil) {
-        [[_dataManager updateGuestlist:_guestlistId withInvites:[self obtainDigits:_addedGuests]] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+        [[_dataManager updateGuestlist:_guestlistId withInvites:[self obtainDigits:_addedGuests] forPromotion:_promotionEntity] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
             [WSELF.delegate interactor:WSELF didCommitChangesToGuestlist:task.error];
             return nil;
         }];

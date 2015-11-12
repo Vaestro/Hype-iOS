@@ -19,8 +19,8 @@
 #import "SVProgressHUD.h"
 #import "KLCPopup.h"
 
-static UIEdgeInsets const COLLECTION_VIEW_EDGEINSETS = {kTHLInset, kTHLInset, kTHLInset, kTHLInset};
-static CGFloat const CELL_SPACING = kTHLInset;
+static UIEdgeInsets const COLLECTION_VIEW_EDGEINSETS = {10, 10, 10, 10};
+static CGFloat const CELL_SPACING = 10;
 
 @interface THLGuestlistReviewViewController()
 <
@@ -145,12 +145,16 @@ UICollectionViewDelegateFlowLayout
             [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"LEAVE GUESTLIST", nil)];
             [WSELF actionBarButton].backgroundColor = kTHLNUIRedColor;
         }
+        else if (status == [NSNumber numberWithInteger:2]) {
+            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"ADD GUESTS", nil)];
+            [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
+        }
         else if (status == [NSNumber numberWithInteger:3]) {
             [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Accept or Decline Guestlist", nil)];
             [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
         }
         else if (status == [NSNumber numberWithInteger:4]) {
-            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Check In Guests", nil)];
+            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Check In Party", nil)];
             [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
         }
         [WSELF.view setNeedsDisplay];

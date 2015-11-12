@@ -13,5 +13,4 @@
 @property (nonatomic, copy) NSURL *imageURL;
 @property (nonatomic, copy) UIImage *image;
 @property (nonatomic) THLStatus guestlistInviteStatus;
-- (void)createUnknownImage;
 @end

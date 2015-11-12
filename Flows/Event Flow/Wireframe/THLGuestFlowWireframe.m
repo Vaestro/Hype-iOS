@@ -95,7 +95,7 @@ THLGuestlistReviewModuleDelegate
 
 - (void)presentEventDetailInterfaceForEvent:(THLEventEntity *)eventEntity {
 	_eventDetailWireframe = [_dependencyManager newEventDetailWireframe];
-    _currentWireframe = _eventDiscoveryWireframe;
+    _currentWireframe = _eventDetailWireframe;
     [_eventDetailWireframe.moduleInterface setModuleDelegate:self];
 	[_eventDetailWireframe.moduleInterface presentEventDetailInterfaceForEvent:eventEntity inWindow:_window];
 }
@@ -103,14 +103,21 @@ THLGuestlistReviewModuleDelegate
 
 - (void)presentGuestlistInvitationInterfaceForPromotion:(THLPromotionEntity *)promotionEntity inController:(UIViewController *)controller {
 	_guestlistInvitationWireframe = [_dependencyManager newGuestlistInvitationWireframe];
-    _currentWireframe = _eventDiscoveryWireframe;
+    _currentWireframe = _guestlistInvitationWireframe;
     [_guestlistInvitationWireframe.moduleInterface setModuleDelegate:self];
 	[_guestlistInvitationWireframe.moduleInterface presentGuestlistInvitationInterfaceForPromotion:promotionEntity inController:controller];
 }
 
+- (void)presentGuestlistInvitationInterfaceForPromotion:(THLPromotionEntity *)promotionEntity withGuestlistId:(NSString *)guestlistId andGuests:(NSArray<THLGuestEntity *> *)guests inController:(UIViewController *)controller {
+    _guestlistInvitationWireframe = [_dependencyManager newGuestlistInvitationWireframe];
+    _currentWireframe = _guestlistInvitationWireframe;
+    [_guestlistInvitationWireframe.moduleInterface setModuleDelegate:self];
+    [_guestlistInvitationWireframe.moduleInterface presentGuestlistInvitationInterfaceForPromotion:promotionEntity withGuestlistId:guestlistId andGuests:guests inController:controller];
+}
+     
 - (void)presentGuestlistReviewInterfaceForGuestlist:(THLGuestlistEntity *)guestlistEntity withGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInviteEntity inController:(UIViewController *)controller {
     _guestlistReviewWireframe = [_dependencyManager newGuestlistReviewWireframe];
-    _currentWireframe = _eventDiscoveryWireframe;
+    _currentWireframe = _guestlistReviewWireframe;
     [_guestlistReviewWireframe.moduleInterface setModuleDelegate:self];
     [_guestlistReviewWireframe.moduleInterface presentGuestlistReviewInterfaceForGuestlist:guestlistEntity withGuestlistInvite:guestlistInviteEntity inController:controller];
 }
@@ -141,6 +148,10 @@ THLGuestlistReviewModuleDelegate
 }
 
 #pragma mark - THLGuestlistReviewModuleDelegate
+- (void)guestlistReviewModule:(id<THLGuestlistReviewModuleInterface>)module promotion:(THLPromotionEntity *)promotionEntity withGuestlistId:(NSString *)guestlistId andGuests:(NSArray<THLGuestEntity *> *)guests presentGuestlistInvitationInterfaceOnController:(UIViewController *)controller {
+    [self presentGuestlistInvitationInterfaceForPromotion:promotionEntity withGuestlistId:guestlistId andGuests:guests inController:controller];
+}
+
 - (void)dismissGuestlistReviewWireframe {
     _guestlistReviewWireframe = nil;
 }
