@@ -8,8 +8,11 @@
 
 #import "THLUserProfileViewController.h"
 #import "THLUserProfileView.h"
+#import "THLUserProfileInfoView.h"
 #import "THLUserProfileTableViewCell.h"
 #import "THLAppearanceConstants.h"
+#import "THLPersonIconView.h"
+
 
 typedef NS_ENUM(NSInteger, TableViewSection) {
     TableViewSectionPersonal = 0,
@@ -33,11 +36,16 @@ typedef NS_ENUM(NSInteger, HypelistSectionRow) {
 static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileViewCellIdentifier";
 
 @interface THLUserProfileViewController()
-
+@property (nonatomic, strong) THLUserProfileInfoView *profileInfoView;
+@property (nonatomic, strong) NSArray *urls;
+@property (nonatomic, strong) NSArray *tableCellNames;
+@property (nonatomic, strong) NSString *siteUrl;
 @end
 
 @implementation THLUserProfileViewController
 @synthesize selectedIndexPathCommand;
+@synthesize userName;
+@synthesize userImageURL;
 
 #pragma mark - VC Lifecycle
 - (void)viewDidLoad {
@@ -45,23 +53,38 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
     [self constructView];
     [self layoutView];
     [self bindView];
+    
+    self.urls = [[NSArray alloc]initWithObjects:@"https://hypelist.typeform.com/to/zGLp4N", @"https://hypelist.typeform.com/to/v01VE8", nil];
+    self.tableCellNames = [[NSArray alloc]initWithObjects:@"Become a Host",@"Let Hypelist Plan Your Party", @"How it Works",@"Terms & Conditions",@"Logout", nil];
+    
 }
 
 #pragma mark - View Setup
 - (void)constructView {
     _tableView = [self newTableView];
+    _profileInfoView = [self newProfileInfoView];
 }
 
 - (void)layoutView {
-    [self.view addSubviews:@[_tableView]];
+    [self.view addSubviews:@[_tableView,
+                             _profileInfoView]];
+    
+    
+    [_profileInfoView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.insets(kTHLEdgeInsetsNone());
+        make.bottom.equalTo(_tableView.mas_top).insets(kTHLEdgeInsetsNone());
+        make.height.equalTo(200);
+    }];
     
     [_tableView makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.insets(UIEdgeInsetsZero);
+        make.left.right.bottom.insets(UIEdgeInsetsZero);
     }];
 }
 
 - (void)bindView {
     [self configureDataSource];
+    RAC(self.profileInfoView, userImageURL) = RACObserve(self, userImageURL);
+    RAC(self.profileInfoView, userName) = RACObserve(self, userName);
 }
 
 - (void)configureDataSource {
@@ -73,24 +96,38 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return TableViewSection_Count;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    switch (section) {
-        case TableViewSectionPersonal: {
-            return PersonalSectionRow_Count;
-            break;
-        }
-        case TableViewSectionHypelist: {
-            return HypelistSectionRow_Count;
-            break;
-        }
-        default: {
-            break;
-        }
+    return [self.tableCellNames count];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.row == 0 || indexPath.row == 1) {
+        self.siteUrl = [self.urls objectAtIndex:indexPath.row];
+        [self alert:[self.urls objectAtIndex:indexPath.row]];
     }
-    return 0;
+    
+}
+
+#pragma mark UIAlertView
+-(void)alert:(NSString *)webSite{
+    
+    UIAlertView *aView = [[UIAlertView alloc]initWithTitle:nil message:[NSString stringWithFormat:@"Are you sure you want to visit: %@", webSite] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
+    
+    [aView show];
+    
+}
+
+#pragma mark UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex==1) {
+        //Ok button was selected
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.siteUrl]];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -99,57 +136,9 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
         cell = [[THLUserProfileTableViewCell alloc] init];
     }
     
-    cell.textLabel.text = [self cellTextForIndexPath:indexPath];
+    cell.textLabel.text = [self.tableCellNames objectAtIndex:indexPath.row];
+    cell.textLabel.textColor = [UIColor whiteColor];
     return cell;
-}
-
-- (NSString *)cellTextForIndexPath:(NSIndexPath *)indexPath {
-    NSString *text;
-    TableViewSection section = indexPath.section;
-    switch (section) {
-        case TableViewSectionPersonal: {
-            PersonalSectionRow row = indexPath.row;
-            switch (row) {
-                case PersonalSectionRowRewards: {
-                    text = @"Rewards";
-                    break;
-                }
-                default: {
-                    break;
-                }
-            }
-            break;
-        }
-        case TableViewSectionHypelist: {
-            HypelistSectionRow row = indexPath.row;
-            switch (row) {
-                case HypelistSectionRowWriteAReview: {
-                    text = @"Write a Review";
-                    break;
-                }
-                case HypelistSectionRowFAQ: {
-                    text = @"Frequently Asked Questions";
-                    break;
-                }
-                case HypelistSectionRowTermsAndConditions: {
-                    text = @"Terms & Conditions";
-                    break;
-                }
-                case HypelistSectionRowPrivacyPolicy: {
-                    text = @"Privacy Policy";
-                    break;
-                }
-                default: {
-                    break;
-                }
-            }
-            break;
-        }
-        default: {
-            break;
-        }
-    }
-    return text;
 }
 
 #pragma mark - Constructors
@@ -157,8 +146,15 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     tableView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     tableView.separatorColor = [UIColor clearColor];
+    tableView.scrollEnabled = NO;
     tableView.dataSource = self;
     tableView.delegate = self;
     return tableView;
 }
+
+- (THLUserProfileInfoView *)newProfileInfoView {
+    THLUserProfileInfoView *profileInfoView = [THLUserProfileInfoView new];
+    return profileInfoView;
+}
+
 @end

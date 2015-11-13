@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "THLUserProfileView.h"
+#import "THLUserProfileInfoView.h"
 
 @protocol THLUserProfileView;
 @interface THLUserProfileViewController : UIViewController
@@ -16,5 +17,6 @@ THLUserProfileView,
 UITableViewDelegate
 >
 @property (nonatomic, strong) UITableView *tableView;
+
 
 @end
