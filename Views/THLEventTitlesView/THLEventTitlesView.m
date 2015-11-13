@@ -48,7 +48,6 @@ static CGFloat const kTHLEventTitlesViewSeparatorViewWidth = 112.5;
     [_locationNameLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.insets(kTHLEdgeInsetsNone());
     }];
-    
     WEAKSELF();
     [_titleLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.insets(kTHLEdgeInsetsNone());

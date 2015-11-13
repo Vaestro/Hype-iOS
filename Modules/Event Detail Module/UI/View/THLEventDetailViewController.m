@@ -112,7 +112,7 @@
                            sideMargin:kTHLPaddingNone()];
     
     [_scrollView.stackView addSubview:_coverInfoLabel
-                  withPrecedingMargin:2*kTHLPaddingHigh()
+                  withPrecedingMargin:2*kTHLPaddingNone()
                            sideMargin:kTHLPaddingNone()];
     
     [_scrollView.stackView addSubview:_promotionInfoView

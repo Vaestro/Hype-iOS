@@ -22,7 +22,7 @@
 static CGFloat kTHLEventNavigationBarHeight = 125;
 //static CGFloat kTHLEventNavigationBarSublabelAlpha = 0.75;
 //static CGFloat kTHLEventNavigationBarDateLabelMaxWidth = 100;
-static CGRect const kTHLEventNavigationBarButtonFrame = {{5,6},{37,30}};
+//static CGRect const kTHLEventNavigationBarButtonFrame = {{12.5,6},{37,30}};
 
 @implementation THLEventNavigationBar
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -82,6 +82,11 @@ static CGRect const kTHLEventNavigationBarButtonFrame = {{5,6},{37,30}};
         make.top.greaterThanOrEqualTo([WSELF.dismissButton mas_bottom]).insets(kTHLEdgeInsetsHigh());
     }];
     
+    [_dismissButton makeConstraints:^(MASConstraintMaker *make) {
+        make.left.insets(kTHLEdgeInsetsSuperHigh());
+        make.top.insets(kTHLEdgeInsetsHigh());
+    }];
+    
     [_detailDisclosureButton makeConstraints:^(MASConstraintMaker *make) {
         make.right.insets(kTHLEdgeInsetsSuperHigh());
         make.top.insets(kTHLEdgeInsetsHigh());
@@ -136,13 +141,17 @@ static CGRect const kTHLEventNavigationBarButtonFrame = {{5,6},{37,30}};
 }
 
 - (UIButton *)newDismissButton {
-    UIButton *button = [[UIButton alloc]initWithFrame:kTHLEventNavigationBarButtonFrame];
+//    UIButton *button = [[UIButton alloc]initWithFrame:kTHLEventNavigationBarButtonFrame];
+    UIButton *button = [[UIButton alloc]init];
+
     [button setImage:[UIImage imageNamed:@"Cancel X Icon"] forState:UIControlStateNormal];
     return button;
 }
 
 - (UIButton *)newDetailDisclosureButton {
-    UIButton *button = [[UIButton alloc]initWithFrame:kTHLEventNavigationBarButtonFrame];
+//    UIButton *button = [[UIButton alloc]initWithFrame:kTHLEventNavigationBarButtonFrame];
+    UIButton *button = [[UIButton alloc]init];
+
     [button setImage:[UIImage imageNamed:@"Detail Disclosure Icon"] forState:UIControlStateNormal];
     return button;
 }
