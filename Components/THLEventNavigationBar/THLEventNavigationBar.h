@@ -14,4 +14,5 @@
 @property (nonatomic, copy) NSString *dateText;
 @property (nonatomic, copy) NSURL *locationImageURL;
 @property (nonatomic, strong) RACCommand *dismissCommand;
+@property (nonatomic, strong) RACCommand *detailDisclosureCommand;
 @end

@@ -19,11 +19,14 @@
 #import "THLPromotionEntity.h"
 #import "THLGuestlistInviteEntity.h"
 
+#import "THLVenueDetailsView.h"
+
 @interface THLEventDetailPresenter()
 <
 THLEventDetailInteractorDelegate
 >
 @property (nonatomic, strong) id<THLEventDetailView> view;
+@property (nonatomic, strong) THLVenueDetailsView *venueDetailsView;
 @property (nonatomic) THLGuestlistStatus guestlistReviewStatus;
 
 @property (nonatomic, strong) THLEventEntity *eventEntity;
@@ -74,13 +77,9 @@ THLEventDetailInteractorDelegate
     }];
     
 //    [_view setDismissCommand:dismissCommand];
-	[self.view setLocationImageURL:_eventEntity.location.imageURL];
-	[self.view setPromoImageURL:_eventEntity.imageURL];
+
 	[self.view setEventName:_eventEntity.title];
 	[self.view setPromoInfo:_eventEntity.info];
-	[self.view setLocationName:_eventEntity.location.name];
-	[self.view setLocationInfo:_eventEntity.location.info];
-	[self.view setLocationAddress:_eventEntity.location.fullAddress];
     [self.view setActionBarButtonCommand:actionBarButtonCommand];
 }
 
@@ -91,14 +90,37 @@ THLEventDetailInteractorDelegate
 	[navBar setDateText:_eventEntity.date.thl_weekdayString];
 	[navBar setLocationImageURL:_eventEntity.location.imageURL];
 
-	RACCommand *command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+	RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
 		[WSELF handleDismissAction];
 		return [RACSignal empty];
 	}];
 
-	[navBar setDismissCommand:command];
+	[navBar setDismissCommand:dismissCommand];
+    
+    RACCommand *detailDisclosureCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [WSELF handleDetailDisclosureAction];
+        return [RACSignal empty];
+    }];
+    
+    [navBar setDetailDisclosureCommand:detailDisclosureCommand];
 }
 
+- (void)configureVenueDetailsView:(THLVenueDetailsView *)venueDetailsView {
+    self.venueDetailsView = venueDetailsView;
+    [self.venueDetailsView setLocationImageURL:_eventEntity.location.imageURL];
+    [self.venueDetailsView setPromoImageURL:_eventEntity.imageURL];
+    [self.venueDetailsView setLocationName:_eventEntity.location.name];
+    [self.venueDetailsView setLocationInfo:_eventEntity.location.info];
+    [self.venueDetailsView setLocationAddress:_eventEntity.location.fullAddress];
+    
+    WEAKSELF();
+    RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [WSELF handleVenueDetailsDismissAction];
+        return [RACSignal empty];
+    }];
+    
+    [self.venueDetailsView setDismissCommand:dismissCommand];
+}
 
 - (void)presentEventDetailInterfaceForEvent:(THLEventEntity *)eventEntity inWindow:(UIWindow *)window {
     _eventEntity = eventEntity;
@@ -116,6 +138,15 @@ THLEventDetailInteractorDelegate
 	[_wireframe dismissInterface];
 }
 
+- (void)handleVenueDetailsDismissAction {
+    [_view hideDetailsView:self.venueDetailsView];
+
+}
+
+- (void)handleDetailDisclosureAction {
+    [_view showDetailsView:self.venueDetailsView];
+}
+
 - (void)handleViewGuestlistAction {
     [self.moduleDelegate eventDetailModule:self guestlist:_guestlistInviteEntity.guestlist guestlistInvite:_guestlistInviteEntity presentGuestlistReviewInterfaceOnController:(UIViewController *)self.view];
 }
@@ -127,7 +158,7 @@ THLEventDetailInteractorDelegate
 #pragma mark - THLEventDetailInteractorDelegate
 - (void)interactor:(THLEventDetailInteractor *)interactor didGetPlacemark:(CLPlacemark *)placemark forLocation:(THLLocationEntity *)locationEntity error:(NSError *)error {
 	if (!error && placemark) {
-		[self.view setLocationPlacemark:placemark];
+		[self.venueDetailsView setLocationPlacemark:placemark];
 	}
 }
 

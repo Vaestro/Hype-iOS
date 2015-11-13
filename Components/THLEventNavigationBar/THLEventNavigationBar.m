@@ -12,6 +12,7 @@
 
 @interface THLEventNavigationBar()
 @property (nonatomic, strong) UIButton *dismissButton;
+@property (nonatomic, strong) UIButton *detailDisclosureButton;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *subtitleLabel;
 @property (nonatomic, strong) UILabel *dateLabel;
@@ -21,7 +22,7 @@
 static CGFloat kTHLEventNavigationBarHeight = 125;
 static CGFloat kTHLEventNavigationBarSublabelAlpha = 0.75;
 static CGFloat kTHLEventNavigationBarDateLabelMaxWidth = 100;
-static CGRect const kTHLEventNavigationBarDismissButtonFrame = {{5,6},{37,30}};
+static CGRect const kTHLEventNavigationBarButtonFrame = {{5,6},{37,30}};
 
 @implementation THLEventNavigationBar
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -35,6 +36,7 @@ static CGRect const kTHLEventNavigationBarDismissButtonFrame = {{5,6},{37,30}};
 
 - (void)constructView {
     _dismissButton = [self newDismissButton];
+    _detailDisclosureButton = [self newDetailDisclosureButton];
     _titleLabel = [self newTitleLabel];
     _subtitleLabel = [self newSubtitleLabel];
     _dateLabel = [self newDateLabel];
@@ -42,7 +44,7 @@ static CGRect const kTHLEventNavigationBarDismissButtonFrame = {{5,6},{37,30}};
 }
 
 - (void)layoutView {
-    [self addSubviews:@[_imageView, _dismissButton, _dateLabel]];
+    [self addSubviews:@[_imageView, _dismissButton, _dateLabel, _detailDisclosureButton]];
     
     WEAKSELF();
     [_imageView makeConstraints:^(MASConstraintMaker *make) {
@@ -79,6 +81,10 @@ static CGRect const kTHLEventNavigationBarDismissButtonFrame = {{5,6},{37,30}};
         make.right.lessThanOrEqualTo([WSELF.dateLabel mas_left]);
         make.top.greaterThanOrEqualTo([WSELF.dismissButton mas_bottom]).insets(kTHLEdgeInsetsHigh());
     }];
+    
+    [_detailDisclosureButton makeConstraints:^(MASConstraintMaker *make) {
+        make.top.right.insets(kTHLEdgeInsetsHigh());
+    }];
 }
 
 - (void)bindView {
@@ -87,7 +93,8 @@ static CGRect const kTHLEventNavigationBarDismissButtonFrame = {{5,6},{37,30}};
     RAC(self.subtitleLabel, text, @"") = RACObserve(self, subtitleText);
     RAC(self.dateLabel, text, @"") = RACObserve(self, dateText);
     RAC(self.dismissButton, rac_command) = RACObserve(self, dismissCommand);
-    
+    RAC(self.detailDisclosureButton, rac_command) = RACObserve(self, detailDisclosureCommand);
+
     RACSignal *imageURLSignal = [RACObserve(self, locationImageURL) filter:^BOOL(NSURL *url) {
         return url.isValid;
     }];
@@ -128,11 +135,16 @@ static CGRect const kTHLEventNavigationBarDismissButtonFrame = {{5,6},{37,30}};
 }
 
 - (UIButton *)newDismissButton {
-    UIButton *button = [[UIButton alloc]initWithFrame:kTHLEventNavigationBarDismissButtonFrame];
+    UIButton *button = [[UIButton alloc]initWithFrame:kTHLEventNavigationBarButtonFrame];
     [button setImage:[UIImage imageNamed:@"Cancel X Icon"] forState:UIControlStateNormal];
     return button;
 }
 
+- (UIButton *)newDetailDisclosureButton {
+    UIButton *button = [[UIButton alloc]initWithFrame:kTHLEventNavigationBarButtonFrame];
+    [button setImage:[UIImage imageNamed:@"Detail Disclosure Icon"] forState:UIControlStateNormal];
+    return button;
+}
 //- (void)dealloc {
 //    NSLog(@"Destroyed %@", self);
 //}

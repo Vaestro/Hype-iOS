@@ -12,6 +12,7 @@
 #import "THLEventDetailViewController.h"
 #import "THLEventDetailPresenter.h"
 #import "THLEventNavigationController.h"
+#import "THLVenueDetailsView.h"
 
 @interface THLEventDetailWireframe()
 @property (nonatomic, strong) UIWindow *window;
@@ -52,6 +53,8 @@
 	[_presenter configureView:_view];
 	THLEventNavigationController *eventNavController = [[THLEventNavigationController alloc] initWithRootViewController:_view];
 	[_presenter configureNavigationBar:eventNavController.navigationBar];
+    THLVenueDetailsView *venueDetailsView = [[THLVenueDetailsView alloc] init];
+    [_presenter configureVenueDetailsView:venueDetailsView];
 	[_window.rootViewController presentViewController:eventNavController animated:YES completion:NULL];
 }
 

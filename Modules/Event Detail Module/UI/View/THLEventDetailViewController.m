@@ -16,13 +16,16 @@
 #import "THLActionBarButton.h"
 
 #import "THLAppearanceConstants.h"
+//#import "FXBlurView.h"
 
 @interface THLEventDetailViewController()
 @property (nonatomic, strong) ORStackScrollView *scrollView;
-@property (nonatomic, strong) THLEventDetailsLocationInfoView *locationInfoView;
-@property (nonatomic, strong) THLEventDetailsMapView *mapView;
+//@property (nonatomic, strong) THLEventDetailsLocationInfoView *locationInfoView;
+//@property (nonatomic, strong) THLEventDetailsMapView *mapView;
 @property (nonatomic, strong) THLEventDetailsPromotionInfoView *promotionInfoView;
 @property (nonatomic, strong) THLActionBarButton *bottomBar;
+//@property (nonatomic, strong) FXBlurView *blurView;
+
 @property (nonatomic) BOOL showPromotionInfoView;
 @end
 
@@ -64,9 +67,21 @@
 - (void)constructView {
     _scrollView = [self newScrollView];
     _promotionInfoView = [self newPromotionInfoView];
-    _locationInfoView = [self newLocationInfoView];
-    _mapView = [self newMapView];
+//    _locationInfoView = [self newLocationInfoView];
+//    _mapView = [self newMapView];
     _bottomBar = [self newBottomBar];
+}
+
+- (void)showDetailsView:(UIView *)detailView {
+    [self.parentViewController.view addSubview:detailView];
+    [detailView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.left.right.insets(kTHLEdgeInsetsNone());
+    }];
+    [self.parentViewController.view bringSubviewToFront:detailView];
+}
+
+- (void)hideDetailsView:(UIView *)detailView {
+    [detailView removeFromSuperview];
 }
 
 - (void)layoutView {
@@ -78,9 +93,7 @@
         make.top.insets(kTHLEdgeInsetsHigh());
     }];
     
-    for (UIView *view in @[_promotionInfoView,
-                           _locationInfoView,
-                           _mapView]) {
+    for (UIView *view in @[_promotionInfoView]) {
         [_scrollView.stackView addSubview:view
                       withPrecedingMargin:2*kTHLPaddingHigh()
                                sideMargin:2*kTHLPaddingHigh()];
@@ -112,11 +125,11 @@
     RAC(self.promotionInfoView, promotionInfo) = RACObserve(self, promoInfo);
     RAC(self.promotionInfoView, promoImageURL) = RACObserve(self, promoImageURL);
     
-    RAC(self.locationInfoView, locationInfo) = RACObserve(self, locationInfo);
-    
-    RAC(self.mapView, locationName) = RACObserve(self, locationName);
-    RAC(self.mapView, locationAddress) = RACObserve(self, locationAddress);
-    RAC(self.mapView, locationPlacemark) = RACObserve(self, locationPlacemark);
+//    RAC(self.locationInfoView, locationInfo) = RACObserve(self, locationInfo);
+//    
+//    RAC(self.mapView, locationName) = RACObserve(self, locationName);
+//    RAC(self.mapView, locationAddress) = RACObserve(self, locationAddress);
+//    RAC(self.mapView, locationPlacemark) = RACObserve(self, locationPlacemark);
     
     [RACObserve(WSELF, actionBarButtonStatus) subscribeNext:^(id _) {
         [WSELF updateBottomBar];
@@ -162,22 +175,22 @@
     scrollView.stackView.lastMarginHeight = kTHLPaddingHigh();
     return scrollView;
 }
-
-- (THLEventDetailsLocationInfoView *)newLocationInfoView {
-    THLEventDetailsLocationInfoView *infoView = [THLEventDetailsLocationInfoView new];
-    infoView.title = NSLocalizedString(@"VENUE DESCRIPTION", nil);
-    infoView.translatesAutoresizingMaskIntoConstraints = NO;
-    infoView.dividerColor = [UIColor whiteColor];
-    return infoView;
-}
-
-- (THLEventDetailsMapView *)newMapView {
-    THLEventDetailsMapView *mapView = [THLEventDetailsMapView new];
-    mapView.title = NSLocalizedString(@"ADDRESS", nil);
-    mapView.translatesAutoresizingMaskIntoConstraints = NO;
-    mapView.dividerColor = [UIColor whiteColor];
-    return mapView;
-}
+//
+//- (THLEventDetailsLocationInfoView *)newLocationInfoView {
+//    THLEventDetailsLocationInfoView *infoView = [THLEventDetailsLocationInfoView new];
+//    infoView.title = NSLocalizedString(@"VENUE DESCRIPTION", nil);
+//    infoView.translatesAutoresizingMaskIntoConstraints = NO;
+//    infoView.dividerColor = [UIColor whiteColor];
+//    return infoView;
+//}
+//
+//- (THLEventDetailsMapView *)newMapView {
+//    THLEventDetailsMapView *mapView = [THLEventDetailsMapView new];
+//    mapView.title = NSLocalizedString(@"ADDRESS", nil);
+//    mapView.translatesAutoresizingMaskIntoConstraints = NO;
+//    mapView.dividerColor = [UIColor whiteColor];
+//    return mapView;
+//}
 
 - (THLEventDetailsPromotionInfoView *)newPromotionInfoView {
     THLEventDetailsPromotionInfoView *promoInfoView = [THLEventDetailsPromotionInfoView new];

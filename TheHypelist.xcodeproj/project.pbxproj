@@ -113,6 +113,9 @@
 		7942082F1BD8C250009B86FA /* THLGuestlistEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7942082E1BD8C250009B86FA /* THLGuestlistEntity.m */; };
 		794483041BEC5B5D00EABE23 /* THLStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794483031BEC5B5D00EABE23 /* THLStatusView.m */; };
 		794DCCAC1BF3B31E0037A03D /* UIImageView+Letters.m in Sources */ = {isa = PBXBuildFile; fileRef = 794DCCAB1BF3B31E0037A03D /* UIImageView+Letters.m */; };
+		794DCCB51BF555020037A03D /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794DCCB41BF555020037A03D /* FXBlurView.m */; };
+		794DCCB71BF555150037A03D /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 794DCCB61BF555150037A03D /* Accelerate.framework */; };
+		794DCCBA1BF557D50037A03D /* THLVenueDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794DCCB91BF557D50037A03D /* THLVenueDetailsView.m */; };
 		79527CF01BF188F80074AF38 /* THLEventHostingInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 79527CEF1BF188F80074AF38 /* THLEventHostingInteractor.m */; };
 		79752ADE1BEBD8B500D09B2E /* THLConfirmationPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79752ADD1BEBD8B500D09B2E /* THLConfirmationPopupView.m */; };
 		798650A41BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 798650A31BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m */; };
@@ -438,6 +441,11 @@
 		794DCCAA1BF3B31E0037A03D /* UIImageView+Letters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Letters.h"; sourceTree = "<group>"; };
 		794DCCAB1BF3B31E0037A03D /* UIImageView+Letters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Letters.m"; sourceTree = "<group>"; };
 		794DCCB01BF543C40037A03D /* THLPopupNotificationViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLPopupNotificationViewModel.h; sourceTree = "<group>"; };
+		794DCCB31BF555020037A03D /* FXBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXBlurView.h; sourceTree = "<group>"; };
+		794DCCB41BF555020037A03D /* FXBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXBlurView.m; sourceTree = "<group>"; };
+		794DCCB61BF555150037A03D /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		794DCCB81BF557D50037A03D /* THLVenueDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLVenueDetailsView.h; sourceTree = "<group>"; };
+		794DCCB91BF557D50037A03D /* THLVenueDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLVenueDetailsView.m; sourceTree = "<group>"; };
 		79527CEE1BF188F80074AF38 /* THLEventHostingInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventHostingInteractor.h; sourceTree = "<group>"; };
 		79527CEF1BF188F80074AF38 /* THLEventHostingInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventHostingInteractor.m; sourceTree = "<group>"; };
 		79752ADC1BEBD8B500D09B2E /* THLConfirmationPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLConfirmationPopupView.h; sourceTree = "<group>"; };
@@ -555,6 +563,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				794DCCB71BF555150037A03D /* Accelerate.framework in Frameworks */,
 				8500CA18DF5736B9764E20A9 /* libPods-TheHypelist.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -959,6 +968,8 @@
 				211D0BB41B8CEE9E0073AFDD /* THLEventDetailView.h */,
 				211D0BB11B8CEE8B0073AFDD /* THLEventDetailViewController.h */,
 				211D0BB21B8CEE8B0073AFDD /* THLEventDetailViewController.m */,
+				794DCCB81BF557D50037A03D /* THLVenueDetailsView.h */,
+				794DCCB91BF557D50037A03D /* THLVenueDetailsView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1796,6 +1807,27 @@
 			path = Interface;
 			sourceTree = "<group>";
 		};
+		794DCCB11BF554E30037A03D /* Onboard */ = {
+			isa = PBXGroup;
+			children = (
+				798D7EBD1BF2E56C001D4593 /* OnboardingViewController.h */,
+				798D7EBE1BF2E56C001D4593 /* OnboardingViewController.m */,
+				798D7EC31BF2E634001D4593 /* OnboardingContentViewController_Private.h */,
+				798D7EC01BF2E5CF001D4593 /* OnboardingContentViewController.h */,
+				798D7EC11BF2E5CF001D4593 /* OnboardingContentViewController.m */,
+			);
+			name = Onboard;
+			sourceTree = "<group>";
+		};
+		794DCCB21BF554F20037A03D /* FXBlurView */ = {
+			isa = PBXGroup;
+			children = (
+				794DCCB31BF555020037A03D /* FXBlurView.h */,
+				794DCCB41BF555020037A03D /* FXBlurView.m */,
+			);
+			name = FXBlurView;
+			sourceTree = "<group>";
+		};
 		798B5FC71BF11B03002EBCB6 /* Host Flow */ = {
 			isa = PBXGroup;
 			children = (
@@ -1852,11 +1884,8 @@
 		798D7EBC1BF2E528001D4593 /* Alien */ = {
 			isa = PBXGroup;
 			children = (
-				798D7EBD1BF2E56C001D4593 /* OnboardingViewController.h */,
-				798D7EBE1BF2E56C001D4593 /* OnboardingViewController.m */,
-				798D7EC31BF2E634001D4593 /* OnboardingContentViewController_Private.h */,
-				798D7EC01BF2E5CF001D4593 /* OnboardingContentViewController.h */,
-				798D7EC11BF2E5CF001D4593 /* OnboardingContentViewController.m */,
+				794DCCB21BF554F20037A03D /* FXBlurView */,
+				794DCCB11BF554E30037A03D /* Onboard */,
 			);
 			name = Alien;
 			sourceTree = "<group>";
@@ -2127,6 +2156,7 @@
 		F3E081FDB7C0DB50ADEBB991 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				794DCCB61BF555150037A03D /* Accelerate.framework */,
 				794483071BEC8A6000EABE23 /* libsqlite3.dylib */,
 				D059D2904940E14B1AF40EE3 /* libPods-TheHypelist.a */,
 				A63D387799ADEA3D66DC04C6 /* libPods-TheHypelist.a */,
@@ -2424,6 +2454,7 @@
 				798B5FCB1BF11BD2002EBCB6 /* THLHostFlowWireframe.m in Sources */,
 				218AF3441BB7391B00AFAEBF /* THLEventService.m in Sources */,
 				216BDD671BC770CA00BBF713 /* THLSearchViewDataSource+Factory.m in Sources */,
+				794DCCBA1BF557D50037A03D /* THLVenueDetailsView.m in Sources */,
 				211892241BAA0C4400E8A11F /* THLLoginViewController.m in Sources */,
 				2133BFBF1B877B82002C1DA9 /* THLPromotion.m in Sources */,
 				218AF3551BB7440800AFAEBF /* THLLocationEntity.m in Sources */,
@@ -2465,6 +2496,7 @@
 				215A429A1BAA25B000D03C35 /* THLFacebookPicturePresenter.m in Sources */,
 				79B9592C1BE581BB00B87799 /* THLGuestlistReviewInteractor.m in Sources */,
 				21E402D91BBF80E6001D0C2C /* THLGuestlist.m in Sources */,
+				794DCCB51BF555020037A03D /* FXBlurView.m in Sources */,
 				798D7EB11BF2CCC7001D4593 /* THLUserProfilePresenter.m in Sources */,
 				794208281BD82641009B86FA /* UIView+DimView.m in Sources */,
 				211D0BBD1B8CEEDE0073AFDD /* THLEventDetailInteractor.m in Sources */,
