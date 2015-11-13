@@ -62,7 +62,7 @@ THLGuestlistReviewModuleDelegate
     _eventDiscoveryWireframe = [_dependencyManager newEventDiscoveryWireframe];
     _currentWireframe = _eventDiscoveryWireframe;
     [_eventDiscoveryWireframe.moduleInterface setModuleDelegate:self];
-    [_eventDiscoveryWireframe.moduleInterface presentEventDiscoveryInterfaceInViewController:viewController];
+//    [_eventDiscoveryWireframe.moduleInterface presentEventDiscoveryInterfaceInViewController:viewController];
 }
 
 - (void)presentEventHostingInterfaceForEvent:(THLEventEntity *)eventEntity {

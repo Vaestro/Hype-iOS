@@ -80,7 +80,6 @@ THLEventDetailInteractorDelegate
     [self.view setEventDate:[NSString stringWithFormat:@"%@, %@", _eventEntity.date.thl_weekdayString, _eventEntity.date.thl_timeString]];
 	[self.view setPromoInfo:_eventEntity.info];
     [self.view setPromoImageURL:_eventEntity.imageURL];
-    [self.view setRatioInfo:[NSString stringWithFormat:@"%d Guys, %d Girls", _promotionEntity.maleRatio, _promotionEntity.femaleRatio]];
     [self.view setCoverInfo:[NSString stringWithFormat:@"$%@ (Guys only)", [NSNumber numberWithFloat:_eventEntity.maleCover ]]];
     [self.view setActionBarButtonCommand:actionBarButtonCommand];
 }
@@ -159,6 +158,7 @@ THLEventDetailInteractorDelegate
 - (void)interactor:(THLEventDetailInteractor *)interactor didGetPromotion:(THLPromotionEntity *)promotionEntity forEvent:(THLEventEntity *)eventEntity error:(NSError *)error {
     if (!error && promotionEntity) {
         _promotionEntity = promotionEntity;
+        [self.view setRatioInfo:[NSString stringWithFormat:@"%d Guys, %d Girls", _promotionEntity.maleRatio, _promotionEntity.femaleRatio]];
     }
 }
 

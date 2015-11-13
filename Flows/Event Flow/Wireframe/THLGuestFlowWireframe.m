@@ -53,10 +53,11 @@ THLGuestlistReviewModuleDelegate
 
 - (void)presentGuestFlowInWindow:(UIWindow *)window {
     _window = window;
-    UIViewController *discovery = [[UIViewController alloc] init];
-    UIViewController *profile = [[UIViewController alloc] init];
+    UIViewController *discovery = [[UIViewController alloc] initWithNibName:nil bundle:nil];
+    UIViewController *profile = [[UIViewController alloc] initWithNibName:nil bundle:nil];
     [self presentEventDiscoveryInterfaceInViewController:discovery];
     [self presentUserProfileInterfaceInViewController:profile];
+    
     THLGuestFlowNavigationController *guestFlowNavController = [[THLGuestFlowNavigationController alloc] initWithMainViewController:discovery
                                                                                                               rightSideViewController:profile];
     _window.rootViewController = guestFlowNavController;
@@ -155,19 +156,4 @@ THLGuestlistReviewModuleDelegate
 //        TODO: Sign user out
     }
 }
-//- (UIView *)newDiscoveryNavBarItem {
-//    UIImageView *imageView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"Hypelist-Icon"]
-//                                                                 imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
-//    imageView.frame = CGRectMake(0, 0, 20, 20);
-//    imageView.contentMode = UIViewContentModeScaleAspectFit;
-//    imageView.tintColor = kTHLNUIGrayFontColor;
-//    return imageView;
-//}
-//
-//- (UIView *)newGuestProfileNavBarItem {
-//    UIImageView *imageView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"Profile Icon"]
-//                                                                 imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
-//    imageView.tintColor = kTHLNUIGrayFontColor;
-//    return imageView;
-//}
 @end

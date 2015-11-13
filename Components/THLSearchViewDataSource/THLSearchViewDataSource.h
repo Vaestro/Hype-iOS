@@ -44,4 +44,7 @@ UICollectionViewDataSource
 @property (nonatomic, strong) UIView *emptyView;
 - (void)setSearchString:(NSString *)searchString;
 - (id)untransformedItemAtIndexPath:(NSIndexPath *)indexPath;
+//- (NSInteger)numberOfSections;
+//- (NSInteger)numberOfItemsInSection:(NSInteger)section;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
 @end
