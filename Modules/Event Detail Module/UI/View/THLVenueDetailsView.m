@@ -70,13 +70,9 @@ static CGRect const kTHLEventNavigationBarDismissButtonFrame = {{33,33},{33,33}}
 }
 
 - (void)bindView {
-//    WEAKSELF();
-//    RAC(self.promotionInfoView, promoImageURL) = RACObserve(self, promoImageURL);
     RAC(self.locationNameLabel, text) = RACObserve(self, locationName);
 
     RAC(self.locationInfoView, locationInfo) = RACObserve(self, locationInfo);
-    
-    
     RAC(self.mapView, locationName) = RACObserve(self, locationName);
     RAC(self.mapView, locationAddress) = RACObserve(self, locationAddress);
     RAC(self.mapView, locationPlacemark) = RACObserve(self, locationPlacemark);

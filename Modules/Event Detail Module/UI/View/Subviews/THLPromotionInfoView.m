@@ -33,19 +33,19 @@
 }
 
 - (void)layoutView {
-    [self addSubviews:@[_typeLabel, _textLabel, _separatorView]];
+    [self addSubviews:@[_typeLabel, _textLabel]];
     WEAKSELF();
     [_typeLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.bottom.insets(kTHLEdgeInsetsHigh());
         make.right.equalTo([WSELF textLabel].mas_left).insets(kTHLEdgeInsetsNone());
-        make.bottom.equalTo([WSELF separatorView].mas_top).insets(kTHLEdgeInsetsHigh());
+//        make.bottom.equalTo([WSELF separatorView].mas_top).insets(kTHLEdgeInsetsHigh());
         make.width.equalTo(WSELF.textLabel);
     }];
     
     [_textLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.right.insets(kTHLEdgeInsetsHigh());
+        make.top.right.bottom.insets(kTHLEdgeInsetsHigh());
         make.left.equalTo([WSELF typeLabel].mas_right).insets(kTHLEdgeInsetsNone());
-        make.bottom.equalTo([WSELF separatorView].mas_top).insets(kTHLEdgeInsetsHigh());
+//        make.bottom.equalTo([WSELF separatorView].mas_top).insets(kTHLEdgeInsetsHigh());
     }];
     
 //    [_separatorView makeConstraints:^(MASConstraintMaker *make) {

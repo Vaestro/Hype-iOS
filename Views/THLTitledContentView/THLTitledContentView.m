@@ -9,7 +9,7 @@
 #import "THLTitledContentView.h"
 #import "THLAppearanceConstants.h"
 
-static CGFloat const kTHLEventTitlesViewSeparatorViewHeight = 0.5;
+//static CGFloat const kTHLEventTitlesViewSeparatorViewHeight = 0.5;
 
 @interface THLTitledContentView()
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -29,13 +29,13 @@ static CGFloat const kTHLEventTitlesViewSeparatorViewHeight = 0.5;
 
 - (void)constructView {
     _titleLabel = [self newTitleLabel];
-    _separatorView = [self newSeparatorView];
+//    _separatorView = [self newSeparatorView];
     _contentView = [self newContentView];
 }
 
 - (void)layoutView {
     [self addSubviews:@[_titleLabel,
-                        _separatorView,
+//                        _separatorView,
                         _contentView]];
     
     [_titleLabel makeConstraints:^(MASConstraintMaker *make) {
@@ -43,22 +43,22 @@ static CGFloat const kTHLEventTitlesViewSeparatorViewHeight = 0.5;
     }];
     
     WEAKSELF();
-    [_separatorView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.insets(kTHLEdgeInsetsNone());
-        make.top.equalTo(WSELF.mas_baseline).insets(kTHLEdgeInsetsHigh());
-        make.height.equalTo(kTHLEventTitlesViewSeparatorViewHeight);
-    }];
+//    [_separatorView makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.insets(kTHLEdgeInsetsNone());
+//        make.top.equalTo(WSELF.mas_baseline).insets(kTHLEdgeInsetsHigh());
+//        make.height.equalTo(kTHLEventTitlesViewSeparatorViewHeight);
+//    }];
     
     [_contentView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo([WSELF titleLabel].mas_baseline).insets(kTHLEdgeInsetsLow());
         make.bottom.left.right.insets(kTHLEdgeInsetsNone());
-        make.top.equalTo([WSELF separatorView].mas_baseline).insets(kTHLEdgeInsetsLow());
     }];
 }
 
 - (void)bindView {
     RAC(self.titleLabel, text) = RACObserve(self, title);
     RAC(self.titleLabel, textColor) = RACObserve(self, titleColor);
-    RAC(self.separatorView, backgroundColor) = RACObserve(self, dividerColor);
+//    RAC(self.separatorView, backgroundColor) = RACObserve(self, dividerColor);
 }
 
 #pragma mark - Constructors

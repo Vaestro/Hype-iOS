@@ -11,10 +11,9 @@
 
 @protocol THLVenueDetailsViewModel;
 @interface THLVenueDetailsView : FXBlurView
-@property (nonatomic, copy) NSURL *locationImageURL;
-@property (nonatomic, copy) NSURL *promoImageURL;
-@property (nonatomic, copy) NSString *eventName;
-@property (nonatomic, copy) NSString *promoInfo;
+//@property (nonatomic, copy) NSURL *locationImageURL;
+//@property (nonatomic, copy) NSURL *promoImageURL;
+//@property (nonatomic, copy) NSString *eventName;
 @property (nonatomic, copy) NSString *locationName;
 @property (nonatomic, copy) NSString *locationInfo;
 @property (nonatomic, copy) NSString *locationAddress;

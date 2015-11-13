@@ -76,43 +76,33 @@ THLEventDetailInteractorDelegate
         [WSELF.view setActionBarButtonStatus:WSELF.guestlistReviewStatus];
     }];
     
-//    [_view setDismissCommand:dismissCommand];
-
 	[self.view setEventName:_eventEntity.title];
-    [self.view setEventDate:[NSString stringWithFormat:@"%@, %@", _eventEntity.date.thl_weekdayString, _eventEntity.date.thl_timeString] ];
+    [self.view setEventDate:[NSString stringWithFormat:@"%@, %@", _eventEntity.date.thl_weekdayString, _eventEntity.date.thl_timeString]];
 	[self.view setPromoInfo:_eventEntity.info];
+    [self.view setPromoImageURL:_eventEntity.imageURL];
     [self.view setRatioInfo:[NSString stringWithFormat:@"%d Guys, %d Girls", _promotionEntity.maleRatio, _promotionEntity.femaleRatio]];
     [self.view setCoverInfo:[NSString stringWithFormat:@"$%@ (Guys only)", [NSNumber numberWithFloat:_eventEntity.maleCover ]]];
-    
     [self.view setActionBarButtonCommand:actionBarButtonCommand];
 }
 
 - (void)configureNavigationBar:(THLEventNavigationBar *)navBar {
     WEAKSELF();
-	[navBar setTitleText:_eventEntity.location.name];
-//	[navBar setSubtitleText:_eventEntity.title];
-//	[navBar setDateText:_eventEntity.date.thl_weekdayString];
-	[navBar setLocationImageURL:_eventEntity.location.imageURL];
-
-	RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-		[WSELF handleDismissAction];
-		return [RACSignal empty];
-	}];
-
-	[navBar setDismissCommand:dismissCommand];
-    
+    RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [WSELF handleDismissAction];
+        return [RACSignal empty];
+    }];
     RACCommand *detailDisclosureCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         [WSELF handleDetailDisclosureAction];
         return [RACSignal empty];
     }];
-    
+	[navBar setTitleText:_eventEntity.location.name];
+	[navBar setLocationImageURL:_eventEntity.location.imageURL];
+	[navBar setDismissCommand:dismissCommand];
     [navBar setDetailDisclosureCommand:detailDisclosureCommand];
 }
 
 - (void)configureVenueDetailsView:(THLVenueDetailsView *)venueDetailsView {
     self.venueDetailsView = venueDetailsView;
-    [self.venueDetailsView setLocationImageURL:_eventEntity.location.imageURL];
-    [self.venueDetailsView setPromoImageURL:_eventEntity.imageURL];
     [self.venueDetailsView setLocationName:_eventEntity.location.name];
     [self.venueDetailsView setLocationInfo:_eventEntity.location.info];
     [self.venueDetailsView setLocationAddress:_eventEntity.location.fullAddress];

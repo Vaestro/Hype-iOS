@@ -31,7 +31,7 @@ static CGFloat const kTHLEventDetailsPromotionInfoViewImageViewHeight = 150;
     WEAKSELF();
     [_textView makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(kTHLEdgeInsetsNone());
-        make.left.right.equalTo(kTHLEdgeInsetsLow());
+        make.left.right.equalTo(kTHLEdgeInsetsNone());
     }];
     
     [_imageView makeConstraints:^(MASConstraintMaker *make) {
@@ -39,7 +39,6 @@ static CGFloat const kTHLEventDetailsPromotionInfoViewImageViewHeight = 150;
         make.top.equalTo([WSELF textView].mas_bottom).insets(kTHLEdgeInsetsHigh());
         make.bottom.equalTo(kTHLEdgeInsetsHigh());
         make.height.equalTo(kTHLEventDetailsPromotionInfoViewImageViewHeight);
-
     }];
 }
 
