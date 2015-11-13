@@ -90,7 +90,7 @@ kTHLPaddingLow() {
 
 CG_INLINE CGFloat
 kTHLPaddingHigh() {
-	return THLPadding(THLUnitNone);
+	return THLPadding(THLUnitHigh);
 }
 
 

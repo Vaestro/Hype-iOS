@@ -79,15 +79,19 @@ THLEventDetailInteractorDelegate
 //    [_view setDismissCommand:dismissCommand];
 
 	[self.view setEventName:_eventEntity.title];
+    [self.view setEventDate:[NSString stringWithFormat:@"%@, %@", _eventEntity.date.thl_weekdayString, _eventEntity.date.thl_timeString] ];
 	[self.view setPromoInfo:_eventEntity.info];
+    [self.view setRatioInfo:[NSString stringWithFormat:@"%d Guys, %d Girls", _promotionEntity.maleRatio, _promotionEntity.femaleRatio]];
+    [self.view setCoverInfo:[NSString stringWithFormat:@"$%@ (Guys only)", [NSNumber numberWithFloat:_eventEntity.maleCover ]]];
+    
     [self.view setActionBarButtonCommand:actionBarButtonCommand];
 }
 
 - (void)configureNavigationBar:(THLEventNavigationBar *)navBar {
     WEAKSELF();
 	[navBar setTitleText:_eventEntity.location.name];
-	[navBar setSubtitleText:_eventEntity.title];
-	[navBar setDateText:_eventEntity.date.thl_weekdayString];
+//	[navBar setSubtitleText:_eventEntity.title];
+//	[navBar setDateText:_eventEntity.date.thl_weekdayString];
 	[navBar setLocationImageURL:_eventEntity.location.imageURL];
 
 	RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {

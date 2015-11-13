@@ -42,15 +42,16 @@ static CGFloat const kTHLEventTitlesViewSeparatorViewHeight = 0.5;
         make.top.left.right.insets(kTHLEdgeInsetsNone());
     }];
     
+    WEAKSELF();
     [_separatorView makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.insets(kTHLEdgeInsetsNone());
-        make.top.equalTo(_titleLabel.mas_baseline).insets(kTHLEdgeInsetsHigh());
+        make.top.equalTo(WSELF.mas_baseline).insets(kTHLEdgeInsetsHigh());
         make.height.equalTo(kTHLEventTitlesViewSeparatorViewHeight);
     }];
     
     [_contentView makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.left.right.insets(kTHLEdgeInsetsNone());
-        make.top.equalTo(_separatorView.mas_baseline).insets(kTHLEdgeInsetsLow());
+        make.top.equalTo([WSELF separatorView].mas_baseline).insets(kTHLEdgeInsetsLow());
     }];
 }
 

@@ -19,7 +19,10 @@ typedef NS_OPTIONS(NSInteger, THLGuestlistStatus) {
 @property (nonatomic, copy) NSURL *locationImageURL;
 @property (nonatomic, copy) NSURL *promoImageURL;
 @property (nonatomic, copy) NSString *eventName;
+@property (nonatomic, copy) NSString *eventDate;
 @property (nonatomic, copy) NSString *promoInfo;
+@property (nonatomic, copy) NSString *ratioInfo;
+@property (nonatomic, copy) NSString *coverInfo;
 @property (nonatomic, copy) NSString *locationName;
 @property (nonatomic, copy) NSString *locationInfo;
 @property (nonatomic, copy) NSString *locationAddress;

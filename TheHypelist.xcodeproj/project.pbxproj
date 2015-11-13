@@ -103,6 +103,7 @@
 		21EED1001BB5F842001325A7 /* THLGuestFlowWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 21EED0FF1BB5F842001325A7 /* THLGuestFlowWireframe.m */; };
 		76FA20541BCF854000BB480A /* THLSessionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 76FA20531BCF854000BB480A /* THLSessionService.m */; };
 		7905CC411BE0252700E56878 /* THLGuestlistInviteEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7905CC401BE0252700E56878 /* THLGuestlistInviteEntity.m */; };
+		790603BD1BF5B6810093335E /* THLPromotionInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 790603BC1BF5B6810093335E /* THLPromotionInfoView.m */; };
 		791C1F7D1BF13AD300CCF803 /* THLEventHostingPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 791C1F7C1BF13AD300CCF803 /* THLEventHostingPresenter.m */; };
 		791C1F831BF13AEA00CCF803 /* THLEventHostingDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 791C1F821BF13AEA00CCF803 /* THLEventHostingDataManager.m */; };
 		791C1F861BF13AF500CCF803 /* THLEventHostingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 791C1F851BF13AF500CCF803 /* THLEventHostingViewController.m */; };
@@ -418,6 +419,8 @@
 		76FA20531BCF854000BB480A /* THLSessionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLSessionService.m; sourceTree = "<group>"; };
 		7905CC3E1BE0251000E56878 /* THLGuestlistInviteEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistInviteEntity.h; sourceTree = "<group>"; };
 		7905CC401BE0252700E56878 /* THLGuestlistInviteEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestlistInviteEntity.m; sourceTree = "<group>"; };
+		790603BB1BF5B6810093335E /* THLPromotionInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPromotionInfoView.h; sourceTree = "<group>"; };
+		790603BC1BF5B6810093335E /* THLPromotionInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPromotionInfoView.m; sourceTree = "<group>"; };
 		791C1F7B1BF13AD300CCF803 /* THLEventHostingPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventHostingPresenter.h; sourceTree = "<group>"; };
 		791C1F7C1BF13AD300CCF803 /* THLEventHostingPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventHostingPresenter.m; sourceTree = "<group>"; };
 		791C1F811BF13AEA00CCF803 /* THLEventHostingDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventHostingDataManager.h; sourceTree = "<group>"; };
@@ -992,6 +995,8 @@
 				21775F3E1B8CF95300609D39 /* THLEventDetailsMapView.m */,
 				21775F371B8CF93000609D39 /* THLEventDetailsPromotionInfoView.h */,
 				21775F381B8CF93000609D39 /* THLEventDetailsPromotionInfoView.m */,
+				790603BB1BF5B6810093335E /* THLPromotionInfoView.h */,
+				790603BC1BF5B6810093335E /* THLPromotionInfoView.m */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -2273,6 +2278,7 @@
 				2174A0621B863F6A006826D7 /* Resources */,
 				D86684AEA6207E01201FB42F /* Copy Pods Resources */,
 				21C6D0091BAE5E3F00DEDDA3 /* Run Script */,
+				B34B440D9B148519586C06AA /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2292,6 +2298,7 @@
 				2174A07A1B863F6A006826D7 /* Frameworks */,
 				2174A07B1B863F6A006826D7 /* Resources */,
 				3BBEDA8F8F68D4810546056C /* Copy Pods Resources */,
+				328DA970C20CEF37C01AFF1C /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2406,6 +2413,21 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/Fabric.framework/run\" 59e4c5cc715a727c29c12850d2ec4cdd9e6c7d65 461d29ada9ef911416346454692039fabbf73c31c449d2485609dbe7e97c18b0";
 		};
+		328DA970C20CEF37C01AFF1C /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TheHypelistTests/Pods-TheHypelistTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		3BBEDA8F8F68D4810546056C /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2434,6 +2456,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B34B440D9B148519586C06AA /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TheHypelist/Pods-TheHypelist-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D86684AEA6207E01201FB42F /* Copy Pods Resources */ = {
@@ -2548,6 +2585,7 @@
 				216BDD521BC6F4A700BBF713 /* THLContactTableViewCell.m in Sources */,
 				212173631BB3451F007D817A /* THLPromotionCardInfoView.m in Sources */,
 				21E402CC1BBF767D001D0C2C /* THLGuestlistInvitationPresenter.m in Sources */,
+				790603BD1BF5B6810093335E /* THLPromotionInfoView.m in Sources */,
 				21CCEDF51B87CFCB0066CDAC /* THLParseQueryFactory.m in Sources */,
 				211005BF1B8A70BF00A540C6 /* THLEventDiscoveryCell.m in Sources */,
 				76FA20541BCF854000BB480A /* THLSessionService.m in Sources */,

@@ -14,14 +14,14 @@
 @property (nonatomic, strong) UIButton *dismissButton;
 @property (nonatomic, strong) UIButton *detailDisclosureButton;
 @property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) UILabel *subtitleLabel;
-@property (nonatomic, strong) UILabel *dateLabel;
+//@property (nonatomic, strong) UILabel *subtitleLabel;
+//@property (nonatomic, strong) UILabel *dateLabel;
 @property (nonatomic, strong) UIImageView *imageView;
 @end
 
 static CGFloat kTHLEventNavigationBarHeight = 125;
-static CGFloat kTHLEventNavigationBarSublabelAlpha = 0.75;
-static CGFloat kTHLEventNavigationBarDateLabelMaxWidth = 100;
+//static CGFloat kTHLEventNavigationBarSublabelAlpha = 0.75;
+//static CGFloat kTHLEventNavigationBarDateLabelMaxWidth = 100;
 static CGRect const kTHLEventNavigationBarButtonFrame = {{5,6},{37,30}};
 
 @implementation THLEventNavigationBar
@@ -38,13 +38,13 @@ static CGRect const kTHLEventNavigationBarButtonFrame = {{5,6},{37,30}};
     _dismissButton = [self newDismissButton];
     _detailDisclosureButton = [self newDetailDisclosureButton];
     _titleLabel = [self newTitleLabel];
-    _subtitleLabel = [self newSubtitleLabel];
-    _dateLabel = [self newDateLabel];
+//    _subtitleLabel = [self newSubtitleLabel];
+//    _dateLabel = [self newDateLabel];
     _imageView = [self newImageView];
 }
 
 - (void)layoutView {
-    [self addSubviews:@[_imageView, _dismissButton, _dateLabel, _detailDisclosureButton]];
+    [self addSubviews:@[_imageView, _dismissButton, _detailDisclosureButton]];
     
     WEAKSELF();
     [_imageView makeConstraints:^(MASConstraintMaker *make) {
@@ -57,41 +57,42 @@ static CGRect const kTHLEventNavigationBarButtonFrame = {{5,6},{37,30}};
 //    backgroundLayer.frame = _imageView.frame;
 //    [_imageView.layer insertSublayer:backgroundLayer atIndex:0];
     
-    [_dateLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.right.insets(kTHLEdgeInsetsHigh());
-        make.width.lessThanOrEqualTo(kTHLEventNavigationBarDateLabelMaxWidth);
-    }];
-    
+//    [_dateLabel makeConstraints:^(MASConstraintMaker *make) {
+//        make.bottom.right.insets(kTHLEdgeInsetsHigh());
+//        make.width.lessThanOrEqualTo(kTHLEventNavigationBarDateLabelMaxWidth);
+//    }];
+//    
     UIView *titleContainerView = [UIView new];
-    [titleContainerView addSubviews:@[_titleLabel,
-                                      _subtitleLabel]];
+    [titleContainerView addSubview:_titleLabel];
     
     [_titleLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.insets(kTHLEdgeInsetsNone());
-        make.bottom.equalTo([WSELF subtitleLabel].mas_top);
+        make.left.insets(kTHLEdgeInsetsHigh());
+        make.right.top.insets(kTHLEdgeInsetsNone());
+        make.bottom.insets(kTHLEdgeInsetsNone());
     }];
     
-    [_subtitleLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.bottom.insets(kTHLEdgeInsetsNone());
-    }];
+//    [_subtitleLabel makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.bottom.insets(kTHLEdgeInsetsNone());
+//    }];
     
     [self addSubview:titleContainerView];
     [titleContainerView makeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.insets(kTHLEdgeInsetsHigh());
-        make.right.lessThanOrEqualTo([WSELF.dateLabel mas_left]);
+        make.right.lessThanOrEqualTo(SV(titleContainerView));
         make.top.greaterThanOrEqualTo([WSELF.dismissButton mas_bottom]).insets(kTHLEdgeInsetsHigh());
     }];
     
     [_detailDisclosureButton makeConstraints:^(MASConstraintMaker *make) {
-        make.top.right.insets(kTHLEdgeInsetsHigh());
+        make.right.insets(kTHLEdgeInsetsSuperHigh());
+        make.top.insets(kTHLEdgeInsetsHigh());
     }];
 }
 
 - (void)bindView {
     WEAKSELF();
     RAC(self.titleLabel, text, @"") = RACObserve(self, titleText);
-    RAC(self.subtitleLabel, text, @"") = RACObserve(self, subtitleText);
-    RAC(self.dateLabel, text, @"") = RACObserve(self, dateText);
+//    RAC(self.subtitleLabel, text, @"") = RACObserve(self, subtitleText);
+//    RAC(self.dateLabel, text, @"") = RACObserve(self, dateText);
     RAC(self.dismissButton, rac_command) = RACObserve(self, dismissCommand);
     RAC(self.detailDisclosureButton, rac_command) = RACObserve(self, detailDisclosureCommand);
 
@@ -114,17 +115,17 @@ static CGRect const kTHLEventNavigationBarButtonFrame = {{5,6},{37,30}};
     return label;
 }
 
-- (UILabel *)newSubtitleLabel {
-    UILabel *label = THLNUILabel(kTHLNUIRegularTitle);
-    label.alpha = kTHLEventNavigationBarSublabelAlpha;
-    return label;
-}
-
-- (UILabel *)newDateLabel {
-    UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
-    label.alpha = kTHLEventNavigationBarSublabelAlpha;
-    return label;
-}
+//- (UILabel *)newSubtitleLabel {
+//    UILabel *label = THLNUILabel(kTHLNUIRegularTitle);
+//    label.alpha = kTHLEventNavigationBarSublabelAlpha;
+//    return label;
+//}
+//
+//- (UILabel *)newDateLabel {
+//    UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
+//    label.alpha = kTHLEventNavigationBarSublabelAlpha;
+//    return label;
+//}
 
 - (UIImageView *)newImageView {
     UIImageView *imageView = [UIImageView new];

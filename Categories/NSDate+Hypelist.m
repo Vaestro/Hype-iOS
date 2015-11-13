@@ -34,7 +34,8 @@
 	}
 	components.hour = 4;
 	components.minute = 0;
-	components.second = 0;
+	components.second = 0
+    ;
 
 	NSDate *start = [calendar dateFromComponents:components];
 	return start;

@@ -17,15 +17,16 @@
 
 #import "THLAppearanceConstants.h"
 //#import "FXBlurView.h"
+#import "THLPromotionInfoView.h"
 
 @interface THLEventDetailViewController()
 @property (nonatomic, strong) ORStackScrollView *scrollView;
-//@property (nonatomic, strong) THLEventDetailsLocationInfoView *locationInfoView;
-//@property (nonatomic, strong) THLEventDetailsMapView *mapView;
+@property (nonatomic, strong) UILabel *eventNameLabel;
+@property (nonatomic, strong) UILabel *dateLabel;
 @property (nonatomic, strong) THLEventDetailsPromotionInfoView *promotionInfoView;
 @property (nonatomic, strong) THLActionBarButton *bottomBar;
-//@property (nonatomic, strong) FXBlurView *blurView;
-
+@property (nonatomic, strong) THLPromotionInfoView *ratioInfoLabel;
+@property (nonatomic, strong) THLPromotionInfoView *coverInfoLabel;
 @property (nonatomic) BOOL showPromotionInfoView;
 @end
 
@@ -34,7 +35,10 @@
 @synthesize locationImageURL;
 @synthesize promoImageURL;
 @synthesize eventName;
+@synthesize eventDate;
 @synthesize promoInfo;
+@synthesize ratioInfo;
+@synthesize coverInfo;
 @synthesize locationName;
 @synthesize locationInfo;
 @synthesize locationAddress;
@@ -67,8 +71,10 @@
 - (void)constructView {
     _scrollView = [self newScrollView];
     _promotionInfoView = [self newPromotionInfoView];
-//    _locationInfoView = [self newLocationInfoView];
-//    _mapView = [self newMapView];
+    _eventNameLabel = [self newEventNameLabel];
+    _dateLabel = [self newDateLabel];
+    _ratioInfoLabel = [self newRatioInfoLabel];
+    _coverInfoLabel = [self newCoverInfoLabel];
     _bottomBar = [self newBottomBar];
 }
 
@@ -93,15 +99,27 @@
         make.top.insets(kTHLEdgeInsetsHigh());
     }];
     
-    for (UIView *view in @[_promotionInfoView]) {
-        [_scrollView.stackView addSubview:view
-                      withPrecedingMargin:2*kTHLPaddingHigh()
-                               sideMargin:2*kTHLPaddingHigh()];
-        //		[view makeConstraints:^(MASConstraintMaker *make) {
-        //			make.left.right.insets(kTHLEdgeInsetsHigh());
-        //		}];
-        //		prevView = view;
-    }
+    [_scrollView.stackView addSubview:_eventNameLabel
+                  withPrecedingMargin:kTHLPaddingHigh()
+                           sideMargin:kTHLPaddingNone()];
+    
+    [_scrollView.stackView addSubview:_dateLabel
+                  withPrecedingMargin:kTHLPaddingHigh()
+                           sideMargin:kTHLPaddingNone()];
+    
+    [_scrollView.stackView addSubview:_ratioInfoLabel
+                  withPrecedingMargin:2*kTHLPaddingHigh()
+                           sideMargin:kTHLPaddingNone()];
+    
+    [_scrollView.stackView addSubview:_coverInfoLabel
+                  withPrecedingMargin:2*kTHLPaddingHigh()
+                           sideMargin:kTHLPaddingNone()];
+    
+    [_scrollView.stackView addSubview:_promotionInfoView
+                  withPrecedingMargin:2*kTHLPaddingHigh()
+                           sideMargin:kTHLPaddingNone()];
+    
+
     
     [_bottomBar makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.left.right.insets(kTHLEdgeInsetsNone());
@@ -109,27 +127,15 @@
     }];
 }
 
-//- (void)updateBottomBarText {
-//    NSString *barText;
-//    if (actionBarButtonStatus == 0) {
-//        barText =  @"JOIN A GUESTLIST";
-//    } else {
-//        barText =  @"VIEW YOUR GUESTLIST";
-//    }
-//    
-//    [_bottomBar.morphingLabel setTextWithoutMorphing:barText];
-//}
-
 - (void)bindView {
     WEAKSELF();
+    RAC(self.eventNameLabel, text, @"") = RACObserve(self, eventName);
+    RAC(self.dateLabel, text, @"") = RACObserve(self, eventDate);
+    RAC(self.ratioInfoLabel, infoText, @"") = RACObserve(self, ratioInfo);
+    RAC(self.coverInfoLabel, infoText, @"") = RACObserve(self, coverInfo);
+    
     RAC(self.promotionInfoView, promotionInfo) = RACObserve(self, promoInfo);
     RAC(self.promotionInfoView, promoImageURL) = RACObserve(self, promoImageURL);
-    
-//    RAC(self.locationInfoView, locationInfo) = RACObserve(self, locationInfo);
-//    
-//    RAC(self.mapView, locationName) = RACObserve(self, locationName);
-//    RAC(self.mapView, locationAddress) = RACObserve(self, locationAddress);
-//    RAC(self.mapView, locationPlacemark) = RACObserve(self, locationPlacemark);
     
     [RACObserve(WSELF, actionBarButtonStatus) subscribeNext:^(id _) {
         [WSELF updateBottomBar];
@@ -175,22 +181,6 @@
     scrollView.stackView.lastMarginHeight = kTHLPaddingHigh();
     return scrollView;
 }
-//
-//- (THLEventDetailsLocationInfoView *)newLocationInfoView {
-//    THLEventDetailsLocationInfoView *infoView = [THLEventDetailsLocationInfoView new];
-//    infoView.title = NSLocalizedString(@"VENUE DESCRIPTION", nil);
-//    infoView.translatesAutoresizingMaskIntoConstraints = NO;
-//    infoView.dividerColor = [UIColor whiteColor];
-//    return infoView;
-//}
-//
-//- (THLEventDetailsMapView *)newMapView {
-//    THLEventDetailsMapView *mapView = [THLEventDetailsMapView new];
-//    mapView.title = NSLocalizedString(@"ADDRESS", nil);
-//    mapView.translatesAutoresizingMaskIntoConstraints = NO;
-//    mapView.dividerColor = [UIColor whiteColor];
-//    return mapView;
-//}
 
 - (THLEventDetailsPromotionInfoView *)newPromotionInfoView {
     THLEventDetailsPromotionInfoView *promoInfoView = [THLEventDetailsPromotionInfoView new];
@@ -205,6 +195,30 @@
 //    [bottomBar.morphingLabel setTextWithoutMorphing:NSLocalizedString(actionBarButtonStatus, nil)];
     return bottomBar;
 }
+
+- (THLPromotionInfoView *)newRatioInfoLabel {
+    THLPromotionInfoView *ratioInfoLabel = [THLPromotionInfoView new];
+    ratioInfoLabel.labelText = @"Ratio";
+    return ratioInfoLabel;
+}
+
+- (THLPromotionInfoView *)newCoverInfoLabel {
+    THLPromotionInfoView *coverInfoLabel = [THLPromotionInfoView new];
+    coverInfoLabel.labelText = @"Venue Cover";
+    return coverInfoLabel;
+}
+
+- (UILabel *)newEventNameLabel {
+    UILabel *label = THLNUILabel(kTHLNUIRegularTitle);
+    return label;
+}
+
+- (UILabel *)newDateLabel {
+    UILabel *label = THLNUILabel(kTHLNUIRegularTitle);
+    label.alpha = 0.67;
+    return label;
+}
+
 
 //- (void)dealloc {
 //    NSLog(@"Destroyed %@", self);
