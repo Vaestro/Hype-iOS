@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "THLUserProfileModuleInterface.h"
+#import "THLUser.h"
 
 @protocol THLUserProfileView;
 @class THLUserProfileWireframe;

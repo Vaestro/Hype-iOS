@@ -9,10 +9,10 @@
 #import "THLUserProfilePresenter.h"
 #import "THLUserProfileWireframe.h"
 #import "THLUserProfileView.h"
+#import "THLUser.h"
 
 @interface THLUserProfilePresenter()
 @property (nonatomic, weak) id<THLUserProfileView> view;
-
 @end
 
 @implementation THLUserProfilePresenter
@@ -31,6 +31,12 @@
 
 - (void)configureView:(id<THLUserProfileView>)view {
     _view = view;
+    
+    PFFile *image = [THLUser currentUser].image;
+    
+    [_view setUserImageURL:[NSURL URLWithString:image.url]];
+    [_view setUserName:[THLUser currentUser].firstName];
+    
     
     RACCommand *selectedIndexPathCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         [self handleIndexPathSelection:(NSIndexPath *)input];

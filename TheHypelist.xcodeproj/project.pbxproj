@@ -165,6 +165,9 @@
 		79B959611BE9A90B00B87799 /* THLActionContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959601BE9A90B00B87799 /* THLActionContainerView.m */; };
 		79BCB5641BF2AAA30050F283 /* THLGuestFlowNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BCB5631BF2AAA30050F283 /* THLGuestFlowNavigationController.m */; };
 		8500CA18DF5736B9764E20A9 /* libPods-TheHypelist.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A63D387799ADEA3D66DC04C6 /* libPods-TheHypelist.a */; };
+		C8E1B1621BF437F300A9824C /* THLUserProfileInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B1611BF437F300A9824C /* THLUserProfileInteractor.m */; };
+		C8E1B1651BF4380D00A9824C /* THLUserProfileDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B1641BF4380D00A9824C /* THLUserProfileDataManager.m */; };
+		C8E1B16B1BF43DA800A9824C /* THLUserProfileInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B16A1BF43DA800A9824C /* THLUserProfileInfoView.m */; };
 		CBE5403C8B7732B36D5ECB5E /* THLViewDataSourceGrouping.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE54FC98A366F3761F89F63 /* THLViewDataSourceGrouping.m */; };
 		CBE54720F63BA2DE2136B454 /* THLViewDataSource+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE545A9A3C66339456E0A06 /* THLViewDataSource+Factory.m */; };
 		CBE547FB5677C373C1DE74C7 /* THLViewDataSourceSorting.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE5404991A434142507D7B0 /* THLViewDataSourceSorting.m */; };
@@ -536,6 +539,12 @@
 		A63D387799ADEA3D66DC04C6 /* libPods-TheHypelist.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TheHypelist.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA51F1731F25286C41A13B20 /* Pods-TheHypelist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheHypelist.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TheHypelist/Pods-TheHypelist.debug.xcconfig"; sourceTree = "<group>"; };
 		C6B634BC51A4BB10D6261492 /* Pods-TheHypelist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheHypelist.release.xcconfig"; path = "Pods/Target Support Files/Pods-TheHypelist/Pods-TheHypelist.release.xcconfig"; sourceTree = "<group>"; };
+		C8E1B1601BF437F300A9824C /* THLUserProfileInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserProfileInteractor.h; sourceTree = "<group>"; };
+		C8E1B1611BF437F300A9824C /* THLUserProfileInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLUserProfileInteractor.m; sourceTree = "<group>"; };
+		C8E1B1631BF4380D00A9824C /* THLUserProfileDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserProfileDataManager.h; sourceTree = "<group>"; };
+		C8E1B1641BF4380D00A9824C /* THLUserProfileDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLUserProfileDataManager.m; sourceTree = "<group>"; };
+		C8E1B1691BF43DA800A9824C /* THLUserProfileInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserProfileInfoView.h; sourceTree = "<group>"; };
+		C8E1B16A1BF43DA800A9824C /* THLUserProfileInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLUserProfileInfoView.m; sourceTree = "<group>"; };
 		CB878AA95A320C00B4227BCE /* Pods-TheHypelistTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheHypelistTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TheHypelistTests/Pods-TheHypelistTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CBE5404991A434142507D7B0 /* THLViewDataSourceSorting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLViewDataSourceSorting.m; sourceTree = "<group>"; };
 		CBE54163EA2D6D75F647F7B1 /* THLViewDataSource+Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "THLViewDataSource+Factory.h"; sourceTree = "<group>"; };
@@ -1830,17 +1839,9 @@
 		798D7EA91BF2C9D9001D4593 /* User Profile */ = {
 			isa = PBXGroup;
 			children = (
-				798D7EAA1BF2CA2E001D4593 /* THLUserProfileModuleInterface.h */,
-				798D7EAB1BF2CA73001D4593 /* THLUserProfileModuleDelegate.h */,
-				798D7EAC1BF2CAF9001D4593 /* THLUserProfileWireframe.h */,
-				798D7EAD1BF2CAF9001D4593 /* THLUserProfileWireframe.m */,
-				798D7EAF1BF2CCC7001D4593 /* THLUserProfilePresenter.h */,
-				798D7EB01BF2CCC7001D4593 /* THLUserProfilePresenter.m */,
-				798D7EB51BF2CCE5001D4593 /* THLUserProfileView.h */,
-				798D7EB21BF2CCD4001D4593 /* THLUserProfileViewController.h */,
-				798D7EB31BF2CCD4001D4593 /* THLUserProfileViewController.m */,
-				798D7EB81BF2D588001D4593 /* THLUserProfileTableViewCell.h */,
-				798D7EB91BF2D588001D4593 /* THLUserProfileTableViewCell.m */,
+				C8E1B1591BF4370F00A9824C /* Components */,
+				C8E1B15A1BF4371900A9824C /* Interface */,
+				C8E1B15B1BF4372800A9824C /* UI */,
 			);
 			name = "User Profile";
 			sourceTree = "<group>";
@@ -2101,6 +2102,100 @@
 			path = THLActionContainerView;
 			sourceTree = "<group>";
 		};
+		C8E1B1591BF4370F00A9824C /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				C8E1B15F1BF4375E00A9824C /* Wireframe */,
+				C8E1B15E1BF4375000A9824C /* Presenter */,
+				C8E1B15D1BF4374400A9824C /* Interactor */,
+				C8E1B15C1BF4373500A9824C /* Data Manager */,
+			);
+			name = Components;
+			sourceTree = "<group>";
+		};
+		C8E1B15A1BF4371900A9824C /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				798D7EAB1BF2CA73001D4593 /* THLUserProfileModuleDelegate.h */,
+				798D7EAA1BF2CA2E001D4593 /* THLUserProfileModuleInterface.h */,
+			);
+			name = Interface;
+			sourceTree = "<group>";
+		};
+		C8E1B15B1BF4372800A9824C /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				C8E1B1661BF4383600A9824C /* View */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		C8E1B15C1BF4373500A9824C /* Data Manager */ = {
+			isa = PBXGroup;
+			children = (
+				C8E1B1631BF4380D00A9824C /* THLUserProfileDataManager.h */,
+				C8E1B1641BF4380D00A9824C /* THLUserProfileDataManager.m */,
+			);
+			name = "Data Manager";
+			sourceTree = "<group>";
+		};
+		C8E1B15D1BF4374400A9824C /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				C8E1B1601BF437F300A9824C /* THLUserProfileInteractor.h */,
+				C8E1B1611BF437F300A9824C /* THLUserProfileInteractor.m */,
+			);
+			name = Interactor;
+			sourceTree = "<group>";
+		};
+		C8E1B15E1BF4375000A9824C /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				798D7EAF1BF2CCC7001D4593 /* THLUserProfilePresenter.h */,
+				798D7EB01BF2CCC7001D4593 /* THLUserProfilePresenter.m */,
+			);
+			name = Presenter;
+			sourceTree = "<group>";
+		};
+		C8E1B15F1BF4375E00A9824C /* Wireframe */ = {
+			isa = PBXGroup;
+			children = (
+				798D7EAC1BF2CAF9001D4593 /* THLUserProfileWireframe.h */,
+				798D7EAD1BF2CAF9001D4593 /* THLUserProfileWireframe.m */,
+			);
+			name = Wireframe;
+			sourceTree = "<group>";
+		};
+		C8E1B1661BF4383600A9824C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				798D7EB21BF2CCD4001D4593 /* THLUserProfileViewController.h */,
+				798D7EB31BF2CCD4001D4593 /* THLUserProfileViewController.m */,
+				798D7EB51BF2CCE5001D4593 /* THLUserProfileView.h */,
+				C8E1B1691BF43DA800A9824C /* THLUserProfileInfoView.h */,
+				C8E1B16A1BF43DA800A9824C /* THLUserProfileInfoView.m */,
+				C8E1B1671BF4384500A9824C /* Cells */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		C8E1B1671BF4384500A9824C /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				C8E1B1681BF4388A00A9824C /* User Profile Cell */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		C8E1B1681BF4388A00A9824C /* User Profile Cell */ = {
+			isa = PBXGroup;
+			children = (
+				798D7EB81BF2D588001D4593 /* THLUserProfileTableViewCell.h */,
+				798D7EB91BF2D588001D4593 /* THLUserProfileTableViewCell.m */,
+			);
+			name = "User Profile Cell";
+			sourceTree = "<group>";
+		};
 		CBE54BB68ECECF48FD57301C /* THLViewDataSourceGrouping */ = {
 			isa = PBXGroup;
 			children = (
@@ -2143,7 +2238,6 @@
 				2174A0621B863F6A006826D7 /* Resources */,
 				D86684AEA6207E01201FB42F /* Copy Pods Resources */,
 				21C6D0091BAE5E3F00DEDDA3 /* Run Script */,
-				FF4CF68A505442300CE188FD /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2163,7 +2257,6 @@
 				2174A07A1B863F6A006826D7 /* Frameworks */,
 				2174A07B1B863F6A006826D7 /* Resources */,
 				3BBEDA8F8F68D4810546056C /* Copy Pods Resources */,
-				12AF44DFB83780D8CB39C679 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2264,21 +2357,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		12AF44DFB83780D8CB39C679 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TheHypelistTests/Pods-TheHypelistTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		21C6D0091BAE5E3F00DEDDA3 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2351,21 +2429,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		FF4CF68A505442300CE188FD /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TheHypelist/Pods-TheHypelist-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2455,6 +2518,7 @@
 				798B5FD11BF12D2C002EBCB6 /* THLEventHostingWireframe.m in Sources */,
 				212173581BB33BC7007D817A /* THLPromotionSelectionViewModel.m in Sources */,
 				215A428E1BAA200E00D03C35 /* THLNumberVerificationWireframe.m in Sources */,
+				C8E1B1651BF4380D00A9824C /* THLUserProfileDataManager.m in Sources */,
 				215A42A81BAA287900D03C35 /* THLFacebookProfilePictureFactory.m in Sources */,
 				21B9894A1BC05AF500428B6A /* THLGuestlistInvitationViewController.m in Sources */,
 				215A429A1BAA25B000D03C35 /* THLFacebookPicturePresenter.m in Sources */,
@@ -2463,6 +2527,7 @@
 				798D7EB11BF2CCC7001D4593 /* THLUserProfilePresenter.m in Sources */,
 				794208281BD82641009B86FA /* UIView+DimView.m in Sources */,
 				211D0BBD1B8CEEDE0073AFDD /* THLEventDetailInteractor.m in Sources */,
+				C8E1B1621BF437F300A9824C /* THLUserProfileInteractor.m in Sources */,
 				79B959541BE91AE300B87799 /* THLPopupNotificationWireframe.m in Sources */,
 				211D0BB01B8CEE800073AFDD /* THLEventDetailPresenter.m in Sources */,
 				21E402DC1BBF8155001D0C2C /* THLGuestlistInvite.m in Sources */,
@@ -2503,6 +2568,7 @@
 				218AF3521BB7422100AFAEBF /* THLEventEntity.m in Sources */,
 				79BCB5641BF2AAA30050F283 /* THLGuestFlowNavigationController.m in Sources */,
 				21775F361B8CF72B00609D39 /* THLTitledContentView.m in Sources */,
+				C8E1B16B1BF43DA800A9824C /* THLUserProfileInfoView.m in Sources */,
 				211005951B8A318400A540C6 /* THLEventDiscoveryPresenter.m in Sources */,
 				21E402C91BBF7675001D0C2C /* THLGuestlistInvitationWireframe.m in Sources */,
 				791C1F8A1BF13BC300CCF803 /* THLEventHostingTableCell.m in Sources */,

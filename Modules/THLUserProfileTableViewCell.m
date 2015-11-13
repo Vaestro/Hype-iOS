@@ -25,14 +25,14 @@
 }
 
 - (void)constructView {
+    self.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     _titleLabel = [self newTitleLabel];
 }
 
 - (void)layoutView {
     [self addSubviews:@[_titleLabel]];
-    
     [_titleLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.right.left.bottom.insets(kTHLEdgeInsetsLow());
+        make.top.right.left.bottom.insets(kTHLEdgeInsetsNone());
     }];
 }
 
@@ -43,6 +43,7 @@
 #pragma mark - Constructors
 - (UILabel *)newTitleLabel {
     UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
+    label.textColor = [UIColor whiteColor];
     return label;
 }
 
