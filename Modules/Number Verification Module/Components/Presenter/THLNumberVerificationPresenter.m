@@ -21,6 +21,7 @@
 - (instancetype)initWithWireframe:(THLNumberVerificationWireframe *)wireframe {
 	if (self = [super init]) {
 		_wireframe = wireframe;
+        _digitsApperance = [self newDigitsAppearance];
 	}
 	return self;
 }
@@ -54,7 +55,7 @@
 	DGTAppearance *appearance = [DGTAppearance new];
 	appearance.backgroundColor = kTHLNUIPrimaryBackgroundColor;
 	appearance.accentColor = kTHLNUIAccentColor;
-	appearance.logoImage = [UIImage imageNamed:@"HypeList Icon"];
+	appearance.logoImage = [UIImage imageNamed:@"Hypelist-Icon"];
 	return appearance;
 }
 

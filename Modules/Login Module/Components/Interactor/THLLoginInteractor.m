@@ -103,7 +103,7 @@
 	_user.image = profileImageFile;
     WEAKSELF();
 	[[_user saveInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask<NSNumber *> *task) {
-		[_delegate interactor:WSELF didAddProfileImage:task.error];
+		[WSELF.delegate interactor:WSELF didAddProfileImage:task.error];
 		return nil;
 	}];
 }

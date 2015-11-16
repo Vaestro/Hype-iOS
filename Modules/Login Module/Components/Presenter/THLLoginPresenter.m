@@ -47,12 +47,13 @@ THLNumberVerificationModuleDelegate
     _view = view;
     
     WEAKSELF();
+    STRONGSELF();
 	RACCommand *loginCommand = [[RACCommand alloc] initWithEnabled:RACObserve(self.interactor, shouldLogin) signalBlock:^RACSignal *(id input) {
 		[WSELF handleUserLoginAction];
 		return [RACSignal empty];
 	}];
     [RACObserve(self, activityStatus) subscribeNext:^(NSNumber *x) {
-        [WSELF.view setShowActivityIndicator:x];
+        [SSELF.view setShowActivityIndicator:x];
     }];
     
     [_view setLoginText:NSLocalizedString(@"Login with Facebook", @"Facebook login")];
