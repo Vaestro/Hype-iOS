@@ -32,6 +32,7 @@
 
 #pragma mark - Guestlist Invites Queries
 - (PFQuery *)queryForGuestlistInviteForUser:(THLUser *)user atEvent:(NSString *)eventId;
+- (PFQuery *)queryForGuestlistInvitesForUser;
 - (PFQuery *)queryForInvitesOnGuestlist:(THLGuestlist *)guestlist;
 - (PFQuery *)queryForGuestlistInviteWithId;
 @end

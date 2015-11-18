@@ -14,15 +14,17 @@
 @interface THLGuestFlowNavigationController()
 @property (nonatomic, strong) UIView *discoveryNavBarItem;
 @property (nonatomic, strong) UIView *guestProfileNavBarItem;
+@property (nonatomic, strong) UIView *dashboardNavBarItem;
 @property (nonatomic, strong) SLPagingViewController *pagingViewController;
 @property (nonatomic, strong) NSArray *views;
 @end
 
 @implementation THLGuestFlowNavigationController
 - (instancetype)initWithMainViewController:(UIViewController *)mainViewController
+                   leftSideViewController:(UIViewController *)leftSideViewController
                       rightSideViewController:(UIViewController *)rightSideViewController {
     if (self = [super init]) {
-        _views = @[mainViewController.view, rightSideViewController.view];
+        _views = @[leftSideViewController.view, mainViewController.view, rightSideViewController.view];
     }
     return self;
 }
@@ -31,12 +33,12 @@
     [super viewDidLoad];
     [self constructView];
     [self layoutView];
-    self.edgesForExtendedLayout = UIRectEdgeNone;
 }
 
 
 - (void)constructView {
     NSArray *navBarItems = @[
+                             [self newDashboardNavBarItem],
                              [self newDiscoveryNavBarItem],
                              [self newGuestProfileNavBarItem]
                              ];
@@ -48,7 +50,8 @@
 }
 
 - (void)layoutView {
-    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.automaticallyAdjustsScrollViewInsets = YES;
     _pagingViewController.navigationSideItemsStyle = SLNavigationSideItemsStyleOnBounds;
 //    [_pagingViewController performSelector:@selector(updateNavItems:) withObject:@(0)];
     _pagingViewController.pagingViewMovingRedefine = ^(UIScrollView * scrollView, NSArray *subviews) {
@@ -68,6 +71,7 @@
             view.alpha = alpha;
         }
     };
+    [_pagingViewController setCurrentIndex:1 animated:NO];
     [self setViewControllers:@[_pagingViewController]];
 }
 
@@ -87,11 +91,11 @@
     return imageView;
 }
 
-//- (UIView *)NewNightNavBarItem {
-//    UIImageView *imageView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"Lists Icon"]
-//                                                                 imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
-//    imageView.contentMode = UIViewContentModeScaleAspectFit;
-//    imageView.tintColor = [THLStyleKit lightTextColor];
-//    return imageView;
-//}
+- (UIView *)newDashboardNavBarItem {
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"Lists Icon"]
+                                                                 imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    imageView.tintColor = kTHLNUIGrayFontColor;
+    return imageView;
+}
 @end

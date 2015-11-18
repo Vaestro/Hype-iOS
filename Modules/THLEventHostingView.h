@@ -15,4 +15,6 @@
 @property (nonatomic, strong) RACCommand *selectedIndexPathCommand;
 @property (nonatomic, strong) RACCommand *refreshCommand;
 @property (nonatomic) BOOL showRefreshAnimation;
+- (void)showDetailsView:(UIView *)detailView;
+- (void)hideDetailsView:(UIView *)detailView;
 @end

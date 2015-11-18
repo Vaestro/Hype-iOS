@@ -13,6 +13,7 @@
 @dynamic guestlist;
 @dynamic response;
 @dynamic checkInStatus;
+@dynamic date;
 
 + (void)load {
 	[self registerSubclass];

@@ -104,6 +104,14 @@
 		76FA20541BCF854000BB480A /* THLSessionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 76FA20531BCF854000BB480A /* THLSessionService.m */; };
 		7905CC411BE0252700E56878 /* THLGuestlistInviteEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7905CC401BE0252700E56878 /* THLGuestlistInviteEntity.m */; };
 		790603BD1BF5B6810093335E /* THLPromotionInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 790603BC1BF5B6810093335E /* THLPromotionInfoView.m */; };
+		790603C31BFB73380093335E /* THLDashboardWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 790603C21BFB73380093335E /* THLDashboardWireframe.m */; };
+		790603C61BFB75CF0093335E /* THLDashboardPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 790603C51BFB75CF0093335E /* THLDashboardPresenter.m */; };
+		790603C91BFB75D90093335E /* THLDashboardInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 790603C81BFB75D90093335E /* THLDashboardInteractor.m */; };
+		790603CC1BFB75E50093335E /* THLDashboardDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 790603CB1BFB75E50093335E /* THLDashboardDataManager.m */; };
+		790603CF1BFB75F00093335E /* THLDashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 790603CE1BFB75F00093335E /* THLDashboardViewController.m */; };
+		790603D31BFBA1B20093335E /* THLEventTicketView.m in Sources */ = {isa = PBXBuildFile; fileRef = 790603D21BFBA1B20093335E /* THLEventTicketView.m */; };
+		790603D81BFBA79F0093335E /* THLEventTicketVenueView.m in Sources */ = {isa = PBXBuildFile; fileRef = 790603D71BFBA79F0093335E /* THLEventTicketVenueView.m */; };
+		790603DB1BFBA8770093335E /* THLEventTicketPromotionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 790603DA1BFBA8770093335E /* THLEventTicketPromotionView.m */; };
 		791C1F7D1BF13AD300CCF803 /* THLEventHostingPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 791C1F7C1BF13AD300CCF803 /* THLEventHostingPresenter.m */; };
 		791C1F831BF13AEA00CCF803 /* THLEventHostingDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 791C1F821BF13AEA00CCF803 /* THLEventHostingDataManager.m */; };
 		791C1F861BF13AF500CCF803 /* THLEventHostingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 791C1F851BF13AF500CCF803 /* THLEventHostingViewController.m */; };
@@ -421,6 +429,25 @@
 		7905CC401BE0252700E56878 /* THLGuestlistInviteEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestlistInviteEntity.m; sourceTree = "<group>"; };
 		790603BB1BF5B6810093335E /* THLPromotionInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPromotionInfoView.h; sourceTree = "<group>"; };
 		790603BC1BF5B6810093335E /* THLPromotionInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPromotionInfoView.m; sourceTree = "<group>"; };
+		790603BF1BFB72810093335E /* THLDashboardModuleInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLDashboardModuleInterface.h; sourceTree = "<group>"; };
+		790603C01BFB72900093335E /* THLDashboardModuleDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLDashboardModuleDelegate.h; sourceTree = "<group>"; };
+		790603C11BFB73380093335E /* THLDashboardWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLDashboardWireframe.h; sourceTree = "<group>"; };
+		790603C21BFB73380093335E /* THLDashboardWireframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLDashboardWireframe.m; sourceTree = "<group>"; };
+		790603C41BFB75CF0093335E /* THLDashboardPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLDashboardPresenter.h; sourceTree = "<group>"; };
+		790603C51BFB75CF0093335E /* THLDashboardPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLDashboardPresenter.m; sourceTree = "<group>"; };
+		790603C71BFB75D90093335E /* THLDashboardInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLDashboardInteractor.h; sourceTree = "<group>"; };
+		790603C81BFB75D90093335E /* THLDashboardInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLDashboardInteractor.m; sourceTree = "<group>"; };
+		790603CA1BFB75E50093335E /* THLDashboardDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLDashboardDataManager.h; sourceTree = "<group>"; };
+		790603CB1BFB75E50093335E /* THLDashboardDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLDashboardDataManager.m; sourceTree = "<group>"; };
+		790603CD1BFB75F00093335E /* THLDashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLDashboardViewController.h; sourceTree = "<group>"; };
+		790603CE1BFB75F00093335E /* THLDashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLDashboardViewController.m; sourceTree = "<group>"; };
+		790603D01BFB7B350093335E /* THLDashboardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLDashboardView.h; sourceTree = "<group>"; };
+		790603D11BFBA1B20093335E /* THLEventTicketView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventTicketView.h; sourceTree = "<group>"; };
+		790603D21BFBA1B20093335E /* THLEventTicketView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventTicketView.m; sourceTree = "<group>"; };
+		790603D61BFBA79F0093335E /* THLEventTicketVenueView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventTicketVenueView.h; sourceTree = "<group>"; };
+		790603D71BFBA79F0093335E /* THLEventTicketVenueView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventTicketVenueView.m; sourceTree = "<group>"; };
+		790603D91BFBA8770093335E /* THLEventTicketPromotionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventTicketPromotionView.h; sourceTree = "<group>"; };
+		790603DA1BFBA8770093335E /* THLEventTicketPromotionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventTicketPromotionView.m; sourceTree = "<group>"; };
 		791C1F7B1BF13AD300CCF803 /* THLEventHostingPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventHostingPresenter.h; sourceTree = "<group>"; };
 		791C1F7C1BF13AD300CCF803 /* THLEventHostingPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventHostingPresenter.m; sourceTree = "<group>"; };
 		791C1F811BF13AEA00CCF803 /* THLEventHostingDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventHostingDataManager.h; sourceTree = "<group>"; };
@@ -1541,6 +1568,7 @@
 		21BDAE5C1B878E0E009D02A3 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				790603BE1BFB6EAB0093335E /* Dashboard Module */,
 				798D7EA91BF2C9D9001D4593 /* User Profile */,
 				2110058D1B8A2F3A00A540C6 /* Event Discovery Module */,
 				211D0BA11B8CED560073AFDD /* Event Detail Module */,
@@ -1803,6 +1831,48 @@
 			path = Session;
 			sourceTree = "<group>";
 		};
+		790603BE1BFB6EAB0093335E /* Dashboard Module */ = {
+			isa = PBXGroup;
+			children = (
+				790603BF1BFB72810093335E /* THLDashboardModuleInterface.h */,
+				790603C01BFB72900093335E /* THLDashboardModuleDelegate.h */,
+				790603C11BFB73380093335E /* THLDashboardWireframe.h */,
+				790603C21BFB73380093335E /* THLDashboardWireframe.m */,
+				790603C41BFB75CF0093335E /* THLDashboardPresenter.h */,
+				790603C51BFB75CF0093335E /* THLDashboardPresenter.m */,
+				790603C71BFB75D90093335E /* THLDashboardInteractor.h */,
+				790603C81BFB75D90093335E /* THLDashboardInteractor.m */,
+				790603CA1BFB75E50093335E /* THLDashboardDataManager.h */,
+				790603CB1BFB75E50093335E /* THLDashboardDataManager.m */,
+				790603D41BFBA6C10093335E /* UI */,
+			);
+			name = "Dashboard Module";
+			sourceTree = "<group>";
+		};
+		790603D41BFBA6C10093335E /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				790603D01BFB7B350093335E /* THLDashboardView.h */,
+				790603CD1BFB75F00093335E /* THLDashboardViewController.h */,
+				790603CE1BFB75F00093335E /* THLDashboardViewController.m */,
+				790603D11BFBA1B20093335E /* THLEventTicketView.h */,
+				790603D21BFBA1B20093335E /* THLEventTicketView.m */,
+				790603D51BFBA7530093335E /* Subviews */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		790603D51BFBA7530093335E /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				790603D61BFBA79F0093335E /* THLEventTicketVenueView.h */,
+				790603D71BFBA79F0093335E /* THLEventTicketVenueView.m */,
+				790603D91BFBA8770093335E /* THLEventTicketPromotionView.h */,
+				790603DA1BFBA8770093335E /* THLEventTicketPromotionView.m */,
+			);
+			name = Subviews;
+			sourceTree = "<group>";
+		};
 		794208291BD82ADB009B86FA /* THLActionBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -1880,8 +1950,8 @@
 		798D7EA91BF2C9D9001D4593 /* User Profile */ = {
 			isa = PBXGroup;
 			children = (
-				C8E1B1591BF4370F00A9824C /* Components */,
 				C8E1B15A1BF4371900A9824C /* Interface */,
+				C8E1B1591BF4370F00A9824C /* Components */,
 				C8E1B15B1BF4372800A9824C /* UI */,
 			);
 			name = "User Profile";
@@ -2510,6 +2580,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				790603DB1BFBA8770093335E /* THLEventTicketPromotionView.m in Sources */,
 				79B959231BE57C9D00B87799 /* THLGuestlistReviewWireframe.m in Sources */,
 				79B9593B1BE67B3700B87799 /* THLGuestlistReviewCell.m in Sources */,
 				21775F5D1B8E169500609D39 /* THLAddressBookPermissionsRequestService.m in Sources */,
@@ -2518,6 +2589,7 @@
 				211005B71B8A446D00A540C6 /* THLViewDataSource.m in Sources */,
 				21192D911BB327C200B176AA /* THLPromotionSelectionViewController.m in Sources */,
 				218AF3591BB7455500AFAEBF /* THLEntityMapper.m in Sources */,
+				790603D81BFBA79F0093335E /* THLEventTicketVenueView.m in Sources */,
 				212173661BB34D22007D817A /* HCSStarRatingView.m in Sources */,
 				2118921F1BAA088D00E8A11F /* THLLoginWireframe.m in Sources */,
 				2121734C1BB32B92007D817A /* THLPromotionSelectionInfoCardViewModel.m in Sources */,
@@ -2552,6 +2624,8 @@
 				21CE06241BB86995004D10BB /* THLAppearanceUtils.m in Sources */,
 				21E402CF1BBF7688001D0C2C /* THLGuestlistInvitationInteractor.m in Sources */,
 				798B5FCB1BF11BD2002EBCB6 /* THLHostFlowWireframe.m in Sources */,
+				790603C61BFB75CF0093335E /* THLDashboardPresenter.m in Sources */,
+				790603CC1BFB75E50093335E /* THLDashboardDataManager.m in Sources */,
 				218AF3441BB7391B00AFAEBF /* THLEventService.m in Sources */,
 				216BDD671BC770CA00BBF713 /* THLSearchViewDataSource+Factory.m in Sources */,
 				794DCCBA1BF557D50037A03D /* THLVenueDetailsView.m in Sources */,
@@ -2604,6 +2678,7 @@
 				211D0BBD1B8CEEDE0073AFDD /* THLEventDetailInteractor.m in Sources */,
 				C8E1B1621BF437F300A9824C /* THLUserProfileInteractor.m in Sources */,
 				79B959541BE91AE300B87799 /* THLPopupNotificationWireframe.m in Sources */,
+				790603CF1BFB75F00093335E /* THLDashboardViewController.m in Sources */,
 				211D0BB01B8CEE800073AFDD /* THLEventDetailPresenter.m in Sources */,
 				21E402DC1BBF8155001D0C2C /* THLGuestlistInvite.m in Sources */,
 				7942082F1BD8C250009B86FA /* THLGuestlistEntity.m in Sources */,
@@ -2615,12 +2690,15 @@
 				2118921B1BAA084300E8A11F /* THLLoginPresenter.m in Sources */,
 				794DCCAC1BF3B31E0037A03D /* UIImageView+Letters.m in Sources */,
 				211D0BAD1B8CEE730073AFDD /* THLEventDetailWireframe.m in Sources */,
+				790603D31BFBA1B20093335E /* THLEventTicketView.m in Sources */,
 				21775F3C1B8CF93E00609D39 /* THLEventDetailsLocationInfoView.m in Sources */,
 				211D0BBA1B8CEED40073AFDD /* THLEventDetailDataManager.m in Sources */,
 				798D7EAE1BF2CAF9001D4593 /* THLUserProfileWireframe.m in Sources */,
 				217DC6531BBB77AC00332174 /* THLUserManager.m in Sources */,
 				79B9594D1BE8966300B87799 /* KLCPopup.m in Sources */,
+				790603C91BFB75D90093335E /* THLDashboardInteractor.m in Sources */,
 				2108A8851B8BBF4900B725F6 /* THLMasterWireframe.m in Sources */,
+				790603C31BFB73380093335E /* THLDashboardWireframe.m in Sources */,
 				798D7EBF1BF2E56C001D4593 /* OnboardingViewController.m in Sources */,
 				217EBEBA1BB7AB68006044B6 /* THLHostEntity.m in Sources */,
 				211005981B8A319000A540C6 /* THLEventDiscoveryInteractor.m in Sources */,

@@ -17,6 +17,7 @@
 @class THLGuestFlowWireframe;
 @class THLHostFlowWireframe;
 @class THLEventDiscoveryWireframe;
+@class THLDashboardWireframe;
 @class THLUserProfileWireframe;
 @class THLEventDetailWireframe;
 @class THLEventHostingWireframe;
@@ -41,6 +42,7 @@ THLHostFlowDependencyManager
 - (THLGuestFlowWireframe *)newGuestFlowWireframe;
 - (THLHostFlowWireframe *)newHostFlowWireframe;
 - (THLEventDiscoveryWireframe *)newEventDiscoveryWireframe;
+- (THLDashboardWireframe *)newDashboardWireframe;
 - (THLEventDetailWireframe *)newEventDetailWireframe;
 - (THLUserProfileWireframe *)newUserProfileWireframe;
 - (THLEventHostingWireframe *)newEventHostingWireframe;

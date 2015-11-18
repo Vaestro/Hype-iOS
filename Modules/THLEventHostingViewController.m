@@ -49,6 +49,18 @@
     [super viewWillDisappear:animated];
 }
 
+- (void)showDetailsView:(UIView *)detailView {
+    [self.parentViewController.view addSubview:detailView];
+    [detailView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.left.right.insets(kTHLEdgeInsetsNone());
+    }];
+    [self.parentViewController.view bringSubviewToFront:detailView];
+}
+
+- (void)hideDetailsView:(UIView *)detailView {
+    [detailView removeFromSuperview];
+}
+
 #pragma mark - View Setup
 - (void)constructView {
     _tableView = [self newTableView];

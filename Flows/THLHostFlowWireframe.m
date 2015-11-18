@@ -13,16 +13,20 @@
 #import "THLEventHostingWireframe.h"
 #import "THLGuestlistReviewWireframe.h"
 #import "THLGuestFlowNavigationController.h"
+#import "THLUserProfileWireframe.h"
 
 @interface THLHostFlowWireframe()
 <
 THLEventDiscoveryModuleDelegate,
+THLUserProfileModuleDelegate,
 THLEventHostingModuleDelegate,
 THLGuestlistReviewModuleDelegate
 >
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) id currentWireframe;
+@property (nonatomic, strong) THLGuestFlowNavigationController *navigationController;
 @property (nonatomic, strong) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
+@property (nonatomic, strong) THLUserProfileWireframe *userProfileWireframe;
 @property (nonatomic, strong) THLEventHostingWireframe  *eventHostingWireframe;
 @property (nonatomic, strong) THLGuestlistReviewWireframe *guestlistReviewWireframe;
 @end
@@ -38,31 +42,41 @@ THLGuestlistReviewModuleDelegate
 #pragma mark - Routing
 - (void)presentHostFlowInWindow:(UIWindow *)window {
     _window = window;
-    UIViewController *discovery = [[UIViewController alloc] init];
-    UIViewController *profile = [[UIViewController alloc] init];
+    UIViewController *discovery = [[UIViewController alloc] initWithNibName:nil bundle:nil];
+    UIViewController *profile = [[UIViewController alloc] initWithNibName:nil bundle:nil];
+    UIViewController *dashboard = [[UIViewController alloc] initWithNibName:nil bundle:nil];
+
     [self presentEventDiscoveryInterfaceInViewController:discovery];
-//    [self presentUserProfileInterfaceInViewController:profile];
+    [self presentUserProfileInterfaceInViewController:profile];
     THLGuestFlowNavigationController *guestFlowNavController = [[THLGuestFlowNavigationController alloc] initWithMainViewController:discovery
+                                                                                                             leftSideViewController:dashboard
                                                                                                             rightSideViewController:profile];
     _window.rootViewController = guestFlowNavController;
     [_window makeKeyAndVisible];
 }
-//
-//- (void)presentHostFlowInWindow:(UIWindow *)window forEventHosting:(THLEventEntity *)eventEntity {
-//    /**
-//     *  Prevents popup notification from instantiating another event detail module if one is already instantiated
-//     */
-//    if (_currentWireframe != _eventHostingWireframe) {
-//        _window = window;
-//        [self presentEventHostingInterfaceForEvent:eventEntity];
-//    }
-//}
+
+- (void)presentHostFlowInWindow:(UIWindow *)window forEventHosting:(THLEventEntity *)eventEntity {
+    /**
+     *  Prevents popup notification from instantiating another event hosting module if one is already instantiated
+     */
+    if (_currentWireframe != _eventHostingWireframe) {
+        _window = window;
+        [self presentEventHostingInterfaceForEvent:eventEntity];
+    }
+}
 
 - (void)presentEventDiscoveryInterfaceInViewController:(UIViewController *)viewController {
     _eventDiscoveryWireframe = [_dependencyManager newEventDiscoveryWireframe];
     _currentWireframe = _eventDiscoveryWireframe;
     [_eventDiscoveryWireframe.moduleInterface setModuleDelegate:self];
-//    [_eventDiscoveryWireframe.moduleInterface presentEventDiscoveryInterfaceInViewController:viewController];
+    [_eventDiscoveryWireframe.moduleInterface presentEventDiscoveryInterfaceInViewController:viewController];
+}
+
+- (void)presentUserProfileInterfaceInViewController:(UIViewController *)viewController {
+    _userProfileWireframe = [_dependencyManager newUserProfileWireframe];
+    _currentWireframe = _userProfileWireframe;
+    [_userProfileWireframe.moduleInterface setModuleDelegate:self];
+    [_userProfileWireframe.moduleInterface presentUserProfileInterfaceInViewController:viewController];
 }
 
 - (void)presentEventHostingInterfaceForEvent:(THLEventEntity *)eventEntity {

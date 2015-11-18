@@ -11,5 +11,6 @@
 
 @interface THLGuestFlowNavigationController : UINavigationController
 - (instancetype)initWithMainViewController:(UIViewController *)mainViewController
+                    leftSideViewController:(UIViewController *)leftSideViewController
                         rightSideViewController:(UIViewController *)rightSideViewController;
 @end

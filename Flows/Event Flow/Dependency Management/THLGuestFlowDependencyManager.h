@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class THLEventDiscoveryWireframe;
+@class THLDashboardWireframe;
 @class THLUserProfileWireframe;
 @class THLEventDetailWireframe;
 @class THLPromotionSelectionWireframe;
@@ -17,6 +18,7 @@
 
 @protocol THLGuestFlowDependencyManager <NSObject>
 - (THLEventDiscoveryWireframe *)newEventDiscoveryWireframe;
+- (THLDashboardWireframe *)newDashboardWireframe;
 - (THLUserProfileWireframe *)newUserProfileWireframe;
 - (THLEventDetailWireframe *)newEventDetailWireframe;
 - (THLPromotionSelectionWireframe *)newPromotionSelectionWireframe;

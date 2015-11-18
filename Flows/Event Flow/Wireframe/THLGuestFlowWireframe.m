@@ -10,6 +10,7 @@
 #import "THLGuestFlowWireframe.h"
 
 #import "THLEventDiscoveryWireframe.h"
+#import "THLDashboardWireframe.h"
 #import "THLUserProfileWireframe.h"
 #import "THLEventDetailWireframe.h"
 #import "THLGuestlistInvitationWireframe.h"
@@ -28,6 +29,7 @@ typedef NS_OPTIONS(NSInteger, THLGuestlistReviewOptions) {
 @interface THLGuestFlowWireframe()
 <
 THLEventDiscoveryModuleDelegate,
+THLDashboardModuleDelegate,
 THLUserProfileModuleDelegate,
 THLEventDetailModuleDelegate,
 THLGuestlistInvitationModuleDelegate,
@@ -37,6 +39,7 @@ THLGuestlistReviewModuleDelegate
 @property (nonatomic, strong) id currentWireframe;
 @property (nonatomic, strong) THLGuestFlowNavigationController *navigationController;
 @property (nonatomic, strong) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
+@property (nonatomic, strong) THLDashboardWireframe *dashboardWireframe;
 @property (nonatomic, strong) THLUserProfileWireframe *userProfileWireframe;
 @property (nonatomic, strong) THLEventDetailWireframe  *eventDetailWireframe;
 @property (nonatomic, strong) THLGuestlistInvitationWireframe *guestlistInvitationWireframe;
@@ -55,12 +58,17 @@ THLGuestlistReviewModuleDelegate
     _window = window;
     UIViewController *discovery = [[UIViewController alloc] initWithNibName:nil bundle:nil];
     UIViewController *profile = [[UIViewController alloc] initWithNibName:nil bundle:nil];
+    UIViewController *dashboard = [[UIViewController alloc] initWithNibName:nil bundle:nil];
+
     [self presentEventDiscoveryInterfaceInViewController:discovery];
+    [self presentDashboardInterfaceInViewController:dashboard];
     [self presentUserProfileInterfaceInViewController:profile];
     
-    THLGuestFlowNavigationController *guestFlowNavController = [[THLGuestFlowNavigationController alloc] initWithMainViewController:discovery
-                                                                                                              rightSideViewController:profile];
-    _window.rootViewController = guestFlowNavController;
+    
+    _navigationController = [[THLGuestFlowNavigationController alloc] initWithMainViewController:discovery
+                                                                          leftSideViewController:dashboard
+                                                                         rightSideViewController:profile];
+    _window.rootViewController = _navigationController;
     [_window makeKeyAndVisible];
 }
 
@@ -77,6 +85,13 @@ THLGuestlistReviewModuleDelegate
     _currentWireframe = _eventDiscoveryWireframe;
 	[_eventDiscoveryWireframe.moduleInterface setModuleDelegate:self];
 	[_eventDiscoveryWireframe.moduleInterface presentEventDiscoveryInterfaceInViewController:viewController];
+}
+
+- (void)presentDashboardInterfaceInViewController:(UIViewController *)viewController {
+    _dashboardWireframe = [_dependencyManager newDashboardWireframe];
+    _currentWireframe = _dashboardWireframe;
+    [_dashboardWireframe.moduleInterface setModuleDelegate:self];
+    [_dashboardWireframe.moduleInterface presentDashboardInterfaceInViewController:viewController];
 }
 
 - (void)presentUserProfileInterfaceInViewController:(UIViewController *)viewController {
@@ -116,6 +131,10 @@ THLGuestlistReviewModuleDelegate
     [_guestlistReviewWireframe.moduleInterface presentGuestlistReviewInterfaceForGuestlist:guestlistEntity withGuestlistInvite:guestlistInviteEntity inController:controller];
 }
 
+#pragma mark - THLDashboardModuleDelegate
+- (void)dashboardModule:(id<THLDashboardModuleInterface>)module didClickToViewEvent:(THLEventEntity *)event {
+    [self presentEventDetailInterfaceForEvent:event];
+}
 
 #pragma mark - THLEventDiscoveryModuleDelegate
 - (void)eventDiscoveryModule:(id<THLEventDiscoveryModuleInterface>)module userDidSelectEventEntity:(THLEventEntity *)eventEntity {

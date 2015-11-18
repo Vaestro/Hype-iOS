@@ -80,6 +80,7 @@ static CGFloat MAPVIEW_METERS = 1000;
     [textView setScrollEnabled:NO];
     textView.editable = NO;
     textView.dataDetectorTypes = UIDataDetectorTypeAll;
+    textView.tintColor = kTHLNUIPrimaryFontColor;
     return textView;
 }
 

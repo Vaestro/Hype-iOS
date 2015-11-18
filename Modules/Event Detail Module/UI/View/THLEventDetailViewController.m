@@ -16,7 +16,6 @@
 #import "THLActionBarButton.h"
 
 #import "THLAppearanceConstants.h"
-//#import "FXBlurView.h"
 #import "THLPromotionInfoView.h"
 
 @interface THLEventDetailViewController()

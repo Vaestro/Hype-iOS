@@ -30,7 +30,21 @@
 //----------------------------------------------------------------
 
 - (BFTask *)fetchGuestlistsForPromotionAtEvent:(NSString *)eventId {
-    return [[_queryFactory queryForGuestlistsForPromotionAtEvent:eventId] findObjectsInBackground];
+    BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
+    NSMutableArray *completedGuestlists = [NSMutableArray new];
+    [[_queryFactory queryForGuestlistsForPromotionAtEvent:eventId] findObjectsInBackgroundWithBlock:^(NSArray *guestlists, NSError *error) {
+        for (PFObject *guestlist in guestlists) {
+            PFObject *promotion = guestlist[@"Promotion"];
+            [guestlist setObject:promotion forKey:@"Promotion"];
+            PFObject *host = guestlist[@"Promotion"][@"host"];
+            if (host != nil) {
+                [guestlist setObject:promotion forKey:@"host"];
+            }
+            [completedGuestlists addObject:guestlist];
+        }
+        [completionSource setResult:completedGuestlists];
+    }];
+    return completionSource.task;
 }
 
 //----------------------------------------------------------------
@@ -52,7 +66,7 @@
             [PFCloud callFunctionInBackground:@"sendOutNotifications"
                                withParameters:@{@"promotionId": promotionEntity.objectId,
                                                 @"eventName":promotionEntity.event.location.name,
-                                                @"promotionTime":promotionEntity.time,
+                                                @"promotionTime":promotionEntity.event.date,
                                                 @"guestPhoneNumbers": guestPhoneNumbers,
                                                 @"guestlistId": guestlist.objectId}
                                         block:^(id object, NSError *cloudError) {
@@ -133,6 +147,35 @@
 - (BFTask *)fetchGuestlistInviteForUser:(THLUser *)user atEvent:(NSString *)eventId {
     return [[_queryFactory queryForGuestlistInviteForUser:user atEvent:eventId] getFirstObjectInBackground];
 }
+
+//----------------------------------------------------------------
+#pragma mark - Fetch Guestlists For Guest For a Dashboard
+//----------------------------------------------------------------
+
+//TODO: Temporary - Only fetches first Accepted Guestlist Invite
+- (BFTask *)fetchGuestlistInvitesForUser {
+    BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
+    [[_queryFactory queryForGuestlistInvitesForUser] getFirstObjectInBackgroundWithBlock:^(PFObject *guestlistInvite, NSError *error) {
+        if (!error) {
+            PFObject *guestlist = guestlistInvite[@"Guestlist"];
+            [guestlistInvite setObject:guestlist forKey:@"Guestlist"];
+            PFObject *promotion = guestlistInvite[@"Guestlist"][@"Promotion"];
+            [guestlist setObject:promotion forKey:@"Promotion"];
+            PFObject *host = guestlistInvite[@"Guestlist"][@"Promotion"][@"host"];
+            [promotion setObject:host forKey:@"host"];
+            PFObject *event = guestlistInvite[@"Guestlist"][@"Promotion"][@"event"];
+            [promotion setObject:event forKey:@"event"];
+            PFObject *location = guestlistInvite[@"Guestlist"][@"Promotion"][@"event"][@"location"];
+            [event setObject:location forKey:@"location"];
+            [guestlistInvite pinInBackgroundWithName:@"GuestlistInvites"];
+            [completionSource setResult:guestlistInvite];
+        } else {
+            [completionSource setError:error];
+        }
+    }];
+    return completionSource.task;
+}
+
 
 //----------------------------------------------------------------
 #pragma mark - Fetch Guestlists For Guest Using The Guestlist Invite ID

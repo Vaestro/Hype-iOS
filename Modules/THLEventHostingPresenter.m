@@ -22,9 +22,11 @@
 #import "THLGuestlistInviteEntity.h"
 #import "THLEventHostingView.h"
 #import "THLEventHostingTableCellViewModel.h"
+#import "THLVenueDetailsView.h"
 
 @interface THLEventHostingPresenter()<THLEventHostingInteractorDelegate>
 @property (nonatomic, strong) id<THLEventHostingView> view;
+@property (nonatomic, strong) THLVenueDetailsView *venueDetailsView;
 @property (nonatomic, strong) THLEventEntity *eventEntity;
 
 @property (nonatomic) BOOL refreshing;
@@ -71,16 +73,34 @@
 - (void)configureNavigationBar:(THLEventNavigationBar *)navBar {
     WEAKSELF();
     [navBar setTitleText:_eventEntity.location.name];
-//    [navBar setSubtitleText:_eventEntity.title];
-//    [navBar setDateText:_eventEntity.date.thl_weekdayString];
     [navBar setLocationImageURL:_eventEntity.location.imageURL];
     
     RACCommand *command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         [WSELF handleDismissAction];
         return [RACSignal empty];
     }];
+    RACCommand *detailDisclosureCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [WSELF handleDetailDisclosureAction];
+        return [RACSignal empty];
+    }];
     
     [navBar setDismissCommand:command];
+    [navBar setDetailDisclosureCommand:detailDisclosureCommand];
+}
+
+- (void)configureVenueDetailsView:(THLVenueDetailsView *)venueDetailsView {
+    self.venueDetailsView = venueDetailsView;
+    [self.venueDetailsView setLocationName:_eventEntity.location.name];
+    [self.venueDetailsView setLocationInfo:_eventEntity.location.info];
+    [self.venueDetailsView setLocationAddress:_eventEntity.location.fullAddress];
+    
+    WEAKSELF();
+    RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [WSELF handleVenueDetailsDismissAction];
+        return [RACSignal empty];
+    }];
+    
+    [self.venueDetailsView setDismissCommand:dismissCommand];
 }
 
 - (void)presentEventHostingInterfaceForEvent:(THLEventEntity *)eventEntity inWindow:(UIWindow *)window {
@@ -92,6 +112,16 @@
 - (void)handleDismissAction {
     [_wireframe dismissInterface];
 }
+
+- (void)handleVenueDetailsDismissAction {
+    [_view hideDetailsView:self.venueDetailsView];
+    
+}
+
+- (void)handleDetailDisclosureAction {
+    [_view showDetailsView:self.venueDetailsView];
+}
+
 
 - (void)handleIndexPathSelection:(NSIndexPath *)indexPath {
     THLGuestlistEntity *guestlistEntity = [[_view dataSource] untransformedItemAtIndexPath:indexPath];

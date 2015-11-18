@@ -94,4 +94,9 @@
     UIImage *image = [[UIImage imageNamed:@"Profile Icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     return image;
 }
+
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
+}
+
 @end

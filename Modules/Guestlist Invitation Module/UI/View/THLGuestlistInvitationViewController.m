@@ -168,8 +168,7 @@
 	return tableView;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 60;
 }
 
@@ -208,15 +207,6 @@
                         forState:UIControlStateNormal];
 	return item;
 }
-
-//- (void)handleCancelAction:(id)sender {
-//	[self.eventHandler viewDidCancelInvitations:self];
-//}
-//
-//- (void)handleCommitAction:(id)sender {
-//	[self.eventHandler viewDidCommitInvitations:self];
-//}
-
 
 - (RACCommand *)newCommitCommand {
 	WEAKSELF();

@@ -73,6 +73,16 @@
     return query;
 }
 
+- (PFQuery *)queryForGuestlistInvitesForUser {
+    PFQuery *query = [self baseGuestlistInviteQuery];
+    [query whereKey:@"Guest" equalTo:[THLUser currentUser]];
+//    TODO: Improve Date + Remove Reponse filtering to fetch all guestlistInvites
+    [query whereKey:@"date" greaterThanOrEqualTo:[[NSDate date] dateByAddingTimeInterval:-60*300]];
+    [query orderByAscending:@"date"];
+    [query whereKey:@"response" equalTo:[NSNumber numberWithInteger:1]];
+    return query;
+}
+
 - (PFQuery *)queryForInvitesOnGuestlist:(THLGuestlist *)guestlist {
     PFQuery *query = [self baseGuestlistInviteQuery];
     [query whereKey:@"Guestlist" equalTo:guestlist];
@@ -128,6 +138,7 @@
     [query includeKey:@"Owner"];
     [query includeKey:@"Promotion"];
     [query includeKey:@"Promotion.event"];
+    [query includeKey:@"Promotion.host"];
     [query includeKey:@"Promotion.event.location"];
     return query;
 }
@@ -141,6 +152,7 @@
     [query includeKey:@"Guestlist"];
     [query includeKey:@"Guestlist.Owner"];
     [query includeKey:@"Guestlist.Promotion"];
+    [query includeKey:@"Guestlist.Promotion.host"];
     [query includeKey:@"Guestlist.Promotion.event"];
     [query includeKey:@"Guestlist.Promotion.event.location"];
     [query includeKey:@"Guest"];

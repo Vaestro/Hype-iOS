@@ -44,6 +44,8 @@
 //----------------------------------------------------------------
 - (BFTask *)fetchGuestlistInviteForUser:(THLUser *)user atEvent:(NSString *)eventId;
 
+- (BFTask *)fetchGuestlistInvitesForUser;
+
 //----------------------------------------------------------------
 #pragma mark - Fetch Guestlists For Guest Using The Guestlist Invite ID
 //----------------------------------------------------------------

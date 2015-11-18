@@ -130,16 +130,19 @@
 }
 
 - (THLHostEntity *)mapHost:(THLUser *)user {
-    //    NSAssert([user isKindOfClass:[THLUser class]], @"Must be of type THLUser to map!");
-    THLHostEntity *entity = [THLHostEntity new];
-    [self mapBaseValuesFromModel:user toEntity:entity];
-    entity.firstName = user.firstName;
-    entity.lastName = user.lastName;
-    entity.phoneNumber = user.phoneNumber;
-    entity.imageURL = [NSURL URLWithString:user.image.url];
-    entity.sex = user.sex;
-    entity.rating = user.rating;
-    return entity;
+    if ([user isKindOfClass:[THLUser class]]) {
+        THLHostEntity *entity = [THLHostEntity new];
+        [self mapBaseValuesFromModel:user toEntity:entity];
+        entity.firstName = user.firstName;
+        entity.lastName = user.lastName;
+        entity.phoneNumber = user.phoneNumber;
+        entity.imageURL = [NSURL URLWithString:user.image.url];
+        entity.sex = user.sex;
+        entity.rating = user.rating;
+        return entity;
+    } else {
+        return nil;
+    }
 }
 
 - (THLPromotionEntity *)mapPromotion:(THLPromotion *)promotion {
@@ -149,7 +152,7 @@
         entity.time = promotion.time;
         entity.maleRatio = promotion.maleRatio;
         entity.femaleRatio = promotion.femaleRatio;
-        //	entity.host = (THLHostEntity *)[self mapUser:promotion.host];
+        entity.host = (THLHostEntity *)[self mapHost:promotion[@"host"]];
         entity.event = [self mapEvent:promotion[@"event"]];
         entity.eventId = promotion.eventId;
         return entity;
@@ -194,6 +197,7 @@
         [self mapBaseValuesFromModel:guestlistInvite toEntity:entity];
         entity.response = guestlistInvite.response;
         entity.checkInStatus = guestlistInvite.checkInStatus;
+        entity.date = guestlistInvite.date;
         entity.guest = [self mapGuest:guestlistInvite.guest];
         entity.guestlist = [self mapGuestlist:guestlistInvite[@"Guestlist"]];
         return entity;

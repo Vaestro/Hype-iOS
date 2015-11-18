@@ -13,6 +13,7 @@
 @class THLEventHostingWireframe;
 @class THLEventHostingInteractor;
 @class THLEventNavigationBar;
+@class THLVenueDetailsView;
 
 @interface THLEventHostingPresenter : NSObject<THLEventHostingModuleInterface>
 #pragma mark - Dependencies
@@ -23,4 +24,5 @@
 
 - (void)configureView:(id<THLEventHostingView>)view;
 - (void)configureNavigationBar:(THLEventNavigationBar *)navBar;
+- (void)configureVenueDetailsView:(THLVenueDetailsView *)venueDetailsView;
 @end
