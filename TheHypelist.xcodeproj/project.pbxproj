@@ -180,6 +180,10 @@
 		C8E1B1621BF437F300A9824C /* THLUserProfileInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B1611BF437F300A9824C /* THLUserProfileInteractor.m */; };
 		C8E1B1651BF4380D00A9824C /* THLUserProfileDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B1641BF4380D00A9824C /* THLUserProfileDataManager.m */; };
 		C8E1B16B1BF43DA800A9824C /* THLUserProfileInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B16A1BF43DA800A9824C /* THLUserProfileInfoView.m */; };
+		C8F2FB201BF815C2004E00B6 /* THLResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F2FB1F1BF815C2004E00B6 /* THLResourceManager.m */; };
+		C8F2FB241BF8183B004E00B6 /* Privacy Policy.txt in Resources */ = {isa = PBXBuildFile; fileRef = C8F2FB231BF8183B004E00B6 /* Privacy Policy.txt */; };
+		C8F2FB271BF81A8E004E00B6 /* THLInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F2FB261BF81A8E004E00B6 /* THLInformationViewController.m */; };
+		C8F2FB2A1BF826B7004E00B6 /* THLWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F2FB291BF826B7004E00B6 /* THLWebViewController.m */; };
 		CBE5403C8B7732B36D5ECB5E /* THLViewDataSourceGrouping.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE54FC98A366F3761F89F63 /* THLViewDataSourceGrouping.m */; };
 		CBE54720F63BA2DE2136B454 /* THLViewDataSource+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE545A9A3C66339456E0A06 /* THLViewDataSource+Factory.m */; };
 		CBE547FB5677C373C1DE74C7 /* THLViewDataSourceSorting.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE5404991A434142507D7B0 /* THLViewDataSourceSorting.m */; };
@@ -586,6 +590,13 @@
 		C8E1B1641BF4380D00A9824C /* THLUserProfileDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLUserProfileDataManager.m; sourceTree = "<group>"; };
 		C8E1B1691BF43DA800A9824C /* THLUserProfileInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserProfileInfoView.h; sourceTree = "<group>"; };
 		C8E1B16A1BF43DA800A9824C /* THLUserProfileInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLUserProfileInfoView.m; sourceTree = "<group>"; };
+		C8F2FB1E1BF815C2004E00B6 /* THLResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THLResourceManager.h; path = ../../THLResourceManager.h; sourceTree = "<group>"; };
+		C8F2FB1F1BF815C2004E00B6 /* THLResourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THLResourceManager.m; path = ../../THLResourceManager.m; sourceTree = "<group>"; };
+		C8F2FB231BF8183B004E00B6 /* Privacy Policy.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Privacy Policy.txt"; path = "TheHypelist/Privacy Policy.txt"; sourceTree = SOURCE_ROOT; };
+		C8F2FB251BF81A8E004E00B6 /* THLInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLInformationViewController.h; sourceTree = "<group>"; };
+		C8F2FB261BF81A8E004E00B6 /* THLInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLInformationViewController.m; sourceTree = "<group>"; };
+		C8F2FB281BF826B7004E00B6 /* THLWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLWebViewController.h; sourceTree = "<group>"; };
+		C8F2FB291BF826B7004E00B6 /* THLWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLWebViewController.m; sourceTree = "<group>"; };
 		CB878AA95A320C00B4227BCE /* Pods-TheHypelistTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheHypelistTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TheHypelistTests/Pods-TheHypelistTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CBE5404991A434142507D7B0 /* THLViewDataSourceSorting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLViewDataSourceSorting.m; sourceTree = "<group>"; };
 		CBE54163EA2D6D75F647F7B1 /* THLViewDataSource+Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "THLViewDataSource+Factory.h"; sourceTree = "<group>"; };
@@ -1987,6 +1998,9 @@
 		79A466641BED371900AC975B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C8F2FB1E1BF815C2004E00B6 /* THLResourceManager.h */,
+				C8F2FB1F1BF815C2004E00B6 /* THLResourceManager.m */,
+				C8F2FB231BF8183B004E00B6 /* Privacy Policy.txt */,
 				79A466651BED371900AC975B /* Images.xcassets */,
 				79A466661BED371900AC975B /* raleway */,
 			);
@@ -2278,12 +2292,16 @@
 		C8E1B1661BF4383600A9824C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C8F2FB251BF81A8E004E00B6 /* THLInformationViewController.h */,
+				C8F2FB261BF81A8E004E00B6 /* THLInformationViewController.m */,
 				798D7EB21BF2CCD4001D4593 /* THLUserProfileViewController.h */,
 				798D7EB31BF2CCD4001D4593 /* THLUserProfileViewController.m */,
 				798D7EB51BF2CCE5001D4593 /* THLUserProfileView.h */,
 				C8E1B1691BF43DA800A9824C /* THLUserProfileInfoView.h */,
 				C8E1B16A1BF43DA800A9824C /* THLUserProfileInfoView.m */,
 				C8E1B1671BF4384500A9824C /* Cells */,
+				C8F2FB281BF826B7004E00B6 /* THLWebViewController.h */,
+				C8F2FB291BF826B7004E00B6 /* THLWebViewController.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2348,7 +2366,6 @@
 				2174A0621B863F6A006826D7 /* Resources */,
 				D86684AEA6207E01201FB42F /* Copy Pods Resources */,
 				21C6D0091BAE5E3F00DEDDA3 /* Run Script */,
-				B34B440D9B148519586C06AA /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2368,7 +2385,6 @@
 				2174A07A1B863F6A006826D7 /* Frameworks */,
 				2174A07B1B863F6A006826D7 /* Resources */,
 				3BBEDA8F8F68D4810546056C /* Copy Pods Resources */,
-				328DA970C20CEF37C01AFF1C /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2440,6 +2456,7 @@
 				79A466931BED371900AC975B /* Raleway-SemiBoldItalic.ttf in Resources */,
 				79A466941BED371900AC975B /* Raleway-Thin.ttf in Resources */,
 				21CE06281BB87FE8004D10BB /* THLNUIStyleSheet.nss in Resources */,
+				C8F2FB241BF8183B004E00B6 /* Privacy Policy.txt in Resources */,
 				79A4668D1BED371900AC975B /* Raleway-Light.ttf in Resources */,
 				79A466831BED371900AC975B /* Images.xcassets in Resources */,
 				79A466871BED371900AC975B /* Raleway-BoldItalic.ttf in Resources */,
@@ -2483,21 +2500,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/Fabric.framework/run\" 59e4c5cc715a727c29c12850d2ec4cdd9e6c7d65 461d29ada9ef911416346454692039fabbf73c31c449d2485609dbe7e97c18b0";
 		};
-		328DA970C20CEF37C01AFF1C /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TheHypelistTests/Pods-TheHypelistTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		3BBEDA8F8F68D4810546056C /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2526,21 +2528,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		B34B440D9B148519586C06AA /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TheHypelist/Pods-TheHypelist-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D86684AEA6207E01201FB42F /* Copy Pods Resources */ = {
@@ -2587,10 +2574,12 @@
 				21775F3F1B8CF95300609D39 /* THLEventDetailsMapView.m in Sources */,
 				21CCEDFA1B87D5060066CDAC /* PFObject+MatchingQuery.m in Sources */,
 				211005B71B8A446D00A540C6 /* THLViewDataSource.m in Sources */,
+				C8F2FB271BF81A8E004E00B6 /* THLInformationViewController.m in Sources */,
 				21192D911BB327C200B176AA /* THLPromotionSelectionViewController.m in Sources */,
 				218AF3591BB7455500AFAEBF /* THLEntityMapper.m in Sources */,
 				790603D81BFBA79F0093335E /* THLEventTicketVenueView.m in Sources */,
 				212173661BB34D22007D817A /* HCSStarRatingView.m in Sources */,
+				C8F2FB201BF815C2004E00B6 /* THLResourceManager.m in Sources */,
 				2118921F1BAA088D00E8A11F /* THLLoginWireframe.m in Sources */,
 				2121734C1BB32B92007D817A /* THLPromotionSelectionInfoCardViewModel.m in Sources */,
 				211D0BB31B8CEE8B0073AFDD /* THLEventDetailViewController.m in Sources */,
@@ -2683,6 +2672,7 @@
 				21E402DC1BBF8155001D0C2C /* THLGuestlistInvite.m in Sources */,
 				7942082F1BD8C250009B86FA /* THLGuestlistEntity.m in Sources */,
 				21CCEDE91B87C87B0066CDAC /* THLDataStore.m in Sources */,
+				C8F2FB2A1BF826B7004E00B6 /* THLWebViewController.m in Sources */,
 				21EED1001BB5F842001325A7 /* THLGuestFlowWireframe.m in Sources */,
 				79B959291BE581A800B87799 /* THLGuestlistReviewDataManager.m in Sources */,
 				791C1F831BF13AEA00CCF803 /* THLEventHostingDataManager.m in Sources */,

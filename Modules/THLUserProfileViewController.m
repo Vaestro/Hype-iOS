@@ -12,6 +12,9 @@
 #import "THLUserProfileTableViewCell.h"
 #import "THLAppearanceConstants.h"
 #import "THLPersonIconView.h"
+#import "THLInformationViewController.h"
+#import "THLWebViewController.h"
+#import "THLResourceManager.h"
 
 
 typedef NS_ENUM(NSInteger, TableViewSection) {
@@ -40,6 +43,10 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 @property (nonatomic, strong) NSArray *urls;
 @property (nonatomic, strong) NSArray *tableCellNames;
 @property (nonatomic, strong) NSString *siteUrl;
+@property (nonatomic, strong) THLInformationViewController *infoVC;
+@property (nonatomic, strong) UINavigationController *navVC;
+@property (nonatomic, strong) UIBarButtonItem *backButton;
+@property (nonatomic, strong) RACCommand *dismissVC;
 @end
 
 @implementation THLUserProfileViewController
@@ -63,6 +70,10 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 - (void)constructView {
     _tableView = [self newTableView];
     _profileInfoView = [self newProfileInfoView];
+    _infoVC = [self newInfoVC];
+    _backButton = [self newBackBarButtonItem]
+    _navVC = [self newNavVC];
+
 }
 
 - (void)layoutView {
@@ -105,9 +116,28 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.row == 0 || indexPath.row == 1) {
-        self.siteUrl = [self.urls objectAtIndex:indexPath.row];
-        [self alert:[self.urls objectAtIndex:indexPath.row]];
+
+    
+    switch(indexPath.row) {
+        case 0: {
+            self.siteUrl = [self.urls objectAtIndex:indexPath.row];
+            [self alert:[self.urls objectAtIndex:indexPath.row]];
+            break;
+        }
+        case 1: {
+            self.siteUrl = [self.urls objectAtIndex:indexPath.row];
+            [self alert:[self.urls objectAtIndex:indexPath.row]];
+            break;
+        }
+        case 2: {
+            _navVC = [[UINavigationController alloc] initWithRootViewController:_infoVC];
+            [self presentViewController:_navVC animated:YES completion:nil];
+            _navVC.navigationItem.leftBarButtonItem = _backButton;
+            break;
+        }
+        default: {
+            break;
+        }
     }
     
 }
@@ -126,6 +156,10 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
     
     if (buttonIndex==1) {
         //Ok button was selected
+        
+//        THLWebViewController *webView = [THLWebViewController new];
+//        webView.url = [NSURL URLWithString:self.siteUrl];
+//        [self presentViewController:webView animated:YES completion:nil];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.siteUrl]];
     }
 }
@@ -157,4 +191,24 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
     return profileInfoView;
 }
 
+- (THLInformationViewController *)newInfoVC {
+    THLInformationViewController *infoVC = [THLInformationViewController new];
+    infoVC.displayText = [THLResourceManager privacyPolicyText];
+    infoVC.title = @"Privacy Policy";
+    return infoVC;
+}
+
+- (UIBarButtonItem *)newBackBarButtonItem {
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(handleCancelAction)];
+    [item setTitleTextAttributes:
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
+                        forState:UIControlStateNormal];
+    return item;
+}
+
+- (void)handleCancelAction {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+}
 @end
