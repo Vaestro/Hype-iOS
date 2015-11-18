@@ -42,6 +42,7 @@
         [self handleIndexPathSelection:(NSIndexPath *)input];
         return [RACSignal empty];
     }];
+    
     [_view setSelectedIndexPathCommand:selectedIndexPathCommand];
 }
 

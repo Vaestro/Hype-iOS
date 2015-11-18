@@ -14,7 +14,8 @@
 @interface THLUserProfileViewController : UIViewController
 <
 THLUserProfileView,
-UITableViewDelegate
+UITableViewDelegate,
+UIWebViewDelegate
 >
 @property (nonatomic, strong) UITableView *tableView;
 
