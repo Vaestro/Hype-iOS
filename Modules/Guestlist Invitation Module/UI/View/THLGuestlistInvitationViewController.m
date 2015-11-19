@@ -249,7 +249,7 @@
 - (void)adjustTableFrame {
 	CGFloat yOffset = _contactPickerView.frame.origin.y + _contactPickerView.frame.size.height;
 
-	CGRect tableFrame = CGRectMake(0, yOffset + 10.0, self.view.frame.size.width, self.view.frame.size.height - yOffset);
+	CGRect tableFrame = CGRectMake(0, yOffset, self.view.frame.size.width, self.view.frame.size.height - yOffset);
 	_tableView.frame = tableFrame;
 }
 

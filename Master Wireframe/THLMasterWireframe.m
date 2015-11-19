@@ -23,6 +23,8 @@
 
 //Delegates
 #import "THLLoginModuleDelegate.h"
+#import "THLGuestFlowModuleDelegate.h"
+#import "THLHostFlowModuleDelegate.h"
 
 #import "THLEventDetailModuleDelegate.h"
 #import "THLPromotionSelectionModuleDelegate.h"
@@ -30,8 +32,7 @@
 #import "THLUser.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
-#import "THLGuestFlowModuleDelegate.h"
-#import "THLHostFlowModuleDelegate.h"
+
 
 
 @interface THLMasterWireframe()
@@ -47,6 +48,7 @@ THLPopupNotificationModuleDelegate
 @property (nonatomic, strong) id currentWireframe;
 @property (nonatomic, strong) THLSessionService *sessionService;
 @property (nonatomic, strong) THLGuestFlowWireframe *guestWireframe;
+@property (nonatomic, strong) THLHostFlowWireframe *hostWireframe;
 
 @end
 
@@ -108,9 +110,10 @@ THLPopupNotificationModuleDelegate
 }
 
 - (void)presentHostFlow {
-    THLHostFlowWireframe *hostWireframe = [_dependencyManager newHostFlowWireframe];
-    _currentWireframe = hostWireframe;
-    [hostWireframe presentHostFlowInWindow:_window];
+    _hostWireframe = [_dependencyManager newHostFlowWireframe];
+    _currentWireframe = _hostWireframe;
+    [_hostWireframe.moduleInterface setModuleDelegate:self];
+    [_hostWireframe presentHostFlowInWindow:_window];
 }
 
 

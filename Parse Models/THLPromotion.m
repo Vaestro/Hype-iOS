@@ -15,6 +15,7 @@
 @dynamic host;
 @dynamic event;
 @dynamic eventId;
+@dynamic promotionMessage;
 
 + (void)load {
 	[self registerSubclass];

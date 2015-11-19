@@ -128,6 +128,7 @@
 		79527CF01BF188F80074AF38 /* THLEventHostingInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 79527CEF1BF188F80074AF38 /* THLEventHostingInteractor.m */; };
 		796965BC1BFCFE5B009034FA /* Privacy Policy.txt in Resources */ = {isa = PBXBuildFile; fileRef = 796965BB1BFCFE5B009034FA /* Privacy Policy.txt */; };
 		796965C01BFCFFB1009034FA /* Terms of Use.txt in Resources */ = {isa = PBXBuildFile; fileRef = 796965BF1BFCFFB1009034FA /* Terms of Use.txt */; };
+		796965C61BFE453C009034FA /* 1Oak.mov in Resources */ = {isa = PBXBuildFile; fileRef = 796965C51BFE453C009034FA /* 1Oak.mov */; };
 		79752ADE1BEBD8B500D09B2E /* THLConfirmationPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79752ADD1BEBD8B500D09B2E /* THLConfirmationPopupView.m */; };
 		798650A41BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 798650A31BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m */; };
 		798B5FCB1BF11BD2002EBCB6 /* THLHostFlowWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 798B5FCA1BF11BD2002EBCB6 /* THLHostFlowWireframe.m */; };
@@ -490,6 +491,7 @@
 		796965BF1BFCFFB1009034FA /* Terms of Use.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Terms of Use.txt"; sourceTree = "<group>"; };
 		796965C11BFD8DDE009034FA /* THLHostFlowModuleInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLHostFlowModuleInterface.h; sourceTree = "<group>"; };
 		796965C21BFD8DE8009034FA /* THLHostFlowModuleDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLHostFlowModuleDelegate.h; sourceTree = "<group>"; };
+		796965C51BFE453C009034FA /* 1Oak.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = 1Oak.mov; sourceTree = "<group>"; };
 		79752ADC1BEBD8B500D09B2E /* THLConfirmationPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLConfirmationPopupView.h; sourceTree = "<group>"; };
 		79752ADD1BEBD8B500D09B2E /* THLConfirmationPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLConfirmationPopupView.m; sourceTree = "<group>"; };
 		798650A21BEDDC2D0032A661 /* CAGradientLayer+THLGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAGradientLayer+THLGradient.h"; sourceTree = "<group>"; };
@@ -645,8 +647,8 @@
 		2110058D1B8A2F3A00A540C6 /* Event Discovery Module */ = {
 			isa = PBXGroup;
 			children = (
-				211005921B8A30E000A540C6 /* Components */,
 				211005911B8A2FE200A540C6 /* Interface */,
+				211005921B8A30E000A540C6 /* Components */,
 				211005901B8A2FDB00A540C6 /* UI */,
 			);
 			path = "Event Discovery Module";
@@ -2009,6 +2011,7 @@
 				C8F2FB1F1BF815C2004E00B6 /* THLResourceManager.m */,
 				796965BB1BFCFE5B009034FA /* Privacy Policy.txt */,
 				796965BF1BFCFFB1009034FA /* Terms of Use.txt */,
+				796965C51BFE453C009034FA /* 1Oak.mov */,
 				79A466651BED371900AC975B /* Images.xcassets */,
 				79A466661BED371900AC975B /* raleway */,
 			);
@@ -2462,6 +2465,7 @@
 				79A4668B1BED371900AC975B /* Raleway-ExtraLightItalic.ttf in Resources */,
 				79A4668F1BED371900AC975B /* Raleway-Medium.ttf in Resources */,
 				79A466861BED371900AC975B /* Raleway-Bold.ttf in Resources */,
+				796965C61BFE453C009034FA /* 1Oak.mov in Resources */,
 				79A4668E1BED371900AC975B /* Raleway-LightItalic.ttf in Resources */,
 				79A466931BED371900AC975B /* Raleway-SemiBoldItalic.ttf in Resources */,
 				79A466941BED371900AC975B /* Raleway-Thin.ttf in Resources */,

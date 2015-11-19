@@ -35,10 +35,11 @@ static NSString *const kTHLGuestlistReviewModuleViewKey = @"kTHLGuestlistReviewM
 
 - (void)updateGuestlistInvites {
     WEAKSELF();
+    STRONGSELF();
     [[_dataManager fetchGuestlistInvitesForGuestlist:_guestlistEntity] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
 //        Store guests in Memory In case User wants to Add more Guests
-        [self collectGuestsPhoneNumbers:task.result];
-        [WSELF.delegate interactor:WSELF didUpdateGuestlistInvites:task.error];
+        [SSELF collectGuestsPhoneNumbers:task.result];
+        [SSELF.delegate interactor:SSELF didUpdateGuestlistInvites:task.error];
         return nil;
     }];
 }
@@ -77,16 +78,18 @@ static NSString *const kTHLGuestlistReviewModuleViewKey = @"kTHLGuestlistReviewM
 #pragma mark - Handle Presenter Events
 - (void)updateGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite withResponse:(THLStatus)response {
     WEAKSELF();
+    STRONGSELF();
     [[_dataManager updateGuestlistInvite:guestlistInvite withResponse:response] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
-        [WSELF.delegate interactor:WSELF didUpdateGuestlistInviteResponse:task.error to:response];
+        [SSELF.delegate interactor:SSELF didUpdateGuestlistInviteResponse:task.error to:response];
         return nil;
     }];
 }
 
 - (void)updateGuestlist:(THLGuestlistEntity *)guestlist withReviewStatus:(THLStatus)reviewStatus {
     WEAKSELF();
+    STRONGSELF();
     [[_dataManager updateGuestlist:guestlist withReviewStatus:reviewStatus] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
-        [WSELF.delegate interactor:WSELF didUpdateGuestlistReviewStatus:task.error to:reviewStatus];
+        [SSELF.delegate interactor:SSELF didUpdateGuestlistReviewStatus:task.error to:reviewStatus];
         return nil;
     }];
 }

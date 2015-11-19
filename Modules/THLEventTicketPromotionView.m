@@ -49,47 +49,61 @@
                         _textView,
                         _eventTimeLabel]];
     
+    WEAKSELF();
     [_eventTimeLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.insets(kTHLEdgeInsetsNone());
     }];
     
     [_iconView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_eventTimeLabel.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+        make.top.equalTo([WSELF eventTimeLabel].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
         make.left.insets(kTHLEdgeInsetsSuperHigh());
         make.size.equalTo(CGSizeMake1(60));
     }];
     
     [_yourHostLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_iconView.mas_right).insets(kTHLEdgeInsetsHigh());
-        make.top.equalTo(_eventTimeLabel.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+        make.left.equalTo([WSELF iconView].mas_right).insets(kTHLEdgeInsetsHigh());
+        make.top.equalTo([WSELF eventTimeLabel].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
         make.right.insets(kTHLEdgeInsetsHigh());
     }];
     
     [_hostNameLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_iconView.mas_right).insets(kTHLEdgeInsetsHigh());
-        make.top.equalTo(_yourHostLabel.mas_bottom).insets(kTHLEdgeInsetsHigh());
-        make.bottom.equalTo(_iconView);
+        make.left.equalTo([WSELF iconView].mas_right).insets(kTHLEdgeInsetsHigh());
+        make.top.equalTo([WSELF yourHostLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.bottom.equalTo(WSELF.iconView);
         make.right.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
     [_hairlineView makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
-        make.top.equalTo(_hostNameLabel.mas_baseline).insets(kTHLEdgeInsetsHigh());
+        make.top.equalTo([WSELF hostNameLabel].mas_baseline).insets(kTHLEdgeInsetsHigh());
     }];
     
     [_textView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_hairlineView.mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.top.equalTo([WSELF hairlineView].mas_bottom).insets(kTHLEdgeInsetsHigh());
         make.left.right.bottom.insets(kTHLEdgeInsetsSuperHigh());
     }];
 }
 
 - (void)bindView {
+    WEAKSELF();
+    [[RACObserve(self, promotionMessage) filter:^BOOL(id value) {
+        NSString *text = value;
+        return text.length > 0;
+    }] subscribeNext:^(id x) {
+        [WSELF.textView setText:x];
+    }];
+    
     RAC(self.iconView, imageURL) = RACObserve(self, hostImageURL);
     RAC(self.eventTimeLabel, text, @"") = RACObserve(self, eventTime);
     RAC(self.hostNameLabel, text, @"") = RACObserve(self, hostName);
 }
 
 #pragma mark - Constructors
+- (UILabel *)newVenueNameLabel {
+    UILabel *label = THLNUILabel(kTHLNUIBoldTitle);
+    return label;
+}
+
 - (THLPersonIconView *)newIconView {
     THLPersonIconView *iconView = [THLPersonIconView new];
     return iconView;
@@ -121,7 +135,7 @@
     UITextView *textView = THLNUITextView(kTHLNUIDetailTitle);
     textView.userInteractionEnabled = NO;
     [textView setScrollEnabled:NO];
-    textView.text = @"Upon arrival at the venue check-in with the host. If you have any questions or would like to update the host on your location, you can send them a private message.";
+    textView.text = @"Upon arrival at the venue, check-in with the host. Your Host will keep you updated with what you need to know about the event.";
     return textView;
 }
 

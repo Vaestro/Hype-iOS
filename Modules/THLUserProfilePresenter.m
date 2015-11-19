@@ -37,9 +37,9 @@
     [_view setUserImageURL:[NSURL URLWithString:image.url]];
     [_view setUserName:[THLUser currentUser].firstName];
     
-    
+    WEAKSELF();
     RACCommand *selectedIndexPathCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [self handleIndexPathSelection:(NSIndexPath *)input];
+        [WSELF handleIndexPathSelection:(NSIndexPath *)input];
         return [RACSignal empty];
     }];
     

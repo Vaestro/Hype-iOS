@@ -47,13 +47,14 @@ THLPopupNotificationInteractorDelegate
 
 - (BFTask *)presentPopupNotificationModuleInterfaceWithPushInfo:(NSDictionary *)pushInfo {
     WEAKSELF();
+    STRONGSELF();
     return [[_interactor handleNotificationData:pushInfo] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
         if (!task.faulted) {
-            WSELF.notificationText = pushInfo[kPushInfoKeyNotficationText];
-            WSELF.imageURL = pushInfo[kPushInfoKeyImageURL];
-            WSELF.guestlistInviteEntity = task.result;
-            WSELF.eventEntity = WSELF.guestlistInviteEntity.guestlist.promotion.event;
-            [WSELF.wireframe presentInterface];
+            SSELF.notificationText = pushInfo[kPushInfoKeyNotficationText];
+            SSELF.imageURL = pushInfo[kPushInfoKeyImageURL];
+            SSELF.guestlistInviteEntity = task.result;
+            SSELF.eventEntity = SSELF.guestlistInviteEntity.guestlist.promotion.event;
+            [SSELF.wireframe presentInterface];
         }
         return task;
     }];

@@ -42,17 +42,18 @@
                         _label]];
     WEAKSELF();
     [_iconView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.insets(kTHLEdgeInsetsSuperHigh()).priorityHigh();
-        make.left.top.greaterThanOrEqualTo(SV(_iconView)).insets(kTHLEdgeInsetsHigh());
+        make.top.insets(kTHLEdgeInsetsHigh());
+        make.left.top.greaterThanOrEqualTo(SV(WSELF.iconView)).insets(kTHLEdgeInsetsHigh());
         make.right.lessThanOrEqualTo(SV(WSELF.iconView)).insets(kTHLEdgeInsetsHigh());
-        make.height.equalTo([WSELF iconView].mas_width);
+        make.height.equalTo(SV(WSELF.iconView)).sizeOffset(CGSizeMake(100, -75));
+        make.width.equalTo([WSELF iconView].mas_height);
         make.centerX.equalTo(0);
     }];
     
     [_label makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_iconView.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+        make.top.equalTo([WSELF iconView].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
         make.bottom.left.right.insets(kTHLEdgeInsetsHigh());
-        make.centerX.equalTo(_iconView.mas_centerX);
+        make.centerX.equalTo([WSELF iconView].mas_centerX);
     }];
     
 }

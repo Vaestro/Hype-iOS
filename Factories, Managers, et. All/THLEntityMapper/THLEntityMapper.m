@@ -155,6 +155,7 @@
         entity.host = (THLHostEntity *)[self mapHost:promotion[@"host"]];
         entity.event = [self mapEvent:promotion[@"event"]];
         entity.eventId = promotion.eventId;
+        entity.promotionMessage = promotion.promotionMessage;
         return entity;
     } else {
         return nil;

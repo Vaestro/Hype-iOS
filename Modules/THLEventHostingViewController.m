@@ -79,21 +79,21 @@
 - (void)bindView {
     WEAKSELF();
     STRONGSELF();
-    [RACObserve(WSELF, dataSource) subscribeNext:^(THLViewDataSource *dataSource) {
+    [RACObserve(self, dataSource) subscribeNext:^(THLViewDataSource *dataSource) {
         [SSELF configureDataSource:dataSource];
     }];
     
-    [RACObserve(WSELF, showRefreshAnimation) subscribeNext:^(NSNumber *val) {
+    [RACObserve(self, showRefreshAnimation) subscribeNext:^(NSNumber *val) {
         BOOL shouldAnimate = [val boolValue];
         if (shouldAnimate) {
-            [SSELF.tableView.pullToRefreshView startAnimating];
+            [WSELF.tableView.pullToRefreshView startAnimating];
         } else {
-            [SSELF.tableView.pullToRefreshView stopAnimating];
+            [WSELF.tableView.pullToRefreshView stopAnimating];
         }
     }];
     
-    [RACObserve(WSELF, refreshCommand) subscribeNext:^(RACCommand *command) {
-        [SSELF.tableView addPullToRefreshWithActionHandler:^{
+    [RACObserve(self, refreshCommand) subscribeNext:^(RACCommand *command) {
+        [WSELF.tableView addPullToRefreshWithActionHandler:^{
             [command execute:nil];
         }];
     }];

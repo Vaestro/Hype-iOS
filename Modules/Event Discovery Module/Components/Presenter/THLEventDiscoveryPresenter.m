@@ -41,26 +41,27 @@
 
 - (void)configureView:(id<THLEventDiscoveryView>)view {
     _view = view;
-
+    
+    WEAKSELF();
+    STRONGSELF();
 	THLViewDataSource *dataSource = [_interactor generateDataSource];
 	dataSource.dataTransformBlock = ^id(id item) {
 		return [[THLEventDiscoveryCellViewModel alloc] initWithEvent:(THLEventEntity *)item];
 	};
     
     RACCommand *selectedIndexPathCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [self handleIndexPathSelection:(NSIndexPath *)input];
+        [SSELF handleIndexPathSelection:(NSIndexPath *)input];
         return [RACSignal empty];
     }];
     
     RACCommand *refreshCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [self handleRefreshAction];
+        [SSELF handleRefreshAction];
         return [RACSignal empty];
     }];
     
-    WEAKSELF();
     [RACObserve(self, refreshing) subscribeNext:^(NSNumber *b) {
         BOOL isRefreshing = [b boolValue];
-        [WSELF.view setShowRefreshAnimation:isRefreshing];
+        [SSELF.view setShowRefreshAnimation:isRefreshing];
     }];
     
 	[_view setDataSource:dataSource];

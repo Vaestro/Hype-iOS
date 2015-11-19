@@ -19,6 +19,7 @@
 
 @implementation THLDashboardViewController
 @synthesize locationImageURL;
+@synthesize promotionMessage;
 @synthesize hostImageURL;
 @synthesize hostName;
 @synthesize eventName;
@@ -70,6 +71,7 @@
 - (void)bindView {
     RAC(self.eventTicketView, locationImageURL) = RACObserve(self, locationImageURL);
     RAC(self.eventTicketView, locationName, @"") = RACObserve(self, locationName);
+    RAC(self.eventTicketView, promotionMessage, @"") = RACObserve(self, promotionMessage);
     RAC(self.eventTicketView, eventDate, @"") = RACObserve(self, eventDate);
     RAC(self.eventTicketView, hostImageURL) = RACObserve(self, hostImageURL);
     RAC(self.eventTicketView, hostName, @"") = RACObserve(self, hostName);

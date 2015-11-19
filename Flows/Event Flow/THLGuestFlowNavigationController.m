@@ -16,7 +16,12 @@
 @property (nonatomic, strong) UIView *guestProfileNavBarItem;
 @property (nonatomic, strong) UIView *dashboardNavBarItem;
 @property (nonatomic, strong) SLPagingViewController *pagingViewController;
+@property (nonatomic, strong) UIViewController *profileVC;
+@property (nonatomic, strong) UIViewController *discoveryVC;
+@property (nonatomic, strong) UIViewController *dashboardVC;
+
 @property (nonatomic, strong) NSArray *views;
+@property (nonatomic, strong) NSArray *navBarItems;
 @end
 
 @implementation THLGuestFlowNavigationController
@@ -24,7 +29,10 @@
                    leftSideViewController:(UIViewController *)leftSideViewController
                       rightSideViewController:(UIViewController *)rightSideViewController {
     if (self = [super init]) {
-        _views = @[leftSideViewController.view, mainViewController.view, rightSideViewController.view];
+        _dashboardVC = leftSideViewController;
+        _discoveryVC = mainViewController;
+        _profileVC = rightSideViewController;
+        _views = @[_dashboardVC.view, _discoveryVC.view, _profileVC.view];
     }
     return self;
 }
@@ -37,21 +45,19 @@
 
 
 - (void)constructView {
-    NSArray *navBarItems = @[
+    _navBarItems = @[
                              [self newDashboardNavBarItem],
                              [self newDiscoveryNavBarItem],
                              [self newGuestProfileNavBarItem]
                              ];
     
-    _pagingViewController = [[SLPagingViewController alloc] initWithNavBarItems:navBarItems
-                                                                                    navBarBackground:kTHLNUIPrimaryBackgroundColor
-                                                                                               views:_views
-                                                                                     showPageControl:NO];
+    _pagingViewController = [self newPagingViewController];
 }
 
 - (void)layoutView {
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.automaticallyAdjustsScrollViewInsets = YES;
+
     _pagingViewController.navigationSideItemsStyle = SLNavigationSideItemsStyleOnBounds;
 //    [_pagingViewController performSelector:@selector(updateNavItems:) withObject:@(0)];
     _pagingViewController.pagingViewMovingRedefine = ^(UIScrollView * scrollView, NSArray *subviews) {
@@ -72,7 +78,16 @@
         }
     };
     [_pagingViewController setCurrentIndex:1 animated:NO];
+    
     [self setViewControllers:@[_pagingViewController]];
+}
+
+- (SLPagingViewController *)newPagingViewController {
+    SLPagingViewController *pagingViewController = [[SLPagingViewController alloc] initWithNavBarItems:_navBarItems
+                                                                                      navBarBackground:kTHLNUIPrimaryBackgroundColor
+                                                                                                 views:_views
+                                                                                       showPageControl:NO];
+    return pagingViewController;
 }
 
 - (UIView *)newDiscoveryNavBarItem {

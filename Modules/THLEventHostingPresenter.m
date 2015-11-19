@@ -53,11 +53,11 @@
         return [[THLEventHostingTableCellViewModel alloc] initWithGuestlistEntity:(THLGuestlistEntity *)item];
     };
     RACCommand *selectedIndexPathCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [self handleIndexPathSelection:(NSIndexPath *)input];
+        [WSELF handleIndexPathSelection:(NSIndexPath *)input];
         return [RACSignal empty];
     }];
     RACCommand *refreshCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [self handleRefreshAction];
+        [WSELF handleRefreshAction];
         return [RACSignal empty];
     }];
     [RACObserve(self, refreshing) subscribeNext:^(NSNumber *b) {

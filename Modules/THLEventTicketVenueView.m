@@ -39,11 +39,11 @@
         make.left.right.bottom.insets(kTHLEdgeInsetsNone());
         make.top.offset(-20);
 	}];
-
+    WEAKSELF();
 	[_venueNameLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.insets(kTHLEdgeInsetsSuperHigh());
-        make.right.lessThanOrEqualTo(_venueImageView.mas_right);
-        make.top.greaterThanOrEqualTo(_venueImageView.mas_top).insets(kTHLEdgeInsetsHigh());
+        make.right.lessThanOrEqualTo([WSELF venueImageView].mas_right);
+        make.top.greaterThanOrEqualTo([WSELF venueImageView].mas_top).insets(kTHLEdgeInsetsHigh());
     }];
 }
 
@@ -69,7 +69,8 @@
 
 - (UILabel *)newVenueNameLabel {
     UILabel *label = THLNUILabel(kTHLNUIBoldTitle);
-    label.text = @"SHAPOOP";
+    label.adjustsFontSizeToFitWidth = YES;
+    label.minimumScaleFactor = 0.5;
 	return label;
 }
 

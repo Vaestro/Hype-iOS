@@ -32,10 +32,11 @@
 
 - (BFTask *)fetchEventsFrom:(NSDate *)startDate to:(NSDate *)endDate {
     WEAKSELF();
+    STRONGSELF();
 	return [[_eventService fetchEventsFrom:startDate to:endDate] continueWithSuccessBlock:^id(BFTask *task) {
-		THLDataStoreDomain *domain = [self domainForEventsFrom:startDate to:endDate];
-		NSSet *entities = [NSSet setWithArray:[WSELF.entityMapper mapEvents:task.result]];
-		[WSELF.dataStore refreshDomain:domain withEntities:entities];
+        THLDataStoreDomain *domain = [SSELF domainForEventsFrom:startDate to:endDate];
+		NSSet *entities = [NSSet setWithArray:[SSELF.entityMapper mapEvents:task.result]];
+		[SSELF.dataStore refreshDomain:domain withEntities:entities];
 		return [BFTask taskWithResult:nil];
 	}];
 }

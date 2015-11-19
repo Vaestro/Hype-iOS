@@ -21,5 +21,10 @@
     return content;
 }
 
++ (NSURL *)onboardingVideo {
+    NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle]
+                                         pathForResource:@"1Oak" ofType:@"mov"]];
+    return url;
+}
 
 @end

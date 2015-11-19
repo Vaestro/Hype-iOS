@@ -29,8 +29,9 @@ static NSString *const kTHLEventDiscoveryModuleViewKey = @"kTHLEventDiscoveryMod
 
 - (void)updateEvents {
     WEAKSELF();
+    STRONGSELF();
 	[[_dataManager fetchEventsFrom:self.eventDisplayPeriod.StartDate to:self.eventDisplayPeriod.EndDate] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
-		[WSELF.delegate interactor:WSELF didUpdateEvents:task.error];
+		[SSELF.delegate interactor:SSELF didUpdateEvents:task.error];
 		return nil;
 	}];
 }

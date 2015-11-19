@@ -142,6 +142,7 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
             break;
         }
     }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
 }
 
@@ -179,7 +180,8 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 60;
+//    TODO: Temporary hack to make sure table cells are shown on Iphone 5 
+    return SCREEN_HEIGHT * 0.067;
 }
 
 #pragma mark - Constructors

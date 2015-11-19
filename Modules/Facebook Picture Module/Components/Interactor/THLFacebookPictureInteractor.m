@@ -23,8 +23,10 @@
 }
 
 - (void)getProfileImage {
+    WEAKSELF();
+    STRONGSELF();
 	[[self downloadProfileImage] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
-		[_delegate interactor:self didGetProfileImage:task.result error:task.error];
+		[SSELF.delegate interactor:SSELF didGetProfileImage:task.result error:task.error];
 		return nil;
 	}];
 }
@@ -34,9 +36,11 @@
 }
 
 - (BFTask *)downloadProfileImage {
+    WEAKSELF();
+    STRONGSELF();
 	return [[self fetchProfileImageURL] continueWithSuccessBlock:^id(BFTask *task) {
 		NSString *imageURL = task.result;
-		return [self downloadImageAtURL:[NSURL URLWithString:imageURL]];
+		return [SSELF downloadImageAtURL:[NSURL URLWithString:imageURL]];
 	}];
 }
 

@@ -18,4 +18,6 @@
 @property (nonatomic, retain) THLUser *host;
 @property (nonatomic, retain) THLEvent *event;
 @property (nonatomic, retain) NSString *eventId;
+@property (nonatomic, retain) NSString *promotionMessage;
+
 @end

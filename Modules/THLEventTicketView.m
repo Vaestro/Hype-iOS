@@ -50,13 +50,14 @@
         make.height.equalTo(125);
     }];
     
+    WEAKSELF();
     [_promotionView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_venueView.mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.top.equalTo([WSELF venueView].mas_bottom).insets(kTHLEdgeInsetsHigh());
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
     [_actionButton makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_promotionView.mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.top.equalTo([WSELF promotionView].mas_bottom).insets(kTHLEdgeInsetsHigh());
         make.bottom.left.right.insets(kTHLEdgeInsetsNone());
     }];
 }
@@ -64,6 +65,7 @@
 - (void)bindView {
     RAC(self.venueView, locationImageURL) = RACObserve(self, locationImageURL);
     RAC(self.venueView, locationName, @"") = RACObserve(self, locationName);
+    RAC(self.promotionView, promotionMessage, @"") = RACObserve(self, promotionMessage);
     RAC(self.promotionView, eventTime, @"") = RACObserve(self, eventDate);
     RAC(self.promotionView, hostImageURL) = RACObserve(self, hostImageURL);
     RAC(self.promotionView, hostName, @"") = RACObserve(self, hostName);

@@ -93,6 +93,8 @@ THLDashboardInteractorDelegate
         }];
         
         [self.view setLocationImageURL:_eventEntity.location.imageURL];
+        [self.view setPromotionMessage:_promotionEntity.promotionMessage];
+        [self.view setLocationName:_eventEntity.location.name];
         [self.view setEventName:_eventEntity.title];
         [self.view setEventDate:[NSString stringWithFormat:@"%@, %@", _eventEntity.date.thl_weekdayString, _eventEntity.date.thl_timeString]];
         [self.view setHostImageURL:_promotionEntity.host.imageURL];

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface THLEventTicketPromotionView : UIView
+@property (nonatomic, copy) NSString *promotionMessage;
 @property (nonatomic, copy) NSURL *hostImageURL;
 @property (nonatomic, copy) NSString *hostName;
 @property (nonatomic, copy) NSString *eventTime;

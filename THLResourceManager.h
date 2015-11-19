@@ -11,6 +11,6 @@
 @interface THLResourceManager : NSObject
 + (NSString *)privacyPolicyText;
 + (NSString *)termsOfUseText;
-
++ (NSURL *)onboardingVideo;
 
 @end

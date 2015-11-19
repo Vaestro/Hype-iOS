@@ -10,6 +10,7 @@
 #import "THLAppearanceConstants.h"
 #import "OnboardingViewController.h"
 #import "SVProgressHUD.h"
+#import "THLResourceManager.h"
 
 static CGFloat const LOGIN_BUTTON_HEIGHT = 50;
 static CGFloat const PRIVACY_IMAGEVIEW_DIMENSION = 14;
@@ -160,7 +161,7 @@ static CGFloat const PRIVACY_IMAGEVIEW_DIMENSION = 14;
 }
 
 - (OnboardingViewController *)newOnboardingViewController {
-    OnboardingViewController *onboardingVC = [OnboardingViewController onboardWithBackgroundImage:[UIImage imageNamed:@"OnboardingBackground"] contents:[self onboardingContentViewControllers]];
+    OnboardingViewController *onboardingVC = [OnboardingViewController onboardWithBackgroundVideoURL:[THLResourceManager onboardingVideo] contents:[self onboardingContentViewControllers]];
     onboardingVC.fontName = @"Raleway-Bold";
     onboardingVC.titleFontSize = 24;
     onboardingVC.subtitleFontSize = 40;

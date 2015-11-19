@@ -37,6 +37,7 @@ THLGuestlistReviewModuleDelegate
 >
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) id currentWireframe;
+@property (nonatomic, nonatomic) UIViewController *containerVC;
 @property (nonatomic, strong) THLGuestFlowNavigationController *navigationController;
 @property (nonatomic, strong) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
 @property (nonatomic, strong) THLDashboardWireframe *dashboardWireframe;
@@ -57,6 +58,7 @@ THLGuestlistReviewModuleDelegate
 
 - (void)presentGuestFlowInWindow:(UIWindow *)window {
     _window = window;
+//    _containerVC = [self newContainerVC];
     UIViewController *discovery = [[UIViewController alloc] initWithNibName:nil bundle:nil];
     UIViewController *profile = [[UIViewController alloc] initWithNibName:nil bundle:nil];
     UIViewController *dashboard = [[UIViewController alloc] initWithNibName:nil bundle:nil];
@@ -65,7 +67,6 @@ THLGuestlistReviewModuleDelegate
     [self presentDashboardInterfaceInViewController:dashboard];
     [self presentUserProfileInterfaceInViewController:profile];
     
-    
     _navigationController = [[THLGuestFlowNavigationController alloc] initWithMainViewController:discovery
                                                                           leftSideViewController:dashboard
                                                                          rightSideViewController:profile];
@@ -73,6 +74,10 @@ THLGuestlistReviewModuleDelegate
     [_window makeKeyAndVisible];
 }
 
+//- (UIViewController *)newContainerVC {
+//    UIViewController *viewController = [[UIViewController alloc] initWithNibName:nil bundle:nil];
+//    
+//}
 - (void)presentGuestFlowInWindow:(UIWindow *)window forEventDetail:(THLEventEntity *)eventEntity {
     /**
      *  Prevents popup notification from instantiating another event detail module if one is already instantiated
