@@ -141,7 +141,6 @@
     }];
     
     RAC(self.bottomBar, rac_command) = RACObserve(self, actionBarButtonCommand);
-
 }
 
 - (void)updateBottomBar {
@@ -165,6 +164,11 @@
         case THLGuestlistStatusDeclined:
             [[WSELF bottomBar].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"CREATE A GUESTLIST", nil)];
             [WSELF bottomBar].backgroundColor = kTHLNUIAccentColor;
+            break;
+        
+        case THLGuestlistStatusUnavailable:
+            [[WSELF bottomBar].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"UNAVAILABLE", nil)];
+            [WSELF bottomBar].backgroundColor = kTHLNUIPendingColor;
             break;
             
         default:

@@ -10,5 +10,5 @@
 
 @protocol THLUserProfileModuleInterface;
 @protocol THLUserProfileModuleDelegate <NSObject>
-- (void)userProfileModule:(id<THLUserProfileModuleInterface>)module didLogOutUser:(NSError *)error;
+- (void)logOutUser;
 @end

@@ -47,6 +47,6 @@
 }
 
 - (void)handleIndexPathSelection:(NSIndexPath *)indexPath {
-
+    [self.moduleDelegate logOutUser];
 }
 @end

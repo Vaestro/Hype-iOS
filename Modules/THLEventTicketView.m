@@ -47,7 +47,7 @@
     
     [_venueView makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.insets(kTHLEdgeInsetsNone());
-        make.size.height.equalTo(125);
+        make.height.equalTo(125);
     }];
     
     [_promotionView makeConstraints:^(MASConstraintMaker *make) {

@@ -154,7 +154,7 @@ UICollectionViewDelegateFlowLayout
             [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
         }
         else if (status == [NSNumber numberWithInteger:4]) {
-            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Check In Party", nil)];
+            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Party is Accepted!", nil)];
             [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
         }
         [WSELF.view setNeedsDisplay];

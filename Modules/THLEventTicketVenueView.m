@@ -36,7 +36,7 @@
 					   _venueNameLabel]];
 
 	[_venueImageView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.insets(UIEdgeInsetsZero);
+        make.left.right.bottom.insets(kTHLEdgeInsetsNone());
         make.top.offset(-20);
 	}];
 

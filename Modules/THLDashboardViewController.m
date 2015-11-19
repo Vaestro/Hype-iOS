@@ -54,13 +54,17 @@
     }];
     
     [_scrollView.stackView addSubview:_acceptedSectionLabel
-                  withPrecedingMargin:kTHLPaddingHigh()
-                           sideMargin:kTHLPaddingNone()];
+                         withPrecedingMargin:kTHLPaddingHigh()
+                                  sideMargin:kTHLPaddingNone()];
     
-    [_scrollView.stackView addSubview:_eventTicketView
-                  withPrecedingMargin:kTHLPaddingHigh()
-                           sideMargin:kTHLPaddingNone()];
-    
+    WEAKSELF();
+    [[RACObserve(WSELF, locationImageURL) filter:^BOOL(id value) {
+        return value != nil;
+    }] subscribeNext:^(id x) {
+        [[WSELF scrollView].stackView addSubview:WSELF.eventTicketView
+                      withPrecedingMargin:kTHLPaddingHigh()
+                               sideMargin:kTHLPaddingNone()];
+    }];
 }
 
 - (void)bindView {

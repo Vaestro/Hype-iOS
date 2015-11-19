@@ -23,17 +23,22 @@
 
 //Delegates
 #import "THLLoginModuleDelegate.h"
+
 #import "THLEventDetailModuleDelegate.h"
 #import "THLPromotionSelectionModuleDelegate.h"
 #import "THLGuestlistInvitationModuleDelegate.h"
 #import "THLUser.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+#import "THLGuestFlowModuleDelegate.h"
+#import "THLHostFlowModuleDelegate.h"
 
 
 @interface THLMasterWireframe()
 <
 THLLoginModuleDelegate,
+THLGuestFlowModuleDelegate,
+THLHostFlowModuleDelegate,
 THLPopupNotificationModuleDelegate
 >
 
@@ -41,6 +46,7 @@ THLPopupNotificationModuleDelegate
 @property (nonatomic, strong) UIViewController *viewController;
 @property (nonatomic, strong) id currentWireframe;
 @property (nonatomic, strong) THLSessionService *sessionService;
+@property (nonatomic, strong) THLGuestFlowWireframe *guestWireframe;
 
 @end
 
@@ -88,15 +94,17 @@ THLPopupNotificationModuleDelegate
 }
 
 - (void)presentGuestFlow {
-	THLGuestFlowWireframe *guestWireframe = [_dependencyManager newGuestFlowWireframe];
-    _currentWireframe = guestWireframe;
-	[guestWireframe presentGuestFlowInWindow:_window];
+	_guestWireframe = [_dependencyManager newGuestFlowWireframe];
+    _currentWireframe = _guestWireframe;
+    [_guestWireframe.moduleInterface setModuleDelegate:self];
+	[_guestWireframe presentGuestFlowInWindow:_window];
 }
 
 - (void)presentGuestFlowForEvent:(THLEventEntity *)eventEntity {
-    THLGuestFlowWireframe *guestWireframe = [_dependencyManager newGuestFlowWireframe];
-    _currentWireframe = guestWireframe;
-    [guestWireframe presentGuestFlowInWindow:_window forEventDetail:eventEntity];
+    _guestWireframe = [_dependencyManager newGuestFlowWireframe];
+    _currentWireframe = _guestWireframe;
+    [_guestWireframe.moduleInterface setModuleDelegate:self];
+    [_guestWireframe presentGuestFlowInWindow:_window forEventDetail:eventEntity];
 }
 
 - (void)presentHostFlow {
@@ -123,14 +131,12 @@ THLPopupNotificationModuleDelegate
     }
 }
 
-#pragma mark - THLEventDetailModuleDelegate
-//- (void)guestFlowModule:(id<THLGuestFlowModuleInterface>)module {
-//    [self presentGuestlistInvitationInterface];
-//}
-
-#pragma mark - THLPromotionSelectionModuleDelegate
-- (void)promotionSelectionModule:(id<THLPromotionSelectionModuleInterface>)module didSelectPromotion:(THLPromotionEntity *)promotionEntity {
-	
+#pragma mark - LogOut
+- (void)logOutUser {
+    [_sessionService logUserOut];
+//    _guestWireframe = nil;
+    [self presentLoginInterface];
 }
+
 
 @end

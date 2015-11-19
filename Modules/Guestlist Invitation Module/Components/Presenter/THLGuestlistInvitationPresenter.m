@@ -94,7 +94,7 @@ THLGuestlistInvitationViewEventHandler
 	[_interactor commitChangesToGuestlist];
 }
 
-- (void)dealloc {
-    NSLog(@"Destroyed %@", self);
-}
+//- (void)dealloc {
+//    NSLog(@"Destroyed %@", self);
+//}
 @end

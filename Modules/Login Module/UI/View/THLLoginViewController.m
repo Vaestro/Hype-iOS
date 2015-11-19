@@ -98,13 +98,14 @@ static CGFloat const PRIVACY_IMAGEVIEW_DIMENSION = 14;
 }
 
 - (UILabel *)newPrivacyLabel {
-    UILabel *label = THLNUILabel(kTHLNUIUndef);
+    UILabel *label = THLNUILabel(kTHLNUISectionTitle);
     label.alpha = 0.80;
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont systemFontOfSize:12.f];
+//    label.backgroundColor = [UIColor clearColor];
+//    label.font = [UIFont systemFontOfSize:12.f];
     label.adjustsFontSizeToFitWidth = YES;
     label.minimumScaleFactor = 0.1;
     label.text = @"We will never post on your behalf";
+    label.textAlignment = NSTextAlignmentCenter;
     return label;
 }
 
@@ -127,8 +128,9 @@ static CGFloat const PRIVACY_IMAGEVIEW_DIMENSION = 14;
     }];
     
     [_privacyLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo([WSELF privacyImageView].mas_right).offset(kTHLEdgeInsetsHigh());
+        make.left.equalTo([WSELF privacyImageView].mas_right).insets(kTHLEdgeInsetsHigh());
         make.centerY.offset(0);
+        make.centerX.offset(0);
         make.top.bottom.insets(UIEdgeInsetsZero);
     }];
     
@@ -158,7 +160,7 @@ static CGFloat const PRIVACY_IMAGEVIEW_DIMENSION = 14;
 }
 
 - (OnboardingViewController *)newOnboardingViewController {
-    OnboardingViewController *onboardingVC = [OnboardingViewController onboardWithBackgroundImage:nil contents:[self onboardingContentViewControllers]];
+    OnboardingViewController *onboardingVC = [OnboardingViewController onboardWithBackgroundImage:[UIImage imageNamed:@"OnboardingBackground"] contents:[self onboardingContentViewControllers]];
     onboardingVC.fontName = @"Raleway-Bold";
     onboardingVC.titleFontSize = 24;
     onboardingVC.subtitleFontSize = 40;
@@ -168,6 +170,8 @@ static CGFloat const PRIVACY_IMAGEVIEW_DIMENSION = 14;
     onboardingVC.underTitlePadding = 0;
     onboardingVC.underSubtitlePadding = SCREEN_HEIGHT/4;
     onboardingVC.bottomPadding = 10;
+    onboardingVC.shouldMaskBackground = NO;
+    onboardingVC.shouldFadeTransitions = YES;
     return onboardingVC;
 }
 

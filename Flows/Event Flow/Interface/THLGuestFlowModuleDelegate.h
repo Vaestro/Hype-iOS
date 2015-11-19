@@ -10,5 +10,5 @@
 
 @protocol THLGuestFlowModuleInterface;
 @protocol THLGuestFlowModuleDelegate <NSObject>
-- (void)guestFlowModule:(id<THLGuestFlowModuleInterface>)module;
+- (void)logOutUser;
 @end

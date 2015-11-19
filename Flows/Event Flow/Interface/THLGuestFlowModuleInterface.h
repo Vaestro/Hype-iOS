@@ -11,6 +11,5 @@
 
 @protocol THLGuestFlowModuleInterface <NSObject>
 @property (nonatomic, weak) id<THLGuestFlowModuleDelegate> moduleDelegate;
-
 - (void)presentGuestFlowModuleInterfaceInWindow:(UIWindow *)window;
 @end

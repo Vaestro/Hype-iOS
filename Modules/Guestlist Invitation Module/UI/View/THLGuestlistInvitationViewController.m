@@ -42,7 +42,7 @@
 
 - (void)dealloc {
 	_eventHandler = nil;
-    NSLog(@"Destroyed %@", self);
+//    NSLog(@"Destroyed %@", self);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -158,6 +158,8 @@
 	tableView.delegate = self;
     tableView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     tableView.separatorColor = kTHLNUIPrimaryBackgroundColor;
+//    tableView.sectionIndexColor = kTHLNUIGrayFontColor;
+//    tableView.sectionIndexBackgroundColor = [UIColor clearColor];
     if ([tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [tableView setSeparatorInset:UIEdgeInsetsZero];
     }
@@ -171,6 +173,17 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 60;
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 20;
+}
+
+//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+//    UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
+//    label.text = @"A";
+//    return label;
+//}
 
 - (THContactPickerView *)newContactPickerView {
 	THContactPickerView *pickerView = [[THContactPickerView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, kContactPickerViewHeight)];
@@ -236,7 +249,7 @@
 - (void)adjustTableFrame {
 	CGFloat yOffset = _contactPickerView.frame.origin.y + _contactPickerView.frame.size.height;
 
-	CGRect tableFrame = CGRectMake(0, yOffset, self.view.frame.size.width, self.view.frame.size.height - yOffset);
+	CGRect tableFrame = CGRectMake(0, yOffset + 10.0, self.view.frame.size.width, self.view.frame.size.height - yOffset);
 	_tableView.frame = tableFrame;
 }
 

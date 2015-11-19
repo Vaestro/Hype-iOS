@@ -12,7 +12,8 @@ typedef NS_OPTIONS(NSInteger, THLGuestlistStatus) {
     THLGuestlistStatusPendingInvite,
     THLGuestlistStatusAccepted,
     THLGuestlistStatusPendingHost,
-    THLGuestlistStatusDeclined
+    THLGuestlistStatusDeclined,
+    THLGuestlistStatusUnavailable
 };
 
 @protocol THLEventDetailView <NSObject>

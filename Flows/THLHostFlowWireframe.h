@@ -7,10 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "THLHostFlowModuleInterface.h"
 @class THLEventEntity;
 
 @protocol THLHostFlowDependencyManager;
-@interface THLHostFlowWireframe : NSObject
+@interface THLHostFlowWireframe : NSObject <THLHostFlowModuleInterface>
+@property (nonatomic, readonly, weak) id<THLHostFlowModuleInterface> moduleInterface;
+
 #pragma mark - Dependencies
 @property (nonatomic, readonly) id<THLHostFlowDependencyManager> dependencyManager;
 - (instancetype)initWithDependencyManager:(id<THLHostFlowDependencyManager>)dependencyManager;

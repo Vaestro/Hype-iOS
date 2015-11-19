@@ -45,7 +45,6 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 @property (nonatomic, strong) NSString *siteUrl;
 @property (nonatomic, strong) THLInformationViewController *infoVC;
 @property (nonatomic, strong) UINavigationController *navVC;
-@property (nonatomic, strong) UIBarButtonItem *backButton;
 @property (nonatomic, strong) RACCommand *dismissVC;
 @end
 
@@ -62,8 +61,7 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
     [self bindView];
     
     self.urls = [[NSArray alloc]initWithObjects:@"https://hypelist.typeform.com/to/zGLp4N", @"https://hypelist.typeform.com/to/v01VE8", nil];
-    self.tableCellNames = [[NSArray alloc]initWithObjects:@"Become a Host",@"Let Hypelist Plan Your Party", @"How it Works",@"Terms & Conditions",@"Logout", nil];
-    
+    self.tableCellNames = [[NSArray alloc]initWithObjects:@"Become a Host",@"Let Hypelist Plan Your Party", @"Privacy Policy",@"Terms & Conditions",@"Logout", nil];
 }
 
 #pragma mark - View Setup
@@ -71,24 +69,21 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
     _tableView = [self newTableView];
     _profileInfoView = [self newProfileInfoView];
     _infoVC = [self newInfoVC];
-    _backButton = [self newBackBarButtonItem]
-    _navVC = [self newNavVC];
-
 }
 
 - (void)layoutView {
     [self.view addSubviews:@[_tableView,
                              _profileInfoView]];
     
-    
+    WEAKSELF();
     [_profileInfoView makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.insets(kTHLEdgeInsetsNone());
-        make.bottom.equalTo(_tableView.mas_top).insets(kTHLEdgeInsetsNone());
+        make.bottom.equalTo([WSELF tableView].mas_top).insets(kTHLEdgeInsetsNone());
         make.height.equalTo(200);
     }];
     
     [_tableView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.insets(UIEdgeInsetsZero);
+        make.left.right.bottom.insets(kTHLEdgeInsetsNone());
     }];
 }
 
@@ -115,9 +110,6 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-
-    
     switch(indexPath.row) {
         case 0: {
             self.siteUrl = [self.urls objectAtIndex:indexPath.row];
@@ -130,10 +122,21 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
             break;
         }
         case 2: {
-            _navVC = [[UINavigationController alloc] initWithRootViewController:_infoVC];
-            [self presentViewController:_navVC animated:YES completion:nil];
-            _navVC.navigationItem.leftBarButtonItem = _backButton;
+            UINavigationController *navVC= [[UINavigationController alloc] initWithRootViewController:_infoVC];
+            [self.view.window.rootViewController presentViewController:navVC animated:YES completion:nil];
+            _infoVC.displayText = [THLResourceManager privacyPolicyText];
+            _infoVC.title = @"Privacy Policy";
             break;
+        }
+        case 3: {
+            UINavigationController *navVC= [[UINavigationController alloc] initWithRootViewController:_infoVC];
+            [self.view.window.rootViewController presentViewController:navVC animated:YES completion:nil];
+            _infoVC.displayText = [THLResourceManager termsOfUseText];
+            _infoVC.title = @"Terms Of Use";
+            break;
+        }
+        case 4: {
+            [selectedIndexPathCommand execute:indexPath];
         }
         default: {
             break;
@@ -175,6 +178,10 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 60;
+}
+
 #pragma mark - Constructors
 - (UITableView *)newTableView {
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
@@ -193,22 +200,9 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 
 - (THLInformationViewController *)newInfoVC {
     THLInformationViewController *infoVC = [THLInformationViewController new];
-    infoVC.displayText = [THLResourceManager privacyPolicyText];
-    infoVC.title = @"Privacy Policy";
+
     return infoVC;
 }
 
-- (UIBarButtonItem *)newBackBarButtonItem {
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(handleCancelAction)];
-    [item setTitleTextAttributes:
-     [NSDictionary dictionaryWithObjectsAndKeys:
-      kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
-                        forState:UIControlStateNormal];
-    return item;
-}
 
-- (void)handleCancelAction {
-    [self dismissViewControllerAnimated:YES completion:nil];
-    
-}
 @end

@@ -52,9 +52,15 @@
 //----------------------------------------------------------------
 
 - (BFTask *)createGuestlistForPromotion:(THLPromotionEntity *)promotionEntity withInvites:(NSArray *)guestPhoneNumbers {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSLocale *enUSPOSIXLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
+    [dateFormatter setLocale:enUSPOSIXLocale];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZZZ"];
+    
+    NSString *iso8601String = [dateFormatter stringFromDate:promotionEntity.event.date];
+    
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
     THLUser *currentUser = [THLUser currentUser];
-
     PFObject *guestlist = [PFObject objectWithClassName:@"Guestlist"];
     PFObject *guestlistInvite = [PFObject objectWithClassName:@"GuestlistInvite"];
     guestlist[@"Promotion"] = [THLPromotion objectWithoutDataWithObjectId:promotionEntity.objectId];
@@ -66,7 +72,7 @@
             [PFCloud callFunctionInBackground:@"sendOutNotifications"
                                withParameters:@{@"promotionId": promotionEntity.objectId,
                                                 @"eventName":promotionEntity.event.location.name,
-                                                @"promotionTime":promotionEntity.event.date,
+                                                @"promotionTime":iso8601String,
                                                 @"guestPhoneNumbers": guestPhoneNumbers,
                                                 @"guestlistId": guestlist.objectId}
                                         block:^(id object, NSError *cloudError) {
@@ -77,6 +83,7 @@
                                                 guestlistInvite[@"phoneNumber"] = currentUser.phoneNumber;
                                                 guestlistInvite[@"response"] = [NSNumber numberWithInt:1];
                                                 guestlistInvite[@"checkInStatus"] = [NSNumber numberWithBool:FALSE];
+                                                guestlistInvite[@"date"] = promotionEntity.event.date;
                                                 [guestlistInvite saveInBackground];
                                                 
                                                 [completionSource setResult:nil];
@@ -144,8 +151,28 @@
 #pragma mark - Fetch Guestlist For Guest For a Event/Promotion
 //----------------------------------------------------------------
 
-- (BFTask *)fetchGuestlistInviteForUser:(THLUser *)user atEvent:(NSString *)eventId {
-    return [[_queryFactory queryForGuestlistInviteForUser:user atEvent:eventId] getFirstObjectInBackground];
+- (BFTask *)fetchGuestlistInviteForUser:(THLUser *)user atEvent:(THLEventEntity *)event {
+    return [[_queryFactory queryForGuestlistInviteForUser:user atEvent:event.objectId] getFirstObjectInBackground];
+//    BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
+//    [PFCloud callFunctionInBackground:@"guestlistAvailability"
+//                       withParameters:@{@"minTime":[event.date dateByAddingTimeInterval:-60*180],
+//                                        @"maxTime":[event.date dateByAddingTimeInterval:60*180]}
+//                                block:^(id object, NSError *error) {
+//                                    if (object == [NSNumber numberWithBool:YES]){
+//                                        [[_queryFactory queryForGuestlistInviteForUser:user atEvent:event.objectId] getFirstObjectInBackgroundWithBlock:^(PFObject *guestlistInvite, NSError *fetchError) {
+//                                            if (guestlistInvite != nil) {
+//                                                [completionSource setResult:guestlistInvite];
+//                                            } else {
+//                                                [completionSource setResult:nil];
+//                                            }
+//                                        }];
+//                                    } else if (object == [NSNumber numberWithBool:NO]){
+//                                        [completionSource setResult:[NSNumber numberWithBool:NO]];
+//                                    } else {
+//                                        [completionSource setError:error];
+//                                    }
+//                                }];
+//    return completionSource.task;
 }
 
 //----------------------------------------------------------------

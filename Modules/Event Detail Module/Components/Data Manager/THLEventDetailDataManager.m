@@ -15,6 +15,7 @@
 #import "THLEntityMapper.h"
 
 #import "THLUser.h"
+#import "THLEventEntity.h"
 
 @implementation THLEventDetailDataManager
 - (instancetype)initWithLocationService:(id<THLLocationServiceInterface>)locationService
@@ -43,9 +44,9 @@
 	}];
 }
 
-- (BFTask *)fetchGuestlistInviteForUser:(THLUser *)user atEvent:(NSString *)eventId {
+- (BFTask *)fetchGuestlistInviteForUser:(THLUser *)user atEvent:(THLEventEntity *)event {
     WEAKSELF();
-    return [[_guestlistService fetchGuestlistInviteForUser:user atEvent:eventId] continueWithSuccessBlock:^id(BFTask *task) {
+    return [[_guestlistService fetchGuestlistInviteForUser:user atEvent:event] continueWithSuccessBlock:^id(BFTask *task) {
         THLGuestlistInvite *fetchedGuestlistInvite = task.result;
         THLGuestlistInviteEntity *mappedGuestlistInvite = [WSELF.entityMapper mapGuestlistInvite:fetchedGuestlistInvite];
         return mappedGuestlistInvite;

@@ -15,6 +15,11 @@
     return content;
 }
 
++ (NSString *)termsOfUseText {
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"Terms of Use" ofType:@"txt"];
+    NSString *content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+    return content;
+}
 
 
 @end

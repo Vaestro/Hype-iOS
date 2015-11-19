@@ -15,6 +15,7 @@
 @class THLUser;
 @class THLEvent;
 @class THLGuestlistInvite;
+@class THLEventEntity;
 
 @protocol THLGuestlistServiceInterface <NSObject>
 
@@ -42,7 +43,7 @@
 //----------------------------------------------------------------
 #pragma mark - Fetch Guestlist For Guest For a Event/Promotion
 //----------------------------------------------------------------
-- (BFTask *)fetchGuestlistInviteForUser:(THLUser *)user atEvent:(NSString *)eventId;
+- (BFTask *)fetchGuestlistInviteForUser:(THLUser *)user atEvent:(THLEventEntity *)event;
 
 - (BFTask *)fetchGuestlistInvitesForUser;
 

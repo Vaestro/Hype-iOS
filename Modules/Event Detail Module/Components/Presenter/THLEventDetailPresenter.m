@@ -32,7 +32,6 @@ THLEventDetailInteractorDelegate
 @property (nonatomic, strong) THLEventEntity *eventEntity;
 @property (nonatomic, strong) THLGuestlistInviteEntity *guestlistInviteEntity;
 @property (nonatomic, strong) THLPromotionEntity *promotionEntity;
-
 @end
 
 @implementation THLEventDetailPresenter
@@ -124,7 +123,7 @@ THLEventDetailInteractorDelegate
 }
 
 - (void)checkForInvite {
-    [_interactor checkValidGuestlistInviteForUser:[THLUser currentUser] atEvent:_eventEntity.objectId];
+    [_interactor checkValidGuestlistInviteForUser:[THLUser currentUser] atEvent:_eventEntity];
 }
 
 - (void)handleDismissAction {
@@ -162,7 +161,11 @@ THLEventDetailInteractorDelegate
     }
 }
 
-- (void)interactor:(THLEventDetailInteractor *)interactor didGetGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite forEvent:(NSString *)eventId error:(NSError *)error {
+//- (void)interactor:(THLEventDetailInteractor *)interactor userUnavailableForEvent:(THLEventEntity *)event {
+//    self.guestlistReviewStatus = THLGuestlistStatusUnavailable;
+//}
+
+- (void)interactor:(THLEventDetailInteractor *)interactor didGetGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite forEvent:(THLEventEntity *)event error:(NSError *)error {
     if (!error && guestlistInvite) {
         _guestlistInviteEntity = guestlistInvite;
         THLGuestlistEntity *guestlistEntity = _guestlistInviteEntity.guestlist;

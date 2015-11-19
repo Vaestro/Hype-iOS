@@ -32,6 +32,7 @@ THLGuestlistReviewModuleDelegate
 @end
 
 @implementation THLHostFlowWireframe
+@synthesize moduleDelegate;
 - (instancetype)initWithDependencyManager:(id<THLHostFlowDependencyManager>)dependencyManager {
     if (self = [super init]) {
         _dependencyManager = dependencyManager;
@@ -111,6 +112,11 @@ THLGuestlistReviewModuleDelegate
 #pragma mark - THLGuestlistReviewModuleDelegate
 - (void)dismissGuestlistReviewWireframe {
     _guestlistReviewWireframe = nil;
+}
+
+#pragma mark - THLUserProfileModuleDelegate
+- (void)logOutUser {
+    [self.moduleDelegate logOutUser];
 }
 
 @end

@@ -62,6 +62,7 @@ pod 'MJRefresh'
 pod 'SVProgressHUD'
 pod 'THContactPicker', '~> 1.2'
 pod "TOMSMorphingLabel", "~> 0.5"
+pod 'DZNEmptyDataSet'
 end
 
 target 'TheHypelistTests' do

@@ -117,7 +117,7 @@
 	[_dataStore updateOrAddEntities:[NSSet setWithArray:guests]];
 }
 
-- (void)dealloc {
-    NSLog(@"Destroyed %@", self);
-}
+//- (void)dealloc {
+//    NSLog(@"Destroyed %@", self);
+//}
 @end

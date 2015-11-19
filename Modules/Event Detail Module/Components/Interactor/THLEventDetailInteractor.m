@@ -9,6 +9,7 @@
 #import "THLEventDetailInteractor.h"
 #import "THLEventDetailDataManager.h"
 #import "THLLocationEntity.h"
+#import "THLGuestlistInviteEntity.h"
 
 @implementation THLEventDetailInteractor
 - (instancetype)initWithDataManager:(THLEventDetailDataManager *)dataManager {
@@ -35,10 +36,14 @@
     }];
 }
 
-- (void)checkValidGuestlistInviteForUser:(THLUser *)user atEvent:(NSString *)eventId {
+- (void)checkValidGuestlistInviteForUser:(THLUser *)user atEvent:(THLEventEntity *)event {
     WEAKSELF();
-    [[_dataManager fetchGuestlistInviteForUser:user atEvent:eventId] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
-        [WSELF.delegate interactor:WSELF didGetGuestlistInvite:task.result forEvent:eventId error:task.error];
+    [[_dataManager fetchGuestlistInviteForUser:user atEvent:event] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+//        if (task.result == [NSNumber numberWithBool:NO]) {
+//            [WSELF.delegate interactor:WSELF userUnavailableForEvent:event];
+//        } else {
+            [WSELF.delegate interactor:WSELF didGetGuestlistInvite:task.result forEvent:event error:task.error];
+//        }
         return nil;
     }];
 }

@@ -12,6 +12,7 @@
 @class THLEvent;
 @class THLUser;
 @class THLEntityMapper;
+@class THLEventEntity;
 
 @protocol THLLocationServiceInterface;
 @protocol THLPromotionServiceInterface;
@@ -30,5 +31,5 @@
 
 - (BFTask<CLPlacemark *> *)fetchPlacemarkForAddress:(NSString *)address;
 - (BFTask *)fetchPromotionForEvent:(NSString *)eventId;
-- (BFTask *)fetchGuestlistInviteForUser:(THLUser *)user atEvent:(NSString *)eventId;
+- (BFTask *)fetchGuestlistInviteForUser:(THLUser *)user atEvent:(THLEventEntity *)event;
 @end

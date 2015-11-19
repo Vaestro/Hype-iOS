@@ -38,6 +38,7 @@ PODS:
   - DateTools (1.7.0)
   - Digits (1.12.1):
     - TwitterCore (= 1.12.1)
+  - DZNEmptyDataSet (1.7.2)
   - EKAlgorithms (0.2)
   - Fabric (1.6.0):
     - Fabric/Base (= 1.6.0)
@@ -137,6 +138,7 @@ DEPENDENCIES:
   - Crashlytics
   - DateTools (~> 1.6)
   - Digits
+  - DZNEmptyDataSet
   - EKAlgorithms (~> 0.2)
   - Fabric
   - FBSDKCoreKit
@@ -183,6 +185,7 @@ SPEC CHECKSUMS:
   Crashlytics: 1ee87895c37472eb3f01f409ea1654a464d2f8d4
   DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
   Digits: 197c120e044fef0634d3abcf4fc7325351911484
+  DZNEmptyDataSet: 0ec00bfc230d7450997b60c127afdd0b9f24f3b6
   EKAlgorithms: 83488651734ba3a63956fcb783b10e82d2ec3388
   Fabric: d737eda3a26ac940a5430230eedb35f16b226131
   FBSDKCoreKit: 9141b70960a37930850370495fe565f4a27ac141
@@ -221,4 +224,4 @@ SPEC CHECKSUMS:
   YapDatabase: 41d80eefb2959fc7cf064c487f2bfa3cf68a5704
   YLMoment: af44d9d402790049e5490fa6eae9585b89b4090b
 
-COCOAPODS: 0.38.2
+COCOAPODS: 0.39.0

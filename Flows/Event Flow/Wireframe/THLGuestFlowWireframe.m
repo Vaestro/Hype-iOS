@@ -47,6 +47,7 @@ THLGuestlistReviewModuleDelegate
 @end
 
 @implementation THLGuestFlowWireframe
+@synthesize moduleDelegate;
 - (instancetype)initWithDependencyManager:(id<THLGuestFlowDependencyManager>)dependencyManager {
 	if (self = [super init]) {
 		_dependencyManager = dependencyManager;
@@ -78,6 +79,10 @@ THLGuestlistReviewModuleDelegate
      */
     [_navigationController popToRootViewControllerAnimated:NO];
     [self presentEventDetailInterfaceForEvent:eventEntity];
+}
+
+- (id<THLGuestFlowModuleInterface>)moduleInterface {
+    return self;
 }
 
 - (void)presentEventDiscoveryInterfaceInViewController:(UIViewController *)viewController {
@@ -170,9 +175,7 @@ THLGuestlistReviewModuleDelegate
 }
 
 #pragma mark - THLUserProfileModuleDelegate
-- (void)userProfileModule:(id<THLUserProfileModuleInterface>)module didLogOutUser:(NSError *)error {
-    if (!error) {
-//        TODO: Sign user out
-    }
+- (void)logOutUser {
+    [self.moduleDelegate logOutUser];
 }
 @end

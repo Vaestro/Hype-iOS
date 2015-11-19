@@ -157,7 +157,7 @@ static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInv
     }
 }
 
-- (void)dealloc {
-    NSLog(@"Destroyed %@", self);
-}
+//- (void)dealloc {
+//    NSLog(@"Destroyed %@", self);
+//}
 @end
