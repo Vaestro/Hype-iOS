@@ -15,7 +15,7 @@
 @interface THLDataStore()
 @property (nonatomic, strong) YapDatabaseConnection *rwConnection;
 @property (nonatomic, strong) YapDatabaseConnection *roConnection;
-@property (nonatomic, readonly, copy) NSString *collectionKey;
+@property (nonatomic, copy) NSString *collectionKey;
 @property (nonatomic) Class entityClass;
 @end
 
@@ -47,15 +47,16 @@
 	return _databaseManager.database;
 }
 
-- (NSString *)collectionKey {
-	return [NSString stringWithFormat:@"k%@DataStoreKey", NSStringFromClass(_entityClass)];
-}
+//- (NSString *)collectionKey {
+//	return [NSString stringWithFormat:@"k%@DataStoreKey", NSStringFromClass(_entityClass)];
+//}
 
 - (NSSet *)entityKeysInDomain:(THLDataStoreDomain *)domain {
     WEAKSELF();
+    STRONGSELF();
 	__block NSMutableSet *keys = [NSMutableSet new];
 	[self.roConnection readWithBlock:^(YapDatabaseReadTransaction * _Nonnull transaction) {
-		[transaction enumerateKeysAndObjectsInCollection:WSELF.collectionKey usingBlock:^(NSString * _Nonnull key, id  _Nonnull object, BOOL * _Nonnull stop) {
+		[transaction enumerateKeysAndObjectsInCollection:SSELF.collectionKey usingBlock:^(NSString * _Nonnull key, id  _Nonnull object, BOOL * _Nonnull stop) {
 			if ([domain containsMember:(THLEntity *)object]) {
 				[keys addObject:key];
 			}
@@ -66,9 +67,10 @@
 
 - (NSSet *)entitiesInDomain:(THLDataStoreDomain *)domain {
     WEAKSELF();
+    STRONGSELF();
 	__block NSMutableSet *entities = [NSMutableSet new];
 	[self.roConnection readWithBlock:^(YapDatabaseReadTransaction * _Nonnull transaction) {
-		[transaction enumerateKeysAndObjectsInCollection:WSELF.collectionKey usingBlock:^(NSString * _Nonnull key, id  _Nonnull object, BOOL * _Nonnull stop) {
+		[transaction enumerateKeysAndObjectsInCollection:SSELF.collectionKey usingBlock:^(NSString * _Nonnull key, id  _Nonnull object, BOOL * _Nonnull stop) {
 			if ([domain containsMember:(THLEntity *)object]) {
 				[entities addObject:object];
 			}
@@ -79,9 +81,10 @@
 
 - (void)removeEntitiesInDomain:(THLDataStoreDomain *)domain {
     WEAKSELF();
+    STRONGSELF();
 	__block NSArray *keys = [[self entityKeysInDomain:domain] allObjects];
 	[self.rwConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {
-        [transaction removeObjectsForKeys:keys inCollection:WSELF.collectionKey];
+        [transaction removeObjectsForKeys:keys inCollection:SSELF.collectionKey];
 	}];
 }
 
@@ -89,78 +92,79 @@
 	return [self entityKeysInDomain:domain].count;
 }
 
-- (void)updateOrAddEntities:(NSSet *)entities {
+- (void)updateOrAddEntities:(NSSet *)entities forKey:(NSString *)key {
 	THLDataStoreDomain *domain = [[THLDataStoreDomain alloc] initWithMembers:[entities allObjects]];
-	[self refreshDomain:domain withEntities:entities];
+	[self refreshDomain:domain withEntities:entities forCollectionKey:key];
 }
 
-- (void)refreshDomain:(THLDataStoreDomain *)domain withEntities:(NSSet *)entities {
-	__block NSArray *keys = [[self entityKeysInDomain:domain] allObjects];
-	__block NSMutableSet *unprocessedEntities = [entities mutableCopy];
-	__block NSMutableSet *entitiesToUpdate = [NSMutableSet new];
-	__block NSMutableSet *entitiesToRemove = [NSMutableSet new];
-    
-    WEAKSELF();
-    STRONGSELF();
-	[self.rwConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {
-		[transaction enumerateObjectsForKeys:keys inCollection:SSELF.collectionKey unorderedUsingBlock:^(NSUInteger keyIndex, id  _Nonnull object, BOOL * _Nonnull stop) {
-			THLEntity *oldEntity = (THLEntity *)object;
-			THLEntity *newEntity = [entities member:oldEntity];
-			if (!newEntity) {
-				//No corresponding entity -> remove entity from domain
-				[entitiesToRemove addObject:object];
-			} else if ([oldEntity shouldUpdateWith:newEntity]) {
-				[entitiesToUpdate addObject:object];
-			}
-
-			[unprocessedEntities removeObject:object];
-		}];
-
-		[entitiesToUpdate unionSet:unprocessedEntities];
-		for (THLEntity *entity in entitiesToUpdate) {
-			[transaction setObject:entity forKey:entity.key inCollection:self.collectionKey];
-		}
-
-		NSArray *keysToRemove = [entitiesToRemove valueForKey:@"key"];
-		if (keysToRemove.count) {
-			[transaction removeObjectsForKeys:keysToRemove inCollection:self.collectionKey];
-		}
-	}];
-}
-
-//- (void)refreshDomain:(THLDataStoreDomain *)domain withRelatedEntities:(NSSet *)entities forEntity:(THLEntity *)entity {
-//    __block NSArray *keys = [[self entityKeysInDomain:domain] allObjects];
-//    __block NSMutableSet *unprocessedEntities = [entities mutableCopy];
-//    __block NSMutableSet *entitiesToUpdate = [NSMutableSet new];
-//    __block NSMutableSet *entitiesToRemove = [NSMutableSet new];
+//- (void)refreshDomain:(THLDataStoreDomain *)domain withEntities:(NSSet *)entities {
+//	__block NSArray *keys = [[self entityKeysInDomain:domain] allObjects];
+//	__block NSMutableSet *unprocessedEntities = [entities mutableCopy];
+//	__block NSMutableSet *entitiesToUpdate = [NSMutableSet new];
+//	__block NSMutableSet *entitiesToRemove = [NSMutableSet new];
 //    
 //    WEAKSELF();
 //    STRONGSELF();
-//    [self.rwConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {
-//        [transaction enumerateObjectsForKeys:keys inCollection:SSELF.collectionKey unorderedUsingBlock:^(NSUInteger keyIndex, id  _Nonnull object, BOOL * _Nonnull stop) {
-//            THLEntity *oldEntity = (THLEntity *)object;
-//            THLEntity *newEntity = [entities member:oldEntity];
-//            if (!newEntity) {
-//                //No corresponding entity -> remove entity from domain
-//                [entitiesToRemove addObject:object];
-//            } else if ([oldEntity shouldUpdateWith:newEntity]) {
-//                [entitiesToUpdate addObject:object];
-//            }
-//            
-//            [unprocessedEntities removeObject:object];
-//        }];
-//        
-//        [entitiesToUpdate unionSet:unprocessedEntities];
-//        for (THLEntity *entity in entitiesToUpdate) {
-//            [transaction setObject:entity forKey:entity.key inCollection:self.collectionKey];
-//        }
-//        
-//        NSArray *keysToRemove = [entitiesToRemove valueForKey:@"key"];
-//        if (keysToRemove.count) {
-//            [transaction removeObjectsForKeys:keysToRemove inCollection:self.collectionKey];
-//        }
-//    }];
+//	[self.rwConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {
+//		[transaction enumerateObjectsForKeys:keys inCollection:SSELF.collectionKey unorderedUsingBlock:^(NSUInteger keyIndex, id  _Nonnull object, BOOL * _Nonnull stop) {
+//			THLEntity *oldEntity = (THLEntity *)object;
+//			THLEntity *newEntity = [entities member:oldEntity];
+//			if (!newEntity) {
+//				//No corresponding entity -> remove entity from domain
+//				[entitiesToRemove addObject:object];
+//			} else if ([oldEntity shouldUpdateWith:newEntity]) {
+//				[entitiesToUpdate addObject:object];
+//			}
+//
+//			[unprocessedEntities removeObject:object];
+//		}];
+//
+//		[entitiesToUpdate unionSet:unprocessedEntities];
+//		for (THLEntity *entity in entitiesToUpdate) {
+//			[transaction setObject:entity forKey:entity.key inCollection:self.collectionKey];
+//		}
+//
+//		NSArray *keysToRemove = [entitiesToRemove valueForKey:@"key"];
+//		if (keysToRemove.count) {
+//			[transaction removeObjectsForKeys:keysToRemove inCollection:self.collectionKey];
+//		}
+//	}];
 //}
+
+- (void)refreshDomain:(THLDataStoreDomain *)domain withEntities:(NSSet *)entities forCollectionKey:(NSString *)key {
+    _collectionKey = key;
+    __block NSArray *keys = [[self entityKeysInDomain:domain] allObjects];
+    __block NSMutableSet *unprocessedEntities = [entities mutableCopy];
+    __block NSMutableSet *entitiesToUpdate = [NSMutableSet new];
+    __block NSMutableSet *entitiesToRemove = [NSMutableSet new];
+    
+    WEAKSELF();
+    STRONGSELF();
+    [self.rwConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction * _Nonnull transaction) {
+        [transaction enumerateObjectsForKeys:keys inCollection:SSELF.collectionKey unorderedUsingBlock:^(NSUInteger keyIndex, id  _Nonnull object, BOOL * _Nonnull stop) {
+            THLEntity *oldEntity = (THLEntity *)object;
+            THLEntity *newEntity = [entities member:oldEntity];
+            if (!newEntity) {
+                //No corresponding entity -> remove entity from domain
+                [entitiesToRemove addObject:object];
+            } else if ([oldEntity shouldUpdateWith:newEntity]) {
+                [entitiesToUpdate addObject:object];
+            }
+            
+            [unprocessedEntities removeObject:object];
+        }];
+        
+        [entitiesToUpdate unionSet:unprocessedEntities];
+        for (THLEntity *entity in entitiesToUpdate) {
+            [transaction setObject:entity forKey:entity.key inCollection:self.collectionKey];
+        }
+        
+        NSArray *keysToRemove = [entitiesToRemove valueForKey:@"key"];
+        if (keysToRemove.count) {
+            [transaction removeObjectsForKeys:keysToRemove inCollection:self.collectionKey];
+        }
+    }];
+}
 
 - (void)purge {
     WEAKSELF();

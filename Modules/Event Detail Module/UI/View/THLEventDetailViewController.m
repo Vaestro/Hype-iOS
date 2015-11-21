@@ -163,7 +163,7 @@
             
         case THLGuestlistStatusDeclined:
             [[WSELF bottomBar].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"CREATE A GUESTLIST", nil)];
-            [WSELF bottomBar].backgroundColor = kTHLNUIAccentColor;
+            [WSELF bottomBar].backgroundColor = kTHLNUIActionColor;
             break;
         
         case THLGuestlistStatusUnavailable:
@@ -173,7 +173,7 @@
             
         default:
             [[WSELF bottomBar].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"CREATE A GUESTLIST", nil)];
-            [WSELF bottomBar].backgroundColor = kTHLNUIAccentColor;
+            [WSELF bottomBar].backgroundColor = kTHLNUIActionColor;
             break;
     }
 }

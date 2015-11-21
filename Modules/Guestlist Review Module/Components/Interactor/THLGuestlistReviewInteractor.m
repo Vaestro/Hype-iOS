@@ -54,14 +54,16 @@ static NSString *const kTHLGuestlistReviewModuleViewKey = @"kTHLGuestlistReviewM
 - (THLViewDataSource *)generateDataSource {
     THLViewDataSourceGrouping *grouping = [self viewGrouping];
     THLViewDataSourceSorting *sorting = [self viewSorting];
-    THLViewDataSource *dataSource = [_viewDataSourceFactory createDataSourceWithGrouping:grouping sorting:sorting key:kTHLGuestlistReviewModuleViewKey];
+    THLViewDataSource *dataSource = [_viewDataSourceFactory createDataSourceWithGrouping:grouping sorting:sorting key:_guestlistEntity.objectId];
     return dataSource;
 }
 
 - (THLViewDataSourceGrouping *)viewGrouping {
     return [THLViewDataSourceGrouping withEntityBlock:^NSString *(NSString *collection, THLEntity *entity) {
         if ([entity isKindOfClass:[THLGuestlistInviteEntity class]]) {
-            return collection;
+            if ([[[entity valueForKey:@"guestlist"] valueForKey:@"objectId"] isEqualToString:_guestlistEntity.objectId]) {
+                return collection;
+            }
         }
         return nil;
     }];

@@ -48,7 +48,9 @@ static NSString *const kTHLEventHostingModuleViewKey = @"kTHLEventHostingModuleV
 - (THLViewDataSourceGrouping *)viewGrouping {
     return [THLViewDataSourceGrouping withEntityBlock:^NSString *(NSString *collection, THLEntity *entity) {
         if ([entity isKindOfClass:[THLGuestlistEntity class]]) {
-            return collection;
+            if ([[[[entity valueForKey:@"promotion"] valueForKey:@"event"] valueForKey:@"objectId"] isEqualToString:_eventEntity.objectId]) {
+                return collection;
+            }
         }
         return nil;
     }];

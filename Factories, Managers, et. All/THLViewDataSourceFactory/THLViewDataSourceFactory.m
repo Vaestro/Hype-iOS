@@ -38,7 +38,8 @@
 
 	YapDatabaseViewMappings *yapMappings = [self yapMappings:key];
 	YapDatabaseConnection *yapConnection = [_databaseManager newDatabaseConnection];
-	THLViewDataSource *viewDataSource = [[THLViewDataSource alloc] initWithMappings:yapMappings connection:yapConnection];
+	THLViewDataSource *viewDataSource = [[THLViewDataSource alloc] initWithMappings:yapMappings
+                                                                         connection:yapConnection];
 	return viewDataSource;
 }
 

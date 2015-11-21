@@ -114,7 +114,7 @@
 }
 
 - (void)storeGuests:(NSArray<THLGuestEntity *> *)guests {
-	[_dataStore updateOrAddEntities:[NSSet setWithArray:guests]];
+	[_dataStore updateOrAddEntities:[NSSet setWithArray:guests] forKey:[NSString stringWithFormat:@"k%@DataStoreKey", NSStringFromClass((Class)[THLGuestEntity class])]];
 }
 
 //- (void)dealloc {

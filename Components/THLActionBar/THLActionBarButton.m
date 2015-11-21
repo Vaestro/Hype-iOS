@@ -47,7 +47,7 @@
     if (!_morphingLabel) {
         TOMSMorphingLabel *label = [[TOMSMorphingLabel alloc] init];
 //        label.font = [UIFont boldSystemFontOfSize:16.0f];
-        label.textColor = kTHLNUIPrimaryFontColor;
+        label.textColor = kTHLNUISecondaryFontColor;
         label.textAlignment = NSTextAlignmentCenter;
         
         _morphingLabel = label;

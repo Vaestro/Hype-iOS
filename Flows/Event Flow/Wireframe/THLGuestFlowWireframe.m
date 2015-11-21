@@ -16,6 +16,9 @@
 #import "THLGuestlistInvitationWireframe.h"
 #import "THLGuestlistReviewWireframe.h"
 #import "THLGuestFlowNavigationController.h"
+#import "SLPagingViewController.h"
+#import "UIColor+SLAddition.h"
+#import "THLAppearanceConstants.h"
 
 typedef NS_OPTIONS(NSInteger, THLGuestlistReviewOptions) {
     THLGuestlistReviewOptionsAcceptDeclineGuestlistInvite = 0,
@@ -45,6 +48,10 @@ THLGuestlistReviewModuleDelegate
 @property (nonatomic, strong) THLEventDetailWireframe  *eventDetailWireframe;
 @property (nonatomic, strong) THLGuestlistInvitationWireframe *guestlistInvitationWireframe;
 @property (nonatomic, strong) THLGuestlistReviewWireframe *guestlistReviewWireframe;
+
+@property (nonatomic, strong) UIView *discoveryNavBarItem;
+@property (nonatomic, strong) UIView *guestProfileNavBarItem;
+@property (nonatomic, strong) UIView *dashboardNavBarItem;
 @end
 
 @implementation THLGuestFlowWireframe
@@ -67,10 +74,64 @@ THLGuestlistReviewModuleDelegate
     [self presentDashboardInterfaceInViewController:dashboard];
     [self presentUserProfileInterfaceInViewController:profile];
     
-    _navigationController = [[THLGuestFlowNavigationController alloc] initWithMainViewController:discovery
-                                                                          leftSideViewController:dashboard
-                                                                         rightSideViewController:profile];
-    _window.rootViewController = _navigationController;
+    NSArray *views = @[dashboard.view, discovery.view, profile.view];
+    
+    NSArray *navBarItems = @[
+                     [self newDashboardNavBarItem],
+                     [self newDiscoveryNavBarItem],
+                     [self newGuestProfileNavBarItem]
+                     ];
+    
+    SLPagingViewController *pagingViewController = [[SLPagingViewController alloc] initWithNavBarItems:navBarItems
+                                                                                      navBarBackground:kTHLNUIPrimaryBackgroundColor
+                                                                                                 views:views
+                                                                                       showPageControl:NO];
+
+    
+    UIColor *gray = [UIColor colorWithRed:.84
+                                    green:.84
+                                     blue:.84
+                                    alpha:1.0];
+    
+    UIColor *gold = kTHLNUIAccentColor;
+    pagingViewController.navigationSideItemsStyle = SLNavigationSideItemsStyleOnBounds;
+    float minX = 45.0;
+    // Tinder Like
+    pagingViewController.pagingViewMoving = ^(NSArray *subviews){
+        float mid  = [UIScreen mainScreen].bounds.size.width/2 - minX;
+        float midM = [UIScreen mainScreen].bounds.size.width - minX;
+        for(UIImageView *v in subviews){
+            UIColor *c = gray;
+            if(v.frame.origin.x > minX
+               && v.frame.origin.x < mid)
+                // Left part
+                c = [UIColor gradient:v.frame.origin.x
+                                  top:minX+1
+                               bottom:mid-1
+                                 init:gold
+                                 goal:gray];
+            else if(v.frame.origin.x > mid
+                    && v.frame.origin.x < midM)
+                // Right part
+                c = [UIColor gradient:v.frame.origin.x
+                                  top:mid+1
+                               bottom:midM-1
+                                 init:gray
+                                 goal:gold];
+            else if(v.frame.origin.x == mid)
+                c = gold;
+            v.tintColor= c;
+        }
+    };
+    [pagingViewController setCurrentIndex:1 animated:NO];
+
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:pagingViewController];
+    
+    navigationController.edgesForExtendedLayout = UIRectEdgeNone;
+    navigationController.automaticallyAdjustsScrollViewInsets = YES;
+    
+    _window.rootViewController = navigationController;
     [_window makeKeyAndVisible];
 }
 
@@ -182,5 +243,29 @@ THLGuestlistReviewModuleDelegate
 #pragma mark - THLUserProfileModuleDelegate
 - (void)logOutUser {
     [self.moduleDelegate logOutUser];
+}
+
+- (UIView *)newDiscoveryNavBarItem {
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"Hypelist-Icon"]
+                                                                 imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+    imageView.frame = CGRectMake(0, 0, 20, 20);
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    imageView.tintColor = kTHLNUIGrayFontColor;
+    return imageView;
+}
+
+- (UIView *)newGuestProfileNavBarItem {
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"Profile Icon"]
+                                                                 imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+    imageView.tintColor = kTHLNUIGrayFontColor;
+    return imageView;
+}
+
+- (UIView *)newDashboardNavBarItem {
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"Lists Icon"]
+                                                                 imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    imageView.tintColor = kTHLNUIGrayFontColor;
+    return imageView;
 }
 @end

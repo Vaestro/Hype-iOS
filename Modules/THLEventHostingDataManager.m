@@ -37,10 +37,7 @@
     return [[_guestlistService fetchGuestlistsForPromotionAtEvent:eventId] continueWithSuccessBlock:^id(BFTask *task) {
         THLDataStoreDomain *domain = [WSELF domainForGuestlistsForPromotion];
         NSSet *entities = [NSSet setWithArray:[WSELF.entityMapper mapGuestlists:task.result]];
-#warning Hackaround to fix data store from causing problems when accessing guestlist invites from different guestlists
-        [WSELF.dataStore purge];
-        
-        [WSELF.dataStore refreshDomain:domain withEntities:entities];
+        [WSELF.dataStore refreshDomain:domain withEntities:entities forCollectionKey:eventId];
         return [BFTask taskWithResult:entities];
     }];
 }

@@ -10,9 +10,9 @@
 
 #import "THLDataStore.h"
 #import "THLEventServiceInterface.h"
-#import "THLEventEntity.h"
 #import "THLDataStoreDomain.h"
 #import "THLEntityMapper.h"
+#import "THLEventEntity.h"
 
 @interface THLEventDiscoveryDataManager()
 
@@ -36,7 +36,7 @@
 	return [[_eventService fetchEventsFrom:startDate to:endDate] continueWithSuccessBlock:^id(BFTask *task) {
         THLDataStoreDomain *domain = [SSELF domainForEventsFrom:startDate to:endDate];
 		NSSet *entities = [NSSet setWithArray:[SSELF.entityMapper mapEvents:task.result]];
-		[SSELF.dataStore refreshDomain:domain withEntities:entities];
+		[SSELF.dataStore refreshDomain:domain withEntities:entities forCollectionKey:[NSString stringWithFormat:@"k%@DataStoreKey", NSStringFromClass((Class)[THLEventEntity class])]];
 		return [BFTask taskWithResult:nil];
 	}];
 }

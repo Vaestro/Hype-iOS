@@ -1402,7 +1402,6 @@
 			children = (
 				794208301BD9A2E1009B86FA /* Interface */,
 				217DC6571BBB7A4500332174 /* Dependency Management */,
-				217DC6591BBB7A8200332174 /* Presenter */,
 				217DC6561BBB7A3C00332174 /* Wireframe */,
 				79BCB5621BF2AAA30050F283 /* THLGuestFlowNavigationController.h */,
 				79BCB5631BF2AAA30050F283 /* THLGuestFlowNavigationController.m */,
@@ -1435,13 +1434,6 @@
 				21EED1011BB5F8A7001325A7 /* THLGuestFlowDependencyManager.h */,
 			);
 			path = "Dependency Management";
-			sourceTree = "<group>";
-		};
-		217DC6591BBB7A8200332174 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Presenter;
 			sourceTree = "<group>";
 		};
 		217EBE891BB78A57006044B6 /* THLViewDataSource */ = {

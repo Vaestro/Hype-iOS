@@ -57,7 +57,7 @@
 - (void)layoutView {
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.automaticallyAdjustsScrollViewInsets = YES;
-
+    
     _pagingViewController.navigationSideItemsStyle = SLNavigationSideItemsStyleOnBounds;
 //    [_pagingViewController performSelector:@selector(updateNavItems:) withObject:@(0)];
     _pagingViewController.pagingViewMovingRedefine = ^(UIScrollView * scrollView, NSArray *subviews) {
