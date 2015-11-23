@@ -39,7 +39,7 @@
     return [[_guestlistService fetchInvitesOnGuestlist:[THLGuestlist objectWithoutDataWithObjectId:guestlist.objectId]] continueWithSuccessBlock:^id(BFTask *task) {
         THLDataStoreDomain *domain = [SSELF domainForGuestlistInvitesForGuestlist:guestlist];
         NSSet *entities = [NSSet setWithArray:[SSELF.entityMapper mapGuestlistInvites:task.result]];
-        [SSELF.dataStore refreshDomain:domain withEntities:entities forCollectionKey:guestlist.objectId];
+        [SSELF.dataStore refreshDomain:domain withEntities:entities];
         return [BFTask taskWithResult:entities];
     }];
 }

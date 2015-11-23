@@ -41,6 +41,7 @@
     [super viewDidLoad];
     [self constructView];
     [self layoutView];
+//    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
 }
 
 

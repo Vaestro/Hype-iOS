@@ -79,7 +79,11 @@ THLEventDetailInteractorDelegate
     [self.view setEventDate:[NSString stringWithFormat:@"%@, %@", _eventEntity.date.thl_weekdayString, _eventEntity.date.thl_timeString]];
 	[self.view setPromoInfo:_eventEntity.info];
     [self.view setPromoImageURL:_eventEntity.imageURL];
-    [self.view setCoverInfo:[NSString stringWithFormat:@"$%@ (Guys only)", [NSNumber numberWithFloat:_eventEntity.maleCover ]]];
+    if (_eventEntity.maleCover > 0 && _eventEntity.femaleCover == 0) {
+        [self.view setCoverInfo:[NSString stringWithFormat:@"$%@ (Guys only)", [NSNumber numberWithFloat:_eventEntity.maleCover ]]];
+    } else {
+        [self.view setCoverInfo:[NSString stringWithFormat:@"$%@", [NSNumber numberWithFloat:_eventEntity.maleCover ]]];
+    }
     [self.view setActionBarButtonCommand:actionBarButtonCommand];
 }
 
@@ -157,7 +161,11 @@ THLEventDetailInteractorDelegate
 - (void)interactor:(THLEventDetailInteractor *)interactor didGetPromotion:(THLPromotionEntity *)promotionEntity forEvent:(THLEventEntity *)eventEntity error:(NSError *)error {
     if (!error && promotionEntity) {
         _promotionEntity = promotionEntity;
-        [self.view setRatioInfo:[NSString stringWithFormat:@"%d Guys, %d Girls", _promotionEntity.maleRatio, _promotionEntity.femaleRatio]];
+        if (_promotionEntity.femaleRatio != 0) {
+            [self.view setRatioInfo:[NSString stringWithFormat:@"%d Guys, %d Girls", _promotionEntity.maleRatio, _promotionEntity.femaleRatio]];
+        } else {
+            [self.view setRatioInfo:@"No ratio required"];
+        }
     }
 }
 

@@ -28,15 +28,15 @@
 /**
  *  Updates or adds the entities in the datastore.
  */
-- (void)updateOrAddEntities:(NSSet *)entities forKey:(NSString *)key;
+- (void)updateOrAddEntities:(NSSet *)entities;
 
 /**
  *  Updates the domain with a set of entities. Adds new entities and removes entities that are no
  *	longer present.
  */
-//- (void)refreshDomain:(THLDataStoreDomain *)domain withEntities:(NSSet *)entities;
+- (void)refreshDomain:(THLDataStoreDomain *)domain withEntities:(NSSet *)entities;
 
-- (void)refreshDomain:(THLDataStoreDomain *)domain withEntities:(NSSet *)entities forCollectionKey:(NSString *)key;
+//- (void)refreshDomain:(THLDataStoreDomain *)domain withEntities:(NSSet *)entities forCollectionKey:(NSString *)key;
 
 /**
  *  Deletes all entities in the Data Store

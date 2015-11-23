@@ -137,6 +137,14 @@
 //            [parentGuestlist setObject:parentGuestlistOwner forKey:@"owner"];
             if (guest != nil) {
                 [guestlistInvite setObject:guest forKey:@"guest"];
+            } else {
+                THLUser *dummyGuest = [THLUser new];
+//                UIImage *image = [[UIImage imageNamed:@"Hypelist-Icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+//                NSData *fileData = UIImagePNGRepresentation(image);
+//                PFFile *file = [PFFile fileWithName:@"dummyImage" data:fileData];
+//                dummyGuest.image = file;
+                dummyGuest.firstName = @"Pending Signup";
+                [guestlistInvite setObject:dummyGuest forKey:@"guest"];
             }
 //            [guestlistInvite setObject:parentGuestlist forKey:@"guestlist"];
             [completedGuestlistInvites addObject:guestlistInvite];

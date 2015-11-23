@@ -36,7 +36,7 @@
 	return [[_eventService fetchEventsFrom:startDate to:endDate] continueWithSuccessBlock:^id(BFTask *task) {
         THLDataStoreDomain *domain = [SSELF domainForEventsFrom:startDate to:endDate];
 		NSSet *entities = [NSSet setWithArray:[SSELF.entityMapper mapEvents:task.result]];
-		[SSELF.dataStore refreshDomain:domain withEntities:entities forCollectionKey:[NSString stringWithFormat:@"k%@DataStoreKey", NSStringFromClass((Class)[THLEventEntity class])]];
+		[SSELF.dataStore refreshDomain:domain withEntities:entities];
 		return [BFTask taskWithResult:nil];
 	}];
 }

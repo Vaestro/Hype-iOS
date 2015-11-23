@@ -58,10 +58,15 @@
         }
         case THLStatusAccepted: {
             [WSELF.shapeView setPath:[self acceptedPath].CGPath];
-            WSELF.shapeView.fillColor = [kTHLNUIAccentColor CGColor];
+            WSELF.shapeView.fillColor = [kTHLNUIActionColor CGColor];
             break;
         }
         case THLStatusDeclined: {
+            [WSELF.shapeView setPath:[self declinedPath].CGPath];
+            WSELF.shapeView.fillColor = [kTHLNUIRedColor CGColor];
+            break;
+        }
+        case THLStatusNone: {
             [WSELF.shapeView setPath:[self declinedPath].CGPath];
             WSELF.shapeView.fillColor = [kTHLNUIRedColor CGColor];
             break;

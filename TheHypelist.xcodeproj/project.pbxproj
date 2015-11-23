@@ -597,8 +597,8 @@
 		C8E1B1641BF4380D00A9824C /* THLUserProfileDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLUserProfileDataManager.m; sourceTree = "<group>"; };
 		C8E1B1691BF43DA800A9824C /* THLUserProfileInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserProfileInfoView.h; sourceTree = "<group>"; };
 		C8E1B16A1BF43DA800A9824C /* THLUserProfileInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLUserProfileInfoView.m; sourceTree = "<group>"; };
-		C8F2FB1E1BF815C2004E00B6 /* THLResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THLResourceManager.h; path = ../../THLResourceManager.h; sourceTree = "<group>"; };
-		C8F2FB1F1BF815C2004E00B6 /* THLResourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THLResourceManager.m; path = ../../THLResourceManager.m; sourceTree = "<group>"; };
+		C8F2FB1E1BF815C2004E00B6 /* THLResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLResourceManager.h; sourceTree = "<group>"; };
+		C8F2FB1F1BF815C2004E00B6 /* THLResourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLResourceManager.m; sourceTree = "<group>"; };
 		C8F2FB251BF81A8E004E00B6 /* THLInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLInformationViewController.h; sourceTree = "<group>"; };
 		C8F2FB261BF81A8E004E00B6 /* THLInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLInformationViewController.m; sourceTree = "<group>"; };
 		C8F2FB281BF826B7004E00B6 /* THLWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLWebViewController.h; sourceTree = "<group>"; };
@@ -647,8 +647,8 @@
 		2110058D1B8A2F3A00A540C6 /* Event Discovery Module */ = {
 			isa = PBXGroup;
 			children = (
-				211005911B8A2FE200A540C6 /* Interface */,
 				211005921B8A30E000A540C6 /* Components */,
+				211005911B8A2FE200A540C6 /* Interface */,
 				211005901B8A2FDB00A540C6 /* UI */,
 			);
 			path = "Event Discovery Module";
@@ -765,19 +765,19 @@
 		211005D11B8A7D0400A540C6 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				798650A21BEDDC2D0032A661 /* CAGradientLayer+THLGradient.h */,
+				798650A31BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m */,
 				211005CE1B8A7D0200A540C6 /* NSDate+Hypelist.h */,
 				211005CF1B8A7D0200A540C6 /* NSDate+Hypelist.m */,
 				211005D41B8A7D2800A540C6 /* NSDate+Utilities.h */,
 				211005D31B8A7D2800A540C6 /* NSDate+Utilities.m */,
 				211BB0D91B8CC6F50068FD50 /* THLGlobalCategories.h */,
+				794DCCAA1BF3B31E0037A03D /* UIImageView+Letters.h */,
+				794DCCAB1BF3B31E0037A03D /* UIImageView+Letters.m */,
 				211BB0D61B8CC6DA0068FD50 /* UIView+AddSubviews.h */,
 				211BB0D71B8CC6DA0068FD50 /* UIView+AddSubviews.m */,
 				794208261BD82641009B86FA /* UIView+DimView.h */,
 				794208271BD82641009B86FA /* UIView+DimView.m */,
-				798650A21BEDDC2D0032A661 /* CAGradientLayer+THLGradient.h */,
-				798650A31BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m */,
-				794DCCAA1BF3B31E0037A03D /* UIImageView+Letters.h */,
-				794DCCAB1BF3B31E0037A03D /* UIImageView+Letters.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -785,8 +785,8 @@
 		211891FC1BA9F5E400E8A11F /* Login Module */ = {
 			isa = PBXGroup;
 			children = (
-				211891FD1BA9F87200E8A11F /* Interface */,
 				21721FB61BAE081F00D754D6 /* Components */,
+				211891FD1BA9F87200E8A11F /* Interface */,
 				211891FF1BA9F87E00E8A11F /* UI */,
 			);
 			path = "Login Module";
@@ -963,8 +963,8 @@
 		211D0BA11B8CED560073AFDD /* Event Detail Module */ = {
 			isa = PBXGroup;
 			children = (
-				211D0BA21B8CED600073AFDD /* Interface */,
 				211D0BA41B8CED670073AFDD /* Components */,
+				211D0BA21B8CED600073AFDD /* Interface */,
 				211D0BA51B8CED6A0073AFDD /* UI */,
 			);
 			path = "Event Detail Module";
@@ -982,10 +982,10 @@
 		211D0BA41B8CED670073AFDD /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				211D0BA81B8CEE4D0073AFDD /* Wireframe */,
-				211D0BA91B8CEE510073AFDD /* Presenter */,
 				211D0BB71B8CEEC50073AFDD /* Data Manager */,
 				211D0BB61B8CEEBF0073AFDD /* Interactor */,
+				211D0BA91B8CEE510073AFDD /* Presenter */,
+				211D0BA81B8CEE4D0073AFDD /* Wireframe */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1274,8 +1274,7 @@
 				216BDD501BC6F4A700BBF713 /* THLContactTableViewCell.h */,
 				216BDD511BC6F4A700BBF713 /* THLContactTableViewCell.m */,
 			);
-			name = THLContactTableViewCell;
-			path = ../../../../Views/THLContactTableViewCell;
+			path = THLContactTableViewCell;
 			sourceTree = "<group>";
 		};
 		216BDD541BC71EE500BBF713 /* THLSearchViewDataSource */ = {
@@ -1321,10 +1320,10 @@
 		21721FB61BAE081F00D754D6 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				2118921C1BAA088600E8A11F /* Wireframe */,
-				211892181BAA083400E8A11F /* Presenter */,
-				211892031BA9FEB600E8A11F /* Interactor */,
 				21937F331BB5D1F5005E949E /* Data Manager */,
+				211892031BA9FEB600E8A11F /* Interactor */,
+				211892181BAA083400E8A11F /* Presenter */,
+				2118921C1BAA088600E8A11F /* Wireframe */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1332,8 +1331,6 @@
 		2174A05B1B863F6A006826D7 = {
 			isa = PBXGroup;
 			children = (
-				79A4665E1BED371900AC975B /* TheHypelist */,
-				79A466991BED372400AC975B /* TheHypelistTests */,
 				21CE061E1BB86939004D10BB /* Appearance */,
 				211005D11B8A7D0400A540C6 /* Categories */,
 				211005A81B8A3D5800A540C6 /* Components */,
@@ -1349,6 +1346,8 @@
 				70242A51DBC534988B8EA34F /* Pods */,
 				2174A0651B863F6A006826D7 /* Products */,
 				21CCEDEB1B87CDD00066CDAC /* Services */,
+				79A4665E1BED371900AC975B /* TheHypelist */,
+				79A466991BED372400AC975B /* TheHypelistTests */,
 				211BB0D11B8CBE690068FD50 /* Views */,
 			);
 			sourceTree = "<group>";
@@ -1400,14 +1399,13 @@
 		217DC6541BBB7A0900332174 /* Guest Flow */ = {
 			isa = PBXGroup;
 			children = (
-				794208301BD9A2E1009B86FA /* Interface */,
 				217DC6571BBB7A4500332174 /* Dependency Management */,
+				794208301BD9A2E1009B86FA /* Interface */,
 				217DC6561BBB7A3C00332174 /* Wireframe */,
 				79BCB5621BF2AAA30050F283 /* THLGuestFlowNavigationController.h */,
 				79BCB5631BF2AAA30050F283 /* THLGuestFlowNavigationController.m */,
 			);
-			name = "Guest Flow";
-			path = "Event Flow";
+			path = "Guest Flow";
 			sourceTree = "<group>";
 		};
 		217DC6551BBB7A2500332174 /* Flows */ = {
@@ -1578,9 +1576,8 @@
 			isa = PBXGroup;
 			children = (
 				790603BE1BFB6EAB0093335E /* Dashboard Module */,
-				798D7EA91BF2C9D9001D4593 /* User Profile */,
-				2110058D1B8A2F3A00A540C6 /* Event Discovery Module */,
 				211D0BA11B8CED560073AFDD /* Event Detail Module */,
+				2110058D1B8A2F3A00A540C6 /* Event Discovery Module */,
 				798B5FCC1BF12085002EBCB6 /* Event Hosting Module */,
 				215A42A21BAA276E00D03C35 /* Facebook Module */,
 				215A428F1BAA248700D03C35 /* Facebook Picture Module */,
@@ -1591,6 +1588,7 @@
 				21EBFBFD1B87AE9F006646E9 /* Parse Module */,
 				79B9594E1BE919A700B87799 /* Popup Notification Module */,
 				21192D931BB327D200B176AA /* Promotion Selection Module */,
+				798D7EA91BF2C9D9001D4593 /* User Profile */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -1710,8 +1708,8 @@
 		21E402C01BBF75EF001D0C2C /* Guestlist Invitation Module */ = {
 			isa = PBXGroup;
 			children = (
-				21E402C31BBF7627001D0C2C /* Interface */,
 				21E402C21BBF761D001D0C2C /* Components */,
+				21E402C31BBF7627001D0C2C /* Interface */,
 				21E402C11BBF7619001D0C2C /* UI */,
 			);
 			path = "Guestlist Invitation Module";
@@ -1728,10 +1726,10 @@
 		21E402C21BBF761D001D0C2C /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				21E402D31BBF7698001D0C2C /* Wireframe */,
-				21E402D41BBF769B001D0C2C /* Presenter */,
-				21E402D51BBF769E001D0C2C /* Interactor */,
 				21E402D61BBF76A2001D0C2C /* Data Manager */,
+				21E402D51BBF769E001D0C2C /* Interactor */,
+				21E402D41BBF769B001D0C2C /* Presenter */,
+				21E402D31BBF7698001D0C2C /* Wireframe */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1794,11 +1792,11 @@
 		21E402E51BBF907D001D0C2C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				216BDD531BC6FA2000BBF713 /* THLContactTableViewCell */,
 				21E402E61BBF90A4001D0C2C /* THLGuestlistInvitationView.h */,
 				21B989481BC05AF500428B6A /* THLGuestlistInvitationViewController.h */,
 				21B989491BC05AF500428B6A /* THLGuestlistInvitationViewController.m */,
 				21E402E81BBF947D001D0C2C /* THLGuestlistInvitationViewEventHandler.h */,
-				216BDD531BC6FA2000BBF713 /* THLContactTableViewCell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1844,43 +1842,43 @@
 		790603BE1BFB6EAB0093335E /* Dashboard Module */ = {
 			isa = PBXGroup;
 			children = (
-				790603BF1BFB72810093335E /* THLDashboardModuleInterface.h */,
-				790603C01BFB72900093335E /* THLDashboardModuleDelegate.h */,
-				790603C11BFB73380093335E /* THLDashboardWireframe.h */,
-				790603C21BFB73380093335E /* THLDashboardWireframe.m */,
-				790603C41BFB75CF0093335E /* THLDashboardPresenter.h */,
-				790603C51BFB75CF0093335E /* THLDashboardPresenter.m */,
-				790603C71BFB75D90093335E /* THLDashboardInteractor.h */,
-				790603C81BFB75D90093335E /* THLDashboardInteractor.m */,
+				790603D41BFBA6C10093335E /* UI */,
 				790603CA1BFB75E50093335E /* THLDashboardDataManager.h */,
 				790603CB1BFB75E50093335E /* THLDashboardDataManager.m */,
-				790603D41BFBA6C10093335E /* UI */,
+				790603C71BFB75D90093335E /* THLDashboardInteractor.h */,
+				790603C81BFB75D90093335E /* THLDashboardInteractor.m */,
+				790603C01BFB72900093335E /* THLDashboardModuleDelegate.h */,
+				790603BF1BFB72810093335E /* THLDashboardModuleInterface.h */,
+				790603C41BFB75CF0093335E /* THLDashboardPresenter.h */,
+				790603C51BFB75CF0093335E /* THLDashboardPresenter.m */,
+				790603C11BFB73380093335E /* THLDashboardWireframe.h */,
+				790603C21BFB73380093335E /* THLDashboardWireframe.m */,
 			);
-			name = "Dashboard Module";
+			path = "Dashboard Module";
 			sourceTree = "<group>";
 		};
 		790603D41BFBA6C10093335E /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				790603D51BFBA7530093335E /* Subviews */,
 				790603D01BFB7B350093335E /* THLDashboardView.h */,
 				790603CD1BFB75F00093335E /* THLDashboardViewController.h */,
 				790603CE1BFB75F00093335E /* THLDashboardViewController.m */,
 				790603D11BFBA1B20093335E /* THLEventTicketView.h */,
 				790603D21BFBA1B20093335E /* THLEventTicketView.m */,
-				790603D51BFBA7530093335E /* Subviews */,
 			);
-			name = UI;
+			path = UI;
 			sourceTree = "<group>";
 		};
 		790603D51BFBA7530093335E /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
-				790603D61BFBA79F0093335E /* THLEventTicketVenueView.h */,
-				790603D71BFBA79F0093335E /* THLEventTicketVenueView.m */,
 				790603D91BFBA8770093335E /* THLEventTicketPromotionView.h */,
 				790603DA1BFBA8770093335E /* THLEventTicketPromotionView.m */,
+				790603D61BFBA79F0093335E /* THLEventTicketVenueView.h */,
+				790603D71BFBA79F0093335E /* THLEventTicketVenueView.m */,
 			);
-			name = Subviews;
+			path = Subviews;
 			sourceTree = "<group>";
 		};
 		794208291BD82ADB009B86FA /* THLActionBar */ = {
@@ -1904,13 +1902,13 @@
 		794DCCB11BF554E30037A03D /* Onboard */ = {
 			isa = PBXGroup;
 			children = (
-				798D7EBD1BF2E56C001D4593 /* OnboardingViewController.h */,
-				798D7EBE1BF2E56C001D4593 /* OnboardingViewController.m */,
-				798D7EC31BF2E634001D4593 /* OnboardingContentViewController_Private.h */,
 				798D7EC01BF2E5CF001D4593 /* OnboardingContentViewController.h */,
 				798D7EC11BF2E5CF001D4593 /* OnboardingContentViewController.m */,
+				798D7EC31BF2E634001D4593 /* OnboardingContentViewController_Private.h */,
+				798D7EBD1BF2E56C001D4593 /* OnboardingViewController.h */,
+				798D7EBE1BF2E56C001D4593 /* OnboardingViewController.m */,
 			);
-			name = Onboard;
+			path = Onboard;
 			sourceTree = "<group>";
 		};
 		794DCCB21BF554F20037A03D /* FXBlurView */ = {
@@ -1919,54 +1917,54 @@
 				794DCCB31BF555020037A03D /* FXBlurView.h */,
 				794DCCB41BF555020037A03D /* FXBlurView.m */,
 			);
-			name = FXBlurView;
+			path = FXBlurView;
 			sourceTree = "<group>";
 		};
 		798B5FC71BF11B03002EBCB6 /* Host Flow */ = {
 			isa = PBXGroup;
 			children = (
-				796965C11BFD8DDE009034FA /* THLHostFlowModuleInterface.h */,
-				796965C21BFD8DE8009034FA /* THLHostFlowModuleDelegate.h */,
 				798B5FC81BF11B31002EBCB6 /* THLHostFlowDependencyManager.h */,
+				796965C21BFD8DE8009034FA /* THLHostFlowModuleDelegate.h */,
+				796965C11BFD8DDE009034FA /* THLHostFlowModuleInterface.h */,
 				798B5FC91BF11BD2002EBCB6 /* THLHostFlowWireframe.h */,
 				798B5FCA1BF11BD2002EBCB6 /* THLHostFlowWireframe.m */,
 			);
-			name = "Host Flow";
+			path = "Host Flow";
 			sourceTree = "<group>";
 		};
 		798B5FCC1BF12085002EBCB6 /* Event Hosting Module */ = {
 			isa = PBXGroup;
 			children = (
-				798B5FCD1BF12A85002EBCB6 /* THLEventHostingModuleInterface.h */,
-				798B5FCE1BF12A9B002EBCB6 /* THLEventHostingModuleDelegate.h */,
-				798B5FCF1BF12D2C002EBCB6 /* THLEventHostingWireframe.h */,
-				798B5FD01BF12D2C002EBCB6 /* THLEventHostingWireframe.m */,
-				791C1F7B1BF13AD300CCF803 /* THLEventHostingPresenter.h */,
-				791C1F7C1BF13AD300CCF803 /* THLEventHostingPresenter.m */,
-				79527CEE1BF188F80074AF38 /* THLEventHostingInteractor.h */,
-				79527CEF1BF188F80074AF38 /* THLEventHostingInteractor.m */,
 				791C1F811BF13AEA00CCF803 /* THLEventHostingDataManager.h */,
 				791C1F821BF13AEA00CCF803 /* THLEventHostingDataManager.m */,
-				791C1F871BF13B9D00CCF803 /* THLEventHostingView.h */,
-				791C1F841BF13AF500CCF803 /* THLEventHostingViewController.h */,
-				791C1F851BF13AF500CCF803 /* THLEventHostingViewController.m */,
+				79527CEE1BF188F80074AF38 /* THLEventHostingInteractor.h */,
+				79527CEF1BF188F80074AF38 /* THLEventHostingInteractor.m */,
+				798B5FCE1BF12A9B002EBCB6 /* THLEventHostingModuleDelegate.h */,
+				798B5FCD1BF12A85002EBCB6 /* THLEventHostingModuleInterface.h */,
+				791C1F7B1BF13AD300CCF803 /* THLEventHostingPresenter.h */,
+				791C1F7C1BF13AD300CCF803 /* THLEventHostingPresenter.m */,
 				791C1F881BF13BC300CCF803 /* THLEventHostingTableCell.h */,
 				791C1F891BF13BC300CCF803 /* THLEventHostingTableCell.m */,
 				791C1F8E1BF13BEE00CCF803 /* THLEventHostingTableCellView.h */,
 				791C1F8B1BF13BD900CCF803 /* THLEventHostingTableCellViewModel.h */,
 				791C1F8C1BF13BD900CCF803 /* THLEventHostingTableCellViewModel.m */,
+				791C1F871BF13B9D00CCF803 /* THLEventHostingView.h */,
+				791C1F841BF13AF500CCF803 /* THLEventHostingViewController.h */,
+				791C1F851BF13AF500CCF803 /* THLEventHostingViewController.m */,
+				798B5FCF1BF12D2C002EBCB6 /* THLEventHostingWireframe.h */,
+				798B5FD01BF12D2C002EBCB6 /* THLEventHostingWireframe.m */,
 			);
-			name = "Event Hosting Module";
+			path = "Event Hosting Module";
 			sourceTree = "<group>";
 		};
 		798D7EA91BF2C9D9001D4593 /* User Profile */ = {
 			isa = PBXGroup;
 			children = (
-				C8E1B15A1BF4371900A9824C /* Interface */,
 				C8E1B1591BF4370F00A9824C /* Components */,
+				C8E1B15A1BF4371900A9824C /* Interface */,
 				C8E1B15B1BF4372800A9824C /* UI */,
 			);
-			name = "User Profile";
+			path = "User Profile";
 			sourceTree = "<group>";
 		};
 		798D7EBC1BF2E528001D4593 /* Alien */ = {
@@ -1975,23 +1973,23 @@
 				794DCCB21BF554F20037A03D /* FXBlurView */,
 				794DCCB11BF554E30037A03D /* Onboard */,
 			);
-			name = Alien;
+			path = Alien;
 			sourceTree = "<group>";
 		};
 		79A4665E1BED371900AC975B /* TheHypelist */ = {
 			isa = PBXGroup;
 			children = (
-				79A4665F1BED371900AC975B /* AppDelegate.h */,
-				79A466601BED371900AC975B /* AppDelegate.m */,
-				79A466611BED371900AC975B /* LaunchScreen.xib */,
-				79A466631BED371900AC975B /* CommonMacros.h */,
 				79A466641BED371900AC975B /* Resources */,
 				79A466791BED371900AC975B /* Supporting Files */,
-				79A4667C1BED371900AC975B /* TheHypelist-PrefixHeader.pch */,
-				79A4667D1BED371900AC975B /* TheHypelist.strings */,
+				79A4665F1BED371900AC975B /* AppDelegate.h */,
+				79A466601BED371900AC975B /* AppDelegate.m */,
+				79A466631BED371900AC975B /* CommonMacros.h */,
+				79A466611BED371900AC975B /* LaunchScreen.xib */,
 				79A4667E1BED371900AC975B /* THLConstants.h */,
 				79A4667F1BED371900AC975B /* THLStylingConstants.h */,
 				79A466801BED371900AC975B /* THLTweaksConstants.h */,
+				79A4667C1BED371900AC975B /* TheHypelist-PrefixHeader.pch */,
+				79A4667D1BED371900AC975B /* TheHypelist.strings */,
 			);
 			path = TheHypelist;
 			sourceTree = "<group>";
@@ -1999,13 +1997,13 @@
 		79A466641BED371900AC975B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				C8F2FB1E1BF815C2004E00B6 /* THLResourceManager.h */,
-				C8F2FB1F1BF815C2004E00B6 /* THLResourceManager.m */,
-				796965BB1BFCFE5B009034FA /* Privacy Policy.txt */,
-				796965BF1BFCFFB1009034FA /* Terms of Use.txt */,
+				79A466661BED371900AC975B /* raleway */,
 				796965C51BFE453C009034FA /* 1Oak.mov */,
 				79A466651BED371900AC975B /* Images.xcassets */,
-				79A466661BED371900AC975B /* raleway */,
+				796965BB1BFCFE5B009034FA /* Privacy Policy.txt */,
+				C8F2FB1E1BF815C2004E00B6 /* THLResourceManager.h */,
+				C8F2FB1F1BF815C2004E00B6 /* THLResourceManager.m */,
+				796965BF1BFCFFB1009034FA /* Terms of Use.txt */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -2063,8 +2061,8 @@
 		79B959191BE5780F00B87799 /* Guestlist Review Module */ = {
 			isa = PBXGroup;
 			children = (
-				79B9591A1BE5782700B87799 /* Interface */,
 				79B9591F1BE57C4F00B87799 /* Components */,
+				79B9591A1BE5782700B87799 /* Interface */,
 				79B959301BE581D700B87799 /* UI */,
 			);
 			path = "Guestlist Review Module";
@@ -2082,10 +2080,10 @@
 		79B9591F1BE57C4F00B87799 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				79B959201BE57C6200B87799 /* Wireframe */,
-				79B959251BE5812000B87799 /* Presenter */,
-				79B959261BE5812B00B87799 /* Interactor */,
 				79B959241BE5810C00B87799 /* Data Manager */,
+				79B959261BE5812B00B87799 /* Interactor */,
+				79B959251BE5812000B87799 /* Presenter */,
+				79B959201BE57C6200B87799 /* Wireframe */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -2137,10 +2135,10 @@
 		79B959311BE581FE00B87799 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				79B959371BE67AFD00B87799 /* Cells */,
 				79B959351BE5822A00B87799 /* THLGuestlistReviewView.h */,
 				79B959321BE5821B00B87799 /* THLGuestlistReviewViewController.h */,
 				79B959331BE5821B00B87799 /* THLGuestlistReviewViewController.m */,
-				79B959371BE67AFD00B87799 /* Cells */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2178,8 +2176,8 @@
 			isa = PBXGroup;
 			children = (
 				79B9595E1BE93C1B00B87799 /* THLPopupNotificationView.h */,
-				794DCCB01BF543C40037A03D /* THLPopupNotificationViewModel.h */,
 				79B959471BE894B800B87799 /* THLPopupNotificationView.m */,
+				794DCCB01BF543C40037A03D /* THLPopupNotificationViewModel.h */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2231,12 +2229,12 @@
 		C8E1B1591BF4370F00A9824C /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				C8E1B15F1BF4375E00A9824C /* Wireframe */,
-				C8E1B15E1BF4375000A9824C /* Presenter */,
-				C8E1B15D1BF4374400A9824C /* Interactor */,
 				C8E1B15C1BF4373500A9824C /* Data Manager */,
+				C8E1B15D1BF4374400A9824C /* Interactor */,
+				C8E1B15E1BF4375000A9824C /* Presenter */,
+				C8E1B15F1BF4375E00A9824C /* Wireframe */,
 			);
-			name = Components;
+			path = Components;
 			sourceTree = "<group>";
 		};
 		C8E1B15A1BF4371900A9824C /* Interface */ = {
@@ -2245,7 +2243,7 @@
 				798D7EAB1BF2CA73001D4593 /* THLUserProfileModuleDelegate.h */,
 				798D7EAA1BF2CA2E001D4593 /* THLUserProfileModuleInterface.h */,
 			);
-			name = Interface;
+			path = Interface;
 			sourceTree = "<group>";
 		};
 		C8E1B15B1BF4372800A9824C /* UI */ = {
@@ -2253,7 +2251,7 @@
 			children = (
 				C8E1B1661BF4383600A9824C /* View */,
 			);
-			name = UI;
+			path = UI;
 			sourceTree = "<group>";
 		};
 		C8E1B15C1BF4373500A9824C /* Data Manager */ = {
@@ -2262,7 +2260,7 @@
 				C8E1B1631BF4380D00A9824C /* THLUserProfileDataManager.h */,
 				C8E1B1641BF4380D00A9824C /* THLUserProfileDataManager.m */,
 			);
-			name = "Data Manager";
+			path = "Data Manager";
 			sourceTree = "<group>";
 		};
 		C8E1B15D1BF4374400A9824C /* Interactor */ = {
@@ -2271,7 +2269,7 @@
 				C8E1B1601BF437F300A9824C /* THLUserProfileInteractor.h */,
 				C8E1B1611BF437F300A9824C /* THLUserProfileInteractor.m */,
 			);
-			name = Interactor;
+			path = Interactor;
 			sourceTree = "<group>";
 		};
 		C8E1B15E1BF4375000A9824C /* Presenter */ = {
@@ -2280,7 +2278,7 @@
 				798D7EAF1BF2CCC7001D4593 /* THLUserProfilePresenter.h */,
 				798D7EB01BF2CCC7001D4593 /* THLUserProfilePresenter.m */,
 			);
-			name = Presenter;
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		C8E1B15F1BF4375E00A9824C /* Wireframe */ = {
@@ -2289,24 +2287,24 @@
 				798D7EAC1BF2CAF9001D4593 /* THLUserProfileWireframe.h */,
 				798D7EAD1BF2CAF9001D4593 /* THLUserProfileWireframe.m */,
 			);
-			name = Wireframe;
+			path = Wireframe;
 			sourceTree = "<group>";
 		};
 		C8E1B1661BF4383600A9824C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C8E1B1671BF4384500A9824C /* Cells */,
 				C8F2FB251BF81A8E004E00B6 /* THLInformationViewController.h */,
 				C8F2FB261BF81A8E004E00B6 /* THLInformationViewController.m */,
-				798D7EB21BF2CCD4001D4593 /* THLUserProfileViewController.h */,
-				798D7EB31BF2CCD4001D4593 /* THLUserProfileViewController.m */,
-				798D7EB51BF2CCE5001D4593 /* THLUserProfileView.h */,
 				C8E1B1691BF43DA800A9824C /* THLUserProfileInfoView.h */,
 				C8E1B16A1BF43DA800A9824C /* THLUserProfileInfoView.m */,
-				C8E1B1671BF4384500A9824C /* Cells */,
+				798D7EB51BF2CCE5001D4593 /* THLUserProfileView.h */,
+				798D7EB21BF2CCD4001D4593 /* THLUserProfileViewController.h */,
+				798D7EB31BF2CCD4001D4593 /* THLUserProfileViewController.m */,
 				C8F2FB281BF826B7004E00B6 /* THLWebViewController.h */,
 				C8F2FB291BF826B7004E00B6 /* THLWebViewController.m */,
 			);
-			name = View;
+			path = View;
 			sourceTree = "<group>";
 		};
 		C8E1B1671BF4384500A9824C /* Cells */ = {
@@ -2314,7 +2312,7 @@
 			children = (
 				C8E1B1681BF4388A00A9824C /* User Profile Cell */,
 			);
-			name = Cells;
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		C8E1B1681BF4388A00A9824C /* User Profile Cell */ = {
@@ -2323,7 +2321,7 @@
 				798D7EB81BF2D588001D4593 /* THLUserProfileTableViewCell.h */,
 				798D7EB91BF2D588001D4593 /* THLUserProfileTableViewCell.m */,
 			);
-			name = "User Profile Cell";
+			path = "User Profile Cell";
 			sourceTree = "<group>";
 		};
 		CBE54BB68ECECF48FD57301C /* THLViewDataSourceGrouping */ = {
@@ -2784,6 +2782,7 @@
 				79A466621BED371900AC975B /* Base */,
 			);
 			name = LaunchScreen.xib;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
