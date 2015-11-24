@@ -27,12 +27,14 @@
 - (instancetype)initWithLocationService:(id<THLLocationServiceInterface>)locationService
 					   promotionService:(id<THLPromotionServiceInterface>)promotionService
                        guestlistService:(id<THLGuestlistServiceInterface>)guestlistService
-						  entityMappper:(THLEntityMapper *)entityMapper {
+						  entityMappper:(THLEntityMapper *)entityMapper
+                        databaseManager:(THLYapDatabaseManager *)databaseManager {
 	if (self = [super init]) {
 		_locationService = locationService;
 		_promotionService = promotionService;
         _guestlistService = guestlistService;
 		_entityMapper = entityMapper;
+        _databaseManager = databaseManager;
 		[self buildModule];
 	}
 	return self;
@@ -42,7 +44,8 @@
 	_dataManager = [[THLEventDetailDataManager alloc] initWithLocationService:_locationService
 															 promotionService:_promotionService
                                                              guestlistService:_guestlistService
-																entityMappper:_entityMapper];
+																entityMappper:_entityMapper
+                                                              databaseManager:_databaseManager];
 	_interactor = [[THLEventDetailInteractor alloc] initWithDataManager:_dataManager];
 	_view = [[THLEventDetailViewController alloc] initWithNibName:nil bundle:nil];
 	_presenter = [[THLEventDetailPresenter alloc] initWithInteractor:_interactor wireframe:self];

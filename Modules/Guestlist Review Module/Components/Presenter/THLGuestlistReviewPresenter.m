@@ -66,6 +66,7 @@ THLGuestlistReviewInteractorDelegate
     _view = view;
     
     THLViewDataSource *dataSource = [_interactor generateDataSource];
+    
     dataSource.dataTransformBlock = ^id(id item) {
         return [[THLGuestlistReviewCellViewModel alloc] initWithGuestlistInviteEntity:(THLGuestlistInviteEntity *)item];
     };

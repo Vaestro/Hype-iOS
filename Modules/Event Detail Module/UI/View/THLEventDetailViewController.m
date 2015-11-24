@@ -201,7 +201,7 @@
 
 - (THLPromotionInfoView *)newRatioInfoLabel {
     THLPromotionInfoView *ratioInfoLabel = [THLPromotionInfoView new];
-    ratioInfoLabel.labelText = @"Ratio";
+    ratioInfoLabel.labelText = @"Suggested Ratio";
     return ratioInfoLabel;
 }
 

@@ -13,6 +13,7 @@
 @class THLUser;
 @class THLEntityMapper;
 @class THLEventEntity;
+@class THLYapDatabaseManager;
 
 @protocol THLLocationServiceInterface;
 @protocol THLPromotionServiceInterface;
@@ -24,10 +25,13 @@
 @property (nonatomic, readonly, weak) id<THLPromotionServiceInterface> promotionService;
 @property (nonatomic, readonly, weak) id<THLGuestlistServiceInterface> guestlistService;
 @property (nonatomic, readonly, weak) THLEntityMapper *entityMapper;
+@property (nonatomic, readonly, weak) THLYapDatabaseManager *databaseManager;
+
 - (instancetype)initWithLocationService:(id<THLLocationServiceInterface>)locationService
 					   promotionService:(id<THLPromotionServiceInterface>)promotionService
                        guestlistService:(id<THLGuestlistServiceInterface>)guestlistService
-						  entityMappper:(THLEntityMapper *)entityMapper;
+						  entityMappper:(THLEntityMapper *)entityMapper
+                        databaseManager:(THLYapDatabaseManager *)databaseManager;
 
 - (BFTask<CLPlacemark *> *)fetchPlacemarkForAddress:(NSString *)address;
 - (BFTask *)fetchPromotionForEvent:(NSString *)eventId;

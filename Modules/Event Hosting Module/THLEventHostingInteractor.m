@@ -41,7 +41,7 @@ static NSString *const kTHLEventHostingModuleViewKey = @"kTHLEventHostingModuleV
 - (THLViewDataSource *)generateDataSource {
     THLViewDataSourceGrouping *grouping = [self viewGrouping];
     THLViewDataSourceSorting *sorting = [self viewSorting];
-    THLViewDataSource *dataSource = [_viewDataSourceFactory createDataSourceWithGrouping:grouping sorting:sorting key:kTHLEventHostingModuleViewKey];
+    THLViewDataSource *dataSource = [_viewDataSourceFactory createDataSourceWithGrouping:grouping sorting:sorting key:[NSString stringWithFormat:@"kTHLEventId:%@", _eventEntity.objectId]];
     return dataSource;
 }
 

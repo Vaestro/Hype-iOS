@@ -38,8 +38,9 @@
 
 - (void)bindView {
     WEAKSELF();
-    [RACObserve(self, status) subscribeNext:^(id x) {
+    [RACObserve(self, status) subscribeNext:^(NSNumber *status) {
         [WSELF drawingForStatus];
+        NSLog(@"Status View is now: %ld", self.status);
     }];
 }
 

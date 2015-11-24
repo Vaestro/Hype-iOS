@@ -162,7 +162,7 @@ THLEventDetailInteractorDelegate
     if (!error && promotionEntity) {
         _promotionEntity = promotionEntity;
         if (_promotionEntity.femaleRatio != 0) {
-            [self.view setRatioInfo:[NSString stringWithFormat:@"%d Guys, %d Girls", _promotionEntity.maleRatio, _promotionEntity.femaleRatio]];
+            [self.view setRatioInfo:[NSString stringWithFormat:@"%d Guys : %d Girls", _promotionEntity.maleRatio, _promotionEntity.femaleRatio]];
         } else {
             [self.view setRatioInfo:@"No ratio required"];
         }

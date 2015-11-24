@@ -37,20 +37,21 @@
     WEAKSELF();
     STRONGSELF();
     return [[_guestlistService fetchInvitesOnGuestlist:[THLGuestlist objectWithoutDataWithObjectId:guestlist.objectId]] continueWithSuccessBlock:^id(BFTask *task) {
-        THLDataStoreDomain *domain = [SSELF domainForGuestlistInvitesForGuestlist:guestlist];
+//        THLDataStoreDomain *domain = [SSELF domainForGuestlistInvitesForGuestlist:guestlist];
         NSSet *entities = [NSSet setWithArray:[SSELF.entityMapper mapGuestlistInvites:task.result]];
-        [SSELF.dataStore refreshDomain:domain withEntities:entities];
+//        [SSELF.dataStore refreshDomain:domain withEntities:entities];
+        [_dataStore updateOrAddEntities:entities];
         return [BFTask taskWithResult:entities];
     }];
 }
 
-- (THLDataStoreDomain *)domainForGuestlistInvitesForGuestlist:(THLGuestlistEntity *)guestlist {
-    THLDataStoreDomain *domain = [[THLDataStoreDomain alloc] initWithMemberTestBlock:^BOOL(THLEntity *entity) {
-        THLGuestlistInviteEntity *guestlistInviteEntity = (THLGuestlistInviteEntity *)entity;
-        return ([guestlistInviteEntity guestlist].objectId == guestlist.objectId);
-    }];
-    return domain;
-}
+//- (THLDataStoreDomain *)domainForGuestlistInvitesForGuestlist:(THLGuestlistEntity *)guestlist {
+//    THLDataStoreDomain *domain = [[THLDataStoreDomain alloc] initWithMemberTestBlock:^BOOL(THLEntity *entity) {
+//        THLGuestlistInviteEntity *guestlistInviteEntity = (THLGuestlistInviteEntity *)entity;
+//        return ([guestlistInviteEntity guestlist].objectId == guestlist.objectId);
+//    }];
+//    return domain;
+//}
 
 - (BFTask *)updateGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite withResponse:(THLStatus)response {
     return [_guestlistService updateGuestlistInvite:[THLGuestlistInvite objectWithoutDataWithObjectId:guestlistInvite.objectId] withResponse:response];

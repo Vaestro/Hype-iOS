@@ -13,9 +13,12 @@
 @protocol THLLocationServiceInterface;
 @protocol THLPromotionServiceInterface;
 @protocol THLGuestlistServiceInterface;
+@class THLYapDatabaseManager;
 
 @interface THLEventDetailWireframe : NSObject
 @property (nonatomic, readonly, weak) id<THLEventDetailModuleInterface> moduleInterface;
+@property (nonatomic, readonly) THLYapDatabaseManager *databaseManager;
+
 #pragma mark - Dependencies
 @property (nonatomic, readonly, weak) id<THLLocationServiceInterface> locationService;
 @property (nonatomic, readonly, weak) id<THLPromotionServiceInterface> promotionService;
@@ -24,7 +27,8 @@
 - (instancetype)initWithLocationService:(id<THLLocationServiceInterface>)locationService
 					   promotionService:(id<THLPromotionServiceInterface>)promotionService
                        guestlistService:(id<THLGuestlistServiceInterface>)guestlistService
-						  entityMappper:(THLEntityMapper *)entityMapper;
+						  entityMappper:(THLEntityMapper *)entityMapper
+                        databaseManager:(THLYapDatabaseManager *)databaseManager;
 
 - (void)presentInterfaceInWindow:(UIWindow *)window;
 - (void)dismissInterface;

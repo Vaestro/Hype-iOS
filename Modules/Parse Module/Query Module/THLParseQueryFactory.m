@@ -58,6 +58,7 @@
     
     PFQuery *query = [self baseGuestlistQuery];
     [query whereKey:@"Promotion" matchesQuery:promotionQuery];
+    [query whereKey:@"reviewStatus" notEqualTo:[NSNumber numberWithInteger:2]];
     return query;
 }
 

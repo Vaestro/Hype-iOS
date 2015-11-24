@@ -47,7 +47,8 @@
     }];
     
     [RACObserve(self, placeholderImageText) subscribeNext:^(id x) {
-        [WSELF.imageView setImageWithString:WSELF.placeholderImageText color:kTHLNUIPrimaryBackgroundColor];
+        [WSELF.imageView setImageWithString:WSELF.placeholderImageText
+                                      color:kTHLNUIPrimaryBackgroundColor];
     }];
 }
 
@@ -65,7 +66,6 @@
 //    imageView.layer.borderWidth = 0.5;
     imageView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
 //    imageView.image = [self placeHolderImage];
-//    FBTweakBind(imageView.layer, borderWidth, kTHLFBTweaksCategoryMainKey, kTHLFBTweaksGroupGuestListInvitationPopup, @"Border Radius", 1.0, 0.0, 5.0);
     return imageView;
 }
 

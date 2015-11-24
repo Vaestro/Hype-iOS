@@ -24,7 +24,7 @@
 	[_connection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
 		[WSELF.mappings updateWithTransaction:transaction];
 	}];
-	
+    
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(yapDatabaseModified:)
 												 name:YapDatabaseModifiedNotification
@@ -40,15 +40,17 @@
 	// End & Re-Begin the long-lived transaction atomically.
 	// Also grab all the notifications for all the commits that I jump.
 	// If the UI is a bit backed up, I may jump multiple commits.
-
+    
 	NSArray *notifications = [_connection beginLongLivedReadTransaction];
+    if ([notifications count] == 0) {
+        return; // already processed commit
+    }
 
 	// Process the notification(s),
 	// and get the change-set(s) as applies to my view and mappings configuration.
-
 	NSArray *sectionChanges = nil;
 	NSArray *rowChanges = nil;
-
+    
 	[[_connection ext:_mappings.view] getSectionChanges:&sectionChanges
 					  rowChanges:&rowChanges
 				forNotifications:notifications

@@ -150,7 +150,8 @@
 	THLEventDetailWireframe *wireframe = [[THLEventDetailWireframe alloc] initWithLocationService:self.locationService
 																				 promotionService:self.promotionService
                                                                                  guestlistService:self.guestlistService
-																					entityMappper:self.entityMapper];
+																					entityMappper:self.entityMapper
+                                                                                  databaseManager:self.databaseManager];
 	self.eventDetailWireframe = wireframe;
 	return wireframe;
 }

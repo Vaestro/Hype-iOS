@@ -116,6 +116,7 @@
     _dataSource.cellConfigureBlock = (^(id cell, id object, id parentView, NSIndexPath *indexPath){
         if ([object isKindOfClass:[THLEventHostingTableCellViewModel class]] && [cell conformsToProtocol:@protocol(THLEventHostingTableCellView)]) {
             [(THLEventHostingTableCellViewModel *)object configureView:(id<THLEventHostingTableCellView>)cell];
+            
         }
     });
 }

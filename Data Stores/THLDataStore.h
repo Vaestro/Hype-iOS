@@ -25,6 +25,7 @@
 - (void)removeEntitiesInDomain:(THLDataStoreDomain *)domain;
 - (NSInteger)countEntitiesInDomain:(THLDataStoreDomain *)domain;
 
+//- (NSString *)collectionKey;
 /**
  *  Updates or adds the entities in the datastore.
  */

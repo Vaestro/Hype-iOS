@@ -30,25 +30,13 @@
     return self;
 }
 
-
-
 - (BFTask *)fetchGuestlistsForPromotionAtEvent:(NSString *)eventId {
     WEAKSELF();
     return [[_guestlistService fetchGuestlistsForPromotionAtEvent:eventId] continueWithSuccessBlock:^id(BFTask *task) {
-        THLDataStoreDomain *domain = [WSELF domainForGuestlistsForPromotion];
         NSSet *entities = [NSSet setWithArray:[WSELF.entityMapper mapGuestlists:task.result]];
-        [WSELF.dataStore refreshDomain:domain withEntities:entities];
+        [_dataStore updateOrAddEntities:entities];
         return [BFTask taskWithResult:entities];
     }];
-}
-
-- (THLDataStoreDomain *)domainForGuestlistsForPromotion {
-    THLDataStoreDomain *domain = [[THLDataStoreDomain alloc] initWithMemberTestBlock:^BOOL(THLEntity *entity) {
-        THLGuestlistInviteEntity *guestlistEntity = (THLGuestlistInviteEntity *)entity;
-//        TODO: Basic Hack to make function work
-        return (guestlistEntity != nil);
-    }];
-    return domain;
 }
 
 - (void)dealloc {

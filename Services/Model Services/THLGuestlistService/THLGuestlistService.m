@@ -127,26 +127,16 @@
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
     NSMutableArray *completedGuestlistInvites = [NSMutableArray new];
     [[_queryFactory queryForInvitesOnGuestlist:guestlist] findObjectsInBackgroundWithBlock:^(NSArray *guestlistInvites, NSError *error) {
-        // GuestlistInvites now contains the Guestlist Invites on the Guestlist, and the "Guest" field
-        // has been populated. For example:
         for (PFObject *guestlistInvite in guestlistInvites) {
-            // This does not require a network access.
             PFObject *guest = guestlistInvite[@"Guest"];
-//            PFObject *parentGuestlist = guestlistInvite[@"Guestlist"];
-//            PFObject *parentGuestlistOwner = guestlistInvite[@"Guestlist"][@"Owner"];
-//            [parentGuestlist setObject:parentGuestlistOwner forKey:@"owner"];
             if (guest != nil) {
                 [guestlistInvite setObject:guest forKey:@"guest"];
-            } else {
+            }
+            else {
                 THLUser *dummyGuest = [THLUser new];
-//                UIImage *image = [[UIImage imageNamed:@"Hypelist-Icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-//                NSData *fileData = UIImagePNGRepresentation(image);
-//                PFFile *file = [PFFile fileWithName:@"dummyImage" data:fileData];
-//                dummyGuest.image = file;
                 dummyGuest.firstName = @"Pending Signup";
                 [guestlistInvite setObject:dummyGuest forKey:@"guest"];
             }
-//            [guestlistInvite setObject:parentGuestlist forKey:@"guestlist"];
             [completedGuestlistInvites addObject:guestlistInvite];
         }
         [completionSource setResult:completedGuestlistInvites];
