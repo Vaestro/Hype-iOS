@@ -22,6 +22,7 @@
 
 #import "THLEventDiscoveryWireframe.h"
 #import "THLDashboardWireframe.h"
+#import "THLHostDashboardWireframe.h"
 #import "THLEventDetailWireframe.h"
 #import "THLUserProfileWireframe.h"
 #import "THLEventHostingWireframe.h"
@@ -67,6 +68,7 @@
 @property (nonatomic, weak) THLHostFlowWireframe *hostFlowWireframe;
 @property (nonatomic, weak) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
 @property (nonatomic, weak) THLDashboardWireframe *dashboardWireframe;
+@property (nonatomic, weak) THLHostDashboardWireframe *hostDashboardWireframe;
 @property (nonatomic, weak) THLUserProfileWireframe *userProfileWireframe;
 @property (nonatomic, weak) THLEventDetailWireframe *eventDetailWireframe;
 @property (nonatomic, weak) THLEventHostingWireframe *eventHostingWireframe;
@@ -140,6 +142,16 @@
                                                                                      dataStore:self.guestlistInviteDataStore];
 
     self.dashboardWireframe = wireframe;
+    return wireframe;
+}
+
+- (THLHostDashboardWireframe *)newHostDashboardWireframe {
+    THLHostDashboardWireframe *wireframe = [[THLHostDashboardWireframe alloc] initWithGuestlistService:self.guestlistService
+                                                                                 entityMappper:self.entityMapper
+                                                                         viewDataSourceFactory:self.viewDataSourceFactory
+                                                                                     dataStore:self.guestlistDataStore];
+    
+    self.hostDashboardWireframe = wireframe;
     return wireframe;
 }
 

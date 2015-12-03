@@ -9,16 +9,25 @@
 #import "THLHostFlowDependencyManager.h"
 
 #import "THLHostFlowWireframe.h"
+
 #import "THLEventDiscoveryWireframe.h"
+#import "THLUserProfileWireframe.h"
+#import "THLHostDashboardWireframe.h"
+
 #import "THLEventHostingWireframe.h"
 #import "THLGuestlistReviewWireframe.h"
+
 #import "THLGuestFlowNavigationController.h"
-#import "THLUserProfileWireframe.h"
+#import "SLPagingViewController.h"
+
+#import "UIColor+SLAddition.h"
+#import "THLAppearanceConstants.h"
 
 @interface THLHostFlowWireframe()
 <
 THLEventDiscoveryModuleDelegate,
 THLUserProfileModuleDelegate,
+THLHostDashboardModuleDelegate,
 THLEventHostingModuleDelegate,
 THLGuestlistReviewModuleDelegate
 >
@@ -27,8 +36,13 @@ THLGuestlistReviewModuleDelegate
 @property (nonatomic, strong) THLGuestFlowNavigationController *navigationController;
 @property (nonatomic, strong) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
 @property (nonatomic, strong) THLUserProfileWireframe *userProfileWireframe;
+@property (nonatomic, strong) THLHostDashboardWireframe *dashboardWireframe;
 @property (nonatomic, strong) THLEventHostingWireframe  *eventHostingWireframe;
 @property (nonatomic, strong) THLGuestlistReviewWireframe *guestlistReviewWireframe;
+
+@property (nonatomic, strong) UIView *discoveryNavBarItem;
+@property (nonatomic, strong) UIView *userProfileNavBarItem;
+@property (nonatomic, strong) UIView *dashboardNavBarItem;
 @end
 
 @implementation THLHostFlowWireframe
@@ -46,13 +60,69 @@ THLGuestlistReviewModuleDelegate
     UIViewController *discovery = [[UIViewController alloc] initWithNibName:nil bundle:nil];
     UIViewController *profile = [[UIViewController alloc] initWithNibName:nil bundle:nil];
     UIViewController *dashboard = [[UIViewController alloc] initWithNibName:nil bundle:nil];
-
+    
     [self presentEventDiscoveryInterfaceInViewController:discovery];
+    [self presentDashboardInterfaceInViewController:dashboard];
     [self presentUserProfileInterfaceInViewController:profile];
-    THLGuestFlowNavigationController *guestFlowNavController = [[THLGuestFlowNavigationController alloc] initWithMainViewController:discovery
-                                                                                                             leftSideViewController:dashboard
-                                                                                                            rightSideViewController:profile];
-    _window.rootViewController = guestFlowNavController;
+    
+    NSArray *views = @[dashboard.view, discovery.view, profile.view];
+    
+    NSArray *navBarItems = @[
+                             [self newDashboardNavBarItem],
+                             [self newDiscoveryNavBarItem],
+                             [self newUserProfileNavBarItem]
+                             ];
+    
+    SLPagingViewController *pagingViewController = [[SLPagingViewController alloc] initWithNavBarItems:navBarItems
+                                                                                      navBarBackground:kTHLNUIPrimaryBackgroundColor
+                                                                                                 views:views
+                                                                                       showPageControl:NO];
+    
+    
+    UIColor *gray = [UIColor colorWithRed:.84
+                                    green:.84
+                                     blue:.84
+                                    alpha:1.0];
+    
+    UIColor *gold = kTHLNUIAccentColor;
+    pagingViewController.navigationSideItemsStyle = SLNavigationSideItemsStyleOnBounds;
+    float minX = 45.0;
+    // Tinder Like
+    pagingViewController.pagingViewMoving = ^(NSArray *subviews){
+        float mid  = [UIScreen mainScreen].bounds.size.width/2 - minX;
+        float midM = [UIScreen mainScreen].bounds.size.width - minX;
+        for(UIImageView *v in subviews){
+            UIColor *c = gray;
+            if(v.frame.origin.x > minX
+               && v.frame.origin.x < mid)
+                // Left part
+                c = [UIColor gradient:v.frame.origin.x
+                                  top:minX+1
+                               bottom:mid-1
+                                 init:gold
+                                 goal:gray];
+            else if(v.frame.origin.x > mid
+                    && v.frame.origin.x < midM)
+                // Right part
+                c = [UIColor gradient:v.frame.origin.x
+                                  top:mid+1
+                               bottom:midM-1
+                                 init:gray
+                                 goal:gold];
+            else if(v.frame.origin.x == mid)
+                c = gold;
+            v.tintColor= c;
+        }
+    };
+    [pagingViewController setCurrentIndex:1 animated:NO];
+    
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:pagingViewController];
+    
+    navigationController.edgesForExtendedLayout = UIRectEdgeNone;
+    navigationController.automaticallyAdjustsScrollViewInsets = YES;
+    
+    _window.rootViewController = navigationController;
     [_window makeKeyAndVisible];
 }
 
@@ -71,6 +141,13 @@ THLGuestlistReviewModuleDelegate
     _currentWireframe = _eventDiscoveryWireframe;
     [_eventDiscoveryWireframe.moduleInterface setModuleDelegate:self];
     [_eventDiscoveryWireframe.moduleInterface presentEventDiscoveryInterfaceInViewController:viewController];
+}
+
+- (void)presentDashboardInterfaceInViewController:(UIViewController *)viewController {
+    _dashboardWireframe = [_dependencyManager newHostDashboardWireframe];
+    _currentWireframe = _dashboardWireframe;
+    [_dashboardWireframe.moduleInterface setModuleDelegate:self];
+    [_dashboardWireframe.moduleInterface presentDashboardInterfaceInViewController:viewController];
 }
 
 - (void)presentUserProfileInterfaceInViewController:(UIViewController *)viewController {
@@ -100,6 +177,11 @@ THLGuestlistReviewModuleDelegate
     [self presentEventHostingInterfaceForEvent:eventEntity];
 }
 
+#pragma mark - THLHostDashboardModuleDelegate
+- (void)hostDashboardModule:(id<THLHostDashboardModuleInterface>)module didClickToViewGuestlistReqeust:(THLGuestlistEntity *)guestlist {
+    [self presentGuestlistReviewInterfaceForGuestlist:guestlist inController:_window.rootViewController];
+}
+
 #pragma mark - THLEventHostingModuleDelegate
 - (void)eventHostingModule:(id<THLEventHostingModuleInterface>)module userDidSelectGuestlistEntity:(THLGuestlistEntity *)guestlistEntity presentGuestlistReviewInterfaceOnController:(UIViewController *)controller {
     [self presentGuestlistReviewInterfaceForGuestlist:guestlistEntity inController:controller];
@@ -117,6 +199,30 @@ THLGuestlistReviewModuleDelegate
 #pragma mark - THLUserProfileModuleDelegate
 - (void)logOutUser {
     [self.moduleDelegate logOutUser];
+}
+
+- (UIView *)newDiscoveryNavBarItem {
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"Hypelist-Icon"]
+                                                                 imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+    imageView.frame = CGRectMake(0, 0, 20, 20);
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    imageView.tintColor = kTHLNUIGrayFontColor;
+    return imageView;
+}
+
+- (UIView *)newUserProfileNavBarItem {
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"Profile Icon"]
+                                                                 imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+    imageView.tintColor = kTHLNUIGrayFontColor;
+    return imageView;
+}
+
+- (UIView *)newDashboardNavBarItem {
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"Lists Icon"]
+                                                                 imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    imageView.tintColor = kTHLNUIGrayFontColor;
+    return imageView;
 }
 
 @end

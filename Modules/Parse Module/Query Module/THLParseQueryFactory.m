@@ -51,6 +51,17 @@
 }
 
 #pragma mark - Guestlist Queries
+- (PFQuery *)queryForGuestlists {
+    PFQuery *promotionQuery = [self basePromotionQuery];
+    [promotionQuery whereKey:@"host" equalTo:[THLUser currentUser]];
+    [promotionQuery whereKey:@"time" greaterThanOrEqualTo:[[NSDate date] dateByAddingTimeInterval:-60*300]];
+
+    PFQuery *query = [self baseGuestlistQuery];
+    [query whereKey:@"Promotion" matchesQuery:promotionQuery];
+    [query whereKey:@"reviewStatus" notEqualTo:[NSNumber numberWithInteger:2]];
+    return query;
+}
+
 - (PFQuery *)queryForGuestlistsForPromotionAtEvent:(NSString *)eventId {
     PFQuery *promotionQuery = [self basePromotionQuery];
     [promotionQuery whereKey:@"eventId" equalTo:eventId];

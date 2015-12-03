@@ -215,7 +215,7 @@ THLGuestlistReviewInteractorDelegate
 
 - (void)handleDecisionAction {
     NSString *ownerName = _guestlistInviteEntity.guestlist.owner.firstName;
-    NSString *eventName =_guestlistInviteEntity.guestlist.promotion.event.title;
+    NSString *eventName =_guestlistInviteEntity.guestlist.promotion.event.location.name;
     NSString *promotionTime =_guestlistInviteEntity.guestlist.promotion.time.thl_timeString;
     NSString *promotionDate =_guestlistInviteEntity.guestlist.promotion.time.thl_weekdayString;
     
@@ -233,11 +233,11 @@ THLGuestlistReviewInteractorDelegate
             break;
         }
         case THLGuestlistReviewerStatusPendingHost: {
-            [_view confirmActionWithMessage:[NSString stringWithFormat:@"%@'s party would like to join to your guestlist for %@, %@ at %@", ownerName, eventName,promotionDate, promotionTime] acceptTitle:@"ACCEPT" declineTitle:@"DECLINE"];
+            [_view confirmActionWithMessage:[NSString stringWithFormat:@"%@'s party would like to join to your guestlist for %@, %@ at %@", _guestlistEntity.owner.firstName, _guestlistEntity.promotion.event.location.name ,_guestlistEntity.promotion.time.thl_weekdayString, _guestlistEntity.promotion.time.thl_timeString] acceptTitle:@"ACCEPT" declineTitle:@"DECLINE"];
             break;
         }
         case THLGuestlistReviewerStatusActiveHost: {
-            [_view confirmActionWithMessage:[NSString stringWithFormat:@"Are you sure you want to check in %@'s party for %@?", ownerName, eventName] acceptTitle:@"YES" declineTitle:@"NO"];
+            [_view confirmActionWithMessage:[NSString stringWithFormat:@"Are you sure you want to check in %@'s party for %@?", _guestlistEntity.owner.firstName, _guestlistEntity.promotion.event.title] acceptTitle:@"YES" declineTitle:@"NO"];
             break;
         }
         default: {

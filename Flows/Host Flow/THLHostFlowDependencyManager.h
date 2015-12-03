@@ -11,10 +11,12 @@
 @class THLUserProfileWireframe;
 @class THLEventHostingWireframe;
 @class THLEventDiscoveryWireframe;
+@class THLHostDashboardWireframe;
 @class THLGuestlistReviewWireframe;
 
 @protocol THLHostFlowDependencyManager <NSObject>
 - (THLEventDiscoveryWireframe *)newEventDiscoveryWireframe;
+- (THLHostDashboardWireframe *)newHostDashboardWireframe;
 - (THLUserProfileWireframe *)newUserProfileWireframe;
 - (THLEventHostingWireframe *)newEventHostingWireframe;
 - (THLGuestlistReviewWireframe *)newGuestlistReviewWireframe;

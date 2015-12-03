@@ -1,17 +1,16 @@
 //
-//  THLDashboardPresenter.m
+//  THLHostDashboardPresenter.m
 //  TheHypelist
 //
-//  Created by Edgar Li on 11/17/15.
+//  Created by Edgar Li on 12/3/15.
 //  Copyright © 2015 Hypelist. All rights reserved.
 //
 
-#import "THLDashboardPresenter.h"
-#import "THLDashboardInteractor.h"
-#import "THLDashboardWireframe.h"
-#import "THLDashboardView.h"
+#import "THLHostDashboardPresenter.h"
+#import "THLHostDashboardInteractor.h"
+#import "THLHostDashboardWireframe.h"
+#import "THLHostDashboardView.h"
 
-#import "THLGuestlistInviteEntity.h"
 #import "THLEventEntity.h"
 #import "THLHostEntity.h"
 #import "THLPromotionEntity.h"
@@ -19,29 +18,28 @@
 
 #import "THLViewDataSource.h"
 #import "THLDashboardNotificationCell.h"
-#import "THLDashboardNotificationCellViewModel.h"
-#import "THLDashboardTicketCellViewModel.h"
+#import "THLHostDashboardNotificationCellViewModel.h"
+#import "THLHostDashboardTicketCellViewModel.h"
 
-@interface THLDashboardPresenter()
+@interface THLHostDashboardPresenter()
 <
-THLDashboardInteractorDelegate
+THLHostDashboardInteractorDelegate
 >
-@property (nonatomic, strong) id<THLDashboardView> view;
+@property (nonatomic, strong) id<THLHostDashboardView> view;
 
 @property (nonatomic) BOOL refreshing;
 
 @property (nonatomic, strong) THLEventEntity *eventEntity;
 @property (nonatomic, strong) THLPromotionEntity *promotionEntity;
 @property (nonatomic, strong) THLGuestlistEntity *guestlistEntity;
-@property (nonatomic, strong) THLGuestlistInviteEntity *guestlistInviteEntity;
 
 @end
 
-@implementation THLDashboardPresenter
+@implementation THLHostDashboardPresenter
 @synthesize moduleDelegate;
 
-- (instancetype)initWithWireframe:(THLDashboardWireframe *)wireframe
-                       interactor:(THLDashboardInteractor *)interactor {
+- (instancetype)initWithWireframe:(THLHostDashboardWireframe *)wireframe
+                       interactor:(THLHostDashboardInteractor *)interactor {
     if (self = [super init]) {
         _wireframe = wireframe;
         _interactor = interactor;
@@ -50,18 +48,18 @@ THLDashboardInteractorDelegate
     return self;
 }
 
-- (void)configureView:(id<THLDashboardView>)view {
+- (void)configureView:(id<THLHostDashboardView>)view {
     self.view = view;
     
     THLViewDataSource *dataSource = [_interactor getDataSource];
     dataSource.dataTransformBlock = ^id(id item) {
-        THLGuestlistInviteEntity *guestlistInvite = (THLGuestlistInviteEntity *)item;
-        if (guestlistInvite.response == THLStatusPending) {
-            return [[THLDashboardNotificationCellViewModel alloc] initWithGuestlistInvite:(THLGuestlistInviteEntity *)item];
-        }
-        if (guestlistInvite.response == THLStatusAccepted) {
-            return [[THLDashboardTicketCellViewModel alloc] initWithGuestlistInvite:(THLGuestlistInviteEntity *)item];
-        }
+//        THLGuestlistEntity *guestlist = (THLGuestlistEntity *)item;
+//        if (guestlist.reviewStatus == THLStatusPending) {
+            return [[THLHostDashboardNotificationCellViewModel alloc] initWithGuestlist:(THLGuestlistEntity *)item];
+//        }
+//        if (guestlist.reviewStatus == THLStatusAccepted) {
+//            return [[THLHostDashboardTicketCellViewModel alloc] initWithGuestlist:(THLGuestlistEntity *)item];
+//        }
         return nil;
     };
     
@@ -86,12 +84,12 @@ THLDashboardInteractorDelegate
     [_view setSelectedIndexPathCommand:selectedIndexPathCommand];
     [_view setRefreshCommand:refreshCommand];
     
-//    [[RACObserve(self.view, viewAppeared) filter:^BOOL(NSNumber *b) {
-//        BOOL viewIsAppearing = [b boolValue];
-//        return viewIsAppearing == TRUE;
-//    }] subscribeNext:^(id x) {
-//        [WSELF reloadInvites];
-//    }];
+    //    [[RACObserve(self.view, viewAppeared) filter:^BOOL(NSNumber *b) {
+    //        BOOL viewIsAppearing = [b boolValue];
+    //        return viewIsAppearing == TRUE;
+    //    }] subscribeNext:^(id x) {
+    //        [WSELF reloadInvites];
+    //    }];
 }
 
 - (void)presentDashboardInterfaceInViewController:(UIViewController *)viewController {
@@ -100,16 +98,16 @@ THLDashboardInteractorDelegate
 
 - (void)handleRefreshAction {
     self.refreshing = YES;
-    [_interactor updateGuestlistInvites];
+    [_interactor updateGuestlists];
 }
 
 - (void)handleIndexPathSelection:(NSIndexPath *)indexPath {
-    THLGuestlistInviteEntity *guestlistInviteEntity = [[_view dataSource] untransformedItemAtIndexPath:indexPath];
-    [self.moduleDelegate dashboardModule:self didClickToViewEvent:guestlistInviteEntity.guestlist.promotion.event];
+    THLGuestlistEntity *guestlistEntity = [[_view dataSource] untransformedItemAtIndexPath:indexPath];
+    [self.moduleDelegate hostDashboardModule:self didClickToViewGuestlistReqeust:guestlistEntity];
 }
 
-#pragma mark - THLDashboardInteractorDelegate
-- (void)interactor:(THLDashboardInteractor *)interactor didUpdateGuestlistInvites:(NSError *)error {
+#pragma mark - THLHostDashboardInteractorDelegate
+- (void)interactor:(THLHostDashboardInteractor *)interactor didUpdateGuestlists:(NSError *)error {
     self.refreshing = NO;
 }
 @end

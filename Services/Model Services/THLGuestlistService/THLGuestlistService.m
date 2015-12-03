@@ -48,6 +48,28 @@
 }
 
 //----------------------------------------------------------------
+#pragma mark - Fetch Guestlists For Host for Dashboard Notifications
+//----------------------------------------------------------------
+
+- (BFTask *)fetchGuestlistsRequestsForHost {
+    BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
+    NSMutableArray *completedGuestlists = [NSMutableArray new];
+    [[_queryFactory queryForGuestlists] findObjectsInBackgroundWithBlock:^(NSArray *guestlists, NSError *error) {
+        for (PFObject *guestlist in guestlists) {
+            PFObject *promotion = guestlist[@"Promotion"];
+            [guestlist setObject:promotion forKey:@"Promotion"];
+            PFObject *host = guestlist[@"Promotion"][@"host"];
+            if (host != nil) {
+                [guestlist setObject:promotion forKey:@"host"];
+            }
+            [completedGuestlists addObject:guestlist];
+        }
+        [completionSource setResult:completedGuestlists];
+    }];
+    return completionSource.task;
+}
+
+//----------------------------------------------------------------
 #pragma mark - Create Guestlist For Promotion
 //----------------------------------------------------------------
 
