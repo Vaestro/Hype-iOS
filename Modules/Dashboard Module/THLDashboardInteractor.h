@@ -10,9 +10,11 @@
 @class THLDashboardDataManager;
 @class THLDashboardInteractor;
 @class THLGuestlistInviteEntity;
+@class THLViewDataSource;
+@protocol THLViewDataSourceFactoryInterface;
 
 @protocol THLDashboardInteractorDelegate <NSObject>
-- (void)interactor:(THLDashboardInteractor *)interactor didGetAcceptedGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite error:(NSError *)error;
+- (void)interactor:(THLDashboardInteractor *)interactor didUpdateGuestlistInvites:(NSError *)error;
 @end
 
 @interface THLDashboardInteractor : NSObject
@@ -20,7 +22,11 @@
 
 #pragma mark - Dependencies
 @property (nonatomic, readonly, weak) THLDashboardDataManager *dataManager;
-- (instancetype)initWithDataManager:(THLDashboardDataManager *)dataManager;
+@property (nonatomic, readonly, weak) id<THLViewDataSourceFactoryInterface> viewDataSourceFactory;
 
-- (void)checkForGuestlistInvites;
+- (instancetype)initWithDataManager:(THLDashboardDataManager *)dataManager
+              viewDataSourceFactory:(id<THLViewDataSourceFactoryInterface>)viewDataSourceFactory;
+
+- (void)updateGuestlistInvites;
+- (THLViewDataSource *)getDataSource;
 @end

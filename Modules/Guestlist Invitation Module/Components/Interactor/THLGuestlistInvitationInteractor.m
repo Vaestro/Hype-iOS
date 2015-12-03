@@ -145,8 +145,11 @@ static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInv
     WEAKSELF();
 //	[self checkForGuestlist];
     if (_guestlistId == nil) {
-        [[_dataManager submitGuestlistForPromotion:_promotionEntity withInvites:[self obtainDigits:_addedGuests]] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
-            [WSELF.delegate interactor:WSELF didCommitChangesToGuestlist:task.error];
+        [[_dataManager submitGuestlistForPromotion:_promotionEntity withInvites:[self obtainDigits:_addedGuests]] continueWithSuccessBlock:^id(BFTask *task) {
+            [[_dataManager getOwnerInviteForPromotion:_promotionEntity] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *fetchTask) {
+                [WSELF.delegate interactor:WSELF didCommitChangesToGuestlist:task.error];
+                return nil;
+            }];
             return nil;
         }];
     } else if (_guestlistId != nil) {

@@ -273,6 +273,7 @@ THLGuestlistReviewInteractorDelegate
     if (!error && response == THLStatusAccepted) {
         self.reviewerStatus = THLGuestlistReviewerStatusAttendingGuest;
         self.activityStatus = THLActivityStatusSuccess;
+        [_interactor updateGuestlistInvites];
     } else if (!error && response == THLStatusDeclined) {
         self.activityStatus = THLActivityStatusNone;
         [_wireframe dismissInterface];

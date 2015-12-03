@@ -21,17 +21,19 @@
 
 @implementation THLPopupNotificationWireframe
 - (instancetype)initWithGuestlistService:(id<THLGuestlistServiceInterface>)guestlistService
-                                  entityMapper:(THLEntityMapper *)entityMapper {
+                                  entityMapper:(THLEntityMapper *)entityMapper
+                               dataStore:(THLDataStore *)dataStore {
     if (self = [super init]) {
         _guestlistService = guestlistService;
         _entityMapper = entityMapper;
+        _dataStore = dataStore;
         [self buildModule];
     }
     return self;
 }
 
 - (void)buildModule {
-    _dataManager = [[THLPopupNotificationDataManager alloc] initWithGuestlistService:_guestlistService entityMapper:_entityMapper];
+    _dataManager = [[THLPopupNotificationDataManager alloc] initWithGuestlistService:_guestlistService entityMapper:_entityMapper dataStore:_dataStore];
     _interactor = [[THLPopupNotificationInteractor alloc] initWithDataManager:_dataManager];
     _presenter = [[THLPopupNotificationPresenter alloc] initWithWireframe:self interactor:_interactor];
 }

@@ -18,8 +18,6 @@
 
 @protocol THLEventDetailInteractorDelegate <NSObject>
 - (void)interactor:(THLEventDetailInteractor *)interactor didGetPlacemark:(CLPlacemark *)placemark forLocation:(THLLocationEntity *)locationEntity error:(NSError *)error;
-//- (void)interactor:(THLEventDetailInteractor *)interactor userUnavailableForEvent:(THLEventEntity *)event;
-
 - (void)interactor:(THLEventDetailInteractor *)interactor didGetGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite forEvent:(THLEventEntity *)event error:(NSError *)error;
 - (void)interactor:(THLEventDetailInteractor *)interactor didGetPromotion:(THLPromotionEntity *)promotionEntity forEvent:(NSString *)eventId error:(NSError *)error;
 @end
@@ -33,5 +31,5 @@
 
 - (void)getPlacemarkForLocation:(THLLocationEntity *)locationEntity;
 - (void)getPromotionForEvent:(NSString *)eventId;
-- (void)checkValidGuestlistInviteForUser:(THLUser *)user atEvent:(THLEventEntity *)event;
+- (void)checkValidGuestlistInviteForEvent:(THLEventEntity *)event;
 @end

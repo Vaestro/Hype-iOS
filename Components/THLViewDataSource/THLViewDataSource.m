@@ -21,6 +21,9 @@
 - (void)beginObservingChanges {
     WEAKSELF();
 	[_connection beginLongLivedReadTransaction];
+    
+    [_mappings setIsDynamicSectionForAllGroups:YES];
+    
 	[_connection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
 		[WSELF.mappings updateWithTransaction:transaction];
 	}];
@@ -45,16 +48,27 @@
     if ([notifications count] == 0) {
         return; // already processed commit
     }
-
+    
+    // Check to see if I need to do anything
+    if ( ! [[_connection ext:_mappings.view] hasChangesForNotifications:notifications])
+    {
+        // Sweet.
+        // Just update my mappings so it's on the same snapshot as my connection, and I'm done.
+        [_connection readWithBlock:^(YapDatabaseReadTransaction *transaction){
+            [_mappings updateWithTransaction:transaction];
+        }];
+        return; // Good to go :)
+    }
+    
 	// Process the notification(s),
 	// and get the change-set(s) as applies to my view and mappings configuration.
 	NSArray *sectionChanges = nil;
 	NSArray *rowChanges = nil;
     
 	[[_connection ext:_mappings.view] getSectionChanges:&sectionChanges
-					  rowChanges:&rowChanges
-				forNotifications:notifications
-					withMappings:_mappings];
+                                             rowChanges:&rowChanges
+                                       forNotifications:notifications
+                                           withMappings:_mappings];
     WEAKSELF();
 	if (self.tableView) {
 		[self.tableView beginUpdates];
@@ -63,7 +77,9 @@
 	} else if (self.collectionView) {
 		[self.collectionView performBatchUpdates:^{
 			[WSELF updateWithSectionChanges:sectionChanges rowChanges:rowChanges];
-		} completion:NULL];
+        } completion:^(BOOL finished) {
+            [self.collectionView reloadData];
+        } ];
 	}
 }
 
@@ -146,6 +162,14 @@
 }
 
 #pragma mark - UICollectionViewDataSource
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+//    NSLog(@"NUMBER OF SECTIONS IN %@ IS: %ld", self, [self numberOfSections]);
+    return [self numberOfSections];
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return [self numberOfItemsInSection:section];
+}
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
 				  cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -158,14 +182,6 @@
 			 parentView:collectionView
 			  indexPath:indexPath];
 	return cell;
-}
-
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-	return [self numberOfSections];
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-	return [self numberOfItemsInSection:section];
 }
 
 #pragma mark - Empty Views
@@ -243,6 +259,7 @@
 		// Nothing has changed that affects our tableView
 		return;
 	}
+//    NSMutableArray *newSections = [NSMutableArray new];
 
 	for (YapDatabaseViewSectionChange *sectionChange in sectionChanges)
 	{
@@ -256,6 +273,7 @@
 			case YapDatabaseViewChangeInsert :
 			{
 				[self insertSectionsAtIndexes:[NSIndexSet indexSetWithIndex:sectionChange.index]];
+//                [newSections addObject:[NSNumber numberWithInteger:sectionChange.index]];
 				break;
 			}
 			default: {
@@ -275,12 +293,12 @@
 			}
 			case YapDatabaseViewChangeInsert :
 			{
-				[self insertCellsAtIndexPaths:@[rowChange.newIndexPath]];
+                [self insertCellsAtIndexPaths:@[rowChange.newIndexPath]];
 				break;
 			}
 			case YapDatabaseViewChangeMove :
 			{
-				[self moveCellAtIndexPath:rowChange.indexPath toIndexPath:rowChange.newIndexPath];
+                [self moveCellAtIndexPath:rowChange.indexPath toIndexPath:rowChange.newIndexPath];
 				break;
 			}
 			case YapDatabaseViewChangeUpdate :
@@ -288,79 +306,114 @@
 				[self reloadCellsAtIndexPaths:@[rowChange.indexPath]];
 				break;
 			}
+            default: {
+                break;
+            }
 		}
 	}
 }
 
-- (void)insertCellsAtIndexPaths:(NSArray *)indexPaths {
-	[self.tableView insertRowsAtIndexPaths:indexPaths
-						  withRowAnimation:UITableViewRowAnimationAutomatic];
-
-	[self.collectionView insertItemsAtIndexPaths:indexPaths];
-
-	[self updateEmptyView];
-}
-
-- (void)deleteCellsAtIndexPaths:(NSArray *)indexPaths {
-	[self.tableView deleteRowsAtIndexPaths:indexPaths
-						  withRowAnimation:UITableViewRowAnimationAutomatic];
-
-	[self.collectionView deleteItemsAtIndexPaths:indexPaths];
-
-	[self updateEmptyView];
-}
-
-- (void)reloadCellsAtIndexPaths:(NSArray *)indexPaths {
-	[self.tableView reloadRowsAtIndexPaths:indexPaths
-						  withRowAnimation:UITableViewRowAnimationAutomatic];
-
-	[self.collectionView reloadItemsAtIndexPaths:indexPaths];
-}
-
-- (void)moveCellAtIndexPath:(NSIndexPath *)index1 toIndexPath:(NSIndexPath *)index2 {
-	[self.tableView moveRowAtIndexPath:index1
-						   toIndexPath:index2];
-
-	[self.collectionView moveItemAtIndexPath:index1
-								 toIndexPath:index2];
-}
-
-- (void)moveSectionAtIndex:(NSInteger)index1 toIndex:(NSInteger)index2 {
-	[self.tableView moveSection:index1
-					  toSection:index2];
-
-	[self.collectionView moveSection:index1
-						   toSection:index2];
-}
+//- (void)moveSectionAtIndex:(NSInteger)index1 toIndex:(NSInteger)index2 {
+//	[self.tableView moveSection:index1
+//					  toSection:index2];
+//
+//	[self.collectionView moveSection:index1
+//						   toSection:index2];
+//}
 
 - (void)insertSectionsAtIndexes:(NSIndexSet *)indexes {
-	[self.tableView insertSections:indexes
-				  withRowAnimation:UITableViewRowAnimationAutomatic];
+    if (self.tableView) {
+        [self.tableView insertSections:indexes
+                      withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
 
-	[self.collectionView insertSections:indexes];
-
+    if (self.collectionView) {
+        [self.collectionView insertSections:indexes];
+    }
 	[self updateEmptyView];
 }
 
 - (void)deleteSectionsAtIndexes:(NSIndexSet *)indexes {
-	[self.tableView deleteSections:indexes
-				  withRowAnimation:UITableViewRowAnimationAutomatic];
+    if (self.tableView) {
+        [self.tableView deleteSections:indexes
+                      withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
 
-	[self.collectionView deleteSections:indexes];
+    if (self.collectionView) {
+        [self.collectionView deleteSections:indexes];
+    }
 
 	[self updateEmptyView];
 }
 
 - (void)reloadSectionsAtIndexes:(NSIndexSet *)indexes {
-	[self.tableView reloadSections:indexes
-				  withRowAnimation:UITableViewRowAnimationAutomatic];
+    if (self.tableView) {
+        [self.tableView reloadSections:indexes
+                      withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    
+    if (self.collectionView) {
+        [self.collectionView reloadSections:indexes];
+    }
+}
 
-	[self.collectionView reloadSections:indexes];
+- (void)insertCellsAtIndexPaths:(NSArray *)indexPaths {
+    if (self.tableView) {
+        [self.tableView insertRowsAtIndexPaths:indexPaths
+                              withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    
+    if (self.collectionView) {
+        [self.collectionView insertItemsAtIndexPaths:indexPaths];
+        
+    }
+    
+    [self updateEmptyView];
+}
+
+- (void)deleteCellsAtIndexPaths:(NSArray *)indexPaths {
+    if (self.tableView) {
+        [self.tableView deleteRowsAtIndexPaths:indexPaths
+                              withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    
+    if (self.collectionView) {
+        [self.collectionView deleteItemsAtIndexPaths:indexPaths];
+    }
+    
+    [self updateEmptyView];
+}
+
+- (void)reloadCellsAtIndexPaths:(NSArray *)indexPaths {
+    if (self.tableView) {
+        [self.tableView reloadRowsAtIndexPaths:indexPaths
+                              withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    
+    if (self.collectionView) {
+        [self.collectionView reloadItemsAtIndexPaths:indexPaths];
+    }
+}
+
+- (void)moveCellAtIndexPath:(NSIndexPath *)index1 toIndexPath:(NSIndexPath *)index2 {
+//    if (self.tableView) {
+        [self deleteCellsAtIndexPaths:@[index1]];
+        [self insertCellsAtIndexPaths:@[index2]];
+//    }
+//    if (self.collectionView) {
+//        [self.collectionView moveItemAtIndexPath:index1
+//								 toIndexPath:index2];
+//    }
 }
 
 - (void)reloadData {
-	[self.tableView reloadData];
-	[self.collectionView reloadData];
+    if (self.tableView) {
+        [self.tableView reloadData];
+    }
+    
+    if (self.collectionView) {
+        [self.collectionView reloadData];
+    }
 
 	[self updateEmptyView];
 }

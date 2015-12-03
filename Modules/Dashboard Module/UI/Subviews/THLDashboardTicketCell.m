@@ -1,26 +1,34 @@
 //
-//  THLEventTicketView.m
+//  THLDashboardTicketCell.m
 //  TheHypelist
 //
-//  Created by Edgar Li on 11/17/15.
+//  Created by Edgar Li on 11/28/15.
 //  Copyright © 2015 Hypelist. All rights reserved.
 //
 
-#import "THLEventTicketView.h"
+#import "THLDashboardTicketCell.h"
+#import "UIView+DimView.h"
 #import "THLAppearanceConstants.h"
-#import "THLActionBarButton.h"
 #import "THLPersonIconView.h"
 #import "THLEventTicketVenueView.h"
 #import "THLEventTicketPromotionView.h"
 
-@interface THLEventTicketView()
+@interface THLDashboardTicketCell()
 @property (nonatomic, strong) THLEventTicketVenueView *venueView;
 @property (nonatomic, strong) THLEventTicketPromotionView *promotionView;
-@property (nonatomic, strong) THLActionBarButton *actionButton;
+//@property (nonatomic, strong) THLActionBarButton *actionButton;
 
 @end
 
-@implementation THLEventTicketView
+@implementation THLDashboardTicketCell
+@synthesize locationImageURL;
+@synthesize promotionMessage;
+@synthesize hostImageURL;
+@synthesize hostName;
+@synthesize eventName;
+@synthesize eventDate;
+@synthesize locationName;
+
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         [self constructView];
@@ -33,33 +41,34 @@
 - (void)constructView {
     _venueView = [self newVenueView];
     _promotionView = [self newPromotionView];
-    _actionButton = [self newActionButton];
+//    _actionButton = [self newActionButton];
 }
 
 - (void)layoutView {
     self.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     self.clipsToBounds = YES;
     self.layer.cornerRadius = 5;
-
-    [self addSubviews:@[_venueView,
-                             _promotionView,
-                        _actionButton]];
     
+    [self addSubviews:@[_venueView,
+                        _promotionView]];
+    WEAKSELF();
+
     [_venueView makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.insets(kTHLEdgeInsetsNone());
-        make.height.equalTo(125);
+        make.height.equalTo(SV(WSELF.venueView)).sizeOffset(CGSizeMake(100, -160));
     }];
     
-    WEAKSELF();
     [_promotionView makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF venueView].mas_bottom).insets(kTHLEdgeInsetsHigh());
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+        make.bottom.insets(kTHLEdgeInsetsHigh());
+//        make.height.equalTo(SV(WSELF.venueView)).sizeOffset(CGSizeMake(100, -90));
     }];
     
-    [_actionButton makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF promotionView].mas_bottom).insets(kTHLEdgeInsetsHigh());
-        make.bottom.left.right.insets(kTHLEdgeInsetsNone());
-    }];
+//    [_actionButton makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo([WSELF promotionView].mas_bottom).insets(kTHLEdgeInsetsHigh());
+//        make.bottom.left.right.insets(kTHLEdgeInsetsNone());
+//    }];
 }
 
 - (void)bindView {
@@ -70,7 +79,7 @@
     RAC(self.promotionView, hostImageURL) = RACObserve(self, hostImageURL);
     RAC(self.promotionView, hostName, @"") = RACObserve(self, hostName);
     
-    RAC(self.actionButton, rac_command) = RACObserve(self, actionButtonCommand);
+//    RAC(self.actionButton, rac_command) = RACObserve(self, actionButtonCommand);
 }
 
 #pragma mark - Constructors
@@ -85,11 +94,15 @@
     return promotionView;
 }
 
-- (THLActionBarButton *)newActionButton {
-    THLActionBarButton *button = [[THLActionBarButton alloc] initWithFrame:CGRectZero];
-    button.backgroundColor = [button tealColor];
-    [button setTitle:@"VIEW EVENT" animateChanges:NO];
-    return button;
-}
+//- (THLActionBarButton *)newActionButton {
+//    THLActionBarButton *button = [[THLActionBarButton alloc] initWithFrame:CGRectZero];
+//    button.backgroundColor = [button tealColor];
+//    [button setTitle:@"VIEW EVENT" animateChanges:NO];
+//    return button;
+//}
 
+#pragma mark - Public Interface
++ (NSString *)identifier {
+    return NSStringFromClass(self.class);
+}
 @end

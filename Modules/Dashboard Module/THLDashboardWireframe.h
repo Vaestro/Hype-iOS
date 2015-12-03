@@ -9,16 +9,24 @@
 #import <Foundation/Foundation.h>
 #import "THLDashboardModuleInterface.h"
 
-@class THLEntityMapper;
 @protocol THLGuestlistServiceInterface;
+@protocol THLViewDataSourceFactoryInterface;
+@class THLEntityMapper;
+@class THLDataStore;
 
 @interface THLDashboardWireframe : NSObject
 @property (nonatomic, readonly) id<THLDashboardModuleInterface> moduleInterface;
+
 #pragma mark - Dependencies
 @property (nonatomic, readonly, weak) id<THLGuestlistServiceInterface> guestlistService;
 @property (nonatomic, readonly, weak) THLEntityMapper *entityMapper;
+@property (nonatomic, readonly, weak) id<THLViewDataSourceFactoryInterface> viewDataSourceFactory;
+@property (nonatomic, readonly, weak) THLDataStore *dataStore;
+
 - (instancetype)initWithGuestlistService:(id<THLGuestlistServiceInterface>)guestlistService
-                          entityMappper:(THLEntityMapper *)entityMapper;
+                          entityMappper:(THLEntityMapper *)entityMapper
+                   viewDataSourceFactory:(id<THLViewDataSourceFactoryInterface>)viewDataSourceFactory
+                               dataStore:(THLDataStore *)dataStore;
 
 - (void)presentInterfaceInViewController:(UIViewController *)viewController;
 @end

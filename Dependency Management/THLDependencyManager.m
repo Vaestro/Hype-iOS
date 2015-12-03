@@ -135,7 +135,10 @@
 
 - (THLDashboardWireframe *)newDashboardWireframe {
     THLDashboardWireframe *wireframe = [[THLDashboardWireframe alloc] initWithGuestlistService:self.guestlistService
-                                                                            entityMappper:self.entityMapper];
+                                                                            entityMappper:self.entityMapper
+                                                                         viewDataSourceFactory:self.viewDataSourceFactory
+                                                                                     dataStore:self.guestlistInviteDataStore];
+
     self.dashboardWireframe = wireframe;
     return wireframe;
 }
@@ -176,7 +179,8 @@
                                                                                                       entityMapper:self.entityMapper
 																							 viewDataSourceFactory:self.viewDataSourceFactory
 																									   addressBook:self.addressBook
-																										 dataStore:self.guestDataStore];
+																										 dataStore:self.guestDataStore
+                                                                                          guestlistInviteDataStore:self.guestlistInviteDataStore];
 	self.guestlistInvitationWireframe = wireframe;
 	return wireframe;
 }
@@ -204,7 +208,8 @@
 
 - (THLPopupNotificationWireframe *)newPopupNotificationWireframe {
     THLPopupNotificationWireframe *wireframe = [[THLPopupNotificationWireframe alloc] initWithGuestlistService:self.guestlistService
-                                                                                                  entityMapper:self.entityMapper];
+                                                                                                  entityMapper:self.entityMapper
+                                                                                                     dataStore:self.guestlistInviteDataStore];
     self.popupNotificationWireframe = wireframe;
     return wireframe;
 }

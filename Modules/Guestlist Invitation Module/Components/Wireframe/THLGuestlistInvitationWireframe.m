@@ -25,20 +25,22 @@
                             entityMapper:(THLEntityMapper *)entityMapper
 				   viewDataSourceFactory:(id<THLViewDataSourceFactoryInterface>)viewDataSourceFactory
 							 addressBook:(APAddressBook *)addressBook
-dataStore:(THLDataStore *)dataStore{
+                               dataStore:(THLDataStore *)dataStore
+                guestlistInviteDataStore:(THLDataStore *)guestlistInviteDataStore  {
 	if (self = [super init]) {
 		_guestlistService = guestlistService;
 		_viewDataSourceFactory = viewDataSourceFactory;
         _entityMapper = entityMapper;
 		_addressBook = addressBook;
 		_dataStore = dataStore;
+        _guestlistInviteDataStore = guestlistInviteDataStore;
 		[self buildModule];
 	}
 	return self;
 }
 
 - (void)buildModule {
-    _dataManager = [[THLGuestlistInvitationDataManager alloc] initWithGuestlistService:_guestlistService entityMapper: _entityMapper dataStore:_dataStore addressBook:_addressBook];
+    _dataManager = [[THLGuestlistInvitationDataManager alloc] initWithGuestlistService:_guestlistService entityMapper: _entityMapper dataStore:_dataStore addressBook:_addressBook guestlistInviteDataStore:_guestlistInviteDataStore];
 	_interactor = [[THLGuestlistInvitationInteractor alloc] initWithDataManager:_dataManager viewDataSourceFactory:_viewDataSourceFactory];
 	_view = [[THLGuestlistInvitationViewController alloc] initWithNibName:nil bundle:nil];
 	_presenter = [[THLGuestlistInvitationPresenter alloc] initWithWireframe:self

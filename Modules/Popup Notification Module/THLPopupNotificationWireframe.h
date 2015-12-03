@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "THLPopupNotificationModuleInterface.h"
 @class THLEntityMapper;
+@class THLDataStore;
 
 @protocol THLGuestlistServiceInterface;
 
@@ -18,9 +19,11 @@
 #pragma mark - Dependencies
 @property (nonatomic, readonly, weak) id<THLGuestlistServiceInterface> guestlistService;
 @property (nonatomic, readonly, weak) THLEntityMapper *entityMapper;
+@property (nonatomic, readonly, weak) THLDataStore *dataStore;
 
 - (instancetype)initWithGuestlistService:(id<THLGuestlistServiceInterface>)guestlistService
-                        entityMapper:(THLEntityMapper *)entityMapper;
+                        entityMapper:(THLEntityMapper *)entityMapper
+                               dataStore:(THLDataStore *)dataStore;
 
 - (void)presentInterface;
 @end

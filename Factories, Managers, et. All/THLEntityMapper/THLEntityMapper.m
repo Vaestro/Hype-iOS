@@ -199,7 +199,7 @@
         entity.response = guestlistInvite.response;
         entity.checkInStatus = guestlistInvite.checkInStatus;
         entity.date = guestlistInvite.date;
-        entity.guest = [self mapGuest:guestlistInvite.guest];
+        entity.guest = [self mapGuest:guestlistInvite[@"Guest"]];
         entity.guestlist = [self mapGuestlist:guestlistInvite[@"Guestlist"]];
         return entity;
     } else {

@@ -9,28 +9,47 @@
 #import "THLDashboardDataManager.h"
 #import "THLGuestlistServiceInterface.h"
 #import "THLEntityMapper.h"
+#import "THLYapDatabaseManager.h"
+#import "THLDataStore.h"
+#import "THLDataStoreDomain.h"
+#import "THLGuestlistInviteEntity.h"
 
 @interface THLDashboardDataManager()
+@property (nonatomic, strong) YapDatabaseConnection *rwConnection;
+@property (nonatomic, strong) YapDatabaseConnection *roConnection;
 
 @end
 
 @implementation THLDashboardDataManager
 - (instancetype)initWithGuestlistService:(id<THLGuestlistServiceInterface>)guestlistService
-                          entityMappper:(THLEntityMapper *)entityMapper {
+                          entityMappper:(THLEntityMapper *)entityMapper
+                               dataStore:(THLDataStore *)dataStore {
     if (self = [super init]) {
         _guestlistService = guestlistService;
         _entityMapper = entityMapper;
+        _dataStore = dataStore;
     }
     return self;
 }
 
 - (BFTask *)fetchGuestlistInvitesForUser {
     WEAKSELF();
+    STRONGSELF();
     return [[_guestlistService fetchGuestlistInvitesForUser] continueWithSuccessBlock:^id(BFTask *task) {
-        THLGuestlistInvite *fetchedGuestlistInvite = task.result;
-        THLGuestlistInviteEntity *mappedGuestlistInvite = [WSELF.entityMapper mapGuestlistInvite:fetchedGuestlistInvite];
-        return mappedGuestlistInvite;
+        THLDataStoreDomain *domain = [SSELF domainForPendingOrAcceptedGuestlistInvites];
+        NSSet *entities = [NSSet setWithArray:[SSELF.entityMapper mapGuestlistInvites:task.result]];
+        [SSELF.dataStore refreshDomain:domain withEntities:entities];
+        return [BFTask taskWithResult:entities];
     }];
+}
+
+- (THLDataStoreDomain *)domainForPendingOrAcceptedGuestlistInvites {
+    THLDataStoreDomain *domain = [[THLDataStoreDomain alloc] initWithMemberTestBlock:^BOOL(THLEntity *entity) {
+        THLGuestlistInviteEntity *guestlistInviteEntity = (THLGuestlistInviteEntity *)entity;
+        return ([guestlistInviteEntity.date isLaterThanOrEqualTo:[[NSDate date] dateByAddingTimeInterval:-60*300]] &&
+                (guestlistInviteEntity.response == THLStatusPending || guestlistInviteEntity.response == THLStatusAccepted));
+    }];
+    return domain;
 }
 
 @end

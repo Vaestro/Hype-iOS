@@ -21,10 +21,8 @@
 
 #import "THLVenueDetailsView.h"
 
-@interface THLEventDetailPresenter()
-<
-THLEventDetailInteractorDelegate
->
+@interface THLEventDetailPresenter()<THLEventDetailInteractorDelegate>
+
 @property (nonatomic, strong) id<THLEventDetailView> view;
 @property (nonatomic, strong) THLVenueDetailsView *venueDetailsView;
 @property (nonatomic) THLGuestlistStatus guestlistReviewStatus;
@@ -127,7 +125,7 @@ THLEventDetailInteractorDelegate
 }
 
 - (void)checkForInvite {
-    [_interactor checkValidGuestlistInviteForUser:[THLUser currentUser] atEvent:_eventEntity];
+    [_interactor checkValidGuestlistInviteForEvent:_eventEntity];
 }
 
 - (void)handleDismissAction {

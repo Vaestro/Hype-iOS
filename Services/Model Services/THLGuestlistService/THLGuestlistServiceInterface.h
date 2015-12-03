@@ -43,7 +43,7 @@
 //----------------------------------------------------------------
 #pragma mark - Fetch Guestlist For Guest For a Event/Promotion
 //----------------------------------------------------------------
-- (BFTask *)fetchGuestlistInviteForUser:(THLUser *)user atEvent:(THLEventEntity *)event;
+- (BFTask *)fetchGuestlistInviteForEvent:(THLEventEntity *)event;
 
 - (BFTask *)fetchGuestlistInvitesForUser;
 

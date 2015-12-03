@@ -83,7 +83,9 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
     }];
     
     [_tableView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.insets(kTHLEdgeInsetsNone());
+        make.left.right.insets(kTHLEdgeInsetsNone());
+//      Temporary Fix to account for SLPagingViewController Height that is greater than Bounds Height
+        make.bottom.equalTo(SV(WSELF.tableView)).mas_offset(UIEdgeInsetsMake(0, 0, DiscoveryCellHeight(ViewWidth(WSELF.tableView))/3.67, 0));
     }];
 }
 
@@ -186,7 +188,7 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 
 #pragma mark - Constructors
 - (UITableView *)newTableView {
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStyleGrouped];
     tableView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     tableView.separatorColor = [UIColor clearColor];
     tableView.scrollEnabled = NO;

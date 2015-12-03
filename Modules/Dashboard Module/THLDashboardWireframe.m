@@ -23,10 +23,14 @@
 
 @implementation THLDashboardWireframe
 - (instancetype)initWithGuestlistService:(id<THLGuestlistServiceInterface>)guestlistService
-                           entityMappper:(THLEntityMapper *)entityMapper {
+                           entityMappper:(THLEntityMapper *)entityMapper
+                   viewDataSourceFactory:(id<THLViewDataSourceFactoryInterface>)viewDataSourceFactory
+                               dataStore:(THLDataStore *)dataStore {
     if (self = [super init]) {
         _guestlistService = guestlistService;
         _entityMapper = entityMapper;
+        _viewDataSourceFactory = viewDataSourceFactory;
+        _dataStore = dataStore;
         [self buildModule];
     }
     return self;
@@ -34,8 +38,10 @@
 
 - (void)buildModule {
     _dataManager = [[THLDashboardDataManager alloc] initWithGuestlistService:_guestlistService
-                                                                entityMappper:_entityMapper];
-    _interactor = [[THLDashboardInteractor alloc] initWithDataManager:_dataManager];
+                                                                entityMappper:_entityMapper
+                                                             dataStore:_dataStore];
+    _interactor = [[THLDashboardInteractor alloc] initWithDataManager:_dataManager
+                                                viewDataSourceFactory:_viewDataSourceFactory];
     _view = [[THLDashboardViewController alloc] initWithNibName:nil bundle:nil];
     _presenter = [[THLDashboardPresenter alloc] initWithWireframe:self interactor:_interactor];
 }

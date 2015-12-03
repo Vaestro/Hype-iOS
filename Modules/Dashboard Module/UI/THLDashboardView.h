@@ -7,16 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+@class THLViewDataSource;
 
 @protocol THLDashboardView <NSObject>
-@property (nonatomic, copy) NSURL *locationImageURL;
-@property (nonatomic, copy) NSString *promotionMessage;
-@property (nonatomic, copy) NSURL *hostImageURL;
-@property (nonatomic, copy) NSString *hostName;
-@property (nonatomic, copy) NSString *eventName;
-@property (nonatomic, copy) NSString *eventDate;
-@property (nonatomic, copy) NSString *locationName;
-@property (nonatomic, strong) RACCommand *actionButtonCommand;
-@property (nonatomic, strong) RACCommand *contactHostCommand;
+@property (nonatomic, strong) THLViewDataSource *dataSource;
+@property (nonatomic, strong) RACCommand *selectedIndexPathCommand;
+@property (nonatomic, strong) RACCommand *refreshCommand;
+@property (nonatomic) BOOL showRefreshAnimation;
+
 @property (nonatomic) BOOL viewAppeared;
 @end

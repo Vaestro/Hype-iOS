@@ -10,17 +10,26 @@
 #import "THLDashboardInteractor.h"
 #import "THLDashboardWireframe.h"
 #import "THLDashboardView.h"
+
 #import "THLGuestlistInviteEntity.h"
 #import "THLEventEntity.h"
 #import "THLHostEntity.h"
 #import "THLPromotionEntity.h"
 #import "THLGuestlistEntity.h"
 
+#import "THLViewDataSource.h"
+#import "THLDashboardNotificationCell.h"
+#import "THLDashboardNotificationCellViewModel.h"
+#import "THLDashboardTicketCellViewModel.h"
+
 @interface THLDashboardPresenter()
 <
 THLDashboardInteractorDelegate
 >
 @property (nonatomic, strong) id<THLDashboardView> view;
+
+@property (nonatomic) BOOL refreshing;
+
 @property (nonatomic, strong) THLEventEntity *eventEntity;
 @property (nonatomic, strong) THLPromotionEntity *promotionEntity;
 @property (nonatomic, strong) THLGuestlistEntity *guestlistEntity;
@@ -37,70 +46,74 @@ THLDashboardInteractorDelegate
         _wireframe = wireframe;
         _interactor = interactor;
         _interactor.delegate = self;
-        [_interactor checkForGuestlistInvites];
     }
     return self;
 }
 
 - (void)configureView:(id<THLDashboardView>)view {
-    WEAKSELF();
     self.view = view;
     
-    [[RACObserve(self.view, viewAppeared) filter:^BOOL(NSNumber *b) {
-        BOOL viewIsAppearing = [b boolValue];
-        return viewIsAppearing == TRUE;
-    }] subscribeNext:^(id x) {
-        [WSELF reloadInvites];
+    THLViewDataSource *dataSource = [_interactor getDataSource];
+    dataSource.dataTransformBlock = ^id(id item) {
+        THLGuestlistInviteEntity *guestlistInvite = (THLGuestlistInviteEntity *)item;
+        if (guestlistInvite.response == THLStatusPending) {
+            return [[THLDashboardNotificationCellViewModel alloc] initWithGuestlistInvite:(THLGuestlistInviteEntity *)item];
+        }
+        if (guestlistInvite.response == THLStatusAccepted) {
+            return [[THLDashboardTicketCellViewModel alloc] initWithGuestlistInvite:(THLGuestlistInviteEntity *)item];
+        }
+        return nil;
+    };
+    
+    WEAKSELF();
+    STRONGSELF();
+    RACCommand *refreshCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [SSELF handleRefreshAction];
+        return [RACSignal empty];
     }];
-
-}
-
-- (void)reloadInvites {
-    [_interactor checkForGuestlistInvites];
+    
+    RACCommand *selectedIndexPathCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [SSELF handleIndexPathSelection:(NSIndexPath *)input];
+        return [RACSignal empty];
+    }];
+    
+    [RACObserve(self, refreshing) subscribeNext:^(NSNumber *b) {
+        BOOL isRefreshing = [b boolValue];
+        [SSELF.view setShowRefreshAnimation:isRefreshing];
+    }];
+    
+    [_view setDataSource:dataSource];
+    [_view setSelectedIndexPathCommand:selectedIndexPathCommand];
+    [_view setRefreshCommand:refreshCommand];
+    
+//    [[RACObserve(self.view, viewAppeared) filter:^BOOL(NSNumber *b) {
+//        BOOL viewIsAppearing = [b boolValue];
+//        return viewIsAppearing == TRUE;
+//    }] subscribeNext:^(id x) {
+//        [WSELF reloadInvites];
+//    }];
 }
 
 - (void)presentDashboardInterfaceInViewController:(UIViewController *)viewController {
     [_wireframe presentInterfaceInViewController:viewController];
 }
 
+- (void)handleRefreshAction {
+    self.refreshing = YES;
+    [_interactor updateGuestlistInvites];
+}
+
 - (void)handleContactHostAction {
     
 }
 
-- (void)handleViewEventAction {
-    [self.moduleDelegate dashboardModule:self didClickToViewEvent:_eventEntity];
+- (void)handleIndexPathSelection:(NSIndexPath *)indexPath {
+    THLGuestlistInviteEntity *guestlistInviteEntity = [[_view dataSource] untransformedItemAtIndexPath:indexPath];
+    [self.moduleDelegate dashboardModule:self didClickToViewEvent:guestlistInviteEntity.guestlist.promotion.event];
 }
 
 #pragma mark - THLDashboardInteractorDelegate
-/**
- *  Temporary - Interactor retrieves only the next Accepted Guestlist Invite
- */
-- (void)interactor:(THLDashboardInteractor *)interactor didGetAcceptedGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite error:(NSError *)error {
-    if (!error && guestlistInvite) {
-        _guestlistInviteEntity = guestlistInvite;
-        _guestlistEntity = _guestlistInviteEntity.guestlist;
-        _promotionEntity = _guestlistEntity.promotion;
-        _eventEntity = _promotionEntity.event;
-        
-        WEAKSELF();
-        RACCommand *contactButtonCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-            [WSELF handleContactHostAction];
-            return [RACSignal empty];
-        }];
-        RACCommand *actionBarButtonCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-            [WSELF handleViewEventAction];
-            return [RACSignal empty];
-        }];
-        
-        [self.view setLocationImageURL:_eventEntity.location.imageURL];
-        [self.view setPromotionMessage:_promotionEntity.promotionMessage];
-        [self.view setLocationName:_eventEntity.location.name];
-        [self.view setEventName:_eventEntity.title];
-        [self.view setEventDate:[NSString stringWithFormat:@"%@, %@", _eventEntity.date.thl_weekdayString, _eventEntity.date.thl_timeString]];
-        [self.view setHostImageURL:_promotionEntity.host.imageURL];
-        [self.view setHostName:_promotionEntity.host.firstName];
-        [self.view setContactHostCommand:contactButtonCommand];
-        [self.view setActionButtonCommand:actionBarButtonCommand];
-    }
+- (void)interactor:(THLDashboardInteractor *)interactor didUpdateGuestlistInvites:(NSError *)error {
+    self.refreshing = NO;
 }
 @end

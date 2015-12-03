@@ -17,17 +17,20 @@
 #import "THLGuestlistEntity.h"
 #import "THLEntityMapper.h"
 #import "THLDataStoreDomain.h"
+#import "THLPromotionEntity.h"
 
 @implementation THLGuestlistInvitationDataManager
 - (instancetype)initWithGuestlistService:(id<THLGuestlistServiceInterface>)guestlistService
                             entityMapper:(THLEntityMapper *)entityMapper
 							   dataStore:(THLDataStore *)dataStore
-							 addressBook:(APAddressBook *)addressBook {
+							 addressBook:(APAddressBook *)addressBook
+                guestlistInviteDataStore:(THLDataStore *)guestlistInviteDataStore {
 	if (self = [super init]) {
 		_guestlistService = guestlistService;
         _entityMapper = entityMapper;
 		_dataStore = dataStore;
 		_addressBook = addressBook;
+        _guestlistInviteDataStore = guestlistInviteDataStore;
 	}
 	return self;
 }
@@ -42,7 +45,15 @@
 
 - (BFTask *)submitGuestlistForPromotion:(THLPromotionEntity *)promotionEntity withInvites:(NSArray *)guestPhoneNumbers {
     return [[_guestlistService createGuestlistForPromotion:promotionEntity withInvites:guestPhoneNumbers] continueWithSuccessBlock:^id(BFTask *task) {
-//        THLGuestlistInviteEntity *guestlistInviteEntity = [_entityMapper mapGuestlistInvite:task.result];
+        return [BFTask taskWithResult:nil];
+    }];
+}
+
+- (BFTask *)getOwnerInviteForPromotion:(THLPromotionEntity *)promotionEntity {
+    WEAKSELF();
+    return [[_guestlistService fetchGuestlistInviteForEvent:promotionEntity.event] continueWithSuccessBlock:^id(BFTask *task) {
+        THLGuestlistInviteEntity *guestlistInviteEntity = [WSELF.entityMapper mapGuestlistInvite:task.result];
+        [WSELF.guestlistInviteDataStore updateOrAddEntities:[NSSet setWithArray:@[guestlistInviteEntity]]];
         return [BFTask taskWithResult:nil];
     }];
 }

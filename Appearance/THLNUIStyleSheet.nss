@@ -70,5 +70,5 @@ font-color: @primaryFontColor;
 }
 
 BackgroundView {
-background-color: #1A1F25;
+background-color: #0e0d12;
 }

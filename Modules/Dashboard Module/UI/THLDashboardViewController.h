@@ -6,12 +6,16 @@
 //  Copyright © 2015 Hypelist. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "THLDashboardView.h"
+#import "UIScrollView+EmptyDataSet.h"
 
 @interface THLDashboardViewController : UIViewController
 <
-THLDashboardView
+THLDashboardView,
+UICollectionViewDelegate,
+DZNEmptyDataSetSource,
+DZNEmptyDataSetDelegate
 >
 
 @end

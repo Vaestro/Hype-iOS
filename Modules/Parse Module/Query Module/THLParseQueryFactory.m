@@ -63,12 +63,12 @@
 }
 
 //TODO: Query for Guestlist Invite for User for Event
-- (PFQuery *)queryForGuestlistInviteForUser:(THLUser *)user atEvent:(NSString *)eventId {
+- (PFQuery *)queryForGuestlistInviteForEvent:(NSString *)eventId {
     PFQuery *guestlistQuery = [self baseGuestlistQuery];
     [guestlistQuery whereKey:@"eventId" equalTo:eventId];
     
     PFQuery *query = [self baseGuestlistInviteQuery];
-    [query whereKey:@"Guest" equalTo:user];
+    [query whereKey:@"Guest" equalTo:[THLUser currentUser]];
     [query whereKey:@"Guestlist" matchesQuery:guestlistQuery];
     [query whereKey:@"response" notEqualTo:[NSNumber numberWithInteger:2]];
     return query;
@@ -76,11 +76,11 @@
 
 - (PFQuery *)queryForGuestlistInvitesForUser {
     PFQuery *query = [self baseGuestlistInviteQuery];
-    [query whereKey:@"Guest" equalTo:[THLUser currentUser]];
+    [query whereKey:@"phoneNumber" equalTo:[THLUser currentUser].phoneNumber];
 //    TODO: Improve Date + Remove Reponse filtering to fetch all guestlistInvites
     [query whereKey:@"date" greaterThanOrEqualTo:[[NSDate date] dateByAddingTimeInterval:-60*300]];
     [query orderByAscending:@"date"];
-    [query whereKey:@"response" equalTo:[NSNumber numberWithInteger:1]];
+    [query whereKey:@"response" notEqualTo:[NSNumber numberWithInteger:2]];
     return query;
 }
 
@@ -150,13 +150,13 @@
  */
 - (PFQuery *)baseGuestlistInviteQuery {
     PFQuery *query = [THLGuestlistInvite query];
+    [query includeKey:@"Guest"];
     [query includeKey:@"Guestlist"];
     [query includeKey:@"Guestlist.Owner"];
     [query includeKey:@"Guestlist.Promotion"];
     [query includeKey:@"Guestlist.Promotion.host"];
     [query includeKey:@"Guestlist.Promotion.event"];
     [query includeKey:@"Guestlist.Promotion.event.location"];
-    [query includeKey:@"Guest"];
     return query;
 }
 

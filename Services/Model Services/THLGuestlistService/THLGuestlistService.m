@@ -62,10 +62,9 @@
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
     THLUser *currentUser = [THLUser currentUser];
     PFObject *guestlist = [PFObject objectWithClassName:@"Guestlist"];
-    PFObject *guestlistInvite = [PFObject objectWithClassName:@"GuestlistInvite"];
     guestlist[@"Promotion"] = [THLPromotion objectWithoutDataWithObjectId:promotionEntity.objectId];
     guestlist[@"Owner"] = currentUser;
-    guestlist[@"reviewStatus"] =  [NSNumber numberWithInt:0];
+    guestlist[@"reviewStatus"] = [NSNumber numberWithInt:0];
     guestlist[@"eventId"] = promotionEntity.eventId;
     [guestlist saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
@@ -75,19 +74,32 @@
                                                 @"promotionTime":iso8601String,
                                                 @"guestPhoneNumbers": guestPhoneNumbers,
                                                 @"guestlistId": guestlist.objectId}
-                                        block:^(id object, NSError *cloudError) {
-                                            
+                                        block:^(id guestlistInvite, NSError *cloudError) {
                                             if (!cloudError){
-                                                guestlistInvite[@"Guest"] = currentUser;
-                                                guestlistInvite[@"Guestlist"] = guestlist;
-                                                guestlistInvite[@"phoneNumber"] = currentUser.phoneNumber;
-                                                guestlistInvite[@"response"] = [NSNumber numberWithInt:1];
-                                                guestlistInvite[@"checkInStatus"] = [NSNumber numberWithBool:FALSE];
-                                                guestlistInvite[@"date"] = promotionEntity.event.date;
-                                                [guestlistInvite saveInBackground];
-                                                
-                                                [completionSource setResult:nil];
-                                            }else {
+//                                                BFTaskCompletionSource *secondCompletionSource = [BFTaskCompletionSource taskCompletionSource];
+//                                                [[_queryFactory queryForGuestlistInviteWithId]
+//                                                    getObjectInBackgroundWithId:[guestlistInvite valueForKey:@"objectId"]
+//                                                    block:^(PFObject *savedGuestlistInvite, NSError *fetchError) {
+//                                                        if (!fetchError) {
+//                                                            PFObject *savedGuestlist = savedGuestlistInvite[@"Guestlist"];
+//                                                            [savedGuestlist setObject:savedGuestlistInvite forKey:@"Guestlist"];
+//                                                            PFObject *owner = savedGuestlistInvite[@"Guestlist"][@"Owner"];
+//                                                            [savedGuestlist setObject:owner forKey:@"Owner"];
+//                                                            PFObject *promotion = savedGuestlistInvite[@"Guestlist"][@"Promotion"];
+//                                                            [savedGuestlist setObject:promotion forKey:@"Promotion"];
+//                                                            PFObject *host = savedGuestlistInvite[@"Guestlist"][@"Promotion"][@"host"];
+//                                                            [savedGuestlist setObject:host forKey:@"host"];
+//                                                            PFObject *event = savedGuestlistInvite[@"Guestlist"][@"Promotion"][@"event"];
+//                                                            [promotion setObject:event forKey:@"event"];
+//                                                            PFObject *location = savedGuestlistInvite[@"Guestlist"][@"Promotion"][@"event"][@"location"];
+//                                                            [event setObject:location forKey:@"location"];
+//                                                            [secondCompletionSource setResult:savedGuestlistInvite];
+//                                                        } else {
+//                                                            [secondCompletionSource setError:cloudError];
+//                                                        }
+//                                                    }];
+                                                [completionSource setResult:guestlistInvite];
+                                            } else {
                                                 [completionSource setError:cloudError];
                                             }
                                         }];
@@ -146,53 +158,70 @@
 }
 
 //----------------------------------------------------------------
-#pragma mark - Fetch Guestlist For Guest For a Event/Promotion
-//----------------------------------------------------------------
-
-- (BFTask *)fetchGuestlistInviteForUser:(THLUser *)user atEvent:(THLEventEntity *)event {
-    return [[_queryFactory queryForGuestlistInviteForUser:user atEvent:event.objectId] getFirstObjectInBackground];
-//    BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
-//    [PFCloud callFunctionInBackground:@"guestlistAvailability"
-//                       withParameters:@{@"minTime":[event.date dateByAddingTimeInterval:-60*180],
-//                                        @"maxTime":[event.date dateByAddingTimeInterval:60*180]}
-//                                block:^(id object, NSError *error) {
-//                                    if (object == [NSNumber numberWithBool:YES]){
-//                                        [[_queryFactory queryForGuestlistInviteForUser:user atEvent:event.objectId] getFirstObjectInBackgroundWithBlock:^(PFObject *guestlistInvite, NSError *fetchError) {
-//                                            if (guestlistInvite != nil) {
-//                                                [completionSource setResult:guestlistInvite];
-//                                            } else {
-//                                                [completionSource setResult:nil];
-//                                            }
-//                                        }];
-//                                    } else if (object == [NSNumber numberWithBool:NO]){
-//                                        [completionSource setResult:[NSNumber numberWithBool:NO]];
-//                                    } else {
-//                                        [completionSource setError:error];
-//                                    }
-//                                }];
-//    return completionSource.task;
-}
-
-//----------------------------------------------------------------
 #pragma mark - Fetch Guestlists For Guest For a Dashboard
 //----------------------------------------------------------------
 
 //TODO: Temporary - Only fetches first Accepted Guestlist Invite
 - (BFTask *)fetchGuestlistInvitesForUser {
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
-    [[_queryFactory queryForGuestlistInvitesForUser] getFirstObjectInBackgroundWithBlock:^(PFObject *guestlistInvite, NSError *error) {
+    __block NSMutableArray *completedGuestlistInvites = [NSMutableArray new];
+    __block NSMutableArray *unfinishedGuestlistInvites = [NSMutableArray new];
+
+    [[_queryFactory queryForGuestlistInvitesForUser] findObjectsInBackgroundWithBlock:^(NSArray *guestlistInvites, NSError *error) {
+        if (!error) {
+            for (PFObject *guestlistInvite in guestlistInvites) {
+                PFObject *guestlist = guestlistInvite[@"Guestlist"];
+                [guestlistInvite setObject:guestlist forKey:@"Guestlist"];
+                PFObject *promotion = guestlistInvite[@"Guestlist"][@"Promotion"];
+                [guestlist setObject:promotion forKey:@"Promotion"];
+                PFObject *host = guestlistInvite[@"Guestlist"][@"Promotion"][@"host"];
+                [promotion setObject:host forKey:@"host"];
+                PFObject *event = guestlistInvite[@"Guestlist"][@"Promotion"][@"event"];
+                [promotion setObject:event forKey:@"event"];
+                PFObject *location = guestlistInvite[@"Guestlist"][@"Promotion"][@"event"][@"location"];
+                [event setObject:location forKey:@"location"];
+                PFObject *guest = guestlistInvite[@"Guest"];
+                if (guest.isDataAvailable) {
+                    [guestlistInvite setObject:guest forKey:@"Guest"];
+                    [completedGuestlistInvites addObject:guestlistInvite];
+                } else {
+                    [guestlistInvite setObject:[THLUser currentUser] forKey:@"Guest"];
+                    [unfinishedGuestlistInvites addObject:guestlistInvite];
+                }
+            }
+            if (unfinishedGuestlistInvites.count > 0) {
+                [PFObject saveAllInBackground:unfinishedGuestlistInvites];
+                NSArray *joinedGuestlistInvites = [completedGuestlistInvites arrayByAddingObjectsFromArray:unfinishedGuestlistInvites];
+                [completionSource setResult:joinedGuestlistInvites];
+            } else {
+                [completionSource setResult:completedGuestlistInvites];
+            }
+        } else {
+            [completionSource setError:error];
+        }
+    }];
+    return completionSource.task;
+}
+
+
+//----------------------------------------------------------------
+#pragma mark - Fetch Guestlist For Guest For a Event/Promotion
+//----------------------------------------------------------------
+
+- (BFTask *)fetchGuestlistInviteForEvent:(THLEventEntity *)event {
+    BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
+    [[_queryFactory queryForGuestlistInviteForEvent:event.objectId] getFirstObjectInBackgroundWithBlock:^(PFObject *guestlistInvite, NSError *error) {
         if (!error) {
             PFObject *guestlist = guestlistInvite[@"Guestlist"];
             [guestlistInvite setObject:guestlist forKey:@"Guestlist"];
+            PFObject *owner = guestlistInvite[@"Guestlist"][@"Owner"];
+            [guestlist setObject:owner forKey:@"Owner"];
             PFObject *promotion = guestlistInvite[@"Guestlist"][@"Promotion"];
             [guestlist setObject:promotion forKey:@"Promotion"];
-            PFObject *host = guestlistInvite[@"Guestlist"][@"Promotion"][@"host"];
-            [promotion setObject:host forKey:@"host"];
-            PFObject *event = guestlistInvite[@"Guestlist"][@"Promotion"][@"event"];
-            [promotion setObject:event forKey:@"event"];
+            PFObject *fetchedEvent = guestlistInvite[@"Guestlist"][@"Promotion"][@"event"];
+            [promotion setObject:fetchedEvent forKey:@"event"];
             PFObject *location = guestlistInvite[@"Guestlist"][@"Promotion"][@"event"][@"location"];
-            [event setObject:location forKey:@"location"];
-            [guestlistInvite pinInBackgroundWithName:@"GuestlistInvites"];
+            [fetchedEvent setObject:location forKey:@"location"];
             [completionSource setResult:guestlistInvite];
         } else {
             [completionSource setError:error];
@@ -220,7 +249,6 @@
             [promotion setObject:event forKey:@"event"];
             PFObject *location = guestlistInvite[@"Guestlist"][@"Promotion"][@"event"][@"location"];
             [event setObject:location forKey:@"location"];
-            [guestlistInvite pinInBackgroundWithName:@"GuestlistInvites"];
             [completionSource setResult:guestlistInvite];
         } else {
             [completionSource setError:error];

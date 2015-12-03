@@ -8,14 +8,19 @@
 #import <Foundation/Foundation.h>
 
 @class THLEntityMapper;
+@class THLDataStore;
+
 @protocol THLGuestlistServiceInterface;
 
 @interface THLPopupNotificationDataManager : NSObject
 #pragma mark - Dependencies
 @property (nonatomic, readonly, weak) id<THLGuestlistServiceInterface> guestlistService;
 @property (nonatomic, readonly, weak) THLEntityMapper *entityMapper;
+@property (nonatomic, readonly, weak) THLDataStore *dataStore;
+
 - (instancetype)initWithGuestlistService:(id<THLGuestlistServiceInterface>)guestlistService
-                            entityMapper:(THLEntityMapper *)entityMapper;
+                            entityMapper:(THLEntityMapper *)entityMapper
+                               dataStore:(THLDataStore *)dataStore;
 
 - (BFTask *)fetchGuestlistInviteWithId:(NSString *)guestlistInviteId;
 @end

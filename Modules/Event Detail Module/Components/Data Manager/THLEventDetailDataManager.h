@@ -13,13 +13,21 @@
 @class THLUser;
 @class THLEntityMapper;
 @class THLEventEntity;
+@class THLEventDetailDataManager;
 @class THLYapDatabaseManager;
+@class THLGuestlistInviteEntity;
 
 @protocol THLLocationServiceInterface;
 @protocol THLPromotionServiceInterface;
 @protocol THLGuestlistServiceInterface;
 
+@protocol THLEventDetailDataManagerDelegate <NSObject>
+- (void)dataManager:(THLEventDetailDataManager *)dataManager didGetNotifiedAboutNewGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite forEvent:(THLEventEntity *)event error:(NSError *)error;
+@end
+
 @interface THLEventDetailDataManager : NSObject
+@property (nonatomic, weak) id<THLEventDetailDataManagerDelegate> delegate;
+
 #pragma mark - Dependencies
 @property (nonatomic, readonly, weak) id<THLLocationServiceInterface> locationService;
 @property (nonatomic, readonly, weak) id<THLPromotionServiceInterface> promotionService;
@@ -35,5 +43,5 @@
 
 - (BFTask<CLPlacemark *> *)fetchPlacemarkForAddress:(NSString *)address;
 - (BFTask *)fetchPromotionForEvent:(NSString *)eventId;
-- (BFTask *)fetchGuestlistInviteForUser:(THLUser *)user atEvent:(THLEventEntity *)event;
+- (BFTask *)fetchGuestlistInviteForEvent:(THLEventEntity *)event;
 @end

@@ -43,6 +43,19 @@
 	return viewDataSource;
 }
 
+- (THLViewDataSource *)createDataSourceWithFixedGrouping:(THLViewDataSourceGrouping *)grouping sorting:(THLViewDataSourceSorting *)sorting groups:(NSArray *)groups key:(NSString *)key {
+    YapDatabaseViewGrouping *yapGrouping = [self yapGrouping:grouping];
+    YapDatabaseViewSorting *yapSorting = [self yapSorting:sorting];
+    [_viewFactory createViewWithGrouping:yapGrouping sorting:yapSorting key:key];
+    
+    YapDatabaseViewMappings *yapMappings = [YapDatabaseViewMappings mappingsWithGroups:groups
+                                                                               view:key];
+    YapDatabaseConnection *yapConnection = [_databaseManager newDatabaseConnection];
+    THLViewDataSource *viewDataSource = [[THLViewDataSource alloc] initWithMappings:yapMappings
+                                                                         connection:yapConnection];
+    return viewDataSource;
+}
+
 - (THLSearchViewDataSource *)createSearchDataSourceWithGrouping:(THLViewDataSourceGrouping *)grouping
 														sorting:(THLViewDataSourceSorting *)sorting
 														handler:(THLSearchResultsViewDataSourceHandler *)handler

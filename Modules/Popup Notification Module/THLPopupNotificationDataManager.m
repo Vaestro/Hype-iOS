@@ -10,13 +10,16 @@
 #import "THLGuestlistEntity.h"
 #import "THLGuestlistInviteEntity.h"
 #import "THLEntityMapper.h"
+#import "THLDataStore.h"
 
 @implementation THLPopupNotificationDataManager
 - (instancetype)initWithGuestlistService:(id<THLGuestlistServiceInterface>)guestlistService
-                            entityMapper:(THLEntityMapper *)entityMapper {
+                            entityMapper:(THLEntityMapper *)entityMapper
+                               dataStore:(THLDataStore *)dataStore {
     if (self = [super init]) {
         _guestlistService = guestlistService;
         _entityMapper = entityMapper;
+        _dataStore = dataStore;
     }
     return self;
 }
@@ -24,11 +27,10 @@
 #pragma mark - Interface
 - (BFTask *)fetchGuestlistInviteWithId:(NSString *)guestlistInviteId {
     WEAKSELF();
-    STRONGSELF();
     return [[_guestlistService fetchGuestlistInviteWithId:guestlistInviteId] continueWithSuccessBlock:^id(BFTask *task) {
-            THLGuestlistInvite *fetchedGuestlistInvite = task.result;
-            THLGuestlistInviteEntity *mappedGuestlistInvite = [SSELF.entityMapper mapGuestlistInvite:fetchedGuestlistInvite];
-            return mappedGuestlistInvite;
+        THLGuestlistInviteEntity *guestlistInviteEntity = [WSELF.entityMapper mapGuestlistInvite:task.result];
+        [WSELF.dataStore updateOrAddEntities:[NSSet setWithArray:@[guestlistInviteEntity]]];
+        return guestlistInviteEntity;
     }];
 }
 

@@ -11,10 +11,15 @@
 #import "THLLocationEntity.h"
 #import "THLGuestlistInviteEntity.h"
 
+@interface THLEventDetailInteractor()<THLEventDetailDataManagerDelegate>
+
+@end
+
 @implementation THLEventDetailInteractor
 - (instancetype)initWithDataManager:(THLEventDetailDataManager *)dataManager {
 	if (self = [super init]) {
 		_dataManager = dataManager;
+        _dataManager.delegate = self;
 	}
 	return self;
 }
@@ -36,20 +41,15 @@
     }];
 }
 
-- (void)checkValidGuestlistInviteForUser:(THLUser *)user atEvent:(THLEventEntity *)event {
+- (void)checkValidGuestlistInviteForEvent:(THLEventEntity *)event {
     WEAKSELF();
-    [[_dataManager fetchGuestlistInviteForUser:user atEvent:event] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
-//        if (task.result == [NSNumber numberWithBool:NO]) {
-//            [WSELF.delegate interactor:WSELF userUnavailableForEvent:event];
-//        } else {
-            [WSELF.delegate interactor:WSELF didGetGuestlistInvite:task.result forEvent:event error:task.error];
-//        }
+    [[_dataManager fetchGuestlistInviteForEvent:event] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+        [WSELF.delegate interactor:WSELF didGetGuestlistInvite:task.result forEvent:event error:task.error];
         return nil;
     }];
 }
 
-//- (void)dealloc {
-//    NSLog(@"Destroyed %@", self);
-//}
-
+- (void)dataManager:(THLEventDetailDataManager *)dataManager didGetNotifiedAboutNewGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite forEvent:(THLEventEntity *)event error:(NSError *)error {
+    [self.delegate interactor:self didGetGuestlistInvite:guestlistInvite forEvent:event error:error];
+}
 @end

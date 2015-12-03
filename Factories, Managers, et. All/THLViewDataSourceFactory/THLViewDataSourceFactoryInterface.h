@@ -24,4 +24,10 @@
 														handler:(THLSearchResultsViewDataSourceHandler *)handler
 										   searchableProperties:(NSArray *)properties
 															key:(NSString *)key;
+
+- (THLViewDataSource *)createDataSourceWithFixedGrouping:(THLViewDataSourceGrouping *)grouping
+                                                 sorting:(THLViewDataSourceSorting *)sorting
+                                                  groups:(NSArray *)groups
+                                                     key:(NSString *)key;
+
 @end

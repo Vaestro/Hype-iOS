@@ -33,20 +33,20 @@
 
 
 - (void)constructView {
-    _iconView = [self newIconView];
-    _hostNameLabel = [self newHostNameLabel];
-    _yourHostLabel = [self newYourHostLabel];
-    _hairlineView = [self newHairlineView];
+//    _iconView = [self newIconView];
+//    _hostNameLabel = [self newHostNameLabel];
+//    _yourHostLabel = [self newYourHostLabel];
+//    _hairlineView = [self newHairlineView];
     _textView = [self newTextView];
     _eventTimeLabel = [self newEventTimeLabel];
 }
 
 - (void)layoutView {
-    [self addSubviews:@[_iconView,
-                        _hostNameLabel,
-                        _yourHostLabel,
-                        _hairlineView,
-                        _textView,
+    [self addSubviews:@[_textView,
+//                        _iconView,
+//                        _hostNameLabel,
+//                        _yourHostLabel,
+//                        _hairlineView,
                         _eventTimeLabel]];
     
     WEAKSELF();
@@ -54,33 +54,34 @@
         make.top.left.right.insets(kTHLEdgeInsetsNone());
     }];
     
-    [_iconView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF eventTimeLabel].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
-        make.left.insets(kTHLEdgeInsetsSuperHigh());
-        make.size.equalTo(CGSizeMake1(60));
-    }];
-    
-    [_yourHostLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo([WSELF iconView].mas_right).insets(kTHLEdgeInsetsHigh());
-        make.top.equalTo([WSELF eventTimeLabel].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
-        make.right.insets(kTHLEdgeInsetsHigh());
-    }];
-    
-    [_hostNameLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo([WSELF iconView].mas_right).insets(kTHLEdgeInsetsHigh());
-        make.top.equalTo([WSELF yourHostLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());
-        make.bottom.equalTo(WSELF.iconView);
-        make.right.insets(kTHLEdgeInsetsSuperHigh());
-    }];
-    
-    [_hairlineView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
-        make.top.equalTo([WSELF hostNameLabel].mas_baseline).insets(kTHLEdgeInsetsHigh());
-    }];
+//    [_iconView makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo([WSELF eventTimeLabel].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+//        make.left.insets(kTHLEdgeInsetsSuperHigh());
+//        make.size.equalTo(CGSizeMake1(60));
+//    }];
+//    
+//    [_yourHostLabel makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo([WSELF iconView].mas_right).insets(kTHLEdgeInsetsHigh());
+//        make.top.equalTo([WSELF eventTimeLabel].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+//        make.right.insets(kTHLEdgeInsetsHigh());
+//    }];
+//    
+//    [_hostNameLabel makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo([WSELF iconView].mas_right).insets(kTHLEdgeInsetsHigh());
+//        make.top.equalTo([WSELF yourHostLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());
+//        make.bottom.equalTo(WSELF.iconView);
+//        make.right.insets(kTHLEdgeInsetsSuperHigh());
+//    }];
+//    
+//    [_hairlineView makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+//        make.top.equalTo([WSELF hostNameLabel].mas_baseline).insets(kTHLEdgeInsetsHigh());
+//    }];
     
     [_textView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF hairlineView].mas_bottom).insets(kTHLEdgeInsetsHigh());
-        make.left.right.bottom.insets(kTHLEdgeInsetsSuperHigh());
+        make.top.equalTo([WSELF eventTimeLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+        make.bottom.insets(kTHLEdgeInsetsHigh());
     }];
 }
 
@@ -93,9 +94,9 @@
         [WSELF.textView setText:x];
     }];
     
-    RAC(self.iconView, imageURL) = RACObserve(self, hostImageURL);
+//    RAC(self.iconView, imageURL) = RACObserve(self, hostImageURL);
     RAC(self.eventTimeLabel, text, @"") = RACObserve(self, eventTime);
-    RAC(self.hostNameLabel, text, @"") = RACObserve(self, hostName);
+//    RAC(self.hostNameLabel, text, @"") = RACObserve(self, hostName);
 }
 
 #pragma mark - Constructors

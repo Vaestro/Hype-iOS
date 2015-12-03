@@ -28,12 +28,6 @@ UICollectionViewDelegateFlowLayout
 @synthesize showRefreshAnimation = _showRefreshAnimation;
 @synthesize refreshCommand = _refreshCommand;
 
-//#pragma mark - THLEventDiscoveryView
-//- (void)setDataSource:(THLViewDataSource *)dataSource {
-//	[self configureDataSource:dataSource];
-//	_dataSource = dataSource;
-//}
-
 #pragma mark - VC Lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -53,8 +47,12 @@ UICollectionViewDelegateFlowLayout
 
 	_collectionView = [self newCollectionView];
 	[self.view addSubview:_collectionView];
+    
+    WEAKSELF();
 	[_collectionView makeConstraints:^(MASConstraintMaker *make) {
-		make.edges.insets(UIEdgeInsetsZero);
+		make.left.right.top.insets(kTHLEdgeInsetsNone());
+        //      Temporary Fix to account for SLPagingViewController Height that is greater than Bounds Height
+        make.bottom.equalTo(SV(WSELF.collectionView)).mas_offset(UIEdgeInsetsMake(0, 0, DiscoveryCellHeight(ViewWidth(WSELF.collectionView))/3.67, 0));
 	}];
 }
 
@@ -85,7 +83,7 @@ UICollectionViewDelegateFlowLayout
 - (UICollectionView *)newCollectionView {
 	UICollectionViewFlowLayout *flowLayout = [UICollectionViewFlowLayout new];
 	flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
-	UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
+	UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) collectionViewLayout:flowLayout];
 	collectionView.nuiClass = kTHLNUIBackgroundView;
 	collectionView.alwaysBounceVertical = YES;
 	collectionView.delegate = self;
