@@ -51,18 +51,23 @@
 	return [NSString stringWithFormat:@"k%@DataStoreKey", NSStringFromClass(_entityClass)];
 }
 
-- (void)addObject {
-    // Add an object
-    [self.rwConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-        [transaction setObject:@"Hello" forKey:@"World" inCollection:@"example1"];
-    }];
-}
-
-- (void)readObject {
-    [self.roConnection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
-        NSLog(@"%@ World", [transaction objectForKey:@"World" inCollection:@"example1"]);
-    }];
-}
+//- (void)addObject:(THLEntity *)entity {
+//    // Add an object
+//    WEAKSELF();
+//    STRONGSELF();
+//    [self.rwConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
+//        [transaction setObject:entity forKey:entity.key inCollection:SSELF.collectionKey];
+//    }];
+//}
+//
+//- (THLEntity *)readObject:(THLEntity *)entity {
+//    WEAKSELF();
+//    STRONGSELF();
+//    THLEntity *entity = [THLEntity new];
+//    [self.roConnection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
+//        [transaction objectForKey:entity.key inCollection:SSELF.collectionKey];
+//    }];
+//}
 
 - (NSSet *)entityKeysInDomain:(THLDataStoreDomain *)domain {
     WEAKSELF();
@@ -76,6 +81,20 @@
 		}];
 	}];
 	return keys;
+}
+
+- (NSSet *)entityKeysNotInDomain:(THLDataStoreDomain *)domain {
+    WEAKSELF();
+    STRONGSELF();
+    __block NSMutableSet *keys = [NSMutableSet new];
+    [self.roConnection readWithBlock:^(YapDatabaseReadTransaction * _Nonnull transaction) {
+        [transaction enumerateKeysAndObjectsInCollection:SSELF.collectionKey usingBlock:^(NSString * _Nonnull key, id  _Nonnull object, BOOL * _Nonnull stop) {
+            if (![domain containsMember:(THLEntity *)object]) {
+                [keys addObject:key];
+            }
+        }];
+    }];
+    return keys;
 }
 
 - (NSSet *)entitiesInDomain:(THLDataStoreDomain *)domain {
@@ -114,7 +133,7 @@
 	__block NSArray *keys = [[self entityKeysInDomain:domain] allObjects];
 	__block NSMutableSet *unprocessedEntities = [entities mutableCopy];
 	__block NSMutableSet *entitiesToUpdate = [NSMutableSet new];
-	__block NSMutableArray *entitiesToRemove = [NSMutableArray new];
+	__block NSMutableArray *entitiesToRemove = [NSMutableArray arrayWithArray:[[self entityKeysNotInDomain:domain] allObjects]];
     
     WEAKSELF();
     STRONGSELF();
@@ -123,9 +142,10 @@
 			THLEntity *existingEntity = (THLEntity *)object;
 			THLEntity *fetchedEntity = [entities member:existingEntity];
 			if (!fetchedEntity) {
-				//No corresponding entity -> remove entity from domain
+				//No corresponding entity -> add entity to array to be deleted from database
 				[entitiesToRemove addObject:existingEntity.key];
 			} else if ([existingEntity shouldUpdateWith:fetchedEntity]) {
+                //If corresponding entity was updated more recently -> add entity to array to be updated in database
 				[entitiesToUpdate addObject:fetchedEntity];
 			}
 

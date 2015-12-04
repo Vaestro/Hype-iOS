@@ -242,9 +242,9 @@ UICollectionViewDelegateFlowLayout
     [_collectionView reloadData];
 }
 
-- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
-{
-    return NO;
-}
+//- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
+//{
+//    return YES;
+//}
 @end
 

@@ -113,7 +113,6 @@
 	return wireframe;
 }
 
-
 - (THLFacebookPictureWireframe *)newFacebookPictureWireframe {
 	THLFacebookPictureWireframe *wireframe = [[THLFacebookPictureWireframe alloc] initWithFetchService:self.facebookProfilePictureURLFetchService];
 	self.facebookPictureWireframe = wireframe;

@@ -63,7 +63,7 @@
 	} else if ([self thl_isTomorrow]) {
 		return @"Tomorrow";
 	} else {
-		return [self formattedDateWithFormat:@"EEEE"];
+		return [self formattedDateWithFormat:@"EEE, MMM dd"];
 	}
 }
 

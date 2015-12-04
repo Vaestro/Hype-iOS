@@ -244,6 +244,6 @@ UICollectionViewDelegateFlowLayout
 
 - (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
 {
-    return NO;
+    return YES;
 }
 @end
