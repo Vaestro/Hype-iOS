@@ -11,6 +11,7 @@
 
 @interface THLConfirmationPopupView()
 @property (nonatomic, strong) UITextView *textView;
+@property (nonatomic, strong) UIButton *dismissButton;
 @end
 
 
@@ -31,12 +32,14 @@
     _textView = [self newTextView];
     _acceptButton = [self newAcceptButton];
     _declineButton = [self newDeclineButton];
+    _dismissButton = [self newDismissButton];
 }
 
 - (void)layoutView {
     [self addSubviews:@[_textView,
                         _acceptButton,
-                        _declineButton]];
+                        _declineButton,
+                        _dismissButton]];
     
     WEAKSELF();
     [_textView makeConstraints:^(MASConstraintMaker *make) {
@@ -52,10 +55,16 @@
     
         [_declineButton makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo([WSELF acceptButton].mas_bottom).insets(kTHLEdgeInsetsHigh());
-            make.right.left.bottom.insets(UIEdgeInsetsZero).insets(kTHLEdgeInsetsSuperHigh());
+            make.right.left.insets(UIEdgeInsetsZero).insets(kTHLEdgeInsetsSuperHigh());
             make.width.equalTo(_acceptButton.mas_width);
         }];
     
+        [_dismissButton makeConstraints:^(MASConstraintMaker *make) {
+            make.top.lessThanOrEqualTo([WSELF declineButton].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+            make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+            make.bottom.equalTo(SV(WSELF.dismissButton).mas_bottom);
+            make.centerX.offset(0);
+        }];
     /**
      *  Side By Side Layout
      */
@@ -92,6 +101,10 @@
     [[self.declineButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         [WSELF dismissPresentingPopup];
     }];
+    
+    [[self.dismissButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        [WSELF dismissPresentingPopup];
+    }];
 }
 
 #pragma mark - Constructors
@@ -116,6 +129,12 @@
     declineButton.backgroundColor = kTHLNUIRedColor;
     
     return declineButton;
+}
+
+- (UIButton *)newDismissButton {
+    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(33, 33, 33, 33)];
+    [button setImage:[UIImage imageNamed:@"Cancel X Icon"] forState:UIControlStateNormal];
+    return button;
 }
 
 - (void)dealloc {

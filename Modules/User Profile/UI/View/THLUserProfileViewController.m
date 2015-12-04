@@ -183,7 +183,7 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
 //    TODO: Temporary hack to make sure table cells are shown on Iphone 5 
-    return SCREEN_HEIGHT * 0.067;
+    return 60;
 }
 
 #pragma mark - Constructors

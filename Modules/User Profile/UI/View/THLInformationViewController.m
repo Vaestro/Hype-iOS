@@ -25,13 +25,14 @@
 }
 
 - (void)layoutView {
-    self.view.backgroundColor = kTHLNUIPrimaryBackgroundColor;
+    self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.navigationItem.leftBarButtonItem = _backButton;
 
     [self.view addSubview:self.textView];
     [_textView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(kTHLEdgeInsetsHigh());
+        make.left.right.insets(kTHLEdgeInsetsHigh());
+        make.top.bottom.insets(kTHLEdgeInsetsNone());
     }];
 }
 
