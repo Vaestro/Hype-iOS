@@ -189,7 +189,7 @@
 		79B9595A1BE92FBA00B87799 /* THLPopupNotificationInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959591BE92FBA00B87799 /* THLPopupNotificationInteractor.m */; };
 		79B9595D1BE934C000B87799 /* THLPopupNotificationDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B9595C1BE934C000B87799 /* THLPopupNotificationDataManager.m */; };
 		79B959611BE9A90B00B87799 /* THLActionContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959601BE9A90B00B87799 /* THLActionContainerView.m */; };
-		79BCB5641BF2AAA30050F283 /* THLGuestFlowNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BCB5631BF2AAA30050F283 /* THLGuestFlowNavigationController.m */; };
+		79BCB5641BF2AAA30050F283 /* THLMasterNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BCB5631BF2AAA30050F283 /* THLMasterNavigationController.m */; };
 		79CE01DF1C0A604B0047E6FA /* THLDashboardNotificationSectionTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CE01DE1C0A604B0047E6FA /* THLDashboardNotificationSectionTitleCell.m */; };
 		79CE01E31C0A69D40047E6FA /* THLDashboardTicketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CE01E21C0A69D40047E6FA /* THLDashboardTicketCell.m */; };
 		79CE01E61C0A69EC0047E6FA /* THLDashboardTicketCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CE01E51C0A69EC0047E6FA /* THLDashboardTicketCellViewModel.m */; };
@@ -624,8 +624,8 @@
 		79B9595E1BE93C1B00B87799 /* THLPopupNotificationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLPopupNotificationView.h; sourceTree = "<group>"; };
 		79B9595F1BE9A90B00B87799 /* THLActionContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLActionContainerView.h; sourceTree = "<group>"; };
 		79B959601BE9A90B00B87799 /* THLActionContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLActionContainerView.m; sourceTree = "<group>"; };
-		79BCB5621BF2AAA30050F283 /* THLGuestFlowNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestFlowNavigationController.h; sourceTree = "<group>"; };
-		79BCB5631BF2AAA30050F283 /* THLGuestFlowNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestFlowNavigationController.m; sourceTree = "<group>"; };
+		79BCB5621BF2AAA30050F283 /* THLMasterNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMasterNavigationController.h; sourceTree = "<group>"; };
+		79BCB5631BF2AAA30050F283 /* THLMasterNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLMasterNavigationController.m; sourceTree = "<group>"; };
 		79CE01DD1C0A604B0047E6FA /* THLDashboardNotificationSectionTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLDashboardNotificationSectionTitleCell.h; sourceTree = "<group>"; };
 		79CE01DE1C0A604B0047E6FA /* THLDashboardNotificationSectionTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLDashboardNotificationSectionTitleCell.m; sourceTree = "<group>"; };
 		79CE01E11C0A69D40047E6FA /* THLDashboardTicketCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLDashboardTicketCell.h; sourceTree = "<group>"; };
@@ -1448,8 +1448,8 @@
 				217DC6571BBB7A4500332174 /* Dependency Management */,
 				794208301BD9A2E1009B86FA /* Interface */,
 				217DC6561BBB7A3C00332174 /* Wireframe */,
-				79BCB5621BF2AAA30050F283 /* THLGuestFlowNavigationController.h */,
-				79BCB5631BF2AAA30050F283 /* THLGuestFlowNavigationController.m */,
+				79BCB5621BF2AAA30050F283 /* THLMasterNavigationController.h */,
+				79BCB5631BF2AAA30050F283 /* THLMasterNavigationController.m */,
 			);
 			path = "Guest Flow";
 			sourceTree = "<group>";
@@ -2909,7 +2909,7 @@
 				79CE01E31C0A69D40047E6FA /* THLDashboardTicketCell.m in Sources */,
 				7942082C1BD82AF6009B86FA /* THLActionBarButton.m in Sources */,
 				218AF3521BB7422100AFAEBF /* THLEventEntity.m in Sources */,
-				79BCB5641BF2AAA30050F283 /* THLGuestFlowNavigationController.m in Sources */,
+				79BCB5641BF2AAA30050F283 /* THLMasterNavigationController.m in Sources */,
 				21775F361B8CF72B00609D39 /* THLTitledContentView.m in Sources */,
 				C8E1B16B1BF43DA800A9824C /* THLUserProfileInfoView.m in Sources */,
 				211005951B8A318400A540C6 /* THLEventDiscoveryPresenter.m in Sources */,

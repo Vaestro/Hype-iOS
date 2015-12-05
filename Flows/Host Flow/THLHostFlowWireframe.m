@@ -17,10 +17,8 @@
 #import "THLEventHostingWireframe.h"
 #import "THLGuestlistReviewWireframe.h"
 
-#import "THLGuestFlowNavigationController.h"
-#import "SLPagingViewController.h"
+#import "THLMasterNavigationController.h"
 
-#import "UIColor+SLAddition.h"
 #import "THLAppearanceConstants.h"
 
 @interface THLHostFlowWireframe()
@@ -33,7 +31,7 @@ THLGuestlistReviewModuleDelegate
 >
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) id currentWireframe;
-@property (nonatomic, strong) THLGuestFlowNavigationController *navigationController;
+@property (nonatomic, strong) UINavigationController *navigationController;
 @property (nonatomic, strong) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
 @property (nonatomic, strong) THLUserProfileWireframe *userProfileWireframe;
 @property (nonatomic, strong) THLHostDashboardWireframe *dashboardWireframe;
@@ -73,56 +71,10 @@ THLGuestlistReviewModuleDelegate
                              [self newUserProfileNavBarItem]
                              ];
     
-    SLPagingViewController *pagingViewController = [[SLPagingViewController alloc] initWithNavBarItems:navBarItems
-                                                                                      navBarBackground:kTHLNUIPrimaryBackgroundColor
-                                                                                                 views:views
-                                                                                       showPageControl:NO];
+    THLMasterNavigationController *masterNavigationController = [[THLMasterNavigationController alloc] initWithNavBarItems:navBarItems navBarBackground:kTHLNUIPrimaryBackgroundColor controllers:views showPageControl:NO];
     
-    
-    UIColor *gray = [UIColor colorWithRed:.84
-                                    green:.84
-                                     blue:.84
-                                    alpha:1.0];
-    
-    UIColor *gold = kTHLNUIAccentColor;
-    pagingViewController.navigationSideItemsStyle = SLNavigationSideItemsStyleOnBounds;
-    float minX = 45.0;
-    // Tinder Like
-    pagingViewController.pagingViewMoving = ^(NSArray *subviews){
-        float mid  = [UIScreen mainScreen].bounds.size.width/2 - minX;
-        float midM = [UIScreen mainScreen].bounds.size.width - minX;
-        for(UIImageView *v in subviews){
-            UIColor *c = gray;
-            if(v.frame.origin.x > minX
-               && v.frame.origin.x < mid)
-                // Left part
-                c = [UIColor gradient:v.frame.origin.x
-                                  top:minX+1
-                               bottom:mid-1
-                                 init:gold
-                                 goal:gray];
-            else if(v.frame.origin.x > mid
-                    && v.frame.origin.x < midM)
-                // Right part
-                c = [UIColor gradient:v.frame.origin.x
-                                  top:mid+1
-                               bottom:midM-1
-                                 init:gray
-                                 goal:gold];
-            else if(v.frame.origin.x == mid)
-                c = gold;
-            v.tintColor= c;
-        }
-    };
-    [pagingViewController setCurrentIndex:1 animated:NO];
-    
-    
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:pagingViewController];
-    
-    navigationController.edgesForExtendedLayout = UIRectEdgeNone;
-    navigationController.automaticallyAdjustsScrollViewInsets = YES;
-    
-    _window.rootViewController = navigationController;
+    _navigationController = [[UINavigationController alloc] initWithRootViewController:masterNavigationController];
+    _window.rootViewController = _navigationController;
     [_window makeKeyAndVisible];
 }
 

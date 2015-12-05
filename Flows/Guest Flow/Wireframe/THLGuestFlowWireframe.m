@@ -15,19 +15,10 @@
 #import "THLEventDetailWireframe.h"
 #import "THLGuestlistInvitationWireframe.h"
 #import "THLGuestlistReviewWireframe.h"
-#import "THLGuestFlowNavigationController.h"
-#import "SLPagingViewController.h"
+#import "THLMasterNavigationController.h"
+//#import "SLPagingViewController.h"
 #import "UIColor+SLAddition.h"
 #import "THLAppearanceConstants.h"
-
-typedef NS_OPTIONS(NSInteger, THLGuestlistReviewOptions) {
-    THLGuestlistReviewOptionsAcceptDeclineGuestlistInvite = 0,
-    THLGuestlistReviewOptionsLeaveGuestlist,
-    THLGuestlistReviewOptionsAddRemoveGuests,
-    THLGuestlistReviewOptionsAcceptDeclineGuestlist,
-    THLGuestlistReviewOptionsConfirmGuestlistInvites,
-    THLGuestlistReviewOptions_Count
-};
 
 @interface THLGuestFlowWireframe()
 <
@@ -41,7 +32,7 @@ THLGuestlistReviewModuleDelegate
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) id currentWireframe;
 @property (nonatomic, nonatomic) UIViewController *containerVC;
-@property (nonatomic, strong) THLGuestFlowNavigationController *navigationController;
+@property (nonatomic, strong) UINavigationController *navigationController;
 @property (nonatomic, strong) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
 @property (nonatomic, strong) THLDashboardWireframe *dashboardWireframe;
 @property (nonatomic, strong) THLUserProfileWireframe *userProfileWireframe;
@@ -65,7 +56,6 @@ THLGuestlistReviewModuleDelegate
 
 - (void)presentGuestFlowInWindow:(UIWindow *)window {
     _window = window;
-//    _containerVC = [self newContainerVC];
     UIViewController *discovery = [[UIViewController alloc] initWithNibName:nil bundle:nil];
     UIViewController *profile = [[UIViewController alloc] initWithNibName:nil bundle:nil];
     UIViewController *dashboard = [[UIViewController alloc] initWithNibName:nil bundle:nil];
@@ -74,7 +64,7 @@ THLGuestlistReviewModuleDelegate
     [self presentDashboardInterfaceInViewController:dashboard];
     [self presentUserProfileInterfaceInViewController:profile];
     
-    NSArray *views = @[dashboard.view, discovery.view, profile.view];
+    NSArray *views = @[dashboard, discovery, profile];
     
     NSArray *navBarItems = @[
                      [self newDashboardNavBarItem],
@@ -82,63 +72,13 @@ THLGuestlistReviewModuleDelegate
                      [self newGuestProfileNavBarItem]
                      ];
     
-    SLPagingViewController *pagingViewController = [[SLPagingViewController alloc] initWithNavBarItems:navBarItems
-                                                                                      navBarBackground:kTHLNUIPrimaryBackgroundColor
-                                                                                                 views:views
-                                                                                       showPageControl:NO];
+    THLMasterNavigationController *masterNavigationController = [[THLMasterNavigationController alloc] initWithNavBarItems:navBarItems navBarBackground:kTHLNUIPrimaryBackgroundColor controllers:views showPageControl:NO];
 
-    
-    UIColor *gray = [UIColor colorWithRed:.84
-                                    green:.84
-                                     blue:.84
-                                    alpha:1.0];
-    
-    UIColor *gold = kTHLNUIAccentColor;
-    pagingViewController.navigationSideItemsStyle = SLNavigationSideItemsStyleOnBounds;
-    float minX = 45.0;
-    // Tinder Like
-    pagingViewController.pagingViewMoving = ^(NSArray *subviews){
-        float mid  = [UIScreen mainScreen].bounds.size.width/2 - minX;
-        float midM = [UIScreen mainScreen].bounds.size.width - minX;
-        for(UIImageView *v in subviews){
-            UIColor *c = gray;
-            if(v.frame.origin.x > minX
-               && v.frame.origin.x < mid)
-                // Left part
-                c = [UIColor gradient:v.frame.origin.x
-                                  top:minX+1
-                               bottom:mid-1
-                                 init:gold
-                                 goal:gray];
-            else if(v.frame.origin.x > mid
-                    && v.frame.origin.x < midM)
-                // Right part
-                c = [UIColor gradient:v.frame.origin.x
-                                  top:mid+1
-                               bottom:midM-1
-                                 init:gray
-                                 goal:gold];
-            else if(v.frame.origin.x == mid)
-                c = gold;
-            v.tintColor= c;
-        }
-    };
-    [pagingViewController setCurrentIndex:1 animated:NO];
-
-    
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:pagingViewController];
-    
-    navigationController.edgesForExtendedLayout = UIRectEdgeNone;
-    navigationController.automaticallyAdjustsScrollViewInsets = YES;
-    
-    _window.rootViewController = navigationController;
+    _navigationController = [[UINavigationController alloc] initWithRootViewController:masterNavigationController];
+    _window.rootViewController = _navigationController;
     [_window makeKeyAndVisible];
 }
 
-//- (UIViewController *)newContainerVC {
-//    UIViewController *viewController = [[UIViewController alloc] initWithNibName:nil bundle:nil];
-//    
-//}
 - (void)presentGuestFlowInWindow:(UIWindow *)window forEventDetail:(THLEventEntity *)eventEntity {
     /**
      *  Prevents popup notification from instantiating another event detail module if one is already instantiated
