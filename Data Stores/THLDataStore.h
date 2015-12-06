@@ -20,6 +20,9 @@
 - (instancetype)initForEntity:(Class)entityClass
 			  databaseManager:(THLYapDatabaseManager *)databaseManager;
 
+- (instancetype)initForKey:(NSString *)key
+              databaseManager:(THLYapDatabaseManager *)databaseManager;
+
 - (NSSet *)entityKeysInDomain:(THLDataStoreDomain *)domain;
 - (NSSet *)entitiesInDomain:(THLDataStoreDomain *)domain;
 - (void)removeEntitiesInDomain:(THLDataStoreDomain *)domain;

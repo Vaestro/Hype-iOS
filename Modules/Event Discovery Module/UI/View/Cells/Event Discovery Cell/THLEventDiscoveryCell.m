@@ -77,6 +77,7 @@
 - (UIImageView *)newImageView {
     UIImageView *imageView = [UIImageView new];
     imageView.contentMode = UIViewContentModeScaleAspectFill;
+    imageView.clipsToBounds = YES;
     [imageView dimView];
     return imageView;
 }

@@ -29,11 +29,14 @@
     [_titleLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.bottom.insets(kTHLEdgeInsetsHigh());
     }];
+    
+    RAC(self.titleLabel, text, @"") = RACObserve(self, titleText);
 }
 
 - (UILabel *)newTitleLabel {
-    UILabel *label = [UILabel new];
+    UILabel *label = THLNUILabel(kTHLNUISectionTitle);
     label.textColor = kTHLNUIGrayFontColor;
+    
     return label;
 }
 

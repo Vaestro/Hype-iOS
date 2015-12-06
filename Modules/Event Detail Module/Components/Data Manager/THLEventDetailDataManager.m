@@ -84,7 +84,7 @@
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
     __block THLGuestlistInviteEntity *guestlistInvite;
     [self.roConnection readWithBlock:^(YapDatabaseReadTransaction * _Nonnull transaction) {
-        [transaction enumerateKeysAndObjectsInCollection:@"kTHLGuestlistInviteEntityDataStoreKey" usingBlock:^(NSString * _Nonnull key, id  _Nonnull object, BOOL * _Nonnull stop) {
+        [transaction enumerateKeysAndObjectsInCollection:@"kUserDataStoreKey" usingBlock:^(NSString * _Nonnull key, id  _Nonnull object, BOOL * _Nonnull stop) {
             if ([[(THLGuestlistInviteEntity *)object guestlist].eventId isEqualToString:event.objectId] &&
                 [[(THLGuestlistInviteEntity *)object guest].objectId isEqualToString:[THLUser currentUser].objectId]) {
                 guestlistInvite = (THLGuestlistInviteEntity *)object;

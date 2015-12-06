@@ -10,10 +10,14 @@
 #import "THLDashboardView.h"
 #import "UIScrollView+EmptyDataSet.h"
 
+@protocol THLDashboardView;
+
 @interface THLDashboardViewController : UIViewController
 <
 THLDashboardView,
 UICollectionViewDelegate,
+UICollectionViewDelegateFlowLayout,
+UICollectionViewDataSource,
 DZNEmptyDataSetSource,
 DZNEmptyDataSetDelegate
 >

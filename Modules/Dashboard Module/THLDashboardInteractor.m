@@ -36,6 +36,7 @@
 }
 
 - (THLViewDataSource *)getDataSource {
+    [self updateGuestlistInvites];
     THLViewDataSourceGrouping *grouping = [self viewGrouping];
     THLViewDataSourceSorting *sorting = [self viewSorting];
     NSArray *groups = @[ @"Pending", @"Accepted"];

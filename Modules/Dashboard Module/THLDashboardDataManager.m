@@ -14,12 +14,6 @@
 #import "THLDataStoreDomain.h"
 #import "THLGuestlistInviteEntity.h"
 
-@interface THLDashboardDataManager()
-@property (nonatomic, strong) YapDatabaseConnection *rwConnection;
-@property (nonatomic, strong) YapDatabaseConnection *roConnection;
-
-@end
-
 @implementation THLDashboardDataManager
 - (instancetype)initWithGuestlistService:(id<THLGuestlistServiceInterface>)guestlistService
                           entityMappper:(THLEntityMapper *)entityMapper

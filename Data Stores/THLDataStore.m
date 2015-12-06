@@ -25,8 +25,18 @@
 	if (self = [super init]) {
 		_entityClass = entityClass;
 		_databaseManager = databaseManager;
+        _collectionKey = [NSString stringWithFormat:@"k%@DataStoreKey", NSStringFromClass(_entityClass)];
 	}
 	return self;
+}
+
+- (instancetype)initForKey:(NSString *)key
+           databaseManager:(THLYapDatabaseManager *)databaseManager {
+    if (self = [super init]) {
+        _databaseManager = databaseManager;
+        _collectionKey = key;
+    }
+    return self;
 }
 
 - (YapDatabaseConnection *)rwConnection {
@@ -47,9 +57,9 @@
 	return _databaseManager.database;
 }
 
-- (NSString *)collectionKey {
-	return [NSString stringWithFormat:@"k%@DataStoreKey", NSStringFromClass(_entityClass)];
-}
+//- (NSString *)collectionKey {
+//	return [NSString stringWithFormat:@"k%@DataStoreKey", NSStringFromClass(_entityClass)];
+//}
 
 //- (void)addObject:(THLEntity *)entity {
 //    // Add an object

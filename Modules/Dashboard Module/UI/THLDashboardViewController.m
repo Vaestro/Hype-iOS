@@ -22,10 +22,7 @@
 #import "THLGuestlistInviteEntity.h"
 
 @interface THLDashboardViewController()
-<
-UICollectionViewDelegate,
-UICollectionViewDelegateFlowLayout
->
+
 @property (nonatomic, strong) UICollectionView *collectionView;
 
 @property (nonatomic, strong) ORStackScrollView *scrollView;
@@ -45,14 +42,13 @@ UICollectionViewDelegateFlowLayout
     [self constructView];
     [self layoutView];
     [self bindView];
-    [_refreshCommand execute:nil];
-    self.edgesForExtendedLayout = UIRectEdgeNone;
+//    [_refreshCommand execute:nil];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [_collectionView reloadData];
-}
+//- (void)viewWillAppear:(BOOL)animated {
+//    [super viewWillAppear:animated];
+//    [_collectionView reloadData];
+//}
 
 - (void)constructView {
     _collectionView = [self newCollectionView];

@@ -8,6 +8,8 @@
 
 #import "THLViewDataSource.h"
 #import "THLViewDataSource_Private.h"
+#import "THLDashboardNotificationSectionTitleCell.h"
+#import "THLAppearanceConstants.h"
 
 @implementation THLViewDataSource
 - (void)dealloc {
@@ -22,7 +24,7 @@
     WEAKSELF();
 	[_connection beginLongLivedReadTransaction];
     
-    [_mappings setIsDynamicSectionForAllGroups:YES];
+    [_mappings setIsDynamicSectionForAllGroups:NO];
     
 	[_connection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
 		[WSELF.mappings updateWithTransaction:transaction];
@@ -45,9 +47,9 @@
 	// If the UI is a bit backed up, I may jump multiple commits.
     
 	NSArray *notifications = [_connection beginLongLivedReadTransaction];
-    if ([notifications count] == 0) {
-        return; // already processed commit
-    }
+//    if ([notifications count] == 0) {
+//        return; // already processed commit
+//    }
     
     // Check to see if I need to do anything
     if ( ! [[_connection ext:_mappings.view] hasChangesForNotifications:notifications])
@@ -151,6 +153,10 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    // The section is which group?
+    // Mappings can tell us...
+//    NSString *group = [_mappings groupForSection:indexPath.section];
+    
 	id item = [self itemAtIndexPath:indexPath];
 
 	id cell = self.cellCreationBlock(item, tableView, indexPath);
@@ -182,6 +188,34 @@
 			 parentView:collectionView
 			  indexPath:indexPath];
 	return cell;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    UICollectionReusableView *reusableview = nil;
+    
+    if (kind == UICollectionElementKindSectionHeader) {
+        THLDashboardNotificationSectionTitleCell *titleHeaderCell = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+                                                                                                       withReuseIdentifier:[THLDashboardNotificationSectionTitleCell identifier]
+                                                                                                              forIndexPath:indexPath];
+        NSString *title = [_mappings groupForSection:indexPath.section];
+        titleHeaderCell.titleText = title;
+        titleHeaderCell.tintColor = kTHLNUIPrimaryFontColor;
+        titleHeaderCell.backgroundColor = kTHLNUIPrimaryBackgroundColor;
+        CGRect frame = titleHeaderCell.frame;
+        frame.size.height = 40;
+        [titleHeaderCell setFrame:frame];
+        reusableview = titleHeaderCell;
+    }
+    else if (kind == UICollectionElementKindSectionFooter) {
+        THLDashboardNotificationSectionTitleCell *titleHeaderCell = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+                                                                                                       withReuseIdentifier:[THLDashboardNotificationSectionTitleCell identifier]
+                                                                                                              forIndexPath:indexPath];
+        NSString *title = @"Pending Guestlist Invites";
+        titleHeaderCell.titleText = title;
+        titleHeaderCell.backgroundColor = kTHLNUIRedColor;
+        reusableview = titleHeaderCell;
+    }
+    return reusableview;
 }
 
 #pragma mark - Empty Views
@@ -399,6 +433,7 @@
 //    if (self.tableView) {
         [self deleteCellsAtIndexPaths:@[index1]];
         [self insertCellsAtIndexPaths:@[index2]];
+//        NSLog(@"Old index: %ld, New Index: %ld", index1.section, index2.section);
 //    }
 //    if (self.collectionView) {
 //        [self.collectionView moveItemAtIndexPath:index1

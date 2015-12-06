@@ -52,6 +52,7 @@ UICollectionViewDelegateFlowLayout
 	[_collectionView makeConstraints:^(MASConstraintMaker *make) {
 		make.left.right.top.insets(kTHLEdgeInsetsNone());
         //      Temporary Fix to account for SLPagingViewController Height that is greater than Bounds Height
+        
         make.bottom.equalTo(SV(WSELF.collectionView)).mas_offset(UIEdgeInsetsMake(0, 0, DiscoveryCellHeight(ViewWidth(WSELF.collectionView))/3.67, 0));
 	}];
 }

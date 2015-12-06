@@ -88,6 +88,7 @@
 @property (nonatomic, strong) APAddressBook *addressBook;
 
 //Data Stores
+@property (nonatomic, strong) THLDataStore *userDataStore;
 @property (nonatomic, strong) THLDataStore *eventDataStore;
 @property (nonatomic, strong) THLDataStore *guestDataStore;
 @property (nonatomic, strong) THLDataStore *guestlistDataStore;
@@ -138,7 +139,7 @@
     THLDashboardWireframe *wireframe = [[THLDashboardWireframe alloc] initWithGuestlistService:self.guestlistService
                                                                             entityMappper:self.entityMapper
                                                                          viewDataSourceFactory:self.viewDataSourceFactory
-                                                                                     dataStore:self.guestlistInviteDataStore];
+                                                                                     dataStore:self.userDataStore];
 
     self.dashboardWireframe = wireframe;
     return wireframe;
@@ -191,7 +192,7 @@
 																							 viewDataSourceFactory:self.viewDataSourceFactory
 																									   addressBook:self.addressBook
 																										 dataStore:self.guestDataStore
-                                                                                          guestlistInviteDataStore:self.guestlistInviteDataStore];
+                                                                                          guestlistInviteDataStore:self.userDataStore];
 	self.guestlistInvitationWireframe = wireframe;
 	return wireframe;
 }
@@ -293,6 +294,13 @@
 }
 
 #pragma mark - Data Stores
+- (THLDataStore *)userDataStore {
+    if (!_userDataStore) {
+        _userDataStore = [[THLDataStore alloc] initForKey:@"kUserDataStoreKey" databaseManager:self.databaseManager];
+    }
+    return _userDataStore;
+}
+
 - (THLDataStore *)eventDataStore {
 	if (!_eventDataStore) {
 		_eventDataStore = [[THLDataStore alloc] initForEntity:[THLEventEntity class] databaseManager:self.databaseManager];
