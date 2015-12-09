@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MessageUI/MessageUI.h>
 #import "THLUserProfileView.h"
 #import "THLUserProfileInfoView.h"
 
@@ -15,7 +16,10 @@
 <
 THLUserProfileView,
 UITableViewDelegate,
-UIWebViewDelegate
+UITableViewDataSource,
+
+UIWebViewDelegate,
+MFMailComposeViewControllerDelegate
 >
 @property (nonatomic, strong) UITableView *tableView;
 

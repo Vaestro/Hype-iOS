@@ -25,7 +25,7 @@
 }
 
 - (void)layoutView {
-    self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
+    self.view.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.navigationItem.leftBarButtonItem = _backButton;
 

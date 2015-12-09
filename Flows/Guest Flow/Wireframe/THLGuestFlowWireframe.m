@@ -154,6 +154,10 @@ THLGuestlistReviewModuleDelegate
 
 #pragma mark - THLEventDetailModuleDelegate
 
+- (void)userNeedsLoginOnViewController:(UIViewController *)viewController {
+    [self.moduleDelegate logInUserOnViewController:viewController];
+}
+
 - (void)eventDetailModule:(id<THLEventDetailModuleInterface>)module promotion:(THLPromotionEntity *)promotionEntity presentGuestlistInvitationInterfaceOnController:(UIViewController *)controller{
     [self presentGuestlistInvitationInterfaceForPromotion:promotionEntity inController:controller];
 }
@@ -185,6 +189,7 @@ THLGuestlistReviewModuleDelegate
     [self.moduleDelegate logOutUser];
 }
 
+#pragma mark - Nav Bar Items Construction
 - (UIView *)newDiscoveryNavBarItem {
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"Hypelist-Icon"]
                                                                  imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];

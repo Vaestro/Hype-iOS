@@ -13,6 +13,7 @@
 #import "THLPromotionEntity.h"
 #import "THLEventEntity.h"
 #import "THLPromotion.h"
+#import "THLUser.h"
 
 @implementation THLGuestlistService
 
@@ -188,40 +189,44 @@
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
     __block NSMutableArray *completedGuestlistInvites = [NSMutableArray new];
     __block NSMutableArray *unfinishedGuestlistInvites = [NSMutableArray new];
-
-    [[_queryFactory queryForGuestlistInvitesForUser] findObjectsInBackgroundWithBlock:^(NSArray *guestlistInvites, NSError *error) {
-        if (!error) {
-            for (PFObject *guestlistInvite in guestlistInvites) {
-                PFObject *guestlist = guestlistInvite[@"Guestlist"];
-                [guestlistInvite setObject:guestlist forKey:@"Guestlist"];
-                PFObject *promotion = guestlistInvite[@"Guestlist"][@"Promotion"];
-                [guestlist setObject:promotion forKey:@"Promotion"];
-                PFObject *host = guestlistInvite[@"Guestlist"][@"Promotion"][@"host"];
-                [promotion setObject:host forKey:@"host"];
-                PFObject *event = guestlistInvite[@"Guestlist"][@"Promotion"][@"event"];
-                [promotion setObject:event forKey:@"event"];
-                PFObject *location = guestlistInvite[@"Guestlist"][@"Promotion"][@"event"][@"location"];
-                [event setObject:location forKey:@"location"];
-                PFObject *guest = guestlistInvite[@"Guest"];
-                if (guest.isDataAvailable) {
-                    [guestlistInvite setObject:guest forKey:@"Guest"];
-                    [completedGuestlistInvites addObject:guestlistInvite];
-                } else {
-                    [guestlistInvite setObject:[THLUser currentUser] forKey:@"Guest"];
-                    [unfinishedGuestlistInvites addObject:guestlistInvite];
+    if ([THLUser currentUser]) {
+        [[_queryFactory queryForGuestlistInvitesForUser] findObjectsInBackgroundWithBlock:^(NSArray *guestlistInvites, NSError *error) {
+            if (!error) {
+                for (PFObject *guestlistInvite in guestlistInvites) {
+                    PFObject *guestlist = guestlistInvite[@"Guestlist"];
+                    [guestlistInvite setObject:guestlist forKey:@"Guestlist"];
+                    PFObject *promotion = guestlistInvite[@"Guestlist"][@"Promotion"];
+                    [guestlist setObject:promotion forKey:@"Promotion"];
+                    PFObject *host = guestlistInvite[@"Guestlist"][@"Promotion"][@"host"];
+                    [promotion setObject:host forKey:@"host"];
+                    PFObject *event = guestlistInvite[@"Guestlist"][@"Promotion"][@"event"];
+                    [promotion setObject:event forKey:@"event"];
+                    PFObject *location = guestlistInvite[@"Guestlist"][@"Promotion"][@"event"][@"location"];
+                    [event setObject:location forKey:@"location"];
+                    PFObject *guest = guestlistInvite[@"Guest"];
+                    if (guest.isDataAvailable) {
+                        [guestlistInvite setObject:guest forKey:@"Guest"];
+                        [completedGuestlistInvites addObject:guestlistInvite];
+                    } else {
+                        [guestlistInvite setObject:[THLUser currentUser] forKey:@"Guest"];
+                        [unfinishedGuestlistInvites addObject:guestlistInvite];
+                    }
                 }
-            }
-            if (unfinishedGuestlistInvites.count > 0) {
-                [PFObject saveAllInBackground:unfinishedGuestlistInvites];
-                NSArray *joinedGuestlistInvites = [completedGuestlistInvites arrayByAddingObjectsFromArray:unfinishedGuestlistInvites];
-                [completionSource setResult:joinedGuestlistInvites];
+                if (unfinishedGuestlistInvites.count > 0) {
+                    [PFObject saveAllInBackground:unfinishedGuestlistInvites];
+                    NSArray *joinedGuestlistInvites = [completedGuestlistInvites arrayByAddingObjectsFromArray:unfinishedGuestlistInvites];
+                    [completionSource setResult:joinedGuestlistInvites];
+                } else {
+                    [completionSource setResult:completedGuestlistInvites];
+                }
             } else {
-                [completionSource setResult:completedGuestlistInvites];
+                [completionSource setError:error];
             }
-        } else {
-            [completionSource setError:error];
-        }
-    }];
+        }];
+    } else {
+        [completionSource setResult:nil];
+    }
+
     return completionSource.task;
 }
 

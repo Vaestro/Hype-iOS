@@ -10,5 +10,6 @@
 
 @protocol THLGuestFlowModuleInterface;
 @protocol THLGuestFlowModuleDelegate <NSObject>
+- (void)logInUserOnViewController:(UIViewController *)viewController;
 - (void)logOutUser;
 @end

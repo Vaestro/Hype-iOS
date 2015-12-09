@@ -10,4 +10,6 @@
 @class THLEventEntity;
 @protocol THLDashboardModuleDelegate <NSObject>
 - (void)dashboardModule:(id<THLDashboardModuleInterface>)module didClickToViewEvent:(THLEventEntity *)event;
+- (void)userNeedsLoginOnViewController:(UIViewController *)viewController;
+
 @end

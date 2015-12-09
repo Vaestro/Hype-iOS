@@ -20,6 +20,7 @@
 #import "THLDashboardTicketCell.h"
 #import "THLDashboardTicketCellViewModel.h"
 #import "THLGuestlistInviteEntity.h"
+#import "THLUser.h"
 
 @interface THLDashboardViewController()
 
@@ -33,6 +34,7 @@
 @synthesize selectedIndexPathCommand = _selectedIndexPathCommand;
 @synthesize dataSource = _dataSource;
 @synthesize refreshCommand = _refreshCommand;
+@synthesize loginCommand = _loginCommand;
 @synthesize showRefreshAnimation = _showRefreshAnimation;
 
 #pragma mark VC Lifecycle
@@ -116,6 +118,7 @@
     flowLayout.sectionInset = UIEdgeInsetsMake(10, 0, 10, 0);
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) collectionViewLayout:flowLayout];
     collectionView.nuiClass = kTHLNUIBackgroundView;
+    collectionView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     collectionView.alwaysBounceVertical = YES;
     collectionView.delegate = self;
     return collectionView;
@@ -197,7 +200,12 @@
 #pragma mark - EmptyDataSetDelegate
 
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
-    NSString *text = @"You do not have any upcoming events";
+    NSString *text = @" ";
+    if ([THLUser currentUser]) {
+        text = @"You do not have any upcoming events";
+    } else {
+        text = @"You are not logged in";
+    }
     
     NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0f],
                                  NSForegroundColorAttributeName: kTHLNUIAccentColor};
@@ -206,7 +214,12 @@
 }
 
 - (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView {
-    NSString *text = @"Please create a Guestlist for an Event or if you are invited to an Event, it will show up here";
+    NSString *text = @" ";
+    if ([THLUser currentUser]) {
+        text = @"Please create a Guestlist for an Event or if you are invited to an Event, it will show up here";
+    } else {
+        text = @"Please log in to create a Guestlist or view your invites to Events";
+    }
     
     NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
     paragraph.lineBreakMode = NSLineBreakByWordWrapping;
@@ -226,16 +239,27 @@
 - (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state
 {
     NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:17.0f],
-                                 NSForegroundColorAttributeName: kTHLNUIActionColor,
+                                 NSForegroundColorAttributeName: kTHLNUIPrimaryFontColor,
                                  };
     
-    return [[NSAttributedString alloc] initWithString:@"Refresh" attributes:attributes];
+    NSString *text = @" ";
+    if ([THLUser currentUser]) {
+        text = @"Refresh";
+    } else {
+        text = @"Login";
+    }
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
 
 - (void)emptyDataSetDidTapButton:(UIScrollView *)scrollView
 {
 //    [_refreshCommand execute:nil];
-    [_collectionView reloadData];
+    if ([THLUser currentUser]) {
+        [_collectionView reloadData];
+    } else {
+        [_loginCommand execute:nil];
+    }
 }
 
 //- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView

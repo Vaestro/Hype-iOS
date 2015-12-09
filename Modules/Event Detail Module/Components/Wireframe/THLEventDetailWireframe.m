@@ -65,7 +65,6 @@
     [_view.navigationController dismissViewControllerAnimated:YES completion:^{
         [_presenter.moduleDelegate dismissEventDetailWireframe];
     }];
-
 }
 
 - (id<THLEventDetailModuleInterface>)moduleInterface {

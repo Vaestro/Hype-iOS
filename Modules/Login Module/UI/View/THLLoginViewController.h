@@ -1,9 +1,9 @@
 //
 //  THLLoginViewController.h
-//  Hypelist2point0
+//  TheHypelist
 //
-//  Created by Phil Meyers IV on 9/16/15.
-//  Copyright (c) 2015 Hypelist. All rights reserved.
+//  Created by Edgar Li on 12/7/15.
+//  Copyright © 2015 Hypelist. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

@@ -45,7 +45,7 @@
 }
 
 - (void)layoutView {
-    self.backgroundColor = kTHLNUIPrimaryBackgroundColor;
+    self.backgroundColor = kTHLNUISecondaryBackgroundColor;
     self.clipsToBounds = YES;
     self.layer.cornerRadius = 5;
     

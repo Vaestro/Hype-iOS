@@ -9,6 +9,7 @@
 #import "THLLoginPresenter.h"
 #import "THLLoginInteractor.h"
 #import "THLLoginWireframe.h"
+#import "THLOnboardingView.h"
 #import "THLLoginView.h"
 
 #import "THLFacebookPictureModuleDelegate.h"
@@ -20,7 +21,8 @@ THLLoginInteractorDelegate,
 THLFacebookPictureModuleDelegate,
 THLNumberVerificationModuleDelegate
 >
-@property (nonatomic, weak) id<THLLoginView> view;
+@property (nonatomic, weak) id<THLOnboardingView> onboardingView;
+@property (nonatomic, weak) id<THLLoginView> loginView;
 @property (nonatomic) BOOL busy;
 @property (nonatomic) THLActivityStatus activityStatus;
 @end
@@ -39,12 +41,16 @@ THLNumberVerificationModuleDelegate
 	return self;
 }
 
-- (void)presentLoginModuleInterfaceInWindow:(UIWindow *)window {
-	[_wireframe presentInterfaceInWindow:window];
+- (void)presentLoginModuleInterfaceWithOnboardingInWindow:(UIWindow *)window {
+    [_wireframe presentOnboardingInterfaceInWindow:window];
 }
 
-- (void)configureView:(id<THLLoginView>)view {
-    _view = view;
+- (void)presentLoginModuleInterfaceOnViewController:(UIViewController *)viewController {
+    [_wireframe presentLoginInterfaceOnViewController:viewController];
+}
+
+- (void)configureOnboardingView:(id<THLOnboardingView>)onboardingView {
+    _onboardingView = onboardingView;
     
     WEAKSELF();
     STRONGSELF();
@@ -52,12 +58,37 @@ THLNumberVerificationModuleDelegate
 		[WSELF handleUserLoginAction];
 		return [RACSignal empty];
 	}];
+    RACCommand *skipCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [WSELF handleSkipAction];
+        return [RACSignal empty];
+    }];
     [RACObserve(self, activityStatus) subscribeNext:^(NSNumber *x) {
-        [SSELF.view setShowActivityIndicator:x];
+        [SSELF.onboardingView setShowActivityIndicator:x];
     }];
     
-    [_view setLoginText:NSLocalizedString(@"Login with Facebook", @"Facebook login")];
-	[_view setLoginCommand:loginCommand];
+    [_onboardingView setSkipCommand:skipCommand];
+    [_onboardingView setLoginText:NSLocalizedString(@"Login with Facebook", @"Facebook login")];
+	[_onboardingView setLoginCommand:loginCommand];
+}
+
+- (void)configureLoginView:(id<THLLoginView>)loginView {
+    _loginView = loginView;
+    
+    WEAKSELF();
+    STRONGSELF();
+    RACCommand *loginCommand = [[RACCommand alloc] initWithEnabled:RACObserve(self.interactor, shouldLogin) signalBlock:^RACSignal *(id input) {
+        [WSELF handleUserLoginAction];
+        return [RACSignal empty];
+    }];
+    RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [WSELF dismissInterface];
+        return [RACSignal empty];
+    }];
+    [RACObserve(self, activityStatus) subscribeNext:^(NSNumber *x) {
+        [SSELF.onboardingView setShowActivityIndicator:x];
+    }];
+    [_loginView setDismissCommand:dismissCommand];
+    [_loginView setLoginCommand:loginCommand];
 }
 
 #pragma mark - Action Handling
@@ -65,6 +96,10 @@ THLNumberVerificationModuleDelegate
     self.activityStatus = THLActivityStatusError;
 	DLog(@"Error: %@", error);
 	[self reroute];
+}
+
+- (void)handleSkipAction {
+    [self.moduleDelegate loginModule:self didLoginUser:nil];
 }
 
 - (void)handleUserLoginAction {
@@ -101,7 +136,11 @@ THLNumberVerificationModuleDelegate
 		[self routeToPickProfilePictureInterface];
 	} else {
         self.activityStatus = THLActivityStatusNone;
-		[self finishLoginInterface];
+        if (_onboardingView) {
+            [self finishOnboardingInterface];
+        } else {
+            [_wireframe finishLogin];
+        }
 	}
 }
 
@@ -113,8 +152,12 @@ THLNumberVerificationModuleDelegate
 	[_wireframe presentFacebookPictureInterface:self];
 }
 
-- (void)finishLoginInterface {
+- (void)finishOnboardingInterface {
 	[self.moduleDelegate loginModule:self didLoginUser:nil];
+}
+
+- (void)dismissInterface {
+    [_wireframe dismissInterface];
 }
 
 #pragma mark - THLLoginInteractorDelegate

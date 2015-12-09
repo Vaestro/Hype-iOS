@@ -77,6 +77,11 @@ THLDashboardInteractorDelegate
         return [RACSignal empty];
     }];
     
+    RACCommand *loginCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [WSELF handleNeedLoginAction];
+        return [RACSignal empty];
+    }];
+                                
     [RACObserve(self, refreshing) subscribeNext:^(NSNumber *b) {
         BOOL isRefreshing = [b boolValue];
         [SSELF.view setShowRefreshAnimation:isRefreshing];
@@ -84,6 +89,7 @@ THLDashboardInteractorDelegate
     
     [_view setDataSource:dataSource];
     [_view setSelectedIndexPathCommand:selectedIndexPathCommand];
+    [_view setLoginCommand:loginCommand];
     [_view setRefreshCommand:refreshCommand];
 }
 
@@ -94,6 +100,10 @@ THLDashboardInteractorDelegate
 - (void)handleRefreshAction {
     self.refreshing = YES;
     [_interactor updateGuestlistInvites];
+}
+
+- (void)handleNeedLoginAction {
+    [self.moduleDelegate userNeedsLoginOnViewController:(UIViewController *)_view];
 }
 
 - (void)handleIndexPathSelection:(NSIndexPath *)indexPath {

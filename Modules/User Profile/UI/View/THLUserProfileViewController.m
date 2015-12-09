@@ -5,7 +5,6 @@
 //  Created by Edgar Li on 11/10/15.
 //  Copyright © 2015 Hypelist. All rights reserved.
 //
-
 #import "THLUserProfileViewController.h"
 #import "THLUserProfileView.h"
 #import "THLUserProfileInfoView.h"
@@ -15,6 +14,8 @@
 #import "THLInformationViewController.h"
 #import "THLWebViewController.h"
 #import "THLResourceManager.h"
+#import "THLUserProfileFooterView.h"
+#import "THLUserProfileHeaderView.h"
 
 
 typedef NS_ENUM(NSInteger, TableViewSection) {
@@ -50,6 +51,8 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 
 @implementation THLUserProfileViewController
 @synthesize selectedIndexPathCommand;
+@synthesize contactCommand;
+@synthesize logoutCommand;
 @synthesize userName;
 @synthesize userImageURL;
 
@@ -61,7 +64,7 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
     [self bindView];
     
     self.urls = [[NSArray alloc]initWithObjects:@"https://hypelist.typeform.com/to/zGLp4N", @"https://hypelist.typeform.com/to/v01VE8", nil];
-    self.tableCellNames = [[NSArray alloc]initWithObjects:@"Become a Host",@"Let Hypelist Plan Your Party", @"Privacy Policy",@"Terms & Conditions",@"Logout", nil];
+    self.tableCellNames = [[NSArray alloc]initWithObjects:@"Become a Host",@"Let Hypelist Plan Your Party", @"Privacy Policy",@"Terms & Conditions", nil];
 }
 
 #pragma mark - View Setup
@@ -72,23 +75,29 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 }
 
 - (void)layoutView {
-    [self.view addSubviews:@[_tableView,
-                             _profileInfoView]];
+    [self.view addSubviews:@[_tableView]];
+    
+//    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.automaticallyAdjustsScrollViewInsets = YES;
     
     WEAKSELF();
-    [_profileInfoView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.insets(kTHLEdgeInsetsNone());
-        make.bottom.equalTo([WSELF tableView].mas_top).insets(kTHLEdgeInsetsNone());
-        make.height.equalTo(200);
-    }];
+//    [_profileInfoView makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.left.right.insets(kTHLEdgeInsetsNone());
+//        make.bottom.equalTo([WSELF tableView].mas_top).insets(kTHLEdgeInsetsNone());
+//        make.height.equalTo(200);
+//    }];
     
     [_tableView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.insets(kTHLEdgeInsetsNone());
+        make.top.left.right.insets(UIEdgeInsetsZero);
 //      Temporary Fix to account for SLPagingViewController Height that is greater than Bounds Height
-        make.bottom.equalTo(SV(WSELF.tableView)).mas_offset(UIEdgeInsetsMake(0, 0, DiscoveryCellHeight(ViewWidth(WSELF.tableView))/3.67, 0));
+        make.bottom.equalTo(SV(WSELF.tableView)).mas_offset(UIEdgeInsetsMake(0, 0, -250, 0));
     }];
 }
 
+-(void)viewDidLayoutSubviews {
+    self.tableView.contentSize = CGSizeMake(self.tableView.frame.size.width, self.tableView.contentSize.height - 1);
+
+}
 - (void)bindView {
     [self configureDataSource];
     RAC(self.profileInfoView, userImageURL) = RACObserve(self, userImageURL);
@@ -101,6 +110,8 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 
 - (void)registerCellsForTableView:(UITableView *)tableView {
     [tableView registerClass:[THLUserProfileTableViewCell class] forCellReuseIdentifier:[THLUserProfileTableViewCell identifier]];
+    [tableView registerClass:[THLUserProfileFooterView class] forHeaderFooterViewReuseIdentifier:[THLUserProfileFooterView identifier]];
+    [tableView registerClass:[THLUserProfileHeaderView class] forHeaderFooterViewReuseIdentifier:[THLUserProfileHeaderView identifier]];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -137,15 +148,78 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
             _infoVC.title = @"Terms Of Use";
             break;
         }
-        case 4: {
-            [selectedIndexPathCommand execute:indexPath];
-        }
         default: {
             break;
         }
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *header = nil;
+    CGFloat height = [self tableView:tableView heightForHeaderInSection:section];
+    CGRect frame = CGRectMake(0, 0, ScreenWidth, height);
+    THLUserProfileHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:[THLUserProfileHeaderView identifier]];
+    headerView = [[THLUserProfileHeaderView alloc] initWithFrame:frame];
+    headerView.userName = self.userName;
+    headerView.userImageURL = self.userImageURL;
+    header = headerView;
+    return header;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    UIView *footer = nil;
+    CGFloat height = [self tableView:tableView heightForFooterInSection:section];
+    CGRect frame = CGRectMake(0, 0, ScreenWidth, height);
+    THLUserProfileFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:[THLUserProfileFooterView identifier]];
+    footerView = [[THLUserProfileFooterView alloc] initWithFrame:frame];
+    footerView.logoutCommand = self.logoutCommand;
+    footerView.emailCommand = self.contactCommand;
+    
+    footer = footerView;
+    return footer;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    CGFloat headerHeight = 0;
+//    if (section == TableViewSectionPersonal) {
+        THLUserProfileHeaderView *headerView = [THLUserProfileHeaderView new];
+//        [headerView configureWithGuest:self.guest];
+
+        headerHeight = [headerView.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+//    }
+    return headerHeight;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    CGFloat footerHeight = 0;
+//    if (section == TableViewSectionHypelist) {
+        THLUserProfileFooterView *footerView = [THLUserProfileFooterView new];
+        footerHeight = [footerView.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+//    }
+    return footerHeight;
+}
+
+#pragma mark MSMailMessage
+-(void)showMailView {
+    if ([MFMailComposeViewController canSendMail])
+    {
+        MFMailComposeViewController *mail = [[MFMailComposeViewController alloc] init];
+        mail.mailComposeDelegate = self;
+        [mail setSubject:@"Contact Us"];
+        [mail setMessageBody:@"" isHTML:NO];
+        [mail setToRecipients:@[@"hypeteam@thehypelist.co"]];
+        mail.navigationBar.barStyle = UIBarButtonItemStylePlain;
+
+        [[mail navigationBar] setTitleTextAttributes:@{NSForegroundColorAttributeName :kTHLNUIPrimaryFontColor}];
+        [[mail navigationBar] setTintColor:kTHLNUIPrimaryFontColor];
+        [self.view.window.rootViewController presentViewController:mail animated:YES completion:NULL];
+    }
+    else
+    {
+        NSLog(@"This device cannot send email");
+    }
 }
 
 #pragma mark UIAlertView
@@ -188,10 +262,12 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 
 #pragma mark - Constructors
 - (UITableView *)newTableView {
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStyleGrouped];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     tableView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     tableView.separatorColor = [UIColor clearColor];
-    tableView.scrollEnabled = NO;
+//    tableView.scrollEnabled = NO;
+    tableView.bounces = YES;
+    tableView.alwaysBounceVertical = YES;
     tableView.dataSource = self;
     tableView.delegate = self;
     return tableView;

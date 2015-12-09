@@ -15,5 +15,4 @@
 @property (nonatomic, strong) RACCommand *refreshCommand;
 @property (nonatomic) BOOL showRefreshAnimation;
 
-@property (nonatomic) BOOL viewAppeared;
 @end

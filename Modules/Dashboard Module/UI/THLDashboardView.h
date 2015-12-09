@@ -12,6 +12,7 @@
 @protocol THLDashboardView <NSObject>
 @property (nonatomic, strong) THLViewDataSource *dataSource;
 @property (nonatomic, strong) RACCommand *selectedIndexPathCommand;
+@property (nonatomic, strong) RACCommand *loginCommand;
 @property (nonatomic, strong) RACCommand *refreshCommand;
 @property (nonatomic) BOOL showRefreshAnimation;
 @end

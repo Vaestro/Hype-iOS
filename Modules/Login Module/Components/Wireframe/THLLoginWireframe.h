@@ -32,7 +32,11 @@
 			   facebookPictureModule:(id<THLFacebookPictureModuleInterface>)facebookPictureModule;
 
 
-- (void)presentInterfaceInWindow:(UIWindow *)window;
+- (void)presentOnboardingInterfaceInWindow:(UIWindow *)window;
+- (void)presentLoginInterfaceOnViewController:(UIViewController *)viewController;
 - (void)presentNumberVerificationInterface:(id<THLNumberVerificationModuleDelegate>)interfaceDelegate;
 - (void)presentFacebookPictureInterface:(id<THLFacebookPictureModuleDelegate>)interfaceDelegate;
+
+- (void)dismissInterface;
+- (void)finishLogin;
 @end

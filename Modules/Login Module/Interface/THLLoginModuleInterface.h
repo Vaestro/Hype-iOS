@@ -12,5 +12,6 @@
 @protocol THLLoginModuleInterface <NSObject>
 @property (nonatomic, weak) id<THLLoginModuleDelegate> moduleDelegate;
 
-- (void)presentLoginModuleInterfaceInWindow:(UIWindow *)window;
+- (void)presentLoginModuleInterfaceWithOnboardingInWindow:(UIWindow *)window;
+- (void)presentLoginModuleInterfaceOnViewController:(UIViewController *)viewController;
 @end

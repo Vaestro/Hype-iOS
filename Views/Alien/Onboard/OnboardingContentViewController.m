@@ -69,13 +69,13 @@ static CGFloat const kMainPageControlHeight = 35;
     
     // default icon properties
     if(_image) {
-        self.iconHeight = _image.size.height;
-        self.iconWidth = _image.size.width;
+        self.iconHeight = SCREEN_HEIGHT;
+        self.iconWidth = SCREEN_WIDTH;
     }
     
     else {
-        self.iconHeight = kDefaultImageViewSize;
-        self.iconWidth = kDefaultImageViewSize;
+        self.iconHeight = SCREEN_HEIGHT;
+        self.iconWidth = SCREEN_WIDTH;
     }
     
     // default title properties

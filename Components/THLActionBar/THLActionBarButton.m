@@ -38,7 +38,6 @@
     }
 }
 
-
 - (void)setTitle:(NSString *)title forState:(UIControlState)state {
     [self setTitle:title animateChanges:NO];
 }
@@ -54,8 +53,6 @@
     }
     return _morphingLabel;
 }
-
-
 
 - (CGSize)intrinsicContentSize {
     return CGSizeMake(UIViewNoIntrinsicMetric, 60);

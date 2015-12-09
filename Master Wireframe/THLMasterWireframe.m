@@ -63,7 +63,7 @@ THLPopupNotificationModuleDelegate
 
 - (void)presentAppInWindow:(UIWindow *)window {
 	_window = window;
-    [_sessionService isUserCached] ? [self routeUserFlow] : [self presentLoginInterface];
+    [_sessionService isUserCached] ? [self routeUserFlow] : [self presentLoginInterfaceWithOnboarding];
 }
 
 - (void)routeUserFlow {
@@ -88,11 +88,18 @@ THLPopupNotificationModuleDelegate
 }
 
 #pragma mark - Routing
-- (void)presentLoginInterface {
+- (void)presentLoginInterfaceWithOnboarding {
 	THLLoginWireframe *loginWireframe = [_dependencyManager newLoginWireframe];
     _currentWireframe = loginWireframe;
 	[loginWireframe.moduleInterface setModuleDelegate:self];
-	[loginWireframe.moduleInterface presentLoginModuleInterfaceInWindow:_window];
+	[loginWireframe.moduleInterface presentLoginModuleInterfaceWithOnboardingInWindow:_window];
+}
+
+- (void)presentLoginInterfaceOnViewController:(UIViewController *)viewController {
+    THLLoginWireframe *loginWireframe = [_dependencyManager newLoginWireframe];
+    _currentWireframe = loginWireframe;
+    [loginWireframe.moduleInterface setModuleDelegate:self];
+    [loginWireframe.moduleInterface presentLoginModuleInterfaceOnViewController:viewController];
 }
 
 - (void)presentGuestFlow {
@@ -125,20 +132,25 @@ THLPopupNotificationModuleDelegate
 #pragma mark - THLLoginModuleDelegate
 - (void)loginModule:(id<THLLoginModuleInterface>)module didLoginUser:(NSError *)error {
 	if (!error) {
-        [_sessionService makeCurrentInstallation];
-        [_sessionService logCrashlyticsUser];
+        if ([THLUser currentUser]) {
+            [_sessionService makeCurrentInstallation];
+            [_sessionService logCrashlyticsUser];
+        }
 		[self presentGuestFlow];
-
     } else {
         NSLog(@"Login Error:%@", error);
     }
 }
 
-#pragma mark - LogOut
+#pragma mark - UserFlowDelegate
+- (void)logInUserOnViewController:(UIViewController *)viewController {
+    [self presentLoginInterfaceOnViewController:viewController];
+}
+
 - (void)logOutUser {
     [_sessionService logUserOut];
 //    _guestWireframe = nil;
-    [self presentLoginInterface];
+    [self presentLoginInterfaceWithOnboarding];
 }
 
 

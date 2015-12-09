@@ -57,15 +57,21 @@
     }];
     
     RACCommand *actionBarButtonCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        if (WSELF.guestlistReviewStatus == THLGuestlistStatusAccepted ||
-            WSELF.guestlistReviewStatus  == THLGuestlistStatusPendingHost ||
-            WSELF.guestlistReviewStatus == THLGuestlistStatusPendingInvite)
-        {
-            [WSELF handleViewGuestlistAction];
+        if (![THLUser currentUser]) {
+            [WSELF handleNeedLoginAction];
         } else {
-//            TODO: Create logic so that Guests with Declined Guestlists can have another guestlist invite to the same event if their other one is declined
-            [WSELF handleCreateGuestlistAction];
+            if (WSELF.guestlistReviewStatus == THLGuestlistStatusAccepted ||
+                WSELF.guestlistReviewStatus  == THLGuestlistStatusPendingHost ||
+                WSELF.guestlistReviewStatus == THLGuestlistStatusPendingInvite)
+            {
+                [WSELF handleViewGuestlistAction];
+            } else {
+                //            TODO: Create logic so that Guests with Declined Guestlists can have another guestlist invite to the same event if their other one is declined
+                [WSELF handleCreateGuestlistAction];
+            }
         }
+        
+
         return [RACSignal empty];
     }];
     
@@ -126,6 +132,10 @@
 
 - (void)checkForInvite {
     [_interactor checkValidGuestlistInviteForEvent:_eventEntity];
+}
+
+- (void)handleNeedLoginAction {
+    [self.moduleDelegate userNeedsLoginOnViewController:(UIViewController *)_view];
 }
 
 - (void)handleDismissAction {

@@ -9,19 +9,23 @@
 #import "THLLoginWireframe.h"
 #import "THLLoginInteractor.h"
 #import "THLLoginPresenter.h"
-#import "THLLoginViewController.h"
 #import "THLLoginDataManager.h"
+
+#import "THLOnboardingViewController.h"
+#import "THLLoginViewController.h"
 
 #import "THLNumberVerificationModuleInterface.h"
 #import "THLFacebookPictureModuleInterface.h"
 
 @interface THLLoginWireframe()
 @property (nonatomic, strong) UIWindow *window;
+@property (nonatomic, strong) UIViewController *viewController;
 
 @property (nonatomic, strong) THLLoginDataManager *dataManager;
 @property (nonatomic, strong) THLLoginInteractor *interactor;
 @property (nonatomic, strong) THLLoginPresenter *presenter;
-@property (nonatomic, strong) THLLoginViewController *view;
+@property (nonatomic, strong) THLOnboardingViewController *onboardingView;
+@property (nonatomic, strong) THLLoginViewController *loginView;
 @end
 
 @implementation THLLoginWireframe
@@ -43,7 +47,8 @@
 	_dataManager = [[THLLoginDataManager alloc] initWithLoginService:_loginService];
 	_interactor = [[THLLoginInteractor alloc] initWithDataManager:_dataManager userManager:_userManager];
 	_presenter = [[THLLoginPresenter alloc] initWithWireframe:self interactor:_interactor];
-	_view = [[THLLoginViewController alloc] initWithNibName:nil bundle:nil];
+	_onboardingView = [[THLOnboardingViewController alloc] initWithNibName:nil bundle:nil];
+    _loginView = [[THLLoginViewController alloc] initWithNibName:nil bundle:nil];
 }
 
 #pragma mark - Interface
@@ -51,11 +56,28 @@
 	return _presenter;
 }
 
-- (void)presentInterfaceInWindow:(UIWindow *)window {
+- (void)presentOnboardingInterfaceInWindow:(UIWindow *)window {
 	_window = window;
-	[_presenter configureView:_view];
-	_window.rootViewController = _view;
+	[_presenter configureOnboardingView:_onboardingView];
+	_window.rootViewController = _onboardingView;
 	[_window makeKeyAndVisible];
+}
+
+- (void)presentLoginInterfaceOnViewController:(UIViewController *)viewController {
+    _viewController = viewController;
+    [_presenter configureLoginView:_loginView];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:_loginView];
+    [_viewController presentViewController:navigationController animated:YES completion:NULL];
+}
+
+- (void)dismissInterface {
+    [_loginView.navigationController dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)finishLogin {
+    [_loginView.navigationController dismissViewControllerAnimated:YES completion:^{
+        [_presenter.moduleDelegate loginModule:_presenter didLoginUser:nil];
+    }];
 }
 
 - (void)presentNumberVerificationInterface:(id<THLNumberVerificationModuleDelegate>)interfaceDelegate {

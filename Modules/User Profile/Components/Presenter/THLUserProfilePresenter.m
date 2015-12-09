@@ -43,10 +43,29 @@
         return [RACSignal empty];
     }];
     
+    RACCommand *contactCommmand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [WSELF handleContactAction];
+        return [RACSignal empty];
+    }];
+    
+    RACCommand *logoutCommmand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [WSELF handleLogoutAction];
+        return [RACSignal empty];
+    }];
+    [_view setLogoutCommand:logoutCommmand];
+    [_view setContactCommand:contactCommmand];
+
     [_view setSelectedIndexPathCommand:selectedIndexPathCommand];
 }
 
 - (void)handleIndexPathSelection:(NSIndexPath *)indexPath {
+}
+
+- (void)handleContactAction {
+    [self.view showMailView];
+}
+
+- (void)handleLogoutAction {
     [self.moduleDelegate logOutUser];
 }
 @end
