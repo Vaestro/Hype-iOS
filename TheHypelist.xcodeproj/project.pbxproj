@@ -99,7 +99,6 @@
 		21E402E01BBF8371001D0C2C /* THLGuestlistService.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E402DF1BBF8371001D0C2C /* THLGuestlistService.m */; };
 		21E402EE1BBF9A8B001D0C2C /* THLGuestEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E402ED1BBF9A8B001D0C2C /* THLGuestEntity.m */; };
 		21EED1001BB5F842001325A7 /* THLGuestFlowWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 21EED0FF1BB5F842001325A7 /* THLGuestFlowWireframe.m */; };
-		76FA20541BCF854000BB480A /* THLSessionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 76FA20531BCF854000BB480A /* THLSessionService.m */; };
 		7905CC411BE0252700E56878 /* THLGuestlistInviteEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7905CC401BE0252700E56878 /* THLGuestlistInviteEntity.m */; };
 		790603BD1BF5B6810093335E /* THLPromotionInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 790603BC1BF5B6810093335E /* THLPromotionInfoView.m */; };
 		790603C31BFB73380093335E /* THLDashboardWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 790603C21BFB73380093335E /* THLDashboardWireframe.m */; };
@@ -198,6 +197,7 @@
 		79CE01E31C0A69D40047E6FA /* THLDashboardTicketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CE01E21C0A69D40047E6FA /* THLDashboardTicketCell.m */; };
 		79CE01E61C0A69EC0047E6FA /* THLDashboardTicketCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CE01E51C0A69EC0047E6FA /* THLDashboardTicketCellViewModel.m */; };
 		8500CA18DF5736B9764E20A9 /* libPods-TheHypelist.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A63D387799ADEA3D66DC04C6 /* libPods-TheHypelist.a */; };
+		9DE048564BB3FAE7AF277A3B /* libPods-TheHypelistTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FB9B71E9A7DBD2DAA9915571 /* libPods-TheHypelistTests.a */; };
 		C8E1B1621BF437F300A9824C /* THLUserProfileInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B1611BF437F300A9824C /* THLUserProfileInteractor.m */; };
 		C8E1B1651BF4380D00A9824C /* THLUserProfileDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B1641BF4380D00A9824C /* THLUserProfileDataManager.m */; };
 		C8E1B16B1BF43DA800A9824C /* THLUserProfileInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B16A1BF43DA800A9824C /* THLUserProfileInfoView.m */; };
@@ -443,9 +443,6 @@
 		21EED0FE1BB5F842001325A7 /* THLGuestFlowWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestFlowWireframe.h; sourceTree = "<group>"; };
 		21EED0FF1BB5F842001325A7 /* THLGuestFlowWireframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestFlowWireframe.m; sourceTree = "<group>"; };
 		21EED1011BB5F8A7001325A7 /* THLGuestFlowDependencyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestFlowDependencyManager.h; sourceTree = "<group>"; };
-		76FA20511BCF851400BB480A /* THLSessionServiceInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLSessionServiceInterface.h; sourceTree = "<group>"; };
-		76FA20521BCF854000BB480A /* THLSessionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLSessionService.h; sourceTree = "<group>"; };
-		76FA20531BCF854000BB480A /* THLSessionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLSessionService.m; sourceTree = "<group>"; };
 		7905CC3E1BE0251000E56878 /* THLGuestlistInviteEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistInviteEntity.h; sourceTree = "<group>"; };
 		7905CC401BE0252700E56878 /* THLGuestlistInviteEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestlistInviteEntity.m; sourceTree = "<group>"; };
 		790603BB1BF5B6810093335E /* THLPromotionInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPromotionInfoView.h; sourceTree = "<group>"; };
@@ -668,6 +665,7 @@
 		CBE54FC98A366F3761F89F63 /* THLViewDataSourceGrouping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLViewDataSourceGrouping.m; sourceTree = "<group>"; };
 		CBE54FD0B5A148F6494B7A84 /* THLViewDataSourceGrouping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLViewDataSourceGrouping.h; sourceTree = "<group>"; };
 		CD3467C7B268F167916C18BA /* Pods-TheHypelistTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheHypelistTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TheHypelistTests/Pods-TheHypelistTests.release.xcconfig"; sourceTree = "<group>"; };
+		FB9B71E9A7DBD2DAA9915571 /* libPods-TheHypelistTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TheHypelistTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -687,6 +685,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DE048564BB3FAE7AF277A3B /* libPods-TheHypelistTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1701,7 +1700,6 @@
 				21CCEDEF1B87CE210066CDAC /* Fetching */,
 				21937F2D1BB5D0F2005E949E /* Model Services */,
 				21775F571B8E15E400609D39 /* Permissions Request */,
-				76FA20501BCF84D300BB480A /* Session */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1885,16 +1883,6 @@
 				CD3467C7B268F167916C18BA /* Pods-TheHypelistTests.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		76FA20501BCF84D300BB480A /* Session */ = {
-			isa = PBXGroup;
-			children = (
-				76FA20521BCF854000BB480A /* THLSessionService.h */,
-				76FA20531BCF854000BB480A /* THLSessionService.m */,
-				76FA20511BCF851400BB480A /* THLSessionServiceInterface.h */,
-			);
-			path = Session;
 			sourceTree = "<group>";
 		};
 		790603BE1BFB6EAB0093335E /* Dashboard Module */ = {
@@ -2556,6 +2544,7 @@
 				794DCCB61BF555150037A03D /* Accelerate.framework */,
 				A63D387799ADEA3D66DC04C6 /* libPods-TheHypelist.a */,
 				790B38EA1C03741000CB2362 /* libPods-TheHypelistTests.a */,
+				FB9B71E9A7DBD2DAA9915571 /* libPods-TheHypelistTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2901,7 +2890,6 @@
 				790603BD1BF5B6810093335E /* THLPromotionInfoView.m in Sources */,
 				21CCEDF51B87CFCB0066CDAC /* THLParseQueryFactory.m in Sources */,
 				211005BF1B8A70BF00A540C6 /* THLEventDiscoveryCell.m in Sources */,
-				76FA20541BCF854000BB480A /* THLSessionService.m in Sources */,
 				798B5FD11BF12D2C002EBCB6 /* THLEventHostingWireframe.m in Sources */,
 				212173581BB33BC7007D817A /* THLPromotionSelectionViewModel.m in Sources */,
 				215A428E1BAA200E00D03C35 /* THLNumberVerificationWireframe.m in Sources */,

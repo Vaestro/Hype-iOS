@@ -6,11 +6,15 @@
 //  Copyright (c) 2015 Hypelist. All rights reserved.
 //
 
+//Frameworks
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
 #import "THLMasterWireframe.h"
 
 //Utilities
 #import "THLDependencyManager.h"
-#import "THLSessionService.h"
+#import "THLUserManager.h"
 
 //Wireframes
 #import "THLLoginWireframe.h"
@@ -26,15 +30,6 @@
 #import "THLGuestFlowModuleDelegate.h"
 #import "THLHostFlowModuleDelegate.h"
 
-#import "THLEventDetailModuleDelegate.h"
-#import "THLPromotionSelectionModuleDelegate.h"
-#import "THLGuestlistInvitationModuleDelegate.h"
-#import "THLUser.h"
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
-
-
-
 @interface THLMasterWireframe()
 <
 THLLoginModuleDelegate,
@@ -46,7 +41,7 @@ THLPopupNotificationModuleDelegate
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) UIViewController *viewController;
 @property (nonatomic, strong) id currentWireframe;
-@property (nonatomic, strong) THLSessionService *sessionService;
+@property (nonatomic, strong) THLUserManager *userManager;
 @property (nonatomic, strong) THLGuestFlowWireframe *guestWireframe;
 @property (nonatomic, strong) THLHostFlowWireframe *hostWireframe;
 
@@ -56,21 +51,21 @@ THLPopupNotificationModuleDelegate
 - (instancetype)initWithDependencyManager:(THLDependencyManager *)dependencyManager {
 	if (self = [super init]) {
         _dependencyManager = dependencyManager;
-        _sessionService = [[THLSessionService alloc] init];
 	}
 	return self;
 }
 
 - (void)presentAppInWindow:(UIWindow *)window {
 	_window = window;
-    [_sessionService isUserCached] ? [self routeUserFlow] : [self presentLoginInterfaceWithOnboarding];
+    _userManager = [_dependencyManager userManager];
+    [_userManager isUserCached] ? [self routeLoggedInUserFlow] : [self presentLoginInterfaceWithOnboarding];
 }
 
-- (void)routeUserFlow {
-    if ([THLUser currentUser].type == THLUserTypeGuest) {
+- (void)routeLoggedInUserFlow {
+    if ([_userManager userIsGuest]) {
         [self presentGuestFlow];
     }
-    else if ([THLUser currentUser].type == THLUserTypeHost) {
+    else if ([_userManager userIsHost]) {
         [self presentHostFlow];
     }
 }
@@ -88,6 +83,10 @@ THLPopupNotificationModuleDelegate
 }
 
 #pragma mark - Routing
+/**
+ *  present modules by setting their delegates to Master Wireframe and calling the module's presenter to initialize the view on the stack
+ */
+
 - (void)presentLoginInterfaceWithOnboarding {
 	THLLoginWireframe *loginWireframe = [_dependencyManager newLoginWireframe];
     _currentWireframe = loginWireframe;
@@ -109,6 +108,7 @@ THLPopupNotificationModuleDelegate
 	[_guestWireframe presentGuestFlowInWindow:_window];
 }
 
+// Route to Event Detail within GuestFlow Module from Popup Module
 - (void)presentGuestFlowForEvent:(THLEventEntity *)eventEntity {
     _guestWireframe = [_dependencyManager newGuestFlowWireframe];
     _currentWireframe = _guestWireframe;
@@ -123,6 +123,9 @@ THLPopupNotificationModuleDelegate
     [_hostWireframe presentHostFlowInWindow:_window];
 }
 
+/**
+ *  Delegates
+ */
 
 #pragma mark - THLPopupNotifcationDelegate
 - (void)popupNotificationModule:(id<THLPopupNotificationModuleInterface>)module userDidAcceptReviewForEvent:(THLEventEntity *)eventEntity {
@@ -132,9 +135,9 @@ THLPopupNotificationModuleDelegate
 #pragma mark - THLLoginModuleDelegate
 - (void)loginModule:(id<THLLoginModuleInterface>)module didLoginUser:(NSError *)error {
 	if (!error) {
-        if ([THLUser currentUser]) {
-            [_sessionService makeCurrentInstallation];
-            [_sessionService logCrashlyticsUser];
+        if ([_userManager currentUser]) {
+            [_userManager makeCurrentInstallation];
+            [_userManager logCrashlyticsUser];
         }
 		[self presentGuestFlow];
     } else {
@@ -148,7 +151,7 @@ THLPopupNotificationModuleDelegate
 }
 
 - (void)logOutUser {
-    [_sessionService logUserOut];
+    [_userManager logUserOut];
 //    _guestWireframe = nil;
     [self presentLoginInterfaceWithOnboarding];
 }
