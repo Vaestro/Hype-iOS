@@ -24,13 +24,13 @@
                             entityMapper:(THLEntityMapper *)entityMapper
 							   dataStore:(THLDataStore *)dataStore
 							 addressBook:(APAddressBook *)addressBook
-                guestlistInviteDataStore:(THLDataStore *)guestlistInviteDataStore {
+                              dataStore2:(THLDataStore *)dataStore2 {
 	if (self = [super init]) {
 		_guestlistService = guestlistService;
         _entityMapper = entityMapper;
 		_dataStore = dataStore;
 		_addressBook = addressBook;
-        _guestlistInviteDataStore = guestlistInviteDataStore;
+        _dataStore2 = dataStore2;
 	}
 	return self;
 }
@@ -53,7 +53,7 @@
     WEAKSELF();
     return [[_guestlistService fetchGuestlistInviteForEvent:promotionEntity.event] continueWithSuccessBlock:^id(BFTask *task) {
         THLGuestlistInviteEntity *guestlistInviteEntity = [WSELF.entityMapper mapGuestlistInvite:task.result];
-        [WSELF.guestlistInviteDataStore updateOrAddEntities:[NSSet setWithArray:@[guestlistInviteEntity]]];
+        [WSELF.dataStore2 updateOrAddEntities:[NSSet setWithArray:@[guestlistInviteEntity]]];
         return [BFTask taskWithResult:nil];
     }];
 }

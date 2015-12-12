@@ -11,6 +11,7 @@
 #import "THLViewDataSourceFactory.h"
 #import "THLGuestlistInviteEntity.h"
 #import "THLUser.h"
+#import "THLGuestEntity.h"
 
 @interface THLDashboardInteractor()
 
@@ -45,13 +46,16 @@
 }
 
 - (THLViewDataSourceGrouping *)viewGrouping {
+    NSMutableOrderedSet *iteratedGuestlistInvites = [NSMutableOrderedSet new];
     return [THLViewDataSourceGrouping withEntityBlock:^NSString *(NSString *collection, THLEntity *entity) {
         if ([entity isKindOfClass:[THLGuestlistInviteEntity class]]) {
-            if ([[[entity valueForKey:@"guest"] valueForKey:@"objectId"] isEqualToString:[THLUser currentUser].objectId]) {
-                THLGuestlistInviteEntity *guestlistInvite = (THLGuestlistInviteEntity *)entity;
-                if (guestlistInvite.response == THLStatusPending) {
+            THLGuestlistInviteEntity *guestlistInviteEntity = (THLGuestlistInviteEntity *)entity;
+            if ([guestlistInviteEntity.guest.objectId isEqualToString:[THLUser currentUser].objectId] && ![iteratedGuestlistInvites containsObject:guestlistInviteEntity]) {
+                if (guestlistInviteEntity.response == THLStatusPending) {
+                    [iteratedGuestlistInvites addObject:guestlistInviteEntity];
                     return @"Pending";
-                } else if (guestlistInvite.response == THLStatusAccepted) {
+                } else if (guestlistInviteEntity.response == THLStatusAccepted) {
+                    [iteratedGuestlistInvites addObject:guestlistInviteEntity];
                     return @"Accepted";
                 }
             }

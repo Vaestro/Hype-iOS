@@ -15,7 +15,7 @@
 @interface THLDataStore()
 @property (nonatomic, strong) YapDatabaseConnection *rwConnection;
 @property (nonatomic, strong) YapDatabaseConnection *roConnection;
-@property (nonatomic, readonly, copy) NSString *collectionKey;
+@property (nonatomic, copy) NSString *collectionKey;
 @property (nonatomic) Class entityClass;
 @end
 

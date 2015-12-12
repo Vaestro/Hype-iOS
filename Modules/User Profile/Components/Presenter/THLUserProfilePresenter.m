@@ -49,9 +49,10 @@
     }];
     
     RACCommand *logoutCommmand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [WSELF handleLogoutAction];
+        [self showAlertViewWithMessage:@"Are you sure you want to logout of Hype?"];
         return [RACSignal empty];
     }];
+    
     [_view setLogoutCommand:logoutCommmand];
     [_view setContactCommand:contactCommmand];
 
@@ -59,6 +60,27 @@
 }
 
 - (void)handleIndexPathSelection:(NSIndexPath *)indexPath {
+
+}
+
+- (void)showAlertViewWithMessage:(NSString *)message {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * action) {
+                                                             
+                                                         }];
+    WEAKSELF();
+    UIAlertAction* confirmAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {
+                                                              [WSELF handleLogoutAction];
+                                                          }];
+    
+    [alert addAction:cancelAction];
+    [alert addAction:confirmAction];
+    [(UIViewController *)_view presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)handleContactAction {

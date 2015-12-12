@@ -15,9 +15,10 @@
 @class THLLoginInteractor;
 
 @interface THLLoginPresenter : NSObject<THLLoginModuleInterface>
-#pragma mark - Dependencies
+
 @property (nonatomic, weak, readonly) THLLoginWireframe *wireframe;
 @property (nonatomic, weak, readonly) THLLoginInteractor *interactor;
+
 - (instancetype)initWithWireframe:(THLLoginWireframe *)wireframe
 					   interactor:(THLLoginInteractor *)interactor;
 

@@ -21,14 +21,14 @@
 @property (nonatomic, readonly) id<THLGuestlistServiceInterface> guestlistService;
 @property (nonatomic, readonly) id<THLPromotionServiceInterface> promotionService;
 @property (nonatomic, readonly) THLDataStore *dataStore;
-@property (nonatomic, readonly) THLDataStore *guestlistInviteDataStore;
+@property (nonatomic, readonly) THLDataStore *dataStore2;
 @property (nonatomic, readonly) THLEntityMapper *entityMapper;
 @property (nonatomic, readonly) APAddressBook *addressBook;
 - (instancetype)initWithGuestlistService:(id<THLGuestlistServiceInterface>)guestlistService
                             entityMapper:(THLEntityMapper *)entityMapper
 							   dataStore:(THLDataStore *)dataStore
 							 addressBook:(APAddressBook *)addressBook
-                guestlistInviteDataStore:(THLDataStore *)guestlistInviteDataStore;
+                dataStore2:(THLDataStore *)dataStore2;
 
 
 - (BFTask *)fetchMembersOnGuestlist:(NSString *)guestlistId;

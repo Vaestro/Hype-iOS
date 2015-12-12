@@ -12,5 +12,6 @@
 @protocol THLLoginModuleInterface;
 @protocol THLLoginModuleDelegate <NSObject>
 - (void)loginModule:(id<THLLoginModuleInterface>)module didLoginUser:(NSError *)error;
+- (void)skipUserLogin;
 - (void)dismissLoginWireframe;
 @end

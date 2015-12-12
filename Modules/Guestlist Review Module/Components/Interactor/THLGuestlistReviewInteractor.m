@@ -61,8 +61,10 @@ static NSString *const kTHLGuestlistReviewModuleViewKey = @"kTHLGuestlistReviewM
 - (THLViewDataSourceGrouping *)viewGrouping {
     return [THLViewDataSourceGrouping withEntityBlock:^NSString *(NSString *collection, THLEntity *entity) {
         if ([entity isKindOfClass:[THLGuestlistInviteEntity class]]) {
-            if ([[[entity valueForKey:@"guestlist"] valueForKey:@"objectId"] isEqualToString:_guestlistEntity.objectId]) {
-                return collection;
+            THLGuestlistInviteEntity *guestlistInviteEntity = (THLGuestlistInviteEntity *)entity;
+//            TODO: Temporary fix for owner's guestlist invite showing up twice
+            if ([guestlistInviteEntity.guestlist.objectId isEqualToString:_guestlistEntity.objectId] && ![guestlistInviteEntity.guest.objectId isEqualToString:_guestlistEntity.owner.objectId]) {
+                return [NSString stringWithFormat:@"kTHLGuestlistId:%@", _guestlistEntity.objectId];
             }
         }
         return nil;

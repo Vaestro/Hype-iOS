@@ -58,7 +58,7 @@ THLPopupNotificationModuleDelegate
 - (void)presentAppInWindow:(UIWindow *)window {
 	_window = window;
     _userManager = [_dependencyManager userManager];
-    [_userManager isUserCached] ? [self routeLoggedInUserFlow] : [self presentLoginInterfaceWithOnboarding];
+    [_userManager isUserCached] ? [self routeLoggedInUserFlow] : [self presentOnboardingAndLoginInterface];
 }
 
 - (void)routeLoggedInUserFlow {
@@ -87,7 +87,7 @@ THLPopupNotificationModuleDelegate
  *  present modules by setting their delegates to Master Wireframe and calling the module's presenter to initialize the view on the stack
  */
 
-- (void)presentLoginInterfaceWithOnboarding {
+- (void)presentOnboardingAndLoginInterface {
 	THLLoginWireframe *loginWireframe = [_dependencyManager newLoginWireframe];
     _currentWireframe = loginWireframe;
 	[loginWireframe.moduleInterface setModuleDelegate:self];
@@ -135,14 +135,16 @@ THLPopupNotificationModuleDelegate
 #pragma mark - THLLoginModuleDelegate
 - (void)loginModule:(id<THLLoginModuleInterface>)module didLoginUser:(NSError *)error {
 	if (!error) {
-        if ([_userManager currentUser]) {
-            [_userManager makeCurrentInstallation];
-            [_userManager logCrashlyticsUser];
-        }
+        [_userManager makeCurrentInstallation];
+        [_userManager logCrashlyticsUser];
 		[self presentGuestFlow];
     } else {
         NSLog(@"Login Error:%@", error);
     }
+}
+
+- (void)skipUserLogin {
+    [self presentGuestFlow];
 }
 
 #pragma mark - UserFlowDelegate
@@ -152,8 +154,7 @@ THLPopupNotificationModuleDelegate
 
 - (void)logOutUser {
     [_userManager logUserOut];
-//    _guestWireframe = nil;
-    [self presentLoginInterfaceWithOnboarding];
+    [self presentOnboardingAndLoginInterface];
 }
 
 

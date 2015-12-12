@@ -183,21 +183,15 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     CGFloat headerHeight = 0;
-//    if (section == TableViewSectionPersonal) {
-        THLUserProfileHeaderView *headerView = [THLUserProfileHeaderView new];
-//        [headerView configureWithGuest:self.guest];
-
-        headerHeight = [headerView.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-//    }
+    THLUserProfileHeaderView *headerView = [THLUserProfileHeaderView new];
+    headerHeight = [headerView.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
     return headerHeight;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     CGFloat footerHeight = 0;
-//    if (section == TableViewSectionHypelist) {
-        THLUserProfileFooterView *footerView = [THLUserProfileFooterView new];
-        footerHeight = [footerView.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-//    }
+    THLUserProfileFooterView *footerView = [THLUserProfileFooterView new];
+    footerHeight = [footerView.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
     return footerHeight;
 }
 

@@ -162,40 +162,12 @@ UICollectionViewDelegateFlowLayout
 
 
 #pragma mark - UICollectionViewDelegate
-//- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
-//    UICollectionReusableView *reusableview = nil;
-//    
-//    if (kind == UICollectionElementKindSectionHeader) {
-//        THLHostDashboardNotificationSectionTitleCell *titleHeaderCell = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-//                                                                                                       withReuseIdentifier:[THLHostDashboardNotificationSectionTitleCell identifier]
-//                                                                                                              forIndexPath:indexPath];
-//        NSString *title = @"Pending Guestlist Invites";
-//        titleHeaderCell.titleText = title;
-//        titleHeaderCell.backgroundColor = kTHLNUIRedColor;
-//        reusableview = titleHeaderCell;
-//    } else if (kind == UICollectionElementKindSectionFooter) {
-//        THLHostDashboardNotificationSectionTitleCell *titleHeaderCell = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-//                                                                                                       withReuseIdentifier:[THLHostDashboardNotificationSectionTitleCell identifier]
-//                                                                                                              forIndexPath:indexPath];
-//        NSString *title = @"Pending Guestlist Invites";
-//        titleHeaderCell.titleText = title;
-//        titleHeaderCell.backgroundColor = kTHLNUIRedColor;
-//        reusableview = titleHeaderCell;
-//    }
-//    return reusableview;
-//}
-
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [_selectedIndexPathCommand execute:indexPath];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-//    THLGuestlistEntity *guestlistEntity = [[self dataSource] untransformedItemAtIndexPath:indexPath];
-//    if (guestlistEntity.reviewStatus == THLStatusPending) {
-        return CGSizeMake(ViewWidth(collectionView) - 25, 125);
-//    } else {
-//        return CGSizeMake(ViewWidth(collectionView) - 25, 250);
-//    }
+    return CGSizeMake(ViewWidth(collectionView) - 25, 125);
 }
 
 #pragma mark - EmptyDataSetDelegate

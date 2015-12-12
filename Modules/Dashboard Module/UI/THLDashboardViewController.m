@@ -114,7 +114,7 @@
     UICollectionViewFlowLayout *flowLayout = [UICollectionViewFlowLayout new];
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     flowLayout.headerReferenceSize = CGSizeMake(self.collectionView.frame.size.width, 25);
-    flowLayout.footerReferenceSize = CGSizeMake(self.collectionView.frame.size.width, 25);
+//    flowLayout.footerReferenceSize = CGSizeMake(self.collectionView.frame.size.width, 25);
     flowLayout.sectionInset = UIEdgeInsetsMake(10, 0, 10, 0);
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) collectionViewLayout:flowLayout];
     collectionView.nuiClass = kTHLNUIBackgroundView;
@@ -161,29 +161,6 @@
 
 
 #pragma mark - UICollectionViewDelegate
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
-    UICollectionReusableView *reusableview = nil;
-    
-    if (kind == UICollectionElementKindSectionHeader) {
-        THLDashboardNotificationSectionTitleCell *titleHeaderCell = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-                                                                                                       withReuseIdentifier:[THLDashboardNotificationSectionTitleCell identifier]
-                                                                                                              forIndexPath:indexPath];
-        NSString *title = @"Pending Guestlist Invites";
-        titleHeaderCell.titleText = title;
-        titleHeaderCell.backgroundColor = kTHLNUIRedColor;
-        reusableview = titleHeaderCell;
-    } else if (kind == UICollectionElementKindSectionFooter) {
-        THLDashboardNotificationSectionTitleCell *titleHeaderCell = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-                                                                                                       withReuseIdentifier:[THLDashboardNotificationSectionTitleCell identifier]
-                                                                                                              forIndexPath:indexPath];
-        NSString *title = @"Pending Guestlist Invites";
-        titleHeaderCell.titleText = title;
-        titleHeaderCell.backgroundColor = kTHLNUIRedColor;
-        reusableview = titleHeaderCell;
-    }
-    return reusableview;
-}
-
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [_selectedIndexPathCommand execute:indexPath];
 }

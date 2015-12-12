@@ -24,7 +24,7 @@
 @property (nonatomic, readonly) id<THLViewDataSourceFactoryInterface> viewDataSourceFactory;
 @property (nonatomic, readonly) APAddressBook *addressBook;
 @property (nonatomic, readonly) THLDataStore *dataStore;
-@property (nonatomic, readonly) THLDataStore *guestlistInviteDataStore;
+@property (nonatomic, readonly) THLDataStore *dataStore2;
 @property (nonatomic, readonly) THLEntityMapper *entityMapper;
 
 - (instancetype)initWithGuestlistService:(id<THLGuestlistServiceInterface>)guestlistService
@@ -32,7 +32,7 @@
 				   viewDataSourceFactory:(id<THLViewDataSourceFactoryInterface>)viewDataSourceFactory
 							 addressBook:(APAddressBook *)addressBook
 							   dataStore:(THLDataStore *)dataStore
-                guestlistInviteDataStore:(THLDataStore *)guestlistInviteDataStore;
+                              dataStore2:(THLDataStore *)dataStore2;
 
 - (void)presentInterfaceInController:(UIViewController *)controller;
 - (void)dismissInterface;

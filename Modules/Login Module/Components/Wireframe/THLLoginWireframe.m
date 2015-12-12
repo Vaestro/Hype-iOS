@@ -24,6 +24,7 @@
 @property (nonatomic, strong) THLLoginDataManager *dataManager;
 @property (nonatomic, strong) THLLoginInteractor *interactor;
 @property (nonatomic, strong) THLLoginPresenter *presenter;
+
 @property (nonatomic, strong) THLOnboardingViewController *onboardingView;
 @property (nonatomic, strong) THLLoginViewController *loginView;
 @end

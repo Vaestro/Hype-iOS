@@ -9,7 +9,6 @@
 #import "THLViewDataSource.h"
 #import "THLViewDataSource_Private.h"
 #import "THLDashboardNotificationSectionTitleCell.h"
-#import "THLAppearanceConstants.h"
 
 @implementation THLViewDataSource
 - (void)dealloc {
@@ -47,9 +46,9 @@
 	// If the UI is a bit backed up, I may jump multiple commits.
     
 	NSArray *notifications = [_connection beginLongLivedReadTransaction];
-//    if ([notifications count] == 0) {
-//        return; // already processed commit
-//    }
+    if ([notifications count] == 0) {
+        return; // already processed commit
+    }
     
     // Check to see if I need to do anything
     if ( ! [[_connection ext:_mappings.view] hasChangesForNotifications:notifications])
@@ -199,21 +198,13 @@
                                                                                                               forIndexPath:indexPath];
         NSString *title = [_mappings groupForSection:indexPath.section];
         titleHeaderCell.titleText = title;
-        titleHeaderCell.tintColor = kTHLNUIPrimaryFontColor;
-        titleHeaderCell.backgroundColor = kTHLNUIPrimaryBackgroundColor;
         CGRect frame = titleHeaderCell.frame;
         frame.size.height = 40;
         [titleHeaderCell setFrame:frame];
         reusableview = titleHeaderCell;
     }
     else if (kind == UICollectionElementKindSectionFooter) {
-        THLDashboardNotificationSectionTitleCell *titleHeaderCell = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-                                                                                                       withReuseIdentifier:[THLDashboardNotificationSectionTitleCell identifier]
-                                                                                                              forIndexPath:indexPath];
-        NSString *title = @"Pending Guestlist Invites";
-        titleHeaderCell.titleText = title;
-        titleHeaderCell.backgroundColor = kTHLNUIRedColor;
-        reusableview = titleHeaderCell;
+
     }
     return reusableview;
 }

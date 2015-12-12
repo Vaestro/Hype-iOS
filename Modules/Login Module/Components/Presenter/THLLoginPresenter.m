@@ -49,6 +49,7 @@ THLNumberVerificationModuleDelegate
     [_wireframe presentLoginInterfaceOnViewController:viewController];
 }
 
+#pragma mark - View Decoration
 - (void)configureOnboardingView:(id<THLOnboardingView>)onboardingView {
     _onboardingView = onboardingView;
     
@@ -99,7 +100,7 @@ THLNumberVerificationModuleDelegate
 }
 
 - (void)handleSkipAction {
-    [self.moduleDelegate loginModule:self didLoginUser:nil];
+    [self.moduleDelegate skipUserLogin];
 }
 
 - (void)handleUserLoginAction {
@@ -125,17 +126,13 @@ THLNumberVerificationModuleDelegate
 #pragma mark - Routing
 - (void)reroute {
     if ([_interactor shouldAddFacebookInformation]) {
-        self.activityStatus = THLActivityStatusInProgress;
         [_interactor addFacebookInformation];
     }
     else if ([_interactor shouldVerifyPhoneNumber]) {
-        self.activityStatus = THLActivityStatusNone;
 		[self routeToNumberVerificationInterface];
 	} else if ([_interactor shouldPickProfileImage]) {
-        self.activityStatus = THLActivityStatusInProgress;
 		[self routeToPickProfilePictureInterface];
 	} else {
-        self.activityStatus = THLActivityStatusNone;
         if (_onboardingView) {
             [self finishOnboardingInterface];
         } else {

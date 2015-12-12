@@ -69,15 +69,6 @@
     return imageView;
 }
 
-//- (void)setPlaceholderImageText:(NSString *)text {
-//    [_imageView setImageWithString:text color:kTHLNUIPrimaryBackgroundColor circular:TRUE];
-//}
-//- (void)setPerson:(id<THLPerson>)person {
-//    _person = person;
-//    _imageView.image = [self placeHolderImage];
-//    [[person thumbnail] downloadAndSetImageInBackground:_imageView];
-//}
-
 - (void)setImage:(UIImage *)image {
     if (image != nil) {
     _imageView.image = image;

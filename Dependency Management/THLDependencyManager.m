@@ -192,7 +192,7 @@
 																							 viewDataSourceFactory:self.viewDataSourceFactory
 																									   addressBook:self.addressBook
 																										 dataStore:self.guestDataStore
-                                                                                          guestlistInviteDataStore:self.userDataStore];
+                                                                                                        dataStore2:self.userDataStore];
 	self.guestlistInvitationWireframe = wireframe;
 	return wireframe;
 }
@@ -221,7 +221,7 @@
 - (THLPopupNotificationWireframe *)newPopupNotificationWireframe {
     THLPopupNotificationWireframe *wireframe = [[THLPopupNotificationWireframe alloc] initWithGuestlistService:self.guestlistService
                                                                                                   entityMapper:self.entityMapper
-                                                                                                     dataStore:self.guestlistInviteDataStore];
+                                                                                                     dataStore:self.userDataStore];
     self.popupNotificationWireframe = wireframe;
     return wireframe;
 }
