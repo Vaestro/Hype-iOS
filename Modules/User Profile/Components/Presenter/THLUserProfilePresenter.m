@@ -60,7 +60,11 @@
 }
 
 - (void)handleIndexPathSelection:(NSIndexPath *)indexPath {
-
+    if (indexPath.row == 0) {
+        [self.moduleDelegate presentPerkInterfaceInWindow];
+    } else if (indexPath.row == 5) {
+        [self.moduleDelegate logOutUser];
+    }
 }
 
 - (void)showAlertViewWithMessage:(NSString *)message {

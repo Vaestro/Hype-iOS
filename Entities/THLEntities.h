@@ -12,5 +12,6 @@
 #import "THLLocationEntity.h"
 #import "THLGuestlistEntity.h"
 #import "THLGuestlistInviteEntity.h"
+#import "THLPerkStoreItemEntity.h"
 
 #endif /* THLEntities_h */

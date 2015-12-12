@@ -14,6 +14,7 @@
 #import "THLPromotion.h"
 #import "THLGuestlist.h"
 #import "THLGuestlistInvite.h"
+#import "THLPerkStoreItem.h"
 
 #import "THLEntities.h"
 #import "THLUserEntity.h"
@@ -22,6 +23,7 @@
 #import "THLPromotionEntity.h"
 #import "THLGuestlistEntity.h"
 #import "THLGuestlistInviteEntity.h"
+#import "THLPerkStoreItemEntity.h"
 
 @implementation THLEntityMapper
 - (void)mapBaseValuesFromModel:(PFObject *)model toEntity:(THLEntity *)entity {
@@ -163,6 +165,21 @@
 
 }
 
+- (THLPerkStoreItemEntity *)mapPerkStoreItem:(THLPerkStoreItem *)perkStoreItem {
+    if ([perkStoreItem isKindOfClass:[THLPerkStoreItem class]]) {
+        THLPerkStoreItemEntity *entity = [THLPerkStoreItemEntity new];
+        [self mapBaseValuesFromModel:perkStoreItem toEntity:entity];
+        entity.name = perkStoreItem.name;
+        entity.itemDescription = perkStoreItem.itemDescription;
+        entity.credits = perkStoreItem.credits;
+        entity.image = [NSURL URLWithString:perkStoreItem.image.url];
+        return entity;
+    } else {
+        return nil;
+    }
+}
+
+
 - (NSArray<THLPromotionEntity *> *)mapPromotions:(NSArray *)promotions {
     WEAKSELF();
     return [promotions linq_select:^id(THLPromotion *promotion) {
@@ -213,6 +230,14 @@
         return [WSELF mapGuestlistInvite:guestlistInvite];
     }];
 }
+
+- (NSArray<THLPerkStoreItemEntity *> *)mapPerkStoreItems:(NSArray *)perkStoreItems {
+    WEAKSELF();
+    return [perkStoreItems linq_select:^id(THLPerkStoreItem *perkStoreItem) {
+        return [WSELF mapPerkStoreItem:perkStoreItem];
+    }];
+}
+
 
 - (void)dealloc {
     NSLog(@"Destroyed %@", self);

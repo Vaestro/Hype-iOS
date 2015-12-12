@@ -14,6 +14,7 @@
 @class THLPromotion;
 @class THLGuestlist;
 @class THLGuestlistInvite;
+@class THLPerkStoreItem;
 
 @class THLUserEntity;
 @class THLGuestEntity;
@@ -23,6 +24,7 @@
 @class THLPromotionEntity;
 @class THLGuestlistEntity;
 @class THLGuestlistInviteEntity;
+@class THLPerkStoreItemEntity;
 
 @interface THLEntityMapper : NSObject
 - (THLEventEntity *)mapEvent:(THLEvent *)event;
@@ -33,6 +35,8 @@
 - (THLPromotionEntity *)mapPromotion:(THLPromotion *)promotion;
 - (THLGuestlistEntity *)mapGuestlist:(THLGuestlist *)guestlist;
 - (THLGuestlistInviteEntity *)mapGuestlistInvite:(THLGuestlistInvite *)guestlistInvite;
+- (THLPerkStoreItemEntity *)mapPerkStoreItem:(THLPerkStoreItem *)perkStoreItem;
+
 
 //- (NSArray *)mapUsers:(NSArray *)users;
 - (NSArray<THLEventEntity*> *)mapEvents:(NSArray *)events;
@@ -40,5 +44,6 @@
 - (NSArray<THLPromotionEntity*> *)mapPromotions:(NSArray *)promotions;
 - (NSArray<THLGuestlistEntity*> *)mapGuestlists:(NSArray *)guestlists;
 - (NSArray<THLGuestlistInviteEntity*> *)mapGuestlistInvites:(NSArray *)guestlistInvites;
+- (NSArray<THLPerkStoreItemEntity*> *)mapPerkStoreItems:(NSArray *)perkStoreItems;
 
 @end
