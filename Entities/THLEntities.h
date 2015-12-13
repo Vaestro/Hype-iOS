@@ -12,5 +12,7 @@
 #import "THLLocationEntity.h"
 #import "THLGuestlistEntity.h"
 #import "THLGuestlistInviteEntity.h"
+#import "THLPerkStoreItemEntity.h"
+#import "THLPurchasedPerkItemEntity.h"
 
 #endif /* THLEntities_h */

@@ -36,4 +36,8 @@
 - (PFQuery *)queryForGuestlistInvitesForUser;
 - (PFQuery *)queryForInvitesOnGuestlist:(THLGuestlist *)guestlist;
 - (PFQuery *)queryForGuestlistInviteWithId;
+
+#pragma mark - PerkStoreItem Queries
+- (PFQuery *)queryForAllPerkStoreItems;
+
 @end

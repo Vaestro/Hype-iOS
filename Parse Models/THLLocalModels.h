@@ -15,5 +15,7 @@
 #import "THLPromotion.h"
 #import "THLGuestlist.h"
 #import "THLGuestlistInvite.h"
+#import "THLPerkStoreItem.h"
+#import "THLPurchasedPerkItem.h"
 
 #endif

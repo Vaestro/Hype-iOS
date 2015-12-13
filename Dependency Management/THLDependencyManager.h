@@ -28,6 +28,9 @@
 @class THLGuestlistReviewWireframe;
 @class THLPopupNotificationWireframe;
 @class THLUserManager;
+@class THLPerkWireframe;
+@class THLPerkDetailWireframe;
+
 /**
  *  Manages all dependenies for the app.
  */
@@ -53,6 +56,7 @@ THLHostFlowDependencyManager
 - (THLGuestlistInvitationWireframe *)newGuestlistInvitationWireframe;
 - (THLGuestlistReviewWireframe *)newGuestlistReviewWireframe;
 - (THLPopupNotificationWireframe *)newPopupNotificationWireframe;
-
+- (THLPerkWireframe *)newPerkWireframe;
+- (THLPerkDetailWireframe *)newPerkDetailWireframe;
 - (THLUserManager *)userManager;
 @end

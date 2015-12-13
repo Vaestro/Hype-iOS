@@ -15,6 +15,8 @@
 #import "THLEventDetailWireframe.h"
 #import "THLGuestlistInvitationWireframe.h"
 #import "THLGuestlistReviewWireframe.h"
+#import "THLPerkWireframe.h"
+#import "THLPerkDetailWireframe.h"
 #import "THLMasterNavigationController.h"
 //#import "SLPagingViewController.h"
 #import "UIColor+SLAddition.h"
@@ -27,7 +29,9 @@ THLDashboardModuleDelegate,
 THLUserProfileModuleDelegate,
 THLEventDetailModuleDelegate,
 THLGuestlistInvitationModuleDelegate,
-THLGuestlistReviewModuleDelegate
+THLGuestlistReviewModuleDelegate,
+THLPerkDetailModuleDelegate,
+THLPerkModuleDelegate
 >
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) id currentWireframe;
@@ -39,6 +43,9 @@ THLGuestlistReviewModuleDelegate
 @property (nonatomic, strong) THLEventDetailWireframe  *eventDetailWireframe;
 @property (nonatomic, strong) THLGuestlistInvitationWireframe *guestlistInvitationWireframe;
 @property (nonatomic, strong) THLGuestlistReviewWireframe *guestlistReviewWireframe;
+@property (nonatomic, strong) THLPerkWireframe *perkWireframe;
+@property (nonatomic, strong) THLPerkDetailWireframe *perkDetailWireframe;
+
 
 @property (nonatomic, strong) UIView *discoveryNavBarItem;
 @property (nonatomic, strong) UIView *guestProfileNavBarItem;
@@ -112,6 +119,12 @@ THLGuestlistReviewModuleDelegate
     [_userProfileWireframe.moduleInterface presentUserProfileInterfaceInViewController:viewController];
 }
 
+- (void)presentPerkInterfaceInWindow:(UIWindow *)window {
+    _perkWireframe = [_dependencyManager newPerkWireframe];
+    _currentWireframe = _perkWireframe;
+    [_perkWireframe.moduleInterface setModuleDelegate:self];
+    [_perkWireframe.moduleInterface presentPerkInterfaceInWindow:_window];
+}
 
 - (void)presentEventDetailInterfaceForEvent:(THLEventEntity *)eventEntity {
 	_eventDetailWireframe = [_dependencyManager newEventDetailWireframe];
@@ -140,6 +153,13 @@ THLGuestlistReviewModuleDelegate
     _currentWireframe = _guestlistReviewWireframe;
     [_guestlistReviewWireframe.moduleInterface setModuleDelegate:self];
     [_guestlistReviewWireframe.moduleInterface presentGuestlistReviewInterfaceForGuestlist:guestlistEntity withGuestlistInvite:guestlistInviteEntity inController:controller];
+}
+
+- (void)presentPerkDetailInterfaceForPerkStoreItem:(THLPerkStoreItemEntity *)perkStoreItemEntity onController:(UIViewController *)controller {
+    _perkDetailWireframe = [_dependencyManager newPerkDetailWireframe];
+    _currentWireframe = _perkDetailWireframe;
+    [_perkDetailWireframe.moduleInterface setModuleDelegate:self];
+    [_perkDetailWireframe.moduleInterface presentPerkDetailInterfaceForPerk:perkStoreItemEntity onViewController:controller];
 }
 
 #pragma mark - THLDashboardModuleDelegate
@@ -184,10 +204,29 @@ THLGuestlistReviewModuleDelegate
     _guestlistReviewWireframe = nil;
 }
 
+#pragma mark - THLPerkModuleDelegate
+- (void)perkModule:(id<THLPerkModuleInterface>)module userDidSelectPerkStoreItemEntity:(THLPerkStoreItemEntity *)perkStoreItemEntity presentPerkDetailInterfaceOnController:(UIViewController *)controller {
+    [self presentPerkDetailInterfaceForPerkStoreItem:perkStoreItemEntity onController:controller];
+}
+
+- (void)dismissPerkWireframe {
+    _perkWireframe = nil;
+}
+
+#pragma mark - THLPerkDetailModuleDelegate
+- (void)dismissPerkDetailWireframe {
+    _perkDetailWireframe = nil;
+}
+
 #pragma mark - THLUserProfileModuleDelegate
 - (void)logOutUser {
     [self.moduleDelegate logOutUser];
 }
+
+- (void)presentPerkInterfaceInWindow {
+    [self presentPerkInterfaceInWindow:_window];
+}
+
 
 #pragma mark - Nav Bar Items Construction
 - (UIView *)newDiscoveryNavBarItem {

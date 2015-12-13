@@ -64,7 +64,7 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
     [self bindView];
     
     self.urls = [[NSArray alloc]initWithObjects:@"https://hypelist.typeform.com/to/zGLp4N", @"https://hypelist.typeform.com/to/v01VE8", nil];
-    self.tableCellNames = [[NSArray alloc]initWithObjects:@"Become a Host",@"Let Hypelist Plan Your Party", @"Privacy Policy",@"Terms & Conditions", nil];
+    self.tableCellNames = [[NSArray alloc]initWithObjects:@"Rewards", @"Become a Host", @"Let Hypelist Plan Your Party", @"Privacy Policy", @"Terms & Conditions", nil];
 }
 
 #pragma mark - View Setup
@@ -125,8 +125,7 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch(indexPath.row) {
         case 0: {
-            self.siteUrl = [self.urls objectAtIndex:indexPath.row];
-            [self alert:[self.urls objectAtIndex:indexPath.row]];
+            [selectedIndexPathCommand execute:indexPath];
             break;
         }
         case 1: {
@@ -135,13 +134,18 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
             break;
         }
         case 2: {
+            self.siteUrl = [self.urls objectAtIndex:1];
+            [self alert:[self.urls objectAtIndex:1]];
+            break;
+        }
+        case 3: {
             UINavigationController *navVC= [[UINavigationController alloc] initWithRootViewController:_infoVC];
             [self.view.window.rootViewController presentViewController:navVC animated:YES completion:nil];
             _infoVC.displayText = [THLResourceManager privacyPolicyText];
             _infoVC.title = @"Privacy Policy";
             break;
         }
-        case 3: {
+        case 4: {
             UINavigationController *navVC= [[UINavigationController alloc] initWithRootViewController:_infoVC];
             [self.view.window.rootViewController presentViewController:navVC animated:YES completion:nil];
             _infoVC.displayText = [THLResourceManager termsOfUseText];

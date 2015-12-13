@@ -109,6 +109,13 @@
     return query;
 }
 
+#pragma mark - PerkItemStore Queries
+- (PFQuery *)queryForAllPerkStoreItems {
+    PFQuery *query = [self basePerkStoreItem];
+    return query;
+}
+
+
 #pragma mark - Class Queries
 /**
  *  Generic query for THLPromotion.
@@ -168,6 +175,15 @@
     [query includeKey:@"Guestlist.Promotion.host"];
     [query includeKey:@"Guestlist.Promotion.event"];
     [query includeKey:@"Guestlist.Promotion.event.location"];
+    return query;
+}
+
+/**
+ *  Generic query for THLPerkStoreItem
+ *	Includes: (none)
+ */
+- (PFQuery *)basePerkStoreItem {
+    PFQuery *query = [THLPerkStoreItem query];
     return query;
 }
 

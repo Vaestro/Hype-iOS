@@ -24,6 +24,7 @@
 @dynamic rating;
 @dynamic fbVerified;
 @dynamic location;
+@dynamic credits;
 
 + (void)load {
 	[self registerSubclass];

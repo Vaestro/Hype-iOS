@@ -81,6 +81,7 @@
             [WSELF user].fbVerified = FALSE;
         }
         [WSELF user].type = THLUserTypeGuest;
+        [WSELF user].credits = 0.00;
         [[WSELF.user saveInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask<NSNumber *> *saveTask) {
             [_delegate interactor:WSELF didAddFacebookInformation:saveTask.error];
             return nil;
