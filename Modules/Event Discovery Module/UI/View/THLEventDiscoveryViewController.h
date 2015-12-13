@@ -8,7 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "THLEventDiscoveryView.h"
+#import "UIScrollView+EmptyDataSet.h"
 
-@interface THLEventDiscoveryViewController : UIViewController<THLEventDiscoveryView>
+@interface THLEventDiscoveryViewController : UIViewController<
+THLEventDiscoveryView,
+DZNEmptyDataSetSource,
+DZNEmptyDataSetDelegate
+>
 
 @end

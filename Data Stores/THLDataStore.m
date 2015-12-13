@@ -57,28 +57,6 @@
 	return _databaseManager.database;
 }
 
-//- (NSString *)collectionKey {
-//	return [NSString stringWithFormat:@"k%@DataStoreKey", NSStringFromClass(_entityClass)];
-//}
-
-//- (void)addObject:(THLEntity *)entity {
-//    // Add an object
-//    WEAKSELF();
-//    STRONGSELF();
-//    [self.rwConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-//        [transaction setObject:entity forKey:entity.key inCollection:SSELF.collectionKey];
-//    }];
-//}
-//
-//- (THLEntity *)readObject:(THLEntity *)entity {
-//    WEAKSELF();
-//    STRONGSELF();
-//    THLEntity *entity = [THLEntity new];
-//    [self.roConnection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
-//        [transaction objectForKey:entity.key inCollection:SSELF.collectionKey];
-//    }];
-//}
-
 - (NSSet *)entityKeysInDomain:(THLDataStoreDomain *)domain {
     WEAKSELF();
     STRONGSELF();

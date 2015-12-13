@@ -16,10 +16,10 @@
 
 #import "THLAppearanceConstants.h"
 #import "UIScrollView+EmptyDataSet.h"
-//#import "THLHostDashboardNotificationSectionTitleCell.h"
 #import "THLHostDashboardTicketCell.h"
 #import "THLHostDashboardTicketCellViewModel.h"
 #import "THLGuestlistEntity.h"
+#import "THLDashboardNotificationSectionTitleCell.h"
 
 @interface THLHostDashboardViewController()
 <
@@ -45,20 +45,13 @@ UICollectionViewDelegateFlowLayout
     [self constructView];
     [self layoutView];
     [self bindView];
-    [_refreshCommand execute:nil];
     self.edgesForExtendedLayout = UIRectEdgeNone;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [_collectionView reloadData];
 }
 
 - (void)constructView {
     _collectionView = [self newCollectionView];
     _scrollView = [self newScrollView];
     _acceptedSectionLabel = [self newAcceptedSectionLabel];
-    //    _eventTicketView = [self newEventTicketView];
 }
 
 - (void)layoutView {
@@ -116,7 +109,7 @@ UICollectionViewDelegateFlowLayout
     UICollectionViewFlowLayout *flowLayout = [UICollectionViewFlowLayout new];
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     flowLayout.headerReferenceSize = CGSizeMake(self.collectionView.frame.size.width, 25);
-    flowLayout.footerReferenceSize = CGSizeMake(self.collectionView.frame.size.width, 25);
+//    flowLayout.footerReferenceSize = CGSizeMake(self.collectionView.frame.size.width, 25);
     flowLayout.sectionInset = UIEdgeInsetsMake(10, 0, 10, 0);
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) collectionViewLayout:flowLayout];
     collectionView.nuiClass = kTHLNUIBackgroundView;
@@ -133,18 +126,14 @@ UICollectionViewDelegateFlowLayout
     
     [self.collectionView registerClass:[THLHostDashboardNotificationCell class] forCellWithReuseIdentifier:[THLHostDashboardNotificationCell identifier]];
 //    [self.collectionView registerClass:[THLHostDashboardTicketCell class] forCellWithReuseIdentifier:[THLHostDashboardTicketCell identifier]];
-//    [self.collectionView registerClass:[THLHostDashboardNotificationSectionTitleCell class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:[THLHostDashboardNotificationSectionTitleCell identifier]];
+    [self.collectionView registerClass:[THLDashboardNotificationSectionTitleCell class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:[THLDashboardNotificationSectionTitleCell identifier]];
     
 //    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"invisibleCell"];
-    
-    
+
     dataSource.cellCreationBlock = (^id(id object, UICollectionView* parentView, NSIndexPath *indexPath) {
         if ([object isKindOfClass:[THLHostDashboardNotificationCellViewModel class]]) {
             return [parentView dequeueReusableCellWithReuseIdentifier:[THLHostDashboardNotificationCell identifier] forIndexPath:indexPath];
         }
-//        else if ([object isKindOfClass:[THLHostDashboardTicketCellViewModel class]]) {
-//            return [parentView dequeueReusableCellWithReuseIdentifier:[THLHostDashboardTicketCell identifier] forIndexPath:indexPath];
-//        }
         return nil;
     });
     
@@ -152,13 +141,8 @@ UICollectionViewDelegateFlowLayout
         if ([object isKindOfClass:[THLHostDashboardNotificationCellViewModel class]] && [cell conformsToProtocol:@protocol(THLHostDashboardNotificationCellView)]) {
             [(THLHostDashboardNotificationCellViewModel *)object configureView:(id<THLHostDashboardNotificationCellView>)cell];
         }
-//        else if ([object isKindOfClass:[THLHostDashboardTicketCellViewModel class]] && [cell conformsToProtocol:@protocol(THLHostDashboardTicketCellView)]) {
-//            [(THLHostDashboardTicketCellViewModel *)object configureView:(id<THLHostDashboardTicketCellView>)cell];
-//        }
     });
 }
-
-
 
 
 #pragma mark - UICollectionViewDelegate
@@ -173,7 +157,7 @@ UICollectionViewDelegateFlowLayout
 #pragma mark - EmptyDataSetDelegate
 
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
-    NSString *text = @"You do not have any upcoming events";
+    NSString *text = @"You do not have any guestlist requests";
     
     NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0f],
                                  NSForegroundColorAttributeName: kTHLNUIAccentColor};
@@ -182,7 +166,7 @@ UICollectionViewDelegateFlowLayout
 }
 
 - (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView {
-    NSString *text = @"Please create a Guestlist for an Event or if you are invited to an Event, it will show up here";
+    NSString *text = @"If someone requests to be added onto your guestlist, it will show up here";
     
     NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
     paragraph.lineBreakMode = NSLineBreakByWordWrapping;
@@ -210,12 +194,6 @@ UICollectionViewDelegateFlowLayout
 
 - (void)emptyDataSetDidTapButton:(UIScrollView *)scrollView
 {
-    //    [_refreshCommand execute:nil];
     [_collectionView reloadData];
-}
-
-- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
-{
-    return YES;
 }
 @end

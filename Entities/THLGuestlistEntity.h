@@ -15,6 +15,8 @@
 @property(nonatomic, strong) NSString *eventId;
 @property(nonatomic, strong) THLGuestEntity *owner;
 @property(nonatomic, strong) THLPromotionEntity *promotion;
+@property (nonatomic, copy) NSDate *date;
+
 @property(nonatomic, strong) NSArray<THLGuestEntity *> *allGuests;
 @property(nonatomic, strong) NSArray<THLGuestEntity *> *invitedGuests;
 @property(nonatomic, strong) NSArray<THLGuestEntity *> *acceptedGuests;

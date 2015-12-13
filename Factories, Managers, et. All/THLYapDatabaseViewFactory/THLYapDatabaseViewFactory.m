@@ -26,7 +26,10 @@
 }
 
 - (void)createViewWithGrouping:(YapDatabaseViewGrouping *)grouping sorting:(YapDatabaseViewSorting *)sorting key:(NSString *)key {
-	YapDatabaseView *view = [[YapDatabaseView alloc] initWithGrouping:grouping sorting:sorting];
+//    YapDatabaseViewOptions *options = [[YapDatabaseViewOptions alloc] init];
+//    options.isPersistent = NO;
+//    YapDatabaseView *view = [[YapDatabaseView alloc] initWithGrouping:grouping sorting:sorting versionTag:@"1" options:options];
+    YapDatabaseView *view = [[YapDatabaseView alloc] initWithGrouping:grouping sorting:sorting];
 	[self registerExtension:view forKey:key];
 }
 

@@ -94,7 +94,6 @@ THLNumberVerificationModuleDelegate
 
 #pragma mark - Action Handling
 - (void)handleError:(NSError *)error {
-    self.activityStatus = THLActivityStatusError;
 	DLog(@"Error: %@", error);
 	[self reroute];
 }

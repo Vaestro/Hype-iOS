@@ -13,6 +13,7 @@
 @dynamic promotion;
 @dynamic eventId;
 @dynamic reviewStatus;
+@dynamic date;
 
 + (void)load {
 	[self registerSubclass];

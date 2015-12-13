@@ -53,14 +53,7 @@ THLHostDashboardInteractorDelegate
     
     THLViewDataSource *dataSource = [_interactor getDataSource];
     dataSource.dataTransformBlock = ^id(id item) {
-//        THLGuestlistEntity *guestlist = (THLGuestlistEntity *)item;
-//        if (guestlist.reviewStatus == THLStatusPending) {
-            return [[THLHostDashboardNotificationCellViewModel alloc] initWithGuestlist:(THLGuestlistEntity *)item];
-//        }
-//        if (guestlist.reviewStatus == THLStatusAccepted) {
-//            return [[THLHostDashboardTicketCellViewModel alloc] initWithGuestlist:(THLGuestlistEntity *)item];
-//        }
-        return nil;
+        return [[THLHostDashboardNotificationCellViewModel alloc] initWithGuestlist:(THLGuestlistEntity *)item];
     };
     
     WEAKSELF();
@@ -83,13 +76,6 @@ THLHostDashboardInteractorDelegate
     [_view setDataSource:dataSource];
     [_view setSelectedIndexPathCommand:selectedIndexPathCommand];
     [_view setRefreshCommand:refreshCommand];
-    
-    //    [[RACObserve(self.view, viewAppeared) filter:^BOOL(NSNumber *b) {
-    //        BOOL viewIsAppearing = [b boolValue];
-    //        return viewIsAppearing == TRUE;
-    //    }] subscribeNext:^(id x) {
-    //        [WSELF reloadInvites];
-    //    }];
 }
 
 - (void)presentDashboardInterfaceInViewController:(UIViewController *)viewController {

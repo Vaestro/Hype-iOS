@@ -11,6 +11,8 @@
 #import "THLViewDataSourceFactory.h"
 #import "THLGuestlistEntity.h"
 #import "THLUser.h"
+#import "THLPromotionEntity.h"
+#import "THLHostEntity.h"
 
 @interface THLHostDashboardInteractor()
 
@@ -36,6 +38,7 @@
 }
 
 - (THLViewDataSource *)getDataSource {
+    [self updateGuestlists];
     THLViewDataSourceGrouping *grouping = [self viewGrouping];
     THLViewDataSourceSorting *sorting = [self viewSorting];
     THLViewDataSource *dataSource = [_viewDataSourceFactory createDataSourceWithGrouping:grouping sorting:sorting key:@"kTHLHostDashboardModuleViewKey"];
@@ -45,9 +48,9 @@
 - (THLViewDataSourceGrouping *)viewGrouping {
     return [THLViewDataSourceGrouping withEntityBlock:^NSString *(NSString *collection, THLEntity *entity) {
         if ([entity isKindOfClass:[THLGuestlistEntity class]]) {
-            if ([[[[entity valueForKey:@"promotion"] valueForKey:@"host"] valueForKey:@"objectId"] isEqualToString:[THLUser currentUser].objectId]) {
-//                THLGuestlistEntity *guestlist = (THLGuestlistEntity *)entity;
-                return collection;
+            THLGuestlistEntity *guestlistEntity = (THLGuestlistEntity *)entity;
+            if ([guestlistEntity.promotion.host.objectId isEqualToString:[THLUser currentUser].objectId]) {
+                return @"Guestlist Requests";
             }
         }
         return nil;

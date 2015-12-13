@@ -97,6 +97,8 @@ UICollectionViewDelegateFlowLayout
 - (void)configureDataSource:(THLViewDataSource *)dataSource {
 	_collectionView.dataSource = dataSource;
 	dataSource.collectionView = _collectionView;
+    _collectionView.emptyDataSetSource = self;
+    _collectionView.emptyDataSetDelegate = self;
 
 	[self.collectionView registerClass:[THLEventDiscoveryCell class] forCellWithReuseIdentifier:[THLEventDiscoveryCell identifier]];
 
@@ -122,5 +124,40 @@ UICollectionViewDelegateFlowLayout
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
 	return CGSizeMake(ViewWidth(collectionView), DiscoveryCellHeight(ViewWidth(collectionView)));
+}
+
+#pragma mark - EmptyDataSetDelegate
+- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView {
+    NSString *text = @"Oops there was an error fetching events";
+
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:14.0f],
+                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                                 NSParagraphStyleAttributeName: paragraph};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView {
+    return kTHLNUIPrimaryBackgroundColor;
+}
+
+- (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state
+{
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:17.0f],
+                                 NSForegroundColorAttributeName: kTHLNUIPrimaryFontColor,
+                                 };
+    
+    NSString *text = @"Refresh";
+
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (void)emptyDataSetDidTapButton:(UIScrollView *)scrollView
+{
+    [_collectionView reloadData];
 }
 @end

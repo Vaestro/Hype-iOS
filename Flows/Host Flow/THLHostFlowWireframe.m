@@ -63,7 +63,7 @@ THLGuestlistReviewModuleDelegate
     [self presentDashboardInterfaceInViewController:dashboard];
     [self presentUserProfileInterfaceInViewController:profile];
     
-    NSArray *views = @[dashboard.view, discovery.view, profile.view];
+    NSArray *views = @[dashboard, discovery, profile];
     
     NSArray *navBarItems = @[
                              [self newDashboardNavBarItem],

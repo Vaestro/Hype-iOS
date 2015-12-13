@@ -16,4 +16,6 @@
 @property (nonatomic, retain) THLPromotion *promotion;
 @property (nonatomic) THLStatus reviewStatus;
 @property (nonatomic, retain) NSString *eventId;
+@property (nonatomic, copy) NSDate *date;
+
 @end

@@ -40,23 +40,20 @@
     [self updateGuestlistInvites];
     THLViewDataSourceGrouping *grouping = [self viewGrouping];
     THLViewDataSourceSorting *sorting = [self viewSorting];
-    NSArray *groups = @[ @"Pending", @"Accepted"];
+    NSArray *groups = @[ @"Pending Invites", @"Upcoming Events"];
     THLViewDataSource *dataSource = [_viewDataSourceFactory createDataSourceWithFixedGrouping:grouping sorting:sorting groups:groups key:@"kTHLDashboardModuleViewKey"];
     return dataSource;
 }
 
 - (THLViewDataSourceGrouping *)viewGrouping {
-    NSMutableOrderedSet *iteratedGuestlistInvites = [NSMutableOrderedSet new];
     return [THLViewDataSourceGrouping withEntityBlock:^NSString *(NSString *collection, THLEntity *entity) {
         if ([entity isKindOfClass:[THLGuestlistInviteEntity class]]) {
             THLGuestlistInviteEntity *guestlistInviteEntity = (THLGuestlistInviteEntity *)entity;
-            if ([guestlistInviteEntity.guest.objectId isEqualToString:[THLUser currentUser].objectId] && ![iteratedGuestlistInvites containsObject:guestlistInviteEntity]) {
+            if ([guestlistInviteEntity.guest.objectId isEqualToString:[THLUser currentUser].objectId]) {
                 if (guestlistInviteEntity.response == THLStatusPending) {
-                    [iteratedGuestlistInvites addObject:guestlistInviteEntity];
-                    return @"Pending";
+                    return @"Pending Invites";
                 } else if (guestlistInviteEntity.response == THLStatusAccepted) {
-                    [iteratedGuestlistInvites addObject:guestlistInviteEntity];
-                    return @"Accepted";
+                    return @"Upcoming Events";
                 }
             }
         }

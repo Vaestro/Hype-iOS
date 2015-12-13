@@ -15,7 +15,6 @@
 #import "ORStackScrollView.h"
 
 #import "THLAppearanceConstants.h"
-#import "UIScrollView+EmptyDataSet.h"
 #import "THLDashboardNotificationSectionTitleCell.h"
 #import "THLDashboardTicketCell.h"
 #import "THLDashboardTicketCellViewModel.h"
@@ -46,11 +45,6 @@
     [self bindView];
 //    [_refreshCommand execute:nil];
 }
-
-//- (void)viewWillAppear:(BOOL)animated {
-//    [super viewWillAppear:animated];
-//    [_collectionView reloadData];
-//}
 
 - (void)constructView {
     _collectionView = [self newCollectionView];
@@ -157,9 +151,6 @@
     });
 }
 
-
-
-
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [_selectedIndexPathCommand execute:indexPath];
@@ -239,9 +230,5 @@
     }
 }
 
-//- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
-//{
-//    return YES;
-//}
 @end
 

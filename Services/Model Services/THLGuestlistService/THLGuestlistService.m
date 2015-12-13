@@ -87,6 +87,7 @@
     PFObject *guestlist = [PFObject objectWithClassName:@"Guestlist"];
     guestlist[@"Promotion"] = [THLPromotion objectWithoutDataWithObjectId:promotionEntity.objectId];
     guestlist[@"Owner"] = currentUser;
+    guestlist[@"date"] = promotionEntity.time;
     guestlist[@"reviewStatus"] = [NSNumber numberWithInt:0];
     guestlist[@"eventId"] = promotionEntity.eventId;
     [guestlist saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -99,28 +100,6 @@
                                                 @"guestlistId": guestlist.objectId}
                                         block:^(id guestlistInvite, NSError *cloudError) {
                                             if (!cloudError){
-//                                                BFTaskCompletionSource *secondCompletionSource = [BFTaskCompletionSource taskCompletionSource];
-//                                                [[_queryFactory queryForGuestlistInviteWithId]
-//                                                    getObjectInBackgroundWithId:[guestlistInvite valueForKey:@"objectId"]
-//                                                    block:^(PFObject *savedGuestlistInvite, NSError *fetchError) {
-//                                                        if (!fetchError) {
-//                                                            PFObject *savedGuestlist = savedGuestlistInvite[@"Guestlist"];
-//                                                            [savedGuestlist setObject:savedGuestlistInvite forKey:@"Guestlist"];
-//                                                            PFObject *owner = savedGuestlistInvite[@"Guestlist"][@"Owner"];
-//                                                            [savedGuestlist setObject:owner forKey:@"Owner"];
-//                                                            PFObject *promotion = savedGuestlistInvite[@"Guestlist"][@"Promotion"];
-//                                                            [savedGuestlist setObject:promotion forKey:@"Promotion"];
-//                                                            PFObject *host = savedGuestlistInvite[@"Guestlist"][@"Promotion"][@"host"];
-//                                                            [savedGuestlist setObject:host forKey:@"host"];
-//                                                            PFObject *event = savedGuestlistInvite[@"Guestlist"][@"Promotion"][@"event"];
-//                                                            [promotion setObject:event forKey:@"event"];
-//                                                            PFObject *location = savedGuestlistInvite[@"Guestlist"][@"Promotion"][@"event"][@"location"];
-//                                                            [event setObject:location forKey:@"location"];
-//                                                            [secondCompletionSource setResult:savedGuestlistInvite];
-//                                                        } else {
-//                                                            [secondCompletionSource setError:cloudError];
-//                                                        }
-//                                                    }];
                                                 [completionSource setResult:guestlistInvite];
                                             } else {
                                                 [completionSource setError:cloudError];
