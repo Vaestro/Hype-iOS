@@ -15,6 +15,7 @@
 #import "THLGuestlist.h"
 #import "THLGuestlistInvite.h"
 #import "THLPerkStoreItem.h"
+#import "THLPurchasedPerkItem.h"
 
 #import "THLEntities.h"
 #import "THLUserEntity.h"
@@ -24,6 +25,7 @@
 #import "THLGuestlistEntity.h"
 #import "THLGuestlistInviteEntity.h"
 #import "THLPerkStoreItemEntity.h"
+#import "THLPurchasedPerkItemEntity.h"
 
 @implementation THLEntityMapper
 - (void)mapBaseValuesFromModel:(PFObject *)model toEntity:(THLEntity *)entity {
@@ -125,6 +127,7 @@
         entity.imageURL = [NSURL URLWithString:user.image.url];
         entity.sex = user.sex;
         entity.rating = user.rating;
+        entity.credits = user.credits;
         return entity;
     } else {
         return nil;
@@ -173,6 +176,19 @@
         entity.itemDescription = perkStoreItem.itemDescription;
         entity.credits = perkStoreItem.credits;
         entity.image = [NSURL URLWithString:perkStoreItem.image.url];
+        return entity;
+    } else {
+        return nil;
+    }
+}
+
+- (THLPurchasedPerkItemEntity *)mapPurchasedPerkItem:(THLPurchasedPerkItem *)purchasedPerkItem {
+    if ([purchasedPerkItem isKindOfClass:[THLPurchasedPerkItem class]]) {
+        THLPurchasedPerkItemEntity *entity = [THLPurchasedPerkItemEntity new];
+        [self mapBaseValuesFromModel:purchasedPerkItem toEntity:entity];
+        entity.guest = [self mapGuest:purchasedPerkItem[@"User"]];
+        entity.perkStoreItem = [self mapPerkStoreItem:purchasedPerkItem[@"PerkStoreItem"]];
+        entity.purchaseDate = purchasedPerkItem.purchaseDate;
         return entity;
     } else {
         return nil;
@@ -238,6 +254,12 @@
     }];
 }
 
+- (NSArray<THLPurchasedPerkItemEntity*> *)mapPurchasedPerkItems:(NSArray *)purchasedPerkItems {
+    WEAKSELF();
+    return [purchasedPerkItems linq_select:^id(THLPurchasedPerkItem *purchasedPerkItem) {
+        return [WSELF mapPurchasedPerkItem:purchasedPerkItem];
+    }];
+}
 
 - (void)dealloc {
     NSLog(@"Destroyed %@", self);

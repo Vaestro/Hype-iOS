@@ -213,6 +213,8 @@
 		C85EE3B91C1BCBF30008C14B /* THLPerksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3B71C1BCBF30008C14B /* THLPerksViewController.m */; };
 		C85EE3BC1C1BCC190008C14B /* THLPerkStoreItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3BB1C1BCC190008C14B /* THLPerkStoreItem.m */; };
 		C85EE3C11C1BCC940008C14B /* THLPerkItemStoreService.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3BF1C1BCC940008C14B /* THLPerkItemStoreService.m */; };
+		C85EE3C41C1CDE140008C14B /* THLPurchasedPerkItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3C31C1CDE140008C14B /* THLPurchasedPerkItem.m */; };
+		C85EE3C71C1CE1020008C14B /* THLPurchasedPerkItemEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3C61C1CE1020008C14B /* THLPurchasedPerkItemEntity.m */; };
 		C8E1B1621BF437F300A9824C /* THLUserProfileInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B1611BF437F300A9824C /* THLUserProfileInteractor.m */; };
 		C8E1B1651BF4380D00A9824C /* THLUserProfileDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B1641BF4380D00A9824C /* THLUserProfileDataManager.m */; };
 		C8E1B16B1BF43DA800A9824C /* THLUserProfileInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B16A1BF43DA800A9824C /* THLUserProfileInfoView.m */; };
@@ -698,6 +700,10 @@
 		C85EE3BE1C1BCC940008C14B /* THLPerkItemStoreService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkItemStoreService.h; sourceTree = "<group>"; };
 		C85EE3BF1C1BCC940008C14B /* THLPerkItemStoreService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPerkItemStoreService.m; sourceTree = "<group>"; };
 		C85EE3C01C1BCC940008C14B /* THLPerkItemStoreServiceInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkItemStoreServiceInterface.h; sourceTree = "<group>"; };
+		C85EE3C21C1CDE140008C14B /* THLPurchasedPerkItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPurchasedPerkItem.h; sourceTree = "<group>"; };
+		C85EE3C31C1CDE140008C14B /* THLPurchasedPerkItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPurchasedPerkItem.m; sourceTree = "<group>"; };
+		C85EE3C51C1CE1020008C14B /* THLPurchasedPerkItemEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPurchasedPerkItemEntity.h; sourceTree = "<group>"; };
+		C85EE3C61C1CE1020008C14B /* THLPurchasedPerkItemEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPurchasedPerkItemEntity.m; sourceTree = "<group>"; };
 		C8E1B1601BF437F300A9824C /* THLUserProfileInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserProfileInteractor.h; sourceTree = "<group>"; };
 		C8E1B1611BF437F300A9824C /* THLUserProfileInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLUserProfileInteractor.m; sourceTree = "<group>"; };
 		C8E1B1631BF4380D00A9824C /* THLUserProfileDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserProfileDataManager.h; sourceTree = "<group>"; };
@@ -1651,6 +1657,8 @@
 				217EBEB61BB7AB54006044B6 /* THLUserEntity.m */,
 				C85EE3771C1BC8AD0008C14B /* THLPerkStoreItemEntity.h */,
 				C85EE3781C1BC8AD0008C14B /* THLPerkStoreItemEntity.m */,
+				C85EE3C51C1CE1020008C14B /* THLPurchasedPerkItemEntity.h */,
+				C85EE3C61C1CE1020008C14B /* THLPurchasedPerkItemEntity.m */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1727,6 +1735,8 @@
 				2133BFC11B877C08002C1DA9 /* THLUser.m */,
 				C85EE3BA1C1BCC190008C14B /* THLPerkStoreItem.h */,
 				C85EE3BB1C1BCC190008C14B /* THLPerkStoreItem.m */,
+				C85EE3C21C1CDE140008C14B /* THLPurchasedPerkItem.h */,
+				C85EE3C31C1CDE140008C14B /* THLPurchasedPerkItem.m */,
 			);
 			path = "Parse Models";
 			sourceTree = "<group>";
@@ -3080,6 +3090,7 @@
 				C85EE3A21C1BCB4D0008C14B /* THLPerkDataManager.m in Sources */,
 				794AFE2A1C10C428008475B1 /* THLHostDashboardTicketCellViewModel.m in Sources */,
 				C85EE3B41C1BCBDD0008C14B /* THLPerksCell.m in Sources */,
+				C85EE3C41C1CDE140008C14B /* THLPurchasedPerkItem.m in Sources */,
 				7905CC411BE0252700E56878 /* THLGuestlistInviteEntity.m in Sources */,
 				21E402D21BBF768F001D0C2C /* THLGuestlistInvitationDataManager.m in Sources */,
 				791C1F861BF13AF500CCF803 /* THLEventHostingViewController.m in Sources */,
@@ -3163,6 +3174,7 @@
 				2118921B1BAA084300E8A11F /* THLLoginPresenter.m in Sources */,
 				794DCCAC1BF3B31E0037A03D /* UIImageView+Letters.m in Sources */,
 				211D0BAD1B8CEE730073AFDD /* THLEventDetailWireframe.m in Sources */,
+				C85EE3C71C1CE1020008C14B /* THLPurchasedPerkItemEntity.m in Sources */,
 				21775F3C1B8CF93E00609D39 /* THLEventDetailsLocationInfoView.m in Sources */,
 				211D0BBA1B8CEED40073AFDD /* THLEventDetailDataManager.m in Sources */,
 				C85EE3C11C1BCC940008C14B /* THLPerkItemStoreService.m in Sources */,

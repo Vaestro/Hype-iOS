@@ -26,6 +26,7 @@
 @property (nonatomic) enum THLUserType type;
 @property (nonatomic) enum THLSex sex;
 @property (nonatomic) float rating;
+@property (nonatomic) float credits;
 
 @property (nonatomic, copy, readonly) NSString *fullName;
 @end

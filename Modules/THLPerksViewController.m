@@ -12,6 +12,8 @@
 #import "THLViewDataSource.h"
 #import "THLPerksCell.h"
 #import "THLPerksCellViewModel.h"
+#import "THLUser.h"
+#import "THLActionBarButton.h"
 
 @interface THLPerksViewController ()
 <
@@ -24,6 +26,8 @@ UICollectionViewDelegateFlowLayout
 @property (nonatomic, strong) UILabel *labelTwo;
 @property (nonatomic, strong) UILabel *userCreditsLabel;
 @property (nonatomic, strong) UIBarButtonItem *backButton;
+@property (nonatomic, strong) NSString *userCredits;
+@property (nonatomic, strong) THLActionBarButton *barButton;
 @end
 
 @implementation THLPerksViewController
@@ -49,9 +53,13 @@ UICollectionViewDelegateFlowLayout
 }
 
 - (void)constructView {
+    _userCredits = [self formattedStringWithDecimal:[[NSNumber alloc]initWithFloat:[THLUser currentUser].credits]];
+    
     _backButton = [self newBackBarButtonItem];
     _labelOne = [self newLabelWithText:@"Your credits balance is" withConstant:kTHLNUIRegularTitle];
-    _labelTwo = [self newLabelWithText:@"Earn credits every time you invite friends to attend an event. Then use those credits to purchase rewards here" withConstant:kTHLNUIDetailTitle];
+    _labelTwo = [self newLabelWithText:@"Earn credits every time you invite friends\nto attend an event. Then use those credits\nto purchase rewards here" withConstant:kTHLNUIDetailTitle];
+    _userCreditsLabel = [self newCreditsLabelWithText:_userCredits];
+    _barButton = [self newBarButton];
 }
 
 - (void)layoutView {
@@ -63,24 +71,34 @@ UICollectionViewDelegateFlowLayout
     
     
     _collectionView = [self newCollectionView];
-    [self.view addSubviews:@[_labelOne, _labelTwo, _collectionView]];
+    [self.view addSubviews:@[_labelOne, _labelTwo, _userCreditsLabel, _collectionView, _barButton]];
     
 //    [_userPerkInfoView makeConstraints:^(MASConstraintMaker *make) {
 //        make.top.bottom.right.bottom.insets(kTHLEdgeInsetsNone());
 //    }];
     WEAKSELF();
     [_labelOne makeConstraints:^(MASConstraintMaker *make) {
-        make.top.right.left.insets(kTHLEdgeInsetsHigh());
+        make.top.right.left.insets(kTHLEdgeInsetsSuperHigh());
+    }];
+    
+    [_userCreditsLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.labelOne.mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.right.left.insets(kTHLEdgeInsetsNone());
     }];
     
     [_labelTwo makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(WSELF.labelOne.mas_bottom);
+        make.top.equalTo(WSELF.userCreditsLabel.mas_bottom).insets(kTHLEdgeInsetsHigh());
         make.left.right.insets(kTHLEdgeInsetsHigh());
     }];
 
     [_collectionView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(WSELF.labelTwo.mas_bottom);
-        make.left.right.bottom.insets(kTHLEdgeInsetsHigh());
+        make.top.equalTo(WSELF.labelTwo.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+        make.left.right.insets(kTHLEdgeInsetsHigh());
+    }];
+    
+    [_barButton makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.collectionView.mas_bottom);
+        make.bottom.left.right.insets(kTHLEdgeInsetsNone());
     }];
 }
 
@@ -126,11 +144,33 @@ UICollectionViewDelegateFlowLayout
     UILabel *label = THLNUILabel(constant);
     label.text = text;
     label.adjustsFontSizeToFitWidth = YES;
+    label.numberOfLines = 4;
+    label.minimumScaleFactor = 1;
+    label.textAlignment = NSTextAlignmentCenter;
+    return label;
+
+}
+
+
+- (UILabel *)newCreditsLabelWithText:(NSString *)text {
+    UILabel *label = [UILabel new];
+    label.text = text;
+    [label setFont:[UIFont systemFontOfSize:30 weight:0.5]];
+    label.textColor = kTHLNUIAccentColor;
+    label.adjustsFontSizeToFitWidth = YES;
     label.numberOfLines = 2;
     label.minimumScaleFactor = 0.5;
     label.textAlignment = NSTextAlignmentCenter;
     return label;
+    
+}
 
+
+- (THLActionBarButton *)newBarButton {
+    THLActionBarButton *barButton = [THLActionBarButton new];
+    barButton.backgroundColor = kTHLNUIAccentColor;
+    [barButton.morphingLabel setTextWithoutMorphing:NSLocalizedString(@"VIEW MY REWARDS", nil)];
+    return barButton;
 }
 
 
@@ -159,6 +199,19 @@ UICollectionViewDelegateFlowLayout
         }
     });
 }
+
+- (NSString *)formattedStringWithDecimal:(NSNumber *)decimalNumber
+{
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    [formatter setMaximumFractionDigits:2]; //two deimal spaces
+    [formatter setRoundingMode: NSNumberFormatterRoundHalfUp]; //round up
+    
+    
+    NSString *result =[NSString stringWithString:[formatter stringFromNumber:decimalNumber]];
+    return result;
+}
+
+
 
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
