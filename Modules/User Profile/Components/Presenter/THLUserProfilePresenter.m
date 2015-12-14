@@ -73,9 +73,7 @@
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
-                                                         handler:^(UIAlertAction * action) {
-                                                             
-                                                         }];
+                                                         handler:nil];
     WEAKSELF();
     UIAlertAction* confirmAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction * action) {

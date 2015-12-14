@@ -36,7 +36,7 @@
 	return [[_eventService fetchEventsFrom:startDate to:endDate] continueWithSuccessBlock:^id(BFTask *task) {
         THLDataStoreDomain *domain = [SSELF domainForEventsFrom:startDate to:endDate];
 		NSSet *entities = [NSSet setWithArray:[SSELF.entityMapper mapEvents:task.result]];
-		[SSELF.dataStore refreshDomain:domain withEntities:entities];
+		[SSELF.dataStore refreshDomain:domain withEntities:entities andDeleteEntities:YES];
 		return [BFTask taskWithResult:nil];
 	}];
 }

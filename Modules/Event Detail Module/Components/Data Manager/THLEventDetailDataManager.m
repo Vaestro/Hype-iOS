@@ -130,7 +130,7 @@
     WEAKSELF();
     STRONGSELF();
     // Update views if needed
-    if ([_connection hasChangeForCollection:@"kTHLGuestlistInviteEntityDataStoreKey" inNotifications:notifications]) {
+    if ([_connection hasChangeForCollection:@"kUserDataStoreKey" inNotifications:notifications]) {
         [[self fetchGuestlistInviteForEvent:_event] continueWithSuccessBlock:^id(BFTask *task) {
             [SSELF.delegate dataManager:SSELF didGetNotifiedAboutNewGuestlistInvite:task.result forEvent:_event error:task.error];
             return nil;

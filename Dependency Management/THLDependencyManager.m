@@ -210,7 +210,7 @@
 - (THLGuestlistReviewWireframe *)newGuestlistReviewWireframe {
     THLGuestlistReviewWireframe *wireframe = [[THLGuestlistReviewWireframe alloc] initWithGuestlistService:self.guestlistService
                                                                                                       entityMapper:self.entityMapper
-                                                                                                 dataStore:self.guestlistInviteDataStore
+                                                                                                 dataStore:self.userDataStore
                                                                                              viewDataSourceFactory:self.viewDataSourceFactory];
     self.guestlistReviewWireframe = wireframe;
     return wireframe;

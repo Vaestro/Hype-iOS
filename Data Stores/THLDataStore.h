@@ -38,7 +38,7 @@
  *  Updates the domain with a set of entities. Adds new entities and removes entities that are no
  *	longer present.
  */
-- (void)refreshDomain:(THLDataStoreDomain *)domain withEntities:(NSSet *)entities;
+- (void)refreshDomain:(THLDataStoreDomain *)domain withEntities:(NSSet *)entities andDeleteEntities:(BOOL)deleteEntities;
 
 //- (void)refreshDomain:(THLDataStoreDomain *)domain withEntities:(NSSet *)entities forCollectionKey:(NSString *)key;
 

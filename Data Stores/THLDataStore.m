@@ -114,14 +114,17 @@
 
 - (void)updateOrAddEntities:(NSSet *)entities {
 	THLDataStoreDomain *domain = [[THLDataStoreDomain alloc] initWithMembers:[entities allObjects]];
-	[self refreshDomain:domain withEntities:entities];
+	[self refreshDomain:domain withEntities:entities andDeleteEntities:NO];
 }
 
-- (void)refreshDomain:(THLDataStoreDomain *)domain withEntities:(NSSet *)entities {
+- (void)refreshDomain:(THLDataStoreDomain *)domain withEntities:(NSSet *)entities andDeleteEntities:(BOOL)deleteEntities {
 	__block NSArray *keys = [[self entityKeysInDomain:domain] allObjects];
 	__block NSMutableSet *unprocessedEntities = [entities mutableCopy];
 	__block NSMutableSet *entitiesToUpdate = [NSMutableSet new];
-	__block NSMutableArray *entitiesToRemove = [NSMutableArray arrayWithArray:[[self entityKeysNotInDomain:domain] allObjects]];
+    __block NSMutableArray *entitiesToRemove = [NSMutableArray new];
+    if (deleteEntities) {
+        entitiesToRemove = [NSMutableArray arrayWithArray:[[self entityKeysNotInDomain:domain] allObjects]];
+    }
     
     WEAKSELF();
     STRONGSELF();
@@ -139,8 +142,6 @@
 
 			[unprocessedEntities removeObject:object];
 		}];
-        
-//        NSLog(@"Entities to update:%ld", entitiesToUpdate.count);
         
         [entitiesToUpdate unionSet:unprocessedEntities];
 
