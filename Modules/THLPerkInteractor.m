@@ -36,6 +36,11 @@ static NSString *const kTHLPerksModuleViewKey = @"kTHLPerksModuleViewKey";
     }];
 }
 
+- (void)refreshUserCredits {
+    [_dataManager fetchCreditsForUser];
+}
+
+
 #pragma mark - DataSource Construction
 - (THLViewDataSource *)generateDataSource {
     THLViewDataSourceGrouping *grouping = [self viewGrouping];

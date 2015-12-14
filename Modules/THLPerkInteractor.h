@@ -27,5 +27,6 @@
               viewDataSourceFactory:(id<THLViewDataSourceFactoryInterface>)viewDataSourceFactory;
 
 - (void)updatePerks;
+- (void)refreshUserCredits;
 - (THLViewDataSource *)generateDataSource;
 @end

@@ -13,5 +13,5 @@
 @property (nonatomic, copy) NSString *name;
 @property (strong, readwrite) NSString *itemDescription;
 @property (nonatomic, copy) NSURL *image;
-@property (nonatomic) int credits;
+@property (nonatomic) float credits;
 @end

@@ -11,12 +11,14 @@
 #import "THLPerkDetailPresenter.h"
 #import "THLPerkDetailViewController.h"
 #import "THLPerksViewController.h"
+#import "THLPerkDetailDataManager.h"
 
 
 @interface THLPerkDetailWireframe()
 @property (nonatomic, strong) UIViewController *controller;
 @property (nonatomic, strong) THLPerkDetailPresenter *presenter;
 @property (nonatomic, strong) THLPerkDetailInteractor *interactor;
+@property (nonatomic, strong) THLPerkDetailDataManager *dataManager;
 @property (nonatomic, strong) THLPerkDetailViewController *view;
 @end
 
@@ -34,7 +36,7 @@
 
 - (void)buildModule {
     _view = [[THLPerkDetailViewController alloc] initWithNibName:nil bundle:nil];
-    _interactor = [[THLPerkDetailInteractor alloc] init];
+    _interactor = [[THLPerkDetailInteractor alloc] initWithPresenter:_presenter withDataManager:_dataManager];
     _presenter = [[THLPerkDetailPresenter alloc] initWithInteractor:_interactor wireframe:self];
 }
 

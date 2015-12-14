@@ -24,4 +24,5 @@
                       perkService:(id<THLPerkItemStoreServiceInterface>)perkService;
 
 - (BFTask *)fetchAllPerkStoreItems;
+- (BFTask *)fetchCreditsForUser;
 @end

@@ -10,6 +10,7 @@
 #import "ORStackScrollView.h"
 #import "THLAppearanceConstants.h"
 #import "UIView+DimView.h"
+#import "THLActionBarButton.h"
 
 
 @interface THLPerkDetailViewController()
@@ -19,6 +20,7 @@
 @property (nonatomic, strong) UILabel *itemNameLabel;
 @property (nonatomic, strong) UILabel *itemCreditsLabel;
 @property (nonatomic, strong) UIBarButtonItem *dismissButton;
+@property (nonatomic, strong) THLActionBarButton *barButton;
 // action bar
 @end
 
@@ -30,6 +32,7 @@
 @synthesize credits;
 //@synthesize viewAppeared;
 @synthesize dismissCommand = _dismissCommand;
+@synthesize purchaseCommand = _purchaseCommand;
 
 #pragma mark VC Lifecycle
 
@@ -49,12 +52,14 @@
     _itemNameLabel = [self newLabelwithConstant:kTHLNUIBoldTitle];
     _itemCreditsLabel = [self newLabelwithConstant:kTHLNUIBoldTitle];
     _infoText = [self newTextView];
+    _barButton = [self newBarButton];
+    
     
     
 }
 
 - (void)layoutView {
-    [self.view addSubviews:@[_scrollView, _imageView, _itemNameLabel, _itemCreditsLabel]];
+    [self.view addSubviews:@[_scrollView, _imageView, _itemNameLabel, _itemCreditsLabel, _barButton]];
     
     self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
     self.navigationItem.leftBarButtonItem = _dismissButton;
@@ -79,12 +84,17 @@
     
     [_scrollView makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF imageView].mas_bottom);
-        make.right.left.bottom.insets(kTHLEdgeInsetsNone());
+        make.right.left.insets(kTHLEdgeInsetsNone());
     }];
     
     [_scrollView.stackView addSubview:_infoText
                   withPrecedingMargin:kTHLPaddingHigh()
-                           sideMargin:kTHLPaddingNone()];
+                           sideMargin:kTHLPaddingHigh()];
+    
+    [_barButton makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo([WSELF scrollView].mas_bottom);
+        make.left.right.bottom.insets(kTHLEdgeInsetsNone());
+    }];
     
 }
 
@@ -102,16 +112,23 @@
     
     RAC(self.infoText, text) = RACObserve(self, perkStoreItemDescription);
     
+    RAC(self.barButton, rac_command) = RACObserve(self, purchaseCommand);
+    
     [[RACObserve(self, credits) map:^id(id creditsInt) {
         return [NSString stringWithFormat:@"%@ credits", creditsInt];
     }] subscribeNext:^(NSString *convertedCredit) {
         [WSELF.itemCreditsLabel setText:convertedCredit];
     }];
-
-    
 }
 
 #pragma mark - Constructors
+
+- (THLActionBarButton *)newBarButton {
+    THLActionBarButton *barButton = [THLActionBarButton new];
+    barButton.backgroundColor = kTHLNUIAccentColor;
+    [barButton.morphingLabel setTextWithoutMorphing:NSLocalizedString(@"REDEEM CREDITS", nil)];
+    return barButton;
+}
 
 - (ORStackScrollView *)newScrollView {
     ORStackScrollView *scrollView = [ORStackScrollView new];
@@ -147,6 +164,7 @@
     UITextView *textView = THLNUITextView(kTHLNUIDetailTitle);
     [textView setScrollEnabled:NO];
     [textView setEditable:NO];
+    [textView setClipsToBounds:YES];
     [textView setTextAlignment:NSTextAlignmentCenter];
     return textView;
 }

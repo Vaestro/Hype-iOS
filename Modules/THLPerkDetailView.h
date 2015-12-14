@@ -14,6 +14,7 @@
 @property (nonatomic, copy) NSString *perkStoreItemDescription;
 @property (nonatomic) int credits;
 @property (nonatomic, strong) RACCommand *dismissCommand;
+@property (nonatomic, strong) RACCommand *purchaseCommand;
 //@property (nonatomic, strong) RACCommand *actionBarButtonCommand;
 //@property (nonatomic) BOOL viewAppeared;
 

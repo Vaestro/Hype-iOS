@@ -8,8 +8,11 @@
 
 #import <Foundation/Foundation.h>
 @class THLPerkDetailInteractor;
+@class THLPerkDetailPresenter;
+@class THLPerkDetailDataManager;
 @class THLUser;
 @class THLPerkStoreItem;
+@class THLPerkStoreItemEntity;
 
 
 
@@ -20,5 +23,12 @@
 
 @interface THLPerkDetailInteractor : NSObject
 @property (nonatomic, weak) id<THLPerkDetailInteractorDelegate> delegate;
+@property (nonatomic, readonly, weak) THLPerkDetailDataManager *dataManager;
+@property (nonatomic, readonly, weak) THLPerkDetailPresenter *presenter;
+
+- (instancetype)initWithPresenter:(THLPerkDetailPresenter *)presenter
+                   withDataManager:(THLPerkDetailDataManager *)dataManager;
+
+- (void)handlePurchasewithPerkItemEntity:(THLPerkStoreItemEntity *)perkEntity;
 
 @end
