@@ -149,7 +149,7 @@
     THLDashboardWireframe *wireframe = [[THLDashboardWireframe alloc] initWithGuestlistService:self.guestlistService
                                                                             entityMappper:self.entityMapper
                                                                          viewDataSourceFactory:self.viewDataSourceFactory
-                                                                                     dataStore:self.userDataStore];
+                                                                                     dataStore:self.guestlistInviteDataStore];
 
     self.dashboardWireframe = wireframe;
     return wireframe;
@@ -202,7 +202,7 @@
 																							 viewDataSourceFactory:self.viewDataSourceFactory
 																									   addressBook:self.addressBook
 																										 dataStore:self.guestDataStore
-                                                                                                        dataStore2:self.userDataStore];
+                                                                                                        dataStore2:self.guestlistInviteDataStore];
 	self.guestlistInvitationWireframe = wireframe;
 	return wireframe;
 }
@@ -210,7 +210,7 @@
 - (THLGuestlistReviewWireframe *)newGuestlistReviewWireframe {
     THLGuestlistReviewWireframe *wireframe = [[THLGuestlistReviewWireframe alloc] initWithGuestlistService:self.guestlistService
                                                                                                       entityMapper:self.entityMapper
-                                                                                                 dataStore:self.userDataStore
+                                                                                                 dataStore:self.guestlistInviteDataStore
                                                                                              viewDataSourceFactory:self.viewDataSourceFactory];
     self.guestlistReviewWireframe = wireframe;
     return wireframe;
@@ -231,7 +231,7 @@
 - (THLPopupNotificationWireframe *)newPopupNotificationWireframe {
     THLPopupNotificationWireframe *wireframe = [[THLPopupNotificationWireframe alloc] initWithGuestlistService:self.guestlistService
                                                                                                   entityMapper:self.entityMapper
-                                                                                                     dataStore:self.userDataStore];
+                                                                                                     dataStore:self.guestlistInviteDataStore];
     self.popupNotificationWireframe = wireframe;
     return wireframe;
 }

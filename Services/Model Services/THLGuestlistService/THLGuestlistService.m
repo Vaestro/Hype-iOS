@@ -100,7 +100,7 @@
                                                 @"guestlistId": guestlist.objectId}
                                         block:^(id guestlistInvite, NSError *cloudError) {
                                             if (!cloudError){
-                                                [completionSource setResult:guestlistInvite];
+                                                [completionSource setResult:nil];
                                             } else {
                                                 [completionSource setError:cloudError];
                                             }

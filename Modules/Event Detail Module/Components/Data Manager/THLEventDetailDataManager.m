@@ -84,7 +84,7 @@
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
     __block THLGuestlistInviteEntity *guestlistInvite;
     [self.roConnection readWithBlock:^(YapDatabaseReadTransaction * _Nonnull transaction) {
-        [transaction enumerateKeysAndObjectsInCollection:@"kUserDataStoreKey" usingBlock:^(NSString * _Nonnull key, id  _Nonnull object, BOOL * _Nonnull stop) {
+        [transaction enumerateKeysAndObjectsInCollection:@"kTHLGuestlistInviteEntityDataStoreKey" usingBlock:^(NSString * _Nonnull key, id  _Nonnull object, BOOL * _Nonnull stop) {
             if ([[(THLGuestlistInviteEntity *)object guestlist].eventId isEqualToString:event.objectId] &&
                 [[(THLGuestlistInviteEntity *)object guest].objectId isEqualToString:[THLUser currentUser].objectId]) {
                 guestlistInvite = (THLGuestlistInviteEntity *)object;
@@ -130,7 +130,7 @@
     WEAKSELF();
     STRONGSELF();
     // Update views if needed
-    if ([_connection hasChangeForCollection:@"kUserDataStoreKey" inNotifications:notifications]) {
+    if ([_connection hasChangeForCollection:@"kTHLGuestlistInviteEntityDataStoreKey" inNotifications:notifications]) {
         [[self fetchGuestlistInviteForEvent:_event] continueWithSuccessBlock:^id(BFTask *task) {
             [SSELF.delegate dataManager:SSELF didGetNotifiedAboutNewGuestlistInvite:task.result forEvent:_event error:task.error];
             return nil;
