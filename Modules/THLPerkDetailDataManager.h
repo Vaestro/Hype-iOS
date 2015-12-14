@@ -25,4 +25,6 @@
 - (instancetype)initWithPerkStoreItemService:(id<THLPerkItemStoreServiceInterface>)perkStoreItemService
                                 entityMapper:(THLEntityMapper *)entityMapper;
 
+
+- (BFTask *)purchasePerkStoreItem:(THLPerkStoreItemEntity *)perkStoreItem;
 @end

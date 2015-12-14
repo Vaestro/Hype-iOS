@@ -60,15 +60,71 @@ THLPerkDetailInteractorDelegate
         
     }];
     
+    RACCommand *purchaseCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [WSELF handlePurchaseAction];
+        return [RACSignal empty];
+    }];
+    
+    
     [_view setDismissCommand:dismissCommand];
+    [_view setPurchaseCommand:purchaseCommand];
 
+}
+
+- (void)handleDismissAction {
+    [_wireframe dismissInterface];
+}
+
+
+- (void)continueWithPurchaseFlow {
+    UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault
+                                                      handler:^(UIAlertAction *action) {
+                                                          [_interactor handlePurchasewithPerkItemEntity:_perkStoreItemEntity];
+                                                      }];
+    
+    UIAlertAction *noAction = [UIAlertAction actionWithTitle:@"No"
+                                                        style:UIAlertActionStyleDefault
+                                                      handler:nil];
+    
+    NSString *message = NSStringWithFormat(@"Are you sure you want to use your credits to pucharse this reward for %i ?", (int)_perkStoreItemEntity.credits);
+
+    [self showAlertViewWithMessage:message withAction:[[NSArray alloc] initWithObjects:yesAction, noAction, nil]];
+    
+}
+
+- (void)errorWithPurchase {
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Ok"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:nil];
+    
+    NSString *message = NSStringWithFormat(@"You dont have enough credits to redeem this reward");
+    
+    [self showAlertViewWithMessage:message withAction:[[NSArray alloc] initWithObjects:cancelAction, nil]];
+    
+}
+
+
+- (void)showAlertViewWithMessage:(NSString *)message withAction:(NSArray<UIAlertAction *>*)actions {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    for(UIAlertAction *action in actions) {
+        [alert addAction:action];
+    }
+    
+    [(UIViewController *)_view presentViewController:alert animated:YES completion:nil];
 }
 
 
 
 
-- (void)handleDismissAction {
-    [_wireframe dismissInterface];
+- (void)handlePurchaseAction {
+    float userCredit = [THLUser currentUser].credits;
+    float perkStoreItemCost = _perkStoreItemEntity.credits;
+    
+    userCredit >= perkStoreItemCost ? [self continueWithPurchaseFlow] : [self errorWithPurchase];
 }
 
 

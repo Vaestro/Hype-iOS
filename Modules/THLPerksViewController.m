@@ -27,7 +27,7 @@ UICollectionViewDelegateFlowLayout
 @property (nonatomic, strong) UILabel *userCreditsLabel;
 @property (nonatomic, strong) UIBarButtonItem *backButton;
 @property (nonatomic, strong) NSString *userCredits;
-@property (nonatomic, strong) THLActionBarButton *barButton;
+//@property (nonatomic, strong) THLActionBarButton *barButton;
 @end
 
 @implementation THLPerksViewController
@@ -36,7 +36,8 @@ UICollectionViewDelegateFlowLayout
 @synthesize showRefreshAnimation = _showRefreshAnimation;
 @synthesize refreshCommand = _refreshCommand;
 @synthesize dismissCommand = _dismissCommand;
-
+@synthesize currentUserCredit = _currentUserCredit;
+@synthesize viewAppeared;
 
 #pragma mark - VC Lifecycle
 - (void)viewDidLoad {
@@ -50,16 +51,21 @@ UICollectionViewDelegateFlowLayout
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [_collectionView reloadData];
+    self.viewAppeared = TRUE;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.viewAppeared = FALSE;
 }
 
 - (void)constructView {
-    _userCredits = [self formattedStringWithDecimal:[[NSNumber alloc]initWithFloat:[THLUser currentUser].credits]];
     
     _backButton = [self newBackBarButtonItem];
     _labelOne = [self newLabelWithText:@"Your credits balance is" withConstant:kTHLNUIRegularTitle];
     _labelTwo = [self newLabelWithText:@"Earn credits every time you invite friends\nto attend an event. Then use those credits\nto purchase rewards here" withConstant:kTHLNUIDetailTitle];
     _userCreditsLabel = [self newCreditsLabelWithText:_userCredits];
-    _barButton = [self newBarButton];
+//    _barButton = [self newBarButton];
 }
 
 - (void)layoutView {
@@ -71,7 +77,7 @@ UICollectionViewDelegateFlowLayout
     
     
     _collectionView = [self newCollectionView];
-    [self.view addSubviews:@[_labelOne, _labelTwo, _userCreditsLabel, _collectionView, _barButton]];
+    [self.view addSubviews:@[_labelOne, _labelTwo, _userCreditsLabel, _collectionView]];
     
 //    [_userPerkInfoView makeConstraints:^(MASConstraintMaker *make) {
 //        make.top.bottom.right.bottom.insets(kTHLEdgeInsetsNone());
@@ -93,13 +99,13 @@ UICollectionViewDelegateFlowLayout
 
     [_collectionView makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(WSELF.labelTwo.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
-        make.left.right.insets(kTHLEdgeInsetsHigh());
+        make.left.right.bottom.insets(kTHLEdgeInsetsHigh());
     }];
     
-    [_barButton makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(WSELF.collectionView.mas_bottom);
-        make.bottom.left.right.insets(kTHLEdgeInsetsNone());
-    }];
+//    [_barButton makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(WSELF.collectionView.mas_bottom);
+//        make.bottom.left.right.insets(kTHLEdgeInsetsNone());
+//    }];
 }
 
 
@@ -120,6 +126,11 @@ UICollectionViewDelegateFlowLayout
     }];
     
     RAC(self.backButton, rac_command) = RACObserve(self, dismissCommand);
+    
+    [RACObserve(WSELF, currentUserCredit) subscribeNext:^(id x) {
+        float credits = [x floatValue];
+        SSELF.userCreditsLabel.text = [self formattedStringWithDecimal:[[NSNumber alloc]initWithFloat:credits]];
+    }];
     
     [RACObserve(WSELF, refreshCommand) subscribeNext:^(RACCommand *command) {
         [SSELF.collectionView addPullToRefreshWithActionHandler:^{
@@ -166,12 +177,12 @@ UICollectionViewDelegateFlowLayout
 }
 
 
-- (THLActionBarButton *)newBarButton {
-    THLActionBarButton *barButton = [THLActionBarButton new];
-    barButton.backgroundColor = kTHLNUIAccentColor;
-    [barButton.morphingLabel setTextWithoutMorphing:NSLocalizedString(@"VIEW MY REWARDS", nil)];
-    return barButton;
-}
+//- (THLActionBarButton *)newBarButton {
+//    THLActionBarButton *barButton = [THLActionBarButton new];
+//    barButton.backgroundColor = kTHLNUIAccentColor;
+//    [barButton.morphingLabel setTextWithoutMorphing:NSLocalizedString(@"VIEW MY REWARDS", nil)];
+//    return barButton;
+//}
 
 
 - (UIBarButtonItem *)newBackBarButtonItem {

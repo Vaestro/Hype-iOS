@@ -13,6 +13,7 @@
 #import "THLViewDataSource.h"
 #import "THLPerkStoreItemEntity.h"
 #import "THLPerksCellViewModel.h"
+#import "THLUser.h"
 
 
 @interface THLPerkPresenter()<THLPerkInteractorDelegate>
@@ -41,6 +42,13 @@
 
 - (void)configureView:(id<THLPerksView>)view {
     _view = view;
+    
+    [[RACObserve(self.view, viewAppeared) filter:^BOOL(NSNumber *b) {
+        BOOL viewIsAppearing = [b boolValue];
+        return viewIsAppearing == TRUE;
+    }] subscribeNext:^(id x) {
+        [_interactor refreshUserCredits];
+    }];
     
     THLViewDataSource *dataSource = [_interactor generateDataSource];
     dataSource.dataTransformBlock = ^id(id item) {
@@ -73,6 +81,8 @@
     [_view setSelectedIndexPathCommand:selectedIndexPathCommand];
     [_view setRefreshCommand:refreshCommand];
     [_view setDismissCommand:dismissCommand];
+    THLUser *currentUser = [THLUser currentUser];
+    [_view setCurrentUserCredit:currentUser.credits];
 
 }
     

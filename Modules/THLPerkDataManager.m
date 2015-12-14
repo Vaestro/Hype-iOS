@@ -12,6 +12,7 @@
 #import "THLDataStoreDomain.h"
 #import "THLEntityMapper.h"
 #import "THLDataStore.h"
+#import "THLUser.h"
 
 @implementation THLPerkDataManager
 - (instancetype)initWithDataStore:(THLDataStore *)dataStore
@@ -34,4 +35,12 @@
         return [BFTask taskWithResult:nil];
     }];
 }
+
+- (BFTask *)fetchCreditsForUser {
+    THLUser *currentUser = [THLUser currentUser];
+    [currentUser fetchInBackground];
+    NSLog(@"%@", currentUser);
+    return [BFTask taskWithResult:nil];
+}
+
 @end
