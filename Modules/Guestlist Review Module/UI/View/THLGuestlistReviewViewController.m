@@ -51,12 +51,12 @@ UICollectionViewDelegateFlowLayout
     [self constructView];
     [self layoutView];
     [self bindView];
-    [_refreshCommand execute:nil];
+//    [_refreshCommand execute:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//    [_collectionView reloadData];
+    [_refreshCommand execute:nil];
 }
 
 - (void)constructView {

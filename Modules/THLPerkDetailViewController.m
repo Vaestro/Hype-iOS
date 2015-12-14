@@ -53,9 +53,6 @@
     _itemCreditsLabel = [self newLabelwithConstant:kTHLNUIBoldTitle];
     _infoText = [self newTextView];
     _barButton = [self newBarButton];
-    
-    
-    
 }
 
 - (void)layoutView {
@@ -65,7 +62,6 @@
     self.navigationItem.leftBarButtonItem = _dismissButton;
     self.navigationItem.title = [_perkStoreItemName uppercaseString];
     self.edgesForExtendedLayout = UIRectEdgeNone;
-//    self.automaticallyAdjustsScrollViewInsets = YES;
     
     WEAKSELF();
     [_imageView makeConstraints:^(MASConstraintMaker *make) {
@@ -74,12 +70,11 @@
     }];
     
     [_itemNameLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.left.equalTo([WSELF imageView]);
-        
+        make.bottom.left.equalTo([WSELF imageView]).insets(kTHLEdgeInsetsHigh());
     }];
     
     [_itemCreditsLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.right.equalTo([WSELF imageView]);
+        make.bottom.right.equalTo([WSELF imageView]).insets(kTHLEdgeInsetsHigh());
     }];
     
     [_scrollView makeConstraints:^(MASConstraintMaker *make) {
@@ -165,7 +160,7 @@
     [textView setScrollEnabled:NO];
     [textView setEditable:NO];
     [textView setClipsToBounds:YES];
-    [textView setTextAlignment:NSTextAlignmentCenter];
+    [textView setTextAlignment:NSTextAlignmentLeft];
     return textView;
 }
 
