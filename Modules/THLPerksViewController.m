@@ -45,7 +45,6 @@ UICollectionViewDelegateFlowLayout
     [self constructView];
     [self layoutView];
     [self configureBindings];
-    [_refreshCommand execute:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -64,7 +63,7 @@ UICollectionViewDelegateFlowLayout
     _backButton = [self newBackBarButtonItem];
     _labelOne = [self newLabelWithText:@"Your credits balance is" withConstant:kTHLNUIRegularTitle];
     _labelTwo = [self newLabelWithText:@"Earn credits every time you invite friends\nto attend an event. Then use those credits\nto purchase rewards here" withConstant:kTHLNUIDetailTitle];
-    _userCreditsLabel = [self newCreditsLabelWithText:_userCredits];
+    _userCreditsLabel = [self newCreditsLabelWithText:NSStringWithFormat(@"$%@", _userCredits)];
 //    _barButton = [self newBarButton];
 }
 
@@ -159,7 +158,6 @@ UICollectionViewDelegateFlowLayout
     label.minimumScaleFactor = 1;
     label.textAlignment = NSTextAlignmentCenter;
     return label;
-
 }
 
 

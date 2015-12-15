@@ -74,7 +74,7 @@
         
     WEAKSELF();
     [[RACObserve(self, credits) map:^id(id creditsInt) {
-        return [NSString stringWithFormat:@"%@ credits", creditsInt];
+        return [NSString stringWithFormat:@"$%@", creditsInt];
     }] subscribeNext:^(NSString *convertedCredit) {
         [WSELF.perkCreditsLabel setText:convertedCredit];
     }];

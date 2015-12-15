@@ -49,8 +49,8 @@
     _scrollView = [self newScrollView];
     _imageView = [self newImageView];
     _dismissButton = [self newDismissButton];
-    _itemNameLabel = [self newLabelwithConstant:kTHLNUIBoldTitle];
-    _itemCreditsLabel = [self newLabelwithConstant:kTHLNUIBoldTitle];
+    _itemNameLabel = [self newItemNameLabel];
+    _itemCreditsLabel = [self newCreditsNameLabel];
     _infoText = [self newTextView];
     _barButton = [self newBarButton];
 }
@@ -74,6 +74,7 @@
     }];
     
     [_itemCreditsLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo([WSELF itemNameLabel].mas_right).insets(kTHLEdgeInsetsHigh());
         make.bottom.right.equalTo([WSELF imageView]).insets(kTHLEdgeInsetsHigh());
     }];
     
@@ -146,12 +147,22 @@
     return barButtonItem;
 }
 
-- (UILabel *)newLabelwithConstant:(NSString *)constant {
-    UILabel *label = THLNUILabel(constant);
+- (UILabel *)newItemNameLabel {
+    UILabel *label = THLNUILabel(kTHLNUIBoldTitle);
     label.adjustsFontSizeToFitWidth = YES;
-    label.numberOfLines = 3;
+    label.numberOfLines = 2;
     label.minimumScaleFactor = 0.5;
-    label.textAlignment = NSTextAlignmentCenter;
+    label.textAlignment = NSTextAlignmentLeft;
+    return label;
+}
+
+- (UILabel *)newCreditsNameLabel {
+    UILabel *label = THLNUILabel(kTHLNUIBoldTitle);
+    label.adjustsFontSizeToFitWidth = YES;
+    label.numberOfLines = 2;
+    label.minimumScaleFactor = 0.5;
+    label.textColor = kTHLNUIGrayFontColor;
+    label.textAlignment = NSTextAlignmentRight;
     return label;
 }
 
