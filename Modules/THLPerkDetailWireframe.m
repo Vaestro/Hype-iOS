@@ -9,6 +9,7 @@
 #import "THLPerkDetailWireframe.h"
 #import "THLPerkDetailInteractor.h"
 #import "THLPerkDetailPresenter.h"
+#import "THLPerkDetailDataManager.h"
 #import "THLPerkDetailViewController.h"
 #import "THLPerksViewController.h"
 #import "THLPerkDetailDataManager.h"
@@ -35,10 +36,22 @@
 }
 
 - (void)buildModule {
+    _dataManager = [[THLPerkDetailDataManager alloc] initWithPerkStoreItemService:_perkItemStoreService entityMapper:_entityMapper];
+    _interactor = [[THLPerkDetailInteractor alloc] initWithDataManager:_dataManager];
     _view = [[THLPerkDetailViewController alloc] initWithNibName:nil bundle:nil];
-    _interactor = [[THLPerkDetailInteractor alloc] initWithPresenter:_presenter withDataManager:_dataManager];
     _presenter = [[THLPerkDetailPresenter alloc] initWithInteractor:_interactor wireframe:self];
+    
+    
 }
+
+//_dataManager = [[THLPerkDataManager alloc] initWithDataStore:_dataStore entityMapper:_entityMapper perkService:_perkItemStoreService];
+//_interactor = [[THLPerkInteractor alloc] initWithDataManager:_dataManager viewDataSourceFactory:_viewDataSourceFactory];
+//_view = [[THLPerksViewController alloc] initWithNibName:nil bundle:nil];
+//_presenter = [[THLPerkPresenter alloc] initWithWireframe:self interactor:_interactor];
+
+
+
+
 
 - (void)presentPerkDetailonViewController:(UIViewController *)viewController {
     _controller = viewController;
