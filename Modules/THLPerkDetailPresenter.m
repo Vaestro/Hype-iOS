@@ -21,8 +21,6 @@ THLPerkDetailInteractorDelegate
 @property (nonatomic, strong) THLPerkStoreItemEntity *perkStoreItemEntity;
 @end
 
-
-
 @implementation THLPerkDetailPresenter
 @synthesize moduleDelegate;
 
@@ -117,9 +115,6 @@ THLPerkDetailInteractorDelegate
     [(UIViewController *)_view presentViewController:alert animated:YES completion:nil];
 }
 
-
-
-
 - (void)handlePurchaseAction {
     float userCredit = [THLUser currentUser].credits;
     float perkStoreItemCost = _perkStoreItemEntity.credits;
@@ -127,6 +122,8 @@ THLPerkDetailInteractorDelegate
     userCredit >= perkStoreItemCost ? [self continueWithPurchaseFlow] : [self errorWithPurchase];
 }
 
-
+- (void)interactor:(THLPerkDetailInteractor *)interactor didPurchasePerkStoreItem:(NSError *)error {
+    [_wireframe dismissInterface];
+}
 
 @end

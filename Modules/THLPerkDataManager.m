@@ -38,9 +38,9 @@
 
 - (BFTask *)fetchCreditsForUser {
     THLUser *currentUser = [THLUser currentUser];
-    [currentUser fetchInBackground];
-    NSLog(@"%@", currentUser);
-    return [BFTask taskWithResult:nil];
+    return [[currentUser fetchInBackground] continueWithSuccessBlock:^id(BFTask *task) {
+        return [BFTask taskWithResult:nil];
+    }];
 }
 
 @end

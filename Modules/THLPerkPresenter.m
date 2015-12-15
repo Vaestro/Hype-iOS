@@ -81,8 +81,6 @@
     [_view setSelectedIndexPathCommand:selectedIndexPathCommand];
     [_view setRefreshCommand:refreshCommand];
     [_view setDismissCommand:dismissCommand];
-    THLUser *currentUser = [THLUser currentUser];
-    [_view setCurrentUserCredit:currentUser.credits];
 
 }
     
@@ -104,5 +102,12 @@
 #pragma mark - InteractorDelegate
 - (void)interactor:(THLPerkInteractor *)interactor didUpdatePerks:(NSError *)error {
     self.refreshing = NO;
+}
+
+- (void)interactor:(THLPerkInteractor *)interactor didUpdateUserCredits:(NSError *)error {
+    if (!error) {
+        THLUser *currentUser = [THLUser currentUser];
+        [_view setCurrentUserCredit:currentUser.credits];
+    }
 }
 @end

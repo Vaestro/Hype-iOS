@@ -23,7 +23,6 @@
 @property (nonatomic, strong) THLPerkDetailViewController *view;
 @end
 
-
 @implementation THLPerkDetailWireframe
 - (instancetype)initWithPerkItemStoreService:(id<THLPerkItemStoreServiceInterface>)perkItemStoreService
                                 entityMapper:(THLEntityMapper *)entityMapper {
@@ -40,8 +39,6 @@
     _interactor = [[THLPerkDetailInteractor alloc] initWithDataManager:_dataManager];
     _view = [[THLPerkDetailViewController alloc] initWithNibName:nil bundle:nil];
     _presenter = [[THLPerkDetailPresenter alloc] initWithInteractor:_interactor wireframe:self];
-    
-    
 }
 
 //_dataManager = [[THLPerkDataManager alloc] initWithDataStore:_dataStore entityMapper:_entityMapper perkService:_perkItemStoreService];

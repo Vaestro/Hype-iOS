@@ -22,7 +22,11 @@
 }
 
 - (void)handlePurchasewithPerkItemEntity:(THLPerkStoreItemEntity *)perkEntity {
-    [_dataManager purchasePerkStoreItem:perkEntity];
+    WEAKSELF();
+    [[_dataManager purchasePerkStoreItem:perkEntity] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+        [WSELF.delegate interactor:WSELF didPurchasePerkStoreItem:task.error];
+        return nil;
+    }];
 }
 
 @end

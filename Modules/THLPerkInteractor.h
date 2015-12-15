@@ -15,6 +15,7 @@
 @class THLPerkInteractor;
 @protocol THLPerkInteractorDelegate <NSObject>
 - (void)interactor:(THLPerkInteractor *)interactor didUpdatePerks:(NSError *)error;
+- (void)interactor:(THLPerkInteractor *)interactor didUpdateUserCredits:(NSError *)error;
 @end
 
 @interface THLPerkInteractor : NSObject

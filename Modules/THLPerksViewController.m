@@ -59,7 +59,6 @@ UICollectionViewDelegateFlowLayout
 }
 
 - (void)constructView {
-    
     _backButton = [self newBackBarButtonItem];
     _labelOne = [self newLabelWithText:@"Your credits balance is" withConstant:kTHLNUIRegularTitle];
     _labelTwo = [self newLabelWithText:@"Earn credits every time you invite friends\nto attend an event. Then use those credits\nto purchase rewards here" withConstant:kTHLNUIDetailTitle];
@@ -73,7 +72,6 @@ UICollectionViewDelegateFlowLayout
     self.navigationItem.title = @"PERKS";
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.automaticallyAdjustsScrollViewInsets = YES;
-    
     
     _collectionView = [self newCollectionView];
     [self.view addSubviews:@[_labelOne, _labelTwo, _userCreditsLabel, _collectionView]];

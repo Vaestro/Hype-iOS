@@ -37,7 +37,11 @@ static NSString *const kTHLPerksModuleViewKey = @"kTHLPerksModuleViewKey";
 }
 
 - (void)refreshUserCredits {
-    [_dataManager fetchCreditsForUser];
+    WEAKSELF();
+    [[_dataManager fetchCreditsForUser] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+        [WSELF.delegate interactor:WSELF didUpdateUserCredits:task.error];
+        return nil;
+    }];
 }
 
 

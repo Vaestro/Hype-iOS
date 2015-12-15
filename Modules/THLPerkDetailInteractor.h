@@ -17,6 +17,7 @@
 
 
 @protocol THLPerkDetailInteractorDelegate <NSObject>
+- (void)interactor:(THLPerkDetailInteractor *)interactor didPurchasePerkStoreItem:(NSError *)error;
 
 @end
 
