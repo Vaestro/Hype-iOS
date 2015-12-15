@@ -45,6 +45,7 @@ THLGuestlistReviewModuleDelegate
 
 @implementation THLHostFlowWireframe
 @synthesize moduleDelegate;
+
 - (instancetype)initWithDependencyManager:(id<THLHostFlowDependencyManager>)dependencyManager {
     if (self = [super init]) {
         _dependencyManager = dependencyManager;
@@ -53,7 +54,7 @@ THLGuestlistReviewModuleDelegate
 }
 
 #pragma mark - Routing
-- (void)presentHostFlowInWindow:(UIWindow *)window {
+- (void)presentHostFlowModuleInterfaceInWindow:(UIWindow *)window {
     _window = window;
     UIViewController *discovery = [[UIViewController alloc] initWithNibName:nil bundle:nil];
     UIViewController *profile = [[UIViewController alloc] initWithNibName:nil bundle:nil];
@@ -76,6 +77,10 @@ THLGuestlistReviewModuleDelegate
     _navigationController = [[UINavigationController alloc] initWithRootViewController:masterNavigationController];
     _window.rootViewController = _navigationController;
     [_window makeKeyAndVisible];
+}
+
+- (id<THLHostFlowModuleInterface>)moduleInterface {
+    return self;
 }
 
 - (void)presentHostFlowInWindow:(UIWindow *)window forEventHosting:(THLEventEntity *)eventEntity {

@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-
 @protocol THLUserProfileModuleInterface;
+
 @protocol THLUserProfileModuleDelegate <NSObject>
 - (void)logOutUser;
 - (void)presentPerkInterfaceInWindow;

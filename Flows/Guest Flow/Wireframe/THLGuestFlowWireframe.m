@@ -18,7 +18,6 @@
 #import "THLPerkWireframe.h"
 #import "THLPerkDetailWireframe.h"
 #import "THLMasterNavigationController.h"
-//#import "SLPagingViewController.h"
 #import "UIColor+SLAddition.h"
 #import "THLAppearanceConstants.h"
 
@@ -46,7 +45,6 @@ THLPerkModuleDelegate
 @property (nonatomic, strong) THLPerkWireframe *perkWireframe;
 @property (nonatomic, strong) THLPerkDetailWireframe *perkDetailWireframe;
 
-
 @property (nonatomic, strong) UIView *discoveryNavBarItem;
 @property (nonatomic, strong) UIView *guestProfileNavBarItem;
 @property (nonatomic, strong) UIView *dashboardNavBarItem;
@@ -54,6 +52,7 @@ THLPerkModuleDelegate
 
 @implementation THLGuestFlowWireframe
 @synthesize moduleDelegate;
+
 - (instancetype)initWithDependencyManager:(id<THLGuestFlowDependencyManager>)dependencyManager {
 	if (self = [super init]) {
 		_dependencyManager = dependencyManager;

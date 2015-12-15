@@ -158,6 +158,6 @@ UICollectionViewDelegateFlowLayout
 
 - (void)emptyDataSetDidTapButton:(UIScrollView *)scrollView
 {
-    [_collectionView reloadData];
+    [_refreshCommand execute:nil];
 }
 @end

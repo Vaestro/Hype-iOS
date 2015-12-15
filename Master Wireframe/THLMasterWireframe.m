@@ -120,7 +120,7 @@ THLPopupNotificationModuleDelegate
     _hostWireframe = [_dependencyManager newHostFlowWireframe];
     _currentWireframe = _hostWireframe;
     [_hostWireframe.moduleInterface setModuleDelegate:self];
-    [_hostWireframe presentHostFlowInWindow:_window];
+    [_hostWireframe presentHostFlowModuleInterfaceInWindow:_window];
 }
 
 /**

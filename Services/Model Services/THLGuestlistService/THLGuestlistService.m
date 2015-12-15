@@ -87,7 +87,7 @@
     PFObject *guestlist = [PFObject objectWithClassName:@"Guestlist"];
     guestlist[@"Promotion"] = [THLPromotion objectWithoutDataWithObjectId:promotionEntity.objectId];
     guestlist[@"Owner"] = currentUser;
-    guestlist[@"date"] = promotionEntity.time;
+    guestlist[@"date"] = promotionEntity.event.date;
     guestlist[@"reviewStatus"] = [NSNumber numberWithInt:0];
     guestlist[@"eventId"] = promotionEntity.eventId;
     [guestlist saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

@@ -49,7 +49,18 @@
     }];
     
     RACCommand *logoutCommmand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [self showAlertViewWithMessage:@"Are you sure you want to logout of Hype?"];
+        
+        UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
+                                                             handler:nil];
+        
+        UIAlertAction* confirmAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * action) {
+                                                                  [WSELF handleLogoutAction];
+                                                              }];
+        NSString *message = NSStringWithFormat(@"Are you sure you want to logout of Hype?");
+
+        [self showAlertViewWithMessage:message withAction:[[NSArray alloc] initWithObjects:cancelAction, confirmAction, nil]];
+
         return [RACSignal empty];
     }];
     
@@ -61,27 +72,29 @@
 
 - (void)handleIndexPathSelection:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
-        [self.moduleDelegate presentPerkInterfaceInWindow];
-    } else if (indexPath.row == 5) {
-        [self.moduleDelegate logOutUser];
+        if ([THLUser currentUser].type == THLUserTypeGuest) {
+            [self.moduleDelegate presentPerkInterfaceInWindow];
+
+        } else {
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault
+                                                              handler:nil];
+            
+            NSString *message = NSStringWithFormat(@"Hosts cannot access Rewards");
+            
+            [self showAlertViewWithMessage:message withAction:[[NSArray alloc] initWithObjects:okAction, nil]];
+        }
     }
 }
 
-- (void)showAlertViewWithMessage:(NSString *)message {
+- (void)showAlertViewWithMessage:(NSString *)message withAction:(NSArray<UIAlertAction *>*)actions {
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil
                                                                    message:message
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
-                                                         handler:nil];
-    WEAKSELF();
-    UIAlertAction* confirmAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault
-                                                          handler:^(UIAlertAction * action) {
-                                                              [WSELF handleLogoutAction];
-                                                          }];
+    for(UIAlertAction *action in actions) {
+        [alert addAction:action];
+    }
     
-    [alert addAction:cancelAction];
-    [alert addAction:confirmAction];
     [(UIViewController *)_view presentViewController:alert animated:YES completion:nil];
 }
 
