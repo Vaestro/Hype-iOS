@@ -26,8 +26,7 @@
 @property (nonatomic, readonly, weak) THLPerkDetailDataManager *dataManager;
 @property (nonatomic, readonly, weak) THLPerkDetailPresenter *presenter;
 
-- (instancetype)initWithPresenter:(THLPerkDetailPresenter *)presenter
-                   withDataManager:(THLPerkDetailDataManager *)dataManager;
+- (instancetype)initWithDataManager:(THLPerkDetailDataManager *)dataManager;
 
 - (void)handlePurchasewithPerkItemEntity:(THLPerkStoreItemEntity *)perkEntity;
 

@@ -42,7 +42,6 @@
     _interactor = [[THLPerkInteractor alloc] initWithDataManager:_dataManager viewDataSourceFactory:_viewDataSourceFactory];
     _view = [[THLPerksViewController alloc] initWithNibName:nil bundle:nil];
     _presenter = [[THLPerkPresenter alloc] initWithWireframe:self interactor:_interactor];
-
 }
 
 #pragma mark - Interface

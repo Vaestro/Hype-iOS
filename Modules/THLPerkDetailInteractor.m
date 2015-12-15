@@ -13,10 +13,9 @@
 
 @implementation THLPerkDetailInteractor
 
-- (instancetype)initWithPresenter:(THLPerkDetailPresenter *)presenter withDataManager:(THLPerkDetailDataManager *)dataManager {
+- (instancetype)initWithDataManager:(THLPerkDetailDataManager *)dataManager {
     
     if (self = [super init]) {
-        _presenter = presenter;
         _dataManager = dataManager;
     }
     return self;
