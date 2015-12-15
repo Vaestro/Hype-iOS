@@ -11,7 +11,7 @@
 
 @interface THLPerkStoreItem : PFObject<PFSubclassing>
 @property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSString *itemDescription;
+@property (nonatomic, retain) NSString *info;
 @property (nonatomic, retain) PFFile *image;
 @property (nonatomic) int credits;
 @end

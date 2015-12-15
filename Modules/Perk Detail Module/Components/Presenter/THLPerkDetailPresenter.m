@@ -47,7 +47,7 @@ THLPerkDetailInteractorDelegate
     self.view = view;
     
     [self.view setCredits:_perkStoreItemEntity.credits];
-    [self.view setPerkStoreItemDescription:_perkStoreItemEntity.itemDescription];
+    [self.view setPerkStoreItemDescription:_perkStoreItemEntity.info];
     [self.view setPerkStoreItemImage:_perkStoreItemEntity.image];
     [self.view setPerkStoreItemName:_perkStoreItemEntity.name];
     

@@ -4,7 +4,7 @@ platform :ios, '8.0'
 #ignore all warnings from all pods
 inhibit_all_warnings!
 
-target 'TheHypelist' do
+target 'Hype' do
 #Global Frameworks and Utilities
 pod 'CocoaLumberjack'
 pod 'Masonry', '~> 0.6'
@@ -65,7 +65,7 @@ pod "TOMSMorphingLabel", "~> 0.5"
 pod 'DZNEmptyDataSet'
 end
 
-target 'TheHypelistTests' do
+target 'HypeTests' do
 pod 'OCMock', '3.1.2'
 pod "Gizou"
 end

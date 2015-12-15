@@ -111,7 +111,7 @@
     RAC(self.barButton, rac_command) = RACObserve(self, purchaseCommand);
     
     [[RACObserve(self, credits) map:^id(id creditsInt) {
-        return [NSString stringWithFormat:@"%@ credits", creditsInt];
+        return [NSString stringWithFormat:@"$%@", creditsInt];
     }] subscribeNext:^(NSString *convertedCredit) {
         [WSELF.itemCreditsLabel setText:convertedCredit];
     }];
@@ -159,7 +159,7 @@
 - (UILabel *)newCreditsNameLabel {
     UILabel *label = THLNUILabel(kTHLNUIBoldTitle);
     label.adjustsFontSizeToFitWidth = YES;
-    label.numberOfLines = 2;
+    label.numberOfLines = 1;
     label.minimumScaleFactor = 0.5;
     label.textColor = kTHLNUIGrayFontColor;
     label.textAlignment = NSTextAlignmentRight;

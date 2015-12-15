@@ -10,7 +10,7 @@
 
 @protocol THLPerkCellView <NSObject>
 @property (nonatomic, copy) NSString *name;
-@property (nonatomic, copy) NSString *description;
+@property (nonatomic, copy) NSString *info;
 @property (nonatomic, copy) NSURL *image;
 @property (nonatomic) int credits;
 @end

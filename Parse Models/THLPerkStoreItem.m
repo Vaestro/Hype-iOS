@@ -10,7 +10,7 @@
 
 @implementation THLPerkStoreItem
 @dynamic name;
-@dynamic itemDescription;
+@dynamic info;
 @dynamic image;
 @dynamic credits;
 

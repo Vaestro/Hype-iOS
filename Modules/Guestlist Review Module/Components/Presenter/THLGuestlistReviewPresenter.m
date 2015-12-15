@@ -185,8 +185,8 @@ THLGuestlistReviewInteractorDelegate
         [_interactor updateGuestlist:_guestlistEntity withReviewStatus:THLStatusAccepted];
     }
     else if (_reviewerStatus == THLGuestlistReviewerStatusActiveHost) {
-        self.activityStatus = THLActivityStatusInProgress;
-//        [_interactor updateGuestlistInvite:_guestlistInviteEntity withResponse:THLStatusAccepted];
+        self.activityStatus = THLActivityStatusSuccess;
+//        [_interactor checkInGuests:_guestlistInviteEntity withResponse:THLStatusAccepted];
     }
 }
 

@@ -7,8 +7,8 @@
 //  Copyright (c) 2015 Hypelist. All rights reserved.
 //
 
-#ifndef TheHypelist_CommonMacros_h
-#define TheHypelist_CommonMacros_h
+#ifndef Hype_CommonMacros_h
+#define Hype_CommonMacros_h
 #define ApplicationDelegate                 ((AppDelegate *)[[UIApplication sharedApplication] delegate])
 #define UserDefaults                        [NSUserDefaults standardUserDefaults]
 #define NotificationCenter                  [NSNotificationCenter defaultCenter]

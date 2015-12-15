@@ -20,7 +20,7 @@
 
 @implementation THLPerksCell
 @synthesize name;
-@synthesize description;
+@synthesize info;
 @synthesize image;
 @synthesize credits;
 
@@ -70,7 +70,7 @@
 
 - (void)bindView {
     RAC(self.perkTitleLabel, text) = RACObserve(self, name);
-    RAC(self.perkDescriptionLabel, text) = RACObserve(self, description);
+    RAC(self.perkDescriptionLabel, text) = RACObserve(self, info);
         
     WEAKSELF();
     [[RACObserve(self, credits) map:^id(id creditsInt) {

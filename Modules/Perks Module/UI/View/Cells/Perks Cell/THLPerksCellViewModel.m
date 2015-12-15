@@ -21,7 +21,7 @@
 
 - (void)configureView:(id<THLPerkCellView>)cellView {
     [cellView setName:_perkStoreItemEntity.name];
-    [cellView setDescription:_perkStoreItemEntity.description];
+    [cellView setInfo:_perkStoreItemEntity.info];
     [cellView setImage:_perkStoreItemEntity.image];
     [cellView setCredits:_perkStoreItemEntity.credits];
 }

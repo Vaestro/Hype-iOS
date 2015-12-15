@@ -45,6 +45,7 @@ UICollectionViewDelegateFlowLayout
     [self constructView];
     [self layoutView];
     [self configureBindings];
+    [_refreshCommand execute:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

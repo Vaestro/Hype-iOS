@@ -7,8 +7,8 @@
 //
 
 
-#ifndef TheHypelist_THLFacebookProfilePictureModule_h
-#define TheHypelist_THLFacebookProfilePictureModule_h
+#ifndef Hype_THLFacebookProfilePictureModule_h
+#define Hype_THLFacebookProfilePictureModule_h
 #import "THLFacebookProfilePictureFactory.h"
 
 #endif

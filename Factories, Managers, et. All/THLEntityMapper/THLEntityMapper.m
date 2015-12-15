@@ -173,7 +173,7 @@
         THLPerkStoreItemEntity *entity = [THLPerkStoreItemEntity new];
         [self mapBaseValuesFromModel:perkStoreItem toEntity:entity];
         entity.name = perkStoreItem.name;
-        entity.itemDescription = perkStoreItem.itemDescription;
+        entity.info = perkStoreItem.info;
         entity.credits = perkStoreItem.credits;
         entity.image = [NSURL URLWithString:perkStoreItem.image.url];
         return entity;
