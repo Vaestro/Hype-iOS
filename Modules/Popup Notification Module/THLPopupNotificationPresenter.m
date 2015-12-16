@@ -48,16 +48,20 @@ THLPopupNotificationInteractorDelegate
 - (BFTask *)presentPopupNotificationModuleInterfaceWithPushInfo:(NSDictionary *)pushInfo {
     WEAKSELF();
     STRONGSELF();
-    return [[_interactor handleNotificationData:pushInfo] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+    return [[_interactor handleNotificationData:pushInfo] continueWithExecutor:[BFExecutor mainThreadExecutor] withSuccessBlock:^id(BFTask *task) {
         if (!task.faulted) {
             SSELF.notificationText = pushInfo[kPushInfoKeyNotficationText];
             SSELF.imageURL = pushInfo[kPushInfoKeyImageURL];
             SSELF.guestlistInviteEntity = task.result;
             SSELF.eventEntity = SSELF.guestlistInviteEntity.guestlist.promotion.event;
-            [SSELF.wireframe presentInterface];
+            [SSELF presentPopupNotificationInterface];
         }
         return task;
     }];
+}
+
+- (void)presentPopupNotificationInterface {
+    [_wireframe presentInterface];
 }
 
 - (void)configureView:(id<THLPopupNotificationViewModel>)view {

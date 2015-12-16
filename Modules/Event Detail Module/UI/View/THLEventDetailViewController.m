@@ -162,8 +162,8 @@
             break;
             
         case THLGuestlistStatusDeclined:
-            [[WSELF bottomBar].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"CREATE A GUESTLIST", nil)];
-            [WSELF bottomBar].backgroundColor = kTHLNUIActionColor;
+            [[WSELF bottomBar].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Declined Guestlist", nil)];
+            [WSELF bottomBar].backgroundColor = kTHLNUIRedColor;
             break;
         
         case THLGuestlistStatusUnavailable:

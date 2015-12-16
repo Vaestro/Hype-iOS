@@ -35,7 +35,6 @@
         }
         case THLStatusDeclined: {
             [cellView setGuestlistReviewStatusTitle:@"Declined"];
-
             break;
         }
         default: {

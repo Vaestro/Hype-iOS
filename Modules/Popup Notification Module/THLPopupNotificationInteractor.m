@@ -10,6 +10,7 @@
 #import "THLPopupNotificationDataManager.h"
 
 static NSString *const kPushInfoKeyGuestlistInviteId = @"guestlistInviteId";
+static NSString *const kPushInfoKeyGuestlistId = @"guestlistId";
 
 @interface THLPopupNotificationInteractor()
 
@@ -24,8 +25,14 @@ static NSString *const kPushInfoKeyGuestlistInviteId = @"guestlistInviteId";
 }
 
 - (BFTask *)handleNotificationData:(NSDictionary *)pushInfo {
-    NSString *guestlistInviteId = pushInfo[kPushInfoKeyGuestlistInviteId];
-    return [_dataManager fetchGuestlistInviteWithId:guestlistInviteId];
+    if ([pushInfo objectForKey:@"guestlistInviteId"]) {
+        NSString *guestlistInviteId = pushInfo[kPushInfoKeyGuestlistInviteId];
+        return [_dataManager fetchGuestlistInviteWithId:guestlistInviteId];
+    } else if ([pushInfo objectForKey:@"guestlistId"]) {
+        NSString *guestlistId = pushInfo[kPushInfoKeyGuestlistId];
+//        return [_dataManager fetchGuestlistWithId:guestlistId];
+    }
+    return [BFTask taskWithResult:nil];
 }
 
 - (void)dealloc {

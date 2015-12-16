@@ -224,7 +224,7 @@
 {
 //    [_refreshCommand execute:nil];
     if ([THLUser currentUser]) {
-        [_collectionView reloadData];
+        [_refreshCommand execute:nil];
     } else {
         [_loginCommand execute:nil];
     }

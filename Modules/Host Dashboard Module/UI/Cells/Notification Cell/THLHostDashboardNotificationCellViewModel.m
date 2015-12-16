@@ -30,7 +30,7 @@
     [cellView setNotificationStatus:_guestlistEntity.reviewStatus];
     [cellView setSenderIntroductionText:[NSString stringWithFormat:@"%@ requested to join your guestlist", _guestlistEntity.owner.firstName]];
     [cellView setSenderImageURL:_guestlistEntity.owner.imageURL];
-    [cellView setDate:[NSString stringWithFormat:@"%@, %@", _guestlistEntity.promotion.time.thl_weekdayString, _guestlistEntity.promotion.time.thl_timeString]];
+    [cellView setDate:[NSString stringWithFormat:@"%@, %@", _guestlistEntity.promotion.event.date.thl_weekdayString, _guestlistEntity.promotion.event.date.thl_timeString]];
 }
 
 @end

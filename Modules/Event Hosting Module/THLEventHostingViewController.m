@@ -34,7 +34,6 @@
     [self constructView];
     [self layoutView];
     [self bindView];
-    [_refreshCommand execute:nil];
 }
 
 - (void)dealloc {
@@ -43,6 +42,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [_refreshCommand execute:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -103,6 +103,8 @@
 - (void)configureDataSource:(THLViewDataSource *)dataSource {
     _tableView.dataSource = dataSource;
     _dataSource.tableView = _tableView;
+    _tableView.emptyDataSetSource = self;
+    _tableView.emptyDataSetDelegate = self;
     
     [_tableView registerClass:[THLEventHostingTableCell class] forCellReuseIdentifier:[THLEventHostingTableCell identifier]];
     
@@ -145,5 +147,50 @@
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [_selectedIndexPathCommand execute:indexPath];
+}
+
+#pragma mark - EmptyDataSetDelegate
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
+    NSString *text = @"There are no requests for your guestlist for this event";
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0f],
+                                 NSForegroundColorAttributeName: kTHLNUIAccentColor};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+
+- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView {
+    NSString *text = @"When a guest submits a guestlist for your event, it will show up here";
+    
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:14.0f],
+                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                                 NSParagraphStyleAttributeName: paragraph};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView {
+    return kTHLNUIPrimaryBackgroundColor;
+}
+
+- (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state
+{
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:17.0f],
+                                 NSForegroundColorAttributeName: kTHLNUIPrimaryFontColor,
+                                 };
+    
+    NSString *text = @"Refresh";
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (void)emptyDataSetDidTapButton:(UIScrollView *)scrollView
+{
+    [_refreshCommand execute:nil];
 }
 @end

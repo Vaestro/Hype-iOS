@@ -160,4 +160,9 @@ UICollectionViewDelegateFlowLayout
 {
     [_refreshCommand execute:nil];
 }
+
+- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
+{
+    return NO;
+}
 @end

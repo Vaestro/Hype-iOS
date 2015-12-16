@@ -72,15 +72,19 @@
 
 - (void)handleIndexPathSelection:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
-        if ([THLUser currentUser].type == THLUserTypeGuest) {
+        if ([THLUser currentUser] && [THLUser currentUser].type == THLUserTypeGuest) {
             [self.moduleDelegate presentPerkInterfaceInWindow];
+        } else if ([THLUser currentUser] && [THLUser currentUser].type == THLUserTypeHost) {
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault
+                                                             handler:nil];
+            NSString *message = NSStringWithFormat(@"Hosts cannot access Rewards");
 
-        } else {
+            [self showAlertViewWithMessage:message withAction:[[NSArray alloc] initWithObjects:okAction, nil]];
+        }
+        else {
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault
                                                               handler:nil];
-            
-            NSString *message = NSStringWithFormat(@"Hosts cannot access Rewards");
-            
+            NSString *message = NSStringWithFormat(@"You must be signed in to view Rewards");
             [self showAlertViewWithMessage:message withAction:[[NSArray alloc] initWithObjects:okAction, nil]];
         }
     }

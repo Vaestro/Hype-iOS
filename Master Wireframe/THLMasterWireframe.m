@@ -74,6 +74,7 @@ THLPopupNotificationModuleDelegate
 - (BFTask *)handlePushNotification:(NSDictionary *)pushInfo {
     if ([pushInfo objectForKey:@"notificationText"]) {
         THLPopupNotificationWireframe *popupNotificationWireframe = [_dependencyManager newPopupNotificationWireframe];
+        _currentWireframe = popupNotificationWireframe;
         [popupNotificationWireframe.moduleInterface setModuleDelegate:self];
         return [popupNotificationWireframe.moduleInterface presentPopupNotificationModuleInterfaceWithPushInfo:pushInfo];
     } else {

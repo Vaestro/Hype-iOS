@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "THLEventHostingView.h"
+#import "UIScrollView+EmptyDataSet.h"
 
 @protocol THLEventHostingView;
 @interface THLEventHostingViewController : UIViewController
 <
 THLEventHostingView,
-UITableViewDelegate
+UITableViewDelegate,
+DZNEmptyDataSetSource,
+DZNEmptyDataSetDelegate
 >
 @property (nonatomic, strong) UITableView *tableView;
 @end

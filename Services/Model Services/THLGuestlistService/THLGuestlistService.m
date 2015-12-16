@@ -117,7 +117,7 @@
     [PFCloud callFunctionInBackground:@"sendOutNotifications"
                        withParameters:@{@"promotionId": promotionEntity.objectId,
                                         @"eventName":promotionEntity.event.location.name,
-                                        @"promotionTime":promotionEntity.time,
+                                        @"promotionTime":promotionEntity.event.date,
                                         @"guestPhoneNumbers": guestPhoneNumbers,
                                         @"guestlistId": guestlistId}
                                 block:^(id object, NSError *error) {

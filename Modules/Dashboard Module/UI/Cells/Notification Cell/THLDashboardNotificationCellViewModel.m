@@ -31,7 +31,7 @@
     [cellView setNotificationStatus:_guestlistInviteEntity.response];
     [cellView setSenderIntroductionText:[NSString stringWithFormat:@"%@ invited you to their guestlist", _guestlistInviteEntity.guestlist.owner.firstName]];
     [cellView setSenderImageURL:_guestlistInviteEntity.guestlist.owner.imageURL];
-    [cellView setDate:[NSString stringWithFormat:@"%@, %@", _guestlistInviteEntity.guestlist.promotion.time.thl_weekdayString, _guestlistInviteEntity.guestlist.promotion.time.thl_timeString]];
+    [cellView setDate:[NSString stringWithFormat:@"%@, %@", _guestlistInviteEntity.guestlist.promotion.event.date.thl_weekdayString, _guestlistInviteEntity.guestlist.promotion.event.date.thl_timeString]];
 }
 
 @end

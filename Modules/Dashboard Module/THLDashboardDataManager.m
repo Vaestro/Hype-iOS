@@ -32,6 +32,10 @@
     return [[_guestlistService fetchGuestlistInvitesForUser] continueWithSuccessBlock:^id(BFTask *task) {
         THLDataStoreDomain *domain = [SSELF domainForPendingOrAcceptedGuestlistInvites];
         NSSet *entities = [NSSet setWithArray:[SSELF.entityMapper mapGuestlistInvites:task.result]];
+        //        HACK to get guestlist Invite to update with updated Guestlist
+        for (THLGuestlistInviteEntity *guestlistInviteEntity in entities) {
+            guestlistInviteEntity.updatedAt = [NSDate date];
+        }
         [SSELF.dataStore refreshDomain:domain withEntities:entities andDeleteEntities:NO];
         return [BFTask taskWithResult:entities];
     }];

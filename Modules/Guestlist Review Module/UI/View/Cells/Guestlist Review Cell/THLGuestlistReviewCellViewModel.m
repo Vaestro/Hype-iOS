@@ -21,7 +21,7 @@
 
 - (void)configureView:(id<THLGuestlistReviewCellView>)cellView {
     [cellView setGuestlistInviteStatus:_guestlistInviteEntity.response];
-    if (_guestlistInviteEntity.response == THLStatusPending || _guestlistInviteEntity.response == THLStatusAccepted) {
+    if (_guestlistInviteEntity.response == THLStatusPending || _guestlistInviteEntity.response == THLStatusAccepted || _guestlistInviteEntity.response == THLStatusDeclined) {
         [cellView setNameText:_guestlistInviteEntity.guest.firstName];
         [cellView setImageURL:_guestlistInviteEntity.guest.imageURL];
     }

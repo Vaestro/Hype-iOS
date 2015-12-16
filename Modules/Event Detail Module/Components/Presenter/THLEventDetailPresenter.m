@@ -62,9 +62,16 @@
         } else {
             if (WSELF.guestlistReviewStatus == THLGuestlistStatusAccepted ||
                 WSELF.guestlistReviewStatus  == THLGuestlistStatusPendingHost ||
-                WSELF.guestlistReviewStatus == THLGuestlistStatusPendingInvite)
-            {
+                WSELF.guestlistReviewStatus == THLGuestlistStatusPendingInvite) {
                 [WSELF handleViewGuestlistAction];
+            } else if (WSELF.guestlistReviewStatus == THLGuestlistStatusDeclined) {
+                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Ok"
+                                                                       style:UIAlertActionStyleDefault
+                                                                     handler:nil];
+                
+                NSString *message = NSStringWithFormat(@"You have a declined guestlist for this event");
+                
+                [self showAlertViewWithMessage:message withAction:[[NSArray alloc] initWithObjects:cancelAction, nil]];
             } else {
                 //            TODO: Create logic so that Guests with Declined Guestlists can have another guestlist invite to the same event if their other one is declined
                 [WSELF handleCreateGuestlistAction];
@@ -122,6 +129,18 @@
     [self.venueDetailsView setDismissCommand:dismissCommand];
 }
 
+- (void)showAlertViewWithMessage:(NSString *)message withAction:(NSArray<UIAlertAction *>*)actions {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    for(UIAlertAction *action in actions) {
+        [alert addAction:action];
+    }
+    
+    [(UIViewController *)_view presentViewController:alert animated:YES completion:nil];
+}
+
 - (void)presentEventDetailInterfaceForEvent:(THLEventEntity *)eventEntity inWindow:(UIWindow *)window {
     _eventEntity = eventEntity;
     
@@ -170,7 +189,7 @@
     if (!error && promotionEntity) {
         _promotionEntity = promotionEntity;
         if (_promotionEntity.femaleRatio != 0) {
-            [self.view setRatioInfo:[NSString stringWithFormat:@"%d Guys : %d Girls", _promotionEntity.maleRatio, _promotionEntity.femaleRatio]];
+            [self.view setRatioInfo:[NSString stringWithFormat:@"%d Girls : 1 Guy", _promotionEntity.femaleRatio]];
         } else {
             [self.view setRatioInfo:@"No ratio required"];
         }
@@ -185,18 +204,18 @@
     if (!error && guestlistInvite) {
         _guestlistInviteEntity = guestlistInvite;
         THLGuestlistEntity *guestlistEntity = _guestlistInviteEntity.guestlist;
-        if (_guestlistInviteEntity.response == THLStatusPending) {
+        if (_guestlistInviteEntity.response == THLStatusPending && guestlistEntity.reviewStatus != THLStatusDeclined) {
             self.guestlistReviewStatus = THLGuestlistStatusPendingInvite;
         }
-        else if (guestlistEntity.reviewStatus == THLStatusPending) {
+        else if (_guestlistInviteEntity.response == THLStatusAccepted && guestlistEntity.reviewStatus == THLStatusPending) {
             self.guestlistReviewStatus = THLGuestlistStatusPendingHost;
         }
-        else if (guestlistEntity.reviewStatus == THLStatusAccepted) {
+        else if (_guestlistInviteEntity.response == THLStatusAccepted && guestlistEntity.reviewStatus == THLStatusAccepted) {
             self.guestlistReviewStatus = THLGuestlistStatusAccepted;
         }
-    }
-    else {
-        self.guestlistReviewStatus = THLGuestlistStatusDeclined;
+        else if (guestlistEntity.reviewStatus == THLStatusDeclined) {
+            self.guestlistReviewStatus = THLGuestlistStatusDeclined;
+        }
     }
 }
 

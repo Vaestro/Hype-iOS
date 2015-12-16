@@ -12,6 +12,7 @@
 #import "THLGuestlistInviteEntity.h"
 #import "THLUser.h"
 #import "THLGuestEntity.h"
+#import "THLGuestlistEntity.h"
 
 @interface THLDashboardInteractor()
 
@@ -49,7 +50,7 @@
     return [THLViewDataSourceGrouping withEntityBlock:^NSString *(NSString *collection, THLEntity *entity) {
         if ([entity isKindOfClass:[THLGuestlistInviteEntity class]]) {
             THLGuestlistInviteEntity *guestlistInviteEntity = (THLGuestlistInviteEntity *)entity;
-            if ([guestlistInviteEntity.guest.objectId isEqualToString:[THLUser currentUser].objectId] && guestlistInviteEntity.date > [[NSDate date] dateByAddingTimeInterval:-60*300]) {
+            if ([guestlistInviteEntity.guest.objectId isEqualToString:[THLUser currentUser].objectId] && guestlistInviteEntity.date > [[NSDate date] dateByAddingTimeInterval:-60*300] && guestlistInviteEntity.guestlist.reviewStatus != THLStatusDeclined) {
                 if (guestlistInviteEntity.response == THLStatusPending) {
                     return @"Pending Invites";
                 } else if (guestlistInviteEntity.response == THLStatusAccepted) {

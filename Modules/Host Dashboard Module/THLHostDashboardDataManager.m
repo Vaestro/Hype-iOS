@@ -14,6 +14,7 @@
 #import "THLDataStoreDomain.h"
 #import "THLGuestlistEntity.h"
 #import "THLPromotionEntity.h"
+#import "THLEventEntity.h"
 
 @interface THLHostDashboardDataManager()
 @property (nonatomic, strong) YapDatabaseConnection *rwConnection;
@@ -47,7 +48,7 @@
 - (THLDataStoreDomain *)domainForPendingOrAcceptedGuestlists {
     THLDataStoreDomain *domain = [[THLDataStoreDomain alloc] initWithMemberTestBlock:^BOOL(THLEntity *entity) {
         THLGuestlistEntity *guestlistEntity = (THLGuestlistEntity *)entity;
-        return ([guestlistEntity.promotion.time isLaterThanOrEqualTo:[[NSDate date] dateByAddingTimeInterval:-60*300]]);
+        return ([guestlistEntity.date isLaterThanOrEqualTo:[[NSDate date] dateByAddingTimeInterval:-60*300]]);
     }];
     return domain;
 }

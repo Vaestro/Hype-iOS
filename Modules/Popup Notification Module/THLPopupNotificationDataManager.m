@@ -27,9 +27,13 @@
 #pragma mark - Interface
 - (BFTask *)fetchGuestlistInviteWithId:(NSString *)guestlistInviteId {
     WEAKSELF();
+    STRONGSELF();
     return [[_guestlistService fetchGuestlistInviteWithId:guestlistInviteId] continueWithSuccessBlock:^id(BFTask *task) {
-        THLGuestlistInviteEntity *guestlistInviteEntity = [WSELF.entityMapper mapGuestlistInvite:task.result];
-        [WSELF.dataStore updateOrAddEntities:[NSSet setWithArray:@[guestlistInviteEntity]]];
+        THLGuestlistInvite *fetchedGuestlistInvite = task.result;
+        THLGuestlistInviteEntity *guestlistInviteEntity = [SSELF.entityMapper mapGuestlistInvite:fetchedGuestlistInvite];
+//        HACK to get guestlist Invite to update with updated Guestlist
+        guestlistInviteEntity.updatedAt = [NSDate date];
+        [SSELF.dataStore updateOrAddEntities:[NSSet setWithArray:@[guestlistInviteEntity]]];
         return guestlistInviteEntity;
     }];
 }
