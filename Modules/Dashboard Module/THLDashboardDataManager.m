@@ -30,13 +30,14 @@
     WEAKSELF();
     STRONGSELF();
     return [[_guestlistService fetchGuestlistInvitesForUser] continueWithSuccessBlock:^id(BFTask *task) {
-        THLDataStoreDomain *domain = [SSELF domainForPendingOrAcceptedGuestlistInvites];
+//        THLDataStoreDomain *domain = [SSELF domainForPendingOrAcceptedGuestlistInvites];
         NSSet *entities = [NSSet setWithArray:[SSELF.entityMapper mapGuestlistInvites:task.result]];
         //        HACK to get guestlist Invite to update with updated Guestlist
         for (THLGuestlistInviteEntity *guestlistInviteEntity in entities) {
             guestlistInviteEntity.updatedAt = [NSDate date];
         }
-        [SSELF.dataStore refreshDomain:domain withEntities:entities andDeleteEntities:NO];
+//        [SSELF.dataStore refreshDomain:domain withEntities:entities andDeleteEntities:NO];
+        [SSELF.dataStore updateOrAddEntities:entities];
         return [BFTask taskWithResult:entities];
     }];
 }
@@ -44,8 +45,7 @@
 - (THLDataStoreDomain *)domainForPendingOrAcceptedGuestlistInvites {
     THLDataStoreDomain *domain = [[THLDataStoreDomain alloc] initWithMemberTestBlock:^BOOL(THLEntity *entity) {
         THLGuestlistInviteEntity *guestlistInviteEntity = (THLGuestlistInviteEntity *)entity;
-        return ([guestlistInviteEntity.date isLaterThanOrEqualTo:[[NSDate date] dateByAddingTimeInterval:-60*300]] &&
-                (guestlistInviteEntity.response == THLStatusPending || guestlistInviteEntity.response == THLStatusAccepted));
+        return ([guestlistInviteEntity.date isLaterThanOrEqualTo:[[NSDate date] dateByAddingTimeInterval:-60*300]]);
     }];
     return domain;
 }

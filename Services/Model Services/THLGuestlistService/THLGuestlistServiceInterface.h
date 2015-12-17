@@ -30,6 +30,11 @@
 - (BFTask *)fetchGuestlistsRequestsForHost;
 
 //----------------------------------------------------------------
+#pragma mark - Fetch Guestlist For Guest Using The Guestlist ID
+//----------------------------------------------------------------
+- (BFTask *)fetchGuestlistWithId:(NSString *)guestlistId;
+
+//----------------------------------------------------------------
 #pragma mark - Create Guestlist For Promotion
 //----------------------------------------------------------------
 - (BFTask *)createGuestlistForPromotion:(THLPromotionEntity *)promotionEntity withInvites:(NSArray *)guestPhoneNumbers;

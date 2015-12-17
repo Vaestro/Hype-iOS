@@ -120,7 +120,7 @@
 
 - (THLActionBarButton *)newAcceptButton {
     THLActionBarButton *acceptButton = [THLActionBarButton new];
-    acceptButton.backgroundColor = kTHLNUIAccentColor;
+    acceptButton.backgroundColor = kTHLNUIActionColor;
     return acceptButton;
 }
 

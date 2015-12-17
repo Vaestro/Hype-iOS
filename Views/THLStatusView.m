@@ -68,8 +68,8 @@
             break;
         }
         case THLStatusNone: {
-            [WSELF.shapeView setPath:[self declinedPath].CGPath];
-            WSELF.shapeView.fillColor = [kTHLNUIRedColor CGColor];
+            [WSELF.shapeView setPath:[self pendingPath].CGPath];
+            WSELF.shapeView.fillColor = [kTHLNUIPendingColor CGColor];
             break;
         }
         default: {

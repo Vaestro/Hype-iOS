@@ -38,6 +38,17 @@
     }];
 }
 
+- (BFTask *)fetchGuestlistWithId:(NSString *)guestlistId {
+    WEAKSELF();
+    STRONGSELF();
+    return [[_guestlistService fetchGuestlistWithId:guestlistId] continueWithSuccessBlock:^id(BFTask *task) {
+        THLGuestlist *fetchedGuestlist = task.result;
+        THLGuestlistEntity *guestlistEntity = [SSELF.entityMapper mapGuestlist:fetchedGuestlist];
+        [SSELF.dataStore updateOrAddEntities:[NSSet setWithArray:@[guestlistEntity]]];
+        return guestlistEntity;
+    }];
+}
+
 - (void)dealloc {
     DLog(@"Destroyed %@", self);
 }
