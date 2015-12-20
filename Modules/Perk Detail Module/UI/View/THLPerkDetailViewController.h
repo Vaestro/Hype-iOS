@@ -10,5 +10,4 @@
 #import "THLPerkDetailView.h"
 
 @interface THLPerkDetailViewController : UIViewController<THLPerkDetailView>
-
 @end

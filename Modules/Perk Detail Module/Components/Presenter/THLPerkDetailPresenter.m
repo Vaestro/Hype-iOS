@@ -12,6 +12,7 @@
 #import "THLPerkDetailView.h"
 #import "THLUser.h"
 #import "THLPerkStoreItemEntity.h"
+#import "THLRedeemPerkView.h"
 
 @interface THLPerkDetailPresenter()
 <
@@ -19,6 +20,7 @@ THLPerkDetailInteractorDelegate
 >
 @property (nonatomic, strong) id<THLPerkDetailView> view;
 @property (nonatomic, strong) THLPerkStoreItemEntity *perkStoreItemEntity;
+@property (nonatomic, strong) THLRedeemPerkView *confirmationView;
 @end
 
 @implementation THLPerkDetailPresenter
@@ -66,7 +68,25 @@ THLPerkDetailInteractorDelegate
     
     [_view setDismissCommand:dismissCommand];
     [_view setPurchaseCommand:purchaseCommand];
+    THLRedeemPerkView *confirmationView = [THLRedeemPerkView new];
+    [self configureConfirmationView:confirmationView];
 
+}
+
+- (void)configureConfirmationView:(THLRedeemPerkView *)view {
+    
+    self.confirmationView = view;
+    
+    WEAKSELF();
+    RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [WSELF handleDismissAction];
+        return [RACSignal empty];
+        
+    }];
+    
+    [_confirmationView setDismissCommand:dismissCommand];
+    [_confirmationView setConfirmationDescription:[NSString stringWithFormat:@"You have purchased %@ with %i credits", _perkStoreItemEntity.name, (int)_perkStoreItemEntity.credits]];
+    
 }
 
 - (void)handleDismissAction {
@@ -78,6 +98,7 @@ THLPerkDetailInteractorDelegate
     UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault
                                                       handler:^(UIAlertAction *action) {
                                                           [_interactor handlePurchasewithPerkItemEntity:_perkStoreItemEntity];
+                                                          
                                                       }];
     
     UIAlertAction *noAction = [UIAlertAction actionWithTitle:@"No"
@@ -123,7 +144,9 @@ THLPerkDetailInteractorDelegate
 }
 
 - (void)interactor:(THLPerkDetailInteractor *)interactor didPurchasePerkStoreItem:(NSError *)error {
-    [_wireframe dismissInterface];
+//    [_wireframe dismissInterface];
+    [_view showRedeemPerkView:_confirmationView];
+
 }
 
 @end
