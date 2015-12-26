@@ -11,6 +11,7 @@
 #import "THLAppearanceConstants.h"
 #import "UIView+DimView.h"
 #import "THLActionBarButton.h"
+#import "THLRedeemPerkView.h"
 
 
 @interface THLPerkDetailViewController()
@@ -21,6 +22,7 @@
 @property (nonatomic, strong) UILabel *itemCreditsLabel;
 @property (nonatomic, strong) UIBarButtonItem *dismissButton;
 @property (nonatomic, strong) THLActionBarButton *barButton;
+@property (nonatomic, strong) THLRedeemPerkView *redeemPerkView;
 // action bar
 @end
 
@@ -54,6 +56,19 @@
     _infoText = [self newTextView];
     _barButton = [self newBarButton];
 }
+
+- (void)showRedeemPerkView:(UIView *)redeemPerkView {
+    [self.parentViewController.view addSubview:redeemPerkView];
+    [redeemPerkView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.right.left.insets(kTHLEdgeInsetsNone());
+    }];
+    [self.parentViewController.view bringSubviewToFront:redeemPerkView];
+}
+
+- (void)hideRedeemPerkView:(UIView *)redeemPerkView {
+    [redeemPerkView removeFromSuperview];
+}
+
 
 - (void)layoutView {
     [self.view addSubviews:@[_scrollView, _imageView, _itemNameLabel, _itemCreditsLabel, _barButton]];
