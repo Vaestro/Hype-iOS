@@ -11,7 +11,7 @@
 #import "THLAppearanceConstants.h"
 #import "UIView+DimView.h"
 #import "THLActionBarButton.h"
-#import "THLRedeemPerkView.h"
+#import "THLConfirmationView.h"
 
 
 @interface THLPerkDetailViewController()
@@ -22,7 +22,7 @@
 @property (nonatomic, strong) UILabel *itemCreditsLabel;
 @property (nonatomic, strong) UIBarButtonItem *dismissButton;
 @property (nonatomic, strong) THLActionBarButton *barButton;
-@property (nonatomic, strong) THLRedeemPerkView *redeemPerkView;
+@property (nonatomic, strong) THLConfirmationView *redeemPerkView;
 // action bar
 @end
 

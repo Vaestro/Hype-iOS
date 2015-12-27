@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "FXBlurView.h"
 
-@interface THLRedeemPerkView : FXBlurView
+@interface THLConfirmationView : FXBlurView
 @property (nonatomic, strong) RACCommand *dismissCommand;
-@property (nonatomic, strong) NSString *confirmationDescription;
+@property (nonatomic, strong) NSString *confirmationMessage;
 @end

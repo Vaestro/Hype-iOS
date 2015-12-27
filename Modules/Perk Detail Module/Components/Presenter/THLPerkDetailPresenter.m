@@ -12,7 +12,7 @@
 #import "THLPerkDetailView.h"
 #import "THLUser.h"
 #import "THLPerkStoreItemEntity.h"
-#import "THLRedeemPerkView.h"
+#import "THLConfirmationView.h"
 
 @interface THLPerkDetailPresenter()
 <
@@ -20,7 +20,7 @@ THLPerkDetailInteractorDelegate
 >
 @property (nonatomic, strong) id<THLPerkDetailView> view;
 @property (nonatomic, strong) THLPerkStoreItemEntity *perkStoreItemEntity;
-@property (nonatomic, strong) THLRedeemPerkView *confirmationView;
+@property (nonatomic, strong) THLConfirmationView *confirmationView;
 @end
 
 @implementation THLPerkDetailPresenter
@@ -68,12 +68,12 @@ THLPerkDetailInteractorDelegate
     
     [_view setDismissCommand:dismissCommand];
     [_view setPurchaseCommand:purchaseCommand];
-    THLRedeemPerkView *confirmationView = [THLRedeemPerkView new];
+    THLConfirmationView *confirmationView = [THLConfirmationView new];
     [self configureConfirmationView:confirmationView];
 
 }
 
-- (void)configureConfirmationView:(THLRedeemPerkView *)view {
+- (void)configureConfirmationView:(THLConfirmationView *)view {
     
     self.confirmationView = view;
     
@@ -85,7 +85,7 @@ THLPerkDetailInteractorDelegate
     }];
     
     [_confirmationView setDismissCommand:dismissCommand];
-    [_confirmationView setConfirmationDescription:[NSString stringWithFormat:@"You have purchased %@ with %i credits", _perkStoreItemEntity.name, (int)_perkStoreItemEntity.credits]];
+    [_confirmationView setConfirmationMessage:[NSString stringWithFormat:@"You have purchased %@ with %i credits", _perkStoreItemEntity.name, (int)_perkStoreItemEntity.credits]];
     
 }
 

@@ -6,14 +6,14 @@
 //  Copyright © 2015 Hypelist. All rights reserved.
 //
 
-#import "THLRedeemPerkView.h"
+#import "THLConfirmationView.h"
 #import "THLAppearanceConstants.h"
 
 static CGFloat const kTHLRedeemPerkViewSeparatorViewHeight = 1;
 static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
 
 
-@interface THLRedeemPerkView()
+@interface THLConfirmationView()
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UIImageView *checkIconView;
 @property (nonatomic, strong) UIView *underlineView;
@@ -22,7 +22,7 @@ static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
 @end
 
 
-@implementation THLRedeemPerkView
+@implementation THLConfirmationView
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]){
         [self constructView];
@@ -82,7 +82,7 @@ static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
 
 - (void)bindView {
     RAC(_dismissButton, rac_command) = RACObserve(self, dismissCommand);
-    RAC(_descriptionLabel, text) = RACObserve(self, confirmationDescription);
+    RAC(_descriptionLabel, text) = RACObserve(self, confirmationMessage);
 }
 
 - (UILabel *)newNameLabel {
