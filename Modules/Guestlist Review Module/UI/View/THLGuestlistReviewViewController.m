@@ -13,6 +13,7 @@
 #import "THLGuestlistReviewCellViewModel.h"
 #import "THLActionContainerView.h"
 #import "THLConfirmationPopupView.h"
+#import "THLMenuView.h"
 
 #import "THLAppearanceConstants.h"
 #import "UIScrollView+SVPullToRefresh.h"
@@ -33,6 +34,7 @@ UICollectionViewDelegateFlowLayout
 @property (nonatomic, strong) THLConfirmationPopupView *confirmationPopupView;
 @property (nonatomic, strong) UIBarButtonItem *dismissButton;
 @property (nonatomic, strong) UIBarButtonItem *menuButton;
+@property (nonatomic, strong) THLMenuView *menuView;
 @end
 
 @implementation THLGuestlistReviewViewController
@@ -40,7 +42,6 @@ UICollectionViewDelegateFlowLayout
 @synthesize showRefreshAnimation = _showRefreshAnimation;
 @synthesize refreshCommand = _refreshCommand;
 @synthesize dismissCommand = _dismissCommand;
-@synthesize menuCommand = _menuCommand;
 @synthesize acceptCommand = _acceptCommand;
 @synthesize declineCommand = _declineCommand;
 @synthesize decisionCommand = _decisionCommand;
@@ -69,6 +70,30 @@ UICollectionViewDelegateFlowLayout
     _actionBarButton = [self newActionBarButton];
     _confirmationPopupView = [self newConfirmationPopupView];
 }
+
+
+- (void)showGuestlistMenuView {
+    _menuView = [THLMenuView new];
+    
+    WEAKSELF();
+    RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [WSELF hideGuestlistMenuView];
+        return [RACSignal empty];
+    }];
+
+    [_menuView setDismissCommand:dismissCommand];
+    
+    [self.parentViewController.view addSubview:_menuView];
+    [_menuView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.bottom.insets(kTHLEdgeInsetsNone());
+    }];
+    [self.parentViewController.view bringSubviewToFront:_menuView];
+}
+
+- (void)hideGuestlistMenuView {
+    [_menuView removeFromSuperview];
+}
+
 
 - (void)layoutView {
     [self.view addSubviews:@[_collectionView, _actionBarButton]];
@@ -100,7 +125,6 @@ UICollectionViewDelegateFlowLayout
     
     RAC(self.dismissButton, rac_command) = RACObserve(self, dismissCommand);
     
-    RAC(self.menuButton, rac_command) = RACObserve(self, menuCommand);
 
     [RACObserve(self, showRefreshAnimation) subscribeNext:^(NSNumber *val) {
         BOOL shouldAnimate = [val boolValue];
@@ -210,13 +234,17 @@ UICollectionViewDelegateFlowLayout
 }
 
 - (UIBarButtonItem *)newMenuBarButtonItem {
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:nil action:NULL];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(showGuestlistMenuView)];
     [item setTitleTextAttributes:
      [NSDictionary dictionaryWithObjectsAndKeys:
       kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
                         forState:UIControlStateNormal];
     return item;
 
+}
+
+- (void)showMenuBtnClicked {
+    
 }
 
 //- (THLActionContainerView *)newActionContainerView {

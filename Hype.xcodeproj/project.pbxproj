@@ -200,6 +200,7 @@
 		79CE01E61C0A69EC0047E6FA /* THLDashboardTicketCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CE01E51C0A69EC0047E6FA /* THLDashboardTicketCellViewModel.m */; };
 		9DE048564BB3FAE7AF277A3B /* libPods-HypeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FB9B71E9A7DBD2DAA9915571 /* libPods-HypeTests.a */; };
 		C82D87BF1C25C7E300116328 /* THLConfirmationView.m in Sources */ = {isa = PBXBuildFile; fileRef = C82D87BE1C25C7E300116328 /* THLConfirmationView.m */; };
+		C82D87C31C31CC2200116328 /* THLMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = C82D87C21C31CC2200116328 /* THLMenuView.m */; };
 		C85EE3791C1BC8AD0008C14B /* THLPerkStoreItemEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3781C1BC8AD0008C14B /* THLPerkStoreItemEntity.m */; };
 		C85EE3831C1BC9920008C14B /* THLPerkDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3811C1BC9920008C14B /* THLPerkDetailViewController.m */; };
 		C85EE38A1C1BCA200008C14B /* THLPerkDetailWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3891C1BCA200008C14B /* THLPerkDetailWireframe.m */; };
@@ -671,6 +672,8 @@
 		A63D387799ADEA3D66DC04C6 /* libPods-Hype.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hype.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C82D87BD1C25C7E300116328 /* THLConfirmationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLConfirmationView.h; sourceTree = "<group>"; };
 		C82D87BE1C25C7E300116328 /* THLConfirmationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLConfirmationView.m; sourceTree = "<group>"; };
+		C82D87C11C31CC2200116328 /* THLMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMenuView.h; sourceTree = "<group>"; };
+		C82D87C21C31CC2200116328 /* THLMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLMenuView.m; sourceTree = "<group>"; };
 		C85EE3771C1BC8AD0008C14B /* THLPerkStoreItemEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkStoreItemEntity.h; sourceTree = "<group>"; };
 		C85EE3781C1BC8AD0008C14B /* THLPerkStoreItemEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPerkStoreItemEntity.m; sourceTree = "<group>"; };
 		C85EE3801C1BC9920008C14B /* THLPerkDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkDetailViewController.h; sourceTree = "<group>"; };
@@ -1066,6 +1069,7 @@
 		211BB0D11B8CBE690068FD50 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C82D87C01C31CBEB00116328 /* THLMenuView */,
 				C880963C1C23C1C900C7524F /* THLConfirmationView */,
 				798D7EBC1BF2E528001D4593 /* Alien */,
 				2121735C1BB34239007D817A /* Promotion Card View */,
@@ -2484,6 +2488,15 @@
 			path = "Ticket Cell";
 			sourceTree = "<group>";
 		};
+		C82D87C01C31CBEB00116328 /* THLMenuView */ = {
+			isa = PBXGroup;
+			children = (
+				C82D87C11C31CC2200116328 /* THLMenuView.h */,
+				C82D87C21C31CC2200116328 /* THLMenuView.m */,
+			);
+			name = THLMenuView;
+			sourceTree = "<group>";
+		};
 		C85EE37A1C1BC93C0008C14B /* Perk Detail Module */ = {
 			isa = PBXGroup;
 			children = (
@@ -3165,6 +3178,7 @@
 				C85EE3B91C1BCBF30008C14B /* THLPerksViewController.m in Sources */,
 				216BDD581BC71F1800BBF713 /* THLSearchViewDataSource.m in Sources */,
 				79B9595A1BE92FBA00B87799 /* THLPopupNotificationInteractor.m in Sources */,
+				C82D87C31C31CC2200116328 /* THLMenuView.m in Sources */,
 				794AFE101C10A3CD008475B1 /* THLHostDashboardPresenter.m in Sources */,
 				217EBEA51BB7A106006044B6 /* THLLoginService.m in Sources */,
 				219E32A51B8EA62700214C85 /* THLEventNavigationController.m in Sources */,
