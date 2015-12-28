@@ -32,6 +32,7 @@ UICollectionViewDelegateFlowLayout
 @property (nonatomic, strong) THLActionBarButton *actionBarButton;
 @property (nonatomic, strong) THLConfirmationPopupView *confirmationPopupView;
 @property (nonatomic, strong) UIBarButtonItem *dismissButton;
+@property (nonatomic, strong) UIBarButtonItem *menuButton;
 @end
 
 @implementation THLGuestlistReviewViewController
@@ -39,6 +40,7 @@ UICollectionViewDelegateFlowLayout
 @synthesize showRefreshAnimation = _showRefreshAnimation;
 @synthesize refreshCommand = _refreshCommand;
 @synthesize dismissCommand = _dismissCommand;
+@synthesize menuCommand = _menuCommand;
 @synthesize acceptCommand = _acceptCommand;
 @synthesize declineCommand = _declineCommand;
 @synthesize decisionCommand = _decisionCommand;
@@ -62,6 +64,7 @@ UICollectionViewDelegateFlowLayout
 - (void)constructView {
     _collectionView = [self newCollectionView];
     _dismissButton = [self newBackBarButtonItem];
+    _menuButton = [self newMenuBarButtonItem];
 //    _actionContainerView = [self newActionContainerView];
     _actionBarButton = [self newActionBarButton];
     _confirmationPopupView = [self newConfirmationPopupView];
@@ -74,6 +77,7 @@ UICollectionViewDelegateFlowLayout
     self.automaticallyAdjustsScrollViewInsets = YES;
     
     self.navigationItem.leftBarButtonItem = _dismissButton;
+    self.navigationItem.rightBarButtonItem = _menuButton;
     self.navigationItem.title = @"YOUR PARTY";
     
     WEAKSELF();
@@ -95,6 +99,8 @@ UICollectionViewDelegateFlowLayout
     }];
     
     RAC(self.dismissButton, rac_command) = RACObserve(self, dismissCommand);
+    
+    RAC(self.menuButton, rac_command) = RACObserve(self, menuCommand);
 
     [RACObserve(self, showRefreshAnimation) subscribeNext:^(NSNumber *val) {
         BOOL shouldAnimate = [val boolValue];
@@ -201,6 +207,16 @@ UICollectionViewDelegateFlowLayout
       kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
                         forState:UIControlStateNormal];
     return item;
+}
+
+- (UIBarButtonItem *)newMenuBarButtonItem {
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:nil action:NULL];
+    [item setTitleTextAttributes:
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
+                        forState:UIControlStateNormal];
+    return item;
+
 }
 
 //- (THLActionContainerView *)newActionContainerView {
