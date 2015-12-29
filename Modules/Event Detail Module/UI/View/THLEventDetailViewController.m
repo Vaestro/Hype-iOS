@@ -13,6 +13,7 @@
 #import "THLEventDetailsLocationInfoView.h"
 #import "THLEventDetailsMapView.h"
 #import "THLEventDetailsPromotionInfoView.h"
+#import "THLNeedToKnowInfoView.h"
 #import "THLActionBarButton.h"
 
 #import "THLAppearanceConstants.h"
@@ -23,12 +24,10 @@
 @property (nonatomic, strong) UILabel *eventNameLabel;
 @property (nonatomic, strong) UILabel *dateLabel;
 @property (nonatomic, strong) THLEventDetailsPromotionInfoView *promotionInfoView;
+@property (nonatomic, strong) THLNeedToKnowInfoView *needToKnowInfoView;
 @property (nonatomic, strong) THLActionBarButton *bottomBar;
-@property (nonatomic, strong) THLPromotionInfoView *ratioInfoLabel;
-@property (nonatomic, strong) THLPromotionInfoView *coverInfoLabel;
 @property (nonatomic) BOOL showPromotionInfoView;
 @end
-
 
 @implementation THLEventDetailViewController
 @synthesize locationImageURL;
@@ -70,10 +69,9 @@
 - (void)constructView {
     _scrollView = [self newScrollView];
     _promotionInfoView = [self newPromotionInfoView];
+    _needToKnowInfoView = [self newNeedToKnowInfoView];
     _eventNameLabel = [self newEventNameLabel];
     _dateLabel = [self newDateLabel];
-    _ratioInfoLabel = [self newRatioInfoLabel];
-    _coverInfoLabel = [self newCoverInfoLabel];
     _bottomBar = [self newBottomBar];
 }
 
@@ -106,19 +104,13 @@
                   withPrecedingMargin:kTHLPaddingHigh()
                            sideMargin:kTHLPaddingNone()];
     
-    [_scrollView.stackView addSubview:_ratioInfoLabel
-                  withPrecedingMargin:2*kTHLPaddingHigh()
-                           sideMargin:kTHLPaddingNone()];
-    
-    [_scrollView.stackView addSubview:_coverInfoLabel
-                  withPrecedingMargin:2*kTHLPaddingNone()
-                           sideMargin:kTHLPaddingNone()];
-    
     [_scrollView.stackView addSubview:_promotionInfoView
                   withPrecedingMargin:2*kTHLPaddingHigh()
                            sideMargin:kTHLPaddingNone()];
     
-
+    [_scrollView.stackView addSubview:_needToKnowInfoView
+                  withPrecedingMargin:kTHLPaddingHigh()
+                           sideMargin:kTHLPaddingNone()];
     
     [_bottomBar makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.left.right.insets(kTHLEdgeInsetsNone());
@@ -130,12 +122,12 @@
     WEAKSELF();
     RAC(self.eventNameLabel, text, @"") = RACObserve(self, eventName);
     RAC(self.dateLabel, text, @"") = RACObserve(self, eventDate);
-    RAC(self.ratioInfoLabel, infoText, @"") = RACObserve(self, ratioInfo);
-    RAC(self.coverInfoLabel, infoText, @"") = RACObserve(self, coverInfo);
     
     RAC(self.promotionInfoView, promotionInfo) = RACObserve(self, promoInfo);
     RAC(self.promotionInfoView, promoImageURL) = RACObserve(self, promoImageURL);
     
+    RAC(self.needToKnowInfoView, ratioText) = RACObserve(self, ratioInfo);
+    RAC(self.needToKnowInfoView, coverFeeText) = RACObserve(self, coverInfo);
     [RACObserve(WSELF, actionBarButtonStatus) subscribeNext:^(id _) {
         [WSELF updateBottomBar];
     }];
@@ -193,22 +185,18 @@
     return promoInfoView;
 }
 
+- (THLNeedToKnowInfoView *)newNeedToKnowInfoView {
+    THLNeedToKnowInfoView *needToKnowInfoView = [THLNeedToKnowInfoView new];
+    needToKnowInfoView.title = NSLocalizedString(@"NEED TO KNOW", nil);
+    needToKnowInfoView.translatesAutoresizingMaskIntoConstraints = NO;
+    needToKnowInfoView.dividerColor = [UIColor whiteColor];
+    return needToKnowInfoView;
+}
+
 - (THLActionBarButton *)newBottomBar {
     THLActionBarButton *bottomBar = [THLActionBarButton new];
 //    [bottomBar.morphingLabel setTextWithoutMorphing:NSLocalizedString(actionBarButtonStatus, nil)];
     return bottomBar;
-}
-
-- (THLPromotionInfoView *)newRatioInfoLabel {
-    THLPromotionInfoView *ratioInfoLabel = [THLPromotionInfoView new];
-    ratioInfoLabel.labelText = @"Suggested Ratio";
-    return ratioInfoLabel;
-}
-
-- (THLPromotionInfoView *)newCoverInfoLabel {
-    THLPromotionInfoView *coverInfoLabel = [THLPromotionInfoView new];
-    coverInfoLabel.labelText = @"Venue Cover";
-    return coverInfoLabel;
 }
 
 - (UILabel *)newEventNameLabel {

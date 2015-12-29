@@ -150,6 +150,7 @@
 		798D7EC21BF2E5CF001D4593 /* OnboardingContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 798D7EC11BF2E5CF001D4593 /* OnboardingContentViewController.m */; };
 		79ABA9B71C053ED6001ABAC7 /* THLDashboardNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79ABA9B61C053ED6001ABAC7 /* THLDashboardNotificationCell.m */; };
 		79ABA9BC1C054F42001ABAC7 /* THLDashboardNotificationCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79ABA9BB1C054F42001ABAC7 /* THLDashboardNotificationCellViewModel.m */; };
+		79AD95F41C30CFC400EDB82E /* THLNeedToKnowInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79AD95F31C30CFC400EDB82E /* THLNeedToKnowInfoView.m */; };
 		79B959231BE57C9D00B87799 /* THLGuestlistReviewWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959221BE57C9D00B87799 /* THLGuestlistReviewWireframe.m */; };
 		79B959291BE581A800B87799 /* THLGuestlistReviewDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959281BE581A800B87799 /* THLGuestlistReviewDataManager.m */; };
 		79B9592C1BE581BB00B87799 /* THLGuestlistReviewInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B9592B1BE581BB00B87799 /* THLGuestlistReviewInteractor.m */; };
@@ -584,6 +585,8 @@
 		79ABA9B81C053F14001ABAC7 /* THLDashboardNotificationCellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLDashboardNotificationCellView.h; sourceTree = "<group>"; };
 		79ABA9BA1C054F42001ABAC7 /* THLDashboardNotificationCellViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLDashboardNotificationCellViewModel.h; sourceTree = "<group>"; };
 		79ABA9BB1C054F42001ABAC7 /* THLDashboardNotificationCellViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLDashboardNotificationCellViewModel.m; sourceTree = "<group>"; };
+		79AD95F21C30CFC400EDB82E /* THLNeedToKnowInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLNeedToKnowInfoView.h; sourceTree = "<group>"; };
+		79AD95F31C30CFC400EDB82E /* THLNeedToKnowInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLNeedToKnowInfoView.m; sourceTree = "<group>"; };
 		79B9591B1BE5783500B87799 /* THLGuestlistReviewModuleInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistReviewModuleInterface.h; sourceTree = "<group>"; };
 		79B9591D1BE578A200B87799 /* THLGuestlistReviewModuleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistReviewModuleDelegate.h; sourceTree = "<group>"; };
 		79B959211BE57C9D00B87799 /* THLGuestlistReviewWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistReviewWireframe.h; sourceTree = "<group>"; };
@@ -1163,6 +1166,8 @@
 				21775F381B8CF93000609D39 /* THLEventDetailsPromotionInfoView.m */,
 				790603BB1BF5B6810093335E /* THLPromotionInfoView.h */,
 				790603BC1BF5B6810093335E /* THLPromotionInfoView.m */,
+				79AD95F21C30CFC400EDB82E /* THLNeedToKnowInfoView.h */,
+				79AD95F31C30CFC400EDB82E /* THLNeedToKnowInfoView.m */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -3161,6 +3166,7 @@
 				C82D87BF1C25C7E300116328 /* THLConfirmationView.m in Sources */,
 				217EBE881BB77ED7006044B6 /* THLEntity+DataStore.m in Sources */,
 				212173601BB34261007D817A /* THLPromotionCardInfoCell.m in Sources */,
+				79AD95F41C30CFC400EDB82E /* THLNeedToKnowInfoView.m in Sources */,
 				79B959611BE9A90B00B87799 /* THLActionContainerView.m in Sources */,
 				C85EE3B91C1BCBF30008C14B /* THLPerksViewController.m in Sources */,
 				216BDD581BC71F1800BBF713 /* THLSearchViewDataSource.m in Sources */,

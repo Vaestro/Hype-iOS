@@ -28,8 +28,6 @@
 - (void)constructView {
     _typeLabel = [self newTypeLabel];
     _textLabel = [self newTextLabel];
-//    _separatorView = [self newSeparatorView];
-
 }
 
 - (void)layoutView {
@@ -47,10 +45,6 @@
         make.left.equalTo([WSELF typeLabel].mas_right).insets(kTHLEdgeInsetsNone());
 //        make.bottom.equalTo([WSELF separatorView].mas_top).insets(kTHLEdgeInsetsHigh());
     }];
-    
-//    [_separatorView makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.right.bottom.insets(kTHLEdgeInsetsNone());
-//    }];
 }
 
 - (void)bindView {
@@ -64,7 +58,6 @@
     label.adjustsFontSizeToFitWidth = YES;
     label.minimumScaleFactor = 0.5;
     label.textAlignment = NSTextAlignmentLeft;
-    label.alpha = 0.67;
     label.numberOfLines = 0;
     return label;
 }

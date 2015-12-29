@@ -36,7 +36,20 @@ typedef NS_OPTIONS(NSInteger, THLActivityStatus) {
     THLActivityStatusNone = 0,
     THLActivityStatusInProgress,
     THLActivityStatusSuccess,
-    THLActivityStatusError,
+    THLActivityStatusError
+};
+
+typedef NS_ENUM(NSInteger, THLAttireType) {
+    THLAttireTypeCasual = 0,
+    THLAttireTypeDressyCasual,
+    THLAttireTypeBusinessCasual,
+    THLAttireTypeBusinessFormal,
+    THLAttireTypeFestive,
+    THLAttireTypeSemiFormal,
+    THLAttireTypeBlackTieOptional,
+    THLAttireTypeBlackTie,
+    THLAttireTypeWhiteTie,
+    THLAttireTypeCocktail
 };
 
 #define SafeString(string) (string != nil) ? string : @""
