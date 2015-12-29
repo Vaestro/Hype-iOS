@@ -24,11 +24,15 @@
 #import "THLPromotionSelectionWireframe.h"
 #import "THLGuestlistInvitationWireframe.h"
 #import "THLPopupNotificationWireframe.h"
+#import "THLWaitlistPresenter.h" //Equivalent of wireframe for this instance
 
 //Delegates
 #import "THLLoginModuleDelegate.h"
 #import "THLGuestFlowModuleDelegate.h"
 #import "THLHostFlowModuleDelegate.h"
+
+
+#define ENABLE_WAITLIST
 
 @interface THLMasterWireframe()
 <
@@ -44,6 +48,7 @@ THLPopupNotificationModuleDelegate
 @property (nonatomic, strong) THLUserManager *userManager;
 @property (nonatomic, strong) THLGuestFlowWireframe *guestWireframe;
 @property (nonatomic, strong) THLHostFlowWireframe *hostWireframe;
+@property (nonatomic, strong) THLWaitlistPresenter *waitlistPresenter;
 
 @end
 
@@ -89,10 +94,16 @@ THLPopupNotificationModuleDelegate
  */
 
 - (void)presentOnboardingAndLoginInterface {
+#ifdef ENABLE_WAITLIST
+	THLWaitlistPresenter *waitlistPresenter = [_dependencyManager newWaitlistPresenter];
+	_waitlistPresenter = waitlistPresenter;
+	[waitlistPresenter presentInterfaceInWindow:_window];
+#else
 	THLLoginWireframe *loginWireframe = [_dependencyManager newLoginWireframe];
     _currentWireframe = loginWireframe;
 	[loginWireframe.moduleInterface setModuleDelegate:self];
 	[loginWireframe.moduleInterface presentLoginModuleInterfaceWithOnboardingInWindow:_window];
+#endif
 }
 
 - (void)presentLoginInterfaceOnViewController:(UIViewController *)viewController {

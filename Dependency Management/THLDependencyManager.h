@@ -30,6 +30,7 @@
 @class THLUserManager;
 @class THLPerkWireframe;
 @class THLPerkDetailWireframe;
+@class THLWaitlistPresenter;
 
 /**
  *  Manages all dependenies for the app.
@@ -59,4 +60,5 @@ THLHostFlowDependencyManager
 - (THLPerkWireframe *)newPerkWireframe;
 - (THLPerkDetailWireframe *)newPerkDetailWireframe;
 - (THLUserManager *)userManager;
+- (THLWaitlistPresenter *)newWaitlistPresenter;
 @end
