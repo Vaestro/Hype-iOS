@@ -45,6 +45,8 @@ UICollectionViewDelegateFlowLayout
 @synthesize acceptCommand = _acceptCommand;
 @synthesize declineCommand = _declineCommand;
 @synthesize decisionCommand = _decisionCommand;
+@synthesize showMenuCommand = _showMenuCommand;
+@synthesize menuAddCommand = _menuAddCommand;
 @synthesize showActivityIndicator = _showActivityIndicator;
 @synthesize reviewerStatus = _reviewerStatus;
 @synthesize popup = _popup;
@@ -72,26 +74,16 @@ UICollectionViewDelegateFlowLayout
 }
 
 
-- (void)showGuestlistMenuView {
-    _menuView = [THLMenuView new];
-    
-    WEAKSELF();
-    RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [WSELF hideGuestlistMenuView];
-        return [RACSignal empty];
-    }];
-
-    [_menuView setDismissCommand:dismissCommand];
-    
-    [self.parentViewController.view addSubview:_menuView];
-    [_menuView makeConstraints:^(MASConstraintMaker *make) {
+- (void)showGuestlistMenuView:(UIView *)menuView {
+    [self.parentViewController.view addSubview:menuView];
+    [menuView makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.bottom.insets(kTHLEdgeInsetsNone());
     }];
-    [self.parentViewController.view bringSubviewToFront:_menuView];
+    [self.parentViewController.view bringSubviewToFront:menuView];
 }
 
-- (void)hideGuestlistMenuView {
-    [_menuView removeFromSuperview];
+- (void)hideGuestlistMenuView:(UIView *)menuView {
+    [menuView removeFromSuperview];
 }
 
 
@@ -146,6 +138,7 @@ UICollectionViewDelegateFlowLayout
     RAC(self.actionBarButton, rac_command) = RACObserve(self, decisionCommand);
     RAC(self.confirmationPopupView, acceptCommand) = RACObserve(self, acceptCommand);
     RAC(self.confirmationPopupView, declineCommand) = RACObserve(self, declineCommand);
+    RAC(self.menuButton, rac_command) = RACObserve(self, showMenuCommand);
 
     [RACObserve(self, showActivityIndicator) subscribeNext:^(id _) {
         switch (WSELF.showActivityIndicator) {
@@ -234,17 +227,13 @@ UICollectionViewDelegateFlowLayout
 }
 
 - (UIBarButtonItem *)newMenuBarButtonItem {
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(showGuestlistMenuView)];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:nil action:NULL];
     [item setTitleTextAttributes:
      [NSDictionary dictionaryWithObjectsAndKeys:
       kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
                         forState:UIControlStateNormal];
     return item;
 
-}
-
-- (void)showMenuBtnClicked {
-    
 }
 
 //- (THLActionContainerView *)newActionContainerView {

@@ -11,4 +11,7 @@
 
 @interface THLMenuView : FXBlurView
 @property (nonatomic, strong) RACCommand *dismissCommand;
+@property (nonatomic, strong) RACCommand *menuAddGuestsCommand;
+@property (nonatomic, strong) RACCommand *menuLeaveGuestCommand;
+@property (nonatomic, strong) RACCommand *menuEventDetailsCommand;
 @end
