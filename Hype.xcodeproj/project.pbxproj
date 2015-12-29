@@ -48,6 +48,7 @@
 		2133BFC21B877C08002C1DA9 /* THLUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2133BFC11B877C08002C1DA9 /* THLUser.m */; };
 		2133BFCB1B877CAB002C1DA9 /* THLEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2133BFCA1B877CAB002C1DA9 /* THLEvent.m */; };
 		2133BFCE1B877D11002C1DA9 /* THLLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2133BFCD1B877D11002C1DA9 /* THLLocation.m */; };
+		2133C9BF1C3329BA0020083A /* THLWaitlistEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 2133C9BE1C3329BA0020083A /* THLWaitlistEntry.m */; };
 		213CE1131BB8D22D00054A2C /* THLLocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 213CE1121BB8D22D00054A2C /* THLLocationService.m */; };
 		215A428B1BAA1FFF00D03C35 /* THLNumberVerificationPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A428A1BAA1FFF00D03C35 /* THLNumberVerificationPresenter.m */; };
 		215A428E1BAA200E00D03C35 /* THLNumberVerificationWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A428D1BAA200E00D03C35 /* THLNumberVerificationWireframe.m */; };
@@ -337,6 +338,8 @@
 		2133BFCA1B877CAB002C1DA9 /* THLEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEvent.m; sourceTree = "<group>"; };
 		2133BFCC1B877D11002C1DA9 /* THLLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLLocation.h; sourceTree = "<group>"; };
 		2133BFCD1B877D11002C1DA9 /* THLLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLLocation.m; sourceTree = "<group>"; };
+		2133C9BD1C3329BA0020083A /* THLWaitlistEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLWaitlistEntry.h; sourceTree = "<group>"; };
+		2133C9BE1C3329BA0020083A /* THLWaitlistEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLWaitlistEntry.m; sourceTree = "<group>"; };
 		213CE1111BB8D22D00054A2C /* THLLocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLLocationService.h; sourceTree = "<group>"; };
 		213CE1121BB8D22D00054A2C /* THLLocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLLocationService.m; sourceTree = "<group>"; };
 		213CE1141BB8D23900054A2C /* THLLocationServiceInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLLocationServiceInterface.h; sourceTree = "<group>"; };
@@ -1745,6 +1748,8 @@
 				C85EE3C31C1CDE140008C14B /* THLPurchasedPerkItem.m */,
 				2133BFC01B877C08002C1DA9 /* THLUser.h */,
 				2133BFC11B877C08002C1DA9 /* THLUser.m */,
+				2133C9BD1C3329BA0020083A /* THLWaitlistEntry.h */,
+				2133C9BE1C3329BA0020083A /* THLWaitlistEntry.m */,
 			);
 			path = "Parse Models";
 			sourceTree = "<group>";
@@ -3268,6 +3273,7 @@
 				798D7EB41BF2CCD4001D4593 /* THLUserProfileViewController.m in Sources */,
 				79B959341BE5821B00B87799 /* THLGuestlistReviewViewController.m in Sources */,
 				2121736E1BB34DD3007D817A /* THLStarRatingView.m in Sources */,
+				2133C9BF1C3329BA0020083A /* THLWaitlistEntry.m in Sources */,
 				2108A8881B8BBF5B00B725F6 /* THLDependencyManager.m in Sources */,
 				2110059F1B8A351000A540C6 /* THLEventDiscoveryWireframe.m in Sources */,
 				79CE01E31C0A69D40047E6FA /* THLDashboardTicketCell.m in Sources */,
