@@ -13,6 +13,7 @@
 #import "THLGuestlistReviewCellViewModel.h"
 #import "THLActionContainerView.h"
 #import "THLConfirmationPopupView.h"
+#import "THLMenuView.h"
 
 #import "THLAppearanceConstants.h"
 #import "UIScrollView+SVPullToRefresh.h"
@@ -32,6 +33,8 @@ UICollectionViewDelegateFlowLayout
 @property (nonatomic, strong) THLActionBarButton *actionBarButton;
 @property (nonatomic, strong) THLConfirmationPopupView *confirmationPopupView;
 @property (nonatomic, strong) UIBarButtonItem *dismissButton;
+@property (nonatomic, strong) UIBarButtonItem *menuButton;
+@property (nonatomic, strong) THLMenuView *menuView;
 @end
 
 @implementation THLGuestlistReviewViewController
@@ -62,10 +65,35 @@ UICollectionViewDelegateFlowLayout
 - (void)constructView {
     _collectionView = [self newCollectionView];
     _dismissButton = [self newBackBarButtonItem];
+    _menuButton = [self newMenuBarButtonItem];
 //    _actionContainerView = [self newActionContainerView];
     _actionBarButton = [self newActionBarButton];
     _confirmationPopupView = [self newConfirmationPopupView];
 }
+
+
+- (void)showGuestlistMenuView {
+    _menuView = [THLMenuView new];
+    
+    WEAKSELF();
+    RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [WSELF hideGuestlistMenuView];
+        return [RACSignal empty];
+    }];
+
+    [_menuView setDismissCommand:dismissCommand];
+    
+    [self.parentViewController.view addSubview:_menuView];
+    [_menuView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.bottom.insets(kTHLEdgeInsetsNone());
+    }];
+    [self.parentViewController.view bringSubviewToFront:_menuView];
+}
+
+- (void)hideGuestlistMenuView {
+    [_menuView removeFromSuperview];
+}
+
 
 - (void)layoutView {
     [self.view addSubviews:@[_collectionView, _actionBarButton]];
@@ -74,6 +102,7 @@ UICollectionViewDelegateFlowLayout
     self.automaticallyAdjustsScrollViewInsets = YES;
     
     self.navigationItem.leftBarButtonItem = _dismissButton;
+    self.navigationItem.rightBarButtonItem = _menuButton;
     self.navigationItem.title = @"YOUR PARTY";
     
     WEAKSELF();
@@ -95,6 +124,7 @@ UICollectionViewDelegateFlowLayout
     }];
     
     RAC(self.dismissButton, rac_command) = RACObserve(self, dismissCommand);
+    
 
     [RACObserve(self, showRefreshAnimation) subscribeNext:^(NSNumber *val) {
         BOOL shouldAnimate = [val boolValue];
@@ -201,6 +231,20 @@ UICollectionViewDelegateFlowLayout
       kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
                         forState:UIControlStateNormal];
     return item;
+}
+
+- (UIBarButtonItem *)newMenuBarButtonItem {
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(showGuestlistMenuView)];
+    [item setTitleTextAttributes:
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
+                        forState:UIControlStateNormal];
+    return item;
+
+}
+
+- (void)showMenuBtnClicked {
+    
 }
 
 //- (THLActionContainerView *)newActionContainerView {

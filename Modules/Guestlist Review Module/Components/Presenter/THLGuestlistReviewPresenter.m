@@ -10,6 +10,7 @@
 #import "THLGuestlistReviewWireframe.h"
 #import "THLGuestlistReviewInteractor.h"
 #import "THLGuestlistReviewView.h"
+#import "THLMenuView.h"
 
 #import "THLViewDataSource.h"
 #import "THLGuestlistInviteEntity.h"
@@ -25,6 +26,7 @@
 THLGuestlistReviewInteractorDelegate
 >
 @property (nonatomic, weak) id<THLGuestlistReviewView> view;
+@property (nonatomic, strong) THLMenuView *menuView;
 
 @property (nonatomic) BOOL refreshing;
 @property (nonatomic) THLGuestlistReviewerStatus reviewerStatus;
@@ -111,7 +113,7 @@ THLGuestlistReviewInteractorDelegate
     [_view setDeclineCommand:declineCommand];
     [_view setDecisionCommand:decisionCommand];
     [_view setRefreshCommand:refreshCommand];
-
+    
 //    TODO: Index Path Logic for Check Ins
     //    RACCommand *selectedIndexPathCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
     //        [self handleIndexPathSelection:(NSIndexPath *)input];

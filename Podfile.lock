@@ -3,7 +3,7 @@ PODS:
     - APAddressBook/Core (= 0.2.1)
   - APAddressBook/Core (0.2.1)
   - AutoCoding (2.2.1)
-  - BFKit (1.7.1)
+  - BFKit (1.8.0)
   - BlocksKit (2.2.5):
     - BlocksKit/All (= 2.2.5)
   - BlocksKit/All (2.2.5):
@@ -19,12 +19,12 @@ PODS:
   - BlocksKit/UIKit (2.2.5):
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
-  - Bolts (1.4.0):
-    - Bolts/AppLinks (= 1.4.0)
-    - Bolts/Tasks (= 1.4.0)
-  - Bolts/AppLinks (1.4.0):
+  - Bolts (1.5.0):
+    - Bolts/AppLinks (= 1.5.0)
+    - Bolts/Tasks (= 1.5.0)
+  - Bolts/AppLinks (1.5.0):
     - Bolts/Tasks
-  - Bolts/Tasks (1.4.0)
+  - Bolts/Tasks (1.5.0)
   - CocoaLumberjack (2.2.0):
     - CocoaLumberjack/Default (= 2.2.0)
     - CocoaLumberjack/Extensions (= 2.2.0)
@@ -33,30 +33,28 @@ PODS:
     - CocoaLumberjack/Core
   - CocoaLumberjack/Extensions (2.2.0):
     - CocoaLumberjack/Default
-  - Crashlytics (3.4.0):
+  - Crashlytics (3.4.1):
     - Fabric (~> 1.6.0)
   - DateTools (1.7.0)
-  - Digits (1.12.1):
-    - TwitterCore (= 1.12.1)
-  - DZNEmptyDataSet (1.7.2)
+  - Digits (1.14.6):
+    - TwitterCore (= 1.14.6)
+  - DZNEmptyDataSet (1.7.3)
   - EKAlgorithms (0.2)
-  - Fabric (1.6.0):
-    - Fabric/Base (= 1.6.0)
-  - Fabric/Base (1.6.0)
-  - FBSDKCoreKit (4.7.1):
+  - Fabric (1.6.1)
+  - FBSDKCoreKit (4.8.0):
     - Bolts (~> 1.1)
-    - FBSDKCoreKit/arc (= 4.7.1)
-    - FBSDKCoreKit/no-arc (= 4.7.1)
-  - FBSDKCoreKit/arc (4.7.1):
+    - FBSDKCoreKit/arc (= 4.8.0)
+    - FBSDKCoreKit/no-arc (= 4.8.0)
+  - FBSDKCoreKit/arc (4.8.0):
     - Bolts (~> 1.1)
-  - FBSDKCoreKit/no-arc (4.7.1):
+  - FBSDKCoreKit/no-arc (4.8.0):
     - Bolts (~> 1.1)
     - FBSDKCoreKit/arc
-  - FBSDKLoginKit (4.7.1):
+  - FBSDKLoginKit (4.8.0):
     - FBSDKCoreKit
-  - FBSDKShareKit (4.7.1):
+  - FBSDKShareKit (4.8.0):
     - FBSDKCoreKit
-  - FLEX (2.1.1)
+  - FLEX (2.2.0)
   - FLKAutoLayout (0.2.1)
   - FormatterKit (1.8.0):
     - FormatterKit/AddressFormatter (= 1.8.0)
@@ -79,25 +77,26 @@ PODS:
   - FormatterKit/URLRequestFormatter (1.8.0)
   - GCDObjC (0.2.0)
   - Gizou (0.1.3)
+  - GKFadeNavigationController (0.5.2)
   - iCarousel (1.8.2)
-  - libPhoneNumber-iOS (0.8.8)
+  - libPhoneNumber-iOS (0.8.10)
   - LinqToObjectiveC (2.0.0)
-  - LMGeocoder (1.0.3)
-  - Masonry (0.6.3)
-  - MJRefresh (2.5.0)
+  - LMGeocoder (1.0.4)
+  - Masonry (0.6.4)
+  - MJRefresh (3.0.8)
   - NUI (0.5.5):
     - NUIParse
-  - NUIParse (1.2.1)
+  - NUIParse (1.3)
   - ObjectiveSugar (1.1.0)
   - OCMock (3.1.2)
   - ORStackView (3.0.1):
     - FLKAutoLayout (~> 0.2)
-  - Parse (1.9.1):
-    - Bolts/Tasks (>= 1.4.0)
-  - ParseFacebookUtilsV4 (1.9.0):
-    - Bolts/Tasks (>= 1.3.0)
-    - FBSDKCoreKit (~> 4.7)
-    - FBSDKLoginKit (~> 4.7)
+  - Parse (1.11.0):
+    - Bolts/Tasks (~> 1.5)
+  - ParseFacebookUtilsV4 (1.9.1):
+    - Bolts/Tasks (>= 1.5)
+    - FBSDKCoreKit (~> 4.8)
+    - FBSDKLoginKit (~> 4.8)
     - Parse (~> 1.9)
   - ReactiveCocoa (2.5):
     - ReactiveCocoa/UI (= 2.5)
@@ -107,7 +106,7 @@ PODS:
   - ReactiveCocoa/UI (2.5):
     - ReactiveCocoa/Core
   - ReflectableEnum (0.1.1)
-  - Reveal-iOS-SDK (1.6.1)
+  - Reveal-iOS-SDK (1.6.2)
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
@@ -117,14 +116,14 @@ PODS:
   - SVPullToRefresh (0.4.1)
   - THContactPicker (1.2)
   - TOMSMorphingLabel (0.5.1)
-  - TwitterCore (1.12.1):
+  - TwitterCore (1.14.6):
     - Fabric
-  - Typhoon (3.4.1):
-    - Typhoon/no-arc (= 3.4.1)
-  - Typhoon/no-arc (3.4.1)
-  - YapDatabase (2.7.4):
-    - YapDatabase/standard (= 2.7.4)
-  - YapDatabase/standard (2.7.4):
+  - Typhoon (3.4.4):
+    - Typhoon/no-arc (= 3.4.4)
+  - Typhoon/no-arc (3.4.4)
+  - YapDatabase (2.7.7):
+    - YapDatabase/standard (= 2.7.7)
+  - YapDatabase/standard (2.7.7):
     - CocoaLumberjack (~> 2)
   - YLMoment (0.2.0)
 
@@ -148,6 +147,7 @@ DEPENDENCIES:
   - FormatterKit (~> 1.8)
   - GCDObjC (~> 0.2)
   - Gizou
+  - GKFadeNavigationController
   - iCarousel (~> 1.8)
   - libPhoneNumber-iOS (~> 0.8)
   - LinqToObjectiveC (~> 2.0)
@@ -178,40 +178,41 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   APAddressBook: 90c0fb07579a47e10ef1a2344e23cfd35f388bec
   AutoCoding: b47e528426c84346371dd532b8e6458929e4da34
-  BFKit: 3ba74d912325cc8a6bf83ebe1e7e3d9bdc87e817
+  BFKit: f9edb431d57bcd01568a5aebbfae2cd9976f03c2
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
-  Bolts: 0e9bce58b9b9f5e8a7a4d47b16d2fabec289072b
+  Bolts: 722ab9a4f8b50fc4ed1b9998a5a7a2b3f16d80b4
   CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
-  Crashlytics: 1ee87895c37472eb3f01f409ea1654a464d2f8d4
+  Crashlytics: 41574a245bc6ae10c55d57f385ebd2004e5bee05
   DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
-  Digits: 197c120e044fef0634d3abcf4fc7325351911484
-  DZNEmptyDataSet: 0ec00bfc230d7450997b60c127afdd0b9f24f3b6
+  Digits: 57b958f1e19907b70645fcd25f97f14175ff2438
+  DZNEmptyDataSet: dd7cca17c1d07dfa78956859b1e70a52505678ef
   EKAlgorithms: 83488651734ba3a63956fcb783b10e82d2ec3388
-  Fabric: d737eda3a26ac940a5430230eedb35f16b226131
-  FBSDKCoreKit: 9141b70960a37930850370495fe565f4a27ac141
-  FBSDKLoginKit: c11ed3c2833472db3bb4a4aecf27af4a6f69b173
-  FBSDKShareKit: 213adf63e073f41a346b0e7a689805880dc5150e
-  FLEX: 27b768fcae23a313a1eb115076d429180ca9b472
+  Fabric: bf0ceb04e7c924090efc5f8c55e4fbcca189e0a0
+  FBSDKCoreKit: 66a935d17b6e00b6b64e604f2eb9b72c9ab7deb8
+  FBSDKLoginKit: d893fcbb98d854496925e9ff73c67b896982d3c4
+  FBSDKShareKit: e7577ee3adf80fc04fb656dd133fbb522250672b
+  FLEX: bc8a4fb887ed5d3cdf7c2f3bd665f7bb1647cc58
   FLKAutoLayout: 9db6b30c2008d230da608e62c607b11c23b942e6
   FormatterKit: bddde83e054edf9d9ee14f9de3b3a5103db256f4
   GCDObjC: adcd9941029e3628de539347d3a6777470a65998
   Gizou: 93853bf634a9382c257795db052aa9a75e972c43
+  GKFadeNavigationController: 87dec5159db580ee1f2ba263720045bec50404ee
   iCarousel: 67c8a43da5a46795b56aadfc96cd36a16f6149b2
-  libPhoneNumber-iOS: fe877b7c44c270a9da2082d3e2892d5316f6a2f9
+  libPhoneNumber-iOS: 7bfd00f843fdcd82b5182b463e8eb3b27579f41d
   LinqToObjectiveC: 768f98c62d5b57cb6bdb7ab869e33d0a7a2da29c
-  LMGeocoder: 100572f9e572a26d3506ee0604d6629bea391767
-  Masonry: ff105a956abcd19a618b2028b121cb638d7a8e2f
-  MJRefresh: 4bce3b592ae052ff89473b2907278bf8a80abdd3
+  LMGeocoder: a0f635f948b0ca420d8d338e54886744cdcb215d
+  Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
+  MJRefresh: fafde8f18f4afd66b434331a9beb67a6c0264056
   NUI: 53de7278003235deb2a375fe6f04c7a3aa3e49eb
-  NUIParse: 9b6d5a6b782dc654ac6c846d623885080306f07f
+  NUIParse: 2e3885ba7807477266396292626bd387d34c2338
   ObjectiveSugar: a6a25f23d657c19df0a0b972466d5b5ca9f5295c
   OCMock: a10ea9f0a6e921651f96f78b6faee95ebc813b92
   ORStackView: a1bb52748cd0ae29891c140baf22ff8972fb363c
-  Parse: 54a965c8c19a6dde90284ab654dbcc77ef8c001b
-  ParseFacebookUtilsV4: aadebfaaaf4a45bf0a0992863bf48c8fc49189e3
+  Parse: 886af46a0a677402f6374bb97ac212e795f70afe
+  ParseFacebookUtilsV4: eab9b4ade12f0800b4d30f6b808bca55ce17a0e9
   ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
   ReflectableEnum: bf9d36f8c35122242125140a22b8921d071989aa
-  Reveal-iOS-SDK: ceae964076cebe3efe63e5e9abe3152efce46aa8
+  Reveal-iOS-SDK: e2250b3c155bcfac53ae223ddc1f76d08f206c33
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   SLPagingView: ba9bb6102cb318ce56f23d0a7e49a46ddcdad7e3
   SSDataSources: b01170fb23b82acf0649194e9189b0bf5f702681
@@ -219,9 +220,9 @@ SPEC CHECKSUMS:
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
   THContactPicker: e723f7c6ab6e1d6d10d59d618322ab8bfcb00365
   TOMSMorphingLabel: 3e88a2bf5257f8993ebc51fb3109187a0bfb2c4d
-  TwitterCore: 2b1bdd58dfba3f21b416d2a0d1ca74173e3b0eea
-  Typhoon: b754e413d64c4182fcf76e22aacd5f9a66e34f2f
-  YapDatabase: 41d80eefb2959fc7cf064c487f2bfa3cf68a5704
+  TwitterCore: 5e9b2d066ceeef53fe611c0c4436cb700f1ed620
+  Typhoon: e937c62b9048f73a93c1aa94f00627d97cecd588
+  YapDatabase: a7a1ae3e0f89c319e3b22615c2351987fbbdbded
   YLMoment: af44d9d402790049e5490fa6eae9585b89b4090b
 
 COCOAPODS: 0.39.0
