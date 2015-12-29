@@ -64,7 +64,7 @@ static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
     }];
     
     [_separatorView makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.offset(0);
+        make.left.insets(kTHLEdgeInsetsSuperHigh());
         make.size.equalTo(CGSizeMake(kTHLRedeemPerkViewSeparatorViewWidth, kTHLRedeemPerkViewSeparatorViewHeight));
         make.bottom.equalTo(WSELF.addGuestsButton.mas_top).insets(kTHLEdgeInsetsHigh());
         //        make.left.right.insets(kTHLEdgeInsetsNone());
