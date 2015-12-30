@@ -66,6 +66,12 @@ pod 'DZNEmptyDataSet'
 pod "GKFadeNavigationController"
 end
 
+#Phone Calls
+pod "PhoneKit"
+pod 'AFNetworking', '~> 3.0'
+
+
+
 target 'HypeTests' do
 pod 'OCMock', '3.1.2'
 pod "Gizou"

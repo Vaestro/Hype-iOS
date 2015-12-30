@@ -11,8 +11,8 @@
 #import "THLGuestlistReviewInteractor.h"
 #import "THLGuestlistReviewView.h"
 #import "THLMenuView.h"
-#import "THLVenueDetailsView.h"
 #import "THLAppearanceConstants.h"
+#import "Parse.h"
 
 #import "THLViewDataSource.h"
 #import "THLGuestlistInviteEntity.h"
@@ -23,14 +23,13 @@
 #import "THLEventEntity.h"
 #import "THLUser.h"
 
+
 @interface THLGuestlistReviewPresenter()
 <
 THLGuestlistReviewInteractorDelegate
 >
 @property (nonatomic, weak) id<THLGuestlistReviewView> view;
 @property (nonatomic, strong) THLMenuView *menuView;
-@property (nonatomic, strong) THLVenueDetailsView *venueDetailsView;
-
 
 @property (nonatomic) BOOL refreshing;
 @property (nonatomic) THLGuestlistReviewerStatus reviewerStatus;
@@ -173,10 +172,18 @@ THLGuestlistReviewInteractorDelegate
         return [RACSignal empty];
     }];
     
+    RACCommand *callHostCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+//        [WSELF.view hideGuestlistMenuView:menuView];
+        [WSELF.view handleCallAction];
+        return [RACSignal empty];
+    }];
+    
+    
     [_menuView setDismissCommand:dismissCommand];
     [_menuView setMenuAddGuestsCommand:addGuestsCommand];
     [_menuView setMenuLeaveGuestCommand:leaveGuestlistCommand];
     [_menuView setMenuEventDetailsCommand:showEventDetailsCommand];
+    [_menuView setMenuContactHostCommand:callHostCommand];
     
 }
 
@@ -196,7 +203,8 @@ THLGuestlistReviewInteractorDelegate
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil
                                                                    message:message
                                                             preferredStyle:UIAlertControllerStyleAlert];
-
+    
+    
     for(UIAlertAction *action in actions) {
         [alert addAction:action];
     }
@@ -242,7 +250,6 @@ THLGuestlistReviewInteractorDelegate
 }
 
 #pragma mark - Event Handling
-
 - (void)handleDismissAction {
     [_wireframe dismissInterface];
 }

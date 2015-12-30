@@ -94,6 +94,7 @@ static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
     RAC(_addGuestsButton, rac_command) = RACObserve(self , menuAddGuestsCommand);
     RAC(_leaveGuestlistButton, rac_command) = RACObserve(self, menuLeaveGuestCommand);
     RAC(_eventDetailsButton, rac_command) = RACObserve(self, menuEventDetailsCommand);
+    RAC(_contactHostButton, rac_command) = RACObserve(self, menuContactHostCommand);
 }
 
 #pragma mark - constructors

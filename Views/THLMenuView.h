@@ -14,4 +14,5 @@
 @property (nonatomic, strong) RACCommand *menuAddGuestsCommand;
 @property (nonatomic, strong) RACCommand *menuLeaveGuestCommand;
 @property (nonatomic, strong) RACCommand *menuEventDetailsCommand;
+@property (nonatomic, strong) RACCommand *menuContactHostCommand;
 @end

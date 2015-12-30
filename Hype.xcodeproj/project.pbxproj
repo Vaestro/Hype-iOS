@@ -198,6 +198,7 @@
 		79CE01DF1C0A604B0047E6FA /* THLDashboardNotificationSectionTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CE01DE1C0A604B0047E6FA /* THLDashboardNotificationSectionTitleCell.m */; };
 		79CE01E31C0A69D40047E6FA /* THLDashboardTicketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CE01E21C0A69D40047E6FA /* THLDashboardTicketCell.m */; };
 		79CE01E61C0A69EC0047E6FA /* THLDashboardTicketCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CE01E51C0A69EC0047E6FA /* THLDashboardTicketCellViewModel.m */; };
+		99FCACEE76226A356043AEDA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B94DBD0CFEB5874DC84569DE /* libPods.a */; };
 		9DE048564BB3FAE7AF277A3B /* libPods-HypeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FB9B71E9A7DBD2DAA9915571 /* libPods-HypeTests.a */; };
 		C82D87BF1C25C7E300116328 /* THLConfirmationView.m in Sources */ = {isa = PBXBuildFile; fileRef = C82D87BE1C25C7E300116328 /* THLConfirmationView.m */; };
 		C82D87C31C31CC2200116328 /* THLMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = C82D87C21C31CC2200116328 /* THLMenuView.m */; };
@@ -670,6 +671,7 @@
 		8ABFDDE0788B42622FD1EB07 /* libPods-HypeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HypeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		90D6C18976DD6E30FF5CFE5B /* Pods-Hype.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hype.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hype/Pods-Hype.release.xcconfig"; sourceTree = "<group>"; };
 		A63D387799ADEA3D66DC04C6 /* libPods-Hype.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hype.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B94DBD0CFEB5874DC84569DE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C82D87BD1C25C7E300116328 /* THLConfirmationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLConfirmationView.h; sourceTree = "<group>"; };
 		C82D87BE1C25C7E300116328 /* THLConfirmationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLConfirmationView.m; sourceTree = "<group>"; };
 		C82D87C11C31CC2200116328 /* THLMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMenuView.h; sourceTree = "<group>"; };
@@ -746,6 +748,7 @@
 				790B38EF1C0375B500CB2362 /* libsqlite3.dylib in Frameworks */,
 				794DCCB71BF555150037A03D /* Accelerate.framework in Frameworks */,
 				03DB8B7272D645FF53789D4E /* libPods-Hype.a in Frameworks */,
+				99FCACEE76226A356043AEDA /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2841,6 +2844,7 @@
 				FB9B71E9A7DBD2DAA9915571 /* libPods-HypeTests.a */,
 				7465E16579C35905935D6E3A /* libPods-Hype.a */,
 				8ABFDDE0788B42622FD1EB07 /* libPods-HypeTests.a */,
+				B94DBD0CFEB5874DC84569DE /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -3082,7 +3086,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hype/Pods-Hype-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
