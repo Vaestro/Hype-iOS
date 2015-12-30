@@ -33,5 +33,10 @@ typedef NS_OPTIONS(NSInteger, THLGuestlistReviewerStatus) {
 @property (nonatomic, strong) RACCommand *decisionCommand;
 @property (nonatomic, strong) RACCommand *refreshCommand;
 @property (nonatomic, strong) RACCommand *dismissCommand;
+@property (nonatomic, strong) RACCommand *showMenuCommand;
+@property (nonatomic, strong) RACCommand *menuAddCommand;
+- (void)showGuestlistMenuView:(UIView *)menuView;
+- (void)hideGuestlistMenuView:(UIView *)menuView;
+
 - (void)confirmActionWithMessage:(NSString *)text acceptTitle:(NSString *)acceptTitle declineTitle:(NSString *)declineTitle;
 @end

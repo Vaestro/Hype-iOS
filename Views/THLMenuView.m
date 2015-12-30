@@ -18,7 +18,6 @@ static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
 @property (nonatomic, strong) UIButton *addGuestsButton;
 @property (nonatomic, strong) UIButton *leaveGuestlistButton;
 @property (nonatomic, strong) UIButton *eventDetailsButton;
-@property (nonatomic, strong) UIButton *venueInfoButton;
 @property (nonatomic, strong) UIButton *contactHostButton;
 @property (nonatomic, strong) UIButton *cancelButton;
 @end
@@ -40,7 +39,6 @@ static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
     _addGuestsButton = [self newButtonwithTitle:@"Add Guests"];
     _leaveGuestlistButton = [self newButtonwithTitle:@"Leave Guestlist"];
     _eventDetailsButton = [self newButtonwithTitle:@"View Event Details"];
-    _venueInfoButton = [self newButtonwithTitle:@"View Venue Info"];
     _contactHostButton = [self newButtonwithTitle:@"Contact Host"];
     _cancelButton = [self newButtonwithTitle:@"Cancel"];
     _separatorView = [self newSeparatorView];
@@ -50,7 +48,7 @@ static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
     self.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     self.tintColor = [UIColor blackColor];
     
-    [self addSubviews:@[_nameLabel, _addGuestsButton, _leaveGuestlistButton, _eventDetailsButton, _venueInfoButton, _contactHostButton, _cancelButton, _separatorView]];
+    [self addSubviews:@[_nameLabel, _addGuestsButton, _leaveGuestlistButton, _eventDetailsButton, _contactHostButton, _cancelButton, _separatorView]];
     
     [_leaveGuestlistButton makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.offset(0);
@@ -80,13 +78,8 @@ static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
         make.left.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
-    [_venueInfoButton makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(WSELF.eventDetailsButton.mas_bottom).insets(kTHLEdgeInsetsHigh());
-        make.left.insets(kTHLEdgeInsetsSuperHigh());
-    }];
-
     [_contactHostButton makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(WSELF.venueInfoButton.mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.top.equalTo(WSELF.eventDetailsButton.mas_bottom).insets(kTHLEdgeInsetsHigh());
         make.left.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
@@ -98,6 +91,9 @@ static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
 
 - (void)bindView {
     RAC(_cancelButton, rac_command) = RACObserve(self, dismissCommand);
+    RAC(_addGuestsButton, rac_command) = RACObserve(self , menuAddGuestsCommand);
+    RAC(_leaveGuestlistButton, rac_command) = RACObserve(self, menuLeaveGuestCommand);
+    RAC(_eventDetailsButton, rac_command) = RACObserve(self, menuEventDetailsCommand);
 }
 
 #pragma mark - constructors

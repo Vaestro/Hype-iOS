@@ -11,6 +11,8 @@
 #import "THLGuestlistReviewInteractor.h"
 #import "THLGuestlistReviewView.h"
 #import "THLMenuView.h"
+#import "THLVenueDetailsView.h"
+#import "THLAppearanceConstants.h"
 
 #import "THLViewDataSource.h"
 #import "THLGuestlistInviteEntity.h"
@@ -27,6 +29,8 @@ THLGuestlistReviewInteractorDelegate
 >
 @property (nonatomic, weak) id<THLGuestlistReviewView> view;
 @property (nonatomic, strong) THLMenuView *menuView;
+@property (nonatomic, strong) THLVenueDetailsView *venueDetailsView;
+
 
 @property (nonatomic) BOOL refreshing;
 @property (nonatomic) THLGuestlistReviewerStatus reviewerStatus;
@@ -114,6 +118,18 @@ THLGuestlistReviewInteractorDelegate
     [_view setDecisionCommand:decisionCommand];
     [_view setRefreshCommand:refreshCommand];
     
+    
+    THLMenuView *menuView = [THLMenuView new];
+    
+    RACCommand *showMenuCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [WSELF.view showGuestlistMenuView:menuView];
+        return [RACSignal empty];
+    }];
+    
+    [_view setShowMenuCommand:showMenuCommand];
+    
+    [self configureMenuView:menuView];
+    
 //    TODO: Index Path Logic for Check Ins
     //    RACCommand *selectedIndexPathCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
     //        [self handleIndexPathSelection:(NSIndexPath *)input];
@@ -122,6 +138,75 @@ THLGuestlistReviewInteractorDelegate
     //
     //    [view setSelectedIndexPathCommand:selectedIndexPathCommand];
 }
+
+- (void)configureMenuView:(THLMenuView *)menuView {
+    
+    self.menuView = menuView;
+    
+    WEAKSELF();
+    RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [WSELF.view hideGuestlistMenuView:menuView];
+        return [RACSignal empty];
+    }];
+    
+    RACCommand *addGuestsCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [WSELF.view hideGuestlistMenuView:menuView];
+        [WSELF handleAddGuestsAction];
+        return [RACSignal empty];
+    }];
+    
+    RACCommand *leaveGuestlistCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        if (self.reviewerStatus == THLGuestlistReviewerStatusOwner) {
+            [WSELF.view hideGuestlistMenuView:menuView];
+            [WSELF partyLeaderError];
+        } else {
+            [WSELF.view hideGuestlistMenuView:menuView];
+            [WSELF handleDeclineAction];
+            [WSELF handleDismissAction];
+        }
+        return [RACSignal empty];
+    }];
+    
+    RACCommand *showEventDetailsCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [WSELF.view hideGuestlistMenuView:menuView];
+        [WSELF handleDismissAction];
+        return [RACSignal empty];
+    }];
+    
+    [_menuView setDismissCommand:dismissCommand];
+    [_menuView setMenuAddGuestsCommand:addGuestsCommand];
+    [_menuView setMenuLeaveGuestCommand:leaveGuestlistCommand];
+    [_menuView setMenuEventDetailsCommand:showEventDetailsCommand];
+    
+}
+
+- (void)partyLeaderError {
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Ok"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:nil];
+    
+    NSString *message = NSStringWithFormat(@"A party leader can't leave their own guestlist");
+    
+    [self showAlertViewWithMessage:message withAction:[[NSArray alloc] initWithObjects:cancelAction, nil]];
+    
+}
+
+- (void)showAlertViewWithMessage:(NSString *)message withAction:(NSArray<UIAlertAction *>*)actions {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+
+    for(UIAlertAction *action in actions) {
+        [alert addAction:action];
+    }
+    
+    [(UIViewController *)_view presentViewController:alert animated:YES completion:nil];
+}
+
+
+
+
 
 //TODO: Create Configure Review Options
 - (void)manageReviewer {
