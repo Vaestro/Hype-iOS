@@ -99,11 +99,11 @@ UICollectionViewDelegateFlowLayout
 
 
 # pragma mark - phone kit
-- (void)handleCallAction {
+- (void)handleCallActionWithCallerdId:(NSString *)twilioNumber toHostNumber:(NSString *)hostNumber {
     
     [self presentViewController:self.callViewController animated:YES completion:nil];
-    [PKTPhone sharedPhone].callerId = @"1 844-214-7467";
-    [[PKTPhone sharedPhone] call:@"1 917-868-6312"];
+    [PKTPhone sharedPhone].callerId = twilioNumber;
+    [[PKTPhone sharedPhone] call:hostNumber];
 }
 
 - (void)setupPhoneKitWithToken:(NSString *)token

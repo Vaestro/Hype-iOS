@@ -141,6 +141,7 @@
         entity.firstName = user.firstName;
         entity.lastName = user.lastName;
         entity.phoneNumber = user.phoneNumber;
+        entity.twilioNumber = user.twilioNumber;
         entity.imageURL = [NSURL URLWithString:user.image.url];
         entity.sex = user.sex;
         entity.rating = user.rating;

@@ -22,6 +22,7 @@
 #import "THLPromotionEntity.h"
 #import "THLEventEntity.h"
 #import "THLUser.h"
+#import "THLHostEntity.h"
 
 
 @interface THLGuestlistReviewPresenter()
@@ -174,7 +175,9 @@ THLGuestlistReviewInteractorDelegate
     
     RACCommand *callHostCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
 //        [WSELF.view hideGuestlistMenuView:menuView];
-        [WSELF.view handleCallAction];
+        NSString *twilioNumber = _guestlistInviteEntity.guestlist.promotion.host.twilioNumber;
+        NSString *hostNumber = _guestlistInviteEntity.guestlist.promotion.host.phoneNumber;
+        [WSELF.view handleCallActionWithCallerdId:twilioNumber toHostNumber:hostNumber];
         return [RACSignal empty];
     }];
     
@@ -188,7 +191,6 @@ THLGuestlistReviewInteractorDelegate
 }
 
 - (void)partyLeaderError {
-    
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Ok"
                                                            style:UIAlertActionStyleDefault
                                                          handler:nil];
