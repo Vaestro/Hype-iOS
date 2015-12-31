@@ -20,6 +20,8 @@
 - (void)interactor:(THLGuestlistReviewInteractor *)interactor didUpdateGuestlistInvites:(NSError *)error;
 - (void)interactor:(THLGuestlistReviewInteractor *)interactor didUpdateGuestlistInviteResponse:(NSError *)error to:(THLStatus)response;
 - (void)interactor:(THLGuestlistReviewInteractor *)interactor didUpdateGuestlistReviewStatus:(NSError *)error to:(THLStatus)reviewStatus;
+- (void)interactor:(THLGuestlistReviewInteractor *)interactor didGetToken:(NSString *)token;
+
 @end
 
 @interface THLGuestlistReviewInteractor : NSObject
@@ -41,4 +43,5 @@
 //- (void)updateGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite withCheckInStatus:(BOOL)checkInStatus;
 - (void)updateGuestlist:(THLGuestlistEntity *)guestlistEntity withReviewStatus:(THLStatus)reviewStatus;
 - (void)checkInGuests;
+- (void)generateToken;
 @end

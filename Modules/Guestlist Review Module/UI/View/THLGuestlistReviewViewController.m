@@ -27,6 +27,7 @@
 #import "PKTPhone.h"
 #import "PKTCallViewController.h"
 #import "NSString+PKTHelpers.h"
+#import "Parse.h"
 
 
 #define kServerBaseURL @"https://vast-cliffs-6190.herokuapp.com"
@@ -63,6 +64,7 @@ UICollectionViewDelegateFlowLayout
 @synthesize showActivityIndicator = _showActivityIndicator;
 @synthesize reviewerStatus = _reviewerStatus;
 @synthesize popup = _popup;
+@synthesize callToken = _callToken;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -70,16 +72,16 @@ UICollectionViewDelegateFlowLayout
     [self layoutView];
     [self bindView];
 //    [_refreshCommand execute:nil];
-    NSURL *baseURL = [NSURL URLWithString:kServerBaseURL];
-    
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager manager] initWithBaseURL:baseURL];
-    
-    [manager GET:kTokenEndpoint parameters:@{@"clientName": @"demo"} progress:nil success:^(NSURLSessionTask *task, id responseObject) {
-        [self setupPhoneKitWithToken:responseObject[@"token"]];
-        
-    } failure:^(NSURLSessionTask *task, NSError *error) {
-        NSLog(@"error: %@", error);
-    }];
+//    NSURL *baseURL = [NSURL URLWithString:kServerBaseURL];
+//    
+//    AFHTTPSessionManager *manager = [[AFHTTPSessionManager manager] initWithBaseURL:baseURL];
+//    
+//    [manager GET:kTokenEndpoint parameters:@{@"clientName": @"demo"} progress:nil success:^(NSURLSessionTask *task, id responseObject) {
+//        [self setupPhoneKitWithToken:responseObject[@"token"]];
+//        
+//    } failure:^(NSURLSessionTask *task, NSError *error) {
+//        NSLog(@"error: %@", error);
+//    }];
 
 }
 
@@ -100,19 +102,18 @@ UICollectionViewDelegateFlowLayout
 
 # pragma mark - phone kit
 - (void)handleCallActionWithCallerdId:(NSString *)twilioNumber toHostNumber:(NSString *)hostNumber {
-    
+    [self setupPhoneKitWithToken];
     [self presentViewController:self.callViewController animated:YES completion:nil];
     [PKTPhone sharedPhone].callerId = twilioNumber;
     [[PKTPhone sharedPhone] call:hostNumber];
 }
 
-- (void)setupPhoneKitWithToken:(NSString *)token
+- (void)setupPhoneKitWithToken
 {
-    [PKTPhone sharedPhone].capabilityToken = token;
-    NSLog(@"Token has been set with capabilities: %@", [PKTPhone sharedPhone].phoneDevice.capabilities);
-    
-    self.callViewController = [PKTCallViewController new];
-    [PKTPhone sharedPhone].delegate = self.callViewController;
+        [PKTPhone sharedPhone].capabilityToken = _callToken;
+        NSLog(@"Token has been set with capabilities: %@", [PKTPhone sharedPhone].phoneDevice.capabilities);
+        self.callViewController = [PKTCallViewController new];
+        [PKTPhone sharedPhone].delegate = self.callViewController;    
 }
 
 

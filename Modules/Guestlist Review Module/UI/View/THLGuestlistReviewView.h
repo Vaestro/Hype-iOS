@@ -35,6 +35,7 @@ typedef NS_OPTIONS(NSInteger, THLGuestlistReviewerStatus) {
 @property (nonatomic, strong) RACCommand *dismissCommand;
 @property (nonatomic, strong) RACCommand *showMenuCommand;
 @property (nonatomic, strong) RACCommand *menuAddCommand;
+@property (nonatomic, strong) NSString *callToken;
 - (void)showGuestlistMenuView:(UIView *)menuView;
 - (void)hideGuestlistMenuView:(UIView *)menuView;
 - (void)handleCallActionWithCallerdId:(NSString *)twilioNumber toHostNumber:(NSString *)hostNumber;

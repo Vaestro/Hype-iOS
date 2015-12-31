@@ -79,6 +79,16 @@ static NSString *const kTHLGuestlistReviewModuleViewKey = @"kTHLGuestlistReviewM
     }];
 }
 
+- (void)generateToken {
+    WEAKSELF();
+    STRONGSELF();
+    [[_dataManager fetchTokenForCall] continueWithSuccessBlock:^id(BFTask *task) {
+        [SSELF.delegate interactor:SSELF didGetToken:task.result];
+        return nil;
+    }];
+}
+
+
 #pragma mark - Handle Presenter Events
 - (void)updateGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite withResponse:(THLStatus)response {
     WEAKSELF();

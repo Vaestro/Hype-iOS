@@ -62,6 +62,11 @@
     return [_guestlistService updateGuestlist:[THLGuestlist objectWithoutDataWithObjectId:guestlist.objectId] withReviewStatus:reviewStatus];
 }
 
+- (BFTask *)fetchTokenForCall {
+    return [_guestlistService fetchTokenForCall];
+}
+
+
 - (void)dealloc {
     NSLog(@"Destroyed %@", self);
 }
