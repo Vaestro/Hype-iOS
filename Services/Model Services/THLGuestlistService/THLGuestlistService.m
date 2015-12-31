@@ -313,25 +313,4 @@
 - (void)dealloc {
     NSLog(@"Destroyed %@", self);
 }
-
-//----------------------------------------------------
-#pragma mark - generate token for twilio call
-//----------------------------------------------------
-
-- (BFTask *)fetchTokenForCall {
-    BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
-    [PFCloud callFunctionInBackground:@"generateHypeToken"
-                       withParameters:nil
-                                block:^(id token, NSError *error) {
-                                    
-                                    if (!error){
-                                        [completionSource setResult:token];
-                                    }else {
-                                        [completionSource setError:error];
-                                    }
-                                }];
-    return completionSource.task;
-}
-
-
 @end

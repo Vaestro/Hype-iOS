@@ -21,13 +21,13 @@
 - (void)interactor:(THLGuestlistReviewInteractor *)interactor didUpdateGuestlistInviteResponse:(NSError *)error to:(THLStatus)response;
 - (void)interactor:(THLGuestlistReviewInteractor *)interactor didUpdateGuestlistReviewStatus:(NSError *)error to:(THLStatus)reviewStatus;
 - (void)interactor:(THLGuestlistReviewInteractor *)interactor didGetToken:(NSString *)token;
-
 @end
 
 @interface THLGuestlistReviewInteractor : NSObject
 @property (nonatomic, weak) id<THLGuestlistReviewInteractorDelegate> delegate;
 @property (nonatomic, strong) THLGuestlistEntity *guestlistEntity;
 @property (nonatomic, strong) NSArray *guests;
+@property (nonatomic, strong) NSString *callToken;
 
 #pragma mark - Dependencies
 @property (nonatomic, readonly, weak) THLGuestlistReviewDataManager *dataManager;

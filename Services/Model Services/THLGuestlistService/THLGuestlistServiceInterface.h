@@ -72,7 +72,5 @@
 //----------------------------------------------------------------
 - (BFTask *)updateGuestlist:(THLGuestlist *)guestlist withReviewStatus:(THLStatus)reviewStatus;
 
-- (BFTask *)fetchTokenForCall;
-
 
 @end

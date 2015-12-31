@@ -142,6 +142,7 @@ THLGuestlistReviewInteractorDelegate
 - (void)configureMenuView:(THLMenuView *)menuView {
     
     self.menuView = menuView;
+
     
     WEAKSELF();
     RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
@@ -174,7 +175,6 @@ THLGuestlistReviewInteractorDelegate
     }];
     
     RACCommand *callHostCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-//        [WSELF.view hideGuestlistMenuView:menuView];
         [_interactor generateToken];
         return [RACSignal empty];
     }];
