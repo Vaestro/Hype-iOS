@@ -50,6 +50,7 @@ UICollectionViewDelegateFlowLayout
 @synthesize showActivityIndicator = _showActivityIndicator;
 @synthesize reviewerStatus = _reviewerStatus;
 @synthesize popup = _popup;
+@synthesize viewAppeared;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -61,7 +62,12 @@ UICollectionViewDelegateFlowLayout
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [_refreshCommand execute:nil];
+    self.viewAppeared = TRUE;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.viewAppeared = FALSE;
 }
 
 - (void)constructView {

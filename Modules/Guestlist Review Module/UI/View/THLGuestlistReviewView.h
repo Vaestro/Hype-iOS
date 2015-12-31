@@ -35,6 +35,8 @@ typedef NS_OPTIONS(NSInteger, THLGuestlistReviewerStatus) {
 @property (nonatomic, strong) RACCommand *dismissCommand;
 @property (nonatomic, strong) RACCommand *showMenuCommand;
 @property (nonatomic, strong) RACCommand *menuAddCommand;
+@property (nonatomic) BOOL viewAppeared;
+
 - (void)showGuestlistMenuView:(UIView *)menuView;
 - (void)hideGuestlistMenuView:(UIView *)menuView;
 

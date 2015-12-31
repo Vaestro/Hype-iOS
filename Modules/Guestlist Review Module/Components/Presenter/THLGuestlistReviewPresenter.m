@@ -98,6 +98,14 @@ THLGuestlistReviewInteractorDelegate
         [WSELF handleRefreshAction];
         return [RACSignal empty];
     }];
+    
+    [[RACObserve(self.view, viewAppeared) filter:^BOOL(NSNumber *b) {
+        BOOL viewIsAppearing = [b boolValue];
+        return viewIsAppearing == TRUE;
+    }] subscribeNext:^(id x) {
+        [_interactor updateGuestlistInvites];
+    }];
+    
     [RACObserve(self, refreshing) subscribeNext:^(NSNumber *b) {
         BOOL isRefreshing = [b boolValue];
         [WSELF.view setShowRefreshAnimation:isRefreshing];
