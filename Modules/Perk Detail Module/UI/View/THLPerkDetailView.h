@@ -15,9 +15,5 @@
 @property (nonatomic) int credits;
 @property (nonatomic, strong) RACCommand *dismissCommand;
 @property (nonatomic, strong) RACCommand *purchaseCommand;
-- (void)showRedeemPerkView:(UIView *)redeemPerkView;
-- (void)hideRedeemPerkView:(UIView *)redeemPerkView;
-//@property (nonatomic, strong) RACCommand *actionBarButtonCommand;
-//@property (nonatomic) BOOL viewAppeared;
 
 @end

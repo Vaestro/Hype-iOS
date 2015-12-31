@@ -72,6 +72,8 @@ static CGFloat const kTHLEventDetailsPromotionInfoViewImageViewHeight = 150;
     UITextView *textView = THLNUITextView(kTHLNUIDetailTitle);
     [textView setScrollEnabled:NO];
     [textView setEditable:NO];
+    [textView setSelectable:NO];
+
     return textView;
 }
 

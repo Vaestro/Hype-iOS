@@ -9,85 +9,197 @@
 #import "THLConfirmationView.h"
 #import "THLAppearanceConstants.h"
 
-static CGFloat const kTHLRedeemPerkViewSeparatorViewHeight = 1;
+static CGFloat const kTHLRedeemPerkViewSeparatorViewHeight = 0.5;
 static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
 
 
 @interface THLConfirmationView()
-@property (nonatomic, strong) UILabel *nameLabel;
+@property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIImageView *checkIconView;
 @property (nonatomic, strong) UIView *underlineView;
-@property (nonatomic, strong) UILabel *descriptionLabel;
+@property (nonatomic, strong) UILabel *messageLabel;
+@property (nonatomic, strong) UIButton *acceptButton;
+@property (nonatomic, strong) UIButton *declineButton;
+
 @property (nonatomic, strong) UIButton *dismissButton;
+
+@property (nonatomic, strong) UIActivityIndicatorView *activityView;
+
 @end
 
 
 @implementation THLConfirmationView
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]){
+        self.backgroundColor = kTHLNUIPrimaryBackgroundColor;
+        self.tintColor = [UIColor blackColor];
+        self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        self.autoresizesSubviews = YES;
+
         [self constructView];
-        [self layoutView];
         [self bindView];
     }
     return self;
 }
 
+- (void)showWithConfirmation {
+    [self layoutView];
+    
+    // Prepare by adding to the top window.
+    if(!self.superview){
+        NSEnumerator *frontToBackWindows = [[[UIApplication sharedApplication] windows] reverseObjectEnumerator];
+        
+        for (UIWindow *window in frontToBackWindows) {
+            if (window.windowLevel == UIWindowLevelNormal) {
+                [window addSubview:self];
+                
+                break;
+            }
+        }
+    }
+    
+    [self makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.right.left.insets(kTHLEdgeInsetsNone());
+    }];
+}
+
+- (void)showInProgressWithMessage:(NSString *)messageText {
+    self.confirmationMessage = messageText;
+    [self layoutPendingView];
+}
+
+- (void)showSuccessWithTitle:(NSString *)titleText Message:(NSString *)messageText {
+    self.confirmationTitle = titleText;
+    self.confirmationMessage = messageText;
+    [self layoutSuccessView];
+}
+
+- (void)dismiss {
+    [self removeFromSuperview];
+}
 
 - (void)constructView {
-    _nameLabel = [self newNameLabel];
+    _titleLabel = [self newTitleLabel];
     _checkIconView = [self newCheckIconView];
-    _underlineView = [self newUnderlineView];
-    _descriptionLabel = [self newDescriptionLabel];
+    _messageLabel = [self newMessageLabel];
+    _acceptButton = [self newAcceptButton];
+    _declineButton = [self newDeclineButton];
+
     _dismissButton = [self newDismissButton];
+    _underlineView = [self newUnderlineView];
     
+    _activityView = [self newActivityView];
 }
 
 - (void)layoutView {
-    self.backgroundColor = kTHLNUIPrimaryBackgroundColor;
-    self.tintColor = [UIColor blackColor];
-    
-    [self addSubviews:@[_nameLabel, _checkIconView, _underlineView, _descriptionLabel, _dismissButton]];
+    [self addSubviews:@[_titleLabel, _underlineView, _messageLabel, _dismissButton, _acceptButton, _declineButton]];
     [_underlineView makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.centerY.offset(0);
+        make.centerX.offset(0);
+        make.centerY.offset(-50);
         make.size.equalTo(CGSizeMake(kTHLRedeemPerkViewSeparatorViewWidth, kTHLRedeemPerkViewSeparatorViewHeight));
-//        make.left.right.insets(kTHLEdgeInsetsNone());
-    }];
-    
-    [_dismissButton makeConstraints:^(MASConstraintMaker *make) {
-        make.top.insets(kTHLEdgeInsetsSuperHigh());
-        make.left.insets(kTHLEdgeInsetsHigh());
     }];
     
     WEAKSELF();
-    [_nameLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(WSELF.underlineView.mas_top).insets(kTHLEdgeInsetsHigh());
+    [_titleLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(WSELF.underlineView.mas_top).insets(kTHLEdgeInsetsSuperHigh());
         make.centerX.offset(0);
         make.left.right.insets(kTHLEdgeInsetsNone());
     }];
     
-    [_checkIconView makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(WSELF.nameLabel.mas_top).insets(kTHLEdgeInsetsHigh());
-        make.left.top.greaterThanOrEqualTo(SV(WSELF.checkIconView)).insets(kTHLEdgeInsetsHigh());
-        make.right.lessThanOrEqualTo(SV(WSELF.checkIconView)).insets(kTHLEdgeInsetsHigh());
-        make.centerX.offset(0);
-        
-    }];
-    
-    [_descriptionLabel makeConstraints:^(MASConstraintMaker *make) {
+    [_messageLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(WSELF.underlineView.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
         make.centerX.offset(0);
-        make.left.right.insets(kTHLEdgeInsetsLow());
+        make.width.equalTo(SCREEN_WIDTH*0.66);
     }];
+    
+    [_declineButton makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo([WSELF messageLabel].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+//        make.left.insets(kTHLEdgeInsetsLow());
+        make.right.equalTo([WSELF mas_centerX]).insets(kTHLEdgeInsetsHigh());
+
+        make.width.equalTo(125);
+        make.height.equalTo(50);
+    }];
+    
+    [_acceptButton makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo([WSELF messageLabel].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+        make.left.equalTo([WSELF mas_centerX]).insets(kTHLEdgeInsetsHigh());
+//        make.right.insets(kTHLEdgeInsetsLow());
+        make.width.equalTo([WSELF declineButton].mas_width);
+        make.height.equalTo([WSELF declineButton].mas_height);
+    }];
+    
+    [_dismissButton makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.insets(kTHLEdgeInsetsInsanelyHigh());
+        make.centerX.equalTo(0);
+    }];
+}
+
+- (void)layoutPendingView {
+    [UIView animateWithDuration:0.1
+                     animations:^{
+                         _acceptButton.frame = CGRectZero;
+                         _declineButton.frame = CGRectZero;
+                     } completion:^(BOOL finished) {
+                         _acceptButton.hidden = YES;
+                         _declineButton.hidden = YES;
+                     }];
+    
+    [self addSubview:_activityView];
+    
+    WEAKSELF();
+    [_activityView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo([WSELF messageLabel].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+        make.centerX.equalTo(0);
+    }];
+    
+    [_activityView startAnimating];
+}
+
+- (void)layoutSuccessView {
+    [UIView animateWithDuration:0.1
+                     animations:^{
+                         _activityView.frame = CGRectZero;
+                     } completion:^(BOOL finished) {
+                         _activityView.hidden = YES;
+                     }];
+    
+    [_activityView stopAnimating];
+    
+    [self addSubview:_checkIconView];
+
+    WEAKSELF();
+    [_checkIconView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo([WSELF messageLabel].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+        make.centerX.equalTo(0);
+    }];
+    
+    self.dismissButton.rac_command = _dismissCommand;
 }
 
 - (void)bindView {
-    RAC(_dismissButton, rac_command) = RACObserve(self, dismissCommand);
-    RAC(_descriptionLabel, text) = RACObserve(self, confirmationMessage);
+    WEAKSELF();
+    RAC(_titleLabel, text) = RACObserve(self, confirmationTitle);
+    RAC(_messageLabel, text) = RACObserve(self, confirmationMessage);
+
+    [RACObserve(WSELF, declineButtonText) subscribeNext:^(id _) {
+        [_declineButton setTitle:_declineButtonText forState:UIControlStateNormal];
+    }];
+    
+    [RACObserve(WSELF, acceptButtonText) subscribeNext:^(id _) {
+        [_acceptButton setTitle:_acceptButtonText forState:UIControlStateNormal];
+    }];
+    
+    RAC(self.acceptButton, rac_command) = RACObserve(WSELF, acceptCommand);
+    RAC(self.declineButton, rac_command) = RACObserve(WSELF, declineCommand);
+
+    [[self.dismissButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        [WSELF dismiss];
+    }];
 }
 
-- (UILabel *)newNameLabel {
-    UILabel *label = THLNUILabel(kTHLNUIBoldTitle);
-    label.text = @"Perk Redeemed";
+- (UILabel *)newTitleLabel {
+    UILabel *label = THLNUILabel(kTHLNUIRegularTitle);
     label.textAlignment = NSTextAlignmentCenter;
     return label;
 }
@@ -105,13 +217,26 @@ static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
     return view;
 }
 
-- (UILabel *)newDescriptionLabel {
+- (UILabel *)newMessageLabel {
     UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
     label.textAlignment = NSTextAlignmentCenter;
-    label.adjustsFontSizeToFitWidth = YES;
-    label.numberOfLines = 2;
-    label.minimumScaleFactor = 0.5;
+    label.numberOfLines = 0;
     return label;
+}
+
+- (UIButton *)newAcceptButton {
+    UIButton *button = [UIButton new];
+    button.backgroundColor = kTHLNUIActionColor;
+    [button setTitleColor:[UIColor whiteColor]];
+    return button;
+}
+- (UIButton *)newDeclineButton {
+    UIButton *button = [UIButton new];
+    button.backgroundColor = [UIColor clearColor];
+    [button.layer setBorderWidth:0.5];
+    [button.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+    [button setTitleColor:[UIColor whiteColor]];
+    return button;
 }
 
 - (UIButton *)newDismissButton {
@@ -120,5 +245,10 @@ static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
     return button;
 }
 
+- (UIActivityIndicatorView *)newActivityView {
+    UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc]
+                                             initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    return activityView;
+}
 
 @end

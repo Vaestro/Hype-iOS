@@ -70,23 +70,35 @@ THLPerkDetailInteractorDelegate
     [_view setPurchaseCommand:purchaseCommand];
     THLConfirmationView *confirmationView = [THLConfirmationView new];
     [self configureConfirmationView:confirmationView];
-
 }
 
 - (void)configureConfirmationView:(THLConfirmationView *)view {
-    
     self.confirmationView = view;
     
     WEAKSELF();
-    RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [WSELF handleDismissAction];
+    RACCommand *acceptCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [WSELF.interactor handlePurchasewithPerkItemEntity:_perkStoreItemEntity];
+        [WSELF.confirmationView showInProgressWithMessage:@"Redeeming your reward..."];
         return [RACSignal empty];
-        
     }];
     
-    [_confirmationView setDismissCommand:dismissCommand];
-    [_confirmationView setConfirmationMessage:[NSString stringWithFormat:@"You have purchased %@ with %i credits", _perkStoreItemEntity.name, (int)_perkStoreItemEntity.credits]];
+    RACCommand *declineCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [WSELF.confirmationView dismiss];
+        return [RACSignal empty];
+    }];
     
+    RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [_wireframe dismissInterface];
+        return [RACSignal empty];
+    }];
+    
+    [_confirmationView setConfirmationTitle:@"Redeem Reward"];
+    [_confirmationView setConfirmationMessage:[NSString stringWithFormat:@"Are you sure you want to use your credits to pucharse this reward for %i ?", (int)_perkStoreItemEntity.credits]];
+    [_confirmationView setAcceptButtonText:@"Yes"];
+    [_confirmationView setDeclineButtonText:@"No"];
+    [_confirmationView setAcceptCommand:acceptCommand];
+    [_confirmationView setDeclineCommand:declineCommand];
+    [_confirmationView setDismissCommand:dismissCommand];
 }
 
 - (void)handleDismissAction {
@@ -95,24 +107,10 @@ THLPerkDetailInteractorDelegate
 
 
 - (void)continueWithPurchaseFlow {
-    UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault
-                                                      handler:^(UIAlertAction *action) {
-                                                          [_interactor handlePurchasewithPerkItemEntity:_perkStoreItemEntity];
-                                                          
-                                                      }];
-    
-    UIAlertAction *noAction = [UIAlertAction actionWithTitle:@"No"
-                                                        style:UIAlertActionStyleDefault
-                                                      handler:nil];
-    
-    NSString *message = NSStringWithFormat(@"Are you sure you want to use your credits to pucharse this reward for %i ?", (int)_perkStoreItemEntity.credits);
-
-    [self showAlertViewWithMessage:message withAction:[[NSArray alloc] initWithObjects:yesAction, noAction, nil]];
-    
+    [_confirmationView showWithConfirmation];
 }
 
 - (void)errorWithPurchase {
-    
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Ok"
                                                        style:UIAlertActionStyleDefault
                                                      handler:nil];
@@ -144,9 +142,8 @@ THLPerkDetailInteractorDelegate
 }
 
 - (void)interactor:(THLPerkDetailInteractor *)interactor didPurchasePerkStoreItem:(NSError *)error {
-//    [_wireframe dismissInterface];
-    [_view showRedeemPerkView:_confirmationView];
-
+    [self.confirmationView showSuccessWithTitle:@"Perk Redeemed"
+                                        Message:[NSString stringWithFormat:@"You have successfully redeemed your credits for %@", _perkStoreItemEntity.name]];
 }
 
 @end

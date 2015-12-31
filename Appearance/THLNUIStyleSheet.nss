@@ -31,7 +31,6 @@ RegularTitle {
 font-name: @primaryMediumFontName;
 font-color: @primaryFontColor;
 font-size: 20;
-text-transform: uppercase;
 }
 
 DetailTitle {

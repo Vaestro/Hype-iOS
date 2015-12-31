@@ -60,7 +60,8 @@ typedef NS_ENUM(NSInteger, THLUnit) {
 	THLUnitNone = 0,
 	THLUnitLow,
 	THLUnitHigh,
-    THLUnitSuperHigh
+    THLUnitSuperHigh,
+    THLUnitInsanelyHigh
 };
 
 NS_INLINE UIView*
@@ -75,6 +76,7 @@ THLPadding(THLUnit unit) {
 		case THLUnitLow: return kTHLBaseUnit;
 		case THLUnitHigh: return kTHLBaseUnit * 2;
         case THLUnitSuperHigh: return kTHLBaseUnit * 4;
+        case THLUnitInsanelyHigh: return kTHLBaseUnit * 8;
 		default: return THLPadding(THLUnitHigh);
 	}
 }
@@ -119,6 +121,11 @@ kTHLEdgeInsetsHigh() {
 UIKIT_STATIC_INLINE UIEdgeInsets
 kTHLEdgeInsetsSuperHigh() {
     return THLEdgeInsets(THLUnitSuperHigh);
+}
+
+UIKIT_STATIC_INLINE UIEdgeInsets
+kTHLEdgeInsetsInsanelyHigh() {
+    return THLEdgeInsets(THLUnitInsanelyHigh);
 }
 
 UIKIT_STATIC_INLINE UILabel*

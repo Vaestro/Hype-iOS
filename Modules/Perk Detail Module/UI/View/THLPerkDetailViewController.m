@@ -11,8 +11,6 @@
 #import "THLAppearanceConstants.h"
 #import "UIView+DimView.h"
 #import "THLActionBarButton.h"
-#import "THLConfirmationView.h"
-
 
 @interface THLPerkDetailViewController()
 @property (nonatomic, strong) ORStackScrollView *scrollView;
@@ -22,8 +20,7 @@
 @property (nonatomic, strong) UILabel *itemCreditsLabel;
 @property (nonatomic, strong) UIBarButtonItem *dismissButton;
 @property (nonatomic, strong) THLActionBarButton *barButton;
-@property (nonatomic, strong) THLConfirmationView *redeemPerkView;
-// action bar
+
 @end
 
 
@@ -47,7 +44,6 @@
 }
 
 - (void)constructView {
-    
     _scrollView = [self newScrollView];
     _imageView = [self newImageView];
     _dismissButton = [self newDismissButton];
@@ -56,19 +52,6 @@
     _infoText = [self newTextView];
     _barButton = [self newBarButton];
 }
-
-- (void)showRedeemPerkView:(UIView *)redeemPerkView {
-    [self.parentViewController.view addSubview:redeemPerkView];
-    [redeemPerkView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.right.left.insets(kTHLEdgeInsetsNone());
-    }];
-    [self.parentViewController.view bringSubviewToFront:redeemPerkView];
-}
-
-- (void)hideRedeemPerkView:(UIView *)redeemPerkView {
-    [redeemPerkView removeFromSuperview];
-}
-
 
 - (void)layoutView {
     [self.view addSubviews:@[_scrollView, _imageView, _itemNameLabel, _itemCreditsLabel, _barButton]];
@@ -185,6 +168,7 @@
     UITextView *textView = THLNUITextView(kTHLNUIDetailTitle);
     [textView setScrollEnabled:NO];
     [textView setEditable:NO];
+    [textView setSelectable:NO];
     [textView setClipsToBounds:YES];
     [textView setTextAlignment:NSTextAlignmentLeft];
     return textView;
