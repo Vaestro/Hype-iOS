@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "THLGuestlistReviewView.h"
 
-@interface THLGuestlistReviewViewController : UIViewController<THLGuestlistReviewView>
+#import "PKTCallViewController.h"
 
+@class PKTCallViewController;
+
+@interface THLGuestlistReviewViewController : UIViewController<THLGuestlistReviewView>
+@property (nonatomic, strong) PKTCallViewController *callViewController;
 @end

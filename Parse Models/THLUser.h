@@ -27,6 +27,7 @@
 @property (nonatomic) enum THLSex sex;
 @property (nonatomic) float rating;
 @property (nonatomic) float credits;
+@property (nonatomic, retain) NSString *twilioNumber;
 
 @property (nonatomic, copy, readonly) NSString *fullName;
 @end

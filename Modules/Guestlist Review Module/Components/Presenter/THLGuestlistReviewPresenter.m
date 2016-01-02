@@ -11,8 +11,8 @@
 #import "THLGuestlistReviewInteractor.h"
 #import "THLGuestlistReviewView.h"
 #import "THLMenuView.h"
-#import "THLVenueDetailsView.h"
 #import "THLAppearanceConstants.h"
+#import "Parse.h"
 
 #import "THLViewDataSource.h"
 #import "THLGuestlistInviteEntity.h"
@@ -23,6 +23,7 @@
 #import "THLEventEntity.h"
 #import "THLConfirmationView.h"
 #import "THLUserManager.h"
+#import "THLHostEntity.h"
 
 @interface THLGuestlistReviewPresenter()
 <
@@ -30,7 +31,6 @@ THLGuestlistReviewInteractorDelegate
 >
 @property (nonatomic, weak) id<THLGuestlistReviewView> view;
 @property (nonatomic, strong) THLMenuView *menuView;
-@property (nonatomic, strong) THLVenueDetailsView *venueDetailsView;
 @property (nonatomic, strong) THLConfirmationView *confirmationView;
 
 @property (nonatomic) BOOL refreshing;
@@ -221,14 +221,23 @@ THLGuestlistReviewInteractorDelegate
         return [RACSignal empty];
     }];
     
+    RACCommand *callHostCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+//        [WSELF.view hideGuestlistMenuView:menuView];
+        NSString *twilioNumber = _guestlistInviteEntity.guestlist.promotion.host.twilioNumber;
+        NSString *hostNumber = _guestlistInviteEntity.guestlist.promotion.host.phoneNumber;
+        [WSELF.view handleCallActionWithCallerdId:twilioNumber toHostNumber:hostNumber];
+        return [RACSignal empty];
+    }];
+    
+    
     [_menuView setDismissCommand:dismissCommand];
     [_menuView setMenuAddGuestsCommand:addGuestsCommand];
     [_menuView setMenuLeaveGuestCommand:leaveGuestlistCommand];
     [_menuView setMenuEventDetailsCommand:showEventDetailsCommand];
+    [_menuView setMenuContactHostCommand:callHostCommand];
     
 }
 
-#pragma mark - Reviewer Handling
 //TODO: Create Configure Review Options
 - (void)manageReviewer {
     if ([THLUserManager userIsGuest]) {

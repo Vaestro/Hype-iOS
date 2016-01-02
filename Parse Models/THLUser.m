@@ -25,6 +25,7 @@
 @dynamic fbVerified;
 @dynamic location;
 @dynamic credits;
+@dynamic twilioNumber;
 
 + (void)load {
 	[self registerSubclass];
