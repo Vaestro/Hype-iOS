@@ -18,4 +18,10 @@
 @property (nonatomic, strong) THLGuestEntity *guest;
 @property (nonatomic, strong) THLGuestlistEntity *guestlist;
 
+- (BOOL)isAccepted;
+- (BOOL)isPending;
+- (BOOL)isDeclined;
+
+- (BOOL)isOwnerInvite;
+
 @end

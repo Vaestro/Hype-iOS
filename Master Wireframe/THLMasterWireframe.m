@@ -41,7 +41,6 @@ THLPopupNotificationModuleDelegate
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) UIViewController *viewController;
 @property (nonatomic, strong) id currentWireframe;
-@property (nonatomic, strong) THLUserManager *userManager;
 @property (nonatomic, strong) THLGuestFlowWireframe *guestWireframe;
 @property (nonatomic, strong) THLHostFlowWireframe *hostWireframe;
 
@@ -57,15 +56,14 @@ THLPopupNotificationModuleDelegate
 
 - (void)presentAppInWindow:(UIWindow *)window {
 	_window = window;
-    _userManager = [_dependencyManager userManager];
-    [_userManager isUserCached] ? [self routeLoggedInUserFlow] : [self presentOnboardingAndLoginInterface];
+    [THLUserManager isUserCached] ? [self routeLoggedInUserFlow] : [self presentOnboardingAndLoginInterface];
 }
 
 - (void)routeLoggedInUserFlow {
-    if ([_userManager userIsGuest]) {
+    if ([THLUserManager userIsGuest]) {
         [self presentGuestFlow];
     }
-    else if ([_userManager userIsHost]) {
+    else if ([THLUserManager userIsHost]) {
         [self presentHostFlow];
     }
 }
@@ -136,8 +134,8 @@ THLPopupNotificationModuleDelegate
 #pragma mark - THLLoginModuleDelegate
 - (void)loginModule:(id<THLLoginModuleInterface>)module didLoginUser:(NSError *)error {
 	if (!error) {
-        [_userManager makeCurrentInstallation];
-        [_userManager logCrashlyticsUser];
+        [THLUserManager makeCurrentInstallation];
+        [THLUserManager logCrashlyticsUser];
 		[self presentGuestFlow];
     } else {
         NSLog(@"Login Error:%@", error);
@@ -154,7 +152,7 @@ THLPopupNotificationModuleDelegate
 }
 
 - (void)logOutUser {
-    [_userManager logUserOut];
+    [THLUserManager logUserOut];
     [self presentOnboardingAndLoginInterface];
 }
 

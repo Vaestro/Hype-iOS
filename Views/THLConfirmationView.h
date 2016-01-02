@@ -19,11 +19,12 @@
 @property (nonatomic, strong) RACCommand *declineCommand;
 @property (nonatomic, strong) RACCommand *dismissCommand;
 
-- (void)showWithResponse;
-- (void)showWithConfirmation;
+- (void)showResponseFlowWithTitle:(NSString *)title message:(NSString *)message;
+- (void)showConfirmationWithTitle:(NSString *)title message:(NSString *)message;
 - (void)showInProgressWithMessage:(NSString *)messageText;
 - (void)showSuccessWithTitle:(NSString *)titleText Message:(NSString *)messageText;
 - (void)dismiss;
+- (void)dismissResponseFlow;
 
 #pragma mark Subclassing
 

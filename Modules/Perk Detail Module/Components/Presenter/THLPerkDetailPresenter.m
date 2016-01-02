@@ -92,8 +92,6 @@ THLPerkDetailInteractorDelegate
         return [RACSignal empty];
     }];
     
-    [_confirmationView setConfirmationTitle:@"Redeem Reward"];
-    [_confirmationView setConfirmationMessage:[NSString stringWithFormat:@"Are you sure you want to use your credits to pucharse this reward for %i ?", (int)_perkStoreItemEntity.credits]];
     [_confirmationView setAcceptButtonText:@"Yes"];
     [_confirmationView setDeclineButtonText:@"No"];
     [_confirmationView setAcceptCommand:acceptCommand];
@@ -107,7 +105,7 @@ THLPerkDetailInteractorDelegate
 
 
 - (void)continueWithPurchaseFlow {
-    [_confirmationView showWithConfirmation];
+    [_confirmationView showConfirmationWithTitle:@"Redeem Reward" message:[NSString stringWithFormat:@"Are you sure you want to use your credits to pucharse this reward for %i ?", (int)_perkStoreItemEntity.credits] ];
 }
 
 - (void)errorWithPurchase {

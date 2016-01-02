@@ -9,5 +9,15 @@
 #import "THLPromotionEntity.h"
 
 @implementation THLGuestlistEntity
+- (BOOL)isAccepted {
+    return self.reviewStatus == THLStatusAccepted;
+}
 
+- (BOOL)isPending {
+    return self.reviewStatus == THLStatusPending;
+}
+
+- (BOOL)isDeclined {
+    return self.reviewStatus == THLStatusDeclined;
+}
 @end

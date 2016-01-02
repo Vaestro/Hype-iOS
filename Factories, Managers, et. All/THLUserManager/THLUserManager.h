@@ -14,13 +14,13 @@
 @interface THLUserManager : NSObject
 @property (nonatomic, readonly) THLUser *currentUser;
 
-- (BOOL)userLoggedIn;
-- (BOOL)userIsGuest;
-- (BOOL)userIsHost;
-- (BOOL)isUserCached;
-- (void) logCrashlyticsUser;
-- (void)logUserOut;
-- (BFTask *)makeCurrentInstallation;
++ (BOOL)userLoggedIn;
++ (BOOL)userIsGuest;
++ (BOOL)userIsHost;
++ (BOOL)isUserCached;
++ (void) logCrashlyticsUser;
++ (void)logUserOut;
++ (BFTask *)makeCurrentInstallation;
 //- (BFTask *)checkUserSessionValidity;
 
 @end

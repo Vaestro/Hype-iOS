@@ -22,46 +22,46 @@
 }
 
 #pragma mark - Properties
-- (THLUser *)currentUser {
++ (THLUser *)currentUser {
 	return [THLUser currentUser];
 }
 
-- (BOOL)userLoggedIn {
++ (BOOL)userLoggedIn {
 	return self.currentUser != nil;
 }
 
-- (THLUserType)userType {
++ (THLUserType)userType {
     return [self currentUser].type;
 }
 
-- (BOOL)userIsGuest {
++ (BOOL)userIsGuest {
     return self.userType == THLUserTypeGuest;
 }
 
-- (BOOL)userIsHost {
++ (BOOL)userIsHost {
     return self.userType == THLUserTypeHost;
 }
 
-- (BOOL)isUserCached {
++ (BOOL)isUserCached {
     return [self currentUser] || [self isFacebookLinkedWithUser];
 }
 
-- (BOOL)isFacebookLinkedWithUser {
++ (BOOL)isFacebookLinkedWithUser {
     return [PFFacebookUtils isLinkedWithUser:[self currentUser]];
 }
 
-- (void)logUserOut{
++ (void)logUserOut{
     [THLUser logOut];
 }
 
-- (void) logCrashlyticsUser {
++ (void) logCrashlyticsUser {
     // You can call any combination of these three methods
     [CrashlyticsKit setUserIdentifier:[NSString stringWithFormat:@"%@", [self currentUser].objectId]];
     [CrashlyticsKit setUserEmail:[self currentUser].email];
     [CrashlyticsKit setUserName:[self currentUser].fullName];
 }
 
-- (void)handleInvalidatedSession {
++ (void)handleInvalidatedSession {
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil];
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
         if (!error) {
@@ -76,7 +76,7 @@
     }];
 }
 
-- (BFTask *)makeCurrentInstallation {
++ (BFTask *)makeCurrentInstallation {
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     if (![[currentInstallation objectForKey:@"User"] isEqual:[self currentUser]]) {
         [currentInstallation setObject:[self currentUser] forKey:@"User"];

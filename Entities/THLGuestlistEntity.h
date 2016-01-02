@@ -22,4 +22,9 @@
 @property(nonatomic, strong) NSArray<THLGuestEntity *> *acceptedGuests;
 @property(nonatomic, strong) NSArray<THLGuestEntity *> *confirmedGuests;
 @property(nonatomic, strong) NSArray<THLGuestEntity *> *declinedGuests;
+
+- (BOOL)isAccepted;
+- (BOOL)isPending;
+- (BOOL)isDeclined;
+
 @end

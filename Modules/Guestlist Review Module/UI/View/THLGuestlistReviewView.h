@@ -10,12 +10,11 @@
 #import "KLCPopup.h"
 
 typedef NS_OPTIONS(NSInteger, THLGuestlistReviewerStatus) {
-    THLGuestlistReviewerStatusPendingGuest = 0,
-    THLGuestlistReviewerStatusAttendingGuest,
-    THLGuestlistReviewerStatusOwner,
-    THLGuestlistReviewerStatusPendingHost,
-    THLGuestlistReviewerStatusActiveHost,
-    THLGuestlistReviewerStatus_Count
+    THLGuestlistPendingGuest = 0,
+    THLGuestlistAttendingGuest,
+    THLGuestlistOwner,
+    THLGuestlistPendingHost,
+    THLGuestlistActiveHost
 };
 
 @class THLViewDataSource;
@@ -30,7 +29,7 @@ typedef NS_OPTIONS(NSInteger, THLGuestlistReviewerStatus) {
 @property (nonatomic, strong) KLCPopup *popup;
 @property (nonatomic, strong) RACCommand *acceptCommand;
 @property (nonatomic, strong) RACCommand *declineCommand;
-@property (nonatomic, strong) RACCommand *decisionCommand;
+@property (nonatomic, strong) RACCommand *responseCommand;
 @property (nonatomic, strong) RACCommand *refreshCommand;
 @property (nonatomic, strong) RACCommand *dismissCommand;
 @property (nonatomic, strong) RACCommand *showMenuCommand;

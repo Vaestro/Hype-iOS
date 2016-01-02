@@ -44,7 +44,7 @@ UICollectionViewDelegateFlowLayout
 @synthesize dismissCommand = _dismissCommand;
 @synthesize acceptCommand = _acceptCommand;
 @synthesize declineCommand = _declineCommand;
-@synthesize decisionCommand = _decisionCommand;
+@synthesize responseCommand = _responseCommand;
 @synthesize showMenuCommand = _showMenuCommand;
 @synthesize menuAddCommand = _menuAddCommand;
 @synthesize showActivityIndicator = _showActivityIndicator;
@@ -139,9 +139,7 @@ UICollectionViewDelegateFlowLayout
         }];
     }];
     
-//    RAC([self.actionContainerView acceptButton], rac_command) = RACObserve(self, acceptCommand);
-//    RAC([self.actionContainerView declineButton], rac_command) = RACObserve(self, declineCommand);
-    RAC(self.actionBarButton, rac_command) = RACObserve(self, decisionCommand);
+    RAC(self.actionBarButton, rac_command) = RACObserve(self, responseCommand);
     RAC(self.confirmationPopupView, acceptCommand) = RACObserve(self, acceptCommand);
     RAC(self.confirmationPopupView, declineCommand) = RACObserve(self, declineCommand);
     RAC(self.menuButton, rac_command) = RACObserve(self, showMenuCommand);

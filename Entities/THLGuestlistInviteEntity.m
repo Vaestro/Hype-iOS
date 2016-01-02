@@ -8,7 +8,23 @@
 
 #import "THLGuestlistInviteEntity.h"
 #import "THLGuestlistEntity.h"
+#import "THLGuestEntity.h"
+#import "THLUser.h"
 
 @implementation THLGuestlistInviteEntity
+- (BOOL)isAccepted {
+    return self.response == THLStatusAccepted;
+}
 
+- (BOOL)isPending {
+    return self.response == THLStatusPending;
+}
+
+- (BOOL)isDeclined {
+    return self.response == THLStatusDeclined;
+}
+
+- (BOOL)isOwnerInvite {
+    return [self.guestlist.owner.objectId isEqualToString:[THLUser currentUser].objectId];
+}
 @end

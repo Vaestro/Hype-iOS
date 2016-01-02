@@ -32,7 +32,7 @@
 }
 
 - (void)checkForExistingUser {
-	if ([_userManager userLoggedIn]) {
+	if ([THLUserManager userLoggedIn]) {
 		[_delegate interactor:self didLoginUser:nil];
 	}
 }
