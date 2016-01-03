@@ -190,6 +190,7 @@ THLGuestlistReviewInteractorDelegate
 
 - (void)configureMenuView:(THLMenuView *)menuView {
     self.menuView = menuView;
+
     
     WEAKSELF();
     RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
@@ -222,10 +223,7 @@ THLGuestlistReviewInteractorDelegate
     }];
     
     RACCommand *callHostCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-//        [WSELF.view hideGuestlistMenuView:menuView];
-        NSString *twilioNumber = _guestlistInviteEntity.guestlist.promotion.host.twilioNumber;
-        NSString *hostNumber = _guestlistInviteEntity.guestlist.promotion.host.phoneNumber;
-        [WSELF.view handleCallActionWithCallerdId:twilioNumber toHostNumber:hostNumber];
+        [_interactor generateToken];
         return [RACSignal empty];
     }];
     
@@ -441,6 +439,13 @@ THLGuestlistReviewInteractorDelegate
         self.activityStatus = THLActivityStatusError;
     }
     NSLog(@"Status is now %ld", (long)self.reviewerStatus);
+}
+
+- (void)interactor:(THLGuestlistReviewInteractor *)interactor didGetToken:(NSString *)token {
+    [self.view setCallToken:token];
+    NSString *twilioNumber = _guestlistInviteEntity.guestlist.promotion.host.twilioNumber;
+    NSString *hostNumber = _guestlistInviteEntity.guestlist.promotion.host.phoneNumber;
+    [self.view handleCallActionWithCallerdId:twilioNumber toHostNumber:hostNumber];
 }
 
 - (void)dealloc {

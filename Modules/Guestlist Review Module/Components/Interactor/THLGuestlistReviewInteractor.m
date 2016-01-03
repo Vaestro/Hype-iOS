@@ -12,6 +12,12 @@
 #import "THLGuestlistEntity.h"
 #import "THLGuestlistInviteEntity.h"
 #import "THLGuestEntity.h"
+#import "AFNetworking.h"
+#import "THLUser.h"
+
+
+#define kServerBaseURL @"https://hypelistnyc.parseapp.com"
+#define kTokenEndpoint @"authenticate"
 
 static NSString *const kTHLGuestlistReviewModuleViewKey = @"kTHLGuestlistReviewModuleViewKey";
 @class THLGuestlistInviteEntity;
@@ -78,6 +84,22 @@ static NSString *const kTHLGuestlistReviewModuleViewKey = @"kTHLGuestlistReviewM
         return [[NSNumber numberWithInteger:guestlistInvite2.response] compare:[NSNumber numberWithInteger:guestlistInvite1.response]];
     }];
 }
+
+- (void)generateToken {
+    WEAKSELF();
+    STRONGSELF();
+    NSURL *baseURL = [NSURL URLWithString:kServerBaseURL];
+    
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager manager] initWithBaseURL:baseURL];
+    
+    [manager GET:kTokenEndpoint parameters:@{@"clientName": [THLUser currentUser].phoneNumber} progress:nil success:^(NSURLSessionTask *task, id responseObject) {
+        [SSELF.delegate interactor:SSELF didGetToken:responseObject[@"token"]];
+    } failure:^(NSURLSessionTask *task, NSError *error) {
+        NSLog(@"error: %@", error);
+    }];
+    
+}
+
 
 #pragma mark - Handle Presenter Events
 - (void)updateGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite withResponse:(THLStatus)response {

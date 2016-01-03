@@ -27,11 +27,7 @@
 #import "PKTPhone.h"
 #import "PKTCallViewController.h"
 #import "NSString+PKTHelpers.h"
-
-
-#define kServerBaseURL @"https://vast-cliffs-6190.herokuapp.com"
-#define kTokenEndpoint @"auth.php"
-
+#import "Parse.h"
 
 static UIEdgeInsets const COLLECTION_VIEW_EDGEINSETS = {10, 10, 10, 10};
 static CGFloat const CELL_SPACING = 10;
@@ -64,6 +60,7 @@ UICollectionViewDelegateFlowLayout
 @synthesize reviewerStatus = _reviewerStatus;
 @synthesize popup = _popup;
 @synthesize viewAppeared;
+@synthesize callToken = _callToken;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -71,17 +68,7 @@ UICollectionViewDelegateFlowLayout
     [self layoutView];
     [self bindView];
 //    [_refreshCommand execute:nil];
-    NSURL *baseURL = [NSURL URLWithString:kServerBaseURL];
     
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager manager] initWithBaseURL:baseURL];
-    
-    [manager GET:kTokenEndpoint parameters:@{@"clientName": @"demo"} progress:nil success:^(NSURLSessionTask *task, id responseObject) {
-        [self setupPhoneKitWithToken:responseObject[@"token"]];
-        
-    } failure:^(NSURLSessionTask *task, NSError *error) {
-        NSLog(@"error: %@", error);
-    }];
-
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -106,19 +93,18 @@ UICollectionViewDelegateFlowLayout
 
 # pragma mark - phone kit
 - (void)handleCallActionWithCallerdId:(NSString *)twilioNumber toHostNumber:(NSString *)hostNumber {
-    
+    [self setupPhoneKitWithToken];
     [self presentViewController:self.callViewController animated:YES completion:nil];
     [PKTPhone sharedPhone].callerId = twilioNumber;
     [[PKTPhone sharedPhone] call:hostNumber];
 }
 
-- (void)setupPhoneKitWithToken:(NSString *)token
+- (void)setupPhoneKitWithToken
 {
-    [PKTPhone sharedPhone].capabilityToken = token;
-    NSLog(@"Token has been set with capabilities: %@", [PKTPhone sharedPhone].phoneDevice.capabilities);
-    
-    self.callViewController = [PKTCallViewController new];
-    [PKTPhone sharedPhone].delegate = self.callViewController;
+        [PKTPhone sharedPhone].capabilityToken = _callToken;
+        NSLog(@"Token has been set with capabilities: %@", [PKTPhone sharedPhone].phoneDevice.capabilities);
+        self.callViewController = [PKTCallViewController new];
+        [PKTPhone sharedPhone].delegate = self.callViewController;
 }
 
 
