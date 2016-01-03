@@ -15,6 +15,7 @@ static CGFloat const kTHLConfirmationViewButtonHeight = 50;
 
 
 @interface THLConfirmationView()
+@property (nonatomic) BOOL isResponseFlow;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIImageView *checkIconView;
 @property (nonatomic, strong) UIView *underlineView;
@@ -36,7 +37,8 @@ static CGFloat const kTHLConfirmationViewButtonHeight = 50;
         self.tintColor = [UIColor blackColor];
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         self.autoresizesSubviews = YES;
-
+        self.isResponseFlow = NO;
+        
         [self constructView];
         [self layoutView];
         [self bindView];
@@ -60,6 +62,7 @@ static CGFloat const kTHLConfirmationViewButtonHeight = 50;
 - (void)showResponseFlowWithTitle:(NSString *)title message:(NSString *)message {
     self.confirmationTitle = title;
     self.confirmationMessage = message;
+    self.isResponseFlow = TRUE;
     
     [_acceptButton setTitle:@"Accept" forState:UIControlStateNormal];
     [_declineButton setTitle:@"Decline" forState:UIControlStateNormal];
