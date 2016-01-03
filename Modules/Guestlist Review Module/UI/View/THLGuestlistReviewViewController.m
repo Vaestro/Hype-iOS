@@ -121,7 +121,6 @@ UICollectionViewDelegateFlowLayout
     [menuView removeFromSuperview];
 }
 
-
 - (void)layoutView {
     [self.view addSubviews:@[_collectionView, _actionBarButton]];
     

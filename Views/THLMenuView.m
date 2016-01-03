@@ -15,11 +15,11 @@ static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
 @interface THLMenuView()
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UIView *separatorView;
+@property (nonatomic, strong) UIButton *cancelButton;
 @property (nonatomic, strong) UIButton *addGuestsButton;
 @property (nonatomic, strong) UIButton *leaveGuestlistButton;
 @property (nonatomic, strong) UIButton *eventDetailsButton;
 @property (nonatomic, strong) UIButton *contactHostButton;
-@property (nonatomic, strong) UIButton *cancelButton;
 @end
 
 @implementation THLMenuView
@@ -117,5 +117,42 @@ static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
     view.backgroundColor = [UIColor whiteColor];
     return view;
 }
+
+
+#pragma mark - layoutUpdates
+
+- (void)hostLayoutUpdate {
+    [self.leaveGuestlistButton setHidden:YES];
+    
+    WEAKSELF();
+    [self.eventDetailsButton remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.addGuestsButton.mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.left.insets(kTHLEdgeInsetsSuperHigh());
+    }];
+}
+
+- (void)guestLayoutUpdate {
+    [self.contactHostButton setHidden:YES];
+    [self.addGuestsButton setHidden:YES];
+    
+    WEAKSELF();
+    [self.eventDetailsButton remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.offset(0);
+        make.left.insets(kTHLEdgeInsetsSuperHigh());
+    }];
+    
+    [self.leaveGuestlistButton remakeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(WSELF.eventDetailsButton.top).insets(kTHLEdgeInsetsHigh());
+        make.left.insets(kTHLEdgeInsetsSuperHigh());
+    }];
+    
+    [self.separatorView remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.insets(kTHLEdgeInsetsSuperHigh());
+        make.size.equalTo(CGSizeMake(kTHLRedeemPerkViewSeparatorViewWidth, kTHLRedeemPerkViewSeparatorViewHeight));
+        make.bottom.equalTo(WSELF.leaveGuestlistButton.mas_top).insets(kTHLEdgeInsetsHigh());
+    }];
+
+}
+
 
 @end

@@ -188,9 +188,19 @@ THLGuestlistReviewInteractorDelegate
     [_confirmationView setDismissCommand:dismissCommand];
 }
 
+// -----------------------------------------
+#pragma mark - MenuView Configuration
+// -----------------------------------------
 - (void)configureMenuView:(THLMenuView *)menuView {
     self.menuView = menuView;
-
+    
+    if (self.reviewerStatus != THLGuestlistOwner) {
+        [_menuView guestLayoutUpdate];
+    }
+    
+    if (self.reviewerStatus == THLGuestlistOwner) {
+        [_menuView hostLayoutUpdate];
+    }
     
     WEAKSELF();
     RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
@@ -205,14 +215,12 @@ THLGuestlistReviewInteractorDelegate
     }];
     
     RACCommand *leaveGuestlistCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        if (self.reviewerStatus == THLGuestlistOwner) {
-            [WSELF.view hideGuestlistMenuView:menuView];
-            [WSELF partyLeaderError];
-        } else {
-            [WSELF.view hideGuestlistMenuView:menuView];
-            [WSELF handleDeclineAction];
-            [WSELF handleDismissAction];
-        }
+        [WSELF.view hideGuestlistMenuView:menuView];
+        THLConfirmationView *confirmationView = [THLConfirmationView new];
+        [self configureResponseView:confirmationView];
+        [WSELF handleResponseAction];
+//        [WSELF handleDeclineAction];
+//        [WSELF handleDismissAction];
         return [RACSignal empty];
     }];
     
@@ -384,6 +392,19 @@ THLGuestlistReviewInteractorDelegate
 - (void)handleAddGuestsAction {
     [self.moduleDelegate guestlistReviewModule:self promotion:_guestlistInviteEntity.guestlist.promotion withGuestlistId:_guestlistInviteEntity.guestlist.objectId andGuests:[_interactor guests] presentGuestlistInvitationInterfaceOnController:(UIViewController *)self.view];
 }
+
+
+
+- (void)guestError {
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Ok"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:nil];
+    
+    NSString *message = NSStringWithFormat(@"Only a party leader can perform that action");
+    
+    [self showAlertViewWithMessage:message withAction:[[NSArray alloc] initWithObjects:cancelAction, nil]];
+}
+
 
 - (void)partyLeaderError {
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Ok"
