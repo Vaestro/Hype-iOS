@@ -47,9 +47,10 @@
 
 - (THLViewDataSourceGrouping *)viewGrouping {
     return [THLViewDataSourceGrouping withEntityBlock:^NSString *(NSString *collection, THLEntity *entity) {
-        if ([entity isKindOfClass:[THLGuestlistEntity class]]) {
+        if ([entity isKindOfClass:[THLGuestlistEntity class]])  {
             THLGuestlistEntity *guestlistEntity = (THLGuestlistEntity *)entity;
-            if ([guestlistEntity.promotion.host.objectId isEqualToString:[THLUser currentUser].objectId]) {
+            if ([guestlistEntity.promotion.host.objectId isEqualToString:[THLUser currentUser].objectId]
+                && [guestlistEntity.date thl_isOrAfterToday]) {
                 return @"Guestlist Requests";
             }
         }
@@ -61,7 +62,7 @@
     return [THLViewDataSourceSorting withSortingBlock:^NSComparisonResult(THLEntity *entity1, THLEntity *entity2) {
         THLGuestlistEntity *guestlist1 = (THLGuestlistEntity *)entity1;
         THLGuestlistEntity *guestlist2 = (THLGuestlistEntity *)entity2;
-        return [[NSNumber numberWithInteger:guestlist1.reviewStatus] compare:[NSNumber numberWithInteger:guestlist2.reviewStatus]];
+        return [guestlist1.date compare:guestlist2.date];
     }];
 }
 @end

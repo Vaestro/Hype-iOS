@@ -24,4 +24,6 @@
 
 - (BOOL)isOwnerInvite;
 
+- (BOOL)guestlistIsAccepted;
+- (BOOL)guestlistIsDeclined;
 @end

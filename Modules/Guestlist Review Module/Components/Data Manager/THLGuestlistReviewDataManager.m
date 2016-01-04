@@ -37,10 +37,8 @@
     WEAKSELF();
     STRONGSELF();
     return [[_guestlistService fetchInvitesOnGuestlist:[THLGuestlist objectWithoutDataWithObjectId:guestlist.objectId]] continueWithSuccessBlock:^id(BFTask *task) {
-//        THLDataStoreDomain *domain = [SSELF domainForPendingOrAcceptedGuestlistInvites];
         NSSet *entities = [NSSet setWithArray:[SSELF.entityMapper mapGuestlistInvites:task.result]];
         [SSELF.dataStore updateOrAddEntities:entities];
-//        [SSELF.dataStore refreshDomain:domain withEntities:entities];
         return [BFTask taskWithResult:entities];
     }];
 }
@@ -55,7 +53,15 @@
 }
 
 - (BFTask *)updateGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite withResponse:(THLStatus)response {
-    return [_guestlistService updateGuestlistInvite:[THLGuestlistInvite objectWithoutDataWithObjectId:guestlistInvite.objectId] withResponse:response];
+    WEAKSELF();
+    STRONGSELF();
+    return [[_guestlistService updateGuestlistInvite:[THLGuestlistInvite objectWithoutDataWithObjectId:guestlistInvite.objectId] withResponse:response] continueWithSuccessBlock:^id _Nullable(BFTask * _Nonnull task) {
+        guestlistInvite.response = response;
+        guestlistInvite.updatedAt = [NSDate date];
+        NSSet *entities = [NSSet setWithArray:@[guestlistInvite]];
+        [SSELF.dataStore updateOrAddEntities:entities];
+        return [BFTask taskWithResult:nil];
+    }];
 }
 
 - (BFTask *)updateGuestlist:(THLGuestlistEntity *)guestlist withReviewStatus:(THLStatus)reviewStatus {

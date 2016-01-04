@@ -51,8 +51,8 @@
         if ([entity isKindOfClass:[THLGuestlistInviteEntity class]]) {
             THLGuestlistInviteEntity *guestlistInviteEntity = (THLGuestlistInviteEntity *)entity;
             if ([guestlistInviteEntity.guest.objectId isEqualToString:[THLUser currentUser].objectId]
-                && guestlistInviteEntity.date > [[NSDate date] dateByAddingTimeInterval:-60*300]
-                && guestlistInviteEntity.guestlist.reviewStatus != THLStatusDeclined) {
+                && guestlistInviteEntity.guestlist.reviewStatus != THLStatusDeclined
+                && [guestlistInviteEntity.date thl_isOrAfterToday]) {
                 if (guestlistInviteEntity.response == THLStatusPending) {
                     return @"Pending Invites";
                 } else if (guestlistInviteEntity.response == THLStatusAccepted) {
@@ -68,7 +68,7 @@
     return [THLViewDataSourceSorting withSortingBlock:^NSComparisonResult(THLEntity *entity1, THLEntity *entity2) {
         THLGuestlistInviteEntity *guestlistInvite1 = (THLGuestlistInviteEntity *)entity1;
         THLGuestlistInviteEntity *guestlistInvite2 = (THLGuestlistInviteEntity *)entity2;
-        return [[NSNumber numberWithInteger:guestlistInvite1.response] compare:[NSNumber numberWithInteger:guestlistInvite2.response]];
+        return [guestlistInvite1.date compare:guestlistInvite2.date];
     }];
 }
 @end

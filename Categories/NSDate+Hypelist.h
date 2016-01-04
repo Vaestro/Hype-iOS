@@ -17,5 +17,5 @@
 + (instancetype)thl_today;
 + (instancetype)thl_tomorrow;
 + (instancetype)thl_nextWeek;
-
+- (BOOL)thl_isOrAfterToday;
 @end
