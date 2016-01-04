@@ -7,6 +7,7 @@
 //
 
 #import "THLWaitlistEntry.h"
+const NSInteger kTHLWaitlistCodeLength = 4;
 
 @implementation THLWaitlistEntry
 @dynamic email;

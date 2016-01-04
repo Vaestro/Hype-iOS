@@ -26,4 +26,5 @@
 - (void)checkForExisitngLocalWaitlistEntry;
 - (void)createWaitlistEntryForEmail:(NSString *)email;
 - (void)getWaitlistPosition;
+- (BOOL)isValidCode:(NSString *)code;
 @end

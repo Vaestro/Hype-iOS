@@ -97,4 +97,10 @@ static NSString *const kTHLWaitlistModelPinName = @"kTHLWaitlistModelPinName";
 	[query whereKey:@"createdAt" lessThan:self.entry.createdAt];
 	return query;
 }
+
+- (BOOL)isValidCode:(NSString *)code {
+	NSAssert(self.entry != nil, @"There must be an entry!");
+	return [code isEqualToString:self.entry.code];
+}
+
 @end
