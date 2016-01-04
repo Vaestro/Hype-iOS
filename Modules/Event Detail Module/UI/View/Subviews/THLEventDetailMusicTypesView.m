@@ -25,7 +25,7 @@
     [self.contentView addSubviews:@[_musicTypesLabel]];
     
     [_musicTypesLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.insets(kTHLEdgeInsetsNone());
+        make.top.insets(kTHLEdgeInsetsLow());
         make.bottom.left.right.equalTo(kTHLEdgeInsetsNone());
     }];
 }

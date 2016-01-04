@@ -90,8 +90,7 @@
     [self.view addSubviews:@[_scrollView, _bottomBar]];
     
     [_scrollView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.insets(kTHLEdgeInsetsNone());
-        make.top.insets(kTHLEdgeInsetsHigh());
+        make.top.left.right.insets(kTHLEdgeInsetsNone());
     }];
     
     [_scrollView.stackView addSubview:_eventNameLabel
