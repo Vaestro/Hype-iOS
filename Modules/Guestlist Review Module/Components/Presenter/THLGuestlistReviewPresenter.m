@@ -70,6 +70,7 @@ THLGuestlistReviewInteractorDelegate
 - (void)presentGuestlistReviewInterfaceForGuestlist:(THLGuestlistEntity *)guestlistEntity withGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInviteEntity inController:(UIViewController *)controller {
     _interactor.guestlistEntity = guestlistEntity;
     _guestlistInviteEntity = guestlistInviteEntity;
+    _guestlistEntity = _guestlistInviteEntity.guestlist;
     [self updateGuestReviewStatus];
     [_wireframe presentInterfaceInController:controller];
 }
@@ -241,7 +242,9 @@ THLGuestlistReviewInteractorDelegate
         return [RACSignal empty];
     }];
     
-    
+    [_menuView setHostName:_guestlistEntity.promotion.host.firstName];
+    [_menuView setHostImageURL:_guestlistEntity.promotion.host.imageURL];
+
     [_menuView setDismissCommand:dismissCommand];
     [_menuView setMenuAddGuestsCommand:addGuestsCommand];
     [_menuView setMenuLeaveGuestCommand:leaveGuestlistCommand];

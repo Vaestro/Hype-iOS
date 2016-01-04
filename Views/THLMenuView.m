@@ -8,18 +8,23 @@
 
 #import "THLMenuView.h"
 #import "THLAppearanceConstants.h"
+#import "THLPersonIconView.h"
 
-static CGFloat const kTHLRedeemPerkViewSeparatorViewHeight = 1;
+static CGFloat const kTHLRedeemPerkViewSeparatorViewHeight = 0.5;
 static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
 
 @interface THLMenuView()
-@property (nonatomic, strong) UILabel *nameLabel;
+@property (nonatomic, strong) UILabel *menuTitleLabel;
+@property (nonatomic, strong) UILabel *hostNameLabel;
+@property (nonatomic, strong) THLPersonIconView *iconImageView;
+
 @property (nonatomic, strong) UIView *separatorView;
 @property (nonatomic, strong) UIButton *cancelButton;
 @property (nonatomic, strong) UIButton *addGuestsButton;
 @property (nonatomic, strong) UIButton *leaveGuestlistButton;
 @property (nonatomic, strong) UIButton *eventDetailsButton;
 @property (nonatomic, strong) UIButton *contactHostButton;
+@property (nonatomic, strong) UIView *containerView;
 @end
 
 @implementation THLMenuView
@@ -33,29 +38,79 @@ static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
     return self;
 }
 
-
 - (void)constructView {
-    _nameLabel = [self newNameLabel];
+    _iconImageView = [self newIconImageView];
+    _hostNameLabel = [self newHostNameLabel];
+    _menuTitleLabel = [self newMenuTitleLabel];
     _addGuestsButton = [self newButtonwithTitle:@"Add Guests"];
     _leaveGuestlistButton = [self newButtonwithTitle:@"Leave Guestlist"];
     _eventDetailsButton = [self newButtonwithTitle:@"View Event Details"];
     _contactHostButton = [self newButtonwithTitle:@"Contact Host"];
     _cancelButton = [self newButtonwithTitle:@"Cancel"];
     _separatorView = [self newSeparatorView];
+    _containerView = [self newContainerView];
 }
 
 - (void)layoutView {
     self.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     self.tintColor = [UIColor blackColor];
+    [self addSubview:_containerView];
+    [_containerView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.bottom.equalTo(kTHLEdgeInsetsNone());
+    }];
+//    _containerView.alpha = 1.0;
+//    _containerView.transform = CGAffineTransformIdentity;
+//    CGRect startFrame = self.frame;
+//    startFrame.origin.y = CGRectGetHeight(self.bounds);
+//    _containerView.frame = startFrame;
+//    static NSInteger const kAnimationOptionCurveIOS7 = (7 << 16);
+//
+//    [UIView animateWithDuration:0.30
+//                          delay:0
+//                        options:kAnimationOptionCurveIOS7 // note: this curve ignores durations
+//                     animations:^{
+//                         _containerView.frame = self.frame;
+//                     }
+//                     completion:NULL];
     
-    [self addSubviews:@[_nameLabel, _addGuestsButton, _leaveGuestlistButton, _eventDetailsButton, _contactHostButton, _cancelButton, _separatorView]];
+    [self.containerView addSubviews:@[_menuTitleLabel, _addGuestsButton, _leaveGuestlistButton, _eventDetailsButton, _contactHostButton, _cancelButton, _separatorView]];
+    WEAKSELF();
+
+    UIView *personContainerView = [UIView new];
+    UILabel *label = [UILabel new];
+    label.text = @"Your Host";
+    label.textColor = [UIColor whiteColor];
+    [personContainerView addSubviews:@[_hostNameLabel, _iconImageView, label]];
+    
+    [_iconImageView makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.bottom.insets(kTHLEdgeInsetsNone());
+        make.size.mas_equalTo(CGSizeMake(50, 50));
+    }];
+
+    [label makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo([WSELF iconImageView].mas_right).insets(kTHLEdgeInsetsHigh());
+        make.top.equalTo([WSELF iconImageView].mas_top);
+        make.right.insets(kTHLEdgeInsetsNone());
+    }];
+    
+    [_hostNameLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo([WSELF iconImageView].mas_right).insets(kTHLEdgeInsetsHigh());
+        make.top.equalTo(label.mas_bottom);
+        make.bottom.right.insets(kTHLEdgeInsetsNone());
+    }];
+    
+    [self.containerView addSubview:personContainerView];
+    
+    [personContainerView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(kTHLEdgeInsetsInsanelyHigh());
+        make.left.equalTo(kTHLEdgeInsetsSuperHigh());
+    }];
     
     [_leaveGuestlistButton makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.offset(0);
         make.left.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
-    WEAKSELF();
     [_addGuestsButton makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(WSELF.leaveGuestlistButton.mas_top).insets(kTHLEdgeInsetsHigh());
         make.left.insets(kTHLEdgeInsetsSuperHigh());
@@ -68,8 +123,8 @@ static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
         //        make.left.right.insets(kTHLEdgeInsetsNone());
     }];
     
-    [_nameLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(WSELF.separatorView.mas_top).insets(kTHLEdgeInsetsLow());
+    [_menuTitleLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(WSELF.separatorView.mas_top).insets(kTHLEdgeInsetsHigh());
         make.left.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
@@ -95,11 +150,24 @@ static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
     RAC(_leaveGuestlistButton, rac_command) = RACObserve(self, menuLeaveGuestCommand);
     RAC(_eventDetailsButton, rac_command) = RACObserve(self, menuEventDetailsCommand);
     RAC(_contactHostButton, rac_command) = RACObserve(self, menuContactHostCommand);
+    RAC(_iconImageView, imageURL) = RACObserve(self, hostImageURL);
+    RAC(_hostNameLabel, text) = RACObserve(self, hostName);
 }
 
 #pragma mark - constructors
 
-- (UILabel *)newNameLabel {
+- (THLPersonIconView *)newIconImageView {
+    THLPersonIconView *iconView = [THLPersonIconView new];
+    return iconView;
+}
+
+- (UILabel *)newHostNameLabel {
+    UILabel *label = THLNUILabel(kTHLNUIRegularTitle);
+    label.textAlignment = NSTextAlignmentLeft;
+    return label;
+}
+
+- (UILabel *)newMenuTitleLabel {
     UILabel *label = THLNUILabel(kTHLNUIBoldTitle);
     label.text = @"Guestlist Menu";
     label.textAlignment = NSTextAlignmentLeft;
@@ -107,7 +175,7 @@ static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
 }
 
 - (UIButton *)newButtonwithTitle:(NSString *)title {
-    UIButton *button = THLNUIButton(kTHLNUIButtonTitle);
+    UIButton *button = THLNUIButton(kTHLNUIRegularTitle);
     [button setTitle:title forState:UIControlStateNormal];
     return button;
 }
@@ -115,6 +183,11 @@ static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
 - (UIView *)newSeparatorView {
     UIView *view = THLNUIView(kTHLNUIUndef);
     view.backgroundColor = [UIColor whiteColor];
+    return view;
+}
+
+- (UIView *)newContainerView {
+    UIView *view = THLNUIView(kTHLNUIUndef);
     return view;
 }
 

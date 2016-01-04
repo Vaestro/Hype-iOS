@@ -87,39 +87,6 @@
 	}];
 }
 
-//- (THLUserEntity *)mapUser:(THLUser *)user {
-////    NSAssert([user isKindOfClass:[THLUser class]], @"Must be of type THLUser to map!");
-//	THLUserEntity *entity;
-//	switch (user.type) {
-//		case THLUserTypeGuest: {
-//            return nil;
-//			break;
-//		}
-//		case THLUserTypeHost: {
-//			entity = [THLHostEntity new];
-//			break;
-//		}
-//		default: {
-//			break;
-//		}
-//	}
-//
-//	[self mapBaseValuesFromModel:user toEntity:entity];
-//	entity.firstName = user.firstName;
-//	entity.lastName = user.lastName;
-//	entity.phoneNumber = user.phoneNumber;
-//	entity.imageURL = [NSURL URLWithString:user.image.url];
-//	entity.sex = user.sex;
-//	entity.rating = user.rating;
-//	return entity;
-//}
-
-//- (NSArray *)mapUsers:(NSArray *)users {
-//	return [users linq_select:^id(THLUser *user) {
-//		return [self mapUser:user];
-//	}];
-//}
-
 - (THLGuestEntity *)mapGuest:(THLUser *)user {
     if ([user isKindOfClass:[THLUser class]]) {
         THLGuestEntity *entity = [THLGuestEntity new];

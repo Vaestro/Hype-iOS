@@ -10,6 +10,9 @@
 #import "FXBlurView.h"
 
 @interface THLMenuView : FXBlurView
+@property (nonatomic, strong) NSString *hostName;
+@property (nonatomic, strong) NSURL *hostImageURL;
+
 @property (nonatomic, strong) RACCommand *dismissCommand;
 @property (nonatomic, strong) RACCommand *menuAddGuestsCommand;
 @property (nonatomic, strong) RACCommand *menuLeaveGuestCommand;
