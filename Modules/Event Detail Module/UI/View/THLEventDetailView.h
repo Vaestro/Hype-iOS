@@ -27,6 +27,9 @@ typedef NS_OPTIONS(NSInteger, THLGuestlistStatus) {
 @property (nonatomic, copy) NSString *locationName;
 @property (nonatomic, copy) NSString *locationInfo;
 @property (nonatomic, copy) NSString *locationAddress;
+@property (nonatomic, copy) NSString *locationAttireRequirement;
+@property (nonatomic, copy) NSString *locationMusicTypes;
+
 @property (nonatomic) THLGuestlistStatus actionBarButtonStatus;
 @property (nonatomic, strong) CLPlacemark *locationPlacemark;
 @property (nonatomic, strong) RACCommand *actionBarButtonCommand;

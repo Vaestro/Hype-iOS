@@ -41,20 +41,20 @@
         make.left.right.insets(kTHLEdgeInsetsNone());
     }];
     
-    [_photoIdLabel makeConstraints:^(MASConstraintMaker *make) {
+    [_attireRequirementLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF coverInfoLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.left.insets(kTHLEdgeInsetsHigh());
+        make.right.insets(kTHLEdgeInsetsNone());
+    }];
+    
+    [_photoIdLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo([WSELF attireRequirementLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());
         make.left.insets(kTHLEdgeInsetsHigh());
         make.right.insets(kTHLEdgeInsetsNone());
     }];
     
     [_ageRequirementLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF photoIdLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());
-        make.left.insets(kTHLEdgeInsetsHigh());
-        make.right.insets(kTHLEdgeInsetsNone());
-    }];
-    
-    [_attireRequirementLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF ageRequirementLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());
         make.left.insets(kTHLEdgeInsetsHigh());
         make.right.bottom.insets(kTHLEdgeInsetsNone());
     }];
@@ -65,6 +65,7 @@
 
     RAC(self.ratioInfoLabel, infoText, @"") = RACObserve(self, ratioText);
     RAC(self.coverInfoLabel, infoText, @"") = RACObserve(self, coverFeeText);
+    RAC(self.attireRequirementLabel, text, @"") = RACObserve(self, attireRequirement);
 }
 
 - (THLPromotionInfoView *)newRatioInfoLabel {

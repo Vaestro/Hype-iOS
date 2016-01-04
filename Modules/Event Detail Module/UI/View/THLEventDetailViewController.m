@@ -18,6 +18,7 @@
 
 #import "THLAppearanceConstants.h"
 #import "THLPromotionInfoView.h"
+#import "THLEventDetailMusicTypesView.h"
 
 @interface THLEventDetailViewController()
 @property (nonatomic, strong) ORStackScrollView *scrollView;
@@ -26,6 +27,7 @@
 @property (nonatomic, strong) THLEventDetailsPromotionInfoView *promotionInfoView;
 @property (nonatomic, strong) THLEventDetailsLocationInfoView *locationInfoView;
 @property (nonatomic, strong) THLNeedToKnowInfoView *needToKnowInfoView;
+@property (nonatomic, strong) THLEventDetailMusicTypesView *musicTypesView;
 @property (nonatomic, strong) THLActionBarButton *bottomBar;
 @property (nonatomic) BOOL showPromotionInfoView;
 @property (nonatomic, strong) THLEventDetailsMapView *mapView;
@@ -43,6 +45,8 @@
 @synthesize locationName;
 @synthesize locationInfo;
 @synthesize locationAddress;
+@synthesize locationAttireRequirement;
+@synthesize locationMusicTypes;
 @synthesize dismissCommand;
 @synthesize locationPlacemark;
 @synthesize actionBarButtonStatus;
@@ -78,7 +82,7 @@
     _dateLabel = [self newDateLabel];
     _bottomBar = [self newBottomBar];
     _mapView = [self newMapView];
-
+    _musicTypesView = [self newMusicTypesView];
 }
 
 - (void)layoutView {
@@ -110,6 +114,10 @@
                   withPrecedingMargin:kTHLPaddingHigh()
                            sideMargin:4*kTHLPaddingHigh()];
     
+    [_scrollView.stackView addSubview:_musicTypesView
+                  withPrecedingMargin:kTHLPaddingHigh()
+                           sideMargin:4*kTHLPaddingHigh()];
+    
     [_scrollView.stackView addSubview:_mapView
                   withPrecedingMargin:kTHLPaddingHigh()
                            sideMargin:kTHLPaddingNone()];
@@ -131,7 +139,9 @@
 
     RAC(self.needToKnowInfoView, ratioText) = RACObserve(self, ratioInfo);
     RAC(self.needToKnowInfoView, coverFeeText) = RACObserve(self, coverInfo);
-    
+    RAC(self.needToKnowInfoView, attireRequirement) = RACObserve(self, locationAttireRequirement);
+    RAC(self.musicTypesView, musicTypesInfo) = RACObserve(self, locationMusicTypes);
+
     RAC(self.mapView, locationName) = RACObserve(self, locationName);
     RAC(self.mapView, locationAddress) = RACObserve(self, locationAddress);
     RAC(self.mapView, locationPlacemark) = RACObserve(self, locationPlacemark);
@@ -207,6 +217,13 @@
     infoView.translatesAutoresizingMaskIntoConstraints = NO;
     infoView.dividerColor = [UIColor whiteColor];
     return infoView;
+}
+
+- (THLEventDetailMusicTypesView *)newMusicTypesView {
+    THLEventDetailMusicTypesView *musicTypesView = [THLEventDetailMusicTypesView new];
+    musicTypesView.title = NSLocalizedString(@"MUSIC", nil);
+    musicTypesView.translatesAutoresizingMaskIntoConstraints = NO;
+    return musicTypesView;
 }
 
 - (THLActionBarButton *)newBottomBar {

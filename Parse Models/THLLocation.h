@@ -20,5 +20,7 @@
 @property (nonatomic, retain) NSString *zipcode;
 @property (nonatomic, retain) NSString *neighborhood;
 @property (nonatomic, retain) PFGeoPoint *coordinate;
+@property (nonatomic, retain) NSArray *musicTypes;
+@property (nonatomic, retain) NSString *attireRequirement;
 
 @end

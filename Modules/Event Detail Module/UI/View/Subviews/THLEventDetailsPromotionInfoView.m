@@ -73,7 +73,7 @@ static CGFloat const kTHLEventDetailsPromotionInfoViewImageViewHeight = 150;
     [textView setScrollEnabled:NO];
     [textView setEditable:NO];
     [textView setSelectable:NO];
-
+    
     return textView;
 }
 

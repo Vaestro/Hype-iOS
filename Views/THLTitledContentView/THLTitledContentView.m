@@ -50,7 +50,8 @@
 //    }];
     
     [_contentView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF titleLabel].mas_baseline).insets(kTHLEdgeInsetsLow());
+        make.top.equalTo([WSELF titleLabel].mas_bottom);
+        make.left.right.equalTo([WSELF titleLabel]);
         make.bottom.left.right.insets(kTHLEdgeInsetsNone());
     }];
 }

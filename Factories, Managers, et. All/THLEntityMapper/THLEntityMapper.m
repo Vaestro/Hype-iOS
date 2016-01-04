@@ -71,6 +71,9 @@
         entity.imageURL = [NSURL URLWithString:location.image.url];
         entity.latitude = location.coordinate.latitude;
         entity.longitude = location.coordinate.longitude;
+        entity.musicTypes = location.musicTypes;
+        entity.attireRequirement = location.attireRequirement;
+        
 	return entity;
     } else {
         return nil;

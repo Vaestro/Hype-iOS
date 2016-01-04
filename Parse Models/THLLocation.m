@@ -19,6 +19,8 @@
 @dynamic zipcode;
 @dynamic neighborhood;
 @dynamic coordinate;
+@dynamic musicTypes;
+@dynamic attireRequirement;
 
 + (void)load {
 	[self registerSubclass];

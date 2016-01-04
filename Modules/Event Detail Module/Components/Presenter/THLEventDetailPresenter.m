@@ -95,6 +95,8 @@
     [self.view setActionBarButtonCommand:actionBarButtonCommand];
     [self.view setLocationInfo:_eventEntity.location.info];
     [self.view setLocationAddress:_eventEntity.location.fullAddress];
+    [self.view setLocationMusicTypes:[NSString stringWithFormat:@"%@", [_eventEntity.location.musicTypes componentsJoinedByString:@" | "]]];
+    [self.view setLocationAttireRequirement:_eventEntity.location.attireRequirement];
 
 }
 
