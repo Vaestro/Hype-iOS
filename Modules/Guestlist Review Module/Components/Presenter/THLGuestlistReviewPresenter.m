@@ -25,6 +25,14 @@
 #import "THLUserManager.h"
 #import "THLHostEntity.h"
 
+
+//phone kit
+#import "AFNetworking.h"
+#import "UIView+FrameAccessor.h"
+#import "PKTPhone.h"
+#import "PKTCallViewController.h"
+#import "NSString+PKTHelpers.h"
+
 @interface THLGuestlistReviewPresenter()
 <
 THLGuestlistReviewInteractorDelegate
@@ -32,11 +40,14 @@ THLGuestlistReviewInteractorDelegate
 @property (nonatomic, weak) id<THLGuestlistReviewView> view;
 @property (nonatomic, strong) THLMenuView *menuView;
 @property (nonatomic, strong) THLConfirmationView *confirmationView;
+@property (nonatomic, strong) PKTCallViewController *callViewController;
 
 @property (nonatomic) BOOL refreshing;
 @property (nonatomic) THLGuestlistReviewerStatus reviewerStatus;
 @property (nonatomic) THLActivityStatus activityStatus;
 @property (nonatomic, strong) RACCommand *responseCommand;
+
+@property (nonatomic, strong) NSString *callToken;
 
 @property (nonatomic, strong) THLGuestlistInviteEntity *guestlistInviteEntity;
 @property (nonatomic, strong) THLGuestlistEntity *guestlistEntity;
@@ -114,10 +125,6 @@ THLGuestlistReviewInteractorDelegate
     [RACObserve(self, refreshing) subscribeNext:^(NSNumber *b) {
         BOOL isRefreshing = [b boolValue];
         [WSELF.view setShowRefreshAnimation:isRefreshing];
-    }];
-    
-    [RACObserve(self, activityStatus) subscribeNext:^(id _) {
-        [WSELF.view setShowActivityIndicator:WSELF.activityStatus];
     }];
     
     [RACObserve(self, reviewerStatus) subscribeNext:^(NSNumber *x) {
@@ -220,8 +227,6 @@ THLGuestlistReviewInteractorDelegate
         THLConfirmationView *confirmationView = [THLConfirmationView new];
         [self configureResponseView:confirmationView];
         [WSELF handleResponseAction];
-//        [WSELF handleDeclineAction];
-//        [WSELF handleDismissAction];
         return [RACSignal empty];
     }];
     
@@ -371,7 +376,7 @@ THLGuestlistReviewInteractorDelegate
      *  Guest Decline Action Options
      */
     if (_reviewerStatus == THLGuestlistAttendingGuest) {
-        [_view.popup dismiss:TRUE];
+        
     }
     else if (_reviewerStatus == THLGuestlistPendingGuest) {
         [_confirmationView showInProgressWithMessage:@"Declining your invite..."];
@@ -385,8 +390,7 @@ THLGuestlistReviewInteractorDelegate
         [_interactor updateGuestlist:_guestlistEntity withReviewStatus:THLStatusDeclined];
     }
     else if (_reviewerStatus == THLGuestlistActiveHost) {
-        self.activityStatus = THLActivityStatusInProgress;
-        //        [_interactor updateGuestlistInvite:_guestlistInviteEntity withResponse:THLStatusAccepted];
+        
     }
 }
 
@@ -394,7 +398,15 @@ THLGuestlistReviewInteractorDelegate
     [self.moduleDelegate guestlistReviewModule:self promotion:_guestlistInviteEntity.guestlist.promotion withGuestlistId:_guestlistInviteEntity.guestlist.objectId andGuests:[_interactor guests] presentGuestlistInvitationInterfaceOnController:(UIViewController *)self.view];
 }
 
-
+# pragma mark - Phone Kit
+- (void)handleCallActionWithCallerdId:(NSString *)twilioNumber toHostNumber:(NSString *)hostNumber {
+    [PKTPhone sharedPhone].capabilityToken = _callToken;
+    [PKTPhone sharedPhone].callerId = twilioNumber;
+    self.callViewController = [PKTCallViewController new];
+    [PKTPhone sharedPhone].delegate = self.callViewController;
+    [(UIViewController *)self.view presentViewController:self.callViewController animated:YES completion:nil];
+    [[PKTPhone sharedPhone] call:hostNumber];
+}
 
 - (void)guestError {
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Ok"
@@ -463,10 +475,10 @@ THLGuestlistReviewInteractorDelegate
 }
 
 - (void)interactor:(THLGuestlistReviewInteractor *)interactor didGetToken:(NSString *)token {
-    [self.view setCallToken:token];
+    self.callToken = token;
     NSString *twilioNumber = _guestlistInviteEntity.guestlist.promotion.host.twilioNumber;
     NSString *hostNumber = _guestlistInviteEntity.guestlist.promotion.host.phoneNumber;
-    [self.view handleCallActionWithCallerdId:twilioNumber toHostNumber:hostNumber];
+    [self handleCallActionWithCallerdId:twilioNumber toHostNumber:hostNumber];
 }
 
 - (void)dealloc {

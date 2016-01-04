@@ -24,9 +24,7 @@ typedef NS_OPTIONS(NSInteger, THLGuestlistReviewerStatus) {
 
 @property (nonatomic) NSNumber *reviewerStatus;
 @property (nonatomic) BOOL showRefreshAnimation;
-@property (nonatomic) THLActivityStatus showActivityIndicator;
 
-@property (nonatomic, strong) KLCPopup *popup;
 @property (nonatomic, strong) RACCommand *acceptCommand;
 @property (nonatomic, strong) RACCommand *declineCommand;
 @property (nonatomic, strong) RACCommand *responseCommand;
@@ -34,8 +32,8 @@ typedef NS_OPTIONS(NSInteger, THLGuestlistReviewerStatus) {
 @property (nonatomic, strong) RACCommand *dismissCommand;
 @property (nonatomic, strong) RACCommand *showMenuCommand;
 @property (nonatomic, strong) RACCommand *menuAddCommand;
+
 @property (nonatomic) BOOL viewAppeared;
-@property (nonatomic, strong) NSString *callToken;
 - (void)showGuestlistMenuView:(UIView *)menuView;
 - (void)hideGuestlistMenuView:(UIView *)menuView;
 - (void)handleCallActionWithCallerdId:(NSString *)twilioNumber toHostNumber:(NSString *)hostNumber;

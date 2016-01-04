@@ -11,23 +11,11 @@
 
 #import "THLGuestlistReviewCell.h"
 #import "THLGuestlistReviewCellViewModel.h"
-#import "THLActionContainerView.h"
-#import "THLConfirmationPopupView.h"
+#import "THLActionBarButton.h"
 #import "THLMenuView.h"
 
 #import "THLAppearanceConstants.h"
 #import "UIScrollView+SVPullToRefresh.h"
-#import "SVProgressHUD.h"
-#import "KLCPopup.h"
-
-
-//phone kit
-#import "AFNetworking.h"
-#import "UIView+FrameAccessor.h"
-#import "PKTPhone.h"
-#import "PKTCallViewController.h"
-#import "NSString+PKTHelpers.h"
-#import "Parse.h"
 
 static UIEdgeInsets const COLLECTION_VIEW_EDGEINSETS = {10, 10, 10, 10};
 static CGFloat const CELL_SPACING = 10;
@@ -38,9 +26,7 @@ UICollectionViewDelegate,
 UICollectionViewDelegateFlowLayout
 >
 @property (nonatomic, strong) UICollectionView *collectionView;
-//@property (nonatomic, strong) THLActionContainerView *actionContainerView;
 @property (nonatomic, strong) THLActionBarButton *actionBarButton;
-@property (nonatomic, strong) THLConfirmationPopupView *confirmationPopupView;
 @property (nonatomic, strong) UIBarButtonItem *dismissButton;
 @property (nonatomic, strong) UIBarButtonItem *menuButton;
 //@property (nonatomic, strong) THLMenuView *menuView;
@@ -56,19 +42,15 @@ UICollectionViewDelegateFlowLayout
 @synthesize responseCommand = _responseCommand;
 @synthesize showMenuCommand = _showMenuCommand;
 @synthesize menuAddCommand = _menuAddCommand;
-@synthesize showActivityIndicator = _showActivityIndicator;
 @synthesize reviewerStatus = _reviewerStatus;
-@synthesize popup = _popup;
 @synthesize viewAppeared;
-@synthesize callToken = _callToken;
+//@synthesize callToken = _callToken;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self constructView];
     [self layoutView];
     [self bindView];
-//    [_refreshCommand execute:nil];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -85,30 +67,11 @@ UICollectionViewDelegateFlowLayout
     _collectionView = [self newCollectionView];
     _dismissButton = [self newBackBarButtonItem];
     _menuButton = [self newMenuBarButtonItem];
-//    _actionContainerView = [self newActionContainerView];
     _actionBarButton = [self newActionBarButton];
-    _confirmationPopupView = [self newConfirmationPopupView];
-}
-
-
-# pragma mark - phone kit
-- (void)handleCallActionWithCallerdId:(NSString *)twilioNumber toHostNumber:(NSString *)hostNumber {
-    [self setupPhoneKitWithToken];
-    [self presentViewController:self.callViewController animated:YES completion:nil];
-    [PKTPhone sharedPhone].callerId = twilioNumber;
-    [[PKTPhone sharedPhone] call:hostNumber];
-}
-
-- (void)setupPhoneKitWithToken
-{
-        [PKTPhone sharedPhone].capabilityToken = _callToken;
-        NSLog(@"Token has been set with capabilities: %@", [PKTPhone sharedPhone].phoneDevice.capabilities);
-        self.callViewController = [PKTCallViewController new];
-        [PKTPhone sharedPhone].delegate = self.callViewController;
 }
 
 //--------------------------------------------------
-# pragma mark - show/hide guestlist
+# pragma mark - show/hide guestlist menu
 - (void)showGuestlistMenuView:(UIView *)menuView {
     [self.parentViewController.view addSubview:menuView];
     [menuView makeConstraints:^(MASConstraintMaker *make) {
@@ -121,18 +84,6 @@ UICollectionViewDelegateFlowLayout
     [menuView removeFromSuperview];
 }
 //---------------------------------------------------
-
-
-//---------------------------------------------------
-#pragma mark - hide Menu Button
-- (void)hideShowMenuButton {
-    [self.menuButton setEnabled:NO];
-    [self.menuButton setTintColor:[UIColor clearColor]];
-}
-//---------------------------------------------------
-
-
-
 
 - (void)layoutView {
     [self.view addSubviews:@[_collectionView, _actionBarButton]];
@@ -181,41 +132,35 @@ UICollectionViewDelegateFlowLayout
     }];
     
     RAC(self.actionBarButton, rac_command) = RACObserve(self, responseCommand);
-    RAC(self.confirmationPopupView, acceptCommand) = RACObserve(self, acceptCommand);
-    RAC(self.confirmationPopupView, declineCommand) = RACObserve(self, declineCommand);
     RAC(self.menuButton, rac_command) = RACObserve(self, showMenuCommand);
-
-    [RACObserve(self, showActivityIndicator) subscribeNext:^(id _) {
-        switch (WSELF.showActivityIndicator) {
-            case THLActivityStatusNone:
-                [SVProgressHUD dismiss];
-                break;
-            case THLActivityStatusInProgress:
-                [SVProgressHUD show];
-                break;
-            case THLActivityStatusSuccess:
-                [SVProgressHUD showSuccessWithStatus:@"Success!"];
-                break;
-            case THLActivityStatusError:
-                [SVProgressHUD showErrorWithStatus:@"Error!"];
-                break;
-            default:
-                break;
-        }
-    }];
     
     [RACObserve(self, reviewerStatus) subscribeNext:^(NSNumber *status) {
         if (status == [NSNumber numberWithInteger:0]) {
             [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Accept or Decline Invite", nil)];
             [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
+            [_menuButton setTitleTextAttributes:
+             [NSDictionary dictionaryWithObjectsAndKeys:
+              [UIColor clearColor], NSForegroundColorAttributeName,nil]
+                                forState:UIControlStateNormal];
+            _menuButton.enabled = NO;
         }
         else if (status == [NSNumber numberWithInteger:1]) {
             [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"LEAVE GUESTLIST", nil)];
             [WSELF actionBarButton].backgroundColor = kTHLNUIRedColor;
+            [_menuButton setTitleTextAttributes:
+             [NSDictionary dictionaryWithObjectsAndKeys:
+              kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
+                                       forState:UIControlStateNormal];
+            _menuButton.enabled = YES;
         }
         else if (status == [NSNumber numberWithInteger:2]) {
             [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"ADD GUESTS", nil)];
             [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
+            [_menuButton setTitleTextAttributes:
+             [NSDictionary dictionaryWithObjectsAndKeys:
+              kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
+                                       forState:UIControlStateNormal];
+            _menuButton.enabled = YES;
         }
         else if (status == [NSNumber numberWithInteger:3]) {
             [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Accept or Decline Guestlist", nil)];
@@ -281,36 +226,10 @@ UICollectionViewDelegateFlowLayout
 
 }
 
-//- (THLActionContainerView *)newActionContainerView {
-//    THLActionContainerView *actionContainerView = [THLActionContainerView new];
-//    actionContainerView.backgroundColor = kTHLNUISecondaryBackgroundColor;
-//    return actionContainerView;
-//}
-
 - (THLActionBarButton *)newActionBarButton {
     THLActionBarButton *actionBarButton = [THLActionBarButton new];
     [actionBarButton.morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Accept or Decline Invite", nil)];
     return actionBarButton;
-}
-
-- (THLConfirmationPopupView *)newConfirmationPopupView {
-    THLConfirmationPopupView *confirmationPopupView = [THLConfirmationPopupView new];
-    return confirmationPopupView;
-}
-
-#pragma mark - Action Guard
-- (void)confirmActionWithMessage:(NSString *)text acceptTitle:(NSString *)acceptTitle declineTitle:(NSString *)declineTitle {
-    _popup = [KLCPopup popupWithContentView:_confirmationPopupView
-                                            showType:KLCPopupShowTypeBounceIn
-                                         dismissType:KLCPopupDismissTypeBounceOut
-                                            maskType:KLCPopupMaskTypeDimmed
-                            dismissOnBackgroundTouch:NO
-                               dismissOnContentTouch:NO];
-    _confirmationPopupView.confirmationText = text;
-    [_confirmationPopupView.acceptButton setTitle:acceptTitle animateChanges:NO];
-    [_confirmationPopupView.declineButton setTitle:declineTitle animateChanges:NO];
-    _popup.dimmedMaskAlpha = 0.9;
-    [_popup show];
 }
 
 #pragma mark - UICollectionViewDelegate

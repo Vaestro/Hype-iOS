@@ -132,7 +132,6 @@ static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
 }
 
 - (void)guestLayoutUpdate {
-    [self.contactHostButton setHidden:YES];
     [self.addGuestsButton setHidden:YES];
     
     WEAKSELF();

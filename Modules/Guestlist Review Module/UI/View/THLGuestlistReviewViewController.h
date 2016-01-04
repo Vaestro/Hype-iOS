@@ -14,5 +14,4 @@
 @class PKTCallViewController;
 
 @interface THLGuestlistReviewViewController : UIViewController<THLGuestlistReviewView>
-@property (nonatomic, strong) PKTCallViewController *callViewController;
 @end
