@@ -43,7 +43,7 @@ UICollectionViewDelegateFlowLayout
 @property (nonatomic, strong) THLConfirmationPopupView *confirmationPopupView;
 @property (nonatomic, strong) UIBarButtonItem *dismissButton;
 @property (nonatomic, strong) UIBarButtonItem *menuButton;
-@property (nonatomic, strong) THLMenuView *menuView;
+//@property (nonatomic, strong) THLMenuView *menuView;
 @end
 
 @implementation THLGuestlistReviewViewController
@@ -107,7 +107,7 @@ UICollectionViewDelegateFlowLayout
         [PKTPhone sharedPhone].delegate = self.callViewController;
 }
 
-
+//--------------------------------------------------
 # pragma mark - show/hide guestlist
 - (void)showGuestlistMenuView:(UIView *)menuView {
     [self.parentViewController.view addSubview:menuView];
@@ -120,6 +120,19 @@ UICollectionViewDelegateFlowLayout
 - (void)hideGuestlistMenuView:(UIView *)menuView {
     [menuView removeFromSuperview];
 }
+//---------------------------------------------------
+
+
+//---------------------------------------------------
+#pragma mark - hide Menu Button
+- (void)hideShowMenuButton {
+    [self.menuButton setEnabled:NO];
+    [self.menuButton setTintColor:[UIColor clearColor]];
+}
+//---------------------------------------------------
+
+
+
 
 - (void)layoutView {
     [self.view addSubviews:@[_collectionView, _actionBarButton]];

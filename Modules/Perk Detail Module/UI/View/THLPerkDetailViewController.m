@@ -64,7 +64,7 @@
     WEAKSELF();
     [_imageView makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.insets(kTHLEdgeInsetsNone());
-        make.height.equalTo([WSELF view].height).multipliedBy(0.33);
+        make.height.equalTo(SCREEN_HEIGHT * 0.33);
     }];
     
     [_itemNameLabel makeConstraints:^(MASConstraintMaker *make) {
