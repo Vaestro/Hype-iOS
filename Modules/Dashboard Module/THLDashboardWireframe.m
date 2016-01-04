@@ -10,14 +10,12 @@
 #import "THLDashboardPresenter.h"
 #import "THLDashboardInteractor.h"
 #import "THLDashboardDataManager.h"
-#import "THLDashboardViewController.h"
 
 @interface THLDashboardWireframe()
 @property (nonatomic, strong) UIViewController *viewController;
 
 @property (nonatomic, strong) THLDashboardInteractor *interactor;
 @property (nonatomic, strong) THLDashboardDataManager *dataManager;
-@property (nonatomic, strong) THLDashboardViewController *view;
 @property (nonatomic, strong) THLDashboardPresenter *presenter;
 @end
 

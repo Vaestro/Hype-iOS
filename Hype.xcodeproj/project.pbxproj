@@ -151,6 +151,7 @@
 		79ABA9B71C053ED6001ABAC7 /* THLDashboardNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79ABA9B61C053ED6001ABAC7 /* THLDashboardNotificationCell.m */; };
 		79ABA9BC1C054F42001ABAC7 /* THLDashboardNotificationCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79ABA9BB1C054F42001ABAC7 /* THLDashboardNotificationCellViewModel.m */; };
 		79AD95F41C30CFC400EDB82E /* THLNeedToKnowInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79AD95F31C30CFC400EDB82E /* THLNeedToKnowInfoView.m */; };
+		79AD95F71C3ADA6200EDB82E /* THLEventDetailMusicTypesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79AD95F61C3ADA6200EDB82E /* THLEventDetailMusicTypesView.m */; };
 		79B959231BE57C9D00B87799 /* THLGuestlistReviewWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959221BE57C9D00B87799 /* THLGuestlistReviewWireframe.m */; };
 		79B959291BE581A800B87799 /* THLGuestlistReviewDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959281BE581A800B87799 /* THLGuestlistReviewDataManager.m */; };
 		79B9592C1BE581BB00B87799 /* THLGuestlistReviewInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B9592B1BE581BB00B87799 /* THLGuestlistReviewInteractor.m */; };
@@ -589,6 +590,8 @@
 		79ABA9BB1C054F42001ABAC7 /* THLDashboardNotificationCellViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLDashboardNotificationCellViewModel.m; sourceTree = "<group>"; };
 		79AD95F21C30CFC400EDB82E /* THLNeedToKnowInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLNeedToKnowInfoView.h; sourceTree = "<group>"; };
 		79AD95F31C30CFC400EDB82E /* THLNeedToKnowInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLNeedToKnowInfoView.m; sourceTree = "<group>"; };
+		79AD95F51C3ADA6200EDB82E /* THLEventDetailMusicTypesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventDetailMusicTypesView.h; sourceTree = "<group>"; };
+		79AD95F61C3ADA6200EDB82E /* THLEventDetailMusicTypesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventDetailMusicTypesView.m; sourceTree = "<group>"; };
 		79B9591B1BE5783500B87799 /* THLGuestlistReviewModuleInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistReviewModuleInterface.h; sourceTree = "<group>"; };
 		79B9591D1BE578A200B87799 /* THLGuestlistReviewModuleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistReviewModuleDelegate.h; sourceTree = "<group>"; };
 		79B959211BE57C9D00B87799 /* THLGuestlistReviewWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistReviewWireframe.h; sourceTree = "<group>"; };
@@ -1175,6 +1178,8 @@
 				790603BC1BF5B6810093335E /* THLPromotionInfoView.m */,
 				79AD95F21C30CFC400EDB82E /* THLNeedToKnowInfoView.h */,
 				79AD95F31C30CFC400EDB82E /* THLNeedToKnowInfoView.m */,
+				79AD95F51C3ADA6200EDB82E /* THLEventDetailMusicTypesView.h */,
+				79AD95F61C3ADA6200EDB82E /* THLEventDetailMusicTypesView.m */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -3286,6 +3291,7 @@
 				CBE54720F63BA2DE2136B454 /* THLViewDataSource+Factory.m in Sources */,
 				794AFE271C10C41B008475B1 /* THLHostDashboardTicketCell.m in Sources */,
 				CBE5403C8B7732B36D5ECB5E /* THLViewDataSourceGrouping.m in Sources */,
+				79AD95F71C3ADA6200EDB82E /* THLEventDetailMusicTypesView.m in Sources */,
 				CBE547FB5677C373C1DE74C7 /* THLViewDataSourceSorting.m in Sources */,
 				79B959481BE894B800B87799 /* THLPopupNotificationView.m in Sources */,
 				C85EE3901C1BCA500008C14B /* THLPerkDetailInteractor.m in Sources */,

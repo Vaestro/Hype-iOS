@@ -8,8 +8,12 @@
 
 @protocol THLDashboardModuleInterface;
 @class THLEventEntity;
+@class THLGuestlistEntity;
+@class THLGuestlistInviteEntity;
+
 @protocol THLDashboardModuleDelegate <NSObject>
 - (void)dashboardModule:(id<THLDashboardModuleInterface>)module didClickToViewEvent:(THLEventEntity *)event;
+- (void)dashboardModule:(id<THLDashboardModuleInterface>)module didClickToViewGuestlist:(THLGuestlistEntity *)guestlistEntity guestlistInvite:(THLGuestlistInviteEntity *)guestlistInviteEntity presentGuestlistReviewInterfaceOnController:(UIViewController *)controller;
 - (void)userNeedsLoginOnViewController:(UIViewController *)viewController;
 
 @end

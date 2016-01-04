@@ -24,6 +24,15 @@
     return self.response == THLStatusDeclined;
 }
 
+- (BOOL)guestlistIsAccepted {
+    return [self.guestlist isAccepted];
+}
+
+- (BOOL)guestlistIsDeclined {
+    return [self.guestlist isDeclined];
+}
+
+
 - (BOOL)isOwnerInvite {
     return [self.guestlist.owner.objectId isEqualToString:[THLUser currentUser].objectId];
 }

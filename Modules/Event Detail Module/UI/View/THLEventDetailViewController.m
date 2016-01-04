@@ -18,15 +18,20 @@
 
 #import "THLAppearanceConstants.h"
 #import "THLPromotionInfoView.h"
+#import "THLEventDetailMusicTypesView.h"
 
 @interface THLEventDetailViewController()
 @property (nonatomic, strong) ORStackScrollView *scrollView;
 @property (nonatomic, strong) UILabel *eventNameLabel;
 @property (nonatomic, strong) UILabel *dateLabel;
 @property (nonatomic, strong) THLEventDetailsPromotionInfoView *promotionInfoView;
+@property (nonatomic, strong) THLEventDetailsLocationInfoView *locationInfoView;
 @property (nonatomic, strong) THLNeedToKnowInfoView *needToKnowInfoView;
+@property (nonatomic, strong) THLEventDetailMusicTypesView *musicTypesView;
 @property (nonatomic, strong) THLActionBarButton *bottomBar;
 @property (nonatomic) BOOL showPromotionInfoView;
+@property (nonatomic, strong) THLEventDetailsMapView *mapView;
+
 @end
 
 @implementation THLEventDetailViewController
@@ -40,6 +45,8 @@
 @synthesize locationName;
 @synthesize locationInfo;
 @synthesize locationAddress;
+@synthesize locationAttireRequirement;
+@synthesize locationMusicTypes;
 @synthesize dismissCommand;
 @synthesize locationPlacemark;
 @synthesize actionBarButtonStatus;
@@ -70,21 +77,12 @@
     _scrollView = [self newScrollView];
     _promotionInfoView = [self newPromotionInfoView];
     _needToKnowInfoView = [self newNeedToKnowInfoView];
+    _locationInfoView = [self newLocationInfoView];
     _eventNameLabel = [self newEventNameLabel];
     _dateLabel = [self newDateLabel];
     _bottomBar = [self newBottomBar];
-}
-
-- (void)showDetailsView:(UIView *)detailView {
-    [self.parentViewController.view addSubview:detailView];
-    [detailView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.left.right.insets(kTHLEdgeInsetsNone());
-    }];
-    [self.parentViewController.view bringSubviewToFront:detailView];
-}
-
-- (void)hideDetailsView:(UIView *)detailView {
-    [detailView removeFromSuperview];
+    _mapView = [self newMapView];
+    _musicTypesView = [self newMusicTypesView];
 }
 
 - (void)layoutView {
@@ -92,23 +90,34 @@
     [self.view addSubviews:@[_scrollView, _bottomBar]];
     
     [_scrollView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
-        make.top.insets(kTHLEdgeInsetsHigh());
+        make.top.left.right.insets(kTHLEdgeInsetsNone());
     }];
     
     [_scrollView.stackView addSubview:_eventNameLabel
                   withPrecedingMargin:kTHLPaddingHigh()
-                           sideMargin:kTHLPaddingNone()];
+                           sideMargin:kTHLPaddingHigh()];
     
     [_scrollView.stackView addSubview:_dateLabel
                   withPrecedingMargin:kTHLPaddingHigh()
-                           sideMargin:kTHLPaddingNone()];
+                           sideMargin:4*kTHLPaddingHigh()];
     
     [_scrollView.stackView addSubview:_promotionInfoView
                   withPrecedingMargin:2*kTHLPaddingHigh()
-                           sideMargin:kTHLPaddingNone()];
+                           sideMargin:4*kTHLPaddingHigh()];
     
     [_scrollView.stackView addSubview:_needToKnowInfoView
+                  withPrecedingMargin:kTHLPaddingHigh()
+                           sideMargin:4*kTHLPaddingHigh()];
+    
+    [_scrollView.stackView addSubview:_locationInfoView
+                  withPrecedingMargin:kTHLPaddingHigh()
+                           sideMargin:4*kTHLPaddingHigh()];
+    
+    [_scrollView.stackView addSubview:_musicTypesView
+                  withPrecedingMargin:kTHLPaddingHigh()
+                           sideMargin:4*kTHLPaddingHigh()];
+    
+    [_scrollView.stackView addSubview:_mapView
                   withPrecedingMargin:kTHLPaddingHigh()
                            sideMargin:kTHLPaddingNone()];
     
@@ -125,9 +134,17 @@
     
     RAC(self.promotionInfoView, promotionInfo) = RACObserve(self, promoInfo);
     RAC(self.promotionInfoView, promoImageURL) = RACObserve(self, promoImageURL);
-    
+    RAC(self.locationInfoView, locationInfo) = RACObserve(self, locationInfo);
+
     RAC(self.needToKnowInfoView, ratioText) = RACObserve(self, ratioInfo);
     RAC(self.needToKnowInfoView, coverFeeText) = RACObserve(self, coverInfo);
+    RAC(self.needToKnowInfoView, attireRequirement) = RACObserve(self, locationAttireRequirement);
+    RAC(self.musicTypesView, musicTypesInfo) = RACObserve(self, locationMusicTypes);
+
+    RAC(self.mapView, locationName) = RACObserve(self, locationName);
+    RAC(self.mapView, locationAddress) = RACObserve(self, locationAddress);
+    RAC(self.mapView, locationPlacemark) = RACObserve(self, locationPlacemark);
+    
     [RACObserve(WSELF, actionBarButtonStatus) subscribeNext:^(id _) {
         [WSELF updateBottomBar];
     }];
@@ -193,6 +210,21 @@
     return needToKnowInfoView;
 }
 
+- (THLEventDetailsLocationInfoView *)newLocationInfoView {
+    THLEventDetailsLocationInfoView *infoView = [THLEventDetailsLocationInfoView new];
+    infoView.title = NSLocalizedString(@"WHY WE LIKE IT", nil);
+    infoView.translatesAutoresizingMaskIntoConstraints = NO;
+    infoView.dividerColor = [UIColor whiteColor];
+    return infoView;
+}
+
+- (THLEventDetailMusicTypesView *)newMusicTypesView {
+    THLEventDetailMusicTypesView *musicTypesView = [THLEventDetailMusicTypesView new];
+    musicTypesView.title = NSLocalizedString(@"MUSIC", nil);
+    musicTypesView.translatesAutoresizingMaskIntoConstraints = NO;
+    return musicTypesView;
+}
+
 - (THLActionBarButton *)newBottomBar {
     THLActionBarButton *bottomBar = [THLActionBarButton new];
 //    [bottomBar.morphingLabel setTextWithoutMorphing:NSLocalizedString(actionBarButtonStatus, nil)];
@@ -210,6 +242,13 @@
     return label;
 }
 
+- (THLEventDetailsMapView *)newMapView {
+    THLEventDetailsMapView *mapView = [THLEventDetailsMapView new];
+    //    mapView.title = NSLocalizedString(@"ADDRESS", nil);
+    mapView.translatesAutoresizingMaskIntoConstraints = NO;
+    //    mapView.dividerColor = [UIColor whiteColor];
+    return mapView;
+}
 
 //- (void)dealloc {
 //    NSLog(@"Destroyed %@", self);

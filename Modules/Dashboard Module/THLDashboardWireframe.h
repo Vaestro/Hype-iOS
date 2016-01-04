@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "THLDashboardModuleInterface.h"
+#import "THLDashboardViewController.h"
 
 @protocol THLGuestlistServiceInterface;
 @protocol THLViewDataSourceFactoryInterface;
@@ -16,6 +17,7 @@
 
 @interface THLDashboardWireframe : NSObject
 @property (nonatomic, readonly) id<THLDashboardModuleInterface> moduleInterface;
+@property (nonatomic, strong) THLDashboardViewController *view;
 
 #pragma mark - Dependencies
 @property (nonatomic, readonly, weak) id<THLGuestlistServiceInterface> guestlistService;

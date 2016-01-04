@@ -85,30 +85,15 @@
     __block THLGuestlistInviteEntity *guestlistInvite;
     [self.roConnection readWithBlock:^(YapDatabaseReadTransaction * _Nonnull transaction) {
         [transaction enumerateKeysAndObjectsInCollection:@"kTHLGuestlistInviteEntityDataStoreKey" usingBlock:^(NSString * _Nonnull key, id  _Nonnull object, BOOL * _Nonnull stop) {
-            if ([[(THLGuestlistInviteEntity *)object guestlist].eventId isEqualToString:event.objectId] &&
-                [[(THLGuestlistInviteEntity *)object guest].objectId isEqualToString:[THLUser currentUser].objectId]) {
+            if ([[(THLGuestlistInviteEntity *)object guestlist].eventId isEqualToString:event.objectId]
+                && [[(THLGuestlistInviteEntity *)object guest].objectId isEqualToString:[THLUser currentUser].objectId]
+                && [(THLGuestlistInviteEntity *)object isAccepted]) {
                 guestlistInvite = (THLGuestlistInviteEntity *)object;
             }
         }];
     }];
     [completionSource setResult:guestlistInvite];
     return completionSource.task;
-    
-//    return [[_guestlistService fetchGuestlistInviteForUser:user atEvent:event] continueWithSuccessBlock:^id(BFTask *task) {
-//        THLGuestlistInvite *fetchedGuestlistInvite = task.result;
-//        THLGuestlistInviteEntity *mappedGuestlistInvite = [WSELF.entityMapper mapGuestlistInvite:fetchedGuestlistInvite];
-//        // Add an object
-//        [self.rwConnection readWriteWithBlock:^(YapDatabaseReadWriteTransaction *transaction) {
-//            [transaction setObject:mappedGuestlistInvite forKey:mappedGuestlistInvite.objectId inCollection:@"kTHLGuestlistInviteEntityDataStoreKey"];
-//        }];
-//        
-//        // Read it back
-//        [self.roConnection readWithBlock:^(YapDatabaseReadTransaction *transaction) {
-//            NSLog(@"%@ World", [transaction objectForKey:mappedGuestlistInvite.objectId inCollection:@"kTHLGuestlistInviteEntityDataStoreKey"]);
-//        }];
-//        
-//        return mappedGuestlistInvite;
-//    }];
 }
 
 - (void)addGuestlistInviteObserver {
@@ -132,7 +117,11 @@
     // Update views if needed
     if ([_connection hasChangeForCollection:@"kTHLGuestlistInviteEntityDataStoreKey" inNotifications:notifications]) {
         [[self fetchGuestlistInviteForEvent:_event] continueWithSuccessBlock:^id(BFTask *task) {
-            [SSELF.delegate dataManager:SSELF didGetNotifiedAboutNewGuestlistInvite:task.result forEvent:_event error:task.error];
+            if ([[(THLGuestlistInviteEntity *)task.result guestlist].eventId isEqualToString:_event.objectId]
+                && [[(THLGuestlistInviteEntity *)task.result guest].objectId isEqualToString:[THLUser currentUser].objectId]
+                && [(THLGuestlistInviteEntity *)task.result isAccepted]) {
+                [SSELF.delegate dataManager:SSELF didGetNotifiedAboutNewGuestlistInvite:task.result forEvent:_event error:task.error];
+            }
             return nil;
         }];
     }

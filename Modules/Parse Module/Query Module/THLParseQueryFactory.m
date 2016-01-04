@@ -89,7 +89,7 @@
     PFQuery *query = [self baseGuestlistInviteQuery];
     [query whereKey:@"phoneNumber" equalTo:[THLUser currentUser].phoneNumber];
 //    TODO: Improve Date + Remove Reponse filtering to fetch all guestlistInvites
-    [query whereKey:@"date" greaterThanOrEqualTo:[[NSDate date] dateByAddingTimeInterval:-60*300]];
+//    [query whereKey:@"date" greaterThanOrEqualTo:[[NSDate date] dateByAddingTimeInterval:-60*300]];
     [query orderByAscending:@"date"];
     [query whereKey:@"response" notEqualTo:[NSNumber numberWithInteger:2]];
     return query;

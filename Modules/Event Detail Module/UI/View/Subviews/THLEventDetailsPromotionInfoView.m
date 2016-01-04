@@ -12,7 +12,7 @@
 static CGFloat const kTHLEventDetailsPromotionInfoViewImageViewHeight = 150;
 
 @interface THLEventDetailsPromotionInfoView()
-@property (nonatomic, strong) UITextView *textView;
+@property (nonatomic, strong) UILabel *eventDetailsLabel;
 @property (nonatomic, strong) UIImageView *imageView;
 @end
 
@@ -20,23 +20,23 @@ static CGFloat const kTHLEventDetailsPromotionInfoViewImageViewHeight = 150;
 
 - (void)constructView {
     [super constructView];
-    _textView = [self newTextView];
+    _eventDetailsLabel = [self newEventDetailsLabel];
     _imageView = [self newImageView];
 }
 
 - (void)layoutView {
     [super layoutView];
-    [self.contentView addSubviews:@[_textView,
+    [self.contentView addSubviews:@[_eventDetailsLabel,
                                     _imageView]];
     WEAKSELF();
-    [_textView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(kTHLEdgeInsetsNone());
+    [_eventDetailsLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(kTHLEdgeInsetsLow());
         make.left.right.equalTo(kTHLEdgeInsetsNone());
     }];
     
     [_imageView makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(kTHLEdgeInsetsNone());
-        make.top.equalTo([WSELF textView].mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.top.equalTo([WSELF eventDetailsLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());
         make.bottom.equalTo(kTHLEdgeInsetsHigh());
         make.height.equalTo(kTHLEventDetailsPromotionInfoViewImageViewHeight);
     }];
@@ -45,7 +45,7 @@ static CGFloat const kTHLEventDetailsPromotionInfoViewImageViewHeight = 150;
 - (void)bindView {
     WEAKSELF();
     [super bindView];
-    RAC(self.textView, text) = RACObserve(self, promotionInfo);
+    RAC(self.eventDetailsLabel, text) = RACObserve(self, promotionInfo);
     
     [[RACObserve(self, promoImageURL) filter:^BOOL(NSURL *url) {
         return [url isValid];
@@ -68,13 +68,10 @@ static CGFloat const kTHLEventDetailsPromotionInfoViewImageViewHeight = 150;
 }
 
 #pragma mark - Constructors
-- (UITextView *)newTextView {
-    UITextView *textView = THLNUITextView(kTHLNUIDetailTitle);
-    [textView setScrollEnabled:NO];
-    [textView setEditable:NO];
-    [textView setSelectable:NO];
-
-    return textView;
+- (UILabel *)newEventDetailsLabel {
+    UILabel *eventDetailsLabel = THLNUILabel(kTHLNUIDetailTitle);
+    eventDetailsLabel.numberOfLines = 0;
+    return eventDetailsLabel;
 }
 
 - (UIImageView *)newImageView {

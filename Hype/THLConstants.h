@@ -40,11 +40,11 @@ typedef NS_OPTIONS(NSInteger, THLActivityStatus) {
 };
 
 typedef NS_ENUM(NSInteger, THLAttireType) {
-    THLAttireTypeCasual = 0,
+    THLAttireTypeFestive = 0,
+    THLAttireTypeCasual,
     THLAttireTypeDressyCasual,
     THLAttireTypeBusinessCasual,
     THLAttireTypeBusinessFormal,
-    THLAttireTypeFestive,
     THLAttireTypeSemiFormal,
     THLAttireTypeBlackTieOptional,
     THLAttireTypeBlackTie,

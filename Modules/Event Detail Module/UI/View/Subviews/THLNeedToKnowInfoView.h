@@ -11,5 +11,7 @@
 @interface THLNeedToKnowInfoView : THLTitledContentView
 @property (nonatomic, copy) NSString *ratioText;
 @property (nonatomic, copy) NSString *coverFeeText;
-@property (nonatomic) THLAttireType attireType;
+@property (nonatomic, copy) NSString *attireRequirement;
+@property (nonatomic, copy) NSString *musicTypes;
+
 @end

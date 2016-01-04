@@ -108,7 +108,7 @@ THLDashboardInteractorDelegate
 
 - (void)handleIndexPathSelection:(NSIndexPath *)indexPath {
     THLGuestlistInviteEntity *guestlistInviteEntity = [[_view dataSource] untransformedItemAtIndexPath:indexPath];
-    [self.moduleDelegate dashboardModule:self didClickToViewEvent:guestlistInviteEntity.guestlist.promotion.event];
+    [self.moduleDelegate dashboardModule:self didClickToViewGuestlist:guestlistInviteEntity.guestlist guestlistInvite:guestlistInviteEntity presentGuestlistReviewInterfaceOnController:_wireframe.view.view.window.rootViewController];
 }
 
 #pragma mark - THLDashboardInteractorDelegate

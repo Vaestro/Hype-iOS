@@ -25,6 +25,10 @@
 	return [DTTimePeriod timePeriodWithStartDate:self endDate:self];
 }
 
+- (BOOL)thl_isOrAfterToday {
+    return [self isLaterThan:[[NSDate date] dateByAddingTimeInterval:-60*300]];
+}
+
 + (instancetype)thl_today {
 	NSDate *date = [NSDate date];
 	NSCalendar *calendar = [NSCalendar currentCalendar];

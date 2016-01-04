@@ -16,6 +16,8 @@
 @property (nonatomic, copy) NSString *stateCode;
 @property (nonatomic, copy) NSString *zipcode;
 @property (nonatomic, copy) NSString *neighborhood;
+@property (nonatomic, copy) NSArray *musicTypes;
+@property (nonatomic, copy) NSString *attireRequirement;
 @property (nonatomic, copy) NSURL *imageURL;
 @property (nonatomic) float latitude;
 @property (nonatomic) float longitude;
