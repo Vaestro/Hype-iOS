@@ -48,8 +48,6 @@
 - (void)presentInterfaceInController:(UIViewController *)controller {
     _controller = controller;
     [_presenter configureView:_view];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:_view];
-    
     CATransition *transition = [CATransition animation];
     transition.duration = 0.3;
     transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
@@ -57,7 +55,7 @@
     transition.subtype = kCATransitionFromRight;
     [_controller.view.window.layer addAnimation:transition forKey:nil];
     
-    [_controller presentViewController:navigationController animated:NO completion:NULL];
+    [_controller presentViewController:_view animated:NO completion:NULL];
 }
 
 - (void)dismissInterface {
@@ -66,9 +64,9 @@
     transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     transition.type = kCATransitionPush;
     transition.subtype = kCATransitionFromLeft;
-    [_view.navigationController.view.window.layer addAnimation:transition forKey:nil];
+    [_view.view.window.layer addAnimation:transition forKey:nil];
     
-    [_view.navigationController dismissViewControllerAnimated:NO completion:^{
+    [_view dismissViewControllerAnimated:NO completion:^{
         [_presenter.moduleDelegate dismissGuestlistReviewWireframe];
     }];
 }

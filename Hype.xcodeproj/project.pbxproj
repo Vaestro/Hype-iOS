@@ -223,6 +223,7 @@
 		C8E1B1621BF437F300A9824C /* THLUserProfileInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B1611BF437F300A9824C /* THLUserProfileInteractor.m */; };
 		C8E1B1651BF4380D00A9824C /* THLUserProfileDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B1641BF4380D00A9824C /* THLUserProfileDataManager.m */; };
 		C8E1B16B1BF43DA800A9824C /* THLUserProfileInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B16A1BF43DA800A9824C /* THLUserProfileInfoView.m */; };
+		C8E342091C3B1A9C009FE9B0 /* THLGuestlistReviewHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E342081C3B1A9C009FE9B0 /* THLGuestlistReviewHeaderView.m */; };
 		C8F2FB271BF81A8E004E00B6 /* THLInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F2FB261BF81A8E004E00B6 /* THLInformationViewController.m */; };
 		C8F2FB2A1BF826B7004E00B6 /* THLWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F2FB291BF826B7004E00B6 /* THLWebViewController.m */; };
 		CBE5403C8B7732B36D5ECB5E /* THLViewDataSourceGrouping.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE54FC98A366F3761F89F63 /* THLViewDataSourceGrouping.m */; };
@@ -727,6 +728,8 @@
 		C8E1B1641BF4380D00A9824C /* THLUserProfileDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLUserProfileDataManager.m; sourceTree = "<group>"; };
 		C8E1B1691BF43DA800A9824C /* THLUserProfileInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserProfileInfoView.h; sourceTree = "<group>"; };
 		C8E1B16A1BF43DA800A9824C /* THLUserProfileInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLUserProfileInfoView.m; sourceTree = "<group>"; };
+		C8E342071C3B1A9C009FE9B0 /* THLGuestlistReviewHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistReviewHeaderView.h; sourceTree = "<group>"; };
+		C8E342081C3B1A9C009FE9B0 /* THLGuestlistReviewHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestlistReviewHeaderView.m; sourceTree = "<group>"; };
 		C8F2FB251BF81A8E004E00B6 /* THLInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLInformationViewController.h; sourceTree = "<group>"; };
 		C8F2FB261BF81A8E004E00B6 /* THLInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLInformationViewController.m; sourceTree = "<group>"; };
 		C8F2FB281BF826B7004E00B6 /* THLWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLWebViewController.h; sourceTree = "<group>"; };
@@ -863,6 +866,7 @@
 		211005A81B8A3D5800A540C6 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				C8E342061C3A380D009FE9B0 /* THLGuestlistReviewHeaderView */,
 				79B959491BE8961800B87799 /* Alien */,
 				794AFE2D1C124693008475B1 /* Info VC */,
 				794208291BD82ADB009B86FA /* THLActionBar */,
@@ -2819,6 +2823,15 @@
 			path = "User Profile Cell";
 			sourceTree = "<group>";
 		};
+		C8E342061C3A380D009FE9B0 /* THLGuestlistReviewHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				C8E342071C3B1A9C009FE9B0 /* THLGuestlistReviewHeaderView.h */,
+				C8E342081C3B1A9C009FE9B0 /* THLGuestlistReviewHeaderView.m */,
+			);
+			name = THLGuestlistReviewHeaderView;
+			sourceTree = "<group>";
+		};
 		CBE54BB68ECECF48FD57301C /* THLViewDataSourceGrouping */ = {
 			isa = PBXGroup;
 			children = (
@@ -3121,6 +3134,7 @@
 				C85EE3A81C1BCB750008C14B /* THLPerkPresenter.m in Sources */,
 				2118921F1BAA088D00E8A11F /* THLLoginWireframe.m in Sources */,
 				2121734C1BB32B92007D817A /* THLPromotionSelectionInfoCardViewModel.m in Sources */,
+				C8E342091C3B1A9C009FE9B0 /* THLGuestlistReviewHeaderView.m in Sources */,
 				79BA91001C20ABA300731A38 /* main.m in Sources */,
 				211D0BB31B8CEE8B0073AFDD /* THLEventDetailViewController.m in Sources */,
 				79B9593E1BE7173D00B87799 /* THLGuestlistReviewCellViewModel.m in Sources */,
