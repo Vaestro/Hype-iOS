@@ -39,7 +39,8 @@
 THLLoginModuleDelegate,
 THLGuestFlowModuleDelegate,
 THLHostFlowModuleDelegate,
-THLPopupNotificationModuleDelegate
+THLPopupNotificationModuleDelegate,
+THLWaitlistPresenterDelegate
 >
 
 @property (nonatomic, strong) UIWindow *window;
@@ -94,16 +95,19 @@ THLPopupNotificationModuleDelegate
  */
 
 - (void)presentOnboardingAndLoginInterface {
-#ifdef ENABLE_WAITLIST
-	THLWaitlistPresenter *waitlistPresenter = [_dependencyManager newWaitlistPresenter];
-	_waitlistPresenter = waitlistPresenter;
-	[waitlistPresenter presentInterfaceInWindow:_window];
-#else
-	THLLoginWireframe *loginWireframe = [_dependencyManager newLoginWireframe];
-    _currentWireframe = loginWireframe;
-	[loginWireframe.moduleInterface setModuleDelegate:self];
-	[loginWireframe.moduleInterface presentLoginModuleInterfaceWithOnboardingInWindow:_window];
-#endif
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    BOOL userApproved = [userDefaults objectForKey:@"userApproved"];
+    if (userApproved) {
+        THLLoginWireframe *loginWireframe = [_dependencyManager newLoginWireframe];
+        _currentWireframe = loginWireframe;
+        [loginWireframe.moduleInterface setModuleDelegate:self];
+        [loginWireframe.moduleInterface presentLoginModuleInterfaceWithOnboardingInWindow:_window];
+    } else {
+        THLWaitlistPresenter *waitlistPresenter = [_dependencyManager newWaitlistPresenter];
+        _waitlistPresenter = waitlistPresenter;
+        _waitlistPresenter.delegate = self;
+        [waitlistPresenter presentInterfaceInWindow:_window];
+    }
 }
 
 - (void)presentLoginInterfaceOnViewController:(UIViewController *)viewController {
@@ -142,6 +146,11 @@ THLPopupNotificationModuleDelegate
 #pragma mark - THLPopupNotifcationDelegate
 - (void)popupNotificationModule:(id<THLPopupNotificationModuleInterface>)module userDidAcceptReviewForEvent:(THLEventEntity *)eventEntity {
     [self presentGuestFlowForEvent:eventEntity];
+}
+
+#pragma mark - THLWaitlistPresenterDelegate
+- (void)waitlistPresenter:(THLWaitlistPresenter *)presenter didGetApprovedWaitlistEntry:(THLWaitlistEntry *)waitlistEntry {
+    [self presentOnboardingAndLoginInterface];
 }
 
 #pragma mark - THLLoginModuleDelegate

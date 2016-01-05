@@ -35,10 +35,21 @@ static NSString *const kTHLWaitlistModelPinName = @"kTHLWaitlistModelPinName";
 			THLWaitlistEntry *existingEntry = (THLWaitlistEntry *)task.result;
 			self.entry = existingEntry;
 		}
-
-		[_delegate model:self didCheckForExistingEntry:(task.result != nil) error:task.result];
+        
+		[_delegate model:self didCheckForExistingEntry:self.entry error:task.result];
 		return nil;
 	}];
+}
+
+- (void)checkForApprovedWaitlistEntry {
+    [[self checkForExistingWaitlistEntryForEmail:self.entry.email] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id _Nullable(BFTask * _Nonnull task) {
+        if (task.result) {
+            THLWaitlistEntry *existingEntry = (THLWaitlistEntry *)task.result;
+            self.entry = existingEntry;
+            [_delegate model:self didCheckForExistingEntry:self.entry error:task.result];
+        }
+        return nil;
+    }];
 }
 
 - (PFQuery *)localEntryQuery {
@@ -56,6 +67,7 @@ static NSString *const kTHLWaitlistModelPinName = @"kTHLWaitlistModelPinName";
 		} else {
 			THLWaitlistEntry *newEntry = [THLWaitlistEntry object];
 			newEntry.email = email;
+            newEntry.approved = FALSE;
 			self.entry = newEntry;
 			return [newEntry saveInBackground];
 		}

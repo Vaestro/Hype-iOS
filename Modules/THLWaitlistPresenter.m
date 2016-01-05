@@ -10,6 +10,7 @@
 #import "THLWaitlistModel.h"
 #import "THLWaitlistSignupViewController.h"
 #import "THLWaitlistPositionViewController.h"
+#import "THLWaitlistEntry.h"
 
 @interface THLWaitlistPresenter()
 <
@@ -41,7 +42,6 @@ THLWaitlistSignupViewDelegate
 	_baseController = [UIViewController new];
 	window.rootViewController = _baseController;
 	[window makeKeyAndVisible];
-	
 	[_model checkForExisitngLocalWaitlistEntry];
 }
 
@@ -58,15 +58,31 @@ THLWaitlistSignupViewDelegate
 	[_model getWaitlistPosition];
 	[_signupView dismissViewControllerAnimated:NO completion:NULL];
 	[_baseController presentViewController:_positionView animated:NO completion:NULL];
+    [_model checkForApprovedWaitlistEntry];
 }
 
-- (void)model:(THLWaitlistModel *)model didCheckForExistingEntry:(BOOL)entryExists error:(NSError *)error {
-	if (entryExists) {
-		[self presentPositionView];
-	} else {
-		[self presentSignupView];
-	}
+- (void)model:(THLWaitlistModel *)model didCheckForExistingEntry:(THLWaitlistEntry *)waitlistEntry error:(NSError *)error {
+    if (waitlistEntry == nil) {
+        [self presentSignupView];
+    } else if (waitlistEntry.approved == FALSE) {
+        [self presentPositionView];
+    } else if (waitlistEntry.approved == TRUE) {
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        [userDefaults setBool:TRUE forKey:@"userApproved"];
+        [userDefaults synchronize];
+        
+        [_delegate waitlistPresenter:self didGetApprovedWaitlistEntry:waitlistEntry];
+    }
 }
+
+//- (void)model:(THLWaitlistModel *)model didCheckForApprovedEntry:(BOOL)approved error:(NSError *)error {
+//    if (approved) {
+//        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+//        [userDefaults setBool:TRUE forKey:@"userApproved"];
+//        
+//        [_delegate waitlistPresenter:self didGetApprovedWaitlistEntry:TRUE];
+//    }
+//}
 
 - (void)presentSignupView {
 	[_baseController presentViewController:_signupView animated:NO completion:NULL];

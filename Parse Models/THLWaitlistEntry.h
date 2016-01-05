@@ -12,4 +12,6 @@
 @interface THLWaitlistEntry : PFObject<PFSubclassing>
 @property (nonatomic, retain) NSString *email;
 @property (nonatomic, retain) NSString *code;
+@property (nonatomic) BOOL approved;
+
 @end

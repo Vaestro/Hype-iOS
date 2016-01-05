@@ -11,6 +11,7 @@
 @implementation THLWaitlistEntry
 @dynamic email;
 @dynamic code;
+@dynamic approved;
 
 + (void)load {
 	[self registerSubclass];

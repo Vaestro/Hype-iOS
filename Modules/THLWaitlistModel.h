@@ -13,7 +13,7 @@
 
 @protocol THLWaitlistModelDelegate <NSObject>
 - (void)modelDidCreateEntry:(THLWaitlistModel *)model error:(NSError *)error;
-- (void)model:(THLWaitlistModel *)model didCheckForExistingEntry:(BOOL)entryExists error:(NSError *)error;
+- (void)model:(THLWaitlistModel *)model didCheckForExistingEntry:(THLWaitlistEntry *)waitlistEntry error:(NSError *)error;
 - (void)model:(THLWaitlistModel *)model didGetWaitlistPosition:(NSInteger)position error:(NSError *)error;
 @end
 
@@ -24,6 +24,7 @@
 - (instancetype)init;
 
 - (void)checkForExisitngLocalWaitlistEntry;
+- (void)checkForApprovedWaitlistEntry;
 - (void)createWaitlistEntryForEmail:(NSString *)email;
 - (void)getWaitlistPosition;
 @end
