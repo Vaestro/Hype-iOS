@@ -36,7 +36,7 @@ static NSString *const kTHLWaitlistModelPinName = @"kTHLWaitlistModelPinName";
 			self.entry = existingEntry;
 		}
         
-		[_delegate model:self didCheckForExistingEntry:self.entry error:task.result];
+        [_delegate model:self didCheckForExistingEntry:(task.result != nil) error:task.result];
 		return nil;
 	}];
 }
@@ -46,7 +46,7 @@ static NSString *const kTHLWaitlistModelPinName = @"kTHLWaitlistModelPinName";
         if (task.result) {
             THLWaitlistEntry *existingEntry = (THLWaitlistEntry *)task.result;
             self.entry = existingEntry;
-            [_delegate model:self didCheckForExistingEntry:self.entry error:task.result];
+            [_delegate model:self didCheckForApprovedEntry:(existingEntry.approved == TRUE) error:task.result];
         }
         return nil;
     }];
@@ -109,4 +109,10 @@ static NSString *const kTHLWaitlistModelPinName = @"kTHLWaitlistModelPinName";
 	[query whereKey:@"createdAt" lessThan:self.entry.createdAt];
 	return query;
 }
+
+- (BOOL)isValidCode:(NSString *)code {
+	NSAssert(self.entry != nil, @"There must be an entry!");
+	return [code isEqualToString:self.entry.code];
+}
+
 @end

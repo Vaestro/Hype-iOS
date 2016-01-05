@@ -65,6 +65,7 @@ pod "TOMSMorphingLabel", "~> 0.5"
 pod 'DZNEmptyDataSet'
 pod "GKFadeNavigationController"
 pod 'IHKeyboardAvoiding'
+pod "SingleLineInput"
 end
 
 target 'HypeTests' do

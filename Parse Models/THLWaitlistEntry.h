@@ -9,6 +9,8 @@
 #import <Parse/Parse.h>
 #import "PFObject+Subclass.h"
 
+extern const NSInteger kTHLWaitlistCodeLength;
+
 @interface THLWaitlistEntry : PFObject<PFSubclassing>
 @property (nonatomic, retain) NSString *email;
 @property (nonatomic, retain) NSString *code;

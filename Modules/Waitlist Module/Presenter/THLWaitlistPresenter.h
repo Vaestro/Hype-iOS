@@ -11,7 +11,7 @@
 @class THLWaitlistPresenter;
 
 @protocol THLWaitlistPresenterDelegate <NSObject>
-- (void)waitlistPresenter:(THLWaitlistPresenter *)presenter didGetApprovedWaitlistEntry:(THLWaitlistEntry *)waitlistEntry;
+- (void)didApproveUserForApp;
 @end
 
 @interface THLWaitlistPresenter : NSObject

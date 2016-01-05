@@ -149,7 +149,7 @@ THLWaitlistPresenterDelegate
 }
 
 #pragma mark - THLWaitlistPresenterDelegate
-- (void)waitlistPresenter:(THLWaitlistPresenter *)presenter didGetApprovedWaitlistEntry:(THLWaitlistEntry *)waitlistEntry {
+- (void)didApproveUserForApp {
     [self presentOnboardingAndLoginInterface];
 }
 
