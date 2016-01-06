@@ -20,9 +20,9 @@
 }
 
 - (void)configureView:(id<THLEventHostingTableCellView>)cellView {
-    [cellView setGuestlistReviewStatus: _guestlistEntity.reviewStatus];
     [cellView setGuestlistTitle:NSStringWithFormat(@"%@'s Guestlist", _guestlistEntity.owner.firstName)];
     [cellView setImageURL:_guestlistEntity.owner.imageURL];
+    [cellView setGuestlistReviewStatus: _guestlistEntity.reviewStatus];
     switch (_guestlistEntity.reviewStatus) {
         case THLStatusPending: {
             [cellView setGuestlistReviewStatusTitle:@"Pending"];

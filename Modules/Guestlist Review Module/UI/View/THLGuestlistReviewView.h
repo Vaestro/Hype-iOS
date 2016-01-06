@@ -29,14 +29,21 @@ typedef NS_OPTIONS(NSInteger, THLGuestlistReviewerStatus) {
 @property (nonatomic, strong) RACCommand *declineCommand;
 @property (nonatomic, strong) RACCommand *responseCommand;
 @property (nonatomic, strong) RACCommand *refreshCommand;
+
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSString *formattedDate;
+@property (nonatomic, strong) NSURL *headerViewImage;
 @property (nonatomic, strong) RACCommand *dismissCommand;
 @property (nonatomic, strong) RACCommand *showMenuCommand;
+
 @property (nonatomic, strong) RACCommand *menuAddCommand;
+@property (nonatomic) THLStatus guestlistReviewStatus;
+@property (nonatomic, copy) NSString *guestlistReviewStatusTitle;
 
 @property (nonatomic) BOOL viewAppeared;
+
 - (void)showGuestlistMenuView:(UIView *)menuView;
 - (void)hideGuestlistMenuView:(UIView *)menuView;
 - (void)handleCallActionWithCallerdId:(NSString *)twilioNumber toHostNumber:(NSString *)hostNumber;
 - (void)confirmActionWithMessage:(NSString *)text acceptTitle:(NSString *)acceptTitle declineTitle:(NSString *)declineTitle;
-- (void)setShowMenuButton;
 @end

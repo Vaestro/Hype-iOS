@@ -12,39 +12,49 @@
 #import "THLGuestlistReviewCell.h"
 #import "THLGuestlistReviewCellViewModel.h"
 #import "THLActionBarButton.h"
+#import "THLGuestlistReviewHeaderView.h"
 #import "THLMenuView.h"
 
 #import "THLAppearanceConstants.h"
 #import "UIScrollView+SVPullToRefresh.h"
 
+#import "UIView+DimView.h"
+
+
+#define kGKHeaderHeight 150
+#define headerViewHeightCondensed = 20
+
 static UIEdgeInsets const COLLECTION_VIEW_EDGEINSETS = {10, 10, 10, 10};
 static CGFloat const CELL_SPACING = 10;
 
 @interface THLGuestlistReviewViewController()
-<
-UICollectionViewDelegate,
-UICollectionViewDelegateFlowLayout
->
+
+@property (nonatomic, strong) THLGuestlistReviewHeaderView *headerView;
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) THLActionBarButton *actionBarButton;
-@property (nonatomic, strong) UIBarButtonItem *dismissButton;
-@property (nonatomic, strong) UIBarButtonItem *menuButton;
-//@property (nonatomic, strong) THLMenuView *menuView;
+
+@property (nonatomic, strong) UIButton *dismissButton;
+@property (nonatomic, strong) UIButton *menuButton;
 @end
 
 @implementation THLGuestlistReviewViewController
 @synthesize dataSource = _dataSource;
 @synthesize showRefreshAnimation = _showRefreshAnimation;
 @synthesize refreshCommand = _refreshCommand;
-@synthesize dismissCommand = _dismissCommand;
 @synthesize acceptCommand = _acceptCommand;
 @synthesize declineCommand = _declineCommand;
 @synthesize responseCommand = _responseCommand;
-@synthesize showMenuCommand = _showMenuCommand;
 @synthesize menuAddCommand = _menuAddCommand;
 @synthesize reviewerStatus = _reviewerStatus;
 @synthesize viewAppeared;
-//@synthesize callToken = _callToken;
+
+@synthesize title = _title;
+@synthesize formattedDate = _formattedDate;
+@synthesize headerViewImage = _headerViewImage;
+@synthesize dismissCommand = _dismissCommand;
+@synthesize showMenuCommand = _showMenuCommand;
+@synthesize guestlistReviewStatus = _guestlistReviewStatus;
+@synthesize guestlistReviewStatusTitle = _guestlistReviewStatusTitle;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -64,16 +74,15 @@ UICollectionViewDelegateFlowLayout
 }
 
 - (void)constructView {
+    _headerView = [self newHeaderView];
     _collectionView = [self newCollectionView];
-    _dismissButton = [self newBackBarButtonItem];
-    _menuButton = [self newMenuBarButtonItem];
     _actionBarButton = [self newActionBarButton];
 }
 
 //--------------------------------------------------
 # pragma mark - show/hide guestlist menu
 - (void)showGuestlistMenuView:(UIView *)menuView {
-    [self.parentViewController.view addSubview:menuView];
+    [self.view addSubview:menuView];
     [menuView makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.bottom.insets(kTHLEdgeInsetsNone());
     }];
@@ -86,18 +95,27 @@ UICollectionViewDelegateFlowLayout
 //---------------------------------------------------
 
 - (void)layoutView {
-    [self.view addSubviews:@[_collectionView, _actionBarButton]];
+    [self.view addSubviews:@[_headerView, _collectionView, _actionBarButton]];
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.automaticallyAdjustsScrollViewInsets = YES;
     
-    self.navigationItem.leftBarButtonItem = _dismissButton;
-    self.navigationItem.rightBarButtonItem = _menuButton;
-    self.navigationItem.title = @"YOUR PARTY";
+//    self.navigationItem.leftBarButtonItem = _dismissButton;
+//    self.navigationItem.rightBarButtonItem = _menuButton;
+//    self.navigationItem.title = _navigationBarTitle;
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:_navigationBarImage]] forBarMetrics:UIBarMetricsDefault];
+
+//    [self.navigationController.navigationBar sizeThatFits:CGSizeMake(SCREEN_WIDTH, 300)];
+    
+    [_headerView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.insets(kTHLEdgeInsetsNone());
+        make.left.right.insets(kTHLEdgeInsetsNone());
+    }];
     
     WEAKSELF();
     [_collectionView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.insets(kTHLEdgeInsetsNone());
+//        make.top.insets(kTHLEdgeInsetsNone());
+        make.top.equalTo(WSELF.headerView.mas_bottom);
         make.left.right.insets(kTHLEdgeInsetsNone());
     }];
     
@@ -109,11 +127,20 @@ UICollectionViewDelegateFlowLayout
 
 - (void)bindView {
     WEAKSELF();
+    RAC(self.headerView, title) = RACObserve(self, title);
+//    RAC(self.headerView, formattedDate) = RACObserve(self, formattedDate);
+    RAC(self.headerView, headerViewImage) = RACObserve(self, headerViewImage);
+    RAC(self.headerView, dismissCommand) = RACObserve(self, dismissCommand);
+    RAC(self.headerView, showMenuCommand) = RACObserve(self, showMenuCommand);
+    RAC(self.headerView, formattedDate) = RACObserve(self, formattedDate);
+    RAC(self.headerView, guestlistReviewStatusTitle) = RACObserve(self, guestlistReviewStatusTitle);
+    RAC(self.headerView, guestlistReviewStatus) = RACObserve(self, guestlistReviewStatus);
+
     [RACObserve(self, dataSource) subscribeNext:^(THLViewDataSource *dataSource) {
         [WSELF configureDataSource:WSELF.dataSource];
     }];
     
-    RAC(self.dismissButton, rac_command) = RACObserve(self, dismissCommand);
+//    RAC(self.dismissButton, rac_command) = RACObserve(self, dismissCommand);
     
 
     [RACObserve(self, showRefreshAnimation) subscribeNext:^(NSNumber *val) {
@@ -133,34 +160,20 @@ UICollectionViewDelegateFlowLayout
     
     RAC(self.actionBarButton, rac_command) = RACObserve(self, responseCommand);
     RAC(self.menuButton, rac_command) = RACObserve(self, showMenuCommand);
-    
+
     [RACObserve(self, reviewerStatus) subscribeNext:^(NSNumber *status) {
         if (status == [NSNumber numberWithInteger:0]) {
             [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Accept or Decline Invite", nil)];
             [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
-            [_menuButton setTitleTextAttributes:
-             [NSDictionary dictionaryWithObjectsAndKeys:
-              [UIColor clearColor], NSForegroundColorAttributeName,nil]
-                                forState:UIControlStateNormal];
-            _menuButton.enabled = NO;
         }
         else if (status == [NSNumber numberWithInteger:1]) {
             [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"LEAVE GUESTLIST", nil)];
             [WSELF actionBarButton].backgroundColor = kTHLNUIRedColor;
-            [_menuButton setTitleTextAttributes:
-             [NSDictionary dictionaryWithObjectsAndKeys:
-              kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
-                                       forState:UIControlStateNormal];
-            _menuButton.enabled = YES;
+
         }
         else if (status == [NSNumber numberWithInteger:2]) {
             [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"ADD GUESTS", nil)];
             [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
-            [_menuButton setTitleTextAttributes:
-             [NSDictionary dictionaryWithObjectsAndKeys:
-              kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
-                                       forState:UIControlStateNormal];
-            _menuButton.enabled = YES;
         }
         else if (status == [NSNumber numberWithInteger:3]) {
             [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Accept or Decline Guestlist", nil)];
@@ -196,6 +209,11 @@ UICollectionViewDelegateFlowLayout
 }
 
 #pragma mark - Constructors
+- (THLGuestlistReviewHeaderView *)newHeaderView {
+    THLGuestlistReviewHeaderView *headerView = [THLGuestlistReviewHeaderView new];
+    return headerView;
+}
+
 - (UICollectionView *)newCollectionView {
     UICollectionViewFlowLayout *flowLayout = [UICollectionViewFlowLayout new];
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
@@ -205,25 +223,6 @@ UICollectionViewDelegateFlowLayout
     collectionView.alwaysBounceVertical = YES;
     collectionView.delegate = self;
     return collectionView;
-}
-
-- (UIBarButtonItem *)newBackBarButtonItem {
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:nil action:NULL];
-    [item setTitleTextAttributes:
-     [NSDictionary dictionaryWithObjectsAndKeys:
-      kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
-                        forState:UIControlStateNormal];
-    return item;
-}
-
-- (UIBarButtonItem *)newMenuBarButtonItem {
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:nil action:NULL];
-    [item setTitleTextAttributes:
-     [NSDictionary dictionaryWithObjectsAndKeys:
-      kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
-                        forState:UIControlStateNormal];
-    return item;
-
 }
 
 - (THLActionBarButton *)newActionBarButton {
@@ -244,6 +243,22 @@ UICollectionViewDelegateFlowLayout
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     return COLLECTION_VIEW_EDGEINSETS;
 }
+
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    CGFloat scrollOffsetY = scrollView.contentOffset.y;
+
+    if (scrollOffsetY > _headerView.frame.size.height) {
+        [self.headerView compressView];
+    }
+    
+    if (scrollOffsetY < _headerView.frame.size.height) {
+        [self.headerView uncompressView];
+    }
+    
+}
+
 
 - (void)dealloc {
     NSLog(@"Destroyed %@", self);

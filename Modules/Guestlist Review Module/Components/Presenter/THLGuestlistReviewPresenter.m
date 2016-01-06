@@ -10,6 +10,7 @@
 #import "THLGuestlistReviewWireframe.h"
 #import "THLGuestlistReviewInteractor.h"
 #import "THLGuestlistReviewView.h"
+#import "THLGuestlistReviewHeaderView.h"
 #import "THLMenuView.h"
 #import "THLAppearanceConstants.h"
 #import "Parse.h"
@@ -24,6 +25,7 @@
 #import "THLConfirmationView.h"
 #import "THLUserManager.h"
 #import "THLHostEntity.h"
+#import "THLUser.h"
 
 
 //phone kit
@@ -133,12 +135,11 @@ THLGuestlistReviewInteractorDelegate
     }];
     
     [_view setDataSource:dataSource];
-    [_view setDismissCommand:dismissCommand];
     [_view setAcceptCommand:acceptCommand];
     [_view setDeclineCommand:declineCommand];
     [_view setResponseCommand:_responseCommand];
     [_view setRefreshCommand:refreshCommand];
-
+    
     THLMenuView *menuView = [THLMenuView new];
     [self configureMenuView:menuView];
     
@@ -146,8 +147,35 @@ THLGuestlistReviewInteractorDelegate
         [WSELF.view showGuestlistMenuView:menuView];
         return [RACSignal empty];
     }];
+
     
+    [_view setHeaderViewImage:_guestlistInviteEntity.guestlist.promotion.event.location.imageURL];
+    NSString *userName = [THLUser currentUser].firstName;
+    NSString *venueLocation = _guestlistInviteEntity.guestlist.promotion.event.location.name;
+    [_view setTitle:[NSString stringWithFormat:@"%@'s List For %@", userName, venueLocation]];
+    [_view setDismissCommand:dismissCommand];
     [_view setShowMenuCommand:showMenuCommand];
+    [_view setFormattedDate: [NSString stringWithFormat:@"%@, %@", _guestlistInviteEntity.guestlist.promotion.event.date.thl_weekdayString, _guestlistInviteEntity.guestlist.promotion.event.date.thl_timeString]];
+    
+    [_view setGuestlistReviewStatus: _guestlistEntity.reviewStatus];
+    switch (_guestlistEntity.reviewStatus) {
+        case THLStatusPending: {
+            [_view setGuestlistReviewStatusTitle:@"Guestlist Pending"];
+            break;
+        }
+        case THLStatusAccepted: {
+            [_view setGuestlistReviewStatusTitle:@"Guestlist Accepted"];
+            
+            break;
+        }
+        case THLStatusDeclined: {
+            [_view setGuestlistReviewStatusTitle:@"Guestlist Declined"];
+            break;
+        }
+        default: {
+            break;
+        }
+    }
 }
 
 - (void)configureResponseView:(THLConfirmationView *)view {
