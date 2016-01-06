@@ -64,6 +64,8 @@ pod 'THContactPicker', '~> 1.2'
 pod "TOMSMorphingLabel", "~> 0.5"
 pod 'DZNEmptyDataSet'
 pod "GKFadeNavigationController"
+pod 'IHKeyboardAvoiding'
+pod "LRTextField"
 end
 
 #Phone Calls

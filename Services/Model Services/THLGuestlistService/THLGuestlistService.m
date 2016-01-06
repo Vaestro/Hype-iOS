@@ -213,6 +213,9 @@
                         [completedGuestlistInvites addObject:guestlistInvite];
                     } else {
                         [guestlistInvite setObject:[THLUser currentUser] forKey:@"Guest"];
+#warning INVITATION CODES SHOULD NOT BE SET TO NIL HERE (BAD CODE)
+                        [guestlistInvite setValue:nil forKey:@"invitationCode"];
+
                         [unfinishedGuestlistInvites addObject:guestlistInvite];
                     }
                 }

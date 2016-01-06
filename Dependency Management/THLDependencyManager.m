@@ -32,6 +32,7 @@
 #import "THLPopupNotificationWireframe.h"
 #import "THLPerkWireframe.h"
 #import "THLPerkDetailWireframe.h"
+#import "THLWaitlistPresenter.h"
 
 //Common
 //#import "THLPushNotificationManager.h"
@@ -63,6 +64,7 @@
 
 
 
+
 @interface THLDependencyManager()
 //Wireframes
 @property (nonatomic, strong) THLMasterWireframe *masterWireframe;
@@ -83,6 +85,7 @@
 @property (nonatomic, weak) THLPopupNotificationWireframe *popupNotificationWireframe;
 @property (nonatomic, weak) THLPerkWireframe *perkWireframe;
 @property (nonatomic, weak) THLPerkDetailWireframe *perkDetailWireframe;
+@property (nonatomic, weak) THLWaitlistPresenter *waitlistPresenter;
 
 //Common
 @property (nonatomic, strong) THLYapDatabaseManager *databaseManager;
@@ -252,6 +255,11 @@
     return wireframe;
 }
 
+- (THLWaitlistPresenter *)newWaitlistPresenter {
+	THLWaitlistPresenter *presenter = [[THLWaitlistPresenter alloc] init];
+	self.waitlistPresenter = presenter;
+	return presenter;
+}
 
 #pragma mark - Lazy Instantiation
 #pragma mark - Wireframes

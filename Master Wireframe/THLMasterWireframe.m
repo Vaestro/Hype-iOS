@@ -24,18 +24,23 @@
 #import "THLPromotionSelectionWireframe.h"
 #import "THLGuestlistInvitationWireframe.h"
 #import "THLPopupNotificationWireframe.h"
+#import "THLWaitlistPresenter.h" //Equivalent of wireframe for this instance
 
 //Delegates
 #import "THLLoginModuleDelegate.h"
 #import "THLGuestFlowModuleDelegate.h"
 #import "THLHostFlowModuleDelegate.h"
 
+
+#define ENABLE_WAITLIST
+
 @interface THLMasterWireframe()
 <
 THLLoginModuleDelegate,
 THLGuestFlowModuleDelegate,
 THLHostFlowModuleDelegate,
-THLPopupNotificationModuleDelegate
+THLPopupNotificationModuleDelegate,
+THLWaitlistPresenterDelegate
 >
 
 @property (nonatomic, strong) UIWindow *window;
@@ -43,6 +48,7 @@ THLPopupNotificationModuleDelegate
 @property (nonatomic, strong) id currentWireframe;
 @property (nonatomic, strong) THLGuestFlowWireframe *guestWireframe;
 @property (nonatomic, strong) THLHostFlowWireframe *hostWireframe;
+@property (nonatomic, strong) THLWaitlistPresenter *waitlistPresenter;
 
 @end
 
@@ -87,10 +93,19 @@ THLPopupNotificationModuleDelegate
  */
 
 - (void)presentOnboardingAndLoginInterface {
-	THLLoginWireframe *loginWireframe = [_dependencyManager newLoginWireframe];
-    _currentWireframe = loginWireframe;
-	[loginWireframe.moduleInterface setModuleDelegate:self];
-	[loginWireframe.moduleInterface presentLoginModuleInterfaceWithOnboardingInWindow:_window];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    BOOL userApproved = [userDefaults objectForKey:@"userApproved"];
+    if (userApproved) {
+        THLLoginWireframe *loginWireframe = [_dependencyManager newLoginWireframe];
+        _currentWireframe = loginWireframe;
+        [loginWireframe.moduleInterface setModuleDelegate:self];
+        [loginWireframe.moduleInterface presentLoginModuleInterfaceWithOnboardingInWindow:_window];
+    } else {
+        THLWaitlistPresenter *waitlistPresenter = [_dependencyManager newWaitlistPresenter];
+        _waitlistPresenter = waitlistPresenter;
+        _waitlistPresenter.delegate = self;
+        [waitlistPresenter presentInterfaceInWindow:_window];
+    }
 }
 
 - (void)presentLoginInterfaceOnViewController:(UIViewController *)viewController {
@@ -129,6 +144,18 @@ THLPopupNotificationModuleDelegate
 #pragma mark - THLPopupNotifcationDelegate
 - (void)popupNotificationModule:(id<THLPopupNotificationModuleInterface>)module userDidAcceptReviewForEvent:(THLEventEntity *)eventEntity {
     [self presentGuestFlowForEvent:eventEntity];
+}
+
+#pragma mark - THLWaitlistPresenterDelegate
+- (void)didApproveUserForApp {
+    [self updateUserDefaultsToApproved];
+    [self presentOnboardingAndLoginInterface];
+}
+
+- (void)updateUserDefaultsToApproved {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setBool:TRUE forKey:@"userApproved"];
+    [userDefaults synchronize];
 }
 
 #pragma mark - THLLoginModuleDelegate

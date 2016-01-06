@@ -28,6 +28,8 @@
     else {
 //        TODO: Hack to get placeholder image to show, this logic should not be here
         [cellView setNameText:@"Pending Signup"];
+        [cellView setImage:nil];
+
     }
 }
 @end

@@ -13,6 +13,7 @@
 
 @interface THLPersonIconView()
 @property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) UILabel *unregisteredUserTextLabel;
 @end
 
 @implementation THLPersonIconView
@@ -46,8 +47,8 @@
         [WSELF.imageView sd_setImageWithURL:url];
     }];
     
-    [RACObserve(self, placeholderImageText) subscribeNext:^(id x) {
-        [WSELF.imageView setImageWithString:WSELF.placeholderImageText
+    [RACObserve(self, placeholderImageText) subscribeNext:^(NSString *text) {
+        [WSELF.imageView setImageWithString:text
                                       color:kTHLNUIPrimaryBackgroundColor];
     }];
 }
@@ -62,19 +63,33 @@
     imageView.clipsToBounds = YES;
     imageView.tintColor = kTHLNUIPrimaryBackgroundColor;
     imageView.contentMode = UIViewContentModeScaleAspectFill;
-//    imageView.layer.borderColor = kTHLNUIGrayFontColor.CGColor;
-//    imageView.layer.borderWidth = 0.5;
     imageView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
-//    imageView.image = [self placeHolderImage];
     return imageView;
+}
+
+- (UILabel *)newUnregisteredUserTextLabel {
+    UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
+    label.text = @"Unregistered User";
+    [label setTextColor:kTHLNUIAccentColor];
+    label.adjustsFontSizeToFitWidth = YES;
+    return label;
 }
 
 - (void)setImage:(UIImage *)image {
     if (image != nil) {
     _imageView.image = image;
     } else {
-        image = [self placeHolderImage];
+        _imageView.image = [self placeHolderImage];
+//        [self setUnregisteredUserOn];
     }
+}
+
+- (void)setUnregisteredUserOn {
+    [self addSubview:_unregisteredUserTextLabel];
+    [_unregisteredUserTextLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(0);
+        make.top.bottom.right.left.insets(kTHLEdgeInsetsNone());
+    }];
 }
 
 - (UIImage *)image {

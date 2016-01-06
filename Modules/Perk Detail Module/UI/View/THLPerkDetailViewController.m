@@ -140,7 +140,7 @@
 }
 
 - (UIBarButtonItem *)newDismissButton {
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Cancel X Icon"] style:UIBarButtonItemStylePlain target:nil action:NULL];
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Back Button"] style:UIBarButtonItemStylePlain target:nil action:NULL];
     [barButtonItem setTintColor:[UIColor whiteColor]];
     return barButtonItem;
 }

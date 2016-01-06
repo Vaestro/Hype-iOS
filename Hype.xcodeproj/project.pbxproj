@@ -48,6 +48,12 @@
 		2133BFC21B877C08002C1DA9 /* THLUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2133BFC11B877C08002C1DA9 /* THLUser.m */; };
 		2133BFCB1B877CAB002C1DA9 /* THLEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2133BFCA1B877CAB002C1DA9 /* THLEvent.m */; };
 		2133BFCE1B877D11002C1DA9 /* THLLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2133BFCD1B877D11002C1DA9 /* THLLocation.m */; };
+		2133C9BF1C3329BA0020083A /* THLWaitlistEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 2133C9BE1C3329BA0020083A /* THLWaitlistEntry.m */; };
+		2133C9C61C332B240020083A /* THLWaitlistModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2133C9C51C332B240020083A /* THLWaitlistModel.m */; };
+		2133C9D01C333AD30020083A /* THLWaitlistSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2133C9CF1C333AD30020083A /* THLWaitlistSignupViewController.m */; };
+		2133C9D31C333DDC0020083A /* NSString+EmailAddresses.m in Sources */ = {isa = PBXBuildFile; fileRef = 2133C9D11C333DDC0020083A /* NSString+EmailAddresses.m */; };
+		2133C9D61C333EC70020083A /* THLWaitlistPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2133C9D51C333EC70020083A /* THLWaitlistPresenter.m */; };
+		2133C9D91C33469A0020083A /* THLWaitlistPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2133C9D81C33469A0020083A /* THLWaitlistPositionViewController.m */; };
 		213CE1131BB8D22D00054A2C /* THLLocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 213CE1121BB8D22D00054A2C /* THLLocationService.m */; };
 		215A428B1BAA1FFF00D03C35 /* THLNumberVerificationPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A428A1BAA1FFF00D03C35 /* THLNumberVerificationPresenter.m */; };
 		215A428E1BAA200E00D03C35 /* THLNumberVerificationWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A428D1BAA200E00D03C35 /* THLNumberVerificationWireframe.m */; };
@@ -99,6 +105,7 @@
 		21E402DC1BBF8155001D0C2C /* THLGuestlistInvite.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E402DB1BBF8155001D0C2C /* THLGuestlistInvite.m */; };
 		21E402E01BBF8371001D0C2C /* THLGuestlistService.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E402DF1BBF8371001D0C2C /* THLGuestlistService.m */; };
 		21E402EE1BBF9A8B001D0C2C /* THLGuestEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E402ED1BBF9A8B001D0C2C /* THLGuestEntity.m */; };
+		21EDC7B01C35F5F700B902CA /* THLWaitlistCodeEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21EDC7AF1C35F5F700B902CA /* THLWaitlistCodeEntryViewController.m */; };
 		21EED1001BB5F842001325A7 /* THLGuestFlowWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 21EED0FF1BB5F842001325A7 /* THLGuestFlowWireframe.m */; };
 		7905CC411BE0252700E56878 /* THLGuestlistInviteEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7905CC401BE0252700E56878 /* THLGuestlistInviteEntity.m */; };
 		790603BD1BF5B6810093335E /* THLPromotionInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 790603BC1BF5B6810093335E /* THLPromotionInfoView.m */; };
@@ -135,6 +142,7 @@
 		794DCCB71BF555150037A03D /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 794DCCB61BF555150037A03D /* Accelerate.framework */; };
 		794DCCBA1BF557D50037A03D /* THLVenueDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794DCCB91BF557D50037A03D /* THLVenueDetailsView.m */; };
 		79527CF01BF188F80074AF38 /* THLEventHostingInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 79527CEF1BF188F80074AF38 /* THLEventHostingInteractor.m */; };
+		795F13661C3C40B500AC9E76 /* THLWaitlistHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 795F13651C3C40B500AC9E76 /* THLWaitlistHomeViewController.m */; };
 		79730CF21C17DC3500D70F4B /* THLUserProfileFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79730CF11C17DC3500D70F4B /* THLUserProfileFooterView.m */; };
 		79730CF61C18A2AA00D70F4B /* THLUserProfileHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79730CF51C18A2AA00D70F4B /* THLUserProfileHeaderView.m */; };
 		79730CF81C18B47000D70F4B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79730CF71C18B47000D70F4B /* MessageUI.framework */; };
@@ -339,6 +347,18 @@
 		2133BFCA1B877CAB002C1DA9 /* THLEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEvent.m; sourceTree = "<group>"; };
 		2133BFCC1B877D11002C1DA9 /* THLLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLLocation.h; sourceTree = "<group>"; };
 		2133BFCD1B877D11002C1DA9 /* THLLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLLocation.m; sourceTree = "<group>"; };
+		2133C9BD1C3329BA0020083A /* THLWaitlistEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLWaitlistEntry.h; sourceTree = "<group>"; };
+		2133C9BE1C3329BA0020083A /* THLWaitlistEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLWaitlistEntry.m; sourceTree = "<group>"; };
+		2133C9C41C332B240020083A /* THLWaitlistModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLWaitlistModel.h; sourceTree = "<group>"; };
+		2133C9C51C332B240020083A /* THLWaitlistModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLWaitlistModel.m; sourceTree = "<group>"; };
+		2133C9CE1C333AD30020083A /* THLWaitlistSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLWaitlistSignupViewController.h; sourceTree = "<group>"; };
+		2133C9CF1C333AD30020083A /* THLWaitlistSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLWaitlistSignupViewController.m; sourceTree = "<group>"; };
+		2133C9D11C333DDC0020083A /* NSString+EmailAddresses.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+EmailAddresses.m"; sourceTree = "<group>"; };
+		2133C9D21C333DDC0020083A /* NSString+EmailAddresses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+EmailAddresses.h"; sourceTree = "<group>"; };
+		2133C9D41C333EC70020083A /* THLWaitlistPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLWaitlistPresenter.h; sourceTree = "<group>"; };
+		2133C9D51C333EC70020083A /* THLWaitlistPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLWaitlistPresenter.m; sourceTree = "<group>"; };
+		2133C9D71C33469A0020083A /* THLWaitlistPositionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLWaitlistPositionViewController.h; sourceTree = "<group>"; };
+		2133C9D81C33469A0020083A /* THLWaitlistPositionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLWaitlistPositionViewController.m; sourceTree = "<group>"; };
 		213CE1111BB8D22D00054A2C /* THLLocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLLocationService.h; sourceTree = "<group>"; };
 		213CE1121BB8D22D00054A2C /* THLLocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLLocationService.m; sourceTree = "<group>"; };
 		213CE1141BB8D23900054A2C /* THLLocationServiceInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLLocationServiceInterface.h; sourceTree = "<group>"; };
@@ -460,6 +480,8 @@
 		21E402E81BBF947D001D0C2C /* THLGuestlistInvitationViewEventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistInvitationViewEventHandler.h; sourceTree = "<group>"; };
 		21E402EC1BBF9A8B001D0C2C /* THLGuestEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestEntity.h; sourceTree = "<group>"; };
 		21E402ED1BBF9A8B001D0C2C /* THLGuestEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestEntity.m; sourceTree = "<group>"; };
+		21EDC7AE1C35F5F700B902CA /* THLWaitlistCodeEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLWaitlistCodeEntryViewController.h; sourceTree = "<group>"; };
+		21EDC7AF1C35F5F700B902CA /* THLWaitlistCodeEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLWaitlistCodeEntryViewController.m; sourceTree = "<group>"; };
 		21EED0FE1BB5F842001325A7 /* THLGuestFlowWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestFlowWireframe.h; sourceTree = "<group>"; };
 		21EED0FF1BB5F842001325A7 /* THLGuestFlowWireframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestFlowWireframe.m; sourceTree = "<group>"; };
 		21EED1011BB5F8A7001325A7 /* THLGuestFlowDependencyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestFlowDependencyManager.h; sourceTree = "<group>"; };
@@ -547,6 +569,8 @@
 		794DCCB91BF557D50037A03D /* THLVenueDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLVenueDetailsView.m; sourceTree = "<group>"; };
 		79527CEE1BF188F80074AF38 /* THLEventHostingInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventHostingInteractor.h; sourceTree = "<group>"; };
 		79527CEF1BF188F80074AF38 /* THLEventHostingInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventHostingInteractor.m; sourceTree = "<group>"; };
+		795F13641C3C40B500AC9E76 /* THLWaitlistHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLWaitlistHomeViewController.h; sourceTree = "<group>"; };
+		795F13651C3C40B500AC9E76 /* THLWaitlistHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLWaitlistHomeViewController.m; sourceTree = "<group>"; };
 		795FB79B1C20D7ED00B70973 /* Hype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hype.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		795FB79C1C20D7ED00B70973 /* Hype.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Hype.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		796965C11BFD8DDE009034FA /* THLHostFlowModuleInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLHostFlowModuleInterface.h; sourceTree = "<group>"; };
@@ -906,6 +930,8 @@
 				211005CF1B8A7D0200A540C6 /* NSDate+Hypelist.m */,
 				211005D41B8A7D2800A540C6 /* NSDate+Utilities.h */,
 				211005D31B8A7D2800A540C6 /* NSDate+Utilities.m */,
+				2133C9D21C333DDC0020083A /* NSString+EmailAddresses.h */,
+				2133C9D11C333DDC0020083A /* NSString+EmailAddresses.m */,
 				211BB0D91B8CC6F50068FD50 /* THLGlobalCategories.h */,
 				794DCCAA1BF3B31E0037A03D /* UIImageView+Letters.h */,
 				794DCCAB1BF3B31E0037A03D /* UIImageView+Letters.m */,
@@ -1078,12 +1104,12 @@
 		211BB0D11B8CBE690068FD50 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C82D87C01C31CBEB00116328 /* THLMenuView */,
-				C880963C1C23C1C900C7524F /* THLConfirmationView */,
 				798D7EBC1BF2E528001D4593 /* Alien */,
 				2121735C1BB34239007D817A /* Promotion Card View */,
 				79B959621BE9A90F00B87799 /* THLActionContainerView */,
+				C880963C1C23C1C900C7524F /* THLConfirmationView */,
 				212173691BB34D46007D817A /* THLEventTitlesView */,
+				C82D87C01C31CBEB00116328 /* THLMenuView */,
 				79B959411BE8306300B87799 /* THLPersonIconView */,
 				212173721BB34F19007D817A /* THLRoundImageView */,
 				2121736B1BB34D68007D817A /* THLStarRatingView */,
@@ -1174,12 +1200,12 @@
 				21775F3E1B8CF95300609D39 /* THLEventDetailsMapView.m */,
 				21775F371B8CF93000609D39 /* THLEventDetailsPromotionInfoView.h */,
 				21775F381B8CF93000609D39 /* THLEventDetailsPromotionInfoView.m */,
-				790603BB1BF5B6810093335E /* THLPromotionInfoView.h */,
-				790603BC1BF5B6810093335E /* THLPromotionInfoView.m */,
 				79AD95F21C30CFC400EDB82E /* THLNeedToKnowInfoView.h */,
 				79AD95F31C30CFC400EDB82E /* THLNeedToKnowInfoView.m */,
 				79AD95F51C3ADA6200EDB82E /* THLEventDetailMusicTypesView.h */,
 				79AD95F61C3ADA6200EDB82E /* THLEventDetailMusicTypesView.m */,
+				790603BB1BF5B6810093335E /* THLPromotionInfoView.h */,
+				790603BC1BF5B6810093335E /* THLPromotionInfoView.m */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -1286,6 +1312,49 @@
 				212173701BB34F15007D817A /* THLRoundImageView.m */,
 			);
 			path = THLRoundImageView;
+			sourceTree = "<group>";
+		};
+		2133C9C01C332AAF0020083A /* Waitlist Module */ = {
+			isa = PBXGroup;
+			children = (
+				2133C9C11C332AF10020083A /* Model */,
+				2133C9C31C332AF90020083A /* Presenter */,
+				2133C9C21C332AF70020083A /* View */,
+			);
+			path = "Waitlist Module";
+			sourceTree = "<group>";
+		};
+		2133C9C11C332AF10020083A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2133C9C41C332B240020083A /* THLWaitlistModel.h */,
+				2133C9C51C332B240020083A /* THLWaitlistModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2133C9C21C332AF70020083A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2133C9D71C33469A0020083A /* THLWaitlistPositionViewController.h */,
+				2133C9D81C33469A0020083A /* THLWaitlistPositionViewController.m */,
+				2133C9CE1C333AD30020083A /* THLWaitlistSignupViewController.h */,
+				2133C9CF1C333AD30020083A /* THLWaitlistSignupViewController.m */,
+				21EDC7AE1C35F5F700B902CA /* THLWaitlistCodeEntryViewController.h */,
+				21EDC7AF1C35F5F700B902CA /* THLWaitlistCodeEntryViewController.m */,
+				795F13641C3C40B500AC9E76 /* THLWaitlistHomeViewController.h */,
+				795F13651C3C40B500AC9E76 /* THLWaitlistHomeViewController.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2133C9C31C332AF90020083A /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				2133C9D41C333EC70020083A /* THLWaitlistPresenter.h */,
+				2133C9D51C333EC70020083A /* THLWaitlistPresenter.m */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		213CE1101BB8D21D00054A2C /* THLLocationService */ = {
@@ -1729,6 +1798,7 @@
 				79B9594E1BE919A700B87799 /* Popup Notification Module */,
 				21192D931BB327D200B176AA /* Promotion Selection Module */,
 				798D7EA91BF2C9D9001D4593 /* User Profile Module */,
+				2133C9C01C332AAF0020083A /* Waitlist Module */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -1753,6 +1823,8 @@
 				C85EE3C31C1CDE140008C14B /* THLPurchasedPerkItem.m */,
 				2133BFC01B877C08002C1DA9 /* THLUser.h */,
 				2133BFC11B877C08002C1DA9 /* THLUser.m */,
+				2133C9BD1C3329BA0020083A /* THLWaitlistEntry.h */,
+				2133C9BE1C3329BA0020083A /* THLWaitlistEntry.m */,
 			);
 			path = "Parse Models";
 			sourceTree = "<group>";
@@ -2507,7 +2579,7 @@
 				C82D87C11C31CC2200116328 /* THLMenuView.h */,
 				C82D87C21C31CC2200116328 /* THLMenuView.m */,
 			);
-			name = THLMenuView;
+			path = THLMenuView;
 			sourceTree = "<group>";
 		};
 		C85EE37A1C1BC93C0008C14B /* Perk Detail Module */ = {
@@ -2723,7 +2795,7 @@
 				C82D87BD1C25C7E300116328 /* THLConfirmationView.h */,
 				C82D87BE1C25C7E300116328 /* THLConfirmationView.m */,
 			);
-			name = THLConfirmationView;
+			path = THLConfirmationView;
 			sourceTree = "<group>";
 		};
 		C8E1B1591BF4370F00A9824C /* Components */ = {
@@ -3007,7 +3079,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/Fabric.framework/run\" 59e4c5cc715a727c29c12850d2ec4cdd9e6c7d65 461d29ada9ef911416346454692039fabbf73c31c449d2485609dbe7e97c18b0";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 59e4c5cc715a727c29c12850d2ec4cdd9e6c7d65 461d29ada9ef911416346454692039fabbf73c31c449d2485609dbe7e97c18b0";
 		};
 		3BBEDA8F8F68D4810546056C /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3143,6 +3215,7 @@
 				215A428B1BAA1FFF00D03C35 /* THLNumberVerificationPresenter.m in Sources */,
 				211005D51B8A7D2800A540C6 /* NSDate+Utilities.m in Sources */,
 				218AF34B1BB740DB00AFAEBF /* THLEntity.m in Sources */,
+				21EDC7B01C35F5F700B902CA /* THLWaitlistCodeEntryViewController.m in Sources */,
 				79527CF01BF188F80074AF38 /* THLEventHostingInteractor.m in Sources */,
 				79B9592F1BE581CC00B87799 /* THLGuestlistReviewPresenter.m in Sources */,
 				79B959571BE9298800B87799 /* THLPopupNotificationPresenter.m in Sources */,
@@ -3156,6 +3229,7 @@
 				794AFE2A1C10C428008475B1 /* THLHostDashboardTicketCellViewModel.m in Sources */,
 				C85EE3B41C1BCBDD0008C14B /* THLPerksCell.m in Sources */,
 				C85EE3C41C1CDE140008C14B /* THLPurchasedPerkItem.m in Sources */,
+				2133C9D61C333EC70020083A /* THLWaitlistPresenter.m in Sources */,
 				7905CC411BE0252700E56878 /* THLGuestlistInviteEntity.m in Sources */,
 				21E402D21BBF768F001D0C2C /* THLGuestlistInvitationDataManager.m in Sources */,
 				791C1F861BF13AF500CCF803 /* THLEventHostingViewController.m in Sources */,
@@ -3167,6 +3241,7 @@
 				798B5FCB1BF11BD2002EBCB6 /* THLHostFlowWireframe.m in Sources */,
 				790603C61BFB75CF0093335E /* THLDashboardPresenter.m in Sources */,
 				790603CC1BFB75E50093335E /* THLDashboardDataManager.m in Sources */,
+				2133C9D31C333DDC0020083A /* NSString+EmailAddresses.m in Sources */,
 				218AF3441BB7391B00AFAEBF /* THLEventService.m in Sources */,
 				216BDD671BC770CA00BBF713 /* THLSearchViewDataSource+Factory.m in Sources */,
 				794DCCBA1BF557D50037A03D /* THLVenueDetailsView.m in Sources */,
@@ -3181,6 +3256,7 @@
 				211BB0D41B8CBE980068FD50 /* THLEventTitlesView.m in Sources */,
 				21192D881BB3279000B176AA /* THLPromotionSelectionDataManager.m in Sources */,
 				79ABA9B71C053ED6001ABAC7 /* THLDashboardNotificationCell.m in Sources */,
+				2133C9C61C332B240020083A /* THLWaitlistModel.m in Sources */,
 				2121735B1BB34215007D817A /* THLPromotionCardView.m in Sources */,
 				2110059B1B8A34AB00A540C6 /* THLEventDiscoveryViewController.m in Sources */,
 				21937F361BB5D20E005E949E /* THLLoginDataManager.m in Sources */,
@@ -3253,7 +3329,9 @@
 				790603C91BFB75D90093335E /* THLDashboardInteractor.m in Sources */,
 				2108A8851B8BBF4900B725F6 /* THLMasterWireframe.m in Sources */,
 				790603C31BFB73380093335E /* THLDashboardWireframe.m in Sources */,
+				795F13661C3C40B500AC9E76 /* THLWaitlistHomeViewController.m in Sources */,
 				C85EE38A1C1BCA200008C14B /* THLPerkDetailWireframe.m in Sources */,
+				2133C9D01C333AD30020083A /* THLWaitlistSignupViewController.m in Sources */,
 				798D7EBF1BF2E56C001D4593 /* OnboardingViewController.m in Sources */,
 				217EBEBA1BB7AB68006044B6 /* THLHostEntity.m in Sources */,
 				211005981B8A319000A540C6 /* THLEventDiscoveryInteractor.m in Sources */,
@@ -3275,8 +3353,10 @@
 				215A429D1BAA25E700D03C35 /* THLFacebookPictureWireframe.m in Sources */,
 				C85EE38D1C1BCA370008C14B /* THLPerkDetailPresenter.m in Sources */,
 				798D7EB41BF2CCD4001D4593 /* THLUserProfileViewController.m in Sources */,
+				2133C9D91C33469A0020083A /* THLWaitlistPositionViewController.m in Sources */,
 				79B959341BE5821B00B87799 /* THLGuestlistReviewViewController.m in Sources */,
 				2121736E1BB34DD3007D817A /* THLStarRatingView.m in Sources */,
+				2133C9BF1C3329BA0020083A /* THLWaitlistEntry.m in Sources */,
 				2108A8881B8BBF5B00B725F6 /* THLDependencyManager.m in Sources */,
 				2110059F1B8A351000A540C6 /* THLEventDiscoveryWireframe.m in Sources */,
 				79CE01E31C0A69D40047E6FA /* THLDashboardTicketCell.m in Sources */,
