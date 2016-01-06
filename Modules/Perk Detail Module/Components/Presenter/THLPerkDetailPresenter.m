@@ -105,7 +105,7 @@ THLPerkDetailInteractorDelegate
 
 
 - (void)continueWithPurchaseFlow {
-    [_confirmationView showConfirmationWithTitle:@"Redeem Reward" message:[NSString stringWithFormat:@"Are you sure you want to use your credits to pucharse this reward for %i ?", (int)_perkStoreItemEntity.credits] ];
+    [_confirmationView showConfirmationWithTitle:@"Redeem Reward" message:[NSString stringWithFormat:@"Are you sure you want to use your credits to pucharse this reward for %i.00 ?", (int)_perkStoreItemEntity.credits] ];
 }
 
 - (void)errorWithPurchase {

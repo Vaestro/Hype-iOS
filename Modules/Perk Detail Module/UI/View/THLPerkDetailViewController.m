@@ -109,7 +109,7 @@
     RAC(self.barButton, rac_command) = RACObserve(self, purchaseCommand);
     
     [[RACObserve(self, credits) map:^id(id creditsInt) {
-        return [NSString stringWithFormat:@"$%@", creditsInt];
+        return [NSString stringWithFormat:@"%@.00", creditsInt];
     }] subscribeNext:^(NSString *convertedCredit) {
         [WSELF.itemCreditsLabel setText:convertedCredit];
     }];

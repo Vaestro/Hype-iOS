@@ -30,7 +30,10 @@
     
     [PFCloud callFunctionInBackground:@"purchasePerkStoreItem"
                        withParameters:@{@"perkStoreItemId" : perkStoreItem.objectId,
-                                        @"perkStoreItemCost" : [[NSNumber alloc] initWithFloat:perkStoreItem.credits]
+                                        @"perkStoreItemCost" : [[NSNumber alloc] initWithFloat:perkStoreItem.credits],
+                                        @"perkStoreItemName" : perkStoreItem.name,
+                                        @"userEmail" : [THLUser currentUser].email,
+                                        @"userName" : [THLUser currentUser].fullName
                                         }
                                 block:^(id object, NSError *error) {
                                     if (!error){
