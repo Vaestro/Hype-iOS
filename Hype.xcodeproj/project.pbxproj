@@ -776,12 +776,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79BA91061C20ACAD00731A38 /* libPods-HypeTests.a in Frameworks */,
-				79730CF81C18B47000D70F4B /* MessageUI.framework in Frameworks */,
 				790B38EF1C0375B500CB2362 /* libsqlite3.dylib in Frameworks */,
 				794DCCB71BF555150037A03D /* Accelerate.framework in Frameworks */,
-				03DB8B7272D645FF53789D4E /* libPods-Hype.a in Frameworks */,
+				79730CF81C18B47000D70F4B /* MessageUI.framework in Frameworks */,
 				99FCACEE76226A356043AEDA /* libPods.a in Frameworks */,
+				03DB8B7272D645FF53789D4E /* libPods-Hype.a in Frameworks */,
+				79BA91061C20ACAD00731A38 /* libPods-HypeTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

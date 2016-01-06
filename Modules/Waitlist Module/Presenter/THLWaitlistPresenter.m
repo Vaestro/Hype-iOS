@@ -101,6 +101,37 @@ THLWaitlistHomeViewDelegate
     }
 }
 
+- (void)model:(THLWaitlistModel *)model didGetMatchingCode:(BOOL)matchingCode error:(NSError *)error {
+    if (matchingCode) {
+        [self approveUserForApp];
+    } else {
+        [self codeError];
+    }
+}
+
+- (void)codeError {
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Ok"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:nil];
+    
+    NSString *message = NSStringWithFormat(@"Invalid code");
+    
+    [self showAlertViewWithMessage:message withAction:[[NSArray alloc] initWithObjects:cancelAction, nil]];
+    
+}
+
+- (void)showAlertViewWithMessage:(NSString *)message withAction:(NSArray<UIAlertAction *>*)actions {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    for(UIAlertAction *action in actions) {
+        [alert addAction:action];
+    }
+    
+    [_codeEntryView presentViewController:alert animated:YES completion:nil];
+}
+
 #pragma mark - THLWaitlistHomeViewDelegate
 - (void)didSelectUseInvitationCode {
     [self presentCodeEntryView];

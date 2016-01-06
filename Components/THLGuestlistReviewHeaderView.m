@@ -14,7 +14,6 @@
 
 @interface THLGuestlistReviewHeaderView()
 @property (nonatomic, strong) UIButton *dismissButton;
-@property (nonatomic, strong) UIButton *menuButton;
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *dateLabel;
@@ -54,7 +53,7 @@
     WEAKSELF();
     [_imageView makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.bottom.insets(kTHLEdgeInsetsNone());
-        make.height.equalTo(@150);
+        make.height.equalTo(150);
     }];
     
     [_dismissButton makeConstraints:^(MASConstraintMaker *make) {
@@ -167,7 +166,6 @@
 //-------------------------------------
 
 - (void)compressView {
-    WEAKSELF();
     [self.imageView remakeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.bottom.insets(kTHLEdgeInsetsNone());
         make.height.equalTo(75);
@@ -197,7 +195,7 @@
     WEAKSELF();
     [_imageView remakeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.bottom.insets(kTHLEdgeInsetsNone());
-        make.height.equalTo(@150);
+        make.height.equalTo(150);
     }];
     
     [_titleLabel remakeConstraints:^(MASConstraintMaker *make) {

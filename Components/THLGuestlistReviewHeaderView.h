@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface THLGuestlistReviewHeaderView : UIView
+@property (nonatomic, strong) UIButton *menuButton;
+
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *formattedDate;
 @property (nonatomic, strong) NSURL *headerViewImage;

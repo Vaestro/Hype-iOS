@@ -126,9 +126,7 @@ static NSString *const kTHLWaitlistModelPinName = @"kTHLWaitlistModelPinName";
 - (void)isValidCode:(NSString *)code {
 //	NSAssert(self.entry != nil, @"There must be an entry!");
     [[self getMatchingInvitationCode:code] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id _Nullable(BFTask * _Nonnull task) {
-        if (task.result) {
-            [_delegate model:self didCheckForApprovedEntry:TRUE error:task.result];
-        }
+        [_delegate model:self didGetMatchingCode:(task.result != nil) error:task.result];
         return nil;
     }];
 }

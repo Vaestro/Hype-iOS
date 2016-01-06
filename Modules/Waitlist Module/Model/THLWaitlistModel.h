@@ -15,6 +15,7 @@
 - (void)modelDidCreateEntry:(THLWaitlistModel *)model error:(NSError *)error;
 - (void)model:(THLWaitlistModel *)model didCheckForExistingEntry:(BOOL)entryExists error:(NSError *)error;
 - (void)model:(THLWaitlistModel *)model didCheckForApprovedEntry:(BOOL)entryApproved error:(NSError *)error;
+- (void)model:(THLWaitlistModel *)model didGetMatchingCode:(BOOL)matchingCode error:(NSError *)error;
 - (void)model:(THLWaitlistModel *)model didGetWaitlistPosition:(NSInteger)position error:(NSError *)error;
 @end
 

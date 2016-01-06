@@ -95,33 +95,32 @@ static CGFloat const CELL_SPACING = 10;
 //---------------------------------------------------
 
 - (void)layoutView {
-    [self.view addSubviews:@[_headerView, _collectionView, _actionBarButton]];
-    
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.automaticallyAdjustsScrollViewInsets = YES;
     
-//    self.navigationItem.leftBarButtonItem = _dismissButton;
-//    self.navigationItem.rightBarButtonItem = _menuButton;
-//    self.navigationItem.title = _navigationBarTitle;
-//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:_navigationBarImage]] forBarMetrics:UIBarMetricsDefault];
+    [self.view addSubviews:@[_headerView, _collectionView, _actionBarButton]];
 
-//    [self.navigationController.navigationBar sizeThatFits:CGSizeMake(SCREEN_WIDTH, 300)];
-    
     [_headerView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.insets(kTHLEdgeInsetsNone());
-        make.left.right.insets(kTHLEdgeInsetsNone());
+        make.top.left.right.equalTo(kTHLEdgeInsetsNone());
     }];
     
     WEAKSELF();
     [_collectionView makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.insets(kTHLEdgeInsetsNone());
-        make.top.equalTo(WSELF.headerView.mas_bottom);
+        make.top.equalTo([WSELF headerView].mas_bottom);
         make.left.right.insets(kTHLEdgeInsetsNone());
     }];
     
     [_actionBarButton makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.insets(kTHLEdgeInsetsNone());
         make.top.equalTo([WSELF collectionView].mas_bottom);
+    }];
+}
+
+- (void)remakeConstraints {
+    WEAKSELF();
+    [_collectionView remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.headerView.mas_bottom);
+        make.left.right.bottom.insets(kTHLEdgeInsetsNone());
     }];
 }
 
@@ -139,9 +138,6 @@ static CGFloat const CELL_SPACING = 10;
     [RACObserve(self, dataSource) subscribeNext:^(THLViewDataSource *dataSource) {
         [WSELF configureDataSource:WSELF.dataSource];
     }];
-    
-//    RAC(self.dismissButton, rac_command) = RACObserve(self, dismissCommand);
-    
 
     [RACObserve(self, showRefreshAnimation) subscribeNext:^(NSNumber *val) {
         BOOL shouldAnimate = [val boolValue];
@@ -165,23 +161,27 @@ static CGFloat const CELL_SPACING = 10;
         if (status == [NSNumber numberWithInteger:0]) {
             [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Accept or Decline Invite", nil)];
             [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
+            [[WSELF.headerView menuButton] setHidden:TRUE];
         }
         else if (status == [NSNumber numberWithInteger:1]) {
-            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"LEAVE GUESTLIST", nil)];
-            [WSELF actionBarButton].backgroundColor = kTHLNUIRedColor;
-
+            [[WSELF actionBarButton] setHidden:TRUE];
+            [[WSELF.headerView menuButton] setHidden:FALSE];
+            [self remakeConstraints];
         }
         else if (status == [NSNumber numberWithInteger:2]) {
-            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"ADD GUESTS", nil)];
-            [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
+            [[WSELF actionBarButton] setHidden:TRUE];
+            [[WSELF.headerView menuButton] setHidden:FALSE];
+            [self remakeConstraints];
         }
         else if (status == [NSNumber numberWithInteger:3]) {
             [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Accept or Decline Guestlist", nil)];
             [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
+            [[WSELF.headerView menuButton] setHidden:TRUE];
         }
         else if (status == [NSNumber numberWithInteger:4]) {
             [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Party is Accepted!", nil)];
             [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
+            [[WSELF.headerView menuButton] setHidden:TRUE];
         }
         [WSELF.view setNeedsDisplay];
     }];
