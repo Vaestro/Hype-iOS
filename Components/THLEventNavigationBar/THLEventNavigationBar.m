@@ -62,6 +62,7 @@ static CGFloat kTHLEventNavigationBarHeight = 125;
     [_dismissButton makeConstraints:^(MASConstraintMaker *make) {
         make.left.insets(kTHLEdgeInsetsSuperHigh());
         make.top.insets(kTHLEdgeInsetsHigh());
+        make.size.mas_equalTo(CGSizeMake(25, 25));
     }];
 }
 
@@ -99,6 +100,7 @@ static CGFloat kTHLEventNavigationBarHeight = 125;
 
 - (UIButton *)newDismissButton {
     UIButton *button = [[UIButton alloc]init];
+    button.frame = CGRectMake(0, 0, 50, 50);
     [button setImage:[UIImage imageNamed:@"Cancel X Icon"] forState:UIControlStateNormal];
     return button;
 }

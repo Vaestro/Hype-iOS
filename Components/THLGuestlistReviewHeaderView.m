@@ -59,11 +59,13 @@
     [_dismissButton makeConstraints:^(MASConstraintMaker *make) {
         make.top.insets(kTHLEdgeInsetsSuperHigh());
         make.left.insets(kTHLEdgeInsetsSuperHigh());
+        make.size.mas_equalTo(CGSizeMake(25, 25));
     }];
     
     [_menuButton makeConstraints:^(MASConstraintMaker *make) {
         make.top.insets(kTHLEdgeInsetsSuperHigh());
         make.right.insets(kTHLEdgeInsetsSuperHigh());
+        make.size.mas_equalTo(CGSizeMake(25, 25));
     }];
     
     [_titleLabel makeConstraints:^(MASConstraintMaker *make) {
@@ -119,12 +121,14 @@
 
 - (UIButton *)newDismissButton {
     UIButton *button = [[UIButton alloc] init];
+    button.frame = CGRectMake(0, 0, 50, 50);
     [button setImage:[UIImage imageNamed:@"Back Button"] forState:UIControlStateNormal];
     return button;
 }
 
 - (UIButton *)newMenuButton {
     UIButton *button = [[UIButton alloc] init];
+    button.frame = CGRectMake(0, 0, 50, 50);
     [button setImage:[UIImage imageNamed:@"Menu Icon"] forState:UIControlStateNormal];
     return button;
 }
@@ -182,11 +186,13 @@
     [_dismissButton remakeConstraints:^(MASConstraintMaker *make) {
         make.centerY.offset(0);
         make.left.equalTo(kTHLEdgeInsetsSuperHigh());
+        make.size.mas_equalTo(CGSizeMake(25, 25));
     }];
     
     [_menuButton remakeConstraints:^(MASConstraintMaker *make) {
         make.centerY.offset(0);
         make.right.equalTo(kTHLEdgeInsetsSuperHigh());
+        make.size.mas_equalTo(CGSizeMake(25, 25));
     }];
     
     [_dateLabel setHidden:YES];
@@ -204,11 +210,13 @@
     [_dismissButton remakeConstraints:^(MASConstraintMaker *make) {
         make.top.insets(kTHLEdgeInsetsSuperHigh());
         make.left.insets(kTHLEdgeInsetsSuperHigh());
+        make.size.mas_equalTo(CGSizeMake(25, 25));
     }];
     
     [_menuButton remakeConstraints:^(MASConstraintMaker *make) {
         make.top.insets(kTHLEdgeInsetsSuperHigh());
         make.right.insets(kTHLEdgeInsetsSuperHigh());
+        make.size.mas_equalTo(CGSizeMake(25, 25));
     }];
     
     [_titleLabel remakeConstraints:^(MASConstraintMaker *make) {

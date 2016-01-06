@@ -485,7 +485,7 @@ THLGuestlistReviewInteractorDelegate
     if (!error && response == THLStatusAccepted) {
         self.reviewerStatus = THLGuestlistAttendingGuest;
         [self.confirmationView showSuccessWithTitle:@"Accepted Invite"
-                                            Message:@"Please meet the Host at the Venue on time at 11:30pm EST so that we can ensure speedy entry for you and your party. If you have any questions, please have Edgar contact the Host."];
+                                            Message:@"Please meet the Host at the Venue on time at 11:30pm EST so that we can ensure speedy entry for you and your party. If you have any questions, you can contact the Host in the guestlist menu."];
     } else if (!error && response == THLStatusDeclined) {
         [self.confirmationView showSuccessWithTitle:@"Declined Invite"
                                             Message:@"Your invite has been declined. If you would like to create your own guestlist for this event, you can do so in the event page."];
