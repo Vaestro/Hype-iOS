@@ -28,5 +28,5 @@
 - (void)checkForApprovedWaitlistEntry;
 - (void)createWaitlistEntryForEmail:(NSString *)email;
 - (void)getWaitlistPosition;
-- (BOOL)isValidCode:(NSString *)code;
+- (void)isValidCode:(NSString *)code;
 @end

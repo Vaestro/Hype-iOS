@@ -14,6 +14,7 @@
 @dynamic response;
 @dynamic checkInStatus;
 @dynamic date;
+@dynamic invitationCode;
 
 + (void)load {
 	[self registerSubclass];

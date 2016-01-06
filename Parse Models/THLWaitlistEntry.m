@@ -11,7 +11,7 @@ const NSInteger kTHLWaitlistCodeLength = 4;
 
 @implementation THLWaitlistEntry
 @dynamic email;
-@dynamic code;
+@dynamic deviceToken;
 @dynamic approved;
 
 + (void)load {

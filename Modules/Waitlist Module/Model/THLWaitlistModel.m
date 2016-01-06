@@ -9,6 +9,8 @@
 #import "THLWaitlistModel.h"
 #import "THLWaitlistEntry.h"
 #import "Bolts.h"
+#import "THLGuestlistInvite.h"
+#import "PFInstallation.h"
 
 static NSString *const kTHLWaitlistModelPinName = @"kTHLWaitlistModelPinName";
 
@@ -68,6 +70,7 @@ static NSString *const kTHLWaitlistModelPinName = @"kTHLWaitlistModelPinName";
 			THLWaitlistEntry *newEntry = [THLWaitlistEntry object];
 			newEntry.email = email;
             newEntry.approved = FALSE;
+            newEntry.deviceToken = [PFInstallation currentInstallation].deviceToken;
 			self.entry = newEntry;
 			return [newEntry saveInBackground];
 		}
@@ -110,9 +113,24 @@ static NSString *const kTHLWaitlistModelPinName = @"kTHLWaitlistModelPinName";
 	return query;
 }
 
-- (BOOL)isValidCode:(NSString *)code {
-	NSAssert(self.entry != nil, @"There must be an entry!");
-	return [code isEqualToString:self.entry.code];
+- (PFQuery *)queryForMatchingInvitationCode:(NSString *)code {
+    PFQuery *query = [THLGuestlistInvite query];
+    [query whereKey:@"invitationCode" equalTo:code];
+    return query;
+}
+
+- (BFTask *)getMatchingInvitationCode:(NSString *)code {
+    return [[self queryForMatchingInvitationCode:code] getFirstObjectInBackground];
+}
+
+- (void)isValidCode:(NSString *)code {
+//	NSAssert(self.entry != nil, @"There must be an entry!");
+    [[self getMatchingInvitationCode:code] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id _Nullable(BFTask * _Nonnull task) {
+        if (task.result) {
+            [_delegate model:self didCheckForApprovedEntry:TRUE error:task.result];
+        }
+        return nil;
+    }];
 }
 
 @end

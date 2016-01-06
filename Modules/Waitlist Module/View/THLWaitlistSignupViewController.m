@@ -12,6 +12,7 @@
 #import "THLAppearanceConstants.h"
 #import "NSString+EmailAddresses.h"
 #import "IHKeyboardAvoiding.h"
+#import "LRTextField.h"
 
 static const CGFloat kSubmitButtonHeight = 58.0f;
 static const CGFloat kLogoImageSize = 75.0f;
@@ -21,8 +22,9 @@ static const CGFloat kLogoImageSize = 75.0f;
 UITextFieldDelegate
 >
 @property (nonatomic, strong) UIBarButtonItem *dismissButton;
-@property (nonatomic, strong) UIImageView *logoImageView;
-@property (nonatomic, strong) UITextField *textField;
+@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UILabel *descriptionLabel;
+@property (nonatomic, strong) LRTextField *textField;
 @property (nonatomic, strong) THLActionBarButton *submitButton;
 
 @end
@@ -38,7 +40,8 @@ UITextFieldDelegate
 
 - (void)constructView {
     _dismissButton = [self newDismissButton];
-	_logoImageView = [self newLogoImageView];
+	_titleLabel = [self newTitleLabel];
+    _descriptionLabel = [self newDescriptionLabel];
 	_textField = [self newTextField];
 	[IHKeyboardAvoiding setAvoidingView:_textField];
 	_submitButton = [self newSubmitButton];
@@ -53,25 +56,32 @@ UITextFieldDelegate
      @{NSForegroundColorAttributeName:kTHLNUIPrimaryFontColor,
        NSFontAttributeName:[UIFont fontWithName:@"Raleway-Regular" size:21]}];
     
-	[self.view addSubviews:@[_logoImageView,
+	[self.view addSubviews:@[_titleLabel,
+                             _descriptionLabel,
 							 _textField,
 							 _submitButton]];
-
+    
+    WEAKSELF();
 	[_submitButton mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.bottom.left.right.insets(kTHLEdgeInsetsNone());
 		make.height.mas_equalTo(kSubmitButtonHeight);
 	}];
 
-	[_logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.size.mas_equalTo(CGSizeMake1(kLogoImageSize));
+	[_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
 		make.centerX.mas_equalTo(0);
 		make.top.insets(UIEdgeInsetsMake1(70));
 	}];
+    
+    [_descriptionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(0);
+        make.top.equalTo([WSELF titleLabel].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+        make.width.mas_equalTo(SCREEN_WIDTH*0.66);
+    }];
 
 	[_textField mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.left.right.insets(UIEdgeInsetsMake1(45));
-		make.centerX.mas_equalTo(0);
-		make.bottom.equalTo(_submitButton.mas_top).insets(UIEdgeInsetsMake1(163));
+        make.height.mas_equalTo(@50);
+        make.width.mas_equalTo(SCREEN_WIDTH*0.80);
+		make.center.mas_equalTo(0);
 	}];
 }
 
@@ -93,7 +103,6 @@ UITextFieldDelegate
 	}];
 }
 
-
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
 	[textField endEditing:YES];
@@ -101,26 +110,31 @@ UITextFieldDelegate
 }
 
 #pragma mark - Constructors
-- (UIImageView *)newLogoImageView {
-	UIImageView *imageView = [UIImageView new];
-	imageView.image = [UIImage imageNamed:@"Hypelist-Icon"];
-	imageView.contentMode = UIViewContentModeScaleAspectFit;
-	imageView.clipsToBounds = YES;
-	return imageView;
+- (UILabel *)newTitleLabel {
+	UILabel *label = THLNUILabel(kTHLNUIRegularTitle);
+    label.text = @"Join the waitlist";
+	return label;
 }
 
-- (UITextField *)newTextField {
-	UITextField *textField = [UITextField new];
-	[textField setPlaceholder:@"Enter your email"];
-	[textField setTextColor:[UIColor whiteColor]];
-	[textField setBackgroundColor:[UIColor greenColor]];
-	textField.delegate = self;
-	return textField;
+- (UILabel *)newDescriptionLabel {
+    UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
+    label.text = @"Please enter your email address to request early access";
+    label.numberOfLines = 0;
+    return label;
+}
+
+- (LRTextField *)newTextField {
+    LRTextField *textFieldEmail = [[LRTextField alloc] initWithFrame:CGRectMake(20, 70, 260, 30) labelHeight:15 style:LRTextFieldStyleEmail];
+    textFieldEmail.placeholderActiveColor = kTHLNUIAccentColor;
+    textFieldEmail.placeholderInactiveColor = kTHLNUIGrayFontColor;
+    textFieldEmail.backgroundColor = kTHLNUIPrimaryBackgroundColor;
+	textFieldEmail.delegate = self;
+	return textFieldEmail;
 }
 
 - (THLActionBarButton *)newSubmitButton {
 	THLActionBarButton *button = [THLActionBarButton new];
-	[button setTitle:@"Submit" forState:UIControlStateNormal];
+	[button setTitle:@"Request Invitation" forState:UIControlStateNormal];
 	return button;
 }
 

@@ -48,9 +48,10 @@ THLWaitlistHomeViewDelegate
 
 #pragma mark - Interface
 - (void)presentInterfaceInWindow:(UIWindow *)window {
-	window.rootViewController = _homeView;
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:_homeView];
+	window.rootViewController = navigationController;
 	[window makeKeyAndVisible];
-//	[_model checkForExisitngLocalWaitlistEntry];
+	[_model checkForExisitngLocalWaitlistEntry];
 }
 
 - (void)returnFromInterface {
@@ -75,10 +76,6 @@ THLWaitlistHomeViewDelegate
 }
 
 - (void)approveUserForApp {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setBool:TRUE forKey:@"userApproved"];
-    [userDefaults synchronize];
-    
     [self returnFromInterface];
     [_delegate didApproveUserForApp];
 }
@@ -124,10 +121,6 @@ THLWaitlistHomeViewDelegate
 }
 
 - (void)validateCode:(NSString *)code {
-	if ([_model isValidCode:code]) {
-		[self returnFromInterface];
-	} else {
-		return;
-	}
+    [_model isValidCode:code];
 }
 @end

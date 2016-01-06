@@ -37,6 +37,13 @@ static const CGFloat kLogoImageSize = 75.0f;
 }
 
 - (void)layoutView {
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.view.backgroundColor = [UIColor clearColor];
+
+    
     self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
 
     [self.view addSubviews:@[_logoImageView,

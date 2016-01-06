@@ -150,7 +150,14 @@ THLWaitlistPresenterDelegate
 
 #pragma mark - THLWaitlistPresenterDelegate
 - (void)didApproveUserForApp {
+    [self updateUserDefaultsToApproved];
     [self presentOnboardingAndLoginInterface];
+}
+
+- (void)updateUserDefaultsToApproved {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setBool:TRUE forKey:@"userApproved"];
+    [userDefaults synchronize];
 }
 
 #pragma mark - THLLoginModuleDelegate

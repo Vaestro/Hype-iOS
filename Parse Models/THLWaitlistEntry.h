@@ -13,7 +13,7 @@ extern const NSInteger kTHLWaitlistCodeLength;
 
 @interface THLWaitlistEntry : PFObject<PFSubclassing>
 @property (nonatomic, retain) NSString *email;
-@property (nonatomic, retain) NSString *code;
+@property (nonatomic, retain) NSString *deviceToken;
 @property (nonatomic) BOOL approved;
 
 @end
