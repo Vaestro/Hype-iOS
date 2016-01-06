@@ -9,15 +9,17 @@
 #import "THLEventTicketPromotionView.h"
 #import "THLPersonIconView.h"
 #import "THLAppearanceConstants.h"
+#import "THLStatusView.h"
 
 @interface THLEventTicketPromotionView()
 @property (nonatomic, strong) THLPersonIconView *iconView;
 @property (nonatomic, strong) UILabel *hostNameLabel;
 @property (nonatomic, strong) UILabel *yourHostLabel;
 @property (nonatomic, strong) UIView *hairlineView;
-@property (nonatomic, strong) UITextView *textView;
+@property (nonatomic, strong) UILabel *eventMessage;
 @property (nonatomic, strong) UILabel *eventTimeLabel;
-
+@property (nonatomic, strong) UILabel *guestlistReviewStatusLabel;
+@property (nonatomic, strong) THLStatusView *statusView;
 
 @end
 
@@ -33,70 +35,54 @@
 
 
 - (void)constructView {
-//    _iconView = [self newIconView];
-//    _hostNameLabel = [self newHostNameLabel];
-//    _yourHostLabel = [self newYourHostLabel];
-//    _hairlineView = [self newHairlineView];
-    _textView = [self newTextView];
+    _eventMessage = [self newEventMessage];
     _eventTimeLabel = [self newEventTimeLabel];
+    _statusView = [self newStatusView];
+    _guestlistReviewStatusLabel = [self newGuestlistReviewStatusLabel];
 }
 
 - (void)layoutView {
-    [self addSubviews:@[_textView,
-//                        _iconView,
-//                        _hostNameLabel,
-//                        _yourHostLabel,
-//                        _hairlineView,
-                        _eventTimeLabel]];
+    [self addSubviews:@[_eventMessage,
+                        _eventTimeLabel,
+                        _statusView,
+                        _guestlistReviewStatusLabel]];
     
     WEAKSELF();
     [_eventTimeLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.insets(kTHLEdgeInsetsNone());
     }];
     
-//    [_iconView makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo([WSELF eventTimeLabel].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
-//        make.left.insets(kTHLEdgeInsetsSuperHigh());
-//        make.size.equalTo(CGSizeMake1(60));
-//    }];
-//    
-//    [_yourHostLabel makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.equalTo([WSELF iconView].mas_right).insets(kTHLEdgeInsetsHigh());
-//        make.top.equalTo([WSELF eventTimeLabel].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
-//        make.right.insets(kTHLEdgeInsetsHigh());
-//    }];
-//    
-//    [_hostNameLabel makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.equalTo([WSELF iconView].mas_right).insets(kTHLEdgeInsetsHigh());
-//        make.top.equalTo([WSELF yourHostLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());
-//        make.bottom.equalTo(WSELF.iconView);
-//        make.right.insets(kTHLEdgeInsetsSuperHigh());
-//    }];
-//    
-//    [_hairlineView makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
-//        make.top.equalTo([WSELF hostNameLabel].mas_baseline).insets(kTHLEdgeInsetsHigh());
-//    }];
+    [_statusView makeConstraints:^(MASConstraintMaker *make) {
+        make.left.insets(kTHLEdgeInsetsNone());
+        make.height.mas_equalTo([WSELF guestlistReviewStatusLabel].mas_height);
+        make.width.mas_equalTo([WSELF statusView].mas_height);
+        make.centerY.equalTo([WSELF guestlistReviewStatusLabel].mas_centerY);
+    }];
     
-    [_textView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF eventTimeLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());
-        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+    [_guestlistReviewStatusLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo([WSELF eventTimeLabel].mas_bottom).insets(kTHLEdgeInsetsLow());
+        make.left.equalTo([WSELF statusView].mas_right);
+    }];
+    
+    [_eventMessage makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo([WSELF guestlistReviewStatusLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.left.right.insets(kTHLEdgeInsetsNone());
         make.bottom.insets(kTHLEdgeInsetsHigh());
     }];
 }
 
 - (void)bindView {
     WEAKSELF();
+    RAC(_statusView, status) = RACObserve(self, guestlistReviewStatus);
+    RAC(_guestlistReviewStatusLabel, text, @"") = RACObserve(self, guestlistReviewStatusTitle);
     [[RACObserve(self, promotionMessage) filter:^BOOL(id value) {
         NSString *text = value;
         return text.length > 0;
     }] subscribeNext:^(id x) {
-        [WSELF.textView setText:x];
+        [WSELF.eventMessage setText:x];
     }];
     
-//    RAC(self.iconView, imageURL) = RACObserve(self, hostImageURL);
     RAC(self.eventTimeLabel, text, @"") = RACObserve(self, eventTime);
-//    RAC(self.hostNameLabel, text, @"") = RACObserve(self, hostName);
 }
 
 #pragma mark - Constructors
@@ -105,20 +91,17 @@
     return label;
 }
 
-- (THLPersonIconView *)newIconView {
-    THLPersonIconView *iconView = [THLPersonIconView new];
-    return iconView;
+- (THLStatusView *)newStatusView {
+    THLStatusView *statusView = [THLStatusView new];
+    [statusView setScale:0.5];
+    return statusView;
 }
 
-- (UILabel *)newYourHostLabel {
-    UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
-    label.text = @"YOUR HOST";
-    return label;
-}
-
-- (UILabel *)newHostNameLabel {
-    UILabel *label = THLNUILabel(kTHLNUIRegularTitle);
-    return label;
+- (UILabel *)newGuestlistReviewStatusLabel {
+    UILabel *guestlistReviewStatusLabel = THLNUILabel(kTHLNUIDetailTitle);
+    guestlistReviewStatusLabel.adjustsFontSizeToFitWidth = YES;
+    guestlistReviewStatusLabel.textAlignment = NSTextAlignmentLeft;
+    return guestlistReviewStatusLabel;
 }
 
 - (UILabel *)newEventTimeLabel {
@@ -126,18 +109,11 @@
     return label;
 }
 
-- (UIView *)newHairlineView {
-    UIView *view = [UIView new];
-    view.backgroundColor = kTHLNUIPrimaryFontColor;
-    return view;
-}
-
-- (UITextView *)newTextView {
-    UITextView *textView = THLNUITextView(kTHLNUIDetailTitle);
-    textView.userInteractionEnabled = NO;
-    [textView setScrollEnabled:NO];
-    textView.text = @"Upon arrival at the venue, check-in with the host. Your Host will keep you updated with what you need to know about the event.";
-    return textView;
+- (UILabel *)newEventMessage {
+    UILabel *eventMessage = THLNUILabel(kTHLNUIDetailTitle);
+    eventMessage.text = @"Upon arrival at the venue, check-in with the host. Your Host will keep you updated with what you need to know about the event.";
+    eventMessage.numberOfLines = 0;
+    return eventMessage;
 }
 
 @end

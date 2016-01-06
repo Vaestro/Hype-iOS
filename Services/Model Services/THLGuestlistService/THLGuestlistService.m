@@ -215,6 +215,7 @@
                         [guestlistInvite setObject:[THLUser currentUser] forKey:@"Guest"];
 #warning INVITATION CODES SHOULD NOT BE SET TO NIL HERE (BAD CODE)
                         [guestlistInvite setValue:nil forKey:@"invitationCode"];
+                        [guestlistInvite setValue:[NSNumber numberWithInt:0] forKey:@"response"];
 
                         [unfinishedGuestlistInvites addObject:guestlistInvite];
                     }

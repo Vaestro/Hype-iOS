@@ -69,26 +69,27 @@
     [_titleLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(WSELF.dismissButton.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
         make.left.insets(kTHLEdgeInsetsSuperHigh());
+        make.right.insets(kTHLEdgeInsetsLow());
+
     }];
     
     [_dateLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(WSELF.titleLabel.mas_bottom).insets(kTHLEdgeInsetsLow());
         make.left.insets(kTHLEdgeInsetsSuperHigh());
+        make.right.insets(kTHLEdgeInsetsLow());
     }];
     
     [_statusView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF dateLabel].mas_bottom).insets(kTHLEdgeInsetsLow());
         make.left.insets(kTHLEdgeInsetsSuperHigh());
-        make.right.equalTo([WSELF guestlistReviewStatusLabel].mas_left);
-        make.bottom.insets(kTHLEdgeInsetsHigh());
         make.height.mas_equalTo([WSELF guestlistReviewStatusLabel].mas_height);
         make.width.mas_equalTo([WSELF statusView].mas_height);
+        make.centerY.equalTo([WSELF guestlistReviewStatusLabel].mas_centerY);
     }];
     
     [_guestlistReviewStatusLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF dateLabel].mas_bottom).insets(kTHLEdgeInsetsLow());
         make.left.equalTo([WSELF statusView].mas_right);
-        make.bottom.insets(kTHLEdgeInsetsHigh());
+        make.right.insets(kTHLEdgeInsetsLow());
     }];
 }
 
@@ -140,7 +141,7 @@
     UILabel *label = THLNUILabel(kTHLNUINavBarTitle);
 //    label.text = _title;
     label.adjustsFontSizeToFitWidth = YES;
-    label.textAlignment = NSTextAlignmentCenter;
+    label.textAlignment = NSTextAlignmentLeft;
     return label;
 }
 
@@ -148,7 +149,7 @@
     UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
     //    label.text = _title;
     label.adjustsFontSizeToFitWidth = YES;
-    label.textAlignment = NSTextAlignmentCenter;
+    label.textAlignment = NSTextAlignmentLeft;
     return label;
 }
 
@@ -160,6 +161,8 @@
 
 - (UILabel *)newGuestlistReviewStatusLabel {
     UILabel *guestlistReviewStatusLabel = THLNUILabel(kTHLNUIDetailTitle);
+    guestlistReviewStatusLabel.adjustsFontSizeToFitWidth = YES;
+    guestlistReviewStatusLabel.textAlignment = NSTextAlignmentLeft;
     return guestlistReviewStatusLabel;
 }
 
@@ -198,11 +201,6 @@
         make.height.equalTo(150);
     }];
     
-    [_titleLabel remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(WSELF.dismissButton.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
-        make.left.insets(kTHLEdgeInsetsSuperHigh());
-    }];
-    
     [_dismissButton remakeConstraints:^(MASConstraintMaker *make) {
         make.top.insets(kTHLEdgeInsetsSuperHigh());
         make.left.insets(kTHLEdgeInsetsSuperHigh());
@@ -213,19 +211,30 @@
         make.right.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
-    [_statusView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF dateLabel].mas_bottom).insets(kTHLEdgeInsetsLow());
+    [_titleLabel remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.dismissButton.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
         make.left.insets(kTHLEdgeInsetsSuperHigh());
-        make.right.equalTo([WSELF guestlistReviewStatusLabel].mas_left);
-        make.bottom.insets(kTHLEdgeInsetsHigh());
-        make.height.mas_equalTo([WSELF guestlistReviewStatusLabel].mas_height);
-        make.width.mas_equalTo([WSELF statusView].mas_height);
+        make.right.insets(kTHLEdgeInsetsLow());
+        
     }];
     
-    [_guestlistReviewStatusLabel makeConstraints:^(MASConstraintMaker *make) {
+    [_dateLabel remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.titleLabel.mas_bottom).insets(kTHLEdgeInsetsLow());
+        make.left.insets(kTHLEdgeInsetsSuperHigh());
+        make.right.insets(kTHLEdgeInsetsLow());
+    }];
+    
+    [_statusView remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.insets(kTHLEdgeInsetsSuperHigh());
+        make.height.mas_equalTo([WSELF guestlistReviewStatusLabel].mas_height);
+        make.width.mas_equalTo([WSELF statusView].mas_height);
+        make.centerY.equalTo([WSELF guestlistReviewStatusLabel].mas_centerY);
+    }];
+    
+    [_guestlistReviewStatusLabel remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF dateLabel].mas_bottom).insets(kTHLEdgeInsetsLow());
         make.left.equalTo([WSELF statusView].mas_right);
-        make.bottom.insets(kTHLEdgeInsetsHigh());
+        make.right.insets(kTHLEdgeInsetsLow());
     }];
     
     [_dateLabel setHidden:NO];

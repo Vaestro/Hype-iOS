@@ -179,9 +179,14 @@ static CGFloat const CELL_SPACING = 10;
             [[WSELF.headerView menuButton] setHidden:TRUE];
         }
         else if (status == [NSNumber numberWithInteger:4]) {
-            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Party is Accepted!", nil)];
-            [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
+            [[WSELF actionBarButton] setHidden:TRUE];
             [[WSELF.headerView menuButton] setHidden:TRUE];
+            [self remakeConstraints];
+        }
+        else if (status == [NSNumber numberWithInteger:5]) {
+            [[WSELF actionBarButton] setHidden:TRUE];
+            [[WSELF.headerView menuButton] setHidden:TRUE];
+            [self remakeConstraints];
         }
         [WSELF.view setNeedsDisplay];
     }];
@@ -227,7 +232,6 @@ static CGFloat const CELL_SPACING = 10;
 
 - (THLActionBarButton *)newActionBarButton {
     THLActionBarButton *actionBarButton = [THLActionBarButton new];
-    [actionBarButton.morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Accept or Decline Invite", nil)];
     return actionBarButton;
 }
 

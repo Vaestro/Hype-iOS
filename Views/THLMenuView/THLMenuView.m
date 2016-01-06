@@ -77,26 +77,26 @@ static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
     WEAKSELF();
 
     UIView *personContainerView = [UIView new];
-    UILabel *label = [UILabel new];
+    UILabel *label = THLNUILabel(kTHLNUIRegularTitle);
     label.text = @"Your Host";
-    label.textColor = [UIColor whiteColor];
+    label.textColor = [UIColor grayColor];
     [personContainerView addSubviews:@[_hostNameLabel, _iconImageView, label]];
     
     [_iconImageView makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.bottom.insets(kTHLEdgeInsetsNone());
-        make.size.mas_equalTo(CGSizeMake(50, 50));
+        make.size.mas_equalTo(CGSizeMake(100, 100));
     }];
 
-    [label makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo([WSELF iconImageView].mas_right).insets(kTHLEdgeInsetsHigh());
-        make.top.equalTo([WSELF iconImageView].mas_top);
-        make.right.insets(kTHLEdgeInsetsNone());
-    }];
-    
     [_hostNameLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo([WSELF iconImageView].mas_right).insets(kTHLEdgeInsetsHigh());
-        make.top.equalTo(label.mas_bottom);
-        make.bottom.right.insets(kTHLEdgeInsetsNone());
+        make.right.insets(kTHLEdgeInsetsNone());
+        make.bottom.equalTo(label.mas_top).insets(kTHLEdgeInsetsNone());
+    }];
+    
+    [label makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo([WSELF iconImageView].mas_right).insets(kTHLEdgeInsetsHigh());
+        make.bottom.equalTo([WSELF iconImageView].mas_bottom);
+        make.right.insets(kTHLEdgeInsetsNone());
     }];
     
     [self.containerView addSubview:personContainerView];
@@ -162,7 +162,10 @@ static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
 }
 
 - (UILabel *)newHostNameLabel {
-    UILabel *label = THLNUILabel(kTHLNUIRegularTitle);
+    UILabel *label = [UILabel new];
+    [label setFont:[UIFont systemFontOfSize:48]];
+    [label setTextColor:kTHLNUIAccentColor];
+    
     label.textAlignment = NSTextAlignmentLeft;
     return label;
 }

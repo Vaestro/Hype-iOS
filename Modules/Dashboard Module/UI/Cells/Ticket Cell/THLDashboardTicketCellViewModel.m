@@ -42,6 +42,25 @@
     [cellView setEventDate:[NSString stringWithFormat:@"%@, %@", _eventEntity.date.thl_weekdayString, _eventEntity.date.thl_timeString]];
     [cellView setHostImageURL:_promotionEntity.host.imageURL];
     [cellView setHostName:_promotionEntity.host.firstName];
+    [cellView setGuestlistReviewStatus:_guestlistEntity.reviewStatus];
+    switch (_guestlistEntity.reviewStatus) {
+        case THLStatusPending: {
+            [cellView setGuestlistReviewStatusTitle:@"Guestlist Pending"];
+            break;
+        }
+        case THLStatusAccepted: {
+            [cellView setGuestlistReviewStatusTitle:@"Guestlist Accepted"];
+            
+            break;
+        }
+        case THLStatusDeclined: {
+            [cellView setGuestlistReviewStatusTitle:@"Guestlist Declined"];
+            break;
+        }
+        default: {
+            break;
+        }
+    }
 }
 
 @end

@@ -16,7 +16,6 @@
 @interface THLDashboardTicketCell()
 @property (nonatomic, strong) THLEventTicketVenueView *venueView;
 @property (nonatomic, strong) THLEventTicketPromotionView *promotionView;
-//@property (nonatomic, strong) THLActionBarButton *actionButton;
 
 @end
 
@@ -28,6 +27,8 @@
 @synthesize eventName;
 @synthesize eventDate;
 @synthesize locationName;
+@synthesize guestlistReviewStatus;
+@synthesize guestlistReviewStatusTitle;
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
@@ -41,7 +42,6 @@
 - (void)constructView {
     _venueView = [self newVenueView];
     _promotionView = [self newPromotionView];
-//    _actionButton = [self newActionButton];
 }
 
 - (void)layoutView {
@@ -62,18 +62,15 @@
         make.top.equalTo([WSELF venueView].mas_bottom).insets(kTHLEdgeInsetsHigh());
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
         make.bottom.insets(kTHLEdgeInsetsHigh());
-//        make.height.equalTo(SV(WSELF.venueView)).sizeOffset(CGSizeMake(100, -90));
     }];
-    
-//    [_actionButton makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo([WSELF promotionView].mas_bottom).insets(kTHLEdgeInsetsHigh());
-//        make.bottom.left.right.insets(kTHLEdgeInsetsNone());
-//    }];
 }
 
 - (void)bindView {
     RAC(self.venueView, locationImageURL) = RACObserve(self, locationImageURL);
     RAC(self.venueView, locationName, @"") = RACObserve(self, locationName);
+    RAC(self.promotionView, guestlistReviewStatus) = RACObserve(self, guestlistReviewStatus);
+    RAC(self.promotionView, guestlistReviewStatusTitle, @"") = RACObserve(self, guestlistReviewStatusTitle);
+    
     RAC(self.promotionView, promotionMessage, @"") = RACObserve(self, promotionMessage);
     RAC(self.promotionView, eventTime, @"") = RACObserve(self, eventDate);
     RAC(self.promotionView, hostImageURL) = RACObserve(self, hostImageURL);

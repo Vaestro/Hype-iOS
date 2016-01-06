@@ -127,9 +127,6 @@
     [self.collectionView registerClass:[THLDashboardNotificationCell class] forCellWithReuseIdentifier:[THLDashboardNotificationCell identifier]];
     [self.collectionView registerClass:[THLDashboardTicketCell class] forCellWithReuseIdentifier:[THLDashboardTicketCell identifier]];
     [self.collectionView registerClass:[THLDashboardNotificationSectionTitleCell class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:[THLDashboardNotificationSectionTitleCell identifier]];
-    
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"invisibleCell"];
-
 
     dataSource.cellCreationBlock = (^id(id object, UICollectionView* parentView, NSIndexPath *indexPath) {
         if ([object isKindOfClass:[THLDashboardNotificationCellViewModel class]]) {

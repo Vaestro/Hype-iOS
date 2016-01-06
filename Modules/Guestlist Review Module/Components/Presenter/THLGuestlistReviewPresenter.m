@@ -149,13 +149,13 @@ THLGuestlistReviewInteractorDelegate
     }];
 
     
-    [_view setHeaderViewImage:_guestlistInviteEntity.guestlist.promotion.event.location.imageURL];
-    NSString *userName = [THLUser currentUser].firstName;
-    NSString *venueLocation = _guestlistInviteEntity.guestlist.promotion.event.location.name;
+    [_view setHeaderViewImage:_guestlistEntity.promotion.event.location.imageURL];
+    NSString *userName = _guestlistEntity.owner.firstName;
+    NSString *venueLocation = _guestlistEntity.promotion.event.location.name;
     [_view setTitle:[NSString stringWithFormat:@"%@'s List For %@", userName, venueLocation]];
     [_view setDismissCommand:dismissCommand];
     [_view setShowMenuCommand:showMenuCommand];
-    [_view setFormattedDate: [NSString stringWithFormat:@"%@, %@", _guestlistInviteEntity.guestlist.promotion.event.date.thl_weekdayString, _guestlistInviteEntity.guestlist.promotion.event.date.thl_timeString]];
+    [_view setFormattedDate: [NSString stringWithFormat:@"%@, %@", _guestlistEntity.promotion.event.date.thl_weekdayString, _guestlistEntity.promotion.event.date.thl_timeString]];
     
     [_view setGuestlistReviewStatus: _guestlistEntity.reviewStatus];
     switch (_guestlistEntity.reviewStatus) {
@@ -310,6 +310,9 @@ THLGuestlistReviewInteractorDelegate
     else if ([_guestlistEntity isAccepted]) {
         self.reviewerStatus = THLGuestlistActiveHost;
     }
+    else if ([_guestlistEntity isDeclined]) {
+        self.reviewerStatus = THLGuestlistDeclinedHost;
+    }
     DLog(@"Status is now %ld", (long)self.reviewerStatus);
 }
 
@@ -368,7 +371,7 @@ THLGuestlistReviewInteractorDelegate
             break;
         }
         case THLGuestlistActiveHost: {
-            [_view confirmActionWithMessage:[NSString stringWithFormat:@"Are you sure you want to check in %@'s party for %@?", _guestlistEntity.owner.firstName, _guestlistEntity.promotion.event.location.name] acceptTitle:@"YES" declineTitle:@"NO"];
+
             break;
         }
         default: {
@@ -495,10 +498,17 @@ THLGuestlistReviewInteractorDelegate
 - (void)interactor:(THLGuestlistReviewInteractor *)interactor didUpdateGuestlistReviewStatus:(NSError *)error to:(THLStatus)reviewStatus {
     if (!error && reviewStatus == THLStatusAccepted) {
         self.reviewerStatus = THLGuestlistActiveHost;
-        self.activityStatus = THLActivityStatusSuccess;
+        [self.confirmationView showSuccessWithTitle:@"Accepted Guestlist"
+                                            Message:@"You have accepted this Guestlist. If your guests have any questions, they will contact you through our phone service."];
+        [_view setGuestlistReviewStatus:reviewStatus];
+        [_view setGuestlistReviewStatusTitle:@"Guestlist Accepted"];
+
     } else if (!error && reviewStatus == THLStatusDeclined) {
-        self.activityStatus = THLActivityStatusNone;
-        [_wireframe dismissInterface];
+        self.reviewerStatus = THLGuestlistDeclinedHost;
+        [self.confirmationView showSuccessWithTitle:@"Declined Guestlist"
+                                            Message:@"You have declined this Guestlist."];
+        [_view setGuestlistReviewStatus:reviewStatus];
+        [_view setGuestlistReviewStatusTitle:@"Guestlist Declined"];
     } else {
         self.activityStatus = THLActivityStatusError;
     }

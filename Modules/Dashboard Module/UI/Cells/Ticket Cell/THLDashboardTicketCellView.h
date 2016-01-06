@@ -15,4 +15,6 @@
 @property (nonatomic, copy) NSString *eventDate;
 @property (nonatomic, copy) NSString *locationName;
 
+@property (nonatomic) THLStatus guestlistReviewStatus;
+@property (nonatomic, copy) NSString *guestlistReviewStatusTitle;
 @end

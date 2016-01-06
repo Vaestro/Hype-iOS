@@ -11,4 +11,5 @@
 @interface THLEventTicketVenueView : UIView
 @property (nonatomic, copy) NSURL *locationImageURL;
 @property (nonatomic, copy) NSURL *locationName;
+
 @end
