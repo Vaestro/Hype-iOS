@@ -181,6 +181,7 @@
         entity.eventId = guestlist.eventId;
         entity.reviewStatus = guestlist.reviewStatus;
         entity.owner = [self mapGuest:guestlist[@"Owner"]];
+        entity.date = guestlist.date;
     //TODO: Fix mapping guestlist's promotion
         entity.promotion = [self mapPromotion:guestlist[@"Promotion"]];
         return entity;
