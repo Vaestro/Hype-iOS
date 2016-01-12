@@ -11,7 +11,6 @@
 #import "THLGuestlistReviewDataManager.h"
 #import "THLGuestlistReviewPresenter.h"
 #import "THLGuestlistReviewViewController.h"
-#import <GKFadeNavigationController/GKFadeNavigationController.h>
 
 @interface THLGuestlistReviewWireframe()
 @property (nonatomic, strong) THLGuestlistReviewInteractor *interactor;
