@@ -78,6 +78,13 @@
 }
 
 
+#pragma mark - Update Layout
+
+-(void)hideReadMoreTextButton {
+    [self.readMoreTextButton setHidden:YES];
+}
+
+
 //- (void)dealloc {
 //    NSLog(@"Destroyed %@", self);
 //}

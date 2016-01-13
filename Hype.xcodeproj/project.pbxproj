@@ -3531,6 +3531,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
+				New_Setting = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hypelist.hype;
 				PRODUCT_NAME = Hype;
 				PROVISIONING_PROFILE = "";
@@ -3565,6 +3566,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
+				New_Setting = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hypelist.hype;
 				PRODUCT_NAME = Hype;
 				PROVISIONING_PROFILE = "";

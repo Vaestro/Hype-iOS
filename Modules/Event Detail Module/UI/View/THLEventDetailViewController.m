@@ -145,6 +145,12 @@
     RAC(self.mapView, locationAddress) = RACObserve(self, locationAddress);
     RAC(self.mapView, locationPlacemark) = RACObserve(self, locationPlacemark);
     
+    [RACObserve(self, locationInfo) subscribeNext:^(NSString *info) {
+        if ([info length] <= 117) {
+            [self.locationInfoView removeReadMoreTextButton];
+        }
+    }];
+    
     [RACObserve(WSELF, actionBarButtonStatus) subscribeNext:^(id _) {
         [WSELF updateBottomBar];
     }];

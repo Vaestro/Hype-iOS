@@ -18,6 +18,15 @@
 #import "THLMasterWireframe.h"
 #import "THLAppearanceUtils.h"
 
+//dev
+#define applicationId @"5t3F1S3wKnVGIKHob1Qj0Je3sygnFiwqAu6PP400"
+#define clientKeyId @"xn4Mces2HcFCQYXF2VRj4W1Ot0zIBELl6fHKLGPk"
+
+//production
+//#define applicationId @"D0AnOPXqqfz7bfE70WvdlE8dK7Qj1kxgf4rPm8rX"
+//#define clientKeyId @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq"
+
+
 
 @interface AppDelegate ()
 @property (nonatomic, strong) THLMasterWireframe *masterWireframe;
@@ -31,8 +40,8 @@
     
 	// Initialize Parse.
     [Parse enableLocalDatastore];
-	[Parse setApplicationId:@"D0AnOPXqqfz7bfE70WvdlE8dK7Qj1kxgf4rPm8rX"
-				  clientKey:@"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq"];
+	[Parse setApplicationId:applicationId
+				  clientKey:clientKeyId];
 
 	// [Optional] Track statistics around application opens.
     if (application.applicationState != UIApplicationStateBackground) {
