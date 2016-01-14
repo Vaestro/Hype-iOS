@@ -32,18 +32,21 @@ pod 'GCDObjC', '~> 0.2'
 pod 'BlocksKit', '~> 2.2'
 pod "ReflectableEnum"
 
-#Parse/Facebook/Digits
+#Parse/Facebook
 pod 'Parse'
 pod 'ParseFacebookUtilsV4'
 pod 'FBSDKCoreKit'
 pod 'FBSDKLoginKit'
 pod 'FBSDKShareKit'
-pod 'Digits'
-pod 'TwitterCore'
 
-#Crashlytics
+#Fabric
 pod 'Fabric'
 pod 'Crashlytics'
+pod 'Appsee'
+pod 'Digits'
+pod 'TwitterCore'
+pod 'Optimizely-iOS-SDK'
+pod 'Stripe'
 
 #Helpers
 pod 'SSDataSources', '~> 0.8'

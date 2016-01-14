@@ -71,6 +71,10 @@
 	}
 }
 
+- (NSString *)thl_dayOfTheWeek {
+    return [self formattedDateWithFormat:@"EEEE"];
+}
+
 - (NSString *)thl_dateString {
 	return [self mediumDateString];
 }

@@ -11,8 +11,10 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "PFFacebookUtils.h"
 #import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
+#import <Appsee/Appsee.h>
 #import <DigitsKit/DigitsKit.h>
+#import <Optimizely/Optimizely.h>
+#import <Stripe/Stripe.h>
 
 #import "THLDependencyManager.h"
 #import "THLMasterWireframe.h"
@@ -49,7 +51,10 @@
     }
     
     [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:nil];
-	[Fabric with:@[[Crashlytics class], [Digits class]]];
+    
+    [Fabric with:@[[Digits class], [Optimizely class], [Appsee class], [Crashlytics class], [STPAPIClient class]]];
+
+    [Optimizely startOptimizelyWithAPIToken:@"AANLIOMBQFi_hFw1wzxiRVDv6GfuC4rH~4568187528" launchOptions:launchOptions];
 
     UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
                                                     UIUserNotificationTypeBadge |

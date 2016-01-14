@@ -18,4 +18,5 @@
 + (instancetype)thl_tomorrow;
 + (instancetype)thl_nextWeek;
 - (BOOL)thl_isOrAfterToday;
+- (NSString *)thl_dayOfTheWeek;
 @end
