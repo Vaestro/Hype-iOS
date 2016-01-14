@@ -147,7 +147,7 @@
     
     [RACObserve(self, locationInfo) subscribeNext:^(NSString *info) {
         if ([info length] <= 117) {
-            [self.locationInfoView removeReadMoreTextButton];
+            [self.locationInfoView hideReadMoreTextButton];
         }
     }];
     
