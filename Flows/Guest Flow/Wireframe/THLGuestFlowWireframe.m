@@ -15,7 +15,7 @@
 #import "THLEventDetailWireframe.h"
 #import "THLGuestlistInvitationWireframe.h"
 #import "THLGuestlistReviewWireframe.h"
-#import "THLPerkWireframe.h"
+#import "THLPerkStoreWireframe.h"
 #import "THLPerkDetailWireframe.h"
 #import "THLMasterNavigationController.h"
 #import "UIColor+SLAddition.h"
@@ -30,7 +30,7 @@ THLEventDetailModuleDelegate,
 THLGuestlistInvitationModuleDelegate,
 THLGuestlistReviewModuleDelegate,
 THLPerkDetailModuleDelegate,
-THLPerkModuleDelegate
+THLPerkStoreModuleDelegate
 >
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) id currentWireframe;
@@ -42,7 +42,7 @@ THLPerkModuleDelegate
 @property (nonatomic, strong) THLEventDetailWireframe  *eventDetailWireframe;
 @property (nonatomic, strong) THLGuestlistInvitationWireframe *guestlistInvitationWireframe;
 @property (nonatomic, strong) THLGuestlistReviewWireframe *guestlistReviewWireframe;
-@property (nonatomic, strong) THLPerkWireframe *perkWireframe;
+@property (nonatomic, strong) THLPerkStoreWireframe *perkStoreWireframe;
 @property (nonatomic, strong) THLPerkDetailWireframe *perkDetailWireframe;
 
 @property (nonatomic, strong) UIView *discoveryNavBarItem;
@@ -118,11 +118,11 @@ THLPerkModuleDelegate
     [_userProfileWireframe.moduleInterface presentUserProfileInterfaceInViewController:viewController];
 }
 
-- (void)presentPerkInterfaceInWindow:(UIWindow *)window {
-    _perkWireframe = [_dependencyManager newPerkWireframe];
-    _currentWireframe = _perkWireframe;
-    [_perkWireframe.moduleInterface setModuleDelegate:self];
-    [_perkWireframe.moduleInterface presentPerkInterfaceInWindow:_window];
+- (void)presentPerkStoreInterfaceInWindow:(UIWindow *)window {
+    _perkStoreWireframe = [_dependencyManager newPerkStoreWireframe];
+    _currentWireframe = _perkStoreWireframe;
+    [_perkStoreWireframe.moduleInterface setModuleDelegate:self];
+    [_perkStoreWireframe.moduleInterface presentPerkStoreInterfaceInWindow:_window];
 }
 
 - (void)presentEventDetailInterfaceForEvent:(THLEventEntity *)eventEntity {
@@ -208,12 +208,12 @@ THLPerkModuleDelegate
 }
 
 #pragma mark - THLPerkModuleDelegate
-- (void)perkModule:(id<THLPerkModuleInterface>)module userDidSelectPerkStoreItemEntity:(THLPerkStoreItemEntity *)perkStoreItemEntity presentPerkDetailInterfaceOnController:(UIViewController *)controller {
+- (void)perkModule:(id<THLPerkStoreModuleInterface>)module userDidSelectPerkStoreItemEntity:(THLPerkStoreItemEntity *)perkStoreItemEntity presentPerkDetailInterfaceOnController:(UIViewController *)controller {
     [self presentPerkDetailInterfaceForPerkStoreItem:perkStoreItemEntity onController:controller];
 }
 
 - (void)dismissPerkWireframe {
-    _perkWireframe = nil;
+    _perkStoreWireframe = nil;
 }
 
 #pragma mark - THLPerkDetailModuleDelegate
@@ -227,7 +227,7 @@ THLPerkModuleDelegate
 }
 
 - (void)presentPerkInterfaceInWindow {
-    [self presentPerkInterfaceInWindow:_window];
+    [self presentPerkStoreInterfaceInWindow:_window];
 }
 
 

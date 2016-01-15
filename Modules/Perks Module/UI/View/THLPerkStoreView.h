@@ -1,5 +1,5 @@
 //
-//  THLPerksView.h
+//  THLPerkStoreView.h
 //  TheHypelist
 //
 //  Created by Daniel Aksenov on 11/24/15.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 @class THLViewDataSource;
 
-@protocol THLPerksView <NSObject>
+@protocol THLPerkStoreView <NSObject>
 @property (nonatomic, strong) THLViewDataSource *dataSource;
 @property (nonatomic, strong) RACCommand *selectedIndexPathCommand;
 @property (nonatomic, strong) RACCommand *refreshCommand;

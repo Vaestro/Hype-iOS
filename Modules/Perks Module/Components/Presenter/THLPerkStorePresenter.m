@@ -1,32 +1,32 @@
 //
-//  THLPerkPresenter.m
+//  THLPerkStorePresenter.m
 //  TheHypelist
 //
 //  Created by Daniel Aksenov on 11/25/15.
 //  Copyright © 2015 Hypelist. All rights reserved.
 //
 
-#import "THLPerkPresenter.h"
-#import "THLPerksView.h"
-#import "THLPerkWireframe.h"
-#import "THLPerkInteractor.h"
+#import "THLPerkStorePresenter.h"
+#import "THLPerkStoreView.h"
+#import "THLPerkStoreWireframe.h"
+#import "THLPerkStoreInteractor.h"
 #import "THLViewDataSource.h"
 #import "THLPerkStoreItemEntity.h"
-#import "THLPerksCellViewModel.h"
+#import "THLPerkStoreCellViewModel.h"
 #import "THLUser.h"
 
 
-@interface THLPerkPresenter()<THLPerkInteractorDelegate>
-@property (nonatomic, weak) id<THLPerksView> view;
+@interface THLPerkStorePresenter()<THLPerkStoreInteractorDelegate>
+@property (nonatomic, weak) id<THLPerkStoreView> view;
 @property (nonatomic) BOOL refreshing;
 @end
 
 
-@implementation THLPerkPresenter
+@implementation THLPerkStorePresenter
 @synthesize moduleDelegate;
 
-- (instancetype)initWithWireframe:(THLPerkWireframe *)wireframe
-                       interactor:(THLPerkInteractor *)interactor {
+- (instancetype)initWithWireframe:(THLPerkStoreWireframe *)wireframe
+                       interactor:(THLPerkStoreInteractor *)interactor {
     if (self = [super init]) {
         _wireframe = wireframe;
         _interactor = interactor;
@@ -36,11 +36,11 @@
 }
 
 #pragma mark - Module Interface
-- (void)presentPerkInterfaceInWindow:(UIWindow *)window {
-    [_wireframe presentPerkInterfaceInWindow:window];
+- (void)presentPerkStoreInterfaceInWindow:(UIWindow *)window {
+    [_wireframe presentPerkStoreInterfaceInWindow:window];
 }
 
-- (void)configureView:(id<THLPerksView>)view {
+- (void)configureView:(id<THLPerkStoreView>)view {
     _view = view;
     
     [[RACObserve(self.view, viewAppeared) filter:^BOOL(NSNumber *b) {
@@ -52,7 +52,7 @@
     
     THLViewDataSource *dataSource = [_interactor generateDataSource];
     dataSource.dataTransformBlock = ^id(id item) {
-        return [[THLPerksCellViewModel alloc] initWithPerkStoreItem:(THLPerkStoreItemEntity *)item];
+        return [[THLPerkStoreCellViewModel alloc] initWithPerkStoreItem:(THLPerkStoreItemEntity *)item];
     };
     
     WEAKSELF();
@@ -100,11 +100,11 @@
 }
 
 #pragma mark - InteractorDelegate
-- (void)interactor:(THLPerkInteractor *)interactor didUpdatePerks:(NSError *)error {
+- (void)interactor:(THLPerkStoreInteractor *)interactor didUpdatePerks:(NSError *)error {
     self.refreshing = NO;
 }
 
-- (void)interactor:(THLPerkInteractor *)interactor didUpdateUserCredits:(NSError *)error {
+- (void)interactor:(THLPerkStoreInteractor *)interactor didUpdateUserCredits:(NSError *)error {
     if (!error) {
         THLUser *currentUser = [THLUser currentUser];
         [_view setCurrentUserCredit:currentUser.credits];

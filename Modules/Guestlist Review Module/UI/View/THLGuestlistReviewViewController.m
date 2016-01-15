@@ -32,7 +32,6 @@ static CGFloat const CELL_SPACING = 10;
 @property (nonatomic, strong) THLGuestlistReviewHeaderView *headerView;
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) THLActionBarButton *actionBarButton;
-
 @property (nonatomic, strong) UIButton *dismissButton;
 @property (nonatomic, strong) UIButton *menuButton;
 @end

@@ -1,5 +1,5 @@
 //
-//  THLPerkWireframe.h
+//  THLPerkStoreWireframe.h
 //  TheHypelist
 //
 //  Created by Daniel Aksenov on 11/28/15.
@@ -7,27 +7,27 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "THLPerkModuleInterface.h"
+#import "THLPerkStoreModuleInterface.h"
 
 @class THLDataStore;
 @class THLEntityMapper;
-@protocol THLPerkItemStoreServiceInterface;
+@protocol THLPerkStoreItemServiceInterface;
 @protocol THLViewDataSourceFactoryInterface;
 
 
-@interface THLPerkWireframe : NSObject
-@property (nonatomic, readonly, weak) id<THLPerkModuleInterface> moduleInterface;
+@interface THLPerkStoreWireframe : NSObject
+@property (nonatomic, readonly, weak) id<THLPerkStoreModuleInterface> moduleInterface;
 
 #pragma mark - Dependencies
 @property (nonatomic, readonly, weak) THLDataStore *dataStore;
 @property (nonatomic, readonly, weak) THLEntityMapper *entityMapper;
-@property (nonatomic, readonly, weak) id<THLPerkItemStoreServiceInterface> perkItemStoreService;
+@property (nonatomic, readonly, weak) id<THLPerkStoreItemServiceInterface> perkStoreItemService;
 @property (nonatomic, readonly, weak) id<THLViewDataSourceFactoryInterface> viewDataSourceFactory;
 - (instancetype)initWithDataStore:(THLDataStore *)dataStore
                      entityMapper:(THLEntityMapper *)entityMapper
-                     perkItemStoreService:(id<THLPerkItemStoreServiceInterface>)perkItemStoreService
+                     perkStoreItemService:(id<THLPerkStoreItemServiceInterface>)perkStoreItemService
             viewDataSourceFactory:(id<THLViewDataSourceFactoryInterface>)viewDataSourceFactory;
 
-- (void)presentPerkInterfaceInWindow:(UIWindow *)window;
+- (void)presentPerkStoreInterfaceInWindow:(UIWindow *)window;
 - (void)dismissInterface;
 @end

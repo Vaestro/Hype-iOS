@@ -1,5 +1,5 @@
 //
-//  THLPerksCellViewModel.h
+//  THLPerkStoreCellViewModel.h
 //  TheHypelist
 //
 //  Created by Daniel Aksenov on 11/24/15.
@@ -7,14 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "THLPerkCellView.h"
+#import "THLPerkStoreCellView.h"
 
-@protocol THLPerkCellView;
+@protocol THLPerkStoreCellView;
 @class THLPerkStoreItemEntity;
 
-@interface THLPerksCellViewModel : NSObject
+@interface THLPerkStoreCellViewModel : NSObject
 @property (nonatomic, readonly) THLPerkStoreItemEntity *perkStoreItemEntity;
 
 - (instancetype)initWithPerkStoreItem:(THLPerkStoreItemEntity *)perkStoreItem;
-- (void)configureView:(id<THLPerkCellView>)view;
+- (void)configureView:(id<THLPerkStoreCellView>)view;
 @end

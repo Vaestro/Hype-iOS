@@ -7,7 +7,7 @@
 //
 
 #import "THLPerkDetailDataManager.h"
-#import "THLPerkItemStoreServiceInterface.h"
+#import "THLPerkStoreItemServiceInterface.h"
 #import "THLEntityMapper.h"
 #import "THLPerkStoreItemEntity.h"
 #import "THLUser.h"
@@ -16,7 +16,7 @@
 
 
 @implementation THLPerkDetailDataManager : NSObject
-- (instancetype)initWithPerkStoreItemService:(id<THLPerkItemStoreServiceInterface>)perkStoreItemService entityMapper:(THLEntityMapper *)entityMapper {
+- (instancetype)initWithPerkStoreItemService:(id<THLPerkStoreItemServiceInterface>)perkStoreItemService entityMapper:(THLEntityMapper *)entityMapper {
     if (self = [super init]) {
         _perkStoreItemService = perkStoreItemService;
         _entityMapper = entityMapper;

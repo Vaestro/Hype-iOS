@@ -1,5 +1,5 @@
 //
-//  THLPerkItemStoreService.h
+//  THLPerkStoreItemService.h
 //  TheHypelist
 //
 //  Created by Daniel Aksenov on 11/24/15.
@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "THLPerkItemStoreServiceInterface.h"
+#import "THLPerkStoreItemServiceInterface.h"
 
 @class THLParseQueryFactory;
 
-@interface THLPerkItemStoreService : NSObject<THLPerkItemStoreServiceInterface>
+@interface THLPerkStoreItemService : NSObject<THLPerkStoreItemServiceInterface>
 #pragma mark - Dependencies
 @property (nonatomic, readonly) THLParseQueryFactory *queryFactory;
 - (instancetype)initWithQueryFactory:(THLParseQueryFactory *)queryFactory;

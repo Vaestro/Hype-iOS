@@ -28,7 +28,7 @@
 @class THLGuestlistReviewWireframe;
 @class THLPopupNotificationWireframe;
 @class THLUserManager;
-@class THLPerkWireframe;
+@class THLPerkStoreWireframe;
 @class THLPerkDetailWireframe;
 @class THLWaitlistPresenter;
 
@@ -57,7 +57,7 @@ THLHostFlowDependencyManager
 - (THLGuestlistInvitationWireframe *)newGuestlistInvitationWireframe;
 - (THLGuestlistReviewWireframe *)newGuestlistReviewWireframe;
 - (THLPopupNotificationWireframe *)newPopupNotificationWireframe;
-- (THLPerkWireframe *)newPerkWireframe;
+- (THLPerkStoreWireframe *)newPerkStoreWireframe;
 - (THLPerkDetailWireframe *)newPerkDetailWireframe;
 - (THLUserManager *)userManager;
 - (THLWaitlistPresenter *)newWaitlistPresenter;

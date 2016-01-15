@@ -1,23 +1,23 @@
 //
-//  THLPerkDataManager.m
+//  THLPerkStoreDataManager.m
 //  TheHypelist
 //
 //  Created by Daniel Aksenov on 11/24/15.
 //  Copyright © 2015 Hypelist. All rights reserved.
 //
 
-#import "THLPerkDataManager.h"
-#import "THLPerkItemStoreServiceInterface.h"
+#import "THLPerkStoreDataManager.h"
+#import "THLPerkStoreItemServiceInterface.h"
 #import "THLEventEntity.h"
 #import "THLDataStoreDomain.h"
 #import "THLEntityMapper.h"
 #import "THLDataStore.h"
 #import "THLUser.h"
 
-@implementation THLPerkDataManager
+@implementation THLPerkStoreDataManager
 - (instancetype)initWithDataStore:(THLDataStore *)dataStore
                 entityMapper:(THLEntityMapper *)entityMapper
-                perkService:(id<THLPerkItemStoreServiceInterface>)perkService {
+                perkService:(id<THLPerkStoreItemServiceInterface>)perkService {
     
     if (self = [super init]) {
         _dataStore = dataStore;

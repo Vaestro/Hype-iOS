@@ -1,5 +1,5 @@
 //
-//  THLPerkDataManager.h
+//  THLPerkStoreDataManager.h
 //  TheHypelist
 //
 //  Created by Daniel Aksenov on 11/24/15.
@@ -11,17 +11,17 @@
 @class THLDataStore;
 @class THLEntityMapper;
 @class BFTask;
-@protocol THLPerkItemStoreServiceInterface;
+@protocol THLPerkStoreItemServiceInterface;
 
 
-@interface THLPerkDataManager : NSObject
+@interface THLPerkStoreDataManager : NSObject
 #pragma mark - Dependencies
 @property (nonatomic, readonly, weak) THLDataStore *dataStore;
 @property (nonatomic, readonly, weak) THLEntityMapper *entityMapper;
-@property (nonatomic, readonly, weak) id<THLPerkItemStoreServiceInterface> perkService;
+@property (nonatomic, readonly, weak) id<THLPerkStoreItemServiceInterface> perkService;
 - (instancetype)initWithDataStore:(THLDataStore *)dataStore
                      entityMapper:(THLEntityMapper *)entityMapper
-                      perkService:(id<THLPerkItemStoreServiceInterface>)perkService;
+                      perkService:(id<THLPerkStoreItemServiceInterface>)perkService;
 
 - (BFTask *)fetchAllPerkStoreItems;
 - (BFTask *)fetchCreditsForUser;

@@ -1,5 +1,5 @@
 //
-//  THLPerkItemStoreServiceInterface.h
+//  THLPerkStoreItemServiceInterface.h
 //  TheHypelist
 //
 //  Created by Daniel Aksenov on 11/24/15.
@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 @class BFTask;
-@protocol THLPerkItemStoreServiceInterface <NSObject>
+@protocol THLPerkStoreItemServiceInterface <NSObject>
 - (BFTask *)fetchAllPerkStoreItems;
 @end

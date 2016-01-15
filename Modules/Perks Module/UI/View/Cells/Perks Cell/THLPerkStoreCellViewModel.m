@@ -1,16 +1,16 @@
 //
-//  THLPerksCellViewModel.m
+//  THLPerkStoreCellViewModel.m
 //  TheHypelist
 //
 //  Created by Daniel Aksenov on 11/24/15.
 //  Copyright © 2015 Hypelist. All rights reserved.
 //
 
-#import "THLPerksCellViewModel.h"
-#import "THLPerkCellView.h"
+#import "THLPerkStoreCellViewModel.h"
+#import "THLPerkStoreCellView.h"
 #import "THLPerkStoreItemEntity.h"
 
-@implementation THLPerksCellViewModel
+@implementation THLPerkStoreCellViewModel
 
 - (instancetype)initWithPerkStoreItem:(THLPerkStoreItemEntity *)perkStoreItemEntity {
     if (self = [super init]) {
@@ -19,7 +19,7 @@
     return self;
 }
 
-- (void)configureView:(id<THLPerkCellView>)cellView {
+- (void)configureView:(id<THLPerkStoreCellView>)cellView {
     [cellView setName:_perkStoreItemEntity.name];
     [cellView setInfo:_perkStoreItemEntity.info];
     [cellView setImage:_perkStoreItemEntity.image];

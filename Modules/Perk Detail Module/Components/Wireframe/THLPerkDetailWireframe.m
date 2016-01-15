@@ -11,7 +11,7 @@
 #import "THLPerkDetailPresenter.h"
 #import "THLPerkDetailDataManager.h"
 #import "THLPerkDetailViewController.h"
-#import "THLPerksViewController.h"
+#import "THLPerkStoreViewController.h"
 #import "THLPerkDetailDataManager.h"
 
 
@@ -24,18 +24,28 @@
 @end
 
 @implementation THLPerkDetailWireframe
-- (instancetype)initWithPerkItemStoreService:(id<THLPerkItemStoreServiceInterface>)perkItemStoreService
+- (instancetype)initWithPerkStoreItemService:(id<THLPerkStoreItemServiceInterface>)perkStoreItemService
                                 entityMapper:(THLEntityMapper *)entityMapper {
     if (self = [super init]) {
-        _perkItemStoreService = perkItemStoreService;
+        _perkStoreItemService = perkStoreItemService;
         _entityMapper = entityMapper;
         [self buildModule];
     }
     return self;
 }
 
+//- (instancetype)initWithPerkItemStoreService:(id<THLPerkStoreItemServiceInterface>)perkStoreItemService
+//                                entityMapper:(THLEntityMapper *)entityMapper {
+//    if (self = [super init]) {
+//        _perkStoreItemService = perkStoreItemService;
+//        _entityMapper = entityMapper;
+//        [self buildModule];
+//    }
+//    return self;
+//}
+
 - (void)buildModule {
-    _dataManager = [[THLPerkDetailDataManager alloc] initWithPerkStoreItemService:_perkItemStoreService entityMapper:_entityMapper];
+    _dataManager = [[THLPerkDetailDataManager alloc] initWithPerkStoreItemService:_perkStoreItemService entityMapper:_entityMapper];
     _interactor = [[THLPerkDetailInteractor alloc] initWithDataManager:_dataManager];
     _view = [[THLPerkDetailViewController alloc] initWithNibName:nil bundle:nil];
     _presenter = [[THLPerkDetailPresenter alloc] initWithInteractor:_interactor wireframe:self];

@@ -1,16 +1,16 @@
 //
-//  THLPerksCell.m
+//  THLPerkStoreCell.m
 //  TheHypelist
 //
 //  Created by Daniel Aksenov on 11/24/15.
 //  Copyright © 2015 Hypelist. All rights reserved.
 //
 
-#import "THLPerksCell.h"
+#import "THLPerkStoreCell.h"
 #import "UIView+DimView.h"
 #import "THLAppearanceConstants.h"
 
-@interface THLPerksCell()
+@interface THLPerkStoreCell()
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UILabel *perkTitleLabel;
 @property (nonatomic, strong) UILabel *perkCreditsLabel;
@@ -18,7 +18,7 @@
 @end
 
 
-@implementation THLPerksCell
+@implementation THLPerkStoreCell
 @synthesize name;
 @synthesize info;
 @synthesize image;

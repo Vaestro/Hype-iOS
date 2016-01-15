@@ -1,25 +1,25 @@
 //
-//  THLPerkInteractor.m
+//  THLPerkStoreInteractor.m
 //  TheHypelist
 //
 //  Created by Daniel Aksenov on 11/25/15.
 //  Copyright © 2015 Hypelist. All rights reserved.
 //
 
-#import "THLPerkInteractor.h"
-#import "THLPerkDataManager.h"
+#import "THLPerkStoreInteractor.h"
+#import "THLPerkStoreDataManager.h"
 #import "THLPerkStoreItemEntity.h"
 #import "THLViewDataSourceFactoryInterface.h"
 
 static NSString *const kTHLPerksModuleViewKey = @"kTHLPerksModuleViewKey";
 
 
-@interface THLPerkInteractor()
+@interface THLPerkStoreInteractor()
 @end
 
 
-@implementation THLPerkInteractor
-- (instancetype)initWithDataManager:(THLPerkDataManager *)dataManager viewDataSourceFactory:(id<THLViewDataSourceFactoryInterface>)viewDataSourceFactory {
+@implementation THLPerkStoreInteractor
+- (instancetype)initWithDataManager:(THLPerkStoreDataManager *)dataManager viewDataSourceFactory:(id<THLViewDataSourceFactoryInterface>)viewDataSourceFactory {
     
     if (self = [super init]) {
         _dataManager = dataManager;

@@ -14,15 +14,15 @@
 @class THLEntityMapper;
 @class THLUser;
 
-@protocol THLPerkItemStoreServiceInterface;
+@protocol THLPerkStoreItemServiceInterface;
 
 
 @interface THLPerkDetailDataManager : NSObject
 
 #pragma mark - Dependencies
-@property (nonatomic, readonly, weak) id<THLPerkItemStoreServiceInterface> perkStoreItemService;
+@property (nonatomic, readonly, weak) id<THLPerkStoreItemServiceInterface> perkStoreItemService;
 @property (nonatomic, readonly, weak) THLEntityMapper *entityMapper;
-- (instancetype)initWithPerkStoreItemService:(id<THLPerkItemStoreServiceInterface>)perkStoreItemService
+- (instancetype)initWithPerkStoreItemService:(id<THLPerkStoreItemServiceInterface>)perkStoreItemService
                                 entityMapper:(THLEntityMapper *)entityMapper;
 
 

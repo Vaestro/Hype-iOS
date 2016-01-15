@@ -218,15 +218,15 @@
 		C85EE38D1C1BCA370008C14B /* THLPerkDetailPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE38C1C1BCA370008C14B /* THLPerkDetailPresenter.m */; };
 		C85EE3901C1BCA500008C14B /* THLPerkDetailInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE38F1C1BCA500008C14B /* THLPerkDetailInteractor.m */; };
 		C85EE3931C1BCA690008C14B /* THLPerkDetailDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3921C1BCA690008C14B /* THLPerkDetailDataManager.m */; };
-		C85EE3A21C1BCB4D0008C14B /* THLPerkDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3A11C1BCB4D0008C14B /* THLPerkDataManager.m */; };
-		C85EE3A51C1BCB5A0008C14B /* THLPerkInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3A41C1BCB5A0008C14B /* THLPerkInteractor.m */; };
-		C85EE3A81C1BCB750008C14B /* THLPerkPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3A71C1BCB750008C14B /* THLPerkPresenter.m */; };
-		C85EE3AB1C1BCB8A0008C14B /* THLPerkWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3AA1C1BCB8A0008C14B /* THLPerkWireframe.m */; };
-		C85EE3B41C1BCBDD0008C14B /* THLPerksCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3B01C1BCBDD0008C14B /* THLPerksCell.m */; };
-		C85EE3B51C1BCBDD0008C14B /* THLPerksCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3B31C1BCBDD0008C14B /* THLPerksCellViewModel.m */; };
-		C85EE3B91C1BCBF30008C14B /* THLPerksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3B71C1BCBF30008C14B /* THLPerksViewController.m */; };
+		C85EE3A21C1BCB4D0008C14B /* THLPerkStoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3A11C1BCB4D0008C14B /* THLPerkStoreDataManager.m */; };
+		C85EE3A51C1BCB5A0008C14B /* THLPerkStoreInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3A41C1BCB5A0008C14B /* THLPerkStoreInteractor.m */; };
+		C85EE3A81C1BCB750008C14B /* THLPerkStorePresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3A71C1BCB750008C14B /* THLPerkStorePresenter.m */; };
+		C85EE3AB1C1BCB8A0008C14B /* THLPerkStoreWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3AA1C1BCB8A0008C14B /* THLPerkStoreWireframe.m */; };
+		C85EE3B41C1BCBDD0008C14B /* THLPerkStoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3B01C1BCBDD0008C14B /* THLPerkStoreCell.m */; };
+		C85EE3B51C1BCBDD0008C14B /* THLPerkStoreCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3B31C1BCBDD0008C14B /* THLPerkStoreCellViewModel.m */; };
+		C85EE3B91C1BCBF30008C14B /* THLPerkStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3B71C1BCBF30008C14B /* THLPerkStoreViewController.m */; };
 		C85EE3BC1C1BCC190008C14B /* THLPerkStoreItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3BB1C1BCC190008C14B /* THLPerkStoreItem.m */; };
-		C85EE3C11C1BCC940008C14B /* THLPerkItemStoreService.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3BF1C1BCC940008C14B /* THLPerkItemStoreService.m */; };
+		C85EE3C11C1BCC940008C14B /* THLPerkStoreItemService.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3BF1C1BCC940008C14B /* THLPerkStoreItemService.m */; };
 		C85EE3C41C1CDE140008C14B /* THLPurchasedPerkItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3C31C1CDE140008C14B /* THLPurchasedPerkItem.m */; };
 		C85EE3C71C1CE1020008C14B /* THLPurchasedPerkItemEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3C61C1CE1020008C14B /* THLPurchasedPerkItemEntity.m */; };
 		C8E1B1621BF437F300A9824C /* THLUserProfileInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B1611BF437F300A9824C /* THLUserProfileInteractor.m */; };
@@ -722,29 +722,29 @@
 		C85EE3921C1BCA690008C14B /* THLPerkDetailDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPerkDetailDataManager.m; sourceTree = "<group>"; };
 		C85EE3941C1BCA7F0008C14B /* THLPerkDetailModuleDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLPerkDetailModuleDelegate.h; sourceTree = "<group>"; };
 		C85EE3951C1BCA7F0008C14B /* THLPerkDetailModuleInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLPerkDetailModuleInterface.h; sourceTree = "<group>"; };
-		C85EE39A1C1BCACA0008C14B /* THLPerkModuleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkModuleDelegate.h; sourceTree = "<group>"; };
-		C85EE39B1C1BCACA0008C14B /* THLPerkModuleInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkModuleInterface.h; sourceTree = "<group>"; };
-		C85EE3A01C1BCB4D0008C14B /* THLPerkDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkDataManager.h; sourceTree = "<group>"; };
-		C85EE3A11C1BCB4D0008C14B /* THLPerkDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPerkDataManager.m; sourceTree = "<group>"; };
-		C85EE3A31C1BCB5A0008C14B /* THLPerkInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkInteractor.h; sourceTree = "<group>"; };
-		C85EE3A41C1BCB5A0008C14B /* THLPerkInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPerkInteractor.m; sourceTree = "<group>"; };
-		C85EE3A61C1BCB750008C14B /* THLPerkPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkPresenter.h; sourceTree = "<group>"; };
-		C85EE3A71C1BCB750008C14B /* THLPerkPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPerkPresenter.m; sourceTree = "<group>"; };
-		C85EE3A91C1BCB8A0008C14B /* THLPerkWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkWireframe.h; sourceTree = "<group>"; };
-		C85EE3AA1C1BCB8A0008C14B /* THLPerkWireframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPerkWireframe.m; sourceTree = "<group>"; };
-		C85EE3AF1C1BCBDD0008C14B /* THLPerksCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerksCell.h; sourceTree = "<group>"; };
-		C85EE3B01C1BCBDD0008C14B /* THLPerksCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPerksCell.m; sourceTree = "<group>"; };
-		C85EE3B11C1BCBDD0008C14B /* THLPerkCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkCellView.h; sourceTree = "<group>"; };
-		C85EE3B21C1BCBDD0008C14B /* THLPerksCellViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerksCellViewModel.h; sourceTree = "<group>"; };
-		C85EE3B31C1BCBDD0008C14B /* THLPerksCellViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPerksCellViewModel.m; sourceTree = "<group>"; };
-		C85EE3B61C1BCBF30008C14B /* THLPerksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerksViewController.h; sourceTree = "<group>"; };
-		C85EE3B71C1BCBF30008C14B /* THLPerksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPerksViewController.m; sourceTree = "<group>"; };
-		C85EE3B81C1BCBF30008C14B /* THLPerksView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerksView.h; sourceTree = "<group>"; };
+		C85EE39A1C1BCACA0008C14B /* THLPerkStoreModuleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkStoreModuleDelegate.h; sourceTree = "<group>"; };
+		C85EE39B1C1BCACA0008C14B /* THLPerkStoreModuleInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkStoreModuleInterface.h; sourceTree = "<group>"; };
+		C85EE3A01C1BCB4D0008C14B /* THLPerkStoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkStoreDataManager.h; sourceTree = "<group>"; };
+		C85EE3A11C1BCB4D0008C14B /* THLPerkStoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPerkStoreDataManager.m; sourceTree = "<group>"; };
+		C85EE3A31C1BCB5A0008C14B /* THLPerkStoreInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkStoreInteractor.h; sourceTree = "<group>"; };
+		C85EE3A41C1BCB5A0008C14B /* THLPerkStoreInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPerkStoreInteractor.m; sourceTree = "<group>"; };
+		C85EE3A61C1BCB750008C14B /* THLPerkStorePresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkStorePresenter.h; sourceTree = "<group>"; };
+		C85EE3A71C1BCB750008C14B /* THLPerkStorePresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPerkStorePresenter.m; sourceTree = "<group>"; };
+		C85EE3A91C1BCB8A0008C14B /* THLPerkStoreWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkStoreWireframe.h; sourceTree = "<group>"; };
+		C85EE3AA1C1BCB8A0008C14B /* THLPerkStoreWireframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPerkStoreWireframe.m; sourceTree = "<group>"; };
+		C85EE3AF1C1BCBDD0008C14B /* THLPerkStoreCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkStoreCell.h; sourceTree = "<group>"; };
+		C85EE3B01C1BCBDD0008C14B /* THLPerkStoreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPerkStoreCell.m; sourceTree = "<group>"; };
+		C85EE3B11C1BCBDD0008C14B /* THLPerkStoreCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkStoreCellView.h; sourceTree = "<group>"; };
+		C85EE3B21C1BCBDD0008C14B /* THLPerkStoreCellViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkStoreCellViewModel.h; sourceTree = "<group>"; };
+		C85EE3B31C1BCBDD0008C14B /* THLPerkStoreCellViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPerkStoreCellViewModel.m; sourceTree = "<group>"; };
+		C85EE3B61C1BCBF30008C14B /* THLPerkStoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkStoreViewController.h; sourceTree = "<group>"; };
+		C85EE3B71C1BCBF30008C14B /* THLPerkStoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPerkStoreViewController.m; sourceTree = "<group>"; };
+		C85EE3B81C1BCBF30008C14B /* THLPerkStoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkStoreView.h; sourceTree = "<group>"; };
 		C85EE3BA1C1BCC190008C14B /* THLPerkStoreItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkStoreItem.h; sourceTree = "<group>"; };
 		C85EE3BB1C1BCC190008C14B /* THLPerkStoreItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPerkStoreItem.m; sourceTree = "<group>"; };
-		C85EE3BE1C1BCC940008C14B /* THLPerkItemStoreService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkItemStoreService.h; sourceTree = "<group>"; };
-		C85EE3BF1C1BCC940008C14B /* THLPerkItemStoreService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPerkItemStoreService.m; sourceTree = "<group>"; };
-		C85EE3C01C1BCC940008C14B /* THLPerkItemStoreServiceInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkItemStoreServiceInterface.h; sourceTree = "<group>"; };
+		C85EE3BE1C1BCC940008C14B /* THLPerkStoreItemService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkStoreItemService.h; sourceTree = "<group>"; };
+		C85EE3BF1C1BCC940008C14B /* THLPerkStoreItemService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPerkStoreItemService.m; sourceTree = "<group>"; };
+		C85EE3C01C1BCC940008C14B /* THLPerkStoreItemServiceInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkStoreItemServiceInterface.h; sourceTree = "<group>"; };
 		C85EE3C21C1CDE140008C14B /* THLPurchasedPerkItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPurchasedPerkItem.h; sourceTree = "<group>"; };
 		C85EE3C31C1CDE140008C14B /* THLPurchasedPerkItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPurchasedPerkItem.m; sourceTree = "<group>"; };
 		C85EE3C51C1CE1020008C14B /* THLPurchasedPerkItemEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPurchasedPerkItemEntity.h; sourceTree = "<group>"; };
@@ -1798,7 +1798,7 @@
 				215A42801BAA1EE100D03C35 /* Number Verification Module */,
 				21EBFBFD1B87AE9F006646E9 /* Parse Module */,
 				C85EE37A1C1BC93C0008C14B /* Perk Detail Module */,
-				C85EE3961C1BCA900008C14B /* Perks Module */,
+				C85EE3961C1BCA900008C14B /* Perk Store Module */,
 				79B9594E1BE919A700B87799 /* Popup Notification Module */,
 				21192D931BB327D200B176AA /* Promotion Selection Module */,
 				798D7EA91BF2C9D9001D4593 /* User Profile Module */,
@@ -2678,13 +2678,14 @@
 			path = "Data Manager";
 			sourceTree = "<group>";
 		};
-		C85EE3961C1BCA900008C14B /* Perks Module */ = {
+		C85EE3961C1BCA900008C14B /* Perk Store Module */ = {
 			isa = PBXGroup;
 			children = (
 				C85EE3981C1BCAAC0008C14B /* Components */,
 				C85EE3991C1BCAB50008C14B /* Interface */,
 				C85EE3971C1BCA9F0008C14B /* UI */,
 			);
+			name = "Perk Store Module";
 			path = "Perks Module";
 			sourceTree = "<group>";
 		};
@@ -2710,8 +2711,8 @@
 		C85EE3991C1BCAB50008C14B /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				C85EE39A1C1BCACA0008C14B /* THLPerkModuleDelegate.h */,
-				C85EE39B1C1BCACA0008C14B /* THLPerkModuleInterface.h */,
+				C85EE39A1C1BCACA0008C14B /* THLPerkStoreModuleDelegate.h */,
+				C85EE39B1C1BCACA0008C14B /* THLPerkStoreModuleInterface.h */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -2719,8 +2720,8 @@
 		C85EE39C1C1BCAD90008C14B /* Wireframe */ = {
 			isa = PBXGroup;
 			children = (
-				C85EE3A91C1BCB8A0008C14B /* THLPerkWireframe.h */,
-				C85EE3AA1C1BCB8A0008C14B /* THLPerkWireframe.m */,
+				C85EE3A91C1BCB8A0008C14B /* THLPerkStoreWireframe.h */,
+				C85EE3AA1C1BCB8A0008C14B /* THLPerkStoreWireframe.m */,
 			);
 			path = Wireframe;
 			sourceTree = "<group>";
@@ -2728,8 +2729,8 @@
 		C85EE39D1C1BCAE10008C14B /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				C85EE3A61C1BCB750008C14B /* THLPerkPresenter.h */,
-				C85EE3A71C1BCB750008C14B /* THLPerkPresenter.m */,
+				C85EE3A61C1BCB750008C14B /* THLPerkStorePresenter.h */,
+				C85EE3A71C1BCB750008C14B /* THLPerkStorePresenter.m */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -2737,8 +2738,8 @@
 		C85EE39E1C1BCAEE0008C14B /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
-				C85EE3A31C1BCB5A0008C14B /* THLPerkInteractor.h */,
-				C85EE3A41C1BCB5A0008C14B /* THLPerkInteractor.m */,
+				C85EE3A31C1BCB5A0008C14B /* THLPerkStoreInteractor.h */,
+				C85EE3A41C1BCB5A0008C14B /* THLPerkStoreInteractor.m */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -2746,8 +2747,8 @@
 		C85EE39F1C1BCAFF0008C14B /* Data Manager */ = {
 			isa = PBXGroup;
 			children = (
-				C85EE3A01C1BCB4D0008C14B /* THLPerkDataManager.h */,
-				C85EE3A11C1BCB4D0008C14B /* THLPerkDataManager.m */,
+				C85EE3A01C1BCB4D0008C14B /* THLPerkStoreDataManager.h */,
+				C85EE3A11C1BCB4D0008C14B /* THLPerkStoreDataManager.m */,
 			);
 			path = "Data Manager";
 			sourceTree = "<group>";
@@ -2756,9 +2757,9 @@
 			isa = PBXGroup;
 			children = (
 				C85EE3AD1C1BCBAE0008C14B /* Cells */,
-				C85EE3B81C1BCBF30008C14B /* THLPerksView.h */,
-				C85EE3B61C1BCBF30008C14B /* THLPerksViewController.h */,
-				C85EE3B71C1BCBF30008C14B /* THLPerksViewController.m */,
+				C85EE3B81C1BCBF30008C14B /* THLPerkStoreView.h */,
+				C85EE3B61C1BCBF30008C14B /* THLPerkStoreViewController.h */,
+				C85EE3B71C1BCBF30008C14B /* THLPerkStoreViewController.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2766,29 +2767,30 @@
 		C85EE3AD1C1BCBAE0008C14B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				C85EE3AE1C1BCBBE0008C14B /* Perks Cell */,
+				C85EE3AE1C1BCBBE0008C14B /* Perk Store Cell */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		C85EE3AE1C1BCBBE0008C14B /* Perks Cell */ = {
+		C85EE3AE1C1BCBBE0008C14B /* Perk Store Cell */ = {
 			isa = PBXGroup;
 			children = (
-				C85EE3B11C1BCBDD0008C14B /* THLPerkCellView.h */,
-				C85EE3AF1C1BCBDD0008C14B /* THLPerksCell.h */,
-				C85EE3B01C1BCBDD0008C14B /* THLPerksCell.m */,
-				C85EE3B21C1BCBDD0008C14B /* THLPerksCellViewModel.h */,
-				C85EE3B31C1BCBDD0008C14B /* THLPerksCellViewModel.m */,
+				C85EE3B11C1BCBDD0008C14B /* THLPerkStoreCellView.h */,
+				C85EE3AF1C1BCBDD0008C14B /* THLPerkStoreCell.h */,
+				C85EE3B01C1BCBDD0008C14B /* THLPerkStoreCell.m */,
+				C85EE3B21C1BCBDD0008C14B /* THLPerkStoreCellViewModel.h */,
+				C85EE3B31C1BCBDD0008C14B /* THLPerkStoreCellViewModel.m */,
 			);
+			name = "Perk Store Cell";
 			path = "Perks Cell";
 			sourceTree = "<group>";
 		};
 		C85EE3BD1C1BCC740008C14B /* THLPerkService */ = {
 			isa = PBXGroup;
 			children = (
-				C85EE3BE1C1BCC940008C14B /* THLPerkItemStoreService.h */,
-				C85EE3BF1C1BCC940008C14B /* THLPerkItemStoreService.m */,
-				C85EE3C01C1BCC940008C14B /* THLPerkItemStoreServiceInterface.h */,
+				C85EE3BE1C1BCC940008C14B /* THLPerkStoreItemService.h */,
+				C85EE3BF1C1BCC940008C14B /* THLPerkStoreItemService.m */,
+				C85EE3C01C1BCC940008C14B /* THLPerkStoreItemServiceInterface.h */,
 			);
 			path = THLPerkService;
 			sourceTree = "<group>";
@@ -3208,7 +3210,7 @@
 				790603D81BFBA79F0093335E /* THLEventTicketVenueView.m in Sources */,
 				79CE01DF1C0A604B0047E6FA /* THLDashboardNotificationSectionTitleCell.m in Sources */,
 				212173661BB34D22007D817A /* HCSStarRatingView.m in Sources */,
-				C85EE3A81C1BCB750008C14B /* THLPerkPresenter.m in Sources */,
+				C85EE3A81C1BCB750008C14B /* THLPerkStorePresenter.m in Sources */,
 				2118921F1BAA088D00E8A11F /* THLLoginWireframe.m in Sources */,
 				2121734C1BB32B92007D817A /* THLPromotionSelectionInfoCardViewModel.m in Sources */,
 				C8E342091C3B1A9C009FE9B0 /* THLGuestlistReviewHeaderView.m in Sources */,
@@ -3222,7 +3224,7 @@
 				217EBEAE1BB7AB1B006044B6 /* THLPromotionEntity.m in Sources */,
 				798650A41BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m in Sources */,
 				212173711BB34F15007D817A /* THLRoundImageView.m in Sources */,
-				C85EE3B51C1BCBDD0008C14B /* THLPerksCellViewModel.m in Sources */,
+				C85EE3B51C1BCBDD0008C14B /* THLPerkStoreCellViewModel.m in Sources */,
 				211005CC1B8A767C00A540C6 /* THLEventDiscoveryCellViewModel.m in Sources */,
 				79B9595D1BE934C000B87799 /* THLPopupNotificationDataManager.m in Sources */,
 				79730CF21C17DC3500D70F4B /* THLUserProfileFooterView.m in Sources */,
@@ -3239,9 +3241,9 @@
 				79BA90FE1C20ABA300731A38 /* THLResourceManager.m in Sources */,
 				211892061BA9FF0600E8A11F /* THLLoginInteractor.m in Sources */,
 				211005D01B8A7D0200A540C6 /* NSDate+Hypelist.m in Sources */,
-				C85EE3A21C1BCB4D0008C14B /* THLPerkDataManager.m in Sources */,
+				C85EE3A21C1BCB4D0008C14B /* THLPerkStoreDataManager.m in Sources */,
 				794AFE2A1C10C428008475B1 /* THLHostDashboardTicketCellViewModel.m in Sources */,
-				C85EE3B41C1BCBDD0008C14B /* THLPerksCell.m in Sources */,
+				C85EE3B41C1BCBDD0008C14B /* THLPerkStoreCell.m in Sources */,
 				C85EE3C41C1CDE140008C14B /* THLPurchasedPerkItem.m in Sources */,
 				2133C9D61C333EC70020083A /* THLWaitlistPresenter.m in Sources */,
 				7905CC411BE0252700E56878 /* THLGuestlistInviteEntity.m in Sources */,
@@ -3280,7 +3282,7 @@
 				212173601BB34261007D817A /* THLPromotionCardInfoCell.m in Sources */,
 				79AD95F41C30CFC400EDB82E /* THLNeedToKnowInfoView.m in Sources */,
 				79B959611BE9A90B00B87799 /* THLActionContainerView.m in Sources */,
-				C85EE3B91C1BCBF30008C14B /* THLPerksViewController.m in Sources */,
+				C85EE3B91C1BCBF30008C14B /* THLPerkStoreViewController.m in Sources */,
 				216BDD581BC71F1800BBF713 /* THLSearchViewDataSource.m in Sources */,
 				79B9595A1BE92FBA00B87799 /* THLPopupNotificationInteractor.m in Sources */,
 				C82D87C31C31CC2200116328 /* THLMenuView.m in Sources */,
@@ -3335,9 +3337,9 @@
 				C85EE3C71C1CE1020008C14B /* THLPurchasedPerkItemEntity.m in Sources */,
 				21775F3C1B8CF93E00609D39 /* THLEventDetailsLocationInfoView.m in Sources */,
 				211D0BBA1B8CEED40073AFDD /* THLEventDetailDataManager.m in Sources */,
-				C85EE3C11C1BCC940008C14B /* THLPerkItemStoreService.m in Sources */,
+				C85EE3C11C1BCC940008C14B /* THLPerkStoreItemService.m in Sources */,
 				798D7EAE1BF2CAF9001D4593 /* THLUserProfileWireframe.m in Sources */,
-				C85EE3A51C1BCB5A0008C14B /* THLPerkInteractor.m in Sources */,
+				C85EE3A51C1BCB5A0008C14B /* THLPerkStoreInteractor.m in Sources */,
 				217DC6531BBB77AC00332174 /* THLUserManager.m in Sources */,
 				79B9594D1BE8966300B87799 /* KLCPopup.m in Sources */,
 				790603C91BFB75D90093335E /* THLDashboardInteractor.m in Sources */,
@@ -3352,7 +3354,7 @@
 				21E402EE1BBF9A8B001D0C2C /* THLGuestEntity.m in Sources */,
 				C85EE3831C1BC9920008C14B /* THLPerkDetailViewController.m in Sources */,
 				215A42AC1BAA2A1700D03C35 /* THLFacebookProfilePictureURLFetchService.m in Sources */,
-				C85EE3AB1C1BCB8A0008C14B /* THLPerkWireframe.m in Sources */,
+				C85EE3AB1C1BCB8A0008C14B /* THLPerkStoreWireframe.m in Sources */,
 				794AFE1B1C10A64A008475B1 /* THLHostDashboardViewController.m in Sources */,
 				21E402E01BBF8371001D0C2C /* THLGuestlistService.m in Sources */,
 				21192D821BB3277F00B176AA /* THLPromotionSelectionPresenter.m in Sources */,

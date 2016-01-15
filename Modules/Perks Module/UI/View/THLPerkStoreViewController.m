@@ -1,21 +1,21 @@
 //
-//  THLPerksViewController.m
+//  THLPerkStoreViewController.m
 //  TheHypelist
 //
 //  Created by Daniel Aksenov on 11/24/15.
 //  Copyright © 2015 Hypelist. All rights reserved.
 //
 
-#import "THLPerksViewController.h"
+#import "THLPerkStoreViewController.h"
 #import "THLAppearanceConstants.h"
 #import "UIScrollView+SVPullToRefresh.h"
 #import "THLViewDataSource.h"
-#import "THLPerksCell.h"
-#import "THLPerksCellViewModel.h"
+#import "THLPerkStoreCell.h"
+#import "THLPerkStoreCellViewModel.h"
 #import "THLUser.h"
 #import "THLActionBarButton.h"
 
-@interface THLPerksViewController ()
+@interface THLPerkStoreViewController ()
 <
 UICollectionViewDelegate,
 UICollectionViewDelegateFlowLayout
@@ -30,7 +30,7 @@ UICollectionViewDelegateFlowLayout
 //@property (nonatomic, strong) THLActionBarButton *barButton;
 @end
 
-@implementation THLPerksViewController
+@implementation THLPerkStoreViewController
 @synthesize selectedIndexPathCommand = _selectedIndexPathCommand;
 @synthesize dataSource = _dataSource;
 @synthesize showRefreshAnimation = _showRefreshAnimation;
@@ -192,18 +192,18 @@ UICollectionViewDelegateFlowLayout
     _collectionView.dataSource = dataSource;
     dataSource.collectionView = _collectionView;
     
-    [self.collectionView registerClass:[THLPerksCell class] forCellWithReuseIdentifier:[THLPerksCell identifier]];
+    [self.collectionView registerClass:[THLPerkStoreCell class] forCellWithReuseIdentifier:[THLPerkStoreCell identifier]];
     
     dataSource.cellCreationBlock = (^id(id object, UICollectionView* parentView, NSIndexPath *indexPath) {
-        if ([object isKindOfClass:[THLPerksCellViewModel class]]) {
-            return [parentView dequeueReusableCellWithReuseIdentifier:[THLPerksCell identifier] forIndexPath:indexPath];
+        if ([object isKindOfClass:[THLPerkStoreCellViewModel class]]) {
+            return [parentView dequeueReusableCellWithReuseIdentifier:[THLPerkStoreCell identifier] forIndexPath:indexPath];
         }
         return nil;
     });
     
     dataSource.cellConfigureBlock = (^(id cell, id object, id parentView, NSIndexPath *indexPath){
-        if ([object isKindOfClass:[THLPerksCellViewModel class]] && [cell conformsToProtocol:@protocol(THLPerkCellView)]) {
-            [(THLPerksCellViewModel *)object configureView:(id<THLPerkCellView>)cell];
+        if ([object isKindOfClass:[THLPerkStoreCellViewModel class]] && [cell conformsToProtocol:@protocol(THLPerkStoreCellView)]) {
+            [(THLPerkStoreCellViewModel *)object configureView:(id<THLPerkStoreCellView>)cell];
         }
     });
 }

@@ -30,7 +30,7 @@
 #import "THLGuestlistInvitationWireframe.h"
 #import "THLGuestlistReviewWireframe.h"
 #import "THLPopupNotificationWireframe.h"
-#import "THLPerkWireframe.h"
+#import "THLPerkStoreWireframe.h"
 #import "THLPerkDetailWireframe.h"
 #import "THLWaitlistPresenter.h"
 
@@ -54,7 +54,7 @@
 #import "THLLocationService.h"
 #import "THLFacebookProfilePictureURLFetchService.h"
 #import "THLGuestlistService.h"
-#import "THLPerkItemStoreService.h"
+#import "THLPerkStoreItemService.h"
 
 //Classes
 #import "THLEntities.h"
@@ -83,7 +83,7 @@
 @property (nonatomic, weak) THLGuestlistInvitationWireframe *guestlistInvitationWireframe;
 @property (nonatomic, weak) THLGuestlistReviewWireframe *guestlistReviewWireframe;
 @property (nonatomic, weak) THLPopupNotificationWireframe *popupNotificationWireframe;
-@property (nonatomic, weak) THLPerkWireframe *perkWireframe;
+@property (nonatomic, weak) THLPerkStoreWireframe *perkStoreWireframe;
 @property (nonatomic, weak) THLPerkDetailWireframe *perkDetailWireframe;
 @property (nonatomic, weak) THLWaitlistPresenter *waitlistPresenter;
 
@@ -112,7 +112,7 @@
 @property (nonatomic, strong) THLPromotionService *promotionService;
 @property (nonatomic, strong) THLLocationService *locationService;
 @property (nonatomic, strong) THLGuestlistService *guestlistService;
-@property (nonatomic, strong) THLPerkItemStoreService *perkItemStoreService;
+@property (nonatomic, strong) THLPerkStoreItemService *perkStoreItemService;
 
 @end
 
@@ -239,18 +239,15 @@
     return wireframe;
 }
 
-- (THLPerkWireframe *)newPerkWireframe {
-    THLPerkWireframe *wireframe = [[THLPerkWireframe alloc] initWithDataStore:self.perkStoreItemDataStore
-                                                                 entityMapper:self.entityMapper
-                                                         perkItemStoreService:self.perkItemStoreService
-                                                        viewDataSourceFactory:self.viewDataSourceFactory];
-    self.perkWireframe = wireframe;
+- (THLPerkStoreWireframe *)newPerkStoreWireframe {
+    THLPerkStoreWireframe *wireframe = [[THLPerkStoreWireframe alloc] initWithDataStore:self.perkStoreItemDataStore
+                                                                           entityMapper:self.entityMapper perkStoreItemService:self.perkStoreItemService viewDataSourceFactory:self.viewDataSourceFactory];
+    self.perkStoreWireframe = wireframe;
     return wireframe;
 }
 
 - (THLPerkDetailWireframe *)newPerkDetailWireframe {
-    THLPerkDetailWireframe *wireframe = [[THLPerkDetailWireframe alloc]initWithPerkItemStoreService:self.perkItemStoreService
-                                                                                       entityMapper:self.entityMapper];
+    THLPerkDetailWireframe *wireframe = [[THLPerkDetailWireframe alloc] initWithPerkStoreItemService:self.perkStoreItemService entityMapper:self.entityMapper];
     self.perkDetailWireframe = wireframe;
     return wireframe;
 }
@@ -414,10 +411,10 @@
 	return _guestlistService;
 }
 
-- (THLPerkItemStoreService *)perkItemStoreService {
-    if (!_perkItemStoreService) {
-        _perkItemStoreService = [[THLPerkItemStoreService alloc] initWithQueryFactory:self.parseQueryFactory];
+- (THLPerkStoreItemService *)perkStoreItemService {
+    if (!_perkStoreItemService) {
+        _perkStoreItemService = [[THLPerkStoreItemService alloc] initWithQueryFactory:self.parseQueryFactory];
     }
-    return _perkItemStoreService;
+    return _perkStoreItemService;
 }
 @end

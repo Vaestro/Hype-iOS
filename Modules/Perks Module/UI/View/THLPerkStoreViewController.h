@@ -1,5 +1,5 @@
 //
-//  THLPerksCell.h
+//  THLPerkStoreViewController.h
 //  TheHypelist
 //
 //  Created by Daniel Aksenov on 11/24/15.
@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "THLPerkCellView.h"
+#import "THLPerkStoreView.h"
 
-@interface THLPerksCell : UICollectionViewCell <THLPerkCellView>
-+ (NSString *)identifier;
+@interface THLPerkStoreViewController : UIViewController<THLPerkStoreView>
+
 @end
+
+

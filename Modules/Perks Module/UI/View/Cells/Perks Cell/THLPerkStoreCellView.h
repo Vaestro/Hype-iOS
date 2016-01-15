@@ -1,5 +1,5 @@
 //
-//  THLPerkCellView.h
+//  THLPerkStoreCellView.h
 //  TheHypelist
 //
 //  Created by Daniel Aksenov on 11/24/15.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol THLPerkCellView <NSObject>
+@protocol THLPerkStoreCellView <NSObject>
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *info;
 @property (nonatomic, copy) NSURL *image;

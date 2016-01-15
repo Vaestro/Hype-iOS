@@ -15,7 +15,7 @@
 @class THLPromotionSelectionWireframe;
 @class THLGuestlistInvitationWireframe;
 @class THLGuestlistReviewWireframe;
-@class THLPerkWireframe;
+@class THLPerkStoreWireframe;
 @class THLPerkDetailWireframe;
 
 @protocol THLGuestFlowDependencyManager <NSObject>
@@ -26,6 +26,6 @@
 - (THLPromotionSelectionWireframe *)newPromotionSelectionWireframe;
 - (THLGuestlistInvitationWireframe *)newGuestlistInvitationWireframe;
 - (THLGuestlistReviewWireframe *)newGuestlistReviewWireframe;
-- (THLPerkWireframe *)newPerkWireframe;
+- (THLPerkStoreWireframe *)newPerkStoreWireframe;
 - (THLPerkDetailWireframe *)newPerkDetailWireframe;
 @end
