@@ -250,9 +250,7 @@
 
 - (THLEventDetailsMapView *)newMapView {
     THLEventDetailsMapView *mapView = [THLEventDetailsMapView new];
-    //    mapView.title = NSLocalizedString(@"ADDRESS", nil);
     mapView.translatesAutoresizingMaskIntoConstraints = NO;
-    //    mapView.dividerColor = [UIColor whiteColor];
     return mapView;
 }
 

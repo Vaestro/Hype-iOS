@@ -37,10 +37,6 @@ THLGuestlistReviewModuleDelegate
 @property (nonatomic, strong) THLHostDashboardWireframe *dashboardWireframe;
 @property (nonatomic, strong) THLEventHostingWireframe  *eventHostingWireframe;
 @property (nonatomic, strong) THLGuestlistReviewWireframe *guestlistReviewWireframe;
-
-@property (nonatomic, strong) UIView *discoveryNavBarItem;
-@property (nonatomic, strong) UIView *userProfileNavBarItem;
-@property (nonatomic, strong) UIView *dashboardNavBarItem;
 @end
 
 @implementation THLHostFlowWireframe
@@ -56,26 +52,27 @@ THLGuestlistReviewModuleDelegate
 #pragma mark - Routing
 - (void)presentHostFlowModuleInterfaceInWindow:(UIWindow *)window {
     _window = window;
-    UIViewController *discovery = [[UIViewController alloc] initWithNibName:nil bundle:nil];
-    UIViewController *profile = [[UIViewController alloc] initWithNibName:nil bundle:nil];
-    UIViewController *dashboard = [[UIViewController alloc] initWithNibName:nil bundle:nil];
+
+    UIViewController *vc = [[UIViewController alloc] initWithNibName:nil bundle:nil];
+    UINavigationController *discovery = [UINavigationController new];
+    UINavigationController *dashboard = [UINavigationController new];
+    UIViewController *profile = vc;
     
-    [self presentEventDiscoveryInterfaceInViewController:discovery];
-    [self presentDashboardInterfaceInViewController:dashboard];
+    [self presentEventDiscoveryInterfaceInNavigationController:discovery];
+    [self presentDashboardInterfaceInNavigationController:dashboard];
     [self presentUserProfileInterfaceInViewController:profile];
     
-    NSArray *views = @[dashboard, discovery, profile];
+    dashboard.tabBarItem.image = [UIImage imageNamed:@"Lists Icon"];
+    discovery.tabBarItem.image = [UIImage imageNamed:@"Home Icon"];
+    profile.tabBarItem.image = [UIImage imageNamed:@"Profile Icon"];
     
-    NSArray *navBarItems = @[
-                             [self newDashboardNavBarItem],
-                             [self newDiscoveryNavBarItem],
-                             [self newUserProfileNavBarItem]
-                             ];
+    NSArray *views = @[discovery, dashboard, profile];
     
-    THLMasterNavigationController *masterNavigationController = [[THLMasterNavigationController alloc] initWithNavBarItems:navBarItems navBarBackground:kTHLNUIPrimaryBackgroundColor controllers:views showPageControl:NO];
+    UITabBarController *masterNavigationController = [UITabBarController new];
+    masterNavigationController.viewControllers = views;
+    masterNavigationController.view.autoresizingMask=(UIViewAutoresizingFlexibleHeight);
     
-    _navigationController = [[UINavigationController alloc] initWithRootViewController:masterNavigationController];
-    _window.rootViewController = _navigationController;
+    _window.rootViewController = masterNavigationController;
     [_window makeKeyAndVisible];
 }
 
@@ -93,18 +90,18 @@ THLGuestlistReviewModuleDelegate
     }
 }
 
-- (void)presentEventDiscoveryInterfaceInViewController:(UIViewController *)viewController {
+- (void)presentEventDiscoveryInterfaceInNavigationController:(UINavigationController *)navigationController {
     _eventDiscoveryWireframe = [_dependencyManager newEventDiscoveryWireframe];
     _currentWireframe = _eventDiscoveryWireframe;
     [_eventDiscoveryWireframe.moduleInterface setModuleDelegate:self];
-    [_eventDiscoveryWireframe.moduleInterface presentEventDiscoveryInterfaceInViewController:viewController];
+    [_eventDiscoveryWireframe.moduleInterface presentEventDiscoveryInterfaceInNavigationController:navigationController];
 }
 
-- (void)presentDashboardInterfaceInViewController:(UIViewController *)viewController {
+- (void)presentDashboardInterfaceInNavigationController:(UINavigationController *)navigationController {
     _dashboardWireframe = [_dependencyManager newHostDashboardWireframe];
     _currentWireframe = _dashboardWireframe;
     [_dashboardWireframe.moduleInterface setModuleDelegate:self];
-    [_dashboardWireframe.moduleInterface presentDashboardInterfaceInViewController:viewController];
+    [_dashboardWireframe.moduleInterface presentDashboardInterfaceInNavigationController:navigationController];
 }
 
 - (void)presentUserProfileInterfaceInViewController:(UIViewController *)viewController {
@@ -157,29 +154,4 @@ THLGuestlistReviewModuleDelegate
 - (void)logOutUser {
     [self.moduleDelegate logOutUser];
 }
-
-- (UIView *)newDiscoveryNavBarItem {
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"Hypelist-Icon"]
-                                                                 imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
-    imageView.frame = CGRectMake(0, 0, 20, 20);
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
-    imageView.tintColor = kTHLNUIGrayFontColor;
-    return imageView;
-}
-
-- (UIView *)newUserProfileNavBarItem {
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"Profile Icon"]
-                                                                 imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
-    imageView.tintColor = kTHLNUIGrayFontColor;
-    return imageView;
-}
-
-- (UIView *)newDashboardNavBarItem {
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"Lists Icon"]
-                                                                 imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
-    imageView.tintColor = kTHLNUIGrayFontColor;
-    return imageView;
-}
-
 @end

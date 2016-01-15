@@ -14,7 +14,7 @@
 #import "THLEventDiscoveryViewController.h"
 
 @interface THLEventDiscoveryWireframe()
-@property (nonatomic, strong) UIViewController *viewController;
+@property (nonatomic, strong) UINavigationController *navigationController;
 
 @property (nonatomic, strong) THLEventDiscoveryInteractor *interactor;
 @property (nonatomic, strong) THLEventDiscoveryDataManager *dataManager;
@@ -49,12 +49,9 @@
 	return _presenter;
 }
 
-- (void)presentInViewController:(UIViewController *)viewController {
-	_viewController = viewController;
+- (void)presentInNavigationController:(UINavigationController *)navigationController {
+	_navigationController = navigationController;
   	[_presenter configureView:_view];
-    [_viewController addChildViewController:_view];
-    _view.view.bounds = _viewController.view.bounds;
-    [_viewController.view addSubview:_view.view];
-    [_view didMoveToParentViewController:_viewController];
+    [_navigationController addChildViewController:_view];
 }
 @end

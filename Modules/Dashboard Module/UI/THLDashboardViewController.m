@@ -55,15 +55,14 @@
 
 - (void)layoutView {
     self.view.nuiClass = kTHLNUIBackgroundView;
-    
+    self.navigationItem.title = @"MY EVENTS";
+
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.automaticallyAdjustsScrollViewInsets = YES;
-    WEAKSELF();
+    
     [self.view addSubviews:@[_collectionView]];
     [_collectionView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.insets(kTHLEdgeInsetsNone());
-        //      Temporary Fix to account for SLPagingViewController Height that is greater than Bounds Height
-        make.bottom.equalTo(SV(WSELF.collectionView)).mas_offset(UIEdgeInsetsMake(0, 0, DiscoveryCellHeight(ViewWidth(WSELF.collectionView))/3.67, 0));
+        make.left.right.top.bottom.insets(kTHLEdgeInsetsNone());
     }];
 }
 

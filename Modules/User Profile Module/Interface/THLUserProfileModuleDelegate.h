@@ -11,5 +11,4 @@
 
 @protocol THLUserProfileModuleDelegate <NSObject>
 - (void)logOutUser;
-- (void)presentPerkInterfaceInWindow;
 @end

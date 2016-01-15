@@ -24,5 +24,4 @@
 
 - (void)configureView:(id<THLEventDetailView>)view;
 - (void)configureNavigationBar:(THLEventNavigationBar *)navBar;
-- (void)configureVenueDetailsView:(THLVenueDetailsView *)venueDetailsView;
 @end

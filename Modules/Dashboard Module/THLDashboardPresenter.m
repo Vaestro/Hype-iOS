@@ -93,8 +93,8 @@ THLDashboardInteractorDelegate
     [_view setRefreshCommand:refreshCommand];
 }
 
-- (void)presentDashboardInterfaceInViewController:(UIViewController *)viewController {
-    [_wireframe presentInterfaceInViewController:viewController];
+- (void)presentDashboardInterfaceInNavigationController:(UINavigationController *)navigationController {
+    [_wireframe presentInterfaceInNavigationController:navigationController];
 }
 
 - (void)handleRefreshAction {

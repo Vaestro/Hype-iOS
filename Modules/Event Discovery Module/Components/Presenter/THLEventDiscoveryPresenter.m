@@ -35,8 +35,8 @@
 }
 
 #pragma mark - Module Interface
-- (void)presentEventDiscoveryInterfaceInViewController:(UIViewController *)viewController {
-	[_wireframe presentInViewController:viewController];
+- (void)presentEventDiscoveryInterfaceInNavigationController:(UINavigationController *)navigationController {
+	[_wireframe presentInNavigationController:navigationController];
 }
 
 - (void)configureView:(id<THLEventDiscoveryView>)view {

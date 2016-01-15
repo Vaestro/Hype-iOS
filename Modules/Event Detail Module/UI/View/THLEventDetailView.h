@@ -35,6 +35,4 @@ typedef NS_OPTIONS(NSInteger, THLGuestlistStatus) {
 @property (nonatomic, strong) RACCommand *actionBarButtonCommand;
 @property (nonatomic, strong) RACCommand *dismissCommand;
 @property (nonatomic) BOOL viewAppeared;
-- (void)showDetailsView:(UIView *)detailView;
-- (void)hideDetailsView:(UIView *)detailView;
 @end

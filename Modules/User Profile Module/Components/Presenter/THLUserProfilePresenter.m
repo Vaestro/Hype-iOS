@@ -36,7 +36,8 @@
     
     [_view setUserImageURL:[NSURL URLWithString:image.url]];
     [_view setUserName:[THLUser currentUser].firstName];
-    
+    NSLog(@"presenter name is:%@", [THLUser currentUser].firstName);
+
     WEAKSELF();
     RACCommand *selectedIndexPathCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         [WSELF handleIndexPathSelection:(NSIndexPath *)input];
@@ -71,23 +72,7 @@
 }
 
 - (void)handleIndexPathSelection:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        if ([THLUser currentUser] && [THLUser currentUser].type == THLUserTypeGuest) {
-            [self.moduleDelegate presentPerkInterfaceInWindow];
-        } else if ([THLUser currentUser] && [THLUser currentUser].type == THLUserTypeHost) {
-            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault
-                                                             handler:nil];
-            NSString *message = NSStringWithFormat(@"Hosts cannot access Rewards");
 
-            [self showAlertViewWithMessage:message withAction:[[NSArray alloc] initWithObjects:okAction, nil]];
-        }
-        else {
-            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault
-                                                              handler:nil];
-            NSString *message = NSStringWithFormat(@"You must be signed in to view Rewards");
-            [self showAlertViewWithMessage:message withAction:[[NSArray alloc] initWithObjects:okAction, nil]];
-        }
-    }
 }
 
 - (void)showAlertViewWithMessage:(NSString *)message withAction:(NSArray<UIAlertAction *>*)actions {

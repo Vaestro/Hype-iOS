@@ -11,7 +11,6 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "PFFacebookUtils.h"
 #import <Fabric/Fabric.h>
-#import <Appsee/Appsee.h>
 #import <DigitsKit/DigitsKit.h>
 #import <Optimizely/Optimizely.h>
 #import <Stripe/Stripe.h>
@@ -61,7 +60,7 @@
     
     [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:nil];
     
-    [Fabric with:@[[Digits class], [Optimizely class], [Appsee class], [Crashlytics class], [STPAPIClient class]]];
+    [Fabric with:@[[Digits class], [Optimizely class], [Crashlytics class], [STPAPIClient class]]];
 
     [Optimizely startOptimizelyWithAPIToken:@"AANLIOMBQFi_hFw1wzxiRVDv6GfuC4rH~4568187528" launchOptions:launchOptions];
 

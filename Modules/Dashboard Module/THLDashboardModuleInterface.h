@@ -12,5 +12,5 @@
 @protocol THLDashboardModuleInterface <NSObject>
 @property (nonatomic, weak) id<THLDashboardModuleDelegate> moduleDelegate;
 
-- (void)presentDashboardInterfaceInViewController:(UIViewController *)viewController;
+- (void)presentDashboardInterfaceInNavigationController:(UINavigationController *)navigationController;
 @end

@@ -25,12 +25,17 @@
 	[[UINavigationBar appearance] setBarTintColor:kTHLNUIPrimaryBackgroundColor];
 //	[[UINavigationBar appearance] setTintColor:[THLStyleKit lightTextColor]];
 	[[UINavigationBar appearance] setTranslucent:NO];
-//	[[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [THLStyleKit lightTextColor]}];
+	[[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : kTHLNUIPrimaryFontColor,
+                                                           NSFontAttributeName: [UIFont fontWithName:@"Raleway-Regular" size:18.0],
+                                                           NSKernAttributeName: @2}];
 	[[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"Back Arrow"]];
 	[[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"Back Arrow"]];
 	[[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)
 														 forBarMetrics:UIBarMetricsDefault];
 
+    [[UITabBar appearance] setTintColor:kTHLNUIAccentColor];
+    [[UITabBar appearance] setBarStyle:UIBarStyleBlack];
+    
 //	[[UIButton appearance] setTitleColor:[THLStyleKit lightTextColor]];
 }
 

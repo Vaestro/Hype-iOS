@@ -36,8 +36,8 @@
 }
 
 #pragma mark - Module Interface
-- (void)presentPerkStoreInterfaceInWindow:(UIWindow *)window {
-    [_wireframe presentPerkStoreInterfaceInWindow:window];
+- (void)presentPerkStoreInterfaceInNavigationController:(UINavigationController *)navigationController {
+    [_wireframe presentPerkStoreInterfaceInNavigationController:navigationController];
 }
 
 - (void)configureView:(id<THLPerkStoreView>)view {
@@ -65,12 +65,6 @@
         [WSELF handleRefreshAction];
         return [RACSignal empty];
     }];
-    
-    RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [WSELF handleDismissAction];
-        return [RACSignal empty];
-        
-    }];
 
     [RACObserve(self, refreshing) subscribeNext:^(NSNumber *b) {
         BOOL isRefreshing = [b boolValue];
@@ -80,7 +74,6 @@
     [_view setDataSource:dataSource];
     [_view setSelectedIndexPathCommand:selectedIndexPathCommand];
     [_view setRefreshCommand:refreshCommand];
-    [_view setDismissCommand:dismissCommand];
 
 }
     

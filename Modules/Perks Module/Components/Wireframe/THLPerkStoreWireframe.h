@@ -28,6 +28,6 @@
                      perkStoreItemService:(id<THLPerkStoreItemServiceInterface>)perkStoreItemService
             viewDataSourceFactory:(id<THLViewDataSourceFactoryInterface>)viewDataSourceFactory;
 
-- (void)presentPerkStoreInterfaceInWindow:(UIWindow *)window;
+- (void)presentPerkStoreInterfaceInNavigationController:(UINavigationController *)navigationController;
 - (void)dismissInterface;
 @end

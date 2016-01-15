@@ -14,7 +14,8 @@
 
 
 @interface THLPerkStoreWireframe()
-@property (nonatomic, strong) UIWindow *window;
+@property (nonatomic, strong) UINavigationController *navigationController;
+
 @property (nonatomic, strong) THLPerkStoreInteractor *interactor;
 @property (nonatomic, strong) THLPerkStoreDataManager *dataManager;
 @property (nonatomic, strong) THLPerkStoreViewController *view;
@@ -49,12 +50,10 @@
     return _presenter;
 }
 
-- (void)presentPerkStoreInterfaceInWindow:(UIWindow *)window {
-    _window = window;
+- (void)presentPerkStoreInterfaceInNavigationController:(UINavigationController *)navigationController {
+    _navigationController = navigationController;
     [_presenter configureView:_view];
-    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:_view];
-    
-    [_window.rootViewController presentViewController:navVC animated:YES completion:NULL];
+    [_navigationController addChildViewController:_view];
 }
 
 - (void)dismissInterface {

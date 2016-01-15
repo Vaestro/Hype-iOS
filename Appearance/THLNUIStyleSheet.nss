@@ -34,7 +34,7 @@ font-size: 20;
 }
 
 DetailTitle {
-font-name: @primaryRegularFontName;
+font-name: @secondaryRegularFontName;
 font-color: @primaryFontColor;
 font-size: 16;
 }

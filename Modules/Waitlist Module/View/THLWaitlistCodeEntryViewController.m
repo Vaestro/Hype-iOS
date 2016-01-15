@@ -15,7 +15,6 @@
 #import "LRTextField.h"
 
 static const CGFloat kSubmitButtonHeight = 58.0f;
-static const CGFloat kLogoImageSize = 75.0f;
 
 @interface THLWaitlistCodeEntryViewController ()
 <

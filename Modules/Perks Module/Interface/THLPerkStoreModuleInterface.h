@@ -13,5 +13,5 @@
 @protocol THLPerkStoreModuleInterface <NSObject>
 @property (nonatomic, weak) id<THLPerkStoreModuleDelegate> moduleDelegate;
 
--(void)presentPerkStoreInterfaceInWindow:(UIWindow *)window;
+- (void)presentPerkStoreInterfaceInNavigationController:(UINavigationController *)navigationController;
 @end

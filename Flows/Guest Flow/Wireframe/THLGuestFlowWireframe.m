@@ -62,26 +62,30 @@ THLPerkStoreModuleDelegate
 
 - (void)presentGuestFlowInWindow:(UIWindow *)window {
     _window = window;
-    UIViewController *discovery = [[UIViewController alloc] initWithNibName:nil bundle:nil];
-    UIViewController *profile = [[UIViewController alloc] initWithNibName:nil bundle:nil];
-    UIViewController *dashboard = [[UIViewController alloc] initWithNibName:nil bundle:nil];
+    
+    UIViewController *vc = [[UIViewController alloc] initWithNibName:nil bundle:nil];
+    UINavigationController *discovery = [UINavigationController new];
+    UINavigationController *dashboard = [UINavigationController new];
+    UINavigationController *perks = [UINavigationController new];
+    UIViewController *profile = vc;
 
-    [self presentEventDiscoveryInterfaceInViewController:discovery];
-    [self presentDashboardInterfaceInViewController:dashboard];
+    [self presentEventDiscoveryInterfaceInNavigationController:discovery];
+    [self presentDashboardInterfaceInNavigationController:dashboard];
+    [self presentPerkStoreInterfaceInNavigationController:perks];
     [self presentUserProfileInterfaceInViewController:profile];
-    
-    NSArray *views = @[dashboard, discovery, profile];
-    
-    NSArray *navBarItems = @[
-                     [self newDashboardNavBarItem],
-                     [self newDiscoveryNavBarItem],
-                     [self newGuestProfileNavBarItem]
-                     ];
-    
-    THLMasterNavigationController *masterNavigationController = [[THLMasterNavigationController alloc] initWithNavBarItems:navBarItems navBarBackground:kTHLNUIPrimaryBackgroundColor controllers:views showPageControl:NO];
 
-    _navigationController = [[UINavigationController alloc] initWithRootViewController:masterNavigationController];
-    _window.rootViewController = _navigationController;
+    dashboard.tabBarItem.image = [UIImage imageNamed:@"Lists Icon"];
+    discovery.tabBarItem.image = [UIImage imageNamed:@"Home Icon"];
+    profile.tabBarItem.image = [UIImage imageNamed:@"Profile Icon"];
+    perks.tabBarItem.image = [UIImage imageNamed:@"Perks Icon"];
+
+    NSArray *views = @[discovery, dashboard, perks, profile];
+    
+    UITabBarController *masterNavigationController = [UITabBarController new];
+    masterNavigationController.viewControllers = views;
+    masterNavigationController.view.autoresizingMask=(UIViewAutoresizingFlexibleHeight);
+
+    _window.rootViewController = masterNavigationController;
     [_window makeKeyAndVisible];
 }
 
@@ -97,18 +101,18 @@ THLPerkStoreModuleDelegate
     return self;
 }
 
-- (void)presentEventDiscoveryInterfaceInViewController:(UIViewController *)viewController {
+- (void)presentEventDiscoveryInterfaceInNavigationController:(UINavigationController *)navigationController {
 	_eventDiscoveryWireframe = [_dependencyManager newEventDiscoveryWireframe];
     _currentWireframe = _eventDiscoveryWireframe;
 	[_eventDiscoveryWireframe.moduleInterface setModuleDelegate:self];
-	[_eventDiscoveryWireframe.moduleInterface presentEventDiscoveryInterfaceInViewController:viewController];
+	[_eventDiscoveryWireframe.moduleInterface presentEventDiscoveryInterfaceInNavigationController:navigationController];
 }
 
-- (void)presentDashboardInterfaceInViewController:(UIViewController *)viewController {
+- (void)presentDashboardInterfaceInNavigationController:(UINavigationController *)navigationController {
     _dashboardWireframe = [_dependencyManager newDashboardWireframe];
     _currentWireframe = _dashboardWireframe;
     [_dashboardWireframe.moduleInterface setModuleDelegate:self];
-    [_dashboardWireframe.moduleInterface presentDashboardInterfaceInViewController:viewController];
+    [_dashboardWireframe.moduleInterface presentDashboardInterfaceInNavigationController:navigationController];
 }
 
 - (void)presentUserProfileInterfaceInViewController:(UIViewController *)viewController {
@@ -118,11 +122,11 @@ THLPerkStoreModuleDelegate
     [_userProfileWireframe.moduleInterface presentUserProfileInterfaceInViewController:viewController];
 }
 
-- (void)presentPerkStoreInterfaceInWindow:(UIWindow *)window {
+- (void)presentPerkStoreInterfaceInNavigationController:(UINavigationController *)navigationController {
     _perkStoreWireframe = [_dependencyManager newPerkStoreWireframe];
     _currentWireframe = _perkStoreWireframe;
     [_perkStoreWireframe.moduleInterface setModuleDelegate:self];
-    [_perkStoreWireframe.moduleInterface presentPerkStoreInterfaceInWindow:_window];
+    [_perkStoreWireframe.moduleInterface presentPerkStoreInterfaceInNavigationController:navigationController];
 }
 
 - (void)presentEventDetailInterfaceForEvent:(THLEventEntity *)eventEntity {
@@ -225,11 +229,6 @@ THLPerkStoreModuleDelegate
 - (void)logOutUser {
     [self.moduleDelegate logOutUser];
 }
-
-- (void)presentPerkInterfaceInWindow {
-    [self presentPerkStoreInterfaceInWindow:_window];
-}
-
 
 #pragma mark - Nav Bar Items Construction
 - (UIView *)newDiscoveryNavBarItem {

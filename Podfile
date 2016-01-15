@@ -42,7 +42,6 @@ pod 'FBSDKShareKit'
 #Fabric
 pod 'Fabric'
 pod 'Crashlytics'
-pod 'Appsee'
 pod 'Digits'
 pod 'TwitterCore'
 pod 'Optimizely-iOS-SDK'

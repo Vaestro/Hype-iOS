@@ -29,11 +29,21 @@
 
 - (BFTask *)fetchAllPerkStoreItems {
     WEAKSELF();
+    STRONGSELF();
     return [[_perkService fetchAllPerkStoreItems] continueWithSuccessBlock:^id(BFTask *task) {
-        NSSet *entities = [NSSet setWithArray:[WSELF.entityMapper mapPerkStoreItems:task.result]];
-        [WSELF.dataStore updateOrAddEntities:entities];
+        THLDataStoreDomain *domain = [SSELF domainForPerks];
+        NSSet *entities = [NSSet setWithArray:[SSELF.entityMapper mapPerkStoreItems:task.result]];
+        [SSELF.dataStore refreshDomain:domain withEntities:entities andDeleteEntities:YES];
         return [BFTask taskWithResult:nil];
     }];
+}
+
+- (THLDataStoreDomain *)domainForPerks {
+    THLDataStoreDomain *domain = [[THLDataStoreDomain alloc] initWithMemberTestBlock:^BOOL(THLEntity *entity) {
+        THLPerkStoreItemEntity *perkStoreItemEntity = (THLPerkStoreItemEntity *)entity;
+        return perkStoreItemEntity;
+    }];
+    return domain;
 }
 
 - (BFTask *)fetchCreditsForUser {

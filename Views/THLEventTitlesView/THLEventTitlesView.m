@@ -9,8 +9,7 @@
 #import "THLEventTitlesView.h"
 #import "THLAppearanceConstants.h"
 
-static CGFloat const kTHLEventTitlesViewSeparatorViewHeight = 1;
-static CGFloat const kTHLEventTitlesViewSeparatorViewWidth = 112.5;
+static CGFloat const kTHLEventTitlesViewSeparatorViewHeight = 0.5;
 
 @interface THLEventTitlesView()
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -56,7 +55,7 @@ static CGFloat const kTHLEventTitlesViewSeparatorViewWidth = 112.5;
     
     [_separatorView makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF titleLabel].mas_baseline).insets(kTHLEdgeInsetsHigh());
-        make.size.equalTo(CGSizeMake(kTHLEventTitlesViewSeparatorViewWidth, kTHLEventTitlesViewSeparatorViewHeight));
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH*0.25, kTHLEventTitlesViewSeparatorViewHeight));
         make.centerX.offset(0);
     }];
     

@@ -46,5 +46,4 @@ typedef NS_OPTIONS(NSInteger, THLGuestlistReviewerStatus) {
 - (void)showGuestlistMenuView:(UIView *)menuView;
 - (void)hideGuestlistMenuView:(UIView *)menuView;
 - (void)handleCallActionWithCallerdId:(NSString *)twilioNumber toHostNumber:(NSString *)hostNumber;
-- (void)confirmActionWithMessage:(NSString *)text acceptTitle:(NSString *)acceptTitle declineTitle:(NSString *)declineTitle;
 @end

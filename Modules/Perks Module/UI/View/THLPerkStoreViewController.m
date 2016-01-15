@@ -20,14 +20,11 @@
 UICollectionViewDelegate,
 UICollectionViewDelegateFlowLayout
 >
-//@property (nonatomic, strong) THLPerkUserInfoView *userPerkInfoView;
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) UILabel *labelOne;
 @property (nonatomic, strong) UILabel *labelTwo;
 @property (nonatomic, strong) UILabel *userCreditsLabel;
-@property (nonatomic, strong) UIBarButtonItem *backButton;
 @property (nonatomic, strong) NSString *userCredits;
-//@property (nonatomic, strong) THLActionBarButton *barButton;
 @end
 
 @implementation THLPerkStoreViewController
@@ -35,7 +32,6 @@ UICollectionViewDelegateFlowLayout
 @synthesize dataSource = _dataSource;
 @synthesize showRefreshAnimation = _showRefreshAnimation;
 @synthesize refreshCommand = _refreshCommand;
-@synthesize dismissCommand = _dismissCommand;
 @synthesize currentUserCredit = _currentUserCredit;
 @synthesize viewAppeared;
 
@@ -60,26 +56,21 @@ UICollectionViewDelegateFlowLayout
 }
 
 - (void)constructView {
-    _backButton = [self newBackBarButtonItem];
     _labelOne = [self newLabelWithText:@"Your credits balance is" withConstant:kTHLNUIRegularTitle];
-    _labelTwo = [self newLabelWithText:@"Earn credits every time you invite friends\nto attend an event. Then use those credits\nto purchase rewards here" withConstant:kTHLNUIDetailTitle];
+    _labelTwo = [self newLabelWithText:@"Earn credits every time you invite friends\nto attend an event. Then use those credits\nto purchase rewards here"
+                          withConstant:kTHLNUIDetailTitle];
     _userCreditsLabel = [self newCreditsLabelWithText:NSStringWithFormat(@"$%@", _userCredits)];
-//    _barButton = [self newBarButton];
 }
 
 - (void)layoutView {
     self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
-    self.navigationItem.leftBarButtonItem = _backButton;
-    self.navigationItem.title = @"PERKS";
+    self.navigationController.navigationBar.topItem.title = @"PERKS";
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.automaticallyAdjustsScrollViewInsets = YES;
     
     _collectionView = [self newCollectionView];
     [self.view addSubviews:@[_labelOne, _labelTwo, _userCreditsLabel, _collectionView]];
     
-//    [_userPerkInfoView makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.bottom.right.bottom.insets(kTHLEdgeInsetsNone());
-//    }];
     WEAKSELF();
     [_labelOne makeConstraints:^(MASConstraintMaker *make) {
         make.top.right.left.insets(kTHLEdgeInsetsSuperHigh());
@@ -97,13 +88,10 @@ UICollectionViewDelegateFlowLayout
 
     [_collectionView makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(WSELF.labelTwo.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
-        make.left.right.bottom.insets(kTHLEdgeInsetsHigh());
+        make.left.right.insets(kTHLEdgeInsetsHigh());
+        make.bottom.equalTo(kTHLEdgeInsetsNone());
+
     }];
-    
-//    [_barButton makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(WSELF.collectionView.mas_bottom);
-//        make.bottom.left.right.insets(kTHLEdgeInsetsNone());
-//    }];
 }
 
 
@@ -122,8 +110,6 @@ UICollectionViewDelegateFlowLayout
             [SSELF.collectionView.pullToRefreshView stopAnimating];
         }
     }];
-    
-    RAC(self.backButton, rac_command) = RACObserve(self, dismissCommand);
     
     [RACObserve(WSELF, currentUserCredit) subscribeNext:^(id x) {
         float credits = [x floatValue];

@@ -66,7 +66,7 @@ static NSString *const kTHLPerksModuleViewKey = @"kTHLPerksModuleViewKey";
     return [THLViewDataSourceSorting withSortingBlock:^NSComparisonResult(THLEntity *entity1, THLEntity *entity2) {
         THLPerkStoreItemEntity *perkStoreItem1 = (THLPerkStoreItemEntity *)entity1;
         THLPerkStoreItemEntity *perkStoreItem2 = (THLPerkStoreItemEntity *)entity2;
-        return [perkStoreItem1.name compare:perkStoreItem2.name];
+        return [[NSNumber numberWithFloat:perkStoreItem1.credits] compare:[NSNumber numberWithFloat:perkStoreItem2.credits]];
     }];
 
 }

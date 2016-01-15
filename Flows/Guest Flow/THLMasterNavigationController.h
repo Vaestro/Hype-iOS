@@ -8,14 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "UIKit/UIkit.h"
-#import "SLPagingViewController.h"
 
-@interface THLMasterNavigationController : SLPagingViewController
-//- (instancetype)initWithMainViewController:(UIViewController *)mainViewController
-//                    leftSideViewController:(UIViewController *)leftSideViewController
-//                        rightSideViewController:(UIViewController *)rightSideViewController;
+@interface THLMasterNavigationController : UITabBarController
 
--(instancetype)initWithNavBarItems:(NSArray*)items navBarBackground:(UIColor*)background controllers:(NSArray*)controllers;
-
--(void)addViewControllers:(UIViewController *) controller needToRefresh:(BOOL) refresh;
 @end

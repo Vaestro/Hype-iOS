@@ -30,5 +30,5 @@
                    viewDataSourceFactory:(id<THLViewDataSourceFactoryInterface>)viewDataSourceFactory
                                dataStore:(THLDataStore *)dataStore;
 
-- (void)presentInterfaceInViewController:(UIViewController *)viewController;
+- (void)presentInterfaceInNavigationController:(UINavigationController *)navigationController;
 @end

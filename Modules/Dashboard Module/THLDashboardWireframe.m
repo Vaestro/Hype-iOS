@@ -12,7 +12,7 @@
 #import "THLDashboardDataManager.h"
 
 @interface THLDashboardWireframe()
-@property (nonatomic, strong) UIViewController *viewController;
+@property (nonatomic, strong) UINavigationController *navigationController;
 
 @property (nonatomic, strong) THLDashboardInteractor *interactor;
 @property (nonatomic, strong) THLDashboardDataManager *dataManager;
@@ -44,13 +44,10 @@
     _presenter = [[THLDashboardPresenter alloc] initWithWireframe:self interactor:_interactor];
 }
 
-- (void)presentInterfaceInViewController:(UIViewController *)viewController {
-    _viewController = viewController;
+- (void)presentInterfaceInNavigationController:(UINavigationController *)navigationController {
+    _navigationController = navigationController;
     [_presenter configureView:_view];
-    [_viewController addChildViewController:_view];
-    _view.view.bounds = _viewController.view.bounds;
-    [_viewController.view addSubview:_view.view];
-    [_view didMoveToParentViewController:_viewController];
+    [_navigationController addChildViewController:_view];
 }
 
 - (id<THLDashboardModuleInterface>)moduleInterface {

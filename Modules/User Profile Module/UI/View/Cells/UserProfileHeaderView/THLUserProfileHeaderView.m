@@ -22,35 +22,30 @@
         [self constructView];
         [self layoutView];
         [self bindView];
-//        self.translatesAutoresizingMaskIntoConstraints = NO;
     }
     return self;
 }
 
 - (void)constructView {
-    self.contentView.backgroundColor = kTHLNUISecondaryBackgroundColor;
+    self.contentView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     _iconView = [self newIconView];
     _label = [self newLabel];
-    
 }
 
 - (void)layoutView {
-    [self addSubviews:@[_iconView,
+    [self.contentView addSubviews:@[_iconView,
                         _label]];
     WEAKSELF();
     [_iconView makeConstraints:^(MASConstraintMaker *make) {
         make.top.insets(kTHLEdgeInsetsHigh());
-        make.left.top.greaterThanOrEqualTo(SV(WSELF.iconView)).insets(kTHLEdgeInsetsHigh());
-        make.right.lessThanOrEqualTo(SV(WSELF.iconView)).insets(kTHLEdgeInsetsHigh());
-        make.height.equalTo(SV(WSELF.iconView)).sizeOffset(CGSizeMake(100, -75));
-        make.width.equalTo([WSELF iconView].mas_height);
+        make.size.mas_equalTo(CGSizeMake(100, 100));
         make.centerX.equalTo(0);
     }];
     
     [_label makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF iconView].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
-        make.bottom.left.right.insets(kTHLEdgeInsetsHigh());
-        make.centerX.equalTo([WSELF iconView].mas_centerX);
+        make.top.equalTo([WSELF iconView].mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.bottom.insets(kTHLEdgeInsetsHigh());
+        make.centerX.equalTo(0);
     }];
     
 }
@@ -64,8 +59,13 @@
 }
 
 - (void)bindView {
-    RAC(self.iconView, imageURL) = RACObserve(self, userImageURL);
-    RAC(self.label, text) = RACObserve(self, userName);
+    [RACObserve(self, userImageURL) subscribeNext:^(id x) {
+        [_iconView setImageURL:self.userImageURL];
+        [self.contentView layoutIfNeeded];
+    }];
+    
+    RAC(self.label, text, @"") = RACObserve(self, userName);
+    
 }
 
 #pragma mark - Construtors
@@ -76,11 +76,15 @@
 
 - (UILabel *)newLabel {
     UILabel *label = THLNUILabel(kTHLNUIRegularTitle);
+    [label setText:@"Bitch"];
+    [label setTextColor:kTHLNUIPrimaryFontColor];
     label.adjustsFontSizeToFitWidth = YES;
     label.minimumScaleFactor = 0.5;
+    label.numberOfLines = 1;
     label.textAlignment = NSTextAlignmentCenter;
     return label;
 }
+
 + (NSString *)identifier {
     return NSStringFromClass(self);
 }

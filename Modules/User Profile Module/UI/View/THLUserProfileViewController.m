@@ -40,7 +40,6 @@ typedef NS_ENUM(NSInteger, HypelistSectionRow) {
 static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileViewCellIdentifier";
 
 @interface THLUserProfileViewController()
-@property (nonatomic, strong) THLUserProfileInfoView *profileInfoView;
 @property (nonatomic, strong) NSArray *urls;
 @property (nonatomic, strong) NSArray *tableCellNames;
 @property (nonatomic, strong) NSString *siteUrl;
@@ -64,33 +63,22 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
     [self bindView];
     
     self.urls = [[NSArray alloc]initWithObjects:@"https://hypelist.typeform.com/to/zGLp4N", @"https://hypelist.typeform.com/to/v01VE8", nil];
-    self.tableCellNames = [[NSArray alloc]initWithObjects:@"Rewards", @"Become a Host", @"Let Hypelist Plan Your Party", @"Privacy Policy", @"Terms & Conditions", nil];
+    self.tableCellNames = [[NSArray alloc]initWithObjects:@"Become a Host", @"Let Hypelist Plan Your Party", @"Privacy Policy", @"Terms & Conditions", nil];
 }
 
 #pragma mark - View Setup
 - (void)constructView {
     _tableView = [self newTableView];
-    _profileInfoView = [self newProfileInfoView];
     _infoVC = [self newInfoVC];
 }
 
 - (void)layoutView {
     [self.view addSubviews:@[_tableView]];
     
-//    self.edgesForExtendedLayout = UIRectEdgeNone;
     self.automaticallyAdjustsScrollViewInsets = YES;
     
-    WEAKSELF();
-//    [_profileInfoView makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.left.right.insets(kTHLEdgeInsetsNone());
-//        make.bottom.equalTo([WSELF tableView].mas_top).insets(kTHLEdgeInsetsNone());
-//        make.height.equalTo(200);
-//    }];
-    
     [_tableView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.insets(UIEdgeInsetsZero);
-//      Temporary Fix to account for SLPagingViewController Height that is greater than Bounds Height
-        make.bottom.equalTo(SV(WSELF.tableView)).mas_offset(UIEdgeInsetsMake(0, 0, -250, 0));
+        make.left.right.top.bottom.insets(kTHLEdgeInsetsNone());
     }];
 }
 
@@ -100,8 +88,6 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 }
 - (void)bindView {
     [self configureDataSource];
-    RAC(self.profileInfoView, userImageURL) = RACObserve(self, userImageURL);
-    RAC(self.profileInfoView, userName) = RACObserve(self, userName);
 }
 
 - (void)configureDataSource {
@@ -109,9 +95,9 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 }
 
 - (void)registerCellsForTableView:(UITableView *)tableView {
+    [tableView registerClass:[THLUserProfileHeaderView class] forHeaderFooterViewReuseIdentifier:[THLUserProfileHeaderView identifier]];
     [tableView registerClass:[THLUserProfileTableViewCell class] forCellReuseIdentifier:[THLUserProfileTableViewCell identifier]];
     [tableView registerClass:[THLUserProfileFooterView class] forHeaderFooterViewReuseIdentifier:[THLUserProfileFooterView identifier]];
-    [tableView registerClass:[THLUserProfileHeaderView class] forHeaderFooterViewReuseIdentifier:[THLUserProfileHeaderView identifier]];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -125,27 +111,23 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch(indexPath.row) {
         case 0: {
-            [selectedIndexPathCommand execute:indexPath];
-            break;
-        }
-        case 1: {
             self.siteUrl = [self.urls objectAtIndex:indexPath.row];
             [self alert:[self.urls objectAtIndex:indexPath.row]];
             break;
         }
-        case 2: {
+        case 1: {
             self.siteUrl = [self.urls objectAtIndex:1];
             [self alert:[self.urls objectAtIndex:1]];
             break;
         }
-        case 3: {
+        case 2: {
             UINavigationController *navVC= [[UINavigationController alloc] initWithRootViewController:_infoVC];
             [self.view.window.rootViewController presentViewController:navVC animated:YES completion:nil];
             _infoVC.displayText = [THLResourceManager privacyPolicyText];
             _infoVC.title = @"Privacy Policy";
             break;
         }
-        case 4: {
+        case 3: {
             UINavigationController *navVC= [[UINavigationController alloc] initWithRootViewController:_infoVC];
             [self.view.window.rootViewController presentViewController:navVC animated:YES completion:nil];
             _infoVC.displayText = [THLResourceManager termsOfUseText];
@@ -166,8 +148,10 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
     CGRect frame = CGRectMake(0, 0, ScreenWidth, height);
     THLUserProfileHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:[THLUserProfileHeaderView identifier]];
     headerView = [[THLUserProfileHeaderView alloc] initWithFrame:frame];
-    headerView.userName = self.userName;
-    headerView.userImageURL = self.userImageURL;
+    RAC(headerView, userImageURL) = RACObserve(self, userImageURL);
+    RAC(headerView, userName) = RACObserve(self, userName);
+    NSLog(@"view controller name is:%@", self.userName);
+
     header = headerView;
     return header;
 }
@@ -230,18 +214,6 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 }
 
 #pragma mark UIAlertViewDelegate
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    
-    if (buttonIndex==1) {
-        //Ok button was selected
-        
-//        THLWebViewController *webView = [THLWebViewController new];
-//        webView.url = [NSURL URLWithString:self.siteUrl];
-//        [self presentViewController:webView animated:YES completion:nil];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.siteUrl]];
-    }
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     THLUserProfileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[THLUserProfileTableViewCell identifier] forIndexPath:indexPath];
     if (!cell) {
