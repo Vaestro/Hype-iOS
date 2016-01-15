@@ -134,7 +134,7 @@
     
 #ifdef DEBUG
 #else
-    [Answers logCustomEventWithName:@"Event Viewed"
+    [Answers logCustomEventWithName:@"Events"
                    customAttributes:@{@"Venue Name & Event Date": [NSString stringWithFormat:@"%@ %@", _eventEntity.location.name, _eventEntity.date.thl_dayOfTheWeek ]}];
 #endif
 }
