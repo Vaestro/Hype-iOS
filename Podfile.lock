@@ -17,6 +17,7 @@ PODS:
   - APAddressBook (0.2.1):
     - APAddressBook/Core (= 0.2.1)
   - APAddressBook/Core (0.2.1)
+  - Appsee (2.1.5)
   - AutoCoding (2.2.1)
   - BFKit (1.8.0)
   - BlocksKit (2.2.5):
@@ -48,7 +49,7 @@ PODS:
     - CocoaLumberjack/Core
   - CocoaLumberjack/Extensions (2.2.0):
     - CocoaLumberjack/Default
-  - Crashlytics (3.4.1):
+  - Crashlytics (3.5.0):
     - Fabric (~> 1.6.0)
   - DateTools (1.7.0)
   - Digits (1.14.6):
@@ -108,6 +109,7 @@ PODS:
   - NUIParse (1.3)
   - ObjectiveSugar (1.1.0)
   - OCMock (3.1.2)
+  - Optimizely-iOS-SDK (1.3.2)
   - ORStackView (3.0.1):
     - FLKAutoLayout (~> 0.2)
   - Parse (1.11.0):
@@ -141,6 +143,9 @@ PODS:
   - SDWebImage/Core (3.7.3)
   - SLPagingView (0.0.5)
   - SSDataSources (0.8.5)
+  - Stripe (6.0.1):
+    - Stripe/Core (= 6.0.1)
+  - Stripe/Core (6.0.1)
   - SVProgressHUD (1.1.3)
   - SVPullToRefresh (0.4.1)
   - THContactPicker (1.2)
@@ -160,6 +165,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
   - APAddressBook (~> 0.2.1)
+  - Appsee
   - AutoCoding (~> 2.2)
   - BFKit
   - BlocksKit (~> 2.2)
@@ -189,6 +195,7 @@ DEPENDENCIES:
   - NUI (~> 0.5)
   - ObjectiveSugar
   - OCMock (= 3.1.2)
+  - Optimizely-iOS-SDK
   - ORStackView
   - Parse
   - ParseFacebookUtilsV4
@@ -199,6 +206,7 @@ DEPENDENCIES:
   - SDWebImage (~> 3.7)
   - SLPagingView
   - SSDataSources (~> 0.8)
+  - Stripe
   - SVProgressHUD
   - SVPullToRefresh
   - THContactPicker (~> 1.2)
@@ -211,12 +219,13 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
   APAddressBook: 90c0fb07579a47e10ef1a2344e23cfd35f388bec
+  Appsee: 77f144701aa1a53d854d319a46667561849e8cf5
   AutoCoding: b47e528426c84346371dd532b8e6458929e4da34
   BFKit: f9edb431d57bcd01568a5aebbfae2cd9976f03c2
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   Bolts: 722ab9a4f8b50fc4ed1b9998a5a7a2b3f16d80b4
   CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
-  Crashlytics: 41574a245bc6ae10c55d57f385ebd2004e5bee05
+  Crashlytics: fabfd45d0e8b8dc936c682b97e302b9a49a1c827
   DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
   Digits: 57b958f1e19907b70645fcd25f97f14175ff2438
   DZNEmptyDataSet: dd7cca17c1d07dfa78956859b1e70a52505678ef
@@ -244,6 +253,7 @@ SPEC CHECKSUMS:
   NUIParse: 2e3885ba7807477266396292626bd387d34c2338
   ObjectiveSugar: a6a25f23d657c19df0a0b972466d5b5ca9f5295c
   OCMock: a10ea9f0a6e921651f96f78b6faee95ebc813b92
+  Optimizely-iOS-SDK: 4e63727b72618f35a1d919f60d5935ac4f463405
   ORStackView: a1bb52748cd0ae29891c140baf22ff8972fb363c
   Parse: 886af46a0a677402f6374bb97ac212e795f70afe
   ParseFacebookUtilsV4: eab9b4ade12f0800b4d30f6b808bca55ce17a0e9
@@ -254,6 +264,7 @@ SPEC CHECKSUMS:
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   SLPagingView: ba9bb6102cb318ce56f23d0a7e49a46ddcdad7e3
   SSDataSources: b01170fb23b82acf0649194e9189b0bf5f702681
+  Stripe: 04f215191702c268b89fe0cdf28dc24a9688a71b
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
   THContactPicker: e723f7c6ab6e1d6d10d59d618322ab8bfcb00365

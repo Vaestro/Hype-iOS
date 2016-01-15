@@ -38,6 +38,7 @@
 		_interactor = interactor;
 		_interactor.delegate = self;
 		_wireframe = wireframe;
+
 	}
 	return self;
 }
@@ -126,10 +127,16 @@
 
 - (void)presentEventDetailInterfaceForEvent:(THLEventEntity *)eventEntity inWindow:(UIWindow *)window {
     _eventEntity = eventEntity;
-    
+
     [_interactor getPlacemarkForLocation:_eventEntity.location];
     [_interactor getPromotionForEvent:_eventEntity.objectId];
 	[_wireframe presentInterfaceInWindow:window];
+    
+#ifdef DEBUG
+#else
+    [Answers logCustomEventWithName:@"Events"
+                   customAttributes:@{@"Venue Name & Event Date": [NSString stringWithFormat:@"%@ %@", _eventEntity.location.name, _eventEntity.date.thl_dayOfTheWeek ]}];
+#endif
 }
 
 - (void)checkForInvite {

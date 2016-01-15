@@ -572,10 +572,9 @@
 		79527CEF1BF188F80074AF38 /* THLEventHostingInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventHostingInteractor.m; sourceTree = "<group>"; };
 		795F13641C3C40B500AC9E76 /* THLWaitlistHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLWaitlistHomeViewController.h; sourceTree = "<group>"; };
 		795F13651C3C40B500AC9E76 /* THLWaitlistHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLWaitlistHomeViewController.m; sourceTree = "<group>"; };
-		795FB79B1C20D7ED00B70973 /* Hype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hype.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		795FB79C1C20D7ED00B70973 /* Hype.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Hype.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		796965C11BFD8DDE009034FA /* THLHostFlowModuleInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLHostFlowModuleInterface.h; sourceTree = "<group>"; };
 		796965C21BFD8DE8009034FA /* THLHostFlowModuleDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLHostFlowModuleDelegate.h; sourceTree = "<group>"; };
+		796BFA461C484A890037EA3A /* Hype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hype.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79730CF01C17DC3500D70F4B /* THLUserProfileFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserProfileFooterView.h; sourceTree = "<group>"; };
 		79730CF11C17DC3500D70F4B /* THLUserProfileFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLUserProfileFooterView.m; sourceTree = "<group>"; };
 		79730CF41C18A2AA00D70F4B /* THLUserProfileHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserProfileHeaderView.h; sourceTree = "<group>"; };
@@ -608,6 +607,7 @@
 		798D7EC01BF2E5CF001D4593 /* OnboardingContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnboardingContentViewController.h; sourceTree = "<group>"; };
 		798D7EC11BF2E5CF001D4593 /* OnboardingContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnboardingContentViewController.m; sourceTree = "<group>"; };
 		798D7EC31BF2E634001D4593 /* OnboardingContentViewController_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OnboardingContentViewController_Private.h; sourceTree = "<group>"; };
+		79A1CEB01C484A910071F328 /* Hype.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Hype.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		79ABA9B51C053ED6001ABAC7 /* THLDashboardNotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLDashboardNotificationCell.h; sourceTree = "<group>"; };
 		79ABA9B61C053ED6001ABAC7 /* THLDashboardNotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLDashboardNotificationCell.m; sourceTree = "<group>"; };
 		79ABA9B81C053F14001ABAC7 /* THLDashboardNotificationCellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLDashboardNotificationCellView.h; sourceTree = "<group>"; };
@@ -1561,8 +1561,8 @@
 				6AB4E611B93EB59002159745 /* Pods */,
 				21CCEDEB1B87CDD00066CDAC /* Services */,
 				211BB0D11B8CBE690068FD50 /* Views */,
-				795FB79B1C20D7ED00B70973 /* Hype.app */,
-				795FB79C1C20D7ED00B70973 /* Hype.xctest */,
+				796BFA461C484A890037EA3A /* Hype.app */,
+				79A1CEB01C484A910071F328 /* Hype.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2967,7 +2967,7 @@
 			);
 			name = Hype;
 			productName = Hype;
-			productReference = 795FB79B1C20D7ED00B70973 /* Hype.app */;
+			productReference = 796BFA461C484A890037EA3A /* Hype.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2174A07C1B863F6A006826D7 /* HypeTests */ = {
@@ -2988,7 +2988,7 @@
 			);
 			name = HypeTests;
 			productName = HypeTests;
-			productReference = 795FB79C1C20D7ED00B70973 /* Hype.xctest */;
+			productReference = 79A1CEB01C484A910071F328 /* Hype.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
