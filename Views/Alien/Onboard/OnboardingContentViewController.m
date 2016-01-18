@@ -15,6 +15,8 @@ static NSString * const kDefaultOnboardingFont = @"Helvetica-Light";
 #define DEFAULT_TEXT_COLOR [UIColor whiteColor];
 
 static CGFloat const kContentWidthMultiplier = 0.9;
+static CGFloat const kDefaultRightSideBodyPadding = 67;
+
 //static CGFloat const kDefaultImageViewSize = 100;
 static CGFloat const kDefaultTopPadding = 60;
 static CGFloat const kDefaultUnderIconPadding = 30;
@@ -240,7 +242,7 @@ static CGFloat const kMainPageControlHeight = 35;
     
     // create and configure the body text label
 
-    _bodyTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, CGRectGetMaxY(_mainTextLabel.frame) + self.underSubtitlePadding, contentWidth, 0)];
+    _bodyTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, CGRectGetMaxY(_mainTextLabel.frame) + self.underSubtitlePadding, contentWidth - kDefaultRightSideBodyPadding, 0)];
     _bodyTextLabel.text = _body;
     _bodyTextLabel.textColor = self.bodyTextColor;
     _bodyTextLabel.font = [UIFont fontWithName:self.bodyFontName size:self.bodyFontSize];
