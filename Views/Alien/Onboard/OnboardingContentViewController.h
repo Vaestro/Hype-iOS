@@ -18,12 +18,15 @@ typedef void (^action_callback)(OnboardingViewController *onboardController);
     NSString *_body;
     UIImage *_image;
     NSString *_buttonText;
-    
+    NSString *_secondaryButtonText;
+
     UIImageView *_imageView;
     UILabel *_mainTextLabel;
     UILabel *_subTextLabel;
     UILabel *_bodyTextLabel;
     UIButton *_actionButton;
+    UIButton *_secondaryButton;
+
 }
 
 @property (nonatomic) OnboardingViewController *delegate;
@@ -37,6 +40,7 @@ typedef void (^action_callback)(OnboardingViewController *onboardController);
 @property (nonatomic, strong) UIColor *subtitleTextColor;
 @property (nonatomic, strong) UIColor *bodyTextColor;
 @property (nonatomic, strong) UIColor *buttonTextColor;
+@property (nonatomic, strong) UIColor *secondaryButtonTextColor;
 
 @property (nonatomic, strong) NSString *titleFontName;
 @property (nonatomic) CGFloat titleFontSize;
@@ -58,17 +62,20 @@ typedef void (^action_callback)(OnboardingViewController *onboardController);
 @property (nonatomic) CGFloat underPageControlPadding;
 
 @property (nonatomic, copy) action_callback buttonActionHandler;
+@property (nonatomic, copy) action_callback secondaryButtonActionHandler;
 
 @property (nonatomic, copy) dispatch_block_t viewWillAppearBlock;
 @property (nonatomic, copy) dispatch_block_t viewDidAppearBlock;
 @property (nonatomic, copy) dispatch_block_t viewWillDisappearBlock;
 @property (nonatomic, copy) dispatch_block_t viewDidDisappearBlock;
 
-+ (instancetype)contentWithTitle:(NSString *)title subtitle:(NSString *)subtitle body:(NSString *)body image:(UIImage *)image buttonText:(NSString *)buttonText action:(dispatch_block_t)action;
-- (instancetype)initWithTitle:(NSString *)title subtitle:(NSString *)subtitle body:(NSString *)body image:(UIImage *)image buttonText:(NSString *)buttonText action:(dispatch_block_t)action;
++ (instancetype)contentWithTitle:(NSString *)title subtitle:(NSString *)subtitle body:(NSString *)body image:(UIImage *)image buttonText:(NSString *)buttonText action:(dispatch_block_t)action secondaryButtonText:(NSString *)secondaryButtonText secondaryAction:(dispatch_block_t)secondaryAction;
 
-+ (instancetype)contentWithTitle:(NSString *)title subtitle:(NSString *)subtitle body:(NSString *)body image:(UIImage *)image buttonText:(NSString *)buttonText actionBlock:(action_callback)actionBlock;
-- (instancetype)initWithTitle:(NSString *)title subtitle:(NSString *)subtitle body:(NSString *)body image:(UIImage *)image buttonText:(NSString *)buttonText actionBlock:(action_callback)actionBlock;
+- (instancetype)initWithTitle:(NSString *)title subtitle:(NSString *)subtitle body:(NSString *)body image:(UIImage *)image buttonText:(NSString *)buttonText action:(dispatch_block_t)action secondaryButtonText:(NSString *)secondaryButtonText secondaryAction:(dispatch_block_t)secondaryAction;
+
++ (instancetype)contentWithTitle:(NSString *)title subtitle:(NSString *)subtitle body:(NSString *)body image:(UIImage *)image buttonText:(NSString *)buttonText actionBlock:(action_callback)actionBlock secondaryButtonText:(NSString *)secondaryButtonText secondaryActionBlock:(action_callback)secondaryActionBlock;
+
+- (instancetype)initWithTitle:(NSString *)title subtitle:(NSString *)subtitle body:(NSString *)body image:(UIImage *)image buttonText:(NSString *)buttonText actionBlock:(action_callback)actionBlock secondaryButtonText:(NSString *)secondaryButtonText secondaryActionBlock:(action_callback)secondaryActionBlock;
 
 - (void)updateAlphas:(CGFloat)newAlpha;
 

@@ -54,16 +54,16 @@
         make.top.left.right.bottom.insets(UIEdgeInsetsZero);
     }];
     
-    [_facebookLoginButton makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.insets(kTHLEdgeInsetsHigh());
-        make.height.equalTo(60);
-        make.bottom.equalTo([WSELF skipButton].mas_top).insets(UIEdgeInsetsZero);
-    }];
+//    [_facebookLoginButton makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.insets(kTHLEdgeInsetsHigh());
+//        make.height.equalTo(60);
+//        make.bottom.equalTo([WSELF skipButton].mas_top).insets(UIEdgeInsetsZero);
+//    }];
     
-    [_skipButton makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.insets(UIEdgeInsetsZero);
-        make.bottom.insets(UIEdgeInsetsMake1(25));
-    }];
+//    [_skipButton makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.insets(UIEdgeInsetsZero);
+//        make.bottom.insets(UIEdgeInsetsMake1(25));
+//    }];
 }
 
 - (void)bindView {
@@ -111,7 +111,7 @@
     onboardingVC.underIconPadding = 67;
     onboardingVC.underTitlePadding = 0;
     onboardingVC.underSubtitlePadding = SCREEN_HEIGHT/4;
-    onboardingVC.bottomPadding = 0;
+    onboardingVC.bottomPadding = -10;
     onboardingVC.shouldMaskBackground = NO;
     onboardingVC.shouldFadeTransitions = NO;
     return onboardingVC;
@@ -124,35 +124,40 @@
                                                                                               body:@"DISCOVER THE MOST EXCLUSIVE EVENTS HAPPENING IN NYC"
                                                                                              image:nil
                                                                                         buttonText:nil
-                                                                                            action:^{
-                                                                                                
-                                                                                            }];
-    OnboardingContentViewController *secondPage = [OnboardingContentViewController contentWithTitle:@"CHOOSE THE"
-                                                                                           subtitle:@"PERFECT HOST"
-
-                                                                                               body:@"ALL OF OUR HOSTS ARE VETTED PROFESSIONALS WHO KNOW HOW TO THROW THE BEST PARTIES"
+                                                                                            action:nil
+                                                                                secondaryButtonText:@"Swipe to Continue"
+                                                                                   secondaryAction:nil];
+    
+    OnboardingContentViewController *secondPage = [OnboardingContentViewController contentWithTitle:@"DESIGN THE"
+                                                                                           subtitle:@"PERFECT NIGHT"
+                                                                                               body:@"CHOOSE THE HOTTEST EVENT AND INVITE YOUR FRIENDS TO JOIN YOUR GUESTLIST WITH EXCLUSIVE VIP BENEFITS"
                                                                                               image:[UIImage imageNamed:@"OnboardingBackground2"]
                                                                                          buttonText:nil
-                                                                                             action:^{
-                                                                                                 
-                                                                                             }];
-    OnboardingContentViewController *thirdPage = [OnboardingContentViewController contentWithTitle:@"SUBMIT YOUR"
-                                                                                          subtitle:@"GUESTLIST"
-
-                                                                                              body:@"INVITE YOUR FRIENDS TO JOIN THE PARTY AND REQUEST TO BE ADDED TO THE GUESTLIST"
+                                                                                             action:nil
+                                                                                secondaryButtonText:nil
+                                                                                    secondaryAction:nil];
+    
+    OnboardingContentViewController *thirdPage = [OnboardingContentViewController contentWithTitle:@"EARN GREAT"
+                                                                                          subtitle:@"PERKS"
+                                                                                              body:@"GET CREDITS FOR EACH FRIEND YOU INVITE THAT ATTENDS THE EVENT. USE THOSE CREDITS FOR PERKS LIKE A FREE LIMO RIDE"
                                                                                              image:[UIImage imageNamed:@"OnboardingBackground3"]
                                                                                         buttonText:nil
-                                                                                            action:^{
-                                                                                                
-                                                                                            }];
+                                                                                            action:nil
+                                                                               secondaryButtonText:nil
+                                                                                   secondaryAction:nil];
+    
     OnboardingContentViewController *fourthPage = [OnboardingContentViewController contentWithTitle:@"GET READY FOR"
                                                                                            subtitle:@"THE PARTY"
-                                                                                               body:@"RULE 1: APPROPRIATE ATTIRE\nRULE 2: HOST KNOWS BEST\nRULE 3: VENUE IS KING"
+                                                                                               body:@"OUR HOSTS WILL ENSURE YOUR NIGHT RUNS SMOOTHLY AND IS ALWAYS HYPE"
                                                                                               image:[UIImage imageNamed:@"OnboardingBackground4"]
-                                                                                         buttonText:nil
+                                                                                         buttonText:@"Login with facebook"
                                                                                              action:^{
-                                                                                                 
-                                                                                             }];
+                                                                                                 [loginCommand execute:nil];
+                                                                                             }
+                                                                                secondaryButtonText:@"I'll signup later"
+                                                                                    secondaryAction:^{
+                                                                                                    [skipCommand execute:nil];
+                                                                                                }];
     return @[firstPage,
              secondPage,
              thirdPage,

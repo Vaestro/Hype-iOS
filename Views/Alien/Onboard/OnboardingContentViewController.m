@@ -8,6 +8,7 @@
 
 #import "OnboardingContentViewController.h"
 #import "OnboardingViewController.h"
+#import "THLAppearanceConstants.h"
 
 static NSString * const kDefaultOnboardingFont = @"Helvetica-Light";
 
@@ -25,7 +26,7 @@ static CGFloat const kDefaultTitleFontSize = 38;
 static CGFloat const kDefaultBodyFontSize = 28;
 static CGFloat const kDefaultButtonFontSize = 24;
 
-static CGFloat const kActionButtonHeight = 50;
+static CGFloat const kActionButtonHeight = 60;
 static CGFloat const kMainPageControlHeight = 35;
 
 @interface OnboardingContentViewController ()
@@ -34,23 +35,32 @@ static CGFloat const kMainPageControlHeight = 35;
 
 @implementation OnboardingContentViewController
 
-+ (instancetype)contentWithTitle:(NSString *)title subtitle:(NSString *)subtitle body:(NSString *)body image:(UIImage *)image buttonText:(NSString *)buttonText action:(dispatch_block_t)action {
-    OnboardingContentViewController *contentVC = [[self alloc] initWithTitle:title subtitle:subtitle body:body image:image buttonText:buttonText action:action];
++ (instancetype)contentWithTitle:(NSString *)title subtitle:(NSString *)subtitle body:(NSString *)body image:(UIImage *)image buttonText:(NSString *)buttonText action:(dispatch_block_t)action secondaryButtonText:(NSString *)secondaryButtonText secondaryAction:(dispatch_block_t)secondaryAction {
+    OnboardingContentViewController *contentVC = [[self alloc] initWithTitle:title subtitle:subtitle body:body image:image buttonText:buttonText action:action secondaryButtonText:secondaryButtonText secondaryAction:secondaryAction];
     return contentVC;
 }
 
-- (instancetype)initWithTitle:(NSString *)title subtitle:(NSString *)subtitle body:(NSString *)body image:(UIImage *)image buttonText:(NSString *)buttonText action:(dispatch_block_t)action {
-    return [self initWithTitle:title subtitle:subtitle body:body image:image buttonText:buttonText actionBlock:^(OnboardingViewController *onboardController) {
-        if(action) action();
-    }];
+- (instancetype)initWithTitle:(NSString *)title subtitle:(NSString *)subtitle body:(NSString *)body image:(UIImage *)image buttonText:(NSString *)buttonText action:(dispatch_block_t)action secondaryButtonText:(NSString *)secondaryButtonText secondaryAction:(dispatch_block_t)secondaryAction {
+    return [self initWithTitle:title
+                      subtitle:subtitle
+                          body:body
+                         image:image
+                    buttonText:buttonText
+                   actionBlock:^(OnboardingViewController *onboardController) {
+                       if(action) action();
+                   }
+           secondaryButtonText:secondaryButtonText
+          secondaryActionBlock:^(OnboardingViewController *onboardController) {
+              if(secondaryAction) secondaryAction();
+          }];
 }
 
-+ (instancetype)contentWithTitle:(NSString *)title subtitle:(NSString *)subtitle body:(NSString *)body image:(UIImage *)image buttonText:(NSString *)buttonText actionBlock:(action_callback)actionBlock {
-    OnboardingContentViewController *contentVC = [[self alloc] initWithTitle:title subtitle:subtitle body:body image:image buttonText:buttonText actionBlock:actionBlock];
++ (instancetype)contentWithTitle:(NSString *)title subtitle:(NSString *)subtitle body:(NSString *)body image:(UIImage *)image buttonText:(NSString *)buttonText actionBlock:(action_callback)actionBlock secondaryButtonText:(NSString *)secondaryButtonText secondaryActionBlock:(action_callback)secondaryActionBlock {
+    OnboardingContentViewController *contentVC = [[self alloc] initWithTitle:title subtitle:subtitle body:body image:image buttonText:buttonText actionBlock:actionBlock secondaryButtonText:secondaryButtonText secondaryActionBlock:secondaryActionBlock];
     return contentVC;
 }
 
-- (instancetype)initWithTitle:(NSString *)title subtitle:(NSString *)subtitle body:(NSString *)body image:(UIImage *)image buttonText:(NSString *)buttonText actionBlock:(action_callback)actionBlock {
+- (instancetype)initWithTitle:(NSString *)title subtitle:(NSString *)subtitle body:(NSString *)body image:(UIImage *)image buttonText:(NSString *)buttonText actionBlock:(action_callback)actionBlock secondaryButtonText:(NSString *)secondaryButtonText secondaryActionBlock:(action_callback)secondaryActionBlock {
     self = [super init];
     
     // hold onto the passed in parameters, and set the action block to an empty block
@@ -61,9 +71,11 @@ static CGFloat const kMainPageControlHeight = 35;
     _body = body;
     _image = image;
     _buttonText = buttonText;
+    _secondaryButtonText = secondaryButtonText;
     
     self.buttonActionHandler = actionBlock;
-    
+    self.secondaryButtonActionHandler = secondaryActionBlock;
+
     // default auto-navigation
     self.movesToNextViewController = NO;
     
@@ -184,6 +196,10 @@ static CGFloat const kMainPageControlHeight = 35;
     _buttonActionHandler = actionBlock ?: ^(OnboardingViewController *controller){};
 }
 
+- (void)setSecondaryButtonActionHandler:(action_callback)secondaryActionBlock {
+    _secondaryButtonActionHandler = secondaryActionBlock ?: ^(OnboardingViewController *controller){};
+}
+
 - (void)generateView {
     // we want our background to be clear so we can see through it to the image provided
     self.view.backgroundColor = [UIColor clearColor];
@@ -236,12 +252,23 @@ static CGFloat const kMainPageControlHeight = 35;
 
     // create the action button if we were given button text
     if (_buttonText) {
-        _actionButton = [[UIButton alloc] initWithFrame:CGRectMake((CGRectGetMaxX(self.view.frame) / 2) - (contentWidth / 2), CGRectGetMaxY(self.view.frame) - self.underPageControlPadding - kMainPageControlHeight - kActionButtonHeight - self.bottomPadding, contentWidth, kActionButtonHeight)];
-        _actionButton.titleLabel.font = [UIFont fontWithName:self.buttonFontName size:self.buttonFontSize];
+        _actionButton = [[UIButton alloc] initWithFrame:CGRectMake((CGRectGetMaxX(self.view.frame) / 2) - (contentWidth / 2), CGRectGetMaxY(self.view.frame) - self.underPageControlPadding - 2*kMainPageControlHeight - kActionButtonHeight - self.bottomPadding, contentWidth, kActionButtonHeight)];
+        _actionButton.titleLabel.font = [UIFont fontWithName:self.buttonFontName size:16];
+        _actionButton.backgroundColor = kTHLNUIBlueColor;
         [_actionButton setTitle:_buttonText forState:UIControlStateNormal];
         [_actionButton setTitleColor:self.buttonTextColor forState:UIControlStateNormal];
         [_actionButton addTarget:self action:@selector(handleButtonPressed) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_actionButton];
+    }
+    
+    // create the second button if we were given button text
+    if (_secondaryButtonText) {
+        _secondaryButton = [[UIButton alloc] initWithFrame:CGRectMake((CGRectGetMaxX(self.view.frame) / 2) - (contentWidth / 2), CGRectGetMaxY(self.view.frame) - self.underPageControlPadding - 2*kMainPageControlHeight, contentWidth, kActionButtonHeight)];
+        _secondaryButton.titleLabel.font = [UIFont fontWithName:self.buttonFontName size:16];
+        [_secondaryButton setTitle:_secondaryButtonText forState:UIControlStateNormal];
+        [_secondaryButton setTitleColor:self.buttonTextColor forState:UIControlStateNormal];
+        [_secondaryButton addTarget:self action:@selector(handleSecondaryButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_secondaryButton];
     }
 }
 
@@ -269,6 +296,19 @@ static CGFloat const kMainPageControlHeight = 35;
     // call the provided action handler
     if (_buttonActionHandler) {
         _buttonActionHandler(self.delegate);
+    }
+}
+
+- (void)handleSecondaryButtonPressed {
+    // if we want to navigate to the next view controller, tell our delegate
+    // to handle it
+    if (self.movesToNextViewController) {
+        [self.delegate moveNextPage];
+    }
+    
+    // call the provided action handler
+    if (_secondaryButtonActionHandler) {
+        _secondaryButtonActionHandler(self.delegate);
     }
 }
 

@@ -169,17 +169,15 @@
 - (void)interactor:(THLEventDetailInteractor *)interactor didGetPromotion:(THLPromotionEntity *)promotionEntity forEvent:(THLEventEntity *)eventEntity error:(NSError *)error {
     if (!error && promotionEntity) {
         _promotionEntity = promotionEntity;
-        if (_promotionEntity.femaleRatio != 0) {
+        if (_promotionEntity.femaleRatio == 1) {
+            [self.view setRatioInfo:@"1 Girl : 1 Guy"];
+        } else if (_promotionEntity.femaleRatio > 1) {
             [self.view setRatioInfo:[NSString stringWithFormat:@"%d Girls : 1 Guy", _promotionEntity.femaleRatio]];
         } else {
             [self.view setRatioInfo:@"No ratio required"];
         }
     }
 }
-
-//- (void)interactor:(THLEventDetailInteractor *)interactor userUnavailableForEvent:(THLEventEntity *)event {
-//    self.guestlistReviewStatus = THLGuestlistStatusUnavailable;
-//}
 
 - (void)interactor:(THLEventDetailInteractor *)interactor didGetGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite forEvent:(THLEventEntity *)event error:(NSError *)error {
     if (!error && guestlistInvite) {
