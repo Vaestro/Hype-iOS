@@ -62,11 +62,10 @@
     [_nameLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF iconImageView].mas_bottom).insets(kTHLEdgeInsetsLow());
         make.bottom.left.right.insets(kTHLEdgeInsetsHigh());
-        //        [_nameLabel c_makeRequiredContentCompressionResistanceAndContentHuggingPriority];
     }];
+    
     [_statusView makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.insets(kTHLEdgeInsetsHigh());
-//        make.size.equalTo(CGSizeMake1(STATUS_VIEW_DIMENSION));
     }];
 }
 

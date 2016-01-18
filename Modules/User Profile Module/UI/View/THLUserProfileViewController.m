@@ -73,8 +73,11 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 }
 
 - (void)layoutView {
+    self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
+
     [self.view addSubviews:@[_tableView]];
-    
+    self.navigationItem.title = @"MY ACCOUNT";
+
     self.automaticallyAdjustsScrollViewInsets = YES;
     
     [_tableView makeConstraints:^(MASConstraintMaker *make) {
@@ -145,12 +148,11 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *header = nil;
     CGFloat height = [self tableView:tableView heightForHeaderInSection:section];
-    CGRect frame = CGRectMake(0, 0, ScreenWidth, height);
+    CGRect frame = CGRectMake(0, 0, ScreenWidth, 0);
     THLUserProfileHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:[THLUserProfileHeaderView identifier]];
     headerView = [[THLUserProfileHeaderView alloc] initWithFrame:frame];
     RAC(headerView, userImageURL) = RACObserve(self, userImageURL);
     RAC(headerView, userName) = RACObserve(self, userName);
-    NSLog(@"view controller name is:%@", self.userName);
 
     header = headerView;
     return header;
@@ -173,7 +175,9 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
     CGFloat headerHeight = 0;
     THLUserProfileHeaderView *headerView = [THLUserProfileHeaderView new];
     headerHeight = [headerView.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-    return headerHeight;
+    //  TODO: Temporarily set header to nil due to issue with displaying user profile picture
+
+    return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -181,6 +185,10 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
     THLUserProfileFooterView *footerView = [THLUserProfileFooterView new];
     footerHeight = [footerView.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
     return footerHeight;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    cell.backgroundColor = kTHLNUISecondaryBackgroundColor  ;
 }
 
 #pragma mark MSMailMessage
@@ -222,6 +230,8 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
     
     cell.textLabel.text = [self.tableCellNames objectAtIndex:indexPath.row];
     cell.textLabel.textColor = [UIColor whiteColor];
+    cell.contentView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
+    cell.textLabel.backgroundColor = [UIColor clearColor];
     return cell;
 }
 
@@ -233,7 +243,7 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 #pragma mark - Constructors
 - (UITableView *)newTableView {
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-    tableView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
+    tableView.backgroundColor = kTHLNUISecondaryBackgroundColor;
     tableView.separatorColor = [UIColor clearColor];
 //    tableView.scrollEnabled = NO;
     tableView.bounces = YES;

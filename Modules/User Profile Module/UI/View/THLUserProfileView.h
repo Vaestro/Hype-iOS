@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @protocol THLUserProfileView <NSObject>
-//@property (nonatomic, strong) RACCommand *dismissCommand;
 @property (nonatomic, strong) RACCommand *selectedIndexPathCommand;
 @property (nonatomic, strong) RACCommand *contactCommand;
 @property (nonatomic, strong) RACCommand *logoutCommand;

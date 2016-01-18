@@ -42,7 +42,7 @@ UICollectionViewDelegateFlowLayout
 }
 
 - (void)layoutView {
-    self.view.nuiClass = kTHLNUIBackgroundView;
+    self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
     self.navigationItem.title = @"NEW YORK";
 
 	self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -83,9 +83,11 @@ UICollectionViewDelegateFlowLayout
 - (UICollectionView *)newCollectionView {
 	UICollectionViewFlowLayout *flowLayout = [UICollectionViewFlowLayout new];
 	flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    flowLayout.minimumInteritemSpacing = 2.5;
+    flowLayout.minimumLineSpacing = 2.5;
 	UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) collectionViewLayout:flowLayout];
 	collectionView.nuiClass = kTHLNUIBackgroundView;
-    collectionView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
+    collectionView.backgroundColor = kTHLNUISecondaryBackgroundColor;
 	collectionView.alwaysBounceVertical = YES;
 	collectionView.delegate = self;
 	return collectionView;
@@ -139,7 +141,7 @@ UICollectionViewDelegateFlowLayout
 }
 
 - (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView {
-    return kTHLNUIPrimaryBackgroundColor;
+    return kTHLNUISecondaryBackgroundColor;
 }
 
 - (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state

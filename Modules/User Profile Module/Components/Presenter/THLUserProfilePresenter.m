@@ -25,18 +25,15 @@
     return self;
 }
 
-- (void)presentUserProfileInterfaceInViewController:(UIViewController *)viewController {
-    [_wireframe presentInterfaceInViewController:viewController];
+- (void)presentUserProfileInterfaceInNavigationController:(UINavigationController *)navigationController {
+    [_wireframe presentInterfaceInNavigationController:navigationController];
 }
 
 - (void)configureView:(id<THLUserProfileView>)view {
     _view = view;
     
-    PFFile *image = [THLUser currentUser].image;
-    
-    [_view setUserImageURL:[NSURL URLWithString:image.url]];
+    [_view setUserImageURL:[NSURL URLWithString:[THLUser currentUser].image.url]];
     [_view setUserName:[THLUser currentUser].firstName];
-    NSLog(@"presenter name is:%@", [THLUser currentUser].firstName);
 
     WEAKSELF();
     RACCommand *selectedIndexPathCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {

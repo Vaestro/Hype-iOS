@@ -37,13 +37,14 @@
                         _label]];
     WEAKSELF();
     [_iconView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.insets(kTHLEdgeInsetsHigh());
+        make.top.equalTo(kTHLEdgeInsetsHigh());
         make.size.mas_equalTo(CGSizeMake(100, 100));
         make.centerX.equalTo(0);
     }];
     
     [_label makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF iconView].mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.top.equalTo([WSELF iconView].mas_bottom).equalTo(kTHLEdgeInsetsHigh());
+        make.height.mas_equalTo(25);
         make.bottom.insets(kTHLEdgeInsetsHigh());
         make.centerX.equalTo(0);
     }];
@@ -59,11 +60,7 @@
 }
 
 - (void)bindView {
-    [RACObserve(self, userImageURL) subscribeNext:^(id x) {
-        [_iconView setImageURL:self.userImageURL];
-        [self.contentView layoutIfNeeded];
-    }];
-    
+    RAC(self.iconView, imageURL) = RACObserve(self, userImageURL);
     RAC(self.label, text, @"") = RACObserve(self, userName);
     
 }
@@ -76,7 +73,6 @@
 
 - (UILabel *)newLabel {
     UILabel *label = THLNUILabel(kTHLNUIRegularTitle);
-    [label setText:@"Bitch"];
     [label setTextColor:kTHLNUIPrimaryFontColor];
     label.adjustsFontSizeToFitWidth = YES;
     label.minimumScaleFactor = 0.5;

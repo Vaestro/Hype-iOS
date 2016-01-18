@@ -56,11 +56,11 @@ THLGuestlistReviewModuleDelegate
     UIViewController *vc = [[UIViewController alloc] initWithNibName:nil bundle:nil];
     UINavigationController *discovery = [UINavigationController new];
     UINavigationController *dashboard = [UINavigationController new];
-    UIViewController *profile = vc;
+    UINavigationController *profile = [UINavigationController new];
     
     [self presentEventDiscoveryInterfaceInNavigationController:discovery];
     [self presentDashboardInterfaceInNavigationController:dashboard];
-    [self presentUserProfileInterfaceInViewController:profile];
+    [self presentUserProfileInterfaceInNavigationController:profile];
     
     dashboard.tabBarItem.image = [UIImage imageNamed:@"Lists Icon"];
     discovery.tabBarItem.image = [UIImage imageNamed:@"Home Icon"];
@@ -104,11 +104,11 @@ THLGuestlistReviewModuleDelegate
     [_dashboardWireframe.moduleInterface presentDashboardInterfaceInNavigationController:navigationController];
 }
 
-- (void)presentUserProfileInterfaceInViewController:(UIViewController *)viewController {
+- (void)presentUserProfileInterfaceInNavigationController:(UINavigationController *)navigationController {
     _userProfileWireframe = [_dependencyManager newUserProfileWireframe];
     _currentWireframe = _userProfileWireframe;
     [_userProfileWireframe.moduleInterface setModuleDelegate:self];
-    [_userProfileWireframe.moduleInterface presentUserProfileInterfaceInViewController:viewController];
+    [_userProfileWireframe.moduleInterface presentUserProfileInterfaceInNavigationController:navigationController];
 }
 
 - (void)presentEventHostingInterfaceForEvent:(THLEventEntity *)eventEntity {

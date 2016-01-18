@@ -160,14 +160,6 @@ UICollectionViewDelegateFlowLayout
 }
 
 
-//- (THLActionBarButton *)newBarButton {
-//    THLActionBarButton *barButton = [THLActionBarButton new];
-//    barButton.backgroundColor = kTHLNUIAccentColor;
-//    [barButton.morphingLabel setTextWithoutMorphing:NSLocalizedString(@"VIEW MY REWARDS", nil)];
-//    return barButton;
-//}
-
-
 - (UIBarButtonItem *)newBackBarButtonItem {
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Cancel X Icon"] style:UIBarButtonItemStylePlain target:nil action:NULL];
     [barButtonItem setTintColor:[UIColor whiteColor]];
