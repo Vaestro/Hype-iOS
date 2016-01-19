@@ -44,6 +44,7 @@
         entity.maleCover = event.maleCoverCharge;
         entity.femaleCover = event.femaleCoverCharge;
         entity.location = [self mapLocation:event.location];
+        entity.creditsPayout = event.creditsPayout;
         return entity;
     } else {
         return nil;

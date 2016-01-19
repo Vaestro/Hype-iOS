@@ -91,13 +91,6 @@
     return promotionView;
 }
 
-//- (THLActionBarButton *)newActionButton {
-//    THLActionBarButton *button = [[THLActionBarButton alloc] initWithFrame:CGRectZero];
-//    button.backgroundColor = [button tealColor];
-//    [button setTitle:@"VIEW EVENT" animateChanges:NO];
-//    return button;
-//}
-
 #pragma mark - Public Interface
 + (NSString *)identifier {
     return NSStringFromClass(self.class);

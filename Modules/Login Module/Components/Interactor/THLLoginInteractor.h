@@ -16,6 +16,7 @@
 @protocol THLLoginInteractorDelegate <NSObject>
 - (void)interactor:(THLLoginInteractor *)interactor didLoginUser:(NSError *)error;
 - (void)interactor:(THLLoginInteractor *)interactor didAddFacebookInformation:(NSError *)error;
+- (void)interactor:(THLLoginInteractor *)interactor didAddEmail:(NSError *)error;
 - (void)interactor:(THLLoginInteractor *)interactor didAddVerifiedPhoneNumber:(NSError *)error;
 - (void)interactor:(THLLoginInteractor *)interactor didAddProfileImage:(NSError *)error;
 @end
@@ -31,10 +32,12 @@
 
 - (BOOL)shouldLogin;
 - (BOOL)shouldAddFacebookInformation;
+- (BOOL)shouldVerifyEmail;
 - (BOOL)shouldVerifyPhoneNumber;
 - (BOOL)shouldPickProfileImage;
 
 - (void)login;
+- (void)addEmail:(NSString *)email;
 - (void)addFacebookInformation;
 - (void)addVerifiedPhoneNumber:(NSString *)phoneNumber;
 - (void)addProfileImage:(UIImage *)profileImage;

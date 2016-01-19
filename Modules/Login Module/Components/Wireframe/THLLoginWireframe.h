@@ -39,4 +39,6 @@
 
 - (void)dismissInterface;
 - (void)finishLogin;
+- (void)finishOnboarding;
+
 @end

@@ -49,6 +49,10 @@
 	return _user.phoneNumber == nil;
 }
 
+- (BOOL)shouldVerifyEmail {
+    return _user.email == nil;
+}
+
 - (BOOL)shouldPickProfileImage {
 	return _user.image == nil;
 }
@@ -86,6 +90,15 @@
             [_delegate interactor:WSELF didAddFacebookInformation:saveTask.error];
             return nil;
         }];
+        return nil;
+    }];
+}
+
+- (void)addEmail:(NSString *)email {
+    _user.email = email;
+    WEAKSELF();
+    [[_user saveInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask<NSNumber *> *task) {
+        [WSELF.delegate interactor:WSELF didAddEmail:task.error];
         return nil;
     }];
 }

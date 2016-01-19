@@ -11,6 +11,8 @@
 #import "THLGuestlistInvitationInteractor.h"
 #import "THLGuestlistInvitationView.h"
 #import "THLGuestlistInvitationViewEventHandler.h"
+#import "THLPromotionEntity.h"
+#import "THLEventEntity.h"
 
 @interface THLGuestlistInvitationPresenter ()
 <
@@ -19,11 +21,8 @@ THLGuestlistInvitationViewEventHandler
 >
 @property (nonatomic, weak) id<THLGuestlistInvitationView> view;
 @property (nonatomic) BOOL submitting;
-//typedef NS_ENUM(NSInteger, guestlistSubmissionStatus) {
-//    guestlistSubmissionStatusPending = 0,
-//    guestlistSubmissionStatusSuccess,
-//    guestlistSubmissionStatusFailure,
-//};
+@property (nonatomic, weak) NSString *creditsPayout;
+
 @end
 
 @implementation THLGuestlistInvitationPresenter
@@ -43,6 +42,7 @@ THLGuestlistInvitationViewEventHandler
 //For Creating A new Guestlist
 - (void)presentGuestlistInvitationInterfaceForPromotion:(THLPromotionEntity *)promotionEntity inController:(UIViewController *)controller {
     _interactor.promotionEntity = promotionEntity;
+    _creditsPayout = [NSString stringWithFormat:@"Get $%d.00 for every friend you invite that attends this event", promotionEntity.event.creditsPayout];
     [_wireframe presentInterfaceInController:controller];
 }
 
@@ -58,13 +58,14 @@ THLGuestlistInvitationViewEventHandler
 	[_view setEventHandler:self];
 	[_view setDataSource:[_interactor getDataSource]];
     [_view setExistingGuests:[_interactor currentGuests]];
+    [_view setCreditsPayout:_creditsPayout];
+    
     WEAKSELF();
     [RACObserve(self, submitting) subscribeNext:^(NSNumber *b) {
         BOOL isSubmitting = [b boolValue];
         [WSELF.view setShowActivityIndicator:isSubmitting];
     }];
 }
-
 
 #pragma mark - THLGuestlistInvitationInteractorDelegate
 - (void)interactor:(THLGuestlistInvitationInteractor *)interactor didCommitChangesToGuestlist:(NSError *)error {

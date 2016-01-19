@@ -147,7 +147,7 @@ PODS:
   - Stripe/Core (6.0.1)
   - SVProgressHUD (1.1.3)
   - SVPullToRefresh (0.4.1)
-  - THContactPicker (1.2)
+  - THContactPicker (2.0)
   - TOMSMorphingLabel (0.5.1)
   - TwilioSDK (1.2.7)
   - TwitterCore (1.14.6):
@@ -207,7 +207,7 @@ DEPENDENCIES:
   - Stripe
   - SVProgressHUD
   - SVPullToRefresh
-  - THContactPicker (~> 1.2)
+  - THContactPicker (~> 2.0)
   - TOMSMorphingLabel (~> 0.5)
   - TwitterCore
   - Typhoon (~> 3.3)
@@ -264,7 +264,7 @@ SPEC CHECKSUMS:
   Stripe: 04f215191702c268b89fe0cdf28dc24a9688a71b
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
-  THContactPicker: e723f7c6ab6e1d6d10d59d618322ab8bfcb00365
+  THContactPicker: 4345c81a407af534e5f618d495e8fb422a911c10
   TOMSMorphingLabel: 3e88a2bf5257f8993ebc51fb3109187a0bfb2c4d
   TwilioSDK: d3982acf6880ddf3ce57c4444e021a71c5f35653
   TwitterCore: 5e9b2d066ceeef53fe611c0c4436cb700f1ed620

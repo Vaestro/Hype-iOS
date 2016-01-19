@@ -17,8 +17,6 @@
 //static CGFloat const PRIVACY_IMAGEVIEW_DIMENSION = 14;
 
 @interface THLOnboardingViewController()
-@property (nonatomic, strong) UIButton *skipButton;
-@property (nonatomic, strong) UIButton *facebookLoginButton;
 @property (nonatomic, strong) OnboardingViewController *onboardingVC;
 @end
 
@@ -26,7 +24,6 @@
 @synthesize showActivityIndicator;
 @synthesize skipCommand;
 @synthesize loginCommand;
-@synthesize loginText;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -38,8 +35,6 @@
 
 - (void)constructView {
     _onboardingVC = [self newOnboardingViewController];
-    _skipButton = [self newSkipButton];
-    _facebookLoginButton = [self newFacebookLoginButton];
 }
 
 - (void)layoutView {
@@ -47,29 +42,14 @@
     [self addChildViewController:_onboardingVC];
     [_onboardingVC didMoveToParentViewController:self];
     
-    [self.view addSubviews:@[_onboardingVC.view, _facebookLoginButton, _skipButton]];
+    [self.view addSubviews:@[_onboardingVC.view]];
     
-    WEAKSELF();
     [_onboardingVC.view makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.bottom.insets(UIEdgeInsetsZero);
     }];
-    
-//    [_facebookLoginButton makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.right.insets(kTHLEdgeInsetsHigh());
-//        make.height.equalTo(60);
-//        make.bottom.equalTo([WSELF skipButton].mas_top).insets(UIEdgeInsetsZero);
-//    }];
-    
-//    [_skipButton makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.right.insets(UIEdgeInsetsZero);
-//        make.bottom.insets(UIEdgeInsetsMake1(25));
-//    }];
 }
 
 - (void)bindView {
-    RAC(self.skipButton, rac_command) = RACObserve(self, skipCommand);
-    RAC(self.facebookLoginButton, rac_command) = RACObserve(self, loginCommand);
-    RAC(self.facebookLoginButton, titleLabel.text) = RACObserve(self, loginText);
     [RACObserve(self, showActivityIndicator) subscribeNext:^(NSNumber *activityStatus) {
         if (activityStatus == [NSNumber numberWithInt:0]) {
             [SVProgressHUD dismiss];
@@ -84,23 +64,6 @@
 }
 
 #pragma mark - Constructors
-
-- (UIButton *)newSkipButton {
-    UIButton *button = THLNUIButton(kTHLNUIUndef);
-    button.backgroundColor = [UIColor clearColor];
-    button.titleLabel.alpha = 0.75;
-    [button setTitle:@"Or skip for now" forState:UIControlStateNormal];
-    return button;
-}
-
-- (UIButton *)newFacebookLoginButton {
-    UIButton *loginButton = [UIButton new];
-    loginButton.backgroundColor = kTHLNUIBlueColor;
-    [loginButton setTitle:@"Login With Facebook" forState:UIControlStateNormal];
-    [loginButton setTitleColor:kTHLNUIPrimaryFontColor forState:UIControlStateNormal];
-    return loginButton;
-}
-
 - (OnboardingViewController *)newOnboardingViewController {
     OnboardingViewController *onboardingVC = [OnboardingViewController onboardWithBackgroundVideoURL:[THLResourceManager onboardingVideo] contents:[self onboardingContentViewControllers]];
     onboardingVC.fontName = @"Raleway-Bold";
@@ -116,7 +79,6 @@
     onboardingVC.shouldFadeTransitions = NO;
     return onboardingVC;
 }
-
 
 - (NSArray *)onboardingContentViewControllers {
     OnboardingContentViewController *firstPage = [OnboardingContentViewController contentWithTitle:@"WELCOME TO"

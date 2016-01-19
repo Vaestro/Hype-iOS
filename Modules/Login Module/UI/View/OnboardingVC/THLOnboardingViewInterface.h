@@ -8,9 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol THLOnboardingView <NSObject>
+@protocol THLOnboardingViewInterface <NSObject>
 @property (nonatomic) NSNumber *showActivityIndicator;
 @property (nonatomic, strong) RACCommand *skipCommand;
 @property (nonatomic, strong) RACCommand *loginCommand;
-@property (nonatomic, copy) NSString *loginText;
 @end

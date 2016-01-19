@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "THLGuestlistInvitationView.h"
 #import "THContactPickerView.h"
+#import "FXBlurView.h"
 
 @protocol THContactPickerDelegate;
 @protocol THLGuestlistInvitationView;
@@ -24,6 +25,9 @@ THContactPickerDelegate
 //@property (nonatomic, strong) id<THLGuestlistInvitationViewEventHandler> eventHandler;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) THContactPickerView *contactPickerView;
+@property (nonatomic, strong) UIView *invitationDetailsView;
+@property (nonatomic, strong) UILabel *invitationDetailsLabel;
+
 @property (nonatomic) BOOL newAdditions;
 @property (nonatomic, strong) NSMutableSet *addedGuests;
 @property (nonatomic, strong) UIBarButtonItem *cancelButton;

@@ -38,8 +38,6 @@
     _dismissButton = [self newDismissButton];
     _bodyLabel = [self newBodyLabel];
     _facebookLoginButton = [self newFacebookLoginButton];
-    //    _facebookLoginContainerView = [self newFacebookContainerView];
-    //    _loginButton = [self newLoginButton];
 }
 
 - (void)layoutView {

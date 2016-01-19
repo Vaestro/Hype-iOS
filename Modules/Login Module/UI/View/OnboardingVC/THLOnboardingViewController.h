@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "THLOnboardingView.h"
+#import "THLOnboardingViewInterface.h"
 
 
-@interface THLOnboardingViewController : UIViewController<THLOnboardingView>
+@interface THLOnboardingViewController : UIViewController<THLOnboardingViewInterface>
 
 @end

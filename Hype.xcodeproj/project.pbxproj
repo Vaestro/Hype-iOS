@@ -147,6 +147,7 @@
 		79730CF61C18A2AA00D70F4B /* THLUserProfileHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79730CF51C18A2AA00D70F4B /* THLUserProfileHeaderView.m */; };
 		79730CF81C18B47000D70F4B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79730CF71C18B47000D70F4B /* MessageUI.framework */; };
 		79752ADE1BEBD8B500D09B2E /* THLConfirmationPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79752ADD1BEBD8B500D09B2E /* THLConfirmationPopupView.m */; };
+		797821BA1C4D97AB00E3F7EC /* THLUserInfoVerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 797821B91C4D97AA00E3F7EC /* THLUserInfoVerificationViewController.m */; };
 		798650A41BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 798650A31BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m */; };
 		798B5FCB1BF11BD2002EBCB6 /* THLHostFlowWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 798B5FCA1BF11BD2002EBCB6 /* THLHostFlowWireframe.m */; };
 		798B5FD11BF12D2C002EBCB6 /* THLEventHostingWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 798B5FD01BF12D2C002EBCB6 /* THLEventHostingWireframe.m */; };
@@ -287,7 +288,7 @@
 		2118921A1BAA084300E8A11F /* THLLoginPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLLoginPresenter.m; sourceTree = "<group>"; };
 		2118921D1BAA088D00E8A11F /* THLLoginWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLLoginWireframe.h; sourceTree = "<group>"; };
 		2118921E1BAA088D00E8A11F /* THLLoginWireframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLLoginWireframe.m; sourceTree = "<group>"; };
-		211892211BAA0C3900E8A11F /* THLOnboardingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLOnboardingView.h; sourceTree = "<group>"; };
+		211892211BAA0C3900E8A11F /* THLOnboardingViewInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLOnboardingViewInterface.h; sourceTree = "<group>"; };
 		211892221BAA0C4400E8A11F /* THLOnboardingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLOnboardingViewController.h; sourceTree = "<group>"; };
 		211892231BAA0C4400E8A11F /* THLOnboardingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLOnboardingViewController.m; sourceTree = "<group>"; };
 		21192D7A1BB3275000B176AA /* THLPromotionSelectionModuleInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPromotionSelectionModuleInterface.h; sourceTree = "<group>"; };
@@ -559,7 +560,7 @@
 		794AFE2C1C10C464008475B1 /* THLHostDashboardTicketCellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLHostDashboardTicketCellView.h; sourceTree = "<group>"; };
 		794AFE411C1624B6008475B1 /* THLLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLLoginViewController.h; sourceTree = "<group>"; };
 		794AFE421C1624B6008475B1 /* THLLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLLoginViewController.m; sourceTree = "<group>"; };
-		794AFE441C1624C1008475B1 /* THLLoginView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLLoginView.h; sourceTree = "<group>"; };
+		794AFE441C1624C1008475B1 /* THLLoginViewInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLLoginViewInterface.h; sourceTree = "<group>"; };
 		794DCCAA1BF3B31E0037A03D /* UIImageView+Letters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Letters.h"; sourceTree = "<group>"; };
 		794DCCAB1BF3B31E0037A03D /* UIImageView+Letters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Letters.m"; sourceTree = "<group>"; };
 		794DCCB01BF543C40037A03D /* THLPopupNotificationViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLPopupNotificationViewModel.h; sourceTree = "<group>"; };
@@ -582,6 +583,8 @@
 		79730CF71C18B47000D70F4B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		79752ADC1BEBD8B500D09B2E /* THLConfirmationPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLConfirmationPopupView.h; sourceTree = "<group>"; };
 		79752ADD1BEBD8B500D09B2E /* THLConfirmationPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLConfirmationPopupView.m; sourceTree = "<group>"; };
+		797821B81C4D97AA00E3F7EC /* THLUserInfoVerificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserInfoVerificationViewController.h; sourceTree = "<group>"; };
+		797821B91C4D97AA00E3F7EC /* THLUserInfoVerificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLUserInfoVerificationViewController.m; sourceTree = "<group>"; };
 		798650A21BEDDC2D0032A661 /* CAGradientLayer+THLGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAGradientLayer+THLGradient.h"; sourceTree = "<group>"; };
 		798650A31BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAGradientLayer+THLGradient.m"; sourceTree = "<group>"; };
 		798B5FC81BF11B31002EBCB6 /* THLHostFlowDependencyManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLHostFlowDependencyManager.h; sourceTree = "<group>"; };
@@ -1012,6 +1015,7 @@
 		211892201BAA0C2D00E8A11F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				797821B71C4D976F00E3F7EC /* UserInfoVerificationVC */,
 				794AFE401C162315008475B1 /* LoginVC */,
 				794AFE3F1C162309008475B1 /* OnboardingVC */,
 			);
@@ -2180,7 +2184,7 @@
 		794AFE3F1C162309008475B1 /* OnboardingVC */ = {
 			isa = PBXGroup;
 			children = (
-				211892211BAA0C3900E8A11F /* THLOnboardingView.h */,
+				211892211BAA0C3900E8A11F /* THLOnboardingViewInterface.h */,
 				211892221BAA0C4400E8A11F /* THLOnboardingViewController.h */,
 				211892231BAA0C4400E8A11F /* THLOnboardingViewController.m */,
 			);
@@ -2190,7 +2194,7 @@
 		794AFE401C162315008475B1 /* LoginVC */ = {
 			isa = PBXGroup;
 			children = (
-				794AFE441C1624C1008475B1 /* THLLoginView.h */,
+				794AFE441C1624C1008475B1 /* THLLoginViewInterface.h */,
 				794AFE411C1624B6008475B1 /* THLLoginViewController.h */,
 				794AFE421C1624B6008475B1 /* THLLoginViewController.m */,
 			);
@@ -2234,6 +2238,15 @@
 				79730CF51C18A2AA00D70F4B /* THLUserProfileHeaderView.m */,
 			);
 			path = UserProfileHeaderView;
+			sourceTree = "<group>";
+		};
+		797821B71C4D976F00E3F7EC /* UserInfoVerificationVC */ = {
+			isa = PBXGroup;
+			children = (
+				797821B81C4D97AA00E3F7EC /* THLUserInfoVerificationViewController.h */,
+				797821B91C4D97AA00E3F7EC /* THLUserInfoVerificationViewController.m */,
+			);
+			name = UserInfoVerificationVC;
 			sourceTree = "<group>";
 		};
 		798B5FC71BF11B03002EBCB6 /* Host Flow */ = {
@@ -3200,6 +3213,7 @@
 				79B959231BE57C9D00B87799 /* THLGuestlistReviewWireframe.m in Sources */,
 				79B9593B1BE67B3700B87799 /* THLGuestlistReviewCell.m in Sources */,
 				21775F5D1B8E169500609D39 /* THLAddressBookPermissionsRequestService.m in Sources */,
+				797821BA1C4D97AB00E3F7EC /* THLUserInfoVerificationViewController.m in Sources */,
 				21775F3F1B8CF95300609D39 /* THLEventDetailsMapView.m in Sources */,
 				21CCEDFA1B87D5060066CDAC /* PFObject+MatchingQuery.m in Sources */,
 				211005B71B8A446D00A540C6 /* THLViewDataSource.m in Sources */,

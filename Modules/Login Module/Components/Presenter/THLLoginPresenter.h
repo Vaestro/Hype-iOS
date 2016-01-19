@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "THLLoginModuleInterface.h"
 
-@protocol THLOnboardingView;
-@protocol THLLoginView;
+@protocol THLOnboardingViewInterface;
+@protocol THLLoginViewInterface;
 @class THLLoginWireframe;
 @class THLLoginInteractor;
 
@@ -22,6 +22,6 @@
 - (instancetype)initWithWireframe:(THLLoginWireframe *)wireframe
 					   interactor:(THLLoginInteractor *)interactor;
 
-- (void)configureLoginView:(id<THLLoginView>)loginView;
-- (void)configureOnboardingView:(id<THLOnboardingView>)onboardingView;
+- (void)configureLoginView:(id<THLLoginViewInterface>)loginView;
+- (void)configureOnboardingView:(id<THLOnboardingViewInterface>)onboardingView;
 @end

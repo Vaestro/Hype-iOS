@@ -9,20 +9,23 @@
 #import "THLLoginPresenter.h"
 #import "THLLoginInteractor.h"
 #import "THLLoginWireframe.h"
-#import "THLOnboardingView.h"
-#import "THLLoginView.h"
+#import "THLOnboardingViewInterface.h"
+#import "THLLoginViewInterface.h"
 
 #import "THLFacebookPictureModuleDelegate.h"
 #import "THLNumberVerificationModuleDelegate.h"
+#import "THLUserInfoVerificationViewController.h"
 
 @interface THLLoginPresenter()
 <
 THLLoginInteractorDelegate,
+THLUserInfoVerificationViewDelegate,
 THLFacebookPictureModuleDelegate,
 THLNumberVerificationModuleDelegate
 >
-@property (nonatomic, weak) id<THLOnboardingView> onboardingView;
-@property (nonatomic, weak) id<THLLoginView> loginView;
+@property (nonatomic, strong) THLUserInfoVerificationViewController *userInfoVerificationView;
+@property (nonatomic, weak) id<THLOnboardingViewInterface> onboardingView;
+@property (nonatomic, weak) id<THLLoginViewInterface> loginView;
 @property (nonatomic) BOOL busy;
 @property (nonatomic) THLActivityStatus activityStatus;
 @end
@@ -37,6 +40,8 @@ THLNumberVerificationModuleDelegate
 		_wireframe = wireframe;
 		_interactor = interactor;
 		_interactor.delegate = self;
+        _userInfoVerificationView = [[THLUserInfoVerificationViewController alloc] initWithNibName:nil bundle:nil];
+        _userInfoVerificationView.delegate = self;
 	}
 	return self;
 }
@@ -50,7 +55,7 @@ THLNumberVerificationModuleDelegate
 }
 
 #pragma mark - View Decoration
-- (void)configureOnboardingView:(id<THLOnboardingView>)onboardingView {
+- (void)configureOnboardingView:(id<THLOnboardingViewInterface>)onboardingView {
     _onboardingView = onboardingView;
     
     WEAKSELF();
@@ -68,11 +73,10 @@ THLNumberVerificationModuleDelegate
     }];
     
     [_onboardingView setSkipCommand:skipCommand];
-    [_onboardingView setLoginText:NSLocalizedString(@"Login with Facebook", @"Facebook login")];
 	[_onboardingView setLoginCommand:loginCommand];
 }
 
-- (void)configureLoginView:(id<THLLoginView>)loginView {
+- (void)configureLoginView:(id<THLLoginViewInterface>)loginView {
     _loginView = loginView;
     
     WEAKSELF();
@@ -99,6 +103,7 @@ THLNumberVerificationModuleDelegate
 }
 
 - (void)handleSkipAction {
+    [_wireframe finishOnboarding];
     [self.moduleDelegate skipUserLogin];
 }
 
@@ -106,26 +111,13 @@ THLNumberVerificationModuleDelegate
 	[_interactor login];
 }
 
-- (void)handleLoginSuccess {
-	[self reroute];
-}
-
-- (void)handleAddFacebookInformationSuccess {
-    [self reroute];
-}
-
-- (void)handleAddVerifiedNumberSuccess {
-	[self reroute];
-}
-
-- (void)handleAddProfilePictureSuccess {
-	[self reroute];
-}
-
 #pragma mark - Routing
 - (void)reroute {
     if ([_interactor shouldAddFacebookInformation]) {
         [_interactor addFacebookInformation];
+    }
+    else if ([_interactor shouldVerifyEmail]) {
+        [self routeToEmailVerificationInterface];
     }
     else if ([_interactor shouldVerifyPhoneNumber]) {
 		[self routeToNumberVerificationInterface];
@@ -133,11 +125,21 @@ THLNumberVerificationModuleDelegate
 		[self routeToPickProfilePictureInterface];
 	} else {
         if (_onboardingView) {
-            [self finishOnboardingInterface];
+            [_wireframe finishOnboarding];
+            [self.moduleDelegate loginModule:self didLoginUser:nil];
         } else {
             [_wireframe finishLogin];
         }
 	}
+}
+
+- (void)routeToEmailVerificationInterface {
+    [self presentUserInfoVerificationView];
+}
+
+- (void)presentUserInfoVerificationView {
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:_userInfoVerificationView];
+    [(UIViewController *)_onboardingView presentViewController:navigationController animated:NO completion:NULL];
 }
 
 - (void)routeToNumberVerificationInterface {
@@ -146,10 +148,6 @@ THLNumberVerificationModuleDelegate
 
 - (void)routeToPickProfilePictureInterface {
 	[_wireframe presentFacebookPictureInterface:self];
-}
-
-- (void)finishOnboardingInterface {
-	[self.moduleDelegate loginModule:self didLoginUser:nil];
 }
 
 - (void)dismissInterface {
@@ -161,7 +159,7 @@ THLNumberVerificationModuleDelegate
 	if (error) {
 		[self handleError:error];
 	} else {
-		[self handleLoginSuccess];
+		[self reroute];
 	}
 }
 
@@ -169,7 +167,15 @@ THLNumberVerificationModuleDelegate
     if (error) {
         [self handleError:error];
     } else {
-        [self handleAddFacebookInformationSuccess];
+        [self reroute];
+    }
+}
+
+- (void)interactor:(THLLoginInteractor *)interactor didAddEmail:(NSError *)error {
+    if (error) {
+        [self handleError:error];
+    } else {
+        [self reroute];
     }
 }
 
@@ -177,7 +183,7 @@ THLNumberVerificationModuleDelegate
 	if (error) {
 		[self handleError:error];
 	} else {
-		[self handleAddVerifiedNumberSuccess];
+		[self reroute];
 	}
 }
 
@@ -185,8 +191,13 @@ THLNumberVerificationModuleDelegate
 	if (error) {
 		[self handleError:error];
 	} else {
-		[self handleAddProfilePictureSuccess];
+		[self reroute];
 	}
+}
+
+#pragma mark - THLUserInfoVerificationDelegate
+- (void)userInfoVerificationView:(THLUserInfoVerificationViewController *)view userDidConfirmEmail:(NSString *)email {
+    [_interactor addEmail:email];
 }
 
 #pragma mark - THLFacebookPictureModuleDelegate

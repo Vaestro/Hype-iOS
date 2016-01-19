@@ -18,5 +18,6 @@
 @property (nonatomic, retain) NSString *title;
 @property (nonatomic, retain) NSString *promoInfo;
 @property (nonatomic, retain) PFFile *promoImage;
+@property (nonatomic) int creditsPayout;
 @property (nonatomic, retain) THLLocation *location;
 @end

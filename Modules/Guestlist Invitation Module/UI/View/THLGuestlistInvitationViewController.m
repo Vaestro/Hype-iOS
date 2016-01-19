@@ -31,6 +31,7 @@
 @synthesize eventHandler = _eventHandler;
 @synthesize dataSource = _dataSource;
 @synthesize showActivityIndicator = _showActivityIndicator;
+@synthesize creditsPayout = _creditsPayout;
 
 #pragma mark - VC Lifecycle
 - (void)viewDidLoad {
@@ -73,10 +74,14 @@
 	_commitButton = [self newCommitBarButtonItem];
 	_commitButton.rac_command = [self newCommitCommand];
 	_addedGuests = [NSMutableSet new];
+    _invitationDetailsView = [self newInvitationDetailsView];
+    _invitationDetailsLabel = [self newInvitationDetailsLabel];
 }
 
 - (void)layoutView {
-	[self.view addSubviews:@[_tableView, _contactPickerView]];
+	[self.view addSubviews:@[_tableView, _contactPickerView, _invitationDetailsView]];
+    [_invitationDetailsView addSubview:_invitationDetailsLabel];
+    [_invitationDetailsView bringSubviewToFront:_invitationDetailsLabel];
 	self.navigationItem.leftBarButtonItem = _cancelButton;
 	self.navigationItem.rightBarButtonItem = _commitButton;
     self.navigationItem.title = @"INVITE";
@@ -87,7 +92,6 @@
 	_dataSource.tableView = _tableView;
 
 	[_tableView registerClass:[THLContactTableViewCell class] forCellReuseIdentifier:[[THLContactTableViewCell class] identifier]];
-
 
 	_dataSource.cellCreationBlock = (^id(id object, UITableView* parentView, NSIndexPath *indexPath) {
 		if ([object isKindOfClass:[THLGuestEntity class]]) {
@@ -102,7 +106,6 @@
 			THLContactTableViewCell *tvCell = (THLContactTableViewCell *)cell;
 			THLGuestEntity *guest = (THLGuestEntity *)object;
 
-//			tvCell.thumbnail = guest.thumbnail;
 			tvCell.name = guest.fullName;
 			tvCell.phoneNumber = guest.phoneNumber;
 
@@ -115,11 +118,9 @@
 
 			if ([WSELF.existingGuests containsObject:guest.intPhoneNumberFormat]) {
                 tvCell.name = [NSString stringWithFormat:@"%@ (Already Invited!)", guest.fullName];
-//                tvCell.phoneNumber = @"This Guest is already invited to your event!";
 				tvCell.userInteractionEnabled = NO;
 				tvCell.alpha = 0.5;
                 [tvCell maskView].alpha = 0.5;
-//                [tvCell dimView];
 			}
             
             if ([tvCell respondsToSelector:@selector(setSeparatorInset:)]) {
@@ -135,7 +136,8 @@
 
 - (void)bindView {
     WEAKSELF();
-
+    RAC(self.invitationDetailsLabel, text, @"") = RACObserve(self, creditsPayout);
+    
 	[RACObserve(self, dataSource) subscribeNext:^(id x) {
 		[WSELF configureDataSource];
 	}];
@@ -158,8 +160,6 @@
 	tableView.delegate = self;
     tableView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     tableView.separatorColor = kTHLNUIPrimaryBackgroundColor;
-//    tableView.sectionIndexColor = kTHLNUIGrayFontColor;
-//    tableView.sectionIndexBackgroundColor = [UIColor clearColor];
     if ([tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [tableView setSeparatorInset:UIEdgeInsetsZero];
     }
@@ -179,11 +179,18 @@
     return 20;
 }
 
-//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-//    UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
-//    label.text = @"A";
-//    return label;
-//}
+- (UIView *)newInvitationDetailsView {
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, _contactPickerView.frame.size.height)];
+    view.backgroundColor = kTHLNUIPrimaryBackgroundColor;  
+    return view;
+}
+
+- (UILabel *)newInvitationDetailsLabel {
+    UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
+    label.numberOfLines = 0;
+    label.textAlignment = NSTextAlignmentCenter;
+    return label;
+}
 
 - (THContactPickerView *)newContactPickerView {
 	THContactPickerView *pickerView = [[THContactPickerView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, kContactPickerViewHeight)];
@@ -201,7 +208,6 @@
 
 - (UIBarButtonItem *)newCancelBarButtonItem {
 	UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:nil action:NULL];
-//	UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(handleCancelAction:)];
 
     [item setTitleTextAttributes:
      [NSDictionary dictionaryWithObjectsAndKeys:
@@ -212,7 +218,6 @@
 
 - (UIBarButtonItem *)newCommitBarButtonItem {
 	UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Submit " style:UIBarButtonItemStylePlain target:nil action:NULL];
-//	UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Submit " style:UIBarButtonItemStylePlain target:self action:@selector(handleCommitAction:)];
 
     [item setTitleTextAttributes:
      [NSDictionary dictionaryWithObjectsAndKeys:
@@ -249,7 +254,7 @@
 - (void)adjustTableFrame {
 	CGFloat yOffset = _contactPickerView.frame.origin.y + _contactPickerView.frame.size.height;
 
-	CGRect tableFrame = CGRectMake(0, yOffset, self.view.frame.size.width, self.view.frame.size.height - yOffset);
+	CGRect tableFrame = CGRectMake(0, yOffset, SCREEN_WIDTH, self.view.frame.size.height - yOffset);
 	_tableView.frame = tableFrame;
 }
 

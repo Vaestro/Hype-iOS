@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "THLLoginView.h"
+#import "THLLoginViewInterface.h"
 
 
-@interface THLLoginViewController : UIViewController<THLLoginView>
+@interface THLLoginViewController : UIViewController<THLLoginViewInterface>
 
 @end

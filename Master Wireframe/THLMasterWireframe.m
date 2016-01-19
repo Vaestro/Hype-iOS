@@ -163,7 +163,7 @@ THLWaitlistPresenterDelegate
 	if (!error) {
         [THLUserManager makeCurrentInstallation];
         [THLUserManager logCrashlyticsUser];
-		[self presentGuestFlow];
+		[self routeLoggedInUserFlow];
     } else {
         NSLog(@"Login Error:%@", error);
     }

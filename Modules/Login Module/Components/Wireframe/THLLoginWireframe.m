@@ -81,6 +81,10 @@
     }];
 }
 
+- (void)finishOnboarding {
+    [_onboardingView dismissViewControllerAnimated:NO completion:NULL];
+}
+
 - (void)presentNumberVerificationInterface:(id<THLNumberVerificationModuleDelegate>)interfaceDelegate {
 	[_numberVerificationModule setModuleDelegate:interfaceDelegate];
 	[_numberVerificationModule presentNumberVerificationInterfaceInWindow:_window];

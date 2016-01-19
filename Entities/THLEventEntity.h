@@ -15,6 +15,7 @@
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSURL *imageURL;
 @property (nonatomic, copy) NSString *info;
+@property (nonatomic) int creditsPayout;
 @property (nonatomic, strong) THLLocationEntity *location;
 @property (nonatomic) float maleCover;
 @property (nonatomic) float femaleCover;

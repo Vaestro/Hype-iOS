@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol THLLoginView <NSObject>
+@protocol THLLoginViewInterface <NSObject>
+
 @property (nonatomic) NSNumber *showActivityIndicator;
 @property (nonatomic, strong) RACCommand *dismissCommand;
 @property (nonatomic, strong) RACCommand *loginCommand;

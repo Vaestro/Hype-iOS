@@ -16,6 +16,7 @@
 @dynamic promoInfo;
 @dynamic promoImage;
 @dynamic location;
+@dynamic creditsPayout;
 
 + (void)load {
 	[self registerSubclass];
