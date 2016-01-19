@@ -52,8 +52,7 @@ THLGuestlistReviewModuleDelegate
 #pragma mark - Routing
 - (void)presentHostFlowModuleInterfaceInWindow:(UIWindow *)window {
     _window = window;
-
-    UIViewController *vc = [[UIViewController alloc] initWithNibName:nil bundle:nil];
+    
     UINavigationController *discovery = [UINavigationController new];
     UINavigationController *dashboard = [UINavigationController new];
     UINavigationController *profile = [UINavigationController new];

@@ -119,7 +119,7 @@ THLWaitlistPresenterDelegate
 	_guestWireframe = [_dependencyManager newGuestFlowWireframe];
     _currentWireframe = _guestWireframe;
     [_guestWireframe.moduleInterface setModuleDelegate:self];
-	[_guestWireframe presentGuestFlowInWindow:_window];
+	[_guestWireframe configureMasterTabViewControllerAndPresentGuestFlowInWindow:_window];
 }
 
 // Route to Event Detail within GuestFlow Module from Popup Module

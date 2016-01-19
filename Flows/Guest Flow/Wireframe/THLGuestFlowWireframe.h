@@ -18,6 +18,6 @@
 @property (nonatomic, readonly) id<THLGuestFlowDependencyManager> dependencyManager;
 - (instancetype)initWithDependencyManager:(id<THLGuestFlowDependencyManager>)dependencyManager;
 
-- (void)presentGuestFlowInWindow:(UIWindow *)window;
+- (void)configureMasterTabViewControllerAndPresentGuestFlowInWindow:(UIWindow *)window;
 - (void)presentGuestFlowInWindow:(UIWindow *)window forEventDetail:(THLEventEntity *)eventEntity;
 @end

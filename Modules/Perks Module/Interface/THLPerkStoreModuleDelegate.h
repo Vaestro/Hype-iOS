@@ -13,5 +13,6 @@
 
 @protocol THLPerkStoreModuleDelegate <NSObject>
 - (void)perkModule:(id<THLPerkStoreModuleInterface>)module userDidSelectPerkStoreItemEntity:(THLPerkStoreItemEntity *)perkStoreItemEntity presentPerkDetailInterfaceOnController:(UIViewController *)controller;
+- (void)userNeedsLoginOnViewController:(UIViewController *)viewController;
 - (void)dismissPerkWireframe;
 @end
