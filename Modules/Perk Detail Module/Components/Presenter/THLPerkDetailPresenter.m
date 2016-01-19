@@ -141,7 +141,7 @@ THLPerkDetailInteractorDelegate
 
 - (void)interactor:(THLPerkDetailInteractor *)interactor didPurchasePerkStoreItem:(NSError *)error {
     [self.confirmationView showSuccessWithTitle:@"Perk Redeemed"
-                                        Message:[NSString stringWithFormat:@"You have successfully redeemed your credits for %@", _perkStoreItemEntity.name]];
+                                        Message:[NSString stringWithFormat:@"You have successfully redeemed your credits for %@. Check your email for further instructions.", _perkStoreItemEntity.name]];
 }
 
 @end
