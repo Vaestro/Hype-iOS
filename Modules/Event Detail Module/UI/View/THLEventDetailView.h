@@ -7,15 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-typedef NS_OPTIONS(NSInteger, THLGuestlistStatus) {
-    THLGuestlistStatusNone = 0,
-    THLGuestlistStatusPendingInvite,
-    THLGuestlistStatusAccepted,
-    THLGuestlistStatusPendingHost,
-    THLGuestlistStatusDeclined,
-    THLGuestlistStatusUnavailable
-};
-
 @protocol THLEventDetailView <NSObject>
 @property (nonatomic, copy) NSURL *locationImageURL;
 @property (nonatomic, copy) NSURL *promoImageURL;
@@ -30,7 +21,7 @@ typedef NS_OPTIONS(NSInteger, THLGuestlistStatus) {
 @property (nonatomic, copy) NSString *locationAttireRequirement;
 @property (nonatomic, copy) NSString *locationMusicTypes;
 
-@property (nonatomic) THLGuestlistStatus actionBarButtonStatus;
+@property (nonatomic) BOOL userHasAcceptedInvite;
 @property (nonatomic, strong) CLPlacemark *locationPlacemark;
 @property (nonatomic, strong) RACCommand *actionBarButtonCommand;
 @property (nonatomic, strong) RACCommand *dismissCommand;

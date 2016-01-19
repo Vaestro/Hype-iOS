@@ -43,26 +43,24 @@
 
 - (void)layoutView {
     [self addSubviews:@[_eventMessage,
-                        _eventTimeLabel,
-                        _statusView,
-                        _guestlistReviewStatusLabel]];
+                        _eventTimeLabel]];
     
     WEAKSELF();
     [_eventTimeLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.insets(kTHLEdgeInsetsNone());
     }];
     
-    [_statusView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.insets(kTHLEdgeInsetsNone());
-        make.height.mas_equalTo([WSELF guestlistReviewStatusLabel].mas_height);
-        make.width.mas_equalTo([WSELF statusView].mas_height);
-        make.centerY.equalTo([WSELF guestlistReviewStatusLabel].mas_centerY);
-    }];
-    
-    [_guestlistReviewStatusLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF eventTimeLabel].mas_bottom).insets(kTHLEdgeInsetsLow());
-        make.left.equalTo([WSELF statusView].mas_right);
-    }];
+//    [_statusView makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.insets(kTHLEdgeInsetsNone());
+//        make.height.mas_equalTo([WSELF guestlistReviewStatusLabel].mas_height);
+//        make.width.mas_equalTo([WSELF statusView].mas_height);
+//        make.centerY.equalTo([WSELF guestlistReviewStatusLabel].mas_centerY);
+//    }];
+//    
+//    [_guestlistReviewStatusLabel makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo([WSELF eventTimeLabel].mas_bottom).insets(kTHLEdgeInsetsLow());
+//        make.left.equalTo([WSELF statusView].mas_right);
+//    }];
     
     [_eventMessage makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF guestlistReviewStatusLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());

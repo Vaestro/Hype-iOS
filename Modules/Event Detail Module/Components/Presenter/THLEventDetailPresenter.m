@@ -22,7 +22,7 @@
 @interface THLEventDetailPresenter()<THLEventDetailInteractorDelegate>
 
 @property (nonatomic, strong) id<THLEventDetailView> view;
-@property (nonatomic) THLGuestlistStatus guestlistReviewStatus;
+@property (nonatomic) BOOL guestHasAcceptedInvite;
 
 @property (nonatomic, strong) THLEventEntity *eventEntity;
 @property (nonatomic, strong) THLGuestlistInviteEntity *guestlistInviteEntity;
@@ -58,18 +58,8 @@
         if (![THLUser currentUser]) {
             [WSELF handleNeedLoginAction];
         } else {
-            if (WSELF.guestlistReviewStatus == THLGuestlistStatusAccepted ||
-                WSELF.guestlistReviewStatus  == THLGuestlistStatusPendingHost ||
-                WSELF.guestlistReviewStatus == THLGuestlistStatusPendingInvite) {
+            if (_guestHasAcceptedInvite) {
                 [WSELF handleViewGuestlistAction];
-            } else if (WSELF.guestlistReviewStatus == THLGuestlistStatusDeclined) {
-                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Ok"
-                                                                       style:UIAlertActionStyleDefault
-                                                                     handler:nil];
-                
-                NSString *message = NSStringWithFormat(@"You have a declined guestlist for this event");
-                
-                [self showAlertViewWithMessage:message withAction:[[NSArray alloc] initWithObjects:cancelAction, nil]];
             } else {
                 //            TODO: Create logic so that Guests with Declined Guestlists can have another guestlist invite to the same event if their other one is declined
                 [WSELF handleCreateGuestlistAction];
@@ -80,8 +70,8 @@
         return [RACSignal empty];
     }];
     
-    [RACObserve(self, guestlistReviewStatus) subscribeNext:^(id _) {
-        [WSELF.view setActionBarButtonStatus:WSELF.guestlistReviewStatus];
+    [RACObserve(self, guestHasAcceptedInvite) subscribeNext:^(id _) {
+        [WSELF.view setUserHasAcceptedInvite:WSELF.guestHasAcceptedInvite];
     }];
     
 	[self.view setEventName:_eventEntity.title];
@@ -182,18 +172,8 @@
 - (void)interactor:(THLEventDetailInteractor *)interactor didGetGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite forEvent:(THLEventEntity *)event error:(NSError *)error {
     if (!error && guestlistInvite) {
         _guestlistInviteEntity = guestlistInvite;
-        THLGuestlistEntity *guestlistEntity = _guestlistInviteEntity.guestlist;
-        if (_guestlistInviteEntity.response == THLStatusPending && guestlistEntity.reviewStatus != THLStatusDeclined) {
-            self.guestlistReviewStatus = THLGuestlistStatusPendingInvite;
-        }
-        else if (_guestlistInviteEntity.response == THLStatusAccepted && guestlistEntity.reviewStatus == THLStatusPending) {
-            self.guestlistReviewStatus = THLGuestlistStatusPendingHost;
-        }
-        else if (_guestlistInviteEntity.response == THLStatusAccepted && guestlistEntity.reviewStatus == THLStatusAccepted) {
-            self.guestlistReviewStatus = THLGuestlistStatusAccepted;
-        }
-        else if (guestlistEntity.reviewStatus == THLStatusDeclined) {
-            self.guestlistReviewStatus = THLGuestlistStatusDeclined;
+        if (_guestlistInviteEntity.response == THLStatusAccepted) {
+            self.guestHasAcceptedInvite = TRUE;
         }
     }
 }

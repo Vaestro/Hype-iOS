@@ -180,13 +180,17 @@
 }
 
 - (UIView *)newInvitationDetailsView {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, _contactPickerView.frame.size.height)];
-    view.backgroundColor = kTHLNUIPrimaryBackgroundColor;  
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, _tableView.frame.size.height - 20, self.view.frame.size.width, 60)];
+    view.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     return view;
 }
 
 - (UILabel *)newInvitationDetailsLabel {
+    
     UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
+    label.frame = CGRectMake(0, 0, _invitationDetailsView.frame.size.width*0.67, _invitationDetailsView.frame.size.height);
+    label.center = CGPointMake(_invitationDetailsView.bounds.size.width  / 2,
+                                     _invitationDetailsView.bounds.size.height / 2);
     label.numberOfLines = 0;
     label.textAlignment = NSTextAlignmentCenter;
     return label;

@@ -58,7 +58,6 @@
     PFQuery *query = [self baseGuestlistQuery];
     [query whereKey:@"Promotion" matchesQuery:promotionQuery];
     [query whereKey:@"date" greaterThanOrEqualTo:[[NSDate date] dateByAddingTimeInterval:-60*300]];
-//    [query whereKey:@"reviewStatus" notEqualTo:[NSNumber numberWithInteger:2]];
     return query;
 }
 
@@ -69,7 +68,6 @@
     
     PFQuery *query = [self baseGuestlistQuery];
     [query whereKey:@"Promotion" matchesQuery:promotionQuery];
-//    [query whereKey:@"reviewStatus" notEqualTo:[NSNumber numberWithInteger:2]];
     return query;
 }
 
@@ -81,7 +79,7 @@
     PFQuery *query = [self baseGuestlistInviteQuery];
     [query whereKey:@"Guest" equalTo:[THLUser currentUser]];
     [query whereKey:@"Guestlist" matchesQuery:guestlistQuery];
-    [query whereKey:@"response" notEqualTo:[NSNumber numberWithInteger:2]];
+    [query whereKey:@"response" notEqualTo:[NSNumber numberWithInteger:-1]];
     return query;
 }
 
@@ -91,7 +89,7 @@
 //    TODO: Improve Date + Remove Reponse filtering to fetch all guestlistInvites
 //    [query whereKey:@"date" greaterThanOrEqualTo:[[NSDate date] dateByAddingTimeInterval:-60*300]];
     [query orderByAscending:@"date"];
-    [query whereKey:@"response" notEqualTo:[NSNumber numberWithInteger:2]];
+    [query whereKey:@"response" notEqualTo:[NSNumber numberWithInteger:-1]];
     return query;
 }
 

@@ -19,10 +19,10 @@ typedef NS_ENUM(NSInteger, THLUserType) {
 };
 
 typedef NS_ENUM(NSInteger, THLStatus) {
-	THLStatusPending = 0,
-	THLStatusAccepted,
-	THLStatusDeclined,
-    THLStatusNone
+	THLStatusDeclined = -1,
+    THLStatusNone = 0,
+    THLStatusAccepted = 1,
+    THLStatusPending = 2
 };
 
 typedef NS_ENUM(NSInteger, THLSex) {

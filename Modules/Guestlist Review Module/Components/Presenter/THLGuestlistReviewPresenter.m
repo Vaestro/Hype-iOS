@@ -159,6 +159,9 @@ THLGuestlistReviewInteractorDelegate
     
     [_view setGuestlistReviewStatus: _guestlistEntity.reviewStatus];
     switch (_guestlistEntity.reviewStatus) {
+        case THLStatusNone: {
+            break;
+        }
         case THLStatusPending: {
             [_view setGuestlistReviewStatusTitle:@"Guestlist Pending"];
             break;

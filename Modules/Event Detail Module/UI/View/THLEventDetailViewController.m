@@ -49,7 +49,7 @@
 @synthesize locationMusicTypes;
 @synthesize dismissCommand;
 @synthesize locationPlacemark;
-@synthesize actionBarButtonStatus;
+@synthesize userHasAcceptedInvite;
 @synthesize actionBarButtonCommand;
 @synthesize viewAppeared;
 
@@ -151,7 +151,7 @@
         }
     }];
     
-    [RACObserve(WSELF, actionBarButtonStatus) subscribeNext:^(id _) {
+    [RACObserve(WSELF, userHasAcceptedInvite) subscribeNext:^(id _) {
         [WSELF updateBottomBar];
     }];
     
@@ -160,36 +160,12 @@
 
 - (void)updateBottomBar {
     WEAKSELF();
-    switch (actionBarButtonStatus) {
-        case THLGuestlistStatusPendingInvite:
-            [[WSELF bottomBar].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"VIEW GUESTLIST", nil)];
-            [WSELF bottomBar].backgroundColor = kTHLNUIPendingColor;
-            break;
-            
-        case THLGuestlistStatusPendingHost:
-            [[WSELF bottomBar].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"VIEW PENDING GUESTLIST", nil)];
-            [WSELF bottomBar].backgroundColor = kTHLNUIPendingColor;
-            break;
-            
-        case THLGuestlistStatusAccepted:
-            [[WSELF bottomBar].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"VIEW YOUR GUESTLIST", nil)];
-            [WSELF bottomBar].backgroundColor = kTHLNUIAccentColor;
-            break;
-            
-        case THLGuestlistStatusDeclined:
-            [[WSELF bottomBar].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Declined Guestlist", nil)];
-            [WSELF bottomBar].backgroundColor = kTHLNUIRedColor;
-            break;
-        
-        case THLGuestlistStatusUnavailable:
-            [[WSELF bottomBar].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"UNAVAILABLE", nil)];
-            [WSELF bottomBar].backgroundColor = kTHLNUIPendingColor;
-            break;
-            
-        default:
-            [[WSELF bottomBar].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"CREATE A GUESTLIST", nil)];
-            [WSELF bottomBar].backgroundColor = kTHLNUIActionColor;
-            break;
+    if (userHasAcceptedInvite) {
+        [[WSELF bottomBar].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"VIEW GUESTLIST", nil)];
+        [WSELF bottomBar].backgroundColor = kTHLNUIAccentColor;
+    } else {
+        [[WSELF bottomBar].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"CREATE GUESTLIST", nil)];
+        [WSELF bottomBar].backgroundColor = kTHLNUIActionColor;
     }
 }
 
