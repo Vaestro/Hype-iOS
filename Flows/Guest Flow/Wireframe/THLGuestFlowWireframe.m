@@ -211,7 +211,7 @@ THLPerkStoreModuleDelegate
     _guestlistReviewWireframe = nil;
 }
 
-#pragma mark - THLPerkModuleDelegate
+#pragma mark - THLPerkStoreModuleDelegate
 - (void)perkModule:(id<THLPerkStoreModuleInterface>)module userDidSelectPerkStoreItemEntity:(THLPerkStoreItemEntity *)perkStoreItemEntity presentPerkDetailInterfaceOnController:(UIViewController *)controller {
     [self presentPerkDetailInterfaceForPerkStoreItem:perkStoreItemEntity onController:controller];
 }

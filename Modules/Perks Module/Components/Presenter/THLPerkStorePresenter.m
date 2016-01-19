@@ -57,7 +57,7 @@
     
     WEAKSELF();
     RACCommand *selectedIndexPathCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [WSELF handleIndexPathSelection:(NSIndexPath *)input];
+        [WSELF checkIfUserLoggedInThenHandleIndexPathSelection:(NSIndexPath *)input];
         return [RACSignal empty];
     }];
     
@@ -78,11 +78,19 @@
 }
     
     
-- (void)handleIndexPathSelection:(NSIndexPath *)indexPath {
+- (void)checkIfUserLoggedInThenHandleIndexPathSelection:(NSIndexPath *)indexPath {
+    if (![THLUser currentUser]) {
+        [self handleLogInAction];
+    } else {
     THLPerkStoreItemEntity *perkStoreItemEntity = [[_view dataSource] untransformedItemAtIndexPath:indexPath];
     [self.moduleDelegate perkModule:self userDidSelectPerkStoreItemEntity:perkStoreItemEntity presentPerkDetailInterfaceOnController:(UIViewController *)_view];
+    }
 }
-    
+
+- (void)handleLogInAction {
+    [self.moduleDelegate userNeedsLoginOnViewController:(UIViewController *)_view];
+}
+
 - (void)handleRefreshAction {
     self.refreshing = YES;
     [_interactor updatePerks];
