@@ -60,34 +60,38 @@ THLPerkStoreModuleDelegate
 	return self;
 }
 
-- (void)presentGuestFlowInWindow:(UIWindow *)window {
+- (void)configureMasterTabViewControllerAndPresentGuestFlowInWindow:(UIWindow *)window {
     _window = window;
-    
-    UIViewController *vc = [[UIViewController alloc] initWithNibName:nil bundle:nil];
+    UITabBarController *masterNavigationController = [UITabBarController new];
+    [self configureMasterTabViewController:masterNavigationController];
+    _window.rootViewController = masterNavigationController;
+    [_window makeKeyAndVisible];
+}
+
+
+- (void)configureMasterTabViewController:(UITabBarController *)masterTabViewController {
     UINavigationController *discovery = [UINavigationController new];
     UINavigationController *dashboard = [UINavigationController new];
     UINavigationController *perks = [UINavigationController new];
     UINavigationController *profile = [UINavigationController new];
-
+    
     [self presentEventDiscoveryInterfaceInNavigationController:discovery];
     [self presentDashboardInterfaceInNavigationController:dashboard];
     [self presentPerkStoreInterfaceInNavigationController:perks];
     [self presentUserProfileInterfaceInNavigationController:profile];
-
+    
     dashboard.tabBarItem.image = [UIImage imageNamed:@"Lists Icon"];
     discovery.tabBarItem.image = [UIImage imageNamed:@"Home Icon"];
     profile.tabBarItem.image = [UIImage imageNamed:@"Profile Icon"];
     perks.tabBarItem.image = [UIImage imageNamed:@"Perks Icon"];
-
+    
     NSArray *views = @[discovery, dashboard, perks, profile];
     
-    UITabBarController *masterNavigationController = [UITabBarController new];
-    masterNavigationController.viewControllers = views;
-    masterNavigationController.view.autoresizingMask=(UIViewAutoresizingFlexibleHeight);
-
-    _window.rootViewController = masterNavigationController;
-    [_window makeKeyAndVisible];
+    masterTabViewController.viewControllers = views;
+    masterTabViewController.view.autoresizingMask=(UIViewAutoresizingFlexibleHeight);
 }
+
+
 
 - (void)presentGuestFlowInWindow:(UIWindow *)window forEventDetail:(THLEventEntity *)eventEntity {
     /**
