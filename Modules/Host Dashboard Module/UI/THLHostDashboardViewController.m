@@ -48,6 +48,11 @@ UICollectionViewDelegateFlowLayout
     self.edgesForExtendedLayout = UIRectEdgeNone;
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [[self navigationController] tabBarItem].badgeValue = nil;
+}
+
 - (void)constructView {
     _collectionView = [self newCollectionView];
     _scrollView = [self newScrollView];

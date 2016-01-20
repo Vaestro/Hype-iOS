@@ -20,4 +20,6 @@
 
 - (void)configureMasterTabViewControllerAndPresentGuestFlowInWindow:(UIWindow *)window;
 - (void)presentGuestFlowInWindow:(UIWindow *)window forEventDetail:(THLEventEntity *)eventEntity;
+- (void)showNotificationBadge;
+
 @end

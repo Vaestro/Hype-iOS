@@ -81,7 +81,6 @@
 - (void)layoutView {
 	[self.view addSubviews:@[_tableView, _contactPickerView, _invitationDetailsView]];
     [_invitationDetailsView addSubview:_invitationDetailsLabel];
-    [_invitationDetailsView bringSubviewToFront:_invitationDetailsLabel];
 	self.navigationItem.leftBarButtonItem = _cancelButton;
 	self.navigationItem.rightBarButtonItem = _commitButton;
     self.navigationItem.title = @"INVITE";

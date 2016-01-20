@@ -62,7 +62,7 @@ pod "ORStackView"
 pod 'iCarousel', '~> 1.8'
 pod 'MJRefresh'
 pod 'SVProgressHUD'
-pod 'THContactPicker', '~> 2.0'
+pod 'THContactPicker', '~> 1.2'
 pod "TOMSMorphingLabel", "~> 0.5"
 pod 'DZNEmptyDataSet'
 pod 'IHKeyboardAvoiding'

@@ -17,4 +17,6 @@
 #pragma mark - Dependencies
 @property (nonatomic, readonly) id<THLHostFlowDependencyManager> dependencyManager;
 - (instancetype)initWithDependencyManager:(id<THLHostFlowDependencyManager>)dependencyManager;
+- (void)showNotificationBadge;
+
 @end

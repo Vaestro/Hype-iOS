@@ -80,7 +80,12 @@ THLWaitlistPresenterDelegate
         THLPopupNotificationWireframe *popupNotificationWireframe = [_dependencyManager newPopupNotificationWireframe];
         _currentWireframe = popupNotificationWireframe;
         [popupNotificationWireframe.moduleInterface setModuleDelegate:self];
-        return [popupNotificationWireframe.moduleInterface presentPopupNotificationModuleInterfaceWithPushInfo:pushInfo];
+        BFTask *task = [popupNotificationWireframe.moduleInterface presentPopupNotificationModuleInterfaceWithPushInfo:pushInfo];
+        if (task.result) {
+            if (_guestWireframe != nil) [_guestWireframe showNotificationBadge];
+            if (_hostWireframe != nil) [_hostWireframe showNotificationBadge];
+        }
+        return task;
     } else {
         NSLog(@"Notification did not have any text");
         return [BFTask taskWithResult:nil];

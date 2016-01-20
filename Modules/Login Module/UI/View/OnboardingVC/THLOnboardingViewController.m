@@ -92,7 +92,7 @@
     
     OnboardingContentViewController *secondPage = [OnboardingContentViewController contentWithTitle:@"DESIGN THE"
                                                                                            subtitle:@"PERFECT NIGHT"
-                                                                                               body:@"CHOOSE THE HOTTEST EVENT AND INVITE YOUR FRIENDS TO JOIN YOUR GUESTLIST WITH EXCLUSIVE VIP BENEFITS"
+                                                                                               body:@"INVITE YOUR FRIENDS TO JOIN YOUR GUEST LIST FOR THE EVENT OF YOUR CHOICE AND GET COMPLIMENTARY VIP BENEFITS"
                                                                                               image:[UIImage imageNamed:@"OnboardingBackground2"]
                                                                                          buttonText:nil
                                                                                              action:nil
@@ -101,7 +101,7 @@
     
     OnboardingContentViewController *thirdPage = [OnboardingContentViewController contentWithTitle:@"EARN GREAT"
                                                                                           subtitle:@"PERKS"
-                                                                                              body:@"GET CREDITS FOR EACH FRIEND YOU INVITE THAT ATTENDS THE EVENT. USE THOSE CREDITS FOR PERKS LIKE A FREE LIMO RIDE"
+                                                                                              body:@"FOR EACH FRIEND THAT ATTENDS YOUR EVENT, YOU WILL GET CREDITS REDEEMABLE FOR PERKS LIKE A LIMO RIDE"
                                                                                              image:[UIImage imageNamed:@"OnboardingBackground3"]
                                                                                         buttonText:nil
                                                                                             action:nil
@@ -110,7 +110,7 @@
     
     OnboardingContentViewController *fourthPage = [OnboardingContentViewController contentWithTitle:@"GET READY FOR"
                                                                                            subtitle:@"THE PARTY"
-                                                                                               body:@"OUR HOSTS WILL ENSURE YOUR NIGHT RUNS SMOOTHLY AND IS ALWAYS HYPE"
+                                                                                               body:@"OUR HOSTS WILL ANSWER ANY QUESTIONS YOU HAVE AND MEET YOU THERE, SO YOU ARE ENSURED A SMOOTH AND HYPE NIGHT"
                                                                                               image:[UIImage imageNamed:@"OnboardingBackground4"]
                                                                                          buttonText:@"Login with facebook"
                                                                                              action:^{

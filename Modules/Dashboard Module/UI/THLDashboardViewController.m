@@ -46,6 +46,11 @@
 //    [_refreshCommand execute:nil];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [[self navigationController] tabBarItem].badgeValue = nil;
+}
+
 - (void)constructView {
     _collectionView = [self newCollectionView];
     _scrollView = [self newScrollView];

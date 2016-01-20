@@ -35,7 +35,7 @@ THLPerkStoreModuleDelegate
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) id currentWireframe;
 @property (nonatomic, nonatomic) UIViewController *containerVC;
-@property (nonatomic, strong) UINavigationController *navigationController;
+@property (nonatomic, strong) UITabBarController *masterTabBarController;
 @property (nonatomic, strong) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
 @property (nonatomic, strong) THLDashboardWireframe *dashboardWireframe;
 @property (nonatomic, strong) THLUserProfileWireframe *userProfileWireframe;
@@ -62,11 +62,15 @@ THLPerkStoreModuleDelegate
 
 - (void)configureMasterTabViewControllerAndPresentGuestFlowInWindow:(UIWindow *)window {
     _window = window;
-
-    UITabBarController *masterNavigationController = [UITabBarController new];
-    [self configureMasterTabViewController:masterNavigationController];
-    _window.rootViewController = masterNavigationController;
+    _masterTabBarController = [UITabBarController new];
+    [self configureMasterTabViewController:_masterTabBarController];
+    _window.rootViewController = _masterTabBarController;
     [_window makeKeyAndVisible];
+
+}
+
+- (void)showNotificationBadge {
+    [[_masterTabBarController.tabBar.items objectAtIndex:1] setBadgeValue:@""];
 }
 
 
@@ -98,7 +102,6 @@ THLPerkStoreModuleDelegate
     /**
      *  Prevents popup notification from instantiating another event detail module if one is already instantiated
      */
-    [_navigationController popToRootViewControllerAnimated:NO];
     [self presentEventDetailInterfaceForEvent:eventEntity];
 }
 

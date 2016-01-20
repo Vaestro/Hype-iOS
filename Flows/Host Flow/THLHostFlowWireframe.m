@@ -31,7 +31,7 @@ THLGuestlistReviewModuleDelegate
 >
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) id currentWireframe;
-@property (nonatomic, strong) UINavigationController *navigationController;
+@property (nonatomic, strong) UITabBarController *masterTabBarController;
 @property (nonatomic, strong) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
 @property (nonatomic, strong) THLUserProfileWireframe *userProfileWireframe;
 @property (nonatomic, strong) THLHostDashboardWireframe *dashboardWireframe;
@@ -53,6 +53,13 @@ THLGuestlistReviewModuleDelegate
 - (void)presentHostFlowModuleInterfaceInWindow:(UIWindow *)window {
     _window = window;
     
+    _masterTabBarController = [UITabBarController new];
+    [self configureMasterTabViewController:_masterTabBarController];
+    _window.rootViewController = _masterTabBarController;
+    [_window makeKeyAndVisible];
+}
+
+- (void)configureMasterTabViewController:(UITabBarController *)masterTabViewController {
     UINavigationController *discovery = [UINavigationController new];
     UINavigationController *dashboard = [UINavigationController new];
     UINavigationController *profile = [UINavigationController new];
@@ -70,9 +77,10 @@ THLGuestlistReviewModuleDelegate
     UITabBarController *masterNavigationController = [UITabBarController new];
     masterNavigationController.viewControllers = views;
     masterNavigationController.view.autoresizingMask=(UIViewAutoresizingFlexibleHeight);
-    
-    _window.rootViewController = masterNavigationController;
-    [_window makeKeyAndVisible];
+}
+
+- (void)showNotificationBadge {
+    [[_masterTabBarController.tabBar.items objectAtIndex:1] setBadgeValue:@""];
 }
 
 - (id<THLHostFlowModuleInterface>)moduleInterface {
