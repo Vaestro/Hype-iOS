@@ -81,9 +81,10 @@ THLWaitlistPresenterDelegate
         _currentWireframe = popupNotificationWireframe;
         [popupNotificationWireframe.moduleInterface setModuleDelegate:self];
         BFTask *task = [popupNotificationWireframe.moduleInterface presentPopupNotificationModuleInterfaceWithPushInfo:pushInfo];
+        [_guestWireframe showNotificationBadge];
+        [_hostWireframe showNotificationBadge];
         if (task.result) {
-            if (_guestWireframe != nil) [_guestWireframe showNotificationBadge];
-            if (_hostWireframe != nil) [_hostWireframe showNotificationBadge];
+  
         }
         return task;
     } else {

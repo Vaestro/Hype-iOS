@@ -19,14 +19,13 @@
 #import "THLMasterWireframe.h"
 #import "THLAppearanceUtils.h"
 
-//dev
-#define applicationId @"5t3F1S3wKnVGIKHob1Qj0Je3sygnFiwqAu6PP400"
-#define clientKeyId @"xn4Mces2HcFCQYXF2VRj4W1Ot0zIBELl6fHKLGPk"
-
-//production
-//#define applicationId @"D0AnOPXqqfz7bfE70WvdlE8dK7Qj1kxgf4rPm8rX"
-//#define clientKeyId @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq"
-
+#if DEBUG
+static NSString *applicationId = @"5t3F1S3wKnVGIKHob1Qj0Je3sygnFiwqAu6PP400";
+static NSString *clientKeyId = @"xn4Mces2HcFCQYXF2VRj4W1Ot0zIBELl6fHKLGPk";
+#else
+static NSString *applicationId = @"D0AnOPXqqfz7bfE70WvdlE8dK7Qj1kxgf4rPm8rX";
+static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
+#endif
 
 
 @interface AppDelegate ()

@@ -63,7 +63,7 @@
 //    }];
     
     [_eventMessage makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF guestlistReviewStatusLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.top.equalTo([WSELF eventTimeLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());
         make.left.right.insets(kTHLEdgeInsetsNone());
         make.bottom.insets(kTHLEdgeInsetsHigh());
     }];

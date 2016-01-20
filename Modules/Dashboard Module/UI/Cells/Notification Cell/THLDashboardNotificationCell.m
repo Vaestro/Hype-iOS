@@ -47,7 +47,7 @@
 }
 
 - (void)layoutView {
-    self.backgroundColor = kTHLNUISecondaryBackgroundColor;
+    self.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     
     WEAKSELF();
     [self addSubviews:@[_iconImageView, _dateLabel, _locationNameLabel, _statusView, _senderIntroductionLabel]];
