@@ -27,7 +27,6 @@
 #import "THLHostEntity.h"
 #import "THLUser.h"
 
-
 //phone kit
 #import "AFNetworking.h"
 #import "UIView+FrameAccessor.h"

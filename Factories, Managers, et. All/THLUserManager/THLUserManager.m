@@ -46,6 +46,17 @@
     return [self currentUser] || [self isFacebookLinkedWithUser];
 }
 
++ (BOOL)isUserVerified {
+    if ([[self currentUser].phoneNumber isEqualToString:@""]
+        || [[self currentUser].email isEqualToString:@""]
+        || [self currentUser].email == nil
+        || [self currentUser].phoneNumber == nil) {
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
 + (BOOL)isFacebookLinkedWithUser {
     return [PFFacebookUtils isLinkedWithUser:[self currentUser]];
 }

@@ -16,6 +16,7 @@
 
 #import "THLNumberVerificationModuleInterface.h"
 #import "THLFacebookPictureModuleInterface.h"
+#import "THLUser.h"
 
 @interface THLLoginWireframe()
 @property (nonatomic, strong) UIWindow *window;
@@ -50,6 +51,7 @@
 	_presenter = [[THLLoginPresenter alloc] initWithWireframe:self interactor:_interactor];
 	_onboardingView = [[THLOnboardingViewController alloc] initWithNibName:nil bundle:nil];
     _loginView = [[THLLoginViewController alloc] initWithNibName:nil bundle:nil];
+    
 }
 
 #pragma mark - Interface
@@ -63,6 +65,23 @@
 	_window.rootViewController = _onboardingView;
 	[_window makeKeyAndVisible];
 }
+
+- (void)presentUserVerificationInterfaceInWindow:(UIWindow *)window {
+    _window = window;
+    [_interactor setUser:[THLUser currentUser]];
+    [_presenter configureOnboardingView:_onboardingView];
+    _window.rootViewController = _onboardingView;
+    
+//    [_presenter configureLoginView:_loginView];
+//    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:_loginView];
+//    _window.rootViewController = navigationController;
+//    UIViewController *baseViewController = [UIViewController new];
+//    [_presenter configureBaseView:baseViewController];
+//    _window.rootViewController = baseViewController;
+    [_window makeKeyAndVisible];
+    [_presenter reroute];
+}
+
 
 - (void)presentLoginInterfaceOnViewController:(UIViewController *)viewController {
     _viewController = viewController;

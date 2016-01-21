@@ -20,6 +20,7 @@
 + (BOOL)isUserCached;
 + (void) logCrashlyticsUser;
 + (void)logUserOut;
++ (BOOL)isUserVerified;
 + (BFTask *)makeCurrentInstallation;
 //- (BFTask *)checkUserSessionValidity;
 

@@ -24,6 +24,8 @@ THLFacebookPictureModuleDelegate,
 THLNumberVerificationModuleDelegate
 >
 @property (nonatomic, strong) THLUserInfoVerificationViewController *userInfoVerificationView;
+@property (nonatomic, strong) UIViewController *baseViewController;
+
 @property (nonatomic, weak) id<THLOnboardingViewInterface> onboardingView;
 @property (nonatomic, weak) id<THLLoginViewInterface> loginView;
 @property (nonatomic) BOOL busy;
@@ -54,6 +56,14 @@ THLNumberVerificationModuleDelegate
     [_wireframe presentLoginInterfaceOnViewController:viewController];
 }
 
+- (void)presentUserVerificationInterfaceInWindow:(UIWindow *)window {
+    [_wireframe presentUserVerificationInterfaceInWindow:window];
+}
+
+- (void)configureBaseView:(UIViewController *)baseView {
+    _baseViewController = baseView;
+}
+
 #pragma mark - View Decoration
 - (void)configureOnboardingView:(id<THLOnboardingViewInterface>)onboardingView {
     _onboardingView = onboardingView;
@@ -74,6 +84,7 @@ THLNumberVerificationModuleDelegate
     
     [_onboardingView setSkipCommand:skipCommand];
 	[_onboardingView setLoginCommand:loginCommand];
+    _baseViewController = (UIViewController *)_onboardingView;
 }
 
 - (void)configureLoginView:(id<THLLoginViewInterface>)loginView {
@@ -94,6 +105,7 @@ THLNumberVerificationModuleDelegate
     }];
     [_loginView setDismissCommand:dismissCommand];
     [_loginView setLoginCommand:loginCommand];
+    _baseViewController = (UIViewController *)_loginView;
 }
 
 #pragma mark - Action Handling
@@ -139,7 +151,7 @@ THLNumberVerificationModuleDelegate
 
 - (void)presentUserInfoVerificationView {
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:_userInfoVerificationView];
-    [(UIViewController *)_onboardingView presentViewController:navigationController animated:NO completion:NULL];
+    [_baseViewController presentViewController:navigationController animated:NO completion:NULL];
 }
 
 - (void)routeToNumberVerificationInterface {

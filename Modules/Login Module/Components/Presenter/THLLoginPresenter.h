@@ -24,4 +24,6 @@
 
 - (void)configureLoginView:(id<THLLoginViewInterface>)loginView;
 - (void)configureOnboardingView:(id<THLOnboardingViewInterface>)onboardingView;
+- (void)configureBaseView:(UIViewController *)baseView;
+- (void)reroute;
 @end
