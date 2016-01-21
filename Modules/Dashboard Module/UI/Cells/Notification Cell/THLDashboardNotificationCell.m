@@ -50,7 +50,7 @@
     self.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     
     WEAKSELF();
-    [self addSubviews:@[_iconImageView, _dateLabel, _locationNameLabel, _statusView, _senderIntroductionLabel]];
+    [self addSubviews:@[_iconImageView, _dateLabel, _locationNameLabel, _senderIntroductionLabel]];
     
     [_iconImageView makeConstraints:^(MASConstraintMaker *make) {
         make.top.greaterThanOrEqualTo(SV(WSELF.iconImageView)).insets(kTHLEdgeInsetsHigh());
@@ -63,30 +63,34 @@
     
     [_senderIntroductionLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(WSELF.iconImageView.mas_top).mas_offset(-10);
-        make.right.equalTo(WSELF.statusView.mas_left).insets(kTHLEdgeInsetsHigh());
+        //        make.right.equalTo(SV([WSELF statusView]).mas_centerX).mas_offset(@125);
+        make.right.equalTo(kTHLEdgeInsetsHigh());
         make.left.equalTo([WSELF iconImageView].mas_right).insets(kTHLEdgeInsetsHigh());
     }];
     
     [_locationNameLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF senderIntroductionLabel].mas_bottom).insets(kTHLEdgeInsetsLow());
-        make.right.equalTo(WSELF.statusView.mas_left).insets(kTHLEdgeInsetsHigh());
+        //        make.right.equalTo(SV([WSELF statusView]).mas_centerX).mas_offset(@125);
+        make.right.equalTo(kTHLEdgeInsetsHigh());
         make.left.equalTo([WSELF iconImageView].mas_right).insets(kTHLEdgeInsetsHigh());
         make.centerY.equalTo(0);
     }];
     
     [_dateLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF locationNameLabel].mas_bottom).insets(kTHLEdgeInsetsLow());
-        make.right.equalTo(WSELF.statusView.mas_left).insets(kTHLEdgeInsetsHigh());
+        //        make.right.equalTo(SV([WSELF statusView]).mas_centerX).mas_offset(@125);
+        make.right.equalTo(kTHLEdgeInsetsHigh());
         make.left.equalTo([WSELF iconImageView].mas_right).insets(kTHLEdgeInsetsHigh());
         make.bottom.equalTo(WSELF.iconImageView.mas_bottom).mas_offset(10);
     }];
     
-    [_statusView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.greaterThanOrEqualTo(SV(WSELF.statusView)).insets(kTHLEdgeInsetsHigh());
-        make.bottom.lessThanOrEqualTo(SV(WSELF.statusView)).insets(kTHLEdgeInsetsHigh());
-        make.right.insets(kTHLEdgeInsetsSuperHigh());
-        make.centerY.equalTo(0);
-    }];
+    //    [_statusView makeConstraints:^(MASConstraintMaker *make) {
+    //        make.top.greaterThanOrEqualTo(SV(WSELF.statusView)).insets(kTHLEdgeInsetsHigh());
+    //        make.bottom.lessThanOrEqualTo(SV(WSELF.statusView)).insets(kTHLEdgeInsetsHigh());
+    ////        make.right.equalTo(SV([WSELF statusView]).mas_right).insets(kTHLEdgeInsetsSuperHigh());
+    //        make.left.equalTo([WSELF senderIntroductionLabel].mas_right).insets(kTHLEdgeInsetsHigh());
+    //        make.centerY.equalTo([WSELF locationNameLabel].mas_centerY);
+    //    }];
 }
 
 - (void)bindView {
@@ -108,16 +112,6 @@
     return imageView;
 }
 
-- (UILabel *)newDateLabel {
-    UILabel *dateLabel = THLNUILabel(kTHLNUIDetailTitle);
-    return dateLabel;
-}
-
-- (UILabel *)newLocationNameLabel {
-    UILabel *locationNameLabel = THLNUILabel(kTHLNUIDetailTitle);
-    return locationNameLabel;
-}
-
 - (THLStatusView *)newStatusView {
     THLStatusView *statusView = [THLStatusView new];
     [statusView setScale:1];
@@ -127,10 +121,27 @@
 - (UILabel *)newSenderIntroductionLabel {
     UILabel *senderIntroductionLabel = THLNUILabel(kTHLNUIDetailTitle);
     senderIntroductionLabel.adjustsFontSizeToFitWidth = YES;
+    senderIntroductionLabel.numberOfLines = 1;
     senderIntroductionLabel.minimumScaleFactor = 0.5;
     return senderIntroductionLabel;
 }
 
+- (UILabel *)newLocationNameLabel {
+    UILabel *locationNameLabel = THLNUILabel(kTHLNUIRegularDetailTitle);
+    locationNameLabel.adjustsFontSizeToFitWidth = YES;
+    locationNameLabel.numberOfLines = 1;
+    locationNameLabel.minimumScaleFactor = 0.5;
+    return locationNameLabel;
+}
+
+- (UILabel *)newDateLabel {
+    UILabel *dateLabel = THLNUILabel(kTHLNUIDetailTitle);
+    dateLabel.adjustsFontSizeToFitWidth = YES;
+    dateLabel.numberOfLines = 1;
+    dateLabel.minimumScaleFactor = 0.5;
+    [dateLabel setTextColor:kTHLNUIGrayFontColor];
+    return dateLabel;
+}
 #pragma mark - Public Interface
 + (NSString *)identifier {
     return NSStringFromClass(self.class);

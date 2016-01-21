@@ -148,7 +148,7 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *header = nil;
     CGFloat height = [self tableView:tableView heightForHeaderInSection:section];
-    CGRect frame = CGRectMake(0, 0, ScreenWidth, 0);
+    CGRect frame = CGRectMake(0, 0, ScreenWidth, height);
     THLUserProfileHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:[THLUserProfileHeaderView identifier]];
     headerView = [[THLUserProfileHeaderView alloc] initWithFrame:frame];
     RAC(headerView, userImageURL) = RACObserve(self, userImageURL);

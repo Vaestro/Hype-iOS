@@ -39,6 +39,7 @@ static NSString *const kTHLNUIBoldTitle = @"BoldTitle";
 static NSString *const kTHLNUINavBarTitle = @"NavBarTitle";
 static NSString *const kTHLNUIRegularTitle = @"RegularTitle";
 static NSString *const kTHLNUIDetailTitle = @"DetailTitle";
+static NSString *const kTHLNUIRegularDetailTitle = @"RegularDetailTitle";
 static NSString *const kTHLNUIButtonTitle = @"ButtonTitle";
 static NSString *const kTHLNUISectionTitle = @"SectionTitle";
 static NSString *const kTHLNUIBackgroundView = @"BackgroundView";

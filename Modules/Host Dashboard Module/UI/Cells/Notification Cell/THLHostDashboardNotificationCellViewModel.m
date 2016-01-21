@@ -28,7 +28,7 @@
 - (void)configureView:(id<THLHostDashboardNotificationCellView>)cellView {
     [cellView setLocationName:[NSString stringWithFormat:@"@ %@", _guestlistEntity.promotion.event.location.name]];
     [cellView setNotificationStatus:_guestlistEntity.reviewStatus];
-    [cellView setSenderIntroductionText:[NSString stringWithFormat:@"%@ requested to join your guestlist", _guestlistEntity.owner.firstName]];
+    [cellView setSenderIntroductionText:[NSString stringWithFormat:@"%@ joined your guestlist", _guestlistEntity.owner.firstName]];
     [cellView setSenderImageURL:_guestlistEntity.owner.imageURL];
     [cellView setDate:[NSString stringWithFormat:@"%@, %@", _guestlistEntity.promotion.event.date.thl_weekdayString, _guestlistEntity.promotion.event.date.thl_timeString]];
 }

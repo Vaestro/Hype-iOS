@@ -27,7 +27,7 @@
 	[[UINavigationBar appearance] setTranslucent:NO];
 	[[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : kTHLNUIPrimaryFontColor,
                                                            NSFontAttributeName: [UIFont fontWithName:@"Raleway-Regular" size:18.0],
-                                                           NSKernAttributeName: @2}];
+                                                           NSKernAttributeName: @2.0f}];
 	[[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"Back Arrow"]];
 	[[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"Back Arrow"]];
 	[[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)
