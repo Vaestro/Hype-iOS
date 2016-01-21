@@ -33,6 +33,7 @@
 
 
 - (void)presentOnboardingInterfaceInWindow:(UIWindow *)window;
+- (void)presentUserVerificationInterfaceInWindow:(UIWindow *)window;
 - (void)presentLoginInterfaceOnViewController:(UIViewController *)viewController;
 - (void)presentNumberVerificationInterface:(id<THLNumberVerificationModuleDelegate>)interfaceDelegate;
 - (void)presentFacebookPictureInterface:(id<THLFacebookPictureModuleDelegate>)interfaceDelegate;

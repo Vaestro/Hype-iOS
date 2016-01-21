@@ -11,5 +11,5 @@
 
 @protocol THLNumberVerificationModuleInterface <NSObject>
 @property (nonatomic, weak) id<THLNumberVerificationModuleDelegate> moduleDelegate;
-- (void)presentNumberVerificationInterfaceInWindow:(UIWindow *)window;
+- (void)presentNumberVerificationInterfaceInViewController:(UIViewController *)viewController;
 @end

@@ -16,10 +16,12 @@
 
 #import "THLNumberVerificationModuleInterface.h"
 #import "THLFacebookPictureModuleInterface.h"
+#import "THLUser.h"
 
 @interface THLLoginWireframe()
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) UIViewController *viewController;
+@property (nonatomic, strong) UIViewController *topViewController;
 
 @property (nonatomic, strong) THLLoginDataManager *dataManager;
 @property (nonatomic, strong) THLLoginInteractor *interactor;
@@ -50,6 +52,7 @@
 	_presenter = [[THLLoginPresenter alloc] initWithWireframe:self interactor:_interactor];
 	_onboardingView = [[THLOnboardingViewController alloc] initWithNibName:nil bundle:nil];
     _loginView = [[THLLoginViewController alloc] initWithNibName:nil bundle:nil];
+    
 }
 
 #pragma mark - Interface
@@ -61,14 +64,36 @@
 	_window = window;
 	[_presenter configureOnboardingView:_onboardingView];
 	_window.rootViewController = _onboardingView;
+    _topViewController = _onboardingView;
 	[_window makeKeyAndVisible];
 }
+
+- (void)presentUserVerificationInterfaceInWindow:(UIWindow *)window {
+    _window = window;
+    [_interactor setUser:[THLUser currentUser]];
+    [_presenter configureOnboardingView:_onboardingView];
+    _topViewController = _onboardingView;
+
+    _window.rootViewController = _onboardingView;
+    
+//    [_presenter configureLoginView:_loginView];
+//    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:_loginView];
+//    _window.rootViewController = navigationController;
+//    UIViewController *baseViewController = [UIViewController new];
+//    [_presenter configureBaseView:baseViewController];
+//    _window.rootViewController = baseViewController;
+    [_window makeKeyAndVisible];
+    [_presenter reroute];
+}
+
 
 - (void)presentLoginInterfaceOnViewController:(UIViewController *)viewController {
     _viewController = viewController;
     [_presenter configureLoginView:_loginView];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:_loginView];
     [_viewController presentViewController:navigationController animated:YES completion:NULL];
+    _topViewController = _loginView;
+
 }
 
 - (void)dismissInterface {
@@ -87,7 +112,7 @@
 
 - (void)presentNumberVerificationInterface:(id<THLNumberVerificationModuleDelegate>)interfaceDelegate {
 	[_numberVerificationModule setModuleDelegate:interfaceDelegate];
-	[_numberVerificationModule presentNumberVerificationInterfaceInWindow:_window];
+	[_numberVerificationModule presentNumberVerificationInterfaceInViewController:_topViewController];
 }
 
 - (void)presentFacebookPictureInterface:(id<THLFacebookPictureModuleDelegate>)interfaceDelegate {

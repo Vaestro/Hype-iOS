@@ -16,12 +16,14 @@
 
 @interface THLLoginPresenter : NSObject<THLLoginModuleInterface>
 
-@property (nonatomic, weak, readonly) THLLoginWireframe *wireframe;
-@property (nonatomic, weak, readonly) THLLoginInteractor *interactor;
+@property (nonatomic, readonly) THLLoginWireframe *wireframe;
+@property (nonatomic, readonly) THLLoginInteractor *interactor;
 
 - (instancetype)initWithWireframe:(THLLoginWireframe *)wireframe
 					   interactor:(THLLoginInteractor *)interactor;
 
 - (void)configureLoginView:(id<THLLoginViewInterface>)loginView;
 - (void)configureOnboardingView:(id<THLOnboardingViewInterface>)onboardingView;
+- (void)configureBaseView:(UIViewController *)baseView;
+- (void)reroute;
 @end

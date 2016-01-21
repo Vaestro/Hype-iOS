@@ -26,16 +26,18 @@
 	return self;
 }
 
-- (void)presentNumberVerificationInterfaceInWindow:(UIWindow *)window {
+- (void)presentNumberVerificationInterfaceInViewController:(UIViewController *)viewController {
 	WEAKSELF();
+    STRONGSELF();
     DGTAuthenticationConfiguration *configuration = [DGTAuthenticationConfiguration new];
+
     configuration.title = NSLocalizedString(@"Number Verification", nil);
     configuration.appearance = _digitsApperance;
-	[[Digits sharedInstance] authenticateWithViewController:window.rootViewController configuration:configuration completion:^(DGTSession *session, NSError *error) {
+	[[Digits sharedInstance] authenticateWithViewController:viewController configuration:configuration completion:^(DGTSession *session, NSError *error) {
 		if (error) {
-			[WSELF handleNumberVerificationFailure:error];
+			[SSELF handleNumberVerificationFailure:error];
 		} else {
-			[WSELF handleNumberVerificationSuccess:session];
+			[SSELF handleNumberVerificationSuccess:session];
 		}
 	}];
 }

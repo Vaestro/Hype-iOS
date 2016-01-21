@@ -27,6 +27,9 @@
 #pragma mark - Dependencies
 @property (nonatomic, readonly, weak) THLLoginDataManager *dataManager;
 @property (nonatomic, readonly, weak) THLUserManager *userManager;
+@property (nonatomic, strong) THLUser *user;
+
+
 - (instancetype)initWithDataManager:(THLLoginDataManager *)dataManager
 						userManager:(THLUserManager *)userManager;
 
@@ -41,4 +44,6 @@
 - (void)addFacebookInformation;
 - (void)addVerifiedPhoneNumber:(NSString *)phoneNumber;
 - (void)addProfileImage:(UIImage *)profileImage;
+
+
 @end

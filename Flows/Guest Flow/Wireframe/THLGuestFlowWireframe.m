@@ -62,8 +62,8 @@ THLPerkStoreModuleDelegate
 
 - (void)configureMasterTabViewControllerAndPresentGuestFlowInWindow:(UIWindow *)window {
     _window = window;
-    _masterTabBarController = [UITabBarController new];
-    [self configureMasterTabViewController:_masterTabBarController];
+    UITabBarController *masterTabBarController = [UITabBarController new];
+    [self configureMasterTabViewController:masterTabBarController];
     _window.rootViewController = _masterTabBarController;
     [_window makeKeyAndVisible];
 }
@@ -72,7 +72,8 @@ THLPerkStoreModuleDelegate
     [[_masterTabBarController.tabBar.items objectAtIndex:1] setBadgeValue:@""];
 }
 
-- (void)configureMasterTabViewController:(UITabBarController *)masterTabViewController {
+- (void)configureMasterTabViewController:(UITabBarController *)masterTabBarController {
+    _masterTabBarController = masterTabBarController;
     UINavigationController *discovery = [UINavigationController new];
     UINavigationController *dashboard = [UINavigationController new];
     UINavigationController *perks = [UINavigationController new];
@@ -90,8 +91,8 @@ THLPerkStoreModuleDelegate
     
     NSArray *views = @[discovery, dashboard, perks, profile];
     
-    masterTabViewController.viewControllers = views;
-    masterTabViewController.view.autoresizingMask=(UIViewAutoresizingFlexibleHeight);
+    _masterTabBarController.viewControllers = views;
+    _masterTabBarController.view.autoresizingMask=(UIViewAutoresizingFlexibleHeight);
 }
 
 

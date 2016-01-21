@@ -13,7 +13,6 @@
 #import "YLMoment.h"
 
 @interface THLLoginInteractor()
-@property (nonatomic, strong) THLUser *user;
 @end
 
 @implementation THLLoginInteractor
@@ -46,11 +45,11 @@
 }
 
 - (BOOL)shouldVerifyPhoneNumber {
-	return _user.phoneNumber == nil;
+	return _user.phoneNumber == nil || [_user.phoneNumber isEqualToString:@""];
 }
 
 - (BOOL)shouldVerifyEmail {
-    return _user.email == nil;
+    return _user.email == nil || [_user.email isEqualToString:@""];
 }
 
 - (BOOL)shouldPickProfileImage {

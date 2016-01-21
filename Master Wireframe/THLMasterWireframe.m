@@ -62,7 +62,11 @@ THLWaitlistPresenterDelegate
 
 - (void)presentAppInWindow:(UIWindow *)window {
 	_window = window;
-    [THLUserManager isUserCached] ? [self routeLoggedInUserFlow] : [self presentOnboardingAndLoginInterface];
+    if ([THLUserManager isUserCached]) {
+        [THLUserManager isUserVerified] ? [self routeLoggedInUserFlow] : [self presentUserVerification];
+    } else {
+        [self presentOnboardingAndLoginInterface];
+    }
 }
 
 - (void)routeLoggedInUserFlow {
@@ -97,6 +101,12 @@ THLWaitlistPresenterDelegate
 /**
  *  present modules by setting their delegates to Master Wireframe and calling the module's presenter to initialize the view on the stack
  */
+
+- (void)presentUserVerification {
+    THLLoginWireframe *loginWireframe = [_dependencyManager newLoginWireframe];
+    [loginWireframe.moduleInterface setModuleDelegate:self];
+    [loginWireframe presentUserVerificationInterfaceInWindow:_window];
+}
 
 - (void)presentOnboardingAndLoginInterface {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
