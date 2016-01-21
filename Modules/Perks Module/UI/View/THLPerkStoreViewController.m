@@ -88,7 +88,7 @@ UICollectionViewDelegateFlowLayout
 
     [_collectionView makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(WSELF.labelTwo.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
-        make.left.right.insets(kTHLEdgeInsetsHigh());
+        make.left.right.insets(kTHLEdgeInsetsNone());
         make.bottom.equalTo(kTHLEdgeInsetsNone());
 
     }];
@@ -205,7 +205,7 @@ UICollectionViewDelegateFlowLayout
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake((ViewWidth(collectionView)), ViewWidth(collectionView)/4);
+    return CGSizeMake((ViewWidth(collectionView)), ViewWidth(collectionView)*0.33);
 }
 
 @end

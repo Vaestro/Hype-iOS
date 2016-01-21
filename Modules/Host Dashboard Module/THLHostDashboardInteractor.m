@@ -62,7 +62,7 @@
     return [THLViewDataSourceSorting withSortingBlock:^NSComparisonResult(THLEntity *entity1, THLEntity *entity2) {
         THLGuestlistEntity *guestlist1 = (THLGuestlistEntity *)entity1;
         THLGuestlistEntity *guestlist2 = (THLGuestlistEntity *)entity2;
-        return [guestlist2.date compare:guestlist1.date];
+        return [guestlist1.updatedAt compare:guestlist2.updatedAt];
     }];
 }
 @end

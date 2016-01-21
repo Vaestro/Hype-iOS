@@ -140,7 +140,7 @@ THLWaitlistPresenterDelegate
     _hostWireframe = [_dependencyManager newHostFlowWireframe];
     _currentWireframe = _hostWireframe;
     [_hostWireframe.moduleInterface setModuleDelegate:self];
-    [_hostWireframe presentHostFlowModuleInterfaceInWindow:_window];
+    [_hostWireframe configureMasterTabViewControllerAndPresentHostFlowInWindow:_window];
 }
 
 /**

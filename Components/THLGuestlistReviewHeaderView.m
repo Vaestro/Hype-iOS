@@ -75,7 +75,6 @@
     }];
     
     [_dateLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(WSELF.titleLabel.mas_bottom).insets(kTHLEdgeInsetsLow());
         make.left.insets(kTHLEdgeInsetsSuperHigh());
         make.bottom.insets(kTHLEdgeInsetsHigh());
     }];
@@ -226,7 +225,6 @@
     }];
     
     [_dateLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(WSELF.titleLabel.mas_bottom).insets(kTHLEdgeInsetsLow());
         make.left.insets(kTHLEdgeInsetsSuperHigh());
         make.bottom.insets(kTHLEdgeInsetsHigh());
     }];

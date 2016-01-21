@@ -68,6 +68,7 @@
     }];
     
     [_itemNameLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(SV([WSELF itemNameLabel]).mas_centerX).insets(kTHLEdgeInsetsHigh());
         make.bottom.left.equalTo([WSELF imageView]).insets(kTHLEdgeInsetsHigh());
     }];
     
@@ -156,7 +157,7 @@
 
 - (UILabel *)newCreditsNameLabel {
     UILabel *label = THLNUILabel(kTHLNUIBoldTitle);
-    label.adjustsFontSizeToFitWidth = YES;
+    label.adjustsFontSizeToFitWidth = NO;
     label.numberOfLines = 1;
     label.minimumScaleFactor = 0.5;
     label.textColor = kTHLNUIGrayFontColor;

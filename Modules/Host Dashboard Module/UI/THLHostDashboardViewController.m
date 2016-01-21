@@ -60,16 +60,14 @@ UICollectionViewDelegateFlowLayout
 }
 
 - (void)layoutView {
-    self.view.nuiClass = kTHLNUIBackgroundView;
+    self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
+    self.navigationItem.title = @"MY GUESTLISTS";
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.automaticallyAdjustsScrollViewInsets = YES;
-    WEAKSELF();
     [self.view addSubviews:@[_collectionView]];
     [_collectionView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.insets(kTHLEdgeInsetsNone());
-        //      Temporary Fix to account for SLPagingViewController Height that is greater than Bounds Height
-        make.bottom.equalTo(SV(WSELF.collectionView)).mas_offset(UIEdgeInsetsMake(0, 0, DiscoveryCellHeight(ViewWidth(WSELF.collectionView))/3.67, 0));
+        make.left.right.top.bottom.insets(kTHLEdgeInsetsNone());
     }];
 }
 
@@ -117,7 +115,7 @@ UICollectionViewDelegateFlowLayout
 //    flowLayout.footerReferenceSize = CGSizeMake(self.collectionView.frame.size.width, 25);
     flowLayout.sectionInset = UIEdgeInsetsMake(10, 0, 10, 0);
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) collectionViewLayout:flowLayout];
-    collectionView.nuiClass = kTHLNUIBackgroundView;
+    collectionView.backgroundColor = kTHLNUISecondaryBackgroundColor;
     collectionView.alwaysBounceVertical = YES;
     collectionView.delegate = self;
     return collectionView;

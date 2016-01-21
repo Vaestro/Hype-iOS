@@ -66,13 +66,11 @@ THLPerkStoreModuleDelegate
     [self configureMasterTabViewController:_masterTabBarController];
     _window.rootViewController = _masterTabBarController;
     [_window makeKeyAndVisible];
-
 }
 
 - (void)showNotificationBadge {
     [[_masterTabBarController.tabBar.items objectAtIndex:1] setBadgeValue:@""];
 }
-
 
 - (void)configureMasterTabViewController:(UITabBarController *)masterTabViewController {
     UINavigationController *discovery = [UINavigationController new];

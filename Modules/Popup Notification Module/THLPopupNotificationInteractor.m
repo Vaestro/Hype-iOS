@@ -30,7 +30,7 @@ static NSString *const kPushInfoKeyGuestlistId = @"guestlistId";
         return [_dataManager fetchGuestlistInviteWithId:guestlistInviteId];
     } else if ([pushInfo objectForKey:@"guestlistId"]) {
         NSString *guestlistId = pushInfo[kPushInfoKeyGuestlistId];
-//        return [_dataManager fetchGuestlistWithId:guestlistId];
+        return [_dataManager fetchGuestlistWithId:guestlistId];
     }
     return [BFTask taskWithResult:nil];
 }

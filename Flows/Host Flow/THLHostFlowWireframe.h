@@ -18,5 +18,6 @@
 @property (nonatomic, readonly) id<THLHostFlowDependencyManager> dependencyManager;
 - (instancetype)initWithDependencyManager:(id<THLHostFlowDependencyManager>)dependencyManager;
 - (void)showNotificationBadge;
+- (void)configureMasterTabViewControllerAndPresentHostFlowInWindow:(UIWindow *)window;
 
 @end

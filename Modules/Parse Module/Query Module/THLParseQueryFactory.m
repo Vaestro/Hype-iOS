@@ -51,6 +51,11 @@
 }
 
 #pragma mark - Guestlist Queries
+- (PFQuery *)queryForGuestlistWithId {
+    PFQuery *query = [self baseGuestlistQuery];
+    return query;
+}
+
 - (PFQuery *)queryForGuestlists {
     PFQuery *promotionQuery = [self basePromotionQuery];
     [promotionQuery whereKey:@"host" equalTo:[THLUser currentUser]];

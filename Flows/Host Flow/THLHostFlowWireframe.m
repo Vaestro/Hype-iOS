@@ -50,9 +50,8 @@ THLGuestlistReviewModuleDelegate
 }
 
 #pragma mark - Routing
-- (void)presentHostFlowModuleInterfaceInWindow:(UIWindow *)window {
+- (void)configureMasterTabViewControllerAndPresentHostFlowInWindow:(UIWindow *)window {
     _window = window;
-    
     _masterTabBarController = [UITabBarController new];
     [self configureMasterTabViewController:_masterTabBarController];
     _window.rootViewController = _masterTabBarController;
@@ -74,9 +73,8 @@ THLGuestlistReviewModuleDelegate
     
     NSArray *views = @[discovery, dashboard, profile];
     
-    UITabBarController *masterNavigationController = [UITabBarController new];
-    masterNavigationController.viewControllers = views;
-    masterNavigationController.view.autoresizingMask=(UIViewAutoresizingFlexibleHeight);
+    masterTabViewController.viewControllers = views;
+    masterTabViewController.view.autoresizingMask=(UIViewAutoresizingFlexibleHeight);
 }
 
 - (void)showNotificationBadge {

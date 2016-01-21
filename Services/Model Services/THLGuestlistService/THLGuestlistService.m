@@ -71,6 +71,26 @@
 }
 
 //----------------------------------------------------------------
+#pragma mark - Fetch Guestlist For Guest Using The Guestlist ID
+////----------------------------------------------------------------
+- (BFTask *)fetchGuestlistWithId:(NSString *)guestlistId {
+    BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
+    [[_queryFactory queryForGuestlistWithId] getObjectInBackgroundWithId:guestlistId block:^(PFObject *guestlist, NSError *error) {
+        if (!error) {
+            PFObject *promotion = guestlist[@"Promotion"];
+            [guestlist setObject:promotion forKey:@"Promotion"];
+            PFObject *host = guestlist[@"Promotion"][@"host"];
+            if (host != nil) {
+                [guestlist setObject:promotion forKey:@"host"];
+            }
+        } else {
+            [completionSource setError:error];
+        }
+    }];
+    return completionSource.task;
+}
+
+//----------------------------------------------------------------
 #pragma mark - Create Guestlist For Promotion
 //----------------------------------------------------------------
 

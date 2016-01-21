@@ -16,6 +16,7 @@
 #import "THLGuestlistEntity.h"
 #import "THLGuestlistInviteEntity.h"
 #import "THLGuestEntity.h"
+#import "THLUserManager.h"
 
 static NSString *const kPushInfoKeyNotficationText = @"notificationText";
 static NSString *const kPushInfoKeyImageURL = @"imageURL";
@@ -26,6 +27,7 @@ THLPopupNotificationInteractorDelegate
 >
 @property (nonatomic, strong) THLEventEntity *eventEntity;
 @property (nonatomic, strong) THLGuestlistInviteEntity *guestlistInviteEntity;
+@property (nonatomic, strong) THLGuestlistEntity *guestlistEntity;
 @property (nonatomic, weak) id<THLPopupNotificationViewModel> view;
 @property (nonatomic, copy) NSString *notificationText;
 @property (nonatomic, copy) NSURL *imageURL;
@@ -52,8 +54,14 @@ THLPopupNotificationInteractorDelegate
         if (!task.faulted) {
             SSELF.notificationText = pushInfo[kPushInfoKeyNotficationText];
             SSELF.imageURL = pushInfo[kPushInfoKeyImageURL];
-            SSELF.guestlistInviteEntity = task.result;
-            SSELF.eventEntity = SSELF.guestlistInviteEntity.guestlist.promotion.event;
+            if ([THLUserManager userIsGuest]) {
+                SSELF.guestlistInviteEntity = task.result;
+                SSELF.eventEntity = SSELF.guestlistInviteEntity.guestlist.promotion.event;
+            } else if ([THLUserManager userIsHost]) {
+                SSELF.guestlistEntity = task.result;
+                SSELF.eventEntity = SSELF.guestlistEntity.promotion.event;
+            }
+    
             [SSELF presentPopupNotificationInterface];
         }
         return task;
@@ -75,8 +83,9 @@ THLPopupNotificationInteractorDelegate
     
     if (_guestlistInviteEntity != nil) {
         [[WSELF view] setImageURL:_guestlistInviteEntity.guestlist.owner.imageURL];
-    }
-    else {
+    } else if (_guestlistEntity != nil) {
+        [[WSELF view] setImageURL:_guestlistEntity.owner.imageURL];
+    } else {
         [[WSELF view] setImage:[[UIImage imageNamed:@"Hypelist-Icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     }
     

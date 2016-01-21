@@ -213,6 +213,9 @@ static CGFloat const kMainPageControlHeight = 35;
     CGFloat horizontalCenter = viewWidth / 2;
     CGFloat contentWidth = viewWidth * kContentWidthMultiplier;
     
+    CGFloat viewHeight = CGRectGetHeight(self.view.frame);
+    CGFloat verticalCenter = viewHeight / 2;
+
     // create the image view with the appropriate image, size, and center in on screen
     _imageView = [[UIImageView alloc] initWithImage:_image];
     [_imageView setFrame:CGRectMake(horizontalCenter - (self.iconWidth / 2), self.topPadding, self.iconWidth, self.iconHeight)];
@@ -234,7 +237,9 @@ static CGFloat const kMainPageControlHeight = 35;
     _subTextLabel.text = _subtitleText;
     _subTextLabel.textColor = self.subtitleTextColor;
     _subTextLabel.font = [UIFont fontWithName:self.subtitleFontName size:self.subtitleFontSize];
-    _subTextLabel.numberOfLines = 0;
+    _subTextLabel.numberOfLines = 1;
+    _subTextLabel.adjustsFontSizeToFitWidth = YES;
+    _subTextLabel.minimumScaleFactor = 0.5;
     _subTextLabel.textAlignment = NSTextAlignmentLeft;
     [_subTextLabel sizeToFit];
 //    _subTextLabel.center = CGPointMake(horizontalCenter, _subTextLabel.center.y);
@@ -242,11 +247,14 @@ static CGFloat const kMainPageControlHeight = 35;
     
     // create and configure the body text label
 
-    _bodyTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, CGRectGetMaxY(_mainTextLabel.frame) + self.underSubtitlePadding, contentWidth - kDefaultRightSideBodyPadding, 0)];
+    _bodyTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, verticalCenter - 100, contentWidth - kDefaultRightSideBodyPadding, 0)];
     _bodyTextLabel.text = _body;
     _bodyTextLabel.textColor = self.bodyTextColor;
     _bodyTextLabel.font = [UIFont fontWithName:self.bodyFontName size:self.bodyFontSize];
-    _bodyTextLabel.numberOfLines = 0;
+    _bodyTextLabel.numberOfLines = 6;
+    _bodyTextLabel.adjustsFontSizeToFitWidth = YES;
+    _bodyTextLabel.minimumScaleFactor = 0.5;
+
     _bodyTextLabel.textAlignment = NSTextAlignmentLeft;
     [_bodyTextLabel sizeToFit];
 //    _bodyTextLabel.center = CGPointMake(horizontalCenter, _bodyTextLabel.center.y);

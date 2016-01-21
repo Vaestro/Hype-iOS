@@ -38,7 +38,6 @@
 - (void)constructView {
     _venueView = [self newVenueView];
     _promotionView = [self newPromotionView];
-    //    _actionButton = [self newActionButton];
 }
 
 - (void)layoutView {

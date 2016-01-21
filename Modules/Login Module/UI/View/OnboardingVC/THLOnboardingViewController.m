@@ -68,12 +68,12 @@
     OnboardingViewController *onboardingVC = [OnboardingViewController onboardWithBackgroundVideoURL:[THLResourceManager onboardingVideo] contents:[self onboardingContentViewControllers]];
     onboardingVC.fontName = @"Raleway-Bold";
     onboardingVC.titleFontSize = 24;
-    onboardingVC.subtitleFontSize = 40;
+    onboardingVC.subtitleFontSize = 36;
     onboardingVC.bodyFontSize = 24;
     onboardingVC.topPadding = 0;
-    onboardingVC.underIconPadding = 67;
+    onboardingVC.underIconPadding = SCREEN_HEIGHT*0.067;
     onboardingVC.underTitlePadding = 0;
-    onboardingVC.underSubtitlePadding = SCREEN_HEIGHT/4;
+    onboardingVC.underSubtitlePadding = SCREEN_HEIGHT*0.2;
     onboardingVC.bottomPadding = -10;
     onboardingVC.shouldMaskBackground = NO;
     onboardingVC.shouldFadeTransitions = NO;

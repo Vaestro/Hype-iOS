@@ -13,7 +13,7 @@
 #import <Fabric/Fabric.h>
 #import <DigitsKit/DigitsKit.h>
 #import <Optimizely/Optimizely.h>
-#import <Stripe/Stripe.h>
+//#import <Stripe/Stripe.h>
 
 #import "THLDependencyManager.h"
 #import "THLMasterWireframe.h"
@@ -59,7 +59,8 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
     
     [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:nil];
     
-    [Fabric with:@[[Digits class], [Optimizely class], [Crashlytics class], [STPAPIClient class]]];
+//    TODO: Add Stripe class with:  [STPAPIClient class]
+    [Fabric with:@[[Digits class], [Optimizely class], [Crashlytics class]]];
 
     [Optimizely startOptimizelyWithAPIToken:@"AANLIOMBQFi_hFw1wzxiRVDv6GfuC4rH~4568187528" launchOptions:launchOptions];
 
