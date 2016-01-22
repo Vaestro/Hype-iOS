@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		03DB8B7272D645FF53789D4E /* libPods-Hype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7465E16579C35905935D6E3A /* libPods-Hype.a */; };
+		03DB8B7272D645FF53789D4E /* libPods-HypeUp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7465E16579C35905935D6E3A /* libPods-HypeUp.a */; };
 		2108A8851B8BBF4900B725F6 /* THLMasterWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 2108A8841B8BBF4900B725F6 /* THLMasterWireframe.m */; };
 		2108A8881B8BBF5B00B725F6 /* THLDependencyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2108A8871B8BBF5B00B725F6 /* THLDependencyManager.m */; };
 		211005951B8A318400A540C6 /* THLEventDiscoveryPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 211005941B8A318400A540C6 /* THLEventDiscoveryPresenter.m */; };
@@ -176,41 +176,42 @@
 		79B9595A1BE92FBA00B87799 /* THLPopupNotificationInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959591BE92FBA00B87799 /* THLPopupNotificationInteractor.m */; };
 		79B9595D1BE934C000B87799 /* THLPopupNotificationDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B9595C1BE934C000B87799 /* THLPopupNotificationDataManager.m */; };
 		79B959611BE9A90B00B87799 /* THLActionContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959601BE9A90B00B87799 /* THLActionContainerView.m */; };
-		79BA90E51C20ABA300731A38 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BA90BF1C20ABA300731A38 /* AppDelegate.m */; };
-		79BA90E61C20ABA300731A38 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79BA90C01C20ABA300731A38 /* LaunchScreen.xib */; };
-		79BA90E71C20ABA300731A38 /* Hype.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79BA90C41C20ABA300731A38 /* Hype.strings */; };
-		79BA90E81C20ABA300731A38 /* Gilded.mov in Resources */ = {isa = PBXBuildFile; fileRef = 79BA90C61C20ABA300731A38 /* Gilded.mov */; };
-		79BA90E91C20ABA300731A38 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79BA90C71C20ABA300731A38 /* Images.xcassets */; };
-		79BA90EA1C20ABA300731A38 /* Privacy Policy.txt in Resources */ = {isa = PBXBuildFile; fileRef = 79BA90C81C20ABA300731A38 /* Privacy Policy.txt */; };
-		79BA90EB1C20ABA300731A38 /* Raleway-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79BA90CA1C20ABA300731A38 /* Raleway-Black.ttf */; };
-		79BA90EC1C20ABA300731A38 /* Raleway-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79BA90CB1C20ABA300731A38 /* Raleway-BlackItalic.ttf */; };
-		79BA90ED1C20ABA300731A38 /* Raleway-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79BA90CC1C20ABA300731A38 /* Raleway-Bold.ttf */; };
-		79BA90EE1C20ABA300731A38 /* Raleway-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79BA90CD1C20ABA300731A38 /* Raleway-BoldItalic.ttf */; };
-		79BA90EF1C20ABA300731A38 /* Raleway-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79BA90CE1C20ABA300731A38 /* Raleway-ExtraBold.ttf */; };
-		79BA90F01C20ABA300731A38 /* Raleway-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79BA90CF1C20ABA300731A38 /* Raleway-ExtraBoldItalic.ttf */; };
-		79BA90F11C20ABA300731A38 /* Raleway-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79BA90D01C20ABA300731A38 /* Raleway-ExtraLight.ttf */; };
-		79BA90F21C20ABA300731A38 /* Raleway-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79BA90D11C20ABA300731A38 /* Raleway-ExtraLightItalic.ttf */; };
-		79BA90F31C20ABA300731A38 /* Raleway-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79BA90D21C20ABA300731A38 /* Raleway-Italic.ttf */; };
-		79BA90F41C20ABA300731A38 /* Raleway-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79BA90D31C20ABA300731A38 /* Raleway-Light.ttf */; };
-		79BA90F51C20ABA300731A38 /* Raleway-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79BA90D41C20ABA300731A38 /* Raleway-LightItalic.ttf */; };
-		79BA90F61C20ABA300731A38 /* Raleway-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79BA90D51C20ABA300731A38 /* Raleway-Medium.ttf */; };
-		79BA90F71C20ABA300731A38 /* Raleway-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79BA90D61C20ABA300731A38 /* Raleway-MediumItalic.ttf */; };
-		79BA90F81C20ABA300731A38 /* Raleway-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79BA90D71C20ABA300731A38 /* Raleway-Regular.ttf */; };
-		79BA90F91C20ABA300731A38 /* Raleway-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79BA90D81C20ABA300731A38 /* Raleway-SemiBold.ttf */; };
-		79BA90FA1C20ABA300731A38 /* Raleway-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79BA90D91C20ABA300731A38 /* Raleway-SemiBoldItalic.ttf */; };
-		79BA90FB1C20ABA300731A38 /* Raleway-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79BA90DA1C20ABA300731A38 /* Raleway-Thin.ttf */; };
-		79BA90FC1C20ABA300731A38 /* Raleway-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79BA90DB1C20ABA300731A38 /* Raleway-ThinItalic.ttf */; };
-		79BA90FD1C20ABA300731A38 /* Terms of Use.txt in Resources */ = {isa = PBXBuildFile; fileRef = 79BA90DC1C20ABA300731A38 /* Terms of Use.txt */; };
-		79BA90FE1C20ABA300731A38 /* THLResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BA90DE1C20ABA300731A38 /* THLResourceManager.m */; };
-		79BA91001C20ABA300731A38 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BA90E11C20ABA300731A38 /* main.m */; };
-		79BA91041C20ABB800731A38 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79BA91031C20ABB800731A38 /* Info.plist */; };
-		79BA91061C20ACAD00731A38 /* libPods-HypeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 79BA91051C20ACAD00731A38 /* libPods-HypeTests.a */; };
+		79BA91061C20ACAD00731A38 /* libPods-HypeUpTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 79BA91051C20ACAD00731A38 /* libPods-HypeUpTests.a */; };
 		79BCB5641BF2AAA30050F283 /* THLMasterNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BCB5631BF2AAA30050F283 /* THLMasterNavigationController.m */; };
+		79CD27E41C520293009BC119 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CD27BE1C520293009BC119 /* AppDelegate.m */; };
+		79CD27E51C520293009BC119 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27BF1C520293009BC119 /* LaunchScreen.xib */; };
+		79CD27E61C520293009BC119 /* HypeUp.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27C31C520293009BC119 /* HypeUp.strings */; };
+		79CD27E71C520293009BC119 /* Gilded.mov in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27C51C520293009BC119 /* Gilded.mov */; };
+		79CD27E81C520293009BC119 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27C61C520293009BC119 /* Images.xcassets */; };
+		79CD27E91C520293009BC119 /* Privacy Policy.txt in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27C71C520293009BC119 /* Privacy Policy.txt */; };
+		79CD27EA1C520293009BC119 /* Raleway-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27C91C520293009BC119 /* Raleway-Black.ttf */; };
+		79CD27EB1C520293009BC119 /* Raleway-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27CA1C520293009BC119 /* Raleway-BlackItalic.ttf */; };
+		79CD27EC1C520293009BC119 /* Raleway-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27CB1C520293009BC119 /* Raleway-Bold.ttf */; };
+		79CD27ED1C520293009BC119 /* Raleway-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27CC1C520293009BC119 /* Raleway-BoldItalic.ttf */; };
+		79CD27EE1C520293009BC119 /* Raleway-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27CD1C520293009BC119 /* Raleway-ExtraBold.ttf */; };
+		79CD27EF1C520293009BC119 /* Raleway-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27CE1C520293009BC119 /* Raleway-ExtraBoldItalic.ttf */; };
+		79CD27F01C520293009BC119 /* Raleway-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27CF1C520293009BC119 /* Raleway-ExtraLight.ttf */; };
+		79CD27F11C520293009BC119 /* Raleway-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27D01C520293009BC119 /* Raleway-ExtraLightItalic.ttf */; };
+		79CD27F21C520293009BC119 /* Raleway-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27D11C520293009BC119 /* Raleway-Italic.ttf */; };
+		79CD27F31C520293009BC119 /* Raleway-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27D21C520293009BC119 /* Raleway-Light.ttf */; };
+		79CD27F41C520293009BC119 /* Raleway-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27D31C520293009BC119 /* Raleway-LightItalic.ttf */; };
+		79CD27F51C520293009BC119 /* Raleway-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27D41C520293009BC119 /* Raleway-Medium.ttf */; };
+		79CD27F61C520293009BC119 /* Raleway-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27D51C520293009BC119 /* Raleway-MediumItalic.ttf */; };
+		79CD27F71C520293009BC119 /* Raleway-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27D61C520293009BC119 /* Raleway-Regular.ttf */; };
+		79CD27F81C520293009BC119 /* Raleway-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27D71C520293009BC119 /* Raleway-SemiBold.ttf */; };
+		79CD27F91C520293009BC119 /* Raleway-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27D81C520293009BC119 /* Raleway-SemiBoldItalic.ttf */; };
+		79CD27FA1C520293009BC119 /* Raleway-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27D91C520293009BC119 /* Raleway-Thin.ttf */; };
+		79CD27FB1C520293009BC119 /* Raleway-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27DA1C520293009BC119 /* Raleway-ThinItalic.ttf */; };
+		79CD27FC1C520293009BC119 /* Terms of Use.txt in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27DB1C520293009BC119 /* Terms of Use.txt */; };
+		79CD27FD1C520293009BC119 /* THLResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CD27DD1C520293009BC119 /* THLResourceManager.m */; };
+		79CD27FE1C520293009BC119 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27DF1C520293009BC119 /* Info.plist */; };
+		79CD27FF1C520293009BC119 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CD27E01C520293009BC119 /* main.m */; };
+		79CD28031C5202A0009BC119 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79CD28021C5202A0009BC119 /* Info.plist */; };
 		79CE01DF1C0A604B0047E6FA /* THLDashboardNotificationSectionTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CE01DE1C0A604B0047E6FA /* THLDashboardNotificationSectionTitleCell.m */; };
 		79CE01E31C0A69D40047E6FA /* THLDashboardTicketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CE01E21C0A69D40047E6FA /* THLDashboardTicketCell.m */; };
 		79CE01E61C0A69EC0047E6FA /* THLDashboardTicketCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CE01E51C0A69EC0047E6FA /* THLDashboardTicketCellViewModel.m */; };
 		99FCACEE76226A356043AEDA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B94DBD0CFEB5874DC84569DE /* libPods.a */; };
-		9DE048564BB3FAE7AF277A3B /* libPods-HypeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FB9B71E9A7DBD2DAA9915571 /* libPods-HypeTests.a */; };
+		9DE048564BB3FAE7AF277A3B /* libPods-HypeUpTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FB9B71E9A7DBD2DAA9915571 /* libPods-HypeUpTests.a */; };
 		C82D87BF1C25C7E300116328 /* THLConfirmationView.m in Sources */ = {isa = PBXBuildFile; fileRef = C82D87BE1C25C7E300116328 /* THLConfirmationView.m */; };
 		C82D87C31C31CC2200116328 /* THLMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = C82D87C21C31CC2200116328 /* THLMenuView.m */; };
 		C85EE3791C1BC8AD0008C14B /* THLPerkStoreItemEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3781C1BC8AD0008C14B /* THLPerkStoreItemEntity.m */; };
@@ -487,9 +488,9 @@
 		21EED0FE1BB5F842001325A7 /* THLGuestFlowWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestFlowWireframe.h; sourceTree = "<group>"; };
 		21EED0FF1BB5F842001325A7 /* THLGuestFlowWireframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestFlowWireframe.m; sourceTree = "<group>"; };
 		21EED1011BB5F8A7001325A7 /* THLGuestFlowDependencyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestFlowDependencyManager.h; sourceTree = "<group>"; };
-		2BF9907EA74F2E21D14684CC /* Pods-HypeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HypeTests/Pods-HypeTests.debug.xcconfig"; sourceTree = "<group>"; };
-		70604C4F18C9EBAC0CE04014 /* Pods-Hype.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hype.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hype/Pods-Hype.debug.xcconfig"; sourceTree = "<group>"; };
-		7465E16579C35905935D6E3A /* libPods-Hype.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hype.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BF9907EA74F2E21D14684CC /* Pods-HypeUpTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeUpTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HypeUpTests/Pods-HypeUpUpTests.debug.xcconfig"; sourceTree = "<group>"; };
+		70604C4F18C9EBAC0CE04014 /* Pods-HypeUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HypeUp/Pods-HypeUp.debug.xcconfig"; sourceTree = "<group>"; };
+		7465E16579C35905935D6E3A /* libPods-HypeUp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HypeUp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7905CC3E1BE0251000E56878 /* THLGuestlistInviteEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistInviteEntity.h; sourceTree = "<group>"; };
 		7905CC401BE0252700E56878 /* THLGuestlistInviteEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestlistInviteEntity.m; sourceTree = "<group>"; };
 		790603BB1BF5B6810093335E /* THLPromotionInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPromotionInfoView.h; sourceTree = "<group>"; };
@@ -511,7 +512,7 @@
 		790603D71BFBA79F0093335E /* THLEventTicketVenueView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventTicketVenueView.m; sourceTree = "<group>"; };
 		790603D91BFBA8770093335E /* THLEventTicketPromotionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventTicketPromotionView.h; sourceTree = "<group>"; };
 		790603DA1BFBA8770093335E /* THLEventTicketPromotionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventTicketPromotionView.m; sourceTree = "<group>"; };
-		790B38EA1C03741000CB2362 /* libPods-HypeTests.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-HypeTests.a"; path = "Pods/../build/Debug-iphoneos/libPods-HypeTests.a"; sourceTree = "<group>"; };
+		790B38EA1C03741000CB2362 /* libPods-HypeUpTests.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-HypeUpTests.a"; path = "Pods/../build/Debug-iphoneos/libPods-HypeUpTests.a"; sourceTree = "<group>"; };
 		790B38EE1C0375B500CB2362 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = ../../../../usr/lib/libsqlite3.dylib; sourceTree = "<group>"; };
 		791C1F7B1BF13AD300CCF803 /* THLEventHostingPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventHostingPresenter.h; sourceTree = "<group>"; };
 		791C1F7C1BF13AD300CCF803 /* THLEventHostingPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventHostingPresenter.m; sourceTree = "<group>"; };
@@ -575,7 +576,7 @@
 		795F13651C3C40B500AC9E76 /* THLWaitlistHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLWaitlistHomeViewController.m; sourceTree = "<group>"; };
 		796965C11BFD8DDE009034FA /* THLHostFlowModuleInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLHostFlowModuleInterface.h; sourceTree = "<group>"; };
 		796965C21BFD8DE8009034FA /* THLHostFlowModuleDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLHostFlowModuleDelegate.h; sourceTree = "<group>"; };
-		796BFA461C484A890037EA3A /* Hype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hype.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		796BFA461C484A890037EA3A /* HypeUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HypeUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79730CF01C17DC3500D70F4B /* THLUserProfileFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserProfileFooterView.h; sourceTree = "<group>"; };
 		79730CF11C17DC3500D70F4B /* THLUserProfileFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLUserProfileFooterView.m; sourceTree = "<group>"; };
 		79730CF41C18A2AA00D70F4B /* THLUserProfileHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserProfileHeaderView.h; sourceTree = "<group>"; };
@@ -610,7 +611,7 @@
 		798D7EC01BF2E5CF001D4593 /* OnboardingContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnboardingContentViewController.h; sourceTree = "<group>"; };
 		798D7EC11BF2E5CF001D4593 /* OnboardingContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnboardingContentViewController.m; sourceTree = "<group>"; };
 		798D7EC31BF2E634001D4593 /* OnboardingContentViewController_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OnboardingContentViewController_Private.h; sourceTree = "<group>"; };
-		79A1CEB01C484A910071F328 /* Hype.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Hype.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		79A1CEB01C484A910071F328 /* HypeUp.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HypeUp.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		79ABA9B51C053ED6001ABAC7 /* THLDashboardNotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLDashboardNotificationCell.h; sourceTree = "<group>"; };
 		79ABA9B61C053ED6001ABAC7 /* THLDashboardNotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLDashboardNotificationCell.m; sourceTree = "<group>"; };
 		79ABA9B81C053F14001ABAC7 /* THLDashboardNotificationCellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLDashboardNotificationCellView.h; sourceTree = "<group>"; };
@@ -656,45 +657,45 @@
 		79B9595E1BE93C1B00B87799 /* THLPopupNotificationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLPopupNotificationView.h; sourceTree = "<group>"; };
 		79B9595F1BE9A90B00B87799 /* THLActionContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLActionContainerView.h; sourceTree = "<group>"; };
 		79B959601BE9A90B00B87799 /* THLActionContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLActionContainerView.m; sourceTree = "<group>"; };
-		79BA90BE1C20ABA300731A38 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		79BA90BF1C20ABA300731A38 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		79BA90C11C20ABA300731A38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		79BA90C21C20ABA300731A38 /* CommonMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonMacros.h; sourceTree = "<group>"; };
-		79BA90C31C20ABA300731A38 /* Hype-PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Hype-PrefixHeader.pch"; sourceTree = "<group>"; };
-		79BA90C41C20ABA300731A38 /* Hype.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Hype.strings; sourceTree = "<group>"; };
-		79BA90C61C20ABA300731A38 /* Gilded.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Gilded.mov; sourceTree = "<group>"; };
-		79BA90C71C20ABA300731A38 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		79BA90C81C20ABA300731A38 /* Privacy Policy.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Privacy Policy.txt"; sourceTree = "<group>"; };
-		79BA90CA1C20ABA300731A38 /* Raleway-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Black.ttf"; sourceTree = "<group>"; };
-		79BA90CB1C20ABA300731A38 /* Raleway-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-BlackItalic.ttf"; sourceTree = "<group>"; };
-		79BA90CC1C20ABA300731A38 /* Raleway-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Bold.ttf"; sourceTree = "<group>"; };
-		79BA90CD1C20ABA300731A38 /* Raleway-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-BoldItalic.ttf"; sourceTree = "<group>"; };
-		79BA90CE1C20ABA300731A38 /* Raleway-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-ExtraBold.ttf"; sourceTree = "<group>"; };
-		79BA90CF1C20ABA300731A38 /* Raleway-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
-		79BA90D01C20ABA300731A38 /* Raleway-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-ExtraLight.ttf"; sourceTree = "<group>"; };
-		79BA90D11C20ABA300731A38 /* Raleway-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
-		79BA90D21C20ABA300731A38 /* Raleway-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Italic.ttf"; sourceTree = "<group>"; };
-		79BA90D31C20ABA300731A38 /* Raleway-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Light.ttf"; sourceTree = "<group>"; };
-		79BA90D41C20ABA300731A38 /* Raleway-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-LightItalic.ttf"; sourceTree = "<group>"; };
-		79BA90D51C20ABA300731A38 /* Raleway-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Medium.ttf"; sourceTree = "<group>"; };
-		79BA90D61C20ABA300731A38 /* Raleway-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-MediumItalic.ttf"; sourceTree = "<group>"; };
-		79BA90D71C20ABA300731A38 /* Raleway-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Regular.ttf"; sourceTree = "<group>"; };
-		79BA90D81C20ABA300731A38 /* Raleway-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-SemiBold.ttf"; sourceTree = "<group>"; };
-		79BA90D91C20ABA300731A38 /* Raleway-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
-		79BA90DA1C20ABA300731A38 /* Raleway-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Thin.ttf"; sourceTree = "<group>"; };
-		79BA90DB1C20ABA300731A38 /* Raleway-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-ThinItalic.ttf"; sourceTree = "<group>"; };
-		79BA90DC1C20ABA300731A38 /* Terms of Use.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Terms of Use.txt"; sourceTree = "<group>"; };
-		79BA90DD1C20ABA300731A38 /* THLResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLResourceManager.h; sourceTree = "<group>"; };
-		79BA90DE1C20ABA300731A38 /* THLResourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLResourceManager.m; sourceTree = "<group>"; };
-		79BA90E01C20ABA300731A38 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		79BA90E11C20ABA300731A38 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		79BA90E21C20ABA300731A38 /* THLConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLConstants.h; sourceTree = "<group>"; };
-		79BA90E31C20ABA300731A38 /* THLStylingConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLStylingConstants.h; sourceTree = "<group>"; };
-		79BA90E41C20ABA300731A38 /* THLTweaksConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLTweaksConstants.h; sourceTree = "<group>"; };
-		79BA91031C20ABB800731A38 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		79BA91051C20ACAD00731A38 /* libPods-HypeTests.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-HypeTests.a"; path = "Pods/../build/Debug-iphoneos/libPods-HypeTests.a"; sourceTree = "<group>"; };
+		79BA91051C20ACAD00731A38 /* libPods-HypeUpTests.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-HypeUpTests.a"; path = "Pods/../build/Debug-iphoneos/libPods-HypeUpTests.a"; sourceTree = "<group>"; };
 		79BCB5621BF2AAA30050F283 /* THLMasterNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMasterNavigationController.h; sourceTree = "<group>"; };
 		79BCB5631BF2AAA30050F283 /* THLMasterNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLMasterNavigationController.m; sourceTree = "<group>"; };
+		79CD27BD1C520293009BC119 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		79CD27BE1C520293009BC119 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		79CD27C01C520293009BC119 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		79CD27C11C520293009BC119 /* CommonMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonMacros.h; sourceTree = "<group>"; };
+		79CD27C21C520293009BC119 /* HypeUp-PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HypeUp-PrefixHeader.pch"; sourceTree = "<group>"; };
+		79CD27C31C520293009BC119 /* HypeUp.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = HypeUp.strings; sourceTree = "<group>"; };
+		79CD27C51C520293009BC119 /* Gilded.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Gilded.mov; sourceTree = "<group>"; };
+		79CD27C61C520293009BC119 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		79CD27C71C520293009BC119 /* Privacy Policy.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Privacy Policy.txt"; sourceTree = "<group>"; };
+		79CD27C91C520293009BC119 /* Raleway-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Black.ttf"; sourceTree = "<group>"; };
+		79CD27CA1C520293009BC119 /* Raleway-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-BlackItalic.ttf"; sourceTree = "<group>"; };
+		79CD27CB1C520293009BC119 /* Raleway-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Bold.ttf"; sourceTree = "<group>"; };
+		79CD27CC1C520293009BC119 /* Raleway-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-BoldItalic.ttf"; sourceTree = "<group>"; };
+		79CD27CD1C520293009BC119 /* Raleway-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-ExtraBold.ttf"; sourceTree = "<group>"; };
+		79CD27CE1C520293009BC119 /* Raleway-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		79CD27CF1C520293009BC119 /* Raleway-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-ExtraLight.ttf"; sourceTree = "<group>"; };
+		79CD27D01C520293009BC119 /* Raleway-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		79CD27D11C520293009BC119 /* Raleway-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Italic.ttf"; sourceTree = "<group>"; };
+		79CD27D21C520293009BC119 /* Raleway-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Light.ttf"; sourceTree = "<group>"; };
+		79CD27D31C520293009BC119 /* Raleway-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-LightItalic.ttf"; sourceTree = "<group>"; };
+		79CD27D41C520293009BC119 /* Raleway-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Medium.ttf"; sourceTree = "<group>"; };
+		79CD27D51C520293009BC119 /* Raleway-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-MediumItalic.ttf"; sourceTree = "<group>"; };
+		79CD27D61C520293009BC119 /* Raleway-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Regular.ttf"; sourceTree = "<group>"; };
+		79CD27D71C520293009BC119 /* Raleway-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-SemiBold.ttf"; sourceTree = "<group>"; };
+		79CD27D81C520293009BC119 /* Raleway-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		79CD27D91C520293009BC119 /* Raleway-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Thin.ttf"; sourceTree = "<group>"; };
+		79CD27DA1C520293009BC119 /* Raleway-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-ThinItalic.ttf"; sourceTree = "<group>"; };
+		79CD27DB1C520293009BC119 /* Terms of Use.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Terms of Use.txt"; sourceTree = "<group>"; };
+		79CD27DC1C520293009BC119 /* THLResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLResourceManager.h; sourceTree = "<group>"; };
+		79CD27DD1C520293009BC119 /* THLResourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLResourceManager.m; sourceTree = "<group>"; };
+		79CD27DF1C520293009BC119 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		79CD27E01C520293009BC119 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		79CD27E11C520293009BC119 /* THLConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLConstants.h; sourceTree = "<group>"; };
+		79CD27E21C520293009BC119 /* THLStylingConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLStylingConstants.h; sourceTree = "<group>"; };
+		79CD27E31C520293009BC119 /* THLTweaksConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLTweaksConstants.h; sourceTree = "<group>"; };
+		79CD28021C5202A0009BC119 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79CE01DD1C0A604B0047E6FA /* THLDashboardNotificationSectionTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLDashboardNotificationSectionTitleCell.h; sourceTree = "<group>"; };
 		79CE01DE1C0A604B0047E6FA /* THLDashboardNotificationSectionTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLDashboardNotificationSectionTitleCell.m; sourceTree = "<group>"; };
 		79CE01E11C0A69D40047E6FA /* THLDashboardTicketCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLDashboardTicketCell.h; sourceTree = "<group>"; };
@@ -702,9 +703,9 @@
 		79CE01E41C0A69EC0047E6FA /* THLDashboardTicketCellViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLDashboardTicketCellViewModel.h; sourceTree = "<group>"; };
 		79CE01E51C0A69EC0047E6FA /* THLDashboardTicketCellViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLDashboardTicketCellViewModel.m; sourceTree = "<group>"; };
 		79CE01E71C0A69FA0047E6FA /* THLDashboardTicketCellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLDashboardTicketCellView.h; sourceTree = "<group>"; };
-		8ABFDDE0788B42622FD1EB07 /* libPods-HypeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HypeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		90D6C18976DD6E30FF5CFE5B /* Pods-Hype.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hype.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hype/Pods-Hype.release.xcconfig"; sourceTree = "<group>"; };
-		A63D387799ADEA3D66DC04C6 /* libPods-Hype.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hype.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8ABFDDE0788B42622FD1EB07 /* libPods-HypeUpTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HypeUpTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		90D6C18976DD6E30FF5CFE5B /* Pods-HypeUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-HypeUp/Pods-HypeUp.release.xcconfig"; sourceTree = "<group>"; };
+		A63D387799ADEA3D66DC04C6 /* libPods-HypeUp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HypeUp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B94DBD0CFEB5874DC84569DE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C82D87BD1C25C7E300116328 /* THLConfirmationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLConfirmationView.h; sourceTree = "<group>"; };
 		C82D87BE1C25C7E300116328 /* THLConfirmationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLConfirmationView.m; sourceTree = "<group>"; };
@@ -770,8 +771,8 @@
 		CBE549410DF951286E27016A /* THLViewDataSourceSorting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLViewDataSourceSorting.h; sourceTree = "<group>"; };
 		CBE54FC98A366F3761F89F63 /* THLViewDataSourceGrouping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLViewDataSourceGrouping.m; sourceTree = "<group>"; };
 		CBE54FD0B5A148F6494B7A84 /* THLViewDataSourceGrouping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLViewDataSourceGrouping.h; sourceTree = "<group>"; };
-		D893AC0B8FA0AD2D0D43C607 /* Pods-HypeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HypeTests/Pods-HypeTests.release.xcconfig"; sourceTree = "<group>"; };
-		FB9B71E9A7DBD2DAA9915571 /* libPods-HypeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HypeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D893AC0B8FA0AD2D0D43C607 /* Pods-HypeUpTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeUpTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HypeUpTests/Pods-HypeUpTests.release.xcconfig"; sourceTree = "<group>"; };
+		FB9B71E9A7DBD2DAA9915571 /* libPods-HypeUpTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HypeUpTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -783,8 +784,8 @@
 				794DCCB71BF555150037A03D /* Accelerate.framework in Frameworks */,
 				79730CF81C18B47000D70F4B /* MessageUI.framework in Frameworks */,
 				99FCACEE76226A356043AEDA /* libPods.a in Frameworks */,
-				03DB8B7272D645FF53789D4E /* libPods-Hype.a in Frameworks */,
-				79BA91061C20ACAD00731A38 /* libPods-HypeTests.a in Frameworks */,
+				03DB8B7272D645FF53789D4E /* libPods-HypeUp.a in Frameworks */,
+				79BA91061C20ACAD00731A38 /* libPods-HypeUpTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -792,7 +793,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9DE048564BB3FAE7AF277A3B /* libPods-HypeTests.a in Frameworks */,
+				9DE048564BB3FAE7AF277A3B /* libPods-HypeUpTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -896,12 +897,12 @@
 		211005A81B8A3D5800A540C6 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				C8E342061C3A380D009FE9B0 /* THLGuestlistReviewHeaderView */,
 				79B959491BE8961800B87799 /* Alien */,
 				794AFE2D1C124693008475B1 /* Info VC */,
 				794208291BD82ADB009B86FA /* THLActionBar */,
 				21CE05F71BB84032004D10BB /* THLEventNavigationBar */,
 				21CE05F61BB84026004D10BB /* THLEventNavigationController */,
+				C8E342061C3A380D009FE9B0 /* THLGuestlistReviewHeaderView */,
 				216BDD541BC71EE500BBF713 /* THLSearchViewDataSource */,
 				217EBE891BB78A57006044B6 /* THLViewDataSource */,
 			);
@@ -1015,9 +1016,9 @@
 		211892201BAA0C2D00E8A11F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				797821B71C4D976F00E3F7EC /* UserInfoVerificationVC */,
 				794AFE401C162315008475B1 /* LoginVC */,
 				794AFE3F1C162309008475B1 /* OnboardingVC */,
+				797821B71C4D976F00E3F7EC /* UserInfoVerificationVC */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1202,6 +1203,8 @@
 		211D0BB51B8CEEA60073AFDD /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				79AD95F51C3ADA6200EDB82E /* THLEventDetailMusicTypesView.h */,
+				79AD95F61C3ADA6200EDB82E /* THLEventDetailMusicTypesView.m */,
 				21775F3A1B8CF93E00609D39 /* THLEventDetailsLocationInfoView.h */,
 				21775F3B1B8CF93E00609D39 /* THLEventDetailsLocationInfoView.m */,
 				21775F3D1B8CF95300609D39 /* THLEventDetailsMapView.h */,
@@ -1210,8 +1213,6 @@
 				21775F381B8CF93000609D39 /* THLEventDetailsPromotionInfoView.m */,
 				79AD95F21C30CFC400EDB82E /* THLNeedToKnowInfoView.h */,
 				79AD95F31C30CFC400EDB82E /* THLNeedToKnowInfoView.m */,
-				79AD95F51C3ADA6200EDB82E /* THLEventDetailMusicTypesView.h */,
-				79AD95F61C3ADA6200EDB82E /* THLEventDetailMusicTypesView.m */,
 				790603BB1BF5B6810093335E /* THLPromotionInfoView.h */,
 				790603BC1BF5B6810093335E /* THLPromotionInfoView.m */,
 			);
@@ -1344,14 +1345,14 @@
 		2133C9C21C332AF70020083A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2133C9D71C33469A0020083A /* THLWaitlistPositionViewController.h */,
-				2133C9D81C33469A0020083A /* THLWaitlistPositionViewController.m */,
-				2133C9CE1C333AD30020083A /* THLWaitlistSignupViewController.h */,
-				2133C9CF1C333AD30020083A /* THLWaitlistSignupViewController.m */,
 				21EDC7AE1C35F5F700B902CA /* THLWaitlistCodeEntryViewController.h */,
 				21EDC7AF1C35F5F700B902CA /* THLWaitlistCodeEntryViewController.m */,
 				795F13641C3C40B500AC9E76 /* THLWaitlistHomeViewController.h */,
 				795F13651C3C40B500AC9E76 /* THLWaitlistHomeViewController.m */,
+				2133C9D71C33469A0020083A /* THLWaitlistPositionViewController.h */,
+				2133C9D81C33469A0020083A /* THLWaitlistPositionViewController.m */,
+				2133C9CE1C333AD30020083A /* THLWaitlistSignupViewController.h */,
+				2133C9CF1C333AD30020083A /* THLWaitlistSignupViewController.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1557,16 +1558,16 @@
 				217EBE8A1BB78A9D006044B6 /* Factories, Managers, et. All */,
 				217DC6551BBB7A2500332174 /* Flows */,
 				F3E081FDB7C0DB50ADEBB991 /* Frameworks */,
-				79BA90BD1C20ABA300731A38 /* Hype */,
-				79BA91011C20ABB800731A38 /* HypeTests */,
+				79CD27BC1C520293009BC119 /* HypeUp */,
+				79CD28001C5202A0009BC119 /* HypeUpTests */,
 				21EED0F91BB5F341001325A7 /* Master Wireframe */,
 				21BDAE5C1B878E0E009D02A3 /* Modules */,
 				21CCEDD11B87C24A0066CDAC /* Parse Models */,
 				6AB4E611B93EB59002159745 /* Pods */,
 				21CCEDEB1B87CDD00066CDAC /* Services */,
 				211BB0D11B8CBE690068FD50 /* Views */,
-				796BFA461C484A890037EA3A /* Hype.app */,
-				79A1CEB01C484A910071F328 /* Hype.xctest */,
+				796BFA461C484A890037EA3A /* HypeUp.app */,
+				79A1CEB01C484A910071F328 /* HypeUp.xctest */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2043,10 +2044,10 @@
 		6AB4E611B93EB59002159745 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				70604C4F18C9EBAC0CE04014 /* Pods-Hype.debug.xcconfig */,
-				90D6C18976DD6E30FF5CFE5B /* Pods-Hype.release.xcconfig */,
-				2BF9907EA74F2E21D14684CC /* Pods-HypeTests.debug.xcconfig */,
-				D893AC0B8FA0AD2D0D43C607 /* Pods-HypeTests.release.xcconfig */,
+				70604C4F18C9EBAC0CE04014 /* Pods-HypeUp.debug.xcconfig */,
+				90D6C18976DD6E30FF5CFE5B /* Pods-HypeUp.release.xcconfig */,
+				2BF9907EA74F2E21D14684CC /* Pods-HypeUpTests.debug.xcconfig */,
+				D893AC0B8FA0AD2D0D43C607 /* Pods-HypeUpTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -2184,9 +2185,9 @@
 		794AFE3F1C162309008475B1 /* OnboardingVC */ = {
 			isa = PBXGroup;
 			children = (
-				211892211BAA0C3900E8A11F /* THLOnboardingViewInterface.h */,
 				211892221BAA0C4400E8A11F /* THLOnboardingViewController.h */,
 				211892231BAA0C4400E8A11F /* THLOnboardingViewController.m */,
+				211892211BAA0C3900E8A11F /* THLOnboardingViewInterface.h */,
 			);
 			path = OnboardingVC;
 			sourceTree = "<group>";
@@ -2194,9 +2195,9 @@
 		794AFE401C162315008475B1 /* LoginVC */ = {
 			isa = PBXGroup;
 			children = (
-				794AFE441C1624C1008475B1 /* THLLoginViewInterface.h */,
 				794AFE411C1624B6008475B1 /* THLLoginViewController.h */,
 				794AFE421C1624B6008475B1 /* THLLoginViewController.m */,
+				794AFE441C1624C1008475B1 /* THLLoginViewInterface.h */,
 			);
 			path = LoginVC;
 			sourceTree = "<group>";
@@ -2246,7 +2247,7 @@
 				797821B81C4D97AA00E3F7EC /* THLUserInfoVerificationViewController.h */,
 				797821B91C4D97AA00E3F7EC /* THLUserInfoVerificationViewController.m */,
 			);
-			name = UserInfoVerificationVC;
+			path = UserInfoVerificationVC;
 			sourceTree = "<group>";
 		};
 		798B5FC71BF11B03002EBCB6 /* Host Flow */ = {
@@ -2496,84 +2497,84 @@
 			path = THLActionContainerView;
 			sourceTree = "<group>";
 		};
-		79BA90BD1C20ABA300731A38 /* Hype */ = {
+		79CD27BC1C520293009BC119 /* HypeUp */ = {
 			isa = PBXGroup;
 			children = (
-				79BA90C51C20ABA300731A38 /* Resources */,
-				79BA90DF1C20ABA300731A38 /* Supporting Files */,
-				79BA90BE1C20ABA300731A38 /* AppDelegate.h */,
-				79BA90BF1C20ABA300731A38 /* AppDelegate.m */,
-				79BA90C21C20ABA300731A38 /* CommonMacros.h */,
-				79BA90C31C20ABA300731A38 /* Hype-PrefixHeader.pch */,
-				79BA90C41C20ABA300731A38 /* Hype.strings */,
-				79BA90C01C20ABA300731A38 /* LaunchScreen.xib */,
-				79BA90E21C20ABA300731A38 /* THLConstants.h */,
-				79BA90E31C20ABA300731A38 /* THLStylingConstants.h */,
-				79BA90E41C20ABA300731A38 /* THLTweaksConstants.h */,
+				79CD27C41C520293009BC119 /* Resources */,
+				79CD27DE1C520293009BC119 /* Supporting Files */,
+				79CD27BD1C520293009BC119 /* AppDelegate.h */,
+				79CD27BE1C520293009BC119 /* AppDelegate.m */,
+				79CD27C11C520293009BC119 /* CommonMacros.h */,
+				79CD27C21C520293009BC119 /* HypeUp-PrefixHeader.pch */,
+				79CD27C31C520293009BC119 /* HypeUp.strings */,
+				79CD27BF1C520293009BC119 /* LaunchScreen.xib */,
+				79CD27E11C520293009BC119 /* THLConstants.h */,
+				79CD27E21C520293009BC119 /* THLStylingConstants.h */,
+				79CD27E31C520293009BC119 /* THLTweaksConstants.h */,
 			);
-			path = Hype;
+			path = HypeUp;
 			sourceTree = "<group>";
 		};
-		79BA90C51C20ABA300731A38 /* Resources */ = {
+		79CD27C41C520293009BC119 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				79BA90C91C20ABA300731A38 /* raleway */,
-				79BA90C61C20ABA300731A38 /* Gilded.mov */,
-				79BA90C71C20ABA300731A38 /* Images.xcassets */,
-				79BA90C81C20ABA300731A38 /* Privacy Policy.txt */,
-				79BA90DD1C20ABA300731A38 /* THLResourceManager.h */,
-				79BA90DE1C20ABA300731A38 /* THLResourceManager.m */,
-				79BA90DC1C20ABA300731A38 /* Terms of Use.txt */,
+				79CD27C81C520293009BC119 /* raleway */,
+				79CD27C51C520293009BC119 /* Gilded.mov */,
+				79CD27C61C520293009BC119 /* Images.xcassets */,
+				79CD27C71C520293009BC119 /* Privacy Policy.txt */,
+				79CD27DC1C520293009BC119 /* THLResourceManager.h */,
+				79CD27DD1C520293009BC119 /* THLResourceManager.m */,
+				79CD27DB1C520293009BC119 /* Terms of Use.txt */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		79BA90C91C20ABA300731A38 /* raleway */ = {
+		79CD27C81C520293009BC119 /* raleway */ = {
 			isa = PBXGroup;
 			children = (
-				79BA90CA1C20ABA300731A38 /* Raleway-Black.ttf */,
-				79BA90CB1C20ABA300731A38 /* Raleway-BlackItalic.ttf */,
-				79BA90CC1C20ABA300731A38 /* Raleway-Bold.ttf */,
-				79BA90CD1C20ABA300731A38 /* Raleway-BoldItalic.ttf */,
-				79BA90CE1C20ABA300731A38 /* Raleway-ExtraBold.ttf */,
-				79BA90CF1C20ABA300731A38 /* Raleway-ExtraBoldItalic.ttf */,
-				79BA90D01C20ABA300731A38 /* Raleway-ExtraLight.ttf */,
-				79BA90D11C20ABA300731A38 /* Raleway-ExtraLightItalic.ttf */,
-				79BA90D21C20ABA300731A38 /* Raleway-Italic.ttf */,
-				79BA90D31C20ABA300731A38 /* Raleway-Light.ttf */,
-				79BA90D41C20ABA300731A38 /* Raleway-LightItalic.ttf */,
-				79BA90D51C20ABA300731A38 /* Raleway-Medium.ttf */,
-				79BA90D61C20ABA300731A38 /* Raleway-MediumItalic.ttf */,
-				79BA90D71C20ABA300731A38 /* Raleway-Regular.ttf */,
-				79BA90D81C20ABA300731A38 /* Raleway-SemiBold.ttf */,
-				79BA90D91C20ABA300731A38 /* Raleway-SemiBoldItalic.ttf */,
-				79BA90DA1C20ABA300731A38 /* Raleway-Thin.ttf */,
-				79BA90DB1C20ABA300731A38 /* Raleway-ThinItalic.ttf */,
+				79CD27C91C520293009BC119 /* Raleway-Black.ttf */,
+				79CD27CA1C520293009BC119 /* Raleway-BlackItalic.ttf */,
+				79CD27CB1C520293009BC119 /* Raleway-Bold.ttf */,
+				79CD27CC1C520293009BC119 /* Raleway-BoldItalic.ttf */,
+				79CD27CD1C520293009BC119 /* Raleway-ExtraBold.ttf */,
+				79CD27CE1C520293009BC119 /* Raleway-ExtraBoldItalic.ttf */,
+				79CD27CF1C520293009BC119 /* Raleway-ExtraLight.ttf */,
+				79CD27D01C520293009BC119 /* Raleway-ExtraLightItalic.ttf */,
+				79CD27D11C520293009BC119 /* Raleway-Italic.ttf */,
+				79CD27D21C520293009BC119 /* Raleway-Light.ttf */,
+				79CD27D31C520293009BC119 /* Raleway-LightItalic.ttf */,
+				79CD27D41C520293009BC119 /* Raleway-Medium.ttf */,
+				79CD27D51C520293009BC119 /* Raleway-MediumItalic.ttf */,
+				79CD27D61C520293009BC119 /* Raleway-Regular.ttf */,
+				79CD27D71C520293009BC119 /* Raleway-SemiBold.ttf */,
+				79CD27D81C520293009BC119 /* Raleway-SemiBoldItalic.ttf */,
+				79CD27D91C520293009BC119 /* Raleway-Thin.ttf */,
+				79CD27DA1C520293009BC119 /* Raleway-ThinItalic.ttf */,
 			);
 			path = raleway;
 			sourceTree = "<group>";
 		};
-		79BA90DF1C20ABA300731A38 /* Supporting Files */ = {
+		79CD27DE1C520293009BC119 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				79BA90E01C20ABA300731A38 /* Info.plist */,
-				79BA90E11C20ABA300731A38 /* main.m */,
+				79CD27DF1C520293009BC119 /* Info.plist */,
+				79CD27E01C520293009BC119 /* main.m */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		79BA91011C20ABB800731A38 /* HypeTests */ = {
+		79CD28001C5202A0009BC119 /* HypeUpTests */ = {
 			isa = PBXGroup;
 			children = (
-				79BA91021C20ABB800731A38 /* Supporting Files */,
+				79CD28011C5202A0009BC119 /* Supporting Files */,
 			);
-			path = HypeTests;
+			path = HypeUpTests;
 			sourceTree = "<group>";
 		};
-		79BA91021C20ABB800731A38 /* Supporting Files */ = {
+		79CD28011C5202A0009BC119 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				79BA91031C20ABB800731A38 /* Info.plist */,
+				79CD28021C5202A0009BC119 /* Info.plist */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -2698,8 +2699,7 @@
 				C85EE3991C1BCAB50008C14B /* Interface */,
 				C85EE3971C1BCA9F0008C14B /* UI */,
 			);
-			name = "Perk Store Module";
-			path = "Perks Module";
+			path = "Perk Store Module";
 			sourceTree = "<group>";
 		};
 		C85EE3971C1BCA9F0008C14B /* UI */ = {
@@ -2788,14 +2788,13 @@
 		C85EE3AE1C1BCBBE0008C14B /* Perk Store Cell */ = {
 			isa = PBXGroup;
 			children = (
-				C85EE3B11C1BCBDD0008C14B /* THLPerkStoreCellView.h */,
 				C85EE3AF1C1BCBDD0008C14B /* THLPerkStoreCell.h */,
 				C85EE3B01C1BCBDD0008C14B /* THLPerkStoreCell.m */,
+				C85EE3B11C1BCBDD0008C14B /* THLPerkStoreCellView.h */,
 				C85EE3B21C1BCBDD0008C14B /* THLPerkStoreCellViewModel.h */,
 				C85EE3B31C1BCBDD0008C14B /* THLPerkStoreCellViewModel.m */,
 			);
-			name = "Perk Store Cell";
-			path = "Perks Cell";
+			path = "Perk Store Cell";
 			sourceTree = "<group>";
 		};
 		C85EE3BD1C1BCC740008C14B /* THLPerkService */ = {
@@ -2921,7 +2920,7 @@
 				C8E342071C3B1A9C009FE9B0 /* THLGuestlistReviewHeaderView.h */,
 				C8E342081C3B1A9C009FE9B0 /* THLGuestlistReviewHeaderView.m */,
 			);
-			name = THLGuestlistReviewHeaderView;
+			path = THLGuestlistReviewHeaderView;
 			sourceTree = "<group>";
 		};
 		CBE54BB68ECECF48FD57301C /* THLViewDataSourceGrouping */ = {
@@ -2945,15 +2944,15 @@
 		F3E081FDB7C0DB50ADEBB991 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				79BA91051C20ACAD00731A38 /* libPods-HypeTests.a */,
+				79BA91051C20ACAD00731A38 /* libPods-HypeUpTests.a */,
 				79730CF71C18B47000D70F4B /* MessageUI.framework */,
 				790B38EE1C0375B500CB2362 /* libsqlite3.dylib */,
 				794DCCB61BF555150037A03D /* Accelerate.framework */,
-				A63D387799ADEA3D66DC04C6 /* libPods-Hype.a */,
-				790B38EA1C03741000CB2362 /* libPods-HypeTests.a */,
-				FB9B71E9A7DBD2DAA9915571 /* libPods-HypeTests.a */,
-				7465E16579C35905935D6E3A /* libPods-Hype.a */,
-				8ABFDDE0788B42622FD1EB07 /* libPods-HypeTests.a */,
+				A63D387799ADEA3D66DC04C6 /* libPods-HypeUp.a */,
+				790B38EA1C03741000CB2362 /* libPods-HypeUpTests.a */,
+				FB9B71E9A7DBD2DAA9915571 /* libPods-HypeUpTests.a */,
+				7465E16579C35905935D6E3A /* libPods-HypeUp.a */,
+				8ABFDDE0788B42622FD1EB07 /* libPods-HypeUpTests.a */,
 				B94DBD0CFEB5874DC84569DE /* libPods.a */,
 			);
 			name = Frameworks;
@@ -2962,9 +2961,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2174A0631B863F6A006826D7 /* Hype */ = {
+		2174A0631B863F6A006826D7 /* HypeUp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2174A0871B863F6A006826D7 /* Build configuration list for PBXNativeTarget "Hype" */;
+			buildConfigurationList = 2174A0871B863F6A006826D7 /* Build configuration list for PBXNativeTarget "HypeUp" */;
 			buildPhases = (
 				6FEE326EF98C94C7EA7C32B9 /* Check Pods Manifest.lock */,
 				2174A0601B863F6A006826D7 /* Sources */,
@@ -2978,14 +2977,14 @@
 			);
 			dependencies = (
 			);
-			name = Hype;
+			name = HypeUp;
 			productName = Hype;
-			productReference = 796BFA461C484A890037EA3A /* Hype.app */;
+			productReference = 796BFA461C484A890037EA3A /* HypeUp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2174A07C1B863F6A006826D7 /* HypeTests */ = {
+		2174A07C1B863F6A006826D7 /* HypeUpTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2174A08A1B863F6A006826D7 /* Build configuration list for PBXNativeTarget "HypeTests" */;
+			buildConfigurationList = 2174A08A1B863F6A006826D7 /* Build configuration list for PBXNativeTarget "HypeUpTests" */;
 			buildPhases = (
 				EB85E791A1ECFA32CCA9B09E /* Check Pods Manifest.lock */,
 				2174A0791B863F6A006826D7 /* Sources */,
@@ -2999,9 +2998,9 @@
 			dependencies = (
 				2174A07F1B863F6A006826D7 /* PBXTargetDependency */,
 			);
-			name = HypeTests;
+			name = HypeUpTests;
 			productName = HypeTests;
-			productReference = 79A1CEB01C484A910071F328 /* Hype.xctest */;
+			productReference = 79A1CEB01C484A910071F328 /* HypeUp.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -3032,7 +3031,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2174A05F1B863F6A006826D7 /* Build configuration list for PBXProject "Hype" */;
+			buildConfigurationList = 2174A05F1B863F6A006826D7 /* Build configuration list for PBXProject "HypeUp" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -3045,8 +3044,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2174A0631B863F6A006826D7 /* Hype */,
-				2174A07C1B863F6A006826D7 /* HypeTests */,
+				2174A0631B863F6A006826D7 /* HypeUp */,
+				2174A07C1B863F6A006826D7 /* HypeUpTests */,
 			);
 		};
 /* End PBXProject section */
@@ -3056,32 +3055,33 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79BA90EC1C20ABA300731A38 /* Raleway-BlackItalic.ttf in Resources */,
-				79BA90FD1C20ABA300731A38 /* Terms of Use.txt in Resources */,
-				79BA90F31C20ABA300731A38 /* Raleway-Italic.ttf in Resources */,
-				79BA90ED1C20ABA300731A38 /* Raleway-Bold.ttf in Resources */,
-				79BA90FB1C20ABA300731A38 /* Raleway-Thin.ttf in Resources */,
-				79BA90FA1C20ABA300731A38 /* Raleway-SemiBoldItalic.ttf in Resources */,
-				79BA90FC1C20ABA300731A38 /* Raleway-ThinItalic.ttf in Resources */,
-				79BA90E61C20ABA300731A38 /* LaunchScreen.xib in Resources */,
-				79BA90E91C20ABA300731A38 /* Images.xcassets in Resources */,
-				79BA90EA1C20ABA300731A38 /* Privacy Policy.txt in Resources */,
-				79BA90F91C20ABA300731A38 /* Raleway-SemiBold.ttf in Resources */,
+				79CD27EB1C520293009BC119 /* Raleway-BlackItalic.ttf in Resources */,
+				79CD27FC1C520293009BC119 /* Terms of Use.txt in Resources */,
+				79CD27F21C520293009BC119 /* Raleway-Italic.ttf in Resources */,
+				79CD27EC1C520293009BC119 /* Raleway-Bold.ttf in Resources */,
+				79CD27FA1C520293009BC119 /* Raleway-Thin.ttf in Resources */,
+				79CD27F91C520293009BC119 /* Raleway-SemiBoldItalic.ttf in Resources */,
+				79CD27FB1C520293009BC119 /* Raleway-ThinItalic.ttf in Resources */,
+				79CD27E51C520293009BC119 /* LaunchScreen.xib in Resources */,
+				79CD27E81C520293009BC119 /* Images.xcassets in Resources */,
+				79CD27E91C520293009BC119 /* Privacy Policy.txt in Resources */,
+				79CD27F81C520293009BC119 /* Raleway-SemiBold.ttf in Resources */,
+				79CD27E61C520293009BC119 /* HypeUp.strings in Resources */,
+				79CD27FE1C520293009BC119 /* Info.plist in Resources */,
+				79CD27F31C520293009BC119 /* Raleway-Light.ttf in Resources */,
 				21CE06281BB87FE8004D10BB /* THLNUIStyleSheet.nss in Resources */,
-				79BA90F41C20ABA300731A38 /* Raleway-Light.ttf in Resources */,
-				79BA90E71C20ABA300731A38 /* Hype.strings in Resources */,
-				79BA90EE1C20ABA300731A38 /* Raleway-BoldItalic.ttf in Resources */,
-				79BA90F01C20ABA300731A38 /* Raleway-ExtraBoldItalic.ttf in Resources */,
-				79BA90F81C20ABA300731A38 /* Raleway-Regular.ttf in Resources */,
-				79BA90E81C20ABA300731A38 /* Gilded.mov in Resources */,
-				79BA90EB1C20ABA300731A38 /* Raleway-Black.ttf in Resources */,
-				79BA91041C20ABB800731A38 /* Info.plist in Resources */,
-				79BA90F61C20ABA300731A38 /* Raleway-Medium.ttf in Resources */,
-				79BA90F51C20ABA300731A38 /* Raleway-LightItalic.ttf in Resources */,
-				79BA90F71C20ABA300731A38 /* Raleway-MediumItalic.ttf in Resources */,
-				79BA90EF1C20ABA300731A38 /* Raleway-ExtraBold.ttf in Resources */,
-				79BA90F21C20ABA300731A38 /* Raleway-ExtraLightItalic.ttf in Resources */,
-				79BA90F11C20ABA300731A38 /* Raleway-ExtraLight.ttf in Resources */,
+				79CD27ED1C520293009BC119 /* Raleway-BoldItalic.ttf in Resources */,
+				79CD27EF1C520293009BC119 /* Raleway-ExtraBoldItalic.ttf in Resources */,
+				79CD27F71C520293009BC119 /* Raleway-Regular.ttf in Resources */,
+				79CD27E71C520293009BC119 /* Gilded.mov in Resources */,
+				79CD27EA1C520293009BC119 /* Raleway-Black.ttf in Resources */,
+				79CD28031C5202A0009BC119 /* Info.plist in Resources */,
+				79CD27F51C520293009BC119 /* Raleway-Medium.ttf in Resources */,
+				79CD27F41C520293009BC119 /* Raleway-LightItalic.ttf in Resources */,
+				79CD27F61C520293009BC119 /* Raleway-MediumItalic.ttf in Resources */,
+				79CD27EE1C520293009BC119 /* Raleway-ExtraBold.ttf in Resources */,
+				79CD27F11C520293009BC119 /* Raleway-ExtraLightItalic.ttf in Resources */,
+				79CD27F01C520293009BC119 /* Raleway-ExtraLight.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3121,7 +3121,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HypeTests/Pods-HypeTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HypeUpTests/Pods-HypeUpTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6FEE326EF98C94C7EA7C32B9 /* Check Pods Manifest.lock */ = {
@@ -3151,7 +3151,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hype/Pods-Hype-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HypeUp/Pods-HypeUp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EB85E791A1ECFA32CCA9B09E /* Check Pods Manifest.lock */ = {
@@ -3181,7 +3181,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HypeTests/Pods-HypeTests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HypeUpTests/Pods-HypeUpTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F1E10D688543EAF0E30A385D /* Embed Pods Frameworks */ = {
@@ -3226,9 +3226,9 @@
 				212173661BB34D22007D817A /* HCSStarRatingView.m in Sources */,
 				C85EE3A81C1BCB750008C14B /* THLPerkStorePresenter.m in Sources */,
 				2118921F1BAA088D00E8A11F /* THLLoginWireframe.m in Sources */,
+				79CD27FD1C520293009BC119 /* THLResourceManager.m in Sources */,
 				2121734C1BB32B92007D817A /* THLPromotionSelectionInfoCardViewModel.m in Sources */,
 				C8E342091C3B1A9C009FE9B0 /* THLGuestlistReviewHeaderView.m in Sources */,
-				79BA91001C20ABA300731A38 /* main.m in Sources */,
 				211D0BB31B8CEE8B0073AFDD /* THLEventDetailViewController.m in Sources */,
 				79B9593E1BE7173D00B87799 /* THLGuestlistReviewCellViewModel.m in Sources */,
 				2133BFCE1B877D11002C1DA9 /* THLLocation.m in Sources */,
@@ -3252,7 +3252,6 @@
 				21192D851BB3278700B176AA /* THLPromotionSelectionInteractor.m in Sources */,
 				217EBE8D1BB78AB4006044B6 /* THLYapDatabaseViewFactory.m in Sources */,
 				79752ADE1BEBD8B500D09B2E /* THLConfirmationPopupView.m in Sources */,
-				79BA90FE1C20ABA300731A38 /* THLResourceManager.m in Sources */,
 				211892061BA9FF0600E8A11F /* THLLoginInteractor.m in Sources */,
 				211005D01B8A7D0200A540C6 /* NSDate+Hypelist.m in Sources */,
 				C85EE3A21C1BCB4D0008C14B /* THLPerkStoreDataManager.m in Sources */,
@@ -3299,6 +3298,7 @@
 				C85EE3B91C1BCBF30008C14B /* THLPerkStoreViewController.m in Sources */,
 				216BDD581BC71F1800BBF713 /* THLSearchViewDataSource.m in Sources */,
 				79B9595A1BE92FBA00B87799 /* THLPopupNotificationInteractor.m in Sources */,
+				79CD27E41C520293009BC119 /* AppDelegate.m in Sources */,
 				C82D87C31C31CC2200116328 /* THLMenuView.m in Sources */,
 				794AFE101C10A3CD008475B1 /* THLHostDashboardPresenter.m in Sources */,
 				217EBEA51BB7A106006044B6 /* THLLoginService.m in Sources */,
@@ -3324,7 +3324,6 @@
 				21B9894A1BC05AF500428B6A /* THLGuestlistInvitationViewController.m in Sources */,
 				215A429A1BAA25B000D03C35 /* THLFacebookPicturePresenter.m in Sources */,
 				79B9592C1BE581BB00B87799 /* THLGuestlistReviewInteractor.m in Sources */,
-				79BA90E51C20ABA300731A38 /* AppDelegate.m in Sources */,
 				21E402D91BBF80E6001D0C2C /* THLGuestlist.m in Sources */,
 				794AFE161C10A4BF008475B1 /* THLHostDashboardDataManager.m in Sources */,
 				794DCCB51BF555020037A03D /* FXBlurView.m in Sources */,
@@ -3390,6 +3389,7 @@
 				2108A8881B8BBF5B00B725F6 /* THLDependencyManager.m in Sources */,
 				2110059F1B8A351000A540C6 /* THLEventDiscoveryWireframe.m in Sources */,
 				79CE01E31C0A69D40047E6FA /* THLDashboardTicketCell.m in Sources */,
+				79CD27FF1C520293009BC119 /* main.m in Sources */,
 				7942082C1BD82AF6009B86FA /* THLActionBarButton.m in Sources */,
 				218AF3521BB7422100AFAEBF /* THLEventEntity.m in Sources */,
 				79BCB5641BF2AAA30050F283 /* THLMasterNavigationController.m in Sources */,
@@ -3420,16 +3420,16 @@
 /* Begin PBXTargetDependency section */
 		2174A07F1B863F6A006826D7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2174A0631B863F6A006826D7 /* Hype */;
+			target = 2174A0631B863F6A006826D7 /* HypeUp */;
 			targetProxy = 2174A07E1B863F6A006826D7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		79BA90C01C20ABA300731A38 /* LaunchScreen.xib */ = {
+		79CD27BF1C520293009BC119 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				79BA90C11C20ABA300731A38 /* Base */,
+				79CD27C01C520293009BC119 /* Base */,
 			);
 			name = LaunchScreen.xib;
 			path = .;
@@ -3521,7 +3521,7 @@
 		};
 		2174A0881B863F6A006826D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 70604C4F18C9EBAC0CE04014 /* Pods-Hype.debug.xcconfig */;
+			baseConfigurationReference = 70604C4F18C9EBAC0CE04014 /* Pods-HypeUp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -3536,11 +3536,11 @@
 				ENABLE_BITCODE = NO;
 				EXCLUDED_SOURCE_FILE_NAMES = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/Hype/Hype-PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/HypeUp/HypeUp-PrefixHeader.pch";
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_SHADOW = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/Hype/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/HypeUp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -3549,14 +3549,14 @@
 				);
 				New_Setting = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hypelist.hype;
-				PRODUCT_NAME = Hype;
+				PRODUCT_NAME = HypeUp;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
 		2174A0891B863F6A006826D7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 90D6C18976DD6E30FF5CFE5B /* Pods-Hype.release.xcconfig */;
+			baseConfigurationReference = 90D6C18976DD6E30FF5CFE5B /* Pods-HypeUp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -3571,11 +3571,11 @@
 				ENABLE_BITCODE = NO;
 				EXCLUDED_SOURCE_FILE_NAMES = "FLEX*";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/Hype/Hype-PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/HypeUp/HypeUp-PrefixHeader.pch";
 				GCC_TREAT_INCOMPATIBLE_POINTER_TYPE_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_SHADOW = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/Hype/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/HypeUp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -3584,14 +3584,14 @@
 				);
 				New_Setting = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hypelist.hype;
-				PRODUCT_NAME = Hype;
+				PRODUCT_NAME = HypeUp;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
 		2174A08B1B863F6A006826D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2BF9907EA74F2E21D14684CC /* Pods-HypeTests.debug.xcconfig */;
+			baseConfigurationReference = 2BF9907EA74F2E21D14684CC /* Pods-HypeUpTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3605,14 +3605,14 @@
 				INFOPLIST_FILE = "Hype/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Hypelist.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = Hype;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hype.app/Hype";
+				PRODUCT_NAME = HypeUp;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HypeUp.app/HypeUp";
 			};
 			name = Debug;
 		};
 		2174A08C1B863F6A006826D7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D893AC0B8FA0AD2D0D43C607 /* Pods-HypeTests.release.xcconfig */;
+			baseConfigurationReference = D893AC0B8FA0AD2D0D43C607 /* Pods-HypeUpTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3622,15 +3622,15 @@
 				INFOPLIST_FILE = "Hype/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Hypelist.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = Hype;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hype.app/Hype";
+				PRODUCT_NAME = HypeUp;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HypeUp.app/HypeUp";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2174A05F1B863F6A006826D7 /* Build configuration list for PBXProject "Hype" */ = {
+		2174A05F1B863F6A006826D7 /* Build configuration list for PBXProject "HypeUp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2174A0851B863F6A006826D7 /* Debug */,
@@ -3639,7 +3639,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2174A0871B863F6A006826D7 /* Build configuration list for PBXNativeTarget "Hype" */ = {
+		2174A0871B863F6A006826D7 /* Build configuration list for PBXNativeTarget "HypeUp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2174A0881B863F6A006826D7 /* Debug */,
@@ -3648,7 +3648,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2174A08A1B863F6A006826D7 /* Build configuration list for PBXNativeTarget "HypeTests" */ = {
+		2174A08A1B863F6A006826D7 /* Build configuration list for PBXNativeTarget "HypeUpTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2174A08B1B863F6A006826D7 /* Debug */,

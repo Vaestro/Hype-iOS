@@ -141,7 +141,7 @@ UITextFieldDelegate
     [codeField setValidationBlock:^NSDictionary *(LRTextField *textField, NSString *text) {
         [NSThread sleepForTimeInterval:0];
         if (text.length != _codeLength) {
-            return @{ VALIDATION_INDICATOR_NO : [NSString stringWithFormat:@"Code must be %ld digits", _codeLength] };
+            return @{ VALIDATION_INDICATOR_NO : [NSString stringWithFormat:@"Code must be %@ digits", [NSNumber numberWithInteger:_codeLength]]};
 //            return @{ VALIDATION_INDICATOR_YES : @"Correct" };
         }
         return nil;

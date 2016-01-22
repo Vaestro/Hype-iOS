@@ -13,6 +13,7 @@
 #import "THLEntityMapper.h"
 #import "THLDataStore.h"
 #import "THLUser.h"
+#import "THLPerkStoreItemEntity.h"
 
 @implementation THLPerkStoreDataManager
 - (instancetype)initWithDataStore:(THLDataStore *)dataStore
@@ -41,7 +42,7 @@
 - (THLDataStoreDomain *)domainForPerks {
     THLDataStoreDomain *domain = [[THLDataStoreDomain alloc] initWithMemberTestBlock:^BOOL(THLEntity *entity) {
         THLPerkStoreItemEntity *perkStoreItemEntity = (THLPerkStoreItemEntity *)entity;
-        return perkStoreItemEntity;
+        return (perkStoreItemEntity.credits > 0);
     }];
     return domain;
 }

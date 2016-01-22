@@ -69,7 +69,7 @@ static const CGFloat kLogoImageSize = 75.0f;
 
 #pragma mark - Interface
 - (void)displayPosition:(NSInteger)position {
-	[_positionLabel setText:[NSString stringWithFormat:@"%lu", position]];
+	[_positionLabel setText:[NSString stringWithFormat:@"%@", [NSNumber numberWithInteger:position]]];
     [_positionLabel setFont:[UIFont systemFontOfSize:72]];
     [_positionLabel setTextColor:kTHLNUIAccentColor];
 }

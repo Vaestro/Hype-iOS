@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Hypelist. All rights reserved.
 //
 
-#ifndef Hype_THLGlobalCategories_h
-#define Hype_THLGlobalCategories_h
+#ifndef HypeUp_THLGlobalCategories_h
+#define HypeUp_THLGlobalCategories_h
 
 #import "NSDate+Utilities.h"
 #import "NSDate+Hypelist.h"

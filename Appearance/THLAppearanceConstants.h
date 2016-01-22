@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Hypelist. All rights reserved.
 //
 
-#ifndef Hype_THLAppearanceConstants_h
-#define Hype_THLAppearanceConstants_h
+#ifndef HypeUp_THLAppearanceConstants_h
+#define HypeUp_THLAppearanceConstants_h
 
 #import "CommonMacros.h"
 #import "UIImageView+WebCache.h"

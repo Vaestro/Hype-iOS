@@ -4,7 +4,7 @@ platform :ios, '8.0'
 #ignore all warnings from all pods
 inhibit_all_warnings!
 
-target 'Hype' do
+target 'HypeUp' do
 #Global Frameworks and Utilities
 pod 'CocoaLumberjack'
 pod 'Masonry', '~> 0.6'
@@ -73,7 +73,7 @@ end
 pod "PhoneKit"
 pod 'AFNetworking', '~> 3.0'
 
-target 'HypeTests' do
+target 'HypeUpTests' do
 pod 'OCMock', '3.1.2'
 pod "Gizou"
 end

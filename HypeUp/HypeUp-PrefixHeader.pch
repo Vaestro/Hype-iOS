@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Hypelist. All rights reserved.
 //
 
-#ifndef Hypelist2point0_Hype_PrefixHeader_pch
-#define Hypelist2point0_Hype_PrefixHeader_pch
+#ifndef Hypelist2point0_HypeUp_PrefixHeader_pch
+#define Hypelist2point0_HypeUp_PrefixHeader_pch
 
 #define MAS_SHORTHAND_GLOBALS
 #define MAS_SHORTHAND

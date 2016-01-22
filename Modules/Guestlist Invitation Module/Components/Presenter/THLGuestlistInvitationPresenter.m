@@ -49,6 +49,7 @@ THLGuestlistInvitationViewEventHandler
 //For Updating An Existing Guestlist
 - (void)presentGuestlistInvitationInterfaceForPromotion:(THLPromotionEntity *)promotionEntity withGuestlistId:(NSString *)guestlistId andGuests:(NSArray *)guests inController:(UIViewController *)controller {
     _interactor.promotionEntity = promotionEntity;
+    _creditsPayout = [NSString stringWithFormat:@"Get $%d.00 for every friend you invite that attends this event", promotionEntity.event.creditsPayout];
     [_interactor loadGuestlist:guestlistId withCurrentGuests:guests];
     [_wireframe presentInterfaceInController:controller];
 }
