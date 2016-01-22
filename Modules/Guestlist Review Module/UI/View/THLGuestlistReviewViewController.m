@@ -173,9 +173,11 @@ static CGFloat const CELL_SPACING = 10;
             [self remakeConstraints];
         }
         else if (status == [NSNumber numberWithInteger:3]) {
-            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Accept or Decline Guestlist", nil)];
-            [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
+//            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Accept or Decline Guestlist", nil)];
+//            [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
+            [[WSELF actionBarButton] setHidden:TRUE];
             [[WSELF.headerView menuButton] setHidden:TRUE];
+            [self remakeConstraints];
         }
         else if (status == [NSNumber numberWithInteger:4]) {
             [[WSELF actionBarButton] setHidden:TRUE];

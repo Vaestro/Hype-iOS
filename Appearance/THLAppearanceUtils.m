@@ -35,6 +35,7 @@
 
     [[UITabBar appearance] setTintColor:kTHLNUIAccentColor];
     [[UITabBar appearance] setBarStyle:UIBarStyleBlack];
+    [[UITabBar appearance] setTranslucent:NO];
     
 //	[[UIButton appearance] setTitleColor:[THLStyleKit lightTextColor]];
 }
