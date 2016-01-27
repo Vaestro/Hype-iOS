@@ -161,19 +161,13 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    CGFloat headerHeight = 0;
     THLUserProfileHeaderView *headerView = [THLUserProfileHeaderView new];
-    headerHeight = [headerView.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-    //  TODO: Temporarily set header to nil due to issue with displaying user profile picture
-
-    return 0;
+    return [headerView.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    CGFloat footerHeight = 0;
     THLUserProfileFooterView *footerView = [THLUserProfileFooterView new];
-    footerHeight = [footerView.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-    return footerHeight;
+    return [footerView.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
