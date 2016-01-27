@@ -34,6 +34,8 @@ static float const kTHLGoldenRatioInverse = 0.61803398875f;
 static CGFloat const kTHLCornerRadius = 5;
 static CGFloat const kTHLBaseUnit = 5;
 
+static CGFloat const kSubmitButtonHeight = 58.0f;
+
 static NSString *const kTHLNUIUndef = @"";
 static NSString *const kTHLNUIBoldTitle = @"BoldTitle";
 static NSString *const kTHLNUINavBarTitle = @"NavBarTitle";

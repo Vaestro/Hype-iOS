@@ -38,6 +38,8 @@ pod 'ParseFacebookUtilsV4'
 pod 'FBSDKCoreKit'
 pod 'FBSDKLoginKit'
 pod 'FBSDKShareKit'
+pod 'FacebookImagePicker'
+
 
 #Fabric
 pod 'Fabric'

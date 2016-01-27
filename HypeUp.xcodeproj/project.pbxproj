@@ -107,6 +107,8 @@
 		21E402EE1BBF9A8B001D0C2C /* THLGuestEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E402ED1BBF9A8B001D0C2C /* THLGuestEntity.m */; };
 		21EDC7B01C35F5F700B902CA /* THLWaitlistCodeEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21EDC7AF1C35F5F700B902CA /* THLWaitlistCodeEntryViewController.m */; };
 		21EED1001BB5F842001325A7 /* THLGuestFlowWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 21EED0FF1BB5F842001325A7 /* THLGuestFlowWireframe.m */; };
+		3ECD03EF1C58408C00AE325D /* THLUserPhotoVerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD03EE1C58408C00AE325D /* THLUserPhotoVerificationViewController.m */; };
+		3EF951781C56AD770046D4F1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EF951771C56AD770046D4F1 /* MobileCoreServices.framework */; };
 		7905CC411BE0252700E56878 /* THLGuestlistInviteEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7905CC401BE0252700E56878 /* THLGuestlistInviteEntity.m */; };
 		790603BD1BF5B6810093335E /* THLPromotionInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 790603BC1BF5B6810093335E /* THLPromotionInfoView.m */; };
 		790603C31BFB73380093335E /* THLDashboardWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 790603C21BFB73380093335E /* THLDashboardWireframe.m */; };
@@ -489,6 +491,10 @@
 		21EED0FF1BB5F842001325A7 /* THLGuestFlowWireframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestFlowWireframe.m; sourceTree = "<group>"; };
 		21EED1011BB5F8A7001325A7 /* THLGuestFlowDependencyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestFlowDependencyManager.h; sourceTree = "<group>"; };
 		2BF9907EA74F2E21D14684CC /* Pods-HypeUpTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeUpTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HypeUpTests/Pods-HypeUpUpTests.debug.xcconfig"; sourceTree = "<group>"; };
+		3ECD03ED1C58408C00AE325D /* THLUserPhotoVerificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THLUserPhotoVerificationViewController.h; path = UserPhotoVerificationVC/THLUserPhotoVerificationViewController.h; sourceTree = "<group>"; };
+		3ECD03EE1C58408C00AE325D /* THLUserPhotoVerificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THLUserPhotoVerificationViewController.m; path = UserPhotoVerificationVC/THLUserPhotoVerificationViewController.m; sourceTree = "<group>"; };
+		3ED444421C59479C00385A8A /* THLUserPhotoVerificationInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = THLUserPhotoVerificationInterface.h; path = UserPhotoVerificationVC/THLUserPhotoVerificationInterface.h; sourceTree = "<group>"; };
+		3EF951771C56AD770046D4F1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		70604C4F18C9EBAC0CE04014 /* Pods-HypeUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HypeUp/Pods-HypeUp.debug.xcconfig"; sourceTree = "<group>"; };
 		7465E16579C35905935D6E3A /* libPods-HypeUp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HypeUp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7905CC3E1BE0251000E56878 /* THLGuestlistInviteEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistInviteEntity.h; sourceTree = "<group>"; };
@@ -780,6 +786,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EF951781C56AD770046D4F1 /* MobileCoreServices.framework in Frameworks */,
 				790B38EF1C0375B500CB2362 /* libsqlite3.dylib in Frameworks */,
 				794DCCB71BF555150037A03D /* Accelerate.framework in Frameworks */,
 				79730CF81C18B47000D70F4B /* MessageUI.framework in Frameworks */,
@@ -941,8 +948,7 @@
 				2133C9D21C333DDC0020083A /* NSString+EmailAddresses.h */,
 				2133C9D11C333DDC0020083A /* NSString+EmailAddresses.m */,
 				211BB0D91B8CC6F50068FD50 /* THLGlobalCategories.h */,
-				794DCCAA1BF3B31E0037A03D /* UIImageView+Letters.h */,
-				794DCCAB1BF3B31E0037A03D /* UIImageView+Letters.m */,
+				3EF9517C1C56B5D40046D4F1 /* UIImageView */,
 				211BB0D61B8CC6DA0068FD50 /* UIView+AddSubviews.h */,
 				211BB0D71B8CC6DA0068FD50 /* UIView+AddSubviews.m */,
 				794208261BD82641009B86FA /* UIView+DimView.h */,
@@ -1019,6 +1025,7 @@
 				794AFE401C162315008475B1 /* LoginVC */,
 				794AFE3F1C162309008475B1 /* OnboardingVC */,
 				797821B71C4D976F00E3F7EC /* UserInfoVerificationVC */,
+				3ECD03F01C58409400AE325D /* UserPhotoVerificationVC */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2041,6 +2048,25 @@
 			path = "Master Wireframe";
 			sourceTree = "<group>";
 		};
+		3ECD03F01C58409400AE325D /* UserPhotoVerificationVC */ = {
+			isa = PBXGroup;
+			children = (
+				3ECD03ED1C58408C00AE325D /* THLUserPhotoVerificationViewController.h */,
+				3ECD03EE1C58408C00AE325D /* THLUserPhotoVerificationViewController.m */,
+				3ED444421C59479C00385A8A /* THLUserPhotoVerificationInterface.h */,
+			);
+			name = UserPhotoVerificationVC;
+			sourceTree = "<group>";
+		};
+		3EF9517C1C56B5D40046D4F1 /* UIImageView */ = {
+			isa = PBXGroup;
+			children = (
+				794DCCAA1BF3B31E0037A03D /* UIImageView+Letters.h */,
+				794DCCAB1BF3B31E0037A03D /* UIImageView+Letters.m */,
+			);
+			name = UIImageView;
+			sourceTree = "<group>";
+		};
 		6AB4E611B93EB59002159745 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -2944,6 +2970,7 @@
 		F3E081FDB7C0DB50ADEBB991 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3EF951771C56AD770046D4F1 /* MobileCoreServices.framework */,
 				79BA91051C20ACAD00731A38 /* libPods-HypeUpTests.a */,
 				79730CF71C18B47000D70F4B /* MessageUI.framework */,
 				790B38EE1C0375B500CB2362 /* libsqlite3.dylib */,
@@ -3266,6 +3293,7 @@
 				21775F631B8E17A300609D39 /* THLAddressBookEntryFetchService.m in Sources */,
 				219E32A81B8EA63D00214C85 /* THLEventNavigationBar.m in Sources */,
 				21CE06241BB86995004D10BB /* THLAppearanceUtils.m in Sources */,
+				3ECD03EF1C58408C00AE325D /* THLUserPhotoVerificationViewController.m in Sources */,
 				21E402CF1BBF7688001D0C2C /* THLGuestlistInvitationInteractor.m in Sources */,
 				798B5FCB1BF11BD2002EBCB6 /* THLHostFlowWireframe.m in Sources */,
 				790603C61BFB75CF0093335E /* THLDashboardPresenter.m in Sources */,

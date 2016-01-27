@@ -12,4 +12,5 @@
 @property (nonatomic) NSNumber *showActivityIndicator;
 @property (nonatomic, strong) RACCommand *skipCommand;
 @property (nonatomic, strong) RACCommand *loginCommand;
+
 @end

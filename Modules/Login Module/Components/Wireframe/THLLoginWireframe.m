@@ -18,6 +18,7 @@
 #import "THLFacebookPictureModuleInterface.h"
 #import "THLUser.h"
 
+
 @interface THLLoginWireframe()
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) UIViewController *viewController;
@@ -123,4 +124,5 @@
 - (void)dealloc {
     DLog(@"Destroyed %@", self);
 }
+
 @end

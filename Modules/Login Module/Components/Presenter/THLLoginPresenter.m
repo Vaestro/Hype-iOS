@@ -15,15 +15,19 @@
 #import "THLFacebookPictureModuleDelegate.h"
 #import "THLNumberVerificationModuleDelegate.h"
 #import "THLUserInfoVerificationViewController.h"
+#import "THLUserPhotoVerificationViewController.h"
+#import "OLFacebookImagePickerController.h"
 
 @interface THLLoginPresenter()
 <
 THLLoginInteractorDelegate,
 THLUserInfoVerificationViewDelegate,
+THLUserPhotoVerificationViewDelegate,
 THLFacebookPictureModuleDelegate,
 THLNumberVerificationModuleDelegate
 >
 @property (nonatomic, strong) THLUserInfoVerificationViewController *userInfoVerificationView;
+@property (nonatomic, strong) THLUserPhotoVerificationViewController *userPhotoVerificationView;
 @property (nonatomic, strong) UIViewController *baseViewController;
 
 @property (nonatomic, weak) id<THLOnboardingViewInterface> onboardingView;
@@ -44,6 +48,11 @@ THLNumberVerificationModuleDelegate
 		_interactor.delegate = self;
         _userInfoVerificationView = [[THLUserInfoVerificationViewController alloc] initWithNibName:nil bundle:nil];
         _userInfoVerificationView.delegate = self;
+        
+        if ([_interactor shouldPickProfileImage]){
+            _userPhotoVerificationView = [[THLUserPhotoVerificationViewController alloc] initWithNibName:nil bundle:nil];
+            _userPhotoVerificationView.delegate = self;
+        }
 	}
 	return self;
 }
@@ -133,7 +142,7 @@ THLNumberVerificationModuleDelegate
     }
     else if ([_interactor shouldVerifyPhoneNumber]) {
 		[self routeToNumberVerificationInterface];
-	} else if ([_interactor shouldPickProfileImage]) {
+    } else if ([_interactor shouldPickProfileImage]) {
 		[self routeToPickProfilePictureInterface];
 	} else {
         if (_onboardingView) {
@@ -159,6 +168,8 @@ THLNumberVerificationModuleDelegate
 }
 
 - (void)routeToPickProfilePictureInterface {
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:_userPhotoVerificationView];
+    [_baseViewController presentViewController:navigationController animated:NO completion:NULL];
 	[_wireframe presentFacebookPictureInterface:self];
 }
 
@@ -212,9 +223,22 @@ THLNumberVerificationModuleDelegate
     [_interactor addEmail:email];
 }
 
+#pragma mark - FACEBOOK PICTURE -
+#pragma mark - THLUserPhotoVerificationDelegate
+
+- (void)presentFacebookImagePicker:(OLFacebookImagePickerController *) imagePicker {
+    [_userPhotoVerificationView presentViewController:imagePicker
+                                             animated:YES
+                                           completion:nil];
+}
+
+- (void) userPhotoVerificationView:(THLUserPhotoVerificationViewController *)view userDidConfirmPhoto:(UIImage *) image{
+    [_interactor addProfileImage:image];
+}
+
 #pragma mark - THLFacebookPictureModuleDelegate
 - (void)facebookPictureModule:(id<THLFacebookPictureModuleInterface>)module didSelectImage:(UIImage *)image {
-	[_interactor addProfileImage:image];
+    [_userPhotoVerificationView facebookUserImage:image];
 }
 
 #pragma mark - THLNumberVerificationModuleDelegate

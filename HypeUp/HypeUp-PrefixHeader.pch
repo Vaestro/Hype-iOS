@@ -27,4 +27,6 @@
 #import "CommonMacros.h"
 #import "THLConstants.h"
 #import "THLGlobalCategories.h"
+#import <Foundation/Foundation.h>
+
 #endif
