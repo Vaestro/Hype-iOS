@@ -9,15 +9,15 @@
 #import <Foundation/Foundation.h>
 #import "THLGuestlistInvitationModuleDelegate.h"
 
-@class THLPromotionEntity;
+@class THLEventEntity;
 @class THLGuestEntity;
 @protocol THLGuestlistInvitationModuleInterface <NSObject>
 @property (nonatomic, weak) id<THLGuestlistInvitationModuleDelegate> moduleDelegate;
 
-- (void)presentGuestlistInvitationInterfaceForPromotion:(THLPromotionEntity *)promotionEntity
+- (void)presentGuestlistInvitationInterfaceForEvent:(THLEventEntity *)eventEntity
                                            inController:(UIViewController *)controller;
 
-- (void)presentGuestlistInvitationInterfaceForPromotion:(THLPromotionEntity *)promotionEntity
+- (void)presentGuestlistInvitationInterfaceForEvent:(THLEventEntity *)eventEntity
                                         withGuestlistId:(NSString *)guestlistId
                                               andGuests:(NSArray<THLGuestEntity *> *)guestlistInvites
                                            inController:(UIViewController *)controller;

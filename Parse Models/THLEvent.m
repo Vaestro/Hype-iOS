@@ -17,6 +17,9 @@
 @dynamic promoImage;
 @dynamic location;
 @dynamic creditsPayout;
+@dynamic host;
+@dynamic maleRatio;
+@dynamic femaleRatio;
 
 + (void)load {
 	[self registerSubclass];

@@ -143,18 +143,18 @@ THLPerkStoreModuleDelegate
 	[_eventDetailWireframe.moduleInterface presentEventDetailInterfaceForEvent:eventEntity inWindow:_window];
 }
 
-- (void)presentGuestlistInvitationInterfaceForPromotion:(THLPromotionEntity *)promotionEntity inController:(UIViewController *)controller {
+- (void)presentGuestlistInvitationInterfaceForEvent:(THLEventEntity *)eventEntity inController:(UIViewController *)controller {
 	_guestlistInvitationWireframe = [_dependencyManager newGuestlistInvitationWireframe];
     _currentWireframe = _guestlistInvitationWireframe;
     [_guestlistInvitationWireframe.moduleInterface setModuleDelegate:self];
-	[_guestlistInvitationWireframe.moduleInterface presentGuestlistInvitationInterfaceForPromotion:promotionEntity inController:controller];
+	[_guestlistInvitationWireframe.moduleInterface presentGuestlistInvitationInterfaceForEvent:eventEntity inController:controller];
 }
 
-- (void)presentGuestlistInvitationInterfaceForPromotion:(THLPromotionEntity *)promotionEntity withGuestlistId:(NSString *)guestlistId andGuests:(NSArray<THLGuestEntity *> *)guests inController:(UIViewController *)controller {
+- (void)presentGuestlistInvitationInterfaceForEvent:(THLEventEntity *)eventEntity withGuestlistId:(NSString *)guestlistId andGuests:(NSArray<THLGuestEntity *> *)guests inController:(UIViewController *)controller {
     _guestlistInvitationWireframe = [_dependencyManager newGuestlistInvitationWireframe];
     _currentWireframe = _guestlistInvitationWireframe;
     [_guestlistInvitationWireframe.moduleInterface setModuleDelegate:self];
-    [_guestlistInvitationWireframe.moduleInterface presentGuestlistInvitationInterfaceForPromotion:promotionEntity withGuestlistId:guestlistId andGuests:guests inController:controller];
+    [_guestlistInvitationWireframe.moduleInterface presentGuestlistInvitationInterfaceForEvent:eventEntity withGuestlistId:guestlistId andGuests:guests inController:controller];
 }
      
 - (void)presentGuestlistReviewInterfaceForGuestlist:(THLGuestlistEntity *)guestlistEntity withGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInviteEntity inController:(UIViewController *)controller {
@@ -191,8 +191,8 @@ THLPerkStoreModuleDelegate
     [self.moduleDelegate logInUserOnViewController:viewController];
 }
 
-- (void)eventDetailModule:(id<THLEventDetailModuleInterface>)module promotion:(THLPromotionEntity *)promotionEntity presentGuestlistInvitationInterfaceOnController:(UIViewController *)controller{
-    [self presentGuestlistInvitationInterfaceForPromotion:promotionEntity inController:controller];
+- (void)eventDetailModule:(id<THLEventDetailModuleInterface>)module event:(THLEventEntity *)eventEntity presentGuestlistInvitationInterfaceOnController:(UIViewController *)controller{
+    [self presentGuestlistInvitationInterfaceForEvent:eventEntity inController:controller];
 }
 
 - (void)eventDetailModule:(id<THLEventDetailModuleInterface>)module guestlist:(THLGuestlistEntity *)guestlistEntity guestlistInvite:(THLGuestlistInviteEntity *)guestlistInviteEntity presentGuestlistReviewInterfaceOnController:(UIViewController *)controller {
@@ -209,8 +209,8 @@ THLPerkStoreModuleDelegate
 }
 
 #pragma mark - THLGuestlistReviewModuleDelegate
-- (void)guestlistReviewModule:(id<THLGuestlistReviewModuleInterface>)module promotion:(THLPromotionEntity *)promotionEntity withGuestlistId:(NSString *)guestlistId andGuests:(NSArray<THLGuestEntity *> *)guests presentGuestlistInvitationInterfaceOnController:(UIViewController *)controller {
-    [self presentGuestlistInvitationInterfaceForPromotion:promotionEntity withGuestlistId:guestlistId andGuests:guests inController:controller];
+- (void)guestlistReviewModule:(id<THLGuestlistReviewModuleInterface>)module event:(THLEventEntity *)eventEntity withGuestlistId:(NSString *)guestlistId andGuests:(NSArray<THLGuestEntity *> *)guests presentGuestlistInvitationInterfaceOnController:(UIViewController *)controller {
+    [self presentGuestlistInvitationInterfaceForEvent:eventEntity withGuestlistId:guestlistId andGuests:guests inController:controller];
 }
 
 - (void)dismissGuestlistReviewWireframe {

@@ -11,7 +11,6 @@
 
 #import "THLLocalModels.h"
 #import "THLUser.h"
-#import "THLPromotion.h"
 #import "THLGuestlist.h"
 #import "THLGuestlistInvite.h"
 #import "THLPerkStoreItem.h"
@@ -21,7 +20,6 @@
 #import "THLUserEntity.h"
 #import "THLGuestEntity.h"
 #import "THLHostEntity.h"
-#import "THLPromotionEntity.h"
 #import "THLGuestlistEntity.h"
 #import "THLGuestlistInviteEntity.h"
 #import "THLPerkStoreItemEntity.h"
@@ -45,6 +43,9 @@
         entity.femaleCover = event.femaleCoverCharge;
         entity.location = [self mapLocation:event.location];
         entity.creditsPayout = event.creditsPayout;
+        entity.host = (THLHostEntity *)[self mapHost:event[@"host"]];
+        entity.maleRatio = event.maleRatio;
+        entity.femaleRatio = event.femaleRatio;
         return entity;
     } else {
         return nil;
@@ -122,24 +123,6 @@
     }
 }
 
-- (THLPromotionEntity *)mapPromotion:(THLPromotion *)promotion {
-    if ([promotion isKindOfClass:[THLPromotion class]]) {
-        THLPromotionEntity *entity = [THLPromotionEntity new];
-        [self mapBaseValuesFromModel:promotion toEntity:entity];
-        entity.time = promotion.time;
-        entity.maleRatio = promotion.maleRatio;
-        entity.femaleRatio = promotion.femaleRatio;
-        entity.host = (THLHostEntity *)[self mapHost:promotion[@"host"]];
-        entity.event = [self mapEvent:promotion[@"event"]];
-        entity.eventId = promotion.eventId;
-        entity.promotionMessage = promotion.promotionMessage;
-        return entity;
-    } else {
-        return nil;
-    }
-
-}
-
 - (THLPerkStoreItemEntity *)mapPerkStoreItem:(THLPerkStoreItem *)perkStoreItem {
     if ([perkStoreItem isKindOfClass:[THLPerkStoreItem class]]) {
         THLPerkStoreItemEntity *entity = [THLPerkStoreItemEntity new];
@@ -167,24 +150,14 @@
     }
 }
 
-
-- (NSArray<THLPromotionEntity *> *)mapPromotions:(NSArray *)promotions {
-    WEAKSELF();
-    return [promotions linq_select:^id(THLPromotion *promotion) {
-        return [WSELF mapPromotion:promotion];
-    }];
-}
-
 - (THLGuestlistEntity *)mapGuestlist:(THLGuestlist *)guestlist {
     if ([guestlist isKindOfClass:[THLGuestlist class]]) {
         THLGuestlistEntity *entity = [THLGuestlistEntity new];
         [self mapBaseValuesFromModel:guestlist toEntity:entity];
-        entity.eventId = guestlist.eventId;
         entity.reviewStatus = guestlist.reviewStatus;
         entity.owner = [self mapGuest:guestlist[@"Owner"]];
         entity.date = guestlist.date;
-    //TODO: Fix mapping guestlist's promotion
-        entity.promotion = [self mapPromotion:guestlist[@"Promotion"]];
+        entity.event = [self mapEvent:guestlist[@"event"]];
         return entity;
     } else {
         return nil;

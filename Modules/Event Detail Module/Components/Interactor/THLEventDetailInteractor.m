@@ -32,15 +32,6 @@
 	}];
 }
 
-//Get One Promotion for Event (MVP ONLY)
-- (void)getPromotionForEvent:(NSString *)eventId {
-    [[_dataManager fetchPromotionForEvent:eventId] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
-        WEAKSELF();
-        [WSELF.delegate interactor:WSELF didGetPromotion:task.result forEvent:eventId error:task.error];
-        return nil;
-    }];
-}
-
 - (void)checkValidGuestlistInviteForEvent:(THLEventEntity *)event {
     WEAKSELF();
     [[_dataManager fetchGuestlistInviteForEvent:event] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {

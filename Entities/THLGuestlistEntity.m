@@ -6,7 +6,6 @@
 //  Copyright © 2015 Hypelist. All rights reserved.
 //
 #import "THLGuestlistEntity.h"
-#import "THLPromotionEntity.h"
 
 @implementation THLGuestlistEntity
 - (BOOL)isAccepted {

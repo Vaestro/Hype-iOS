@@ -10,14 +10,13 @@
 #import "APAddressBook.h"
 #import "APContact.h"
 #import "THLGuestEntity.h"
+#import "THLEventEntity.h"
 #import "THLDataStore.h"
 #import "THLGuestlistServiceInterface.h"
-#import "THLPromotionServiceInterface.h"
 #import "THLGuestlist.h"
 #import "THLGuestlistEntity.h"
 #import "THLEntityMapper.h"
 #import "THLDataStoreDomain.h"
-#import "THLPromotionEntity.h"
 
 @implementation THLGuestlistInvitationDataManager
 - (instancetype)initWithGuestlistService:(id<THLGuestlistServiceInterface>)guestlistService
@@ -43,23 +42,23 @@
 	}];
 }
 
-- (BFTask *)submitGuestlistForPromotion:(THLPromotionEntity *)promotionEntity withInvites:(NSArray *)guestPhoneNumbers {
-    return [[_guestlistService createGuestlistForPromotion:promotionEntity withInvites:guestPhoneNumbers] continueWithSuccessBlock:^id(BFTask *task) {
+- (BFTask *)submitGuestlistForEvent:(THLEventEntity *)eventEntity withInvites:(NSArray *)guestPhoneNumbers {
+    return [[_guestlistService createGuestlistForEvent:eventEntity withInvites:guestPhoneNumbers] continueWithSuccessBlock:^id(BFTask *task) {
         return [BFTask taskWithResult:nil];
     }];
 }
 
-- (BFTask *)getOwnerInviteForPromotion:(THLPromotionEntity *)promotionEntity {
+- (BFTask *)getOwnerInviteForEvent:(THLEventEntity *)eventEntity {
     WEAKSELF();
-    return [[_guestlistService fetchGuestlistInviteForEvent:promotionEntity.event] continueWithSuccessBlock:^id(BFTask *task) {
+    return [[_guestlistService fetchGuestlistInviteForEvent:eventEntity] continueWithSuccessBlock:^id(BFTask *task) {
         THLGuestlistInviteEntity *guestlistInviteEntity = [WSELF.entityMapper mapGuestlistInvite:task.result];
         [WSELF.dataStore2 updateOrAddEntities:[NSSet setWithArray:@[guestlistInviteEntity]]];
         return [BFTask taskWithResult:nil];
     }];
 }
 
-- (BFTask *)updateGuestlist:(NSString *)guestlistId withInvites:(NSArray *)guestPhoneNumbers forPromotion:(THLPromotionEntity *)promotionEntity {
-    return [[_guestlistService updateGuestlist:guestlistId withInvites:guestPhoneNumbers forPromotion:promotionEntity] continueWithSuccessBlock:^id(BFTask *task) {
+- (BFTask *)updateGuestlist:(NSString *)guestlistId withInvites:(NSArray *)guestPhoneNumbers forEvent:(THLEventEntity *)eventEntity {
+    return [[_guestlistService updateGuestlist:guestlistId withInvites:guestPhoneNumbers forEvent:eventEntity] continueWithSuccessBlock:^id(BFTask *task) {
         return [BFTask taskWithResult:nil];
     }];
 }

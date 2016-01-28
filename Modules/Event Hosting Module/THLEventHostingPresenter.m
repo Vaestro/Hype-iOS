@@ -18,7 +18,7 @@
 #import "THLUser.h"
 #import "THLEventEntity.h"
 #import "THLGuestlistEntity.h"
-#import "THLPromotionEntity.h"
+#import "THLLocationEntity.h"
 #import "THLGuestlistInviteEntity.h"
 #import "THLEventHostingView.h"
 #import "THLEventHostingTableCellViewModel.h"

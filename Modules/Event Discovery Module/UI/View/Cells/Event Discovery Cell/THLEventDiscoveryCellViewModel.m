@@ -9,6 +9,7 @@
 #import "THLEventDiscoveryCellViewModel.h"
 #import "THLEventDiscoveryCellView.h"
 #import "THLEventEntity.h"
+#import "THLLocationEntity.h"
 
 @implementation THLEventDiscoveryCellViewModel
 - (instancetype)initWithEvent:(THLEventEntity *)eventEntity {

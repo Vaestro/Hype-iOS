@@ -11,7 +11,6 @@
 #import "THLGuestlistInvitationInteractor.h"
 #import "THLGuestlistInvitationView.h"
 #import "THLGuestlistInvitationViewEventHandler.h"
-#import "THLPromotionEntity.h"
 #import "THLEventEntity.h"
 
 @interface THLGuestlistInvitationPresenter ()
@@ -40,16 +39,16 @@ THLGuestlistInvitationViewEventHandler
 
 #pragma mark - THLGuestlistModuleInterface
 //For Creating A new Guestlist
-- (void)presentGuestlistInvitationInterfaceForPromotion:(THLPromotionEntity *)promotionEntity inController:(UIViewController *)controller {
-    _interactor.promotionEntity = promotionEntity;
-    _creditsPayout = [NSString stringWithFormat:@"Get $%d.00 for every friend you invite that attends this event", promotionEntity.event.creditsPayout];
+- (void)presentGuestlistInvitationInterfaceForEvent:(THLEventEntity *)eventEntity inController:(UIViewController *)controller {
+    _interactor.eventEntity = eventEntity;
+    _creditsPayout = [NSString stringWithFormat:@"Get $%d.00 for every friend you invite that attends this event", eventEntity.creditsPayout];
     [_wireframe presentInterfaceInController:controller];
 }
 
 //For Updating An Existing Guestlist
-- (void)presentGuestlistInvitationInterfaceForPromotion:(THLPromotionEntity *)promotionEntity withGuestlistId:(NSString *)guestlistId andGuests:(NSArray *)guests inController:(UIViewController *)controller {
-    _interactor.promotionEntity = promotionEntity;
-    _creditsPayout = [NSString stringWithFormat:@"Get $%d.00 for every friend you invite that attends this event", promotionEntity.event.creditsPayout];
+- (void)presentGuestlistInvitationInterfaceForEvent:(THLEventEntity *)eventEntity withGuestlistId:(NSString *)guestlistId andGuests:(NSArray *)guests inController:(UIViewController *)controller {
+    _interactor.eventEntity = eventEntity;
+    _creditsPayout = [NSString stringWithFormat:@"Get $%d.00 for every friend you invite that attends this event", eventEntity.creditsPayout];
     [_interactor loadGuestlist:guestlistId withCurrentGuests:guests];
     [_wireframe presentInterfaceInController:controller];
 }

@@ -16,17 +16,15 @@
 #import "THLUser.h"
 #import "THLEventEntity.h"
 #import "THLGuestlistEntity.h"
-#import "THLPromotionEntity.h"
 #import "THLGuestlistInviteEntity.h"
+#import "THLLocationEntity.h"
 
 @interface THLEventDetailPresenter()<THLEventDetailInteractorDelegate>
 
 @property (nonatomic, strong) id<THLEventDetailView> view;
 @property (nonatomic) BOOL guestHasAcceptedInvite;
-
 @property (nonatomic, strong) THLEventEntity *eventEntity;
 @property (nonatomic, strong) THLGuestlistInviteEntity *guestlistInviteEntity;
-@property (nonatomic, strong) THLPromotionEntity *promotionEntity;
 @end
 
 @implementation THLEventDetailPresenter
@@ -88,6 +86,14 @@
     [self.view setLocationAddress:_eventEntity.location.fullAddress];
     [self.view setLocationMusicTypes:[NSString stringWithFormat:@"%@", [_eventEntity.location.musicTypes componentsJoinedByString:@" | "]]];
     [self.view setLocationAttireRequirement:_eventEntity.location.attireRequirement];
+    
+    if (_eventEntity.femaleRatio == 1) {
+        [self.view setRatioInfo:@"1 Girl : 1 Guy"];
+    } else if (_eventEntity.femaleRatio > 1) {
+        [self.view setRatioInfo:[NSString stringWithFormat:@"%d Girls : 1 Guy", _eventEntity.femaleRatio]];
+    } else {
+        [self.view setRatioInfo:@"No ratio required"];
+    }
 
 }
 
@@ -117,9 +123,7 @@
 
 - (void)presentEventDetailInterfaceForEvent:(THLEventEntity *)eventEntity inWindow:(UIWindow *)window {
     _eventEntity = eventEntity;
-
     [_interactor getPlacemarkForLocation:_eventEntity.location];
-    [_interactor getPromotionForEvent:_eventEntity.objectId];
 	[_wireframe presentInterfaceInWindow:window];
     
 #ifdef DEBUG
@@ -146,7 +150,7 @@
 }
 
 - (void)handleCreateGuestlistAction {
-    [self.moduleDelegate eventDetailModule:self promotion:_promotionEntity presentGuestlistInvitationInterfaceOnController:(UIViewController *)self.view];
+    [self.moduleDelegate eventDetailModule:self event:_eventEntity presentGuestlistInvitationInterfaceOnController:(UIViewController *)self.view];
 }
 
 #pragma mark - THLEventDetailInteractorDelegate
@@ -156,22 +160,11 @@
 	}
 }
 
-- (void)interactor:(THLEventDetailInteractor *)interactor didGetPromotion:(THLPromotionEntity *)promotionEntity forEvent:(THLEventEntity *)eventEntity error:(NSError *)error {
-    if (!error && promotionEntity) {
-        _promotionEntity = promotionEntity;
-        if (_promotionEntity.femaleRatio == 1) {
-            [self.view setRatioInfo:@"1 Girl : 1 Guy"];
-        } else if (_promotionEntity.femaleRatio > 1) {
-            [self.view setRatioInfo:[NSString stringWithFormat:@"%d Girls : 1 Guy", _promotionEntity.femaleRatio]];
-        } else {
-            [self.view setRatioInfo:@"No ratio required"];
-        }
-    }
-}
 
 - (void)interactor:(THLEventDetailInteractor *)interactor didGetGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite forEvent:(THLEventEntity *)event error:(NSError *)error {
     if (!error && guestlistInvite) {
         _guestlistInviteEntity = guestlistInvite;
+        _eventEntity = event;
         if (_guestlistInviteEntity.response == THLStatusAccepted) {
             self.guestHasAcceptedInvite = TRUE;
         }

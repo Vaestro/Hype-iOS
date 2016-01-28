@@ -14,7 +14,6 @@
 #import "THLGuestlistInviteEntity.h"
 #import "THLEventEntity.h"
 #import "THLHostEntity.h"
-#import "THLPromotionEntity.h"
 #import "THLGuestlistEntity.h"
 
 #import "THLViewDataSource.h"
@@ -27,11 +26,8 @@
 THLDashboardInteractorDelegate
 >
 @property (nonatomic, strong) id<THLDashboardView> view;
-
 @property (nonatomic) BOOL refreshing;
-
 @property (nonatomic, strong) THLEventEntity *eventEntity;
-@property (nonatomic, strong) THLPromotionEntity *promotionEntity;
 @property (nonatomic, strong) THLGuestlistEntity *guestlistEntity;
 @property (nonatomic, strong) THLGuestlistInviteEntity *guestlistInviteEntity;
 

@@ -13,7 +13,6 @@
 #import "THLDataStore.h"
 #import "THLDataStoreDomain.h"
 #import "THLGuestlistEntity.h"
-#import "THLPromotionEntity.h"
 #import "THLEventEntity.h"
 
 @interface THLHostDashboardDataManager()

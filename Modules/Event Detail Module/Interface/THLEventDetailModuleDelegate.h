@@ -7,13 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-@class THLPromotionEntity;
+@class THLEventEntity;
 @class THLGuestlistEntity;
 @class THLGuestlistInviteEntity;
 
 @protocol THLEventDetailModuleInterface;
 @protocol THLEventDetailModuleDelegate <NSObject>
-- (void)eventDetailModule:(id<THLEventDetailModuleInterface>)module promotion:(THLPromotionEntity *)promotionEntity presentGuestlistInvitationInterfaceOnController:(UIViewController *)controller;
+- (void)eventDetailModule:(id<THLEventDetailModuleInterface>)module event:(THLEventEntity *)eventEntity presentGuestlistInvitationInterfaceOnController:(UIViewController *)controller;
 - (void)eventDetailModule:(id<THLEventDetailModuleInterface>)module guestlist:(THLGuestlistEntity *)guestlistEntity guestlistInvite:(THLGuestlistInviteEntity *)guestlistInviteEntity presentGuestlistReviewInterfaceOnController:(UIViewController *)controller;
 - (void)userNeedsLoginOnViewController:(UIViewController *)viewController;
 - (void)dismissEventDetailWireframe;

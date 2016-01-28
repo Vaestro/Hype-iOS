@@ -9,13 +9,11 @@
 #import <Parse/Parse.h>
 #import <Parse/PFObject+Subclass.h>
 @class THLUser;
-@class THLPromotion;
+@class THLEvent;
 
 @interface THLGuestlist : PFObject<PFSubclassing>
 @property (nonatomic, retain) THLUser *owner;
-@property (nonatomic, retain) THLPromotion *promotion;
+@property (nonatomic, retain) THLEvent *event;
 @property (nonatomic) THLStatus reviewStatus;
-@property (nonatomic, retain) NSString *eventId;
 @property (nonatomic, copy) NSDate *date;
-
 @end
