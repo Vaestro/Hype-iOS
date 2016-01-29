@@ -72,9 +72,13 @@
 
 //TODO: Query for Guestlist Invite for User for Event
 - (PFQuery *)queryForGuestlistInviteForEvent:(NSString *)eventId {
-    PFQuery *guestlistQuery = [self baseGuestlistQuery];
-    [guestlistQuery whereKey:@"eventId" equalTo:eventId];
     
+    PFQuery *eventQuery = [self baseEventQuery];
+    [eventQuery whereKey:@"objectId" equalTo:eventId];
+    
+    PFQuery *guestlistQuery = [self baseGuestlistQuery];
+    [guestlistQuery whereKey:@"event" matchesQuery:eventQuery];
+
     PFQuery *query = [self baseGuestlistInviteQuery];
     [query whereKey:@"Guest" equalTo:[THLUser currentUser]];
     [query whereKey:@"Guestlist" matchesQuery:guestlistQuery];

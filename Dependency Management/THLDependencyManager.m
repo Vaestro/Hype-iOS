@@ -77,7 +77,6 @@
 @property (nonatomic, weak) THLUserProfileWireframe *userProfileWireframe;
 @property (nonatomic, weak) THLEventDetailWireframe *eventDetailWireframe;
 @property (nonatomic, weak) THLEventHostingWireframe *eventHostingWireframe;
-@property (nonatomic, weak) THLPromotionSelectionWireframe *promotionSelectionWireframe;
 @property (nonatomic, weak) THLGuestlistInvitationWireframe *guestlistInvitationWireframe;
 @property (nonatomic, weak) THLGuestlistReviewWireframe *guestlistReviewWireframe;
 @property (nonatomic, weak) THLPopupNotificationWireframe *popupNotificationWireframe;

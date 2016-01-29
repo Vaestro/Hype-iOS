@@ -21,7 +21,6 @@
 
 @implementation THLDashboardTicketCell
 @synthesize locationImageURL;
-@synthesize promotionMessage;
 @synthesize hostImageURL;
 @synthesize hostName;
 @synthesize eventName;
@@ -71,7 +70,6 @@
     RAC(self.promotionView, guestlistReviewStatus) = RACObserve(self, guestlistReviewStatus);
     RAC(self.promotionView, guestlistReviewStatusTitle, @"") = RACObserve(self, guestlistReviewStatusTitle);
     
-    RAC(self.promotionView, promotionMessage, @"") = RACObserve(self, promotionMessage);
     RAC(self.promotionView, eventTime, @"") = RACObserve(self, eventDate);
     RAC(self.promotionView, hostImageURL) = RACObserve(self, hostImageURL);
     RAC(self.promotionView, hostName, @"") = RACObserve(self, hostName);

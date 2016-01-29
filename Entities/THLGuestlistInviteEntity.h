@@ -13,7 +13,6 @@
 @interface THLGuestlistInviteEntity : THLEntity
 @property (nonatomic) THLStatus response;
 @property (nonatomic) BOOL checkInStatus;
-@property (nonatomic, strong) NSString *eventId;
 @property (nonatomic, copy) NSDate *date;
 @property (nonatomic, strong) THLGuestEntity *guest;
 @property (nonatomic, strong) THLGuestlistEntity *guestlist;

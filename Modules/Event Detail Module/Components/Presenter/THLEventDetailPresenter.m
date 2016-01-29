@@ -164,7 +164,6 @@
 - (void)interactor:(THLEventDetailInteractor *)interactor didGetGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite forEvent:(THLEventEntity *)event error:(NSError *)error {
     if (!error && guestlistInvite) {
         _guestlistInviteEntity = guestlistInvite;
-        _eventEntity = event;
         if (_guestlistInviteEntity.response == THLStatusAccepted) {
             self.guestHasAcceptedInvite = TRUE;
         }

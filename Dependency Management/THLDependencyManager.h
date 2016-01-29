@@ -22,7 +22,6 @@
 @class THLUserProfileWireframe;
 @class THLEventDetailWireframe;
 @class THLEventHostingWireframe;
-@class THLPromotionSelectionWireframe;
 @class THLGuestlistWireframe;
 @class THLGuestlistInvitationWireframe;
 @class THLGuestlistReviewWireframe;
@@ -53,7 +52,6 @@ THLHostFlowDependencyManager
 - (THLEventDetailWireframe *)newEventDetailWireframe;
 - (THLUserProfileWireframe *)newUserProfileWireframe;
 - (THLEventHostingWireframe *)newEventHostingWireframe;
-- (THLPromotionSelectionWireframe *)newPromotionSelectionWireframe;
 - (THLGuestlistInvitationWireframe *)newGuestlistInvitationWireframe;
 - (THLGuestlistReviewWireframe *)newGuestlistReviewWireframe;
 - (THLPopupNotificationWireframe *)newPopupNotificationWireframe;
