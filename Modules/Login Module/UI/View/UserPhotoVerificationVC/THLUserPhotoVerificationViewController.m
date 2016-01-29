@@ -10,18 +10,91 @@
 #import "THLActionBarButton.h"
 #import "THLAppearanceConstants.h"
 #import "OLFacebookImage.h"
+#import "THLPersonIconView.h"
+#import "THLUser.h"
+#import "THLUserDataWorker.h"
 
 @interface THLUserPhotoVerificationViewController() <OLFacebookImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, strong) THLActionBarButton *submitButton;
 @property (nonatomic, strong) UITapGestureRecognizer *photoTapRecognizer;
 @property (nonatomic, strong) UILabel *descriptionLabel;
+@property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) OLFacebookImagePickerController *imagePicker;
+@property (nonatomic, strong) NSURL *userImageURL;
+@property (nonatomic, strong) THLPersonIconView *userImageView;
+@property (nonatomic, assign) BOOL needHideSubmitButton;
 
 @end
 
 @implementation THLUserPhotoVerificationViewController
-@synthesize userImageView = _userImageView;
+
+
+#pragma mark default Initialization
+
+- (instancetype) init {
+    if (self == [super init]){
+        self.needHideSubmitButton = NO;
+    }
+    return self;
+}
+
+- (instancetype) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    if (self == [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]){
+        self.needHideSubmitButton = NO;
+    }
+    return self;
+}
+
+#pragma mark - Initialization with Navigation Controller
+
+- (instancetype) initForNavigationController {
+    if (self == [super init]){
+        [self configureBarButtons];
+        self.needHideSubmitButton = YES;
+    }
+    return self;
+}
+
+- (void) configureBarButtons {
+    self.navigationItem.leftBarButtonItem = [self newBackBarButtonItem];
+    self.navigationItem.rightBarButtonItem = [self newSaveBarButtonItem];
+}
+
+
+- (UIBarButtonItem *)newBackBarButtonItem {
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Back"
+                                                             style:UIBarButtonItemStylePlain
+                                                            target:self
+                                                            action:@selector(handleCancelAction)];
+    [item setTitleTextAttributes:
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
+                        forState:UIControlStateNormal];
+    return item;
+}
+
+- (UIBarButtonItem *)newSaveBarButtonItem {
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Save"
+                                                             style:UIBarButtonItemStylePlain
+                                                            target:self
+                                                            action:@selector(updateUserPhoto)];
+    [item setTitleTextAttributes:
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
+                        forState:UIControlStateNormal];
+    return item;
+}
+
+
+#pragma mark - Initialization as Modal View Controller
+
+- (instancetype) initwithSubmitButton {
+    if (self == [super init]){
+        self.needHideSubmitButton = NO;
+    }
+    return self;
+}
 
 #pragma mark - VC Lifecycle
 - (void)viewDidLoad {
@@ -29,13 +102,18 @@
     [self constructView];
     [self layoutView];
     [self bindView];
+    [self setDefaultPhoto];
 }
 
 - (void)constructView {
-    _userImageView = [self newUserImage];
+    _userImageView = [self newIconView];
     _photoTapRecognizer = [self tapGestureRecognizer];
-    _submitButton = [self newSubmitButton];
     _descriptionLabel = [self newDescriptionLabel];
+    _titleLabel = [self newTitleLabel];
+    _submitButton = [self newSubmitButton];
+    if (_needHideSubmitButton){
+        _submitButton.alpha = 0.0;
+    }
 }
 
 - (void)layoutView {
@@ -48,8 +126,9 @@
     
     [self.view addSubviews:@[_userImageView,
                              _submitButton,
-                             _descriptionLabel]];
-    [self.view addGestureRecognizer:_photoTapRecognizer];
+                             _descriptionLabel,
+                             _titleLabel]];
+    [_userImageView addGestureRecognizer:_photoTapRecognizer];
     
     WEAKSELF();
     [_submitButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -58,7 +137,7 @@
     }];
     
     [_userImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        CGFloat width = SCREEN_WIDTH * 0.80;
+        CGFloat width = SCREEN_WIDTH * 0.50;
         make.height.mas_equalTo(width);
         make.width.mas_equalTo(width);
         make.centerX.mas_equalTo(WSELF.submitButton.centerX);
@@ -71,45 +150,51 @@
         make.width.mas_equalTo(SCREEN_WIDTH*0.66);
     }];
 
+    [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(0);
+        make.bottom.equalTo([WSELF descriptionLabel].mas_top).insets(kTHLEdgeInsetsSuperHigh());
+        make.width.mas_equalTo(SCREEN_WIDTH*0.66);
+    }];
 }
 
 - (void) bindView {
     @weakify(self)
-    [[self.submitButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        @strongify(self)
-        [self updateUserPhoto];
-    }];
-    RACSignal *imageUpdated = RACObserve(self.userImageView, image);
-    [imageUpdated subscribeNext:^(UIImageView *imageView) {
-        @strongify(self)
-        if (imageView != nil) {
-            [self makeImageRound: imageView];
-        }
-    }];
+    [[[self.submitButton rac_signalForControlEvents:UIControlEventTouchUpInside]
+        filter:^BOOL(id value) {
+          @strongify(self)
+            return [self.userImageView.image isValid];}]
+        subscribeNext:^(id x) {
+              [self updateUserPhoto];
+          }];
+    RAC(self.userImageView, imageURL) = RACObserve(self, userImageURL);
 }
 
 #pragma mark - Photo processing
 
-- (BOOL) userPhotoValid {
-    return _userImageView.image != nil;
+- (NSURL *) remoteUserImageURL {
+    return [NSURL URLWithString:[THLUser currentUser].image.url];
+}
+
+- (void) setDefaultPhoto {
+     _userImageView.imageURL = [self remoteUserImageURL];
 }
 
 - (void) updateUserPhoto {
-    if ([self userPhotoValid]) {
-        [self.delegate userPhotoVerificationView:self userDidConfirmPhoto:self.userImageView.image];
+    if (self.delegate != nil) {
+        [self.delegate userPhotoVerificationView:self
+                             userDidConfirmPhoto:self.userImageView.image];
+    } else {
+        [THLUserDataWorker addProfileImage:self.userImageView.image
+                                   forUser:[THLUser currentUser]
+                                  delegate:nil];
     }
-}
-
-- (void) makeImageRound:(UIImageView *) imageView {
-//    imageView.layer.cornerRadius = imageView.frame.size.height / 2;
-//    imageView.clipsToBounds = YES;
 }
 
 #pragma mark - Constructors
 
-- (UIImageView *) newUserImage{
-    UIImageView *imageView = [[UIImageView alloc] init];
-    return imageView;
+- (THLPersonIconView *)newIconView {
+    THLPersonIconView *iconView = [THLPersonIconView new];
+    return iconView;
 }
 
 - (UITapGestureRecognizer *) tapGestureRecognizer{
@@ -125,10 +210,17 @@
 
 - (UILabel *)newDescriptionLabel {
     UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
-    label.text = @"Are your photo is completely describe your apperance? If you want to pass face control then tap on the screen to provide new photo from your FB profile.";
+    label.text = @"Choose an accurate picture of yourself by tapping on the screen so that the host can find you at the venue";
     label.numberOfLines = 0;
-    label.textAlignment = NSTextAlignmentCenter;
+    label.textAlignment = NSTextAlignmentLeft;
     label.lineBreakMode = NSLineBreakByWordWrapping;
+    return label;
+}
+
+- (UILabel *) newTitleLabel {
+    UILabel *label = THLNUILabel(kTHLNUIRegularTitle);
+    label.text = @"Profile Picture";
+    label.textAlignment = NSTextAlignmentLeft;
     return label;
 }
 
@@ -137,7 +229,7 @@
 }
 
 - (void) loadFacebookUserImageWithURL:(NSURL *) imageURL {
-    [self.userImageView sd_setImageWithURL:imageURL];
+    _userImageView.imageURL = imageURL;
 }
 
 #pragma mark GestureRecognizer call Facebook picker
@@ -145,7 +237,9 @@
 - (void) callFacebookPicker:(UITapGestureRecognizer *) recognizer{
     _imagePicker = [[OLFacebookImagePickerController alloc] init];
     _imagePicker.delegate = self;
-    [self.delegate presentFacebookImagePicker:_imagePicker];
+    [self presentViewController:_imagePicker
+                      animated:YES
+                    completion:nil];
 }
 
 #pragma mark - OLFacebookImagePickerControllerDelegate methods
@@ -183,6 +277,13 @@
                                delegate:nil
                       cancelButtonTitle:@"OK"
                       otherButtonTitles:nil] show];
+}
+
+#pragma mark dismiss as UINavigationController
+
+- (void)handleCancelAction {
+    [self.view.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
+    [_renewImageDelegate reloadUserImageWithURL:[self remoteUserImageURL]];
 }
 
 @end

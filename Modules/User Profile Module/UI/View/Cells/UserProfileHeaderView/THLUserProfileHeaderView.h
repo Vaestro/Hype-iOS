@@ -12,5 +12,6 @@
 + (NSString *)identifier;
 @property (nonatomic, strong) NSString *userName;
 @property (nonatomic, strong) NSURL *userImageURL;
+@property (nonatomic, strong) UITapGestureRecognizer *photoTapRecognizer;
 
 @end

@@ -226,12 +226,6 @@ THLNumberVerificationModuleDelegate
 #pragma mark - FACEBOOK PICTURE -
 #pragma mark - THLUserPhotoVerificationDelegate
 
-- (void)presentFacebookImagePicker:(OLFacebookImagePickerController *) imagePicker {
-    [_userPhotoVerificationView presentViewController:imagePicker
-                                             animated:YES
-                                           completion:nil];
-}
-
 - (void) userPhotoVerificationView:(THLUserPhotoVerificationViewController *)view userDidConfirmPhoto:(UIImage *) image{
     [_interactor addProfileImage:image];
 }

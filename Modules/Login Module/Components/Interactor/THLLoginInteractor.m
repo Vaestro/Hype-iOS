@@ -11,6 +11,7 @@
 #import "THLUser.h"
 #import "THLUserManager.h"
 #import "YLMoment.h"
+#import "THLUserDataWorker.h"
 
 @interface THLLoginInteractor()
 @end
@@ -112,26 +113,7 @@
 }
 
 - (void)addProfileImage:(UIImage *)profileImage {
-	PFFile *profileImageFile = [self profileImageFileForUser:_user withImage:profileImage];
-	_user.image = profileImageFile;
-    WEAKSELF();
-	[[_user saveInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask<NSNumber *> *task) {
-		[WSELF.delegate interactor:WSELF didAddProfileImage:task.error];
-		return nil;
-	}];
-}
-
-#pragma mark - Profile Image Helpers
-- (PFFile *)profileImageFileForUser:(THLUser *)user withImage:(UIImage *)image {
-	NSData *imageData = UIImagePNGRepresentation(image);
-	PFFile *imageFile = [PFFile fileWithName:[self profileImageNameForUser:user] data:imageData];
-	return imageFile;
-}
-
-- (NSString *)profileImageNameForUser:(THLUser *)user {
-	NSArray *nameComponents = @[@"ProfilePicture",
-								user.fullName];
-	return [nameComponents componentsJoinedByString:@"_"];
+    [THLUserDataWorker addProfileImage:profileImage forUser:_user delegate:_delegate];
 }
 
 - (void)dealloc {

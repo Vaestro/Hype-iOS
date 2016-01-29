@@ -13,13 +13,23 @@
 @class THLUserPhotoVerificationViewController;
 
 @protocol THLUserPhotoVerificationViewDelegate <NSObject>
-- (void)userPhotoVerificationView:(THLUserPhotoVerificationViewController *)view userDidConfirmPhoto:(UIImage *) image;
-- (void)presentFacebookImagePicker:(OLFacebookImagePickerController *) imagePicker;
-//- (void)cancelPicker:(OLFacebookImagePickerController *) imagePicker;
+
+- (void)userPhotoVerificationView:(THLUserPhotoVerificationViewController *)view
+              userDidConfirmPhoto:(UIImage *) image;
+
+@end
+
+@protocol THLUserPhotoVerificationInterfaceDidHideDelegate <NSObject>
+
+- (void) reloadUserImageWithURL:(NSURL *) imageURL;
+
 @end
 
 @interface THLUserPhotoVerificationViewController : UIViewController <THLUserPhotoVerificationInterface>
 
 @property (nonatomic, weak) id<THLUserPhotoVerificationViewDelegate> delegate;
+@property (nonatomic, weak) id<THLUserPhotoVerificationInterfaceDidHideDelegate> renewImageDelegate;
+
+- (instancetype) initForNavigationController;
 
 @end

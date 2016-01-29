@@ -16,7 +16,7 @@
 #import "THLResourceManager.h"
 #import "THLUserProfileFooterView.h"
 #import "THLUserProfileHeaderView.h"
-
+#import "THLUserPhotoVerificationViewController.h"
 
 typedef NS_ENUM(NSInteger, TableViewSection) {
     TableViewSectionPersonal = 0,
@@ -37,13 +37,20 @@ typedef NS_ENUM(NSInteger, HypelistSectionRow) {
     HypelistSectionRow_Count
 };
 
+typedef NS_ENUM(NSUInteger, ApplicationInfoCase){
+    PrivacyPolicy = 0,
+    TermsAndConditions
+};
+
 static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileViewCellIdentifier";
 
-@interface THLUserProfileViewController()
+@interface THLUserProfileViewController() <THLUserPhotoVerificationInterfaceDidHideDelegate>
+
 @property (nonatomic, strong) NSArray *urls;
 @property (nonatomic, strong) NSArray *tableCellNames;
 @property (nonatomic, strong) NSString *siteUrl;
 @property (nonatomic, strong) THLInformationViewController *infoVC;
+#warning need to examine if this controller shold exist like instanse variable
 @property (nonatomic, strong) UINavigationController *navVC;
 @property (nonatomic, strong) RACCommand *dismissVC;
 @end
@@ -62,7 +69,7 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
     [self layoutView];
     [self bindView];
     
-    self.tableCellNames = [[NSArray alloc]initWithObjects:@"Privacy Policy", @"Terms & Conditions", nil];
+    self.tableCellNames = @[@"Privacy Policy", @"Terms & Conditions"];
 }
 
 #pragma mark - View Setup
@@ -112,26 +119,33 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch(indexPath.row) {
-        case 0: {
-            UINavigationController *navVC= [[UINavigationController alloc] initWithRootViewController:_infoVC];
-            [self.view.window.rootViewController presentViewController:navVC animated:YES completion:nil];
-            _infoVC.displayText = [THLResourceManager privacyPolicyText];
-            _infoVC.title = @"Privacy Policy";
+        case PrivacyPolicy:
+            [self presentModalInformationWithText:[THLResourceManager privacyPolicyText]
+                                         andTitle:@"Privacy Policy"];
             break;
-        }
-        case 1: {
-            UINavigationController *navVC= [[UINavigationController alloc] initWithRootViewController:_infoVC];
-            [self.view.window.rootViewController presentViewController:navVC animated:YES completion:nil];
-            _infoVC.displayText = [THLResourceManager termsOfUseText];
-            _infoVC.title = @"Terms Of Use";
+        case TermsAndConditions:
+            [self presentModalInformationWithText:[THLResourceManager termsOfUseText]
+                                         andTitle:@"Terms Of Use"];
             break;
-        }
         default: {
             break;
         }
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void) presentModalInformationWithText:(NSString *) text andTitle:(NSString *) title{
+    UINavigationController *navVC= [[UINavigationController alloc] initWithRootViewController:_infoVC];
+    _infoVC.displayText = text;
+    _infoVC.title = title;
+    [self.view.window.rootViewController presentViewController:navVC animated:YES completion:nil];
+}
     
+- (void) presentModalUserProfile {
+    THLUserPhotoVerificationViewController *userPhotoVerificationView = [[THLUserPhotoVerificationViewController alloc] initForNavigationController];
+    userPhotoVerificationView.renewImageDelegate = self;
+    UINavigationController *navVC= [[UINavigationController alloc] initWithRootViewController:userPhotoVerificationView];
+    [self.view.window.rootViewController presentViewController:navVC animated:YES completion:nil];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -142,7 +156,11 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
     headerView = [[THLUserProfileHeaderView alloc] initWithFrame:frame];
     RAC(headerView, userImageURL) = RACObserve(self, userImageURL);
     RAC(headerView, userName) = RACObserve(self, userName);
-
+    [[headerView.photoTapRecognizer rac_gestureSignal]
+        subscribeNext:^(id x) {
+           [self presentModalUserProfile];
+    }];
+     
     header = headerView;
     return header;
 }
@@ -247,5 +265,10 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
     return infoVC;
 }
 
+#pragma mark Did Hide user photo varification interface
+
+- (void) reloadUserImageWithURL:(NSURL *) imageURL{
+    self.userImageURL = imageURL;
+}
 
 @end
