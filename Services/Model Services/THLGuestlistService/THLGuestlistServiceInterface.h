@@ -21,7 +21,7 @@
 //----------------------------------------------------------------
 #pragma mark - Fetch Guestlists For Host at a Event/Promotion
 //----------------------------------------------------------------
-- (BFTask *)fetchGuestlistsForPromotionAtEvent:(NSString *)eventId;
+- (BFTask *)fetchGuestlistsForEvent:(NSString *)eventId;
 
 //----------------------------------------------------------------
 #pragma mark - Fetch Guestlists For Host at Dashboard Notifications

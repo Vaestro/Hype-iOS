@@ -30,9 +30,9 @@
     return self;
 }
 
-- (BFTask *)fetchGuestlistsForPromotionAtEvent:(NSString *)eventId {
+- (BFTask *)fetchGuestlistsForEvent:(NSString *)eventId {
     WEAKSELF();
-    return [[_guestlistService fetchGuestlistsForPromotionAtEvent:eventId] continueWithSuccessBlock:^id(BFTask *task) {
+    return [[_guestlistService fetchGuestlistsForEvent:eventId] continueWithSuccessBlock:^id(BFTask *task) {
         NSSet *entities = [NSSet setWithArray:[WSELF.entityMapper mapGuestlists:task.result]];
         [_dataStore updateOrAddEntities:entities];
         return [BFTask taskWithResult:entities];

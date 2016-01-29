@@ -31,7 +31,7 @@ static NSString *const kTHLEventHostingModuleViewKey = @"kTHLEventHostingModuleV
 
 - (void)updateGuestlists {
     WEAKSELF();
-    [[_dataManager fetchGuestlistsForPromotionAtEvent:_eventEntity.objectId] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+    [[_dataManager fetchGuestlistsForEvent:_eventEntity.objectId] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
         [WSELF.delegate interactor:WSELF didUpdateGuestlists:task.error];
         return nil;
     }];
@@ -48,7 +48,7 @@ static NSString *const kTHLEventHostingModuleViewKey = @"kTHLEventHostingModuleV
 - (THLViewDataSourceGrouping *)viewGrouping {
     return [THLViewDataSourceGrouping withEntityBlock:^NSString *(NSString *collection, THLEntity *entity) {
         if ([entity isKindOfClass:[THLGuestlistEntity class]]) {
-            if ([[[[entity valueForKey:@"promotion"] valueForKey:@"event"] valueForKey:@"objectId"] isEqualToString:_eventEntity.objectId]) {
+            if ([[[entity valueForKey:@"event"] valueForKey:@"objectId"] isEqualToString:_eventEntity.objectId]) {
                 return collection;
             }
         }

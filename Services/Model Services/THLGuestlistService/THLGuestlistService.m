@@ -30,23 +30,23 @@
 #pragma mark - Fetch Guestlists For Host at a Event/Promotion
 //----------------------------------------------------------------
 
-//- (BFTask *)fetchGuestlistsForPromotionAtEvent:(NSString *)eventId {
-//    BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
-//    NSMutableArray *completedGuestlists = [NSMutableArray new];
-//    [[_queryFactory queryForGuestlistsForPromotionAtEvent:eventId] findObjectsInBackgroundWithBlock:^(NSArray *guestlists, NSError *error) {
-//        for (PFObject *guestlist in guestlists) {
-//            PFObject *promotion = guestlist[@"Promotion"];
-//            [guestlist setObject:promotion forKey:@"Promotion"];
-//            PFObject *host = guestlist[@"Promotion"][@"host"];
-//            if (host != nil) {
-//                [guestlist setObject:promotion forKey:@"host"];
-//            }
-//            [completedGuestlists addObject:guestlist];
-//        }
-//        [completionSource setResult:completedGuestlists];
-//    }];
-//    return completionSource.task;
-//}
+- (BFTask *)fetchGuestlistsForEvent:(NSString *)eventId {
+    BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
+    NSMutableArray *completedGuestlists = [NSMutableArray new];
+    [[_queryFactory queryForGuestlistsForEvent:eventId] findObjectsInBackgroundWithBlock:^(NSArray *guestlists, NSError *error) {
+        for (PFObject *guestlist in guestlists) {
+            PFObject *event = guestlist[@"event"];
+            [guestlist setObject:event forKey:@"event"];
+            PFObject *host = guestlist[@"event"][@"host"];
+            if (host != nil) {
+                [event setObject:host forKey:@"host"];
+            }
+            [completedGuestlists addObject:guestlist];
+        }
+        [completionSource setResult:completedGuestlists];
+    }];
+    return completionSource.task;
+}
 
 //----------------------------------------------------------------
 #pragma mark - Fetch Guestlists For Host for Dashboard Notifications
@@ -57,11 +57,11 @@
     NSMutableArray *completedGuestlists = [NSMutableArray new];
     [[_queryFactory queryForGuestlists] findObjectsInBackgroundWithBlock:^(NSArray *guestlists, NSError *error) {
         for (PFObject *guestlist in guestlists) {
-            PFObject *promotion = guestlist[@"Promotion"];
-            [guestlist setObject:promotion forKey:@"Promotion"];
-            PFObject *host = guestlist[@"Promotion"][@"host"];
+            PFObject *event = guestlist[@"event"];
+            [guestlist setObject:event forKey:@"event"];
+            PFObject *host = guestlist[@"event"][@"host"];
             if (host != nil) {
-                [guestlist setObject:promotion forKey:@"host"];
+                [event setObject:host forKey:@"host"];
             }
             [completedGuestlists addObject:guestlist];
         }
