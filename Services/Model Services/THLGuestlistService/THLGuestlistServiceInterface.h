@@ -11,7 +11,6 @@
 @class BFTask;
 @class THLGuestlist;
 
-@class THLPromotionEntity;
 @class THLUser;
 @class THLEvent;
 @class THLGuestlistInvite;
@@ -22,7 +21,7 @@
 //----------------------------------------------------------------
 #pragma mark - Fetch Guestlists For Host at a Event/Promotion
 //----------------------------------------------------------------
-- (BFTask *)fetchGuestlistsForPromotionAtEvent:(NSString *)eventId;
+- (BFTask *)fetchGuestlistsForEvent:(NSString *)eventId;
 
 //----------------------------------------------------------------
 #pragma mark - Fetch Guestlists For Host at Dashboard Notifications
@@ -35,14 +34,9 @@
 - (BFTask *)fetchGuestlistWithId:(NSString *)guestlistId;
 
 //----------------------------------------------------------------
-#pragma mark - Create Guestlist For Promotion
-//----------------------------------------------------------------
-- (BFTask *)createGuestlistForPromotion:(THLPromotionEntity *)promotionEntity withInvites:(NSArray *)guestPhoneNumbers;
-
-//----------------------------------------------------------------
 #pragma mark - Create Additional Guestlist Invites for an Existing Guestlist
 //----------------------------------------------------------------
-- (BFTask *)updateGuestlist:(NSString *)guestlistId withInvites:(NSArray *)guestPhoneNumbers forPromotion:(THLPromotionEntity *)promotionEntity;
+- (BFTask *)updateGuestlist:(NSString *)guestlistId withInvites:(NSArray *)guestPhoneNumbers forEvent:(THLEventEntity *)eventEntity;
 
 //----------------------------------------------------------------
 #pragma mark - Fetch Guestlists Invites For Guestlist
@@ -61,6 +55,13 @@
 #pragma mark - Fetch Guestlists For Guest Using The Guestlist Invite ID
 //----------------------------------------------------------------
 - (BFTask *)fetchGuestlistInviteWithId:(NSString *)guestlistInviteId;
+
+
+//----------------------------------------------------------------
+#pragma mark - Create Guestlist For Event
+//----------------------------------------------------------------
+- (BFTask *)createGuestlistForEvent:(THLEventEntity *)event withInvites:(NSArray *)guestPhoneNumbers;
+
 
 //----------------------------------------------------------------
 #pragma mark - Update Guest's Guestlist Invite Response Status

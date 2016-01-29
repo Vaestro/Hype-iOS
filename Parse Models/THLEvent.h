@@ -8,8 +8,8 @@
 
 #import <Parse/Parse.h>
 #import <Parse/PFObject+Subclass.h>
-
 #import "THLLocation.h"
+@class THLUser;
 
 @interface THLEvent : PFObject<PFSubclassing>
 @property (nonatomic, retain) NSDate *date;
@@ -20,4 +20,7 @@
 @property (nonatomic, retain) PFFile *promoImage;
 @property (nonatomic) int creditsPayout;
 @property (nonatomic, retain) THLLocation *location;
+@property (nonatomic, retain) THLUser *host;
+@property (nonatomic) int maleRatio;
+@property (nonatomic) int femaleRatio;
 @end

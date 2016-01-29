@@ -10,8 +10,7 @@
 
 @implementation THLGuestlist
 @dynamic owner;
-@dynamic promotion;
-@dynamic eventId;
+@dynamic event;
 @dynamic reviewStatus;
 @dynamic date;
 

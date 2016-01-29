@@ -12,7 +12,6 @@
 #import "THLPopupNotificationViewModel.h"
 
 #import "THLEventEntity.h"
-#import "THLPromotionEntity.h"
 #import "THLGuestlistEntity.h"
 #import "THLGuestlistInviteEntity.h"
 #import "THLGuestEntity.h"
@@ -56,12 +55,11 @@ THLPopupNotificationInteractorDelegate
             SSELF.imageURL = pushInfo[kPushInfoKeyImageURL];
             if ([THLUserManager userIsGuest]) {
                 SSELF.guestlistInviteEntity = task.result;
-                SSELF.eventEntity = SSELF.guestlistInviteEntity.guestlist.promotion.event;
+                SSELF.eventEntity = SSELF.guestlistInviteEntity.guestlist.event;
             } else if ([THLUserManager userIsHost]) {
                 SSELF.guestlistEntity = task.result;
-                SSELF.eventEntity = SSELF.guestlistEntity.promotion.event;
+                SSELF.eventEntity = SSELF.guestlistEntity.event;
             }
-    
             [SSELF presentPopupNotificationInterface];
         }
         return task;

@@ -11,8 +11,9 @@
 #import "THLViewDataSourceFactory.h"
 #import "THLGuestlistEntity.h"
 #import "THLUser.h"
-#import "THLPromotionEntity.h"
+#import "THLEventEntity.h"
 #import "THLHostEntity.h"
+
 
 @interface THLHostDashboardInteractor()
 
@@ -49,7 +50,7 @@
     return [THLViewDataSourceGrouping withEntityBlock:^NSString *(NSString *collection, THLEntity *entity) {
         if ([entity isKindOfClass:[THLGuestlistEntity class]])  {
             THLGuestlistEntity *guestlistEntity = (THLGuestlistEntity *)entity;
-            if ([guestlistEntity.promotion.host.objectId isEqualToString:[THLUser currentUser].objectId]
+            if ([guestlistEntity.event.host.objectId isEqualToString:[THLUser currentUser].objectId]
                 && [guestlistEntity.date thl_isOrAfterToday]) {
                 return @"Guestlist Requests";
             }

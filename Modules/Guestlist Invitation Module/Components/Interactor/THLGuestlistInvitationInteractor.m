@@ -12,7 +12,7 @@
 #import "THLGuestEntity.h"
 #import "THLGuestlistEntity.h"
 #import "THLGuestlistInvite.h"
-#import "THLPromotionEntity.h"
+#import "THLEventEntity.h"
 
 static NSString *const kGuestEntityFirstNameKey = @"firstName";
 static NSString *const kGuestEntityLastNameKey = @"lastName";
@@ -38,8 +38,8 @@ static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInv
 	return self;
 }
 
-- (void)setPromotionEntity:(THLPromotionEntity *)promotionEntity {
-    _promotionEntity = promotionEntity;
+- (void)setEventEntity:(THLEventEntity *)eventEntity {
+    _eventEntity = eventEntity;
     [_addedGuestDigits removeAllObjects];
     _currentGuests = nil;
 }
@@ -145,15 +145,15 @@ static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInv
     WEAKSELF();
 //	[self checkForGuestlist];
     if (_guestlistId == nil) {
-        [[_dataManager submitGuestlistForPromotion:_promotionEntity withInvites:[self obtainDigits:_addedGuests]] continueWithSuccessBlock:^id(BFTask *task) {
-            [[_dataManager getOwnerInviteForPromotion:_promotionEntity] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *fetchTask) {
+        [[_dataManager submitGuestlistForEvent:_eventEntity withInvites:[self obtainDigits:_addedGuests]] continueWithSuccessBlock:^id(BFTask *task) {
+            [[_dataManager getOwnerInviteForEvent:_eventEntity] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *fetchTask) {
                 [WSELF.delegate interactor:WSELF didCommitChangesToGuestlist:task.error];
                 return nil;
             }];
             return nil;
         }];
     } else if (_guestlistId != nil) {
-        [[_dataManager updateGuestlist:_guestlistId withInvites:[self obtainDigits:_addedGuests] forPromotion:_promotionEntity] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+        [[_dataManager updateGuestlist:_guestlistId withInvites:[self obtainDigits:_addedGuests] forEvent:_eventEntity] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
             [WSELF.delegate interactor:WSELF didCommitChangesToGuestlist:task.error];
             return nil;
         }];

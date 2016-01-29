@@ -11,15 +11,14 @@
 @class THLDataStore;
 @class APAddressBook;
 @class THLEntityMapper;
-@class THLPromotionEntity;
+@class THLEventEntity;
 @class THLUser;
 @protocol THLGuestlistServiceInterface;
-@protocol THLPromotionServiceInterface;
+@protocol THLEventServiceInterface;
 
 @interface THLGuestlistInvitationDataManager : NSObject
 #pragma mark - Dependencies
 @property (nonatomic, readonly) id<THLGuestlistServiceInterface> guestlistService;
-@property (nonatomic, readonly) id<THLPromotionServiceInterface> promotionService;
 @property (nonatomic, readonly) THLDataStore *dataStore;
 @property (nonatomic, readonly) THLDataStore *dataStore2;
 @property (nonatomic, readonly) THLEntityMapper *entityMapper;
@@ -32,10 +31,9 @@
 
 
 - (BFTask *)fetchMembersOnGuestlist:(NSString *)guestlistId;
-- (BFTask *)submitGuestlistForPromotion:(THLPromotionEntity *)promotionEntity withInvites:(NSArray *)guestPhoneNumbers;
-- (BFTask *)getOwnerInviteForPromotion:(THLPromotionEntity *)promotionEntity;
-
-- (BFTask *)updateGuestlist:(NSString *)guestlistId withInvites:(NSArray *)guestPhoneNumbers forPromotion:(THLPromotionEntity *)promotionEntity;
+- (BFTask *)submitGuestlistForEvent:(THLEventEntity *)eventEntity withInvites:(NSArray *)guestPhoneNumbers;
+- (BFTask *)getOwnerInviteForEvent:(THLEventEntity *)eventEntity;
+- (BFTask *)updateGuestlist:(NSString *)guestlistId withInvites:(NSArray *)guestPhoneNumbers forEvent:(THLEventEntity *)eventEntity;
 - (void)loadContacts;
 
 @end

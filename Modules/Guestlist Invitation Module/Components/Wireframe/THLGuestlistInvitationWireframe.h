@@ -10,7 +10,6 @@
 #import "THLGuestlistInvitationModuleInterface.h"
 
 @protocol THLGuestlistServiceInterface;
-@protocol THLPromotionServiceInterface;
 @class THLEntityMapper;
 @class APAddressBook;
 @class THLDataStore;

@@ -8,13 +8,12 @@
 
 #import "THLEntity.h"
 @class THLGuestEntity;
-@class THLPromotionEntity;
+@class THLEventEntity;
 
 @interface THLGuestlistEntity : THLEntity
 @property(nonatomic) THLStatus reviewStatus;
-@property(nonatomic, strong) NSString *eventId;
 @property(nonatomic, strong) THLGuestEntity *owner;
-@property(nonatomic, strong) THLPromotionEntity *promotion;
+@property(nonatomic, strong) THLEventEntity *event;
 @property (nonatomic, copy) NSDate *date;
 
 @property(nonatomic, strong) NSArray<THLGuestEntity *> *allGuests;

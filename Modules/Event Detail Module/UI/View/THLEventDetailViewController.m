@@ -131,7 +131,6 @@
     WEAKSELF();
     RAC(self.eventNameLabel, text, @"") = RACObserve(self, eventName);
     RAC(self.dateLabel, text, @"") = RACObserve(self, eventDate);
-    
     RAC(self.promotionInfoView, promotionInfo) = RACObserve(self, promoInfo);
     RAC(self.promotionInfoView, promoImageURL) = RACObserve(self, promoImageURL);
     RAC(self.locationInfoView, locationInfo) = RACObserve(self, locationInfo);

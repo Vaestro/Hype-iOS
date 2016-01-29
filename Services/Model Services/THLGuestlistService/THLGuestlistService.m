@@ -10,9 +10,9 @@
 #import "THLParseQueryFactory.h"
 #import "Parse.h"
 #import "THLGuestlistInvite.h"
-#import "THLPromotionEntity.h"
 #import "THLEventEntity.h"
-#import "THLPromotion.h"
+#import "THLEvent.h"
+#import "THLLocationEntity.h"
 #import "THLUser.h"
 
 @implementation THLGuestlistService
@@ -30,16 +30,16 @@
 #pragma mark - Fetch Guestlists For Host at a Event/Promotion
 //----------------------------------------------------------------
 
-- (BFTask *)fetchGuestlistsForPromotionAtEvent:(NSString *)eventId {
+- (BFTask *)fetchGuestlistsForEvent:(NSString *)eventId {
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
     NSMutableArray *completedGuestlists = [NSMutableArray new];
-    [[_queryFactory queryForGuestlistsForPromotionAtEvent:eventId] findObjectsInBackgroundWithBlock:^(NSArray *guestlists, NSError *error) {
+    [[_queryFactory queryForGuestlistsForEvent:eventId] findObjectsInBackgroundWithBlock:^(NSArray *guestlists, NSError *error) {
         for (PFObject *guestlist in guestlists) {
-            PFObject *promotion = guestlist[@"Promotion"];
-            [guestlist setObject:promotion forKey:@"Promotion"];
-            PFObject *host = guestlist[@"Promotion"][@"host"];
+            PFObject *event = guestlist[@"event"];
+            [guestlist setObject:event forKey:@"event"];
+            PFObject *host = guestlist[@"event"][@"host"];
             if (host != nil) {
-                [guestlist setObject:promotion forKey:@"host"];
+                [event setObject:host forKey:@"host"];
             }
             [completedGuestlists addObject:guestlist];
         }
@@ -57,11 +57,11 @@
     NSMutableArray *completedGuestlists = [NSMutableArray new];
     [[_queryFactory queryForGuestlists] findObjectsInBackgroundWithBlock:^(NSArray *guestlists, NSError *error) {
         for (PFObject *guestlist in guestlists) {
-            PFObject *promotion = guestlist[@"Promotion"];
-            [guestlist setObject:promotion forKey:@"Promotion"];
-            PFObject *host = guestlist[@"Promotion"][@"host"];
+            PFObject *event = guestlist[@"event"];
+            [guestlist setObject:event forKey:@"event"];
+            PFObject *host = guestlist[@"event"][@"host"];
             if (host != nil) {
-                [guestlist setObject:promotion forKey:@"host"];
+                [event setObject:host forKey:@"host"];
             }
             [completedGuestlists addObject:guestlist];
         }
@@ -77,11 +77,11 @@
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
     [[_queryFactory queryForGuestlistWithId] getObjectInBackgroundWithId:guestlistId block:^(PFObject *guestlist, NSError *error) {
         if (!error) {
-            PFObject *promotion = guestlist[@"Promotion"];
-            [guestlist setObject:promotion forKey:@"Promotion"];
-            PFObject *host = guestlist[@"Promotion"][@"host"];
+            PFObject *event = guestlist[@"event"];
+            [guestlist setObject:event forKey:@"event"];
+            PFObject *host = guestlist[@"event"][@"host"];
             if (host != nil) {
-                [guestlist setObject:promotion forKey:@"host"];
+                [event setObject:host forKey:@"host"];
             }
         } else {
             [completionSource setError:error];
@@ -91,31 +91,30 @@
 }
 
 //----------------------------------------------------------------
-#pragma mark - Create Guestlist For Promotion
+#pragma mark - Create Guestlist For Event
 //----------------------------------------------------------------
 
-- (BFTask *)createGuestlistForPromotion:(THLPromotionEntity *)promotionEntity withInvites:(NSArray *)guestPhoneNumbers {
+- (BFTask *)createGuestlistForEvent:(THLEventEntity *)eventEntity withInvites:(NSArray *)guestPhoneNumbers {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     NSLocale *enUSPOSIXLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
     [dateFormatter setLocale:enUSPOSIXLocale];
     [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZZZ"];
     
-    NSString *iso8601String = [dateFormatter stringFromDate:promotionEntity.event.date];
+    NSString *iso8601String = [dateFormatter stringFromDate:eventEntity.date];
     
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
     THLUser *currentUser = [THLUser currentUser];
     PFObject *guestlist = [PFObject objectWithClassName:@"Guestlist"];
-    guestlist[@"Promotion"] = [THLPromotion objectWithoutDataWithObjectId:promotionEntity.objectId];
     guestlist[@"Owner"] = currentUser;
-    guestlist[@"date"] = promotionEntity.event.date;
+    guestlist[@"date"] = eventEntity.date;
     guestlist[@"reviewStatus"] = [NSNumber numberWithInt:0];
-    guestlist[@"eventId"] = promotionEntity.eventId;
+    guestlist[@"event"] = [THLEvent objectWithoutDataWithObjectId:eventEntity.objectId];
     [guestlist saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             [PFCloud callFunctionInBackground:@"sendOutNotifications"
-                               withParameters:@{@"promotionId": promotionEntity.objectId,
-                                                @"eventName":promotionEntity.event.location.name,
-                                                @"promotionTime":iso8601String,
+                               withParameters:@{@"eventId": eventEntity.objectId,
+                                                @"eventName":eventEntity.location.name,
+                                                @"eventTime":iso8601String,
                                                 @"guestPhoneNumbers": guestPhoneNumbers,
                                                 @"guestlistId": guestlist.objectId}
                                         block:^(id guestlistInvite, NSError *cloudError) {
@@ -132,12 +131,12 @@
     return completionSource.task;
 }
 
-- (BFTask *)updateGuestlist:(NSString *)guestlistId withInvites:(NSArray *)guestPhoneNumbers forPromotion:(THLPromotionEntity *)promotionEntity {
+- (BFTask *)updateGuestlist:(NSString *)guestlistId withInvites:(NSArray *)guestPhoneNumbers forEvent:(THLEventEntity *)eventEntity {
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
     [PFCloud callFunctionInBackground:@"sendOutNotifications"
-                       withParameters:@{@"promotionId": promotionEntity.objectId,
-                                        @"eventName":promotionEntity.event.location.name,
-                                        @"promotionTime":promotionEntity.event.date,
+                       withParameters:@{@"eventId": eventEntity.objectId,
+                                        @"eventName":eventEntity.location.name,
+                                        @"eventTime": eventEntity.date,
                                         @"guestPhoneNumbers": guestPhoneNumbers,
                                         @"guestlistId": guestlistId}
                                 block:^(id object, NSError *error) {
@@ -194,13 +193,11 @@
                 for (PFObject *guestlistInvite in guestlistInvites) {
                     PFObject *guestlist = guestlistInvite[@"Guestlist"];
                     [guestlistInvite setObject:guestlist forKey:@"Guestlist"];
-                    PFObject *promotion = guestlistInvite[@"Guestlist"][@"Promotion"];
-                    [guestlist setObject:promotion forKey:@"Promotion"];
-                    PFObject *host = guestlistInvite[@"Guestlist"][@"Promotion"][@"host"];
-                    [promotion setObject:host forKey:@"host"];
-                    PFObject *event = guestlistInvite[@"Guestlist"][@"Promotion"][@"event"];
-                    [promotion setObject:event forKey:@"event"];
-                    PFObject *location = guestlistInvite[@"Guestlist"][@"Promotion"][@"event"][@"location"];
+                    PFObject *event= guestlistInvite[@"Guestlist"][@"event"];
+                    [guestlist setObject:event forKey:@"event"];
+                    PFObject *host = guestlistInvite[@"Guestlist"][@"event"][@"host"];
+                    [event setObject:host forKey:@"host"];
+                    PFObject *location = guestlistInvite[@"Guestlist"][@"event"][@"location"];
                     [event setObject:location forKey:@"location"];
                     PFObject *guest = guestlistInvite[@"Guest"];
                     if (guest.isDataAvailable) {
@@ -246,11 +243,9 @@
             [guestlistInvite setObject:guestlist forKey:@"Guestlist"];
             PFObject *owner = guestlistInvite[@"Guestlist"][@"Owner"];
             [guestlist setObject:owner forKey:@"Owner"];
-            PFObject *promotion = guestlistInvite[@"Guestlist"][@"Promotion"];
-            [guestlist setObject:promotion forKey:@"Promotion"];
-            PFObject *fetchedEvent = guestlistInvite[@"Guestlist"][@"Promotion"][@"event"];
-            [promotion setObject:fetchedEvent forKey:@"event"];
-            PFObject *location = guestlistInvite[@"Guestlist"][@"Promotion"][@"event"][@"location"];
+            PFObject *fetchedEvent = guestlistInvite[@"Guestlist"][@"event"];
+            [guestlist setObject:fetchedEvent forKey:@"event"];
+            PFObject *location = guestlistInvite[@"Guestlist"][@"event"][@"location"];
             [fetchedEvent setObject:location forKey:@"location"];
             [completionSource setResult:guestlistInvite];
         } else {
@@ -273,11 +268,9 @@
             [guestlistInvite setObject:guestlist forKey:@"Guestlist"];
             PFObject *owner = guestlistInvite[@"Guestlist"][@"Owner"];
             [guestlist setObject:owner forKey:@"Owner"];
-            PFObject *promotion = guestlistInvite[@"Guestlist"][@"Promotion"];
-            [guestlist setObject:promotion forKey:@"Promotion"];
-            PFObject *event = guestlistInvite[@"Guestlist"][@"Promotion"][@"event"];
-            [promotion setObject:event forKey:@"event"];
-            PFObject *location = guestlistInvite[@"Guestlist"][@"Promotion"][@"event"][@"location"];
+            PFObject *event = guestlistInvite[@"Guestlist"][@"event"];
+            [guestlist setObject:event forKey:@"event"];
+            PFObject *location = guestlistInvite[@"Guestlist"][@"event"][@"location"];
             [event setObject:location forKey:@"location"];
             [completionSource setResult:guestlistInvite];
         } else {

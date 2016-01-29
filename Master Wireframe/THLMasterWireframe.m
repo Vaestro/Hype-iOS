@@ -21,7 +21,6 @@
 #import "THLGuestFlowWireframe.h"
 #import "THLHostFlowWireframe.h"
 #import "THLEventDetailWireframe.h"
-#import "THLPromotionSelectionWireframe.h"
 #import "THLGuestlistInvitationWireframe.h"
 #import "THLPopupNotificationWireframe.h"
 #import "THLWaitlistPresenter.h" //Equivalent of wireframe for this instance
@@ -110,7 +109,9 @@ THLWaitlistPresenterDelegate
 
 - (void)presentOnboardingAndLoginInterface {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+
     BOOL userApproved = [userDefaults boolForKey:@"userApproved"];
+
     if (userApproved) {
         THLLoginWireframe *loginWireframe = [_dependencyManager newLoginWireframe];
         _currentWireframe = loginWireframe;

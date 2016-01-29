@@ -26,7 +26,6 @@
 #import "THLEventDetailWireframe.h"
 #import "THLUserProfileWireframe.h"
 #import "THLEventHostingWireframe.h"
-#import "THLPromotionSelectionWireframe.h"
 #import "THLGuestlistInvitationWireframe.h"
 #import "THLGuestlistReviewWireframe.h"
 #import "THLPopupNotificationWireframe.h"
@@ -50,7 +49,6 @@
 //Services
 #import "THLLoginService.h"
 #import "THLEventService.h"
-#import "THLPromotionService.h"
 #import "THLLocationService.h"
 #import "THLFacebookProfilePictureURLFetchService.h"
 #import "THLGuestlistService.h"
@@ -79,7 +77,6 @@
 @property (nonatomic, weak) THLUserProfileWireframe *userProfileWireframe;
 @property (nonatomic, weak) THLEventDetailWireframe *eventDetailWireframe;
 @property (nonatomic, weak) THLEventHostingWireframe *eventHostingWireframe;
-@property (nonatomic, weak) THLPromotionSelectionWireframe *promotionSelectionWireframe;
 @property (nonatomic, weak) THLGuestlistInvitationWireframe *guestlistInvitationWireframe;
 @property (nonatomic, weak) THLGuestlistReviewWireframe *guestlistReviewWireframe;
 @property (nonatomic, weak) THLPopupNotificationWireframe *popupNotificationWireframe;
@@ -109,7 +106,6 @@
 @property (nonatomic, strong) THLEventService *eventService;
 @property (nonatomic, strong) THLFacebookProfilePictureURLFetchService *facebookProfilePictureURLFetchService;
 @property (nonatomic, strong) THLLoginService *loginService;
-@property (nonatomic, strong) THLPromotionService *promotionService;
 @property (nonatomic, strong) THLLocationService *locationService;
 @property (nonatomic, strong) THLGuestlistService *guestlistService;
 @property (nonatomic, strong) THLPerkStoreItemService *perkStoreItemService;
@@ -176,7 +172,6 @@
 
 - (THLEventDetailWireframe *)newEventDetailWireframe {
 	THLEventDetailWireframe *wireframe = [[THLEventDetailWireframe alloc] initWithLocationService:self.locationService
-																				 promotionService:self.promotionService
                                                                                  guestlistService:self.guestlistService
 																					entityMappper:self.entityMapper
                                                                                   databaseManager:self.databaseManager];
@@ -191,12 +186,6 @@
                                                                                 entityMappper:self.entityMapper];
     self.eventHostingWireframe = wireframe;
     return wireframe;
-}
-
-- (THLPromotionSelectionWireframe *)newPromotionSelectionWireframe {
-	THLPromotionSelectionWireframe *wireframe = [[THLPromotionSelectionWireframe alloc] initWithEntityMapper:self.entityMapper promotionService:self.promotionService];
-	self.promotionSelectionWireframe = wireframe;
-	return nil;
 }
 
 - (THLGuestlistInvitationWireframe *)newGuestlistInvitationWireframe {
@@ -388,13 +377,6 @@
 		_loginService = [[THLLoginService alloc] init];
 	}
 	return _loginService;
-}
-
-- (THLPromotionService *)promotionService {
-	if (!_promotionService) {
-		_promotionService = [[THLPromotionService alloc] initWithQueryFactory:self.parseQueryFactory];
-	}
-	return _promotionService;
 }
 
 - (THLLocationService *)locationService {

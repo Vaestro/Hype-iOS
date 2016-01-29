@@ -20,8 +20,8 @@
 #import "THLGuestlistReviewCellViewModel.h"
 #import "THLGuestlistEntity.h"
 #import "THLGuestEntity.h"
-#import "THLPromotionEntity.h"
 #import "THLEventEntity.h"
+#import "THLLocationEntity.h"
 #import "THLConfirmationView.h"
 #import "THLUserManager.h"
 #import "THLHostEntity.h"
@@ -148,13 +148,13 @@ THLGuestlistReviewInteractorDelegate
     }];
 
     
-    [_view setHeaderViewImage:_guestlistEntity.promotion.event.location.imageURL];
+    [_view setHeaderViewImage:_guestlistEntity.event.location.imageURL];
     NSString *userName = _guestlistEntity.owner.firstName;
-    NSString *venueLocation = _guestlistEntity.promotion.event.location.name;
+    NSString *venueLocation = _guestlistEntity.event.location.name;
     [_view setTitle:[NSString stringWithFormat:@"%@'s List For %@", userName, venueLocation]];
     [_view setDismissCommand:dismissCommand];
     [_view setShowMenuCommand:showMenuCommand];
-    [_view setFormattedDate: [NSString stringWithFormat:@"%@, %@", _guestlistEntity.promotion.event.date.thl_weekdayString, _guestlistEntity.promotion.event.date.thl_timeString]];
+    [_view setFormattedDate: [NSString stringWithFormat:@"%@, %@", _guestlistEntity.event.date.thl_weekdayString, _guestlistEntity.event.date.thl_timeString]];
     
     [_view setGuestlistReviewStatus: _guestlistEntity.reviewStatus];
     switch (_guestlistEntity.reviewStatus) {
@@ -272,8 +272,8 @@ THLGuestlistReviewInteractorDelegate
         return [RACSignal empty];
     }];
     
-    [_menuView setHostName:_guestlistEntity.promotion.host.firstName];
-    [_menuView setHostImageURL:_guestlistEntity.promotion.host.imageURL];
+    [_menuView setHostName:_guestlistEntity.event.host.firstName];
+    [_menuView setHostImageURL:_guestlistEntity.event.host.imageURL];
 
     [_menuView setDismissCommand:dismissCommand];
     [_menuView setMenuAddGuestsCommand:addGuestsCommand];
@@ -330,9 +330,9 @@ THLGuestlistReviewInteractorDelegate
 
 - (void)handleResponseAction {
     NSString *ownerName = _guestlistInviteEntity.guestlist.owner.firstName;
-    NSString *eventName =_guestlistInviteEntity.guestlist.promotion.event.location.name;
-    NSString *promotionTime =_guestlistInviteEntity.guestlist.promotion.event.date.thl_timeString;
-    NSString *promotionDate =_guestlistInviteEntity.guestlist.promotion.event.date.thl_weekdayString;
+    NSString *eventName =_guestlistInviteEntity.guestlist.event.location.name;
+    NSString *promotionTime =_guestlistInviteEntity.guestlist.event.date.thl_timeString;
+    NSString *promotionDate =_guestlistInviteEntity.guestlist.event.date.thl_weekdayString;
     
     switch (_reviewerStatus) {
         case THLGuestlistPendingGuest: {
@@ -369,7 +369,7 @@ THLGuestlistReviewInteractorDelegate
             break;
         }
         case THLGuestlistPendingHost: {
-            [_confirmationView showResponseFlowWithTitle:@"Respond Now" message:[NSString stringWithFormat:@"%@'s party would like to join to your guestlist for %@, %@ at %@", _guestlistEntity.owner.firstName, _guestlistEntity.promotion.event.location.name ,_guestlistEntity.promotion.event.date.thl_weekdayString, _guestlistEntity.promotion.event.date.thl_timeString] ];
+            [_confirmationView showResponseFlowWithTitle:@"Respond Now" message:[NSString stringWithFormat:@"%@'s party would like to join to your guestlist for %@, %@ at %@", _guestlistEntity.owner.firstName, _guestlistEntity.event.location.name ,_guestlistEntity.event.date.thl_weekdayString, _guestlistEntity.event.date.thl_timeString]];
             break;
         }
         case THLGuestlistActiveHost: {
@@ -431,7 +431,7 @@ THLGuestlistReviewInteractorDelegate
 }
 
 - (void)handleAddGuestsAction {
-    [self.moduleDelegate guestlistReviewModule:self promotion:_guestlistInviteEntity.guestlist.promotion withGuestlistId:_guestlistInviteEntity.guestlist.objectId andGuests:[_interactor guests] presentGuestlistInvitationInterfaceOnController:(UIViewController *)self.view];
+    [self.moduleDelegate guestlistReviewModule:self event:_guestlistInviteEntity.guestlist.event withGuestlistId:_guestlistInviteEntity.guestlist.objectId andGuests:[_interactor guests] presentGuestlistInvitationInterfaceOnController:(UIViewController *)self.view];
 }
 
 # pragma mark - Phone Kit
@@ -519,8 +519,8 @@ THLGuestlistReviewInteractorDelegate
 
 - (void)interactor:(THLGuestlistReviewInteractor *)interactor didGetToken:(NSString *)token {
     self.callToken = token;
-    NSString *twilioNumber = _guestlistInviteEntity.guestlist.promotion.host.twilioNumber;
-    NSString *hostNumber = _guestlistInviteEntity.guestlist.promotion.host.phoneNumber;
+    NSString *twilioNumber = _guestlistInviteEntity.guestlist.event.host.twilioNumber;
+    NSString *hostNumber = _guestlistInviteEntity.guestlist.event.host.phoneNumber;
     [self handleCallActionWithCallerdId:twilioNumber toHostNumber:hostNumber];
 }
 

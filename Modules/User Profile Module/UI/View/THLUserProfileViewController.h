@@ -17,7 +17,6 @@
 THLUserProfileView,
 UITableViewDelegate,
 UITableViewDataSource,
-
 UIWebViewDelegate,
 MFMailComposeViewControllerDelegate
 >

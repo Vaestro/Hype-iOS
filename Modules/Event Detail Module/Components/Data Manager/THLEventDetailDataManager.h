@@ -18,7 +18,6 @@
 @class THLGuestlistInviteEntity;
 
 @protocol THLLocationServiceInterface;
-@protocol THLPromotionServiceInterface;
 @protocol THLGuestlistServiceInterface;
 
 @protocol THLEventDetailDataManagerDelegate <NSObject>
@@ -30,18 +29,15 @@
 
 #pragma mark - Dependencies
 @property (nonatomic, readonly, weak) id<THLLocationServiceInterface> locationService;
-@property (nonatomic, readonly, weak) id<THLPromotionServiceInterface> promotionService;
 @property (nonatomic, readonly, weak) id<THLGuestlistServiceInterface> guestlistService;
 @property (nonatomic, readonly, weak) THLEntityMapper *entityMapper;
 @property (nonatomic, readonly, weak) THLYapDatabaseManager *databaseManager;
 
 - (instancetype)initWithLocationService:(id<THLLocationServiceInterface>)locationService
-					   promotionService:(id<THLPromotionServiceInterface>)promotionService
                        guestlistService:(id<THLGuestlistServiceInterface>)guestlistService
 						  entityMappper:(THLEntityMapper *)entityMapper
                         databaseManager:(THLYapDatabaseManager *)databaseManager;
 
 - (BFTask<CLPlacemark *> *)fetchPlacemarkForAddress:(NSString *)address;
-- (BFTask *)fetchPromotionForEvent:(NSString *)eventId;
 - (BFTask *)fetchGuestlistInviteForEvent:(THLEventEntity *)event;
 @end

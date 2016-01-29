@@ -7,8 +7,9 @@
 //
 
 #import "THLEntity.h"
-#import "THLLocationEntity.h"
 
+@class THLHostEntity;
+@class THLLocationEntity;
 
 @interface THLEventEntity : THLEntity
 @property (nonatomic, copy) NSDate *date;
@@ -19,4 +20,7 @@
 @property (nonatomic, strong) THLLocationEntity *location;
 @property (nonatomic) float maleCover;
 @property (nonatomic) float femaleCover;
+@property (nonatomic, strong) THLHostEntity *host;
+@property (nonatomic) int maleRatio;
+@property (nonatomic) int femaleRatio;
 @end

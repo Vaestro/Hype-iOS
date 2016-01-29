@@ -16,7 +16,6 @@
 @property (nonatomic, strong) UILabel *hostNameLabel;
 @property (nonatomic, strong) UILabel *yourHostLabel;
 @property (nonatomic, strong) UIView *hairlineView;
-@property (nonatomic, strong) UILabel *eventMessage;
 @property (nonatomic, strong) UILabel *eventTimeLabel;
 @property (nonatomic, strong) UILabel *guestlistReviewStatusLabel;
 @property (nonatomic, strong) THLStatusView *statusView;
@@ -35,17 +34,14 @@
 
 
 - (void)constructView {
-    _eventMessage = [self newEventMessage];
     _eventTimeLabel = [self newEventTimeLabel];
     _statusView = [self newStatusView];
     _guestlistReviewStatusLabel = [self newGuestlistReviewStatusLabel];
 }
 
 - (void)layoutView {
-    [self addSubviews:@[_eventMessage,
-                        _eventTimeLabel]];
-    
-    WEAKSELF();
+    [self addSubviews:@[_eventTimeLabel]];
+//    WEAKSELF();
     [_eventTimeLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.insets(kTHLEdgeInsetsNone());
     }];
@@ -62,24 +58,11 @@
 //        make.left.equalTo([WSELF statusView].mas_right);
 //    }];
     
-    [_eventMessage makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF eventTimeLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());
-        make.left.right.insets(kTHLEdgeInsetsNone());
-        make.bottom.insets(kTHLEdgeInsetsHigh());
-    }];
 }
 
 - (void)bindView {
-    WEAKSELF();
     RAC(_statusView, status) = RACObserve(self, guestlistReviewStatus);
     RAC(_guestlistReviewStatusLabel, text, @"") = RACObserve(self, guestlistReviewStatusTitle);
-    [[RACObserve(self, promotionMessage) filter:^BOOL(id value) {
-        NSString *text = value;
-        return text.length > 0;
-    }] subscribeNext:^(id x) {
-        [WSELF.eventMessage setText:x];
-    }];
-    
     RAC(self.eventTimeLabel, text, @"") = RACObserve(self, eventTime);
 }
 

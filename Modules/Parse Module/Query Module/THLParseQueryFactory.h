@@ -24,13 +24,13 @@
 - (PFQuery *)queryForEventsStartingOn:(NSDate *)startDate endingOn:(NSDate *)endDate;
 
 #pragma mark - Promotion Queries
-- (PFQuery *)queryForPromotionsStartingOn:(NSDate *)startDate endingOn:(NSDate *)endDate;
+//- (PFQuery *)queryForPromotionsStartingOn:(NSDate *)startDate endingOn:(NSDate *)endDate;
 - (PFQuery *)queryForPromotionForEvent:(NSString *)eventId;
 
 #pragma mark - Guestlist Queries
 - (PFQuery *)queryForGuestlistWithId;
 - (PFQuery *)queryForGuestlists;
-- (PFQuery *)queryForGuestlistsForPromotionAtEvent:(NSString *)eventId;
+- (PFQuery *)queryForGuestlistsForEvent:(NSString *)eventId;
 
 #pragma mark - Guestlist Invites Queries
 - (PFQuery *)queryForGuestlistInviteForEvent:(NSString *)eventId;

@@ -12,7 +12,6 @@
 @class THLDashboardWireframe;
 @class THLUserProfileWireframe;
 @class THLEventDetailWireframe;
-@class THLPromotionSelectionWireframe;
 @class THLGuestlistInvitationWireframe;
 @class THLGuestlistReviewWireframe;
 @class THLPerkStoreWireframe;
@@ -23,7 +22,6 @@
 - (THLDashboardWireframe *)newDashboardWireframe;
 - (THLUserProfileWireframe *)newUserProfileWireframe;
 - (THLEventDetailWireframe *)newEventDetailWireframe;
-- (THLPromotionSelectionWireframe *)newPromotionSelectionWireframe;
 - (THLGuestlistInvitationWireframe *)newGuestlistInvitationWireframe;
 - (THLGuestlistReviewWireframe *)newGuestlistReviewWireframe;
 - (THLPerkStoreWireframe *)newPerkStoreWireframe;

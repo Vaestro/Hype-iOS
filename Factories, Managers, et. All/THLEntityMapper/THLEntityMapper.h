@@ -11,7 +11,6 @@
 @class THLUser;
 @class THLEvent;
 @class THLLocation;
-@class THLPromotion;
 @class THLGuestlist;
 @class THLGuestlistInvite;
 @class THLPerkStoreItem;
@@ -22,7 +21,6 @@
 @class THLHostEntity;
 @class THLEventEntity;
 @class THLLocationEntity;
-@class THLPromotionEntity;
 @class THLGuestlistEntity;
 @class THLGuestlistInviteEntity;
 @class THLPerkStoreItemEntity;
@@ -34,7 +32,6 @@
 //- (THLUserEntity *)mapUser:(THLUser *)user;
 - (THLGuestEntity *)mapGuest:(THLUser *)user;
 - (THLHostEntity *)mapHost:(THLUser *)user;
-- (THLPromotionEntity *)mapPromotion:(THLPromotion *)promotion;
 - (THLGuestlistEntity *)mapGuestlist:(THLGuestlist *)guestlist;
 - (THLGuestlistInviteEntity *)mapGuestlistInvite:(THLGuestlistInvite *)guestlistInvite;
 - (THLPerkStoreItemEntity *)mapPerkStoreItem:(THLPerkStoreItem *)perkStoreItem;
@@ -44,7 +41,6 @@
 //- (NSArray *)mapUsers:(NSArray *)users;
 - (NSArray<THLEventEntity*> *)mapEvents:(NSArray *)events;
 - (NSArray<THLLocationEntity*> *)mapLocations:(NSArray *)locations;
-- (NSArray<THLPromotionEntity*> *)mapPromotions:(NSArray *)promotions;
 - (NSArray<THLGuestlistEntity*> *)mapGuestlists:(NSArray *)guestlists;
 - (NSArray<THLGuestlistInviteEntity*> *)mapGuestlistInvites:(NSArray *)guestlistInvites;
 - (NSArray<THLPerkStoreItemEntity*> *)mapPerkStoreItems:(NSArray *)perkStoreItems;

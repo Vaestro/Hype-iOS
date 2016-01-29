@@ -9,13 +9,12 @@
 #import "THLHostDashboardTicketCellViewModel.h"
 #import "THLHostDashboardTicketCellView.h"
 #import "THLGuestlistEntity.h"
-#import "THLPromotionEntity.h"
 #import "THLEventEntity.h"
 #import "THLGuestEntity.h"
 #import "THLHostEntity.h"
+#import "THLLocationEntity.h"
 
 @interface THLHostDashboardTicketCellViewModel()
-@property (nonatomic, readonly) THLPromotionEntity *promotionEntity;
 @property (nonatomic, readonly) THLEventEntity *eventEntity;
 
 @end
@@ -24,8 +23,7 @@
 - (instancetype)initWithGuestlist:(THLGuestlistEntity *)guestlist {
     if (self = [super init]) {
         _guestlistEntity = guestlist;
-        _promotionEntity = _guestlistEntity.promotion;
-        _eventEntity = _promotionEntity.event;
+        _eventEntity = _guestlistEntity.event;
     }
     return self;
 }
