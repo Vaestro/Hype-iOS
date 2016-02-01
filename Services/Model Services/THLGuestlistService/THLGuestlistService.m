@@ -107,7 +107,13 @@
     PFObject *guestlist = [PFObject objectWithClassName:@"Guestlist"];
     guestlist[@"Owner"] = currentUser;
     guestlist[@"date"] = eventEntity.date;
-    guestlist[@"reviewStatus"] = [NSNumber numberWithInt:0];
+    
+    if (eventEntity.requiresApproval) {
+        guestlist[@"reviewStatus"] = [NSNumber numberWithInt:2];
+    } else {
+        guestlist[@"reviewStatus"] = [NSNumber numberWithInt:0];
+    }
+    
     guestlist[@"event"] = [THLEvent objectWithoutDataWithObjectId:eventEntity.objectId];
     [guestlist saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {

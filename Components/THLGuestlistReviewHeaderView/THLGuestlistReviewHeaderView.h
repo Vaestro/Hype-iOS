@@ -10,7 +10,6 @@
 
 @interface THLGuestlistReviewHeaderView : UIView
 @property (nonatomic, strong) UIButton *menuButton;
-
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *formattedDate;
 @property (nonatomic, strong) NSURL *headerViewImage;
@@ -18,6 +17,4 @@
 @property (nonatomic, copy) NSString *guestlistReviewStatusTitle;
 @property (nonatomic, strong) RACCommand *dismissCommand;
 @property (nonatomic, strong) RACCommand *showMenuCommand;
-- (void)compressView;
-- (void)uncompressView;
 @end

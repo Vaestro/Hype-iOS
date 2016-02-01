@@ -168,9 +168,10 @@ THLNumberVerificationModuleDelegate
 }
 
 - (void)routeToPickProfilePictureInterface {
+    [_wireframe presentFacebookPictureInterface:self];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:_userPhotoVerificationView];
     [_baseViewController presentViewController:navigationController animated:NO completion:NULL];
-	[_wireframe presentFacebookPictureInterface:self];
+	
 }
 
 - (void)dismissInterface {

@@ -187,6 +187,9 @@
         [THLUserDataWorker addProfileImage:self.userImageView.image
                                    forUser:[THLUser currentUser]
                                   delegate:nil];
+        [_renewImageDelegate reloadUserImageWithURL:self.userImageView.imageURL];
+        [self.view.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
+
     }
 }
 
@@ -283,7 +286,6 @@
 
 - (void)handleCancelAction {
     [self.view.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
-    [_renewImageDelegate reloadUserImageWithURL:[self remoteUserImageURL]];
 }
 
 @end
