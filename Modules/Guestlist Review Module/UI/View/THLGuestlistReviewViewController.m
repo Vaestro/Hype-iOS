@@ -157,13 +157,6 @@ static CGFloat const CELL_SPACING = 10;
     RAC(self.menuButton, rac_command) = RACObserve(self, showMenuCommand);
 
     [RACObserve(self, reviewerStatus) subscribeNext:^(NSNumber *status) {
-        if (status == [NSNumber numberWithInteger:0] && _guestlistReviewStatus == 0) {
-//            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Accept or Decline Invite", nil)];
-//            [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
-            [[WSELF actionBarButton] setHidden:TRUE];
-            [[WSELF.headerView menuButton] setHidden:TRUE];
-            [self remakeConstraints];
-        }
         if (status == [NSNumber numberWithInteger:0]) {
             [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Accept or Decline Invite", nil)];
             [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
@@ -179,19 +172,19 @@ static CGFloat const CELL_SPACING = 10;
             [[WSELF.headerView menuButton] setHidden:FALSE];
             [self remakeConstraints];
         }
-        else if (status == [NSNumber numberWithInteger:3] && _guestlistReviewStatus == 2) {
+        else if (status == [NSNumber numberWithInteger:3]) {
             [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Accept or Decline Guestlist", nil)];
             [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
-            [[WSELF actionBarButton] setHidden:NO];
-            [[WSELF.headerView menuButton] setHidden:TRUE];
-//            [self remakeConstraints];
-        }
-        else if (status == [NSNumber numberWithInteger:3]) {
             [[WSELF actionBarButton] setHidden:TRUE];
             [[WSELF.headerView menuButton] setHidden:TRUE];
             [self remakeConstraints];
         }
-        else if (status == [NSNumber numberWithInteger:4] && _guestlistReviewStatus == 1) {
+        else if (status == [NSNumber numberWithInteger:4]) {
+            [[WSELF actionBarButton] setHidden:TRUE];
+            [[WSELF.headerView menuButton] setHidden:TRUE];
+            [self remakeConstraints];
+        }
+        else if (status == [NSNumber numberWithInteger:5]) {
             [[WSELF actionBarButton] setHidden:TRUE];
             [[WSELF.headerView menuButton] setHidden:TRUE];
             [self remakeConstraints];

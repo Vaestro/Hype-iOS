@@ -309,7 +309,7 @@ THLGuestlistReviewInteractorDelegate
     if ([_guestlistEntity isPending]) {
         self.reviewerStatus = THLGuestlistPendingHost;
     }
-    else if ([_guestlistEntity isAccepted]) {
+    else if ([_guestlistEntity isAccepted] || [_guestlistEntity doesNotRequireApproval]) {
         self.reviewerStatus = THLGuestlistActiveHost;
     }
     else if ([_guestlistEntity isDeclined]) {
