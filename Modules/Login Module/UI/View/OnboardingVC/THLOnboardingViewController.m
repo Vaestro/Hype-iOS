@@ -65,7 +65,7 @@
 
 #pragma mark - Constructors
 - (OnboardingViewController *)newOnboardingViewController {
-    OnboardingViewController *onboardingVC = [OnboardingViewController onboardWithBackgroundImage:nil contents:[self onboardingContentViewControllers]];
+    OnboardingViewController *onboardingVC = [OnboardingViewController onboardWithBackgroundVideoURL:[THLResourceManager onboardingVideo] contents:[self onboardingContentViewControllers]];
     onboardingVC.fontName = @"Raleway-Bold";
     onboardingVC.titleFontSize = 24;
     onboardingVC.subtitleFontSize = 36;
@@ -76,7 +76,7 @@
     onboardingVC.underSubtitlePadding = SCREEN_HEIGHT*0.2;
     onboardingVC.bottomPadding = -10;
     onboardingVC.shouldMaskBackground = NO;
-    onboardingVC.shouldFadeTransitions = NO;
+    onboardingVC.shouldFadeTransitions = YES;
     return onboardingVC;
 }
 
@@ -84,15 +84,15 @@
     OnboardingContentViewController *firstPage = [OnboardingContentViewController
                                                   initialContentWithTitle:@"WELCOME TO\nTHE HYPEUP"
                                                   body:@"Discover the most exclusive events happening in NYC"
-                                                  backgroundVideo:[THLResourceManager onboardingVideo]];
+                                                  backgroundVideo:nil   ];
     
     OnboardingContentViewController *secondPage = [OnboardingContentViewController contentWithTitle:@"DESIGN THE PERFECT NIGHT"
                                                                                                body:@"Invite your friends to join your guest list for the event of your choice and get complimentary vip benefits."
-                                                                                              image:[UIImage imageNamed:@"OnboardingBackground2"]];
+                                                                                              image:nil];
     
     OnboardingContentViewController *thirdPage = [OnboardingContentViewController contentWithTitle:@"EARN GREAT PERKS"
                                                                                               body:@"For each friend that attends your event, you will get credits redeemable for perks like a free limo ride."
-                                                                                             image:[UIImage imageNamed:@"OnboardingBackground3"]];
+                                                                                             image:nil];
 
     
     OnboardingContentViewController *fourthPage = [OnboardingContentViewController
