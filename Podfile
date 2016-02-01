@@ -53,7 +53,7 @@ pod 'YLMoment', '~> 0.2.0'
 pod 'APAddressBook', '~> 0.2.1’
 pod 'libPhoneNumber-iOS', '~> 0.8'
 pod 'LMGeocoder'
-
+pod 'TTTAttributedLabel'
 
 #UI
 pod 'SLPagingView'

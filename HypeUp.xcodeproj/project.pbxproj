@@ -130,6 +130,7 @@
 		794DCCB51BF555020037A03D /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794DCCB41BF555020037A03D /* FXBlurView.m */; };
 		794DCCB71BF555150037A03D /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 794DCCB61BF555150037A03D /* Accelerate.framework */; };
 		794DCCBA1BF557D50037A03D /* THLVenueDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794DCCB91BF557D50037A03D /* THLVenueDetailsView.m */; };
+		794FAB641C5D6A1F00438D49 /* Gilded.mov in Resources */ = {isa = PBXBuildFile; fileRef = 794FAB631C5D6A1F00438D49 /* Gilded.mov */; };
 		79527CF01BF188F80074AF38 /* THLEventHostingInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 79527CEF1BF188F80074AF38 /* THLEventHostingInteractor.m */; };
 		795F13661C3C40B500AC9E76 /* THLWaitlistHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 795F13651C3C40B500AC9E76 /* THLWaitlistHomeViewController.m */; };
 		79730CF21C17DC3500D70F4B /* THLUserProfileFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79730CF11C17DC3500D70F4B /* THLUserProfileFooterView.m */; };
@@ -170,7 +171,6 @@
 		79CD27E41C520293009BC119 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CD27BE1C520293009BC119 /* AppDelegate.m */; };
 		79CD27E51C520293009BC119 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27BF1C520293009BC119 /* LaunchScreen.xib */; };
 		79CD27E61C520293009BC119 /* HypeUp.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27C31C520293009BC119 /* HypeUp.strings */; };
-		79CD27E71C520293009BC119 /* Gilded.mov in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27C51C520293009BC119 /* Gilded.mov */; };
 		79CD27E81C520293009BC119 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27C61C520293009BC119 /* Images.xcassets */; };
 		79CD27E91C520293009BC119 /* Privacy Policy.txt in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27C71C520293009BC119 /* Privacy Policy.txt */; };
 		79CD27EA1C520293009BC119 /* Raleway-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27C91C520293009BC119 /* Raleway-Black.ttf */; };
@@ -533,6 +533,7 @@
 		794DCCB61BF555150037A03D /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		794DCCB81BF557D50037A03D /* THLVenueDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLVenueDetailsView.h; sourceTree = "<group>"; };
 		794DCCB91BF557D50037A03D /* THLVenueDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLVenueDetailsView.m; sourceTree = "<group>"; };
+		794FAB631C5D6A1F00438D49 /* Gilded.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = Gilded.mov; path = ../../../../Desktop/Gilded.mov; sourceTree = "<group>"; };
 		79527CEE1BF188F80074AF38 /* THLEventHostingInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventHostingInteractor.h; sourceTree = "<group>"; };
 		79527CEF1BF188F80074AF38 /* THLEventHostingInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventHostingInteractor.m; sourceTree = "<group>"; };
 		795F13641C3C40B500AC9E76 /* THLWaitlistHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLWaitlistHomeViewController.h; sourceTree = "<group>"; };
@@ -629,7 +630,6 @@
 		79CD27C11C520293009BC119 /* CommonMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonMacros.h; sourceTree = "<group>"; };
 		79CD27C21C520293009BC119 /* HypeUp-PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HypeUp-PrefixHeader.pch"; sourceTree = "<group>"; };
 		79CD27C31C520293009BC119 /* HypeUp.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = HypeUp.strings; sourceTree = "<group>"; };
-		79CD27C51C520293009BC119 /* Gilded.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Gilded.mov; sourceTree = "<group>"; };
 		79CD27C61C520293009BC119 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		79CD27C71C520293009BC119 /* Privacy Policy.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Privacy Policy.txt"; sourceTree = "<group>"; };
 		79CD27C91C520293009BC119 /* Raleway-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Black.ttf"; sourceTree = "<group>"; };
@@ -2325,8 +2325,8 @@
 		79CD27C41C520293009BC119 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				794FAB631C5D6A1F00438D49 /* Gilded.mov */,
 				79CD27C81C520293009BC119 /* raleway */,
-				79CD27C51C520293009BC119 /* Gilded.mov */,
 				79CD27C61C520293009BC119 /* Images.xcassets */,
 				79CD27C71C520293009BC119 /* Privacy Policy.txt */,
 				79CD27DC1C520293009BC119 /* THLResourceManager.h */,
@@ -3099,6 +3099,7 @@
 			files = (
 				79CD27EB1C520293009BC119 /* Raleway-BlackItalic.ttf in Resources */,
 				79CD27FC1C520293009BC119 /* Terms of Use.txt in Resources */,
+				794FAB641C5D6A1F00438D49 /* Gilded.mov in Resources */,
 				79CD27F21C520293009BC119 /* Raleway-Italic.ttf in Resources */,
 				79CD27EC1C520293009BC119 /* Raleway-Bold.ttf in Resources */,
 				79CD27FA1C520293009BC119 /* Raleway-Thin.ttf in Resources */,
@@ -3115,7 +3116,6 @@
 				79CD27ED1C520293009BC119 /* Raleway-BoldItalic.ttf in Resources */,
 				79CD27EF1C520293009BC119 /* Raleway-ExtraBoldItalic.ttf in Resources */,
 				79CD27F71C520293009BC119 /* Raleway-Regular.ttf in Resources */,
-				79CD27E71C520293009BC119 /* Gilded.mov in Resources */,
 				79CD27EA1C520293009BC119 /* Raleway-Black.ttf in Resources */,
 				79CD28031C5202A0009BC119 /* Info.plist in Resources */,
 				79CD27F51C520293009BC119 /* Raleway-Medium.ttf in Resources */,

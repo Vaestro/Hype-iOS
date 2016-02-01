@@ -149,6 +149,7 @@ PODS:
   - SVPullToRefresh (0.4.1)
   - THContactPicker (1.2)
   - TOMSMorphingLabel (0.5.1)
+  - TTTAttributedLabel (1.13.4)
   - TwilioSDK (1.2.7)
   - TwitterCore (1.14.6):
     - Fabric
@@ -209,6 +210,7 @@ DEPENDENCIES:
   - SVPullToRefresh
   - THContactPicker (~> 1.2)
   - TOMSMorphingLabel (~> 0.5)
+  - TTTAttributedLabel
   - TwitterCore
   - Typhoon (~> 3.3)
   - YapDatabase (~> 2.7)
@@ -266,6 +268,7 @@ SPEC CHECKSUMS:
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
   THContactPicker: e723f7c6ab6e1d6d10d59d618322ab8bfcb00365
   TOMSMorphingLabel: 3e88a2bf5257f8993ebc51fb3109187a0bfb2c4d
+  TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
   TwilioSDK: d3982acf6880ddf3ce57c4444e021a71c5f35653
   TwitterCore: 5e9b2d066ceeef53fe611c0c4436cb700f1ed620
   Typhoon: e937c62b9048f73a93c1aa94f00627d97cecd588

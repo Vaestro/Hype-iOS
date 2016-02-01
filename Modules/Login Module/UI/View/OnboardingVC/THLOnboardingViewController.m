@@ -65,11 +65,11 @@
 
 #pragma mark - Constructors
 - (OnboardingViewController *)newOnboardingViewController {
-    OnboardingViewController *onboardingVC = [OnboardingViewController onboardWithBackgroundVideoURL:[THLResourceManager onboardingVideo] contents:[self onboardingContentViewControllers]];
+    OnboardingViewController *onboardingVC = [OnboardingViewController onboardWithBackgroundImage:nil contents:[self onboardingContentViewControllers]];
     onboardingVC.fontName = @"Raleway-Bold";
     onboardingVC.titleFontSize = 24;
     onboardingVC.subtitleFontSize = 36;
-    onboardingVC.bodyFontSize = 24;
+    onboardingVC.bodyFontSize = 18;
     onboardingVC.topPadding = 0;
     onboardingVC.underIconPadding = SCREEN_HEIGHT*0.067;
     onboardingVC.underTitlePadding = 0;
@@ -81,45 +81,33 @@
 }
 
 - (NSArray *)onboardingContentViewControllers {
-    OnboardingContentViewController *firstPage = [OnboardingContentViewController contentWithTitle:@"WELCOME TO"
-                                                                                          subtitle:@"THE HYPEUP"
-                                                                                              body:@"DISCOVER THE MOST EXCLUSIVE EVENTS HAPPENING IN NYC"
-                                                                                             image:nil
-                                                                                        buttonText:nil
-                                                                                            action:nil
-                                                                                secondaryButtonText:@"Swipe to Continue"
-                                                                                   secondaryAction:nil];
+    OnboardingContentViewController *firstPage = [OnboardingContentViewController
+                                                  initialContentWithTitle:@"WELCOME TO\nTHE HYPEUP"
+                                                  body:@"Discover the most exclusive events happening in NYC"
+                                                  backgroundVideo:[THLResourceManager onboardingVideo]];
     
-    OnboardingContentViewController *secondPage = [OnboardingContentViewController contentWithTitle:@"DESIGN THE"
-                                                                                           subtitle:@"PERFECT NIGHT"
-                                                                                               body:@"INVITE YOUR FRIENDS TO JOIN YOUR GUEST LIST FOR THE EVENT OF YOUR CHOICE AND GET COMPLIMENTARY VIP BENEFITS"
-                                                                                              image:[UIImage imageNamed:@"OnboardingBackground2"]
-                                                                                         buttonText:nil
-                                                                                             action:nil
-                                                                                secondaryButtonText:nil
-                                                                                    secondaryAction:nil];
+    OnboardingContentViewController *secondPage = [OnboardingContentViewController contentWithTitle:@"DESIGN THE PERFECT NIGHT"
+                                                                                               body:@"Invite your friends to join your guest list for the event of your choice and get complimentary vip benefits."
+                                                                                              image:[UIImage imageNamed:@"OnboardingBackground2"]];
     
-    OnboardingContentViewController *thirdPage = [OnboardingContentViewController contentWithTitle:@"EARN GREAT"
-                                                                                          subtitle:@"PERKS"
-                                                                                              body:@"FOR EACH FRIEND THAT ATTENDS YOUR EVENT, YOU WILL GET CREDITS REDEEMABLE FOR PERKS LIKE A LIMO RIDE"
-                                                                                             image:[UIImage imageNamed:@"OnboardingBackground3"]
-                                                                                        buttonText:nil
-                                                                                            action:nil
-                                                                               secondaryButtonText:nil
-                                                                                   secondaryAction:nil];
+    OnboardingContentViewController *thirdPage = [OnboardingContentViewController contentWithTitle:@"EARN GREAT PERKS"
+                                                                                              body:@"For each friend that attends your event, you will get credits redeemable for perks like a free limo ride."
+                                                                                             image:[UIImage imageNamed:@"OnboardingBackground3"]];
+
     
-    OnboardingContentViewController *fourthPage = [OnboardingContentViewController contentWithTitle:@"GET READY FOR"
-                                                                                           subtitle:@"THE PARTY"
-                                                                                               body:@"OUR HOSTS WILL ANSWER ANY QUESTIONS YOU HAVE AND MEET YOU THERE, SO YOU ARE ENSURED A SMOOTH AND HYPE NIGHT"
-                                                                                              image:[UIImage imageNamed:@"OnboardingBackground4"]
-                                                                                         buttonText:@"Login with facebook"
-                                                                                             action:^{
-                                                                                                 [loginCommand execute:nil];
-                                                                                             }
-                                                                                secondaryButtonText:@"I'll signup later"
-                                                                                    secondaryAction:^{
-                                                                                                    [skipCommand execute:nil];
-                                                                                                }];
+    OnboardingContentViewController *fourthPage = [OnboardingContentViewController
+                                                   finalContentWithTitle:@"Signup for a great night tonight"
+                                                   body:nil
+                                                   backgroundImage:[UIImage imageNamed:@"OnboardingLoginBG"]
+                                                   buttonText:@"Login with facebook"
+                                                   action:^{
+                                                    [loginCommand execute:nil];
+                                                   }
+                                                   secondaryButtonText:@"I'll signup later"
+                                                   secondaryAction:^{
+                                                       [skipCommand execute:nil];
+                                                   }];
+    
     return @[firstPage,
              secondPage,
              thirdPage,
