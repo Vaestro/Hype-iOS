@@ -253,6 +253,7 @@ static const CGFloat kLogoImageSize = 50.0f;
     _subTextLabel = [self newSubTextLabel];
     _bodyTextLabel = [self newBodyTextLabel];
     _actionButton = [self newActionButton];
+    _secondaryButton = [self newSecondActionButton];
     _attributedLabel = [self newAttributedLabel];
     // otherwise send the video view to the back if we have one
     if (_videoURL) {
@@ -311,7 +312,12 @@ static const CGFloat kLogoImageSize = 50.0f;
 }
 
 - (void)layoutFinalView {
-    [self.view addSubviews:@[_imageView, _logoImageView, _subTextLabel, _bodyTextLabel, _actionButton, _attributedLabel]];
+    [self.view addSubviews:@[_imageView, _logoImageView, _subTextLabel, _bodyTextLabel, _actionButton, _secondaryButton, _attributedLabel]];
+    
+    [_secondaryButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(kTHLEdgeInsetsSuperHigh());
+        make.top.equalTo(kTHLEdgeInsetsSuperHigh());
+    }];
     
     [_logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(SV(_logoImageView).centerX);
@@ -322,7 +328,7 @@ static const CGFloat kLogoImageSize = 50.0f;
     [_subTextLabel makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(SV(_logoImageView).centerX);
         make.top.equalTo(SV(_logoImageView).centerY).insets(kTHLEdgeInsetsSuperHigh());
-        make.width.equalTo(SCREEN_WIDTH*0.5);
+        make.width.equalTo(SCREEN_WIDTH*0.67);
     }];
     
     [_imageView makeConstraints:^(MASConstraintMaker *make) {
@@ -405,8 +411,19 @@ static const CGFloat kLogoImageSize = 50.0f;
     [actionButton.layer setBorderColor:[kTHLNUIAccentColor CGColor]];
     [actionButton setTitle:@"Login with Facebook" forState:UIControlStateNormal];
     [actionButton setTitleColor:kTHLNUIPrimaryFontColor forState:UIControlStateNormal];
+    actionButton.titleLabel.font = [UIFont fontWithName:@"Raleway-Light" size:16];
     [actionButton addTarget:self action:@selector(handleButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     return actionButton;
+}
+
+- (UIButton *)newSecondActionButton {
+    UIButton *secondButton = [UIButton new];
+    secondButton.tintColor = [UIColor clearColor];
+    [secondButton setTitle:@"Skip" forState:UIControlStateNormal];
+    [secondButton setTitleColor:kTHLNUIGrayFontColor forState:UIControlStateNormal];
+    secondButton.titleLabel.font = [UIFont fontWithName:@"Raleway-Light" size:16];
+    [secondButton addTarget:self action:@selector(handleSecondaryButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    return secondButton;
 }
 
 - (TTTAttributedLabel *)newAttributedLabel {
