@@ -134,7 +134,7 @@
 		794DCCB71BF555150037A03D /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 794DCCB61BF555150037A03D /* Accelerate.framework */; };
 		794DCCBA1BF557D50037A03D /* THLVenueDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794DCCB91BF557D50037A03D /* THLVenueDetailsView.m */; };
 		794FAB671C5F17F400438D49 /* THLActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 794FAB661C5F17F400438D49 /* THLActionButton.m */; };
-		794FAB691C606F1900438D49 /* Lavo.mov in Resources */ = {isa = PBXBuildFile; fileRef = 794FAB681C606F1900438D49 /* Lavo.mov */; };
+		794FAB6B1C615DE200438D49 /* Lavo.mov in Resources */ = {isa = PBXBuildFile; fileRef = 794FAB6A1C615DE200438D49 /* Lavo.mov */; };
 		79527CF01BF188F80074AF38 /* THLEventHostingInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 79527CEF1BF188F80074AF38 /* THLEventHostingInteractor.m */; };
 		795F13661C3C40B500AC9E76 /* THLWaitlistHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 795F13651C3C40B500AC9E76 /* THLWaitlistHomeViewController.m */; };
 		79730CF21C17DC3500D70F4B /* THLUserProfileFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79730CF11C17DC3500D70F4B /* THLUserProfileFooterView.m */; };
@@ -545,7 +545,7 @@
 		794DCCB91BF557D50037A03D /* THLVenueDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLVenueDetailsView.m; sourceTree = "<group>"; };
 		794FAB651C5F17F400438D49 /* THLActionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLActionButton.h; sourceTree = "<group>"; };
 		794FAB661C5F17F400438D49 /* THLActionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLActionButton.m; sourceTree = "<group>"; };
-		794FAB681C606F1900438D49 /* Lavo.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = Lavo.mov; path = ../../../../Desktop/Lavo.mov; sourceTree = "<group>"; };
+		794FAB6A1C615DE200438D49 /* Lavo.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Lavo.mov; sourceTree = "<group>"; };
 		79527CEE1BF188F80074AF38 /* THLEventHostingInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventHostingInteractor.h; sourceTree = "<group>"; };
 		79527CEF1BF188F80074AF38 /* THLEventHostingInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventHostingInteractor.m; sourceTree = "<group>"; };
 		795F13641C3C40B500AC9E76 /* THLWaitlistHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLWaitlistHomeViewController.h; sourceTree = "<group>"; };
@@ -2369,7 +2369,7 @@
 		79CD27C41C520293009BC119 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				794FAB681C606F1900438D49 /* Lavo.mov */,
+				794FAB6A1C615DE200438D49 /* Lavo.mov */,
 				79CD27C81C520293009BC119 /* raleway */,
 				79CD27C61C520293009BC119 /* Images.xcassets */,
 				79CD27C71C520293009BC119 /* Privacy Policy.txt */,
@@ -3146,7 +3146,7 @@
 				79CD27FC1C520293009BC119 /* Terms of Use.txt in Resources */,
 				79CD27F21C520293009BC119 /* Raleway-Italic.ttf in Resources */,
 				79CD27EC1C520293009BC119 /* Raleway-Bold.ttf in Resources */,
-				794FAB691C606F1900438D49 /* Lavo.mov in Resources */,
+				794FAB6B1C615DE200438D49 /* Lavo.mov in Resources */,
 				79CD27FA1C520293009BC119 /* Raleway-Thin.ttf in Resources */,
 				79CD27F91C520293009BC119 /* Raleway-SemiBoldItalic.ttf in Resources */,
 				79CD27FB1C520293009BC119 /* Raleway-ThinItalic.ttf in Resources */,
