@@ -46,6 +46,7 @@
         entity.host = (THLHostEntity *)[self mapHost:event[@"host"]];
         entity.maleRatio = event.maleRatio;
         entity.femaleRatio = event.femaleRatio;
+        entity.requiresApproval = event.requiresApproval;
         return entity;
     } else {
         return nil;
@@ -75,7 +76,6 @@
         entity.longitude = location.coordinate.longitude;
         entity.musicTypes = location.musicTypes;
         entity.attireRequirement = location.attireRequirement;
-        
 	return entity;
     } else {
         return nil;

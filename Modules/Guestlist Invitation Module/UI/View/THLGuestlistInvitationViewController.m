@@ -231,9 +231,7 @@
 
 - (RACCommand *)newCommitCommand {
 	WEAKSELF();
-	RACCommand *command = [[RACCommand alloc] initWithEnabled:[RACObserve(self, addedGuests) map:^id(NSSet *value) {
-		return @(value.count > 0);
-	}] signalBlock:^RACSignal *(id input) {
+	RACCommand *command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
 		[WSELF.eventHandler viewDidCommitInvitations:WSELF];
 		return [RACSignal empty];
 	}];

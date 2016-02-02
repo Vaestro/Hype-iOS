@@ -173,8 +173,8 @@ static CGFloat const CELL_SPACING = 10;
             [self remakeConstraints];
         }
         else if (status == [NSNumber numberWithInteger:3]) {
-//            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Accept or Decline Guestlist", nil)];
-//            [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
+            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Accept or Decline Guestlist", nil)];
+            [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
             [[WSELF actionBarButton] setHidden:TRUE];
             [[WSELF.headerView menuButton] setHidden:TRUE];
             [self remakeConstraints];
@@ -248,22 +248,6 @@ static CGFloat const CELL_SPACING = 10;
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     return COLLECTION_VIEW_EDGEINSETS;
 }
-
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
-    CGFloat scrollOffsetY = scrollView.contentOffset.y;
-
-    if (scrollOffsetY > _headerView.frame.size.height) {
-        [self.headerView compressView];
-    }
-    
-    if (scrollOffsetY < _headerView.frame.size.height) {
-        [self.headerView uncompressView];
-    }
-    
-}
-
 
 - (void)dealloc {
     NSLog(@"Destroyed %@", self);

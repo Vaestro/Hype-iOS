@@ -21,6 +21,7 @@
 @property (nonatomic) int creditsPayout;
 @property (nonatomic, retain) THLLocation *location;
 @property (nonatomic, retain) THLUser *host;
+@property (nonatomic) bool requiresApproval;
 @property (nonatomic) int maleRatio;
 @property (nonatomic) int femaleRatio;
 @end

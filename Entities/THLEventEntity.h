@@ -23,4 +23,5 @@
 @property (nonatomic, strong) THLHostEntity *host;
 @property (nonatomic) int maleRatio;
 @property (nonatomic) int femaleRatio;
+@property (nonatomic) bool requiresApproval;
 @end

@@ -19,4 +19,9 @@
 - (BOOL)isDeclined {
     return self.reviewStatus == THLStatusDeclined;
 }
+
+- (BOOL)doesNotRequireApproval {
+    return self.reviewStatus == THLStatusNone;
+}
+
 @end
