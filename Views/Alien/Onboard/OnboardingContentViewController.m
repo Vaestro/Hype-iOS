@@ -9,44 +9,63 @@
 #import "OnboardingContentViewController.h"
 #import "OnboardingViewController.h"
 #import "THLAppearanceConstants.h"
+#import "THLInformationViewController.h"
+#import "THLResourceManager.h"
 
-static NSString * const kDefaultOnboardingFont = @"Helvetica-Light";
+typedef NS_OPTIONS(NSInteger, THLOnboardingState) {
+    THLOnboardingStateInitial = 0,
+    THLOnboardingStateBody,
+    THLOnboardingStateEnd
+};
 
-#define DEFAULT_TEXT_COLOR [UIColor whiteColor];
-
-static CGFloat const kContentWidthMultiplier = 0.9;
-static CGFloat const kDefaultRightSideBodyPadding = 67;
-
-//static CGFloat const kDefaultImageViewSize = 100;
-static CGFloat const kDefaultTopPadding = 60;
-static CGFloat const kDefaultUnderIconPadding = 30;
-static CGFloat const kDefaultUnderTitlePadding = 30;
-static CGFloat const kDefaultUnderSubtitlePadding = 30;
-static CGFloat const kDefaultBottomPadding = 0;
-static CGFloat const kDefaultUnderPageControlPadding = 0;
-static CGFloat const kDefaultTitleFontSize = 38;
-static CGFloat const kDefaultBodyFontSize = 28;
-static CGFloat const kDefaultButtonFontSize = 24;
-
-static CGFloat const kActionButtonHeight = 60;
-static CGFloat const kMainPageControlHeight = 35;
+static const CGFloat kLogoImageSize = 50.0f;
 
 @interface OnboardingContentViewController ()
-
+@property (nonatomic, strong) UIImageView *logoImageView;
+@property (nonatomic) THLOnboardingState onboardingState;
 @end
 
 @implementation OnboardingContentViewController
 
-+ (instancetype)contentWithTitle:(NSString *)title subtitle:(NSString *)subtitle body:(NSString *)body image:(UIImage *)image buttonText:(NSString *)buttonText action:(dispatch_block_t)action secondaryButtonText:(NSString *)secondaryButtonText secondaryAction:(dispatch_block_t)secondaryAction {
-    OnboardingContentViewController *contentVC = [[self alloc] initWithTitle:title subtitle:subtitle body:body image:image buttonText:buttonText action:action secondaryButtonText:secondaryButtonText secondaryAction:secondaryAction];
++ (instancetype)initialContentWithTitle:(NSString *)title body:(NSString *)body backgroundVideo:(NSURL *)videoURL {
+    OnboardingContentViewController *contentVC = [[self alloc] initWithInitialTitle:title body:body backgroundVideo:videoURL];
     return contentVC;
 }
 
-- (instancetype)initWithTitle:(NSString *)title subtitle:(NSString *)subtitle body:(NSString *)body image:(UIImage *)image buttonText:(NSString *)buttonText action:(dispatch_block_t)action secondaryButtonText:(NSString *)secondaryButtonText secondaryAction:(dispatch_block_t)secondaryAction {
-    return [self initWithTitle:title
-                      subtitle:subtitle
+- (instancetype)initWithInitialTitle:(NSString *)title body:(NSString *)body backgroundVideo:(NSURL *)videoURL {
+    self = [super init];
+    
+    // hold onto the passed in parameters, and set the action block to an empty block
+    // in case we were passed nil, so we don't have to nil-check the block later before
+    // calling
+    _onboardingState = THLOnboardingStateInitial;
+    _titleText = title;
+    _body = body;
+    _videoURL = videoURL;
+    self.moviePlayerController = [MPMoviePlayerController new];
+
+    
+    // default auto-navigation
+    self.movesToNextViewController = NO;
+    
+    // default blocks
+    self.viewWillAppearBlock = ^{};
+    self.viewDidAppearBlock = ^{};
+    self.viewWillDisappearBlock = ^{};
+    self.viewDidDisappearBlock = ^{};
+    
+    return self;
+}
+
++ (instancetype)finalContentWithTitle:(NSString *)title body:(NSString *)body backgroundImage:(UIImage *)image buttonText:(NSString *)buttonText action:(dispatch_block_t)action secondaryButtonText:(NSString *)secondaryButtonText secondaryAction:(dispatch_block_t)secondaryAction {
+    OnboardingContentViewController *contentVC = [[self alloc] initWithFinalTitle:title body:body backgroundImage:image buttonText:buttonText action:action secondaryButtonText:secondaryButtonText secondaryAction:secondaryAction];
+    return contentVC;
+}
+
+- (instancetype)initWithFinalTitle:(NSString *)title body:(NSString *)body backgroundImage:(UIImage *)image buttonText:(NSString *)buttonText action:(dispatch_block_t)action secondaryButtonText:(NSString *)secondaryButtonText secondaryAction:(dispatch_block_t)secondaryAction {
+    return [self initWithFinalTitle:title
                           body:body
-                         image:image
+                         backgroundImage:image
                     buttonText:buttonText
                    actionBlock:^(OnboardingViewController *onboardController) {
                        if(action) action();
@@ -57,26 +76,54 @@ static CGFloat const kMainPageControlHeight = 35;
           }];
 }
 
-+ (instancetype)contentWithTitle:(NSString *)title subtitle:(NSString *)subtitle body:(NSString *)body image:(UIImage *)image buttonText:(NSString *)buttonText actionBlock:(action_callback)actionBlock secondaryButtonText:(NSString *)secondaryButtonText secondaryActionBlock:(action_callback)secondaryActionBlock {
-    OnboardingContentViewController *contentVC = [[self alloc] initWithTitle:title subtitle:subtitle body:body image:image buttonText:buttonText actionBlock:actionBlock secondaryButtonText:secondaryButtonText secondaryActionBlock:secondaryActionBlock];
++ (instancetype)finalContentWithTitle:(NSString *)title body:(NSString *)body backgroundImage:(UIImage *)image buttonText:(NSString *)buttonText actionBlock:(action_callback)actionBlock secondaryButtonText:(NSString *)secondaryButtonText secondaryActionBlock:(action_callback)secondaryActionBlock {
+    OnboardingContentViewController *contentVC = [[self alloc] initWithFinalTitle:title body:body backgroundImage:image buttonText:buttonText actionBlock:actionBlock secondaryButtonText:secondaryButtonText secondaryActionBlock:secondaryActionBlock];
     return contentVC;
 }
 
-- (instancetype)initWithTitle:(NSString *)title subtitle:(NSString *)subtitle body:(NSString *)body image:(UIImage *)image buttonText:(NSString *)buttonText actionBlock:(action_callback)actionBlock secondaryButtonText:(NSString *)secondaryButtonText secondaryActionBlock:(action_callback)secondaryActionBlock {
+- (instancetype)initWithFinalTitle:(NSString *)title body:(NSString *)body backgroundImage:(UIImage *)image buttonText:(NSString *)buttonText actionBlock:(action_callback)actionBlock secondaryButtonText:(NSString *)secondaryButtonText secondaryActionBlock:(action_callback)secondaryActionBlock {
     self = [super init];
     
     // hold onto the passed in parameters, and set the action block to an empty block
     // in case we were passed nil, so we don't have to nil-check the block later before
     // calling
-    _titleText = title;
-    _subtitleText = subtitle;
-    _body = body;
+    _onboardingState = THLOnboardingStateEnd;
+    _subtitleText = title;
     _image = image;
     _buttonText = buttonText;
     _secondaryButtonText = secondaryButtonText;
     
     self.buttonActionHandler = actionBlock;
     self.secondaryButtonActionHandler = secondaryActionBlock;
+    
+    // default auto-navigation
+    self.movesToNextViewController = NO;
+    
+    // default blocks
+    self.viewWillAppearBlock = ^{};
+    self.viewDidAppearBlock = ^{};
+    self.viewWillDisappearBlock = ^{};
+    self.viewDidDisappearBlock = ^{};
+    
+    return self;
+}
+
++ (instancetype)contentWithTitle:(NSString *)title body:(NSString *)body image:(UIImage *)image {
+    OnboardingContentViewController *contentVC = [[self alloc] initWithTitle:title body:body image:image];
+    return contentVC;
+}
+
+- (instancetype)initWithTitle:(NSString *)title body:(NSString *)body image:(UIImage *)image  {
+    self = [super init];
+    
+    // hold onto the passed in parameters, and set the action block to an empty block
+    // in case we were passed nil, so we don't have to nil-check the block later before
+    // calling
+    _onboardingState = THLOnboardingStateBody;
+
+    _titleText = title;
+    _body = body;
+    _image = image;
 
     // default auto-navigation
     self.movesToNextViewController = NO;
@@ -92,36 +139,6 @@ static CGFloat const kMainPageControlHeight = 35;
         self.iconWidth = SCREEN_WIDTH;
     }
     
-    // default title properties
-    self.titleFontName = kDefaultOnboardingFont;
-    self.titleFontSize = kDefaultTitleFontSize;
-    
-    // default subtitle properties
-    self.subtitleFontName = kDefaultOnboardingFont;
-    self.subtitleFontSize = kDefaultTitleFontSize;
-    
-    // default body properties
-    self.bodyFontName = kDefaultOnboardingFont;
-    self.bodyFontSize = kDefaultBodyFontSize;
-    
-    // default button properties
-    self.buttonFontName = kDefaultOnboardingFont;
-    self.buttonFontSize = kDefaultButtonFontSize;
-    
-    // default padding values
-    self.topPadding = kDefaultTopPadding;
-    self.underIconPadding = kDefaultUnderIconPadding;
-    self.underTitlePadding = kDefaultUnderTitlePadding;
-    self.underSubtitlePadding = kDefaultUnderSubtitlePadding;
-    self.bottomPadding = kDefaultBottomPadding;
-    self.underPageControlPadding = kDefaultUnderPageControlPadding;
-    
-    // default colors
-    self.titleTextColor = DEFAULT_TEXT_COLOR;
-    self.subtitleTextColor = DEFAULT_TEXT_COLOR;
-    self.bodyTextColor = DEFAULT_TEXT_COLOR;
-    self.buttonTextColor = DEFAULT_TEXT_COLOR;
-    
     // default blocks
     self.viewWillAppearBlock = ^{};
     self.viewDidAppearBlock = ^{};
@@ -135,7 +152,14 @@ static CGFloat const kMainPageControlHeight = 35;
     [super viewDidLoad];
     
     // now that the view has loaded we can generate the content
-    [self generateView];
+    [self constructView];
+    if (_onboardingState == THLOnboardingStateInitial) {
+        [self layoutInitialView];
+    } else if (_onboardingState == THLOnboardingStateEnd) {
+        [self layoutFinalView];
+    } else {
+        [self layoutView];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -145,6 +169,11 @@ static CGFloat const kMainPageControlHeight = 35;
     // about to appear
     if (self.delegate) {
         [self.delegate setNextPage:self];
+    }
+    
+    // if we have a video URL, start playing
+    if (_videoURL) {
+        [self.moviePlayerController play];
     }
     
     // call our view will appear block
@@ -181,7 +210,20 @@ static CGFloat const kMainPageControlHeight = 35;
             self.viewWillDisappearBlock();
         });
     }
+
+    if (self.moviePlayerController.playbackState == MPMoviePlaybackStatePlaying && self.stopMoviePlayerWhenDisappear) {
+        [self.moviePlayerController stop];
+    }
 }
+
+- (void)handleAppEnteredForeground {
+    // If the movie player is paused, as it does by default when backgrounded, start
+    // playing again.
+    if (self.moviePlayerController.playbackState == MPMoviePlaybackStatePaused) {
+        [self.moviePlayerController play];
+    }
+}
+
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
@@ -202,86 +244,209 @@ static CGFloat const kMainPageControlHeight = 35;
     _secondaryButtonActionHandler = secondaryActionBlock ?: ^(OnboardingViewController *controller){};
 }
 
-- (void)generateView {
-    // we want our background to be clear so we can see through it to the image provided
+- (void)constructView {
     self.view.backgroundColor = [UIColor clearColor];
     
-    // do some calculation for some common values we'll need, namely the width of the view,
-    // the center of the width, and the content width we want to fill up, which is some
-    // fraction of the view width we set in the multipler constant
-    CGFloat viewWidth = CGRectGetWidth(self.view.frame);
-    CGFloat horizontalCenter = viewWidth / 2;
-    CGFloat contentWidth = viewWidth * kContentWidthMultiplier;
-    
-    CGFloat viewHeight = CGRectGetHeight(self.view.frame);
-    CGFloat verticalCenter = viewHeight / 2;
-
-    // create the image view with the appropriate image, size, and center in on screen
-    _imageView = [[UIImageView alloc] initWithImage:_image];
-    [_imageView setFrame:CGRectMake(horizontalCenter - (self.iconWidth / 2), self.topPadding, self.iconWidth, self.iconHeight)];
-    [self.view addSubview:_imageView];
-    
-    // create and configure the main text label sitting underneath the icon with the provided padding
-    _mainTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, self.underIconPadding, contentWidth, 0)];
-    _mainTextLabel.text = _titleText;
-    _mainTextLabel.textColor = self.titleTextColor;
-    _mainTextLabel.font = [UIFont fontWithName:self.titleFontName size:self.titleFontSize];
-    _mainTextLabel.numberOfLines = 0;
-    _mainTextLabel.textAlignment = NSTextAlignmentLeft;
-    [_mainTextLabel sizeToFit];
-//    _mainTextLabel.center = CGPointMake(horizontalCenter, _mainTextLabel.center.y);
-    [self.view addSubview:_mainTextLabel];
-    
-    // create and configure the sub text label
-    _subTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, CGRectGetMaxY(_mainTextLabel.frame) + self.underTitlePadding, contentWidth, 0)];
-    _subTextLabel.text = _subtitleText;
-    _subTextLabel.textColor = self.subtitleTextColor;
-    _subTextLabel.font = [UIFont fontWithName:self.subtitleFontName size:self.subtitleFontSize];
-    _subTextLabel.numberOfLines = 1;
-    _subTextLabel.adjustsFontSizeToFitWidth = YES;
-    _subTextLabel.minimumScaleFactor = 0.5;
-    _subTextLabel.textAlignment = NSTextAlignmentLeft;
-    [_subTextLabel sizeToFit];
-//    _subTextLabel.center = CGPointMake(horizontalCenter, _subTextLabel.center.y);
-    [self.view addSubview:_subTextLabel];
-    
-    // create and configure the body text label
-
-    _bodyTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, verticalCenter - 100, contentWidth - kDefaultRightSideBodyPadding, 0)];
-    _bodyTextLabel.text = _body;
-    _bodyTextLabel.textColor = self.bodyTextColor;
-    _bodyTextLabel.font = [UIFont fontWithName:self.bodyFontName size:self.bodyFontSize];
-    _bodyTextLabel.numberOfLines = 6;
-    _bodyTextLabel.adjustsFontSizeToFitWidth = YES;
-    _bodyTextLabel.minimumScaleFactor = 0.5;
-
-    _bodyTextLabel.textAlignment = NSTextAlignmentLeft;
-    [_bodyTextLabel sizeToFit];
-//    _bodyTextLabel.center = CGPointMake(horizontalCenter, _bodyTextLabel.center.y);
-    [self.view addSubview:_bodyTextLabel];
-
-    // create the action button if we were given button text
-    if (_buttonText) {
-        _actionButton = [[UIButton alloc] initWithFrame:CGRectMake((CGRectGetMaxX(self.view.frame) / 2) - (contentWidth / 2), CGRectGetMaxY(self.view.frame) - self.underPageControlPadding - 2*kMainPageControlHeight - kActionButtonHeight - self.bottomPadding, contentWidth, kActionButtonHeight)];
-        _actionButton.titleLabel.font = [UIFont fontWithName:self.buttonFontName size:16];
-        _actionButton.backgroundColor = kTHLNUIBlueColor;
-        [_actionButton setTitle:_buttonText forState:UIControlStateNormal];
-        [_actionButton setTitleColor:self.buttonTextColor forState:UIControlStateNormal];
-        [_actionButton addTarget:self action:@selector(handleButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:_actionButton];
-    }
-    
-    // create the second button if we were given button text
-    if (_secondaryButtonText) {
-        _secondaryButton = [[UIButton alloc] initWithFrame:CGRectMake((CGRectGetMaxX(self.view.frame) / 2) - (contentWidth / 2), CGRectGetMaxY(self.view.frame) - self.underPageControlPadding - 2*kMainPageControlHeight, contentWidth, kActionButtonHeight)];
-        _secondaryButton.titleLabel.font = [UIFont fontWithName:self.buttonFontName size:16];
-        [_secondaryButton setTitle:_secondaryButtonText forState:UIControlStateNormal];
-        [_secondaryButton setTitleColor:self.buttonTextColor forState:UIControlStateNormal];
-        [_secondaryButton addTarget:self action:@selector(handleSecondaryButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:_secondaryButton];
+    _logoImageView = [self newLogoImageView];
+    _imageView = [self newImageView];
+    _mainTextLabel = [self newMainTextLabel];
+    _subTextLabel = [self newSubTextLabel];
+    _bodyTextLabel = [self newBodyTextLabel];
+    _actionButton = [self newActionButton];
+    _secondaryButton = [self newSecondActionButton];
+    _attributedLabel = [self newAttributedLabel];
+    // otherwise send the video view to the back if we have one
+    if (_videoURL) {
+        self.moviePlayerController.contentURL = _videoURL;
+        self.moviePlayerController.view.frame = self.view.frame;
+        self.moviePlayerController.repeatMode = MPMovieRepeatModeOne;
+        self.moviePlayerController.controlStyle = MPMovieControlStyleNone;
+        
+        [self.view addSubview:self.moviePlayerController.view];
+        [self.view sendSubviewToBack:self.moviePlayerController.view];
     }
 }
 
+- (void)layoutInitialView {
+    [self.view addSubviews:@[_logoImageView, _mainTextLabel, _bodyTextLabel]];
+    
+    [_logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(kTHLEdgeInsetsSuperHigh());
+        make.top.equalTo(kTHLEdgeInsetsInsanelyHigh());
+        make.size.mas_equalTo(CGSizeMake1(kLogoImageSize));
+    }];
+    
+    [_bodyTextLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_offset(-67);
+        make.left.equalTo(kTHLEdgeInsetsSuperHigh());
+        make.width.equalTo(SCREEN_WIDTH*0.67);
+    }];
+    
+    [_mainTextLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(_bodyTextLabel.mas_top).insets(kTHLEdgeInsetsHigh());
+        make.left.equalTo(kTHLEdgeInsetsSuperHigh());
+        make.width.equalTo(SCREEN_WIDTH*0.67);
+    }];
+}
+
+- (void)layoutView {
+    [self.view addSubviews:@[_imageView, _mainTextLabel, _bodyTextLabel]];
+    
+    [_bodyTextLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_offset(-67);
+        make.left.equalTo(kTHLEdgeInsetsSuperHigh());
+        make.width.equalTo(SCREEN_WIDTH*0.67);
+    }];
+    
+    [_mainTextLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(_bodyTextLabel.mas_top).insets(kTHLEdgeInsetsHigh());
+        make.left.equalTo(kTHLEdgeInsetsSuperHigh());
+        make.width.equalTo(SCREEN_WIDTH*0.67);
+    }];
+    
+    [_imageView makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.top.equalTo(UIEdgeInsetsZero);
+    }];
+    
+    [self.view sendSubviewToBack:_imageView];
+}
+
+- (void)layoutFinalView {
+    [self.view addSubviews:@[_imageView, _logoImageView, _subTextLabel, _bodyTextLabel, _actionButton, _secondaryButton, _attributedLabel]];
+    
+    [_secondaryButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(kTHLEdgeInsetsSuperHigh());
+        make.top.equalTo(kTHLEdgeInsetsSuperHigh());
+    }];
+    
+    [_logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(SV(_logoImageView).centerX);
+        make.bottom.equalTo(SV(_logoImageView).centerY).insets(kTHLEdgeInsetsSuperHigh());
+        make.size.mas_equalTo(CGSizeMake1(75.0f));
+    }];
+    
+    [_subTextLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(SV(_logoImageView).centerX);
+        make.top.equalTo(SV(_logoImageView).centerY).insets(kTHLEdgeInsetsSuperHigh());
+        make.width.equalTo(SCREEN_WIDTH*0.67);
+    }];
+    
+    [_imageView makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.top.equalTo(UIEdgeInsetsZero);
+    }];
+    
+    [_actionButton makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(_attributedLabel.mas_top).insets(kTHLEdgeInsetsInsanelyHigh());
+        make.centerX.equalTo(SV(_actionButton).centerX);
+        make.height.equalTo(50);
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+    }];
+    
+    [_attributedLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_offset(-35);
+        make.centerX.equalTo(SV(_attributedLabel).centerX);
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+    }];
+    
+    [self.view sendSubviewToBack:_imageView];
+}
+
+#pragma mark - Constructors
+- (UIImageView *)newLogoImageView {
+    UIImageView *imageView = [UIImageView new];
+    imageView.image = [UIImage imageNamed:@"Hypelist-Icon"];
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    imageView.clipsToBounds = YES;
+    return imageView;
+}
+
+- (UIImageView *)newImageView {
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:_image];;
+    return imageView;
+}
+
+- (UILabel *)newMainTextLabel {
+    UILabel *mainTextLabel = [UILabel new];
+    mainTextLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    mainTextLabel.text = _titleText;
+    mainTextLabel.textColor = kTHLNUIPrimaryFontColor;
+    mainTextLabel.font = [UIFont fontWithName:@"Raleway-Regular" size:28];
+    mainTextLabel.numberOfLines = 0;
+    mainTextLabel.textAlignment = NSTextAlignmentLeft;
+    [mainTextLabel sizeToFit];
+    return mainTextLabel;
+}
+
+- (UILabel *)newSubTextLabel {
+    UILabel *subTextLabel = [UILabel new];
+    subTextLabel.text = _subtitleText;
+    subTextLabel.textColor = kTHLNUIGrayFontColor;
+    subTextLabel.font = [UIFont fontWithName:@"Raleway-Light" size:24];
+    subTextLabel.numberOfLines = 0;
+    subTextLabel.adjustsFontSizeToFitWidth = YES;
+    subTextLabel.minimumScaleFactor = 0.5;
+    subTextLabel.textAlignment = NSTextAlignmentCenter;
+    [subTextLabel sizeToFit];
+    return subTextLabel;
+}
+
+- (UILabel *)newBodyTextLabel {
+    UILabel *bodyTextLabel = [UILabel new];
+    bodyTextLabel.text = _body;
+    bodyTextLabel.textColor = kTHLNUIGrayFontColor;
+    bodyTextLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20];
+    bodyTextLabel.numberOfLines = 6;
+    bodyTextLabel.adjustsFontSizeToFitWidth = YES;
+    bodyTextLabel.minimumScaleFactor = 0.5;
+    
+    bodyTextLabel.textAlignment = NSTextAlignmentLeft;
+    [bodyTextLabel sizeToFit];
+    return bodyTextLabel;
+}
+
+- (UIButton *)newActionButton {
+    UIButton *actionButton = [UIButton new];
+    actionButton.tintColor = [UIColor clearColor];
+    [actionButton.layer setBorderWidth:1.0];
+    [actionButton.layer setBorderColor:[kTHLNUIAccentColor CGColor]];
+    [actionButton setTitle:@"Login with Facebook" forState:UIControlStateNormal];
+    [actionButton setTitleColor:kTHLNUIPrimaryFontColor forState:UIControlStateNormal];
+    actionButton.titleLabel.font = [UIFont fontWithName:@"Raleway-Light" size:16];
+    [actionButton addTarget:self action:@selector(handleButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    return actionButton;
+}
+
+- (UIButton *)newSecondActionButton {
+    UIButton *secondButton = [UIButton new];
+    secondButton.tintColor = [UIColor clearColor];
+    [secondButton setTitle:@"Skip" forState:UIControlStateNormal];
+    [secondButton setTitleColor:kTHLNUIGrayFontColor forState:UIControlStateNormal];
+    secondButton.titleLabel.font = [UIFont fontWithName:@"Raleway-Light" size:16];
+    [secondButton addTarget:self action:@selector(handleSecondaryButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    return secondButton;
+}
+
+- (TTTAttributedLabel *)newAttributedLabel {
+    TTTAttributedLabel *tttLabel = [TTTAttributedLabel new];
+    tttLabel.textColor = kTHLNUIGrayFontColor;
+    tttLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16];
+    tttLabel.numberOfLines = 0;
+    tttLabel.adjustsFontSizeToFitWidth = YES;
+    tttLabel.minimumScaleFactor = 0.5;
+    tttLabel.linkAttributes = @{NSForegroundColorAttributeName: kTHLNUIGrayFontColor,
+                                      NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
+    tttLabel.activeLinkAttributes = @{NSForegroundColorAttributeName: kTHLNUIPrimaryFontColor,
+                                      NSUnderlineStyleAttributeName: @(NSUnderlineStyleNone)};
+    tttLabel.textAlignment = NSTextAlignmentCenter;
+    NSString *labelText = @"By signing up, you agree to our Privacy Policy and Terms & Conditions";
+    tttLabel.text = labelText;
+    NSRange privacy = [labelText rangeOfString:@"Privacy Policy"];
+    NSRange terms = [labelText rangeOfString:@"Terms & Conditions"];
+    [tttLabel addLinkToURL:[NSURL URLWithString:@"action://show-privacy"] withRange:privacy];
+    [tttLabel addLinkToURL:[NSURL URLWithString:@"action://show-terms"] withRange:terms];
+    tttLabel.delegate = self;
+    return tttLabel;
+}
 
 #pragma mark - Transition alpha
 
@@ -293,6 +458,25 @@ static CGFloat const kMainPageControlHeight = 35;
     _actionButton.alpha = newAlpha;
 }
 
+- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url {
+    if ([[url scheme] hasPrefix:@"action"]) {
+        if ([[url host] hasPrefix:@"show-privacy"]) {
+            THLInformationViewController *infoVC = [THLInformationViewController new];
+            UINavigationController *navVC= [[UINavigationController alloc] initWithRootViewController:infoVC];
+            [self.view.window.rootViewController presentViewController:navVC animated:YES completion:nil];
+            infoVC.displayText = [THLResourceManager privacyPolicyText];
+            infoVC.title = @"Privacy Policy";
+        } else if ([[url host] hasPrefix:@"show-terms"]) {
+            THLInformationViewController *infoVC = [THLInformationViewController new];
+            UINavigationController *navVC= [[UINavigationController alloc] initWithRootViewController:infoVC];
+            [self.view.window.rootViewController presentViewController:navVC animated:YES completion:nil];
+            infoVC.displayText = [THLResourceManager termsOfUseText];
+            infoVC.title = @"Terms Of Use";
+        }
+    } else {
+        /* deal with http links here */
+    }
+}
 
 #pragma mark - action button callback
 

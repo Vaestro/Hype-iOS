@@ -54,7 +54,7 @@ static NSString *const kTHLNUITableCellDetail = @"TableCellDetail";
 #define kTHLNUIRedColor [UIColor colorWithRed:0.969 green:0.114 blue:0.333 alpha:1] /*#f71d55*/
 #define kTHLNUIBlueColor [UIColor colorWithRed:0.23 green:0.35 blue:0.60 alpha:1.0]; /*#3A5A99*/
 #define kTHLNUIPrimaryBackgroundColor [UIColor colorWithRed:0.055 green:0.051 blue:0.071 alpha:1] /*#0e0d12*/
-#define kTHLNUISecondaryBackgroundColor [UIColor colorWithRed:0.102 green:0.122 blue:0.145 alpha:1] /*#1a1f25*/
+#define kTHLNUISecondaryBackgroundColor [UIColor colorWithRed:0.004 green:0.094 blue:0.149 alpha:1] /*#011826*/
 #define kTHLNUIPrimaryFontColor [UIColor colorWithRed:1 green:1 blue:1 alpha:1] /*#ffffff*/
 #define kTHLNUISecondaryFontColor [UIColor colorWithRed:0 green:0 blue:0 alpha:0.67] /*#000000*/
 #define kTHLNUIGrayFontColor [UIColor colorWithRed:1 green:1 blue:1 alpha:0.7] /*#ffffff*/

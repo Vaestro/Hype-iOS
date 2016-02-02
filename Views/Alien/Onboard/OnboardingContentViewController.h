@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TTTAttributedLabel.h"
+
+@import MediaPlayer;
 
 @class OnboardingViewController;
 
@@ -19,7 +22,9 @@ typedef void (^action_callback)(OnboardingViewController *onboardController);
     UIImage *_image;
     NSString *_buttonText;
     NSString *_secondaryButtonText;
-
+    NSURL *_videoURL;
+    TTTAttributedLabel *_attributedLabel;
+    
     UIImageView *_imageView;
     UILabel *_mainTextLabel;
     UILabel *_subTextLabel;
@@ -69,7 +74,14 @@ typedef void (^action_callback)(OnboardingViewController *onboardController);
 @property (nonatomic, copy) dispatch_block_t viewWillDisappearBlock;
 @property (nonatomic, copy) dispatch_block_t viewDidDisappearBlock;
 
-+ (instancetype)contentWithTitle:(NSString *)title subtitle:(NSString *)subtitle body:(NSString *)body image:(UIImage *)image buttonText:(NSString *)buttonText action:(dispatch_block_t)action secondaryButtonText:(NSString *)secondaryButtonText secondaryAction:(dispatch_block_t)secondaryAction;
+// Movie player
+@property (nonatomic) BOOL stopMoviePlayerWhenDisappear;
+@property (nonatomic) MPMoviePlayerController *moviePlayerController;
+
++ (instancetype)initialContentWithTitle:(NSString *)title body:(NSString *)body backgroundVideo:(NSURL *)videoURL;
++ (instancetype)finalContentWithTitle:(NSString *)title body:(NSString *)body backgroundImage:(UIImage *)image buttonText:(NSString *)buttonText action:(dispatch_block_t)action secondaryButtonText:(NSString *)secondaryButtonText secondaryAction:(dispatch_block_t)secondaryAction;
+
++ (instancetype)contentWithTitle:(NSString *)title body:(NSString *)body image:(UIImage *)image;
 
 - (instancetype)initWithTitle:(NSString *)title subtitle:(NSString *)subtitle body:(NSString *)body image:(UIImage *)image buttonText:(NSString *)buttonText action:(dispatch_block_t)action secondaryButtonText:(NSString *)secondaryButtonText secondaryAction:(dispatch_block_t)secondaryAction;
 

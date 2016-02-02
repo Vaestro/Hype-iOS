@@ -9,14 +9,16 @@
 #import "THLWaitlistHomeViewController.h"
 #import "THLAppearanceConstants.h"
 #import "THLActionBarButton.h"
+#import "THLActionButton.h"
 
 static const CGFloat kLogoImageSize = 75.0f;
 
 @interface THLWaitlistHomeViewController()
+@property (nonatomic, strong) UIImageView *backgroundView;
 @property (nonatomic, strong) UIImageView *logoImageView;
 @property (nonatomic, strong) UILabel *welcomeMessageLabel;
-@property (nonatomic, strong) THLActionBarButton *submitInvitationCodeButton;
-@property (nonatomic, strong) THLActionBarButton *requestInvitationButton;
+@property (nonatomic, strong) THLActionButton *submitInvitationCodeButton;
+@property (nonatomic, strong) THLActionButton *requestInvitationButton;
 @end
 
 @implementation THLWaitlistHomeViewController
@@ -29,6 +31,7 @@ static const CGFloat kLogoImageSize = 75.0f;
 }
 
 - (void)constructView {
+    _backgroundView = [self newBackgroundView];
     _logoImageView = [self newLogoImageView];
     _welcomeMessageLabel = [self newWelcomeMessageLabel];
     _submitInvitationCodeButton = [self newSubmitInvitationCodeButton];
@@ -45,32 +48,38 @@ static const CGFloat kLogoImageSize = 75.0f;
     
     self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
 
-    [self.view addSubviews:@[_logoImageView,
+    [self.view addSubviews:@[_backgroundView,
+                             _logoImageView,
                              _welcomeMessageLabel,
                              _submitInvitationCodeButton,
                              _requestInvitationButton]];
     WEAKSELF();
+    [_backgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.left.right.equalTo(UIEdgeInsetsZero);
+    }];
+    
     [_requestInvitationButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.left.right.insets(kTHLEdgeInsetsNone());
-        make.top.equalTo([WSELF submitInvitationCodeButton].mas_bottom);
+        make.bottom.left.right.insets(kTHLEdgeInsetsSuperHigh());
+        make.top.equalTo([WSELF submitInvitationCodeButton].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
         make.height.mas_equalTo(kSubmitButtonHeight);
     }];
     
     [_submitInvitationCodeButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.insets(kTHLEdgeInsetsNone());
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
         make.height.mas_equalTo(kSubmitButtonHeight);
     }];
     
     [_logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.mas_equalTo(CGSizeMake1(kLogoImageSize));
         make.centerX.mas_equalTo(0);
-        make.top.insets(UIEdgeInsetsMake1(70));
+        make.bottom.equalTo([WSELF welcomeMessageLabel].mas_top).insets(kTHLEdgeInsetsSuperHigh());
     }];
     
     [_welcomeMessageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(SCREEN_WIDTH*0.66);
         make.centerX.mas_equalTo(0);
-        make.centerY.mas_equalTo(0);
+        make.bottom.equalTo(SV([WSELF welcomeMessageLabel]).mas_centerY).insets(kTHLEdgeInsetsHigh());
+
     }];
 }
 
@@ -95,6 +104,15 @@ static const CGFloat kLogoImageSize = 75.0f;
 }
 
 #pragma mark - Constructors
+
+- (UIImageView *)newBackgroundView {
+    UIImageView *imageView = [UIImageView new];
+    imageView.image = [UIImage imageNamed:@"WaitlistHomeBG"];
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    imageView.clipsToBounds = YES;
+    return imageView;
+}
+
 - (UIImageView *)newLogoImageView {
     UIImageView *imageView = [UIImageView new];
     imageView.image = [UIImage imageNamed:@"Hypelist-Icon"];
@@ -112,18 +130,15 @@ static const CGFloat kLogoImageSize = 75.0f;
     return label;
 }
 
-- (THLActionBarButton *)newSubmitInvitationCodeButton {
-    THLActionBarButton *button = [THLActionBarButton new];
-    [button setTitle:@"Use Invitation Code" forState:UIControlStateNormal];
-    [button setBackgroundColor:kTHLNUIAccentColor];
+- (THLActionButton *)newSubmitInvitationCodeButton {
+    THLActionButton *button = [[THLActionButton alloc] initWithDefaultStyle];
+    [button setTitle:@"Use Invitation Code"];
     return button;
 }
 
-- (THLActionBarButton *)newRequestInvitationButton {
-    THLActionBarButton *button = [THLActionBarButton new];
-    [button setTitle:@"Request Invitation" forState:UIControlStateNormal];
-    [button setBackgroundColor:kTHLNUIAccentColor];
-    [button setAlpha:0.75];
+- (THLActionButton *)newRequestInvitationButton {
+    THLActionButton *button = [[THLActionButton alloc] initWithInverseStyle];
+    [button setTitle:@"Request Invitation"];
     return button;
 }
 
