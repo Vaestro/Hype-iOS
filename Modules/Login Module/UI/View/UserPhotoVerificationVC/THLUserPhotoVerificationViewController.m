@@ -63,27 +63,26 @@
 
 
 - (UIBarButtonItem *)newBackBarButtonItem {
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Back"
-                                                             style:UIBarButtonItemStylePlain
-                                                            target:self
-                                                            action:@selector(handleCancelAction)];
-    [item setTitleTextAttributes:
-     [NSDictionary dictionaryWithObjectsAndKeys:
-      kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
-                        forState:UIControlStateNormal];
-    return item;
+    return [self createBarButtonWithTitle:@"Back"
+                                 selector:@selector(handleCancelAction)];
 }
 
 - (UIBarButtonItem *)newSaveBarButtonItem {
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Save"
+    return [self createBarButtonWithTitle:@"Save"
+                                 selector:@selector(updateUserPhoto)];
+}
+
+- (UIBarButtonItem *) createBarButtonWithTitle:(NSString *) title selector:(SEL) selector {
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:title
                                                              style:UIBarButtonItemStylePlain
                                                             target:self
-                                                            action:@selector(updateUserPhoto)];
+                                                            action:selector];
     [item setTitleTextAttributes:
      [NSDictionary dictionaryWithObjectsAndKeys:
       kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
                         forState:UIControlStateNormal];
     return item;
+    
 }
 
 
