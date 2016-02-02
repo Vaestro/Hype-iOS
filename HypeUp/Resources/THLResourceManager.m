@@ -22,7 +22,8 @@
 }
 
 + (NSURL *)onboardingVideo {
-    NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Gilded" ofType:@"mov"]];
+    NSURL *url = [NSURL fileURLWithPath:[[
+                                          NSBundle mainBundle] pathForResource:@"Lavo" ofType:@"mov"]];
     return url;
 }
 

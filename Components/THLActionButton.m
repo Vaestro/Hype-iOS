@@ -20,7 +20,7 @@
 - (instancetype)initWithDefaultStyle {
     if (self = [super init]) {
         self.inverse = FALSE;
-        self.backgroundColor = kTHLNUIAccentColor;
+        [self.fxLabel setBackgroundColor:kTHLNUIAccentColor];
         [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     }
     return self;
@@ -29,7 +29,8 @@
 - (instancetype)initWithInverseStyle {
     if (self = [super init]) {
         self.inverse = TRUE;
-        self.tintColor = [UIColor clearColor];
+        [self setTintColor:[UIColor clearColor]];
+        [self.fxLabel setTintColor:[UIColor clearColor]];
         [self.layer setBorderWidth:1.0];
 //        Accent Color with opacity set at 0.5
         [self.layer setBorderColor:[[UIColor colorWithRed:0.773 green:0.702 blue:0.345 alpha:0.5] CGColor]];

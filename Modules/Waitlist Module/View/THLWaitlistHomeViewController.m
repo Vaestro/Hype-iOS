@@ -134,7 +134,6 @@ static const CGFloat kLogoImageSize = 75.0f;
 - (THLActionButton *)newSubmitInvitationCodeButton {
     THLActionButton *button = [[THLActionButton alloc] initWithDefaultStyle];
     [button setTitle:@"Use Invitation Code"];
-
     return button;
 }
 
