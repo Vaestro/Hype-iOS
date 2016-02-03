@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, FAQSeparatorStyle){
+    SlimWhiteLine
+};
+
 @interface THLFAQSectionView : UIView
+
+- (instancetype) initWithTitle:(NSString *) title
+                   description:(NSString *) description
+                         image:(UIImage *) image
+                separatorStyle:(FAQSeparatorStyle) separatorStyle;
 
 @end
