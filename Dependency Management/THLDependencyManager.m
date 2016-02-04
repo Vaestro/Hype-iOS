@@ -20,6 +20,7 @@
 #import "THLGuestFlowWireframe.h"
 #import "THLHostFlowWireframe.h"
 
+#import "THLMessageListWireframe.h"
 #import "THLEventDiscoveryWireframe.h"
 #import "THLDashboardWireframe.h"
 #import "THLHostDashboardWireframe.h"
@@ -71,6 +72,7 @@
 @property (nonatomic, weak) THLNumberVerificationWireframe *numberVerificationWireframe;
 @property (nonatomic, weak) THLGuestFlowWireframe *guestFlowWireframe;
 @property (nonatomic, weak) THLHostFlowWireframe *hostFlowWireframe;
+@property (nonatomic, weak) THLMessageListWireframe *messageListWireframe;
 @property (nonatomic, weak) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
 @property (nonatomic, weak) THLDashboardWireframe *dashboardWireframe;
 @property (nonatomic, weak) THLHostDashboardWireframe *hostDashboardWireframe;
@@ -133,6 +135,15 @@
 	THLNumberVerificationWireframe *wireframe = [[THLNumberVerificationWireframe alloc] init];
 	self.numberVerificationWireframe = wireframe;
 	return wireframe;
+}
+
+- (THLMessageListWireframe *)newMessageListWireframe {
+    THLMessageListWireframe *wireframe = [[THLMessageListWireframe alloc] initWithDataStore:self.eventDataStore
+                                                                                     entityMapper:self.entityMapper
+                                                                                     eventService:self.eventService
+                                                                            viewDataSourceFactory:self.viewDataSourceFactory];
+    self.messageListWireframe = wireframe;
+    return wireframe;
 }
 
 - (THLEventDiscoveryWireframe *)newEventDiscoveryWireframe {

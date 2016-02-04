@@ -10,6 +10,7 @@
 #import "THLGuestFlowWireframe.h"
 
 #import "THLEventDiscoveryWireframe.h"
+#import "THLMessageListWireframe.h"
 #import "THLDashboardWireframe.h"
 #import "THLUserProfileWireframe.h"
 #import "THLEventDetailWireframe.h"
@@ -23,6 +24,7 @@
 
 @interface THLGuestFlowWireframe()
 <
+THLMessageListModuleDelegate,
 THLEventDiscoveryModuleDelegate,
 THLDashboardModuleDelegate,
 THLUserProfileModuleDelegate,
@@ -36,6 +38,7 @@ THLPerkStoreModuleDelegate
 @property (nonatomic, strong) id currentWireframe;
 @property (nonatomic, nonatomic) UIViewController *containerVC;
 @property (nonatomic, strong) UITabBarController *masterTabBarController;
+@property (nonatomic, strong) THLMessageListWireframe *messageListWireframe;
 @property (nonatomic, strong) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
 @property (nonatomic, strong) THLDashboardWireframe *dashboardWireframe;
 @property (nonatomic, strong) THLUserProfileWireframe *userProfileWireframe;
@@ -74,22 +77,25 @@ THLPerkStoreModuleDelegate
 
 - (void)configureMasterTabViewController:(UITabBarController *)masterTabBarController {
     _masterTabBarController = masterTabBarController;
+    UINavigationController *messages = [UINavigationController new];
     UINavigationController *discovery = [UINavigationController new];
     UINavigationController *dashboard = [UINavigationController new];
     UINavigationController *perks = [UINavigationController new];
     UINavigationController *profile = [UINavigationController new];
     
+    [self presentMessageListInterfaceInNavigationController:messages];
     [self presentEventDiscoveryInterfaceInNavigationController:discovery];
     [self presentDashboardInterfaceInNavigationController:dashboard];
     [self presentPerkStoreInterfaceInNavigationController:perks];
     [self presentUserProfileInterfaceInNavigationController:profile];
     
+    messages.tabBarItem.image = [UIImage imageNamed:@"Lists Icon"];
     dashboard.tabBarItem.image = [UIImage imageNamed:@"Lists Icon"];
     discovery.tabBarItem.image = [UIImage imageNamed:@"Home Icon"];
     profile.tabBarItem.image = [UIImage imageNamed:@"Profile Icon"];
     perks.tabBarItem.image = [UIImage imageNamed:@"Perks Icon"];
     
-    NSArray *views = @[discovery, dashboard, perks, profile];
+    NSArray *views = @[messages, discovery, dashboard, perks, profile];
     
     _masterTabBarController.viewControllers = views;
     _masterTabBarController.view.autoresizingMask=(UIViewAutoresizingFlexibleHeight);
@@ -106,6 +112,13 @@ THLPerkStoreModuleDelegate
 
 - (id<THLGuestFlowModuleInterface>)moduleInterface {
     return self;
+}
+
+- (void)presentMessageListInterfaceInNavigationController:(UINavigationController *)navigationController {
+    _messageListWireframe = [_dependencyManager newMessageListWireframe];
+    _currentWireframe = _messageListWireframe;
+    [_messageListWireframe.moduleInterface setModuleDelegate:self];
+    [_messageListWireframe.moduleInterface presentEventDiscoveryInterfaceInNavigationController:navigationController];
 }
 
 - (void)presentEventDiscoveryInterfaceInNavigationController:(UINavigationController *)navigationController {
