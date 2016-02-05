@@ -28,5 +28,6 @@
 - (BFTask *)fetchGuestlistInvitesForGuestlist:(THLGuestlistEntity *)guestlist;
 - (BFTask *)updateGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite withResponse:(THLStatus)response;
 - (BFTask *)updateGuestlist:(THLGuestlistEntity *)guestlist withReviewStatus:(THLStatus)reviewStatus;
+- (BFTask *)updateGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite withCheckInStatus:(BOOL)status;
 
 @end

@@ -20,9 +20,11 @@
 - (BOOL)isAccepted;
 - (BOOL)isPending;
 - (BOOL)isDeclined;
+- (BOOL)isCheckedIn;
 
 - (BOOL)isOwnerInvite;
 
 - (BOOL)guestlistIsAccepted;
 - (BOOL)guestlistIsDeclined;
+- (BOOL)guestlistIsCheckedIn;
 @end

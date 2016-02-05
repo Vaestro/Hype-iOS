@@ -9,6 +9,8 @@
 #import <Parse/Parse.h>
 #import <Parse/PFObject+Subclass.h>
 #import "THLConstants.h"
+//#import "THLBeaconEntity.h"
+@class THLBeaconEntity;
 //@protocol PFSubclassing;
 
 @interface THLUser : PFUser<PFSubclassing>
@@ -22,12 +24,11 @@
 @property (nonatomic, retain) NSString *phoneNumber;
 @property (nonatomic, retain) NSString *location;
 @property (nonatomic) BOOL fbVerified;
-
 @property (nonatomic) enum THLUserType type;
 @property (nonatomic) enum THLSex sex;
 @property (nonatomic) float rating;
 @property (nonatomic) float credits;
 @property (nonatomic, retain) NSString *twilioNumber;
-
+@property (nonatomic, retain) THLBeaconEntity *beacon;
 @property (nonatomic, copy, readonly) NSString *fullName;
 @end

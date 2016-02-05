@@ -163,14 +163,16 @@ static CGFloat const CELL_SPACING = 10;
             [[WSELF.headerView menuButton] setHidden:TRUE];
         }
         else if (status == [NSNumber numberWithInteger:1]) {
-            [[WSELF actionBarButton] setHidden:TRUE];
+            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Check In", nil)];
+            [WSELF actionBarButton].backgroundColor = kTHLNUIActionColor;
             [[WSELF.headerView menuButton] setHidden:FALSE];
-            [self remakeConstraints];
+
         }
         else if (status == [NSNumber numberWithInteger:2]) {
-            [[WSELF actionBarButton] setHidden:TRUE];
+            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Check In", nil)];
+            [WSELF actionBarButton].backgroundColor = kTHLNUIActionColor;
             [[WSELF.headerView menuButton] setHidden:FALSE];
-            [self remakeConstraints];
+
         }
         else if (status == [NSNumber numberWithInteger:3]) {
             [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Accept or Decline Guestlist", nil)];
@@ -188,6 +190,16 @@ static CGFloat const CELL_SPACING = 10;
             [[WSELF actionBarButton] setHidden:TRUE];
             [[WSELF.headerView menuButton] setHidden:TRUE];
             [self remakeConstraints];
+        }
+        else if (status == [NSNumber numberWithInteger:6]) {
+            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Checked In", nil)];
+            [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
+            [[WSELF.headerView menuButton] setHidden:FALSE];
+        }
+        else if (status == [NSNumber numberWithInteger:7]) {
+            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Checked In", nil)];
+            [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
+            [[WSELF.headerView menuButton] setHidden:FALSE];
         }
         [WSELF.view setNeedsDisplay];
     }];

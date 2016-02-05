@@ -55,6 +55,7 @@ PODS:
     - TwitterCore (= 1.14.6)
   - DZNEmptyDataSet (1.7.3)
   - EKAlgorithms (0.2)
+  - EstimoteSDK (3.8.2)
   - Fabric (1.6.1)
   - FacebookImagePicker (2.0.7):
     - FBSDKCoreKit (~> 4.8.0)
@@ -180,6 +181,7 @@ DEPENDENCIES:
   - Digits
   - DZNEmptyDataSet
   - EKAlgorithms (~> 0.2)
+  - EstimoteSDK
   - Fabric
   - FacebookImagePicker
   - FBSDKCoreKit
@@ -236,6 +238,7 @@ SPEC CHECKSUMS:
   Digits: 57b958f1e19907b70645fcd25f97f14175ff2438
   DZNEmptyDataSet: dd7cca17c1d07dfa78956859b1e70a52505678ef
   EKAlgorithms: 83488651734ba3a63956fcb783b10e82d2ec3388
+  EstimoteSDK: 5e36b596f9f28161bff35b086d9f70282be5f513
   Fabric: bf0ceb04e7c924090efc5f8c55e4fbcca189e0a0
   FacebookImagePicker: ba3d3fe1c6f48f41f97de0aceeb906b4cc16570e
   FBSDKCoreKit: 66a935d17b6e00b6b64e604f2eb9b72c9ab7deb8

@@ -21,11 +21,13 @@
 - (void)interactor:(THLGuestlistReviewInteractor *)interactor didUpdateGuestlistInviteResponse:(NSError *)error to:(THLStatus)response;
 - (void)interactor:(THLGuestlistReviewInteractor *)interactor didUpdateGuestlistReviewStatus:(NSError *)error to:(THLStatus)reviewStatus;
 - (void)interactor:(THLGuestlistReviewInteractor *)interactor didGetToken:(NSString *)token;
+- (void)interactor:(THLGuestlistReviewInteractor *)interactor didUpdateGuestlistInviteCheckInStatus:(NSError *)error to:(BOOL)status;
 @end
 
 @interface THLGuestlistReviewInteractor : NSObject
 @property (nonatomic, weak) id<THLGuestlistReviewInteractorDelegate> delegate;
 @property (nonatomic, strong) THLGuestlistEntity *guestlistEntity;
+@property (nonatomic, strong) THLGuestlistInviteEntity *guestlistInvite;
 @property (nonatomic, strong) NSArray *guests;
 @property (nonatomic, strong) NSString *callToken;
 
@@ -37,11 +39,12 @@
 
 - (THLViewDataSource *)generateDataSource;
 //- (void)commitChangesToGuestlist;
+- (void)checkInForGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite;
 - (void)updateGuestlistInvites;
-
 - (void)updateGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite withResponse:(THLStatus)response;
+- (void)updateGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite withCheckInStatus:(BOOL)status;
 //- (void)updateGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite withCheckInStatus:(BOOL)checkInStatus;
 - (void)updateGuestlist:(THLGuestlistEntity *)guestlistEntity withReviewStatus:(THLStatus)reviewStatus;
-- (void)checkInGuests;
+//- (void)checkInGuests;
 - (void)generateToken;
 @end

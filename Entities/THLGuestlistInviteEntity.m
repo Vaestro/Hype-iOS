@@ -24,6 +24,10 @@
     return self.response == THLStatusDeclined;
 }
 
+- (BOOL)isCheckedIn {
+    return self.checkInStatus;
+}
+
 - (BOOL)guestlistIsAccepted {
     return [self.guestlist isAccepted];
 }
@@ -36,4 +40,9 @@
 - (BOOL)isOwnerInvite {
     return [self.guestlist.owner.objectId isEqualToString:[THLUser currentUser].objectId];
 }
+
+-(BOOL)guestlistIsCheckedIn {
+    return self.checkInStatus;
+}
+
 @end

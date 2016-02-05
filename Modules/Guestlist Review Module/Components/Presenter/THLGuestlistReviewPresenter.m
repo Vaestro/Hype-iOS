@@ -293,8 +293,14 @@ THLGuestlistReviewInteractorDelegate
 }
 
 - (void)updateGuestReviewStatus {
-    if ([_guestlistInviteEntity isOwnerInvite]) {
+    if ([_guestlistInviteEntity isOwnerInvite] && [_guestlistInviteEntity isCheckedIn] ) {
+        self.reviewerStatus = THLGuestlistCheckedInOwner;
+    }
+    else if ([_guestlistInviteEntity isOwnerInvite]) {
         self.reviewerStatus = THLGuestlistOwner;
+    }
+    else if ([_guestlistInviteEntity isAccepted] && [_guestlistInviteEntity isCheckedIn]) {
+        self.reviewerStatus = THLGuestlistCheckedInGuest;
     }
     else if ([_guestlistInviteEntity isAccepted]) {
         self.reviewerStatus = THLGuestlistAttendingGuest;
@@ -365,7 +371,7 @@ THLGuestlistReviewInteractorDelegate
             break;
         }
         case THLGuestlistOwner: {
-            [self handleAddGuestsAction];
+            [_interactor checkInForGuestlistInvite:_guestlistInviteEntity];
             break;
         }
         case THLGuestlistPendingHost: {
@@ -381,6 +387,13 @@ THLGuestlistReviewInteractorDelegate
         }
     }
 }
+
+
+- (void)handleCheckInAction {
+    
+}
+
+
 
 - (void)handleAcceptAction {
     /**
@@ -524,6 +537,33 @@ THLGuestlistReviewInteractorDelegate
     NSString *hostNumber = _guestlistInviteEntity.guestlist.event.host.phoneNumber;
     [self handleCallActionWithCallerdId:twilioNumber toHostNumber:hostNumber];
 }
+
+
+- (void)interactor:(THLGuestlistReviewInteractor *)interactor didUpdateGuestlistInviteCheckInStatus:(NSError *)error to:(BOOL)status {
+    if (status) {
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Checked In"
+                                                                       message:@"You have successfully checked In"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * action) {}];
+        
+        [alert addAction:defaultAction];
+        [(UIViewController *)_view presentViewController:alert animated:YES completion:nil];
+        [self updateGuestReviewStatus];
+    } else {
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Not checked In"
+                                                                       message:@"You are not in range to check In"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * action) {}];
+        
+        [alert addAction:defaultAction];
+        [(UIViewController *)_view presentViewController:alert animated:YES completion:nil];
+    }
+}
+
 
 - (void)dealloc {
     NSLog(@"Destroyed %@", self);

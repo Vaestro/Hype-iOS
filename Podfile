@@ -70,6 +70,10 @@ pod 'DZNEmptyDataSet'
 pod 'IHKeyboardAvoiding'
 pod "LRTextField"
 pod "FXLabel"
+
+#Geolocation
+pod 'EstimoteSDK'
+
 end
 
 #Phone Calls
