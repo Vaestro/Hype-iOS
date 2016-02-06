@@ -7,16 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "THLTitledContentView.h"
 
-typedef NS_ENUM(NSUInteger, FAQSeparatorStyle){
-    SlimWhiteLine
-};
+@interface THLFAQSectionView : THLTitledContentView
 
-@interface THLFAQSectionView : UIView
-
-- (instancetype) initWithTitle:(NSString *) title
-                   description:(NSString *) description
-                         image:(UIImage *) image
-                separatorStyle:(FAQSeparatorStyle) separatorStyle;
+@property (nonatomic, strong) NSString *titleString;
+@property (nonatomic, strong) NSString *descriptionString;
+@property (nonatomic, strong) UIImage *image;
 
 @end

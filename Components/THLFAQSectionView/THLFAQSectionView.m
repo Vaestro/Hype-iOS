@@ -7,6 +7,13 @@
 //
 
 #import "THLFAQSectionView.h"
+#import "THLAppearanceConstants.h"
+
+static CGFloat const kTHLFQASectionImageViewHeight = 150;
+static CGFloat const kTHLFAQSectionTitleFontSize = 22.0;
+static CGFloat const kTHLFAQSectionDescriptionFontSize = 14.0;
+static CGFloat const kTHLFAQSectionDescriptionHeight = 40.0;
+static CGFloat const kTHLFAQSectionSeparatorHeight = 2.0;
 
 @interface THLFAQSectionView()
 
@@ -21,88 +28,88 @@
 
 #pragma mark - View cycle
 
-- (instancetype) initWithTitle:(NSString *)title
-                   description:(NSString *)description
-                         image:(UIImage *)image
-                separatorStyle:(FAQSeparatorStyle)separatorStyle
+- (void) constructView
 {
-    if (self == [super init]){
-        [self newTitlLabelWithText:title];
-        [self newDescriptionLabelWithText:description];
-        [self newImageViewWithImage: image];
-        [self newSeparatorViewWithStyle: separatorStyle];
-    }
-    return self;
-}
-
-- (void) drawRect:(CGRect)rect
-{
-    [super drawRect:rect];
-    [self addSubviews:@[_howTitle, _howImage, _howDescription, _separator]];
-    [self layoutView];
-    
+    [super constructView];
+    _howTitle = [self newTitleLabel];
+    _howDescription = [self newDescriptionLabel];
+    _howImage = [self newImageView];
+    _separator = [self newSeparatorView];
 }
 
 - (void) layoutView
 {
+    [super layoutView];
+    [self.contentView addSubviews:@[_howTitle,
+                                    _howImage,
+                                    _howDescription,
+                                    _separator]];
+    @weakify(self)
     [_howTitle makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.equalTo(0);
-        make.bottom.equalTo(_howImage.top);
+        make.top.equalTo(kTHLEdgeInsetsLow());
+        make.left.right.equalTo(kTHLEdgeInsetsNone());
     }];
     [_howImage makeConstraints:^(MASConstraintMaker *make) {
-        make.width.height.equalTo(self.bounds.size.width / 3);
-        make.center.equalTo(self.center);
+        @strongify(self)
+        make.left.right.equalTo(kTHLEdgeInsetsNone());
+        make.top.equalTo([self howTitle].mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.bottom.equalTo(kTHLEdgeInsetsHigh());
+        make.height.equalTo(kTHLFQASectionImageViewHeight);
     }];
     [_howDescription makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_howImage.bottom);
-        make.width.equalTo(self.width);
-        make.height.equalTo(40);
+        @strongify(self)
+        make.top.equalTo([self howImage].mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.left.right.equalTo(kTHLEdgeInsetsNone());
+        make.height.equalTo(kTHLFAQSectionDescriptionHeight);
     }];
     [_separator makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.centerX);
-        make.width.equalTo(self.bounds.size.width / 5 * 4);
-        make.height.equalTo(2);
+        make.left.right.equalTo(kTHLEdgeInsetsHigh());
+        make.height.equalTo(kTHLFAQSectionSeparatorHeight);
+        make.bottom.equalTo(kTHLEdgeInsetsNone());
     }];
 }
-    
+
+- (void) bindView
+{
+    [super bindView];
+    RAC(self.howTitle, text) = RACObserve(self, titleString);
+    RAC(self.howImage, image) = RACObserve(self, image);
+    RAC(self.howDescription, text) = RACObserve(self, descriptionString);
+}
+
 #pragma mark constructors
 
-- (void) newTitlLabelWithText:(NSString *) title
+- (UILabel *) newTitleLabel
 {
-    _howTitle = [UILabel new];
-    _howTitle.text = title;
-    _howTitle.textAlignment = NSTextAlignmentCenter;
-    _howTitle.textColor = [UIColor whiteColor];
-    _howTitle.font = [UIFont systemFontOfSize:22.0];
+    UILabel* titleLabel = [UILabel new];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.font = [UIFont systemFontOfSize:kTHLFAQSectionTitleFontSize];
+    return titleLabel;
 }
 
-- (void) newDescriptionLabelWithText:(NSString *) description
+- (UILabel *) newDescriptionLabel
 {
-    _howDescription = [UILabel new];
-    _howDescription.text = description;
-    _howDescription.textAlignment = NSTextAlignmentCenter;
-    _howDescription.textColor = [UIColor whiteColor];
-    _howDescription.font = [UIFont systemFontOfSize:14.0];
-    _howDescription.numberOfLines = 0;
-    _howDescription.lineBreakMode = NSLineBreakByWordWrapping;
+    UILabel *descriptionLabel = [UILabel new];
+    descriptionLabel.textAlignment = NSTextAlignmentCenter;
+    descriptionLabel.textColor = [UIColor whiteColor];
+    descriptionLabel.font = [UIFont systemFontOfSize:kTHLFAQSectionDescriptionFontSize];
+    descriptionLabel.numberOfLines = 0;
+    descriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    return descriptionLabel;
 }
 
-- (void) newImageViewWithImage:(UIImage *) image
+- (UIImageView *) newImageView
 {
-    _howImage = [UIImageView new];
-    _howImage.image = image;
+    UIImageView *image = [UIImageView new];
+    return image;
 }
 
-- (void) newSeparatorViewWithStyle:(FAQSeparatorStyle) separatorStyle
+- (UIView *) newSeparatorView
 {
-    _separator = [UIView new];
-    switch (separatorStyle) {
-        case SlimWhiteLine:
-            _separator.backgroundColor = [UIColor whiteColor];
-            break;
-        default:
-            break;
-    }
+    UIView *separatorView = [UIView new];
+    separatorView.backgroundColor = [UIColor whiteColor];
+    return separatorView;
 }
 
 @end

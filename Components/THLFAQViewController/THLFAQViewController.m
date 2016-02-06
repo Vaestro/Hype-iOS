@@ -14,6 +14,10 @@
 @interface THLFAQViewController()
 
 @property (nonatomic, strong) ORStackScrollView *scrollView;
+@property (nonatomic, strong) THLFAQSectionView *ratio;
+@property (nonatomic, strong) THLFAQSectionView *bottleService;
+@property (nonatomic, strong) THLFAQSectionView *barTab;
+@property (nonatomic, strong) THLFAQSectionView *walkIns;
 
 @end
 
@@ -22,12 +26,16 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
     [self constructView];
-    
+    [self layoutView];
 }
 
 - (void) constructView {
      self.navigationItem.leftBarButtonItem = [self newBackBarButtonItem];
      _scrollView = [self newScrollView];
+    _ratio = [self recommendedRatio];
+    _bottleService = [self bottleService];
+    _barTab = [self barTab];
+    _walkIns = [self walkIns];
 }
 
 #pragma mark Configuration setup
@@ -40,21 +48,22 @@
         make.top.left.right.insets(kTHLEdgeInsetsNone());
     }];
     
-    [_scrollView.stackView addSubview:[self recommendedRatio]
+    [_scrollView.stackView addSubview:_ratio
                   withPrecedingMargin:kTHLPaddingHigh()
                            sideMargin:kTHLPaddingHigh()];
 
-    [_scrollView.stackView addSubview:[self bottleService]
+    [_scrollView.stackView addSubview:_bottleService
                   withPrecedingMargin:kTHLPaddingHigh()
-                           sideMargin:4*kTHLPaddingHigh()];
+                           sideMargin:kTHLPaddingHigh()];
 
-    [_scrollView.stackView addSubview:[self barTab]
-                  withPrecedingMargin:2*kTHLPaddingHigh()
-                           sideMargin:4*kTHLPaddingHigh()];
-    
-    [_scrollView.stackView addSubview:[self walkIns]
+    [_scrollView.stackView addSubview:_barTab
                   withPrecedingMargin:kTHLPaddingHigh()
-                           sideMargin:4*kTHLPaddingHigh()];
+                           sideMargin:kTHLPaddingHigh()];
+    
+    [_scrollView.stackView addSubview:_walkIns
+                  withPrecedingMargin:kTHLPaddingHigh()
+                           sideMargin:kTHLPaddingHigh()];
+    
 }
 
 #pragma mark - Constructors
@@ -77,44 +86,39 @@
 - (THLFAQSectionView *) recommendedRatio
 {
     return [self createSectionViewWithTitle:@"Recommended Ratio"
-                                      image:[UIImage imageNamed:@"digits-logo-name@3x"]
-                                description:@"ratioratioratioratio ratioratio ratioratioratio ratioratio"
-                             separatorStyle:SlimWhiteLine];
+                                      image:[UIImage imageNamed:@"Home Icon"]
+                                description:@"ratioratioratioratio ratioratio ratioratioratio ratioratio"];
 }
 
 - (THLFAQSectionView *) bottleService
 {
     return [self createSectionViewWithTitle:@"Bottle service"
-                                      image:[UIImage imageNamed:@"digits-logo-icon@3x"]
-                                description:@"bottle bollf serjdsfsdfns; sdl;jf ;lsdn f;lsn"
-                             separatorStyle:SlimWhiteLine];
+                                      image:[UIImage imageNamed:@"Clear Check"]
+                                description:@"bottle bollf serjdsfsdfns; sdl;jf ;lsdn f;lsn"];
 }
 
 - (THLFAQSectionView *) barTab
 {
     return [self createSectionViewWithTitle:@"Bar Tab"
-                                      image:[UIImage imageNamed:@"stp_card_jcb@3x"]
-                                description:@"bar tab sdfj sldjfg lsaj f;lsaj f"
-                             separatorStyle:SlimWhiteLine];
+                                      image:[UIImage imageNamed:@"Calendar Icon"]
+                                description:@"bar tab sdfj sldjfg lsaj f;lsaj f"];
 }
 
 - (THLFAQSectionView *) walkIns
 {
     return [self createSectionViewWithTitle:@"Walk Ins"
-                                      image:[UIImage imageNamed:@"stp_card_discover@3x"]
-                                description:@"walk ins dlf lsakdjf asjdf; jasd"
-                             separatorStyle:SlimWhiteLine];
+                                      image:[UIImage imageNamed:@"Chat Icon"]
+                                description:@"walk ins dlf lsakdjf asjdf; jasd"];
 }
 
 - (THLFAQSectionView *) createSectionViewWithTitle:(NSString *) title
                                              image:(UIImage *) image
                                        description:(NSString *) description
-                                    separatorStyle:(FAQSeparatorStyle) separatorStyle
 {
-    THLFAQSectionView *sectionView = [[THLFAQSectionView alloc] initWithTitle:title
-                                                                  description:description
-                                                                        image:image
-                                                               separatorStyle:separatorStyle];
+    THLFAQSectionView *sectionView = [THLFAQSectionView new];
+    sectionView.titleString = title;
+    sectionView.descriptionString = description;
+    sectionView.image = image;
     return sectionView;
 }
 
