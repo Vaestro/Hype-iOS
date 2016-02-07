@@ -20,6 +20,7 @@
 #import "THLHostEntity.h"
 #import "THLBeacon.h"
 #import "THLBeaconEntity.h"
+ #import <KVNProgress/KVNProgress.h>
 
 
 
@@ -35,6 +36,7 @@ ESTBeaconManagerDelegate
 >
 @property (nonatomic) ESTBeaconManager *beaconManager;
 @property (nonatomic) CLBeaconRegion *beaconRegion;
+@property (nonatomic) int counter;
 //@property (nonatomic, strong) CLRegion *venueRegion;
 //@property (nonatomic, strong) CLLocation *venueLocation;
 @end
@@ -153,6 +155,7 @@ ESTBeaconManagerDelegate
 
 - (void)setUpGeofences {
     
+    _counter = 0;
     
     self.beaconRegion = [[CLBeaconRegion alloc]
      initWithProximityUUID:[[NSUUID alloc]
@@ -181,14 +184,25 @@ ESTBeaconManagerDelegate
 
 
 - (void)beaconManager:(id)manager didRangeBeacons:(NSArray<CLBeacon *> *)beacons inRegion:(CLBeaconRegion *)region {
-   CLBeacon *nearestBeacon = beacons.firstObject;
+   
+    _counter += 1;
+    NSLog(@"%i", _counter);
     
-    if (nearestBeacon.proximity == CLProximityImmediate) {
-        [self.beaconManager stopRangingBeaconsInRegion:self.beaconRegion];
-        [self updateGuestlistInvite:_guestlistInvite withCheckInStatus:YES];
+//    [KVNProgress showProgress:0.5f
+//                       status:@"Checking In"];
+    
+    CLBeacon *nearestBeacon = beacons.firstObject;
+    
+    if (_counter <= 30) {
+        if (nearestBeacon.proximity == CLProximityNear) {
+            [self.beaconManager stopRangingBeaconsInRegion:self.beaconRegion];
+            [self updateGuestlistInvite:_guestlistInvite withCheckInStatus:YES];
+//            [KVNProgress dismiss];
+        }
     } else {
-         [self.beaconManager stopRangingBeaconsInRegion:self.beaconRegion];
-         [self updateGuestlistInvite:_guestlistInvite withCheckInStatus:NO];
+        [self.beaconManager stopRangingBeaconsInRegion:self.beaconRegion];
+        [self updateGuestlistInvite:_guestlistInvite withCheckInStatus:NO];
+//        [KVNProgress dismiss];
     }
     
 }

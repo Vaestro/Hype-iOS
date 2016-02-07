@@ -73,6 +73,7 @@ pod "FXLabel"
 
 #Geolocation
 pod 'EstimoteSDK'
+pod 'KVNProgress'
 
 end
 

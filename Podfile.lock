@@ -103,6 +103,7 @@ PODS:
   - IHKeyboardAvoiding (2.5)
   - JCDialPad (0.1.1):
     - libPhoneNumber-iOS
+  - KVNProgress (2.2.2)
   - libPhoneNumber-iOS (0.8.10)
   - LinqToObjectiveC (2.0.0)
   - LMGeocoder (1.0.4)
@@ -194,6 +195,7 @@ DEPENDENCIES:
   - Gizou
   - iCarousel (~> 1.8)
   - IHKeyboardAvoiding
+  - KVNProgress
   - libPhoneNumber-iOS (~> 0.8)
   - LinqToObjectiveC (~> 2.0)
   - LMGeocoder
@@ -254,6 +256,7 @@ SPEC CHECKSUMS:
   iCarousel: 67c8a43da5a46795b56aadfc96cd36a16f6149b2
   IHKeyboardAvoiding: 8f14fed93405dd2c44ce070a26f780d9e477538c
   JCDialPad: d977d1ff76eaaa1939c5f3b8882937094e093b3d
+  KVNProgress: 4697347e21e37fdaa5264ebc24e377c205a50328
   libPhoneNumber-iOS: 7bfd00f843fdcd82b5182b463e8eb3b27579f41d
   LinqToObjectiveC: 768f98c62d5b57cb6bdb7ab869e33d0a7a2da29c
   LMGeocoder: a0f635f948b0ca420d8d338e54886744cdcb215d
