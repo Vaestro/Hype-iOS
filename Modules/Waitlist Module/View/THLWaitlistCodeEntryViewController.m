@@ -8,11 +8,12 @@
 
 #import "THLWaitlistCodeEntryViewController.h"
 #import "IHKeyboardAvoiding.h"
-#import "THLActionBarButton.h"
+#import "THLActionButton.h"
 #import "ReactiveCocoa.h"
 #import "THLAppearanceConstants.h"
 #import "THLWaitlistEntry.h"
-#import "LRTextField.h"
+//#import "LRTextField.h"
+#import "THLSingleLineTextField.h"
 
 static const CGFloat kSubmitButtonHeight = 58.0f;
 
@@ -23,8 +24,8 @@ UITextFieldDelegate
 @property (nonatomic, strong) UIBarButtonItem *dismissButton;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *descriptionLabel;
-@property (nonatomic, strong) UITextField *textField;
-@property (nonatomic, strong) THLActionBarButton *submitButton;
+@property (nonatomic, strong) THLSingleLineTextField *textField;
+@property (nonatomic, strong) THLActionButton *submitButton;
 
 @end
 
@@ -39,7 +40,7 @@ UITextFieldDelegate
 }
 
 - (void)constructView {
-    _dismissButton = [self newDismissButton];
+//    _dismissButton = [self newDismissButton];
     _titleLabel = [self newTitleLabel];
     _descriptionLabel = [self newDescriptionLabel];
 	_textField = [self newTextField];
@@ -49,13 +50,6 @@ UITextFieldDelegate
 
 - (void)layoutView {
     self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
-
-    self.navigationItem.leftBarButtonItem = _dismissButton;
-    self.navigationItem.title = @"Use Invite Code";
-    [self.navigationController.navigationBar setTitleTextAttributes:
-     @{NSForegroundColorAttributeName:kTHLNUIPrimaryFontColor,
-       NSFontAttributeName:[UIFont fontWithName:@"Raleway-Regular" size:21]}];
-    
     [self.view addSubviews:@[_titleLabel,
                              _descriptionLabel,
 							 _textField,
@@ -63,33 +57,35 @@ UITextFieldDelegate
 
     WEAKSELF();
     [_submitButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.left.right.insets(kTHLEdgeInsetsNone());
+        make.bottom.left.right.insets(kTHLEdgeInsetsSuperHigh());
         make.height.mas_equalTo(kSubmitButtonHeight);
     }];
     
     [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(0);
-        make.top.insets(UIEdgeInsetsMake1(70));
+        make.left.insets(kTHLEdgeInsetsSuperHigh());
+        make.bottom.equalTo([WSELF descriptionLabel].mas_top).insets(kTHLEdgeInsetsSuperHigh());
     }];
     
     [_descriptionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(0);
-        make.top.equalTo([WSELF titleLabel].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+        make.left.insets(kTHLEdgeInsetsSuperHigh());
+        make.bottom.equalTo([WSELF textField].mas_top).insets(kTHLEdgeInsetsSuperHigh());
         make.width.mas_equalTo(SCREEN_WIDTH*0.66);
     }];
     
     [_textField mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.insets(kTHLEdgeInsetsSuperHigh());
         make.height.mas_equalTo(@50);
         make.width.mas_equalTo(SCREEN_WIDTH*0.80);
-        make.center.mas_equalTo(0);
+        make.bottom.equalTo([WSELF submitButton].mas_top).insets(kTHLEdgeInsetsSuperHigh());
     }];
 }
 
 - (void)bindView {
-    _dismissButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [self dismissViewControllerAnimated:NO completion:NULL];
-        return [RACSignal empty];
-    }];
+//    _dismissButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+//        NSLog(@"%@",self.navigationController.viewControllers);
+//        [self.navigationController popToRootViewControllerAnimated:YES];
+//        return [RACSignal empty];
+//    }];
     
 	_submitButton.rac_command = [[RACCommand alloc] initWithEnabled:[self validInputSignal] signalBlock:^RACSignal *(id input) {
 		[self submitCodeForValidation];
@@ -126,19 +122,17 @@ UITextFieldDelegate
 
 - (UILabel *)newDescriptionLabel {
     UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
-    label.text = @"Enter your invtite code to get in";
+    label.text = @"Enter your invite code to get in";
     label.numberOfLines = 0;
+    label.textColor = [kTHLNUIGrayFontColor colorWithAlphaComponent:0.5];
     return label;
 }
 
-- (LRTextField *)newTextField {
-    LRTextField *codeField = [[LRTextField alloc] initWithFrame:CGRectMake(20, 70, 260, 30) labelHeight:15 style:LRTextFieldStyleNone];
+- (THLSingleLineTextField *)newTextField {
+    THLSingleLineTextField *codeField = [[THLSingleLineTextField alloc] initWithFrame:CGRectMake(0, 0, 260, 30) labelHeight:15 style:THLSingleLineTextFieldStyleNone];
     [codeField setPlaceholder:@"Code"];
-    codeField.placeholderActiveColor = kTHLNUIAccentColor;
-    codeField.placeholderInactiveColor = kTHLNUIGrayFontColor;
-    codeField.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     codeField.delegate = self;
-    [codeField setValidationBlock:^NSDictionary *(LRTextField *textField, NSString *text) {
+    [codeField setValidationBlock:^NSDictionary *(THLSingleLineTextField *textField, NSString *text) {
         [NSThread sleepForTimeInterval:0];
         if (text.length != _codeLength) {
             return @{ VALIDATION_INDICATOR_NO : [NSString stringWithFormat:@"Code must be %@ digits", [NSNumber numberWithInteger:_codeLength]]};
@@ -149,21 +143,21 @@ UITextFieldDelegate
     return codeField;
 }
 
-- (THLActionBarButton *)newSubmitButton {
-	THLActionBarButton *button = [THLActionBarButton new];
-	[button setTitle:@"Submit" forState:UIControlStateNormal];
+- (THLActionButton *)newSubmitButton {
+	THLActionButton *button = [[THLActionButton alloc] initWithInverseStyle];
+	[button setTitle:@"Submit Code"];
 	return button;
 }
 
-- (UIBarButtonItem *)newDismissButton {
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Back Button"] style:UIBarButtonItemStylePlain target:nil action:NULL];
-    [item setTintColor:kTHLNUIGrayFontColor];
-    [item setTitleTextAttributes:
-     [NSDictionary dictionaryWithObjectsAndKeys:
-      kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
-                        forState:UIControlStateNormal];
-    return item;
-}
+//- (UIBarButtonItem *)newDismissButton {
+//    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Back Button"] style:UIBarButtonItemStylePlain target:nil action:NULL];
+//    [item setTintColor:kTHLNUIGrayFontColor];
+//    [item setTitleTextAttributes:
+//     [NSDictionary dictionaryWithObjectsAndKeys:
+//      kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
+//                        forState:UIControlStateNormal];
+//    return item;
+//}
 
 
 @end

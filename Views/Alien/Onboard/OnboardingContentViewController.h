@@ -10,6 +10,7 @@
 #import "TTTAttributedLabel.h"
 
 @import MediaPlayer;
+#import "THLActionButton.h"
 
 @class OnboardingViewController;
 
@@ -29,7 +30,7 @@ typedef void (^action_callback)(OnboardingViewController *onboardController);
     UILabel *_mainTextLabel;
     UILabel *_subTextLabel;
     UILabel *_bodyTextLabel;
-    UIButton *_actionButton;
+    THLActionButton *_actionButton;
     UIButton *_secondaryButton;
 
 }

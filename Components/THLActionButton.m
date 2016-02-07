@@ -22,6 +22,8 @@
         self.inverse = FALSE;
         [self.fxLabel setBackgroundColor:kTHLNUIAccentColor];
         [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [self.layer setCornerRadius:2.0];
+
     }
     return self;
 }
@@ -30,8 +32,10 @@
     if (self = [super init]) {
         self.inverse = TRUE;
         [self setTintColor:[UIColor clearColor]];
-        [self.fxLabel setTintColor:[UIColor clearColor]];
+        [self.fxLabel setBackgroundColor:[UIColor clearColor]];
         [self.layer setBorderWidth:1.0];
+        [self.layer setCornerRadius:2.0];
+
 //        Accent Color with opacity set at 0.5
         [self.layer setBorderColor:[[UIColor colorWithRed:0.773 green:0.702 blue:0.345 alpha:0.5] CGColor]];
         [self setTitleColor:kTHLNUIPrimaryFontColor forState:UIControlStateNormal];
@@ -40,6 +44,7 @@
 }
 
 - (void)layoutSubviews {
+    
     [super layoutSubviews];
     [self addSubview:self.fxLabel];
     WEAKSELF();

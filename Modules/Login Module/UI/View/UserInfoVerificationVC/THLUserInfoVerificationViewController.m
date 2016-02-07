@@ -7,12 +7,12 @@
 //
 
 #import "THLUserInfoVerificationViewController.h"
-#import "THLActionBarButton.h"
+#import "THLActionButton.h"
 #import "ReactiveCocoa.h"
 #import "THLAppearanceConstants.h"
 #import "NSString+EmailAddresses.h"
 #import "IHKeyboardAvoiding.h"
-#import "LRTextField.h"
+#import "THLSingleLineTextField.h"
 
 static const CGFloat kSubmitButtonHeight = 58.0f;
 
@@ -22,8 +22,8 @@ UITextFieldDelegate
 >
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *descriptionLabel;
-@property (nonatomic, strong) LRTextField *textField;
-@property (nonatomic, strong) THLActionBarButton *submitButton;
+@property (nonatomic, strong) THLSingleLineTextField *textField;
+@property (nonatomic, strong) THLActionButton *submitButton;
 
 @end
 
@@ -47,10 +47,11 @@ UITextFieldDelegate
 - (void)layoutView {
     self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
     
-    self.navigationItem.title = @"Confirm";
-    [self.navigationController.navigationBar setTitleTextAttributes:
-     @{NSForegroundColorAttributeName:kTHLNUIPrimaryFontColor,
-       NSFontAttributeName:[UIFont fontWithName:@"Raleway-Regular" size:21]}];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.view.backgroundColor = [UIColor clearColor];
     
     [self.view addSubviews:@[_titleLabel,
                              _descriptionLabel,
@@ -59,26 +60,26 @@ UITextFieldDelegate
     
     WEAKSELF();
     [_submitButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.left.right.insets(kTHLEdgeInsetsNone());
+        make.bottom.left.right.insets(kTHLEdgeInsetsSuperHigh());
         make.height.mas_equalTo(kSubmitButtonHeight);
     }];
     
     [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(0);
-        make.top.insets(UIEdgeInsetsMake1(40));
-    }];
-    
-    [_textField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(@50);
-        make.width.mas_equalTo(SCREEN_WIDTH*0.80);
-        make.top.equalTo([WSELF titleLabel].mas_bottom).insets(kTHLEdgeInsetsInsanelyHigh());
-        make.centerX.mas_equalTo(0);
+        make.left.insets(kTHLEdgeInsetsSuperHigh());
+        make.bottom.equalTo([WSELF descriptionLabel].mas_top).insets(kTHLEdgeInsetsSuperHigh());
     }];
     
     [_descriptionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(0);
-        make.top.equalTo([WSELF textField].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+        make.left.insets(kTHLEdgeInsetsSuperHigh());
+        make.bottom.equalTo([WSELF textField].mas_top).insets(kTHLEdgeInsetsSuperHigh());
         make.width.mas_equalTo(SCREEN_WIDTH*0.66);
+    }];
+    
+    [_textField mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.insets(kTHLEdgeInsetsSuperHigh());
+        make.height.mas_equalTo(@50);
+        make.width.mas_equalTo(SCREEN_WIDTH*0.80);
+        make.bottom.equalTo([WSELF submitButton].mas_top).insets(kTHLEdgeInsetsSuperHigh());
     }];
 }
 
@@ -104,29 +105,26 @@ UITextFieldDelegate
 #pragma mark - Constructors
 - (UILabel *)newTitleLabel {
     UILabel *label = THLNUILabel(kTHLNUIRegularTitle);
-    label.text = @"Please confirm your email";
+    label.text = @"Confirm Info";
     return label;
 }
 
 - (UILabel *)newDescriptionLabel {
     UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
-    label.text = @"We use your email to send you reward confirmations and receipts ";
+    label.text = @"We use your email and phone number to send you confirmations and receipts";
     label.numberOfLines = 0;
     return label;
 }
 
-- (LRTextField *)newTextField {
-    LRTextField *textFieldEmail = [[LRTextField alloc] initWithFrame:CGRectMake(20, 70, 260, 30) labelHeight:15 style:LRTextFieldStyleEmail];
-    textFieldEmail.placeholderActiveColor = kTHLNUIAccentColor;
-    textFieldEmail.placeholderInactiveColor = kTHLNUIGrayFontColor;
-    textFieldEmail.backgroundColor = kTHLNUIPrimaryBackgroundColor;
+- (THLSingleLineTextField *)newTextField {
+    THLSingleLineTextField *textFieldEmail = [[THLSingleLineTextField alloc] initWithFrame:CGRectMake(20, 70, 260, 30) labelHeight:15 style:THLSingleLineTextFieldStyleEmail];
     textFieldEmail.delegate = self;
     return textFieldEmail;
 }
 
-- (THLActionBarButton *)newSubmitButton {
-    THLActionBarButton *button = [THLActionBarButton new];
-    [button setTitle:@"Continue" forState:UIControlStateNormal];
+- (THLActionButton *)newSubmitButton {
+    THLActionButton *button = [[THLActionButton alloc] initWithInverseStyle];
+    [button setTitle:@"Verify Phone Number"];
     return button;
 }
 

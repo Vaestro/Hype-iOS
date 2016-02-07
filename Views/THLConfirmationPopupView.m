@@ -133,7 +133,7 @@
 
 - (UIButton *)newDismissButton {
     UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(33, 33, 33, 33)];
-    [button setImage:[UIImage imageNamed:@"Cancel X Icon"] forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"cancel_button"] forState:UIControlStateNormal];
     return button;
 }
 

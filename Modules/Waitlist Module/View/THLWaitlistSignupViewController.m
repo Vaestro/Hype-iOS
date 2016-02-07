@@ -7,12 +7,12 @@
 //
 
 #import "THLWaitlistSignupViewController.h"
-#import "THLActionBarButton.h"
+#import "THLActionButton.h"
 #import "ReactiveCocoa.h"
 #import "THLAppearanceConstants.h"
 #import "NSString+EmailAddresses.h"
 #import "IHKeyboardAvoiding.h"
-#import "LRTextField.h"
+#import "THLSingleLineTextField.h"
 
 static const CGFloat kSubmitButtonHeight = 58.0f;
 
@@ -23,8 +23,8 @@ UITextFieldDelegate
 @property (nonatomic, strong) UIBarButtonItem *dismissButton;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *descriptionLabel;
-@property (nonatomic, strong) LRTextField *textField;
-@property (nonatomic, strong) THLActionBarButton *submitButton;
+@property (nonatomic, strong) THLSingleLineTextField *textField;
+@property (nonatomic, strong) THLActionButton *submitButton;
 
 @end
 
@@ -38,7 +38,7 @@ UITextFieldDelegate
 }
 
 - (void)constructView {
-    _dismissButton = [self newDismissButton];
+//    _dismissButton = [self newDismissButton];
 	_titleLabel = [self newTitleLabel];
     _descriptionLabel = [self newDescriptionLabel];
 	_textField = [self newTextField];
@@ -48,47 +48,41 @@ UITextFieldDelegate
 
 - (void)layoutView {
     self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
-
-    self.navigationItem.leftBarButtonItem = _dismissButton;
-    self.navigationItem.title = @"Waitlist signup";
-    [self.navigationController.navigationBar setTitleTextAttributes:
-     @{NSForegroundColorAttributeName:kTHLNUIPrimaryFontColor,
-       NSFontAttributeName:[UIFont fontWithName:@"Raleway-Regular" size:21]}];
-    
 	[self.view addSubviews:@[_titleLabel,
                              _descriptionLabel,
 							 _textField,
 							 _submitButton]];
     
     WEAKSELF();
-	[_submitButton mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.bottom.left.right.insets(kTHLEdgeInsetsNone());
-		make.height.mas_equalTo(kSubmitButtonHeight);
-	}];
-
-	[_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-		make.centerX.mas_equalTo(0);
-		make.top.insets(UIEdgeInsetsMake1(70));
-	}];
+    [_submitButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.left.right.insets(kTHLEdgeInsetsSuperHigh());
+        make.height.mas_equalTo(kSubmitButtonHeight);
+    }];
+    
+    [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.insets(kTHLEdgeInsetsSuperHigh());
+        make.bottom.equalTo([WSELF descriptionLabel].mas_top).insets(kTHLEdgeInsetsSuperHigh());
+    }];
     
     [_descriptionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(0);
-        make.top.equalTo([WSELF titleLabel].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+        make.left.insets(kTHLEdgeInsetsSuperHigh());
+        make.bottom.equalTo([WSELF textField].mas_top).insets(kTHLEdgeInsetsSuperHigh());
         make.width.mas_equalTo(SCREEN_WIDTH*0.66);
     }];
-
-	[_textField mas_makeConstraints:^(MASConstraintMaker *make) {
+    
+    [_textField mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.insets(kTHLEdgeInsetsSuperHigh());
         make.height.mas_equalTo(@50);
         make.width.mas_equalTo(SCREEN_WIDTH*0.80);
-		make.center.mas_equalTo(0);
-	}];
+        make.bottom.equalTo([WSELF submitButton].mas_top).insets(kTHLEdgeInsetsSuperHigh());
+    }];
 }
 
 - (void)bindView {
-    _dismissButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [self dismissViewControllerAnimated:NO completion:NULL];
-        return [RACSignal empty];
-    }];
+//    _dismissButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+//        [self dismissViewControllerAnimated:NO completion:NULL];
+//        return [RACSignal empty];
+//    }];
     
 	_submitButton.rac_command = [[RACCommand alloc] initWithEnabled:[self validEmailSignal] signalBlock:^RACSignal *(id input) {
 		[_delegate signupView:self userDidSubmitEmail:_textField.text];
@@ -122,29 +116,26 @@ UITextFieldDelegate
     return label;
 }
 
-- (LRTextField *)newTextField {
-    LRTextField *textFieldEmail = [[LRTextField alloc] initWithFrame:CGRectMake(20, 70, 260, 30) labelHeight:15 style:LRTextFieldStyleEmail];
-    textFieldEmail.placeholderActiveColor = kTHLNUIAccentColor;
-    textFieldEmail.placeholderInactiveColor = kTHLNUIGrayFontColor;
-    textFieldEmail.backgroundColor = kTHLNUIPrimaryBackgroundColor;
+- (THLSingleLineTextField *)newTextField {
+    THLSingleLineTextField *textFieldEmail = [[THLSingleLineTextField alloc] initWithFrame:CGRectMake(20, 70, 260, 30) labelHeight:15 style:THLSingleLineTextFieldStyleEmail];
 	textFieldEmail.delegate = self;
 	return textFieldEmail;
 }
 
-- (THLActionBarButton *)newSubmitButton {
-	THLActionBarButton *button = [THLActionBarButton new];
-	[button setTitle:@"Request Invitation" forState:UIControlStateNormal];
+- (THLActionButton *)newSubmitButton {
+    THLActionButton *button = [[THLActionButton alloc] initWithDefaultStyle];
+	[button setTitle:@"Request Invitation"];
 	return button;
 }
 
-- (UIBarButtonItem *)newDismissButton {
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Back Button"] style:UIBarButtonItemStylePlain target:nil action:NULL];
-    [item setTintColor:kTHLNUIGrayFontColor];
-    [item setTitleTextAttributes:
-     [NSDictionary dictionaryWithObjectsAndKeys:
-      kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
-                        forState:UIControlStateNormal];
-    return item;
-}
+//- (UIBarButtonItem *)newDismissButton {
+//    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Back Button"] style:UIBarButtonItemStylePlain target:nil action:NULL];
+//    [item setTintColor:kTHLNUIGrayFontColor];
+//    [item setTitleTextAttributes:
+//     [NSDictionary dictionaryWithObjectsAndKeys:
+//      kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
+//                        forState:UIControlStateNormal];
+//    return item;
+//}
 
 @end

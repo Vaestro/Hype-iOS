@@ -321,7 +321,7 @@ static CGFloat const kTHLConfirmationViewButtonHeight = 50;
 
 - (UIButton *)newDismissButton {
     UIButton *button = [UIButton new];
-    [button setImage:[UIImage imageNamed:@"Cancel X Icon"] forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"cancel_button"] forState:UIControlStateNormal];
     return button;
 }
 

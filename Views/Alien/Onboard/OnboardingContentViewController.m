@@ -338,7 +338,7 @@ static const CGFloat kLogoImageSize = 50.0f;
     [_actionButton makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(_attributedLabel.mas_top).insets(kTHLEdgeInsetsInsanelyHigh());
         make.centerX.equalTo(SV(_actionButton).centerX);
-        make.height.equalTo(50);
+        make.height.equalTo(58);
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
@@ -404,14 +404,9 @@ static const CGFloat kLogoImageSize = 50.0f;
     return bodyTextLabel;
 }
 
-- (UIButton *)newActionButton {
-    UIButton *actionButton = [UIButton new];
-    actionButton.tintColor = [UIColor clearColor];
-    [actionButton.layer setBorderWidth:1.0];
-    [actionButton.layer setBorderColor:[kTHLNUIAccentColor CGColor]];
-    [actionButton setTitle:@"Login with Facebook" forState:UIControlStateNormal];
-    [actionButton setTitleColor:kTHLNUIPrimaryFontColor forState:UIControlStateNormal];
-    actionButton.titleLabel.font = [UIFont fontWithName:@"Raleway-Light" size:16];
+- (THLActionButton *)newActionButton {
+    THLActionButton *actionButton = [[THLActionButton alloc] initWithInverseStyle];
+    [actionButton setTitle:@"Login with Facebook"];
     [actionButton addTarget:self action:@selector(handleButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     return actionButton;
 }

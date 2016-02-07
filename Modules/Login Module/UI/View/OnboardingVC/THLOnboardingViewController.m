@@ -114,6 +114,10 @@
              fourthPage];
 }
 
+-(BOOL)prefersStatusBarHidden{
+    return YES;
+}
+
 - (void)dealloc {
     DLog(@"Destroyed %@", self);
 }

@@ -28,11 +28,15 @@
 	[[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : kTHLNUIPrimaryFontColor,
                                                            NSFontAttributeName: [UIFont fontWithName:@"Raleway-Regular" size:18.0],
                                                            NSKernAttributeName: @2.0f}];
-	[[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"Back Arrow"]];
-	[[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"Back Arrow"]];
+    [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"back_button"]];
+    [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"back_button"]];
+
 	[[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)
 														 forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setTintColor:kTHLNUIGrayFontColor];
 
+    
+    
     [[UITabBar appearance] setTintColor:kTHLNUIAccentColor];
     [[UITabBar appearance] setBarStyle:UIBarStyleBlack];
     [[UITabBar appearance] setTranslucent:NO];

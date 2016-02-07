@@ -66,13 +66,13 @@ THLWaitlistHomeViewDelegate
 }
 
 - (void)presentSignupView {
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:_signupView];
-	[_homeView presentViewController:navigationController animated:NO completion:NULL];
+//    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:_signupView];
+    [_homeView.navigationController pushViewController:_signupView animated:YES];
 }
 
 - (void)presentCodeEntryView {
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:_codeEntryView];
-    [_homeView presentViewController:navigationController animated:NO completion:NULL];
+//    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:_codeEntryView];
+    [_homeView.navigationController pushViewController:_codeEntryView animated:YES];
 }
 
 - (void)approveUserForApp {

@@ -10,13 +10,18 @@
 #import "THLAppearanceConstants.h"
 #import "SVProgressHUD.h"
 #import "THLResourceManager.h"
-#import "THLActionBarButton.h"
+#import "THLActionButton.h"
+#import "TTTAttributedLabel.h"
+#import "THLInformationViewController.h"
 
 @interface THLLoginViewController()
 @property (nonatomic, strong) UIBarButtonItem *dismissButton;
 @property (nonatomic, strong) UILabel *bodyLabel;
+@property (nonatomic, strong) UIImageView *logoImageView;
 @property (nonatomic, strong) UIImageView *backgroundView;
-@property (nonatomic, strong) UIButton *facebookLoginButton;
+@property (nonatomic, strong) THLActionButton *facebookLoginButton;
+@property (nonatomic, strong) TTTAttributedLabel *attributedLabel;
+
 @end
 
 @implementation THLLoginViewController
@@ -35,9 +40,11 @@
 
 - (void)constructView {
     _backgroundView = [self newBackgroundView];
+    _logoImageView = [self newLogoImageView];
     _dismissButton = [self newDismissButton];
     _bodyLabel = [self newBodyLabel];
     _facebookLoginButton = [self newFacebookLoginButton];
+    _attributedLabel = [self newAttributedLabel];
 }
 
 - (void)layoutView {
@@ -48,28 +55,39 @@
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.view.backgroundColor = [UIColor clearColor];
     self.navigationItem.leftBarButtonItem = _dismissButton;
-    self.navigationItem.title = @"LOG IN";
-    [self.navigationController.navigationBar setTitleTextAttributes:
-     @{NSForegroundColorAttributeName:kTHLNUIPrimaryFontColor,
-       NSFontAttributeName:[UIFont fontWithName:@"Raleway-Regular" size:21]}];
-    
-    [self.view addSubviews:@[_backgroundView, _bodyLabel, _facebookLoginButton]];
-    
-//    WEAKSELF();
-    [_backgroundView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.insets(UIEdgeInsetsZero);
+        
+    [self.view addSubviews:@[_backgroundView, _logoImageView, _bodyLabel, _facebookLoginButton, _attributedLabel]];
+    WEAKSELF();
+    [_logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(SV([WSELF logoImageView]).centerX);
+        make.bottom.equalTo(SV([WSELF logoImageView]).centerY).insets(kTHLEdgeInsetsSuperHigh());
+        make.size.mas_equalTo(CGSizeMake1(75.0f));
     }];
     
     [_bodyLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.insets(kTHLEdgeInsetsSuperHigh());
-        make.centerY.equalTo(0);
+        make.centerX.equalTo(SV([WSELF logoImageView]).centerX);
+        make.top.equalTo(SV([WSELF logoImageView]).centerY).insets(kTHLEdgeInsetsSuperHigh());
+        make.width.equalTo(SCREEN_WIDTH*0.67);
+    }];
+    
+    [_backgroundView makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.top.equalTo(UIEdgeInsetsZero);
     }];
     
     [_facebookLoginButton makeConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(60);
+        make.bottom.equalTo([WSELF attributedLabel].mas_top).insets(kTHLEdgeInsetsInsanelyHigh());
+        make.centerX.equalTo(SV([WSELF facebookLoginButton]).centerX);
+        make.height.equalTo(50);
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
-        make.bottom.insets(UIEdgeInsetsMake1(35));
     }];
+    
+    [_attributedLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_offset(-35);
+        make.centerX.equalTo(SV([WSELF attributedLabel]).centerX);
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+    }];
+    
+    [self.view sendSubviewToBack:_backgroundView];
 }
 
 - (void)bindView {
@@ -90,27 +108,58 @@
     }];
 }
 
+- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url {
+    if ([[url scheme] hasPrefix:@"action"]) {
+        if ([[url host] hasPrefix:@"show-privacy"]) {
+            THLInformationViewController *infoVC = [THLInformationViewController new];
+            UINavigationController *navVC= [[UINavigationController alloc] initWithRootViewController:infoVC];
+            [self.view.window.rootViewController presentViewController:navVC animated:YES completion:nil];
+            infoVC.displayText = [THLResourceManager privacyPolicyText];
+            infoVC.title = @"Privacy Policy";
+        } else if ([[url host] hasPrefix:@"show-terms"]) {
+            THLInformationViewController *infoVC = [THLInformationViewController new];
+            UINavigationController *navVC= [[UINavigationController alloc] initWithRootViewController:infoVC];
+            [self.view.window.rootViewController presentViewController:navVC animated:YES completion:nil];
+            infoVC.displayText = [THLResourceManager termsOfUseText];
+            infoVC.title = @"Terms Of Use";
+        }
+    } else {
+        /* deal with http links here */
+    }
+}
+
 #pragma mark - Constructors
 - (UILabel *)newBodyLabel {
-    UILabel *label =  [UILabel new];
-    [label setFont:[UIFont fontWithName:@"Raleway-Bold" size:48]];
-    label.textColor = kTHLNUIPrimaryFontColor;
-    label.text = @"GET\nREADY\nFOR\nTHE\nPARTY";
-    label.numberOfLines = 5;
-    label.textAlignment = NSTextAlignmentLeft;
-    return label;
+    UILabel *bodyLabel = [UILabel new];
+    bodyLabel.text = @"Signup for a great night tonight";
+    bodyLabel.textColor = kTHLNUIGrayFontColor;
+    bodyLabel.font = [UIFont fontWithName:@"Raleway-Light" size:24];
+    bodyLabel.numberOfLines = 0;
+    bodyLabel.adjustsFontSizeToFitWidth = YES;
+    bodyLabel.minimumScaleFactor = 0.5;
+    bodyLabel.textAlignment = NSTextAlignmentCenter;
+    [bodyLabel sizeToFit];
+    return bodyLabel;
+}
+
+- (UIImageView *)newLogoImageView {
+    UIImageView *imageView = [UIImageView new];
+    imageView.image = [UIImage imageNamed:@"Hypelist-Icon"];
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    imageView.clipsToBounds = YES;
+    return imageView;
 }
 
 - (UIImageView *)newBackgroundView {
     UIImageView *imageView = [UIImageView new];
     imageView.clipsToBounds = YES;
     imageView.contentMode = UIViewContentModeScaleAspectFill;
-    [imageView setImage:[UIImage imageNamed:@"LoginBackground"]];
+    [imageView setImage:[UIImage imageNamed:@"OnboardingLoginBG"]];
     return imageView;
 }
 
 - (UIBarButtonItem *)newDismissButton {
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Cancel X Icon"] style:UIBarButtonItemStylePlain target:nil action:NULL];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"cancel_button"] style:UIBarButtonItemStylePlain target:nil action:NULL];
     [item setTintColor:kTHLNUIGrayFontColor];
     [item setTitleTextAttributes:
      [NSDictionary dictionaryWithObjectsAndKeys:
@@ -119,12 +168,32 @@
     return item;
 }
 
-- (UIButton *)newFacebookLoginButton {
-    UIButton *loginButton = [UIButton new];
-    loginButton.backgroundColor = kTHLNUIBlueColor;
-    [loginButton setTitle:@"Login With Facebook" forState:UIControlStateNormal];
-    [loginButton setTitleColor:kTHLNUIPrimaryFontColor forState:UIControlStateNormal];
+- (THLActionButton *)newFacebookLoginButton {
+    THLActionButton *loginButton = [[THLActionButton alloc] initWithInverseStyle];
+    [loginButton setTitle:@"Login with Facebook"];
     return loginButton;
+}
+
+- (TTTAttributedLabel *)newAttributedLabel {
+    TTTAttributedLabel *tttLabel = [TTTAttributedLabel new];
+    tttLabel.textColor = kTHLNUIGrayFontColor;
+    tttLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16];
+    tttLabel.numberOfLines = 0;
+    tttLabel.adjustsFontSizeToFitWidth = YES;
+    tttLabel.minimumScaleFactor = 0.5;
+    tttLabel.linkAttributes = @{NSForegroundColorAttributeName: kTHLNUIGrayFontColor,
+                                NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
+    tttLabel.activeLinkAttributes = @{NSForegroundColorAttributeName: kTHLNUIPrimaryFontColor,
+                                      NSUnderlineStyleAttributeName: @(NSUnderlineStyleNone)};
+    tttLabel.textAlignment = NSTextAlignmentCenter;
+    NSString *labelText = @"By signing up, you agree to our Privacy Policy and Terms & Conditions";
+    tttLabel.text = labelText;
+    NSRange privacy = [labelText rangeOfString:@"Privacy Policy"];
+    NSRange terms = [labelText rangeOfString:@"Terms & Conditions"];
+    [tttLabel addLinkToURL:[NSURL URLWithString:@"action://show-privacy"] withRange:privacy];
+    [tttLabel addLinkToURL:[NSURL URLWithString:@"action://show-terms"] withRange:terms];
+    tttLabel.delegate = self;
+    return tttLabel;
 }
 
 @end

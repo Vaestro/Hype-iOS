@@ -101,7 +101,7 @@ static CGFloat kTHLEventNavigationBarHeight = 125;
 - (UIButton *)newDismissButton {
     UIButton *button = [[UIButton alloc]init];
     button.frame = CGRectMake(0, 0, 50, 50);
-    [button setImage:[UIImage imageNamed:@"Cancel X Icon"] forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"cancel_button"] forState:UIControlStateNormal];
     return button;
 }
 
