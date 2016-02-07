@@ -16,7 +16,7 @@
 
 @property (nonatomic, assign) CGFloat placeholderXInset;
 @property (nonatomic, assign) CGFloat placeholderYInset;
-@property (nonatomic, strong) validationBlock validationBlock;
+@property (nonatomic, strong) ValidationBlock validationBlock;
 @property (nonatomic, strong) NSString *temporaryString;
 @property (nonatomic, copy) NSString *placeholderText;
 
@@ -188,7 +188,7 @@
     [self updateHint];
 }
 
-- (void) setValidationBlock:(validationBlock)block
+- (void) setValidationBlock:(ValidationBlock)block
 {
     _validationBlock = block;
     [self initLayer];

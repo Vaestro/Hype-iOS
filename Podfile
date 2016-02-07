@@ -66,7 +66,6 @@ pod 'THContactPicker', '~> 1.2'
 pod "TOMSMorphingLabel", "~> 0.5"
 pod 'DZNEmptyDataSet'
 pod 'IHKeyboardAvoiding'
-pod "LRTextField"
 pod "FXLabel"
 end
 
