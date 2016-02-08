@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "THLEventDetailView.h"
 
-@interface THLEventDetailViewController : UIViewController<THLEventDetailView>
+@interface THLEventDetailViewController : UIViewController
+<
+THLEventDetailView,
+UIScrollViewDelegate
+>
 
 @end

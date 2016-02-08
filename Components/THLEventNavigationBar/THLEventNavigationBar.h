@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BLKFlexibleHeightBar.h"
 
-@interface THLEventNavigationBar : UINavigationBar
+@interface THLEventNavigationBar : BLKFlexibleHeightBar
 @property (nonatomic, copy) NSString *titleText;
 //@property (nonatomic, copy) NSString *subtitleText;
 //@property (nonatomic, copy) NSString *dateText;

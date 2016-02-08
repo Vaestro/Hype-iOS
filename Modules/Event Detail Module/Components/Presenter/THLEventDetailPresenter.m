@@ -63,14 +63,21 @@
                 [WSELF handleCreateGuestlistAction];
             }
         }
-        
-
         return [RACSignal empty];
     }];
     
     [RACObserve(self, guestHasAcceptedInvite) subscribeNext:^(id _) {
         [WSELF.view setUserHasAcceptedInvite:WSELF.guestHasAcceptedInvite];
     }];
+    
+    RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [WSELF handleDismissAction];
+        return [RACSignal empty];
+    }];
+    
+    [self.view setTitleText:_eventEntity.location.name];
+    [self.view setLocationImageURL:_eventEntity.location.imageURL];
+    [self.view setDismissCommand:dismissCommand];
     
 	[self.view setEventName:_eventEntity.title];
     [self.view setEventDate:[NSString stringWithFormat:@"%@, %@", _eventEntity.date.thl_weekdayString, _eventEntity.date.thl_timeString]];
@@ -99,14 +106,14 @@
 
 - (void)configureNavigationBar:(THLEventNavigationBar *)navBar {
     WEAKSELF();
-    RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [WSELF handleDismissAction];
-        return [RACSignal empty];
-    }];
-
-	[navBar setTitleText:_eventEntity.location.name];
-	[navBar setLocationImageURL:_eventEntity.location.imageURL];
-	[navBar setDismissCommand:dismissCommand];
+//    RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+//        [WSELF handleDismissAction];
+//        return [RACSignal empty];
+//    }];
+//
+//	[navBar setTitleText:_eventEntity.location.name];
+//	[navBar setLocationImageURL:_eventEntity.location.imageURL];
+//	[navBar setDismissCommand:dismissCommand];
 }
 
 - (void)showAlertViewWithMessage:(NSString *)message withAction:(NSArray<UIAlertAction *>*)actions {

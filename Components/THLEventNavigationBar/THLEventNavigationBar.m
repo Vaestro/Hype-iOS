@@ -16,7 +16,7 @@
 @property (nonatomic, strong) UIImageView *imageView;
 @end
 
-static CGFloat kTHLEventNavigationBarHeight = 125;
+//static CGFloat kTHLEventNavigationBarHeight = 125;
 
 @implementation THLEventNavigationBar
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -24,6 +24,7 @@ static CGFloat kTHLEventNavigationBarHeight = 125;
         [self constructView];
         [self layoutView];
         [self bindView];
+        self.userInteractionEnabled = YES;
     }
     return self;
 }
@@ -35,33 +36,23 @@ static CGFloat kTHLEventNavigationBarHeight = 125;
 }
 
 - (void)layoutView {
-    [self addSubviews:@[_imageView, _dismissButton]];
+    [self addSubviews:@[_imageView, _dismissButton, _titleLabel]];
     
     WEAKSELF();
     [_imageView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.insets(UIEdgeInsetsZero);
-        make.top.offset(-20);
-    }];
- 
-    UIView *titleContainerView = [UIView new];
-    [titleContainerView addSubview:_titleLabel];
-    
-    [_titleLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.insets(kTHLEdgeInsetsHigh());
-        make.right.top.insets(kTHLEdgeInsetsNone());
-        make.bottom.insets(kTHLEdgeInsetsNone());
+        make.top.left.right.bottom.insets(UIEdgeInsetsZero);
+//        make.top.offset(-20);x
     }];
 
-    [self addSubview:titleContainerView];
-    [titleContainerView makeConstraints:^(MASConstraintMaker *make) {
+    [_titleLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.insets(kTHLEdgeInsetsHigh());
-        make.right.lessThanOrEqualTo(SV(titleContainerView));
+        make.right.lessThanOrEqualTo(SV(_titleLabel));
         make.top.greaterThanOrEqualTo([WSELF.dismissButton mas_bottom]).insets(kTHLEdgeInsetsHigh());
     }];
     
     [_dismissButton makeConstraints:^(MASConstraintMaker *make) {
         make.left.insets(kTHLEdgeInsetsSuperHigh());
-        make.top.insets(kTHLEdgeInsetsHigh());
+        make.top.insets(kTHLEdgeInsetsSuperHigh());
         make.size.mas_equalTo(CGSizeMake(25, 25));
     }];
 }
@@ -80,8 +71,20 @@ static CGFloat kTHLEventNavigationBarHeight = 125;
     }];
 }
 
-- (CGSize)sizeThatFits:(CGSize)size {
-    return CGSizeMake([super sizeThatFits:size].width, kTHLEventNavigationBarHeight);
+//- (CGSize)sizeThatFits:(CGSize)size {
+//    return CGSizeMake([super sizeThatFits:size].width, kTHLEventNavigationBarHeight);
+//}
+
+- (void)addGradientLayer {
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    
+    CGRect frame = self.imageView.frame;
+    gradient.frame = frame;
+    gradient.colors = @[(id)[UIColor blackColor].CGColor,
+                            (id)[UIColor clearColor].CGColor];
+
+//    self.imageView.alpha = 0.5;
+    self.imageView.layer.mask = gradient;
 }
 
 #pragma mark - Constructors
@@ -93,8 +96,9 @@ static CGFloat kTHLEventNavigationBarHeight = 125;
 - (UIImageView *)newImageView {
     UIImageView *imageView = [UIImageView new];
     imageView.clipsToBounds = YES;
-    imageView.contentMode = UIViewContentModeScaleAspectFill;
-    [imageView dimView];
+    imageView.contentMode = UIViewContentModeCenter;
+    [self addGradientLayer];
+
     return imageView;
 }
 

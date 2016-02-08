@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 @protocol THLEventDetailView <NSObject>
+@property (nonatomic, copy) NSString *titleText;
 @property (nonatomic, copy) NSURL *locationImageURL;
+
 @property (nonatomic, copy) NSURL *promoImageURL;
 @property (nonatomic, copy) NSString *eventName;
 @property (nonatomic, copy) NSString *eventDate;

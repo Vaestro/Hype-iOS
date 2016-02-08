@@ -49,14 +49,14 @@
 
 - (void)presentInterfaceInWindow:(UIWindow *)window {
 	_window = window;
-	[_presenter configureView:_view];
-	THLEventNavigationController *eventNavController = [[THLEventNavigationController alloc] initWithRootViewController:_view];
-	[_presenter configureNavigationBar:eventNavController.navigationBar];
-	[_window.rootViewController presentViewController:eventNavController animated:YES completion:NULL];
+    [_presenter configureView:_view];
+//	UINavigationController *eventNavController = [[UINavigationController alloc] initWithRootViewController:_view];
+//	[_presenter configureNavigationBar:eventNavController.navigationBar];
+	[_window.rootViewController presentViewController:_view animated:YES completion:NULL];
 }
 
 - (void)dismissInterface {
-    [_view.navigationController dismissViewControllerAnimated:YES completion:^{
+    [_view dismissViewControllerAnimated:YES completion:^{
         [_presenter.moduleDelegate dismissEventDetailWireframe];
     }];
 }

@@ -19,6 +19,8 @@
 #import "THLAppearanceConstants.h"
 #import "THLPromotionInfoView.h"
 #import "THLEventDetailMusicTypesView.h"
+#import "THLEventNavigationBar.h"
+#import "SquareCashStyleBehaviorDefiner.h"
 
 @interface THLEventDetailViewController()
 @property (nonatomic, strong) ORStackScrollView *scrollView;
@@ -31,10 +33,12 @@
 @property (nonatomic, strong) THLActionBarButton *bottomBar;
 @property (nonatomic) BOOL showPromotionInfoView;
 @property (nonatomic, strong) THLEventDetailsMapView *mapView;
+@property (nonatomic, strong) THLEventNavigationBar *navBar;
 
 @end
 
 @implementation THLEventDetailViewController
+@synthesize titleText;
 @synthesize locationImageURL;
 @synthesize promoImageURL;
 @synthesize eventName;
@@ -86,15 +90,23 @@
 }
 
 - (void)layoutView {
+    _navBar = [[THLEventNavigationBar alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, SCREEN_HEIGHT*0.75)];
+    _navBar.minimumBarHeight = 100.0;
+    _navBar.behaviorDefiner = [SquareCashStyleBehaviorDefiner new];
+    self.scrollView.delegate = (id<UIScrollViewDelegate>)_navBar.behaviorDefiner;
+
+    [self.view addSubview:_navBar];
+    
     self.view.nuiClass = kTHLNUIBackgroundView;
     [self.view addSubviews:@[_scrollView, _bottomBar]];
     
     [_scrollView makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(myBar.mas_bottom);
         make.top.left.right.insets(kTHLEdgeInsetsNone());
     }];
     
     [_scrollView.stackView addSubview:_eventNameLabel
-                  withPrecedingMargin:kTHLPaddingHigh()
+                  withPrecedingMargin:SCREEN_HEIGHT*.75
                            sideMargin:kTHLPaddingHigh()];
     
     [_scrollView.stackView addSubview:_dateLabel
@@ -129,6 +141,10 @@
 
 - (void)bindView {
     WEAKSELF();
+    RAC(self.navBar, titleText) = RACObserve(self, titleText);
+    RAC(self.navBar, dismissCommand) = RACObserve(self, dismissCommand);
+    RAC(self.navBar, locationImageURL) = RACObserve(self, locationImageURL);
+
     RAC(self.eventNameLabel, text, @"") = RACObserve(self, eventName);
     RAC(self.dateLabel, text, @"") = RACObserve(self, eventDate);
     RAC(self.promotionInfoView, promotionInfo) = RACObserve(self, promoInfo);
@@ -227,6 +243,10 @@
     THLEventDetailsMapView *mapView = [THLEventDetailsMapView new];
     mapView.translatesAutoresizingMaskIntoConstraints = NO;
     return mapView;
+}
+
+- (UIStatusBarStyle) preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 //- (void)dealloc {

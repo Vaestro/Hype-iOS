@@ -67,6 +67,7 @@ pod "TOMSMorphingLabel", "~> 0.5"
 pod 'DZNEmptyDataSet'
 pod 'IHKeyboardAvoiding'
 pod "FXLabel"
+pod 'BLKFlexibleHeightBar'
 end
 
 #Phone Calls
