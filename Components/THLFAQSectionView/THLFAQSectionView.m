@@ -58,7 +58,7 @@ static CGFloat const kTHLFAQSectionSeparatorHeight = 2.0;
     }];
     [_howDescription makeConstraints:^(MASConstraintMaker *make) {
         @strongify(self)
-        make.top.equalTo([self howImage].mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.top.equalTo([self howImage].mas_bottom).insets(kTHLEdgeInsetsLow());
         make.left.right.equalTo(kTHLEdgeInsetsNone());
         make.height.equalTo(kTHLFAQSectionDescriptionHeight);
     }];
@@ -102,6 +102,8 @@ static CGFloat const kTHLFAQSectionSeparatorHeight = 2.0;
 - (UIImageView *) newImageView
 {
     UIImageView *image = [UIImageView new];
+    image.contentMode = UIViewContentModeScaleAspectFill;
+    image.clipsToBounds = YES;
     return image;
 }
 
