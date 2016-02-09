@@ -17,6 +17,7 @@
 #import "THLUserProfileFooterView.h"
 #import "THLUserProfileHeaderView.h"
 #import "THLUserPhotoVerificationViewController.h"
+#import "THLFAQViewController.h"
 
 typedef NS_ENUM(NSInteger, TableViewSection) {
     TableViewSectionPersonal = 0,
@@ -38,7 +39,8 @@ typedef NS_ENUM(NSInteger, HypelistSectionRow) {
 };
 
 typedef NS_ENUM(NSUInteger, ApplicationInfoCase){
-    PrivacyPolicy = 0,
+    HowItWorks = 0,
+    PrivacyPolicy,
     TermsAndConditions
 };
 
@@ -69,7 +71,7 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
     [self layoutView];
     [self bindView];
     
-    self.tableCellNames = @[@"Privacy Policy", @"Terms & Conditions"];
+    self.tableCellNames = @[@"How it works", @"Privacy Policy", @"Terms & Conditions"];
 }
 
 #pragma mark - View Setup
@@ -119,6 +121,8 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch(indexPath.row) {
+        case HowItWorks:
+            [self presentModalExplanationHowItWorks];
         case PrivacyPolicy:
             [self presentModalInformationWithText:[THLResourceManager privacyPolicyText]
                                          andTitle:@"Privacy Policy"];
@@ -132,6 +136,12 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
         }
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void) presentModalExplanationHowItWorks {
+    THLFAQViewController *faqVC = [[THLFAQViewController alloc] init];
+    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:faqVC];
+    [self.view.window.rootViewController presentViewController:navVC animated:YES completion:nil];
 }
 
 - (void) presentModalInformationWithText:(NSString *) text andTitle:(NSString *) title{

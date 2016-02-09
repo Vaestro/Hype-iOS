@@ -97,7 +97,9 @@
 		21EDC7B01C35F5F700B902CA /* THLWaitlistCodeEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21EDC7AF1C35F5F700B902CA /* THLWaitlistCodeEntryViewController.m */; };
 		21EED1001BB5F842001325A7 /* THLGuestFlowWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 21EED0FF1BB5F842001325A7 /* THLGuestFlowWireframe.m */; };
 		3E64EBE01C5C14F3002BA11B /* THLUserDataWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E64EBDF1C5C14F3002BA11B /* THLUserDataWorker.m */; };
+		3E64EBEA1C5D89C5002BA11B /* THLFAQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E64EBE91C5D89C5002BA11B /* THLFAQViewController.m */; };
 		3ECD03EF1C58408C00AE325D /* THLUserPhotoVerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD03EE1C58408C00AE325D /* THLUserPhotoVerificationViewController.m */; };
+		3EECB6911C61450100702540 /* THLFAQSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EECB6901C61450100702540 /* THLFAQSectionView.m */; };
 		3EF951781C56AD770046D4F1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EF951771C56AD770046D4F1 /* MobileCoreServices.framework */; };
 		7905CC411BE0252700E56878 /* THLGuestlistInviteEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7905CC401BE0252700E56878 /* THLGuestlistInviteEntity.m */; };
 		790603BD1BF5B6810093335E /* THLPromotionInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 790603BC1BF5B6810093335E /* THLPromotionInfoView.m */; };
@@ -460,9 +462,13 @@
 		2BF9907EA74F2E21D14684CC /* Pods-HypeUpTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeUpTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HypeUpTests/Pods-HypeUpUpTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3E64EBDE1C5C14F3002BA11B /* THLUserDataWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THLUserDataWorker.h; path = UserDataWorker/THLUserDataWorker.h; sourceTree = "<group>"; };
 		3E64EBDF1C5C14F3002BA11B /* THLUserDataWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THLUserDataWorker.m; path = UserDataWorker/THLUserDataWorker.m; sourceTree = "<group>"; };
+		3E64EBE81C5D89C5002BA11B /* THLFAQViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THLFAQViewController.h; path = THLFAQViewController/THLFAQViewController.h; sourceTree = "<group>"; };
+		3E64EBE91C5D89C5002BA11B /* THLFAQViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THLFAQViewController.m; path = THLFAQViewController/THLFAQViewController.m; sourceTree = "<group>"; };
 		3ECD03ED1C58408C00AE325D /* THLUserPhotoVerificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THLUserPhotoVerificationViewController.h; path = UserPhotoVerificationVC/THLUserPhotoVerificationViewController.h; sourceTree = "<group>"; };
 		3ECD03EE1C58408C00AE325D /* THLUserPhotoVerificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THLUserPhotoVerificationViewController.m; path = UserPhotoVerificationVC/THLUserPhotoVerificationViewController.m; sourceTree = "<group>"; };
 		3ED444421C59479C00385A8A /* THLUserPhotoVerificationInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = THLUserPhotoVerificationInterface.h; path = UserPhotoVerificationVC/THLUserPhotoVerificationInterface.h; sourceTree = "<group>"; };
+		3EECB68F1C61450100702540 /* THLFAQSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THLFAQSectionView.h; path = THLFAQSectionView/THLFAQSectionView.h; sourceTree = "<group>"; };
+		3EECB6901C61450100702540 /* THLFAQSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THLFAQSectionView.m; path = THLFAQSectionView/THLFAQSectionView.m; sourceTree = "<group>"; };
 		3EF951771C56AD770046D4F1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		70604C4F18C9EBAC0CE04014 /* Pods-HypeUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HypeUp/Pods-HypeUp.debug.xcconfig"; sourceTree = "<group>"; };
 		7465E16579C35905935D6E3A /* libPods-HypeUp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HypeUp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -889,6 +895,8 @@
 				217EBE891BB78A57006044B6 /* THLViewDataSource */,
 				794FAB651C5F17F400438D49 /* THLActionButton.h */,
 				794FAB661C5F17F400438D49 /* THLActionButton.m */,
+				3E64EBEB1C5D89CC002BA11B /* THLFAQViewController */,
+				3EECB6921C61451800702540 /* THLFAOSectionView */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1915,6 +1923,15 @@
 			name = UserDataWorker;
 			sourceTree = "<group>";
 		};
+		3E64EBEB1C5D89CC002BA11B /* THLFAQViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3E64EBE81C5D89C5002BA11B /* THLFAQViewController.h */,
+				3E64EBE91C5D89C5002BA11B /* THLFAQViewController.m */,
+			);
+			name = THLFAQViewController;
+			sourceTree = "<group>";
+		};
 		3ECD03F01C58409400AE325D /* UserPhotoVerificationVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -1923,6 +1940,15 @@
 				3ED444421C59479C00385A8A /* THLUserPhotoVerificationInterface.h */,
 			);
 			name = UserPhotoVerificationVC;
+			sourceTree = "<group>";
+		};
+		3EECB6921C61451800702540 /* THLFAOSectionView */ = {
+			isa = PBXGroup;
+			children = (
+				3EECB68F1C61450100702540 /* THLFAQSectionView.h */,
+				3EECB6901C61450100702540 /* THLFAQSectionView.m */,
+			);
+			name = THLFAOSectionView;
 			sourceTree = "<group>";
 		};
 		3EF9517C1C56B5D40046D4F1 /* UIImageView */ = {
@@ -3333,6 +3359,7 @@
 				798650A41BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m in Sources */,
 				212173711BB34F15007D817A /* THLRoundImageView.m in Sources */,
 				C85EE3B51C1BCBDD0008C14B /* THLPerkStoreCellViewModel.m in Sources */,
+				3EECB6911C61450100702540 /* THLFAQSectionView.m in Sources */,
 				211005CC1B8A767C00A540C6 /* THLEventDiscoveryCellViewModel.m in Sources */,
 				79B9595D1BE934C000B87799 /* THLPopupNotificationDataManager.m in Sources */,
 				79730CF21C17DC3500D70F4B /* THLUserProfileFooterView.m in Sources */,
@@ -3463,6 +3490,7 @@
 				C85EE3AB1C1BCB8A0008C14B /* THLPerkStoreWireframe.m in Sources */,
 				794AFE1B1C10A64A008475B1 /* THLHostDashboardViewController.m in Sources */,
 				21E402E01BBF8371001D0C2C /* THLGuestlistService.m in Sources */,
+				3E64EBEA1C5D89C5002BA11B /* THLFAQViewController.m in Sources */,
 				21775F391B8CF93000609D39 /* THLEventDetailsPromotionInfoView.m in Sources */,
 				2133BFC21B877C08002C1DA9 /* THLUser.m in Sources */,
 				217EBE821BB75FD5006044B6 /* THLDataStoreDomain.m in Sources */,
