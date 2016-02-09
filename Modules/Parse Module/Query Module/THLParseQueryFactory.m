@@ -135,6 +135,7 @@
 	PFQuery *query = [THLEvent query];
 	[query includeKey:@"location"];
     [query includeKey:@"host"];
+    [query includeKey:@"host.beacon"];
 	return query;
 }
 

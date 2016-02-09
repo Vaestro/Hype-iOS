@@ -164,6 +164,7 @@ ESTBeaconManagerDelegate
      minor:_guestlistEntity.event.host.beacon.minor.integerValue
      identifier:@"beacon"];
     
+    [KVNProgress show];
     
     [self.beaconManager startRangingBeaconsInRegion:self.beaconRegion];
 
@@ -208,15 +209,18 @@ ESTBeaconManagerDelegate
 }
 
 
-- (void)beaconManager:(id)manager monitoringDidFailForRegion:(CLBeaconRegion *)region withError:(NSError *)error {
-    NSLog(@"%@", error);
+- (void)beaconManager:(id)manager rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region withError:(NSError *)error {
+    [KVNProgress dismiss];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                    message:@"Make sure your device's bluetooth is turned on"
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+    
 }
 
-
-//- (void)beaconManager:(id)manager didStartMonitoringForRegion:(CLBeaconRegion *)region {
-//    NSLog(@"%@", region);
-//    [self.beaconManager stopMonitoringForRegion:_beaconRegion];
-//}
 
 
 
@@ -238,7 +242,12 @@ ESTBeaconManagerDelegate
         [SSELF.delegate interactor:SSELF didUpdateGuestlistInviteCheckInStatus:task.error to:status];
         return nil;
     }];
-
+    [KVNProgress dismissWithCompletion:^{
+        // Things you want to do after the HUD is gone.
+        if (status) {
+            [self updateGuestlistInvites];
+        }
+    }];
 }
 
 

@@ -19,6 +19,7 @@
 #import "UIScrollView+SVPullToRefresh.h"
 
 #import "UIView+DimView.h"
+#import <KVNProgress/KVNProgress.h>
 
 
 #define kGKHeaderHeight 150

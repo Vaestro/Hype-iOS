@@ -551,6 +551,7 @@ THLGuestlistReviewInteractorDelegate
         [alert addAction:defaultAction];
         [(UIViewController *)_view presentViewController:alert animated:YES completion:nil];
         [self updateGuestReviewStatus];
+//        self.refreshing = NO;
     } else {
         UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Not checked In"
                                                                        message:@"You are not in range to check In"
