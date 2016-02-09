@@ -45,7 +45,7 @@
     [self.view addSubviews:@[_scrollView]];
     
     [_scrollView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.insets(kTHLEdgeInsetsNone());
+        make.top.left.right.bottom.insets(kTHLEdgeInsetsNone());
     }];
     
     [_scrollView.stackView addSubview:_ratio
