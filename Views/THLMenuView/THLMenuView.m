@@ -115,36 +115,36 @@ static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
         make.left.equalTo(kTHLEdgeInsetsSuperHigh());
     }];
     
-    [_leaveIcon makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.offset(0);
+    [_menuTitleLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.iconImageView.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
         make.left.insets(kTHLEdgeInsetsSuperHigh());
-    }];
-    
-    [_leaveGuestlistButton makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.offset(0);
-        make.left.equalTo(WSELF.leaveIcon.mas_right).insets(kTHLEdgeInsetsHigh());
-    }];
-    
-    [_addIcon makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(WSELF.leaveGuestlistButton.mas_top).insets(kTHLEdgeInsetsSuperHigh());
-        make.left.insets(kTHLEdgeInsetsSuperHigh());
-    }];
-    
-    [_addGuestsButton makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(WSELF.leaveGuestlistButton.mas_top).insets(kTHLEdgeInsetsHigh());
-        make.left.equalTo(WSELF.addIcon.mas_right).insets(kTHLEdgeInsetsHigh());
     }];
     
     [_separatorView makeConstraints:^(MASConstraintMaker *make) {
         make.left.insets(kTHLEdgeInsetsHigh());
         make.size.equalTo(CGSizeMake(kTHLRedeemPerkViewSeparatorViewWidth, kTHLRedeemPerkViewSeparatorViewHeight));
-        make.bottom.equalTo(WSELF.addGuestsButton.mas_top).insets(kTHLEdgeInsetsHigh());
-        //        make.left.right.insets(kTHLEdgeInsetsNone());
+        make.top.equalTo(WSELF.menuTitleLabel.mas_bottom).insets(kTHLEdgeInsetsLow());
     }];
     
-    [_menuTitleLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(WSELF.separatorView.mas_top).insets(kTHLEdgeInsetsHigh());
+    [_addIcon makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.separatorView.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
         make.left.insets(kTHLEdgeInsetsSuperHigh());
+    }];
+    
+    [_addGuestsButton makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.separatorView.mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.left.equalTo(WSELF.addIcon.mas_right).insets(kTHLEdgeInsetsHigh());
+    }];
+
+    
+    [_leaveIcon makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.addGuestsButton.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+        make.left.insets(kTHLEdgeInsetsSuperHigh());
+    }];
+    
+    [_leaveGuestlistButton makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.addGuestsButton.mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.left.equalTo(WSELF.leaveIcon.mas_right).insets(kTHLEdgeInsetsHigh());
     }];
     
     [_calendarIcon makeConstraints:^(MASConstraintMaker *make) {
@@ -224,7 +224,6 @@ static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
     return view;
 }
 
-
 - (UIImageView *)newIconNamed:(NSString *)iconName {
     UIImageView *image = [[UIImageView alloc]initWithImage:[UIImage imageNamed:iconName]];
     return image;
@@ -239,63 +238,19 @@ static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
     
     WEAKSELF();
     [self.calendarIcon remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.offset(0);
+        make.top.equalTo(WSELF.addGuestsButton.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
         make.left.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
     [self.eventDetailsButton remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.offset(0);
+        make.top.equalTo(WSELF.addGuestsButton.mas_bottom).insets(kTHLEdgeInsetsHigh());
         make.left.equalTo(WSELF.calendarIcon.mas_right).insets(kTHLEdgeInsetsHigh());
     }];
-    
-    [self.addGuestsButton remakeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(WSELF.eventDetailsButton.mas_top).insets(kTHLEdgeInsetsHigh());
-        make.left.equalTo(WSELF.addIcon.mas_right).insets(kTHLEdgeInsetsHigh());
-    }];
-
-    [self.addIcon remakeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(WSELF.eventDetailsButton.mas_top).insets(kTHLEdgeInsetsSuperHigh());
-        make.left.insets(kTHLEdgeInsetsSuperHigh());
-    }];
-
-
-    
 }
 
 - (void)guestLayoutUpdate {
-    WEAKSELF();
-    [self.eventDetailsButton remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.offset(0);
-        make.left.equalTo(WSELF.calendarIcon.mas_right).insets(kTHLEdgeInsetsHigh());
-    }];
-    
-    [self.leaveIcon remakeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(WSELF.eventDetailsButton.top).insets(kTHLEdgeInsetsSuperHigh());
-        make.left.insets(kTHLEdgeInsetsSuperHigh());
-    }];
-
-    [self.leaveGuestlistButton remakeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(WSELF.eventDetailsButton.top).insets(kTHLEdgeInsetsHigh());
-        make.left.equalTo(WSELF.leaveIcon.mas_right).insets(kTHLEdgeInsetsHigh());
-    }];
-    
-    [self.addGuestsButton remakeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(WSELF.leaveGuestlistButton.mas_top).insets(kTHLEdgeInsetsHigh());
-        make.left.equalTo(WSELF.addIcon.mas_right).insets(kTHLEdgeInsetsHigh());
-    }];
-
-    [self.addIcon remakeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(WSELF.leaveGuestlistButton.mas_top).insets(kTHLEdgeInsetsSuperHigh());
-        make.left.insets(kTHLEdgeInsetsSuperHigh());
-    }];
-    
-    
-    [self.separatorView remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.insets(kTHLEdgeInsetsHigh());
-        make.size.equalTo(CGSizeMake(kTHLRedeemPerkViewSeparatorViewWidth, kTHLRedeemPerkViewSeparatorViewHeight));
-        make.bottom.equalTo(WSELF.addGuestsButton.mas_top).insets(kTHLEdgeInsetsHigh());
-    }];
-
+    [self.contactHostButton setHidden:YES];
+    [self.contactIcon setHidden:YES];
 }
 
 

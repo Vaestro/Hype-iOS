@@ -233,7 +233,7 @@ THLGuestlistReviewInteractorDelegate
 - (void)configureMenuView:(THLMenuView *)menuView {
     self.menuView = menuView;
     
-    if (self.reviewerStatus != THLGuestlistOwner || self.reviewerStatus != THLGuestlistCheckedInOwner) {
+    if (self.reviewerStatus != THLGuestlistOwner && self.reviewerStatus != THLGuestlistCheckedInOwner) {
         [_menuView guestLayoutUpdate];
     }
     
@@ -308,6 +308,9 @@ THLGuestlistReviewInteractorDelegate
     else if ([_guestlistInviteEntity isPending]) {
         self.reviewerStatus = THLGuestlistPendingGuest;
     }
+    
+    [_view setReviewerStatus:[NSNumber numberWithInt:self.reviewerStatus]];
+    
     DLog(@"Status is now %ld", (long)self.reviewerStatus);
 }
 
@@ -367,7 +370,6 @@ THLGuestlistReviewInteractorDelegate
     }
 }
 
-
 - (void)handleLeaveAction {
     
     NSString *ownerName = _guestlistInviteEntity.guestlist.owner.firstName;
@@ -395,10 +397,7 @@ THLGuestlistReviewInteractorDelegate
 
     [_confirmationView showConfirmationWithTitle:@"Leave Guestlist" message:[NSString stringWithFormat:@"Are you sure you want to leave %@'s party for %@?", ownerName, eventName]];
 
-    
 }
-
-
 
 - (void)handleAcceptAction {
     /**
