@@ -233,11 +233,11 @@ THLGuestlistReviewInteractorDelegate
 - (void)configureMenuView:(THLMenuView *)menuView {
     self.menuView = menuView;
     
-    if (self.reviewerStatus != THLGuestlistOwner) {
+    if (self.reviewerStatus != THLGuestlistOwner || self.reviewerStatus != THLGuestlistCheckedInOwner) {
         [_menuView guestLayoutUpdate];
     }
     
-    if (self.reviewerStatus == THLGuestlistOwner) {
+    if (self.reviewerStatus == THLGuestlistOwner || self.reviewerStatus == THLGuestlistCheckedInOwner) {
         [_menuView hostLayoutUpdate];
     }
     
@@ -257,7 +257,7 @@ THLGuestlistReviewInteractorDelegate
         [WSELF.view hideGuestlistMenuView:menuView];
         THLConfirmationView *confirmationView = [THLConfirmationView new];
         [self configureResponseView:confirmationView];
-        [WSELF handleResponseAction];
+        [WSELF handleLeaveAction];
         return [RACSignal empty];
     }];
     
@@ -346,28 +346,7 @@ THLGuestlistReviewInteractorDelegate
             break;
         }
         case THLGuestlistAttendingGuest: {
-            WEAKSELF();
-            RACCommand *confirmationAcceptCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-                [WSELF handleAcceptAction];
-                return [RACSignal empty];
-            }];
-            
-            RACCommand *confirmationDeclineCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-                [WSELF.confirmationView dismiss];
-                return [RACSignal empty];
-            }];
-            
-            RACCommand *viewDismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-                [_wireframe dismissInterface];
-                return [RACSignal empty];
-            }];
-            
-            [_confirmationView setAcceptCommand:confirmationAcceptCommand];
-            [_confirmationView setDeclineCommand:confirmationDeclineCommand];
-            [_confirmationView setDismissCommand:viewDismissCommand];
-
-            [_confirmationView showConfirmationWithTitle:@"Leave Guestlist" message:[NSString stringWithFormat:@"Are you sure you want to leave %@'s party for %@?", ownerName, eventName]];
-            
+            [_interactor checkInForGuestlistInvite:_guestlistInviteEntity];
             break;
         }
         case THLGuestlistOwner: {
@@ -389,7 +368,33 @@ THLGuestlistReviewInteractorDelegate
 }
 
 
-- (void)handleCheckInAction {
+- (void)handleLeaveAction {
+    
+    NSString *ownerName = _guestlistInviteEntity.guestlist.owner.firstName;
+    NSString *eventName =_guestlistInviteEntity.guestlist.event.location.name;
+    
+    WEAKSELF();
+    RACCommand *confirmationAcceptCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [WSELF handleAcceptAction];
+        return [RACSignal empty];
+    }];
+
+    RACCommand *confirmationDeclineCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [WSELF.confirmationView dismiss];
+        return [RACSignal empty];
+    }];
+
+    RACCommand *viewDismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [_wireframe dismissInterface];
+        return [RACSignal empty];
+    }];
+
+    [_confirmationView setAcceptCommand:confirmationAcceptCommand];
+    [_confirmationView setDeclineCommand:confirmationDeclineCommand];
+    [_confirmationView setDismissCommand:viewDismissCommand];
+
+    [_confirmationView showConfirmationWithTitle:@"Leave Guestlist" message:[NSString stringWithFormat:@"Are you sure you want to leave %@'s party for %@?", ownerName, eventName]];
+
     
 }
 
