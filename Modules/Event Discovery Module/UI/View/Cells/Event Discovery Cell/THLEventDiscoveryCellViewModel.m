@@ -24,7 +24,11 @@
     [cellView setEventName:_eventEntity.title];
     [cellView setLocationNeighborhood:_eventEntity.location.neighborhood];
     [cellView setTime:_eventEntity.date.thl_weekdayString];
-    [cellView setImageURL:_eventEntity.location.imageURL];
+    if (_eventEntity.imageURL != nil) {
+        [cellView setImageURL:_eventEntity.imageURL];
+    } else {
+        [cellView setImageURL:_eventEntity.location.imageURL];
+    }
 }
 
 @end

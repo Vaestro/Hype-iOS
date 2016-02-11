@@ -11,5 +11,6 @@
 @interface THLActionButton : UIButton
 - (instancetype)initWithDefaultStyle;
 - (instancetype)initWithInverseStyle;
+- (instancetype)initWithActionStyle;
 - (void)setTitle:(NSString *)title;
 @end

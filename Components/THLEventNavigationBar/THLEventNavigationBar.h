@@ -10,10 +10,14 @@
 #import "BLKFlexibleHeightBar.h"
 
 @interface THLEventNavigationBar : BLKFlexibleHeightBar
+@property (nonatomic, copy) NSString *dateText;
+@property (nonatomic, copy) NSString *eventName;
 @property (nonatomic, copy) NSString *titleText;
-//@property (nonatomic, copy) NSString *subtitleText;
-//@property (nonatomic, copy) NSString *dateText;
+@property (nonatomic, copy) NSString *promotionInfo;
 @property (nonatomic, copy) NSURL *locationImageURL;
+@property (nonatomic, copy) NSURL *promoImageURL;
 @property (nonatomic, strong) RACCommand *dismissCommand;
 @property (nonatomic, strong) RACCommand *detailDisclosureCommand;
+
+-(void)addGradientLayer;
 @end

@@ -22,6 +22,7 @@ static CGFloat const kTHLEventDetailsPromotionInfoViewImageViewHeight = 150;
     [super constructView];
     _eventDetailsLabel = [self newEventDetailsLabel];
     _imageView = [self newImageView];
+    self.userInteractionEnabled = NO;
 }
 
 - (void)layoutView {

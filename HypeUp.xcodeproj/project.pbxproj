@@ -169,6 +169,7 @@
 		79B959611BE9A90B00B87799 /* THLActionContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959601BE9A90B00B87799 /* THLActionContainerView.m */; };
 		79BA91061C20ACAD00731A38 /* libPods-HypeUpTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 79BA91051C20ACAD00731A38 /* libPods-HypeUpTests.a */; };
 		79BB15301C657FF50044D943 /* THLSingleLineTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BB152F1C657FF50044D943 /* THLSingleLineTextField.m */; };
+		79BB15331C6CED740044D943 /* THLFxTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BB15321C6CED720044D943 /* THLFxTitleLabel.m */; };
 		79BCB5641BF2AAA30050F283 /* THLMasterNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BCB5631BF2AAA30050F283 /* THLMasterNavigationController.m */; };
 		79CD27E41C520293009BC119 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CD27BE1C520293009BC119 /* AppDelegate.m */; };
 		79CD27E51C520293009BC119 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27BF1C520293009BC119 /* LaunchScreen.xib */; };
@@ -628,6 +629,8 @@
 		79BA91051C20ACAD00731A38 /* libPods-HypeUpTests.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-HypeUpTests.a"; path = "Pods/../build/Debug-iphoneos/libPods-HypeUpTests.a"; sourceTree = "<group>"; };
 		79BB152E1C657FF50044D943 /* THLSingleLineTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLSingleLineTextField.h; sourceTree = "<group>"; };
 		79BB152F1C657FF50044D943 /* THLSingleLineTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLSingleLineTextField.m; sourceTree = "<group>"; };
+		79BB15311C6CED720044D943 /* THLFxTitleLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLFxTitleLabel.h; sourceTree = "<group>"; };
+		79BB15321C6CED720044D943 /* THLFxTitleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLFxTitleLabel.m; sourceTree = "<group>"; };
 		79BCB5621BF2AAA30050F283 /* THLMasterNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMasterNavigationController.h; sourceTree = "<group>"; };
 		79BCB5631BF2AAA30050F283 /* THLMasterNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLMasterNavigationController.m; sourceTree = "<group>"; };
 		79CD27BD1C520293009BC119 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -878,6 +881,8 @@
 				794FAB661C5F17F400438D49 /* THLActionButton.m */,
 				79BB152E1C657FF50044D943 /* THLSingleLineTextField.h */,
 				79BB152F1C657FF50044D943 /* THLSingleLineTextField.m */,
+				79BB15311C6CED720044D943 /* THLFxTitleLabel.h */,
+				79BB15321C6CED720044D943 /* THLFxTitleLabel.m */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -3358,6 +3363,7 @@
 				21E402CC1BBF767D001D0C2C /* THLGuestlistInvitationPresenter.m in Sources */,
 				790603BD1BF5B6810093335E /* THLPromotionInfoView.m in Sources */,
 				21CCEDF51B87CFCB0066CDAC /* THLParseQueryFactory.m in Sources */,
+				79BB15331C6CED740044D943 /* THLFxTitleLabel.m in Sources */,
 				211005BF1B8A70BF00A540C6 /* THLEventDiscoveryCell.m in Sources */,
 				798B5FD11BF12D2C002EBCB6 /* THLEventHostingWireframe.m in Sources */,
 				215A428E1BAA200E00D03C35 /* THLNumberVerificationWireframe.m in Sources */,

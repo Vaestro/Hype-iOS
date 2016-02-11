@@ -14,13 +14,13 @@
 #import "THLEventDetailsMapView.h"
 #import "THLEventDetailsPromotionInfoView.h"
 #import "THLNeedToKnowInfoView.h"
-#import "THLActionBarButton.h"
 
 #import "THLAppearanceConstants.h"
 #import "THLPromotionInfoView.h"
 #import "THLEventDetailMusicTypesView.h"
 #import "THLEventNavigationBar.h"
 #import "SquareCashStyleBehaviorDefiner.h"
+#import "THLActionButton.h"
 
 @interface THLEventDetailViewController()
 @property (nonatomic, strong) ORStackScrollView *scrollView;
@@ -30,7 +30,7 @@
 @property (nonatomic, strong) THLEventDetailsLocationInfoView *locationInfoView;
 @property (nonatomic, strong) THLNeedToKnowInfoView *needToKnowInfoView;
 @property (nonatomic, strong) THLEventDetailMusicTypesView *musicTypesView;
-@property (nonatomic, strong) THLActionBarButton *bottomBar;
+@property (nonatomic, strong) THLActionButton *bottomBar;
 @property (nonatomic) BOOL showPromotionInfoView;
 @property (nonatomic, strong) THLEventDetailsMapView *mapView;
 @property (nonatomic, strong) THLEventNavigationBar *navBar;
@@ -77,9 +77,14 @@
     self.viewAppeared = FALSE;
 }
 
+- (void)viewDidLayoutSubviews {
+//    [super viewDidLayoutSubviews];
+//    Gradient on Event Nav Bar needs to be set after views are subviews are laid out
+    [_navBar addGradientLayer];
+}
 - (void)constructView {
     _scrollView = [self newScrollView];
-    _promotionInfoView = [self newPromotionInfoView];
+//    _promotionInfoView = [self newPromotionInfoView];
     _needToKnowInfoView = [self newNeedToKnowInfoView];
     _locationInfoView = [self newLocationInfoView];
     _eventNameLabel = [self newEventNameLabel];
@@ -90,35 +95,23 @@
 }
 
 - (void)layoutView {
-    _navBar = [[THLEventNavigationBar alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, SCREEN_HEIGHT*0.75)];
-    _navBar.minimumBarHeight = 100.0;
+    _navBar = [[THLEventNavigationBar alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, SCREEN_HEIGHT-80)];
+    _navBar.minimumBarHeight = 65;
     _navBar.behaviorDefiner = [SquareCashStyleBehaviorDefiner new];
+    
     self.scrollView.delegate = (id<UIScrollViewDelegate>)_navBar.behaviorDefiner;
 
     [self.view addSubview:_navBar];
     
-    self.view.nuiClass = kTHLNUIBackgroundView;
+    self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
     [self.view addSubviews:@[_scrollView, _bottomBar]];
     
     [_scrollView makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(myBar.mas_bottom);
         make.top.left.right.insets(kTHLEdgeInsetsNone());
     }];
     
-    [_scrollView.stackView addSubview:_eventNameLabel
-                  withPrecedingMargin:SCREEN_HEIGHT*.75
-                           sideMargin:kTHLPaddingHigh()];
-    
-    [_scrollView.stackView addSubview:_dateLabel
-                  withPrecedingMargin:kTHLPaddingHigh()
-                           sideMargin:4*kTHLPaddingHigh()];
-    
-    [_scrollView.stackView addSubview:_promotionInfoView
-                  withPrecedingMargin:2*kTHLPaddingHigh()
-                           sideMargin:4*kTHLPaddingHigh()];
-    
     [_scrollView.stackView addSubview:_needToKnowInfoView
-                  withPrecedingMargin:kTHLPaddingHigh()
+                  withPrecedingMargin:_navBar.frame.size.height + 2*kTHLPaddingHigh()
                            sideMargin:4*kTHLPaddingHigh()];
     
     [_scrollView.stackView addSubview:_locationInfoView
@@ -133,22 +126,33 @@
                   withPrecedingMargin:kTHLPaddingHigh()
                            sideMargin:kTHLPaddingNone()];
     
-    [_bottomBar makeConstraints:^(MASConstraintMaker *make) {
+    [self.view bringSubviewToFront:_navBar];
+    
+    UIView *buttonBackground = [UIView new];
+    buttonBackground.backgroundColor = kTHLNUIPrimaryBackgroundColor;
+    [self.view addSubview:buttonBackground];
+    [buttonBackground makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.left.right.insets(kTHLEdgeInsetsNone());
         make.top.equalTo(_scrollView.mas_bottom);
+        make.height.equalTo(80);
+    }];
+    
+    [buttonBackground addSubview:_bottomBar];
+    [_bottomBar makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.insets(kTHLEdgeInsetsHigh());
     }];
 }
 
 - (void)bindView {
     WEAKSELF();
+    RAC(self.navBar, dateText) = RACObserve(self, eventDate);
     RAC(self.navBar, titleText) = RACObserve(self, titleText);
     RAC(self.navBar, dismissCommand) = RACObserve(self, dismissCommand);
     RAC(self.navBar, locationImageURL) = RACObserve(self, locationImageURL);
+    RAC(self.navBar, promotionInfo) = RACObserve(self, promoInfo);
+    if (eventName != nil) { [self.navBar setEventName:eventName];}
+    [self.navBar setLocationImageURL:promoImageURL];
 
-    RAC(self.eventNameLabel, text, @"") = RACObserve(self, eventName);
-    RAC(self.dateLabel, text, @"") = RACObserve(self, eventDate);
-    RAC(self.promotionInfoView, promotionInfo) = RACObserve(self, promoInfo);
-    RAC(self.promotionInfoView, promoImageURL) = RACObserve(self, promoImageURL);
     RAC(self.locationInfoView, locationInfo) = RACObserve(self, locationInfo);
 
     RAC(self.needToKnowInfoView, ratioText) = RACObserve(self, ratioInfo);
@@ -176,11 +180,10 @@
 - (void)updateBottomBar {
     WEAKSELF();
     if (userHasAcceptedInvite) {
-        [[WSELF bottomBar].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"VIEW GUESTLIST", nil)];
+        [[WSELF bottomBar] setTitle:NSLocalizedString(@"VIEW GUESTLIST", nil)];
         [WSELF bottomBar].backgroundColor = kTHLNUIAccentColor;
     } else {
-        [[WSELF bottomBar].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"CREATE GUESTLIST", nil)];
-        [WSELF bottomBar].backgroundColor = kTHLNUIActionColor;
+        [[WSELF bottomBar] setTitle:NSLocalizedString(@"CREATE GUESTLIST", nil)];
     }
 }
 
@@ -222,10 +225,15 @@
     return musicTypesView;
 }
 
-- (THLActionBarButton *)newBottomBar {
-    THLActionBarButton *bottomBar = [THLActionBarButton new];
-//    [bottomBar.morphingLabel setTextWithoutMorphing:NSLocalizedString(actionBarButtonStatus, nil)];
-    return bottomBar;
+- (THLActionButton *)newBottomBar {
+    THLActionButton *button = [[THLActionButton alloc] initWithActionStyle];
+    [button setTitle:@"Join Guestlist"];
+    
+//    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(-10, -10, SCREEN_WIDTH, 0.5)];
+//    lineView.backgroundColor = kTHLNUIGrayFontColor;
+//    [button addSubview:lineView];
+//    
+    return button;
 }
 
 - (UILabel *)newEventNameLabel {
@@ -248,8 +256,4 @@
 - (UIStatusBarStyle) preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
-
-//- (void)dealloc {
-//    NSLog(@"Destroyed %@", self);
-//}
 @end
