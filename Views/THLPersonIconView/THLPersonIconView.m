@@ -1,4 +1,4 @@
-//
+    //
 //  THLPersonIconView.m
 //  Hypelist2point0
 //
@@ -40,15 +40,17 @@
 }
 
 - (void)bindView {
-    WEAKSELF();
+    @weakify(self);
     [[RACObserve(self, imageURL) filter:^BOOL(NSURL *url) {
         return [url isValid];
     }] subscribeNext:^(NSURL *url) {
-        [WSELF.imageView sd_setImageWithURL:url];
+        @strongify(self)
+        [self.imageView sd_setImageWithURL:url];
     }];
     
     [RACObserve(self, placeholderImageText) subscribeNext:^(NSString *text) {
-        [WSELF.imageView setImageWithString:text
+        @strongify(self)
+        [self.imageView setImageWithString:text
                                       color:kTHLNUIPrimaryBackgroundColor];
     }];
 }

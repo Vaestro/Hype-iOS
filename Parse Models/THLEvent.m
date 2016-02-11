@@ -18,6 +18,7 @@
 @dynamic location;
 @dynamic creditsPayout;
 @dynamic host;
+@dynamic requiresApproval;
 @dynamic maleRatio;
 @dynamic femaleRatio;
 

@@ -30,11 +30,13 @@
     self.contentView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     _iconView = [self newIconView];
     _label = [self newLabel];
+    _photoTapRecognizer = [self tapGestureRecognizer];
 }
 
 - (void)layoutView {
     [self.contentView addSubviews:@[_iconView,
-                        _label]];
+                                    _label]];
+    [_iconView addGestureRecognizer:_photoTapRecognizer];
     WEAKSELF();
     [_iconView makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(kTHLEdgeInsetsHigh());
@@ -84,4 +86,10 @@
 + (NSString *)identifier {
     return NSStringFromClass(self);
 }
+
+- (UITapGestureRecognizer *) tapGestureRecognizer{
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:nil action:nil];
+    return tapRecognizer;
+}
+
 @end

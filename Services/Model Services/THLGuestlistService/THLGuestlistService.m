@@ -14,6 +14,8 @@
 #import "THLEvent.h"
 #import "THLLocationEntity.h"
 #import "THLUser.h"
+#import "THLBeaconEntity.h"
+#import "THLBeacon.h"
 
 @implementation THLGuestlistService
 
@@ -38,8 +40,12 @@
             PFObject *event = guestlist[@"event"];
             [guestlist setObject:event forKey:@"event"];
             PFObject *host = guestlist[@"event"][@"host"];
+            PFObject *beacon = guestlist[@"event"][@"host"][@"beacon"];
+            PFObject *location = guestlist[@"event"][@"location"];
             if (host != nil) {
+                [host setObject:beacon forKey:@"beacon"];
                 [event setObject:host forKey:@"host"];
+                [event setObject:location forKey:@"location"];
             }
             [completedGuestlists addObject:guestlist];
         }
@@ -78,10 +84,18 @@
     [[_queryFactory queryForGuestlistWithId] getObjectInBackgroundWithId:guestlistId block:^(PFObject *guestlist, NSError *error) {
         if (!error) {
             PFObject *event = guestlist[@"event"];
-            [guestlist setObject:event forKey:@"event"];
+            PFObject *beacon = guestlist[@"event"][@"host"][@"beacon"];
             PFObject *host = guestlist[@"event"][@"host"];
+            PFObject *location = guestlist[@"event"][@"location"];
+            [host setObject:beacon forKey:@"beacon"];
+            [event setObject:host forKey:@"host"];
+            [event setObject:location forKey:@"location"];
+            [guestlist setObject:event forKey:@"event"];
+            
+            
             if (host != nil) {
-                [event setObject:host forKey:@"host"];
+                
+                
             }
         } else {
             [completionSource setError:error];
@@ -107,7 +121,13 @@
     PFObject *guestlist = [PFObject objectWithClassName:@"Guestlist"];
     guestlist[@"Owner"] = currentUser;
     guestlist[@"date"] = eventEntity.date;
-    guestlist[@"reviewStatus"] = [NSNumber numberWithInt:0];
+    
+    if (eventEntity.requiresApproval) {
+        guestlist[@"reviewStatus"] = [NSNumber numberWithInt:2];
+    } else {
+        guestlist[@"reviewStatus"] = [NSNumber numberWithInt:0];
+    }
+    
     guestlist[@"event"] = [THLEvent objectWithoutDataWithObjectId:eventEntity.objectId];
     [guestlist saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
@@ -197,6 +217,8 @@
                     [guestlist setObject:event forKey:@"event"];
                     PFObject *host = guestlistInvite[@"Guestlist"][@"event"][@"host"];
                     [event setObject:host forKey:@"host"];
+                    PFObject *beacon = guestlistInvite[@"Guestlist"][@"event"][@"host"][@"beacon"];
+                    [host setObject:beacon forKey:@"beacon"];
                     PFObject *location = guestlistInvite[@"Guestlist"][@"event"][@"location"];
                     [event setObject:location forKey:@"location"];
                     PFObject *guest = guestlistInvite[@"Guest"];
@@ -300,6 +322,17 @@
     [guestlist saveInBackground];
     return [BFTask taskWithResult:nil];
 }
+
+
+//----------------------------------------------------------------
+#pragma mark - Update a Guestlist Invite's Check In Status
+//----------------------------------------------------------------
+- (BFTask *)updateGuestlistInvite:(THLGuestlistInvite *)guestlistInvite withCheckInStatus:(BOOL)status {
+    guestlistInvite[@"checkInStatus"] = [NSNumber numberWithBool:status];
+    [guestlistInvite saveInBackground];
+    return [BFTask taskWithResult:nil];
+}
+
 
 
 - (void)dealloc {

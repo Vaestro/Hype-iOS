@@ -13,6 +13,7 @@
 #import <Fabric/Fabric.h>
 #import <DigitsKit/DigitsKit.h>
 #import <Optimizely/Optimizely.h>
+
 //#import <Stripe/Stripe.h>
 
 #import "THLDependencyManager.h"
@@ -26,7 +27,6 @@ static NSString *clientKeyId = @"xn4Mces2HcFCQYXF2VRj4W1Ot0zIBELl6fHKLGPk";
 static NSString *applicationId = @"D0AnOPXqqfz7bfE70WvdlE8dK7Qj1kxgf4rPm8rX";
 static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
 #endif
-
 
 @interface AppDelegate ()
 @property (nonatomic, strong) THLMasterWireframe *masterWireframe;
@@ -158,6 +158,5 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
 												sourceApplication:sourceApplication
 													   annotation:annotation];
 }
-
 
 @end

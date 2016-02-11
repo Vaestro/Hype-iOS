@@ -96,6 +96,11 @@
 		21E402EE1BBF9A8B001D0C2C /* THLGuestEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E402ED1BBF9A8B001D0C2C /* THLGuestEntity.m */; };
 		21EDC7B01C35F5F700B902CA /* THLWaitlistCodeEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 21EDC7AF1C35F5F700B902CA /* THLWaitlistCodeEntryViewController.m */; };
 		21EED1001BB5F842001325A7 /* THLGuestFlowWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 21EED0FF1BB5F842001325A7 /* THLGuestFlowWireframe.m */; };
+		3E64EBE01C5C14F3002BA11B /* THLUserDataWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E64EBDF1C5C14F3002BA11B /* THLUserDataWorker.m */; };
+		3E64EBEA1C5D89C5002BA11B /* THLFAQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E64EBE91C5D89C5002BA11B /* THLFAQViewController.m */; };
+		3ECD03EF1C58408C00AE325D /* THLUserPhotoVerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD03EE1C58408C00AE325D /* THLUserPhotoVerificationViewController.m */; };
+		3EECB6911C61450100702540 /* THLFAQSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EECB6901C61450100702540 /* THLFAQSectionView.m */; };
+		3EF951781C56AD770046D4F1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EF951771C56AD770046D4F1 /* MobileCoreServices.framework */; };
 		7905CC411BE0252700E56878 /* THLGuestlistInviteEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7905CC401BE0252700E56878 /* THLGuestlistInviteEntity.m */; };
 		790603BD1BF5B6810093335E /* THLPromotionInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 790603BC1BF5B6810093335E /* THLPromotionInfoView.m */; };
 		790603C31BFB73380093335E /* THLDashboardWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 790603C21BFB73380093335E /* THLDashboardWireframe.m */; };
@@ -131,7 +136,7 @@
 		794DCCB71BF555150037A03D /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 794DCCB61BF555150037A03D /* Accelerate.framework */; };
 		794DCCBA1BF557D50037A03D /* THLVenueDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794DCCB91BF557D50037A03D /* THLVenueDetailsView.m */; };
 		794FAB671C5F17F400438D49 /* THLActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 794FAB661C5F17F400438D49 /* THLActionButton.m */; };
-		794FAB691C606F1900438D49 /* Lavo.mov in Resources */ = {isa = PBXBuildFile; fileRef = 794FAB681C606F1900438D49 /* Lavo.mov */; };
+		794FAB6B1C615DE200438D49 /* Lavo.mov in Resources */ = {isa = PBXBuildFile; fileRef = 794FAB6A1C615DE200438D49 /* Lavo.mov */; };
 		79527CF01BF188F80074AF38 /* THLEventHostingInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 79527CEF1BF188F80074AF38 /* THLEventHostingInteractor.m */; };
 		795F13661C3C40B500AC9E76 /* THLWaitlistHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 795F13651C3C40B500AC9E76 /* THLWaitlistHomeViewController.m */; };
 		79730CF21C17DC3500D70F4B /* THLUserProfileFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79730CF11C17DC3500D70F4B /* THLUserProfileFooterView.m */; };
@@ -152,6 +157,7 @@
 		79ABA9BC1C054F42001ABAC7 /* THLDashboardNotificationCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79ABA9BB1C054F42001ABAC7 /* THLDashboardNotificationCellViewModel.m */; };
 		79AD95F41C30CFC400EDB82E /* THLNeedToKnowInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79AD95F31C30CFC400EDB82E /* THLNeedToKnowInfoView.m */; };
 		79AD95F71C3ADA6200EDB82E /* THLEventDetailMusicTypesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79AD95F61C3ADA6200EDB82E /* THLEventDetailMusicTypesView.m */; };
+		79AE087B1C6CF42B0020BF85 /* libPods-HypeUpTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 79AE087A1C6CF42B0020BF85 /* libPods-HypeUpTests.a */; };
 		79B959231BE57C9D00B87799 /* THLGuestlistReviewWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959221BE57C9D00B87799 /* THLGuestlistReviewWireframe.m */; };
 		79B959291BE581A800B87799 /* THLGuestlistReviewDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959281BE581A800B87799 /* THLGuestlistReviewDataManager.m */; };
 		79B9592C1BE581BB00B87799 /* THLGuestlistReviewInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B9592B1BE581BB00B87799 /* THLGuestlistReviewInteractor.m */; };
@@ -167,7 +173,6 @@
 		79B9595A1BE92FBA00B87799 /* THLPopupNotificationInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959591BE92FBA00B87799 /* THLPopupNotificationInteractor.m */; };
 		79B9595D1BE934C000B87799 /* THLPopupNotificationDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B9595C1BE934C000B87799 /* THLPopupNotificationDataManager.m */; };
 		79B959611BE9A90B00B87799 /* THLActionContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959601BE9A90B00B87799 /* THLActionContainerView.m */; };
-		79BA91061C20ACAD00731A38 /* libPods-HypeUpTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 79BA91051C20ACAD00731A38 /* libPods-HypeUpTests.a */; };
 		79BB15301C657FF50044D943 /* THLSingleLineTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BB152F1C657FF50044D943 /* THLSingleLineTextField.m */; };
 		79BB15331C6CED740044D943 /* THLFxTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BB15321C6CED720044D943 /* THLFxTitleLabel.m */; };
 		79BCB5641BF2AAA30050F283 /* THLMasterNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BCB5631BF2AAA30050F283 /* THLMasterNavigationController.m */; };
@@ -196,7 +201,6 @@
 		79CD27FB1C520293009BC119 /* Raleway-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27DA1C520293009BC119 /* Raleway-ThinItalic.ttf */; };
 		79CD27FC1C520293009BC119 /* Terms of Use.txt in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27DB1C520293009BC119 /* Terms of Use.txt */; };
 		79CD27FD1C520293009BC119 /* THLResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CD27DD1C520293009BC119 /* THLResourceManager.m */; };
-		79CD27FE1C520293009BC119 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27DF1C520293009BC119 /* Info.plist */; };
 		79CD27FF1C520293009BC119 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CD27E01C520293009BC119 /* main.m */; };
 		79CD28031C5202A0009BC119 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79CD28021C5202A0009BC119 /* Info.plist */; };
 		79CE01DF1C0A604B0047E6FA /* THLDashboardNotificationSectionTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CE01DE1C0A604B0047E6FA /* THLDashboardNotificationSectionTitleCell.m */; };
@@ -226,6 +230,8 @@
 		C8E1B1621BF437F300A9824C /* THLUserProfileInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B1611BF437F300A9824C /* THLUserProfileInteractor.m */; };
 		C8E1B1651BF4380D00A9824C /* THLUserProfileDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B1641BF4380D00A9824C /* THLUserProfileDataManager.m */; };
 		C8E1B16B1BF43DA800A9824C /* THLUserProfileInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B16A1BF43DA800A9824C /* THLUserProfileInfoView.m */; };
+		C8E2A5941C643D6D00B8BDD5 /* THLBeaconEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E2A5931C643D6D00B8BDD5 /* THLBeaconEntity.m */; };
+		C8E2A5971C64414B00B8BDD5 /* THLBeacon.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E2A5961C64414B00B8BDD5 /* THLBeacon.m */; };
 		C8E342091C3B1A9C009FE9B0 /* THLGuestlistReviewHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E342081C3B1A9C009FE9B0 /* THLGuestlistReviewHeaderView.m */; };
 		C8F2FB271BF81A8E004E00B6 /* THLInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F2FB261BF81A8E004E00B6 /* THLInformationViewController.m */; };
 		C8F2FB2A1BF826B7004E00B6 /* THLWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F2FB291BF826B7004E00B6 /* THLWebViewController.m */; };
@@ -245,6 +251,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1D7D735BB0EB105973187FED /* Pods-HypeUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HypeUp/Pods-HypeUp.debug.xcconfig"; sourceTree = "<group>"; };
 		2108A8831B8BBF4900B725F6 /* THLMasterWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMasterWireframe.h; sourceTree = "<group>"; };
 		2108A8841B8BBF4900B725F6 /* THLMasterWireframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLMasterWireframe.m; sourceTree = "<group>"; };
 		2108A8861B8BBF5B00B725F6 /* THLDependencyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLDependencyManager.h; sourceTree = "<group>"; };
@@ -454,8 +461,19 @@
 		21EED0FE1BB5F842001325A7 /* THLGuestFlowWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestFlowWireframe.h; sourceTree = "<group>"; };
 		21EED0FF1BB5F842001325A7 /* THLGuestFlowWireframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestFlowWireframe.m; sourceTree = "<group>"; };
 		21EED1011BB5F8A7001325A7 /* THLGuestFlowDependencyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestFlowDependencyManager.h; sourceTree = "<group>"; };
-		2BF9907EA74F2E21D14684CC /* Pods-HypeUpTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeUpTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HypeUpTests/Pods-HypeUpUpTests.debug.xcconfig"; sourceTree = "<group>"; };
-		70604C4F18C9EBAC0CE04014 /* Pods-HypeUp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeUp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HypeUp/Pods-HypeUp.debug.xcconfig"; sourceTree = "<group>"; };
+		3E64EBDE1C5C14F3002BA11B /* THLUserDataWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THLUserDataWorker.h; path = UserDataWorker/THLUserDataWorker.h; sourceTree = "<group>"; };
+		3E64EBDF1C5C14F3002BA11B /* THLUserDataWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THLUserDataWorker.m; path = UserDataWorker/THLUserDataWorker.m; sourceTree = "<group>"; };
+		3E64EBE81C5D89C5002BA11B /* THLFAQViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THLFAQViewController.h; path = THLFAQViewController/THLFAQViewController.h; sourceTree = "<group>"; };
+		3E64EBE91C5D89C5002BA11B /* THLFAQViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THLFAQViewController.m; path = THLFAQViewController/THLFAQViewController.m; sourceTree = "<group>"; };
+		3ECD03ED1C58408C00AE325D /* THLUserPhotoVerificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THLUserPhotoVerificationViewController.h; path = UserPhotoVerificationVC/THLUserPhotoVerificationViewController.h; sourceTree = "<group>"; };
+		3ECD03EE1C58408C00AE325D /* THLUserPhotoVerificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THLUserPhotoVerificationViewController.m; path = UserPhotoVerificationVC/THLUserPhotoVerificationViewController.m; sourceTree = "<group>"; };
+		3ED444421C59479C00385A8A /* THLUserPhotoVerificationInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = THLUserPhotoVerificationInterface.h; path = UserPhotoVerificationVC/THLUserPhotoVerificationInterface.h; sourceTree = "<group>"; };
+		3EECB68F1C61450100702540 /* THLFAQSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THLFAQSectionView.h; path = THLFAQSectionView/THLFAQSectionView.h; sourceTree = "<group>"; };
+		3EECB6901C61450100702540 /* THLFAQSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THLFAQSectionView.m; path = THLFAQSectionView/THLFAQSectionView.m; sourceTree = "<group>"; };
+		3EF951771C56AD770046D4F1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		442C6CC9162561E1C703FEB4 /* Pods-HypeUpTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeUpTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HypeUpTests/Pods-HypeUpTests.release.xcconfig"; sourceTree = "<group>"; };
+		50387CEFCC248DE286980673 /* Pods-HypeUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-HypeUp/Pods-HypeUp.release.xcconfig"; sourceTree = "<group>"; };
+		5CB33B19C604690B6873D8D8 /* Pods-HypeUpTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeUpTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HypeUpTests/Pods-HypeUpTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7465E16579C35905935D6E3A /* libPods-HypeUp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HypeUp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7905CC3E1BE0251000E56878 /* THLGuestlistInviteEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistInviteEntity.h; sourceTree = "<group>"; };
 		7905CC401BE0252700E56878 /* THLGuestlistInviteEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestlistInviteEntity.m; sourceTree = "<group>"; };
@@ -538,7 +556,7 @@
 		794DCCB91BF557D50037A03D /* THLVenueDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLVenueDetailsView.m; sourceTree = "<group>"; };
 		794FAB651C5F17F400438D49 /* THLActionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLActionButton.h; sourceTree = "<group>"; };
 		794FAB661C5F17F400438D49 /* THLActionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLActionButton.m; sourceTree = "<group>"; };
-		794FAB681C606F1900438D49 /* Lavo.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = Lavo.mov; path = ../../../../Desktop/Lavo.mov; sourceTree = "<group>"; };
+		794FAB6A1C615DE200438D49 /* Lavo.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Lavo.mov; sourceTree = "<group>"; };
 		79527CEE1BF188F80074AF38 /* THLEventHostingInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventHostingInteractor.h; sourceTree = "<group>"; };
 		79527CEF1BF188F80074AF38 /* THLEventHostingInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventHostingInteractor.m; sourceTree = "<group>"; };
 		795F13641C3C40B500AC9E76 /* THLWaitlistHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLWaitlistHomeViewController.h; sourceTree = "<group>"; };
@@ -590,6 +608,7 @@
 		79AD95F31C30CFC400EDB82E /* THLNeedToKnowInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLNeedToKnowInfoView.m; sourceTree = "<group>"; };
 		79AD95F51C3ADA6200EDB82E /* THLEventDetailMusicTypesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventDetailMusicTypesView.h; sourceTree = "<group>"; };
 		79AD95F61C3ADA6200EDB82E /* THLEventDetailMusicTypesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventDetailMusicTypesView.m; sourceTree = "<group>"; };
+		79AE087A1C6CF42B0020BF85 /* libPods-HypeUpTests.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-HypeUpTests.a"; path = "Pods/../build/Debug-iphoneos/libPods-HypeUpTests.a"; sourceTree = "<group>"; };
 		79B9591B1BE5783500B87799 /* THLGuestlistReviewModuleInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistReviewModuleInterface.h; sourceTree = "<group>"; };
 		79B9591D1BE578A200B87799 /* THLGuestlistReviewModuleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistReviewModuleDelegate.h; sourceTree = "<group>"; };
 		79B959211BE57C9D00B87799 /* THLGuestlistReviewWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistReviewWireframe.h; sourceTree = "<group>"; };
@@ -676,7 +695,6 @@
 		79CE01E51C0A69EC0047E6FA /* THLDashboardTicketCellViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLDashboardTicketCellViewModel.m; sourceTree = "<group>"; };
 		79CE01E71C0A69FA0047E6FA /* THLDashboardTicketCellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLDashboardTicketCellView.h; sourceTree = "<group>"; };
 		8ABFDDE0788B42622FD1EB07 /* libPods-HypeUpTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HypeUpTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		90D6C18976DD6E30FF5CFE5B /* Pods-HypeUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-HypeUp/Pods-HypeUp.release.xcconfig"; sourceTree = "<group>"; };
 		A63D387799ADEA3D66DC04C6 /* libPods-HypeUp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HypeUp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B94DBD0CFEB5874DC84569DE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C82D87BD1C25C7E300116328 /* THLConfirmationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLConfirmationView.h; sourceTree = "<group>"; };
@@ -731,6 +749,10 @@
 		C8E1B1641BF4380D00A9824C /* THLUserProfileDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLUserProfileDataManager.m; sourceTree = "<group>"; };
 		C8E1B1691BF43DA800A9824C /* THLUserProfileInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserProfileInfoView.h; sourceTree = "<group>"; };
 		C8E1B16A1BF43DA800A9824C /* THLUserProfileInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLUserProfileInfoView.m; sourceTree = "<group>"; };
+		C8E2A5921C643D6D00B8BDD5 /* THLBeaconEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLBeaconEntity.h; sourceTree = "<group>"; };
+		C8E2A5931C643D6D00B8BDD5 /* THLBeaconEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLBeaconEntity.m; sourceTree = "<group>"; };
+		C8E2A5951C64414B00B8BDD5 /* THLBeacon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLBeacon.h; sourceTree = "<group>"; };
+		C8E2A5961C64414B00B8BDD5 /* THLBeacon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLBeacon.m; sourceTree = "<group>"; };
 		C8E342071C3B1A9C009FE9B0 /* THLGuestlistReviewHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistReviewHeaderView.h; sourceTree = "<group>"; };
 		C8E342081C3B1A9C009FE9B0 /* THLGuestlistReviewHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestlistReviewHeaderView.m; sourceTree = "<group>"; };
 		C8F2FB251BF81A8E004E00B6 /* THLInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLInformationViewController.h; sourceTree = "<group>"; };
@@ -743,7 +765,6 @@
 		CBE549410DF951286E27016A /* THLViewDataSourceSorting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLViewDataSourceSorting.h; sourceTree = "<group>"; };
 		CBE54FC98A366F3761F89F63 /* THLViewDataSourceGrouping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLViewDataSourceGrouping.m; sourceTree = "<group>"; };
 		CBE54FD0B5A148F6494B7A84 /* THLViewDataSourceGrouping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLViewDataSourceGrouping.h; sourceTree = "<group>"; };
-		D893AC0B8FA0AD2D0D43C607 /* Pods-HypeUpTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeUpTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HypeUpTests/Pods-HypeUpTests.release.xcconfig"; sourceTree = "<group>"; };
 		FB9B71E9A7DBD2DAA9915571 /* libPods-HypeUpTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HypeUpTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -752,12 +773,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EF951781C56AD770046D4F1 /* MobileCoreServices.framework in Frameworks */,
 				790B38EF1C0375B500CB2362 /* libsqlite3.dylib in Frameworks */,
 				794DCCB71BF555150037A03D /* Accelerate.framework in Frameworks */,
 				79730CF81C18B47000D70F4B /* MessageUI.framework in Frameworks */,
 				99FCACEE76226A356043AEDA /* libPods.a in Frameworks */,
 				03DB8B7272D645FF53789D4E /* libPods-HypeUp.a in Frameworks */,
-				79BA91061C20ACAD00731A38 /* libPods-HypeUpTests.a in Frameworks */,
+				79AE087B1C6CF42B0020BF85 /* libPods-HypeUpTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -883,6 +905,8 @@
 				79BB152F1C657FF50044D943 /* THLSingleLineTextField.m */,
 				79BB15311C6CED720044D943 /* THLFxTitleLabel.h */,
 				79BB15321C6CED720044D943 /* THLFxTitleLabel.m */,
+				3E64EBEB1C5D89CC002BA11B /* THLFAQViewController */,
+				3EECB6921C61451800702540 /* THLFAOSectionView */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -919,8 +943,7 @@
 				2133C9D21C333DDC0020083A /* NSString+EmailAddresses.h */,
 				2133C9D11C333DDC0020083A /* NSString+EmailAddresses.m */,
 				211BB0D91B8CC6F50068FD50 /* THLGlobalCategories.h */,
-				794DCCAA1BF3B31E0037A03D /* UIImageView+Letters.h */,
-				794DCCAB1BF3B31E0037A03D /* UIImageView+Letters.m */,
+				3EF9517C1C56B5D40046D4F1 /* UIImageView */,
 				211BB0D61B8CC6DA0068FD50 /* UIView+AddSubviews.h */,
 				211BB0D71B8CC6DA0068FD50 /* UIView+AddSubviews.m */,
 				794208261BD82641009B86FA /* UIView+DimView.h */,
@@ -997,6 +1020,7 @@
 				794AFE401C162315008475B1 /* LoginVC */,
 				794AFE3F1C162309008475B1 /* OnboardingVC */,
 				797821B71C4D976F00E3F7EC /* UserInfoVerificationVC */,
+				3ECD03F01C58409400AE325D /* UserPhotoVerificationVC */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1612,6 +1636,8 @@
 				C85EE3C61C1CE1020008C14B /* THLPurchasedPerkItemEntity.m */,
 				217EBEB51BB7AB54006044B6 /* THLUserEntity.h */,
 				217EBEB61BB7AB54006044B6 /* THLUserEntity.m */,
+				C8E2A5951C64414B00B8BDD5 /* THLBeacon.h */,
+				C8E2A5961C64414B00B8BDD5 /* THLBeacon.m */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1689,6 +1715,8 @@
 				2133BFC11B877C08002C1DA9 /* THLUser.m */,
 				2133C9BD1C3329BA0020083A /* THLWaitlistEntry.h */,
 				2133C9BE1C3329BA0020083A /* THLWaitlistEntry.m */,
+				C8E2A5921C643D6D00B8BDD5 /* THLBeaconEntity.h */,
+				C8E2A5931C643D6D00B8BDD5 /* THLBeaconEntity.m */,
 			);
 			path = "Parse Models";
 			sourceTree = "<group>";
@@ -1896,13 +1924,59 @@
 			path = "Master Wireframe";
 			sourceTree = "<group>";
 		};
+		3E64EBE11C5C14FA002BA11B /* UserDataWorker */ = {
+			isa = PBXGroup;
+			children = (
+				3E64EBDE1C5C14F3002BA11B /* THLUserDataWorker.h */,
+				3E64EBDF1C5C14F3002BA11B /* THLUserDataWorker.m */,
+			);
+			name = UserDataWorker;
+			sourceTree = "<group>";
+		};
+		3E64EBEB1C5D89CC002BA11B /* THLFAQViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3E64EBE81C5D89C5002BA11B /* THLFAQViewController.h */,
+				3E64EBE91C5D89C5002BA11B /* THLFAQViewController.m */,
+			);
+			name = THLFAQViewController;
+			sourceTree = "<group>";
+		};
+		3ECD03F01C58409400AE325D /* UserPhotoVerificationVC */ = {
+			isa = PBXGroup;
+			children = (
+				3ECD03ED1C58408C00AE325D /* THLUserPhotoVerificationViewController.h */,
+				3ECD03EE1C58408C00AE325D /* THLUserPhotoVerificationViewController.m */,
+				3ED444421C59479C00385A8A /* THLUserPhotoVerificationInterface.h */,
+			);
+			name = UserPhotoVerificationVC;
+			sourceTree = "<group>";
+		};
+		3EECB6921C61451800702540 /* THLFAOSectionView */ = {
+			isa = PBXGroup;
+			children = (
+				3EECB68F1C61450100702540 /* THLFAQSectionView.h */,
+				3EECB6901C61450100702540 /* THLFAQSectionView.m */,
+			);
+			name = THLFAOSectionView;
+			sourceTree = "<group>";
+		};
+		3EF9517C1C56B5D40046D4F1 /* UIImageView */ = {
+			isa = PBXGroup;
+			children = (
+				794DCCAA1BF3B31E0037A03D /* UIImageView+Letters.h */,
+				794DCCAB1BF3B31E0037A03D /* UIImageView+Letters.m */,
+			);
+			name = UIImageView;
+			sourceTree = "<group>";
+		};
 		6AB4E611B93EB59002159745 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				70604C4F18C9EBAC0CE04014 /* Pods-HypeUp.debug.xcconfig */,
-				90D6C18976DD6E30FF5CFE5B /* Pods-HypeUp.release.xcconfig */,
-				2BF9907EA74F2E21D14684CC /* Pods-HypeUpTests.debug.xcconfig */,
-				D893AC0B8FA0AD2D0D43C607 /* Pods-HypeUpTests.release.xcconfig */,
+				1D7D735BB0EB105973187FED /* Pods-HypeUp.debug.xcconfig */,
+				50387CEFCC248DE286980673 /* Pods-HypeUp.release.xcconfig */,
+				5CB33B19C604690B6873D8D8 /* Pods-HypeUpTests.debug.xcconfig */,
+				442C6CC9162561E1C703FEB4 /* Pods-HypeUpTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -2115,6 +2189,7 @@
 				C8E1B1591BF4370F00A9824C /* Components */,
 				C8E1B15A1BF4371900A9824C /* Interface */,
 				C8E1B15B1BF4372800A9824C /* UI */,
+				3E64EBE11C5C14FA002BA11B /* UserDataWorker */,
 			);
 			path = "User Profile Module";
 			sourceTree = "<group>";
@@ -2340,7 +2415,7 @@
 		79CD27C41C520293009BC119 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				794FAB681C606F1900438D49 /* Lavo.mov */,
+				794FAB6A1C615DE200438D49 /* Lavo.mov */,
 				79CD27C81C520293009BC119 /* raleway */,
 				79CD27C61C520293009BC119 /* Images.xcassets */,
 				79CD27C71C520293009BC119 /* Privacy Policy.txt */,
@@ -3001,6 +3076,8 @@
 		F3E081FDB7C0DB50ADEBB991 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				79AE087A1C6CF42B0020BF85 /* libPods-HypeUpTests.a */,
+				3EF951771C56AD770046D4F1 /* MobileCoreServices.framework */,
 				79BA91051C20ACAD00731A38 /* libPods-HypeUpTests.a */,
 				79730CF71C18B47000D70F4B /* MessageUI.framework */,
 				790B38EE1C0375B500CB2362 /* libsqlite3.dylib */,
@@ -3116,7 +3193,7 @@
 				79CD27FC1C520293009BC119 /* Terms of Use.txt in Resources */,
 				79CD27F21C520293009BC119 /* Raleway-Italic.ttf in Resources */,
 				79CD27EC1C520293009BC119 /* Raleway-Bold.ttf in Resources */,
-				794FAB691C606F1900438D49 /* Lavo.mov in Resources */,
+				794FAB6B1C615DE200438D49 /* Lavo.mov in Resources */,
 				79CD27FA1C520293009BC119 /* Raleway-Thin.ttf in Resources */,
 				79CD27F91C520293009BC119 /* Raleway-SemiBoldItalic.ttf in Resources */,
 				79CD27FB1C520293009BC119 /* Raleway-ThinItalic.ttf in Resources */,
@@ -3125,7 +3202,6 @@
 				79CD27E91C520293009BC119 /* Privacy Policy.txt in Resources */,
 				79CD27F81C520293009BC119 /* Raleway-SemiBold.ttf in Resources */,
 				79CD27E61C520293009BC119 /* HypeUp.strings in Resources */,
-				79CD27FE1C520293009BC119 /* Info.plist in Resources */,
 				79CD27F31C520293009BC119 /* Raleway-Light.ttf in Resources */,
 				21CE06281BB87FE8004D10BB /* THLNUIStyleSheet.nss in Resources */,
 				79CD27ED1C520293009BC119 /* Raleway-BoldItalic.ttf in Resources */,
@@ -3293,11 +3369,13 @@
 				798650A41BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m in Sources */,
 				212173711BB34F15007D817A /* THLRoundImageView.m in Sources */,
 				C85EE3B51C1BCBDD0008C14B /* THLPerkStoreCellViewModel.m in Sources */,
+				3EECB6911C61450100702540 /* THLFAQSectionView.m in Sources */,
 				211005CC1B8A767C00A540C6 /* THLEventDiscoveryCellViewModel.m in Sources */,
 				79B9595D1BE934C000B87799 /* THLPopupNotificationDataManager.m in Sources */,
 				79730CF21C17DC3500D70F4B /* THLUserProfileFooterView.m in Sources */,
 				215A428B1BAA1FFF00D03C35 /* THLNumberVerificationPresenter.m in Sources */,
 				211005D51B8A7D2800A540C6 /* NSDate+Utilities.m in Sources */,
+				3E64EBE01C5C14F3002BA11B /* THLUserDataWorker.m in Sources */,
 				218AF34B1BB740DB00AFAEBF /* THLEntity.m in Sources */,
 				21EDC7B01C35F5F700B902CA /* THLWaitlistCodeEntryViewController.m in Sources */,
 				79527CF01BF188F80074AF38 /* THLEventHostingInteractor.m in Sources */,
@@ -3319,6 +3397,7 @@
 				21775F631B8E17A300609D39 /* THLAddressBookEntryFetchService.m in Sources */,
 				219E32A81B8EA63D00214C85 /* THLEventNavigationBar.m in Sources */,
 				21CE06241BB86995004D10BB /* THLAppearanceUtils.m in Sources */,
+				3ECD03EF1C58408C00AE325D /* THLUserPhotoVerificationViewController.m in Sources */,
 				21E402CF1BBF7688001D0C2C /* THLGuestlistInvitationInteractor.m in Sources */,
 				798B5FCB1BF11BD2002EBCB6 /* THLHostFlowWireframe.m in Sources */,
 				790603C61BFB75CF0093335E /* THLDashboardPresenter.m in Sources */,
@@ -3407,6 +3486,7 @@
 				79B9594D1BE8966300B87799 /* KLCPopup.m in Sources */,
 				790603C91BFB75D90093335E /* THLDashboardInteractor.m in Sources */,
 				2108A8851B8BBF4900B725F6 /* THLMasterWireframe.m in Sources */,
+				C8E2A5971C64414B00B8BDD5 /* THLBeacon.m in Sources */,
 				790603C31BFB73380093335E /* THLDashboardWireframe.m in Sources */,
 				795F13661C3C40B500AC9E76 /* THLWaitlistHomeViewController.m in Sources */,
 				C85EE38A1C1BCA200008C14B /* THLPerkDetailWireframe.m in Sources */,
@@ -3415,11 +3495,13 @@
 				217EBEBA1BB7AB68006044B6 /* THLHostEntity.m in Sources */,
 				211005981B8A319000A540C6 /* THLEventDiscoveryInteractor.m in Sources */,
 				21E402EE1BBF9A8B001D0C2C /* THLGuestEntity.m in Sources */,
+				C8E2A5941C643D6D00B8BDD5 /* THLBeaconEntity.m in Sources */,
 				C85EE3831C1BC9920008C14B /* THLPerkDetailViewController.m in Sources */,
 				215A42AC1BAA2A1700D03C35 /* THLFacebookProfilePictureURLFetchService.m in Sources */,
 				C85EE3AB1C1BCB8A0008C14B /* THLPerkStoreWireframe.m in Sources */,
 				794AFE1B1C10A64A008475B1 /* THLHostDashboardViewController.m in Sources */,
 				21E402E01BBF8371001D0C2C /* THLGuestlistService.m in Sources */,
+				3E64EBEA1C5D89C5002BA11B /* THLFAQViewController.m in Sources */,
 				21775F391B8CF93000609D39 /* THLEventDetailsPromotionInfoView.m in Sources */,
 				2133BFC21B877C08002C1DA9 /* THLUser.m in Sources */,
 				217EBE821BB75FD5006044B6 /* THLDataStoreDomain.m in Sources */,
@@ -3570,7 +3652,7 @@
 		};
 		2174A0881B863F6A006826D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 70604C4F18C9EBAC0CE04014 /* Pods-HypeUp.debug.xcconfig */;
+			baseConfigurationReference = 1D7D735BB0EB105973187FED /* Pods-HypeUp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -3605,7 +3687,7 @@
 		};
 		2174A0891B863F6A006826D7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 90D6C18976DD6E30FF5CFE5B /* Pods-HypeUp.release.xcconfig */;
+			baseConfigurationReference = 50387CEFCC248DE286980673 /* Pods-HypeUp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -3640,7 +3722,7 @@
 		};
 		2174A08B1B863F6A006826D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2BF9907EA74F2E21D14684CC /* Pods-HypeUpTests.debug.xcconfig */;
+			baseConfigurationReference = 5CB33B19C604690B6873D8D8 /* Pods-HypeUpTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3661,7 +3743,7 @@
 		};
 		2174A08C1B863F6A006826D7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D893AC0B8FA0AD2D0D43C607 /* Pods-HypeUpTests.release.xcconfig */;
+			baseConfigurationReference = 442C6CC9162561E1C703FEB4 /* Pods-HypeUpTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (

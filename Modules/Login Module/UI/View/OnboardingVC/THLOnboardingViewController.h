@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "THLOnboardingViewInterface.h"
 
-
 @interface THLOnboardingViewController : UIViewController<THLOnboardingViewInterface>
 
 @end

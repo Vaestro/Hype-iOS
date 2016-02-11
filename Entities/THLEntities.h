@@ -14,5 +14,6 @@
 #import "THLGuestlistInviteEntity.h"
 #import "THLPerkStoreItemEntity.h"
 #import "THLPurchasedPerkItemEntity.h"
+#import "THLBeacon.h"
 
 #endif /* THLEntities_h */

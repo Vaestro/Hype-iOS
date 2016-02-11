@@ -15,6 +15,8 @@
 @class THLEvent;
 @class THLGuestlistInvite;
 @class THLEventEntity;
+@class THLBeaconEntity;
+@class THLBeacon;
 
 @protocol THLGuestlistServiceInterface <NSObject>
 
@@ -72,6 +74,12 @@
 #pragma mark - Update a Guestlist's Review Status
 //----------------------------------------------------------------
 - (BFTask *)updateGuestlist:(THLGuestlist *)guestlist withReviewStatus:(THLStatus)reviewStatus;
+
+
+//----------------------------------------------------------------
+#pragma mark - Update a Guestlist Invite's Check In Status
+//----------------------------------------------------------------
+- (BFTask *)updateGuestlistInvite:(THLGuestlistInvite *)guestlistInvite withCheckInStatus:(BOOL)status;
 
 
 @end

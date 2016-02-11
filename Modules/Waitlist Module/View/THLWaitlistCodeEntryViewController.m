@@ -15,8 +15,6 @@
 //#import "LRTextField.h"
 #import "THLSingleLineTextField.h"
 
-static const CGFloat kSubmitButtonHeight = 58.0f;
-
 @interface THLWaitlistCodeEntryViewController ()
 <
 UITextFieldDelegate

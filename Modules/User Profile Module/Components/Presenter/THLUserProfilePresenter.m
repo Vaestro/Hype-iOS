@@ -90,5 +90,7 @@
 
 - (void)handleLogoutAction {
     [self.moduleDelegate logOutUser];
-}
+
+}    
+
 @end

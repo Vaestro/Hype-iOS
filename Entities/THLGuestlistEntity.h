@@ -25,5 +25,6 @@
 - (BOOL)isAccepted;
 - (BOOL)isPending;
 - (BOOL)isDeclined;
+- (BOOL)doesNotRequireApproval;
 
 @end

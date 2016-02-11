@@ -68,6 +68,10 @@
     return [_guestlistService updateGuestlist:[THLGuestlist objectWithoutDataWithObjectId:guestlist.objectId] withReviewStatus:reviewStatus];
 }
 
+- (BFTask *)updateGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite withCheckInStatus:(BOOL)status {
+    return [_guestlistService updateGuestlistInvite:[THLGuestlistInvite objectWithoutDataWithObjectId:guestlistInvite.objectId] withCheckInStatus:status];
+}
+
 - (void)dealloc {
     NSLog(@"Destroyed %@", self);
 }

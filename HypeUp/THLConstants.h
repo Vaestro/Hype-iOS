@@ -22,7 +22,8 @@ typedef NS_ENUM(NSInteger, THLStatus) {
 	THLStatusDeclined = -1,
     THLStatusNone = 0,
     THLStatusAccepted = 1,
-    THLStatusPending = 2
+    THLStatusPending = 2,
+    THLStatusCheckedIn = 3
 };
 
 typedef NS_ENUM(NSInteger, THLSex) {

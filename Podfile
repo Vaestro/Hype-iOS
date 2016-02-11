@@ -33,11 +33,13 @@ pod 'BlocksKit', '~> 2.2'
 pod "ReflectableEnum"
 
 #Parse/Facebook
-pod 'Parse'
+pod 'Parse', '~> 1.11.0'
 pod 'ParseFacebookUtilsV4'
 pod 'FBSDKCoreKit'
 pod 'FBSDKLoginKit'
 pod 'FBSDKShareKit'
+pod 'FacebookImagePicker'
+
 
 #Fabric
 pod 'Fabric'
@@ -68,6 +70,10 @@ pod 'DZNEmptyDataSet'
 pod 'IHKeyboardAvoiding'
 pod "FXLabel"
 pod 'BLKFlexibleHeightBar'
+
+#Geolocation
+pod 'EstimoteSDK'
+pod 'KVNProgress'
 end
 
 #Phone Calls

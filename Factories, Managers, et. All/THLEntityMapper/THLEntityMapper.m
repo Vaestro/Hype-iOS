@@ -15,6 +15,7 @@
 #import "THLGuestlistInvite.h"
 #import "THLPerkStoreItem.h"
 #import "THLPurchasedPerkItem.h"
+#import "THLBeaconEntity.h"
 
 #import "THLEntities.h"
 #import "THLUserEntity.h"
@@ -24,6 +25,7 @@
 #import "THLGuestlistInviteEntity.h"
 #import "THLPerkStoreItemEntity.h"
 #import "THLPurchasedPerkItemEntity.h"
+#import "THLBeacon.h"
 
 @implementation THLEntityMapper
 - (void)mapBaseValuesFromModel:(PFObject *)model toEntity:(THLEntity *)entity {
@@ -46,6 +48,7 @@
         entity.host = (THLHostEntity *)[self mapHost:event[@"host"]];
         entity.maleRatio = event.maleRatio;
         entity.femaleRatio = event.femaleRatio;
+        entity.requiresApproval = event.requiresApproval;
         return entity;
     } else {
         return nil;
@@ -75,7 +78,6 @@
         entity.longitude = location.coordinate.longitude;
         entity.musicTypes = location.musicTypes;
         entity.attireRequirement = location.attireRequirement;
-        
 	return entity;
     } else {
         return nil;
@@ -117,6 +119,7 @@
         entity.imageURL = [NSURL URLWithString:user.image.url];
         entity.sex = user.sex;
         entity.rating = user.rating;
+        entity.beacon = [self mapBeaconEntity:user[@"beacon"]];
         return entity;
     } else {
         return nil;
@@ -164,6 +167,21 @@
     }
 }
 
+
+- (THLBeacon *)mapBeaconEntity:(THLBeaconEntity *)beaconEntity {
+    if ([beaconEntity isKindOfClass:[THLBeaconEntity class]]) {
+        THLBeacon *beacon = [THLBeacon new];
+        [self mapBaseValuesFromModel:beaconEntity toEntity:beacon];
+        beacon.UUID = beaconEntity.UUID;
+        beacon.major = beaconEntity.major;
+        beacon.minor = beaconEntity.minor;
+        return beacon;
+    } else {
+        return nil;
+    }
+}
+
+
 - (NSArray<THLGuestlistEntity *> *)mapGuestlists:(NSArray *)guestlists {
     WEAKSELF();
     return [guestlists linq_select:^id(THLGuestlist *guestlist) {
@@ -185,6 +203,9 @@
         return nil;
     }
 }
+
+
+
 
 - (NSArray<THLGuestlistInviteEntity *> *)mapGuestlistInvites:(NSArray *)guestlistInvites {
     WEAKSELF();

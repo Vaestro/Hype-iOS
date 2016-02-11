@@ -19,6 +19,7 @@
 #import "UIScrollView+SVPullToRefresh.h"
 
 #import "UIView+DimView.h"
+#import <KVNProgress/KVNProgress.h>
 
 
 #define kGKHeaderHeight 150
@@ -163,18 +164,20 @@ static CGFloat const CELL_SPACING = 10;
             [[WSELF.headerView menuButton] setHidden:TRUE];
         }
         else if (status == [NSNumber numberWithInteger:1]) {
-            [[WSELF actionBarButton] setHidden:TRUE];
+            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Check In", nil)];
+            [WSELF actionBarButton].backgroundColor = kTHLNUIActionColor;
             [[WSELF.headerView menuButton] setHidden:FALSE];
-            [self remakeConstraints];
+
         }
         else if (status == [NSNumber numberWithInteger:2]) {
-            [[WSELF actionBarButton] setHidden:TRUE];
+            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Check In", nil)];
+            [WSELF actionBarButton].backgroundColor = kTHLNUIActionColor;
             [[WSELF.headerView menuButton] setHidden:FALSE];
-            [self remakeConstraints];
+
         }
         else if (status == [NSNumber numberWithInteger:3]) {
-//            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Accept or Decline Guestlist", nil)];
-//            [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
+            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Accept or Decline Guestlist", nil)];
+            [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
             [[WSELF actionBarButton] setHidden:TRUE];
             [[WSELF.headerView menuButton] setHidden:TRUE];
             [self remakeConstraints];
@@ -188,6 +191,16 @@ static CGFloat const CELL_SPACING = 10;
             [[WSELF actionBarButton] setHidden:TRUE];
             [[WSELF.headerView menuButton] setHidden:TRUE];
             [self remakeConstraints];
+        }
+        else if (status == [NSNumber numberWithInteger:6]) {
+            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Checked In", nil)];
+            [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
+            [[WSELF.headerView menuButton] setHidden:FALSE];
+        }
+        else if (status == [NSNumber numberWithInteger:7]) {
+            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Checked In", nil)];
+            [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
+            [[WSELF.headerView menuButton] setHidden:FALSE];
         }
         [WSELF.view setNeedsDisplay];
     }];
@@ -248,22 +261,6 @@ static CGFloat const CELL_SPACING = 10;
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     return COLLECTION_VIEW_EDGEINSETS;
 }
-
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
-    CGFloat scrollOffsetY = scrollView.contentOffset.y;
-
-    if (scrollOffsetY > _headerView.frame.size.height) {
-        [self.headerView compressView];
-    }
-    
-    if (scrollOffsetY < _headerView.frame.size.height) {
-        [self.headerView uncompressView];
-    }
-    
-}
-
 
 - (void)dealloc {
     NSLog(@"Destroyed %@", self);

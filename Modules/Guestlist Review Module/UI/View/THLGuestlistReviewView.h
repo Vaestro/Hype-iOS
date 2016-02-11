@@ -15,7 +15,9 @@ typedef NS_OPTIONS(NSInteger, THLGuestlistReviewerStatus) {
     THLGuestlistOwner,
     THLGuestlistPendingHost,
     THLGuestlistActiveHost,
-    THLGuestlistDeclinedHost
+    THLGuestlistDeclinedHost,
+    THLGuestlistCheckedInGuest,
+    THLGuestlistCheckedInOwner
 };
 
 @class THLViewDataSource;

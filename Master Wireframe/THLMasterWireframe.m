@@ -109,7 +109,9 @@ THLWaitlistPresenterDelegate
 
 - (void)presentOnboardingAndLoginInterface {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    bool userApproved = [userDefaults objectForKey:@"userApproved"];
+
+    BOOL userApproved = [userDefaults boolForKey:@"userApproved"];
+
     if (userApproved) {
         THLLoginWireframe *loginWireframe = [_dependencyManager newLoginWireframe];
         _currentWireframe = loginWireframe;
