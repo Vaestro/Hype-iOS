@@ -19,5 +19,6 @@
 @property (nonatomic, strong) RACCommand *dismissCommand;
 @property (nonatomic, strong) RACCommand *detailDisclosureCommand;
 
+- (void)setExclusiveEventLabel;
 -(void)addGradientLayer;
 @end

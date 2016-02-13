@@ -94,6 +94,8 @@
     [self.view setLocationMusicTypes:[NSString stringWithFormat:@"%@", [_eventEntity.location.musicTypes componentsJoinedByString:@" | "]]];
     [self.view setLocationAttireRequirement:_eventEntity.location.attireRequirement];
     
+    [self.view setExclusiveEvent:_eventEntity.requiresApproval];
+    
     if (_eventEntity.femaleRatio == 1) {
         [self.view setRatioInfo:@"1 Girl : 1 Guy"];
     } else if (_eventEntity.femaleRatio > 1) {

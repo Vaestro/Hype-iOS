@@ -26,7 +26,6 @@ static CGFloat const kTHLConfirmationViewButtonHeight = 50;
 @property (nonatomic, strong) UIButton *dismissButton;
 
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
-
 @end
 
 
@@ -52,10 +51,8 @@ static CGFloat const kTHLConfirmationViewButtonHeight = 50;
     _messageLabel = [self newMessageLabel];
     _acceptButton = [self newAcceptButton];
     _declineButton = [self newDeclineButton];
-    
     _dismissButton = [self newDismissButton];
     _underlineView = [self newUnderlineView];
-    
     _activityView = [self newActivityView];
 }
 
@@ -92,17 +89,19 @@ static CGFloat const kTHLConfirmationViewButtonHeight = 50;
 
 - (void)presentView {
     // Prepare by adding to the top window.
-    if(!self.superview){
-        NSEnumerator *frontToBackWindows = [[[UIApplication sharedApplication] windows] reverseObjectEnumerator];
-        
-        for (UIWindow *window in frontToBackWindows) {
-            if (window.windowLevel == UIWindowLevelNormal) {
-                [window addSubview:self];
-                
-                break;
-            }
-        }
-    }
+//    if(!self.superview){
+//        NSEnumerator *frontToBackWindows = [[[UIApplication sharedApplication] windows] reverseObjectEnumerator];
+//        
+//        for (UIWindow *window in frontToBackWindows) {
+//            if (window.windowLevel == UIWindowLevelNormal) {
+//                [window addSubview:self];
+//                
+//                break;
+//            }
+//        }
+//    }
+    UIWindow* mainWindow = [[UIApplication sharedApplication] keyWindow];
+    [mainWindow addSubview:self];
     
     [self makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.right.left.insets(kTHLEdgeInsetsNone());

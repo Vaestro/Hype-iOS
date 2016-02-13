@@ -56,6 +56,7 @@
 @synthesize userHasAcceptedInvite;
 @synthesize actionBarButtonCommand;
 @synthesize viewAppeared;
+@synthesize exclusiveEvent;
 
 #pragma mark VC Lifecycle 
 
@@ -150,7 +151,8 @@
     RAC(self.navBar, dismissCommand) = RACObserve(self, dismissCommand);
     RAC(self.navBar, locationImageURL) = RACObserve(self, locationImageURL);
     RAC(self.navBar, promotionInfo) = RACObserve(self, promoInfo);
-    if (eventName != nil) { [self.navBar setEventName:eventName];}
+    if (eventName != nil) [self.navBar setEventName:eventName];
+    if (exclusiveEvent) [self.navBar setExclusiveEventLabel];
     [self.navBar setLocationImageURL:promoImageURL];
 
     RAC(self.locationInfoView, locationInfo) = RACObserve(self, locationInfo);
@@ -212,7 +214,7 @@
 
 - (THLEventDetailsLocationInfoView *)newLocationInfoView {
     THLEventDetailsLocationInfoView *infoView = [THLEventDetailsLocationInfoView new];
-    infoView.title = NSLocalizedString(@"WHY WE LIKE IT", nil);
+    infoView.title = NSLocalizedString(@"VENUE INFORMATION", nil);
     infoView.translatesAutoresizingMaskIntoConstraints = NO;
     infoView.dividerColor = [UIColor whiteColor];
     return infoView;

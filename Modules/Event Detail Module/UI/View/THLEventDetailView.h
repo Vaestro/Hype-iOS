@@ -22,6 +22,7 @@
 @property (nonatomic, copy) NSString *locationAddress;
 @property (nonatomic, copy) NSString *locationAttireRequirement;
 @property (nonatomic, copy) NSString *locationMusicTypes;
+@property (nonatomic) BOOL exclusiveEvent;
 
 @property (nonatomic) BOOL userHasAcceptedInvite;
 @property (nonatomic, strong) CLPlacemark *locationPlacemark;

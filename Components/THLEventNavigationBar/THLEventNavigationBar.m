@@ -11,6 +11,7 @@
 #import "UIView+DimView.h"
 #import "THLEventDetailsPromotionInfoView.h"
 #import "BLKFlexibleHeightBarSubviewLayoutAttributes.h"
+#import "THLAlertView.h"
 
 @interface THLEventNavigationBar()
 @property (nonatomic, strong) UIButton *dismissButton;
@@ -88,7 +89,6 @@
 - (void)bindView {
     WEAKSELF();
     RAC(self.titleLabel, text, @"") = RACObserve(self, titleText);
-//    RAC(self.titleLabel, text, @"") = RACObserve(self, eventName);
     RAC(self.minimumTitleLabel, text, @"") = RACObserve(self, titleText);
     RAC(self.dateLabel, text, @"") = RACObserve(self, dateText);
     RAC(self.dismissButton, rac_command) = RACObserve(self, dismissCommand);
@@ -101,10 +101,6 @@
     [imageURLSignal subscribeNext:^(NSURL *url) {
         [WSELF.imageView sd_setImageWithURL:url];
     }];
-    
-//    [promoImageURLSignal subscribeNext:^(NSURL *url) {
-//        [WSELF.imageView sd_setImageWithURL:url];
-//    }];
 }
 
 - (void)setEventName:(NSString *)eventName {
@@ -115,9 +111,32 @@
     [self.imageView sd_setImageWithURL:promoImageURL];
 }
 
-//- (CGSize)sizeThatFits:(CGSize)size {
-//    return CGSizeMake([super sizeThatFits:size].width, kTHLEventNavigationBarHeight);
-//}
+- (void)setExclusiveEventLabel {
+    UIView *exclusiveLabelBackground = [UIView new];
+    exclusiveLabelBackground.backgroundColor = [UIColor redColor];
+    BLKFlexibleHeightBarSubviewLayoutAttributes *initialLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
+    initialLayoutAttributes.alpha = 1.0;
+    [exclusiveLabelBackground addLayoutAttributes:initialLayoutAttributes forProgress:0.75];
+    
+    BLKFlexibleHeightBarSubviewLayoutAttributes *finalLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
+    finalLayoutAttributes.alpha = 0.0;
+    [exclusiveLabelBackground addLayoutAttributes:finalLayoutAttributes forProgress:0.90];
+    
+    [self addSubview:exclusiveLabelBackground];
+    
+    WEAKSELF();
+    [exclusiveLabelBackground makeConstraints:^(MASConstraintMaker *make) {
+        make.left.insets(kTHLEdgeInsetsSuperHigh());
+        make.bottom.equalTo([WSELF dateLabel].mas_top).insets(kTHLEdgeInsetsSuperHigh());
+    }];
+    
+    UIButton *exclusiveLabel = [self newExclusiveEventLabel];
+    [exclusiveLabelBackground addSubview:exclusiveLabel];
+    [exclusiveLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(kTHLEdgeInsetsSuperHigh());
+        make.top.bottom.equalTo(kTHLEdgeInsetsNone());
+    }];
+}
 
 - (void)addGradientLayer {
     CAGradientLayer *gradient = [CAGradientLayer layer];
@@ -131,6 +150,12 @@
     
     self.imageView.layer.mask = gradient;
 
+}
+
+- (void)showExplanationView {
+    THLAlertView *alertView = [THLAlertView new];
+    [alertView showWithTitle:@"Exclusive Event"
+                     message:@"This is an event with limited VIP guestlist spots. Your guestlist needs to be approved by a host in order to attend. To guarantee RSVP, please book bottle service."];
 }
 
 #pragma mark - Constructors
@@ -170,6 +195,22 @@
     return label;
 }
 
+- (UIButton *)newExclusiveEventLabel {
+    UIButton *label = [UIButton new];
+    [label setTitle:@"Limited Guestlist Space" forState:UIControlStateNormal];
+    [label addTarget:self
+                 action:@selector(showExplanationView)
+       forControlEvents:UIControlEventTouchUpInside];
+    BLKFlexibleHeightBarSubviewLayoutAttributes *initialLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
+    initialLayoutAttributes.alpha = 1.0;
+    [label addLayoutAttributes:initialLayoutAttributes forProgress:0.75];
+    
+    BLKFlexibleHeightBarSubviewLayoutAttributes *finalLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
+    finalLayoutAttributes.alpha = 0.0;
+    [label addLayoutAttributes:finalLayoutAttributes forProgress:0.90];
+    return label;
+}
+
 - (THLEventDetailsPromotionInfoView *)newPromotionInfoView {
     THLEventDetailsPromotionInfoView *promoInfoView = [THLEventDetailsPromotionInfoView new];
     promoInfoView.title = NSLocalizedString(@"EVENT DETAILS", nil);
@@ -194,13 +235,10 @@
 
     BLKFlexibleHeightBarSubviewLayoutAttributes *initialLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
     initialLayoutAttributes.alpha = 1.0;
-    //    initialLayoutAttributes.frame = CGRectMake(25, self.frame.size.height - 50, promoInfoView.frame.size.width, promoInfoView.frame.size.height);
-    // This is what we want the bar to look like at its maximum height (progress == 0.0)
     [imageView addLayoutAttributes:initialLayoutAttributes forProgress:0.75];
     
     BLKFlexibleHeightBarSubviewLayoutAttributes *finalLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
     finalLayoutAttributes.alpha = 0.0;
-    // This is what we want the bar to look like at its maximum height (progress == 0.0)
     [imageView addLayoutAttributes:finalLayoutAttributes forProgress:1.0];
     
     return imageView;

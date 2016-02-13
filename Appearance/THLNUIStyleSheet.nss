@@ -1,8 +1,8 @@
 @primaryBoldFontName: Raleway-Bold;
 @primaryMediumFontName: Raleway-Medium;
 @primaryRegularFontName: Raleway-Regular;
-@secondaryRegularFontName: HelveticaNeue-Regular;
-@secondaryLightFontName: HelveticaNeue-Light;
+@secondaryRegularFontName: OpenSans-Regular;
+@secondaryLightFontName: OpenSans-Light;
 @primaryFontColor: #FFFFFF;
 @secondaryFontColor: #2BC497;
 @primaryBackgroundColor: #1A1F25;
