@@ -81,9 +81,9 @@
     [_statusView makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF dateLabel].mas_bottom).insets(kTHLEdgeInsetsLow());
         make.left.insets(kTHLEdgeInsetsSuperHigh());
-        make.right.equalTo([WSELF guestlistReviewStatusLabel].mas_left);
+        make.right.equalTo([WSELF guestlistReviewStatusLabel].mas_left).insets(kTHLEdgeInsetsHigh());
         make.bottom.insets(kTHLEdgeInsetsHigh());
-        make.height.mas_equalTo([WSELF guestlistReviewStatusLabel].mas_height);
+        make.height.mas_equalTo(20);
         make.width.mas_equalTo([WSELF statusView].mas_height);
     }];
     

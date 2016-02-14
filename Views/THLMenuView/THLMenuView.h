@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FXBlurView.h"
 
-@interface THLMenuView : FXBlurView
+@interface THLMenuView : UIView
 @property (nonatomic, strong) NSString *hostName;
 @property (nonatomic, strong) NSURL *hostImageURL;
 

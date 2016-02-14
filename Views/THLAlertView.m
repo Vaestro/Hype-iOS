@@ -39,11 +39,9 @@
 
 - (void)presentView {
     UIWindow* mainWindow = [[UIApplication sharedApplication] keyWindow];
+    self.frame = [UIScreen mainScreen].bounds;
     [mainWindow addSubview:self];
     
-    [self makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.right.left.insets(kTHLEdgeInsetsNone());
-    }];
 }
 
 - (void)dismiss {

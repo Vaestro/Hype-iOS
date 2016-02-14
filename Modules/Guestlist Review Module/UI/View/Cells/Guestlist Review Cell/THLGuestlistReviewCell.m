@@ -17,9 +17,9 @@
 @property (nonatomic, strong) THLPersonIconView *iconImageView;
 @property (nonatomic, strong) THLStatusView *statusView;
 @property (nonatomic, strong) UILabel *nameLabel;
-@end
+@property (nonatomic, strong) UILabel *statusLabel;
 
-//static CGFloat const STATUS_VIEW_DIMENSION = 20;
+@end
 
 @implementation THLGuestlistReviewCell
 @synthesize image;
@@ -40,32 +40,39 @@
 - (void)constructView {
     _iconImageView = [self newIconImageView];
     _nameLabel = [self newNameLabel];
+    _statusLabel = [self newStatusLabel];
     _statusView = [self newStatusView];
 }
 
 - (void)layoutView {
-    self.layer.cornerRadius = kTHLCornerRadius;
     self.clipsToBounds = YES;
-    self.contentView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
 
-    [self addSubviews:@[_iconImageView, _nameLabel, _statusView]];
+    [self addSubviews:@[_iconImageView, _nameLabel, _statusLabel, _statusView]];
     
     WEAKSELF();
     [_iconImageView makeConstraints:^(MASConstraintMaker *make) {
         make.top.insets(kTHLEdgeInsetsHigh()).priorityHigh();
         make.left.top.greaterThanOrEqualTo(SV(WSELF.iconImageView)).insets(kTHLEdgeInsetsHigh());
         make.right.lessThanOrEqualTo(SV(WSELF.iconImageView)).insets(kTHLEdgeInsetsHigh());
-        make.size.equalTo(SV(WSELF.iconImageView)).sizeOffset(CGSizeMake(-50, -50));
+      make.size.equalTo(SV(WSELF.iconImageView)).sizeOffset(CGSizeMake(-50, -60));
         make.centerX.offset(0);
     }];
     
     [_nameLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF iconImageView].mas_bottom).insets(kTHLEdgeInsetsLow());
-        make.bottom.left.right.insets(kTHLEdgeInsetsHigh());
+        make.left.right.insets(kTHLEdgeInsetsHigh());
+    }];
+    
+    
+    [_statusLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo([WSELF nameLabel].mas_bottom).insets(kTHLEdgeInsetsNone());
+        make.left.right.insets(kTHLEdgeInsetsHigh());
     }];
     
     [_statusView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.insets(kTHLEdgeInsetsHigh());
+        make.top.insets(kTHLEdgeInsetsHigh());
+        make.size.equalTo(CGSizeMake(25, 25));
+        make.right.equalTo([WSELF iconImageView].mas_right);
     }];
 }
 
@@ -74,6 +81,28 @@
     RAC(_iconImageView, image) = RACObserve(self, image);
     RAC(_nameLabel, text) = RACObserve(self, nameText);
     RAC(_statusView, status) = RACObserve(self, guestlistInviteStatus);
+    WEAKSELF();
+    [RACObserve(self, guestlistInviteStatus) subscribeNext:^(id x) {
+        [_statusView setStatus:WSELF.guestlistInviteStatus];
+        [_statusLabel setTextColor:kTHLNUIGrayFontColor];
+        switch (WSELF.guestlistInviteStatus) {
+            case THLStatusPending:
+                [_statusLabel setText:@"Pending"];
+                break;
+            case THLStatusAccepted:
+                [_statusLabel setText:@"Confirmed"];
+                break;
+            case THLStatusDeclined:
+                [_statusLabel setText:@"Declined"];
+                break;
+            case THLStatusCheckedIn:
+                [_statusLabel setText:@"Checked-In"];
+                break;
+            default:
+                break;
+        }
+    }];
+
 }
 
 #pragma mark - Constructors
@@ -90,10 +119,16 @@
     return label;
 }
 
+- (UILabel *)newStatusLabel {
+    UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
+    label.adjustsFontSizeToFitWidth = YES;
+    label.minimumScaleFactor = 0.5;
+    label.textAlignment = NSTextAlignmentCenter;
+    return label;
+}
+
 - (THLStatusView *)newStatusView {
     THLStatusView *statusView = [THLStatusView new];
-    [statusView setScale:1.0];
-//    statusView.clipsToBounds = YES;
     return statusView;
 }
 

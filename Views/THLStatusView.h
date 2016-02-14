@@ -14,7 +14,7 @@ typedef NS_OPTIONS(NSInteger, THLStatusViewSize) {
     THLStatusViewSizeLarge
 };
 
-@interface THLStatusView : UIView
+@interface THLStatusView : UIImageView
 @property (nonatomic) THLStatus status;
 @property (nonatomic, assign) CGFloat scale;
 @end

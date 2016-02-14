@@ -162,11 +162,11 @@ THLGuestlistReviewInteractorDelegate
             break;
         }
         case THLStatusPending: {
-            [_view setGuestlistReviewStatusTitle:@"Guestlist Pending"];
+            [_view setGuestlistReviewStatusTitle:@"Guestlist Pending Approval"];
             break;
         }
         case THLStatusAccepted: {
-            [_view setGuestlistReviewStatusTitle:@"Guestlist Accepted"];
+            [_view setGuestlistReviewStatusTitle:@"Guestlist Approved"];
             
             break;
         }
@@ -206,12 +206,21 @@ THLGuestlistReviewInteractorDelegate
     }];
     
     RACCommand *acceptCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [WSELF configureConfirmationView:WSELF.confirmationView title:@"Accept Invite" message:@"Are you sure you want to accept your invite?" acceptCommand:confirmationAcceptCommand declineCommand:WSELF.responseCommand dismissCommand:confirmationDismissCommand];
+        [WSELF configureConfirmationView:WSELF.confirmationView title:@"Accept Invite"
+                                 message:@"Are you sure you want to accept your invite?"
+                           acceptCommand:confirmationAcceptCommand
+                          declineCommand:WSELF.responseCommand
+                          dismissCommand:confirmationDismissCommand];
         return [RACSignal empty];
     }];
     
     RACCommand *declineCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [WSELF configureConfirmationView:WSELF.confirmationView title:@"Decline Invite" message:@"Are you sure you want to decline your invite?" acceptCommand:confirmationDeclineCommand declineCommand:WSELF.responseCommand dismissCommand:viewDismissCommand];
+        [WSELF configureConfirmationView:WSELF.confirmationView
+                                   title:@"Decline Invite"
+                                 message:@"Are you sure you want to decline your invite?"
+                           acceptCommand:confirmationDeclineCommand
+                          declineCommand:WSELF.responseCommand
+                          dismissCommand:viewDismissCommand];
         return [RACSignal empty];
     }];
 
@@ -220,7 +229,12 @@ THLGuestlistReviewInteractorDelegate
     [_confirmationView setDismissCommand:confirmationDismissCommand];
 }
 
-- (void)configureConfirmationView:(THLConfirmationView *)view title:(NSString *)title message:(NSString *)message acceptCommand:(RACCommand *)acceptCommand declineCommand:(RACCommand *)declineCommand dismissCommand:(RACCommand *)dismissCommand {
+- (void)configureConfirmationView:(THLConfirmationView *)view
+                            title:(NSString *)title
+                          message:(NSString *)message
+                    acceptCommand:(RACCommand *)acceptCommand
+                   declineCommand:(RACCommand *)declineCommand
+                   dismissCommand:(RACCommand *)dismissCommand {
     [view showConfirmationWithTitle:title message:message];
     [_confirmationView setAcceptCommand:acceptCommand];
     [_confirmationView setDeclineCommand:declineCommand];
@@ -299,7 +313,7 @@ THLGuestlistReviewInteractorDelegate
     else if ([_guestlistInviteEntity isOwnerInvite]) {
         self.reviewerStatus = THLGuestlistOwner;
     }
-    else if ([_guestlistInviteEntity isAccepted] && [_guestlistInviteEntity isCheckedIn]) {
+    else if ([_guestlistInviteEntity isCheckedIn]) {
         self.reviewerStatus = THLGuestlistCheckedInGuest;
     }
     else if ([_guestlistInviteEntity isAccepted]) {
@@ -345,7 +359,8 @@ THLGuestlistReviewInteractorDelegate
     
     switch (_reviewerStatus) {
         case THLGuestlistPendingGuest: {
-            [_confirmationView showResponseFlowWithTitle:@"Respond Now" message:[NSString stringWithFormat:@"%@ would like you to join their guestlist for %@, %@ at %@", ownerName, eventName, eventDate, eventTime]];
+            [_confirmationView showResponseFlowWithTitle:@"Respond Now"
+                                                 message:[NSString stringWithFormat:@"%@ would like you to join their guestlist for %@, %@ at %@", ownerName, eventName, eventDate, eventTime]];
             break;
         }
         case THLGuestlistAttendingGuest: {
@@ -357,7 +372,8 @@ THLGuestlistReviewInteractorDelegate
             break;
         }
         case THLGuestlistPendingHost: {
-            [_confirmationView showResponseFlowWithTitle:@"Respond Now" message:[NSString stringWithFormat:@"%@'s party would like to join to your guestlist for %@, %@ at %@", _guestlistEntity.owner.firstName, _guestlistEntity.event.location.name ,_guestlistEntity.event.date.thl_weekdayString, _guestlistEntity.event.date.thl_timeString]];
+            [_confirmationView showResponseFlowWithTitle:@"Respond Now"
+                                                 message:[NSString stringWithFormat:@"%@'s party would like to join to your guestlist for %@, %@ at %@", _guestlistEntity.owner.firstName, _guestlistEntity.event.location.name ,_guestlistEntity.event.date.thl_weekdayString, _guestlistEntity.event.date.thl_timeString]];
             break;
         }
         case THLGuestlistActiveHost: {
@@ -395,7 +411,8 @@ THLGuestlistReviewInteractorDelegate
     [_confirmationView setDeclineCommand:confirmationDeclineCommand];
     [_confirmationView setDismissCommand:viewDismissCommand];
 
-    [_confirmationView showConfirmationWithTitle:@"Leave Guestlist" message:[NSString stringWithFormat:@"Are you sure you want to leave %@'s party for %@?", ownerName, eventName]];
+    [_confirmationView showConfirmationWithTitle:@"Leave Guestlist"
+                                         message:[NSString stringWithFormat:@"Are you sure you want to leave %@'s party for %@?", ownerName, eventName]];
 
 }
 
@@ -405,18 +422,21 @@ THLGuestlistReviewInteractorDelegate
      */
     if (_reviewerStatus == THLGuestlistAttendingGuest) {
         [_confirmationView showInProgressWithMessage:@"Leaving guestlist..."];
-        [_interactor updateGuestlistInvite:_guestlistInviteEntity withResponse:THLStatusDeclined];
+        [_interactor updateGuestlistInvite:_guestlistInviteEntity
+                              withResponse:THLStatusDeclined];
     }
     else if (_reviewerStatus == THLGuestlistPendingGuest) {
         [_confirmationView showInProgressWithMessage:@"Accepting your invite..."];
-        [_interactor updateGuestlistInvite:_guestlistInviteEntity withResponse:THLStatusAccepted];
+        [_interactor updateGuestlistInvite:_guestlistInviteEntity
+                              withResponse:THLStatusAccepted];
     }
     /**
      *  Host Accept Action Options
      */
     else if (_reviewerStatus == THLGuestlistPendingHost) {
         [_confirmationView showInProgressWithMessage:@"Accepting guestlist..."];
-        [_interactor updateGuestlist:_guestlistEntity withReviewStatus:THLStatusAccepted];
+        [_interactor updateGuestlist:_guestlistEntity
+                    withReviewStatus:THLStatusAccepted];
     }
     else if (_reviewerStatus == THLGuestlistActiveHost) {
         self.activityStatus = THLActivityStatusSuccess;
@@ -433,14 +453,16 @@ THLGuestlistReviewInteractorDelegate
     }
     else if (_reviewerStatus == THLGuestlistPendingGuest) {
         [_confirmationView showInProgressWithMessage:@"Declining your invite..."];
-        [_interactor updateGuestlistInvite:_guestlistInviteEntity withResponse:THLStatusDeclined];
+        [_interactor updateGuestlistInvite:_guestlistInviteEntity
+                              withResponse:THLStatusDeclined];
     }
     /**
      *  Host Decline Action Options
      */
     else if (_reviewerStatus == THLGuestlistPendingHost) {
         [_confirmationView showInProgressWithMessage:@"Declining guestlist..."];
-        [_interactor updateGuestlist:_guestlistEntity withReviewStatus:THLStatusDeclined];
+        [_interactor updateGuestlist:_guestlistEntity
+                    withReviewStatus:THLStatusDeclined];
     }
     else if (_reviewerStatus == THLGuestlistActiveHost) {
         
@@ -448,7 +470,11 @@ THLGuestlistReviewInteractorDelegate
 }
 
 - (void)handleAddGuestsAction {
-    [self.moduleDelegate guestlistReviewModule:self event:_guestlistInviteEntity.guestlist.event withGuestlistId:_guestlistInviteEntity.guestlist.objectId andGuests:[_interactor guests] presentGuestlistInvitationInterfaceOnController:(UIViewController *)self.view];
+    [self.moduleDelegate guestlistReviewModule:self
+                                         event:_guestlistInviteEntity.guestlist.event
+                               withGuestlistId:_guestlistInviteEntity.guestlist.objectId
+                                     andGuests:[_interactor guests]
+presentGuestlistInvitationInterfaceOnController:(UIViewController *)self.view];
 }
 
 # pragma mark - Phone Kit
@@ -554,8 +580,8 @@ THLGuestlistReviewInteractorDelegate
         
         [alert addAction:defaultAction];
         [(UIViewController *)_view presentViewController:alert animated:YES completion:nil];
+        _guestlistInviteEntity.checkInStatus = status;
         [self updateGuestReviewStatus];
-//        self.refreshing = NO;
     } else {
         UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Not checked In"
                                                                        message:@"You are not in range to check In"
