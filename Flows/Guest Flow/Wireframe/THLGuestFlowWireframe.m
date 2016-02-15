@@ -10,7 +10,7 @@
 #import "THLGuestFlowWireframe.h"
 
 #import "THLEventDiscoveryWireframe.h"
-#import "THLMessageListWireframe.h"
+//#import "THLMessageListWireframe.h"
 #import "THLDashboardWireframe.h"
 #import "THLUserProfileWireframe.h"
 #import "THLEventDetailWireframe.h"
@@ -26,7 +26,6 @@
 
 @interface THLGuestFlowWireframe()
 <
-THLMessageListModuleDelegate,
 THLEventDiscoveryModuleDelegate,
 THLDashboardModuleDelegate,
 THLUserProfileModuleDelegate,
@@ -40,7 +39,7 @@ THLPerkStoreModuleDelegate
 @property (nonatomic, strong) id currentWireframe;
 @property (nonatomic, nonatomic) UIViewController *containerVC;
 @property (nonatomic, strong) UITabBarController *masterTabBarController;
-@property (nonatomic, strong) THLMessageListWireframe *messageListWireframe;
+//@property (nonatomic, strong) THLMessageListWireframe *messageListWireframe;
 @property (nonatomic, strong) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
 @property (nonatomic, strong) THLDashboardWireframe *dashboardWireframe;
 @property (nonatomic, strong) THLUserProfileWireframe *userProfileWireframe;
@@ -188,13 +187,13 @@ THLPerkStoreModuleDelegate
     [_perkDetailWireframe.moduleInterface presentPerkDetailInterfaceForPerk:perkStoreItemEntity onViewController:controller];
 }
 
-- (void)presentChatRoomForMessageList:(THLMessageListEntity *)messageListEntity onController:(UINavigationController *)navigationController {
-    
-    _messageListWireframe = [_dependencyManager newMessageListWireframe];
-    _currentWireframe = _messageListWireframe;
-    [_messageListWireframe.moduleInterface setModuleDelegate:self];
-    [_messageListWireframe.moduleInterface presentChatRoomInNavigationController:navigationController];
-}
+//- (void)presentChatRoomForMessageList:(THLMessageListEntity *)messageListEntity onController:(UINavigationController *)navigationController {
+//    
+//    _messageListWireframe = [_dependencyManager newMessageListWireframe];
+//    _currentWireframe = _messageListWireframe;
+//    [_messageListWireframe.moduleInterface setModuleDelegate:self];
+//    [_messageListWireframe.moduleInterface presentChatRoomInNavigationController:navigationController];
+//}
 
 #pragma mark - THLDashboardModuleDelegate
 - (void)dashboardModule:(id<THLDashboardModuleInterface>)module didClickToViewEvent:(THLEventEntity *)event {
@@ -248,13 +247,13 @@ THLPerkStoreModuleDelegate
 }
 
 #pragma mark - THLPerkStoreModuleDelegate
-- (void)messageListModule:(id<THLMessageListModuleInterface>)module userDidSelectMessageListItemEntity:(THLMessageListEntity *)messageListEntity presentChatRoomInterfaceOnController:(UIViewController *)controller {
-    UITabBarController * tab = (UITabBarController *)[_window rootViewController];
-    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:controller];
-    [tab presentViewController:navController animated:true completion:nil];
-    //[_wireframe presentInNavigationController:navigationController];
-    //[self presentChatRoomForMessageList:messageListEntity onController:controller];
-}
+//- (void)messageListModule:(id<THLMessageListModuleInterface>)module userDidSelectMessageListItemEntity:(THLMessageListEntity *)messageListEntity presentChatRoomInterfaceOnController:(UIViewController *)controller {
+//    UITabBarController * tab = (UITabBarController *)[_window rootViewController];
+//    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:controller];
+//    [tab presentViewController:navController animated:true completion:nil];
+//    //[_wireframe presentInNavigationController:navigationController];
+//    //[self presentChatRoomForMessageList:messageListEntity onController:controller];
+//}
 
 - (void)dismissPerkWireframe {
     _perkStoreWireframe = nil;

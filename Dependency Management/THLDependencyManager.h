@@ -16,7 +16,7 @@
 @class THLNumberVerificationWireframe;
 @class THLGuestFlowWireframe;
 @class THLHostFlowWireframe;
-@class THLMessageListWireframe;
+//@class THLMessageListWireframe;
 @class THLEventDiscoveryWireframe;
 @class THLDashboardWireframe;
 @class THLHostDashboardWireframe;
@@ -47,7 +47,7 @@ THLHostFlowDependencyManager
 - (THLNumberVerificationWireframe *)newNumberVerificationWireframe;
 - (THLGuestFlowWireframe *)newGuestFlowWireframe;
 - (THLHostFlowWireframe *)newHostFlowWireframe;
-- (THLMessageListWireframe *)newMessageListWireframe;
+//- (THLMessageListWireframe *)newMessageListWireframe;
 - (THLEventDiscoveryWireframe *)newEventDiscoveryWireframe;
 - (THLDashboardWireframe *)newDashboardWireframe;
 - (THLHostDashboardWireframe *)newHostDashboardWireframe;

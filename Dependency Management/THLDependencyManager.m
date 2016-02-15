@@ -20,7 +20,7 @@
 #import "THLGuestFlowWireframe.h"
 #import "THLHostFlowWireframe.h"
 
-#import "THLMessageListWireframe.h"
+//#import "THLMessageListWireframe.h"
 #import "THLEventDiscoveryWireframe.h"
 #import "THLDashboardWireframe.h"
 #import "THLHostDashboardWireframe.h"
@@ -73,7 +73,7 @@
 @property (nonatomic, weak) THLNumberVerificationWireframe *numberVerificationWireframe;
 @property (nonatomic, weak) THLGuestFlowWireframe *guestFlowWireframe;
 @property (nonatomic, weak) THLHostFlowWireframe *hostFlowWireframe;
-@property (nonatomic, weak) THLMessageListWireframe *messageListWireframe;
+//@property (nonatomic, weak) THLMessageListWireframe *messageListWireframe;
 @property (nonatomic, weak) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
 @property (nonatomic, weak) THLDashboardWireframe *dashboardWireframe;
 @property (nonatomic, weak) THLHostDashboardWireframe *hostDashboardWireframe;
@@ -141,14 +141,14 @@
 	self.numberVerificationWireframe = wireframe;
 	return wireframe;
 }
-
-- (THLMessageListWireframe *)newMessageListWireframe {
-    THLMessageListWireframe *wireframe = [[THLMessageListWireframe alloc] initWithDataStore:self.messageListDataStore
-                                                                                     entityMapper:self.entityMapper
-                                                                         messageListService:self.messageListItemService viewDataSourceFactory:self.viewDataSourceFactory];
-    self.messageListWireframe = wireframe;
-    return wireframe;
-}
+//
+//- (THLMessageListWireframe *)newMessageListWireframe {
+//    THLMessageListWireframe *wireframe = [[THLMessageListWireframe alloc] initWithDataStore:self.messageListDataStore
+//                                                                                     entityMapper:self.entityMapper
+//                                                                         messageListService:self.messageListItemService viewDataSourceFactory:self.viewDataSourceFactory];
+//    self.messageListWireframe = wireframe;
+//    return wireframe;
+//}
 
 - (THLEventDiscoveryWireframe *)newEventDiscoveryWireframe {
 	THLEventDiscoveryWireframe *wireframe = [[THLEventDiscoveryWireframe alloc] initWithDataStore:self.eventDataStore
