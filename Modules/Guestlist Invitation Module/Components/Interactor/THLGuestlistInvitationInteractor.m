@@ -12,6 +12,7 @@
 #import "THLGuestEntity.h"
 #import "THLGuestlistEntity.h"
 #import "THLGuestlistInvite.h"
+#import "THLChannelService.h"
 #import "THLEventEntity.h"
 
 static NSString *const kGuestEntityFirstNameKey = @"firstName";
@@ -148,6 +149,13 @@ static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInv
         [[_dataManager submitGuestlistForEvent:_eventEntity withInvites:[self obtainDigits:_addedGuests]] continueWithSuccessBlock:^id(BFTask *task) {
             [[_dataManager getOwnerInviteForEvent:_eventEntity] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *fetchTask) {
                 [WSELF.delegate interactor:WSELF didCommitChangesToGuestlist:task.error];
+                
+                //!!
+//                if (_guestlistId != nil) {
+//                THLChannelService *service = [[THLChannelService alloc] init];
+//                [service createChannelForOwner:[THLUser currentUser].objectId andHost:@"235" withGuestlist:_guestlistId];
+//                }
+                
                 return nil;
             }];
             return nil;

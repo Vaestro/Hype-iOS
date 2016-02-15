@@ -25,14 +25,14 @@
 #import "THLConfirmationView.h"
 #import "THLUserManager.h"
 #import "THLHostEntity.h"
+#import "THLChannelService.h"
 #import "THLUser.h"
+#import "THLParseQueryFactory.h"
+#import "THLGuestlist.h"
+#import "THLChatListItem.h"
 
-//phone kit
-#import "AFNetworking.h"
-#import "UIView+FrameAccessor.h"
-#import "PKTPhone.h"
-#import "PKTCallViewController.h"
-#import "NSString+PKTHelpers.h"
+#import "THLChatRoomViewController.h"
+#import "THLChatListViewController.h"
 
 @interface THLGuestlistReviewPresenter()
 <
@@ -41,7 +41,6 @@ THLGuestlistReviewInteractorDelegate
 @property (nonatomic, weak) id<THLGuestlistReviewView> view;
 @property (nonatomic, strong) THLMenuView *menuView;
 @property (nonatomic, strong) THLConfirmationView *confirmationView;
-@property (nonatomic, strong) PKTCallViewController *callViewController;
 
 @property (nonatomic) BOOL refreshing;
 @property (nonatomic) THLGuestlistReviewerStatus reviewerStatus;
@@ -81,6 +80,20 @@ THLGuestlistReviewInteractorDelegate
     _guestlistEntity = guestlistEntity;
     [self updateHostReviewStatus];
     [_wireframe presentInterfaceInController:controller];
+}
+
+- (void)presentOpenChatInController:(UIViewController *)controller {
+    UIWindow *keyWindow = [[[UIApplication sharedApplication] delegate] window];
+    THLChatRoomViewController *chrmvctrl = [[THLChatRoomViewController alloc] initWithChannel:nil];
+    [_wireframe presentInController:chrmvctrl];
+    //UITabBarController *tabController = (UITabBarController *)[keyWindow rootViewController];
+    //UINavigationController *navController = (UINavigationController *)[tabController viewControllers][2];
+    //[navController presentViewController:chrmvctrl animated:YES completion:nil];
+    //[navController showViewController:chrmvctrl sender:nil];
+//    //_interactor.guestlistEntity = guestlistEntity;
+//    //_guestlistEntity = guestlistEntity;
+//    [self updateHostReviewStatus];
+//    [_wireframe presentInterfaceInController:controller];
 }
 
 #pragma mark - View Configuration
@@ -252,6 +265,10 @@ THLGuestlistReviewInteractorDelegate
     }
     
     if (self.reviewerStatus == THLGuestlistOwner || self.reviewerStatus == THLGuestlistCheckedInOwner) {
+        [_menuView partyLeadLayoutUpdate];
+    }
+    
+    if (self.reviewerStatus == THLGuestlistActiveHost) {
         [_menuView hostLayoutUpdate];
     }
     
@@ -281,8 +298,21 @@ THLGuestlistReviewInteractorDelegate
         return [RACSignal empty];
     }];
     
-    RACCommand *callHostCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [_interactor generateToken];
+    RACCommand *openChatHostCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [WSELF.view hideGuestlistMenuView:menuView];
+        [WSELF handleDismissAction];
+
+        [self checkCurrentChatType: 0];
+        
+        return [RACSignal empty];
+    }];
+    
+    RACCommand *openChatGroupCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [WSELF.view hideGuestlistMenuView:menuView];
+        [WSELF handleDismissAction];
+        
+        [self checkCurrentChatType:1];
+
         return [RACSignal empty];
     }];
     
@@ -293,8 +323,71 @@ THLGuestlistReviewInteractorDelegate
     [_menuView setMenuAddGuestsCommand:addGuestsCommand];
     [_menuView setMenuLeaveGuestCommand:leaveGuestlistCommand];
     [_menuView setMenuEventDetailsCommand:showEventDetailsCommand];
-    [_menuView setMenuContactHostCommand:callHostCommand];
+    [_menuView setMenuChatHostCommand:openChatHostCommand];
+    [_menuView setMenuChatGroupCommand:openChatGroupCommand];
     
+}
+
+- (void)checkCurrentChatType:(NSInteger)type {
+    NSString *currentUserId = [THLUser currentUser].objectId;
+    NSString *ownerId = _guestlistEntity.owner.objectId;
+    NSString *hostId = _guestlistEntity.event.host.objectId;
+    NSString *guestlistId = _guestlistEntity.objectId;
+    THLGuestlist *guestlist = [THLGuestlist objectWithoutDataWithObjectId:guestlistId];
+    THLParseQueryFactory *factory = [[THLParseQueryFactory alloc] init];
+    PFQuery *query;
+    if ([currentUserId isEqualToString:ownerId]) {
+        query = [factory queryChannelsForOwnerID:[THLUser objectWithoutDataWithObjectId:ownerId] withGuestList:guestlist];
+    } else if ([currentUserId isEqualToString: hostId]) {
+        query = [factory queryChannelsForHostID:[THLUser objectWithoutDataWithObjectId:hostId] withGuestList:guestlist];
+    } else {
+        query = [factory queryChannelsForGuestID:[THLUser currentUser] withGuestList:guestlist];
+    }
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (error == nil) {
+            if ([objects count] > 0) {
+                [self presentChatRoomControllerFromItemWithType:type];
+            } else {
+                [self presentChatRoomControllerFromCreateItemWithType:type];
+            }
+        }
+    }];
+    
+}
+
+- (void)presentChatRoomControllerFromCreateItemWithType:(NSInteger)type {
+    THLChatListItem *item;
+    if (type == 0) {
+        THLChannelService *service = [[THLChannelService alloc] init];
+        [service createChannelForOwner:_guestlistEntity.owner.objectId andHost:_guestlistEntity.event.host.objectId withGuestlist:_guestlistEntity.objectId];
+        item = [[THLChatListItem alloc] initWithChannel:[NSString stringWithFormat:@"%@_host", _guestlistEntity.objectId] andTitle:@"HOST"];
+    } else {
+        THLChannelService *service = [[THLChannelService alloc] init];
+        [service createChannelForGuest:[THLUser currentUser].objectId withGuestlist:_guestlistEntity.objectId];
+        item = [[THLChatListItem alloc] initWithChannel:[NSString stringWithFormat:@"%@_guestlist", _guestlistEntity.objectId] andTitle:@"GROUP"];
+    }
+    [self presentChatRoomController: item];
+}
+
+- (void)presentChatRoomControllerFromItemWithType:(NSInteger)type {
+    THLChatListItem *item;
+    if (type == 0) {
+        item = [[THLChatListItem alloc] initWithChannel:[NSString stringWithFormat:@"%@_host", _guestlistEntity.objectId] andTitle:@"HOST"];
+    } else {
+        item = [[THLChatListItem alloc] initWithChannel:[NSString stringWithFormat:@"%@_guestlist", _guestlistEntity.objectId] andTitle:@"GROUP"];
+    }
+    [self presentChatRoomController: item];
+}
+
+- (void)presentChatRoomController:(THLChatListItem *)item {
+    UITabBarController *tabController = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+    THLChatRoomViewController *controller = [[THLChatRoomViewController alloc] initWithChannel:item];
+    controller.hidesBottomBarWhenPushed = YES;
+    if (tabController.presentedViewController != nil) {
+        [tabController.presentedViewController dismissViewControllerAnimated:NO completion:nil];
+    }
+    [tabController.selectedViewController showViewController:controller sender:nil];
 }
 
 //TODO: Create Configure Review Options
@@ -477,16 +570,6 @@ THLGuestlistReviewInteractorDelegate
 presentGuestlistInvitationInterfaceOnController:(UIViewController *)self.view];
 }
 
-# pragma mark - Phone Kit
-- (void)handleCallActionWithCallerdId:(NSString *)twilioNumber toHostNumber:(NSString *)hostNumber {
-    [PKTPhone sharedPhone].capabilityToken = _callToken;
-    [PKTPhone sharedPhone].callerId = twilioNumber;
-    self.callViewController = [PKTCallViewController new];
-    [PKTPhone sharedPhone].delegate = self.callViewController;
-    [(UIViewController *)self.view presentViewController:self.callViewController animated:YES completion:nil];
-    [[PKTPhone sharedPhone] call:hostNumber];
-}
-
 - (void)guestError {
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Ok"
                                                            style:UIAlertActionStyleDefault
@@ -560,14 +643,6 @@ presentGuestlistInvitationInterfaceOnController:(UIViewController *)self.view];
     }
     NSLog(@"Status is now %ld", (long)self.reviewerStatus);
 }
-
-- (void)interactor:(THLGuestlistReviewInteractor *)interactor didGetToken:(NSString *)token {
-    self.callToken = token;
-    NSString *twilioNumber = _guestlistInviteEntity.guestlist.event.host.twilioNumber;
-    NSString *hostNumber = _guestlistInviteEntity.guestlist.event.host.phoneNumber;
-    [self handleCallActionWithCallerdId:twilioNumber toHostNumber:hostNumber];
-}
-
 
 - (void)interactor:(THLGuestlistReviewInteractor *)interactor didUpdateGuestlistInviteCheckInStatus:(NSError *)error to:(BOOL)status {
     if (status) {

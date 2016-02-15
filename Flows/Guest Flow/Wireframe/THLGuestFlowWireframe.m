@@ -10,6 +10,7 @@
 #import "THLGuestFlowWireframe.h"
 
 #import "THLEventDiscoveryWireframe.h"
+//#import "THLMessageListWireframe.h"
 #import "THLDashboardWireframe.h"
 #import "THLUserProfileWireframe.h"
 #import "THLEventDetailWireframe.h"
@@ -20,6 +21,8 @@
 #import "THLMasterNavigationController.h"
 #import "UIColor+SLAddition.h"
 #import "THLAppearanceConstants.h"
+#import "THLChatRoomViewController.h"
+#import "THLChatListViewController.h"
 
 @interface THLGuestFlowWireframe()
 <
@@ -36,6 +39,7 @@ THLPerkStoreModuleDelegate
 @property (nonatomic, strong) id currentWireframe;
 @property (nonatomic, nonatomic) UIViewController *containerVC;
 @property (nonatomic, strong) UITabBarController *masterTabBarController;
+//@property (nonatomic, strong) THLMessageListWireframe *messageListWireframe;
 @property (nonatomic, strong) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
 @property (nonatomic, strong) THLDashboardWireframe *dashboardWireframe;
 @property (nonatomic, strong) THLUserProfileWireframe *userProfileWireframe;
@@ -74,22 +78,25 @@ THLPerkStoreModuleDelegate
 
 - (void)configureMasterTabViewController:(UITabBarController *)masterTabBarController {
     _masterTabBarController = masterTabBarController;
+    UINavigationController *messages = [UINavigationController new];
     UINavigationController *discovery = [UINavigationController new];
     UINavigationController *dashboard = [UINavigationController new];
     UINavigationController *perks = [UINavigationController new];
     UINavigationController *profile = [UINavigationController new];
     
+    [self presentMessageListInterfaceInNavigationController:messages];
     [self presentEventDiscoveryInterfaceInNavigationController:discovery];
     [self presentDashboardInterfaceInNavigationController:dashboard];
     [self presentPerkStoreInterfaceInNavigationController:perks];
     [self presentUserProfileInterfaceInNavigationController:profile];
     
+    messages.tabBarItem.image = [UIImage imageNamed:@"Inbox Icon"];
     dashboard.tabBarItem.image = [UIImage imageNamed:@"Lists Icon"];
     discovery.tabBarItem.image = [UIImage imageNamed:@"Home Icon"];
     profile.tabBarItem.image = [UIImage imageNamed:@"Profile Icon"];
     perks.tabBarItem.image = [UIImage imageNamed:@"Perks Icon"];
     
-    NSArray *views = @[discovery, dashboard, perks, profile];
+    NSArray *views = @[discovery, messages, dashboard, perks, profile];
     
     _masterTabBarController.viewControllers = views;
     _masterTabBarController.view.autoresizingMask=(UIViewAutoresizingFlexibleHeight);
@@ -106,6 +113,15 @@ THLPerkStoreModuleDelegate
 
 - (id<THLGuestFlowModuleInterface>)moduleInterface {
     return self;
+}
+
+- (void)presentMessageListInterfaceInNavigationController:(UINavigationController *)navigationController {
+    THLChatListViewController *chtlvtrl = [[THLChatListViewController alloc] init];
+    [navigationController showViewController:chtlvtrl sender:nil];
+//    _messageListWireframe = [_dependencyManager newMessageListWireframe];
+//    _currentWireframe = _messageListWireframe;
+//    [_messageListWireframe.moduleInterface setModuleDelegate:self];
+//    [_messageListWireframe.moduleInterface presentChatRoomInNavigationController:navigationController];
 }
 
 - (void)presentEventDiscoveryInterfaceInNavigationController:(UINavigationController *)navigationController {
@@ -171,6 +187,14 @@ THLPerkStoreModuleDelegate
     [_perkDetailWireframe.moduleInterface presentPerkDetailInterfaceForPerk:perkStoreItemEntity onViewController:controller];
 }
 
+//- (void)presentChatRoomForMessageList:(THLMessageListEntity *)messageListEntity onController:(UINavigationController *)navigationController {
+//    
+//    _messageListWireframe = [_dependencyManager newMessageListWireframe];
+//    _currentWireframe = _messageListWireframe;
+//    [_messageListWireframe.moduleInterface setModuleDelegate:self];
+//    [_messageListWireframe.moduleInterface presentChatRoomInNavigationController:navigationController];
+//}
+
 #pragma mark - THLDashboardModuleDelegate
 - (void)dashboardModule:(id<THLDashboardModuleInterface>)module didClickToViewEvent:(THLEventEntity *)event {
     [self presentEventDetailInterfaceForEvent:event];
@@ -217,10 +241,19 @@ THLPerkStoreModuleDelegate
     _guestlistReviewWireframe = nil;
 }
 
-#pragma mark - THLPerkStoreModuleDelegate
+#pragma mark - THLChatRoomModuleDelegate
 - (void)perkModule:(id<THLPerkStoreModuleInterface>)module userDidSelectPerkStoreItemEntity:(THLPerkStoreItemEntity *)perkStoreItemEntity presentPerkDetailInterfaceOnController:(UIViewController *)controller {
     [self presentPerkDetailInterfaceForPerkStoreItem:perkStoreItemEntity onController:controller];
 }
+
+#pragma mark - THLPerkStoreModuleDelegate
+//- (void)messageListModule:(id<THLMessageListModuleInterface>)module userDidSelectMessageListItemEntity:(THLMessageListEntity *)messageListEntity presentChatRoomInterfaceOnController:(UIViewController *)controller {
+//    UITabBarController * tab = (UITabBarController *)[_window rootViewController];
+//    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:controller];
+//    [tab presentViewController:navController animated:true completion:nil];
+//    //[_wireframe presentInNavigationController:navigationController];
+//    //[self presentChatRoomForMessageList:messageListEntity onController:controller];
+//}
 
 - (void)dismissPerkWireframe {
     _perkStoreWireframe = nil;

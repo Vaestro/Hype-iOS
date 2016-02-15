@@ -19,6 +19,7 @@
 #import "THLDependencyManager.h"
 #import "THLMasterWireframe.h"
 #import "THLAppearanceUtils.h"
+#import "THLPubnubManager.h"
 
 #if DEBUG
 static NSString *applicationId = @"5t3F1S3wKnVGIKHob1Qj0Je3sygnFiwqAu6PP400";
@@ -42,6 +43,7 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
     [Parse enableLocalDatastore];
 	[Parse setApplicationId:applicationId
 				  clientKey:clientKeyId];
+    [[THLPubnubManager sharedInstance] setup];
 
 	// [Optional] Track statistics around application opens.
     if (application.applicationState != UIApplicationStateBackground) {
@@ -103,6 +105,7 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
         
         return nil;
     }];
+    [[THLPubnubManager sharedInstance] didRegisterForRemoteToken:deviceToken];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {

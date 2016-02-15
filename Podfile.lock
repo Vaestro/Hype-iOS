@@ -73,7 +73,7 @@ PODS:
     - FBSDKCoreKit/arc
   - FBSDKLoginKit (4.8.0):
     - FBSDKCoreKit
-  - FBSDKShareKit (4.10.0):
+  - FBSDKShareKit (4.8.0):
     - FBSDKCoreKit
   - FLEX (2.2.0)
   - FLKAutoLayout (0.2.1)
@@ -135,6 +135,11 @@ PODS:
     - FontasticIcons
     - JCDialPad
     - PhoneKit/Core
+  - PubNub (4.2.5):
+    - CocoaLumberjack (= 2.2.0)
+    - PubNub/Core (= 4.2.5)
+  - PubNub/Core (4.2.5):
+    - CocoaLumberjack (= 2.2.0)
   - ReactiveCocoa (2.5):
     - ReactiveCocoa/UI (= 2.5)
   - ReactiveCocoa/Core (2.5):
@@ -227,7 +232,7 @@ DEPENDENCIES:
   - FacebookImagePicker
   - FBSDKCoreKit
   - FBSDKLoginKit
-  - FBSDKShareKit
+  - FBSDKShareKit (= 4.8.0)
   - FLEX (~> 2.0)
   - FormatterKit (~> 1.8)
   - FXLabel
@@ -249,6 +254,7 @@ DEPENDENCIES:
   - Parse (~> 1.11.0)
   - ParseFacebookUtilsV4
   - PhoneKit
+  - PubNub (~> 4.2)
   - ReactiveCocoa (= 2.5)
   - ReflectableEnum
   - Reveal-iOS-SDK
@@ -285,7 +291,7 @@ SPEC CHECKSUMS:
   FacebookImagePicker: 888e7554898bea596e88556a935835c6141d8aed
   FBSDKCoreKit: 66a935d17b6e00b6b64e604f2eb9b72c9ab7deb8
   FBSDKLoginKit: d893fcbb98d854496925e9ff73c67b896982d3c4
-  FBSDKShareKit: 54587b4624706ace1e810cf83412a918141f807a
+  FBSDKShareKit: e7577ee3adf80fc04fb656dd133fbb522250672b
   FLEX: bc8a4fb887ed5d3cdf7c2f3bd665f7bb1647cc58
   FLKAutoLayout: 9db6b30c2008d230da608e62c607b11c23b942e6
   FontasticIcons: f20740bf8f1d3565c312f1c3b9806339212b58aa
@@ -311,6 +317,7 @@ SPEC CHECKSUMS:
   Parse: 886af46a0a677402f6374bb97ac212e795f70afe
   ParseFacebookUtilsV4: eab9b4ade12f0800b4d30f6b808bca55ce17a0e9
   PhoneKit: 26f7c49593bc093a20510b2dbb9f7eba6d0b5f83
+  PubNub: 92c9e3556a5666a597bcf613c72e2e426d3321d4
   ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
   ReflectableEnum: bf9d36f8c35122242125140a22b8921d071989aa
   Reveal-iOS-SDK: e2250b3c155bcfac53ae223ddc1f76d08f206c33

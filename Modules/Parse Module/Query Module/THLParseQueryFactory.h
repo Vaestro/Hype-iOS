@@ -12,6 +12,7 @@
 @class THLEvent;
 @class THLUser;
 @class THLGuestlist;
+@class THLChannel;
 
 /**
  *  Interface for constructing all queries for Parse servers.
@@ -40,5 +41,15 @@
 
 #pragma mark - PerkStoreItem Queries
 - (PFQuery *)queryForAllPerkStoreItems;
+
+#pragma mark - User Queries
+- (PFQuery *)queryForUserWithId:(NSString *)userID;
+
+#pragma mark - Channels Queries
+//- (PFQuery *)queryAllChannelsForUserID:(NSString *)userID;
+- (PFQuery *)queryAllChannelsForUserID:(PFUser *)user;
+- (PFQuery *)queryChannelsForHostID:(PFUser *)user withGuestList:(THLGuestlist *)guestlist;
+- (PFQuery *)queryChannelsForGuestID:(PFUser *)user withGuestList:(THLGuestlist *)guestlist;
+- (PFQuery *)queryChannelsForOwnerID:(PFUser *)user withGuestList:(THLGuestlist *)guestlist;
 
 @end

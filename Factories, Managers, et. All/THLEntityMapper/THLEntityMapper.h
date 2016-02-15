@@ -16,6 +16,7 @@
 @class THLPerkStoreItem;
 @class THLPurchasedPerkItem;
 @class THLBeaconEntity;
+@class THLMessageListItem;
 
 @class THLUserEntity;
 @class THLGuestEntity;
@@ -27,6 +28,7 @@
 @class THLPerkStoreItemEntity;
 @class THLPurchasedPerkItemEntity;
 @class THLBeacon;
+@class THLMessageListEntity;
 
 @interface THLEntityMapper : NSObject
 - (THLEventEntity *)mapEvent:(THLEvent *)event;
@@ -40,13 +42,13 @@
 - (THLPurchasedPerkItemEntity *)mapPurchasedPerkItem:(THLPurchasedPerkItem *)purchasedPerkItem;
 - (THLBeacon *)mapBeaconEntity:(THLBeaconEntity *)beaconEntity;
 
-
 //- (NSArray *)mapUsers:(NSArray *)users;
 - (NSArray<THLEventEntity*> *)mapEvents:(NSArray *)events;
 - (NSArray<THLLocationEntity*> *)mapLocations:(NSArray *)locations;
 - (NSArray<THLGuestlistEntity*> *)mapGuestlists:(NSArray *)guestlists;
 - (NSArray<THLGuestlistInviteEntity*> *)mapGuestlistInvites:(NSArray *)guestlistInvites;
 - (NSArray<THLPerkStoreItemEntity*> *)mapPerkStoreItems:(NSArray *)perkStoreItems;
+- (NSArray<THLMessageListEntity *> *)mapMessageListItems:(NSArray *)messageListItems;
 - (NSArray<THLPurchasedPerkItemEntity*> *)mapPurchasedPerkItems:(NSArray *)purchasedPerkItems;
 
 @end

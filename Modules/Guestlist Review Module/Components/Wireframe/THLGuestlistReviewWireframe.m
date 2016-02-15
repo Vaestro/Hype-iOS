@@ -11,6 +11,7 @@
 #import "THLGuestlistReviewDataManager.h"
 #import "THLGuestlistReviewPresenter.h"
 #import "THLGuestlistReviewViewController.h"
+#import "THLDashboardViewController.h"
 
 @interface THLGuestlistReviewWireframe()
 @property (nonatomic, strong) THLGuestlistReviewInteractor *interactor;
@@ -55,6 +56,17 @@
     [_controller.view.window.layer addAnimation:transition forKey:nil];
     
     [_controller presentViewController:_view animated:NO completion:NULL];
+}
+
+- (void)presentInController:(UIViewController *)controller {
+    UIWindow *keyWindow = [[[UIApplication sharedApplication] delegate] window];
+    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:controller];
+    keyWindow.rootViewController = nvc;
+//    UITabBarController *tabController = (UITabBarController *)[keyWindow rootViewController];
+//    UINavigationController *navController = (UINavigationController *)[tabController viewControllers][2];
+//    THLDashboardViewController *dash = [[navController viewControllers] firstObject];
+//    [dash presentModalViewController:controller animated:YES];
+    //[navController showViewController:chrmvctrl sender:nil];
 }
 
 - (void)dismissInterface {

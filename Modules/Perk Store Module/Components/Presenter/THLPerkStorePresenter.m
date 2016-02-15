@@ -45,6 +45,7 @@
 - (void)configureView:(id<THLPerkStoreView>)view {
     _view = view;
     
+    
     [[RACObserve(self.view, viewAppeared) filter:^BOOL(NSNumber *b) {
         BOOL viewIsAppearing = [b boolValue];
         return viewIsAppearing == TRUE;

@@ -16,7 +16,9 @@
 @property (nonatomic, strong) RACCommand *menuAddGuestsCommand;
 @property (nonatomic, strong) RACCommand *menuLeaveGuestCommand;
 @property (nonatomic, strong) RACCommand *menuEventDetailsCommand;
-@property (nonatomic, strong) RACCommand *menuContactHostCommand;
+@property (nonatomic, strong) RACCommand *menuChatHostCommand;
+@property (nonatomic, strong) RACCommand *menuChatGroupCommand;
 - (void)hostLayoutUpdate;
+- (void)partyLeadLayoutUpdate;
 - (void)guestLayoutUpdate;
 @end
