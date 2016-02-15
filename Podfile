@@ -49,6 +49,9 @@ pod 'TwitterCore'
 pod 'Optimizely-iOS-SDK'
 pod 'Stripe'
 
+#Branch
+pod "Branch"
+
 #Helpers
 pod 'SSDataSources', '~> 0.8'
 pod 'YLMoment', '~> 0.2.0'

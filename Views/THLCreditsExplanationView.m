@@ -51,13 +51,19 @@
 }
 
 - (void)show {
-    UIWindow* mainWindow = [[UIApplication sharedApplication] keyWindow];
     self.frame = [UIScreen mainScreen].bounds;
-    [mainWindow addSubview:self];
+    
+    _parentViewController = [UIViewController new];
+    _parentViewController.modalPresentationStyle = UIModalPresentationCurrentContext;
+    [_parentViewController setView:self];
+    
+    UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    [topController presentViewController:_parentViewController animated:YES completion:nil];
+
 }
 
 - (void)dismiss {
-    [self removeFromSuperview];
+    [_parentViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)layoutView {

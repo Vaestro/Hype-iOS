@@ -16,6 +16,8 @@
 #import "THLUser.h"
 #import "THLCreditsExplanationView.h"
 
+#import "BranchUniversalObject.h"
+#import "BranchLinkProperties.h"
 
 @interface THLPerkStorePresenter()<THLPerkStoreInteractorDelegate>
 @property (nonatomic, weak) id<THLPerkStoreView> view;
@@ -121,7 +123,24 @@
 }
 
 - (void)handleInviteFriendsAction {
-//    TODO: Add invites friends action
+
+    BranchUniversalObject *branchUniversalObject = [[BranchUniversalObject alloc] init];
+    BranchLinkProperties *linkProperties = [[BranchLinkProperties alloc] init];
+    [linkProperties addControlParam:@"$ios_url" withValue:@"hypeup://"];
+    
+    UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    
+    while (topController.presentedViewController) {
+        topController = topController.presentedViewController;
+    }
+    
+    [branchUniversalObject showShareSheetWithLinkProperties:linkProperties
+                                               andShareText:@"Super amazing app I want to share!"
+                                         fromViewController:topController
+                                                 completion:^(NSString *activityType, BOOL completed) {
+                                                     NSLog(@"finished presenting");
+                                                 }];
+
 }
 
 - (void)handleRefreshAction {
