@@ -119,7 +119,6 @@ THLNumberVerificationModuleDelegate
     [_loginView setDismissCommand:dismissCommand];
     [_loginView setLoginCommand:loginCommand];
     _baseViewController = (UIViewController *)_loginView;
-    
 }
 
 #pragma mark - Action Handling
