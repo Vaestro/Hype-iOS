@@ -161,7 +161,7 @@
     if (guestlistInviteEntity.response == THLStatusPending) {
         return CGSizeMake(ViewWidth(collectionView) - 25, 125);
     } else {
-        return CGSizeMake(ViewWidth(collectionView) - 25, 250);
+        return CGSizeMake(ViewWidth(collectionView) - 25, 150);
     }
 }
 

@@ -11,4 +11,5 @@
 
 @interface THLDashboardTicketCell : UICollectionViewCell <THLDashboardTicketCellView>
 + (NSString *)identifier;
+- (void)addGradientLayer;
 @end

@@ -12,10 +12,14 @@
 #import "THLPersonIconView.h"
 #import "THLEventTicketVenueView.h"
 #import "THLEventTicketPromotionView.h"
+#import "THLStatusView.h"
 
 @interface THLDashboardTicketCell()
-@property (nonatomic, strong) THLEventTicketVenueView *venueView;
-@property (nonatomic, strong) THLEventTicketPromotionView *promotionView;
+@property (nonatomic, strong) UIImageView *venueImageView;
+@property (nonatomic, strong) UILabel *venueNameLabel;
+@property (nonatomic, strong) UILabel *eventTimeLabel;
+@property (nonatomic, strong) UILabel *guestlistReviewStatusLabel;
+@property (nonatomic, strong) THLStatusView *statusView;
 
 @end
 
@@ -39,54 +43,108 @@
 }
 
 - (void)constructView {
-    _venueView = [self newVenueView];
-    _promotionView = [self newPromotionView];
+    _venueImageView = [self newVenueImageView];
+    _venueNameLabel = [self newVenueNameLabel];
+    _eventTimeLabel = [self newEventTimeLabel];
+    _statusView = [self newStatusView];
+    _guestlistReviewStatusLabel = [self newGuestlistReviewStatusLabel];
 }
 
 - (void)layoutView {
-    self.backgroundColor = kTHLNUIPrimaryBackgroundColor;
-    self.clipsToBounds = YES;
-    self.layer.cornerRadius = 5;
+    [self setBackgroundColor:kTHLNUIPrimaryBackgroundColor];
+    [self addSubviews:@[_venueImageView,
+                        _venueNameLabel,
+                        _eventTimeLabel,
+                        _statusView,
+                        _guestlistReviewStatusLabel]];
     
-    [self addSubviews:@[_venueView,
-                        _promotionView]];
-    WEAKSELF();
-
-    [_venueView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.insets(kTHLEdgeInsetsNone());
-        make.height.equalTo(SV(WSELF.venueView)).sizeOffset(CGSizeMake(100, -160));
+    
+    [_venueImageView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.bottom.insets(kTHLEdgeInsetsNone());
     }];
     
-    [_promotionView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF venueView].mas_bottom).insets(kTHLEdgeInsetsHigh());
-        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
-        make.bottom.insets(kTHLEdgeInsetsHigh());
+    WEAKSELF();
+    [_eventTimeLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.left.insets(kTHLEdgeInsetsSuperHigh());
+        make.bottom.equalTo([WSELF venueNameLabel].mas_top).insets(kTHLEdgeInsetsSuperHigh());
+    }];
+    
+    [_venueNameLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.left.insets(kTHLEdgeInsetsSuperHigh());
+        make.bottom.equalTo([WSELF guestlistReviewStatusLabel].mas_top).insets(kTHLEdgeInsetsHigh());
+    }];
+    
+    [_statusView makeConstraints:^(MASConstraintMaker *make) {
+        make.left.insets(kTHLEdgeInsetsSuperHigh());
+        make.height.equalTo(20);
+        make.width.mas_equalTo([WSELF statusView].mas_height);
+        make.centerY.equalTo([WSELF guestlistReviewStatusLabel].mas_centerY);
+    }];
+    
+    [_guestlistReviewStatusLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(kTHLEdgeInsetsLow());
+        make.left.equalTo([WSELF statusView].mas_right).insets(kTHLEdgeInsetsHigh());
     }];
 }
 
 - (void)bindView {
-    RAC(self.venueView, locationImageURL) = RACObserve(self, locationImageURL);
-    RAC(self.venueView, locationName, @"") = RACObserve(self, locationName);
-    RAC(self.promotionView, guestlistReviewStatus) = RACObserve(self, guestlistReviewStatus);
-    RAC(self.promotionView, guestlistReviewStatusTitle, @"") = RACObserve(self, guestlistReviewStatusTitle);
+    WEAKSELF();
+    RAC(self.venueNameLabel, text, @"") = RACObserve(self, locationName);
+    RAC(_statusView, status) = RACObserve(self, guestlistReviewStatus);
+    RAC(_guestlistReviewStatusLabel, text, @"") = RACObserve(self, guestlistReviewStatusTitle);
+    RAC(self.eventTimeLabel, text, @"") = RACObserve(self, eventDate);
     
-    RAC(self.promotionView, eventTime, @"") = RACObserve(self, eventDate);
-    RAC(self.promotionView, hostImageURL) = RACObserve(self, hostImageURL);
-    RAC(self.promotionView, hostName, @"") = RACObserve(self, hostName);
+    RACSignal *imageURLSignal = [RACObserve(self, locationImageURL) filter:^BOOL(NSURL *url) {
+        return url.isValid;
+    }];
     
-//    RAC(self.actionButton, rac_command) = RACObserve(self, actionButtonCommand);
+    [imageURLSignal subscribeNext:^(NSURL *url) {
+        [WSELF.venueImageView sd_setImageWithURL:url];
+    }];
 }
 
 #pragma mark - Constructors
 
-- (THLEventTicketVenueView *)newVenueView {
-    THLEventTicketVenueView *venueView = [THLEventTicketVenueView new];
-    return venueView;
+- (void)addGradientLayer {
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    
+    gradient.frame = self.venueImageView.bounds;
+    gradient.colors = @[(id)[UIColor blackColor].CGColor,
+                        (id)[UIColor clearColor].CGColor];
+    
+    self.venueImageView.layer.mask = gradient;
 }
 
-- (THLEventTicketPromotionView *)newPromotionView {
-    THLEventTicketPromotionView *promotionView = [THLEventTicketPromotionView new];
-    return promotionView;
+- (UIImageView *)newVenueImageView {
+    UIImageView *imageView = [UIImageView new];
+    imageView.clipsToBounds = YES;
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    [imageView dimView];
+    return imageView;
+}
+
+- (UILabel *)newVenueNameLabel {
+    UILabel *label = THLNUILabel(kTHLNUIBoldTitle);
+    label.adjustsFontSizeToFitWidth = YES;
+    label.minimumScaleFactor = 0.5;
+    return label;
+}
+
+- (THLStatusView *)newStatusView {
+    THLStatusView *statusView = [THLStatusView new];
+    return statusView;
+}
+
+- (UILabel *)newGuestlistReviewStatusLabel {
+    UILabel *guestlistReviewStatusLabel = THLNUILabel(kTHLNUIDetailTitle);
+    guestlistReviewStatusLabel.adjustsFontSizeToFitWidth = YES;
+    guestlistReviewStatusLabel.textAlignment = NSTextAlignmentLeft;
+    return guestlistReviewStatusLabel;
+}
+
+- (UILabel *)newEventTimeLabel {
+    UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
+    return label;
 }
 
 #pragma mark - Public Interface

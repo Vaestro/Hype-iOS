@@ -11,5 +11,9 @@
 @interface THLEventTicketVenueView : UIView
 @property (nonatomic, copy) NSURL *locationImageURL;
 @property (nonatomic, copy) NSURL *locationName;
+@property (nonatomic) THLStatus guestlistReviewStatus;
+@property (nonatomic, copy) NSString *guestlistReviewStatusTitle;
+@property (nonatomic, copy) NSString *eventTime;
 
+- (void)setGradientLayer;
 @end

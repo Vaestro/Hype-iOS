@@ -14,10 +14,12 @@
 #import "THLPerkStoreItemEntity.h"
 #import "THLPerkStoreCellViewModel.h"
 #import "THLUser.h"
+#import "THLCreditsExplanationView.h"
 
 
 @interface THLPerkStorePresenter()<THLPerkStoreInteractorDelegate>
 @property (nonatomic, weak) id<THLPerkStoreView> view;
+@property (nonatomic, strong) THLCreditsExplanationView *creditsExplanationView;
 @property (nonatomic) BOOL refreshing;
 @end
 
@@ -70,13 +72,32 @@
         BOOL isRefreshing = [b boolValue];
         [WSELF.view setShowRefreshAnimation:isRefreshing];
     }];
+    
+    RACCommand *showCreditsExplanationView = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [WSELF handleShowCreditsExplanationAction];
+        return [RACSignal empty];
+    }];
 
+    RACCommand *discoverEventsCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [WSELF handleDiscoverEventsAction];
+        return [RACSignal empty];
+    }];
+    
+    RACCommand *inviteFriendsCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [WSELF handleInviteFriendsAction];
+        return [RACSignal empty];
+    }];
+    
     [_view setDataSource:dataSource];
+    [_view setShowCreditsExplanationView:showCreditsExplanationView];
     [_view setSelectedIndexPathCommand:selectedIndexPathCommand];
     [_view setRefreshCommand:refreshCommand];
+    _creditsExplanationView = [THLCreditsExplanationView new];
+    [_creditsExplanationView setDiscoverEventsCommand:discoverEventsCommand];
+    [_creditsExplanationView setInviteFriendsCommand:inviteFriendsCommand];
 
 }
-    
+
     
 - (void)checkIfUserLoggedInThenHandleIndexPathSelection:(NSIndexPath *)indexPath {
     if (![THLUser currentUser]) {
@@ -89,6 +110,18 @@
 
 - (void)handleLogInAction {
     [self.moduleDelegate userNeedsLoginOnViewController:(UIViewController *)_view];
+}
+
+- (void)handleShowCreditsExplanationAction {
+    [_creditsExplanationView show];
+}
+
+- (void)handleDiscoverEventsAction {
+//    TODO: Add handle discover events action
+}
+
+- (void)handleInviteFriendsAction {
+//    TODO: Add invites friends action
 }
 
 - (void)handleRefreshAction {

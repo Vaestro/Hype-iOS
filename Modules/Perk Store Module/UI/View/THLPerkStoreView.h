@@ -11,6 +11,7 @@
 
 @protocol THLPerkStoreView <NSObject>
 @property (nonatomic, strong) THLViewDataSource *dataSource;
+@property (nonatomic, strong) RACCommand *showCreditsExplanationView;
 @property (nonatomic, strong) RACCommand *selectedIndexPathCommand;
 @property (nonatomic, strong) RACCommand *refreshCommand;
 @property (nonatomic) float currentUserCredit;

@@ -13,7 +13,8 @@
 #import "THLPerkStoreCell.h"
 #import "THLPerkStoreCellViewModel.h"
 #import "THLUser.h"
-#import "THLActionBarButton.h"
+#import "THLActionButton.h"
+#import "THLCreditsExplanationView.h"
 
 @interface THLPerkStoreViewController ()
 <
@@ -22,12 +23,13 @@ UICollectionViewDelegateFlowLayout
 >
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) UILabel *labelOne;
-@property (nonatomic, strong) UILabel *labelTwo;
+@property (nonatomic, strong) THLActionButton *earnMoreCreditsButton;
 @property (nonatomic, strong) UILabel *userCreditsLabel;
 @property (nonatomic, strong) NSString *userCredits;
 @end
 
 @implementation THLPerkStoreViewController
+@synthesize showCreditsExplanationView = _showCreditsExplanationView;
 @synthesize selectedIndexPathCommand = _selectedIndexPathCommand;
 @synthesize dataSource = _dataSource;
 @synthesize showRefreshAnimation = _showRefreshAnimation;
@@ -57,8 +59,7 @@ UICollectionViewDelegateFlowLayout
 
 - (void)constructView {
     _labelOne = [self newLabelWithText:@"Your credits balance is" withConstant:kTHLNUIRegularTitle];
-    _labelTwo = [self newLabelWithText:@"Earn credits every time you invite friends\nto attend an event. Then use those credits\nto purchase rewards here"
-                          withConstant:kTHLNUIDetailTitle];
+    _earnMoreCreditsButton = [self newEarnMoreCreditsButton];
     _userCreditsLabel = [self newCreditsLabelWithText:NSStringWithFormat(@"$%@", _userCredits)];
 }
 
@@ -69,7 +70,7 @@ UICollectionViewDelegateFlowLayout
     self.automaticallyAdjustsScrollViewInsets = YES;
     
     _collectionView = [self newCollectionView];
-    [self.view addSubviews:@[_labelOne, _labelTwo, _userCreditsLabel, _collectionView]];
+    [self.view addSubviews:@[_labelOne, _earnMoreCreditsButton, _userCreditsLabel, _collectionView]];
     
     WEAKSELF();
     [_labelOne makeConstraints:^(MASConstraintMaker *make) {
@@ -81,16 +82,16 @@ UICollectionViewDelegateFlowLayout
         make.right.left.insets(kTHLEdgeInsetsNone());
     }];
     
-    [_labelTwo makeConstraints:^(MASConstraintMaker *make) {
+    [_earnMoreCreditsButton makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(WSELF.userCreditsLabel.mas_bottom).insets(kTHLEdgeInsetsHigh());
-        make.left.right.insets(kTHLEdgeInsetsHigh());
+        make.size.equalTo(CGSizeMake(SCREEN_WIDTH*0.80, 50));
+        make.centerX.equalTo(0);
     }];
 
     [_collectionView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(WSELF.labelTwo.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+        make.top.equalTo(WSELF.earnMoreCreditsButton.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
         make.left.right.insets(kTHLEdgeInsetsNone());
         make.bottom.equalTo(kTHLEdgeInsetsNone());
-
     }];
 }
 
@@ -98,6 +99,9 @@ UICollectionViewDelegateFlowLayout
 - (void)configureBindings {
     WEAKSELF();
     STRONGSELF();
+    RAC(self.earnMoreCreditsButton, rac_command) = RACObserve(self, showCreditsExplanationView);
+
+    
     [RACObserve(WSELF, dataSource) subscribeNext:^(THLViewDataSource *dataSource) {
         [SSELF configureDataSource:dataSource];
     }];
@@ -145,7 +149,6 @@ UICollectionViewDelegateFlowLayout
     return label;
 }
 
-
 - (UILabel *)newCreditsLabelWithText:(NSString *)text {
     UILabel *label = [UILabel new];
     label.text = text;
@@ -156,7 +159,12 @@ UICollectionViewDelegateFlowLayout
     label.minimumScaleFactor = 0.5;
     label.textAlignment = NSTextAlignmentCenter;
     return label;
-    
+}
+
+- (THLActionButton *)newEarnMoreCreditsButton {
+    THLActionButton *button = [[THLActionButton alloc] initWithInverseStyle];
+    [button setTitle:@"Earn more credits"];
+    return button;
 }
 
 
