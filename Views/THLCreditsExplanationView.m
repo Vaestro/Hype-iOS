@@ -113,12 +113,14 @@
     
     [_discoverEventsButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(SCREEN_WIDTH*0.80);
+        make.centerX.equalTo(0);
         make.bottom.equalTo([WSELF inviteFriendsButton].mas_top).insets(kTHLEdgeInsetsSuperHigh());
         make.height.mas_equalTo(kSubmitButtonHeight);
     }];
     
     [_inviteFriendsButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.insets(kTHLEdgeInsetsInsanelyHigh());
+        make.centerX.equalTo(0);
         make.width.equalTo(SCREEN_WIDTH*0.80);
         make.top.equalTo([WSELF discoverEventsButton].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
         make.height.mas_equalTo(kSubmitButtonHeight);
