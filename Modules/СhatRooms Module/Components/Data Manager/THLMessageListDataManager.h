@@ -7,21 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "THLMessageListServiceInterface.h"
 
 @class THLDataStore;
 @class THLEntityMapper;
 @class BFTask;
-@protocol THLEventServiceInterface;
+@protocol THLMessageListServiceInterface;
 
 @interface THLMessageListDataManager : NSObject
 #pragma mark - Dependencies
 @property (nonatomic, readonly, weak) THLDataStore *dataStore;
 @property (nonatomic, readonly, weak) THLEntityMapper *entityMapper;
-@property (nonatomic, readonly, weak) id<THLEventServiceInterface> eventService;
+@property (nonatomic, readonly, weak) id<THLMessageListServiceInterface> messageListService;
+
 - (instancetype)initWithDataStore:(THLDataStore *)dataStore
                      entityMapper:(THLEntityMapper *)entityMapper
-                     eventService:(id<THLEventServiceInterface>)eventService;
+                     messageList:(id<THLMessageListServiceInterface>)messageListService;
 
-- (BFTask *)fetchEventsFrom:(NSDate *)startDate to:(NSDate *)endDate;
+- (BFTask *)fetchAllChannels;
 
 @end

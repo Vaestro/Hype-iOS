@@ -24,6 +24,9 @@ static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
 @property (nonatomic, strong) UIButton *leaveGuestlistButton;
 @property (nonatomic, strong) UIButton *eventDetailsButton;
 @property (nonatomic, strong) UIButton *contactHostButton;
+@property (nonatomic, strong) UIButton *chatHostButton;
+@property (nonatomic, strong) UIButton *chatGroupButton;
+
 @property (nonatomic, strong) UIView *containerView;
 @property (nonatomic, strong) UIImageView *contactIcon;
 @property (nonatomic, strong) UIImageView *addIcon;
@@ -50,7 +53,9 @@ static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
     _addGuestsButton = [self newButtonwithTitle:@"Add Guests"];
     _leaveGuestlistButton = [self newButtonwithTitle:@"Leave Guestlist"];
     _eventDetailsButton = [self newButtonwithTitle:@"View Event Details"];
-    _contactHostButton = [self newButtonwithTitle:@"Contact Host"];
+    //_contactHostButton = [self newButtonwithTitle:@"Contact Host"];
+    _chatHostButton = [self newButtonwithTitle:@"Chat Host"];
+    _chatGroupButton = [self newButtonwithTitle:@"Chat Group"];
     _cancelButton = [self newButtonwithTitle:@"Cancel"];
     _separatorView = [self newSeparatorView];
     _containerView = [self newContainerView];
@@ -82,7 +87,7 @@ static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
 //                     }
 //                     completion:NULL];
     
-    [self.containerView addSubviews:@[_menuTitleLabel, _addGuestsButton, _leaveGuestlistButton, _eventDetailsButton, _contactHostButton, _cancelButton, _separatorView, _addIcon, _calendarIcon, _contactIcon, _leaveIcon]];
+    [self.containerView addSubviews:@[_menuTitleLabel, _addGuestsButton, _leaveGuestlistButton, _eventDetailsButton, _chatHostButton, _chatGroupButton, _cancelButton, _separatorView, _addIcon, _calendarIcon, _contactIcon, _leaveIcon]];
     WEAKSELF();
 
     UIView *personContainerView = [UIView new];
@@ -163,8 +168,18 @@ static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
         make.left.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
-    [_contactHostButton makeConstraints:^(MASConstraintMaker *make) {
+//    [_contactHostButton makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(WSELF.eventDetailsButton.mas_bottom).insets(kTHLEdgeInsetsHigh());
+//        make.left.equalTo(WSELF.contactIcon.mas_right).insets(kTHLEdgeInsetsHigh());
+//    }];
+    
+    [_chatHostButton makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(WSELF.eventDetailsButton.mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.left.equalTo(WSELF.contactIcon.mas_right).insets(kTHLEdgeInsetsHigh());
+    }];
+    
+    [_chatGroupButton makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.chatHostButton.mas_bottom).insets(kTHLEdgeInsetsHigh());
         make.left.equalTo(WSELF.contactIcon.mas_right).insets(kTHLEdgeInsetsHigh());
     }];
     
@@ -179,7 +194,9 @@ static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
     RAC(_addGuestsButton, rac_command) = RACObserve(self , menuAddGuestsCommand);
     RAC(_leaveGuestlistButton, rac_command) = RACObserve(self, menuLeaveGuestCommand);
     RAC(_eventDetailsButton, rac_command) = RACObserve(self, menuEventDetailsCommand);
-    RAC(_contactHostButton, rac_command) = RACObserve(self, menuContactHostCommand);
+    //RAC(_contactHostButton, rac_command) = RACObserve(self, menuContactHostCommand);
+    RAC(_chatHostButton, rac_command) = RACObserve(self, menuChatHostCommand);
+    RAC(_chatGroupButton, rac_command) = RACObserve(self, menuChatGroupCommand);
     RAC(_iconImageView, imageURL) = RACObserve(self, hostImageURL);
     RAC(_hostNameLabel, text) = RACObserve(self, hostName);
 }
@@ -235,6 +252,7 @@ static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
 
 - (void)hostLayoutUpdate {
     [self.leaveGuestlistButton setHidden:YES];
+    [self.chatGroupButton setHidden: YES];
     [self.leaveIcon setHidden:YES];
     
     WEAKSELF();
@@ -249,10 +267,36 @@ static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
         make.left.equalTo(WSELF.calendarIcon.mas_right).insets(kTHLEdgeInsetsHigh());
     }];
     
+    [self.chatHostButton remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.eventDetailsButton.mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.left.equalTo(WSELF.contactIcon.mas_right).insets(kTHLEdgeInsetsHigh());
+    }];
+    
+    
+}
+
+- (void)partyLeadLayoutUpdate {
+    [self.leaveGuestlistButton setHidden:YES];
+    [self.leaveIcon setHidden:YES];
+    
+    WEAKSELF();
+    [self.calendarIcon remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.addGuestsButton.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+        make.left.insets(kTHLEdgeInsetsSuperHigh());
+    }];
+    
+    
+    [self.eventDetailsButton remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.addGuestsButton.mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.left.equalTo(WSELF.calendarIcon.mas_right).insets(kTHLEdgeInsetsHigh());
+    }];
+    
+    
 }
 
 - (void)guestLayoutUpdate {
     [self.addGuestsButton setHidden:YES];
+    [self.chatHostButton setHidden:YES];
     [self.addIcon setHidden:YES];
     
     WEAKSELF();
@@ -270,6 +314,11 @@ static CGFloat const kTHLRedeemPerkViewSeparatorViewWidth = 300;
     [self.leaveGuestlistButton remakeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(WSELF.eventDetailsButton.top).insets(kTHLEdgeInsetsHigh());
         make.left.equalTo(WSELF.leaveIcon.mas_right).insets(kTHLEdgeInsetsHigh());
+    }];
+    
+    [self.chatGroupButton makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.leaveGuestlistButton.mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.left.equalTo(WSELF.contactIcon.mas_right).insets(kTHLEdgeInsetsHigh());
     }];
     
     [self.separatorView remakeConstraints:^(MASConstraintMaker *make) {

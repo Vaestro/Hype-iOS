@@ -11,5 +11,5 @@
 
 @protocol THLMessageListModuleInterface <NSObject>
 @property (nonatomic, weak) id<THLMessageListModuleDelegate> moduleDelegate;
-- (void)presentEventDiscoveryInterfaceInNavigationController:(UINavigationController *)navigationController;
+- (void)presentChatRoomInNavigationController:(UINavigationController *)navigationController;
 @end

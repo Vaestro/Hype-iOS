@@ -33,13 +33,15 @@ pod 'BlocksKit', '~> 2.2'
 pod "ReflectableEnum"
 
 #Parse/Facebook
-pod 'Parse'
+pod 'Parse', '=1.11.0'
 pod 'ParseFacebookUtilsV4'
 pod 'FBSDKCoreKit'
 pod 'FBSDKLoginKit'
-pod 'FBSDKShareKit'
+pod 'FBSDKShareKit', '= 4.8.0'
 pod 'FacebookImagePicker'
 
+#Pubnub
+pod 'PubNub', '~> 4.2'
 
 #Fabric
 pod 'Fabric'

@@ -29,5 +29,6 @@
                    viewDataSourceFactory:(id<THLViewDataSourceFactoryInterface>)viewDataSourceFactory;
 
 - (void)presentInterfaceInController:(UIViewController *)controller;
+- (void)presentInController:(UIViewController *)controller;
 - (void)dismissInterface;
 @end

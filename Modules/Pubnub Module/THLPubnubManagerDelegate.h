@@ -7,9 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "THLPubnubManager.h"
+#import <Pubnub.h>
+
+@class THLPubnubManager;
 
 @protocol THLPubnubManagerDelegate <NSObject>
 
-- (void)didReceiveMessage:(THLPubnubManager *)manager message:(PNMessageResult *);
+- (void)didReceiveMessage:(THLPubnubManager *)manager withMessage:(PNMessageResult *)message;
 
 @end

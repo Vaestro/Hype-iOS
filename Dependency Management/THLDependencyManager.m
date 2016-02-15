@@ -40,6 +40,7 @@
 #import "THLEntityMapper.h"
 #import "THLViewDataSourceFactory.h"
 #import "THLParseQueryFactory.h"
+#import "THLPubnubQueryFactory.h"
 #import "THLYapDatabaseViewFactory.h"
 #import "THLUserManager.h"
 #import "APAddressBook.h"
@@ -54,14 +55,14 @@
 #import "THLFacebookProfilePictureURLFetchService.h"
 #import "THLGuestlistService.h"
 #import "THLPerkStoreItemService.h"
+#import "THLMessageListService.h"
 
 //Classes
 #import "THLEntities.h"
 #import "THLGuestEntity.h"
 #import "THLGuestlistInviteEntity.h"
 #import "THLPerkStoreItemEntity.h"
-
-
+#import "THLMessageListEntity.h"
 
 
 @interface THLDependencyManager()
@@ -93,6 +94,7 @@
 @property (nonatomic, strong) THLViewDataSourceFactory *viewDataSourceFactory;
 @property (nonatomic, strong) THLYapDatabaseViewFactory *yapDatabaseViewFactory;
 @property (nonatomic, strong) THLParseQueryFactory *parseQueryFactory;
+@property (nonatomic, strong) THLPubnubQueryFactory *pubnubQueryFactory;
 @property (nonatomic, strong) CLGeocoder *geocoder;
 @property (nonatomic, strong) APAddressBook *addressBook;
 
@@ -103,6 +105,7 @@
 @property (nonatomic, strong) THLDataStore *guestlistDataStore;
 @property (nonatomic, strong) THLDataStore *guestlistInviteDataStore;
 @property (nonatomic, strong) THLDataStore *perkStoreItemDataStore;
+@property (nonatomic, strong) THLDataStore *messageListDataStore;
 
 //Services
 @property (nonatomic, strong) THLEventService *eventService;
@@ -111,6 +114,8 @@
 @property (nonatomic, strong) THLLocationService *locationService;
 @property (nonatomic, strong) THLGuestlistService *guestlistService;
 @property (nonatomic, strong) THLPerkStoreItemService *perkStoreItemService;
+@property (nonatomic, strong) THLMessageListService *messageListItemService;
+
 
 @end
 
@@ -138,10 +143,9 @@
 }
 
 - (THLMessageListWireframe *)newMessageListWireframe {
-    THLMessageListWireframe *wireframe = [[THLMessageListWireframe alloc] initWithDataStore:self.eventDataStore
+    THLMessageListWireframe *wireframe = [[THLMessageListWireframe alloc] initWithDataStore:self.messageListDataStore
                                                                                      entityMapper:self.entityMapper
-                                                                                     eventService:self.eventService
-                                                                            viewDataSourceFactory:self.viewDataSourceFactory];
+                                                                         messageListService:self.messageListItemService viewDataSourceFactory:self.viewDataSourceFactory];
     self.messageListWireframe = wireframe;
     return wireframe;
 }
@@ -311,6 +315,13 @@
 	return _parseQueryFactory;
 }
 
+- (THLPubnubQueryFactory *)pubnubQueryFactory {
+    if (!_pubnubQueryFactory) {
+        _pubnubQueryFactory = [[THLPubnubQueryFactory alloc] init];
+    }
+    return _pubnubQueryFactory;
+}
+
 - (CLGeocoder *)geocoder {
 	if (!_geocoder) {
 		_geocoder = [[CLGeocoder alloc] init];
@@ -368,6 +379,13 @@
     return _perkStoreItemDataStore;
 }
 
+- (THLDataStore *)messageListDataStore {
+    if (!_messageListDataStore) {
+        _messageListDataStore = [[THLDataStore alloc] initForEntity:[THLMessageListEntity class] databaseManager:self.databaseManager];
+    }
+    return _messageListDataStore;
+}
+
 #pragma mark - Services
 - (THLEventService *)eventService {
 	if (!_eventService) {
@@ -410,4 +428,12 @@
     }
     return _perkStoreItemService;
 }
+
+- (THLMessageListService *)messageListItemService {
+    if (!_messageListItemService) {
+        _messageListItemService = [[THLMessageListService alloc] initWithQueryFactory:self.pubnubQueryFactory];
+    }
+    return _messageListItemService;
+}
+
 @end

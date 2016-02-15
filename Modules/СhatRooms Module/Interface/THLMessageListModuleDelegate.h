@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "THLMessageListModuleInterface.h"
+
+@class THLMessageListEntity;
+@protocol THLMessageListModuleInterface;
 
 @protocol THLMessageListModuleDelegate <NSObject>
+- (void)messageListModule:(id<THLMessageListModuleInterface>)module userDidSelectMessageListItemEntity:(THLMessageListEntity *)messageListEntity presentChatRoomInterfaceOnController:(UIViewController *)controller;
 
 @end

@@ -21,6 +21,8 @@
 #import "THLMasterNavigationController.h"
 #import "UIColor+SLAddition.h"
 #import "THLAppearanceConstants.h"
+#import "THLChatRoomViewController.h"
+#import "THLChatListViewController.h"
 
 @interface THLGuestFlowWireframe()
 <
@@ -95,7 +97,7 @@ THLPerkStoreModuleDelegate
     profile.tabBarItem.image = [UIImage imageNamed:@"Profile Icon"];
     perks.tabBarItem.image = [UIImage imageNamed:@"Perks Icon"];
     
-    NSArray *views = @[messages, discovery, dashboard, perks, profile];
+    NSArray *views = @[discovery, messages, dashboard, perks, profile];
     
     _masterTabBarController.viewControllers = views;
     _masterTabBarController.view.autoresizingMask=(UIViewAutoresizingFlexibleHeight);
@@ -115,10 +117,12 @@ THLPerkStoreModuleDelegate
 }
 
 - (void)presentMessageListInterfaceInNavigationController:(UINavigationController *)navigationController {
-    _messageListWireframe = [_dependencyManager newMessageListWireframe];
-    _currentWireframe = _messageListWireframe;
-    [_messageListWireframe.moduleInterface setModuleDelegate:self];
-    [_messageListWireframe.moduleInterface presentEventDiscoveryInterfaceInNavigationController:navigationController];
+    THLChatListViewController *chtlvtrl = [[THLChatListViewController alloc] init];
+    [navigationController showViewController:chtlvtrl sender:nil];
+//    _messageListWireframe = [_dependencyManager newMessageListWireframe];
+//    _currentWireframe = _messageListWireframe;
+//    [_messageListWireframe.moduleInterface setModuleDelegate:self];
+//    [_messageListWireframe.moduleInterface presentChatRoomInNavigationController:navigationController];
 }
 
 - (void)presentEventDiscoveryInterfaceInNavigationController:(UINavigationController *)navigationController {
@@ -184,6 +188,14 @@ THLPerkStoreModuleDelegate
     [_perkDetailWireframe.moduleInterface presentPerkDetailInterfaceForPerk:perkStoreItemEntity onViewController:controller];
 }
 
+- (void)presentChatRoomForMessageList:(THLMessageListEntity *)messageListEntity onController:(UINavigationController *)navigationController {
+    
+    _messageListWireframe = [_dependencyManager newMessageListWireframe];
+    _currentWireframe = _messageListWireframe;
+    [_messageListWireframe.moduleInterface setModuleDelegate:self];
+    [_messageListWireframe.moduleInterface presentChatRoomInNavigationController:navigationController];
+}
+
 #pragma mark - THLDashboardModuleDelegate
 - (void)dashboardModule:(id<THLDashboardModuleInterface>)module didClickToViewEvent:(THLEventEntity *)event {
     [self presentEventDetailInterfaceForEvent:event];
@@ -230,9 +242,18 @@ THLPerkStoreModuleDelegate
     _guestlistReviewWireframe = nil;
 }
 
-#pragma mark - THLPerkStoreModuleDelegate
+#pragma mark - THLChatRoomModuleDelegate
 - (void)perkModule:(id<THLPerkStoreModuleInterface>)module userDidSelectPerkStoreItemEntity:(THLPerkStoreItemEntity *)perkStoreItemEntity presentPerkDetailInterfaceOnController:(UIViewController *)controller {
     [self presentPerkDetailInterfaceForPerkStoreItem:perkStoreItemEntity onController:controller];
+}
+
+#pragma mark - THLPerkStoreModuleDelegate
+- (void)messageListModule:(id<THLMessageListModuleInterface>)module userDidSelectMessageListItemEntity:(THLMessageListEntity *)messageListEntity presentChatRoomInterfaceOnController:(UIViewController *)controller {
+    UITabBarController * tab = (UITabBarController *)[_window rootViewController];
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:controller];
+    [tab presentViewController:navController animated:true completion:nil];
+    //[_wireframe presentInNavigationController:navigationController];
+    //[self presentChatRoomForMessageList:messageListEntity onController:controller];
 }
 
 - (void)dismissPerkWireframe {

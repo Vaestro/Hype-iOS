@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 #import "THLMessageListCellView.h"
 
 @interface THLMessageListCell : UITableViewCell<THLMessageListCellView>
-
++ (NSString *)identifier;
+- (void)setup;
 @end

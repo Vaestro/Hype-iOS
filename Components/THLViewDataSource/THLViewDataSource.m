@@ -9,6 +9,7 @@
 #import "THLViewDataSource.h"
 #import "THLViewDataSource_Private.h"
 #import "THLDashboardNotificationSectionTitleCell.h"
+#import "YapDatabaseViewMappings.h"
 
 @implementation THLViewDataSource
 - (void)dealloc {

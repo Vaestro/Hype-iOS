@@ -11,6 +11,7 @@
 #import "THLMessageListInteractor.h"
 #import "THLMessageListPresenter.h"
 #import "THLMessageListViewController.h"
+#import "THLChatRoomViewController.h"
 
 @interface THLMessageListWireframe()
 @property (nonatomic, strong) UINavigationController *navigationController;
@@ -25,12 +26,12 @@
 
 - (instancetype)initWithDataStore:(THLDataStore *)dataStore
                      entityMapper:(THLEntityMapper *)entityMapper
-                     eventService:(id<THLEventServiceInterface>)eventService
+                     messageListService:(id<THLMessageListServiceInterface>)messageListService
             viewDataSourceFactory:(id<THLViewDataSourceFactoryInterface>)viewDataSourceFactory {
     if (self = [super init]) {
         _dataStore = dataStore;
         _entityMapper = entityMapper;
-        _eventService = eventService;
+        _messageListService = messageListService;
         _viewDataSourceFactory = viewDataSourceFactory;
         [self buildModule];
     }
@@ -38,8 +39,8 @@
 }
 
 - (void)buildModule {
-    _dataManager = [[THLMessageListDataManager alloc] initWithDataStore:_dataStore entityMapper:_entityMapper eventService:_eventService];
-    _interactor = [[THLMessageListInteractor alloc] initWithDataManager:_dataManager];
+    _dataManager = [[THLMessageListDataManager alloc] initWithDataStore:_dataStore entityMapper:_entityMapper messageList:_messageListService];
+    _interactor = [[THLMessageListInteractor alloc] initWithDataManager:_dataManager viewDataSourceFactory:_viewDataSourceFactory];
     _view = [[THLMessageListViewController alloc] initWithNibName:nil bundle:nil];
     _presenter = [[THLMessageListPresenter alloc] initWithInteractor:_interactor wireframe:self];
 }
@@ -53,6 +54,13 @@
     _navigationController = navigationController;
     [_presenter configureView:_view];
     [_navigationController addChildViewController:_view];
+}
+
+- (void)presentChatInNavigationController:(UINavigationController *)navigationController {
+    _navigationController = navigationController;
+    THLChatRoomViewController * controller = [[THLChatRoomViewController alloc] initWithNibName:nil bundle:nil];
+    //[_presenter configureView:controller];
+    [_navigationController addChildViewController:controller];
 }
 
 @end
