@@ -18,6 +18,7 @@
 #import "THLUserProfileHeaderView.h"
 #import "THLUserPhotoVerificationViewController.h"
 #import "THLFAQViewController.h"
+#import "THLUser.h"
 
 typedef NS_ENUM(NSInteger, TableViewSection) {
     TableViewSectionPersonal = 0,
@@ -152,10 +153,12 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 }
     
 - (void) presentModalUserProfile {
+    if ([THLUser currentUser]) {
     THLUserPhotoVerificationViewController *userPhotoVerificationView = [[THLUserPhotoVerificationViewController alloc] initForNavigationController];
     userPhotoVerificationView.renewImageDelegate = self;
     UINavigationController *navVC= [[UINavigationController alloc] initWithRootViewController:userPhotoVerificationView];
     [self.view.window.rootViewController presentViewController:navVC animated:YES completion:nil];
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -225,11 +228,8 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 
 #pragma mark UIAlertView
 -(void)alert:(NSString *)webSite{
-    
     UIAlertView *aView = [[UIAlertView alloc]initWithTitle:nil message:[NSString stringWithFormat:@"Are you sure you want to visit: %@", webSite] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
-    
     [aView show];
-    
 }
 
 #pragma mark UIAlertViewDelegate
@@ -271,7 +271,6 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 
 - (THLInformationViewController *)newInfoVC {
     THLInformationViewController *infoVC = [THLInformationViewController new];
-
     return infoVC;
 }
 
