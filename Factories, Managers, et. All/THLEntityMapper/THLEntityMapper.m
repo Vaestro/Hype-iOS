@@ -140,26 +140,26 @@
     }
 }
 
-- (THLMessageListEntity *)mapMessageListItem:(THLMessageListItem *)messageListItem {
-    if ([messageListItem isKindOfClass:[PNHistoryResult class]]) {
-        PNHistoryResult *result = (PNHistoryResult *)messageListItem;
-        THLMessageListEntity *entity = [THLMessageListEntity new];
-        
-        //[self mapBaseValuesFromModel:(PFObject *) toEntity:<#(THLEntity *)#>]
-        //[self mapBaseValuesFromModel:perkStoreItem toEntity:entity];
-        entity.lastMessage = @"message"; //result.data.messages.lastObject;
-        entity.address = @"Wall street 7";
-        entity.time = @"yesterday";
-        entity.updatedAt = [NSDate date];
-        entity.objectId = @"1324er";
-        //entity.info = perkStoreItem.info;
-        //entity.credits = perkStoreItem.credits;
-        //entity.image = [NSURL URLWithString:perkStoreItem.image.url];
-        return entity;
-    } else {
-        return nil;
-    }
-}
+//- (THLMessageListEntity *)mapMessageListItem:(THLMessageListItem *)messageListItem {
+//    if ([messageListItem isKindOfClass:[PNHistoryResult class]]) {
+//        PNHistoryResult *result = (PNHistoryResult *)messageListItem;
+//        THLMessageListEntity *entity = [THLMessageListEntity new];
+//        
+//        //[self mapBaseValuesFromModel:(PFObject *) toEntity:<#(THLEntity *)#>]
+//        //[self mapBaseValuesFromModel:perkStoreItem toEntity:entity];
+//        entity.lastMessage = @"message"; //result.data.messages.lastObject;
+//        entity.address = @"Wall street 7";
+//        entity.time = @"yesterday";
+//        entity.updatedAt = [NSDate date];
+//        entity.objectId = @"1324er";
+//        //entity.info = perkStoreItem.info;
+//        //entity.credits = perkStoreItem.credits;
+//        //entity.image = [NSURL URLWithString:perkStoreItem.image.url];
+//        return entity;
+//    } else {
+//        return nil;
+//    }
+//}
 
 - (THLPurchasedPerkItemEntity *)mapPurchasedPerkItem:(THLPurchasedPerkItem *)purchasedPerkItem {
     if ([purchasedPerkItem isKindOfClass:[THLPurchasedPerkItem class]]) {
@@ -224,12 +224,12 @@
     }];
 }
 
-- (NSArray<THLMessageListEntity *> *)mapMessageListItems:(NSArray *)messageListItems {
-    WEAKSELF();
-    return [messageListItems linq_select:^id(THLMessageListItem *messageListItem) {
-        return [WSELF mapMessageListItem:messageListItem];
-    }];
-}
+//- (NSArray<THLMessageListEntity *> *)mapMessageListItems:(NSArray *)messageListItems {
+//    WEAKSELF();
+//    return [messageListItems linq_select:^id(THLMessageListItem *messageListItem) {
+//        return [WSELF mapMessageListItem:messageListItem];
+//    }];
+//}
 
 - (NSArray<THLPurchasedPerkItemEntity*> *)mapPurchasedPerkItems:(NSArray *)purchasedPerkItems {
     WEAKSELF();

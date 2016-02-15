@@ -38,7 +38,7 @@
 - (THLGuestlistInviteEntity *)mapGuestlistInvite:(THLGuestlistInvite *)guestlistInvite;
 - (THLPerkStoreItemEntity *)mapPerkStoreItem:(THLPerkStoreItem *)perkStoreItem;
 - (THLPurchasedPerkItemEntity *)mapPurchasedPerkItem:(THLPurchasedPerkItem *)purchasedPerkItem;
-- (THLMessageListEntity *)mapMessageListItem:(THLMessageListItem *)messageListItem;
+//- (THLMessageListEntity *)mapMessageListItem:(THLMessageListItem *)messageListItem;
 
 //- (NSArray *)mapUsers:(NSArray *)users;
 - (NSArray<THLEventEntity*> *)mapEvents:(NSArray *)events;

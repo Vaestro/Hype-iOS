@@ -240,16 +240,9 @@
 		FA9D52FC1C689DAC00C14EAD /* THLChatRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9D52FB1C689DAC00C14EAD /* THLChatRoomViewController.m */; };
 		FA9D52FF1C68AB5700C14EAD /* THLChatRoomTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9D52FE1C68AB5700C14EAD /* THLChatRoomTableView.m */; };
 		FAB4887E1C634EA00052FA38 /* THLPubnubManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB4887D1C634EA00052FA38 /* THLPubnubManager.m */; };
-		FAB488821C6367BB0052FA38 /* THLMessageListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB488811C6367BB0052FA38 /* THLMessageListViewModel.m */; };
 		FAB488851C6369110052FA38 /* THLMessageListEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB488841C6369110052FA38 /* THLMessageListEntity.m */; };
 		FAB54DF61C67C5F900F07410 /* THLPubnubQueryFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB54DF51C67C5F900F07410 /* THLPubnubQueryFactory.m */; };
 		FABCC7C11C6F79E6006102C7 /* THLChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = FABCC7C01C6F79E6006102C7 /* THLChannel.m */; };
-		FAE1C2FE1C61FC78005F4C5F /* THLMessageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C2FD1C61FC78005F4C5F /* THLMessageListViewController.m */; };
-		FAE1C3021C62048F005F4C5F /* THLMessageListWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C3011C62048F005F4C5F /* THLMessageListWireframe.m */; };
-		FAE1C3081C620B3F005F4C5F /* THLMessageListInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C3071C620B3F005F4C5F /* THLMessageListInteractor.m */; };
-		FAE1C30B1C620B74005F4C5F /* THLMessageListDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C30A1C620B74005F4C5F /* THLMessageListDataManager.m */; };
-		FAE1C30E1C620B92005F4C5F /* THLMessageListPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C30D1C620B92005F4C5F /* THLMessageListPresenter.m */; };
-		FAE1C3151C6265F6005F4C5F /* THLMessageListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE1C3141C6265F6005F4C5F /* THLMessageListCell.m */; };
 		FAEE45D01C70E4BA0032C91C /* THLChannelService.m in Sources */ = {isa = PBXBuildFile; fileRef = FAEE45CF1C70E4BA0032C91C /* THLChannelService.m */; };
 		FAEE556A1C6E52E5008E66AE /* THLChatListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAEE55691C6E52E5008E66AE /* THLChatListViewController.m */; };
 		FAEE556D1C6E530A008E66AE /* THLChatListTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAEE556C1C6E530A008E66AE /* THLChatListTableView.m */; };
@@ -775,7 +768,6 @@
 		FA0C495C1C6DBF6300A09C76 /* THLChatRoomInputTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLChatRoomInputTextView.m; sourceTree = "<group>"; };
 		FA0C495E1C6DDFF500A09C76 /* THLMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMessage.h; sourceTree = "<group>"; };
 		FA0C495F1C6DDFF500A09C76 /* THLMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLMessage.m; sourceTree = "<group>"; };
-		FA2F5DEB1C63FA1F00765155 /* THLMessageListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMessageListView.h; sourceTree = "<group>"; };
 		FA3408281C6DB2A700D68112 /* THLChatRoomBubbleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLChatRoomBubbleCell.h; sourceTree = "<group>"; };
 		FA3408291C6DB2A700D68112 /* THLChatRoomBubbleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLChatRoomBubbleCell.m; sourceTree = "<group>"; };
 		FA34082A1C6DB2A700D68112 /* THLChatRoomBubbleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THLChatRoomBubbleCell.xib; sourceTree = "<group>"; };
@@ -788,29 +780,12 @@
 		FAB4887C1C634EA00052FA38 /* THLPubnubManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPubnubManager.h; sourceTree = "<group>"; };
 		FAB4887D1C634EA00052FA38 /* THLPubnubManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPubnubManager.m; sourceTree = "<group>"; };
 		FAB4887F1C634F1F0052FA38 /* THLPubnubManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPubnubManagerDelegate.h; sourceTree = "<group>"; };
-		FAB488801C6367BB0052FA38 /* THLMessageListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMessageListViewModel.h; sourceTree = "<group>"; };
-		FAB488811C6367BB0052FA38 /* THLMessageListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLMessageListViewModel.m; sourceTree = "<group>"; };
 		FAB488831C6369110052FA38 /* THLMessageListEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMessageListEntity.h; sourceTree = "<group>"; };
 		FAB488841C6369110052FA38 /* THLMessageListEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLMessageListEntity.m; sourceTree = "<group>"; };
 		FAB54DF41C67C5F900F07410 /* THLPubnubQueryFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPubnubQueryFactory.h; sourceTree = "<group>"; };
 		FAB54DF51C67C5F900F07410 /* THLPubnubQueryFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPubnubQueryFactory.m; sourceTree = "<group>"; };
 		FABCC7BF1C6F79E6006102C7 /* THLChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLChannel.h; sourceTree = "<group>"; };
 		FABCC7C01C6F79E6006102C7 /* THLChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLChannel.m; sourceTree = "<group>"; };
-		FAE1C2FC1C61FC78005F4C5F /* THLMessageListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMessageListViewController.h; sourceTree = "<group>"; };
-		FAE1C2FD1C61FC78005F4C5F /* THLMessageListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLMessageListViewController.m; sourceTree = "<group>"; };
-		FAE1C3001C62048F005F4C5F /* THLMessageListWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMessageListWireframe.h; sourceTree = "<group>"; };
-		FAE1C3011C62048F005F4C5F /* THLMessageListWireframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLMessageListWireframe.m; sourceTree = "<group>"; };
-		FAE1C3061C620B3F005F4C5F /* THLMessageListInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMessageListInteractor.h; sourceTree = "<group>"; };
-		FAE1C3071C620B3F005F4C5F /* THLMessageListInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLMessageListInteractor.m; sourceTree = "<group>"; };
-		FAE1C3091C620B74005F4C5F /* THLMessageListDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMessageListDataManager.h; sourceTree = "<group>"; };
-		FAE1C30A1C620B74005F4C5F /* THLMessageListDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLMessageListDataManager.m; sourceTree = "<group>"; };
-		FAE1C30C1C620B92005F4C5F /* THLMessageListPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMessageListPresenter.h; sourceTree = "<group>"; };
-		FAE1C30D1C620B92005F4C5F /* THLMessageListPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLMessageListPresenter.m; sourceTree = "<group>"; };
-		FAE1C3101C621901005F4C5F /* THLMessageListModuleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMessageListModuleDelegate.h; sourceTree = "<group>"; };
-		FAE1C3111C621922005F4C5F /* THLMessageListModuleInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMessageListModuleInterface.h; sourceTree = "<group>"; };
-		FAE1C3131C6265F6005F4C5F /* THLMessageListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMessageListCell.h; sourceTree = "<group>"; };
-		FAE1C3141C6265F6005F4C5F /* THLMessageListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLMessageListCell.m; sourceTree = "<group>"; };
-		FAE1C3161C626835005F4C5F /* THLMessageListCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMessageListCellView.h; sourceTree = "<group>"; };
 		FAEE45CE1C70E4BA0032C91C /* THLChannelService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLChannelService.h; sourceTree = "<group>"; };
 		FAEE45CF1C70E4BA0032C91C /* THLChannelService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLChannelService.m; sourceTree = "<group>"; };
 		FAEE55681C6E52E5008E66AE /* THLChatListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLChatListViewController.h; sourceTree = "<group>"; };
@@ -1735,7 +1710,6 @@
 				FAB4887B1C634E2E0052FA38 /* Pubnub Module */,
 				FA9D52F01C689D2800C14EAD /* ChatRoom Module */,
 				FAEE55641C6E52B3008E66AE /* ChatList Module */,
-				FAE1C2F41C61F721005F4C5F /* Conversations Module */,
 				790603BE1BFB6EAB0093335E /* Dashboard Module */,
 				211D0BA11B8CED560073AFDD /* Event Detail Module */,
 				2110058D1B8A2F3A00A540C6 /* Event Discovery Module */,
@@ -3200,104 +3174,6 @@
 			path = "Query Module";
 			sourceTree = "<group>";
 		};
-		FAE1C2F41C61F721005F4C5F /* Conversations Module */ = {
-			isa = PBXGroup;
-			children = (
-				FAE1C2F51C61F721005F4C5F /* Components */,
-				FAE1C2F61C61F721005F4C5F /* Interface */,
-				FAE1C2F71C61F721005F4C5F /* UI */,
-			);
-			name = "Conversations Module";
-			path = "СhatRooms Module";
-			sourceTree = "<group>";
-		};
-		FAE1C2F51C61F721005F4C5F /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				FAE1C3031C620ACF005F4C5F /* Data Manager */,
-				FAE1C3041C620ACF005F4C5F /* Interactor */,
-				FAE1C3051C620ACF005F4C5F /* Presenter */,
-				FAE1C2FF1C620458005F4C5F /* Wireframe */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-		FAE1C2F61C61F721005F4C5F /* Interface */ = {
-			isa = PBXGroup;
-			children = (
-				FAE1C3101C621901005F4C5F /* THLMessageListModuleDelegate.h */,
-				FAE1C3111C621922005F4C5F /* THLMessageListModuleInterface.h */,
-			);
-			path = Interface;
-			sourceTree = "<group>";
-		};
-		FAE1C2F71C61F721005F4C5F /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				FAE1C2FB1C61FC78005F4C5F /* View */,
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
-		FAE1C2FB1C61FC78005F4C5F /* View */ = {
-			isa = PBXGroup;
-			children = (
-				FAE1C3121C6265C9005F4C5F /* Cells */,
-				FAE1C2FC1C61FC78005F4C5F /* THLMessageListViewController.h */,
-				FA2F5DEB1C63FA1F00765155 /* THLMessageListView.h */,
-				FAE1C2FD1C61FC78005F4C5F /* THLMessageListViewController.m */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		FAE1C2FF1C620458005F4C5F /* Wireframe */ = {
-			isa = PBXGroup;
-			children = (
-				FAE1C3001C62048F005F4C5F /* THLMessageListWireframe.h */,
-				FAE1C3011C62048F005F4C5F /* THLMessageListWireframe.m */,
-			);
-			path = Wireframe;
-			sourceTree = "<group>";
-		};
-		FAE1C3031C620ACF005F4C5F /* Data Manager */ = {
-			isa = PBXGroup;
-			children = (
-				FAE1C3091C620B74005F4C5F /* THLMessageListDataManager.h */,
-				FAE1C30A1C620B74005F4C5F /* THLMessageListDataManager.m */,
-			);
-			path = "Data Manager";
-			sourceTree = "<group>";
-		};
-		FAE1C3041C620ACF005F4C5F /* Interactor */ = {
-			isa = PBXGroup;
-			children = (
-				FAE1C3061C620B3F005F4C5F /* THLMessageListInteractor.h */,
-				FAE1C3071C620B3F005F4C5F /* THLMessageListInteractor.m */,
-			);
-			path = Interactor;
-			sourceTree = "<group>";
-		};
-		FAE1C3051C620ACF005F4C5F /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				FAE1C30C1C620B92005F4C5F /* THLMessageListPresenter.h */,
-				FAE1C30D1C620B92005F4C5F /* THLMessageListPresenter.m */,
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
-		FAE1C3121C6265C9005F4C5F /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				FAE1C3131C6265F6005F4C5F /* THLMessageListCell.h */,
-				FAE1C3141C6265F6005F4C5F /* THLMessageListCell.m */,
-				FAE1C3161C626835005F4C5F /* THLMessageListCellView.h */,
-				FAB488801C6367BB0052FA38 /* THLMessageListViewModel.h */,
-				FAB488811C6367BB0052FA38 /* THLMessageListViewModel.m */,
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
 		FAEE45CD1C70E4580032C91C /* THLChannelService */ = {
 			isa = PBXGroup;
 			children = (
@@ -3622,7 +3498,6 @@
 				FA34082B1C6DB2A700D68112 /* THLChatRoomBubbleCell.m in Sources */,
 				794AFE451C163541008475B1 /* THLLoginViewController.m in Sources */,
 				FAB54DF61C67C5F900F07410 /* THLPubnubQueryFactory.m in Sources */,
-				FAE1C30E1C620B92005F4C5F /* THLMessageListPresenter.m in Sources */,
 				794AFE131C10A47D008475B1 /* THLHostDashboardInteractor.m in Sources */,
 				790603DB1BFBA8770093335E /* THLEventTicketPromotionView.m in Sources */,
 				79B959231BE57C9D00B87799 /* THLGuestlistReviewWireframe.m in Sources */,
@@ -3653,7 +3528,6 @@
 				212173711BB34F15007D817A /* THLRoundImageView.m in Sources */,
 				C85EE3B51C1BCBDD0008C14B /* THLPerkStoreCellViewModel.m in Sources */,
 				211005CC1B8A767C00A540C6 /* THLEventDiscoveryCellViewModel.m in Sources */,
-				FAE1C3021C62048F005F4C5F /* THLMessageListWireframe.m in Sources */,
 				79B9595D1BE934C000B87799 /* THLPopupNotificationDataManager.m in Sources */,
 				79730CF21C17DC3500D70F4B /* THLUserProfileFooterView.m in Sources */,
 				215A428B1BAA1FFF00D03C35 /* THLNumberVerificationPresenter.m in Sources */,
@@ -3781,16 +3655,13 @@
 				790603C31BFB73380093335E /* THLDashboardWireframe.m in Sources */,
 				FAEE55731C6E5344008E66AE /* THLChatListModel.m in Sources */,
 				795F13661C3C40B500AC9E76 /* THLWaitlistHomeViewController.m in Sources */,
-				FAE1C3151C6265F6005F4C5F /* THLMessageListCell.m in Sources */,
 				C85EE38A1C1BCA200008C14B /* THLPerkDetailWireframe.m in Sources */,
 				2133C9D01C333AD30020083A /* THLWaitlistSignupViewController.m in Sources */,
 				798D7EBF1BF2E56C001D4593 /* OnboardingViewController.m in Sources */,
-				FAE1C2FE1C61FC78005F4C5F /* THLMessageListViewController.m in Sources */,
 				217EBEBA1BB7AB68006044B6 /* THLHostEntity.m in Sources */,
 				211005981B8A319000A540C6 /* THLEventDiscoveryInteractor.m in Sources */,
 				FA0C49601C6DDFF500A09C76 /* THLMessage.m in Sources */,
 				21E402EE1BBF9A8B001D0C2C /* THLGuestEntity.m in Sources */,
-				FAE1C30B1C620B74005F4C5F /* THLMessageListDataManager.m in Sources */,
 				C85EE3831C1BC9920008C14B /* THLPerkDetailViewController.m in Sources */,
 				FAEE557B1C6E5C99008E66AE /* THLChatListItem.m in Sources */,
 				215A42AC1BAA2A1700D03C35 /* THLFacebookProfilePictureURLFetchService.m in Sources */,
@@ -3826,9 +3697,7 @@
 				791C1F8A1BF13BC300CCF803 /* THLEventHostingTableCell.m in Sources */,
 				CBE54720F63BA2DE2136B454 /* THLViewDataSource+Factory.m in Sources */,
 				794AFE271C10C41B008475B1 /* THLHostDashboardTicketCell.m in Sources */,
-				FAB488821C6367BB0052FA38 /* THLMessageListViewModel.m in Sources */,
 				CBE5403C8B7732B36D5ECB5E /* THLViewDataSourceGrouping.m in Sources */,
-				FAE1C3081C620B3F005F4C5F /* THLMessageListInteractor.m in Sources */,
 				79AD95F71C3ADA6200EDB82E /* THLEventDetailMusicTypesView.m in Sources */,
 				CBE547FB5677C373C1DE74C7 /* THLViewDataSourceSorting.m in Sources */,
 				79B959481BE894B800B87799 /* THLPopupNotificationView.m in Sources */,
