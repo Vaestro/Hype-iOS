@@ -57,6 +57,10 @@ THLNumberVerificationModuleDelegate
 	return self;
 }
 
+- (void)presentUserProfileInterfaceInNavigationController:(UINavigationController *)navigationController {
+    [_wireframe presentLoginInterfaceOnNavigationController:navigationController];
+}
+
 - (void)presentLoginModuleInterfaceWithOnboardingInWindow:(UIWindow *)window {
     [_wireframe presentOnboardingInterfaceInWindow:window];
 }
@@ -115,6 +119,7 @@ THLNumberVerificationModuleDelegate
     [_loginView setDismissCommand:dismissCommand];
     [_loginView setLoginCommand:loginCommand];
     _baseViewController = (UIViewController *)_loginView;
+    
 }
 
 #pragma mark - Action Handling
