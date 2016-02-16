@@ -12,7 +12,7 @@
 @protocol THLEventHostingView;
 @class THLEventHostingWireframe;
 @class THLEventHostingInteractor;
-@class THLEventNavigationBar;
+@class THLEventHostingNavigationBar;
 @class THLVenueDetailsView;
 
 @interface THLEventHostingPresenter : NSObject<THLEventHostingModuleInterface>
@@ -23,6 +23,6 @@
                         interactor:(THLEventHostingInteractor *)interactor;
 
 - (void)configureView:(id<THLEventHostingView>)view;
-- (void)configureNavigationBar:(THLEventNavigationBar *)navBar;
+- (void)configureNavigationBar:(THLEventHostingNavigationBar *)navBar;
 - (void)configureVenueDetailsView:(THLVenueDetailsView *)venueDetailsView;
 @end

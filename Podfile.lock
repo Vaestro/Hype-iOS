@@ -251,7 +251,7 @@ DEPENDENCIES:
   - OCMock (= 3.1.2)
   - Optimizely-iOS-SDK
   - ORStackView
-  - Parse (~> 1.11.0)
+  - Parse (= 1.11.0)
   - ParseFacebookUtilsV4
   - PhoneKit
   - PubNub (~> 4.2)

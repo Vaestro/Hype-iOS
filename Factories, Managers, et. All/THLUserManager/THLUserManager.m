@@ -58,7 +58,20 @@
 }
 
 + (BOOL)isFacebookLinkedWithUser {
-    return [PFFacebookUtils isLinkedWithUser:[self currentUser]];
+    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil];
+    __block BOOL isLinked = FALSE;
+    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+        if (!error) {
+            // handle successful response
+            isLinked = [PFFacebookUtils isLinkedWithUser:[self currentUser]];
+        } else if ([[error userInfo][@"error"][@"type"] isEqualToString: @"OAuthException"]) { // Since the request failed, we can check if it was due to an invalid session
+            NSLog(@"The facebook session was invalidated");
+            [PFFacebookUtils unlinkUserInBackground:[PFUser currentUser]];
+        } else {
+            NSLog(@"Some other error: %@", error);
+        }
+    }];
+    return isLinked;
 }
 
 + (void)logUserOut{

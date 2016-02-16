@@ -12,7 +12,7 @@
 #import "THLEventHostingInteractor.h"
 #import "THLViewDataSource.h"
 
-#import "THLEventNavigationBar.h"
+#import "THLEventHostingNavigationBar.h"
 #import "THLEventHostingView.h"
 
 #import "THLUser.h"
@@ -70,7 +70,7 @@
     [_view setRefreshCommand:refreshCommand];
 }
 
-- (void)configureNavigationBar:(THLEventNavigationBar *)navBar {
+- (void)configureNavigationBar:(THLEventHostingNavigationBar *)navBar {
     WEAKSELF();
     [navBar setTitleText:_eventEntity.location.name];
     [navBar setLocationImageURL:_eventEntity.location.imageURL];
