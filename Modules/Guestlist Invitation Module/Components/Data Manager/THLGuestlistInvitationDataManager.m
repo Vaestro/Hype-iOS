@@ -44,6 +44,7 @@
 
 - (BFTask *)submitGuestlistForEvent:(THLEventEntity *)eventEntity withInvites:(NSArray *)guestPhoneNumbers {
     return [[_guestlistService createGuestlistForEvent:eventEntity withInvites:guestPhoneNumbers] continueWithSuccessBlock:^id(BFTask *task) {
+        
         return [BFTask taskWithResult:nil];
     }];
 }

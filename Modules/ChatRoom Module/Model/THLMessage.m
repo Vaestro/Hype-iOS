@@ -50,7 +50,7 @@
         self.time = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];
         self.userID = user.objectId;
         self.userImageURL = user.image.url;
-        self.userName = user.username;
+        self.userName = user.firstName;
     }
     return self;
 }
@@ -61,6 +61,14 @@
                                                         self.time, @"time",
                                                         [THLUser currentUser].image.url, @"userImageURL",
                                                         self.userName, @"userName", nil];
+}
+
+- (NSDictionary *)toObjectWithUser:(THLUser *)user {
+    return [[NSDictionary alloc] initWithObjectsAndKeys:self.text, @"text",
+            self.userID, @"userID",
+            self.time, @"time",
+            user.image.url, @"userImageURL",
+            self.userName, @"userName", nil];
 }
 
 

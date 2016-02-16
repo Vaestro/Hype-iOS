@@ -137,6 +137,13 @@
     }];
 }
 
+- (void)publishFirstMessageFromChannel:(NSString *)channel withUser:(NSString *)userID {
+    THLUser *user = [THLUser objectWithoutDataWithObjectId:userID];
+    THLMessage *message = [[THLMessage alloc] initWithText:@"Hello, I am host" andUser:user];
+    [self.client publish:[message toObjectWithUser:user] toChannel:channel compressed:YES withCompletion:^(PNPublishStatus *status) {
+    }];
+}
+
 - (void)subscribeWithChannels:(NSArray *)channels {
     [self.client unsubscribeFromAll];
     [[UIApplication sharedApplication] registerForRemoteNotifications];

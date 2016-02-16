@@ -23,5 +23,6 @@
 - (instancetype)initWithText:(NSString *)text andUser:(THLUser *)user;
 
 - (NSDictionary *)toObject;
+- (NSDictionary *)toObjectWithUser:(THLUser *)user;
 
 @end

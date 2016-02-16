@@ -15,6 +15,9 @@
 #import "THLLocationEntity.h"
 #import "THLUser.h"
 #import "THLBeaconEntity.h"
+#import "THLPubnubManager.h"
+#import "THLChannelService.h"
+#import "THLHostEntity.h"
 #import "THLBeacon.h"
 
 @implementation THLGuestlistService
@@ -140,10 +143,16 @@
                                         block:^(id guestlistInvite, NSError *cloudError) {
                                             if (!cloudError){
                                                 [completionSource setResult:nil];
+                                                
+                                                THLChannelService *service = [[THLChannelService alloc] init];
+                                                [service createChannelForOwner:currentUser.objectId andHost:eventEntity.host.objectId withGuestlist:guestlist.objectId expireEvent:eventEntity.date];
+                                                [[THLPubnubManager sharedInstance] publishFirstMessageFromChannel:[NSString stringWithFormat:@"%@_host", guestlist.objectId] withUser:eventEntity.host.objectId];
                                             } else {
                                                 [completionSource setError:cloudError];
                                             }
                                         }];
+            
+            
         } else {
             [completionSource setError:error];
         }

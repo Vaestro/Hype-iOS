@@ -14,6 +14,7 @@
 #import "THLGuestlistInvite.h"
 #import "THLChannelService.h"
 #import "THLEventEntity.h"
+#import "THLPubnubManager.h"
 
 static NSString *const kGuestEntityFirstNameKey = @"firstName";
 static NSString *const kGuestEntityLastNameKey = @"lastName";
@@ -151,6 +152,7 @@ static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInv
                 [WSELF.delegate interactor:WSELF didCommitChangesToGuestlist:task.error];
                 
                 //!!
+
 //                if (_guestlistId != nil) {
 //                THLChannelService *service = [[THLChannelService alloc] init];
 //                [service createChannelForOwner:[THLUser currentUser].objectId andHost:@"235" withGuestlist:_guestlistId];
