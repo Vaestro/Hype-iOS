@@ -270,7 +270,7 @@
     }];
     
     [self.chatGroupButton remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(WSELF.leaveGuestlistButton.mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.top.equalTo(WSELF.eventDetailsButton.mas_bottom).insets(kTHLEdgeInsetsHigh());
         make.left.equalTo(WSELF.groupChatIcon.mas_right).insets(kTHLEdgeInsetsHigh());
     }];
 }

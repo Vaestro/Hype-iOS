@@ -13,6 +13,7 @@
 #import "THLEventDiscoveryWireframe.h"
 #import "THLUserProfileWireframe.h"
 #import "THLHostDashboardWireframe.h"
+#import "THLChatListViewController.h"
 
 #import "THLEventHostingWireframe.h"
 #import "THLGuestlistReviewWireframe.h"
@@ -60,18 +61,21 @@ THLGuestlistReviewModuleDelegate
 
 - (void)configureMasterTabViewController:(UITabBarController *)masterTabViewController {
     UINavigationController *discovery = [UINavigationController new];
+    UINavigationController *chat = [UINavigationController new];
     UINavigationController *dashboard = [UINavigationController new];
     UINavigationController *profile = [UINavigationController new];
     
     [self presentEventDiscoveryInterfaceInNavigationController:discovery];
+    [self presentMessageListInterfaceInNavigationController:chat];
     [self presentDashboardInterfaceInNavigationController:dashboard];
     [self presentUserProfileInterfaceInNavigationController:profile];
     
     dashboard.tabBarItem.image = [UIImage imageNamed:@"Lists Icon"];
+    chat.tabBarItem.image = [UIImage imageNamed:@"Lists Icon"];
     discovery.tabBarItem.image = [UIImage imageNamed:@"Home Icon"];
     profile.tabBarItem.image = [UIImage imageNamed:@"Profile Icon"];
     
-    NSArray *views = @[discovery, dashboard, profile];
+    NSArray *views = @[discovery, chat, dashboard, profile];
     
     masterTabViewController.viewControllers = views;
     masterTabViewController.view.autoresizingMask=(UIViewAutoresizingFlexibleHeight);
@@ -100,6 +104,11 @@ THLGuestlistReviewModuleDelegate
     _currentWireframe = _eventDiscoveryWireframe;
     [_eventDiscoveryWireframe.moduleInterface setModuleDelegate:self];
     [_eventDiscoveryWireframe.moduleInterface presentEventDiscoveryInterfaceInNavigationController:navigationController];
+}
+
+- (void)presentMessageListInterfaceInNavigationController:(UINavigationController *)navigationController {
+    THLChatListViewController *chtlvtrl = [[THLChatListViewController alloc] init];
+    [navigationController showViewController:chtlvtrl sender:nil];
 }
 
 - (void)presentDashboardInterfaceInNavigationController:(UINavigationController *)navigationController {

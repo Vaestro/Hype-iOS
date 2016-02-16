@@ -109,7 +109,7 @@ static NSString *const kChannelListRecievedNotification = @"kDataChannelListSetu
     NSMutableArray *channels = [[NSMutableArray alloc] init];
     for (THLChannel *channel in objects) {
         NSComparisonResult order = [channel.guestlistId.date compare:[NSDate date]];
-        if (order == NSOrderedAscending) {
+        if (order == NSOrderedAscending || channel.guestlistId == nil) {
             break;
         }
         [self.allChannels setObject:channel.guestlistId.event forKey:channel.guestlistId.objectId];

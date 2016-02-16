@@ -360,11 +360,11 @@ THLGuestlistReviewInteractorDelegate
     THLChatListItem *item;
     if (type == 0) {
         THLChannelService *service = [[THLChannelService alloc] init];
-        [service createChannelForOwner:_guestlistEntity.owner.objectId andHost:_guestlistEntity.event.host.objectId withGuestlist:_guestlistEntity.objectId];
+        [service createChannelForOwner:_guestlistEntity.owner.objectId andHost:_guestlistEntity.event.host.objectId withGuestlist:_guestlistEntity.objectId expireEvent:_guestlistEntity.event.date];
         item = [[THLChatListItem alloc] initWithChannel:[NSString stringWithFormat:@"%@_host", _guestlistEntity.objectId] andTitle:@"HOST"];
     } else {
         THLChannelService *service = [[THLChannelService alloc] init];
-        [service createChannelForGuest:[THLUser currentUser].objectId withGuestlist:_guestlistEntity.objectId];
+        [service createChannelForGuest:[THLUser currentUser].objectId withGuestlist:_guestlistEntity.objectId expireEvent:_guestlistEntity.event.date];
         item = [[THLChatListItem alloc] initWithChannel:[NSString stringWithFormat:@"%@_guestlist", _guestlistEntity.objectId] andTitle:@"GROUP"];
     }
     [self presentChatRoomController: item];

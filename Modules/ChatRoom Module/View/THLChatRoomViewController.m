@@ -112,11 +112,14 @@ CGFloat const kBottomBarHeight = 64.0;
                          CGRect tableViewFrame = self.tableView.frame;
                          CGRect inputViewFrame = self.textField.frame;
                          
-                         tableViewFrame.size.height = (keyboardEndFrame.origin.y - tableViewFrame.origin.y - kInputFieldHeight);
+                         //tableViewFrame.size.height = (keyboardEndFrame.origin.y - tableViewFrame.origin.y - kInputFieldHeight);
+                         tableViewFrame.size.height = self.view.frame.size.height - kInputFieldHeight - keyboardEndFrame.size.height;
                          inputViewFrame.origin.y = self.view.frame.size.height - kInputFieldHeight - keyboardEndFrame.size.height;
                          self.tableView.frame = tableViewFrame;
                          self.textField.frame = inputViewFrame;
-                     } completion:nil];
+                     } completion:^(BOOL finished) {
+                         [self.tableView scrollToBottomWithAnimated:NO];
+                     }];
 }
 
 // Called when the UIKeyboardWillHideNotification is sent

@@ -9,7 +9,7 @@
 #import "THLChatRoomTableView.h"
 #import "THLChatRoomBubbleCell.h"
 
-NSString * const BUBLE_CELL_IDENTIFIER = @"THLChatRoomBubbleCell";
+NSString * const BUBBLE_CELL_IDENTIFIER = @"THLChatRoomBubbleCell";
 
 @interface THLChatRoomTableView ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -26,7 +26,7 @@ NSString * const BUBLE_CELL_IDENTIFIER = @"THLChatRoomBubbleCell";
         self.tableView = [[UITableView alloc] initWithFrame:self.frame style:UITableViewStyleGrouped];
         self.tableView.backgroundColor = UIColor.clearColor;
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [self.tableView registerNib:[UINib nibWithNibName:BUBLE_CELL_IDENTIFIER bundle:nil] forCellReuseIdentifier:BUBLE_CELL_IDENTIFIER];
+        [self.tableView registerNib:[UINib nibWithNibName:BUBBLE_CELL_IDENTIFIER bundle:nil] forCellReuseIdentifier:BUBBLE_CELL_IDENTIFIER];
         self.tableView.dataSource = self;
         self.tableView.delegate = self;
         self.tableView.estimatedRowHeight = 77.0;
@@ -73,7 +73,7 @@ NSString * const BUBLE_CELL_IDENTIFIER = @"THLChatRoomBubbleCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    THLChatRoomBubbleCell *cell = [tableView dequeueReusableCellWithIdentifier:BUBLE_CELL_IDENTIFIER forIndexPath:indexPath];
+    THLChatRoomBubbleCell *cell = [tableView dequeueReusableCellWithIdentifier:BUBBLE_CELL_IDENTIFIER forIndexPath:indexPath];
 
     [cell setMessage:[self.dataSource tableView:self messageAtIndex:indexPath.section]];
     //[cell setMessage:@"This is long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long TEXT"];

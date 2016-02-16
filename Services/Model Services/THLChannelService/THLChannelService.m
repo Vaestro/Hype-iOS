@@ -14,22 +14,24 @@
 
 @implementation THLChannelService
 
-- (void)createChannelForGuest:(NSString *)guestId withGuestlist:(NSString *)guestlistId {
+- (void)createChannelForGuest:(NSString *)guestId withGuestlist:(NSString *)guestlistId expireEvent:(NSDate *)date {
     
     PFObject *channel = [PFObject objectWithClassName:@"Channel"];
     channel[@"guestId"] = [THLUser objectWithoutDataWithObjectId:guestId];
     channel[@"guestlistId"] = [THLGuestlist objectWithoutDataWithObjectId:guestlistId];
+    channel[@"date"] = date;
     [channel saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         //
     }];
 }
 
 - (void)createChannelForOwner:(NSString *)ownerId andHost:(NSString *)hostId
-    withGuestlist:(NSString *)guestlistId {
+                withGuestlist:(NSString *)guestlistId expireEvent:(NSDate *)date {
     PFObject *channel = [PFObject objectWithClassName:@"Channel"];
     channel[@"ownerId"] = [THLUser objectWithoutDataWithObjectId:ownerId];
     channel[@"hostId"] = [THLUser objectWithoutDataWithObjectId:hostId];
     channel[@"guestlistId"] = [THLGuestlist objectWithoutDataWithObjectId:guestlistId];
+    channel[@"date"] = date;
     [channel saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         //
     }];

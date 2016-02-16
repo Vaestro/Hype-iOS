@@ -141,12 +141,10 @@
     PFQuery *query = [PFQuery orQueryWithSubqueries:@[guestQuery,
                                                       hostQuery,
                                                       ownerQuery]];
+    [query whereKey:@"date" greaterThan:[NSDate date]];
     [query includeKey:@"guestlistId"];
     [query includeKey:@"guestlistId.event"];
     [query includeKey:@"guestlistId.event.location"];
-//    PFQuery *query2 = [PFQuery queryWithClassName:@"Guestlist"];
-//    [query2 whereKey:@"date" greaterThan:[NSDate date]];
-//    [query wh]
     
     return query;
 }
@@ -161,6 +159,7 @@
     PFQuery *query = [PFQuery orQueryWithSubqueries:@[guestQuery,
                                                       hostQuery,
                                                       ownerQuery]];
+    [query whereKey:@"date" greaterThan:[NSDate date]];
     [query includeKey:@"guestlistId"];
     [query includeKey:@"guestlistId.event"];
     [query includeKey:@"guestlistId.event.location"];
@@ -174,6 +173,7 @@
     [guestlistQuery whereKey:@"guestlistId" equalTo:user];
     PFQuery *query = [PFQuery orQueryWithSubqueries:@[hostQuery,
                                                       guestlistQuery]];
+    [query whereKey:@"date" greaterThan:[NSDate date]];
     [query includeKey:@"guestlistId"];
     [query includeKey:@"guestlistId.event"];
     [query includeKey:@"guestlistId.event.location"];
@@ -187,6 +187,7 @@
     [guestlistQuery whereKey:@"guestlistId" equalTo:user];
     PFQuery *query = [PFQuery orQueryWithSubqueries:@[guestQuery,
                                                       guestlistQuery]];
+    [query whereKey:@"date" greaterThan:[NSDate date]];
     [query includeKey:@"guestlistId"];
     [query includeKey:@"guestlistId.event"];
     [query includeKey:@"guestlistId.event.location"];
@@ -200,6 +201,7 @@
     [guestlistQuery whereKey:@"guestlistId" equalTo:user];
     PFQuery *query = [PFQuery orQueryWithSubqueries:@[ownerQuery,
                                                       guestlistQuery]];
+    [query whereKey:@"date" greaterThan:[NSDate date]];
     [query includeKey:@"guestlistId"];
     [query includeKey:@"guestlistId.event"];
     [query includeKey:@"guestlistId.event.location"];
