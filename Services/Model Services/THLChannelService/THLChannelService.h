@@ -10,8 +10,8 @@
 
 @interface THLChannelService : NSObject
 
-- (void)createChannelForGuest:(NSString *)guestId withGuestlist:(NSString *)guestlistId;
+- (void)createChannelForGuest:(NSString *)guestId withGuestlist:(NSString *)guestlistId expireEvent:(NSDate *)date;
 - (void)createChannelForOwner:(NSString *)ownerId andHost:(NSString *)hostId
-                withGuestlist:(NSString *)guestlistId;
+                withGuestlist:(NSString *)guestlistId expireEvent:(NSDate *)date;
 
 @end
