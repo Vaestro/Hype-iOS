@@ -85,8 +85,8 @@ THLPerkStoreModuleDelegate
     UINavigationController *profile = [UINavigationController new];
     
     [self presentMessageListInterfaceInNavigationController:messages];
-    [self presentEventDiscoveryInterfaceInNavigationController:discovery];
     [self presentDashboardInterfaceInNavigationController:dashboard];
+    [self presentEventDiscoveryInterfaceInNavigationController:discovery];
     [self presentPerkStoreInterfaceInNavigationController:perks];
     [self presentUserProfileInterfaceInNavigationController:profile];
     
@@ -96,13 +96,12 @@ THLPerkStoreModuleDelegate
     profile.tabBarItem.image = [UIImage imageNamed:@"Profile Icon"];
     perks.tabBarItem.image = [UIImage imageNamed:@"Perks Icon"];
     
-    NSArray *views = @[discovery, messages, dashboard, perks, profile];
+    NSArray *views = @[messages, dashboard, discovery, perks, profile];
     
     _masterTabBarController.viewControllers = views;
+    [_masterTabBarController setSelectedIndex:2];
     _masterTabBarController.view.autoresizingMask=(UIViewAutoresizingFlexibleHeight);
 }
-
-
 
 - (void)presentGuestFlowInWindow:(UIWindow *)window forEventDetail:(THLEventEntity *)eventEntity {
     /**
