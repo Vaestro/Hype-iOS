@@ -135,7 +135,7 @@ THLNumberVerificationModuleDelegate
 
 - (void)handleUserLoginAction {
 	[_interactor login];
-}
+};
 
 #pragma mark - Routing
 - (void)reroute {
