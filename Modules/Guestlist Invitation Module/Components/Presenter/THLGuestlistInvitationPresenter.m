@@ -72,6 +72,7 @@ THLGuestlistInvitationViewEventHandler
     self.submitting = NO;
     if(!error) {
         [_wireframe dismissInterface];
+        
     } else {
         
     }
