@@ -128,6 +128,9 @@
     BranchLinkProperties *linkProperties = [[BranchLinkProperties alloc] init];
     [linkProperties addControlParam:@"$ios_url" withValue:@"hypeup://"];
     
+//    linkProperties.feature = @"sharing";
+//    linkProperties.channel = @"facebook";
+    
     UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
     
     while (topController.presentedViewController) {
@@ -135,7 +138,7 @@
     }
     
     [branchUniversalObject showShareSheetWithLinkProperties:linkProperties
-                                               andShareText:@"Super amazing app I want to share!"
+                                               andShareText:@"Get ready for an easier way to go clubbing!"
                                          fromViewController:topController
                                                  completion:^(NSString *activityType, BOOL completed) {
                                                      NSLog(@"finished presenting");
