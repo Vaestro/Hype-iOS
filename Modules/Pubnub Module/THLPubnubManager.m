@@ -118,6 +118,12 @@
     
 }
 
+- (void)subscribeWithChannel:(NSString *)channel {
+    [self.client unsubscribeFromAll];
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    [self.client subscribeToChannels:@[channel] withPresence:NO];
+}
+
 - (void)fetchHistoryForChannel:(NSString *)channel withCompletion:(void (^)(PNHistoryResult *))success {
     [self.client historyForChannel:channel withCompletion:^(PNHistoryResult *result, PNErrorStatus *status) {
         success(result);

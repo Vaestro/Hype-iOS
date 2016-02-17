@@ -43,6 +43,7 @@ CGFloat const kBottomBarHeight = 64.0;
     [super viewDidLoad];
     
     [[THLPubnubManager sharedInstance] setDelegate:self];
+    [[THLPubnubManager sharedInstance] subscribeWithChannel:self.currentChatItem.channel];
     self.navigationItem.title = self.currentChatItem.title;
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;

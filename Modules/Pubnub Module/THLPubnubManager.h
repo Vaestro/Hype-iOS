@@ -27,6 +27,7 @@
 - (void)fetchHistoryWithCompletion:(void (^)(NSArray *))success;
 - (void)fetchHistoryForChannel:(NSString *)channel withCompletion:(void (^)(PNHistoryResult *))success;
 
+- (void)subscribeWithChannel:(NSString *)channel;
 - (void)publishMessage:(THLMessage *)message withChannel:(NSString *)channel withCompletion:(void (^)(NSString *))success;
 - (void)publishFirstMessageFromChannel:(NSString *)channel withUser:(THLHostEntity *)userID;
 - (void)subscribeWithChannels:(NSArray *)channels;
