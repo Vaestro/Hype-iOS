@@ -31,7 +31,7 @@
     self.tableView = [[THLChatListTableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tableView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
+    self.tableView.backgroundColor = kTHLNUISecondaryBackgroundColor;
     [self.view addSubview:self.tableView];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMessageData:) name:@"kDataChatListSetupNotification" object:nil];

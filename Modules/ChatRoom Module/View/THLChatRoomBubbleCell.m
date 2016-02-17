@@ -33,7 +33,6 @@
     self.photoImageView.layer.cornerRadius = self.photoImageView.frame.size.width / 2;
     self.photoImageView.clipsToBounds = true;
     self.containerView.layer.cornerRadius = 2;
-    self.contentView.backgroundColor = [UIColor clearColor];
     // Initialization code
 }
 
