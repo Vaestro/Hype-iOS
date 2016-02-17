@@ -8,6 +8,7 @@
 
 #import "THLPubnubManager.h"
 #import "THLUser.h"
+#import "THLHostEntity.h"
 
 @interface THLPubnubManager ()<PNObjectEventListener>
 
@@ -64,7 +65,7 @@
                                                          // of which request did fail. Request can be resent using: [status retry];
                                                      }];
     
-    [self.client addPushNotificationsOnChannels:@[@""]
+    [self.client addPushNotificationsOnChannels:self.client.channels
                             withDevicePushToken:deviceToken andCompletion:^(PNAcknowledgmentStatus *status) {
                                 
                                 NSLog(@"status: %@", status);
@@ -117,6 +118,12 @@
     
 }
 
+- (void)subscribeWithChannel:(NSString *)channel {
+    [self.client unsubscribeFromAll];
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    [self.client subscribeToChannels:@[channel] withPresence:NO];
+}
+
 - (void)fetchHistoryForChannel:(NSString *)channel withCompletion:(void (^)(PNHistoryResult *))success {
     [self.client historyForChannel:channel withCompletion:^(PNHistoryResult *result, PNErrorStatus *status) {
         success(result);
@@ -128,20 +135,29 @@
 }
 
 - (void)publishMessage:(THLMessage *)message withChannel:(NSString *)channel withCompletion:(void (^)(NSString *))success {
-    [self.client publish:[message toObject] toChannel:channel compressed:YES withCompletion:^(PNPublishStatus *status) {
-        if (status) {
-            success(@"ok");
-        } else {
-            success(@"error");
-        }
+//    [self.client publish:[message toObject] toChannel:channel compressed:YES withCompletion:^(PNPublishStatus *status) {
+//        if (status) {
+//            success(@"ok");
+//        } else {
+//            success(@"error");
+//        }
+//    }];
+    
+    [self.client publish:[message toObject] toChannel:channel mobilePushPayload:@{@"aps":@{@"alert":message.text}} compressed:YES withCompletion:^(PNPublishStatus *status) {
+        //
     }];
 }
 
-- (void)publishFirstMessageFromChannel:(NSString *)channel withUser:(NSString *)userID {
-    THLUser *user = [THLUser objectWithoutDataWithObjectId:userID];
-    THLMessage *message = [[THLMessage alloc] initWithText:@"Hello, I am host" andUser:user];
-    [self.client publish:[message toObjectWithUser:user] toChannel:channel compressed:YES withCompletion:^(PNPublishStatus *status) {
+- (void)publishFirstMessageFromChannel:(NSString *)channel withUser:(THLHostEntity *)user {
+    //THLUser *user = [THLUser objectWithoutDataWithObjectId:userID];
+    THLMessage *message = [[THLMessage alloc] initWithText:@"Hello, I am host" andHost:user];
+    
+    [self.client publish:[message toObjectWithUser:user] toChannel:channel mobilePushPayload:@{@"aps":@{@"alert":message.text}} compressed:YES withCompletion:^(PNPublishStatus *status) {
+        //
     }];
+    
+//    [self.client publish:[message toObjectWithUser:user] toChannel:channel compressed:YES withCompletion:^(PNPublishStatus *status) {
+//    }];
 }
 
 - (void)subscribeWithChannels:(NSArray *)channels {

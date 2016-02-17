@@ -55,6 +55,19 @@
     return self;
 }
 
+- (instancetype)initWithText:(NSString *)text andHost:(THLHostEntity *)user
+{
+    self = [super init];
+    if (self) {
+        self.text = text;
+        self.time = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];
+        self.userID = user.objectId;
+        self.userImageURL = [user.imageURL absoluteString];
+        self.userName = user.firstName;
+    }
+    return self;
+}
+
 - (NSDictionary *)toObject {
     return [[NSDictionary alloc] initWithObjectsAndKeys:self.text, @"text",
                                                         self.userID, @"userID",
@@ -63,11 +76,11 @@
                                                         self.userName, @"userName", nil];
 }
 
-- (NSDictionary *)toObjectWithUser:(THLUser *)user {
+- (NSDictionary *)toObjectWithUser:(THLHostEntity *)user {
     return [[NSDictionary alloc] initWithObjectsAndKeys:self.text, @"text",
             self.userID, @"userID",
             self.time, @"time",
-            user.image.url, @"userImageURL",
+            [user.imageURL absoluteString], @"userImageURL",
             self.userName, @"userName", nil];
 }
 

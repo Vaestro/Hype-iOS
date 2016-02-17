@@ -146,7 +146,7 @@
                                                 
                                                 THLChannelService *service = [[THLChannelService alloc] init];
                                                 [service createChannelForOwner:currentUser.objectId andHost:eventEntity.host.objectId withGuestlist:guestlist.objectId expireEvent:eventEntity.date];
-                                                [[THLPubnubManager sharedInstance] publishFirstMessageFromChannel:[NSString stringWithFormat:@"%@_host", guestlist.objectId] withUser:eventEntity.host.objectId];
+                                                [[THLPubnubManager sharedInstance] publishFirstMessageFromChannel:[NSString stringWithFormat:@"%@_host", guestlist.objectId] withUser:eventEntity.host];
                                             } else {
                                                 [completionSource setError:cloudError];
                                             }

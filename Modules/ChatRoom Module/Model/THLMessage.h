@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "THLHostEntity.h"
 
 @class THLUser;
 
@@ -21,8 +22,9 @@
 - (instancetype)initWithResult:(NSDictionary *)data;
 - (instancetype)initWithText:(NSString *)text;
 - (instancetype)initWithText:(NSString *)text andUser:(THLUser *)user;
+- (instancetype)initWithText:(NSString *)text andHost:(THLHostEntity *)user;
 
 - (NSDictionary *)toObject;
-- (NSDictionary *)toObjectWithUser:(THLUser *)user;
+- (NSDictionary *)toObjectWithUser:(THLHostEntity *)user;
 
 @end
