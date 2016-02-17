@@ -65,7 +65,7 @@
                                                          // of which request did fail. Request can be resent using: [status retry];
                                                      }];
     
-    [self.client addPushNotificationsOnChannels:@[@""]
+    [self.client addPushNotificationsOnChannels:self.client.channels
                             withDevicePushToken:deviceToken andCompletion:^(PNAcknowledgmentStatus *status) {
                                 
                                 NSLog(@"status: %@", status);
@@ -129,12 +129,16 @@
 }
 
 - (void)publishMessage:(THLMessage *)message withChannel:(NSString *)channel withCompletion:(void (^)(NSString *))success {
-    [self.client publish:[message toObject] toChannel:channel compressed:YES withCompletion:^(PNPublishStatus *status) {
-        if (status) {
-            success(@"ok");
-        } else {
-            success(@"error");
-        }
+//    [self.client publish:[message toObject] toChannel:channel compressed:YES withCompletion:^(PNPublishStatus *status) {
+//        if (status) {
+//            success(@"ok");
+//        } else {
+//            success(@"error");
+//        }
+//    }];
+    
+    [self.client publish:[message toObject] toChannel:channel mobilePushPayload:@{@"aps":@{@"alert":message.text}} compressed:YES withCompletion:^(PNPublishStatus *status) {
+        //
     }];
 }
 
@@ -142,8 +146,12 @@
     //THLUser *user = [THLUser objectWithoutDataWithObjectId:userID];
     THLMessage *message = [[THLMessage alloc] initWithText:@"Hello, I am host" andHost:user];
     
-    [self.client publish:[message toObjectWithUser:user] toChannel:channel compressed:YES withCompletion:^(PNPublishStatus *status) {
+    [self.client publish:[message toObjectWithUser:user] toChannel:channel mobilePushPayload:@{@"aps":@{@"alert":message.text}} compressed:YES withCompletion:^(PNPublishStatus *status) {
+        //
     }];
+    
+//    [self.client publish:[message toObjectWithUser:user] toChannel:channel compressed:YES withCompletion:^(PNPublishStatus *status) {
+//    }];
 }
 
 - (void)subscribeWithChannels:(NSArray *)channels {
