@@ -21,6 +21,8 @@
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UIImageView *scrollUpIcon;
 @property (nonatomic, strong) UILabel *minimumTitleLabel;
+@property (nonatomic) int numberOfLayouts;
+
 @end
 
 @implementation THLEventNavigationBar
@@ -30,6 +32,7 @@
         [self layoutView];
         [self bindView];
         self.userInteractionEnabled = YES;
+        _numberOfLayouts = 0;
     }
     return self;
 }
@@ -139,17 +142,20 @@
 }
 
 - (void)addGradientLayer {
-    CAGradientLayer *gradient = [CAGradientLayer layer];
-    
-    gradient.frame = self.imageView.bounds;
-    gradient.colors = @[(id)[UIColor clearColor].CGColor,
-                        (id)[UIColor blackColor].CGColor,
-                        (id)[UIColor blackColor].CGColor,
-                        (id)[UIColor clearColor].CGColor];
-    gradient.locations = @[@0.0, @0.25, @0.25, @1.0];
-    
-    self.imageView.layer.mask = gradient;
-
+#warning some hacky shit to make sure the gradient layer doesnt draw again so you cant see the event image
+    if (_numberOfLayouts < 2) {
+        CAGradientLayer *gradient = [CAGradientLayer layer];
+        
+        gradient.frame = self.imageView.bounds;
+        gradient.colors = @[(id)[UIColor clearColor].CGColor,
+                            (id)[UIColor blackColor].CGColor,
+                            (id)[UIColor blackColor].CGColor,
+                            (id)[UIColor clearColor].CGColor];
+        gradient.locations = @[@0.0, @0.25, @0.25, @1.0];
+        
+        self.imageView.layer.mask = gradient;
+        _numberOfLayouts += 1;
+    }
 }
 
 - (void)showExplanationView {
@@ -240,6 +246,8 @@
     BLKFlexibleHeightBarSubviewLayoutAttributes *finalLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
     finalLayoutAttributes.alpha = 0.0;
     [imageView addLayoutAttributes:finalLayoutAttributes forProgress:1.0];
+    
+    return imageView;
 }
 
 - (UIImageView *)newScrollUpIcon {

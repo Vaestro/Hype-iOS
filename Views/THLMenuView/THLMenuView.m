@@ -105,7 +105,8 @@
     
     [_addGuestsButton makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo([WSELF addIcon].mas_right).insets(kTHLEdgeInsetsSuperHigh());
-     make.top.equalTo(_hostNameLabel.mas_bottom).insets(kTHLEdgeInsetsInsanelyHigh());    }];
+        make.top.equalTo(_hostNameLabel.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+    }];
 
     [_leaveIcon makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(kTHLEdgeInsetsInsanelyHigh());
@@ -114,7 +115,7 @@
     
     [_leaveGuestlistButton makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo([WSELF leaveIcon].mas_right).insets(kTHLEdgeInsetsSuperHigh());
-        make.top.equalTo(WSELF.addGuestsButton.mas_bottom).insets(kTHLEdgeInsetsInsanelyHigh());
+        make.top.equalTo(WSELF.addGuestsButton.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
     }];
     
     [_calendarIcon makeConstraints:^(MASConstraintMaker *make) {
@@ -124,7 +125,7 @@
     
     [_eventDetailsButton makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo([WSELF calendarIcon].mas_right).insets(kTHLEdgeInsetsSuperHigh());
-        make.top.equalTo(WSELF.leaveGuestlistButton.mas_bottom).insets(kTHLEdgeInsetsInsanelyHigh());
+        make.top.equalTo(WSELF.leaveGuestlistButton.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
     }];
     
     [_hostChatIcon makeConstraints:^(MASConstraintMaker *make) {
@@ -134,7 +135,7 @@
 
     [_chatHostButton makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo([WSELF hostChatIcon].mas_right).insets(kTHLEdgeInsetsSuperHigh());
-        make.top.equalTo(WSELF.eventDetailsButton.mas_bottom).insets(kTHLEdgeInsetsInsanelyHigh());
+        make.top.equalTo(WSELF.eventDetailsButton.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
     }];
     
     [_groupChatIcon makeConstraints:^(MASConstraintMaker *make) {
@@ -144,7 +145,7 @@
     
     [_chatGroupButton makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo([WSELF groupChatIcon].mas_right).insets(kTHLEdgeInsetsSuperHigh());
-        make.top.equalTo(WSELF.chatHostButton.mas_bottom).insets(kTHLEdgeInsetsInsanelyHigh());
+        make.top.equalTo(WSELF.chatHostButton.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
     }];
 
     [_cancelButton makeConstraints:^(MASConstraintMaker *make) {
@@ -216,12 +217,12 @@
     
     [_eventDetailsButton remakeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo([WSELF calendarIcon].mas_right).insets(kTHLEdgeInsetsSuperHigh());
-        make.top.equalTo(WSELF.addGuestsButton.mas_bottom).insets(kTHLEdgeInsetsInsanelyHigh());
+        make.top.equalTo(WSELF.addGuestsButton.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
     }];
     
     [_chatHostButton remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(WSELF.eventDetailsButton.mas_bottom).insets(kTHLEdgeInsetsHigh());
-        make.left.equalTo(WSELF.hostChatIcon.mas_right).insets(kTHLEdgeInsetsHigh());
+        make.left.equalTo(WSELF.hostChatIcon.mas_right).insets(kTHLEdgeInsetsSuperHigh());
     }];
     
     [_hostChatIcon remakeConstraints:^(MASConstraintMaker *make) {
@@ -242,7 +243,7 @@
     
     [_eventDetailsButton remakeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo([WSELF calendarIcon].mas_right).insets(kTHLEdgeInsetsSuperHigh());
-        make.top.equalTo(WSELF.addGuestsButton.mas_bottom).insets(kTHLEdgeInsetsInsanelyHigh());
+        make.top.equalTo(WSELF.addGuestsButton.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
     }];
 
 }
@@ -255,23 +256,23 @@
 
     WEAKSELF();
     [self.eventDetailsButton remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.offset(0);
-        make.left.equalTo(WSELF.calendarIcon.mas_right).insets(kTHLEdgeInsetsHigh());
+        make.top.equalTo(WSELF.leaveGuestlistButton.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+        make.left.equalTo(WSELF.calendarIcon.mas_right).insets(kTHLEdgeInsetsSuperHigh());
     }];
     
     [self.leaveIcon remakeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(WSELF.eventDetailsButton.top).insets(kTHLEdgeInsetsSuperHigh());
+        make.centerY.equalTo([WSELF leaveGuestlistButton].mas_centerY);
         make.left.equalTo(kTHLEdgeInsetsInsanelyHigh());
     }];
     
     [self.leaveGuestlistButton remakeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(WSELF.eventDetailsButton.top).insets(kTHLEdgeInsetsHigh());
-        make.left.equalTo(WSELF.leaveIcon.mas_right).insets(kTHLEdgeInsetsHigh());
+        make.top.equalTo(_hostNameLabel.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+        make.left.equalTo(WSELF.leaveIcon.mas_right).insets(kTHLEdgeInsetsSuperHigh());
     }];
     
     [self.chatGroupButton remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(WSELF.eventDetailsButton.mas_bottom).insets(kTHLEdgeInsetsHigh());
-        make.left.equalTo(WSELF.groupChatIcon.mas_right).insets(kTHLEdgeInsetsHigh());
+        make.top.equalTo(WSELF.eventDetailsButton.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+        make.left.equalTo(WSELF.groupChatIcon.mas_right).insets(kTHLEdgeInsetsSuperHigh());
     }];
 }
 
