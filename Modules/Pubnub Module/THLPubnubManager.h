@@ -11,7 +11,7 @@
 #import "Pubnub+History.h"
 #import "THLPubnubManagerDelegate.h"
 #import "THLMessage.h"
-
+#import "THLHostEntity.h"
 
 @interface THLPubnubManager : NSObject
 
@@ -28,7 +28,7 @@
 - (void)fetchHistoryForChannel:(NSString *)channel withCompletion:(void (^)(PNHistoryResult *))success;
 
 - (void)publishMessage:(THLMessage *)message withChannel:(NSString *)channel withCompletion:(void (^)(NSString *))success;
-- (void)publishFirstMessageFromChannel:(NSString *)channel withUser:(NSString *)userID;
+- (void)publishFirstMessageFromChannel:(NSString *)channel withUser:(THLHostEntity *)userID;
 - (void)subscribeWithChannels:(NSArray *)channels;
 
 @end

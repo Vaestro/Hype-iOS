@@ -8,6 +8,7 @@
 
 #import "THLPubnubManager.h"
 #import "THLUser.h"
+#import "THLHostEntity.h"
 
 @interface THLPubnubManager ()<PNObjectEventListener>
 
@@ -28,7 +29,7 @@
 }
 
 - (void)setup {
-    self.configuration = [PNConfiguration configurationWithPublishKey:@"pub-c-c4bad3f0-207c-4e6f-869d-349bad1eef4b" subscribeKey:@"sub-c-d72b6bc0-c5c4-11e5-a9aa-02ee2ddab7fe"];
+    self.configuration = [PNConfiguration configurationWithPublishKey:@"pub-c-a6ad6c13-a9fc-4f6b-aa5c-12b115d5f030" subscribeKey:@"sub-c-9551fcaa-c380-11e5-8a35-0619f8945a4f"];
     self.configuration.uuid = [THLUser currentUser].objectId;
     self.client = [PubNub clientWithConfiguration:self.configuration];
     
@@ -137,9 +138,10 @@
     }];
 }
 
-- (void)publishFirstMessageFromChannel:(NSString *)channel withUser:(NSString *)userID {
-    THLUser *user = [THLUser objectWithoutDataWithObjectId:userID];
-    THLMessage *message = [[THLMessage alloc] initWithText:@"Hello, I am host" andUser:user];
+- (void)publishFirstMessageFromChannel:(NSString *)channel withUser:(THLHostEntity *)user {
+    //THLUser *user = [THLUser objectWithoutDataWithObjectId:userID];
+    THLMessage *message = [[THLMessage alloc] initWithText:@"Hello, I am host" andHost:user];
+    
     [self.client publish:[message toObjectWithUser:user] toChannel:channel compressed:YES withCompletion:^(PNPublishStatus *status) {
     }];
 }
