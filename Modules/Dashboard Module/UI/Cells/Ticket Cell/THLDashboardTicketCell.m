@@ -66,11 +66,11 @@
     WEAKSELF();
     [_eventTimeLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.insets(kTHLEdgeInsetsSuperHigh());
-        make.bottom.equalTo([WSELF venueNameLabel].mas_top).insets(kTHLEdgeInsetsSuperHigh());
+        make.bottom.equalTo([WSELF venueNameLabel].mas_top).insets(kTHLEdgeInsetsHigh());
     }];
     
     [_venueNameLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.insets(kTHLEdgeInsetsSuperHigh());
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
         make.bottom.equalTo([WSELF guestlistReviewStatusLabel].mas_top).insets(kTHLEdgeInsetsHigh());
     }];
     
@@ -82,7 +82,7 @@
     }];
     
     [_guestlistReviewStatusLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(kTHLEdgeInsetsLow());
+        make.bottom.equalTo(kTHLEdgeInsetsSuperHigh());
         make.left.equalTo([WSELF statusView].mas_right).insets(kTHLEdgeInsetsHigh());
     }];
 }

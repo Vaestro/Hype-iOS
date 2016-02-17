@@ -9,9 +9,11 @@
 #import "THLUserProfileHeaderView.h"
 #import "THLPersonIconView.h"
 #import "THLAppearanceConstants.h"
+#import "UIView+DimView.h"
 
 @interface THLUserProfileHeaderView()
 @property (nonatomic, strong) UILabel *label;
+@property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) THLPersonIconView *iconView;
 
 @end
@@ -30,24 +32,32 @@
     self.contentView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     _iconView = [self newIconView];
     _label = [self newLabel];
+    _imageView = [self newImageView];
     _photoTapRecognizer = [self tapGestureRecognizer];
 }
 
 - (void)layoutView {
-    [self.contentView addSubviews:@[_iconView,
+    [self.contentView addSubviews:@[_imageView, _iconView,
                                     _label]];
+    [self.contentView setBackgroundColor:kTHLNUISecondaryBackgroundColor];
     [_iconView addGestureRecognizer:_photoTapRecognizer];
+    
     WEAKSELF();
+    [_imageView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.insets(UIEdgeInsetsZero);
+        make.height.equalTo(125);
+//        make.bottom.offset(-50);
+    }];
+    
     [_iconView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(kTHLEdgeInsetsHigh());
+        make.centerY.equalTo([WSELF imageView].mas_bottom);
         make.size.mas_equalTo(CGSizeMake(100, 100));
         make.centerX.equalTo(0);
+        make.bottom.equalTo(UIEdgeInsetsZero);
     }];
     
     [_label makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF iconView].mas_bottom).equalTo(kTHLEdgeInsetsHigh());
-        make.height.mas_equalTo(25);
-        make.bottom.insets(kTHLEdgeInsetsHigh());
+        make.bottom.equalTo([WSELF iconView].mas_top).equalTo(kTHLEdgeInsetsHigh());
         make.centerX.equalTo(0);
     }];
     
@@ -67,6 +77,10 @@
     
 }
 
+- (CGSize)sizeThatFits:(CGSize)size {
+    return CGSizeMake([super sizeThatFits:size].width, 100);
+}
+
 #pragma mark - Construtors
 - (THLPersonIconView *)newIconView {
     THLPersonIconView *iconView = [THLPersonIconView new];
@@ -81,6 +95,14 @@
     label.numberOfLines = 1;
     label.textAlignment = NSTextAlignmentCenter;
     return label;
+}
+
+- (UIImageView *)newImageView {
+    UIImageView *imageView = [UIImageView new];
+    imageView.image = [UIImage imageNamed:@"user_profile_cover"];
+    imageView.clipsToBounds = YES;
+    imageView.contentMode = UIViewContentModeScaleAspectFill;
+    return imageView;
 }
 
 + (NSString *)identifier {

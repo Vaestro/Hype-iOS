@@ -63,12 +63,12 @@ THLGuestlistReviewModuleDelegate
     UINavigationController *discovery = [UINavigationController new];
     UINavigationController *chat = [UINavigationController new];
     UINavigationController *dashboard = [UINavigationController new];
-    UINavigationController *profile = [UINavigationController new];
+    UIViewController *profile = [UIViewController new];
     
     [self presentEventDiscoveryInterfaceInNavigationController:discovery];
     [self presentMessageListInterfaceInNavigationController:chat];
     [self presentDashboardInterfaceInNavigationController:dashboard];
-    [self presentUserProfileInterfaceInNavigationController:profile];
+    [self presentUserProfileInterfaceInViewController:profile];
     
     dashboard.tabBarItem.image = [UIImage imageNamed:@"Lists Icon"];
     chat.tabBarItem.image = [UIImage imageNamed:@"Lists Icon"];
@@ -118,11 +118,11 @@ THLGuestlistReviewModuleDelegate
     [_dashboardWireframe.moduleInterface presentDashboardInterfaceInNavigationController:navigationController];
 }
 
-- (void)presentUserProfileInterfaceInNavigationController:(UINavigationController *)navigationController {
+- (void)presentUserProfileInterfaceInViewController:(UIViewController *)viewController {
     _userProfileWireframe = [_dependencyManager newUserProfileWireframe];
     _currentWireframe = _userProfileWireframe;
     [_userProfileWireframe.moduleInterface setModuleDelegate:self];
-    [_userProfileWireframe.moduleInterface presentUserProfileInterfaceInNavigationController:navigationController];
+    [_userProfileWireframe.moduleInterface presentUserProfileInterfaceInViewController:viewController];
 }
 
 - (void)presentEventHostingInterfaceForEvent:(THLEventEntity *)eventEntity {

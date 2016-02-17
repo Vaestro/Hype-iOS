@@ -18,6 +18,7 @@
 #import "THLUserProfileHeaderView.h"
 #import "THLUserPhotoVerificationViewController.h"
 #import "THLFAQViewController.h"
+#import "THLUserManager.h"
 
 typedef NS_ENUM(NSInteger, TableViewSection) {
     TableViewSectionPersonal = 0,
@@ -35,13 +36,17 @@ typedef NS_ENUM(NSInteger, HypelistSectionRow) {
     HypelistSectionRowFAQ,
     HypelistSectionRowTermsAndConditions,
     HypelistSectionRowPrivacyPolicy,
+    HypelistSectionRowContactUs,
+    HypelistSectionRowLogout,
     HypelistSectionRow_Count
 };
 
 typedef NS_ENUM(NSUInteger, ApplicationInfoCase){
     HowItWorks = 0,
     PrivacyPolicy,
-    TermsAndConditions
+    TermsAndConditions,
+    ContactUs,
+    LogOut
 };
 
 static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileViewCellIdentifier";
@@ -71,7 +76,7 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
     [self layoutView];
     [self bindView];
     
-    self.tableCellNames = @[@"How it works", @"Privacy Policy", @"Terms & Conditions"];
+    self.tableCellNames = @[@"How it works", @"Privacy Policy", @"Terms & Conditions", @"Contact Us", @"Logout"];
 }
 
 #pragma mark - View Setup
@@ -81,15 +86,13 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 }
 
 - (void)layoutView {
+    
     self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
 
     [self.view addSubviews:@[_tableView]];
-    self.navigationItem.title = @"MY ACCOUNT";
-
-    self.automaticallyAdjustsScrollViewInsets = YES;
     
     [_tableView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.bottom.insets(kTHLEdgeInsetsNone());
+        make.left.right.top.bottom.insets(UIEdgeInsetsZero);
     }];
 }
 
@@ -130,6 +133,12 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
         case TermsAndConditions:
             [self presentModalInformationWithText:[THLResourceManager termsOfUseText]
                                          andTitle:@"Terms Of Use"];
+            break;
+        case ContactUs:
+            [contactCommand execute:nil];
+            break;
+        case LogOut:
+            [logoutCommand execute:nil];
             break;
         default: {
             break;
@@ -241,14 +250,17 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
     
     cell.textLabel.text = [self.tableCellNames objectAtIndex:indexPath.row];
     cell.textLabel.textColor = [UIColor whiteColor];
-    cell.contentView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
+    cell.contentView.backgroundColor = kTHLNUISecondaryBackgroundColor;
     cell.textLabel.backgroundColor = [UIColor clearColor];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    TODO: Temporary hack to make sure table cells are shown on Iphone 5 
-    return 60;
+//    TODO: Temporary hack to make sure table cells are shown on Iphone 5
+    if(indexPath.row == LogOut && ![THLUserManager userLoggedIn])
+        return 0;
+    else
+        return 60;
 }
 
 #pragma mark - Constructors
@@ -256,9 +268,8 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     tableView.backgroundColor = kTHLNUISecondaryBackgroundColor;
     tableView.separatorColor = [UIColor clearColor];
-//    tableView.scrollEnabled = NO;
-    tableView.bounces = YES;
-    tableView.alwaysBounceVertical = YES;
+//    tableView.bounces = YES;
+//    tableView.alwaysBounceVertical = YES;
     tableView.dataSource = self;
     tableView.delegate = self;
     return tableView;
@@ -279,6 +290,10 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 
 - (void) reloadUserImageWithURL:(NSURL *) imageURL{
     self.userImageURL = imageURL;
+}
+
+- (UIStatusBarStyle) preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 @end

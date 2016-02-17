@@ -31,37 +31,13 @@ static CGFloat const BUTTON_HEIGHT = 60;
     _logoutButton = [self newLogoutButton];
     _appDetailsLabel = [self newAppDetailsLabel];
     
-    [self.contentView addSubviews:@[_contactUsButton,
-                                    _logoutButton,
-                                    _appDetailsLabel]];
-    
-    [_contactUsButton makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.insets(kTHLEdgeInsetsHigh());
-        make.height.equalTo(BUTTON_HEIGHT);
-        make.centerX.equalTo(0);
-    }];
-    
-    if ([THLUser currentUser]) {
-        [_logoutButton makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(_contactUsButton.mas_bottom).offset(kTHLInset);
-            make.left.right.insets(kTHLEdgeInsetsHigh());
-            make.height.equalTo(BUTTON_HEIGHT);
-            make.centerX.equalTo(0);
-        }];
-        
-        [_appDetailsLabel makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(_logoutButton.mas_bottom).offset(kTHLInset);
-            make.left.right.insets(kTHLEdgeInsetsHigh());
-            make.bottom.insets(kTHLEdgeInsetsHigh());
-        }];
-    } else {
-        [_appDetailsLabel makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(_contactUsButton.mas_bottom).offset(kTHLInset);
-            make.left.right.insets(kTHLEdgeInsetsHigh());
-            make.bottom.insets(kTHLEdgeInsetsHigh());
-        }];
-    }
+    [self.contentView addSubviews:@[_appDetailsLabel]];
 
+    [_appDetailsLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(kTHLEdgeInsetsHigh());
+        make.left.right.insets(kTHLEdgeInsetsHigh());
+        make.bottom.insets(kTHLEdgeInsetsHigh());
+    }];
     
 
     RAC(self.contactUsButton, rac_command) = RACObserve(self, emailCommand);
