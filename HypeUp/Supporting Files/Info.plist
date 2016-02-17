@@ -27,15 +27,8 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb678431492288292</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleURLName</key>
-			<string>hypeup</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
 				<string>hypeup</string>
+				<string>fb678431492288292</string>
 			</array>
 		</dict>
 	</array>
