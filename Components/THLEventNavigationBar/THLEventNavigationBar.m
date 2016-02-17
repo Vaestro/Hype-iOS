@@ -240,8 +240,6 @@
     BLKFlexibleHeightBarSubviewLayoutAttributes *finalLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
     finalLayoutAttributes.alpha = 0.0;
     [imageView addLayoutAttributes:finalLayoutAttributes forProgress:1.0];
-    
-    return imageView;
 }
 
 - (UIImageView *)newScrollUpIcon {

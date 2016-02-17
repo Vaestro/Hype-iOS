@@ -45,7 +45,7 @@
     WEAKSELF();
     [_imageView makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.insets(UIEdgeInsetsZero);
-        make.height.equalTo(125);
+        make.height.equalTo(SCREEN_HEIGHT*0.32);
 //        make.bottom.offset(-50);
     }];
     

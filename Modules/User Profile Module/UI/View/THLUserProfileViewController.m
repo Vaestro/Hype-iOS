@@ -256,8 +256,10 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    TODO: Temporary hack to make sure table cells are shown on Iphone 5
     if(indexPath.row == LogOut && ![THLUserManager userLoggedIn])
+        return 0;
+    else if(indexPath.row == HowItWorks)
+//        TODO: Show HowItWorks Tab when the section is completed
         return 0;
     else
         return 60;
