@@ -55,7 +55,21 @@
     return self;
 }
 
-- (instancetype)initWithText:(NSString *)text andHost:(THLHostEntity *)user
+- (instancetype)initWithText:(NSString *)text andPartyLeader:(THLUserEntity *)user
+{
+    self = [super init];
+    if (self) {
+        self.text = text;
+        self.time = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];
+        self.userID = user.objectId;
+        self.userImageURL = [user.imageURL absoluteString];
+        self.userName = user.firstName;
+    }
+    return self;
+}
+
+
+- (instancetype)initWithText:(NSString *)text andHost:(THLUserEntity *)user
 {
     self = [super init];
     if (self) {

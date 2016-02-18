@@ -22,9 +22,10 @@
 - (instancetype)initWithResult:(NSDictionary *)data;
 - (instancetype)initWithText:(NSString *)text;
 - (instancetype)initWithText:(NSString *)text andUser:(THLUser *)user;
-- (instancetype)initWithText:(NSString *)text andHost:(THLHostEntity *)user;
+- (instancetype)initWithText:(NSString *)text andHost:(THLUserEntity *)user;
+- (instancetype)initWithText:(NSString *)text andPartyLeader:(THLUserEntity *)user;
 
 - (NSDictionary *)toObject;
-- (NSDictionary *)toObjectWithUser:(THLHostEntity *)user;
+- (NSDictionary *)toObjectWithUser:(THLUserEntity *)user;
 
 @end
