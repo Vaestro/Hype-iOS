@@ -51,14 +51,6 @@
     _presenter = [[THLPerkDetailPresenter alloc] initWithInteractor:_interactor wireframe:self];
 }
 
-//_dataManager = [[THLPerkDataManager alloc] initWithDataStore:_dataStore entityMapper:_entityMapper perkService:_perkItemStoreService];
-//_interactor = [[THLPerkInteractor alloc] initWithDataManager:_dataManager viewDataSourceFactory:_viewDataSourceFactory];
-//_view = [[THLPerksViewController alloc] initWithNibName:nil bundle:nil];
-//_presenter = [[THLPerkPresenter alloc] initWithWireframe:self interactor:_interactor];
-
-
-
-
 
 - (void)presentPerkDetailonViewController:(UIViewController *)viewController {
     _controller = viewController;
@@ -82,9 +74,9 @@
     transition.type = kCATransitionPush;
     transition.subtype = kCATransitionFromLeft;
     [_view.navigationController.view.window.layer addAnimation:transition forKey:nil];
-    
+    WEAKSELF();
     [_view.navigationController dismissViewControllerAnimated:NO completion:^{
-        [_presenter.moduleDelegate dismissPerkDetailWireframe];
+        [WSELF.presenter.moduleDelegate dismissPerkDetailWireframe];
     }];
 }
 

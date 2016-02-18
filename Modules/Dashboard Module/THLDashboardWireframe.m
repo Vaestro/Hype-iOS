@@ -54,4 +54,8 @@
     return _presenter;
 }
 
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
+}
+
 @end

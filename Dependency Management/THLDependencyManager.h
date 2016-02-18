@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "THLGuestFlowDependencyManager.h"
 #import "THLHostFlowDependencyManager.h"
+#import "THLYapDatabaseManager.h"
 
 @class THLMasterWireframe;
 @class THLLoginWireframe;
@@ -60,5 +61,6 @@ THLHostFlowDependencyManager
 - (THLPerkStoreWireframe *)newPerkStoreWireframe;
 - (THLPerkDetailWireframe *)newPerkDetailWireframe;
 - (THLUserManager *)userManager;
+- (THLYapDatabaseManager *)databaseManager;
 - (THLWaitlistPresenter *)newWaitlistPresenter;
 @end
