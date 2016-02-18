@@ -628,7 +628,7 @@ presentGuestlistInvitationInterfaceOnController:(UIViewController *)self.view];
     if (!error && reviewStatus == THLStatusAccepted) {
         self.reviewerStatus = THLGuestlistActiveHost;
         [self.confirmationView showSuccessWithTitle:@"Accepted Guestlist"
-                                            Message:@"You have accepted this Guestlist. If your guests have any questions, they will contact you through our phone service."];
+                                            Message:@"You have accepted this Guestlist. If your guests have any questions, they will contact you through chat."];
         [_view setGuestlistReviewStatus:reviewStatus];
         [_view setGuestlistReviewStatusTitle:@"Guestlist Accepted"];
 
