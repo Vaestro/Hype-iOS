@@ -149,12 +149,12 @@
                                                 
                                                 THLChannelService *service = [[THLChannelService alloc] init];
                                                 [service createChannelForOwner:currentUser.objectId andHost:eventEntity.host.objectId withGuestlist:guestlist.objectId expireEvent:eventEntity.date];
-                                                [[THLPubnubManager sharedInstance] publishFirstMessageFromChannel:[NSString stringWithFormat:@"%@_host", guestlist.objectId] withHost:eventEntity.host];
+                                                [[THLPubnubManager sharedInstance] publishFirstMessageFromChannel:[NSString stringWithFormat:@"%@_host", guestlist.objectId] withHost:eventEntity.host andChatMessage:eventEntity.chatMessage];
                                                 
                                                 if (guestPhoneNumbers.count > 0)  {
                                                 [service createChannelForGuest:currentUser.objectId withGuestlist:guestlist.objectId expireEvent:eventEntity.date];
                                                 THLGuestEntity *guest = [[THLEntityMapper new] mapGuest:currentUser];
-                                                [[THLPubnubManager sharedInstance] publishFirstMessageFromChannel:[NSString stringWithFormat:@"%@_guestlist", guestlist.objectId] withUser:guest];
+                                                    [[THLPubnubManager sharedInstance] publishFirstMessageFromChannel:[NSString stringWithFormat:@"%@_guestlist", guestlist.objectId] withUser:guest andChatMessage:eventEntity.chatMessage];
                                                 }
                                                 
                                             } else {

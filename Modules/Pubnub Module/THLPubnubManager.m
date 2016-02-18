@@ -149,8 +149,8 @@
 }
 
 
-- (void)publishFirstMessageFromChannel:(NSString *)channel withUser:(THLUserEntity *)user {
-    THLMessage *message = [[THLMessage alloc] initWithText:@"Hello, I am Party leader" andPartyLeader:user];
+- (void)publishFirstMessageFromChannel:(NSString *)channel withUser:(THLUserEntity *)user andChatMessage:(NSString *)chatMessage {
+    THLMessage *message = [[THLMessage alloc] initWithText:@"Hello, this is the group channel. Where you can discuss plans and stay in the loop with your group!" andPartyLeader:user];
     [self.client publish:[message toObjectWithUser:user] toChannel:channel mobilePushPayload:@{@"aps":@{@"alert":message.text}} compressed:YES withCompletion:^(PNPublishStatus *status) {
     }];
 
@@ -158,11 +158,11 @@
 
 
 
-- (void)publishFirstMessageFromChannel:(NSString *)channel withHost:(THLUserEntity *)host {
+- (void)publishFirstMessageFromChannel:(NSString *)channel withHost:(THLUserEntity *)host andChatMessage:(NSString *)chatMessage {
     //THLUser *user = [THLUser objectWithoutDataWithObjectId:userID];
     
     
-    THLMessage *message = [[THLMessage alloc] initWithText:@"Hello, I am host" andHost:host];
+    THLMessage *message = [[THLMessage alloc] initWithText:@"Hello, I am your host for the event you have applied to. If you have any questions at all, please go ahead and ask!" andHost:host];
     [self.client publish:[message toObjectWithUser:host] toChannel:channel mobilePushPayload:@{@"aps":@{@"alert":message.text}} compressed:YES withCompletion:^(PNPublishStatus *status) {
         //
     }];
