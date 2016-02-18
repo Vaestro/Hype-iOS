@@ -148,11 +148,22 @@
     }];
 }
 
-- (void)publishFirstMessageFromChannel:(NSString *)channel withUser:(THLHostEntity *)user {
-    //THLUser *user = [THLUser objectWithoutDataWithObjectId:userID];
-    THLMessage *message = [[THLMessage alloc] initWithText:@"Hello, I am host" andHost:user];
-    
+
+- (void)publishFirstMessageFromChannel:(NSString *)channel withUser:(THLUserEntity *)user {
+    THLMessage *message = [[THLMessage alloc] initWithText:@"Hello, I am Party leader" andPartyLeader:user];
     [self.client publish:[message toObjectWithUser:user] toChannel:channel mobilePushPayload:@{@"aps":@{@"alert":message.text}} compressed:YES withCompletion:^(PNPublishStatus *status) {
+    }];
+
+}
+
+
+
+- (void)publishFirstMessageFromChannel:(NSString *)channel withHost:(THLUserEntity *)host {
+    //THLUser *user = [THLUser objectWithoutDataWithObjectId:userID];
+    
+    
+    THLMessage *message = [[THLMessage alloc] initWithText:@"Hello, I am host" andHost:host];
+    [self.client publish:[message toObjectWithUser:host] toChannel:channel mobilePushPayload:@{@"aps":@{@"alert":message.text}} compressed:YES withCompletion:^(PNPublishStatus *status) {
         //
     }];
     

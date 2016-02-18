@@ -19,6 +19,9 @@
 #import "THLChannelService.h"
 #import "THLHostEntity.h"
 #import "THLBeacon.h"
+#import "THLEntityMapper.h"
+#import "THLGuestEntity.h"
+
 
 @implementation THLGuestlistService
 
@@ -146,7 +149,14 @@
                                                 
                                                 THLChannelService *service = [[THLChannelService alloc] init];
                                                 [service createChannelForOwner:currentUser.objectId andHost:eventEntity.host.objectId withGuestlist:guestlist.objectId expireEvent:eventEntity.date];
-                                                [[THLPubnubManager sharedInstance] publishFirstMessageFromChannel:[NSString stringWithFormat:@"%@_host", guestlist.objectId] withUser:eventEntity.host];
+                                                [[THLPubnubManager sharedInstance] publishFirstMessageFromChannel:[NSString stringWithFormat:@"%@_host", guestlist.objectId] withHost:eventEntity.host];
+                                                
+                                                if (guestPhoneNumbers.count > 0)  {
+                                                [service createChannelForGuest:currentUser.objectId withGuestlist:guestlist.objectId expireEvent:eventEntity.date];
+                                                THLGuestEntity *guest = [[THLEntityMapper new] mapGuest:currentUser];
+                                                [[THLPubnubManager sharedInstance] publishFirstMessageFromChannel:[NSString stringWithFormat:@"%@_guestlist", guestlist.objectId] withUser:guest];
+                                                }
+                                                
                                             } else {
                                                 [completionSource setError:cloudError];
                                             }

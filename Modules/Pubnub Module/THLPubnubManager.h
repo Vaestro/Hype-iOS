@@ -29,7 +29,8 @@
 
 - (void)subscribeWithChannel:(NSString *)channel;
 - (void)publishMessage:(THLMessage *)message withChannel:(NSString *)channel withCompletion:(void (^)(NSString *))success;
-- (void)publishFirstMessageFromChannel:(NSString *)channel withUser:(THLHostEntity *)userID;
+- (void)publishFirstMessageFromChannel:(NSString *)channel withUser:(THLUserEntity *)user;
+- (void)publishFirstMessageFromChannel:(NSString *)channel withHost:(THLUserEntity *)user;
 - (void)subscribeWithChannels:(NSArray *)channels;
 
 @end
