@@ -20,7 +20,10 @@
 #import "THLHostEntity.h"
 #import "THLBeacon.h"
 #import "THLBeaconEntity.h"
- #import <KVNProgress/KVNProgress.h>
+#import "THLParseQueryFactory.h"
+#import <KVNProgress/KVNProgress.h>
+#import "THLEntityMapper.h"
+#import "THLGuestlist.h"
 
 
 
@@ -234,6 +237,16 @@ ESTBeaconManagerDelegate
     }];
 }
 
+- (void)unSubscribeChannelsForUser:(THLUser *)userId withGuestlist:(THLGuestlistEntity *)guestlistEntity {
+    THLGuestlist *guestlist = [THLGuestlist objectWithoutDataWithObjectId:guestlistEntity.objectId];
+    THLParseQueryFactory *factory = [[THLParseQueryFactory alloc] init];
+    PFQuery *query = [factory queryChannelsForGuestID:userId withGuestList:guestlist];
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (objects != nil) {
+            [PFObject deleteAllInBackground:objects];
+        }
+    }];
+}
 
 - (void)updateGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite withCheckInStatus:(BOOL)status {
     WEAKSELF();

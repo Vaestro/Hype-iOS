@@ -154,7 +154,7 @@
     PFQuery *hostQuery = [self baseChannelQuery];
     [hostQuery whereKey:@"hostId" equalTo:user];
     PFQuery *guestlistQuery = [self baseChannelQuery];
-    [guestlistQuery whereKey:@"guestlistId" equalTo:user];
+    [guestlistQuery whereKey:@"guestlistId" equalTo:guestlistId];
     PFQuery *query = [PFQuery orQueryWithSubqueries:@[hostQuery,
                                                       guestlistQuery]];
     [query whereKey:@"date" greaterThan:[NSDate date]];
@@ -168,7 +168,7 @@
     PFQuery *guestQuery = [self baseChannelQuery];
     [guestQuery whereKey:@"guestId" equalTo:user];
     PFQuery *guestlistQuery = [self baseChannelQuery];
-    [guestlistQuery whereKey:@"guestlistId" equalTo:user];
+    [guestlistQuery whereKey:@"guestlistId" equalTo:guestlist];
     PFQuery *query = [PFQuery orQueryWithSubqueries:@[guestQuery,
                                                       guestlistQuery]];
     [query whereKey:@"date" greaterThan:[NSDate date]];
@@ -182,7 +182,7 @@
     PFQuery *ownerQuery = [self baseChannelQuery];
     [ownerQuery whereKey:@"ownerId" equalTo:user];
     PFQuery *guestlistQuery = [self baseChannelQuery];
-    [guestlistQuery whereKey:@"guestlistId" equalTo:user];
+    [guestlistQuery whereKey:@"guestlistId" equalTo:guestlist];
     PFQuery *query = [PFQuery orQueryWithSubqueries:@[ownerQuery,
                                                       guestlistQuery]];
     [query whereKey:@"date" greaterThan:[NSDate date]];
