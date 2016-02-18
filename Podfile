@@ -42,6 +42,7 @@ pod 'FacebookImagePicker'
 
 #Pubnub
 pod 'PubNub', '~> 4.2'
+pod 'RKNotificationHub'
 
 #Fabric
 pod 'Fabric'

@@ -25,7 +25,7 @@ typedef NS_ENUM(NSInteger, THLSingleLineTextFieldStyle)
 /**
  * Validation block to be applied to validate raw text synchronously or asynchronously.
  * @param text The raw text of the text field
- * @param textField
+ * @param textField the text field
  * @return A dictionary with key of YES or NO and value of string to be displayed.
  */
 typedef NSDictionary *(^ValidationBlock)(THLSingleLineTextField *textField, NSString *text);

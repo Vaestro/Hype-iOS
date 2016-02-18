@@ -21,6 +21,8 @@
 @dynamic requiresApproval;
 @dynamic maleRatio;
 @dynamic femaleRatio;
+@dynamic chatMessage;
+
 
 + (void)load {
 	[self registerSubclass];

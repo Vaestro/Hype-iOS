@@ -63,7 +63,6 @@ static NSString * const kChatListCellIdentifier = @"THLChatListCell";
     THLChatListCell *cell = [tableView dequeueReusableCellWithIdentifier:kChatListCellIdentifier forIndexPath:indexPath];
     THLChatListItem *item = [self.dataSource tableView:self itemAtIndex:indexPath.row];
     [cell configureCell:item];
-    
     return cell;
 }
 

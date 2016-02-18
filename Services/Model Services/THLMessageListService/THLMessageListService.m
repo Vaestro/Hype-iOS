@@ -26,16 +26,6 @@
     return [BFTask taskWithResult:[[THLPubnubManager sharedInstance] fetchHistory]];
 }
 
-//- (BFTask *)fetchHistory {
-//    BFTask * task;// = [BFTask taskWithResult:[[THLPubnubManager sharedInstance] fetchHistory]];
-//    return task;
-//}
-
-//- (BFTask *)fetchAllHistoryList {
-//    return [BFTask taskWithResult:[[THLPubnubManager sharedInstance] fetchHistoryWithCompletion:^(NSArray *result) {
-//    }]];
-//}
-
 - (BFTask *)fetchHistory {
     BFTaskCompletionSource *task = [BFTaskCompletionSource taskCompletionSource];
     [[THLPubnubManager sharedInstance] fetchHistoryWithCompletion:^(NSArray *result) {
@@ -43,10 +33,4 @@
     }];
     return task.task;
 }
-
-//
-//- (BFTask *)fetchAllHistoryList {
-//    return [BFTask ta]
-//}
-
 @end

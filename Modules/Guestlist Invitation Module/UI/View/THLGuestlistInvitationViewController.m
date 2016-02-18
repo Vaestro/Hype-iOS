@@ -310,18 +310,26 @@
 
 	THLGuestEntity *guest = [_dataSource untransformedItemAtIndexPath:indexPath];
 	UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-
-	if (![_addedGuests containsObject:guest]) {
-		[_eventHandler view:self didAddGuest:guest];
-		[self addGuest:guest];
-		cell.accessoryType = UITableViewCellAccessoryCheckmark;
-		[_contactPickerView addContact:guest withName:guest.fullName];
-	} else {
-		[_eventHandler view:self didRemoveGuest:guest];
-		[self removeGuest:guest];
-		cell.accessoryType = UITableViewCellAccessoryNone;
-		[_contactPickerView removeContact:guest];
-	}
+    if (_addedGuests.count <= 9) {
+        if (![_addedGuests containsObject:guest]) {
+            [_eventHandler view:self didAddGuest:guest];
+            [self addGuest:guest];
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            [_contactPickerView addContact:guest withName:guest.fullName];
+        } else {
+            [_eventHandler view:self didRemoveGuest:guest];
+            [self removeGuest:guest];
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            [_contactPickerView removeContact:guest];
+        }
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry"
+                                                        message:@"You can only add 10 people at a time"
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
 
 	[_tableView reloadData];
 

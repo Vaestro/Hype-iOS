@@ -135,7 +135,7 @@ static NSString *const kChannelListRecievedNotification = @"kDataChannelListSetu
     NSString *channelType = channelComponents.lastObject;
     THLEvent *event = self.allChannels[channelObject];
     THLLocation *location = event.location;
-    NSString *titleChatItem = [NSString stringWithFormat:@"%@ @ %@", channelType, location.address];
+    NSString *titleChatItem = [NSString stringWithFormat:@"%@ @ %@", channelType, location.name];
     return titleChatItem;
 }
 

@@ -52,6 +52,7 @@ THLPerkStoreModuleDelegate
 @property (nonatomic, strong) UIView *discoveryNavBarItem;
 @property (nonatomic, strong) UIView *guestProfileNavBarItem;
 @property (nonatomic, strong) UIView *dashboardNavBarItem;
+
 @end
 
 @implementation THLGuestFlowWireframe

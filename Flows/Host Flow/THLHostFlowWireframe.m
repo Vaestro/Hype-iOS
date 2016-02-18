@@ -21,6 +21,7 @@
 #import "THLMasterNavigationController.h"
 
 #import "THLAppearanceConstants.h"
+#import "RKNotificationHub.h"
 
 @interface THLHostFlowWireframe()
 <

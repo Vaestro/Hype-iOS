@@ -24,4 +24,5 @@
 @property (nonatomic) bool requiresApproval;
 @property (nonatomic) int maleRatio;
 @property (nonatomic) int femaleRatio;
+@property (nonatomic, retain) NSString *chatMessage;
 @end
