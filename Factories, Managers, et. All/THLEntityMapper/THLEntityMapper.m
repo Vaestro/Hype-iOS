@@ -192,7 +192,6 @@
     }
 }
 
-
 - (THLBeacon *)mapBeaconEntity:(THLBeaconEntity *)beaconEntity {
     if ([beaconEntity isKindOfClass:[THLBeaconEntity class]]) {
         THLBeacon *beacon = [THLBeacon new];

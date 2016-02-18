@@ -21,7 +21,9 @@
 #import "THLBeacon.h"
 #import "THLBeaconEntity.h"
 #import "THLParseQueryFactory.h"
- #import <KVNProgress/KVNProgress.h>
+#import <KVNProgress/KVNProgress.h>
+#import "THLEntityMapper.h"
+#import "THLGuestlist.h"
 
 
 
@@ -235,7 +237,8 @@ ESTBeaconManagerDelegate
     }];
 }
 
-- (void)unSubscribeChannelsForUser:(THLUser *)userId withGuestlist:(THLGuestlist *)guestlist {
+- (void)unSubscribeChannelsForUser:(THLUser *)userId withGuestlist:(THLGuestlistEntity *)guestlistEntity {
+    THLGuestlist *guestlist = [THLGuestlist objectWithoutDataWithObjectId:guestlistEntity.objectId];
     THLParseQueryFactory *factory = [[THLParseQueryFactory alloc] init];
     PFQuery *query = [factory queryChannelsForGuestID:userId withGuestList:guestlist];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
