@@ -185,6 +185,10 @@
 		79BB15301C657FF50044D943 /* THLSingleLineTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BB152F1C657FF50044D943 /* THLSingleLineTextField.m */; };
 		79BB15331C6CED740044D943 /* THLFxTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BB15321C6CED720044D943 /* THLFxTitleLabel.m */; };
 		79BCB5641BF2AAA30050F283 /* THLMasterNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BCB5631BF2AAA30050F283 /* THLMasterNavigationController.m */; };
+		79C93E2B1C758B5D005B4D95 /* TSMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C93E281C758B5D005B4D95 /* TSMessage.m */; };
+		79C93E2C1C758B5D005B4D95 /* TSMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C93E2A1C758B5D005B4D95 /* TSMessageView.m */; };
+		79C93E2E1C758B69005B4D95 /* TSMessagesDefaultDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = 79C93E2D1C758B69005B4D95 /* TSMessagesDefaultDesign.json */; };
+		79C93E311C758D36005B4D95 /* TSBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C93E301C758D36005B4D95 /* TSBlurView.m */; };
 		79CD27E41C520293009BC119 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CD27BE1C520293009BC119 /* AppDelegate.m */; };
 		79CD27E51C520293009BC119 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27BF1C520293009BC119 /* LaunchScreen.xib */; };
 		79CD27E61C520293009BC119 /* HypeUp.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27C31C520293009BC119 /* HypeUp.strings */; };
@@ -691,6 +695,13 @@
 		79BB15321C6CED720044D943 /* THLFxTitleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLFxTitleLabel.m; sourceTree = "<group>"; };
 		79BCB5621BF2AAA30050F283 /* THLMasterNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMasterNavigationController.h; sourceTree = "<group>"; };
 		79BCB5631BF2AAA30050F283 /* THLMasterNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLMasterNavigationController.m; sourceTree = "<group>"; };
+		79C93E271C758B5D005B4D95 /* TSMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSMessage.h; sourceTree = "<group>"; };
+		79C93E281C758B5D005B4D95 /* TSMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSMessage.m; sourceTree = "<group>"; };
+		79C93E291C758B5D005B4D95 /* TSMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSMessageView.h; sourceTree = "<group>"; };
+		79C93E2A1C758B5D005B4D95 /* TSMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSMessageView.m; sourceTree = "<group>"; };
+		79C93E2D1C758B69005B4D95 /* TSMessagesDefaultDesign.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TSMessagesDefaultDesign.json; sourceTree = "<group>"; };
+		79C93E2F1C758D36005B4D95 /* TSBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSBlurView.h; sourceTree = "<group>"; };
+		79C93E301C758D36005B4D95 /* TSBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSBlurView.m; sourceTree = "<group>"; };
 		79CD27BD1C520293009BC119 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		79CD27BE1C520293009BC119 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		79CD27C01C520293009BC119 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -974,6 +985,7 @@
 		211005A81B8A3D5800A540C6 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				79C93E261C758B47005B4D95 /* TSMessages */,
 				79DF30231C72FD3200516199 /* THLEventHostingNavigationBar */,
 				79B959491BE8961800B87799 /* Alien */,
 				794AFE2D1C124693008475B1 /* Info VC */,
@@ -2504,6 +2516,20 @@
 			path = THLActionContainerView;
 			sourceTree = "<group>";
 		};
+		79C93E261C758B47005B4D95 /* TSMessages */ = {
+			isa = PBXGroup;
+			children = (
+				79C93E2F1C758D36005B4D95 /* TSBlurView.h */,
+				79C93E301C758D36005B4D95 /* TSBlurView.m */,
+				79C93E271C758B5D005B4D95 /* TSMessage.h */,
+				79C93E281C758B5D005B4D95 /* TSMessage.m */,
+				79C93E291C758B5D005B4D95 /* TSMessageView.h */,
+				79C93E2A1C758B5D005B4D95 /* TSMessageView.m */,
+				79C93E2D1C758B69005B4D95 /* TSMessagesDefaultDesign.json */,
+			);
+			name = TSMessages;
+			sourceTree = "<group>";
+		};
 		79CD27BC1C520293009BC119 /* HypeUp */ = {
 			isa = PBXGroup;
 			children = (
@@ -3448,6 +3474,7 @@
 				79B527B11C6EA777000A0970 /* OpenSans-BoldItalic.ttf in Resources */,
 				79B527B21C6EA777000A0970 /* OpenSans-ExtraBold.ttf in Resources */,
 				79B527B31C6EA777000A0970 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
+				79C93E2E1C758B69005B4D95 /* TSMessagesDefaultDesign.json in Resources */,
 				79B527B41C6EA777000A0970 /* OpenSans-Italic.ttf in Resources */,
 				79B527B51C6EA777000A0970 /* OpenSans-Light.ttf in Resources */,
 				79B527B61C6EA777000A0970 /* OpenSans-LightItalic.ttf in Resources */,
@@ -3608,6 +3635,7 @@
 			files = (
 				794AFE461C16355E008475B1 /* THLOnboardingViewController.m in Sources */,
 				FA34082B1C6DB2A700D68112 /* THLChatRoomBubbleCell.m in Sources */,
+				79C93E2B1C758B5D005B4D95 /* TSMessage.m in Sources */,
 				794AFE451C163541008475B1 /* THLLoginViewController.m in Sources */,
 				FAB54DF61C67C5F900F07410 /* THLPubnubQueryFactory.m in Sources */,
 				794AFE131C10A47D008475B1 /* THLHostDashboardInteractor.m in Sources */,
@@ -3642,6 +3670,7 @@
 				211005CC1B8A767C00A540C6 /* THLEventDiscoveryCellViewModel.m in Sources */,
 				79B9595D1BE934C000B87799 /* THLPopupNotificationDataManager.m in Sources */,
 				79730CF21C17DC3500D70F4B /* THLUserProfileFooterView.m in Sources */,
+				79C93E311C758D36005B4D95 /* TSBlurView.m in Sources */,
 				215A428B1BAA1FFF00D03C35 /* THLNumberVerificationPresenter.m in Sources */,
 				211005D51B8A7D2800A540C6 /* NSDate+Utilities.m in Sources */,
 				3E64EBE01C5C14F3002BA11B /* THLUserDataWorker.m in Sources */,
@@ -3716,6 +3745,7 @@
 				FAEE556A1C6E52E5008E66AE /* THLChatListViewController.m in Sources */,
 				794AFE0D1C10A1B0008475B1 /* THLHostDashboardWireframe.m in Sources */,
 				794AFE241C10C409008475B1 /* THLHostDashboardNotificationCellViewModel.m in Sources */,
+				79C93E2C1C758B5D005B4D95 /* TSMessageView.m in Sources */,
 				216BDD521BC6F4A700BBF713 /* THLContactTableViewCell.m in Sources */,
 				212173631BB3451F007D817A /* THLPromotionCardInfoView.m in Sources */,
 				21E402CC1BBF767D001D0C2C /* THLGuestlistInvitationPresenter.m in Sources */,

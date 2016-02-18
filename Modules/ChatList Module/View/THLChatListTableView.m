@@ -10,11 +10,12 @@
 #import "THLChatListCell.h"
 #import "THLChatListItem.h"
 #import <UIScrollView+SVPullToRefresh.h>
-
+#import "UIScrollView+EmptyDataSet.h"
+#import "THLAppearanceConstants.h"
 const CGFloat kChatListRowHeight = 90.0;
 static NSString * const kChatListCellIdentifier = @"THLChatListCell";
 
-@interface THLChatListTableView ()<UITableViewDataSource, UITableViewDelegate>
+@interface THLChatListTableView ()<UITableViewDataSource, UITableViewDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 
@@ -39,6 +40,8 @@ static NSString * const kChatListCellIdentifier = @"THLChatListCell";
     [table registerNib:[UINib nibWithNibName:kChatListCellIdentifier bundle:nil] forCellReuseIdentifier:kChatListCellIdentifier];
     table.dataSource = self;
     table.delegate = self;
+    table.emptyDataSetSource = self;
+    table.emptyDataSetDelegate = self;
     table.estimatedRowHeight = kChatListRowHeight;
     table.rowHeight = UITableViewAutomaticDimension;
     return table;
@@ -77,6 +80,35 @@ static NSString * const kChatListCellIdentifier = @"THLChatListCell";
     [self.tableView reloadData];
 }
 
+#pragma mark - EmptyDataSetDelegate
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
+    NSString *text = @" ";
+    text = @"You do not have any messages";
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0f],
+                                 NSForegroundColorAttributeName: kTHLNUIAccentColor};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView {
+    NSString *text = @" ";
+    text = @"When you join a party for an event, you will see your messages here";
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:14.0f],
+                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                                 NSParagraphStyleAttributeName: paragraph};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView {
+    return kTHLNUISecondaryBackgroundColor;
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
