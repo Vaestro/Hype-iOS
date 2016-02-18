@@ -45,6 +45,7 @@
 - (void)updateGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite withCheckInStatus:(BOOL)status;
 //- (void)updateGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite withCheckInStatus:(BOOL)checkInStatus;
 - (void)updateGuestlist:(THLGuestlistEntity *)guestlistEntity withReviewStatus:(THLStatus)reviewStatus;
+- (void)unSubscribeChannelsForUser:(THLUser *)userId withGuestlist:(THLGuestlist *)guestlist;
 //- (void)checkInGuests;
 - (void)generateToken;
 @end

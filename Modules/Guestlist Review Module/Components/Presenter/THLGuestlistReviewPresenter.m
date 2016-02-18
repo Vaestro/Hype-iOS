@@ -517,6 +517,10 @@ THLGuestlistReviewInteractorDelegate
         [_confirmationView showInProgressWithMessage:@"Leaving guestlist..."];
         [_interactor updateGuestlistInvite:_guestlistInviteEntity
                               withResponse:THLStatusDeclined];
+        [_interactor unSubscribeChannelsForUser:[THLUser currentUser] withGuestlist:_guestlistInviteEntity.guestlist];
+        //_guestlistInviteEntity.guestlist.objectId
+        //_
+        // UNSUBCSRIBE
     }
     else if (_reviewerStatus == THLGuestlistPendingGuest) {
         [_confirmationView showInProgressWithMessage:@"Accepting your invite..."];
