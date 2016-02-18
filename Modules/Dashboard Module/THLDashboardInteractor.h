@@ -29,4 +29,5 @@
 
 - (void)updateGuestlistInvites;
 - (THLViewDataSource *)getDataSource;
+
 @end

@@ -267,4 +267,8 @@ THLPerkStoreModuleDelegate
 - (void)logOutUser {
     [self.moduleDelegate logOutUser];
 }
+
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
+}
 @end

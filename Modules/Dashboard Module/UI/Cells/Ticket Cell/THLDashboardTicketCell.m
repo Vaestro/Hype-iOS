@@ -10,8 +10,6 @@
 #import "UIView+DimView.h"
 #import "THLAppearanceConstants.h"
 #import "THLPersonIconView.h"
-#import "THLEventTicketVenueView.h"
-#import "THLEventTicketPromotionView.h"
 #import "THLStatusView.h"
 
 @interface THLDashboardTicketCell()
@@ -150,5 +148,9 @@
 #pragma mark - Public Interface
 + (NSString *)identifier {
     return NSStringFromClass(self.class);
+}
+
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
 }
 @end

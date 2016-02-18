@@ -197,6 +197,9 @@ THLWaitlistPresenterDelegate
 
 - (void)logOutUser {
     [THLUserManager logUserOut];
+    [_dependencyManager.databaseManager dropDB];
+    _guestWireframe = nil;
+    _hostWireframe = nil;
     [self presentOnboardingAndLoginInterface];
 }
 

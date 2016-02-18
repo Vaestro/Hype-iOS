@@ -129,8 +129,9 @@
 
 
 - (void)bindView {
+    WEAKSELF();
     _dismissButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [self dismiss];
+        [WSELF dismiss];
         return [RACSignal empty];
     }];
     

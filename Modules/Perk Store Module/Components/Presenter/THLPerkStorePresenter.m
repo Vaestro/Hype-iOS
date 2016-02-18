@@ -44,13 +44,14 @@
 
 - (void)configureView:(id<THLPerkStoreView>)view {
     _view = view;
-    
+    WEAKSELF();
+
     
     [[RACObserve(self.view, viewAppeared) filter:^BOOL(NSNumber *b) {
         BOOL viewIsAppearing = [b boolValue];
         return viewIsAppearing == TRUE;
     }] subscribeNext:^(id x) {
-        [_interactor refreshUserCredits];
+        [WSELF.interactor refreshUserCredits];
     }];
     
     THLViewDataSource *dataSource = [_interactor generateDataSource];
@@ -58,7 +59,6 @@
         return [[THLPerkStoreCellViewModel alloc] initWithPerkStoreItem:(THLPerkStoreItemEntity *)item];
     };
     
-    WEAKSELF();
     RACCommand *selectedIndexPathCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         [WSELF checkIfUserLoggedInThenHandleIndexPathSelection:(NSIndexPath *)input];
         return [RACSignal empty];

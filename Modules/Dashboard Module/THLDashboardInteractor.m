@@ -71,4 +71,8 @@
         return [guestlistInvite1.date compare:guestlistInvite2.date];
     }];
 }
+
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
+}
 @end

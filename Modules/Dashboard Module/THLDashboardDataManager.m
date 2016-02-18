@@ -50,4 +50,7 @@
     return domain;
 }
 
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
+}
 @end

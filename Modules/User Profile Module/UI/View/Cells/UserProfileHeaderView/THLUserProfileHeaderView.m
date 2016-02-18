@@ -10,6 +10,7 @@
 #import "THLPersonIconView.h"
 #import "THLAppearanceConstants.h"
 #import "UIView+DimView.h"
+#import "THLUserManager.h"
 
 @interface THLUserProfileHeaderView()
 @property (nonatomic, strong) UILabel *label;
@@ -61,6 +62,10 @@
         make.centerX.equalTo(0);
     }];
     
+    if (![THLUserManager userLoggedIn]) {
+        _iconView.hidden = TRUE;
+        _label.hidden = TRUE;
+    }
 }
 
 - (void)layoutSubviews {

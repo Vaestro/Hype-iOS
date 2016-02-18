@@ -117,7 +117,7 @@ UICollectionViewDelegateFlowLayout
     
     [RACObserve(WSELF, currentUserCredit) subscribeNext:^(id x) {
         float credits = [x floatValue];
-        SSELF.userCreditsLabel.text = [self formattedStringWithDecimal:[[NSNumber alloc]initWithFloat:credits]];
+        SSELF.userCreditsLabel.text = [SSELF formattedStringWithDecimal:[[NSNumber alloc]initWithFloat:credits]];
     }];
     
     [RACObserve(WSELF, refreshCommand) subscribeNext:^(RACCommand *command) {
