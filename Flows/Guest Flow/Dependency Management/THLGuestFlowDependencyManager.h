@@ -17,6 +17,7 @@
 @class THLGuestlistReviewWireframe;
 @class THLPerkStoreWireframe;
 @class THLPerkDetailWireframe;
+@class THLLoginWireframe;
 
 @protocol THLGuestFlowDependencyManager <NSObject>
 //- (THLMessageListWireframe *)newMessageListWireframe;
@@ -28,4 +29,5 @@
 - (THLGuestlistReviewWireframe *)newGuestlistReviewWireframe;
 - (THLPerkStoreWireframe *)newPerkStoreWireframe;
 - (THLPerkDetailWireframe *)newPerkDetailWireframe;
+- (THLLoginWireframe *)newLoginWireframe;
 @end

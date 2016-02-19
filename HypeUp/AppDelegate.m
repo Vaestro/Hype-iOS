@@ -13,6 +13,7 @@
 #import <Fabric/Fabric.h>
 #import <DigitsKit/DigitsKit.h>
 #import <Optimizely/Optimizely.h>
+#import "Branch.h"
 
 //#import <Stripe/Stripe.h>
 
@@ -91,6 +92,13 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
         NSLog(@"app did not recieve notification");
     }
     
+    // Initialize Branch
+    Branch *branch = [Branch getInstance];
+    [branch initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
+        // params are the deep linked params associated with the link that the user clicked before showing up.
+        NSLog(@"deep link data: %@", [params description]);
+    }];
+    
 	return [[FBSDKApplicationDelegate sharedInstance] application:application
 									didFinishLaunchingWithOptions:launchOptions];
 }
@@ -156,10 +164,21 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
 			openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
 		 annotation:(id)annotation {
+    
+    NSLog(@"%@", url);
+    
+    [[Branch getInstance] handleDeepLink:url];
 	return [[FBSDKApplicationDelegate sharedInstance] application:application
 														  openURL:url
 												sourceApplication:sourceApplication
 													   annotation:annotation];
+}
+
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
+    
+    BOOL handledByBranch = [[Branch getInstance] continueUserActivity:userActivity];
+    
+    return handledByBranch;
 }
 
 @end

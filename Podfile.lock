@@ -41,6 +41,7 @@ PODS:
   - Bolts/AppLinks (1.6.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.6.0)
+  - Branch (0.11.15)
   - CocoaLumberjack (2.2.0):
     - CocoaLumberjack/Default (= 2.2.0)
     - CocoaLumberjack/Extensions (= 2.2.0)
@@ -222,6 +223,7 @@ DEPENDENCIES:
   - BLKFlexibleHeightBar
   - BlocksKit (~> 2.2)
   - Bolts
+  - Branch
   - CocoaLumberjack
   - Crashlytics
   - DateTools (~> 1.6)
@@ -282,6 +284,7 @@ SPEC CHECKSUMS:
   BLKFlexibleHeightBar: b27572a69633d8e33f1f2bbc486b04d8e86f742d
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   Bolts: f52a250053bb517ca874523c3913776359ab3def
+  Branch: fde6f089f0ae4fd4a9e507a189a535435535c993
   CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
   Crashlytics: e4e8d02914f2608fbc7bf42b1a7af838b0db67a2
   DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60

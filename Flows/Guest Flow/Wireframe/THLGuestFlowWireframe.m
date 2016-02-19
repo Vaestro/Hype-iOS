@@ -13,6 +13,7 @@
 //#import "THLMessageListWireframe.h"
 #import "THLDashboardWireframe.h"
 #import "THLUserProfileWireframe.h"
+#import "THLLoginWireframe.h"
 #import "THLEventDetailWireframe.h"
 #import "THLGuestlistInvitationWireframe.h"
 #import "THLGuestlistReviewWireframe.h"
@@ -23,6 +24,7 @@
 #import "THLAppearanceConstants.h"
 #import "THLChatRoomViewController.h"
 #import "THLChatListViewController.h"
+#import "THLUser.h"
 
 @interface THLGuestFlowWireframe()
 <
@@ -33,7 +35,8 @@ THLEventDetailModuleDelegate,
 THLGuestlistInvitationModuleDelegate,
 THLGuestlistReviewModuleDelegate,
 THLPerkDetailModuleDelegate,
-THLPerkStoreModuleDelegate
+THLPerkStoreModuleDelegate,
+THLLoginModuleDelegate
 >
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) id currentWireframe;
@@ -48,6 +51,7 @@ THLPerkStoreModuleDelegate
 @property (nonatomic, strong) THLGuestlistReviewWireframe *guestlistReviewWireframe;
 @property (nonatomic, strong) THLPerkStoreWireframe *perkStoreWireframe;
 @property (nonatomic, strong) THLPerkDetailWireframe *perkDetailWireframe;
+@property (nonatomic, strong) THLLoginWireframe *loginWireframe;
 
 @property (nonatomic, strong) UIView *discoveryNavBarItem;
 @property (nonatomic, strong) UIView *guestProfileNavBarItem;
@@ -124,6 +128,7 @@ THLPerkStoreModuleDelegate
 //    [_messageListWireframe.moduleInterface presentChatRoomInNavigationController:navigationController];
 }
 
+
 - (void)presentEventDiscoveryInterfaceInNavigationController:(UINavigationController *)navigationController {
 	_eventDiscoveryWireframe = [_dependencyManager newEventDiscoveryWireframe];
     _currentWireframe = _eventDiscoveryWireframe;
@@ -186,14 +191,6 @@ THLPerkStoreModuleDelegate
     [_perkDetailWireframe.moduleInterface setModuleDelegate:self];
     [_perkDetailWireframe.moduleInterface presentPerkDetailInterfaceForPerk:perkStoreItemEntity onViewController:controller];
 }
-
-//- (void)presentChatRoomForMessageList:(THLMessageListEntity *)messageListEntity onController:(UINavigationController *)navigationController {
-//    
-//    _messageListWireframe = [_dependencyManager newMessageListWireframe];
-//    _currentWireframe = _messageListWireframe;
-//    [_messageListWireframe.moduleInterface setModuleDelegate:self];
-//    [_messageListWireframe.moduleInterface presentChatRoomInNavigationController:navigationController];
-//}
 
 #pragma mark - THLDashboardModuleDelegate
 - (void)dashboardModule:(id<THLDashboardModuleInterface>)module didClickToViewEvent:(THLEventEntity *)event {

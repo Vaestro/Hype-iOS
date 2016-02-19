@@ -30,6 +30,7 @@
 
 @property (nonatomic, strong) THLOnboardingViewController *onboardingView;
 @property (nonatomic, strong) THLLoginViewController *loginView;
+@property (nonatomic, strong) UINavigationController *navigationController;
 @end
 
 @implementation THLLoginWireframe
@@ -60,6 +61,13 @@
 - (id<THLLoginModuleInterface>)moduleInterface {
 	return _presenter;
 }
+
+- (void)presentLoginInterfaceOnNavigationController:(UINavigationController *)navigationController {
+    _navigationController = navigationController;
+    [_presenter configureLoginView:_loginView];
+    [_navigationController addChildViewController:_loginView];
+}
+
 
 - (void)presentOnboardingInterfaceInWindow:(UIWindow *)window {
 	_window = window;
