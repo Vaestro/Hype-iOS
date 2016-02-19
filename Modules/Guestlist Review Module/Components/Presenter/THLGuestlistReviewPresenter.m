@@ -47,8 +47,6 @@ THLGuestlistReviewInteractorDelegate
 @property (nonatomic) THLActivityStatus activityStatus;
 @property (nonatomic, strong) RACCommand *responseCommand;
 
-@property (nonatomic, strong) NSString *callToken;
-
 @property (nonatomic, strong) THLGuestlistInviteEntity *guestlistInviteEntity;
 @property (nonatomic, strong) THLGuestlistEntity *guestlistEntity;
 @end

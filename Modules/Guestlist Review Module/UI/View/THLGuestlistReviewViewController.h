@@ -8,9 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "THLGuestlistReviewView.h"
-#import "PKTCallViewController.h"
-
-@class PKTCallViewController;
 
 @interface THLGuestlistReviewViewController : UIViewController
 <
@@ -18,5 +15,4 @@ THLGuestlistReviewView,
 UICollectionViewDelegate,
 UICollectionViewDelegateFlowLayout
 >
-@property (nonatomic, strong) PKTCallViewController *callViewController;
 @end
