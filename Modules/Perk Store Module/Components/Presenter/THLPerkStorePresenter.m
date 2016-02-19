@@ -16,7 +16,7 @@
 #import "THLUser.h"
 #import "THLCreditsExplanationView.h"
 
-static NSString *branchMarketingLink = @"https://bnc.lt/m/aTR7pkSq0q";
+//static NSString *branchMarketingLink = @"https://bnc.lt/m/aTR7pkSq0q";
 
 @interface THLPerkStorePresenter()<THLPerkStoreInteractorDelegate>
 @property (nonatomic, weak) id<THLPerkStoreView> view;
@@ -85,18 +85,18 @@ static NSString *branchMarketingLink = @"https://bnc.lt/m/aTR7pkSq0q";
         return [RACSignal empty];
     }];
     
-    RACCommand *inviteFriendsCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [WSELF handleInviteFriendsAction];
-        return [RACSignal empty];
-    }];
-    
+//    RACCommand *inviteFriendsCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+//        [WSELF handleInviteFriendsAction];
+//        return [RACSignal empty];
+//    }];
+//    
     [_view setDataSource:dataSource];
     [_view setShowCreditsExplanationView:showCreditsExplanationView];
     [_view setSelectedIndexPathCommand:selectedIndexPathCommand];
     [_view setRefreshCommand:refreshCommand];
     _creditsExplanationView = [THLCreditsExplanationView new];
     [_creditsExplanationView setDiscoverEventsCommand:discoverEventsCommand];
-    [_creditsExplanationView setInviteFriendsCommand:inviteFriendsCommand];
+//    [_creditsExplanationView setInviteFriendsCommand:inviteFriendsCommand];
 
 }
 
@@ -122,23 +122,23 @@ static NSString *branchMarketingLink = @"https://bnc.lt/m/aTR7pkSq0q";
 //    TODO: Add handle discover events action
 }
 
-- (void)handleInviteFriendsAction {
-    UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
-    
-    while (topController.presentedViewController) {
-        topController = topController.presentedViewController;
-    }
-    
-    NSString *message = @"Check out this amazing app!";
-    NSString *shareBody = branchMarketingLink;
-    
-    NSArray *postItems = @[message, shareBody];
-    
-    UIActivityViewController *activityVC = [[UIActivityViewController alloc]
-                                            initWithActivityItems:postItems
-                                            applicationActivities:nil];
-    [topController presentViewController:activityVC animated:YES completion:nil];
-}
+//- (void)handleInviteFriendsAction {
+//    UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
+//    
+//    while (topController.presentedViewController) {
+//        topController = topController.presentedViewController;
+//    }
+//    
+//    NSString *message = @"Check out this amazing app!";
+//    NSString *shareBody = branchMarketingLink;
+//    
+//    NSArray *postItems = @[message, shareBody];
+//    
+//    UIActivityViewController *activityVC = [[UIActivityViewController alloc]
+//                                            initWithActivityItems:postItems
+//                                            applicationActivities:nil];
+//    [topController presentViewController:activityVC animated:YES completion:nil];
+//}
 
 - (void)handleRefreshAction {
     self.refreshing = YES;

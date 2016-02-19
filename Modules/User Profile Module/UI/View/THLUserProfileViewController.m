@@ -43,7 +43,7 @@ typedef NS_ENUM(NSInteger, HypelistSectionRow) {
 };
 
 typedef NS_ENUM(NSUInteger, ApplicationInfoCase){
-    HowItWorks = 0,
+    InviteFriends = 0,
     PrivacyPolicy,
     TermsAndConditions,
     ContactUs,
@@ -51,6 +51,7 @@ typedef NS_ENUM(NSUInteger, ApplicationInfoCase){
 };
 
 static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileViewCellIdentifier";
+static NSString *branchMarketingLink = @"https://bnc.lt/m/aTR7pkSq0q";
 
 @interface THLUserProfileViewController() <THLUserPhotoVerificationInterfaceDidHideDelegate>
 
@@ -77,7 +78,7 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
     [self layoutView];
     [self bindView];
     
-    self.tableCellNames = @[@"How it works", @"Privacy Policy", @"Terms & Conditions", @"Contact Us", @"Logout"];
+    self.tableCellNames = @[@"Invite Friends", @"Privacy Policy", @"Terms & Conditions", @"Contact Us", @"Logout"];
 }
 
 #pragma mark - View Setup
@@ -125,8 +126,8 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch(indexPath.row) {
-        case HowItWorks:
-            [self presentModalExplanationHowItWorks];
+        case InviteFriends:
+            [self handleInviteFriendsAction];
         case PrivacyPolicy:
             [self presentModalInformationWithText:[THLResourceManager privacyPolicyText]
                                          andTitle:@"Privacy Policy"];
@@ -146,6 +147,24 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
         }
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)handleInviteFriendsAction {
+    UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    
+    while (topController.presentedViewController) {
+        topController = topController.presentedViewController;
+    }
+    
+    NSString *message = @"Check out this amazing app!";
+    NSString *shareBody = branchMarketingLink;
+    
+    NSArray *postItems = @[message, shareBody];
+    
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc]
+                                            initWithActivityItems:postItems
+                                            applicationActivities:nil];
+    [topController presentViewController:activityVC animated:YES completion:nil];
 }
 
 - (void) presentModalExplanationHowItWorks {
@@ -257,9 +276,6 @@ static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileView
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.row == LogOut && ![THLUserManager userLoggedIn])
-        return 0;
-    else if(indexPath.row == HowItWorks)
-//        TODO: Show HowItWorks Tab when the section is completed
         return 0;
     else
         return 60;
