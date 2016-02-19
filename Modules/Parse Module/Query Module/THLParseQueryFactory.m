@@ -150,11 +150,11 @@
     return query;
 }
 
-- (PFQuery *)queryChannelsForHostID:(PFUser *)user withGuestList:(THLGuestlist *)guestlistId {
+- (PFQuery *)queryChannelsForHostID:(PFUser *)user withGuestList:(THLGuestlist *)guestlist {
     PFQuery *hostQuery = [self baseChannelQuery];
     [hostQuery whereKey:@"hostId" equalTo:user];
     PFQuery *guestlistQuery = [self baseChannelQuery];
-    [guestlistQuery whereKey:@"guestlistId" equalTo:guestlistId];
+    [guestlistQuery whereKey:@"guestlistId" equalTo:guestlist];
     PFQuery *query = [PFQuery orQueryWithSubqueries:@[hostQuery,
                                                       guestlistQuery]];
     [query whereKey:@"date" greaterThan:[NSDate date]];
