@@ -121,7 +121,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>let me stalk you gurl</string>
+	<string>Please let us check if you are in the venue area</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>OpenSans-Bold.ttf</string>
