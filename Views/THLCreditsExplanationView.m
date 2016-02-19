@@ -95,24 +95,25 @@
     }];
     
     [_explanationLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo([WSELF secondExplanationLabel].mas_top).insets(kTHLEdgeInsetsSuperHigh());
+        make.bottom.offset(-100);
+//        make.bottom.equalTo([WSELF secondExplanationLabel].mas_top).insets(kTHLEdgeInsetsSuperHigh());
         make.left.equalTo([WSELF numberOneIcon].mas_right).insets(kTHLEdgeInsetsHigh());
         make.width.equalTo(SCREEN_WIDTH*0.66);
     }];
-
-    [_numberTwoIcon makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo([WSELF secondExplanationLabel].mas_centerY);
-//        make.left.equalTo([WSELF discoverEventsButton]);
-        make.left.equalTo([WSELF dismissButton].mas_right);
-
-    }];
-    
-    [_secondExplanationLabel makeConstraints:^(MASConstraintMaker *make) {
-//        make.bottom.equalTo([WSELF discoverEventsButton].mas_top).insets(kTHLEdgeInsetsSuperHigh());
-        make.bottom.offset(-100);
-        make.left.equalTo([WSELF numberTwoIcon].mas_right).insets(kTHLEdgeInsetsHigh());
-        make.width.equalTo(SCREEN_WIDTH*0.66);
-    }];
+//
+//    [_numberTwoIcon makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.equalTo([WSELF secondExplanationLabel].mas_centerY);
+////        make.left.equalTo([WSELF discoverEventsButton]);
+//        make.left.equalTo([WSELF dismissButton].mas_right);
+//
+//    }];
+//    
+//    [_secondExplanationLabel makeConstraints:^(MASConstraintMaker *make) {
+////        make.bottom.equalTo([WSELF discoverEventsButton].mas_top).insets(kTHLEdgeInsetsSuperHigh());
+//        make.bottom.offset(-100);
+//        make.left.equalTo([WSELF numberTwoIcon].mas_right).insets(kTHLEdgeInsetsHigh());
+//        make.width.equalTo(SCREEN_WIDTH*0.66);
+//    }];
     
     [_dismissButton makeConstraints:^(MASConstraintMaker *make) {
         make.top.insets(kTHLEdgeInsetsInsanelyHigh());
