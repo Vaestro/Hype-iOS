@@ -242,6 +242,7 @@
 		C85EE3C11C1BCC940008C14B /* THLPerkStoreItemService.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3BF1C1BCC940008C14B /* THLPerkStoreItemService.m */; };
 		C85EE3C41C1CDE140008C14B /* THLPurchasedPerkItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3C31C1CDE140008C14B /* THLPurchasedPerkItem.m */; };
 		C85EE3C71C1CE1020008C14B /* THLPurchasedPerkItemEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3C61C1CE1020008C14B /* THLPurchasedPerkItemEntity.m */; };
+		C8659AD51C76FE1F00B7EAD8 /* THLChatRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8659AD41C76FE1F00B7EAD8 /* THLChatRoomViewController.m */; };
 		C8E1B1621BF437F300A9824C /* THLUserProfileInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B1611BF437F300A9824C /* THLUserProfileInteractor.m */; };
 		C8E1B1651BF4380D00A9824C /* THLUserProfileDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B1641BF4380D00A9824C /* THLUserProfileDataManager.m */; };
 		C8E1B16B1BF43DA800A9824C /* THLUserProfileInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B16A1BF43DA800A9824C /* THLUserProfileInfoView.m */; };
@@ -258,7 +259,6 @@
 		FA34082B1C6DB2A700D68112 /* THLChatRoomBubbleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3408291C6DB2A700D68112 /* THLChatRoomBubbleCell.m */; };
 		FA34082C1C6DB2A700D68112 /* THLChatRoomBubbleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA34082A1C6DB2A700D68112 /* THLChatRoomBubbleCell.xib */; };
 		FA9D52F61C689D6000C14EAD /* THLChatRoomModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9D52F51C689D6000C14EAD /* THLChatRoomModel.m */; };
-		FA9D52FC1C689DAC00C14EAD /* THLChatRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9D52FB1C689DAC00C14EAD /* THLChatRoomViewController.m */; };
 		FA9D52FF1C68AB5700C14EAD /* THLChatRoomTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9D52FE1C68AB5700C14EAD /* THLChatRoomTableView.m */; };
 		FAB4887E1C634EA00052FA38 /* THLPubnubManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB4887D1C634EA00052FA38 /* THLPubnubManager.m */; };
 		FAB488851C6369110052FA38 /* THLMessageListEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB488841C6369110052FA38 /* THLMessageListEntity.m */; };
@@ -797,6 +797,8 @@
 		C85EE3C31C1CDE140008C14B /* THLPurchasedPerkItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPurchasedPerkItem.m; sourceTree = "<group>"; };
 		C85EE3C51C1CE1020008C14B /* THLPurchasedPerkItemEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPurchasedPerkItemEntity.h; sourceTree = "<group>"; };
 		C85EE3C61C1CE1020008C14B /* THLPurchasedPerkItemEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPurchasedPerkItemEntity.m; sourceTree = "<group>"; };
+		C8659AD31C76FE1F00B7EAD8 /* THLChatRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLChatRoomViewController.h; sourceTree = "<group>"; };
+		C8659AD41C76FE1F00B7EAD8 /* THLChatRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLChatRoomViewController.m; sourceTree = "<group>"; };
 		C8E1B1601BF437F300A9824C /* THLUserProfileInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserProfileInteractor.h; sourceTree = "<group>"; };
 		C8E1B1611BF437F300A9824C /* THLUserProfileInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLUserProfileInteractor.m; sourceTree = "<group>"; };
 		C8E1B1631BF4380D00A9824C /* THLUserProfileDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserProfileDataManager.h; sourceTree = "<group>"; };
@@ -828,8 +830,6 @@
 		FA34082A1C6DB2A700D68112 /* THLChatRoomBubbleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = THLChatRoomBubbleCell.xib; sourceTree = "<group>"; };
 		FA9D52F41C689D6000C14EAD /* THLChatRoomModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLChatRoomModel.h; sourceTree = "<group>"; };
 		FA9D52F51C689D6000C14EAD /* THLChatRoomModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLChatRoomModel.m; sourceTree = "<group>"; };
-		FA9D52FA1C689DAC00C14EAD /* THLChatRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THLChatRoomViewController.h; path = ../View/THLChatRoomViewController.h; sourceTree = "<group>"; };
-		FA9D52FB1C689DAC00C14EAD /* THLChatRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THLChatRoomViewController.m; path = ../View/THLChatRoomViewController.m; sourceTree = "<group>"; };
 		FA9D52FD1C68AB5700C14EAD /* THLChatRoomTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLChatRoomTableView.h; sourceTree = "<group>"; };
 		FA9D52FE1C68AB5700C14EAD /* THLChatRoomTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLChatRoomTableView.m; sourceTree = "<group>"; };
 		FAB4887C1C634EA00052FA38 /* THLPubnubManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPubnubManager.h; sourceTree = "<group>"; };
@@ -2850,6 +2850,15 @@
 			path = THLPerkService;
 			sourceTree = "<group>";
 		};
+		C8659AD21C76FE1F00B7EAD8 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				C8659AD31C76FE1F00B7EAD8 /* THLChatRoomViewController.h */,
+				C8659AD41C76FE1F00B7EAD8 /* THLChatRoomViewController.m */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
 		C880963C1C23C1C900C7524F /* THLConfirmationView */ = {
 			isa = PBXGroup;
 			children = (
@@ -3241,8 +3250,8 @@
 		FA9D52F01C689D2800C14EAD /* ChatRoom Module */ = {
 			isa = PBXGroup;
 			children = (
+				C8659AD21C76FE1F00B7EAD8 /* Presenter */,
 				FA9D52F11C689D2800C14EAD /* Model */,
-				FA9D52F21C689D2800C14EAD /* Presenter */,
 				FA9D52F31C689D2800C14EAD /* View */,
 			);
 			path = "ChatRoom Module";
@@ -3257,15 +3266,6 @@
 				FA0C495F1C6DDFF500A09C76 /* THLMessage.m */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		FA9D52F21C689D2800C14EAD /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				FA9D52FA1C689DAC00C14EAD /* THLChatRoomViewController.h */,
-				FA9D52FB1C689DAC00C14EAD /* THLChatRoomViewController.m */,
-			);
-			path = Presenter;
 			sourceTree = "<group>";
 		};
 		FA9D52F31C689D2800C14EAD /* View */ = {
@@ -3695,7 +3695,6 @@
 				791C1F861BF13AF500CCF803 /* THLEventHostingViewController.m in Sources */,
 				79DF30261C72FF1700516199 /* THLEventHostingNavigationBar.m in Sources */,
 				216BDD611BC72F9100BBF713 /* THLSearchResultsViewDataSourceHandler.m in Sources */,
-				FA9D52FC1C689DAC00C14EAD /* THLChatRoomViewController.m in Sources */,
 				FAEE556D1C6E530A008E66AE /* THLChatListTableView.m in Sources */,
 				21775F631B8E17A300609D39 /* THLAddressBookEntryFetchService.m in Sources */,
 				219E32A81B8EA63D00214C85 /* THLEventNavigationBar.m in Sources */,
@@ -3778,6 +3777,7 @@
 				21E402DC1BBF8155001D0C2C /* THLGuestlistInvite.m in Sources */,
 				7942082F1BD8C250009B86FA /* THLGuestlistEntity.m in Sources */,
 				21CCEDE91B87C87B0066CDAC /* THLDataStore.m in Sources */,
+				C8659AD51C76FE1F00B7EAD8 /* THLChatRoomViewController.m in Sources */,
 				C8F2FB2A1BF826B7004E00B6 /* THLWebViewController.m in Sources */,
 				21EED1001BB5F842001325A7 /* THLGuestFlowWireframe.m in Sources */,
 				79B959291BE581A800B87799 /* THLGuestlistReviewDataManager.m in Sources */,

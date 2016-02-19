@@ -16,6 +16,8 @@
 #import "THLUser.h"
 #import "THLCreditsExplanationView.h"
 
+static NSString *branchMarketingLink = @"https://bnc.lt/m/aTR7pkSq0q";
+
 
 @interface THLPerkStorePresenter()<THLPerkStoreInteractorDelegate>
 @property (nonatomic, weak) id<THLPerkStoreView> view;
@@ -122,7 +124,21 @@
 }
 
 - (void)handleInviteFriendsAction {
-//    TODO: Add invites friends action
+    UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    
+    while (topController.presentedViewController) {
+        topController = topController.presentedViewController;
+    }
+    
+    NSString *message = @"Check out this amazing app!";
+    NSString *shareBody = branchMarketingLink;
+    
+    NSArray *postItems = @[message, shareBody];
+    
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc]
+                                            initWithActivityItems:postItems
+                                            applicationActivities:nil];
+    [topController presentViewController:activityVC animated:YES completion:nil];
 }
 
 - (void)handleRefreshAction {
