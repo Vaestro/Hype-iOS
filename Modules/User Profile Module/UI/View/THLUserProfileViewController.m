@@ -156,7 +156,7 @@ static NSString *branchMarketingLink = @"https://bnc.lt/m/aTR7pkSq0q";
         topController = topController.presentedViewController;
     }
     
-    NSString *message = @"Check out this amazing app!";
+    NSString *message = @"Check out this app that gets you into the hottest parties in NYC!";
     NSString *shareBody = branchMarketingLink;
     
     NSArray *postItems = @[message, shareBody];

@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>branch_key</key>
-	<string>key_live_mcn4eSLxVcOhtbGNQOa7JlioDrh1m25Y</string>
 	<key> NSLocationAlwaysUsageDescription</key>
 	<string>let me stalk ya gurl</string>
 	<key>CFBundleDevelopmentRegion</key>
@@ -33,7 +31,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0.3.2</string>
+	<string>1.0.3.3</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -172,5 +170,7 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>branch_key</key>
+	<string>key_live_mcn4eSLxVcOhtbGNQOa7JlioDrh1m25Y</string>
 </dict>
 </plist>
