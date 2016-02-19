@@ -67,7 +67,7 @@
     }];
     
     [_promotionInfoView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.insets(kTHLEdgeInsetsSuperHigh());
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
         make.bottom.equalTo([WSELF scrollUpIcon].mas_top);
     }];
     
