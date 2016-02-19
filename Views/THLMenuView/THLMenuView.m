@@ -105,7 +105,7 @@
     
     [_addGuestsButton makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo([WSELF addIcon].mas_right).insets(kTHLEdgeInsetsSuperHigh());
-        make.top.equalTo(_hostNameLabel.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+        make.top.equalTo(_hostNameLabel.mas_bottom).offset(50);
     }];
 
     [_leaveIcon makeConstraints:^(MASConstraintMaker *make) {
@@ -266,7 +266,7 @@
     }];
     
     [self.leaveGuestlistButton remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_hostNameLabel.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+        make.top.equalTo(_hostNameLabel.mas_bottom).offset(50);
         make.left.equalTo(WSELF.leaveIcon.mas_right).insets(kTHLEdgeInsetsSuperHigh());
     }];
     
