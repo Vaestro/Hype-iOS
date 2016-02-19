@@ -16,6 +16,8 @@
 #import "THLUser.h"
 #import "THLCreditsExplanationView.h"
 
+static NSString *branchMarketingLink = @"https://bnc.lt/m/aTR7pkSq0q";
+
 
 @interface THLPerkStorePresenter()<THLPerkStoreInteractorDelegate>
 @property (nonatomic, weak) id<THLPerkStoreView> view;
