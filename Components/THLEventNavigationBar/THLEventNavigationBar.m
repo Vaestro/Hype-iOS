@@ -67,7 +67,7 @@
     }];
     
     [_promotionInfoView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.insets(kTHLEdgeInsetsSuperHigh());
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
         make.bottom.equalTo([WSELF scrollUpIcon].mas_top);
     }];
     
@@ -161,7 +161,7 @@
 - (void)showExplanationView {
     THLAlertView *alertView = [THLAlertView new];
     [alertView showWithTitle:@"Exclusive Event"
-                     message:@"This is an event with limited VIP guestlist spots. Your guestlist needs to be approved by a host in order to attend. To guarantee RSVP, please book bottle service."];
+                     message:@"This is an event with limited VIP guestlist spots. Your guestlist needs to be approved by a host in order to attend. To guarantee RSVP, submit a guestlist and ask your host to book bottle service"];
 }
 
 #pragma mark - Constructors

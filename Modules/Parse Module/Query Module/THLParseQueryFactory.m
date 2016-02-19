@@ -27,23 +27,6 @@
 	return query;
 }
 
-#pragma mark - Promotion Queries
-//- (PFQuery *)queryForPromotionsStartingOn:(NSDate *)startDate endingOn:(NSDate *)endDate {
-//	PFQuery *eventQuery = [self baseEventQuery];
-//	[eventQuery whereKey:@"date" greaterThanOrEqualTo:startDate];
-//	[eventQuery whereKey:@"date" lessThanOrEqualTo:endDate];
-//
-//	PFQuery *query = [self basePromotionQuery];
-//	[query whereKey:@"event" matchesQuery:eventQuery];
-//	return query;
-//}
-
-//- (PFQuery *)queryForPromotionForEvent:(NSString *)eventId {
-//	PFQuery *query = [self basePromotionQuery];
-//	[query whereKey:@"eventId" equalTo:eventId];
-//	return query;
-//}
-
 #pragma mark - Guestlist Queries
 - (PFQuery *)queryForGuestlistWithId {
     PFQuery *query = [self baseGuestlistQuery];
@@ -56,7 +39,8 @@
 
     PFQuery *query = [self baseGuestlistQuery];
     [query whereKey:@"event" matchesQuery:eventQuery];
-    [query whereKey:@"date" greaterThanOrEqualTo:[[NSDate date] dateByAddingTimeInterval:-60*300]];
+//    Fetch all guestlists so local database can be updated
+//    [query whereKey:@"date" greaterThanOrEqualTo:[[NSDate date] dateByAddingTimeInterval:-60*300]];
     return query;
 }
 
