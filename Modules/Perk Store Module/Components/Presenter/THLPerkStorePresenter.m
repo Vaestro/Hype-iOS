@@ -122,7 +122,21 @@
 }
 
 - (void)handleInviteFriendsAction {
-//    TODO: Add invites friends action
+    UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    
+    while (topController.presentedViewController) {
+        topController = topController.presentedViewController;
+    }
+    
+    NSString *message = @"Check out this amazing app!";
+    NSString *shareBody = branchMarketingLink;
+    
+    NSArray *postItems = @[message, shareBody];
+    
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc]
+                                            initWithActivityItems:postItems
+                                            applicationActivities:nil];
+    [topController presentViewController:activityVC animated:YES completion:nil];
 }
 
 - (void)handleRefreshAction {
