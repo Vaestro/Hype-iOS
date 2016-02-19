@@ -14,6 +14,7 @@
 #import "THLParseQueryFactory.h"
 #import "THLPubnubManager.h"
 #import "THLChannel.h"
+#import "THLUser.h"
 
 @interface THLChatListViewController ()<THLChatListTableViewDataSource, THLChatListTableViewDelegate, THLPubnubManagerDelegate>
 
@@ -41,7 +42,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[THLChatListModel sharedManager] requestGetChannels];
+    if ([THLUser currentUser]) {
+        [[THLChatListModel sharedManager] requestGetChannels];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
