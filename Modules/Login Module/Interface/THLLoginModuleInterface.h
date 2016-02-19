@@ -14,4 +14,5 @@
 
 - (void)presentLoginModuleInterfaceWithOnboardingInWindow:(UIWindow *)window;
 - (void)presentLoginModuleInterfaceOnViewController:(UIViewController *)viewController;
+- (void)presentUserProfileInterfaceInNavigationController:(UINavigationController *)navigationController;
 @end

@@ -21,6 +21,8 @@
 #import "THLDashboardNotificationCellViewModel.h"
 #import "THLDashboardTicketCellViewModel.h"
 
+#import "THLUser.h"
+
 @interface THLDashboardPresenter()
 <
 THLDashboardInteractorDelegate

@@ -557,6 +557,7 @@ THLGuestlistReviewInteractorDelegate
         [_confirmationView showInProgressWithMessage:@"Declining your invite..."];
         [_interactor updateGuestlistInvite:_guestlistInviteEntity
                               withResponse:THLStatusDeclined];
+        [_interactor unSubscribeChannelsForUser:[THLUser currentUser] withGuestlist:_guestlistInviteEntity.guestlist];
     }
     /**
      *  Host Decline Action Options

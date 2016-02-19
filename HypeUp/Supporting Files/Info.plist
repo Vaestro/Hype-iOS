@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>branch_key</key>
+	<string>key_live_mcn4eSLxVcOhtbGNQOa7JlioDrh1m25Y</string>
 	<key> NSLocationAlwaysUsageDescription</key>
 	<string>let me stalk ya gurl</string>
 	<key>CFBundleDevelopmentRegion</key>
@@ -25,6 +27,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>hypeup</string>
 				<string>fb678431492288292</string>
 			</array>
 		</dict>

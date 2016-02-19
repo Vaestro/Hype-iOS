@@ -12,6 +12,7 @@
 @interface THLCreditsExplanationView : FXBlurView
 @property (nonatomic, strong) RACCommand *discoverEventsCommand;
 @property (nonatomic, strong) RACCommand *inviteFriendsCommand;
+@property (nonatomic, strong) UIViewController *parentViewController;
 
 - (void)show;
 @end
