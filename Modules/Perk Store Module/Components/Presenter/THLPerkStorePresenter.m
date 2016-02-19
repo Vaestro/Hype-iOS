@@ -16,8 +16,7 @@
 #import "THLUser.h"
 #import "THLCreditsExplanationView.h"
 
-#import "BranchUniversalObject.h"
-#import "BranchLinkProperties.h"
+static NSString *branchMarketingLink = @"https://bnc.lt/m/aTR7pkSq0q";
 
 @interface THLPerkStorePresenter()<THLPerkStoreInteractorDelegate>
 @property (nonatomic, weak) id<THLPerkStoreView> view;
@@ -123,26 +122,21 @@
 }
 
 - (void)handleInviteFriendsAction {
-
-    BranchUniversalObject *branchUniversalObject = [[BranchUniversalObject alloc] init];
-    BranchLinkProperties *linkProperties = [[BranchLinkProperties alloc] init];
-    [linkProperties addControlParam:@"$ios_url" withValue:@"hypeup://"];
-    
-//    linkProperties.feature = @"sharing";
-//    linkProperties.channel = @"facebook";
-    
     UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
     
     while (topController.presentedViewController) {
         topController = topController.presentedViewController;
     }
     
-    [branchUniversalObject showShareSheetWithLinkProperties:linkProperties
-                                               andShareText:@"Get ready for an easier way to go clubbing!"
-                                         fromViewController:topController
-                                                 completion:^(NSString *activityType, BOOL completed) {
-                                                     NSLog(@"finished presenting");
-                                                 }];
+    NSString *message = @"Check out this amazing app!";
+    NSString *shareBody = branchMarketingLink;
+    
+    NSArray *postItems = @[message, shareBody];
+    
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc]
+                                            initWithActivityItems:postItems
+                                            applicationActivities:nil];
+    [topController presentViewController:activityVC animated:YES completion:nil];
 
 }
 

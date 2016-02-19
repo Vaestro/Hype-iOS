@@ -101,6 +101,8 @@
 		3ECD03EF1C58408C00AE325D /* THLUserPhotoVerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD03EE1C58408C00AE325D /* THLUserPhotoVerificationViewController.m */; };
 		3EECB6911C61450100702540 /* THLFAQSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EECB6901C61450100702540 /* THLFAQSectionView.m */; };
 		3EF951781C56AD770046D4F1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EF951771C56AD770046D4F1 /* MobileCoreServices.framework */; };
+		59B1B5471C74754A00F94DBF /* HypeUp.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 59B1B5461C74703F00F94DBF /* HypeUp.entitlements */; };
+		59B1B5481C748F9800F94DBF /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27DF1C520293009BC119 /* Info.plist */; };
 		7905CC411BE0252700E56878 /* THLGuestlistInviteEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7905CC401BE0252700E56878 /* THLGuestlistInviteEntity.m */; };
 		790603BD1BF5B6810093335E /* THLPromotionInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 790603BC1BF5B6810093335E /* THLPromotionInfoView.m */; };
 		790603C31BFB73380093335E /* THLDashboardWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 790603C21BFB73380093335E /* THLDashboardWireframe.m */; };
@@ -485,6 +487,7 @@
 		3EF951771C56AD770046D4F1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		442C6CC9162561E1C703FEB4 /* Pods-HypeUpTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeUpTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HypeUpTests/Pods-HypeUpTests.release.xcconfig"; sourceTree = "<group>"; };
 		50387CEFCC248DE286980673 /* Pods-HypeUp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeUp.release.xcconfig"; path = "Pods/Target Support Files/Pods-HypeUp/Pods-HypeUp.release.xcconfig"; sourceTree = "<group>"; };
+		59B1B5461C74703F00F94DBF /* HypeUp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = HypeUp.entitlements; sourceTree = "<group>"; };
 		5CB33B19C604690B6873D8D8 /* Pods-HypeUpTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeUpTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HypeUpTests/Pods-HypeUpTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7465E16579C35905935D6E3A /* libPods-HypeUp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HypeUp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7905CC3E1BE0251000E56878 /* THLGuestlistInviteEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistInviteEntity.h; sourceTree = "<group>"; };
@@ -2452,6 +2455,7 @@
 		79CD27BC1C520293009BC119 /* HypeUp */ = {
 			isa = PBXGroup;
 			children = (
+				59B1B5461C74703F00F94DBF /* HypeUp.entitlements */,
 				79CD27C41C520293009BC119 /* Resources */,
 				79CD27DE1C520293009BC119 /* Supporting Files */,
 				79CD27BD1C520293009BC119 /* AppDelegate.h */,
@@ -3213,6 +3217,9 @@
 							com.apple.Push = {
 								enabled = 1;
 							};
+							com.apple.SafariKeychain = {
+								enabled = 1;
+							};
 						};
 					};
 					2174A07C1B863F6A006826D7 = {
@@ -3271,7 +3278,9 @@
 				79CD27F31C520293009BC119 /* Raleway-Light.ttf in Resources */,
 				21CE06281BB87FE8004D10BB /* THLNUIStyleSheet.nss in Resources */,
 				79CD27ED1C520293009BC119 /* Raleway-BoldItalic.ttf in Resources */,
+				59B1B5471C74754A00F94DBF /* HypeUp.entitlements in Resources */,
 				79CD27EF1C520293009BC119 /* Raleway-ExtraBoldItalic.ttf in Resources */,
+				59B1B5481C748F9800F94DBF /* Info.plist in Resources */,
 				79CD27F71C520293009BC119 /* Raleway-Regular.ttf in Resources */,
 				79CD27EA1C520293009BC119 /* Raleway-Black.ttf in Resources */,
 				79CD28031C5202A0009BC119 /* Info.plist in Resources */,
@@ -3729,6 +3738,7 @@
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = NO;
 				CLANG_WARN_NULLABLE_TO_NONNULL_CONVERSION = NO;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
+				CODE_SIGN_ENTITLEMENTS = HypeUp/HypeUp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -3764,6 +3774,7 @@
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = NO;
 				CLANG_WARN_NULLABLE_TO_NONNULL_CONVERSION = NO;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
+				CODE_SIGN_ENTITLEMENTS = HypeUp/HypeUp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
