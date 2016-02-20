@@ -92,6 +92,11 @@ static CGFloat const CELL_SPACING = 10;
 - (void)hideGuestlistMenuView:(UIView *)menuView {
     [menuView removeFromSuperview];
 }
+- (void)hideActionBar {
+    
+    [[self actionBarButton] setHidden:TRUE];
+    [self remakeConstraints];
+}
 //---------------------------------------------------
 
 - (void)layoutView {
@@ -173,7 +178,6 @@ static CGFloat const CELL_SPACING = 10;
             [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Check In", nil)];
             [WSELF actionBarButton].backgroundColor = kTHLNUIActionColor;
             [[WSELF.headerView menuButton] setHidden:FALSE];
-
         }
         else if (status == [NSNumber numberWithInteger:3]) {
             [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Accept or Decline Guestlist", nil)];
@@ -198,6 +202,14 @@ static CGFloat const CELL_SPACING = 10;
         else if (status == [NSNumber numberWithInteger:7]) {
             [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Checked In", nil)];
             [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
+            [[WSELF.headerView menuButton] setHidden:FALSE];
+        }
+        else if (status == [NSNumber numberWithInteger:8]) {
+            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Pending Host Approval", nil)];
+            [[WSELF.headerView menuButton] setHidden:FALSE];
+        }
+        else if (status == [NSNumber numberWithInteger:9]) {
+            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Pending Host Approval", nil)];
             [[WSELF.headerView menuButton] setHidden:FALSE];
         }
         [WSELF.view setNeedsDisplay];

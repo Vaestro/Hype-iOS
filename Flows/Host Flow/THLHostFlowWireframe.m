@@ -72,7 +72,7 @@ THLGuestlistReviewModuleDelegate
     [self presentUserProfileInterfaceInViewController:profile];
     
     dashboard.tabBarItem.image = [UIImage imageNamed:@"Lists Icon"];
-    chat.tabBarItem.image = [UIImage imageNamed:@"Lists Icon"];
+    chat.tabBarItem.image = [UIImage imageNamed:@"Inbox Icon"];
     discovery.tabBarItem.image = [UIImage imageNamed:@"Home Icon"];
     profile.tabBarItem.image = [UIImage imageNamed:@"Profile Icon"];
     

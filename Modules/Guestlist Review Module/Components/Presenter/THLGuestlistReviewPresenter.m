@@ -47,8 +47,6 @@ THLGuestlistReviewInteractorDelegate
 @property (nonatomic) THLActivityStatus activityStatus;
 @property (nonatomic, strong) RACCommand *responseCommand;
 
-@property (nonatomic, strong) NSString *callToken;
-
 @property (nonatomic, strong) THLGuestlistInviteEntity *guestlistInviteEntity;
 @property (nonatomic, strong) THLGuestlistEntity *guestlistEntity;
 @end
@@ -403,15 +401,22 @@ THLGuestlistReviewInteractorDelegate
     if ([_guestlistInviteEntity isOwnerInvite] && [_guestlistInviteEntity isCheckedIn] ) {
         self.reviewerStatus = THLGuestlistCheckedInOwner;
     }
+    else if ([_guestlistInviteEntity isOwnerInvite] && [_guestlistEntity isPending]) {
+        self.reviewerStatus = THLGuestlistOwnerPendingApproval;
+    }
     else if ([_guestlistInviteEntity isOwnerInvite]) {
         self.reviewerStatus = THLGuestlistOwner;
     }
     else if ([_guestlistInviteEntity isCheckedIn]) {
         self.reviewerStatus = THLGuestlistCheckedInGuest;
     }
+    else if ([_guestlistInviteEntity isAccepted] && [_guestlistEntity isPending]) {
+        self.reviewerStatus = THLGuestlistAttendingGuestPendingApproval;
+    }
     else if ([_guestlistInviteEntity isAccepted]) {
         self.reviewerStatus = THLGuestlistAttendingGuest;
     }
+
     else if ([_guestlistInviteEntity isPending]) {
         self.reviewerStatus = THLGuestlistPendingGuest;
     }

@@ -14,7 +14,6 @@
 #import "THLGuestEntity.h"
 #import "THLEventEntity.h"
 #import "THLLocationEntity.h"
-#import "AFNetworking.h"
 #import <EstimoteSDK/EstimoteSDK.h>
 #import "THLUser.h"
 #import "THLHostEntity.h"
@@ -110,21 +109,6 @@ ESTBeaconManagerDelegate
         THLGuestlistInviteEntity *guestlistInvite2 = (THLGuestlistInviteEntity *)entity2;
         return [[NSNumber numberWithInteger:guestlistInvite2.response] compare:[NSNumber numberWithInteger:guestlistInvite1.response]];
     }];
-}
-
-- (void)generateToken {
-    WEAKSELF();
-    STRONGSELF();
-    NSURL *baseURL = [NSURL URLWithString:kServerBaseURL];
-    
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager manager] initWithBaseURL:baseURL];
-    
-    [manager GET:kTokenEndpoint parameters:@{@"clientName": [THLUser currentUser].phoneNumber} progress:nil success:^(NSURLSessionTask *task, id responseObject) {
-        [SSELF.delegate interactor:SSELF didGetToken:responseObject[@"token"]];
-    } failure:^(NSURLSessionTask *task, NSError *error) {
-        NSLog(@"error: %@", error);
-    }];
-    
 }
 
 #pragma mark - Handle Location Check In
