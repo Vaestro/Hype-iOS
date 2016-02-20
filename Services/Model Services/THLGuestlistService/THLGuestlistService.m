@@ -143,17 +143,23 @@
                                                 @"eventTime":iso8601String,
                                                 @"guestPhoneNumbers": guestPhoneNumbers,
                                                 @"guestlistId": guestlist.objectId}
-                                        block:^(id guestlistInvite, NSError *cloudError) {
+                                        block:^(id knownGuestIds, NSError *cloudError) {
                                             if (!cloudError){
                                                 [completionSource setResult:nil];
+                                                
+                                                NSArray *knownGuests = knownGuestIds;
                                                 
                                                 THLChannelService *service = [[THLChannelService alloc] init];
                                                 [service createChannelForOwner:currentUser.objectId andHost:eventEntity.host.objectId withGuestlist:guestlist.objectId expireEvent:eventEntity.date];
                                                 [[THLPubnubManager sharedInstance] publishFirstMessageFromChannel:[NSString stringWithFormat:@"%@_host", guestlist.objectId] withHost:eventEntity.host andChatMessage:eventEntity.chatMessage];
                                                 
-                                                if (guestPhoneNumbers.count > 0)  {
-                                                THLGuestEntity *guest = [[THLEntityMapper new] mapGuest:currentUser];
-                                                [[THLPubnubManager sharedInstance] publishFirstMessageFromChannel:[NSString stringWithFormat:@"%@_guestlist", guestlist.objectId] withUser:guest andChatMessage:eventEntity.chatMessage];
+                                                if (knownGuests.count > 0)  {
+                                                    for (id guestId in knownGuests) {
+                                                        [service createChannelForGuest:guestId withGuestlist:guestlist.objectId expireEvent:eventEntity.date];
+                                                    }
+                                                    
+                                                    THLGuestEntity *guest = [[THLEntityMapper new] mapGuest:currentUser];
+                                                    [[THLPubnubManager sharedInstance] publishFirstMessageFromChannel:[NSString stringWithFormat:@"%@_guestlist", guestlist.objectId] withUser:guest andChatMessage:eventEntity.chatMessage];
                                                 }
                                                 
                                             } else {
@@ -177,10 +183,21 @@
                                         @"eventTime": eventEntity.date,
                                         @"guestPhoneNumbers": guestPhoneNumbers,
                                         @"guestlistId": guestlistId}
-                                block:^(id object, NSError *error) {
+                                block:^(id knownGuestIds, NSError *error) {
                                     
                                     if (!error){
                                         [completionSource setResult:nil];
+                                        
+                                        NSArray *knownGuests = knownGuestIds;
+                                        
+                                        THLChannelService *service = [[THLChannelService alloc] init];
+                                        
+                                        if (knownGuests.count > 0)  {
+                                            for (id guestId in knownGuests) {
+                                                [service createChannelForGuest:guestId withGuestlist:guestlistId expireEvent:eventEntity.date];
+                                            }
+                                        }
+                                        
                                     }else {
                                         [completionSource setError:error];
                                     }
