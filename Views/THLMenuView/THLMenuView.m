@@ -54,7 +54,7 @@
     _addIcon = [self newIconNamed:@"Add Icon"];
     _calendarIcon = [self newIconNamed:@"Calendar Icon"];
     _hostChatIcon = [self newIconNamed:@"Chat Icon"];
-    _groupChatIcon = [self newIconNamed:@"Chat Icon"];
+    _groupChatIcon = [self newIconNamed:@"group_chat"];
     _leaveIcon = [self newIconNamed:@"Leave Icon"];
 }
 
