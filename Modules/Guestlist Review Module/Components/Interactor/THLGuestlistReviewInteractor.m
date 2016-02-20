@@ -135,6 +135,7 @@ ESTBeaconManagerDelegate
 -(void)askForPermission {
     if ([self.beaconManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
         [self.beaconManager requestAlwaysAuthorization];
+        [self setUpGeofences];
     } else {
         [self setUpGeofences];
     }
@@ -181,7 +182,7 @@ ESTBeaconManagerDelegate
     
     CLBeacon *nearestBeacon = beacons.firstObject;
     
-    if (_counter <= 30) {
+    if (_counter <= 7) {
         if (nearestBeacon.proximity == CLProximityNear) {
             [self.beaconManager stopRangingBeaconsInRegion:self.beaconRegion];
             [self updateGuestlistInvite:_guestlistInvite withCheckInStatus:YES];
