@@ -118,12 +118,12 @@ static NSString *const kChannelListRecievedNotification = @"kDataChannelListSetu
         THLUser *host = channel.hostId;
         
         if ([guest.objectId isEqualToString:userID]) {
-            [channels addObject:[NSString stringWithFormat:@"%@_guestlist", channel.guestlistId.objectId]];
+            [channels addObject:[NSString stringWithFormat:@"%@_Group", channel.guestlistId.objectId]];
         } else if ([owner.objectId isEqualToString:userID]) {
-            [channels addObject:[NSString stringWithFormat:@"%@_guestlist", channel.guestlistId.objectId]];
-            [channels addObject:[NSString stringWithFormat:@"%@_host", channel.guestlistId.objectId]];
+            [channels addObject:[NSString stringWithFormat:@"%@_Group", channel.guestlistId.objectId]];
+            [channels addObject:[NSString stringWithFormat:@"%@_Host", channel.guestlistId.objectId]];
         } else if ([host.objectId isEqualToString:userID]) {
-            [channels addObject:[NSString stringWithFormat:@"%@_host", channel.guestlistId.objectId]];
+            [channels addObject:[NSString stringWithFormat:@"%@_Host", channel.guestlistId.objectId]];
         }
     }
     return channels;
