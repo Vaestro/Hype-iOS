@@ -135,7 +135,6 @@ ESTBeaconManagerDelegate
 -(void)askForPermission {
     if ([self.beaconManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
         [self.beaconManager requestAlwaysAuthorization];
-        [self setUpGeofences];
     } else {
         [self setUpGeofences];
     }
@@ -152,7 +151,7 @@ ESTBeaconManagerDelegate
      minor:_guestlistEntity.event.host.beacon.minor.integerValue
      identifier:@"beacon"];
     
-    [KVNProgress show];
+    [KVNProgress showWithStatus:@"Checking In"];
     
     [self.beaconManager startRangingBeaconsInRegion:self.beaconRegion];
 
