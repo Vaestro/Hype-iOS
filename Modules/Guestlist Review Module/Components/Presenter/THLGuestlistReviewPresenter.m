@@ -258,11 +258,11 @@ THLGuestlistReviewInteractorDelegate
 - (void)configureMenuView:(THLMenuView *)menuView {
     self.menuView = menuView;
     
-    if (self.reviewerStatus != THLGuestlistOwner && self.reviewerStatus != THLGuestlistCheckedInOwner) {
+    if (self.reviewerStatus != THLGuestlistOwner && self.reviewerStatus != THLGuestlistCheckedInOwner && self.reviewerStatus != THLGuestlistOwnerPendingApproval) {
         [_menuView guestLayoutUpdate];
     }
     
-    if (self.reviewerStatus == THLGuestlistOwner || self.reviewerStatus == THLGuestlistCheckedInOwner) {
+    if (self.reviewerStatus == THLGuestlistOwner || self.reviewerStatus == THLGuestlistCheckedInOwner || self.reviewerStatus == THLGuestlistOwnerPendingApproval) {
         [_menuView partyLeadLayoutUpdate];
     }
     
