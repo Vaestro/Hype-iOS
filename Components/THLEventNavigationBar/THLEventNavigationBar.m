@@ -160,8 +160,14 @@
 
 - (void)showExplanationView {
     THLAlertView *alertView = [THLAlertView new];
-    [alertView showWithTitle:@"Exclusive Event"
-                     message:@"This is an event with limited VIP guestlist spots. Your guestlist needs to be approved by a host in order to attend. To guarantee RSVP, submit a guestlist and ask your host to book bottle service"];
+    [alertView setTitle:@"Exclusive Event"];
+    [alertView setMessage:@"This is an event with limited VIP guestlist spots. Your guestlist needs to be approved by a host in order to attend. To guarantee RSVP, submit a guestlist and ask your host to book bottle service"];
+    
+    [self.superview addSubview:alertView];
+    [self.superview bringSubviewToFront:alertView];
+    [alertView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.bottom.insets(kTHLEdgeInsetsNone());
+    }];
 }
 
 #pragma mark - Constructors
