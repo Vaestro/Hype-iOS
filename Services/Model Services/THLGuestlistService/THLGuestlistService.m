@@ -265,7 +265,8 @@
 #warning INVITATION CODES SHOULD NOT BE SET TO NIL HERE (BAD CODE)
                         [guestlistInvite setValue:nil forKey:@"invitationCode"];
                         [guestlistInvite setValue:[NSNumber numberWithInt:2] forKey:@"response"];
-
+                        THLChannelService *service = [[THLChannelService alloc] init];
+                        [service createChannelForGuest:[THLUser currentUser].objectId withGuestlist:guestlist.objectId expireEvent:event[@"date"]];
                         [unfinishedGuestlistInvites addObject:guestlistInvite];
                     }
                 }
