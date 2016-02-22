@@ -35,7 +35,14 @@
         //        HACK to get guestlist Invite to update with updated Guestlist
         for (THLGuestlistInviteEntity *guestlistInviteEntity in entities) {
             guestlistInviteEntity.updatedAt = [NSDate date];
+            
+            
+            
         }
+        
+        
+        
+        
 //        [SSELF.dataStore refreshDomain:domain withEntities:entities andDeleteEntities:NO];
         [SSELF.dataStore updateOrAddEntities:entities];
         return [BFTask taskWithResult:entities];

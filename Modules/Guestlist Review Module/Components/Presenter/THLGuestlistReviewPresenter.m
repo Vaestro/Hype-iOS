@@ -553,7 +553,7 @@ THLGuestlistReviewInteractorDelegate
     if (_reviewerStatus == THLGuestlistAttendingGuest) {
         
     }
-    else if (_reviewerStatus == THLGuestlistPendingGuest || _reviewerStatus == THLGuestlistAttendingGuestPendingApproval) {
+    else if (_reviewerStatus == THLGuestlistPendingGuest) {
         [_confirmationView showInProgressWithMessage:@"Declining your invite..."];
         [_interactor updateGuestlistInvite:_guestlistInviteEntity
                               withResponse:THLStatusDeclined];
@@ -622,7 +622,11 @@ presentGuestlistInvitationInterfaceOnController:(UIViewController *)self.view];
 - (void)interactor:(THLGuestlistReviewInteractor *)interactor didUpdateGuestlistInviteResponse:(NSError *)error to:(THLStatus)response {
     if (!error && response == THLStatusAccepted) {
          NSString *eventTime =_guestlistInviteEntity.guestlist.event.date.thl_timeString;
-        self.reviewerStatus = THLGuestlistAttendingGuest;
+        if ([_guestlistEntity isPending]) {
+            self.reviewerStatus = THLGuestlistAttendingGuestPendingApproval;
+        } else {
+            self.reviewerStatus = THLGuestlistAttendingGuest;
+        }
         [self.confirmationView showSuccessWithTitle:@"Accepted Invite"
                                             Message: NSStringWithFormat(@"Please meet the Host at the Venue 10 minutes before %@ EST so that we can ensure speedy entry for you and your party. If you have any questions, you can contact the Host in the guestlist menu.", eventTime)];
     } else if (!error && response == THLStatusDeclined) {
