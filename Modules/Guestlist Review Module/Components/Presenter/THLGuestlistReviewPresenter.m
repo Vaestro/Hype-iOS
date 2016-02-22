@@ -553,7 +553,7 @@ THLGuestlistReviewInteractorDelegate
     if (_reviewerStatus == THLGuestlistAttendingGuest) {
         
     }
-    else if (_reviewerStatus == THLGuestlistPendingGuest) {
+    else if (_reviewerStatus == THLGuestlistPendingGuest || _reviewerStatus == THLGuestlistAttendingGuestPendingApproval) {
         [_confirmationView showInProgressWithMessage:@"Declining your invite..."];
         [_interactor updateGuestlistInvite:_guestlistInviteEntity
                               withResponse:THLStatusDeclined];
