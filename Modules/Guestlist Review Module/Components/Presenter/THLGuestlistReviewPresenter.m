@@ -518,7 +518,7 @@ THLGuestlistReviewInteractorDelegate
     /**
      *  Guest Accept Action Options
      */
-    if (_reviewerStatus == THLGuestlistAttendingGuest) {
+    if (_reviewerStatus == THLGuestlistAttendingGuest || _reviewerStatus == THLGuestlistAttendingGuestPendingApproval) {
         [_confirmationView showInProgressWithMessage:@"Leaving guestlist..."];
         [_interactor updateGuestlistInvite:_guestlistInviteEntity
                               withResponse:THLStatusDeclined];
