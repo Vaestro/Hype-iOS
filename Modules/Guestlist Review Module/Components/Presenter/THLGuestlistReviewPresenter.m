@@ -661,7 +661,7 @@ presentGuestlistInvitationInterfaceOnController:(UIViewController *)self.view];
 - (void)interactor:(THLGuestlistReviewInteractor *)interactor didUpdateGuestlistInviteCheckInStatus:(NSError *)error to:(BOOL)status {
     if (status) {
         UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Checked In"
-                                                                       message:@"You have successfully checked In"
+                                                                       message:@"You have successfully checked in. The host has been notified"
                                                                 preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
