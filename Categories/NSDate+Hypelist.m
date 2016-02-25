@@ -71,6 +71,10 @@
 	}
 }
 
+- (NSString *)thl_dayString {
+    return [self formattedDateWithFormat:@"MM/dd"];
+}
+
 - (NSString *)thl_dayOfTheWeek {
     return [self formattedDateWithFormat:@"EEEE"];
 }

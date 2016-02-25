@@ -160,9 +160,10 @@ THLGuestlistReviewInteractorDelegate
 
     
     [_view setHeaderViewImage:_guestlistEntity.event.location.imageURL];
-    NSString *userName = _guestlistEntity.owner.firstName;
+    NSString *firstName = _guestlistEntity.owner.firstName;
+    NSString *lastName = [_guestlistEntity.owner.lastName substringToIndex:1];
     NSString *venueLocation = _guestlistEntity.event.location.name;
-    [_view setTitle:[NSString stringWithFormat:@"%@'s List For %@", userName, venueLocation]];
+    [_view setTitle:[NSString stringWithFormat:@"%@ %@'s List For %@", firstName, lastName, venueLocation]];
     [_view setDismissCommand:dismissCommand];
     [_view setShowMenuCommand:showMenuCommand];
     [_view setFormattedDate: [NSString stringWithFormat:@"%@, %@", _guestlistEntity.event.date.thl_weekdayString, _guestlistEntity.event.date.thl_timeString]];

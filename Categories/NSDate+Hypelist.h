@@ -14,6 +14,7 @@
 @property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *thl_dateString;
 @property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *thl_timeString;
 @property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *thl_dateTimeString;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *thl_dayString;
 + (instancetype)thl_today;
 + (instancetype)thl_tomorrow;
 + (instancetype)thl_nextWeek;

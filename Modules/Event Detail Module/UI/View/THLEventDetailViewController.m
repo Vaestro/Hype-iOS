@@ -214,7 +214,7 @@
 
 - (THLEventDetailsLocationInfoView *)newLocationInfoView {
     THLEventDetailsLocationInfoView *infoView = [THLEventDetailsLocationInfoView new];
-    infoView.title = NSLocalizedString(@"VENUE INFORMATION", nil);
+    infoView.title = NSLocalizedString(@"WHAT WE LIKE", nil);
     infoView.translatesAutoresizingMaskIntoConstraints = NO;
     infoView.dividerColor = [UIColor whiteColor];
     return infoView;

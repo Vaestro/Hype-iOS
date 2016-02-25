@@ -163,9 +163,6 @@
     [self.client publish:[message toObjectWithUser:host] toChannel:channel mobilePushPayload:@{@"aps":@{@"alert":message.text}} compressed:YES withCompletion:^(PNPublishStatus *status) {
         //
     }];
-    
-//    [self.client publish:[message toObjectWithUser:user] toChannel:channel compressed:YES withCompletion:^(PNPublishStatus *status) {
-//    }];
 }
 
 - (void)subscribeWithChannels:(NSArray *)channels {
