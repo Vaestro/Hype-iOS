@@ -81,7 +81,7 @@ THLGuestlistReviewInteractorDelegate
 }
 
 - (void)presentOpenChatInController:(UIViewController *)controller {
-    UIWindow *keyWindow = [[[UIApplication sharedApplication] delegate] window];
+//    UIWindow *keyWindow = [[[UIApplication sharedApplication] delegate] window];
     THLChatRoomViewController *chrmvctrl = [[THLChatRoomViewController alloc] initWithChannel:nil];
     [_wireframe presentInController:chrmvctrl];
     //UITabBarController *tabController = (UITabBarController *)[keyWindow rootViewController];
@@ -359,11 +359,11 @@ THLGuestlistReviewInteractorDelegate
     if (type == 0) {
         THLChannelService *service = [[THLChannelService alloc] init];
         [service createChannelForOwner:_guestlistEntity.owner.objectId andHost:_guestlistEntity.event.host.objectId withGuestlist:_guestlistEntity.objectId expireEvent:_guestlistEntity.event.date];
-        item = [[THLChatListItem alloc] initWithChannel:[NSString stringWithFormat:@"%@_host", _guestlistEntity.objectId] andTitle:@"HOST"];
+        item = [[THLChatListItem alloc] initWithChannel:[NSString stringWithFormat:@"%@_Host", _guestlistEntity.objectId] andTitle:@"HOST"];
     } else {
         THLChannelService *service = [[THLChannelService alloc] init];
         [service createChannelForGuest:[THLUser currentUser].objectId withGuestlist:_guestlistEntity.objectId expireEvent:_guestlistEntity.event.date];
-        item = [[THLChatListItem alloc] initWithChannel:[NSString stringWithFormat:@"%@_guestlist", _guestlistEntity.objectId] andTitle:@"GROUP"];
+        item = [[THLChatListItem alloc] initWithChannel:[NSString stringWithFormat:@"%@_Group", _guestlistEntity.objectId] andTitle:@"GROUP"];
     }
     [self presentChatRoomController: item];
 }
@@ -371,9 +371,9 @@ THLGuestlistReviewInteractorDelegate
 - (void)presentChatRoomControllerFromItemWithType:(NSInteger)type {
     THLChatListItem *item;
     if (type == 0) {
-        item = [[THLChatListItem alloc] initWithChannel:[NSString stringWithFormat:@"%@_host", _guestlistEntity.objectId] andTitle:@"HOST"];
+        item = [[THLChatListItem alloc] initWithChannel:[NSString stringWithFormat:@"%@_Host", _guestlistEntity.objectId] andTitle:@"HOST"];
     } else {
-        item = [[THLChatListItem alloc] initWithChannel:[NSString stringWithFormat:@"%@_guestlist", _guestlistEntity.objectId] andTitle:@"GROUP"];
+        item = [[THLChatListItem alloc] initWithChannel:[NSString stringWithFormat:@"%@_Group", _guestlistEntity.objectId] andTitle:@"GROUP"];
     }
     [self presentChatRoomController: item];
 }
