@@ -71,6 +71,13 @@
 	}
 }
 
+
+- (NSDate *)thl_sixHoursAhead {
+    NSTimeInterval secondsInSixHours = 6 * 60 * 60;
+    return [self dateByAddingTimeInterval:secondsInSixHours];
+}
+
+
 - (NSString *)thl_dayString {
     return [self formattedDateWithFormat:@"MM/dd"];
 }
@@ -90,6 +97,12 @@
 - (NSString *)thl_dateTimeString {
 	return [self shortString];
 }
+
+- (NSString *)thl_endTimeString {
+   
+    return nil;
+}
+
 
 
 @end

@@ -150,12 +150,12 @@
                                                 NSArray *knownGuests = knownGuestIds;
                                                 
                                                 THLChannelService *service = [[THLChannelService alloc] init];
-                                                [service createChannelForOwner:currentUser.objectId andHost:eventEntity.host.objectId withGuestlist:guestlist.objectId expireEvent:eventEntity.date];
+                                                [service createChannelForOwner:currentUser.objectId andHost:eventEntity.host.objectId withGuestlist:guestlist.objectId expireEvent:eventEntity.date.thl_sixHoursAhead];
                                                 [[THLPubnubManager sharedInstance] publishFirstMessageFromChannel:[NSString stringWithFormat:@"%@_Host", guestlist.objectId] withHost:eventEntity.host andChatMessage:eventEntity.chatMessage];
                                                 
                                                 if (knownGuests.count > 0)  {
                                                     for (id guestId in knownGuests) {
-                                                        [service createChannelForGuest:guestId withGuestlist:guestlist.objectId expireEvent:eventEntity.date];
+                                                        [service createChannelForGuest:guestId withGuestlist:guestlist.objectId expireEvent:eventEntity.date.thl_sixHoursAhead];
                                                     }
                                                     
                                                     THLGuestEntity *guest = [[THLEntityMapper new] mapGuest:currentUser];
@@ -194,7 +194,7 @@
                                         
                                         if (knownGuests.count > 0)  {
                                             for (id guestId in knownGuests) {
-                                                [service createChannelForGuest:guestId withGuestlist:guestlistId expireEvent:eventEntity.date];
+                                                [service createChannelForGuest:guestId withGuestlist:guestlistId expireEvent:eventEntity.date.thl_sixHoursAhead];
                                             }
                                         }
                                         

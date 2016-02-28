@@ -34,7 +34,7 @@
 - (void)configureCell:(THLChatListItem *)item {
     [self.lastMessageLabel setText:item.lastMessage];
     [self.titleLabel setText:item.title];
-    [self.titleLabel sizeToFit];
+    self.titleLabel.adjustsFontSizeToFitWidth = YES;
     [self.timeLabel setText:[self configureDate:item.time]];
     [self.photoImageView sd_setImageWithURL:[NSURL URLWithString:item.imageURL]];
 }
