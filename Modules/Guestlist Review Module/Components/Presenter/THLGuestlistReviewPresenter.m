@@ -108,7 +108,7 @@ THLGuestlistReviewInteractorDelegate
     [_ticketView setDismissCommand:dismissCommand];
     [_ticketView setViewPartyCommand:viewPartyCommand];
     [_ticketView setViewEventDetailsCommand:viewEventDetailsCommand];
-    [_ticketView setListNumber:@"1"];
+    [_ticketView setListNumber:[NSString stringWithFormat:@"%d",_guestlistInviteEntity.ticketNumber]];
     [_ticketView setVenueName:_guestlistInviteEntity.guestlist.event.location.name];
     [_ticketView setEventDate:[NSString stringWithFormat:@"%@", _guestlistEntity.event.date.thl_weekdayString]];
     [_ticketView setArrivalMessage:[NSString stringWithFormat:@"PLEASE MEET HOST @ %@", _guestlistEntity.event.date.thl_timeString]];

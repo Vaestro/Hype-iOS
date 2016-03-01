@@ -18,5 +18,5 @@
 @property (nonatomic) THLStatus response;
 @property (nonatomic) BOOL checkInStatus;
 @property (nonatomic, retain) NSString *invitationCode;
-
+@property (nonatomic) int ticketNumber;
 @end

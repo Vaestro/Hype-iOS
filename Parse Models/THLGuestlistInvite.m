@@ -15,6 +15,7 @@
 @dynamic checkInStatus;
 @dynamic date;
 @dynamic invitationCode;
+@dynamic ticketNumber;
 
 + (void)load {
 	[self registerSubclass];
