@@ -121,6 +121,7 @@
 
 - (void)dismissPartyViewAndShowTicketView {
     [_partyView dismissViewControllerAnimated:NO completion:^{
+        _partyView = [[THLGuestlistReviewViewController alloc] initWithNibName:nil bundle:nil];
         [_presenter configureTicketView:_ticketView];
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:_ticketView];
         [_controller presentViewController:navigationController animated:NO completion:nil];

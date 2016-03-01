@@ -136,9 +136,6 @@ static CGFloat const CELL_SPACING = 10;
         }];
     }
 
-    
-
-    
     [_actionBarButton makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.insets(kTHLEdgeInsetsNone());
         make.top.equalTo([WSELF collectionView].mas_bottom);
