@@ -229,6 +229,13 @@ THLLoginModuleDelegate
     _guestlistInvitationWireframe = nil;
 }
 
+- (void)dismissWireframeAndPresentGuestlistReviewWireframeFor:(THLGuestlistInviteEntity *)guestlistInvite guestlist:(THLGuestlistEntity *)guestlist controller:(UIViewController *)vc {
+    _guestlistInvitationWireframe = nil;
+    [self presentGuestlistReviewInterfaceForGuestlist:guestlist withGuestlistInvite:guestlistInvite inController:vc];
+}
+
+
+
 #pragma mark - THLGuestlistReviewModuleDelegate
 - (void)guestlistReviewModule:(id<THLGuestlistReviewModuleInterface>)module event:(THLEventEntity *)eventEntity withGuestlistId:(NSString *)guestlistId andGuests:(NSArray<THLGuestEntity *> *)guests presentGuestlistInvitationInterfaceOnController:(UIViewController *)controller {
     [self presentGuestlistInvitationInterfaceForEvent:eventEntity withGuestlistId:guestlistId andGuests:guests inController:controller];

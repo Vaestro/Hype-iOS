@@ -60,6 +60,12 @@
     }];
 }
 
+- (void)dismissInterfaceAndPresentGuestlistReviewFor:(THLGuestlistInviteEntity *)guestlistInvite guestlist:(THLGuestlistEntity *)guestlist {
+    [_view.navigationController dismissViewControllerAnimated:YES completion:^{
+        [_presenter.moduleDelegate dismissWireframeAndPresentGuestlistReviewWireframeFor:(THLGuestlistInviteEntity *)guestlistInvite guestlist:(THLGuestlistEntity *)guestlist controller:_controller];
+    }];
+}
+
 - (id<THLGuestlistInvitationModuleInterface>)moduleInterface {
 	return _presenter;
 }

@@ -13,6 +13,8 @@
 @class THLEntityMapper;
 @class APAddressBook;
 @class THLDataStore;
+@class THLGuestlistInviteEntity;
+@class THLGuestlistEntity;
 @protocol THLViewDataSourceFactoryInterface;
 
 @interface THLGuestlistInvitationWireframe : NSObject
@@ -35,4 +37,5 @@
 
 - (void)presentInterfaceInController:(UIViewController *)controller;
 - (void)dismissInterface;
+- (void)dismissInterfaceAndPresentGuestlistReviewFor:(THLGuestlistInviteEntity *)guestlistInvite guestlist:(THLGuestlistEntity *)guestlist;
 @end

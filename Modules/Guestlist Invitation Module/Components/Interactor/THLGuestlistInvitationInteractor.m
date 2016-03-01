@@ -149,7 +149,7 @@ static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInv
     if (_guestlistId == nil) {
         [[_dataManager submitGuestlistForEvent:_eventEntity withInvites:[self obtainDigits:_addedGuests]] continueWithSuccessBlock:^id(BFTask *task) {
             [[_dataManager getOwnerInviteForEvent:_eventEntity] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *fetchTask) {
-                [WSELF.delegate interactor:WSELF didCommitChangesToGuestlist:task.error];
+                [WSELF.delegate interactor:WSELF didSubmitInitialGuestlist:fetchTask.result withError:task.error];
                 
                 //!!
 

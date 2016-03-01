@@ -12,6 +12,7 @@
 #import "THLGuestlistInvitationView.h"
 #import "THLGuestlistInvitationViewEventHandler.h"
 #import "THLEventEntity.h"
+#import "THLGuestlistInviteEntity.h"
 
 @interface THLGuestlistInvitationPresenter ()
 <
@@ -76,6 +77,13 @@ THLGuestlistInvitationViewEventHandler
     } else {
         
     }
+}
+
+- (void)interactor:(THLGuestlistInvitationInteractor *)interactor didSubmitInitialGuestlist:(THLGuestlistInviteEntity *)guestlistInvite withError:(NSError *)error {
+    self.submitting = NO;
+
+    [_wireframe dismissInterfaceAndPresentGuestlistReviewFor:guestlistInvite guestlist:guestlistInvite.guestlist];
+    
 }
 
 #pragma mark - THLGuestlistInvitationViewEventHandler 
