@@ -16,6 +16,7 @@
 @property (nonatomic, copy) NSDate *date;
 @property (nonatomic, strong) THLGuestEntity *guest;
 @property (nonatomic, strong) THLGuestlistEntity *guestlist;
+@property (nonatomic) int ticketNumber;
 
 - (BOOL)isAccepted;
 - (BOOL)isPending;

@@ -222,6 +222,7 @@
         entity.date = guestlistInvite.date;
         entity.guest = [self mapGuest:guestlistInvite[@"Guest"]];
         entity.guestlist = [self mapGuestlist:guestlistInvite[@"Guestlist"]];
+        entity.ticketNumber = guestlistInvite.ticketNumber;
         return entity;
     } else {
         return nil;
