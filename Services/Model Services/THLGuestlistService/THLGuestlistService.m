@@ -150,16 +150,15 @@
                                                 NSArray *knownGuests = knownGuestIds;
                                                 
                                                 THLChannelService *service = [[THLChannelService alloc] init];
-                                                [service createChannelForOwner:currentUser.objectId andHost:eventEntity.host.objectId withGuestlist:guestlist.objectId expireEvent:eventEntity.date.thl_sixHoursAhead];
-                                                [[THLPubnubManager sharedInstance] publishFirstMessageFromChannel:[NSString stringWithFormat:@"%@_Host", guestlist.objectId] withHost:eventEntity.host andChatMessage:eventEntity.chatMessage];
+                                                
                                                 
                                                 if (knownGuests.count > 0)  {
                                                     for (id guestId in knownGuests) {
-                                                        [service createChannelForGuest:guestId withGuestlist:guestlist.objectId expireEvent:eventEntity.date.thl_sixHoursAhead];
+                                                        [service createChannelForOwner:guestId andHost:eventEntity.host.objectId withGuestlist:guestlist.objectId expireEvent:eventEntity.date.thl_sixHoursAhead];
                                                     }
                                                     
-                                                    THLGuestEntity *guest = [[THLEntityMapper new] mapGuest:currentUser];
-                                                    [[THLPubnubManager sharedInstance] publishFirstMessageFromChannel:[NSString stringWithFormat:@"%@_Group", guestlist.objectId] withUser:guest andChatMessage:eventEntity.chatMessage];
+                                                    [[THLPubnubManager sharedInstance] publishFirstMessageFromChannel:[NSString stringWithFormat:@"%@_Host", guestlist.objectId] withHost:eventEntity.host andChatMessage:eventEntity.chatMessage];
+                                                    
                                                 }
                                                 
                                             } else {
@@ -194,7 +193,7 @@
                                         
                                         if (knownGuests.count > 0)  {
                                             for (id guestId in knownGuests) {
-                                                [service createChannelForGuest:guestId withGuestlist:guestlistId expireEvent:eventEntity.date.thl_sixHoursAhead];
+                                                [service createChannelForOwner:guestId andHost:eventEntity.host.objectId withGuestlist:guestlistId expireEvent:eventEntity.date.thl_sixHoursAhead];
                                             }
                                         }
                                         
