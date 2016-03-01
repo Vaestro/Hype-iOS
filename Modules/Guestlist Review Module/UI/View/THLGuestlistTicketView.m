@@ -42,17 +42,17 @@
 }
 
 - (void)layoutView {
-    self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                                                   forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.view.backgroundColor = [UIColor clearColor];
+    
+    
+    self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
+    
     self.navigationItem.leftBarButtonItem = _dismissButton;
     self.navigationItem.title = @"TICKET";
-
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-    self.automaticallyAdjustsScrollViewInsets = YES;
     
     UIView *ticketBox = [UIView new];
     [ticketBox.layer setBorderWidth:3.0];
@@ -63,7 +63,7 @@
     WEAKSELF();
 
     [_ticketInstructionLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.insets(kTHLEdgeInsetsSuperHigh());
+        make.top.offset(75);
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
@@ -143,7 +143,7 @@
 }
 
 - (UILabel *)newVenueNameLabel {
-    UILabel *label = THLNUILabel(kTHLNUIRegularTitle);
+    UILabel *label = THLNUILabel(kTHLNUIBoldTitle);
     label.adjustsFontSizeToFitWidth = YES;
     label.numberOfLines = 1;
     label.minimumScaleFactor = 0.5;
@@ -152,7 +152,7 @@
 }
 
 - (UILabel *)newEventDateLabel {
-    UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
+    UILabel *label = THLNUILabel(kTHLNUIRegularTitle);
     label.adjustsFontSizeToFitWidth = YES;
     label.numberOfLines = 1;
     label.minimumScaleFactor = 0.5;

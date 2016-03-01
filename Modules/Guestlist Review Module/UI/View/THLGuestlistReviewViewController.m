@@ -148,7 +148,7 @@ static CGFloat const CELL_SPACING = 10;
 - (void)remakeConstraints {
     WEAKSELF();
     [_collectionView remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(WSELF.headerView.mas_bottom);
+        make.top.equalTo(kTHLEdgeInsetsNone());
         make.left.right.bottom.insets(kTHLEdgeInsetsNone());
     }];
 }
@@ -193,15 +193,16 @@ static CGFloat const CELL_SPACING = 10;
             [[WSELF.headerView menuButton] setHidden:TRUE];
         }
         else if (status == [NSNumber numberWithInteger:1]) {
-            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Check In", nil)];
-            [WSELF actionBarButton].backgroundColor = kTHLNUIActionColor;
+            [[WSELF actionBarButton] setHidden:TRUE];
             [[WSELF.headerView menuButton] setHidden:FALSE];
+            [self remakeConstraints];
 
         }
         else if (status == [NSNumber numberWithInteger:2]) {
-            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Check In", nil)];
-            [WSELF actionBarButton].backgroundColor = kTHLNUIActionColor;
+            [[WSELF actionBarButton] setHidden:TRUE];
             [[WSELF.headerView menuButton] setHidden:FALSE];
+            [self remakeConstraints];
+
         }
         else if (status == [NSNumber numberWithInteger:3]) {
             [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Accept or Decline Guestlist", nil)];

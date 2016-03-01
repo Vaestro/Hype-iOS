@@ -206,6 +206,8 @@
 - (void)hostLayoutUpdate {
     [self.leaveGuestlistButton setHidden:YES];
     [self.leaveIcon setHidden:YES];
+    [self.chatHostButton setHidden:YES];
+    [self.hostChatIcon setHidden:YES];
     [self.chatGroupButton setHidden:YES];
     [self.groupChatIcon setHidden:YES];
     
@@ -234,6 +236,10 @@
 - (void)partyLeadLayoutUpdate {
     [self.leaveGuestlistButton setHidden:YES];
     [self.leaveIcon setHidden:YES];
+    [self.chatHostButton setHidden:YES];
+    [self.hostChatIcon setHidden:YES];
+    [self.chatGroupButton setHidden:YES];
+    [self.groupChatIcon setHidden:YES];
     
     WEAKSELF();
     [_calendarIcon remakeConstraints:^(MASConstraintMaker *make) {
@@ -249,31 +255,10 @@
 }
 
 - (void)guestLayoutUpdate {
-    [self.addGuestsButton setHidden:YES];
-    [self.addIcon setHidden:YES];
     [self.chatHostButton setHidden:YES];
     [self.hostChatIcon setHidden:YES];
-
-    WEAKSELF();
-    [self.eventDetailsButton remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(WSELF.leaveGuestlistButton.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
-        make.left.equalTo(WSELF.calendarIcon.mas_right).insets(kTHLEdgeInsetsSuperHigh());
-    }];
-    
-    [self.leaveIcon remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo([WSELF leaveGuestlistButton].mas_centerY);
-        make.left.equalTo(kTHLEdgeInsetsInsanelyHigh());
-    }];
-    
-    [self.leaveGuestlistButton remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_hostNameLabel.mas_bottom).offset(50);
-        make.left.equalTo(WSELF.leaveIcon.mas_right).insets(kTHLEdgeInsetsSuperHigh());
-    }];
-    
-    [self.chatGroupButton remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(WSELF.eventDetailsButton.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
-        make.left.equalTo(WSELF.groupChatIcon.mas_right).insets(kTHLEdgeInsetsSuperHigh());
-    }];
+    [self.chatGroupButton setHidden:YES];
+    [self.groupChatIcon setHidden:YES];
 }
 
 
