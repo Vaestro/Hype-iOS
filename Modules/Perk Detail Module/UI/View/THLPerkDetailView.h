@@ -16,4 +16,5 @@
 @property (nonatomic, strong) RACCommand *dismissCommand;
 @property (nonatomic, strong) RACCommand *purchaseCommand;
 
+-(void)showConfirmationView:(UIView *)confirmationView;
 @end

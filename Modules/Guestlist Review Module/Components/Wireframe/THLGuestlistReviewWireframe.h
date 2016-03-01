@@ -28,7 +28,12 @@
                                dataStore:(THLDataStore *)dataStore
                    viewDataSourceFactory:(id<THLViewDataSourceFactoryInterface>)viewDataSourceFactory;
 
-- (void)presentInterfaceInController:(UIViewController *)controller;
+- (void)presentPartyViewOnTicketView;
+- (void)presentPartyViewInController:(UIViewController *)controller;
+- (void)presentTicketViewInController:(UIViewController *)controller;
+
 - (void)presentInController:(UIViewController *)controller;
 - (void)dismissInterface;
+- (void)dismissPartyView;
+- (void)dismissPartyViewAndShowTicketView;
 @end

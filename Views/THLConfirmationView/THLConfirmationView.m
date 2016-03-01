@@ -56,7 +56,7 @@ static CGFloat const kTHLConfirmationViewButtonHeight = 50;
     _activityView = [self newActivityView];
 }
 
-- (void)showResponseFlowWithTitle:(NSString *)title message:(NSString *)message {
+- (void)setResponseFlowWithTitle:(NSString *)title message:(NSString *)message {
     self.confirmationTitle = title;
     self.confirmationMessage = message;
     self.isResponseFlow = TRUE;
@@ -65,23 +65,21 @@ static CGFloat const kTHLConfirmationViewButtonHeight = 50;
     [_declineButton setTitle:@"Decline" forState:UIControlStateNormal];
     
     [self layoutResponseView];
-    [self presentView];
 }
 
-- (void)showConfirmationWithTitle:(NSString *)title message:(NSString *)message {
+- (void)setConfirmationWithTitle:(NSString *)title message:(NSString *)message {
     self.confirmationTitle = title;
     self.confirmationMessage = message;
     
     [self layoutConfirmationView];
-    [self presentView];
 }
 
-- (void)showInProgressWithMessage:(NSString *)messageText {
+- (void)setInProgressWithMessage:(NSString *)messageText {
     self.confirmationMessage = messageText;
     [self layoutPendingView];
 }
 
-- (void)showSuccessWithTitle:(NSString *)titleText Message:(NSString *)messageText {
+- (void)setSuccessWithTitle:(NSString *)titleText Message:(NSString *)messageText {
     self.confirmationTitle = titleText;
     self.confirmationMessage = messageText;
     [self layoutSuccessView];

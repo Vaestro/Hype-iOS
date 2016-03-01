@@ -61,11 +61,11 @@ UICollectionViewDelegateFlowLayout
 
 - (void)presentCreditsExplanationView {
     _creditsExplanationView = [THLCreditsExplanationView new];
-    [self.view addSubview:_creditsExplanationView];
+    [self.tabBarController.view addSubview:_creditsExplanationView];
     [_creditsExplanationView makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.bottom.insets(kTHLEdgeInsetsNone());
     }];
-    [self.navigationController.view bringSubviewToFront:_creditsExplanationView];
+    [self.tabBarController.view bringSubviewToFront:_creditsExplanationView];
 }
 
 - (void)constructView {

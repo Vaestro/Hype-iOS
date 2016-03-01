@@ -10,6 +10,7 @@
 #import "THLGuestlistReviewModuleInterface.h"
 @class THLGuestlistReviewWireframe;
 @class THLGuestlistReviewInteractor;
+@class THLGuestlistTicketView;
 @protocol THLGuestlistReviewView;
 
 @interface THLGuestlistReviewPresenter : NSObject<THLGuestlistReviewModuleInterface>
@@ -20,4 +21,6 @@
                        interactor:(THLGuestlistReviewInteractor *)interactor;
 
 - (void)configureView:(id<THLGuestlistReviewView>)view;
+- (void)configureTicketView:(THLGuestlistTicketView *)view;
+
 @end

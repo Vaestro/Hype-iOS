@@ -20,6 +20,7 @@
 
 #import "UIView+DimView.h"
 #import <KVNProgress/KVNProgress.h>
+#import "THLGuestlistTicketView.h"
 
 
 #define kGKHeaderHeight 150
@@ -32,9 +33,10 @@ static CGFloat const CELL_SPACING = 10;
 
 @property (nonatomic, strong) THLGuestlistReviewHeaderView *headerView;
 @property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, strong) UIBarButtonItem *menuButton;
+
 @property (nonatomic, strong) THLActionBarButton *actionBarButton;
 @property (nonatomic, strong) UIButton *dismissButton;
-@property (nonatomic, strong) UIButton *menuButton;
 @end
 
 @implementation THLGuestlistReviewViewController
@@ -77,12 +79,13 @@ static CGFloat const CELL_SPACING = 10;
     _headerView = [self newHeaderView];
     _collectionView = [self newCollectionView];
     _actionBarButton = [self newActionBarButton];
+    _menuButton = [self newMenuButton];
 }
 
 //--------------------------------------------------
 # pragma mark - show/hide guestlist menu
 - (void)showGuestlistMenuView:(UIView *)menuView {
-    [self.view addSubview:menuView];
+    [self.navigationController.view addSubview:menuView];
     [menuView makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.bottom.insets(kTHLEdgeInsetsNone());
     }];
@@ -92,6 +95,15 @@ static CGFloat const CELL_SPACING = 10;
 - (void)hideGuestlistMenuView:(UIView *)menuView {
     [menuView removeFromSuperview];
 }
+
+- (void)showResponseView:(UIView *)responseView {
+    [self.view addSubview:responseView];
+    [responseView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.bottom.insets(kTHLEdgeInsetsNone());
+    }];
+    [self.parentViewController.view bringSubviewToFront:responseView];
+}
+
 - (void)hideActionBar {
     
     [[self actionBarButton] setHidden:TRUE];
@@ -102,18 +114,30 @@ static CGFloat const CELL_SPACING = 10;
 - (void)layoutView {
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.automaticallyAdjustsScrollViewInsets = YES;
-    
-    [self.view addSubviews:@[_headerView, _collectionView, _actionBarButton]];
+    self.navigationItem.rightBarButtonItem = _menuButton;
 
-    [_headerView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.equalTo(kTHLEdgeInsetsNone());
-    }];
-    
+    [self.view addSubviews:@[_collectionView, _actionBarButton]];
+
     WEAKSELF();
-    [_collectionView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF headerView].mas_bottom);
-        make.left.right.insets(kTHLEdgeInsetsNone());
-    }];
+
+    if (self.navigationController) {
+        [_collectionView makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.right.insets(kTHLEdgeInsetsNone());
+        }];
+    } else {
+        [self.view addSubview:_headerView];
+        [_headerView makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.right.equalTo(kTHLEdgeInsetsNone());
+        }];
+        
+        [_collectionView makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo([WSELF headerView].mas_bottom);
+            make.left.right.insets(kTHLEdgeInsetsNone());
+        }];
+    }
+
+    
+
     
     [_actionBarButton makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.insets(kTHLEdgeInsetsNone());
@@ -257,6 +281,16 @@ static CGFloat const CELL_SPACING = 10;
 - (THLActionBarButton *)newActionBarButton {
     THLActionBarButton *actionBarButton = [THLActionBarButton new];
     return actionBarButton;
+}
+
+- (UIBarButtonItem *)newMenuButton {
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Menu Icon"] style:UIBarButtonItemStylePlain target:nil action:NULL];
+    [item setTintColor:kTHLNUIGrayFontColor];
+    [item setTitleTextAttributes:
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
+                        forState:UIControlStateNormal];
+    return item;
 }
 
 #pragma mark - UICollectionViewDelegate
