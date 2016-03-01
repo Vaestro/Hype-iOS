@@ -87,6 +87,14 @@
     [_ticketView.navigationController pushViewController:_partyView animated:YES];
 }
 
+- (void)presentDetailsForEvent:(THLEventEntity *)eventEntity {
+    [_presenter.moduleDelegate guestlistReviewModule:_presenter userDidSelectViewEventEntity:eventEntity onViewController:_ticketView];
+}
+
+- (void)presentDetailsForEventOnPartyView:(THLEventEntity *)eventEntity{
+    [_presenter.moduleDelegate guestlistReviewModule:_presenter userDidSelectViewEventEntity:eventEntity onViewController:_partyView];
+}
+
 - (void)presentInController:(UIViewController *)controller {
     UIWindow *keyWindow = [[[UIApplication sharedApplication] delegate] window];
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:controller];

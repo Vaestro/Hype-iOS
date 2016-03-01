@@ -57,7 +57,8 @@
             [WSELF handleNeedLoginAction];
         } else {
             if (_guestHasAcceptedInvite) {
-                [WSELF handleViewGuestlistAction];
+                [WSELF.view showAlertView];
+//                [WSELF handleViewGuestlistAction];
             } else {
                 //            TODO: Create logic so that Guests with Declined Guestlists can have another guestlist invite to the same event if their other one is declined
                 [WSELF handleCreateGuestlistAction];
@@ -130,10 +131,10 @@
     [(UIViewController *)_view presentViewController:alert animated:YES completion:nil];
 }
 
-- (void)presentEventDetailInterfaceForEvent:(THLEventEntity *)eventEntity inWindow:(UIWindow *)window {
+- (void)presentEventDetailInterfaceForEvent:(THLEventEntity *)eventEntity onViewController:(UIViewController *)viewController {
     _eventEntity = eventEntity;
     [_interactor getPlacemarkForLocation:_eventEntity.location];
-	[_wireframe presentInterfaceInWindow:window];
+	[_wireframe presentInterfaceOnViewController:viewController];
     
 #ifdef DEBUG
 #else

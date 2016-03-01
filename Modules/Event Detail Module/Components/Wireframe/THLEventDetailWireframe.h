@@ -26,6 +26,6 @@
                        guestlistService:(id<THLGuestlistServiceInterface>)guestlistService
 						  entityMappper:(THLEntityMapper *)entityMapper
                         databaseManager:(THLYapDatabaseManager *)databaseManager;
-- (void)presentInterfaceInWindow:(UIWindow *)window;
+- (void)presentInterfaceOnViewController:(UIViewController *)viewController;
 - (void)dismissInterface;
 @end

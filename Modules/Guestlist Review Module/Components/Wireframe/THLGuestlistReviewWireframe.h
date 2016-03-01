@@ -33,6 +33,9 @@
 - (void)presentTicketViewInController:(UIViewController *)controller;
 
 - (void)presentInController:(UIViewController *)controller;
+- (void)presentDetailsForEvent:(THLEventEntity *)eventEntity;
+- (void)presentDetailsForEventOnPartyView:(THLEventEntity *)eventEntity;
+
 - (void)dismissInterface;
 - (void)dismissPartyView;
 - (void)dismissPartyViewAndShowTicketView;

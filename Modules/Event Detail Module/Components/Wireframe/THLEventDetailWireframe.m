@@ -20,6 +20,7 @@
 @property (nonatomic, strong) THLEventDetailDataManager *dataManager;
 @property (nonatomic, strong) THLEventDetailViewController *view;
 @property (nonatomic, strong) THLEventDetailPresenter *presenter;
+@property (nonatomic, strong) UIViewController *controller;
 @end
 
 @implementation THLEventDetailWireframe
@@ -47,12 +48,12 @@
 	_presenter = [[THLEventDetailPresenter alloc] initWithInteractor:_interactor wireframe:self];
 }
 
-- (void)presentInterfaceInWindow:(UIWindow *)window {
-	_window = window;
+- (void)presentInterfaceOnViewController:(UIViewController *)viewController {
+    _controller = viewController;
     [_presenter configureView:_view];
 //	UINavigationController *eventNavController = [[UINavigationController alloc] initWithRootViewController:_view];
 //	[_presenter configureNavigationBar:eventNavController.navigationBar];
-	[_window.rootViewController presentViewController:_view animated:YES completion:NULL];
+	[_controller presentViewController:_view animated:YES completion:NULL];
 }
 
 - (void)dismissInterface {

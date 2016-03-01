@@ -114,6 +114,8 @@ static CGFloat const CELL_SPACING = 10;
 - (void)layoutView {
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.automaticallyAdjustsScrollViewInsets = YES;
+    self.navigationController.view.backgroundColor = kTHLNUIPrimaryBackgroundColor;
+
     self.navigationItem.rightBarButtonItem = _menuButton;
 
     [self.view addSubviews:@[_collectionView, _actionBarButton]];

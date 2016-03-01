@@ -112,7 +112,7 @@ THLLoginModuleDelegate
     /**
      *  Prevents popup notification from instantiating another event detail module if one is already instantiated
      */
-    [self presentEventDetailInterfaceForEvent:eventEntity];
+    [self presentEventDetailInterfaceForEvent:eventEntity onViewController:_window.rootViewController];
 }
 
 - (id<THLGuestFlowModuleInterface>)moduleInterface {
@@ -157,11 +157,11 @@ THLLoginModuleDelegate
     [_perkStoreWireframe.moduleInterface presentPerkStoreInterfaceInNavigationController:navigationController];
 }
 
-- (void)presentEventDetailInterfaceForEvent:(THLEventEntity *)eventEntity {
+- (void)presentEventDetailInterfaceForEvent:(THLEventEntity *)eventEntity onViewController:(UIViewController *)viewController {
 	_eventDetailWireframe = [_dependencyManager newEventDetailWireframe];
     _currentWireframe = _eventDetailWireframe;
     [_eventDetailWireframe.moduleInterface setModuleDelegate:self];
-	[_eventDetailWireframe.moduleInterface presentEventDetailInterfaceForEvent:eventEntity inWindow:_window];
+	[_eventDetailWireframe.moduleInterface presentEventDetailInterfaceForEvent:eventEntity onViewController:viewController];
 }
 
 - (void)presentGuestlistInvitationInterfaceForEvent:(THLEventEntity *)eventEntity inController:(UIViewController *)controller {
@@ -194,7 +194,7 @@ THLLoginModuleDelegate
 
 #pragma mark - THLDashboardModuleDelegate
 - (void)dashboardModule:(id<THLDashboardModuleInterface>)module didClickToViewEvent:(THLEventEntity *)event {
-    [self presentEventDetailInterfaceForEvent:event];
+    [self presentEventDetailInterfaceForEvent:event onViewController:_window.rootViewController];
 }
 
 - (void)dashboardModule:(id<THLDashboardModuleInterface>)module didClickToViewGuestlist:(THLGuestlistEntity *)guestlistEntity guestlistInvite:(THLGuestlistInviteEntity *)guestlistInviteEntity presentGuestlistReviewInterfaceOnController:(UIViewController *)controller {
@@ -203,7 +203,7 @@ THLLoginModuleDelegate
 
 #pragma mark - THLEventDiscoveryModuleDelegate
 - (void)eventDiscoveryModule:(id<THLEventDiscoveryModuleInterface>)module userDidSelectEventEntity:(THLEventEntity *)eventEntity {
-	[self presentEventDetailInterfaceForEvent:eventEntity];
+    [self presentEventDetailInterfaceForEvent:eventEntity onViewController:_window.rootViewController];
 }
 
 #pragma mark - THLEventDetailModuleDelegate
@@ -239,6 +239,10 @@ THLLoginModuleDelegate
 #pragma mark - THLGuestlistReviewModuleDelegate
 - (void)guestlistReviewModule:(id<THLGuestlistReviewModuleInterface>)module event:(THLEventEntity *)eventEntity withGuestlistId:(NSString *)guestlistId andGuests:(NSArray<THLGuestEntity *> *)guests presentGuestlistInvitationInterfaceOnController:(UIViewController *)controller {
     [self presentGuestlistInvitationInterfaceForEvent:eventEntity withGuestlistId:guestlistId andGuests:guests inController:controller];
+}
+
+- (void)guestlistReviewModule:(id<THLGuestlistReviewModuleInterface>)module userDidSelectViewEventEntity:(THLEventEntity *)eventEntity onViewController:(UIViewController *)viewController {
+    [self presentEventDetailInterfaceForEvent:eventEntity onViewController:viewController];
 }
 
 - (void)dismissGuestlistReviewWireframe {

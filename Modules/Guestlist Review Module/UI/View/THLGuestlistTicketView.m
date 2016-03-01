@@ -14,7 +14,7 @@
 
 @property (nonatomic, strong) THLActionButton *viewPartyButton;
 @property (nonatomic, strong) UIBarButtonItem *dismissButton;
-@property (nonatomic, strong) UIButton *eventDetailsButton;
+@property (nonatomic, strong) UIBarButtonItem *eventDetailsButton;
 @property (nonatomic, strong) UILabel *ticketInstructionLabel;
 @property (nonatomic, strong) UILabel *listNumberLabel;
 @property (nonatomic, strong) UILabel *venueNameLabel;
@@ -52,6 +52,7 @@
     self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
     
     self.navigationItem.leftBarButtonItem = _dismissButton;
+    self.navigationItem.rightBarButtonItem = _eventDetailsButton;
     self.navigationItem.title = @"TICKET";
     
     UIView *ticketBox = [UIView new];
@@ -179,9 +180,14 @@
     return item;
 }
 
-- (UIButton *)newEventDetailsButton {
-    UIButton *button = [UIButton new];
-    return button;
+- (UIBarButtonItem *)newEventDetailsButton {
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Detail Disclosure Icon"] style:UIBarButtonItemStylePlain target:nil action:NULL];
+    [item setTintColor:kTHLNUIGrayFontColor];
+    [item setTitleTextAttributes:
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
+                        forState:UIControlStateNormal];
+    return item;
 }
 
 - (THLActionButton *)newViewPartyButton {

@@ -313,7 +313,7 @@ THLGuestlistReviewInteractorDelegate
     
     RACCommand *showEventDetailsCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         [WSELF.view hideGuestlistMenuView:menuView];
-        [WSELF handleDismissAction];
+        [WSELF handleViewEventDetailsForPartyAction];
         return [RACSignal empty];
     }];
     
@@ -384,8 +384,11 @@ THLGuestlistReviewInteractorDelegate
     [_wireframe presentPartyViewOnTicketView];
 }
 - (void)handleViewEventDetailsAction {
+    [_wireframe presentDetailsForEvent:_guestlistEntity.event];
+}
 
-
+- (void)handleViewEventDetailsForPartyAction {
+    [_wireframe presentDetailsForEventOnPartyView:_guestlistEntity.event];
 }
 
 - (void)handleDismissAction {
