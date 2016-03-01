@@ -159,7 +159,7 @@
 
 
 - (void)publishFirstMessageFromChannel:(NSString *)channel withHost:(THLUserEntity *)host andChatMessage:(NSString *)chatMessage {
-    THLMessage *message = [[THLMessage alloc] initWithText:@"Hello, I am your host for the event you have applied to. If you have any questions at all, please go ahead and ask!" andHost:host];
+    THLMessage *message = [[THLMessage alloc] initWithText:@"Hello, I am your host for this event. Feel free to ask any questions you may have regarding the event!" andHost:host];
     [self.client publish:[message toObjectWithUser:host] toChannel:channel mobilePushPayload:@{@"aps":@{@"alert":message.text}} compressed:YES withCompletion:^(PNPublishStatus *status) {
         //
     }];
