@@ -45,6 +45,7 @@ THLGuestlistReviewInteractorDelegate
 @property (nonatomic, strong) THLConfirmationView *confirmationView;
 
 @property (nonatomic) BOOL refreshing;
+@property (nonatomic) BOOL showInstruction;
 @property (nonatomic) THLGuestlistReviewerStatus reviewerStatus;
 @property (nonatomic) THLActivityStatus activityStatus;
 @property (nonatomic, strong) RACCommand *responseCommand;
@@ -68,8 +69,9 @@ THLGuestlistReviewInteractorDelegate
 
 #pragma mark - THLGuestlistReviewModuleInterface
 //Present guestlist for Guest
-- (void)presentGuestlistReviewInterfaceForGuestlist:(THLGuestlistEntity *)guestlistEntity withGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInviteEntity inController:(UIViewController *)controller {
+- (void)presentGuestlistReviewInterfaceForGuestlist:(THLGuestlistEntity *)guestlistEntity withGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInviteEntity inController:(UIViewController *)controller andShowInstruction:(BOOL)showInstruction {
     _interactor.guestlistEntity = guestlistEntity;
+    _showInstruction = showInstruction;
     _guestlistInviteEntity = guestlistInviteEntity;
     _guestlistEntity = _guestlistInviteEntity.guestlist;
     [self updateGuestReviewStatus];
@@ -112,7 +114,7 @@ THLGuestlistReviewInteractorDelegate
     [_ticketView setVenueName:_guestlistInviteEntity.guestlist.event.location.name];
     [_ticketView setEventDate:[NSString stringWithFormat:@"%@", _guestlistEntity.event.date.thl_weekdayString]];
     [_ticketView setArrivalMessage:[NSString stringWithFormat:@"PLEASE MEET HOST @ %@", _guestlistEntity.event.date.thl_timeString]];
-
+    [_ticketView setShowInstruction:_showInstruction];
 }
 
 - (void)configureView:(id<THLGuestlistReviewView>)view {

@@ -13,10 +13,12 @@
 @property (nonatomic, strong) RACCommand *viewEventDetailsCommand;
 @property (nonatomic, strong) RACCommand *dismissCommand;
 @property (nonatomic, strong) RACCommand *viewPartyCommand;
+@property (nonatomic) BOOL showInstruction;
 
 @property (nonatomic, strong) NSString *listNumber;
 @property (nonatomic, strong) NSString *venueName;
 @property (nonatomic, strong) NSString *eventDate;
 @property (nonatomic, strong) NSString *arrivalMessage;
 
+- (void)showAlertView;
 @end

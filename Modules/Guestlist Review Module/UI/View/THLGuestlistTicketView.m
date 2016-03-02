@@ -9,6 +9,7 @@
 #import "THLGuestlistTicketView.h"
 #import "THLActionButton.h"
 #import "THLAppearanceConstants.h"
+#import "THLAlertView.h"
 
 @interface THLGuestlistTicketView()
 
@@ -23,6 +24,19 @@
 @end
 
 @implementation THLGuestlistTicketView
+- (void)showAlertView {
+    THLAlertView *alertView = [THLAlertView new];
+    [alertView setTitle:@"Success"];
+    [alertView setMessage:@"Please arrive on time and show your ticket at the door for entrance. Your ticket + guestlist can always be found in the 'My Events' tab. If you have any questions, you can message the Host in the 'Chats Tab'. "];
+    
+    [self.navigationController.view addSubview:alertView];
+    [alertView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.bottom.insets(kTHLEdgeInsetsNone());
+    }];
+    [self.navigationController.view bringSubviewToFront:alertView];
+
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self constructView];
@@ -104,6 +118,11 @@
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
         make.bottom.insets(kTHLEdgeInsetsSuperHigh());
     }];
+    
+    if (_showInstruction) {
+        [self showAlertView];
+        _showInstruction = FALSE;
+    }
 }
 
 - (void)bindView {
@@ -171,7 +190,7 @@
 }
 
 - (UIBarButtonItem *)newDismissButton {
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"cancel_button"] style:UIBarButtonItemStylePlain target:nil action:NULL];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Back Button"] style:UIBarButtonItemStylePlain target:nil action:NULL];
     [item setTintColor:kTHLNUIGrayFontColor];
     [item setTitleTextAttributes:
      [NSDictionary dictionaryWithObjectsAndKeys:

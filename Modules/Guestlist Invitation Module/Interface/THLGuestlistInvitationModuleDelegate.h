@@ -13,5 +13,5 @@
 @protocol THLGuestlistInvitationModuleDelegate <NSObject>
 //- (void)guestlistInvitationModule:(id<THLGuestlistInvitationModuleInterface>)module userDidCommitChangesToGuestlist:(NSString *)guestlistId;
 - (void)dismissGuestlistInvitationWireframe;
-- (void)dismissWireframeAndPresentGuestlistReviewWireframeFor:(THLGuestlistInviteEntity *)guestlistInvite guestlist:(THLGuestlistEntity *)guestlist controller:(UIViewController *)vc;
+- (void)dismissWireframeAndPresentGuestlistReviewWireframeFor:(THLGuestlistInviteEntity *)guestlistInvite guestlist:(THLGuestlistEntity *)guestlist;
 @end

@@ -15,6 +15,8 @@
 @property (nonatomic, retain) NSDate *date;
 @property (nonatomic) float maleCoverCharge;
 @property (nonatomic) float femaleCoverCharge;
+@property (nonatomic) float maleCoverRange;
+@property (nonatomic) float femaleCoverRange;
 @property (nonatomic, retain) NSString *title;
 @property (nonatomic, retain) NSString *promoInfo;
 @property (nonatomic, retain) PFFile *promoImage;

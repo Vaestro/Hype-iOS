@@ -61,8 +61,10 @@
 }
 
 - (void)dismissInterfaceAndPresentGuestlistReviewFor:(THLGuestlistInviteEntity *)guestlistInvite guestlist:(THLGuestlistEntity *)guestlist {
-    [_view.navigationController dismissViewControllerAnimated:YES completion:^{
-        [_presenter.moduleDelegate dismissWireframeAndPresentGuestlistReviewWireframeFor:(THLGuestlistInviteEntity *)guestlistInvite guestlist:(THLGuestlistEntity *)guestlist controller:_controller];
+    [_view.navigationController dismissViewControllerAnimated:NO completion:^{
+        [_controller dismissViewControllerAnimated:NO completion:^{
+            [_presenter.moduleDelegate dismissWireframeAndPresentGuestlistReviewWireframeFor:(THLGuestlistInviteEntity *)guestlistInvite guestlist:(THLGuestlistEntity *)guestlist];
+        }];
     }];
 }
 
