@@ -101,10 +101,12 @@
 //    } else if (maleCover > 0 && femaleCover > 0) {
 //        [self.view setCoverInfo:[NSString stringWithFormat:@"$%@ (Guys) $%@", maleCover, femaleCover]];
 //    }
-    if (maleCover > 0 && femaleCover == 0) {
+    if (_eventEntity.maleCover > 0 && _eventEntity.femaleCover == 0) {
         [self.view setCoverInfo:[NSString stringWithFormat:@"$%@ (Guys only)", maleCover]];
     } else if (_eventEntity.maleCover > 0 && _eventEntity.femaleCover > 0) {
         [self.view setCoverInfo:[NSString stringWithFormat:@"$%@ (Guys) $%@ (Girls)", maleCover, femaleCover]];
+    } else if (maleCover == 0) {
+        [self.view setCoverInfo:[NSString stringWithFormat:@"No Cover"]];
     }
     [self.view setActionBarButtonCommand:actionBarButtonCommand];
     [self.view setLocationInfo:_eventEntity.location.info];
