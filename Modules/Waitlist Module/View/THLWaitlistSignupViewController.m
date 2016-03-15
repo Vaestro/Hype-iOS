@@ -36,7 +36,6 @@ UITextFieldDelegate
 }
 
 - (void)constructView {
-//    _dismissButton = [self newDismissButton];
 	_titleLabel = [self newTitleLabel];
     _descriptionLabel = [self newDescriptionLabel];
 	_textField = [self newTextField];
@@ -77,11 +76,6 @@ UITextFieldDelegate
 }
 
 - (void)bindView {
-//    _dismissButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-//        [self dismissViewControllerAnimated:NO completion:NULL];
-//        return [RACSignal empty];
-//    }];
-    
 	_submitButton.rac_command = [[RACCommand alloc] initWithEnabled:[self validEmailSignal] signalBlock:^RACSignal *(id input) {
 		[_delegate signupView:self userDidSubmitEmail:_textField.text];
 		return [RACSignal empty];
@@ -126,14 +120,5 @@ UITextFieldDelegate
 	return button;
 }
 
-//- (UIBarButtonItem *)newDismissButton {
-//    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Back Button"] style:UIBarButtonItemStylePlain target:nil action:NULL];
-//    [item setTintColor:kTHLNUIGrayFontColor];
-//    [item setTitleTextAttributes:
-//     [NSDictionary dictionaryWithObjectsAndKeys:
-//      kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
-//                        forState:UIControlStateNormal];
-//    return item;
-//}
 
 @end

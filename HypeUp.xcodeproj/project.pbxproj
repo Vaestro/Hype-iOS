@@ -154,6 +154,7 @@
 		798D7EBA1BF2D588001D4593 /* THLUserProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 798D7EB91BF2D588001D4593 /* THLUserProfileTableViewCell.m */; };
 		798D7EBF1BF2E56C001D4593 /* OnboardingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 798D7EBE1BF2E56C001D4593 /* OnboardingViewController.m */; };
 		798D7EC21BF2E5CF001D4593 /* OnboardingContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 798D7EC11BF2E5CF001D4593 /* OnboardingContentViewController.m */; };
+		799862461C97B6AF004C5326 /* THLTextEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 799862451C97B6AF004C5326 /* THLTextEntryViewController.m */; };
 		79ABA9B71C053ED6001ABAC7 /* THLDashboardNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79ABA9B61C053ED6001ABAC7 /* THLDashboardNotificationCell.m */; };
 		79ABA9BC1C054F42001ABAC7 /* THLDashboardNotificationCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79ABA9BB1C054F42001ABAC7 /* THLDashboardNotificationCellViewModel.m */; };
 		79AD95F41C30CFC400EDB82E /* THLNeedToKnowInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79AD95F31C30CFC400EDB82E /* THLNeedToKnowInfoView.m */; };
@@ -635,6 +636,8 @@
 		798D7EC01BF2E5CF001D4593 /* OnboardingContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnboardingContentViewController.h; sourceTree = "<group>"; };
 		798D7EC11BF2E5CF001D4593 /* OnboardingContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnboardingContentViewController.m; sourceTree = "<group>"; };
 		798D7EC31BF2E634001D4593 /* OnboardingContentViewController_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OnboardingContentViewController_Private.h; sourceTree = "<group>"; };
+		799862441C97B6AF004C5326 /* THLTextEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLTextEntryViewController.h; sourceTree = "<group>"; };
+		799862451C97B6AF004C5326 /* THLTextEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLTextEntryViewController.m; sourceTree = "<group>"; };
 		79A1CEB01C484A910071F328 /* HypeUp.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HypeUp.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		79ABA9B51C053ED6001ABAC7 /* THLDashboardNotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLDashboardNotificationCell.h; sourceTree = "<group>"; };
 		79ABA9B61C053ED6001ABAC7 /* THLDashboardNotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLDashboardNotificationCell.m; sourceTree = "<group>"; };
@@ -1007,6 +1010,8 @@
 				79BB152F1C657FF50044D943 /* THLSingleLineTextField.m */,
 				79BB15311C6CED720044D943 /* THLFxTitleLabel.h */,
 				79BB15321C6CED720044D943 /* THLFxTitleLabel.m */,
+				799862441C97B6AF004C5326 /* THLTextEntryViewController.h */,
+				799862451C97B6AF004C5326 /* THLTextEntryViewController.m */,
 				3E64EBEB1C5D89CC002BA11B /* THLFAQViewController */,
 				3EECB6921C61451800702540 /* THLFAOSectionView */,
 			);
@@ -3698,6 +3703,7 @@
 				79752ADE1BEBD8B500D09B2E /* THLConfirmationPopupView.m in Sources */,
 				211892061BA9FF0600E8A11F /* THLLoginInteractor.m in Sources */,
 				211005D01B8A7D0200A540C6 /* NSDate+Hypelist.m in Sources */,
+				799862461C97B6AF004C5326 /* THLTextEntryViewController.m in Sources */,
 				C85EE3A21C1BCB4D0008C14B /* THLPerkStoreDataManager.m in Sources */,
 				794AFE2A1C10C428008475B1 /* THLHostDashboardTicketCellViewModel.m in Sources */,
 				C85EE3B41C1BCBDD0008C14B /* THLPerkStoreCell.m in Sources */,
