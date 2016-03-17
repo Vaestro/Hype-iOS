@@ -80,7 +80,7 @@ UITextFieldDelegate
     [_descriptionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.insets(kTHLEdgeInsetsNone());
         make.bottom.equalTo([WSELF textField].mas_top).insets(kTHLEdgeInsetsSuperHigh());
-        make.width.mas_equalTo(SCREEN_WIDTH*0.66);
+        make.width.mas_equalTo(SCREEN_WIDTH*0.75);
     }];
     
     [_textField mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -93,6 +93,12 @@ UITextFieldDelegate
 
 - (void)bindView {
     WEAKSELF();
+    RAC(self.titleLabel, text, @"") = RACObserve(self, titleText);
+    RAC(self.descriptionLabel, text, @"") = RACObserve(self, descriptionText);
+    [RACObserve(self, buttonText) subscribeNext:^(id x) {
+        [self.submitButton setTitle:_buttonText];
+    }];
+    
     switch (self.type) {
         case THLTextEntryTypeEmail: {
             _submitButton.rac_command = [[RACCommand alloc] initWithEnabled:[self validEmailSignal] signalBlock:^RACSignal *(id input) {
@@ -144,13 +150,11 @@ UITextFieldDelegate
 #pragma mark - Constructors
 - (UILabel *)newTitleLabel {
     UILabel *label = THLNUILabel(kTHLNUIRegularTitle);
-    label.text = @"Welcome";
     return label;
 }
 
 - (UILabel *)newDescriptionLabel {
     UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
-    label.text = @"Enter your invite code to get in";
     label.numberOfLines = 0;
     label.textColor = [kTHLNUIGrayFontColor colorWithAlphaComponent:0.5];
     return label;
@@ -180,7 +184,6 @@ UITextFieldDelegate
 
 - (THLActionButton *)newSubmitButton {
     THLActionButton *button = [[THLActionButton alloc] initWithInverseStyle];
-    [button setTitle:@"Submit Code"];
     return button;
 }
 

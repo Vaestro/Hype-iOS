@@ -62,7 +62,7 @@ THLWaitlistPresenterDelegate
 - (void)presentAppInWindow:(UIWindow *)window {
 	_window = window;
     if ([THLUserManager isUserCached]) {
-        [THLUserManager isUserVerified] ? [self routeLoggedInUserFlow] : [self presentUserVerification];
+        [THLUserManager isUserProfileValid] ? [self routeLoggedInUserFlow] : [self presentUserVerification];
     } else {
         [self presentOnboardingAndLoginInterface];
     }

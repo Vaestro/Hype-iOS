@@ -1,4 +1,4 @@
-//
+ //
 //  THLLoginPresenter.m
 //  Hypelist2point0
 //
@@ -17,6 +17,7 @@
 #import "THLUserInfoVerificationViewController.h"
 #import "THLUserPhotoVerificationViewController.h"
 #import "OLFacebookImagePickerController.h"
+#import "THLTextEntryViewController.h"
 
 @interface THLLoginPresenter()
 <
@@ -26,8 +27,8 @@ THLUserPhotoVerificationViewDelegate,
 THLFacebookPictureModuleDelegate,
 THLNumberVerificationModuleDelegate
 >
-@property (nonatomic, strong) THLUserInfoVerificationViewController *userInfoVerificationView;
 @property (nonatomic, strong) THLUserPhotoVerificationViewController *userPhotoVerificationView;
+@property (nonatomic, strong) THLTextEntryViewController *emailVerificationView;
 @property (nonatomic, strong) UIViewController *baseViewController;
 
 @property (nonatomic, weak) id<THLOnboardingViewInterface> onboardingView;
@@ -45,14 +46,7 @@ THLNumberVerificationModuleDelegate
 	if (self = [super init]) {
 		_wireframe = wireframe;
 		_interactor = interactor;
-		_interactor.delegate = self;
-        _userInfoVerificationView = [[THLUserInfoVerificationViewController alloc] initWithNibName:nil bundle:nil];
-        _userInfoVerificationView.delegate = self;
-        
-        if ([_interactor shouldPickProfileImage]){
-            _userPhotoVerificationView = [[THLUserPhotoVerificationViewController alloc] initWithNibName:nil bundle:nil];
-            _userPhotoVerificationView.delegate = self;
-        }
+        _interactor.delegate = self;
 	}
 	return self;
 }
@@ -164,7 +158,20 @@ THLNumberVerificationModuleDelegate
 }
 
 - (void)presentUserInfoVerificationView {
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:_userInfoVerificationView];
+    _emailVerificationView  = [[THLTextEntryViewController alloc] initWithNibName:nil bundle:nil];
+    _emailVerificationView.delegate = self;
+    _emailVerificationView.titleText = @"Confirm Info";
+    _emailVerificationView.descriptionText = @"We use your email and phone number to send you confirmations and receipts";
+    _emailVerificationView.buttonText = @"Continue";
+    _emailVerificationView.type = THLTextEntryTypeEmail;
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:_emailVerificationView];
+    [navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    navigationController.navigationBar.shadowImage = [UIImage new];
+    navigationController.navigationBar.translucent = YES;
+    navigationController.view.backgroundColor = [UIColor clearColor];
+    
     [_baseViewController presentViewController:navigationController animated:NO completion:NULL];
 }
 
@@ -174,6 +181,8 @@ THLNumberVerificationModuleDelegate
 
 - (void)routeToPickProfilePictureInterface {
     [_wireframe presentFacebookPictureInterface:self];
+    _userPhotoVerificationView = [[THLUserPhotoVerificationViewController alloc] initWithNibName:nil bundle:nil];
+    _userPhotoVerificationView.delegate = self;
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:_userPhotoVerificationView];
     [_baseViewController presentViewController:navigationController animated:NO completion:NULL];
 	
@@ -204,6 +213,7 @@ THLNumberVerificationModuleDelegate
     if (error) {
         [self handleError:error];
     } else {
+        [_emailVerificationView dismissViewControllerAnimated:FALSE completion:NULL];
         [self reroute];
     }
 }
@@ -224,8 +234,8 @@ THLNumberVerificationModuleDelegate
 	}
 }
 
-#pragma mark - THLUserInfoVerificationDelegate
-- (void)userInfoVerificationView:(THLUserInfoVerificationViewController *)view userDidConfirmEmail:(NSString *)email {
+#pragma mark - THLTextEntryVerificationDelegate
+- (void)emailEntryView:(THLTextEntryViewController *)view userDidSubmitEmail:(NSString *)email {
     [_interactor addEmail:email];
 }
 

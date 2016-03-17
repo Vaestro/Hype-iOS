@@ -46,11 +46,12 @@
     return [self currentUser] || [self isFacebookLinkedWithUser];
 }
 
-+ (BOOL)isUserVerified {
++ (BOOL)isUserProfileValid {
     if ([[self currentUser].phoneNumber isEqualToString:@""]
         || [[self currentUser].email isEqualToString:@""]
         || [self currentUser].email == nil
-        || [self currentUser].phoneNumber == nil) {
+        || [self currentUser].phoneNumber == nil
+        || [self currentUser].image == nil) {
         return NO;
     } else {
         return YES;
