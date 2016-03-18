@@ -22,6 +22,8 @@
 #import "THLAppearanceUtils.h"
 #import "THLPubnubManager.h"
 
+#define MIXPANEL_TOKEN @"2946053341530a84c490a107bd3e5fff"
+
 #if DEBUG
 static NSString *applicationId = @"5t3F1S3wKnVGIKHob1Qj0Je3sygnFiwqAu6PP400";
 static NSString *clientKeyId = @"xn4Mces2HcFCQYXF2VRj4W1Ot0zIBELl6fHKLGPk";
@@ -63,10 +65,17 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
     [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:nil];
     
 //    TODO: Add Stripe class with:  [STPAPIClient class]
-    [Fabric with:@[[Digits class], [Optimizely class], [Crashlytics class]]];
+    [Fabric with:@[[Digits class], [Crashlytics class]]];
 
-    [Optimizely startOptimizelyWithAPIToken:@"AANLIOMBQFi_hFw1wzxiRVDv6GfuC4rH~4568187528" launchOptions:launchOptions];
-
+    // Initialize the library with your
+    // Mixpanel project token, MIXPANEL_TOKEN
+    [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
+    
+    // Later, you can get your instance with
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    // Call .identify to flush the People record to Mixpanel
+    [mixpanel identify:mixpanel.distinctId];
+    
     UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
                                                     UIUserNotificationTypeBadge |
                                                     UIUserNotificationTypeSound);
@@ -110,10 +119,12 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
     [currentInstallation setDeviceTokenFromData:deviceToken];
     currentInstallation.channels = @[ @"global" ];
     [[currentInstallation saveInBackground] continueWithBlock:^id(BFTask *task) {
-        
+    
         return nil;
     }];
     [[THLPubnubManager sharedInstance] didRegisterForRemoteToken:deviceToken];
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel.people addPushDeviceToken:deviceToken];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {

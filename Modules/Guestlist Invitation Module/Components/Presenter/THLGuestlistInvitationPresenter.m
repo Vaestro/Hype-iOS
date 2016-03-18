@@ -72,6 +72,7 @@ THLGuestlistInvitationViewEventHandler
 - (void)interactor:(THLGuestlistInvitationInteractor *)interactor didCommitChangesToGuestlist:(NSError *)error {
     self.submitting = NO;
     if(!error) {
+
         [_wireframe dismissInterface];
         
     } else {

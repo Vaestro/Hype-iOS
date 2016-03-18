@@ -85,13 +85,29 @@
             [WSELF user].fbVerified = FALSE;
         }
         [WSELF user].type = THLUserTypeGuest;
-        [WSELF user].credits = 0.00;
         [[WSELF.user saveInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask<NSNumber *> *saveTask) {
             [_delegate interactor:WSELF didAddFacebookInformation:saveTask.error];
             return nil;
         }];
         return nil;
     }];
+}
+
+- (void)createMixPanelUserProfile {
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
+    // mixpanel identify: must be called before
+    // people properties can be set
+    NSString *userSex;
+    if (self.user.sex == THLSexMale) {
+        userSex = @"Male";
+    } else if (self.user.sex == THLSexFemale) {
+        userSex = @"Female";
+    }
+    [mixpanel.people set:@{@"Name": [NSString stringWithFormat:@"%@ %@", self.user.firstName, self.user.lastName],
+                           @"Email": self.user.email,
+                           @"Gender": userSex
+                           }];
 }
 
 - (void)addEmail:(NSString *)email {

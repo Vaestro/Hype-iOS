@@ -205,6 +205,7 @@ THLNumberVerificationModuleDelegate
     if (error) {
         [self handleError:error];
     } else {
+        [_interactor createMixPanelUserProfile];
         [self reroute];
     }
 }

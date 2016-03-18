@@ -20,6 +20,7 @@ pod 'AutoCoding', '~> 2.2'
 pod 'SDWebImage', '~> 3.7'
 pod 'FormatterKit', '~> 1.8'
 pod 'Typhoon', '~> 3.3'
+pod 'Mixpanel'
 
 #Debugging
 pod 'FLEX', '~> 2.0', :configurations => ['Debug']

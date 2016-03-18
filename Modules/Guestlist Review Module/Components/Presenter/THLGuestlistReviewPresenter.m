@@ -485,6 +485,8 @@ THLGuestlistReviewInteractorDelegate
         [_interactor updateGuestlistInvite:_guestlistInviteEntity
                               withResponse:THLStatusDeclined];
         [_interactor unSubscribeChannelsForUser:[THLUser currentUser] withGuestlist:_guestlistInviteEntity.guestlist];
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        [mixpanel track:@"InviteDeclined"];
         //_guestlistInviteEntity.guestlist.objectId
         //_
         // UNSUBCSRIBE
@@ -493,6 +495,8 @@ THLGuestlistReviewInteractorDelegate
         [_confirmationView setInProgressWithMessage:@"Accepting your invite..."];
         [_interactor updateGuestlistInvite:_guestlistInviteEntity
                               withResponse:THLStatusAccepted];
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        [mixpanel track:@"InviteAccepted"];
     }
     /**
      *  Host Accept Action Options
@@ -520,6 +524,8 @@ THLGuestlistReviewInteractorDelegate
         [_interactor updateGuestlistInvite:_guestlistInviteEntity
                               withResponse:THLStatusDeclined];
         [_interactor unSubscribeChannelsForUser:[THLUser currentUser] withGuestlist:_guestlistInviteEntity.guestlist];
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        [mixpanel track:@"InviteDeclined"];
     }
     /**
      *  Host Decline Action Options

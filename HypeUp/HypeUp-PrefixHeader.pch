@@ -21,6 +21,7 @@
 #import "ReflectableEnum.h"
 #import "DateTools.h"
 #import "Bolts.h"
+#import "Mixpanel.h"
 
 #import <Crashlytics/Crashlytics.h>
 

@@ -110,6 +110,9 @@ PODS:
   - LinqToObjectiveC (2.1.0)
   - LMGeocoder (1.0.4)
   - Masonry (0.6.4)
+  - Mixpanel (2.9.4):
+    - Mixpanel/Mixpanel (= 2.9.4)
+  - Mixpanel/Mixpanel (2.9.4)
   - MJRefresh (3.1.0)
   - NUI (0.5.5):
     - NUIParse
@@ -248,6 +251,7 @@ DEPENDENCIES:
   - LinqToObjectiveC (~> 2.0)
   - LMGeocoder
   - Masonry (~> 0.6)
+  - Mixpanel
   - MJRefresh
   - NUI (~> 0.5)
   - ObjectiveSugar
@@ -312,6 +316,7 @@ SPEC CHECKSUMS:
   LinqToObjectiveC: f0e40c137a458b6b9725c4c7b6a575c0c72e3aec
   LMGeocoder: a0f635f948b0ca420d8d338e54886744cdcb215d
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
+  Mixpanel: 80d2ca9bb38ae91c1044d738e80fe448377ac89f
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   NUI: 53de7278003235deb2a375fe6f04c7a3aa3e49eb
   NUIParse: 2e3885ba7807477266396292626bd387d34c2338

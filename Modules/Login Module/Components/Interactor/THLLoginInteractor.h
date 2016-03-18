@@ -42,6 +42,7 @@
 - (void)login;
 - (void)addEmail:(NSString *)email;
 - (void)addFacebookInformation;
+- (void)createMixPanelUserProfile;
 - (void)addVerifiedPhoneNumber:(NSString *)phoneNumber;
 - (void)addProfileImage:(UIImage *)profileImage;
 

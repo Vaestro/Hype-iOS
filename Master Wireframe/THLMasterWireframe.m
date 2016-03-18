@@ -180,6 +180,8 @@ THLWaitlistPresenterDelegate
 	if (!error) {
         [THLUserManager makeCurrentInstallation];
         [THLUserManager logCrashlyticsUser];
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        [mixpanel track:@"CompletedSignup"];
 		[self routeLoggedInUserFlow];
     } else {
         NSLog(@"Login Error:%@", error);
@@ -187,6 +189,8 @@ THLWaitlistPresenterDelegate
 }
 
 - (void)skipUserLogin {
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"SkippedSignup"];
     [self presentGuestFlow];
 }
 

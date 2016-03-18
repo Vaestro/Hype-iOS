@@ -150,14 +150,10 @@ static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInv
         [[_dataManager submitGuestlistForEvent:_eventEntity withInvites:[self obtainDigits:_addedGuests]] continueWithSuccessBlock:^id(BFTask *task) {
             [[_dataManager getOwnerInviteForEvent:_eventEntity] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *fetchTask) {
                 [WSELF.delegate interactor:WSELF didSubmitInitialGuestlist:fetchTask.result withError:task.error];
-                
-                //!!
-
-//                if (_guestlistId != nil) {
-//                THLChannelService *service = [[THLChannelService alloc] init];
-//                [service createChannelForOwner:[THLUser currentUser].objectId andHost:@"235" withGuestlist:_guestlistId];
-//                }
-                
+                Mixpanel *mixpanel = [Mixpanel sharedInstance];
+                [mixpanel track:@"GuestlistSubmitted" properties:@{
+                                                               @"NumberOfInvites": NSStringWithFormat(@"%lu", _addedGuests.count)
+                                                               }];
                 return nil;
             }];
             return nil;
@@ -165,6 +161,10 @@ static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInv
     } else if (_guestlistId != nil) {
         [[_dataManager updateGuestlist:_guestlistId withInvites:[self obtainDigits:_addedGuests] forEvent:_eventEntity] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
             [WSELF.delegate interactor:WSELF didCommitChangesToGuestlist:task.error];
+            Mixpanel *mixpanel = [Mixpanel sharedInstance];
+            [mixpanel track:@"UpdatedGuestlist" properties:@{
+             @"NumberOfInvites": NSStringWithFormat(@"%lu", _addedGuests.count)
+             }];
             return nil;
         }];
     }
