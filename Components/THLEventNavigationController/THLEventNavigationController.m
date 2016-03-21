@@ -16,7 +16,7 @@
 @dynamic navigationBar;
 
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController {
-	if (self = [super initWithNavigationBarClass:[THLEventNavigationBar class] toolbarClass:nil]) {
+	if (self = [super initWithNavigationBarClass:[THLEventHostingNavigationBar class] toolbarClass:nil]) {
 		[self setViewControllers:@[rootViewController]];
 	}
 	return self;

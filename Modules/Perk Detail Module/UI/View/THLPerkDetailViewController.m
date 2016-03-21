@@ -34,6 +34,13 @@
 @synthesize purchaseCommand = _purchaseCommand;
 
 #pragma mark VC Lifecycle
+- (void)showConfirmationView:(UIView *)confirmationView {
+    [self.navigationController.view addSubview:confirmationView];
+    [confirmationView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.bottom.insets(kTHLEdgeInsetsNone());
+    }];
+    [self.parentViewController.view bringSubviewToFront:confirmationView];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

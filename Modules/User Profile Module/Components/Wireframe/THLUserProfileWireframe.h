@@ -12,5 +12,5 @@
 @interface THLUserProfileWireframe : NSObject
 @property (nonatomic, readonly) id<THLUserProfileModuleInterface> moduleInterface;
 
-- (void)presentInterfaceInNavigationController:(UINavigationController *)navigationController;
+- (void)presentInterfaceInViewController:(UIViewController *)viewController;
 @end

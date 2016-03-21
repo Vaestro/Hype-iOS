@@ -14,9 +14,12 @@
 @property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *thl_dateString;
 @property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *thl_timeString;
 @property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *thl_dateTimeString;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *thl_dayString;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *thl_endTimeString;
 + (instancetype)thl_today;
 + (instancetype)thl_tomorrow;
 + (instancetype)thl_nextWeek;
 - (BOOL)thl_isOrAfterToday;
 - (NSString *)thl_dayOfTheWeek;
+- (NSDate *)thl_sixHoursAhead;
 @end

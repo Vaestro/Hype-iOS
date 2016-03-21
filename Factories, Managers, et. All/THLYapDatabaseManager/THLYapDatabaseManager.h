@@ -14,4 +14,6 @@
 
 - (instancetype)init;
 - (YapDatabaseConnection *)newDatabaseConnection;
+- (void)createDB;
+- (void)dropDB;
 @end

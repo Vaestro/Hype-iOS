@@ -20,6 +20,7 @@ pod 'AutoCoding', '~> 2.2'
 pod 'SDWebImage', '~> 3.7'
 pod 'FormatterKit', '~> 1.8'
 pod 'Typhoon', '~> 3.3'
+pod 'Mixpanel'
 
 #Debugging
 pod 'FLEX', '~> 2.0', :configurations => ['Debug']
@@ -33,13 +34,16 @@ pod 'BlocksKit', '~> 2.2'
 pod "ReflectableEnum"
 
 #Parse/Facebook
-pod 'Parse', '~> 1.11.0'
+pod 'Parse', '=1.11.0'
 pod 'ParseFacebookUtilsV4'
 pod 'FBSDKCoreKit'
 pod 'FBSDKLoginKit'
-pod 'FBSDKShareKit'
+pod 'FBSDKShareKit', '= 4.8.0'
 pod 'FacebookImagePicker'
 
+#Pubnub
+pod 'PubNub', '~> 4.2'
+pod 'RKNotificationHub'
 
 #Fabric
 pod 'Fabric'
@@ -48,6 +52,9 @@ pod 'Digits'
 pod 'TwitterCore'
 pod 'Optimizely-iOS-SDK'
 pod 'Stripe'
+
+#Branch
+pod "Branch"
 
 #Helpers
 pod 'SSDataSources', '~> 0.8'

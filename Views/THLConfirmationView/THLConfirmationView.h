@@ -19,10 +19,10 @@
 @property (nonatomic, strong) RACCommand *declineCommand;
 @property (nonatomic, strong) RACCommand *dismissCommand;
 
-- (void)showResponseFlowWithTitle:(NSString *)title message:(NSString *)message;
-- (void)showConfirmationWithTitle:(NSString *)title message:(NSString *)message;
-- (void)showInProgressWithMessage:(NSString *)messageText;
-- (void)showSuccessWithTitle:(NSString *)titleText Message:(NSString *)messageText;
+- (void)setResponseFlowWithTitle:(NSString *)title message:(NSString *)message;
+- (void)setConfirmationWithTitle:(NSString *)title message:(NSString *)message;
+- (void)setInProgressWithMessage:(NSString *)messageText;
+- (void)setSuccessWithTitle:(NSString *)titleText Message:(NSString *)messageText;
 - (void)dismiss;
 - (void)dismissResponseFlow;
 

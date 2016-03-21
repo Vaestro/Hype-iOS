@@ -13,12 +13,16 @@
 #import <Fabric/Fabric.h>
 #import <DigitsKit/DigitsKit.h>
 #import <Optimizely/Optimizely.h>
+#import "Branch.h"
 
 //#import <Stripe/Stripe.h>
 
 #import "THLDependencyManager.h"
 #import "THLMasterWireframe.h"
 #import "THLAppearanceUtils.h"
+#import "THLPubnubManager.h"
+
+#define MIXPANEL_TOKEN @"2946053341530a84c490a107bd3e5fff"
 
 #if DEBUG
 static NSString *applicationId = @"5t3F1S3wKnVGIKHob1Qj0Je3sygnFiwqAu6PP400";
@@ -42,6 +46,7 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
     [Parse enableLocalDatastore];
 	[Parse setApplicationId:applicationId
 				  clientKey:clientKeyId];
+    [[THLPubnubManager sharedInstance] setup];
 
 	// [Optional] Track statistics around application opens.
     if (application.applicationState != UIApplicationStateBackground) {
@@ -60,10 +65,17 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
     [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:nil];
     
 //    TODO: Add Stripe class with:  [STPAPIClient class]
-    [Fabric with:@[[Digits class], [Optimizely class], [Crashlytics class]]];
+    [Fabric with:@[[Digits class], [Crashlytics class]]];
 
-    [Optimizely startOptimizelyWithAPIToken:@"AANLIOMBQFi_hFw1wzxiRVDv6GfuC4rH~4568187528" launchOptions:launchOptions];
-
+    // Initialize the library with your
+    // Mixpanel project token, MIXPANEL_TOKEN
+    [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
+    
+    // Later, you can get your instance with
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    // Call .identify to flush the People record to Mixpanel
+    [mixpanel identify:mixpanel.distinctId];
+    
     UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
                                                     UIUserNotificationTypeBadge |
                                                     UIUserNotificationTypeSound);
@@ -89,6 +101,13 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
         NSLog(@"app did not recieve notification");
     }
     
+    // Initialize Branch
+    Branch *branch = [Branch getInstance];
+    [branch initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
+        // params are the deep linked params associated with the link that the user clicked before showing up.
+        NSLog(@"deep link data: %@", [params description]);
+    }];
+    
 	return [[FBSDKApplicationDelegate sharedInstance] application:application
 									didFinishLaunchingWithOptions:launchOptions];
 }
@@ -100,9 +119,12 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
     [currentInstallation setDeviceTokenFromData:deviceToken];
     currentInstallation.channels = @[ @"global" ];
     [[currentInstallation saveInBackground] continueWithBlock:^id(BFTask *task) {
-        
+    
         return nil;
     }];
+    [[THLPubnubManager sharedInstance] didRegisterForRemoteToken:deviceToken];
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel.people addPushDeviceToken:deviceToken];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
@@ -153,10 +175,21 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
 			openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
 		 annotation:(id)annotation {
+    
+    NSLog(@"%@", url);
+    
+    [[Branch getInstance] handleDeepLink:url];
 	return [[FBSDKApplicationDelegate sharedInstance] application:application
 														  openURL:url
 												sourceApplication:sourceApplication
 													   annotation:annotation];
+}
+
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
+    
+    BOOL handledByBranch = [[Branch getInstance] continueUserActivity:userActivity];
+    
+    return handledByBranch;
 }
 
 @end

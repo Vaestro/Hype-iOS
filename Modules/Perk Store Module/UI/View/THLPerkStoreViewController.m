@@ -21,6 +21,8 @@
 UICollectionViewDelegate,
 UICollectionViewDelegateFlowLayout
 >
+@property (nonatomic, strong) THLCreditsExplanationView *creditsExplanationView;
+
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) UILabel *labelOne;
 @property (nonatomic, strong) THLActionButton *earnMoreCreditsButton;
@@ -55,6 +57,15 @@ UICollectionViewDelegateFlowLayout
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     self.viewAppeared = FALSE;
+}
+
+- (void)presentCreditsExplanationView {
+    _creditsExplanationView = [THLCreditsExplanationView new];
+    [self.tabBarController.view addSubview:_creditsExplanationView];
+    [_creditsExplanationView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.bottom.insets(kTHLEdgeInsetsNone());
+    }];
+    [self.tabBarController.view bringSubviewToFront:_creditsExplanationView];
 }
 
 - (void)constructView {
@@ -99,8 +110,11 @@ UICollectionViewDelegateFlowLayout
 - (void)configureBindings {
     WEAKSELF();
     STRONGSELF();
-    RAC(self.earnMoreCreditsButton, rac_command) = RACObserve(self, showCreditsExplanationView);
-
+//    RAC(self.earnMoreCreditsButton, rac_command) = RACObserve(self, showCreditsExplanationView);
+    _earnMoreCreditsButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [self presentCreditsExplanationView];
+        return [RACSignal empty];
+    }];
     
     [RACObserve(WSELF, dataSource) subscribeNext:^(THLViewDataSource *dataSource) {
         [SSELF configureDataSource:dataSource];
@@ -117,7 +131,7 @@ UICollectionViewDelegateFlowLayout
     
     [RACObserve(WSELF, currentUserCredit) subscribeNext:^(id x) {
         float credits = [x floatValue];
-        SSELF.userCreditsLabel.text = [self formattedStringWithDecimal:[[NSNumber alloc]initWithFloat:credits]];
+        SSELF.userCreditsLabel.text = [SSELF formattedStringWithDecimal:[[NSNumber alloc]initWithFloat:credits]];
     }];
     
     [RACObserve(WSELF, refreshCommand) subscribeNext:^(RACCommand *command) {

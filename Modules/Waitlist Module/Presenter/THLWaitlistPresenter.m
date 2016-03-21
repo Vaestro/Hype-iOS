@@ -8,26 +8,24 @@
 
 #import "THLWaitlistPresenter.h"
 #import "THLWaitlistModel.h"
-#import "THLWaitlistSignupViewController.h"
 #import "THLWaitlistPositionViewController.h"
 #import "THLWaitlistEntry.h"
-#import "THLWaitlistCodeEntryViewController.h"
 #import "THLWaitlistHomeViewController.h"
+#import "THLTextEntryViewController.h"
 
 @interface THLWaitlistPresenter()
 <
 THLWaitlistModelDelegate,
-THLWaitlistSignupViewDelegate,
-THLWaitlistCodeEntryViewDelegate,
+THLTextEntryViewDelegate,
 THLWaitlistHomeViewDelegate
 >
 @property (nonatomic, strong) UIViewController *baseController;
 
 @property (nonatomic, strong) THLWaitlistModel *model;
 @property (nonatomic, strong) THLWaitlistHomeViewController *homeView;
-@property (nonatomic, strong) THLWaitlistSignupViewController *signupView;
 @property (nonatomic, strong) THLWaitlistPositionViewController *positionView;
-@property (nonatomic, strong) THLWaitlistCodeEntryViewController *codeEntryView;
+@property (nonatomic, strong) THLTextEntryViewController *signupView;
+@property (nonatomic, strong) THLTextEntryViewController *invitationCodeEntryView;
 @end
 
 @implementation THLWaitlistPresenter
@@ -37,11 +35,8 @@ THLWaitlistHomeViewDelegate
 		_model.delegate = self;
         _homeView = [[THLWaitlistHomeViewController alloc] initWithNibName:nil bundle:nil];
         _homeView.delegate = self;
-		_signupView = [[THLWaitlistSignupViewController alloc] initWithNibName:nil bundle:nil];
-		_signupView.delegate = self;
-		_positionView = [[THLWaitlistPositionViewController alloc] initWithNibName:nil bundle:nil];
-		_codeEntryView = [[THLWaitlistCodeEntryViewController alloc] initWithNibName:nil bundle:nil];
-		_codeEntryView.delegate = self;
+        _positionView = [[THLWaitlistPositionViewController alloc] initWithNibName:nil bundle:nil];
+
 	}
 	return self;
 }
@@ -66,13 +61,24 @@ THLWaitlistHomeViewDelegate
 }
 
 - (void)presentSignupView {
-//    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:_signupView];
-    [_homeView.navigationController pushViewController:_signupView animated:YES];
+    THLTextEntryViewController *signupView  = [[THLTextEntryViewController alloc] initWithNibName:nil bundle:nil];
+    signupView.delegate = self;
+    signupView.titleText = @"Join the waitlist";
+    signupView.descriptionText = @"To provide the best possible experience for everyone, we're letting users onto Hype on an invite-only basis - for now\n\nPlease enter your email address to request early access";
+    signupView.buttonText = @"Request Invitation";
+    signupView.type = THLTextEntryTypeEmail;
+    [_homeView.navigationController pushViewController:signupView animated:YES];
 }
 
 - (void)presentCodeEntryView {
-//    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:_codeEntryView];
-    [_homeView.navigationController pushViewController:_codeEntryView animated:YES];
+    THLTextEntryViewController *invitationCodeEntryView = [[THLTextEntryViewController alloc] initWithNibName:nil bundle:nil];
+    invitationCodeEntryView.delegate = self;
+    invitationCodeEntryView.titleText = @"Welcome";
+    invitationCodeEntryView.descriptionText = @"Enter your invite code to get in";
+    invitationCodeEntryView.buttonText = @"Submit Code";
+    invitationCodeEntryView.textLength = 6;
+    invitationCodeEntryView.type = THLTextEntryTypeCode;
+    [_homeView.navigationController pushViewController:invitationCodeEntryView animated:YES];
 }
 
 - (void)approveUserForApp {
@@ -129,7 +135,7 @@ THLWaitlistHomeViewDelegate
         [alert addAction:action];
     }
     
-    [_codeEntryView presentViewController:alert animated:YES completion:nil];
+    [_homeView presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - THLWaitlistHomeViewDelegate
@@ -142,16 +148,18 @@ THLWaitlistHomeViewDelegate
 }
 
 #pragma mark - THLWaitlistSignupViewDelegate
-- (void)signupView:(THLWaitlistSignupViewController *)view userDidSubmitEmail:(NSString *)email {
+- (void)emailEntryView:(THLTextEntryViewController *)view userDidSubmitEmail:(NSString *)email {
 	[_model createWaitlistEntryForEmail:email];
 }
 
 #pragma mark - THLWaitlistCodeEntryViewDelegate
-- (void)view:(THLWaitlistCodeEntryViewController *)codeEntryView didRecieveCode:(NSString *)code {
+- (void)codeEntryView:(THLTextEntryViewController *)view userDidSubmitCode:(NSString *)code {
 	[self validateCode:code];
 }
 
 - (void)validateCode:(NSString *)code {
     [_model isValidCode:code];
 }
+
+
 @end

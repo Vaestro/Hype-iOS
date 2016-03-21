@@ -54,7 +54,6 @@
 	_presenter = [[THLLoginPresenter alloc] initWithWireframe:self interactor:_interactor];
 	_onboardingView = [[THLOnboardingViewController alloc] initWithNibName:nil bundle:nil];
     _loginView = [[THLLoginViewController alloc] initWithNibName:nil bundle:nil];
-    
 }
 
 #pragma mark - Interface
@@ -82,15 +81,7 @@
     [_interactor setUser:[THLUser currentUser]];
     [_presenter configureOnboardingView:_onboardingView];
     _topViewController = _onboardingView;
-
     _window.rootViewController = _onboardingView;
-    
-//    [_presenter configureLoginView:_loginView];
-//    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:_loginView];
-//    _window.rootViewController = navigationController;
-//    UIViewController *baseViewController = [UIViewController new];
-//    [_presenter configureBaseView:baseViewController];
-//    _window.rootViewController = baseViewController;
     [_window makeKeyAndVisible];
     [_presenter reroute];
 }
@@ -110,13 +101,17 @@
 }
 
 - (void)finishLogin {
+    WEAKSELF();
     [_loginView.navigationController dismissViewControllerAnimated:YES completion:^{
-        [_presenter.moduleDelegate loginModule:_presenter didLoginUser:nil];
+        [WSELF.presenter.moduleDelegate loginModule:WSELF.presenter didLoginUser:nil];
     }];
 }
 
 - (void)finishOnboarding {
-    [_onboardingView dismissViewControllerAnimated:NO completion:NULL];
+    WEAKSELF();
+    [_onboardingView dismissViewControllerAnimated:NO completion:^{
+        [WSELF.presenter.moduleDelegate loginModule:WSELF.presenter didLoginUser:nil];
+    }];
 }
 
 - (void)presentNumberVerificationInterface:(id<THLNumberVerificationModuleDelegate>)interfaceDelegate {

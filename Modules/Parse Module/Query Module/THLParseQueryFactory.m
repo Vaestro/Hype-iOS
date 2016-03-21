@@ -27,23 +27,6 @@
 	return query;
 }
 
-#pragma mark - Promotion Queries
-//- (PFQuery *)queryForPromotionsStartingOn:(NSDate *)startDate endingOn:(NSDate *)endDate {
-//	PFQuery *eventQuery = [self baseEventQuery];
-//	[eventQuery whereKey:@"date" greaterThanOrEqualTo:startDate];
-//	[eventQuery whereKey:@"date" lessThanOrEqualTo:endDate];
-//
-//	PFQuery *query = [self basePromotionQuery];
-//	[query whereKey:@"event" matchesQuery:eventQuery];
-//	return query;
-//}
-
-//- (PFQuery *)queryForPromotionForEvent:(NSString *)eventId {
-//	PFQuery *query = [self basePromotionQuery];
-//	[query whereKey:@"eventId" equalTo:eventId];
-//	return query;
-//}
-
 #pragma mark - Guestlist Queries
 - (PFQuery *)queryForGuestlistWithId {
     PFQuery *query = [self baseGuestlistQuery];
@@ -56,7 +39,8 @@
 
     PFQuery *query = [self baseGuestlistQuery];
     [query whereKey:@"event" matchesQuery:eventQuery];
-    [query whereKey:@"date" greaterThanOrEqualTo:[[NSDate date] dateByAddingTimeInterval:-60*300]];
+//    Fetch all guestlists so local database can be updated
+//    [query whereKey:@"date" greaterThanOrEqualTo:[[NSDate date] dateByAddingTimeInterval:-60*300]];
     return query;
 }
 
@@ -96,6 +80,14 @@
     return query;
 }
 
+- (PFQuery *)queryForGuestlistInvitesForUser:(THLUser *)user {
+    PFQuery *query = [self baseGuestlistInviteQuery];
+    [query whereKey:@"Guest" equalTo:[THLUser currentUser].objectId];
+    [query orderByAscending:@"date"];
+    //[query whereKey:@"response" notEqualTo:[NSNumber numberWithInteger:-1]];
+    return query;
+}
+
 - (PFQuery *)queryForInvitesOnGuestlist:(THLGuestlist *)guestlist {
     PFQuery *query = [self baseGuestlistInviteQuery];
     [query whereKey:@"Guestlist" equalTo:guestlist];
@@ -110,14 +102,109 @@
     return query;
 }
 
+- (PFQuery *)queryForUserWithId:(NSString *)userID {
+    PFQuery *query = [self baseUserQuery];
+    [query whereKey:@"objectId" equalTo:userID];
+    return query;
+}
+
 #pragma mark - PerkItemStore Queries
 - (PFQuery *)queryForAllPerkStoreItems {
     PFQuery *query = [self basePerkStoreItem];
     return query;
 }
 
+#pragma mark - Channels Queries
+- (PFQuery *)queryAllChannelsForUserID:(PFUser *)user {
+    PFQuery *guestQuery = [self baseChannelQuery];
+    [guestQuery whereKey:@"guestId" equalTo:user];
+    PFQuery *hostQuery = [self baseChannelQuery];
+    [hostQuery whereKey:@"hostId" equalTo:user];
+    PFQuery *ownerQuery = [self baseChannelQuery];
+    [ownerQuery whereKey:@"ownerId" equalTo:user];
+    PFQuery *query = [PFQuery orQueryWithSubqueries:@[guestQuery,
+                                                      hostQuery,
+                                                      ownerQuery]];
+    [query whereKey:@"date" greaterThan:[NSDate date]];
+    [query includeKey:@"guestlistId"];
+    [query includeKey:@"guestlistId.event"];
+    [query includeKey:@"guestlistId.event.location"];
+    
+    return query;
+}
+
+- (PFQuery *)queryChannelsForUserID:(PFUser *)user {
+    PFQuery *guestQuery = [self baseChannelQuery];
+    [guestQuery whereKey:@"guestId" equalTo:user];
+    PFQuery *hostQuery = [self baseChannelQuery];
+    [hostQuery whereKey:@"hostId" equalTo:user];
+    PFQuery *ownerQuery = [self baseChannelQuery];
+    [ownerQuery whereKey:@"ownerId" equalTo:user];
+    PFQuery *query = [PFQuery orQueryWithSubqueries:@[guestQuery,
+                                                      hostQuery,
+                                                      ownerQuery]];
+    [query whereKey:@"date" greaterThan:[NSDate date]];
+    [query includeKey:@"guestlistId"];
+    [query includeKey:@"guestlistId.event"];
+    [query includeKey:@"guestlistId.event.location"];
+    return query;
+}
+
+- (PFQuery *)queryChannelsForHostID:(PFUser *)user withGuestList:(THLGuestlist *)guestlist {
+    PFQuery *hostQuery = [self baseChannelQuery];
+    [hostQuery whereKey:@"hostId" equalTo:user];
+    PFQuery *guestlistQuery = [self baseChannelQuery];
+    [guestlistQuery whereKey:@"guestlistId" equalTo:guestlist];
+    PFQuery *query = [PFQuery orQueryWithSubqueries:@[hostQuery,
+                                                      guestlistQuery]];
+    [query whereKey:@"date" greaterThan:[NSDate date]];
+    [query includeKey:@"guestlistId"];
+    [query includeKey:@"guestlistId.event"];
+    [query includeKey:@"guestlistId.event.location"];
+    return query;
+}
+
+- (PFQuery *)queryChannelsForGuestID:(PFUser *)user withGuestList:(THLGuestlist *)guestlist {
+    PFQuery *guestQuery = [self baseChannelQuery];
+    [guestQuery whereKey:@"guestId" equalTo:user];
+    PFQuery *guestlistQuery = [self baseChannelQuery];
+    [guestlistQuery whereKey:@"guestlistId" equalTo:guestlist];
+    PFQuery *query = [PFQuery orQueryWithSubqueries:@[guestQuery,
+                                                      guestlistQuery]];
+    [query whereKey:@"date" greaterThan:[NSDate date]];
+    [query includeKey:@"guestlistId"];
+    [query includeKey:@"guestlistId.event"];
+    [query includeKey:@"guestlistId.event.location"];
+    return query;
+}
+
+- (PFQuery *)queryChannelsForOwnerID:(PFUser *)user withGuestList:(THLGuestlist *)guestlist {
+    PFQuery *ownerQuery = [self baseChannelQuery];
+    [ownerQuery whereKey:@"ownerId" equalTo:user];
+    PFQuery *guestlistQuery = [self baseChannelQuery];
+    [guestlistQuery whereKey:@"guestlistId" equalTo:guestlist];
+    PFQuery *query = [PFQuery orQueryWithSubqueries:@[ownerQuery,
+                                                      guestlistQuery]];
+    [query whereKey:@"date" greaterThan:[NSDate date]];
+    [query includeKey:@"guestlistId"];
+    [query includeKey:@"guestlistId.event"];
+    [query includeKey:@"guestlistId.event.location"];
+    return query;
+}
 
 #pragma mark - Class Queries
+
+/**
+ *  Generic query for THLUChannel.
+ *	Includes: (none)
+ */
+- (PFQuery *)baseChannelQuery {
+    //PFQuery *query = [[PFQuery alloc] initWithClassName:@"Channel"];
+    PFQuery *query = [THLChannel query];
+    //[query includeKey:@"event.location"];
+    return query;
+}
+
 /**
  *  Generic query for THLUser.
  *	Includes: (none)

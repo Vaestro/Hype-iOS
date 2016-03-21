@@ -29,4 +29,7 @@
 @property (nonatomic, strong) RACCommand *actionBarButtonCommand;
 @property (nonatomic, strong) RACCommand *dismissCommand;
 @property (nonatomic) BOOL viewAppeared;
+
+- (void)showAlertView;
+
 @end

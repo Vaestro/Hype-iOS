@@ -2,17 +2,14 @@
 //  THLWaitlistCodeEntryViewController.m
 //  Hype
 //
-//  Created by Phil Meyers IV on 12/31/15.
+//  Created by Edgar Li on 12/31/15.
 //  Copyright © 2015 Hypelist. All rights reserved.
 //
 
 #import "THLWaitlistCodeEntryViewController.h"
 #import "IHKeyboardAvoiding.h"
 #import "THLActionButton.h"
-#import "ReactiveCocoa.h"
 #import "THLAppearanceConstants.h"
-#import "THLWaitlistEntry.h"
-//#import "LRTextField.h"
 #import "THLSingleLineTextField.h"
 
 @interface THLWaitlistCodeEntryViewController ()
@@ -20,6 +17,7 @@
 UITextFieldDelegate
 >
 @property (nonatomic, strong) UIBarButtonItem *dismissButton;
+@property (nonatomic, strong) UIView *containerView;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *descriptionLabel;
 @property (nonatomic, strong) THLSingleLineTextField *textField;
@@ -38,53 +36,52 @@ UITextFieldDelegate
 }
 
 - (void)constructView {
-//    _dismissButton = [self newDismissButton];
     _titleLabel = [self newTitleLabel];
     _descriptionLabel = [self newDescriptionLabel];
 	_textField = [self newTextField];
-	[IHKeyboardAvoiding setAvoidingView:_textField];
 	_submitButton = [self newSubmitButton];
 }
 
 - (void)layoutView {
     self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
-    [self.view addSubviews:@[_titleLabel,
-                             _descriptionLabel,
-							 _textField,
-							 _submitButton]];
-
+    _containerView = [UIView new];
+    [IHKeyboardAvoiding setAvoidingView:_containerView];
+    [self.view addSubviews:@[_containerView,
+                             _submitButton]];
     WEAKSELF();
     [_submitButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.left.right.insets(kTHLEdgeInsetsSuperHigh());
         make.height.mas_equalTo(kSubmitButtonHeight);
     }];
     
+    [_containerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+        make.top.insets(kTHLEdgeInsetsNone());
+        make.bottom.equalTo([WSELF submitButton].mas_top).insets(kTHLEdgeInsetsSuperHigh());
+    }];
+
+    [_containerView addSubviews:@[_titleLabel, _descriptionLabel, _textField]];
+
     [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.insets(kTHLEdgeInsetsSuperHigh());
+        make.left.insets(kTHLEdgeInsetsNone());
         make.bottom.equalTo([WSELF descriptionLabel].mas_top).insets(kTHLEdgeInsetsSuperHigh());
     }];
     
     [_descriptionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.insets(kTHLEdgeInsetsSuperHigh());
+        make.left.insets(kTHLEdgeInsetsNone());
         make.bottom.equalTo([WSELF textField].mas_top).insets(kTHLEdgeInsetsSuperHigh());
         make.width.mas_equalTo(SCREEN_WIDTH*0.66);
     }];
     
     [_textField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.insets(kTHLEdgeInsetsSuperHigh());
+        make.left.insets(kTHLEdgeInsetsNone());
         make.height.mas_equalTo(@50);
         make.width.mas_equalTo(SCREEN_WIDTH*0.80);
-        make.bottom.equalTo([WSELF submitButton].mas_top).insets(kTHLEdgeInsetsSuperHigh());
+        make.bottom.insets(kTHLEdgeInsetsNone());
     }];
 }
 
 - (void)bindView {
-//    _dismissButton.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-//        NSLog(@"%@",self.navigationController.viewControllers);
-//        [self.navigationController popToRootViewControllerAnimated:YES];
-//        return [RACSignal empty];
-//    }];
-    
 	_submitButton.rac_command = [[RACCommand alloc] initWithEnabled:[self validInputSignal] signalBlock:^RACSignal *(id input) {
 		[self submitCodeForValidation];
 		return [RACSignal empty];
@@ -146,16 +143,5 @@ UITextFieldDelegate
 	[button setTitle:@"Submit Code"];
 	return button;
 }
-
-//- (UIBarButtonItem *)newDismissButton {
-//    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Back Button"] style:UIBarButtonItemStylePlain target:nil action:NULL];
-//    [item setTintColor:kTHLNUIGrayFontColor];
-//    [item setTitleTextAttributes:
-//     [NSDictionary dictionaryWithObjectsAndKeys:
-//      kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
-//                        forState:UIControlStateNormal];
-//    return item;
-//}
-
 
 @end

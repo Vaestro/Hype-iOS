@@ -11,6 +11,8 @@
 @class THLGuestlistReviewInteractor;
 @class THLViewDataSource;
 @class THLGuestEntity;
+@class THLGuestlist;
+@class THLUser;
 
 @class THLGuestlistEntity;
 @class THLGuestlistInviteEntity;
@@ -20,7 +22,6 @@
 - (void)interactor:(THLGuestlistReviewInteractor *)interactor didUpdateGuestlistInvites:(NSError *)error;
 - (void)interactor:(THLGuestlistReviewInteractor *)interactor didUpdateGuestlistInviteResponse:(NSError *)error to:(THLStatus)response;
 - (void)interactor:(THLGuestlistReviewInteractor *)interactor didUpdateGuestlistReviewStatus:(NSError *)error to:(THLStatus)reviewStatus;
-- (void)interactor:(THLGuestlistReviewInteractor *)interactor didGetToken:(NSString *)token;
 - (void)interactor:(THLGuestlistReviewInteractor *)interactor didUpdateGuestlistInviteCheckInStatus:(NSError *)error to:(BOOL)status;
 @end
 
@@ -29,7 +30,6 @@
 @property (nonatomic, strong) THLGuestlistEntity *guestlistEntity;
 @property (nonatomic, strong) THLGuestlistInviteEntity *guestlistInvite;
 @property (nonatomic, strong) NSArray *guests;
-@property (nonatomic, strong) NSString *callToken;
 
 #pragma mark - Dependencies
 @property (nonatomic, readonly, weak) THLGuestlistReviewDataManager *dataManager;
@@ -45,6 +45,6 @@
 - (void)updateGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite withCheckInStatus:(BOOL)status;
 //- (void)updateGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite withCheckInStatus:(BOOL)checkInStatus;
 - (void)updateGuestlist:(THLGuestlistEntity *)guestlistEntity withReviewStatus:(THLStatus)reviewStatus;
+- (void)unSubscribeChannelsForUser:(THLUser *)userId withGuestlist:(THLGuestlistEntity *)guestlistEntity;
 //- (void)checkInGuests;
-- (void)generateToken;
 @end

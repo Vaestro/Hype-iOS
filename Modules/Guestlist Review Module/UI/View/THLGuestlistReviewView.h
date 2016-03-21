@@ -17,7 +17,9 @@ typedef NS_OPTIONS(NSInteger, THLGuestlistReviewerStatus) {
     THLGuestlistActiveHost,
     THLGuestlistDeclinedHost,
     THLGuestlistCheckedInGuest,
-    THLGuestlistCheckedInOwner
+    THLGuestlistCheckedInOwner,
+    THLGuestlistAttendingGuestPendingApproval,
+    THLGuestlistOwnerPendingApproval
 };
 
 @class THLViewDataSource;
@@ -46,6 +48,11 @@ typedef NS_OPTIONS(NSInteger, THLGuestlistReviewerStatus) {
 @property (nonatomic) BOOL viewAppeared;
 
 - (void)showGuestlistMenuView:(UIView *)menuView;
+- (void)showResponseView:(UIView *)responseView;
+
 - (void)hideGuestlistMenuView:(UIView *)menuView;
 - (void)handleCallActionWithCallerdId:(NSString *)twilioNumber toHostNumber:(NSString *)hostNumber;
+
+- (void)hideActionBar;
+
 @end

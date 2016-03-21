@@ -41,7 +41,7 @@
     [self updateGuestlistInvites];
     THLViewDataSourceGrouping *grouping = [self viewGrouping];
     THLViewDataSourceSorting *sorting = [self viewSorting];
-    NSArray *groups = @[ @"Pending Invites", @"Upcoming Events"];
+    NSArray *groups = @[ @"Event Invites    ", @"Upcoming Events"];
     THLViewDataSource *dataSource = [_viewDataSourceFactory createDataSourceWithFixedGrouping:grouping sorting:sorting groups:groups key:@"kTHLDashboardModuleViewKey"];
     return dataSource;
 }
@@ -54,7 +54,7 @@
                 && guestlistInviteEntity.guestlist.reviewStatus != THLStatusDeclined
                 && [guestlistInviteEntity.date thl_isOrAfterToday]) {
                 if (guestlistInviteEntity.response == THLStatusPending) {
-                    return @"Pending Invites";
+                    return @"Event Invites";
                 } else if (guestlistInviteEntity.response == THLStatusAccepted) {
                     return @"Upcoming Events";
                 }
@@ -70,5 +70,9 @@
         THLGuestlistInviteEntity *guestlistInvite2 = (THLGuestlistInviteEntity *)entity2;
         return [guestlistInvite1.date compare:guestlistInvite2.date];
     }];
+}
+
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
 }
 @end

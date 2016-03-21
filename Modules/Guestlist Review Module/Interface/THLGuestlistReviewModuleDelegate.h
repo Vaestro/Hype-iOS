@@ -13,5 +13,5 @@
 @protocol THLGuestlistReviewModuleDelegate <NSObject>
 - (void)guestlistReviewModule:(id<THLGuestlistReviewModuleInterface>)module event:(THLEventEntity *)eventEntity withGuestlistId:(NSString *)guestlistId andGuests:(NSArray<THLGuestEntity *> *)guests presentGuestlistInvitationInterfaceOnController:(UIViewController *)controller;
 - (void)dismissGuestlistReviewWireframe;
-
+- (void)guestlistReviewModule:(id<THLGuestlistReviewModuleInterface>)module userDidSelectViewEventEntity:(THLEventEntity *)eventEntity onViewController:(UIViewController *)viewController;
 @end

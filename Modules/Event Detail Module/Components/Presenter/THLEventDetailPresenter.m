@@ -57,7 +57,8 @@
             [WSELF handleNeedLoginAction];
         } else {
             if (_guestHasAcceptedInvite) {
-                [WSELF handleViewGuestlistAction];
+                [WSELF.view showAlertView];
+//                [WSELF handleViewGuestlistAction];
             } else {
                 //            TODO: Create logic so that Guests with Declined Guestlists can have another guestlist invite to the same event if their other one is declined
                 [WSELF handleCreateGuestlistAction];
@@ -83,10 +84,29 @@
     [self.view setEventDate:[NSString stringWithFormat:@"%@, %@", _eventEntity.date.thl_weekdayString, _eventEntity.date.thl_timeString]];
 	[self.view setPromoInfo:_eventEntity.info];
     [self.view setPromoImageURL:_eventEntity.imageURL];
+//    NSNumber *maleCoverRange = [NSNumber numberWithFloat:_eventEntity.maleCoverRange];
+//    NSNumber *femaleCoverRange = [NSNumber numberWithFloat:_eventEntity.femaleCoverRange];
+    NSNumber *maleCover = [NSNumber numberWithFloat:_eventEntity.maleCover];
+    NSNumber *femaleCover = [NSNumber numberWithFloat:_eventEntity.femaleCover];
+//    NSNumber *minMaleCover = [NSNumber numberWithFloat:(_eventEntity.maleCover - _eventEntity.maleCoverRange)];
+//    NSNumber *minFemaleCover = [NSNumber numberWithFloat:(_eventEntity.femaleCover - _eventEntity.femaleCoverRange)];
+//    if (maleCover > 0 && femaleCover == 0) {
+//        [self.view setCoverInfo:[NSString stringWithFormat:@"$%@ (Guys only)", maleCover]];
+//    } else if (maleCoverRange > 0 && femaleCover == 0){
+//        [self.view setCoverInfo:[NSString stringWithFormat:@"$%@-%@ (Guys only)", minMaleCover, maleCover]];
+//    } else if (maleCoverRange != 0 && femaleCoverRange != 0){
+//        [self.view setCoverInfo:[NSString stringWithFormat:@"$%@-%@ (Guys) $%@-%@ (Girls)", minMaleCover, maleCover, minFemaleCover, femaleCover]];
+//    } else if (maleCover > 0 && femaleCoverRange > 0) {
+//        [self.view setCoverInfo:[NSString stringWithFormat:@"$%@ (Guys) $%@-%@ (Girls)", maleCover, minFemaleCover, femaleCover]];
+//    } else if (maleCover > 0 && femaleCover > 0) {
+//        [self.view setCoverInfo:[NSString stringWithFormat:@"$%@ (Guys) $%@", maleCover, femaleCover]];
+//    }
     if (_eventEntity.maleCover > 0 && _eventEntity.femaleCover == 0) {
-        [self.view setCoverInfo:[NSString stringWithFormat:@"$%@ (Guys only)", [NSNumber numberWithFloat:_eventEntity.maleCover ]]];
-    } else {
-        [self.view setCoverInfo:[NSString stringWithFormat:@"$%@", [NSNumber numberWithFloat:_eventEntity.maleCover ]]];
+        [self.view setCoverInfo:[NSString stringWithFormat:@"$%@ (Guys only)", maleCover]];
+    } else if (_eventEntity.maleCover > 0 && _eventEntity.femaleCover > 0) {
+        [self.view setCoverInfo:[NSString stringWithFormat:@"$%@ (Guys) $%@ (Girls)", maleCover, femaleCover]];
+    } else if (maleCover == 0) {
+        [self.view setCoverInfo:[NSString stringWithFormat:@"No Cover"]];
     }
     [self.view setActionBarButtonCommand:actionBarButtonCommand];
     [self.view setLocationInfo:_eventEntity.location.info];
@@ -95,8 +115,10 @@
     [self.view setLocationAttireRequirement:_eventEntity.location.attireRequirement];
     
     [self.view setExclusiveEvent:_eventEntity.requiresApproval];
-    
-    if (_eventEntity.femaleRatio == 1) {
+    if (_eventEntity.maleRatio == 0) {
+        [self.view setRatioInfo:@"Girls Only"];
+    }
+    else if (_eventEntity.femaleRatio == 1) {
         [self.view setRatioInfo:@"1 Girl : 1 Guy"];
     } else if (_eventEntity.femaleRatio > 1) {
         [self.view setRatioInfo:[NSString stringWithFormat:@"%d Girls : 1 Guy", _eventEntity.femaleRatio]];
@@ -130,10 +152,10 @@
     [(UIViewController *)_view presentViewController:alert animated:YES completion:nil];
 }
 
-- (void)presentEventDetailInterfaceForEvent:(THLEventEntity *)eventEntity inWindow:(UIWindow *)window {
+- (void)presentEventDetailInterfaceForEvent:(THLEventEntity *)eventEntity onViewController:(UIViewController *)viewController {
     _eventEntity = eventEntity;
     [_interactor getPlacemarkForLocation:_eventEntity.location];
-	[_wireframe presentInterfaceInWindow:window];
+	[_wireframe presentInterfaceOnViewController:viewController];
     
 #ifdef DEBUG
 #else

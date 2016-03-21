@@ -20,8 +20,11 @@
 @property (nonatomic, strong) THLLocationEntity *location;
 @property (nonatomic) float maleCover;
 @property (nonatomic) float femaleCover;
+@property (nonatomic) float maleCoverRange;
+@property (nonatomic) float femaleCoverRange;
 @property (nonatomic, strong) THLHostEntity *host;
 @property (nonatomic) int maleRatio;
 @property (nonatomic) int femaleRatio;
 @property (nonatomic) bool requiresApproval;
+@property (nonatomic, copy) NSString *chatMessage;
 @end

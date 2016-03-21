@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+//@class THLMessageListWireframe;
 @class THLEventDiscoveryWireframe;
 @class THLDashboardWireframe;
 @class THLUserProfileWireframe;
@@ -19,6 +20,7 @@
 @class THLLoginWireframe;
 
 @protocol THLGuestFlowDependencyManager <NSObject>
+//- (THLMessageListWireframe *)newMessageListWireframe;
 - (THLEventDiscoveryWireframe *)newEventDiscoveryWireframe;
 - (THLDashboardWireframe *)newDashboardWireframe;
 - (THLUserProfileWireframe *)newUserProfileWireframe;

@@ -113,4 +113,8 @@ THLDashboardInteractorDelegate
 - (void)interactor:(THLDashboardInteractor *)interactor didUpdateGuestlistInvites:(NSError *)error {
     self.refreshing = NO;
 }
+
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
+}
 @end

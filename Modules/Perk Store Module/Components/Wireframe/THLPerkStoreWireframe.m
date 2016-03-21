@@ -57,8 +57,9 @@
 }
 
 - (void)dismissInterface {
+    WEAKSELF();
     [_view.navigationController dismissViewControllerAnimated:YES completion:^{
-        [_presenter.moduleDelegate dismissPerkWireframe];
+        [WSELF.presenter.moduleDelegate dismissPerkWireframe];
     }];
 }
 

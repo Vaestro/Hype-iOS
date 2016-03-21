@@ -44,6 +44,7 @@
 
 - (BFTask *)submitGuestlistForEvent:(THLEventEntity *)eventEntity withInvites:(NSArray *)guestPhoneNumbers {
     return [[_guestlistService createGuestlistForEvent:eventEntity withInvites:guestPhoneNumbers] continueWithSuccessBlock:^id(BFTask *task) {
+        
         return [BFTask taskWithResult:nil];
     }];
 }
@@ -53,7 +54,7 @@
     return [[_guestlistService fetchGuestlistInviteForEvent:eventEntity] continueWithSuccessBlock:^id(BFTask *task) {
         THLGuestlistInviteEntity *guestlistInviteEntity = [WSELF.entityMapper mapGuestlistInvite:task.result];
         [WSELF.dataStore2 updateOrAddEntities:[NSSet setWithArray:@[guestlistInviteEntity]]];
-        return [BFTask taskWithResult:nil];
+        return [BFTask taskWithResult:guestlistInviteEntity];
     }];
 }
 

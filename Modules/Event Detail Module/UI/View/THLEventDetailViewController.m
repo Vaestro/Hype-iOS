@@ -21,6 +21,8 @@
 #import "THLEventNavigationBar.h"
 #import "SquareCashStyleBehaviorDefiner.h"
 #import "THLActionButton.h"
+#import "THLAlertView.h"
+
 
 @interface THLEventDetailViewController()
 @property (nonatomic, strong) ORStackScrollView *scrollView;
@@ -77,6 +79,20 @@
     [super viewDidAppear:animated];
     self.viewAppeared = FALSE;
 }
+
+
+- (void)showAlertView {
+    THLAlertView *alertView = [THLAlertView new];
+    [alertView setTitle:@"What's Next?"];
+    [alertView setMessage:@"You can view your ticket + guestlist in the 'My Events’ tab. Please arrive on time and show your ticket at the door for entrance. If you have any questions, you can message the Host in the 'Chats Tab'"];
+    
+    [self.view addSubview:alertView];
+    [self.view bringSubviewToFront:alertView];
+    [alertView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.bottom.insets(kTHLEdgeInsetsNone());
+    }];
+}
+
 
 - (void)viewDidLayoutSubviews {
 //    [super viewDidLayoutSubviews];
@@ -182,10 +198,10 @@
 - (void)updateBottomBar {
     WEAKSELF();
     if (userHasAcceptedInvite) {
-        [[WSELF bottomBar] setTitle:NSLocalizedString(@"VIEW GUESTLIST", nil)];
+        [[WSELF bottomBar] setTitle:NSLocalizedString(@"You are on the list", nil)];
         [WSELF bottomBar].backgroundColor = kTHLNUIAccentColor;
     } else {
-        [[WSELF bottomBar] setTitle:NSLocalizedString(@"CREATE GUESTLIST", nil)];
+        [[WSELF bottomBar] setTitle:NSLocalizedString(@"GO", nil)];
     }
 }
 
@@ -214,7 +230,7 @@
 
 - (THLEventDetailsLocationInfoView *)newLocationInfoView {
     THLEventDetailsLocationInfoView *infoView = [THLEventDetailsLocationInfoView new];
-    infoView.title = NSLocalizedString(@"VENUE INFORMATION", nil);
+    infoView.title = NSLocalizedString(@"WHAT WE LIKE", nil);
     infoView.translatesAutoresizingMaskIntoConstraints = NO;
     infoView.dividerColor = [UIColor whiteColor];
     return infoView;

@@ -21,6 +21,8 @@
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UIImageView *scrollUpIcon;
 @property (nonatomic, strong) UILabel *minimumTitleLabel;
+@property (nonatomic) int numberOfLayouts;
+
 @end
 
 @implementation THLEventNavigationBar
@@ -30,6 +32,7 @@
         [self layoutView];
         [self bindView];
         self.userInteractionEnabled = YES;
+        _numberOfLayouts = 0;
     }
     return self;
 }
@@ -64,7 +67,7 @@
     }];
     
     [_promotionInfoView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.insets(kTHLEdgeInsetsSuperHigh());
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
         make.bottom.equalTo([WSELF scrollUpIcon].mas_top);
     }];
     
@@ -139,23 +142,32 @@
 }
 
 - (void)addGradientLayer {
-    CAGradientLayer *gradient = [CAGradientLayer layer];
-    
-    gradient.frame = self.imageView.bounds;
-    gradient.colors = @[(id)[UIColor clearColor].CGColor,
-                        (id)[UIColor blackColor].CGColor,
-                        (id)[UIColor blackColor].CGColor,
-                        (id)[UIColor clearColor].CGColor];
-    gradient.locations = @[@0.0, @0.25, @0.25, @1.0];
-    
-    self.imageView.layer.mask = gradient;
-
+#warning some hacky shit to make sure the gradient layer doesnt draw again so you cant see the event image
+    if (_numberOfLayouts < 2) {
+        CAGradientLayer *gradient = [CAGradientLayer layer];
+        
+        gradient.frame = self.imageView.bounds;
+        gradient.colors = @[(id)[UIColor clearColor].CGColor,
+                            (id)[UIColor blackColor].CGColor,
+                            (id)[UIColor blackColor].CGColor,
+                            (id)[UIColor clearColor].CGColor];
+        gradient.locations = @[@0.0, @0.25, @0.25, @1.0];
+        
+        self.imageView.layer.mask = gradient;
+        _numberOfLayouts += 1;
+    }
 }
 
 - (void)showExplanationView {
     THLAlertView *alertView = [THLAlertView new];
-    [alertView showWithTitle:@"Exclusive Event"
-                     message:@"This is an event with limited VIP guestlist spots. Your guestlist needs to be approved by a host in order to attend. To guarantee RSVP, please book bottle service."];
+    [alertView setTitle:@"Exclusive Event"];
+    [alertView setMessage:@"This is an event with limited VIP guestlist spots. Your guestlist needs to be approved by a host in order to attend. To guarantee RSVP, submit a guestlist and ask your host to book bottle service"];
+    
+    [self.superview addSubview:alertView];
+    [self.superview bringSubviewToFront:alertView];
+    [alertView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.bottom.insets(kTHLEdgeInsetsNone());
+    }];
 }
 
 #pragma mark - Constructors

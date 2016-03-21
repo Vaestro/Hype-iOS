@@ -62,7 +62,7 @@ THLWaitlistPresenterDelegate
 - (void)presentAppInWindow:(UIWindow *)window {
 	_window = window;
     if ([THLUserManager isUserCached]) {
-        [THLUserManager isUserVerified] ? [self routeLoggedInUserFlow] : [self presentUserVerification];
+        [THLUserManager isUserProfileValid] ? [self routeLoggedInUserFlow] : [self presentUserVerification];
     } else {
         [self presentOnboardingAndLoginInterface];
     }
@@ -180,6 +180,8 @@ THLWaitlistPresenterDelegate
 	if (!error) {
         [THLUserManager makeCurrentInstallation];
         [THLUserManager logCrashlyticsUser];
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        [mixpanel track:@"CompletedSignup"];
 		[self routeLoggedInUserFlow];
     } else {
         NSLog(@"Login Error:%@", error);
@@ -187,6 +189,8 @@ THLWaitlistPresenterDelegate
 }
 
 - (void)skipUserLogin {
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"SkippedSignup"];
     [self presentGuestFlow];
 }
 
@@ -197,6 +201,9 @@ THLWaitlistPresenterDelegate
 
 - (void)logOutUser {
     [THLUserManager logUserOut];
+    [_dependencyManager.databaseManager dropDB];
+    _guestWireframe = nil;
+    _hostWireframe = nil;
     [self presentOnboardingAndLoginInterface];
 }
 

@@ -15,7 +15,13 @@
 #import "THLLocationEntity.h"
 #import "THLUser.h"
 #import "THLBeaconEntity.h"
+#import "THLPubnubManager.h"
+#import "THLChannelService.h"
+#import "THLHostEntity.h"
 #import "THLBeacon.h"
+#import "THLEntityMapper.h"
+#import "THLGuestEntity.h"
+
 
 @implementation THLGuestlistService
 
@@ -137,13 +143,30 @@
                                                 @"eventTime":iso8601String,
                                                 @"guestPhoneNumbers": guestPhoneNumbers,
                                                 @"guestlistId": guestlist.objectId}
-                                        block:^(id guestlistInvite, NSError *cloudError) {
+                                        block:^(id knownGuestIds, NSError *cloudError) {
                                             if (!cloudError){
                                                 [completionSource setResult:nil];
+                                                
+                                                NSArray *knownGuests = knownGuestIds;
+                                                
+                                                THLChannelService *service = [[THLChannelService alloc] init];
+                                                
+                                                
+                                                if (knownGuests.count > 0)  {
+                                                    for (id guestId in knownGuests) {
+                                                        [service createChannelForOwner:guestId andHost:eventEntity.host.objectId withGuestlist:guestlist.objectId expireEvent:eventEntity.date.thl_sixHoursAhead];
+                                                    }
+                                                    
+                                                    [[THLPubnubManager sharedInstance] publishFirstMessageFromChannel:[NSString stringWithFormat:@"%@_Host", guestlist.objectId] withHost:eventEntity.host andChatMessage:eventEntity.chatMessage];
+                                                    
+                                                }
+                                                
                                             } else {
                                                 [completionSource setError:cloudError];
                                             }
                                         }];
+            
+            
         } else {
             [completionSource setError:error];
         }
@@ -159,10 +182,21 @@
                                         @"eventTime": eventEntity.date,
                                         @"guestPhoneNumbers": guestPhoneNumbers,
                                         @"guestlistId": guestlistId}
-                                block:^(id object, NSError *error) {
+                                block:^(id knownGuestIds, NSError *error) {
                                     
                                     if (!error){
                                         [completionSource setResult:nil];
+                                        
+                                        NSArray *knownGuests = knownGuestIds;
+                                        
+                                        THLChannelService *service = [[THLChannelService alloc] init];
+                                        
+                                        if (knownGuests.count > 0)  {
+                                            for (id guestId in knownGuests) {
+                                                [service createChannelForOwner:guestId andHost:eventEntity.host.objectId withGuestlist:guestlistId expireEvent:eventEntity.date.thl_sixHoursAhead];
+                                            }
+                                        }
+                                        
                                     }else {
                                         [completionSource setError:error];
                                     }
@@ -230,7 +264,8 @@
 #warning INVITATION CODES SHOULD NOT BE SET TO NIL HERE (BAD CODE)
                         [guestlistInvite setValue:nil forKey:@"invitationCode"];
                         [guestlistInvite setValue:[NSNumber numberWithInt:2] forKey:@"response"];
-
+                        THLChannelService *service = [[THLChannelService alloc] init];
+                        [service createChannelForGuest:[THLUser currentUser].objectId withGuestlist:guestlist.objectId expireEvent:event[@"date"]];
                         [unfinishedGuestlistInvites addObject:guestlistInvite];
                     }
                 }

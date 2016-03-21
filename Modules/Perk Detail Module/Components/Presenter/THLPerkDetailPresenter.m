@@ -77,7 +77,7 @@ THLPerkDetailInteractorDelegate
     WEAKSELF();
     RACCommand *acceptCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         [WSELF.interactor handlePurchasewithPerkItemEntity:_perkStoreItemEntity];
-        [WSELF.confirmationView showInProgressWithMessage:@"Redeeming your reward..."];
+        [WSELF.confirmationView setInProgressWithMessage:@"Redeeming your reward..."];
         return [RACSignal empty];
     }];
     
@@ -104,8 +104,9 @@ THLPerkDetailInteractorDelegate
 
 
 - (void)continueWithPurchaseFlow {
-    [_confirmationView showConfirmationWithTitle:@"Redeem Reward"
+    [_confirmationView setConfirmationWithTitle:@"Redeem Reward"
                                          message:[NSString stringWithFormat:@"Are you sure you want to use your credits to pucharse this reward for %i.00 ?", (int)_perkStoreItemEntity.credits] ];
+    [_view showConfirmationView:_confirmationView];
 }
 
 - (void)errorWithPurchase {
@@ -140,7 +141,7 @@ THLPerkDetailInteractorDelegate
 }
 
 - (void)interactor:(THLPerkDetailInteractor *)interactor didPurchasePerkStoreItem:(NSError *)error {
-    [self.confirmationView showSuccessWithTitle:@"Perk Redeemed"
+    [self.confirmationView setSuccessWithTitle:@"Perk Redeemed"
                                         Message:[NSString stringWithFormat:@"You have successfully redeemed your credits for %@. Check your email for further instructions.", _perkStoreItemEntity.name]];
 }
 

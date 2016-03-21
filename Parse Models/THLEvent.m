@@ -12,6 +12,8 @@
 @dynamic date;
 @dynamic maleCoverCharge;
 @dynamic femaleCoverCharge;
+@dynamic maleCoverRange;
+@dynamic femaleCoverRange;
 @dynamic title;
 @dynamic promoInfo;
 @dynamic promoImage;
@@ -21,6 +23,8 @@
 @dynamic requiresApproval;
 @dynamic maleRatio;
 @dynamic femaleRatio;
+@dynamic chatMessage;
+
 
 + (void)load {
 	[self registerSubclass];

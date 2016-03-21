@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "THLEventNavigationBar.h"
+#import "THLEventHostingNavigationBar.h"
 
 @interface THLEventNavigationController : UINavigationController
-@property (nonatomic, strong) THLEventNavigationBar *navigationBar;
+@property (nonatomic, strong) THLEventHostingNavigationBar *navigationBar;
 @end

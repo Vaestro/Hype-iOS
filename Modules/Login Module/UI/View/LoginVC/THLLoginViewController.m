@@ -186,7 +186,7 @@
     tttLabel.activeLinkAttributes = @{NSForegroundColorAttributeName: kTHLNUIPrimaryFontColor,
                                       NSUnderlineStyleAttributeName: @(NSUnderlineStyleNone)};
     tttLabel.textAlignment = NSTextAlignmentCenter;
-    NSString *labelText = @"By signing up, you agree to our Privacy Policy and Terms & Conditions";
+    NSString *labelText = @"By signing up, you agree to our Privacy Policy, Terms & Conditions, and are over the age of 21";
     tttLabel.text = labelText;
     NSRange privacy = [labelText rangeOfString:@"Privacy Policy"];
     NSRange terms = [labelText rangeOfString:@"Terms & Conditions"];

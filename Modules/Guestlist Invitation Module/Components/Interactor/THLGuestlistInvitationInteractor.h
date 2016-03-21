@@ -14,10 +14,12 @@
 @class THLSearchViewDataSource;
 @class THLGuestEntity;
 @class THLEventEntity;
+@class THLGuestlistInviteEntity;
 @protocol THLViewDataSourceFactoryInterface;
 
 @protocol THLGuestlistInvitationInteractorDelegate <NSObject>
 - (void)interactor:(THLGuestlistInvitationInteractor *)interactor didCommitChangesToGuestlist:(NSError *)error;
+- (void)interactor:(THLGuestlistInvitationInteractor *)interactor didSubmitInitialGuestlist:(THLGuestlistInviteEntity *)guestlistInvite withError:(NSError *)error;
 @end
 
 

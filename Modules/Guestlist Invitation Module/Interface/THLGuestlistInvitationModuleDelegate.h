@@ -7,8 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+@class THLGuestlistInviteEntity;
+@class THLGuestlistEntity;
 @protocol THLGuestlistInvitationModuleInterface;
 @protocol THLGuestlistInvitationModuleDelegate <NSObject>
 //- (void)guestlistInvitationModule:(id<THLGuestlistInvitationModuleInterface>)module userDidCommitChangesToGuestlist:(NSString *)guestlistId;
 - (void)dismissGuestlistInvitationWireframe;
+- (void)dismissWireframeAndPresentGuestlistReviewWireframeFor:(THLGuestlistInviteEntity *)guestlistInvite guestlist:(THLGuestlistEntity *)guestlist;
 @end

@@ -10,6 +10,7 @@
 #import "THLGuestFlowWireframe.h"
 
 #import "THLEventDiscoveryWireframe.h"
+//#import "THLMessageListWireframe.h"
 #import "THLDashboardWireframe.h"
 #import "THLUserProfileWireframe.h"
 #import "THLLoginWireframe.h"
@@ -21,6 +22,8 @@
 #import "THLMasterNavigationController.h"
 #import "UIColor+SLAddition.h"
 #import "THLAppearanceConstants.h"
+#import "THLChatRoomViewController.h"
+#import "THLChatListViewController.h"
 #import "THLUser.h"
 
 @interface THLGuestFlowWireframe()
@@ -39,6 +42,7 @@ THLLoginModuleDelegate
 @property (nonatomic, strong) id currentWireframe;
 @property (nonatomic, nonatomic) UIViewController *containerVC;
 @property (nonatomic, strong) UITabBarController *masterTabBarController;
+//@property (nonatomic, strong) THLMessageListWireframe *messageListWireframe;
 @property (nonatomic, strong) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
 @property (nonatomic, strong) THLDashboardWireframe *dashboardWireframe;
 @property (nonatomic, strong) THLUserProfileWireframe *userProfileWireframe;
@@ -52,6 +56,7 @@ THLLoginModuleDelegate
 @property (nonatomic, strong) UIView *discoveryNavBarItem;
 @property (nonatomic, strong) UIView *guestProfileNavBarItem;
 @property (nonatomic, strong) UIView *dashboardNavBarItem;
+
 @end
 
 @implementation THLGuestFlowWireframe
@@ -78,49 +83,50 @@ THLLoginModuleDelegate
 
 - (void)configureMasterTabViewController:(UITabBarController *)masterTabBarController {
     _masterTabBarController = masterTabBarController;
+    UINavigationController *messages = [UINavigationController new];
     UINavigationController *discovery = [UINavigationController new];
     UINavigationController *dashboard = [UINavigationController new];
     UINavigationController *perks = [UINavigationController new];
-    UINavigationController *profile = [UINavigationController new];
+    UIViewController *profile = [UIViewController new];
     
+    [self presentMessageListInterfaceInNavigationController:messages];
+    [self presentDashboardInterfaceInNavigationController:dashboard];
     [self presentEventDiscoveryInterfaceInNavigationController:discovery];
-    
-    if ([THLUser currentUser]) {
-        [self presentDashboardInterfaceInNavigationController:dashboard];
-    } else {
-        [self presentLoginInterfaceInNavigationViewController:dashboard];
-    }
-    
-    
-    
     [self presentPerkStoreInterfaceInNavigationController:perks];
-    [self presentUserProfileInterfaceInNavigationController:profile];
+    [self presentUserProfileInterfaceInViewController:profile];
     
+    messages.tabBarItem.image = [UIImage imageNamed:@"Inbox Icon"];
     dashboard.tabBarItem.image = [UIImage imageNamed:@"Lists Icon"];
     discovery.tabBarItem.image = [UIImage imageNamed:@"Home Icon"];
     profile.tabBarItem.image = [UIImage imageNamed:@"Profile Icon"];
     perks.tabBarItem.image = [UIImage imageNamed:@"Perks Icon"];
     
-    NSArray *views = @[discovery, dashboard, perks, profile];
+    NSArray *views = @[messages, dashboard, discovery, perks, profile];
     
     _masterTabBarController.viewControllers = views;
+    [_masterTabBarController setSelectedIndex:2];
     _masterTabBarController.view.autoresizingMask=(UIViewAutoresizingFlexibleHeight);
 }
-
-
 
 - (void)presentGuestFlowInWindow:(UIWindow *)window forEventDetail:(THLEventEntity *)eventEntity {
     /**
      *  Prevents popup notification from instantiating another event detail module if one is already instantiated
      */
-    [self presentEventDetailInterfaceForEvent:eventEntity];
+    [self presentEventDetailInterfaceForEvent:eventEntity onViewController:_window.rootViewController];
 }
 
 - (id<THLGuestFlowModuleInterface>)moduleInterface {
     return self;
 }
 
-
+- (void)presentMessageListInterfaceInNavigationController:(UINavigationController *)navigationController {
+    THLChatListViewController *chtlvtrl = [[THLChatListViewController alloc] init];
+    [navigationController showViewController:chtlvtrl sender:nil];
+//    _messageListWireframe = [_dependencyManager newMessageListWireframe];
+//    _currentWireframe = _messageListWireframe;
+//    [_messageListWireframe.moduleInterface setModuleDelegate:self];
+//    [_messageListWireframe.moduleInterface presentChatRoomInNavigationController:navigationController];
+}
 
 
 - (void)presentEventDiscoveryInterfaceInNavigationController:(UINavigationController *)navigationController {
@@ -137,11 +143,11 @@ THLLoginModuleDelegate
     [_dashboardWireframe.moduleInterface presentDashboardInterfaceInNavigationController:navigationController];
 }
 
-- (void)presentUserProfileInterfaceInNavigationController:(UINavigationController *)navigationController {
+- (void)presentUserProfileInterfaceInViewController:(UIViewController *)viewController {
     _userProfileWireframe = [_dependencyManager newUserProfileWireframe];
     _currentWireframe = _userProfileWireframe;
     [_userProfileWireframe.moduleInterface setModuleDelegate:self];
-    [_userProfileWireframe.moduleInterface presentUserProfileInterfaceInNavigationController:navigationController];
+    [_userProfileWireframe.moduleInterface presentUserProfileInterfaceInViewController:viewController];
 }
 
 - (void)presentPerkStoreInterfaceInNavigationController:(UINavigationController *)navigationController {
@@ -151,11 +157,11 @@ THLLoginModuleDelegate
     [_perkStoreWireframe.moduleInterface presentPerkStoreInterfaceInNavigationController:navigationController];
 }
 
-- (void)presentEventDetailInterfaceForEvent:(THLEventEntity *)eventEntity {
+- (void)presentEventDetailInterfaceForEvent:(THLEventEntity *)eventEntity onViewController:(UIViewController *)viewController {
 	_eventDetailWireframe = [_dependencyManager newEventDetailWireframe];
     _currentWireframe = _eventDetailWireframe;
     [_eventDetailWireframe.moduleInterface setModuleDelegate:self];
-	[_eventDetailWireframe.moduleInterface presentEventDetailInterfaceForEvent:eventEntity inWindow:_window];
+	[_eventDetailWireframe.moduleInterface presentEventDetailInterfaceForEvent:eventEntity onViewController:viewController];
 }
 
 - (void)presentGuestlistInvitationInterfaceForEvent:(THLEventEntity *)eventEntity inController:(UIViewController *)controller {
@@ -172,11 +178,11 @@ THLLoginModuleDelegate
     [_guestlistInvitationWireframe.moduleInterface presentGuestlistInvitationInterfaceForEvent:eventEntity withGuestlistId:guestlistId andGuests:guests inController:controller];
 }
      
-- (void)presentGuestlistReviewInterfaceForGuestlist:(THLGuestlistEntity *)guestlistEntity withGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInviteEntity inController:(UIViewController *)controller {
+- (void)presentGuestlistReviewInterfaceForGuestlist:(THLGuestlistEntity *)guestlistEntity withGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInviteEntity inController:(UIViewController *)controller andShowInstruction:(BOOL)showInstruction {
     _guestlistReviewWireframe = [_dependencyManager newGuestlistReviewWireframe];
     _currentWireframe = _guestlistReviewWireframe;
     [_guestlistReviewWireframe.moduleInterface setModuleDelegate:self];
-    [_guestlistReviewWireframe.moduleInterface presentGuestlistReviewInterfaceForGuestlist:guestlistEntity withGuestlistInvite:guestlistInviteEntity inController:controller];
+    [_guestlistReviewWireframe.moduleInterface presentGuestlistReviewInterfaceForGuestlist:guestlistEntity withGuestlistInvite:guestlistInviteEntity inController:controller andShowInstruction:showInstruction];
 }
 
 - (void)presentPerkDetailInterfaceForPerkStoreItem:(THLPerkStoreItemEntity *)perkStoreItemEntity onController:(UIViewController *)controller {
@@ -186,28 +192,18 @@ THLLoginModuleDelegate
     [_perkDetailWireframe.moduleInterface presentPerkDetailInterfaceForPerk:perkStoreItemEntity onViewController:controller];
 }
 
-- (void)presentLoginInterfaceInNavigationViewController:(UINavigationController *)viewController {
-    _loginWireframe = [_dependencyManager newLoginWireframe];
-    _currentWireframe = _loginWireframe;
-    [_loginWireframe.moduleInterface setModuleDelegate:self];
-    [_loginWireframe.moduleInterface presentUserProfileInterfaceInNavigationController:viewController];
-}
-
-
-
-
 #pragma mark - THLDashboardModuleDelegate
 - (void)dashboardModule:(id<THLDashboardModuleInterface>)module didClickToViewEvent:(THLEventEntity *)event {
-    [self presentEventDetailInterfaceForEvent:event];
+    [self presentEventDetailInterfaceForEvent:event onViewController:_window.rootViewController];
 }
 
 - (void)dashboardModule:(id<THLDashboardModuleInterface>)module didClickToViewGuestlist:(THLGuestlistEntity *)guestlistEntity guestlistInvite:(THLGuestlistInviteEntity *)guestlistInviteEntity presentGuestlistReviewInterfaceOnController:(UIViewController *)controller {
-    [self presentGuestlistReviewInterfaceForGuestlist:guestlistEntity withGuestlistInvite:guestlistInviteEntity inController:controller];
+    [self presentGuestlistReviewInterfaceForGuestlist:guestlistEntity withGuestlistInvite:guestlistInviteEntity inController:controller andShowInstruction:FALSE];
 }
 
 #pragma mark - THLEventDiscoveryModuleDelegate
 - (void)eventDiscoveryModule:(id<THLEventDiscoveryModuleInterface>)module userDidSelectEventEntity:(THLEventEntity *)eventEntity {
-	[self presentEventDetailInterfaceForEvent:eventEntity];
+    [self presentEventDetailInterfaceForEvent:eventEntity onViewController:_window.rootViewController];
 }
 
 #pragma mark - THLEventDetailModuleDelegate
@@ -221,7 +217,7 @@ THLLoginModuleDelegate
 }
 
 - (void)eventDetailModule:(id<THLEventDetailModuleInterface>)module guestlist:(THLGuestlistEntity *)guestlistEntity guestlistInvite:(THLGuestlistInviteEntity *)guestlistInviteEntity presentGuestlistReviewInterfaceOnController:(UIViewController *)controller {
-    [self presentGuestlistReviewInterfaceForGuestlist:guestlistEntity withGuestlistInvite:guestlistInviteEntity inController:controller];
+    [self presentGuestlistReviewInterfaceForGuestlist:guestlistEntity withGuestlistInvite:guestlistInviteEntity inController:controller andShowInstruction:FALSE];
 }
 
 - (void)dismissEventDetailWireframe {
@@ -233,19 +229,41 @@ THLLoginModuleDelegate
     _guestlistInvitationWireframe = nil;
 }
 
+- (void)dismissWireframeAndPresentGuestlistReviewWireframeFor:(THLGuestlistInviteEntity *)guestlistInvite guestlist:(THLGuestlistEntity *)guestlist {
+    _guestlistInvitationWireframe = nil;
+    _eventDetailWireframe = nil;
+    [_masterTabBarController setSelectedIndex:1];
+    [self presentGuestlistReviewInterfaceForGuestlist:guestlist withGuestlistInvite:guestlistInvite inController:_window.rootViewController andShowInstruction:TRUE];
+}
+
+
+
 #pragma mark - THLGuestlistReviewModuleDelegate
 - (void)guestlistReviewModule:(id<THLGuestlistReviewModuleInterface>)module event:(THLEventEntity *)eventEntity withGuestlistId:(NSString *)guestlistId andGuests:(NSArray<THLGuestEntity *> *)guests presentGuestlistInvitationInterfaceOnController:(UIViewController *)controller {
     [self presentGuestlistInvitationInterfaceForEvent:eventEntity withGuestlistId:guestlistId andGuests:guests inController:controller];
+}
+
+- (void)guestlistReviewModule:(id<THLGuestlistReviewModuleInterface>)module userDidSelectViewEventEntity:(THLEventEntity *)eventEntity onViewController:(UIViewController *)viewController {
+    [self presentEventDetailInterfaceForEvent:eventEntity onViewController:viewController];
 }
 
 - (void)dismissGuestlistReviewWireframe {
     _guestlistReviewWireframe = nil;
 }
 
-#pragma mark - THLPerkStoreModuleDelegate
+#pragma mark - THLChatRoomModuleDelegate
 - (void)perkModule:(id<THLPerkStoreModuleInterface>)module userDidSelectPerkStoreItemEntity:(THLPerkStoreItemEntity *)perkStoreItemEntity presentPerkDetailInterfaceOnController:(UIViewController *)controller {
     [self presentPerkDetailInterfaceForPerkStoreItem:perkStoreItemEntity onController:controller];
 }
+
+#pragma mark - THLPerkStoreModuleDelegate
+//- (void)messageListModule:(id<THLMessageListModuleInterface>)module userDidSelectMessageListItemEntity:(THLMessageListEntity *)messageListEntity presentChatRoomInterfaceOnController:(UIViewController *)controller {
+//    UITabBarController * tab = (UITabBarController *)[_window rootViewController];
+//    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:controller];
+//    [tab presentViewController:navController animated:true completion:nil];
+//    //[_wireframe presentInNavigationController:navigationController];
+//    //[self presentChatRoomForMessageList:messageListEntity onController:controller];
+//}
 
 - (void)dismissPerkWireframe {
     _perkStoreWireframe = nil;
@@ -259,5 +277,9 @@ THLLoginModuleDelegate
 #pragma mark - THLUserProfileModuleDelegate
 - (void)logOutUser {
     [self.moduleDelegate logOutUser];
+}
+
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
 }
 @end

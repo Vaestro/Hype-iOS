@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "THLGuestFlowDependencyManager.h"
 #import "THLHostFlowDependencyManager.h"
+#import "THLYapDatabaseManager.h"
 
 @class THLMasterWireframe;
 @class THLLoginWireframe;
@@ -16,6 +17,7 @@
 @class THLNumberVerificationWireframe;
 @class THLGuestFlowWireframe;
 @class THLHostFlowWireframe;
+//@class THLMessageListWireframe;
 @class THLEventDiscoveryWireframe;
 @class THLDashboardWireframe;
 @class THLHostDashboardWireframe;
@@ -46,6 +48,7 @@ THLHostFlowDependencyManager
 - (THLNumberVerificationWireframe *)newNumberVerificationWireframe;
 - (THLGuestFlowWireframe *)newGuestFlowWireframe;
 - (THLHostFlowWireframe *)newHostFlowWireframe;
+//- (THLMessageListWireframe *)newMessageListWireframe;
 - (THLEventDiscoveryWireframe *)newEventDiscoveryWireframe;
 - (THLDashboardWireframe *)newDashboardWireframe;
 - (THLHostDashboardWireframe *)newHostDashboardWireframe;
@@ -58,5 +61,6 @@ THLHostFlowDependencyManager
 - (THLPerkStoreWireframe *)newPerkStoreWireframe;
 - (THLPerkDetailWireframe *)newPerkDetailWireframe;
 - (THLUserManager *)userManager;
+- (THLYapDatabaseManager *)databaseManager;
 - (THLWaitlistPresenter *)newWaitlistPresenter;
 @end

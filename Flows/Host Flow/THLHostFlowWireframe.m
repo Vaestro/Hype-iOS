@@ -13,6 +13,7 @@
 #import "THLEventDiscoveryWireframe.h"
 #import "THLUserProfileWireframe.h"
 #import "THLHostDashboardWireframe.h"
+#import "THLChatListViewController.h"
 
 #import "THLEventHostingWireframe.h"
 #import "THLGuestlistReviewWireframe.h"
@@ -20,6 +21,7 @@
 #import "THLMasterNavigationController.h"
 
 #import "THLAppearanceConstants.h"
+#import "RKNotificationHub.h"
 
 @interface THLHostFlowWireframe()
 <
@@ -60,18 +62,21 @@ THLGuestlistReviewModuleDelegate
 
 - (void)configureMasterTabViewController:(UITabBarController *)masterTabViewController {
     UINavigationController *discovery = [UINavigationController new];
+    UINavigationController *chat = [UINavigationController new];
     UINavigationController *dashboard = [UINavigationController new];
-    UINavigationController *profile = [UINavigationController new];
+    UIViewController *profile = [UIViewController new];
     
     [self presentEventDiscoveryInterfaceInNavigationController:discovery];
+    [self presentMessageListInterfaceInNavigationController:chat];
     [self presentDashboardInterfaceInNavigationController:dashboard];
-    [self presentUserProfileInterfaceInNavigationController:profile];
+    [self presentUserProfileInterfaceInViewController:profile];
     
     dashboard.tabBarItem.image = [UIImage imageNamed:@"Lists Icon"];
+    chat.tabBarItem.image = [UIImage imageNamed:@"Inbox Icon"];
     discovery.tabBarItem.image = [UIImage imageNamed:@"Home Icon"];
     profile.tabBarItem.image = [UIImage imageNamed:@"Profile Icon"];
     
-    NSArray *views = @[discovery, dashboard, profile];
+    NSArray *views = @[discovery, chat, dashboard, profile];
     
     masterTabViewController.viewControllers = views;
     masterTabViewController.view.autoresizingMask=(UIViewAutoresizingFlexibleHeight);
@@ -102,6 +107,11 @@ THLGuestlistReviewModuleDelegate
     [_eventDiscoveryWireframe.moduleInterface presentEventDiscoveryInterfaceInNavigationController:navigationController];
 }
 
+- (void)presentMessageListInterfaceInNavigationController:(UINavigationController *)navigationController {
+    THLChatListViewController *chtlvtrl = [[THLChatListViewController alloc] init];
+    [navigationController showViewController:chtlvtrl sender:nil];
+}
+
 - (void)presentDashboardInterfaceInNavigationController:(UINavigationController *)navigationController {
     _dashboardWireframe = [_dependencyManager newHostDashboardWireframe];
     _currentWireframe = _dashboardWireframe;
@@ -109,11 +119,11 @@ THLGuestlistReviewModuleDelegate
     [_dashboardWireframe.moduleInterface presentDashboardInterfaceInNavigationController:navigationController];
 }
 
-- (void)presentUserProfileInterfaceInNavigationController:(UINavigationController *)navigationController {
+- (void)presentUserProfileInterfaceInViewController:(UIViewController *)viewController {
     _userProfileWireframe = [_dependencyManager newUserProfileWireframe];
     _currentWireframe = _userProfileWireframe;
     [_userProfileWireframe.moduleInterface setModuleDelegate:self];
-    [_userProfileWireframe.moduleInterface presentUserProfileInterfaceInNavigationController:navigationController];
+    [_userProfileWireframe.moduleInterface presentUserProfileInterfaceInViewController:viewController];
 }
 
 - (void)presentEventHostingInterfaceForEvent:(THLEventEntity *)eventEntity {

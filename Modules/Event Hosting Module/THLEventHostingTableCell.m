@@ -66,17 +66,17 @@
     
     [_statusView makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF guestlistTitleLabel].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
-        make.right.equalTo([WSELF guestlistReviewStatusLabel].mas_left);
         make.left.equalTo([WSELF iconImageView].mas_right).insets(kTHLEdgeInsetsHigh());
         make.bottom.insets(kTHLEdgeInsetsHigh());
-        make.height.mas_equalTo([WSELF guestlistReviewStatusLabel].mas_height);
+        make.height.mas_equalTo(20);
         make.width.mas_equalTo([WSELF statusView].mas_height);
+        make.centerY.mas_equalTo([WSELF guestlistReviewStatusLabel].mas_centerY);
     }];
     
     [_guestlistReviewStatusLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF guestlistTitleLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());
         make.right.insets(kTHLEdgeInsetsHigh());
-        make.left.equalTo([WSELF statusView].mas_right);
+        make.left.equalTo([WSELF statusView].mas_right).insets(kTHLEdgeInsetsHigh());
         make.bottom.insets(kTHLEdgeInsetsHigh());
     }];
 }

@@ -19,7 +19,8 @@
 }
 
 - (BFTask *)fetchAllPerkStoreItems {
-    return [[_queryFactory queryForAllPerkStoreItems] findObjectsInBackground];
+    BFTask * task = [[_queryFactory queryForAllPerkStoreItems] findObjectsInBackground];
+    return task;
 }
 
 

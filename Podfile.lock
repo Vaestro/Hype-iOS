@@ -41,6 +41,7 @@ PODS:
   - Bolts/AppLinks (1.6.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.6.0)
+  - Branch (0.11.15)
   - CocoaLumberjack (2.2.0):
     - CocoaLumberjack/Default (= 2.2.0)
     - CocoaLumberjack/Extensions (= 2.2.0)
@@ -73,7 +74,7 @@ PODS:
     - FBSDKCoreKit/arc
   - FBSDKLoginKit (4.8.0):
     - FBSDKCoreKit
-  - FBSDKShareKit (4.10.0):
+  - FBSDKShareKit (4.8.0):
     - FBSDKCoreKit
   - FLEX (2.2.0)
   - FLKAutoLayout (0.2.1)
@@ -109,6 +110,9 @@ PODS:
   - LinqToObjectiveC (2.1.0)
   - LMGeocoder (1.0.4)
   - Masonry (0.6.4)
+  - Mixpanel (2.9.4):
+    - Mixpanel/Mixpanel (= 2.9.4)
+  - Mixpanel/Mixpanel (2.9.4)
   - MJRefresh (3.1.0)
   - NUI (0.5.5):
     - NUIParse
@@ -135,6 +139,11 @@ PODS:
     - FontasticIcons
     - JCDialPad
     - PhoneKit/Core
+  - PubNub (4.2.7):
+    - CocoaLumberjack (= 2.2.0)
+    - PubNub/Core (= 4.2.7)
+  - PubNub/Core (4.2.7):
+    - CocoaLumberjack (= 2.2.0)
   - ReactiveCocoa (2.5):
     - ReactiveCocoa/UI (= 2.5)
   - ReactiveCocoa/Core (2.5):
@@ -144,6 +153,7 @@ PODS:
     - ReactiveCocoa/Core
   - ReflectableEnum (0.1.1)
   - Reveal-iOS-SDK (1.6.2)
+  - RKNotificationHub (2.0.1)
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
@@ -216,6 +226,7 @@ DEPENDENCIES:
   - BLKFlexibleHeightBar
   - BlocksKit (~> 2.2)
   - Bolts
+  - Branch
   - CocoaLumberjack
   - Crashlytics
   - DateTools (~> 1.6)
@@ -227,7 +238,7 @@ DEPENDENCIES:
   - FacebookImagePicker
   - FBSDKCoreKit
   - FBSDKLoginKit
-  - FBSDKShareKit
+  - FBSDKShareKit (= 4.8.0)
   - FLEX (~> 2.0)
   - FormatterKit (~> 1.8)
   - FXLabel
@@ -240,18 +251,21 @@ DEPENDENCIES:
   - LinqToObjectiveC (~> 2.0)
   - LMGeocoder
   - Masonry (~> 0.6)
+  - Mixpanel
   - MJRefresh
   - NUI (~> 0.5)
   - ObjectiveSugar
   - OCMock (= 3.1.2)
   - Optimizely-iOS-SDK
   - ORStackView
-  - Parse (~> 1.11.0)
+  - Parse (= 1.11.0)
   - ParseFacebookUtilsV4
   - PhoneKit
+  - PubNub (~> 4.2)
   - ReactiveCocoa (= 2.5)
   - ReflectableEnum
   - Reveal-iOS-SDK
+  - RKNotificationHub
   - SDWebImage (~> 3.7)
   - SLPagingView
   - SSDataSources (~> 0.8)
@@ -274,6 +288,7 @@ SPEC CHECKSUMS:
   BLKFlexibleHeightBar: b27572a69633d8e33f1f2bbc486b04d8e86f742d
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   Bolts: f52a250053bb517ca874523c3913776359ab3def
+  Branch: fde6f089f0ae4fd4a9e507a189a535435535c993
   CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
   Crashlytics: e4e8d02914f2608fbc7bf42b1a7af838b0db67a2
   DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
@@ -285,7 +300,7 @@ SPEC CHECKSUMS:
   FacebookImagePicker: 888e7554898bea596e88556a935835c6141d8aed
   FBSDKCoreKit: 66a935d17b6e00b6b64e604f2eb9b72c9ab7deb8
   FBSDKLoginKit: d893fcbb98d854496925e9ff73c67b896982d3c4
-  FBSDKShareKit: 54587b4624706ace1e810cf83412a918141f807a
+  FBSDKShareKit: e7577ee3adf80fc04fb656dd133fbb522250672b
   FLEX: bc8a4fb887ed5d3cdf7c2f3bd665f7bb1647cc58
   FLKAutoLayout: 9db6b30c2008d230da608e62c607b11c23b942e6
   FontasticIcons: f20740bf8f1d3565c312f1c3b9806339212b58aa
@@ -301,6 +316,7 @@ SPEC CHECKSUMS:
   LinqToObjectiveC: f0e40c137a458b6b9725c4c7b6a575c0c72e3aec
   LMGeocoder: a0f635f948b0ca420d8d338e54886744cdcb215d
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
+  Mixpanel: 80d2ca9bb38ae91c1044d738e80fe448377ac89f
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   NUI: 53de7278003235deb2a375fe6f04c7a3aa3e49eb
   NUIParse: 2e3885ba7807477266396292626bd387d34c2338
@@ -311,9 +327,11 @@ SPEC CHECKSUMS:
   Parse: 886af46a0a677402f6374bb97ac212e795f70afe
   ParseFacebookUtilsV4: eab9b4ade12f0800b4d30f6b808bca55ce17a0e9
   PhoneKit: 26f7c49593bc093a20510b2dbb9f7eba6d0b5f83
+  PubNub: 052a698177f64ab12889c513af425a2195ccaf12
   ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
   ReflectableEnum: bf9d36f8c35122242125140a22b8921d071989aa
   Reveal-iOS-SDK: e2250b3c155bcfac53ae223ddc1f76d08f206c33
+  RKNotificationHub: d80905a948c79c11673345f807133a0bfd17e320
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   SLPagingView: ba9bb6102cb318ce56f23d0a7e49a46ddcdad7e3
   SSDataSources: b01170fb23b82acf0649194e9189b0bf5f702681

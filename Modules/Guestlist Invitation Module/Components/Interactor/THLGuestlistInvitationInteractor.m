@@ -12,7 +12,9 @@
 #import "THLGuestEntity.h"
 #import "THLGuestlistEntity.h"
 #import "THLGuestlistInvite.h"
+#import "THLChannelService.h"
 #import "THLEventEntity.h"
+#import "THLPubnubManager.h"
 
 static NSString *const kGuestEntityFirstNameKey = @"firstName";
 static NSString *const kGuestEntityLastNameKey = @"lastName";
@@ -147,7 +149,12 @@ static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInv
     if (_guestlistId == nil) {
         [[_dataManager submitGuestlistForEvent:_eventEntity withInvites:[self obtainDigits:_addedGuests]] continueWithSuccessBlock:^id(BFTask *task) {
             [[_dataManager getOwnerInviteForEvent:_eventEntity] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *fetchTask) {
-                [WSELF.delegate interactor:WSELF didCommitChangesToGuestlist:task.error];
+                [WSELF.delegate interactor:WSELF didSubmitInitialGuestlist:fetchTask.result withError:task.error];
+                Mixpanel *mixpanel = [Mixpanel sharedInstance];
+                [mixpanel track:@"Guestlist Submitted" properties:@{
+                                                               @"Number Of Invites": NSStringWithFormat(@"%lu", (unsigned long)_addedGuests.count)
+                                                               }];
+                [mixpanel.people increment:@"guestlist invites sent" by: [NSNumber numberWithUnsignedInteger:_addedGuests.count]];
                 return nil;
             }];
             return nil;
@@ -155,6 +162,12 @@ static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInv
     } else if (_guestlistId != nil) {
         [[_dataManager updateGuestlist:_guestlistId withInvites:[self obtainDigits:_addedGuests] forEvent:_eventEntity] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
             [WSELF.delegate interactor:WSELF didCommitChangesToGuestlist:task.error];
+            Mixpanel *mixpanel = [Mixpanel sharedInstance];
+            [mixpanel track:@"Updated Guestlist" properties:@{
+             @"NumberOfInvites": NSStringWithFormat(@"%lu", (unsigned long)_addedGuests.count)
+             }];
+            [mixpanel.people increment:@"guestlist invites sent" by: [NSNumber numberWithUnsignedInteger:_addedGuests.count]];
+
             return nil;
         }];
     }

@@ -48,7 +48,7 @@
                                     _perkCreditsLabel,
                                     _perkDescriptionLabel]];
     
-//    WEAKSELF();
+    WEAKSELF();
     [_imageView makeConstraints:^(MASConstraintMaker *make) {
         make.center.centerOffset(CGPointZero);
         make.top.left.right.left.insets(kTHLEdgeInsetsNone());
@@ -62,7 +62,7 @@
     
     [_perkCreditsLabel makeConstraints:^(MASConstraintMaker *make) {
 //        make.top.insets(kTHLEdgeInsetsLow());
-        make.top.right.lessThanOrEqualTo(SV(_imageView)).insets(kTHLEdgeInsetsHigh());
+        make.top.right.lessThanOrEqualTo(SV(WSELF.imageView)).insets(kTHLEdgeInsetsHigh());
     }];
     
     

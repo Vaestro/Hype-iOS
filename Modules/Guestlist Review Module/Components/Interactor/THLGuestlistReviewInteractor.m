@@ -14,13 +14,15 @@
 #import "THLGuestEntity.h"
 #import "THLEventEntity.h"
 #import "THLLocationEntity.h"
-#import "AFNetworking.h"
 #import <EstimoteSDK/EstimoteSDK.h>
 #import "THLUser.h"
 #import "THLHostEntity.h"
 #import "THLBeacon.h"
 #import "THLBeaconEntity.h"
- #import <KVNProgress/KVNProgress.h>
+#import "THLParseQueryFactory.h"
+#import <KVNProgress/KVNProgress.h>
+#import "THLEntityMapper.h"
+#import "THLGuestlist.h"
 
 
 
@@ -32,21 +34,28 @@ static NSString *const kTHLGuestlistReviewModuleViewKey = @"kTHLGuestlistReviewM
 
 @interface THLGuestlistReviewInteractor()
 <
-ESTBeaconManagerDelegate
+ESTBeaconManagerDelegate,
+CLLocationManagerDelegate
 >
-@property (nonatomic) ESTBeaconManager *beaconManager;
-@property (nonatomic) CLBeaconRegion *beaconRegion;
+//@property (nonatomic) ESTBeaconManager *beaconManager;
+//@property (nonatomic) CLBeaconRegion *beaconRegion;
 @property (nonatomic) int counter;
-//@property (nonatomic, strong) CLRegion *venueRegion;
-//@property (nonatomic, strong) CLLocation *venueLocation;
+@property (nonatomic, strong) CLRegion *venueRegion;
+@property (nonatomic, strong) CLLocation *venueLocation;
+@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, strong) CLLocation *center;
 @end
 
 @implementation THLGuestlistReviewInteractor
 - (instancetype)initWithDataManager:(THLGuestlistReviewDataManager *)dataManager
               viewDataSourceFactory:(id<THLViewDataSourceFactoryInterface>)viewDataSourceFactory {
     if (self = [super init]) {
-        self.beaconManager = [ESTBeaconManager new];
-        _beaconManager.delegate = self;
+        self.locationManager = [CLLocationManager new];
+        _locationManager.delegate = self;
+        
+        
+//        self.beaconManager = [ESTBeaconManager new];
+//        _beaconManager.delegate = self;
         _dataManager = dataManager;
         _viewDataSourceFactory = viewDataSourceFactory;
         
@@ -109,21 +118,6 @@ ESTBeaconManagerDelegate
     }];
 }
 
-- (void)generateToken {
-    WEAKSELF();
-    STRONGSELF();
-    NSURL *baseURL = [NSURL URLWithString:kServerBaseURL];
-    
-    AFHTTPSessionManager *manager = [[AFHTTPSessionManager manager] initWithBaseURL:baseURL];
-    
-    [manager GET:kTokenEndpoint parameters:@{@"clientName": [THLUser currentUser].phoneNumber} progress:nil success:^(NSURLSessionTask *task, id responseObject) {
-        [SSELF.delegate interactor:SSELF didGetToken:responseObject[@"token"]];
-    } failure:^(NSURLSessionTask *task, NSError *error) {
-        NSLog(@"error: %@", error);
-    }];
-    
-}
-
 #pragma mark - Handle Location Check In
 - (void)checkInForGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite {
     
@@ -146,8 +140,8 @@ ESTBeaconManagerDelegate
 }
 
 -(void)askForPermission {
-    if ([self.beaconManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
-        [self.beaconManager requestAlwaysAuthorization];
+    if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+        [self.locationManager requestAlwaysAuthorization];
     } else {
         [self setUpGeofences];
     }
@@ -155,20 +149,14 @@ ESTBeaconManagerDelegate
 
 - (void)setUpGeofences {
     
-    _counter = 0;
+//    _counter = 0;
     
-    self.beaconRegion = [[CLBeaconRegion alloc]
-     initWithProximityUUID:[[NSUUID alloc]
-                            initWithUUIDString:_guestlistEntity.event.host.beacon.UUID]
-     major:_guestlistEntity.event.host.beacon.major.integerValue
-     minor:_guestlistEntity.event.host.beacon.minor.integerValue
-     identifier:@"beacon"];
-    
-    [KVNProgress show];
-    
-    [self.beaconManager startRangingBeaconsInRegion:self.beaconRegion];
+    _center = [[CLLocation alloc]initWithLatitude:_guestlistEntity.event.location.latitude longitude:_guestlistEntity.event.location.longitude];
 
-//    [self.beaconManager startMonitoringForRegion:self.beaconRegion];
+    
+    [KVNProgress showWithStatus:@"Checking In"];
+    
+    [self.locationManager startUpdatingLocation];
 }
 
 - (void)showSorryAlert {
@@ -181,47 +169,28 @@ ESTBeaconManagerDelegate
 
 }
 
-
-
-
-- (void)beaconManager:(id)manager didRangeBeacons:(NSArray<CLBeacon *> *)beacons inRegion:(CLBeaconRegion *)region {
-   
-    _counter += 1;
-    NSLog(@"%i", _counter);
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+    CLLocationDistance meters = [locations[0] distanceFromLocation:_center];
     
-//    [KVNProgress showProgress:0.5f
-//                       status:@"Checking In"];
-    
-    CLBeacon *nearestBeacon = beacons.firstObject;
-    
-    if (_counter <= 30) {
-        if (nearestBeacon.proximity == CLProximityNear) {
-            [self.beaconManager stopRangingBeaconsInRegion:self.beaconRegion];
+        if (meters < 70) {
+            [self.locationManager stopUpdatingLocation];
             [self updateGuestlistInvite:_guestlistInvite withCheckInStatus:YES];
-//            [KVNProgress dismiss];
-        }
-    } else {
-        [self.beaconManager stopRangingBeaconsInRegion:self.beaconRegion];
-        [self updateGuestlistInvite:_guestlistInvite withCheckInStatus:NO];
-//        [KVNProgress dismiss];
-    }
-    
-}
+        } else {
+            [self.locationManager stopUpdatingLocation];
+            [self updateGuestlistInvite:_guestlistInvite withCheckInStatus:NO];
+       }
+};
 
 
-- (void)beaconManager:(id)manager rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region withError:(NSError *)error {
-    [KVNProgress dismiss];
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                    message:@"Make sure your device's bluetooth is turned on"
+                                                    message:@"Make sure your location settings are properly enabled"
                                                    delegate:self
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     [alert show];
-    
 }
-
-
 
 
 #pragma mark - Handle Presenter Events
@@ -234,6 +203,16 @@ ESTBeaconManagerDelegate
     }];
 }
 
+- (void)unSubscribeChannelsForUser:(THLUser *)userId withGuestlist:(THLGuestlistEntity *)guestlistEntity {
+    THLGuestlist *guestlist = [THLGuestlist objectWithoutDataWithObjectId:guestlistEntity.objectId];
+    THLParseQueryFactory *factory = [[THLParseQueryFactory alloc] init];
+    PFQuery *query = [factory queryChannelsForGuestID:userId withGuestList:guestlist];
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (objects != nil) {
+            [PFObject deleteAllInBackground:objects];
+        }
+    }];
+}
 
 - (void)updateGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite withCheckInStatus:(BOOL)status {
     WEAKSELF();

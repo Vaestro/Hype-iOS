@@ -11,8 +11,8 @@
 
 @interface THLYapDatabaseManager ()
 @property (nonatomic, strong) NSString *documentsDirectory;
-@property (nonatomic, strong) NSString *databaseFilename;
-
+@property (nonatomic, strong) NSString *databasePath;
+@property (nonatomic, strong) NSArray *directoryPaths;
 @end
 
 @implementation THLYapDatabaseManager
@@ -27,17 +27,15 @@ static sqlite3 *database = nil;
 }
 
 - (void)createDB{
-    NSString *docsDir;
-    NSArray *dirPaths;
     // Get the documents directory
-    dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    docsDir = dirPaths[0];
+    _directoryPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    _documentsDirectory = _directoryPaths[0];
     // Build the path to the database file
-    NSString *databasePath = [[NSString alloc] initWithString:[docsDir stringByAppendingPathComponent: @"database.sqlite"]];
+    _databasePath = [[NSString alloc] initWithString:[_documentsDirectory stringByAppendingPathComponent: @"database.sqlite"]];
     
     NSFileManager *filemgr = [NSFileManager defaultManager];
-    if ([filemgr fileExistsAtPath: databasePath ] == NO) {
-        const char *dbpath = [databasePath UTF8String];
+    if ([filemgr fileExistsAtPath: _databasePath ] == NO) {
+        const char *dbpath = [_databasePath UTF8String];
         if (sqlite3_open(dbpath, &database) == SQLITE_OK) {
             char *errMsg;
             const char *sql_stmt = "create table if not exists database";
@@ -51,7 +49,13 @@ static sqlite3 *database = nil;
             NSLog(@"Failed to open/create database");
         }
     }
-    _database = [[YapDatabase alloc] initWithPath:databasePath];
+    _database = [[YapDatabase alloc] initWithPath:_databasePath];
+}
+
+- (void)dropDB {
+    if([[NSFileManager defaultManager] fileExistsAtPath:_databasePath]){
+        [[NSFileManager defaultManager] removeItemAtPath:_databasePath error:nil];
+    }
 }
 
 // Phil's temporary databse code

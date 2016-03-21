@@ -14,6 +14,7 @@
 #import "THLGuestlist.h"
 #import "THLGuestlistInvite.h"
 #import "THLPerkStoreItem.h"
+#import "THLMessageListItem.h"
 #import "THLPurchasedPerkItem.h"
 #import "THLBeaconEntity.h"
 
@@ -26,6 +27,8 @@
 #import "THLPerkStoreItemEntity.h"
 #import "THLPurchasedPerkItemEntity.h"
 #import "THLBeacon.h"
+#import "THLMessageListEntity.h"
+#import "PubNub.h"
 
 @implementation THLEntityMapper
 - (void)mapBaseValuesFromModel:(PFObject *)model toEntity:(THLEntity *)entity {
@@ -43,12 +46,15 @@
         entity.info = event.promoInfo;
         entity.maleCover = event.maleCoverCharge;
         entity.femaleCover = event.femaleCoverCharge;
+        entity.maleCoverRange = event.maleCoverRange;
+        entity.femaleCoverRange = event.femaleCoverRange;
         entity.location = [self mapLocation:event.location];
         entity.creditsPayout = event.creditsPayout;
         entity.host = (THLHostEntity *)[self mapHost:event[@"host"]];
         entity.maleRatio = event.maleRatio;
         entity.femaleRatio = event.femaleRatio;
         entity.requiresApproval = event.requiresApproval;
+        entity.chatMessage = event.chatMessage;
         return entity;
     } else {
         return nil;
@@ -140,6 +146,27 @@
     }
 }
 
+//- (THLMessageListEntity *)mapMessageListItem:(THLMessageListItem *)messageListItem {
+//    if ([messageListItem isKindOfClass:[PNHistoryResult class]]) {
+//        PNHistoryResult *result = (PNHistoryResult *)messageListItem;
+//        THLMessageListEntity *entity = [THLMessageListEntity new];
+//        
+//        //[self mapBaseValuesFromModel:(PFObject *) toEntity:<#(THLEntity *)#>]
+//        //[self mapBaseValuesFromModel:perkStoreItem toEntity:entity];
+//        entity.lastMessage = @"message"; //result.data.messages.lastObject;
+//        entity.address = @"Wall street 7";
+//        entity.time = @"yesterday";
+//        entity.updatedAt = [NSDate date];
+//        entity.objectId = @"1324er";
+//        //entity.info = perkStoreItem.info;
+//        //entity.credits = perkStoreItem.credits;
+//        //entity.image = [NSURL URLWithString:perkStoreItem.image.url];
+//        return entity;
+//    } else {
+//        return nil;
+//    }
+//}
+
 - (THLPurchasedPerkItemEntity *)mapPurchasedPerkItem:(THLPurchasedPerkItem *)purchasedPerkItem {
     if ([purchasedPerkItem isKindOfClass:[THLPurchasedPerkItem class]]) {
         THLPurchasedPerkItemEntity *entity = [THLPurchasedPerkItemEntity new];
@@ -166,7 +193,6 @@
         return nil;
     }
 }
-
 
 - (THLBeacon *)mapBeaconEntity:(THLBeaconEntity *)beaconEntity {
     if ([beaconEntity isKindOfClass:[THLBeaconEntity class]]) {
@@ -198,6 +224,7 @@
         entity.date = guestlistInvite.date;
         entity.guest = [self mapGuest:guestlistInvite[@"Guest"]];
         entity.guestlist = [self mapGuestlist:guestlistInvite[@"Guestlist"]];
+        entity.ticketNumber = guestlistInvite.ticketNumber;
         return entity;
     } else {
         return nil;
@@ -220,6 +247,13 @@
         return [WSELF mapPerkStoreItem:perkStoreItem];
     }];
 }
+
+//- (NSArray<THLMessageListEntity *> *)mapMessageListItems:(NSArray *)messageListItems {
+//    WEAKSELF();
+//    return [messageListItems linq_select:^id(THLMessageListItem *messageListItem) {
+//        return [WSELF mapMessageListItem:messageListItem];
+//    }];
+//}
 
 - (NSArray<THLPurchasedPerkItemEntity*> *)mapPurchasedPerkItems:(NSArray *)purchasedPerkItems {
     WEAKSELF();
