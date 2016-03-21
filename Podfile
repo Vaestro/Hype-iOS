@@ -91,3 +91,19 @@ target 'HypeUpTests' do
 pod 'OCMock', '3.1.2'
 pod "Gizou"
 end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            settings = config.build_settings['GCC_PREPROCESSOR_DEFINITIONS']
+            settings = ['$(inherited)'] if settings.nil?
+            
+            if target.name == 'Pods-MyProject-Mixpanel'
+                settings << 'MIXPANEL_DEBUG=1'
+                settings << 'MIXPANEL_ERROR=1'
+            end
+            
+            config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] = settings
+        end
+    end
+end
