@@ -128,6 +128,8 @@ THLNumberVerificationModuleDelegate
 }
 
 - (void)handleUserLoginAction {
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"Touched Facebook Login Button"];
 	[_interactor login];
 };
 

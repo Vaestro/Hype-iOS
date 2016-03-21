@@ -72,6 +72,8 @@ static NSString *const kTHLWaitlistModelPinName = @"kTHLWaitlistModelPinName";
             newEntry.approved = FALSE;
             newEntry.deviceToken = [PFInstallation currentInstallation].deviceToken;
 			self.entry = newEntry;
+            Mixpanel *mixpanel = [Mixpanel sharedInstance];
+            [mixpanel track:@"Waitlist Signup"];
 			return [newEntry saveInBackground];
 		}
 	}] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id _Nullable(BFTask * _Nonnull task) {
@@ -126,6 +128,10 @@ static NSString *const kTHLWaitlistModelPinName = @"kTHLWaitlistModelPinName";
 - (void)isValidCode:(NSString *)code {
 //	NSAssert(self.entry != nil, @"There must be an entry!");
     [[self getMatchingInvitationCode:code] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id _Nullable(BFTask * _Nonnull task) {
+        if (task.result != nil) {
+            Mixpanel *mixpanel = [Mixpanel sharedInstance];
+            [mixpanel track:@"Waitlist Skip" properties:@{@"Invitation Code":code}];
+        }
         [_delegate model:self didGetMatchingCode:(task.result != nil) error:task.result];
         return nil;
     }];

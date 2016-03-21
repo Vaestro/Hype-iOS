@@ -201,7 +201,7 @@
         [[WSELF bottomBar] setTitle:NSLocalizedString(@"You are on the list", nil)];
         [WSELF bottomBar].backgroundColor = kTHLNUIAccentColor;
     } else {
-        [[WSELF bottomBar] setTitle:NSLocalizedString(@"CREATE GUESTLIST", nil)];
+        [[WSELF bottomBar] setTitle:NSLocalizedString(@"GO", nil)];
     }
 }
 

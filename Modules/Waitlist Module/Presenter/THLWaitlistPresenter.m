@@ -64,7 +64,7 @@ THLWaitlistHomeViewDelegate
     THLTextEntryViewController *signupView  = [[THLTextEntryViewController alloc] initWithNibName:nil bundle:nil];
     signupView.delegate = self;
     signupView.titleText = @"Join the waitlist";
-    signupView.descriptionText = @"Please enter your email address to request early access";
+    signupView.descriptionText = @"To provide the best possible experience for everyone, we're letting users onto Hype on an invite-only basis - for now\n\nPlease enter your email address to request early access";
     signupView.buttonText = @"Request Invitation";
     signupView.type = THLTextEntryTypeEmail;
     [_homeView.navigationController pushViewController:signupView animated:YES];
