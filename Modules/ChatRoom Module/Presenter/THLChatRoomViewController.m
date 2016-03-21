@@ -169,6 +169,9 @@ CGFloat const kBottomBarHeight = 64.0;
 - (void)sendMessage:(NSString *)message {
     THLMessage * msg = [[THLMessage alloc] initWithText:message andUser:[THLUser currentUser]];
     [[THLPubnubManager sharedInstance] publishMessage:msg withChannel:self.currentChatItem.channel withCompletion:^(NSString *status) {
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        [mixpanel track:@"User sent message"];
+        [mixpanel.people increment:@"messages sent" by:@1];
         if ([status isEqualToString:@"ok"]) {
             PFQuery *pushQuery = [PFInstallation query];
             [pushQuery whereKey:@"deviceType" equalTo:@"ios"];

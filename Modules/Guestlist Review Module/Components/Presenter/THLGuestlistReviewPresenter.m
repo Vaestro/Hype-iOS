@@ -487,6 +487,9 @@ THLGuestlistReviewInteractorDelegate
         [_interactor unSubscribeChannelsForUser:[THLUser currentUser] withGuestlist:_guestlistInviteEntity.guestlist];
         Mixpanel *mixpanel = [Mixpanel sharedInstance];
         [mixpanel track:@"InviteDeclined"];
+
+        [mixpanel.people increment:@"guestlist invites declined" by:@1];
+
         //_guestlistInviteEntity.guestlist.objectId
         //_
         // UNSUBCSRIBE
@@ -497,6 +500,8 @@ THLGuestlistReviewInteractorDelegate
                               withResponse:THLStatusAccepted];
         Mixpanel *mixpanel = [Mixpanel sharedInstance];
         [mixpanel track:@"InviteAccepted"];
+        [mixpanel.people increment:@"guestlist invites accepted" by:@1];
+
     }
     /**
      *  Host Accept Action Options
@@ -526,6 +531,8 @@ THLGuestlistReviewInteractorDelegate
         [_interactor unSubscribeChannelsForUser:[THLUser currentUser] withGuestlist:_guestlistInviteEntity.guestlist];
         Mixpanel *mixpanel = [Mixpanel sharedInstance];
         [mixpanel track:@"InviteDeclined"];
+        [mixpanel.people increment:@"guestlist invites declined" by:@1];
+
     }
     /**
      *  Host Decline Action Options
