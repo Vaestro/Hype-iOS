@@ -135,18 +135,15 @@ THLNumberVerificationModuleDelegate
 - (void)reroute {
     if ([_interactor shouldAddFacebookInformation]) {
         [_interactor addFacebookInformation];
-    }
-    else if ([_interactor shouldVerifyEmail]) {
+    } else if ([_interactor shouldVerifyEmail]) {
         [self routeToEmailVerificationInterface];
-    }
-    else if ([_interactor shouldVerifyPhoneNumber]) {
+    } else if ([_interactor shouldVerifyPhoneNumber]) {
 		[self routeToNumberVerificationInterface];
     } else if ([_interactor shouldPickProfileImage]) {
 		[self routeToPickProfilePictureInterface];
 	} else {
         if (_onboardingView) {
             [_wireframe finishOnboarding];
-            [self.moduleDelegate loginModule:self didLoginUser:nil];
         } else {
             [_wireframe finishLogin];
         }
