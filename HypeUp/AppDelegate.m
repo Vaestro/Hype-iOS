@@ -103,6 +103,9 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
     
     // Initialize Branch
     Branch *branch = [Branch getInstance];
+//#warning Remove for launch
+//    Branch *branch = [Branch getTestInstance];
+    
     [branch initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
         // params are the deep linked params associated with the link that the user clicked before showing up.
         NSLog(@"deep link data: %@", [params description]);
