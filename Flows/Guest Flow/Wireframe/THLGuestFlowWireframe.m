@@ -87,13 +87,13 @@ THLLoginModuleDelegate
     UINavigationController *discovery = [UINavigationController new];
     UINavigationController *dashboard = [UINavigationController new];
     UINavigationController *perks = [UINavigationController new];
-    UIViewController *profile = [UIViewController new];
+    UINavigationController *profile = [UINavigationController new];
     
     [self presentMessageListInterfaceInNavigationController:messages];
     [self presentDashboardInterfaceInNavigationController:dashboard];
     [self presentEventDiscoveryInterfaceInNavigationController:discovery];
     [self presentPerkStoreInterfaceInNavigationController:perks];
-    [self presentUserProfileInterfaceInViewController:profile];
+    [self presentUserProfileInterfaceInNavigationController:profile];
     
     messages.tabBarItem.image = [UIImage imageNamed:@"Inbox Icon"];
     dashboard.tabBarItem.image = [UIImage imageNamed:@"Lists Icon"];
@@ -143,11 +143,11 @@ THLLoginModuleDelegate
     [_dashboardWireframe.moduleInterface presentDashboardInterfaceInNavigationController:navigationController];
 }
 
-- (void)presentUserProfileInterfaceInViewController:(UIViewController *)viewController {
+- (void)presentUserProfileInterfaceInNavigationController:(UINavigationController *)navigationController {
     _userProfileWireframe = [_dependencyManager newUserProfileWireframe];
     _currentWireframe = _userProfileWireframe;
     [_userProfileWireframe.moduleInterface setModuleDelegate:self];
-    [_userProfileWireframe.moduleInterface presentUserProfileInterfaceInViewController:viewController];
+    [_userProfileWireframe.moduleInterface presentUserProfileInterfaceInNavigationController:navigationController];
 }
 
 - (void)presentPerkStoreInterfaceInNavigationController:(UINavigationController *)navigationController {

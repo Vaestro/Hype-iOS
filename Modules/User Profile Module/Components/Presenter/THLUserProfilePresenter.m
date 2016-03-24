@@ -25,8 +25,8 @@
     return self;
 }
 
-- (void)presentUserProfileInterfaceInViewController:(UIViewController *)viewController {
-    [_wireframe presentInterfaceInViewController:viewController];
+- (void)presentUserProfileInterfaceInNavigationController:(UINavigationController *)navigationController {
+    [_wireframe presentInterfaceInNavigationController:navigationController];
 }
 
 - (void)configureView:(id<THLUserProfileView>)view {

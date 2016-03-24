@@ -12,5 +12,5 @@
 @protocol THLUserProfileModuleInterface <NSObject>
 @property (nonatomic, weak) id<THLUserProfileModuleDelegate> moduleDelegate;
 
-- (void)presentUserProfileInterfaceInViewController:(UIViewController *)viewController;
+- (void)presentUserProfileInterfaceInNavigationController:(UINavigationController *)navigationController;
 @end

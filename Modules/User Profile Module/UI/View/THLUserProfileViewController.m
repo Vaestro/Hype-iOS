@@ -185,12 +185,8 @@ THLTextEntryViewDelegate
     invitationCodeEntryView.buttonText = @"Submit Code";
     invitationCodeEntryView.textLength = 6;
     invitationCodeEntryView.type = THLTextEntryTypeCode;
-    
-    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:invitationCodeEntryView];
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Back Button"] style:UIBarButtonItemStylePlain target:nil action:NULL];
-    [barButtonItem setTintColor:[UIColor whiteColor]];
-    navVC.navigationItem.leftBarButtonItem = barButtonItem;
-    [self.view.window.rootViewController presentViewController:navVC animated:YES completion:nil];
+
+    [self.navigationController pushViewController:invitationCodeEntryView animated:YES];
 }
 
 
