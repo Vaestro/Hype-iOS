@@ -17,6 +17,7 @@
 #import "THLUserProfileFooterView.h"
 #import "THLUserProfileHeaderView.h"
 #import "THLUserPhotoVerificationViewController.h"
+#import "THLTextEntryViewController.h"
 #import "THLFAQViewController.h"
 #import "THLUserManager.h"
 #import "THLUser.h"
@@ -44,6 +45,7 @@ typedef NS_ENUM(NSInteger, HypelistSectionRow) {
 
 typedef NS_ENUM(NSUInteger, ApplicationInfoCase){
     InviteFriends = 0,
+    RedeemCode,
     PrivacyPolicy,
     TermsAndConditions,
     ContactUs,
@@ -53,7 +55,11 @@ typedef NS_ENUM(NSUInteger, ApplicationInfoCase){
 static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileViewCellIdentifier";
 static NSString *branchMarketingLink = @"https://bnc.lt/m/aTR7pkSq0q";
 
-@interface THLUserProfileViewController() <THLUserPhotoVerificationInterfaceDidHideDelegate>
+@interface THLUserProfileViewController()
+<
+THLUserPhotoVerificationInterfaceDidHideDelegate,
+THLTextEntryViewDelegate
+>
 
 @property (nonatomic, strong) NSArray *urls;
 @property (nonatomic, strong) NSArray *tableCellNames;
@@ -78,7 +84,7 @@ static NSString *branchMarketingLink = @"https://bnc.lt/m/aTR7pkSq0q";
     [self layoutView];
     [self bindView];
     
-    self.tableCellNames = @[@"Invite Friends", @"Privacy Policy", @"Terms & Conditions", @"Contact Us", @"Logout"];
+    self.tableCellNames = @[@"Invite Friends",@"Redeem Code", @"Privacy Policy", @"Terms & Conditions", @"Contact Us", @"Logout"];
 }
 
 #pragma mark - View Setup
@@ -128,6 +134,10 @@ static NSString *branchMarketingLink = @"https://bnc.lt/m/aTR7pkSq0q";
     switch(indexPath.row) {
         case InviteFriends:
             [self handleInviteFriendsAction];
+            break;
+        case RedeemCode:
+            [self presentCodeEntryView];
+            break;
         case PrivacyPolicy:
             [self presentModalInformationWithText:[THLResourceManager privacyPolicyText]
                                          andTitle:@"Privacy Policy"];
@@ -166,6 +176,23 @@ static NSString *branchMarketingLink = @"https://bnc.lt/m/aTR7pkSq0q";
                                             applicationActivities:nil];
     [topController presentViewController:activityVC animated:YES completion:nil];
 }
+
+- (void)presentCodeEntryView {
+    THLTextEntryViewController *invitationCodeEntryView = [[THLTextEntryViewController alloc] initWithNibName:nil bundle:nil];
+    invitationCodeEntryView.delegate = self;
+    invitationCodeEntryView.titleText = @"Redeem Code";
+    invitationCodeEntryView.descriptionText = @"Enter your code to redeem credits";
+    invitationCodeEntryView.buttonText = @"Submit Code";
+    invitationCodeEntryView.textLength = 6;
+    invitationCodeEntryView.type = THLTextEntryTypeCode;
+    
+    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:invitationCodeEntryView];
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Back Button"] style:UIBarButtonItemStylePlain target:nil action:NULL];
+    [barButtonItem setTintColor:[UIColor whiteColor]];
+    navVC.navigationItem.leftBarButtonItem = barButtonItem;
+    [self.view.window.rootViewController presentViewController:navVC animated:YES completion:nil];
+}
+
 
 - (void) presentModalExplanationHowItWorks {
     THLFAQViewController *faqVC = [[THLFAQViewController alloc] init];
