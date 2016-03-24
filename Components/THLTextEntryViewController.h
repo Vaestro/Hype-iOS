@@ -13,12 +13,14 @@
 typedef NS_ENUM(NSInteger, THLTextEntryType)
 {
     THLTextEntryTypeEmail,
-    THLTextEntryTypeCode
+    THLTextEntryTypeCode,
+    THLTextEntryTypeRedeemCode
 };
 
 @protocol THLTextEntryViewDelegate <NSObject>
 - (void)emailEntryView:(THLTextEntryViewController *)view userDidSubmitEmail:(NSString *)email;
 - (void)codeEntryView:(THLTextEntryViewController *)view userDidSubmitCode:(NSString *)code;
+- (void)codeEntryView:(THLTextEntryViewController *)view userDidSubmitRedemptionCode:(NSString *)code;
 @end
 
 

@@ -12,7 +12,6 @@
 #import "THLAppearanceConstants.h"
 #import "THLPersonIconView.h"
 #import "THLInformationViewController.h"
-#import "THLWebViewController.h"
 #import "THLResourceManager.h"
 #import "THLUserProfileFooterView.h"
 #import "THLUserProfileHeaderView.h"
@@ -21,6 +20,7 @@
 #import "THLFAQViewController.h"
 #import "THLUserManager.h"
 #import "THLUser.h"
+#import "Parse.h"
 
 typedef NS_ENUM(NSInteger, TableViewSection) {
     TableViewSectionPersonal = 0,
@@ -65,8 +65,6 @@ THLTextEntryViewDelegate
 @property (nonatomic, strong) NSArray *tableCellNames;
 @property (nonatomic, strong) NSString *siteUrl;
 @property (nonatomic, strong) THLInformationViewController *infoVC;
-#warning need to examine if this controller shold exist like instanse variable
-@property (nonatomic, strong) UINavigationController *navVC;
 @property (nonatomic, strong) RACCommand *dismissVC;
 @end
 
@@ -178,17 +176,9 @@ THLTextEntryViewDelegate
 }
 
 - (void)presentCodeEntryView {
-    THLTextEntryViewController *invitationCodeEntryView = [[THLTextEntryViewController alloc] initWithNibName:nil bundle:nil];
-    invitationCodeEntryView.delegate = self;
-    invitationCodeEntryView.titleText = @"Redeem Code";
-    invitationCodeEntryView.descriptionText = @"Enter your code to redeem credits";
-    invitationCodeEntryView.buttonText = @"Submit Code";
-    invitationCodeEntryView.textLength = 6;
-    invitationCodeEntryView.type = THLTextEntryTypeCode;
-
+    THLTextEntryViewController *invitationCodeEntryView = [self configureTextEntryView];
     [self.navigationController pushViewController:invitationCodeEntryView animated:YES];
 }
-
 
 - (void) presentModalExplanationHowItWorks {
     THLFAQViewController *faqVC = [[THLFAQViewController alloc] init];
@@ -325,6 +315,47 @@ THLTextEntryViewDelegate
     THLInformationViewController *infoVC = [THLInformationViewController new];
     return infoVC;
 }
+
+- (THLTextEntryViewController *)configureTextEntryView
+{
+    THLTextEntryViewController *invitationCodeEntryView = [[THLTextEntryViewController alloc] initWithNibName:nil bundle:nil];
+    invitationCodeEntryView.delegate = self;
+    invitationCodeEntryView.titleText = @"Redeem Code";
+    invitationCodeEntryView.descriptionText = @"Enter your code to redeem credits";
+    invitationCodeEntryView.buttonText = @"Submit Code";
+    invitationCodeEntryView.textLength = 6;
+    invitationCodeEntryView.type = THLTextEntryTypeRedeemCode;
+    return invitationCodeEntryView;
+}
+
+
+#pragma mark - THLTextViewEntryDelegate
+
+- (void)codeEntryView:(THLTextEntryViewController *)view userDidSubmitRedemptionCode:(NSString *)code {
+    [PFCloud callFunctionInBackground:@"redeemReferralCode"
+                       withParameters:@{@"referralCode": code}
+                                block:^(id approvedCode, NSError *cloudError) {
+                                    NSString *title;
+                                    NSString *message;
+                                    
+                                    if ([approvedCode  isEqual:@1]) {
+                                        title = @"Success";
+                                        message = @"You have successfully redeemed your code!";
+                                    } else {
+                                        title = @"Unsuccessful";
+                                        message = @"This code is not valid";
+                                    }
+                                    
+                                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                                                    message:message
+                                                                                   delegate:self
+                                                                          cancelButtonTitle:@"OK"
+                                                                          otherButtonTitles:nil];
+                                    [alert show];
+                                }];
+}
+
+
 
 #pragma mark Did Hide user photo varification interface
 

@@ -12,6 +12,7 @@
 #import "THLAppearanceConstants.h"
 #import "THLSingleLineTextField.h"
 #import "NSString+EmailAddresses.h"
+#import "Parse.h"
 
 @interface THLTextEntryViewController()
 <
@@ -44,6 +45,10 @@ UITextFieldDelegate
         }
         case THLTextEntryTypeCode: {
             _textField = [self newCodeField];
+            break;
+        }
+        case THLTextEntryTypeRedeemCode: {
+            _textField = [self newRedeemCodeField];
             break;
         }
     }
@@ -110,6 +115,13 @@ UITextFieldDelegate
         case THLTextEntryTypeCode: {
             _submitButton.rac_command = [[RACCommand alloc] initWithEnabled:[self validInputSignal] signalBlock:^RACSignal *(id input) {
                 [WSELF submitTextForValidation];
+                return [RACSignal empty];
+            }];
+            break;
+        }
+        case THLTextEntryTypeRedeemCode: {
+            _submitButton.rac_command = [[RACCommand alloc] initWithEnabled:[self validInputSignal] signalBlock:^RACSignal *(id input) {
+                [WSELF.delegate codeEntryView:WSELF userDidSubmitRedemptionCode:_textField.text];
                 return [RACSignal empty];
             }];
             break;
@@ -181,6 +193,15 @@ UITextFieldDelegate
     textFieldEmail.delegate = self;
     return textFieldEmail;
 }
+
+- (THLSingleLineTextField *)newRedeemCodeField {
+    THLSingleLineTextField *codeField = [[THLSingleLineTextField alloc] initWithFrame:CGRectMake(20, 70, 260, 30) labelHeight:15 style:THLSingleLineTextFieldStyleNone];
+    [codeField setPlaceholder:@"Code"];
+    codeField.delegate = self;
+    return codeField;
+}
+
+
 
 - (THLActionButton *)newSubmitButton {
     THLActionButton *button = [[THLActionButton alloc] initWithInverseStyle];
