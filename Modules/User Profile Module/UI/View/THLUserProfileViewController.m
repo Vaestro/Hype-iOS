@@ -83,6 +83,7 @@ THLTextEntryViewDelegate
     [self bindView];
     
     self.tableCellNames = @[@"Invite Friends",@"Redeem Code", @"Privacy Policy", @"Terms & Conditions", @"Contact Us", @"Logout"];
+    self.navigationItem.title = @"MY PROFILE";
 }
 
 #pragma mark - View Setup
@@ -291,7 +292,7 @@ THLTextEntryViewDelegate
     if(indexPath.row == LogOut && ![THLUserManager userLoggedIn])
         return 0;
     else
-        return 60;
+        return 55;
 }
 
 #pragma mark - Constructors

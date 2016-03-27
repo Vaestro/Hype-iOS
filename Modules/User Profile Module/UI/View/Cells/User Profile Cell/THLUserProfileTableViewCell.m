@@ -11,7 +11,6 @@
 
 @interface THLUserProfileTableViewCell()
 @property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) UIImageView *disclosureIcon;
 
 @end
 
@@ -28,22 +27,16 @@
 
 - (void)constructView {
     _titleLabel = [self newTitleLabel];
-    _disclosureIcon = [self newDisclosureIcon];
+    self.accessoryView = [[ UIImageView alloc ]
+                            initWithImage:[UIImage imageNamed:@"cell_disclosure_icon" ]];
 }
 
 - (void)layoutView {
-    [self addSubviews:@[_titleLabel, _disclosureIcon]];
-    WEAKSELF();
+    [self addSubviews:@[_titleLabel]];
     [_titleLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.insets(kTHLEdgeInsetsNone());
         make.left.equalTo(kTHLEdgeInsetsSuperHigh());
-        make.right.equalTo([WSELF titleLabel].mas_left);
-    }];
-    
-    [_disclosureIcon makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.insets(kTHLEdgeInsetsNone());
-        make.right.insets(kTHLEdgeInsetsSuperHigh());
-        make.size.equalTo(CGSizeMake1(20));
+        make.right.equalTo(kTHLEdgeInsetsSuperHigh());
     }];
 
 }
@@ -54,17 +47,11 @@
 
 #pragma mark - Constructors
 - (UILabel *)newTitleLabel {
-    UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
+    UILabel *label = [UILabel new];
+    label.font = [UIFont fontWithName:@"OpenSans-Light" size:14];
+
     label.textColor = [UIColor whiteColor];
     return label;
-}
-
-- (UIImageView *)newDisclosureIcon {
-    UIImageView *imageView = [UIImageView new];
-    imageView.image = [UIImage imageNamed:@"cell_disclosure_icon"];
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
-    imageView.clipsToBounds = YES;
-    return imageView;
 }
 
 #pragma mark - Public Interface

@@ -48,7 +48,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [[self navigationController] tabBarItem].badgeValue = nil;
+//    [[self navigationController] tabBarItem].badgeValue = nil;
 }
 
 - (void)constructView {

@@ -38,33 +38,19 @@
 }
 
 - (void)layoutView {
-    [self.contentView addSubviews:@[_imageView, _iconView,
-                                    _label]];
+    [self.contentView addSubviews:@[_iconView]];
     [self.contentView setBackgroundColor:kTHLNUISecondaryBackgroundColor];
     [_iconView addGestureRecognizer:_photoTapRecognizer];
     
     WEAKSELF();
-    [_imageView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.insets(UIEdgeInsetsZero);
-        make.height.equalTo(SCREEN_HEIGHT*0.32);
-//        make.bottom.offset(-50);
-    }];
-    
     [_iconView makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo([WSELF imageView].mas_bottom);
+        make.top.bottom.insets(kTHLEdgeInsetsHigh());
         make.size.mas_equalTo(CGSizeMake(100, 100));
-        make.centerX.equalTo(0);
-        make.bottom.equalTo(UIEdgeInsetsZero);
-    }];
-    
-    [_label makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo([WSELF iconView].mas_top).equalTo(kTHLEdgeInsetsHigh());
         make.centerX.equalTo(0);
     }];
     
     if (![THLUserManager userLoggedIn]) {
         _iconView.hidden = TRUE;
-        _label.hidden = TRUE;
     }
 }
 

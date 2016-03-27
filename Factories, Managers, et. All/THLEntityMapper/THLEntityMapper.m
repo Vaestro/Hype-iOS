@@ -125,7 +125,6 @@
         entity.imageURL = [NSURL URLWithString:user.image.url];
         entity.sex = user.sex;
         entity.rating = user.rating;
-        entity.beacon = [self mapBeaconEntity:user[@"beacon"]];
         return entity;
     } else {
         return nil;

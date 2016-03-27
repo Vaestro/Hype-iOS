@@ -77,6 +77,18 @@ THLLoginModuleDelegate
     [_window makeKeyAndVisible];
 }
 
+//- (void)showNotificationBadge {
+//    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+//    f.numberStyle = NSNumberFormatterDecimalStyle;
+//    NSNumber *currentBadgeValue = [f numberFromString:[_masterTabBarController.tabBar.items objectAtIndex:1].badgeValue];
+//    if (currentBadgeValue == nil) {
+//        [[_masterTabBarController.viewControllers objectAtIndex:1] tabBarItem].badgeValue = @"";
+//    } else {
+//        NSNumber *newBadgeValue = [NSNumber numberWithFloat:([currentBadgeValue floatValue] + 1)];
+//        [[_masterTabBarController.tabBar.items objectAtIndex:1] setBadgeValue:[NSString stringWithFormat:@"%@", newBadgeValue]];
+//    }
+//}
+
 - (void)showNotificationBadge {
     [[_masterTabBarController.tabBar.items objectAtIndex:1] setBadgeValue:@""];
 }
@@ -96,11 +108,16 @@ THLLoginModuleDelegate
     [self presentUserProfileInterfaceInNavigationController:profile];
     
     messages.tabBarItem.image = [UIImage imageNamed:@"Inbox Icon"];
+    messages.tabBarItem.title = @"Messages";
     dashboard.tabBarItem.image = [UIImage imageNamed:@"Lists Icon"];
+    dashboard.tabBarItem.title = @"My Events";
     discovery.tabBarItem.image = [UIImage imageNamed:@"Home Icon"];
+    discovery.tabBarItem.title = @"Discover";
     profile.tabBarItem.image = [UIImage imageNamed:@"Profile Icon"];
+    profile.tabBarItem.title = @"Profile";
     perks.tabBarItem.image = [UIImage imageNamed:@"Perks Icon"];
-    
+    perks.tabBarItem.title = @"Perks";
+
     NSArray *views = @[messages, dashboard, discovery, perks, profile];
     
     _masterTabBarController.viewControllers = views;

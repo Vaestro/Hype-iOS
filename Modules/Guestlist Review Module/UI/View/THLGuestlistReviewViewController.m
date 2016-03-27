@@ -146,10 +146,16 @@ static CGFloat const CELL_SPACING = 10;
 
 - (void)remakeConstraints {
     WEAKSELF();
-    [_collectionView remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(kTHLEdgeInsetsNone());
-        make.left.right.bottom.insets(kTHLEdgeInsetsNone());
-    }];
+    if (self.navigationController) {
+        [_collectionView remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.right.bottom.insets(kTHLEdgeInsetsNone());
+        }];
+    } else {
+        [_collectionView remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo([WSELF headerView].mas_bottom);
+            make.left.right.bottom.insets(kTHLEdgeInsetsNone());
+        }];
+    }
 }
 
 - (void)bindView {
