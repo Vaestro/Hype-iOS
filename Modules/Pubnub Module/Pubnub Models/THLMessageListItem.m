@@ -1,6 +1,6 @@
 //
 //  THLMessageListItem.m
-//  HypeUp
+//  Hype
 //
 //  Created by Александр on 07.02.16.
 //  Copyright © 2016 Hypelist. All rights reserved.

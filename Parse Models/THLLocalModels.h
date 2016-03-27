@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Hypelist. All rights reserved.
 //
 
-#ifndef HypeUp_THLLocalModels_h
-#define HypeUp_THLLocalModels_h
+#ifndef Hype_THLLocalModels_h
+#define Hype_THLLocalModels_h
 
 #import "THLUser.h"
 #import "THLEvent.h"

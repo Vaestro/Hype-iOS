@@ -82,7 +82,7 @@
 
 - (NSArray *)onboardingContentViewControllers {
     OnboardingContentViewController *firstPage = [OnboardingContentViewController
-                                                  initialContentWithTitle:@"WELCOME TO\nTHE HYPEUP"
+                                                  initialContentWithTitle:@"WELCOME TO\nTHE Hype"
                                                   body:@"Discover the most exclusive events happening in NYC"
                                                   backgroundVideo:nil   ];
     

@@ -1,6 +1,6 @@
 //
 //  THLChatRoomBubbleCell.h
-//  HypeUp
+//  Hype
 //
 //  Created by Александр on 12.02.16.
 //  Copyright © 2016 Hypelist. All rights reserved.
