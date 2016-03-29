@@ -12,14 +12,15 @@
 #import "THLAppearanceConstants.h"
 #import "THLPersonIconView.h"
 #import "THLInformationViewController.h"
-#import "THLWebViewController.h"
 #import "THLResourceManager.h"
 #import "THLUserProfileFooterView.h"
 #import "THLUserProfileHeaderView.h"
 #import "THLUserPhotoVerificationViewController.h"
+#import "THLTextEntryViewController.h"
 #import "THLFAQViewController.h"
 #import "THLUserManager.h"
 #import "THLUser.h"
+#import "Parse.h"
 
 typedef NS_ENUM(NSInteger, TableViewSection) {
     TableViewSectionPersonal = 0,
@@ -44,6 +45,7 @@ typedef NS_ENUM(NSInteger, HypelistSectionRow) {
 
 typedef NS_ENUM(NSUInteger, ApplicationInfoCase){
     InviteFriends = 0,
+    RedeemCode,
     PrivacyPolicy,
     TermsAndConditions,
     ContactUs,
@@ -53,14 +55,16 @@ typedef NS_ENUM(NSUInteger, ApplicationInfoCase){
 static NSString *const kTHLUserProfileViewCellIdentifier = @"kTHLUserProfileViewCellIdentifier";
 static NSString *branchMarketingLink = @"https://bnc.lt/m/aTR7pkSq0q";
 
-@interface THLUserProfileViewController() <THLUserPhotoVerificationInterfaceDidHideDelegate>
+@interface THLUserProfileViewController()
+<
+THLUserPhotoVerificationInterfaceDidHideDelegate,
+THLTextEntryViewDelegate
+>
 
 @property (nonatomic, strong) NSArray *urls;
 @property (nonatomic, strong) NSArray *tableCellNames;
 @property (nonatomic, strong) NSString *siteUrl;
 @property (nonatomic, strong) THLInformationViewController *infoVC;
-#warning need to examine if this controller shold exist like instanse variable
-@property (nonatomic, strong) UINavigationController *navVC;
 @property (nonatomic, strong) RACCommand *dismissVC;
 @end
 
@@ -78,7 +82,8 @@ static NSString *branchMarketingLink = @"https://bnc.lt/m/aTR7pkSq0q";
     [self layoutView];
     [self bindView];
     
-    self.tableCellNames = @[@"Invite Friends", @"Privacy Policy", @"Terms & Conditions", @"Contact Us", @"Logout"];
+    self.tableCellNames = @[@"Invite Friends",@"Redeem Code", @"Privacy Policy", @"Terms & Conditions", @"Contact Us", @"Logout"];
+    self.navigationItem.title = @"MY PROFILE";
 }
 
 #pragma mark - View Setup
@@ -128,6 +133,10 @@ static NSString *branchMarketingLink = @"https://bnc.lt/m/aTR7pkSq0q";
     switch(indexPath.row) {
         case InviteFriends:
             [self handleInviteFriendsAction];
+            break;
+        case RedeemCode:
+            [self presentCodeEntryView];
+            break;
         case PrivacyPolicy:
             [self presentModalInformationWithText:[THLResourceManager privacyPolicyText]
                                          andTitle:@"Privacy Policy"];
@@ -165,6 +174,16 @@ static NSString *branchMarketingLink = @"https://bnc.lt/m/aTR7pkSq0q";
                                             initWithActivityItems:postItems
                                             applicationActivities:nil];
     [topController presentViewController:activityVC animated:YES completion:nil];
+}
+
+- (void)presentCodeEntryView {
+    THLTextEntryViewController *invitationCodeEntryView = [self configureTextEntryView];
+    [invitationCodeEntryView.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                             forBarMetrics:UIBarMetricsDefault];
+    invitationCodeEntryView.navigationController.navigationBar.shadowImage = [UIImage new];
+    invitationCodeEntryView.navigationController.navigationBar.translucent = YES;
+    invitationCodeEntryView.navigationController.view.backgroundColor = [UIColor clearColor];
+    [self.navigationController pushViewController:invitationCodeEntryView animated:YES];
 }
 
 - (void) presentModalExplanationHowItWorks {
@@ -267,9 +286,11 @@ static NSString *branchMarketingLink = @"https://bnc.lt/m/aTR7pkSq0q";
         cell = [[THLUserProfileTableViewCell alloc] init];
     }
     
-    cell.textLabel.text = [self.tableCellNames objectAtIndex:indexPath.row];
-    cell.textLabel.textColor = [UIColor whiteColor];
+//    cell.textLabel.text = [self.tableCellNames objectAtIndex:indexPath.row];
+//    cell.textLabel.textColor = [UIColor whiteColor];
     cell.contentView.backgroundColor = kTHLNUISecondaryBackgroundColor;
+//    cell.backgroundColor = kTHLNUISecondaryBackgroundColor;
+    cell.title = [self.tableCellNames objectAtIndex:indexPath.row];
     cell.textLabel.backgroundColor = [UIColor clearColor];
     return cell;
 }
@@ -278,7 +299,7 @@ static NSString *branchMarketingLink = @"https://bnc.lt/m/aTR7pkSq0q";
     if(indexPath.row == LogOut && ![THLUserManager userLoggedIn])
         return 0;
     else
-        return 60;
+        return 55;
 }
 
 #pragma mark - Constructors
@@ -302,6 +323,47 @@ static NSString *branchMarketingLink = @"https://bnc.lt/m/aTR7pkSq0q";
     THLInformationViewController *infoVC = [THLInformationViewController new];
     return infoVC;
 }
+
+- (THLTextEntryViewController *)configureTextEntryView
+{
+    THLTextEntryViewController *invitationCodeEntryView = [[THLTextEntryViewController alloc] initWithNibName:nil bundle:nil];
+    invitationCodeEntryView.delegate = self;
+    invitationCodeEntryView.titleText = @"Redeem Code";
+    invitationCodeEntryView.descriptionText = @"Enter your code to redeem credits";
+    invitationCodeEntryView.buttonText = @"Submit Code";
+    invitationCodeEntryView.textLength = 6;
+    invitationCodeEntryView.type = THLTextEntryTypeRedeemCode;
+    return invitationCodeEntryView;
+}
+
+
+#pragma mark - THLTextViewEntryDelegate
+
+- (void)codeEntryView:(THLTextEntryViewController *)view userDidSubmitRedemptionCode:(NSString *)code {
+    [PFCloud callFunctionInBackground:@"redeemReferralCode"
+                       withParameters:@{@"referralCode": code}
+                                block:^(id approvedCode, NSError *cloudError) {
+                                    NSString *title;
+                                    NSString *message;
+                                    
+                                    if ([approvedCode  isEqual:@1]) {
+                                        title = @"Success";
+                                        message = @"You have successfully redeemed your code!";
+                                    } else {
+                                        title = @"Unsuccessful";
+                                        message = @"This code is not valid";
+                                    }
+                                    
+                                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                                                    message:message
+                                                                                   delegate:self
+                                                                          cancelButtonTitle:@"OK"
+                                                                          otherButtonTitles:nil];
+                                    [alert show];
+                                }];
+}
+
+
 
 #pragma mark Did Hide user photo varification interface
 

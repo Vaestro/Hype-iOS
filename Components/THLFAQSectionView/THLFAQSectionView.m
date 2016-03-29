@@ -1,6 +1,6 @@
 //
 //  THLFAQSectionView.m
-//  HypeUp
+//  Hype
 //
 //  Created by Nik Cane on 02/02/16.
 //  Copyright © 2016 Hypelist. All rights reserved.

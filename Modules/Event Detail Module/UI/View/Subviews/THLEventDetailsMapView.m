@@ -39,7 +39,8 @@ static CGFloat MAPVIEW_METERS = 1000;
     }];
     
     [_textView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.insets(kTHLEdgeInsetsNone());
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+        make.bottom.insets(kTHLEdgeInsetsNone());
         make.top.equalTo([WSELF mapView].mas_bottom).insets(kTHLEdgeInsetsLow());
     }];
 }

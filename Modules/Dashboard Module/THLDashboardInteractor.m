@@ -32,16 +32,20 @@
     WEAKSELF();
     STRONGSELF();
     [[_dataManager fetchGuestlistInvitesForUser] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
-        [SSELF.delegate interactor:SSELF didUpdateGuestlistInvites:task.error];
+        [SSELF.delegate interactor:SSELF didUpdateGuestlistInvites:task];
         return nil;
     }];
+}
+
+- (void)updateGuestlistInviteToOpened:(THLGuestlistInviteEntity *)guestlistInvite {
+    [_dataManager updateGuestlistInviteToOpened:guestlistInvite];
 }
 
 - (THLViewDataSource *)getDataSource {
     [self updateGuestlistInvites];
     THLViewDataSourceGrouping *grouping = [self viewGrouping];
     THLViewDataSourceSorting *sorting = [self viewSorting];
-    NSArray *groups = @[ @"Event Invites    ", @"Upcoming Events"];
+    NSArray *groups = @[@"Event Invites", @"Upcoming Events"];
     THLViewDataSource *dataSource = [_viewDataSourceFactory createDataSourceWithFixedGrouping:grouping sorting:sorting groups:groups key:@"kTHLDashboardModuleViewKey"];
     return dataSource;
 }

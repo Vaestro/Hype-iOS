@@ -1,6 +1,6 @@
 //
 //  THLUserPhotoVerificationViewController.m
-//  HypeUp
+//  Hype
 //
 //  Created by Nik Cane on 27/01/16.
 //  Copyright © 2016 Hypelist. All rights reserved.
@@ -212,7 +212,7 @@
 
 - (UILabel *)newDescriptionLabel {
     UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
-    label.text = @"Choose an accurate picture of yourself by tapping on the screen so that the host can find you at the venue";
+    label.text = @"Tap on your photo if you would like to change your profile picture.";
     label.numberOfLines = 0;
     label.textAlignment = NSTextAlignmentLeft;
     label.lineBreakMode = NSLineBreakByWordWrapping;

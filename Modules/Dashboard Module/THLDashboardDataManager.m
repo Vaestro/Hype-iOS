@@ -13,6 +13,7 @@
 #import "THLDataStore.h"
 #import "THLDataStoreDomain.h"
 #import "THLGuestlistInviteEntity.h"
+#import "THLGuestlistInvite.h"
 
 @implementation THLDashboardDataManager
 - (instancetype)initWithGuestlistService:(id<THLGuestlistServiceInterface>)guestlistService
@@ -32,21 +33,21 @@
     return [[_guestlistService fetchGuestlistInvitesForUser] continueWithSuccessBlock:^id(BFTask *task) {
 //        THLDataStoreDomain *domain = [SSELF domainForPendingOrAcceptedGuestlistInvites];
         NSSet *entities = [NSSet setWithArray:[SSELF.entityMapper mapGuestlistInvites:task.result]];
+        NSNumber *unopenedGuestlistInviteCount;
         //        HACK to get guestlist Invite to update with updated Guestlist
         for (THLGuestlistInviteEntity *guestlistInviteEntity in entities) {
             guestlistInviteEntity.updatedAt = [NSDate date];
-            
-            
-            
+            if (!guestlistInviteEntity.didOpen && guestlistInviteEntity.response == THLStatusPending) {
+                unopenedGuestlistInviteCount = @([unopenedGuestlistInviteCount intValue] + 1);
+            }
         }
-        
-        
-        
-        
-//        [SSELF.dataStore refreshDomain:domain withEntities:entities andDeleteEntities:NO];
         [SSELF.dataStore updateOrAddEntities:entities];
-        return [BFTask taskWithResult:entities];
+        return [BFTask taskWithResult:unopenedGuestlistInviteCount];
     }];
+}
+
+- (void)updateGuestlistInviteToOpened:(THLGuestlistInviteEntity *)guestlistInvite {
+    [_guestlistService updateGuestlistInviteToOpened:[THLGuestlistInvite objectWithoutDataWithObjectId:guestlistInvite.objectId]];
 }
 
 - (THLDataStoreDomain *)domainForPendingOrAcceptedGuestlistInvites {

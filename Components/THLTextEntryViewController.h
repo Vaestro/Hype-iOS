@@ -1,6 +1,6 @@
 //
 //  THLTextEntryViewController.h
-//  HypeUp
+//  Hype
 //
 //  Created by Edgar Li on 3/14/16.
 //  Copyright © 2016 Hypelist. All rights reserved.
@@ -13,12 +13,14 @@
 typedef NS_ENUM(NSInteger, THLTextEntryType)
 {
     THLTextEntryTypeEmail,
-    THLTextEntryTypeCode
+    THLTextEntryTypeCode,
+    THLTextEntryTypeRedeemCode
 };
 
 @protocol THLTextEntryViewDelegate <NSObject>
 - (void)emailEntryView:(THLTextEntryViewController *)view userDidSubmitEmail:(NSString *)email;
 - (void)codeEntryView:(THLTextEntryViewController *)view userDidSubmitCode:(NSString *)code;
+- (void)codeEntryView:(THLTextEntryViewController *)view userDidSubmitRedemptionCode:(NSString *)code;
 @end
 
 

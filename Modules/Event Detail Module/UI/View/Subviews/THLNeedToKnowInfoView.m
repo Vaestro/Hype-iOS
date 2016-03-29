@@ -16,6 +16,9 @@
 @property (nonatomic, strong) UILabel *photoIdLabel;
 @property (nonatomic, strong) UILabel *ageRequirementLabel;
 @property (nonatomic, strong) UILabel *attireRequirementLabel;
+@property (nonatomic, strong) UILabel *doormanDiscretionLabel;
+@property (nonatomic, strong) UILabel *surgePriceExplanationLabel;
+
 @end
 
 @implementation THLNeedToKnowInfoView
@@ -26,11 +29,14 @@
     _photoIdLabel = [self newPhotoIdLabel];
     _ageRequirementLabel = [self newAgeRequirementLabel];
     _attireRequirementLabel = [self newAttireRequirementLabel];
+    _doormanDiscretionLabel = [self newDoormanDiscretionLabel];
+    _surgePriceExplanationLabel = [self newSurgePriceExplanationLabel];
 }
 
 - (void)layoutView {
     [super layoutView];
-    [self.contentView addSubviews:@[_ratioInfoLabel, _coverInfoLabel, _photoIdLabel, _ageRequirementLabel, _attireRequirementLabel]];
+    [self.contentView addSubviews:@[_ratioInfoLabel, _coverInfoLabel, _photoIdLabel, _ageRequirementLabel, _attireRequirementLabel, _doormanDiscretionLabel, _surgePriceExplanationLabel]];
+    
     WEAKSELF();
     [_ratioInfoLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.insets(kTHLEdgeInsetsHigh());
@@ -54,6 +60,16 @@
     
     [_ageRequirementLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF photoIdLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.left.right.insets(kTHLEdgeInsetsNone());
+    }];
+    
+    [_surgePriceExplanationLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo([WSELF ageRequirementLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.left.right.insets(kTHLEdgeInsetsNone());
+    }];
+    
+    [_doormanDiscretionLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo([WSELF surgePriceExplanationLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());
         make.left.right.bottom.insets(kTHLEdgeInsetsNone());
     }];
 }
@@ -103,4 +119,23 @@
     return attireRequirementLabel;
 }
 
+- (UILabel *)newDoormanDiscretionLabel {
+    UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
+    label.text = @"Final admission at doorman’s discretion.";
+    label.adjustsFontSizeToFitWidth = YES;
+    label.minimumScaleFactor = 0.5;
+    label.textAlignment = NSTextAlignmentLeft;
+    label.numberOfLines = 0;
+    return label;
+}
+
+- (UILabel *)newSurgePriceExplanationLabel {
+    UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
+    label.text = @"Arrive on time to avoid surge pricing";
+    label.adjustsFontSizeToFitWidth = YES;
+    label.minimumScaleFactor = 0.5;
+    label.textAlignment = NSTextAlignmentLeft;
+    label.numberOfLines = 0;
+    return label;
+}
 @end

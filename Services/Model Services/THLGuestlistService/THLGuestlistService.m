@@ -46,10 +46,8 @@
             PFObject *event = guestlist[@"event"];
             [guestlist setObject:event forKey:@"event"];
             PFObject *host = guestlist[@"event"][@"host"];
-            PFObject *beacon = guestlist[@"event"][@"host"][@"beacon"];
             PFObject *location = guestlist[@"event"][@"location"];
             if (host != nil) {
-                [host setObject:beacon forKey:@"beacon"];
                 [event setObject:host forKey:@"host"];
                 [event setObject:location forKey:@"location"];
             }
@@ -90,10 +88,8 @@
     [[_queryFactory queryForGuestlistWithId] getObjectInBackgroundWithId:guestlistId block:^(PFObject *guestlist, NSError *error) {
         if (!error) {
             PFObject *event = guestlist[@"event"];
-            PFObject *beacon = guestlist[@"event"][@"host"][@"beacon"];
             PFObject *host = guestlist[@"event"][@"host"];
             PFObject *location = guestlist[@"event"][@"location"];
-            [host setObject:beacon forKey:@"beacon"];
             [event setObject:host forKey:@"host"];
             [event setObject:location forKey:@"location"];
             [guestlist setObject:event forKey:@"event"];
@@ -251,8 +247,6 @@
                     [guestlist setObject:event forKey:@"event"];
                     PFObject *host = guestlistInvite[@"Guestlist"][@"event"][@"host"];
                     [event setObject:host forKey:@"host"];
-                    PFObject *beacon = guestlistInvite[@"Guestlist"][@"event"][@"host"][@"beacon"];
-                    [host setObject:beacon forKey:@"beacon"];
                     PFObject *location = guestlistInvite[@"Guestlist"][@"event"][@"location"];
                     [event setObject:location forKey:@"location"];
                     PFObject *guest = guestlistInvite[@"Guest"];
@@ -344,6 +338,17 @@
 - (BFTask *)updateGuestlistInvite:(THLGuestlistInvite *)guestlistInvite withResponse:(THLStatus)response {
     NSNumber *castedResponse = [[NSNumber alloc] initWithInt:response];
     guestlistInvite[@"response"] = castedResponse;
+    [guestlistInvite saveInBackground];
+    return [BFTask taskWithResult:nil];
+}
+
+//----------------------------------------------------------------
+#pragma mark - Update Guest's Guestlist Invite To Opened
+//----------------------------------------------------------------
+
+
+- (BFTask *)updateGuestlistInviteToOpened:(THLGuestlistInvite *)guestlistInvite {
+    guestlistInvite[@"didOpen"] = @YES;
     [guestlistInvite saveInBackground];
     return [BFTask taskWithResult:nil];
 }

@@ -13,6 +13,7 @@
 @dynamic guestlist;
 @dynamic response;
 @dynamic checkInStatus;
+@dynamic didOpen;
 @dynamic date;
 @dynamic invitationCode;
 @dynamic ticketNumber;

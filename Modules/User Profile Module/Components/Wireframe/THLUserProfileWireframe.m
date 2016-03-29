@@ -11,7 +11,7 @@
 #import "THLUserProfileViewController.h"
 
 @interface THLUserProfileWireframe()
-@property (nonatomic, strong) UIViewController *viewController;
+@property (nonatomic, strong) UINavigationController *navigationController;
 @property (nonatomic, strong) THLUserProfilePresenter *presenter;
 @property (nonatomic, strong) THLUserProfileViewController *view;
 @end
@@ -29,13 +29,10 @@
     _presenter = [[THLUserProfilePresenter alloc] initWithWireframe:self];
 }
 
-- (void)presentInterfaceInViewController:(UIViewController *)viewController {
-    _viewController = viewController;
+- (void)presentInterfaceInNavigationController:(UINavigationController *)navigationController {
+    _navigationController = navigationController;
     [_presenter configureView:_view];
-    [_viewController addChildViewController:_view];
-    _view.view.frame = _viewController.view.bounds;
-    [_viewController.view addSubview:_view.view];
-    [_view didMoveToParentViewController:_viewController];
+    [_navigationController addChildViewController:_view];
 }
 
 - (id<THLUserProfileModuleInterface>)moduleInterface {

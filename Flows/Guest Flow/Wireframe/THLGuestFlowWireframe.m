@@ -77,9 +77,22 @@ THLLoginModuleDelegate
     [_window makeKeyAndVisible];
 }
 
-- (void)showNotificationBadge {
-    [[_masterTabBarController.tabBar.items objectAtIndex:1] setBadgeValue:@""];
-}
+//- (void)showNotificationBadge {
+//    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+//    f.numberStyle = NSNumberFormatterDecimalStyle;
+//    NSString *badgeString = [_masterTabBarController.tabBar.items objectAtIndex:1].badgeValue;
+//    NSNumber *currentBadgeValue = [f numberFromString:badgeString];
+//    if (currentBadgeValue == nil) {
+//        [[_masterTabBarController.viewControllers objectAtIndex:1] tabBarItem].badgeValue = @"1";
+//    } else {
+//        NSNumber *newBadgeValue = [NSNumber numberWithFloat:([currentBadgeValue floatValue] + 1)];
+//        [[_masterTabBarController.tabBar.items objectAtIndex:1] setBadgeValue:[NSString stringWithFormat:@"%@", newBadgeValue]];
+//    }
+//}
+
+//- (void)showNotificationBadge {
+//    [[_masterTabBarController.tabBar.items objectAtIndex:1] setBadgeValue:@""];
+//}
 
 - (void)configureMasterTabViewController:(UITabBarController *)masterTabBarController {
     _masterTabBarController = masterTabBarController;
@@ -87,20 +100,25 @@ THLLoginModuleDelegate
     UINavigationController *discovery = [UINavigationController new];
     UINavigationController *dashboard = [UINavigationController new];
     UINavigationController *perks = [UINavigationController new];
-    UIViewController *profile = [UIViewController new];
+    UINavigationController *profile = [UINavigationController new];
     
     [self presentMessageListInterfaceInNavigationController:messages];
     [self presentDashboardInterfaceInNavigationController:dashboard];
     [self presentEventDiscoveryInterfaceInNavigationController:discovery];
     [self presentPerkStoreInterfaceInNavigationController:perks];
-    [self presentUserProfileInterfaceInViewController:profile];
+    [self presentUserProfileInterfaceInNavigationController:profile];
     
     messages.tabBarItem.image = [UIImage imageNamed:@"Inbox Icon"];
+    messages.tabBarItem.title = @"Messages";
     dashboard.tabBarItem.image = [UIImage imageNamed:@"Lists Icon"];
+    dashboard.tabBarItem.title = @"My Events";
     discovery.tabBarItem.image = [UIImage imageNamed:@"Home Icon"];
+    discovery.tabBarItem.title = @"Discover";
     profile.tabBarItem.image = [UIImage imageNamed:@"Profile Icon"];
+    profile.tabBarItem.title = @"Profile";
     perks.tabBarItem.image = [UIImage imageNamed:@"Perks Icon"];
-    
+    perks.tabBarItem.title = @"Perks";
+
     NSArray *views = @[messages, dashboard, discovery, perks, profile];
     
     _masterTabBarController.viewControllers = views;
@@ -143,11 +161,11 @@ THLLoginModuleDelegate
     [_dashboardWireframe.moduleInterface presentDashboardInterfaceInNavigationController:navigationController];
 }
 
-- (void)presentUserProfileInterfaceInViewController:(UIViewController *)viewController {
+- (void)presentUserProfileInterfaceInNavigationController:(UINavigationController *)navigationController {
     _userProfileWireframe = [_dependencyManager newUserProfileWireframe];
     _currentWireframe = _userProfileWireframe;
     [_userProfileWireframe.moduleInterface setModuleDelegate:self];
-    [_userProfileWireframe.moduleInterface presentUserProfileInterfaceInViewController:viewController];
+    [_userProfileWireframe.moduleInterface presentUserProfileInterfaceInNavigationController:navigationController];
 }
 
 - (void)presentPerkStoreInterfaceInNavigationController:(UINavigationController *)navigationController {

@@ -10,7 +10,7 @@
 @class THLUser;
 @class THLEntityMapper;
 @class THLDataStore;
-
+@class THLGuestlistInviteEntity;
 @protocol THLGuestlistServiceInterface;
 
 @interface THLDashboardDataManager : NSObject
@@ -24,4 +24,5 @@
                                dataStore:(THLDataStore *)dataStore;
 
 - (BFTask *)fetchGuestlistInvitesForUser;
+- (void)updateGuestlistInviteToOpened:(THLGuestlistInviteEntity *)guestlistInvite;
 @end

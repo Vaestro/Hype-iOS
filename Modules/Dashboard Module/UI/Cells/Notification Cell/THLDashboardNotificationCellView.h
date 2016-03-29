@@ -11,6 +11,6 @@
 @property (nonatomic, copy) NSString *locationName;
 @property (nonatomic, copy) NSString *date;
 @property (nonatomic, copy) NSURL *senderImageURL;
-@property (nonatomic) THLStatus notificationStatus;
+@property (nonatomic) BOOL didOpen;
 @property (nonatomic, copy) NSString *senderIntroductionText;
 @end

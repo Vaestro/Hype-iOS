@@ -14,7 +14,7 @@
 @protocol THLViewDataSourceFactoryInterface;
 
 @protocol THLDashboardInteractorDelegate <NSObject>
-- (void)interactor:(THLDashboardInteractor *)interactor didUpdateGuestlistInvites:(NSError *)error;
+- (void)interactor:(THLDashboardInteractor *)interactor didUpdateGuestlistInvites:(BFTask *)task;
 @end
 
 @interface THLDashboardInteractor : NSObject
@@ -29,5 +29,5 @@
 
 - (void)updateGuestlistInvites;
 - (THLViewDataSource *)getDataSource;
-
+- (void)updateGuestlistInviteToOpened:(THLGuestlistInviteEntity *)guestlistInvite;
 @end

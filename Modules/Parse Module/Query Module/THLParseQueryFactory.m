@@ -222,7 +222,6 @@
 	PFQuery *query = [THLEvent query];
 	[query includeKey:@"location"];
     [query includeKey:@"host"];
-    [query includeKey:@"host.beacon"];
 	return query;
 }
 
@@ -236,7 +235,6 @@
     [query includeKey:@"event"];
     [query includeKey:@"event.host"];
     [query includeKey:@"event.location"];
-    [query includeKey:@"event.host.beacon"];
     return query;
 }
 
@@ -252,7 +250,6 @@
     [query includeKey:@"Guestlist.event"];
     [query includeKey:@"Guestlist.event.host"];
     [query includeKey:@"Guestlist.event.location"];
-    [query includeKey:@"Guestlist.event.host.beacon"];
     return query;
 }
 

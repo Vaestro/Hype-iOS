@@ -125,7 +125,6 @@
         entity.imageURL = [NSURL URLWithString:user.image.url];
         entity.sex = user.sex;
         entity.rating = user.rating;
-        entity.beacon = [self mapBeaconEntity:user[@"beacon"]];
         return entity;
     } else {
         return nil;
@@ -221,6 +220,7 @@
         [self mapBaseValuesFromModel:guestlistInvite toEntity:entity];
         entity.response = guestlistInvite.response;
         entity.checkInStatus = guestlistInvite.checkInStatus;
+        entity.didOpen = guestlistInvite.didOpen;
         entity.date = guestlistInvite.date;
         entity.guest = [self mapGuest:guestlistInvite[@"Guest"]];
         entity.guestlist = [self mapGuestlist:guestlistInvite[@"Guestlist"]];
