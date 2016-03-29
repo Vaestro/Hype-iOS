@@ -220,6 +220,7 @@
         [self mapBaseValuesFromModel:guestlistInvite toEntity:entity];
         entity.response = guestlistInvite.response;
         entity.checkInStatus = guestlistInvite.checkInStatus;
+        entity.didOpen = guestlistInvite.didOpen;
         entity.date = guestlistInvite.date;
         entity.guest = [self mapGuest:guestlistInvite[@"Guest"]];
         entity.guestlist = [self mapGuestlist:guestlistInvite[@"Guestlist"]];

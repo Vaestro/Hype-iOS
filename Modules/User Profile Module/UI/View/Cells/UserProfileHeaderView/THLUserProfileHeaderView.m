@@ -30,7 +30,7 @@
 }
 
 - (void)constructView {
-    self.contentView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
+    self.contentView.backgroundColor = kTHLNUISecondaryBackgroundColor;
     _iconView = [self newIconView];
     _label = [self newLabel];
     _imageView = [self newImageView];

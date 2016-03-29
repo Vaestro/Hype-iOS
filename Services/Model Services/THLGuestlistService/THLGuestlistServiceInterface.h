@@ -71,6 +71,11 @@
 - (BFTask *)updateGuestlistInvite:(THLGuestlistInvite *)guestlistInvite withResponse:(THLStatus)response;
 
 //----------------------------------------------------------------
+#pragma mark - Update Guest's Guestlist Invite didOpen Status
+//----------------------------------------------------------------
+- (BFTask *)updateGuestlistInviteToOpened:(THLGuestlistInvite *)guestlistInvite;
+
+//----------------------------------------------------------------
 #pragma mark - Update a Guestlist's Review Status
 //----------------------------------------------------------------
 - (BFTask *)updateGuestlist:(THLGuestlist *)guestlist withReviewStatus:(THLStatus)reviewStatus;

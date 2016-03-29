@@ -178,6 +178,11 @@ THLTextEntryViewDelegate
 
 - (void)presentCodeEntryView {
     THLTextEntryViewController *invitationCodeEntryView = [self configureTextEntryView];
+    [invitationCodeEntryView.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                             forBarMetrics:UIBarMetricsDefault];
+    invitationCodeEntryView.navigationController.navigationBar.shadowImage = [UIImage new];
+    invitationCodeEntryView.navigationController.navigationBar.translucent = YES;
+    invitationCodeEntryView.navigationController.view.backgroundColor = [UIColor clearColor];
     [self.navigationController pushViewController:invitationCodeEntryView animated:YES];
 }
 
@@ -281,9 +286,11 @@ THLTextEntryViewDelegate
         cell = [[THLUserProfileTableViewCell alloc] init];
     }
     
-    cell.textLabel.text = [self.tableCellNames objectAtIndex:indexPath.row];
-    cell.textLabel.textColor = [UIColor whiteColor];
+//    cell.textLabel.text = [self.tableCellNames objectAtIndex:indexPath.row];
+//    cell.textLabel.textColor = [UIColor whiteColor];
     cell.contentView.backgroundColor = kTHLNUISecondaryBackgroundColor;
+//    cell.backgroundColor = kTHLNUISecondaryBackgroundColor;
+    cell.title = [self.tableCellNames objectAtIndex:indexPath.row];
     cell.textLabel.backgroundColor = [UIColor clearColor];
     return cell;
 }

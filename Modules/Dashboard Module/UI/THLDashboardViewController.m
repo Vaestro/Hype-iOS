@@ -30,11 +30,6 @@
 @end
 
 @implementation THLDashboardViewController
-@synthesize selectedIndexPathCommand = _selectedIndexPathCommand;
-@synthesize dataSource = _dataSource;
-@synthesize refreshCommand = _refreshCommand;
-@synthesize loginCommand = _loginCommand;
-@synthesize showRefreshAnimation = _showRefreshAnimation;
 
 #pragma mark VC Lifecycle
 
@@ -46,9 +41,14 @@
 //    [_refreshCommand execute:nil];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.viewAppeared = TRUE;
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-//    [[self navigationController] tabBarItem].badgeValue = nil;
+    self.viewAppeared = FALSE;
 }
 
 - (void)constructView {
@@ -73,25 +73,27 @@
 
 - (void)bindView {
     WEAKSELF();
-    STRONGSELF();
-    [RACObserve(WSELF, dataSource) subscribeNext:^(THLViewDataSource *dataSource) {
-        [SSELF configureDataSource:dataSource];
+    [RACObserve(self, dataSource) subscribeNext:^(THLViewDataSource *dataSource) {
+        [WSELF configureDataSource:dataSource];
     }];
     
-    [RACObserve(WSELF, showRefreshAnimation) subscribeNext:^(NSNumber *val) {
+    [RACObserve(self, showRefreshAnimation) subscribeNext:^(NSNumber *val) {
         BOOL shouldAnimate = [val boolValue];
         if (shouldAnimate) {
-            [SSELF.collectionView.pullToRefreshView startAnimating];
+            [WSELF.collectionView.pullToRefreshView startAnimating];
         } else {
-            [SSELF.collectionView.pullToRefreshView stopAnimating];
+            [WSELF.collectionView.pullToRefreshView stopAnimating];
         }
     }];
     
-    [RACObserve(WSELF, refreshCommand) subscribeNext:^(RACCommand *command) {
-        [SSELF.collectionView addPullToRefreshWithActionHandler:^{
+    [RACObserve(self, refreshCommand) subscribeNext:^(RACCommand *command) {
+        [WSELF.collectionView addPullToRefreshWithActionHandler:^{
             [command execute:nil];
         }];
     }];
+    
+    
+
 }
 
 #pragma mark - Constructors

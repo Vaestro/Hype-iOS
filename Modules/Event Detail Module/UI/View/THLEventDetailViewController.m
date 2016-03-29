@@ -127,14 +127,10 @@
         make.top.left.right.insets(kTHLEdgeInsetsNone());
     }];
     
-    [_scrollView.stackView addSubview:_needToKnowInfoView
+    [_scrollView.stackView addSubview:_locationInfoView
                   withPrecedingMargin:_navBar.frame.size.height + 2*kTHLPaddingHigh()
                            sideMargin:4*kTHLPaddingHigh()];
-    
-    [_scrollView.stackView addSubview:_locationInfoView
-                  withPrecedingMargin:kTHLPaddingHigh()
-                           sideMargin:4*kTHLPaddingHigh()];
-    
+
     [_scrollView.stackView addSubview:_musicTypesView
                   withPrecedingMargin:kTHLPaddingHigh()
                            sideMargin:4*kTHLPaddingHigh()];
@@ -142,6 +138,10 @@
     [_scrollView.stackView addSubview:_mapView
                   withPrecedingMargin:kTHLPaddingHigh()
                            sideMargin:kTHLPaddingNone()];
+    
+    [_scrollView.stackView addSubview:_needToKnowInfoView
+                  withPrecedingMargin:2*kTHLPaddingHigh()
+                           sideMargin:4*kTHLPaddingHigh()];
     
     [self.view bringSubviewToFront:_navBar];
     

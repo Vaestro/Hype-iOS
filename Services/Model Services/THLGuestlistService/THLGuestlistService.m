@@ -343,6 +343,17 @@
 }
 
 //----------------------------------------------------------------
+#pragma mark - Update Guest's Guestlist Invite To Opened
+//----------------------------------------------------------------
+
+
+- (BFTask *)updateGuestlistInviteToOpened:(THLGuestlistInvite *)guestlistInvite {
+    guestlistInvite[@"didOpen"] = @YES;
+    [guestlistInvite saveInBackground];
+    return [BFTask taskWithResult:nil];
+}
+
+//----------------------------------------------------------------
 #pragma mark - Update a Guestlist's Review Status
 //----------------------------------------------------------------
 

@@ -77,18 +77,18 @@ THLLoginModuleDelegate
     [_window makeKeyAndVisible];
 }
 
-- (void)showNotificationBadge {
-    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-    f.numberStyle = NSNumberFormatterDecimalStyle;
-    NSString *badgeString = [_masterTabBarController.tabBar.items objectAtIndex:1].badgeValue;
-    NSNumber *currentBadgeValue = [f numberFromString:badgeString];
-    if (currentBadgeValue == nil) {
-        [[_masterTabBarController.viewControllers objectAtIndex:1] tabBarItem].badgeValue = @"1";
-    } else {
-        NSNumber *newBadgeValue = [NSNumber numberWithFloat:([currentBadgeValue floatValue] + 1)];
-        [[_masterTabBarController.tabBar.items objectAtIndex:1] setBadgeValue:[NSString stringWithFormat:@"%@", newBadgeValue]];
-    }
-}
+//- (void)showNotificationBadge {
+//    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+//    f.numberStyle = NSNumberFormatterDecimalStyle;
+//    NSString *badgeString = [_masterTabBarController.tabBar.items objectAtIndex:1].badgeValue;
+//    NSNumber *currentBadgeValue = [f numberFromString:badgeString];
+//    if (currentBadgeValue == nil) {
+//        [[_masterTabBarController.viewControllers objectAtIndex:1] tabBarItem].badgeValue = @"1";
+//    } else {
+//        NSNumber *newBadgeValue = [NSNumber numberWithFloat:([currentBadgeValue floatValue] + 1)];
+//        [[_masterTabBarController.tabBar.items objectAtIndex:1] setBadgeValue:[NSString stringWithFormat:@"%@", newBadgeValue]];
+//    }
+//}
 
 //- (void)showNotificationBadge {
 //    [[_masterTabBarController.tabBar.items objectAtIndex:1] setBadgeValue:@""];

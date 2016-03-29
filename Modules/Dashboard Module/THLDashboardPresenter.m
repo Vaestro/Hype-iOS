@@ -9,7 +9,7 @@
 #import "THLDashboardPresenter.h"
 #import "THLDashboardInteractor.h"
 #import "THLDashboardWireframe.h"
-#import "THLDashboardView.h"
+#import "THLDashboardViewController.h"
 
 #import "THLGuestlistInviteEntity.h"
 #import "THLEventEntity.h"
@@ -27,12 +27,12 @@
 <
 THLDashboardInteractorDelegate
 >
-@property (nonatomic, strong) id<THLDashboardView> view;
+@property (nonatomic, strong) THLDashboardViewController *view;
 @property (nonatomic) BOOL refreshing;
 @property (nonatomic, strong) THLEventEntity *eventEntity;
 @property (nonatomic, strong) THLGuestlistEntity *guestlistEntity;
 @property (nonatomic, strong) THLGuestlistInviteEntity *guestlistInviteEntity;
-
+@property (nonatomic) NSNumber *unopenedInviteCount;
 @end
 
 @implementation THLDashboardPresenter
@@ -48,12 +48,16 @@ THLDashboardInteractorDelegate
     return self;
 }
 
-- (void)configureView:(id<THLDashboardView>)view {
+- (void)configureView:(THLDashboardViewController *)view {
     self.view = view;
-    
+    WEAKSELF();
+    STRONGSELF();
+
     THLViewDataSource *dataSource = [_interactor getDataSource];
     dataSource.dataTransformBlock = ^id(id item) {
+
         THLGuestlistInviteEntity *guestlistInvite = (THLGuestlistInviteEntity *)item;
+
         if (guestlistInvite.response == THLStatusPending) {
             return [[THLDashboardNotificationCellViewModel alloc] initWithGuestlistInvite:(THLGuestlistInviteEntity *)item];
         }
@@ -63,8 +67,13 @@ THLDashboardInteractorDelegate
         return nil;
     };
     
-    WEAKSELF();
-    STRONGSELF();
+    [[RACObserve(self.view, viewAppeared) filter:^BOOL(NSNumber *b) {
+        BOOL viewIsAppearing = [b boolValue];
+        return viewIsAppearing == TRUE;
+    }] subscribeNext:^(id x) {
+        [_interactor updateGuestlistInvites];
+    }];
+    
     RACCommand *refreshCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         [SSELF handleRefreshAction];
         return [RACSignal empty];
@@ -84,6 +93,12 @@ THLDashboardInteractorDelegate
         BOOL isRefreshing = [b boolValue];
         [SSELF.view setShowRefreshAnimation:isRefreshing];
     }];
+
+//    [[RACObserve(self, unopenedInviteCount) filter:^BOOL(NSNumber *value) {
+//        return value != NULL;
+//    }] subscribeNext:^(NSNumber *val) {
+//        [SSELF.view.navigationController.tabBarItem setBadgeValue:[NSString stringWithFormat:@"%@", val]];
+//    }];
     
     [_view setDataSource:dataSource];
     [_view setSelectedIndexPathCommand:selectedIndexPathCommand];
@@ -104,14 +119,27 @@ THLDashboardInteractorDelegate
     [self.moduleDelegate userNeedsLoginOnViewController:(UIViewController *)_view];
 }
 
+- (void)updateTabBarBadgeValue {
+    if (_unopenedInviteCount != nil) {
+        [self.view.navigationController.tabBarItem setBadgeValue:[NSString stringWithFormat:@"%@", _unopenedInviteCount]];
+    } else {
+        [self.view.navigationController.tabBarItem setBadgeValue:nil];
+    }
+}
+
 - (void)handleIndexPathSelection:(NSIndexPath *)indexPath {
     THLGuestlistInviteEntity *guestlistInviteEntity = [[_view dataSource] untransformedItemAtIndexPath:indexPath];
     [self.moduleDelegate dashboardModule:self didClickToViewGuestlist:guestlistInviteEntity.guestlist guestlistInvite:guestlistInviteEntity presentGuestlistReviewInterfaceOnController:_wireframe.view.view.window.rootViewController];
+    if (!guestlistInviteEntity.didOpen) {
+        [_interactor updateGuestlistInviteToOpened:guestlistInviteEntity];
+    }
 }
 
 #pragma mark - THLDashboardInteractorDelegate
-- (void)interactor:(THLDashboardInteractor *)interactor didUpdateGuestlistInvites:(NSError *)error {
+- (void)interactor:(THLDashboardInteractor *)interactor didUpdateGuestlistInvites:(BFTask *)task {
     self.refreshing = NO;
+    _unopenedInviteCount = task.result;
+    [self updateTabBarBadgeValue];
 }
 
 - (void)dealloc {

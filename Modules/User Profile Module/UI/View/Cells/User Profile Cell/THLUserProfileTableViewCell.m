@@ -36,7 +36,7 @@
     [_titleLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.insets(kTHLEdgeInsetsNone());
         make.left.equalTo(kTHLEdgeInsetsSuperHigh());
-        make.right.equalTo(kTHLEdgeInsetsSuperHigh());
+        make.right.equalTo(kTHLEdgeInsetsNone());
     }];
 
 }
@@ -48,7 +48,8 @@
 #pragma mark - Constructors
 - (UILabel *)newTitleLabel {
     UILabel *label = [UILabel new];
-    label.font = [UIFont fontWithName:@"OpenSans-Light" size:14];
+    label.backgroundColor = kTHLNUISecondaryBackgroundColor;
+    label.font = [UIFont fontWithName:@"OpenSans-Light" size:16];
 
     label.textColor = [UIColor whiteColor];
     return label;

@@ -28,10 +28,14 @@
 
 - (void)configureView:(id<THLDashboardNotificationCellView>)cellView {
     [cellView setLocationName:[NSString stringWithFormat:@"@ %@", _guestlistInviteEntity.guestlist.event.location.name]];
-    [cellView setNotificationStatus:_guestlistInviteEntity.response];
-    [cellView setSenderIntroductionText:[NSString stringWithFormat:@"%@ invited you to their guestlist", _guestlistInviteEntity.guestlist.owner.firstName]];
+    [cellView setSenderIntroductionText:[NSString stringWithFormat:@"%@ invited you to their party", _guestlistInviteEntity.guestlist.owner.firstName]];
     [cellView setSenderImageURL:_guestlistInviteEntity.guestlist.owner.imageURL];
     [cellView setDate:[NSString stringWithFormat:@"%@, %@", _guestlistInviteEntity.guestlist.event.date.thl_weekdayString, _guestlistInviteEntity.guestlist.event.date.thl_timeString]];
+    if (_guestlistInviteEntity.didOpen == TRUE) {
+        [cellView setDidOpen:TRUE];
+
+    }
+
 }
 
 @end

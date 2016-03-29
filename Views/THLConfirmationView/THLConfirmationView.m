@@ -300,8 +300,8 @@ static CGFloat const kTHLConfirmationViewButtonHeight = 50;
 
 - (UIButton *)newAcceptButton {
     UIButton *button = [UIButton new];
-    button.backgroundColor = kTHLNUIActionColor;
-    [button setTitleColor:[UIColor whiteColor]];
+    button.backgroundColor = kTHLNUIAccentColor;
+    [button setTitleColor:[UIColor blackColor]];
     return button;
 }
 - (UIButton *)newDeclineButton {

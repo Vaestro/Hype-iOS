@@ -7,19 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "THLDashboardView.h"
 #import "UIScrollView+EmptyDataSet.h"
 
-@protocol THLDashboardView;
+@class THLViewDataSource;
 
 @interface THLDashboardViewController : UIViewController
 <
-THLDashboardView,
 UICollectionViewDelegate,
 UICollectionViewDelegateFlowLayout,
 UICollectionViewDataSource,
 DZNEmptyDataSetSource,
 DZNEmptyDataSetDelegate
 >
+@property (nonatomic, strong) THLViewDataSource *dataSource;
+@property (nonatomic, strong) RACCommand *selectedIndexPathCommand;
+@property (nonatomic, strong) RACCommand *loginCommand;
+@property (nonatomic, strong) RACCommand *refreshCommand;
+@property (nonatomic) BOOL showRefreshAnimation;
+@property (nonatomic) NSNumber *unopenedInviteCount;
+@property (nonatomic) BOOL viewAppeared;
 
 @end
