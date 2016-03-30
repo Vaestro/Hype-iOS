@@ -81,7 +81,7 @@ UICollectionViewDelegateFlowLayout
     self.automaticallyAdjustsScrollViewInsets = YES;
     
     _collectionView = [self newCollectionView];
-    [self.view addSubviews:@[_labelOne, _earnMoreCreditsButton, _userCreditsLabel, _collectionView]];
+    [self.view addSubviews:@[_labelOne, _userCreditsLabel, _collectionView]];
     
     WEAKSELF();
     [_labelOne makeConstraints:^(MASConstraintMaker *make) {
@@ -93,14 +93,14 @@ UICollectionViewDelegateFlowLayout
         make.right.left.insets(kTHLEdgeInsetsNone());
     }];
     
-    [_earnMoreCreditsButton makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(WSELF.userCreditsLabel.mas_bottom).insets(kTHLEdgeInsetsHigh());
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH*0.80, 50));
-        make.centerX.equalTo(0);
-    }];
+//    [_earnMoreCreditsButton makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(WSELF.userCreditsLabel.mas_bottom).insets(kTHLEdgeInsetsHigh());
+//        make.size.equalTo(CGSizeMake(SCREEN_WIDTH*0.80, 50));
+//        make.centerX.equalTo(0);
+//    }];
 
     [_collectionView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(WSELF.earnMoreCreditsButton.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+        make.top.equalTo(WSELF.userCreditsLabel.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
         make.left.right.insets(kTHLEdgeInsetsNone());
         make.bottom.equalTo(kTHLEdgeInsetsNone());
     }];

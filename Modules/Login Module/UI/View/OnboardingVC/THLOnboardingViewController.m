@@ -90,15 +90,14 @@
                                                                                                body:@"Pick the event of your choice, invite your friends to join your party, and plan the night with the party chat."
                                                                                               image:nil];
     
-    OnboardingContentViewController *thirdPage = [OnboardingContentViewController contentWithTitle:@"YOUR HYPE TEAM"
-                                                                                               body:@"Our team is always on call to answer any questions you may have to ensure a smooth night."
+    OnboardingContentViewController *thirdPage = [OnboardingContentViewController contentWithTitle:@"EARN GREAT PERKS"
+                                                                                               body:@"For each friend that attends your event, you will get credits redeemable for perks like a free limo ride."
                                                                                               image:nil];
     
-    OnboardingContentViewController *fourthPage = [OnboardingContentViewController contentWithTitle:@"EARN GREAT PERKS"
-                                                                                              body:@"For each friend that attends your event, you will get credits redeemable for perks like a free limo ride."
-                                                                                             image:nil];
+    OnboardingContentViewController *fourthPage = [OnboardingContentViewController contentWithTitle:@"YOUR HYPE TEAM"
+                                                                                               body:@"Our team is always on call to answer any questions you may have to ensure a smooth night."
+                                                                                              image:nil];
 
-    
     OnboardingContentViewController *fifthPage = [OnboardingContentViewController
                                                    finalContentWithTitle:@"Signup for a great night tonight"
                                                    body:nil

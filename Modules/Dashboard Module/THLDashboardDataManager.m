@@ -37,7 +37,7 @@
         //        HACK to get guestlist Invite to update with updated Guestlist
         for (THLGuestlistInviteEntity *guestlistInviteEntity in entities) {
             guestlistInviteEntity.updatedAt = [NSDate date];
-            if (!guestlistInviteEntity.didOpen && guestlistInviteEntity.response == THLStatusPending) {
+            if (!guestlistInviteEntity.didOpen && guestlistInviteEntity.response == THLStatusPending && [guestlistInviteEntity.date thl_isOrAfterToday]) {
                 unopenedGuestlistInviteCount = @([unopenedGuestlistInviteCount intValue] + 1);
             }
         }
