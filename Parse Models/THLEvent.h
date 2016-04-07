@@ -27,4 +27,6 @@
 @property (nonatomic) int maleRatio;
 @property (nonatomic) int femaleRatio;
 @property (nonatomic, retain) NSString *chatMessage;
+@property (nonatomic) int ageRequirement;
+
 @end

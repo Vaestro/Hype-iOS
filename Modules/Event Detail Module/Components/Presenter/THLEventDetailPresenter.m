@@ -113,7 +113,8 @@
     [self.view setLocationAddress:_eventEntity.location.fullAddress];
     [self.view setLocationMusicTypes:[NSString stringWithFormat:@"%@", [_eventEntity.location.musicTypes componentsJoinedByString:@" | "]]];
     [self.view setLocationAttireRequirement:_eventEntity.location.attireRequirement];
-    
+    [self.view setAgeRequirement:[NSString stringWithFormat:@"%d+", _eventEntity.ageRequirement]];
+
     [self.view setExclusiveEvent:_eventEntity.requiresApproval];
     if (_eventEntity.maleRatio == 0) {
         [self.view setRatioInfo:@"Girls Only"];
@@ -125,7 +126,6 @@
     } else {
         [self.view setRatioInfo:@"No ratio required"];
     }
-
 }
 
 - (void)configureNavigationBar:(THLEventNavigationBar *)navBar {

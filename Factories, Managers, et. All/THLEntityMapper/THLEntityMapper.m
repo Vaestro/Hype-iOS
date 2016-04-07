@@ -55,6 +55,7 @@
         entity.femaleRatio = event.femaleRatio;
         entity.requiresApproval = event.requiresApproval;
         entity.chatMessage = event.chatMessage;
+        entity.ageRequirement = event.ageRequirement;
         return entity;
     } else {
         return nil;

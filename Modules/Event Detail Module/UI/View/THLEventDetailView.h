@@ -17,6 +17,7 @@
 @property (nonatomic, copy) NSString *promoInfo;
 @property (nonatomic, copy) NSString *ratioInfo;
 @property (nonatomic, copy) NSString *coverInfo;
+@property (nonatomic, copy) NSString *ageRequirement;
 @property (nonatomic, copy) NSString *locationName;
 @property (nonatomic, copy) NSString *locationInfo;
 @property (nonatomic, copy) NSString *locationAddress;

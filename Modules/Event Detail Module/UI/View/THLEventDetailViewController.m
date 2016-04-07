@@ -52,6 +52,7 @@
 @synthesize locationInfo;
 @synthesize locationAddress;
 @synthesize locationAttireRequirement;
+@synthesize ageRequirement;
 @synthesize locationMusicTypes;
 @synthesize dismissCommand;
 @synthesize locationPlacemark;
@@ -176,6 +177,8 @@
     RAC(self.needToKnowInfoView, ratioText) = RACObserve(self, ratioInfo);
     RAC(self.needToKnowInfoView, coverFeeText) = RACObserve(self, coverInfo);
     RAC(self.needToKnowInfoView, attireRequirement) = RACObserve(self, locationAttireRequirement);
+    RAC(self.needToKnowInfoView, ageRequirement) = RACObserve(self, ageRequirement);
+
     RAC(self.musicTypesView, musicTypesInfo) = RACObserve(self, locationMusicTypes);
 
     RAC(self.mapView, locationName) = RACObserve(self, locationName);
