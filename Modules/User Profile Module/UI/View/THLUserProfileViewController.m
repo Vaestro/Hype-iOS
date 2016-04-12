@@ -19,6 +19,7 @@
 #import "THLTextEntryViewController.h"
 #import "THLFAQViewController.h"
 #import "THLUserManager.h"
+#import "Intercom/intercom.h"
 #import "THLUser.h"
 #import "Parse.h"
 
@@ -84,6 +85,7 @@ THLTextEntryViewDelegate
     
     self.tableCellNames = @[@"Invite Friends",@"Redeem Code", @"Privacy Policy", @"Terms & Conditions", @"Contact Us", @"Logout"];
     self.navigationItem.title = @"MY PROFILE";
+    self.navigationItem.leftBarButtonItem = [self newBarButtonItem];
 }
 
 #pragma mark - View Setup
@@ -303,6 +305,18 @@ THLTextEntryViewDelegate
 }
 
 #pragma mark - Constructors
+
+- (UIBarButtonItem *)newBarButtonItem
+{
+    return [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Inbox Icon"] style:UIBarButtonItemStylePlain target:self action:@selector(messageButtonPressed)];
+}
+
+- (void)messageButtonPressed
+{
+    [Intercom presentConversationList];
+}
+
+
 - (UITableView *)newTableView {
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     tableView.backgroundColor = kTHLNUISecondaryBackgroundColor;

@@ -17,6 +17,7 @@
 #import "THLNumberVerificationModuleInterface.h"
 #import "THLFacebookPictureModuleInterface.h"
 #import "THLUser.h"
+#import "Intercom/intercom.h"
 
 
 @interface THLLoginWireframe()

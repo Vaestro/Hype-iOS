@@ -9,6 +9,20 @@
 #import "THLPubnubManager.h"
 #import "THLUser.h"
 #import "THLHostEntity.h"
+#import "CocoaLumberjack.h"
+
+
+#if DEBUG
+static NSString *publishKey = @"pub-c-9014e182-3d38-4352-b919-a7f81bc5ebab";
+static NSString *subscribeKey = @"sub-c-53537a22-c380-11e5-bcee-0619f8945a4f";
+#else
+static NSString *publishKey = @"pub-c-a6ad6c13-a9fc-4f6b-aa5c-12b115d5f030";
+static NSString *subscribeKey = @"sub-c-9551fcaa-c380-11e5-8a35-0619f8945a4f";
+#endif
+
+
+
+static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 @interface THLPubnubManager ()<PNObjectEventListener>
 
@@ -29,7 +43,7 @@
 }
 
 - (void)setup {
-    self.configuration = [PNConfiguration configurationWithPublishKey:@"pub-c-a6ad6c13-a9fc-4f6b-aa5c-12b115d5f030" subscribeKey:@"sub-c-9551fcaa-c380-11e5-8a35-0619f8945a4f"];
+    self.configuration = [PNConfiguration configurationWithPublishKey:publishKey subscribeKey:subscribeKey];
     self.configuration.uuid = [THLUser currentUser].objectId;
     self.client = [PubNub clientWithConfiguration:self.configuration];
     
@@ -45,6 +59,26 @@
     [self.client addListener:self];
     self.results = [[NSMutableArray alloc] init];
 }
+
+
+- (void)configureUUID:(NSString *)userId
+{
+    PNConfiguration *configuration = self.client.currentConfiguration;
+    
+    if ([configuration.uuid isEqualToString:userId]) {
+        DDLogInfo(@"uuid has already been set");
+        return;
+    } else {
+        configuration.uuid = userId;
+        __weak __typeof(self) weakSelf = self;
+        
+        [self.client copyWithConfiguration:configuration completion:^(PubNub *client) {
+            weakSelf.client = client;
+            DDLogInfo(@"uuid has been assigned");
+        }];
+    }
+}
+
 
 - (void)didRegisterForRemoteToken:(NSData *)deviceToken {
     NSData *oldToken = [[NSUserDefaults standardUserDefaults] dataForKey:@"DeviceToken"];
@@ -144,7 +178,7 @@
 //    }];
     
     [self.client publish:[message toObject] toChannel:channel mobilePushPayload:@{@"aps":@{@"alert":message.text}} compressed:YES withCompletion:^(PNPublishStatus *status) {
-        //
+        DDLogInfo(@"status is : %@", status);
     }];
 }
 
@@ -161,7 +195,7 @@
 - (void)publishFirstMessageFromChannel:(NSString *)channel withHost:(THLUserEntity *)host andChatMessage:(NSString *)chatMessage {
     THLMessage *message = [[THLMessage alloc] initWithText:@"Hello, I am your concierge for this event. Feel free to ask any questions you may have regarding the event!" andHost:host];
     [self.client publish:[message toObjectWithUser:host] toChannel:channel mobilePushPayload:@{@"aps":@{@"alert":message.text}} compressed:YES withCompletion:^(PNPublishStatus *status) {
-        //
+        
     }];
 }
 

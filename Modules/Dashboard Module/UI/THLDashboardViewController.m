@@ -20,6 +20,7 @@
 #import "THLDashboardTicketCellViewModel.h"
 #import "THLGuestlistInviteEntity.h"
 #import "THLUser.h"
+#import "Intercom/intercom.h"
 
 @interface THLDashboardViewController()
 
@@ -27,6 +28,7 @@
 
 @property (nonatomic, strong) ORStackScrollView *scrollView;
 @property (nonatomic, strong) UILabel *acceptedSectionLabel;
+@property (nonatomic, strong) UIBarButtonItem *messageButton;
 @end
 
 @implementation THLDashboardViewController
@@ -55,12 +57,14 @@
     _collectionView = [self newCollectionView];
     _scrollView = [self newScrollView];
     _acceptedSectionLabel = [self newAcceptedSectionLabel];
+    _messageButton = [self newBarButtonItem];
 //    _eventTicketView = [self newEventTicketView];
 }
 
 - (void)layoutView {
     self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
     self.navigationItem.title = @"MY EVENTS";
+    self.navigationItem.leftBarButtonItem = _messageButton;
 
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.automaticallyAdjustsScrollViewInsets = YES;
@@ -122,6 +126,17 @@
     collectionView.delegate = self;
     return collectionView;
 }
+
+- (UIBarButtonItem *)newBarButtonItem
+{
+    return [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Inbox Icon"] style:UIBarButtonItemStylePlain target:self action:@selector(messageButtonPressed)];
+}
+
+- (void)messageButtonPressed
+{
+    [Intercom presentConversationList];
+}
+
 
 - (void)configureDataSource:(THLViewDataSource *)dataSource {
     _collectionView.dataSource = dataSource;

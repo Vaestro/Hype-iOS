@@ -154,7 +154,6 @@
                                                     }
                                                     
                                                     [[THLPubnubManager sharedInstance] publishFirstMessageFromChannel:[NSString stringWithFormat:@"%@_Host", guestlist.objectId] withHost:eventEntity.host andChatMessage:eventEntity.chatMessage];
-                                                    
                                                 }
                                                 
                                             } else {

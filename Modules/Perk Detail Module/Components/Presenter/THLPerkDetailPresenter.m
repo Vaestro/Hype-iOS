@@ -13,6 +13,7 @@
 #import "THLUser.h"
 #import "THLPerkStoreItemEntity.h"
 #import "THLConfirmationView.h"
+#import "Intercom/intercom.h"
 
 @interface THLPerkDetailPresenter()
 <
@@ -141,6 +142,18 @@ THLPerkDetailInteractorDelegate
 }
 
 - (void)interactor:(THLPerkDetailInteractor *)interactor didPurchasePerkStoreItem:(NSError *)error {
+    NSDate *currDate = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSS'Z'"];
+    NSString *dateString = [dateFormatter stringFromDate:currDate];
+    
+//    [Intercom enableLogging];
+    [Intercom logEventWithName:@"store_purchase" metaData: @{
+                                                             @"order_date": dateString,
+                                                             @"perk_store_item": _perkStoreItemEntity.name,
+                                                             @"credits_left": [NSNumber numberWithFloat:[THLUser currentUser].credits]
+                                                            }];
+    
     [self.confirmationView setSuccessWithTitle:@"Perk Redeemed"
                                         Message:[NSString stringWithFormat:@"You have successfully redeemed your credits for %@. Check your email for further instructions.", _perkStoreItemEntity.name]];
 }

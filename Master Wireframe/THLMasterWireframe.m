@@ -15,6 +15,8 @@
 //Utilities
 #import "THLDependencyManager.h"
 #import "THLUserManager.h"
+#import "Intercom/intercom.h"
+#import "THLUser.h"
 
 //Wireframes
 #import "THLLoginWireframe.h"
@@ -69,6 +71,7 @@ THLWaitlistPresenterDelegate
 }
 
 - (void)routeLoggedInUserFlow {
+    [Intercom registerUserWithUserId:[THLUser currentUser].objectId];
     if ([THLUserManager userIsGuest]) {
         [self presentGuestFlow];
     }
@@ -180,6 +183,7 @@ THLWaitlistPresenterDelegate
 	if (!error) {
         [THLUserManager makeCurrentInstallation];
         [THLUserManager logCrashlyticsUser];
+        [Intercom registerUserWithUserId:[THLUser currentUser].objectId];
         Mixpanel *mixpanel = [Mixpanel sharedInstance];
         [mixpanel track:@"CompletedSignup"];
 		[self routeLoggedInUserFlow];
@@ -201,6 +205,7 @@ THLWaitlistPresenterDelegate
 
 - (void)logOutUser {
     [THLUserManager logUserOut];
+    [Intercom reset];
     [_dependencyManager.databaseManager dropDB];
     _guestWireframe = nil;
     _hostWireframe = nil;

@@ -12,6 +12,7 @@
 #import "THLEventDiscoveryCellViewModel.h"
 #import "UIScrollView+SVPullToRefresh.h"
 #import "THLAppearanceConstants.h"
+#import "Intercom/intercom.h"
 
 @interface THLEventDiscoveryViewController ()
 <
@@ -39,11 +40,13 @@ UICollectionViewDelegateFlowLayout
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	[_collectionView reloadData];
+    
 }
 
 - (void)layoutView {
     self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
     self.navigationItem.title = @"NEW YORK";
+    self.navigationItem.leftBarButtonItem = [self newBarButtonItem];
 
 	self.edgesForExtendedLayout = UIRectEdgeNone;
 	self.automaticallyAdjustsScrollViewInsets = YES;
@@ -115,6 +118,17 @@ UICollectionViewDelegateFlowLayout
 	});
 
 }
+
+- (UIBarButtonItem *)newBarButtonItem
+{
+    return [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Inbox Icon"] style:UIBarButtonItemStylePlain target:self action:@selector(messageButtonPressed)];
+}
+
+- (void)messageButtonPressed
+{
+    [Intercom presentConversationList];
+}
+
 
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {

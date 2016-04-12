@@ -25,6 +25,7 @@
 #import "THLChatRoomViewController.h"
 #import "THLChatListViewController.h"
 #import "THLUser.h"
+#import "Intercom/intercom.h"
 
 @interface THLGuestFlowWireframe()
 <
@@ -96,20 +97,19 @@ THLLoginModuleDelegate
 
 - (void)configureMasterTabViewController:(UITabBarController *)masterTabBarController {
     _masterTabBarController = masterTabBarController;
-    UINavigationController *messages = [UINavigationController new];
+    
     UINavigationController *discovery = [UINavigationController new];
     UINavigationController *dashboard = [UINavigationController new];
     UINavigationController *perks = [UINavigationController new];
     UINavigationController *profile = [UINavigationController new];
     
-    [self presentMessageListInterfaceInNavigationController:messages];
     [self presentDashboardInterfaceInNavigationController:dashboard];
     [self presentEventDiscoveryInterfaceInNavigationController:discovery];
     [self presentPerkStoreInterfaceInNavigationController:perks];
     [self presentUserProfileInterfaceInNavigationController:profile];
     
-    messages.tabBarItem.image = [UIImage imageNamed:@"Inbox Icon"];
-    messages.tabBarItem.title = @"Messages";
+//    messages.tabBarItem.image = [UIImage imageNamed:@"Inbox Icon"];
+//    messages.tabBarItem.title = @"Messages";
     dashboard.tabBarItem.image = [UIImage imageNamed:@"Lists Icon"];
     dashboard.tabBarItem.title = @"My Events";
     discovery.tabBarItem.image = [UIImage imageNamed:@"Home Icon"];
@@ -118,11 +118,11 @@ THLLoginModuleDelegate
     profile.tabBarItem.title = @"Profile";
     perks.tabBarItem.image = [UIImage imageNamed:@"Perks Icon"];
     perks.tabBarItem.title = @"Perks";
-
-    NSArray *views = @[messages, dashboard, discovery, perks, profile];
+    
+    NSArray *views = @[discovery, dashboard, perks, profile];
     
     _masterTabBarController.viewControllers = views;
-    [_masterTabBarController setSelectedIndex:2];
+    [_masterTabBarController setSelectedIndex:0];
     _masterTabBarController.view.autoresizingMask=(UIViewAutoresizingFlexibleHeight);
 }
 
@@ -209,6 +209,13 @@ THLLoginModuleDelegate
     [_perkDetailWireframe.moduleInterface setModuleDelegate:self];
     [_perkDetailWireframe.moduleInterface presentPerkDetailInterfaceForPerk:perkStoreItemEntity onViewController:controller];
 }
+
+- (void)messageButtonPressed
+{
+    [Intercom presentMessageComposer];
+}
+
+
 
 #pragma mark - THLDashboardModuleDelegate
 - (void)dashboardModule:(id<THLDashboardModuleInterface>)module didClickToViewEvent:(THLEventEntity *)event {

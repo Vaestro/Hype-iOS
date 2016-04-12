@@ -15,6 +15,7 @@
 #import "THLUser.h"
 #import "THLActionButton.h"
 #import "THLCreditsExplanationView.h"
+#import "Intercom/intercom.h"
 
 @interface THLPerkStoreViewController ()
 <
@@ -77,6 +78,7 @@ UICollectionViewDelegateFlowLayout
 - (void)layoutView {
     self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
     self.navigationController.navigationBar.topItem.title = @"PERKS";
+    self.navigationItem.leftBarButtonItem = [self newBarButtonItem];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.automaticallyAdjustsScrollViewInsets = YES;
     
@@ -187,6 +189,18 @@ UICollectionViewDelegateFlowLayout
     [barButtonItem setTintColor:[UIColor whiteColor]];
     return barButtonItem;
 }
+
+
+- (UIBarButtonItem *)newBarButtonItem
+{
+    return [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Inbox Icon"] style:UIBarButtonItemStylePlain target:self action:@selector(messageButtonPressed)];
+}
+
+- (void)messageButtonPressed
+{
+    [Intercom presentConversationList];
+}
+
 
 - (void)configureDataSource:(THLViewDataSource *)dataSource {
     _collectionView.dataSource = dataSource;

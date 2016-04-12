@@ -14,13 +14,19 @@
 #import <DigitsKit/DigitsKit.h>
 #import <Optimizely/Optimizely.h>
 #import "Branch.h"
-
 //#import <Stripe/Stripe.h>
-
 #import "THLDependencyManager.h"
 #import "THLMasterWireframe.h"
 #import "THLAppearanceUtils.h"
 #import "THLPubnubManager.h"
+#import "Intercom/intercom.h"
+
+//Logging framework
+//#define LOG_LEVEL_DEF ddLogLevel
+#import "CocoaLumberjack.h"
+static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
+
+
 
 #define MIXPANEL_TOKEN @"2946053341530a84c490a107bd3e5fff"
 
@@ -40,13 +46,28 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
 @implementation AppDelegate
 
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    
     
 	// Initialize Parse.
     [Parse enableLocalDatastore];
 	[Parse setApplicationId:applicationId
 				  clientKey:clientKeyId];
+    
+    
     [[THLPubnubManager sharedInstance] setup];
+    
+    //Initialize Intercom
+    [Intercom setApiKey:@"ios_sdk-3899f433e0b112fe8daff2cc4f8bfdff18fad071" forAppId:@"eixn8wsn"];
+    [Intercom enableLogging];
+    
+    //Configuring Lumberjack logging framework
+    setenv("XcodeColors", "YES", 0);
+    [DDLog addLogger:[DDASLLogger sharedInstance]];
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    [[DDTTYLogger sharedInstance] setColorsEnabled:YES];
+    
 
 	// [Optional] Track statistics around application opens.
     if (application.applicationState != UIApplicationStateBackground) {
@@ -103,7 +124,7 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
     
     // Initialize Branch
     Branch *branch = [Branch getInstance];
-//#warning Remove for launch
+    //#warning Remove for launch
 //    Branch *branch = [Branch getTestInstance];
     
     [branch initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
@@ -115,7 +136,8 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
 									didFinishLaunchingWithOptions:launchOptions];
 }
 
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
     // Store the deviceToken in the current installation and save it to Parse.
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     currentInstallation.deviceToken = @"";
@@ -130,6 +152,13 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
     [mixpanel.people addPushDeviceToken:deviceToken];
 }
 
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    DDLogWarn(@"application failed to register for remote notifications with the following error: %@", error);
+}
+
+
+
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [PFPush handlePush:userInfo];
     if (application.applicationState == UIApplicationStateInactive) {
@@ -139,10 +168,10 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
     }
 }
 
-- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
-    //register to receive notifications
-    [application registerForRemoteNotifications];
-}
+//- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
+//    //register to receive notifications
+//    [application registerForRemoteNotifications];
+//}
 
 //For interactive notification only
 - (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void(^)())completionHandler

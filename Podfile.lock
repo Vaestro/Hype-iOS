@@ -103,6 +103,7 @@ PODS:
   - Gizou (0.1.3)
   - iCarousel (1.8.2)
   - IHKeyboardAvoiding (2.5)
+  - Intercom (2.3.19)
   - JCDialPad (0.1.1):
     - libPhoneNumber-iOS
   - KVNProgress (2.2.2)
@@ -246,6 +247,7 @@ DEPENDENCIES:
   - Gizou
   - iCarousel (~> 1.8)
   - IHKeyboardAvoiding
+  - Intercom
   - KVNProgress
   - libPhoneNumber-iOS (~> 0.8)
   - LinqToObjectiveC (~> 2.0)
@@ -310,6 +312,7 @@ SPEC CHECKSUMS:
   Gizou: 93853bf634a9382c257795db052aa9a75e972c43
   iCarousel: 67c8a43da5a46795b56aadfc96cd36a16f6149b2
   IHKeyboardAvoiding: 8f14fed93405dd2c44ce070a26f780d9e477538c
+  Intercom: de20d3f2eeb7798aac66b26a7a7b92979211e05c
   JCDialPad: d977d1ff76eaaa1939c5f3b8882937094e093b3d
   KVNProgress: 4697347e21e37fdaa5264ebc24e377c205a50328
   libPhoneNumber-iOS: 7bfd00f843fdcd82b5182b463e8eb3b27579f41d
