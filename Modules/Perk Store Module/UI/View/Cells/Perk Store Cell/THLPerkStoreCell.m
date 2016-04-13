@@ -56,7 +56,7 @@
     
     [_perkTitleLabel makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.centerY.equalTo(0);
-        make.top.left.right.left.insets(kTHLEdgeInsetsNone());
+        make.left.right.insets(kTHLEdgeInsetsHigh());
         
     }];
     
@@ -99,7 +99,7 @@
 }
 
 - (UILabel *)newPerkTitleLabel {
-    UILabel *label = THLNUILabel(kTHLNUIRegularTitle);
+    UILabel *label = THLNUILabel(kTHLNUIDetailBoldTitle);
     label.lineBreakMode = NSLineBreakByWordWrapping;
     label.numberOfLines = 3;
     label.textAlignment = NSTextAlignmentCenter;

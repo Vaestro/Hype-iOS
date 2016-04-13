@@ -78,6 +78,8 @@
     UIImageView *imageView = [UIImageView new];
     imageView.contentMode = UIViewContentModeScaleAspectFill;
     imageView.clipsToBounds = YES;
+    imageView.layer.cornerRadius = 5;
+    imageView.layer.masksToBounds = YES;
     [imageView dimView];
     return imageView;
 }

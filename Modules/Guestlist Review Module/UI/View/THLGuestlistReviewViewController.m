@@ -302,7 +302,8 @@ static CGFloat const CELL_SPACING = 10;
 #pragma mark - UICollectionViewDelegate
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat width = ([self contentViewWithInsetsWidth] - CELL_SPACING)/2.0;
-    return CGSizeMake(width, width + 10);}
+    return CGSizeMake(width, width + 10);
+}
 
 - (CGFloat)contentViewWithInsetsWidth {
     return ScreenWidth - (COLLECTION_VIEW_EDGEINSETS.left + COLLECTION_VIEW_EDGEINSETS.right);

@@ -42,8 +42,11 @@ UICollectionViewDelegateFlowLayout
 }
 
 - (void)layoutView {
-    self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
-    self.navigationItem.title = @"NEW YORK";
+    self.view.backgroundColor = kTHLNUIPrimaryBackgroundColor;
+    NSDictionary *size = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Raleway-Regular" size:14.0],NSFontAttributeName, nil];
+    
+    self.navigationController.navigationBar.titleTextAttributes = size;
+    self.navigationItem.title = @"THIS WEEK IN NEW YORK";
 
 	self.edgesForExtendedLayout = UIRectEdgeNone;
 	self.automaticallyAdjustsScrollViewInsets = YES;
@@ -52,7 +55,8 @@ UICollectionViewDelegateFlowLayout
 	[self.view addSubview:_collectionView];
     
 	[_collectionView makeConstraints:^(MASConstraintMaker *make) {
-		make.left.right.top.bottom.insets(kTHLEdgeInsetsNone());
+        make.top.insets(kTHLEdgeInsetsLow());
+		make.left.right.bottom.insets(kTHLEdgeInsetsNone());
 	}];
 }
 
@@ -83,11 +87,12 @@ UICollectionViewDelegateFlowLayout
 - (UICollectionView *)newCollectionView {
 	UICollectionViewFlowLayout *flowLayout = [UICollectionViewFlowLayout new];
 	flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
-    flowLayout.minimumInteritemSpacing = 2.5;
-    flowLayout.minimumLineSpacing = 2.5;
+    flowLayout.minimumInteritemSpacing = 5;
+    flowLayout.minimumLineSpacing = 5;
+    
 	UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) collectionViewLayout:flowLayout];
 	collectionView.nuiClass = kTHLNUIBackgroundView;
-    collectionView.backgroundColor = kTHLNUISecondaryBackgroundColor;
+    collectionView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
 	collectionView.alwaysBounceVertical = YES;
 	collectionView.delegate = self;
 	return collectionView;
@@ -122,7 +127,7 @@ UICollectionViewDelegateFlowLayout
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-	return CGSizeMake(ViewWidth(collectionView), DiscoveryCellHeight(ViewWidth(collectionView)));
+	return CGSizeMake(DiscoveryCellWidth(collectionView), DiscoveryCellHeight(collectionView));
 }
 
 #pragma mark - EmptyDataSetDelegate

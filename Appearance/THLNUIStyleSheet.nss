@@ -40,6 +40,13 @@ font-color: @primaryFontColor;
 font-size: 16;
 }
 
+DetailBoldTitle {
+font-name: @primaryBoldFontName;
+font-color: @primaryFontColor;
+font-size: 16;
+text-transform: uppercase;
+}
+
 RegularDetailTitle {
 font-name: @secondaryRegularFontName;
 font-color: @primaryFontColor;
