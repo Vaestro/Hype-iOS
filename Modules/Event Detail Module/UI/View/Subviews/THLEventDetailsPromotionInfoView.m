@@ -47,7 +47,14 @@ static CGFloat const kTHLEventDetailsPromotionInfoViewImageViewHeight = 150;
     WEAKSELF();
     [super bindView];
     RAC(self.eventDetailsLabel, text) = RACObserve(self, promotionInfo);
-    
+//    [RACObserve(self, promotionInfo) subscribeNext:^(NSString *text) {
+//        if (text.length > 1) {
+//            [WSELF.eventDetailsLabel setText:text];
+//            [super.titleLabel setHidden:FALSE];
+//        } else {
+//            [super.titleLabel setHidden:TRUE];
+//        }
+//    }];
     [[RACObserve(self, promoImageURL) filter:^BOOL(NSURL *url) {
         return [url isValid];
     }] subscribeNext:^(NSURL *url) {

@@ -2,17 +2,14 @@
 //  THLTitledContentView.m
 //  Hypelist2point0
 //
-//  Created by Phil Meyers IV on 8/25/15.
+//  Created by Edgar Li on 8/25/15.
 //  Copyright (c) 2015 Hypelist. All rights reserved.
 //
 
 #import "THLTitledContentView.h"
 #import "THLAppearanceConstants.h"
 
-//static CGFloat const kTHLEventTitlesViewSeparatorViewHeight = 0.5;
-
 @interface THLTitledContentView()
-@property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIView *separatorView;
 @property (nonatomic, strong) UIView *contentView;
 @end
@@ -29,13 +26,11 @@
 
 - (void)constructView {
     _titleLabel = [self newTitleLabel];
-//    _separatorView = [self newSeparatorView];
     _contentView = [self newContentView];
 }
 
 - (void)layoutView {
     [self addSubviews:@[_titleLabel,
-//                        _separatorView,
                         _contentView]];
     
     [_titleLabel makeConstraints:^(MASConstraintMaker *make) {
@@ -43,12 +38,6 @@
     }];
     
     WEAKSELF();
-//    [_separatorView makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.right.insets(kTHLEdgeInsetsNone());
-//        make.top.equalTo(WSELF.mas_baseline).insets(kTHLEdgeInsetsHigh());
-//        make.height.equalTo(kTHLEventTitlesViewSeparatorViewHeight);
-//    }];
-    
     [_contentView makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF titleLabel].mas_bottom);
         make.left.right.equalTo([WSELF titleLabel]);
@@ -59,7 +48,6 @@
 - (void)bindView {
     RAC(self.titleLabel, text) = RACObserve(self, title);
     RAC(self.titleLabel, textColor) = RACObserve(self, titleColor);
-//    RAC(self.separatorView, backgroundColor) = RACObserve(self, dividerColor);
 }
 
 #pragma mark - Constructors

@@ -56,7 +56,7 @@
         if (![THLUser currentUser]) {
             [WSELF handleNeedLoginAction];
         } else {
-            if (_guestHasAcceptedInvite) {
+            if (WSELF.guestHasAcceptedInvite) {
                 [WSELF.view showAlertView];
 //                [WSELF handleViewGuestlistAction];
             } else {
@@ -88,24 +88,11 @@
 //    NSNumber *femaleCoverRange = [NSNumber numberWithFloat:_eventEntity.femaleCoverRange];
     NSNumber *maleCover = [NSNumber numberWithFloat:_eventEntity.maleCover];
     NSNumber *femaleCover = [NSNumber numberWithFloat:_eventEntity.femaleCover];
-//    NSNumber *minMaleCover = [NSNumber numberWithFloat:(_eventEntity.maleCover - _eventEntity.maleCoverRange)];
-//    NSNumber *minFemaleCover = [NSNumber numberWithFloat:(_eventEntity.femaleCover - _eventEntity.femaleCoverRange)];
-//    if (maleCover > 0 && femaleCover == 0) {
-//        [self.view setCoverInfo:[NSString stringWithFormat:@"$%@ (Guys only)", maleCover]];
-//    } else if (maleCoverRange > 0 && femaleCover == 0){
-//        [self.view setCoverInfo:[NSString stringWithFormat:@"$%@-%@ (Guys only)", minMaleCover, maleCover]];
-//    } else if (maleCoverRange != 0 && femaleCoverRange != 0){
-//        [self.view setCoverInfo:[NSString stringWithFormat:@"$%@-%@ (Guys) $%@-%@ (Girls)", minMaleCover, maleCover, minFemaleCover, femaleCover]];
-//    } else if (maleCover > 0 && femaleCoverRange > 0) {
-//        [self.view setCoverInfo:[NSString stringWithFormat:@"$%@ (Guys) $%@-%@ (Girls)", maleCover, minFemaleCover, femaleCover]];
-//    } else if (maleCover > 0 && femaleCover > 0) {
-//        [self.view setCoverInfo:[NSString stringWithFormat:@"$%@ (Guys) $%@", maleCover, femaleCover]];
-//    }
     if (_eventEntity.maleCover > 0 && _eventEntity.femaleCover == 0) {
         [self.view setCoverInfo:[NSString stringWithFormat:@"$%@ (Guys only)", maleCover]];
     } else if (_eventEntity.maleCover > 0 && _eventEntity.femaleCover > 0) {
         [self.view setCoverInfo:[NSString stringWithFormat:@"$%@ (Guys) $%@ (Girls)", maleCover, femaleCover]];
-    } else if (maleCover == 0) {
+    } else if (_eventEntity.maleCover == 0) {
         [self.view setCoverInfo:[NSString stringWithFormat:@"No Cover"]];
     }
     [self.view setActionBarButtonCommand:actionBarButtonCommand];
@@ -128,18 +115,6 @@
     }
 }
 
-- (void)configureNavigationBar:(THLEventNavigationBar *)navBar {
-    WEAKSELF();
-//    RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-//        [WSELF handleDismissAction];
-//        return [RACSignal empty];
-//    }];
-//
-//	[navBar setTitleText:_eventEntity.location.name];
-//	[navBar setLocationImageURL:_eventEntity.location.imageURL];
-//	[navBar setDismissCommand:dismissCommand];
-}
-
 - (void)showAlertViewWithMessage:(NSString *)message withAction:(NSArray<UIAlertAction *>*)actions {
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil
                                                                    message:message
@@ -156,12 +131,6 @@
     _eventEntity = eventEntity;
     [_interactor getPlacemarkForLocation:_eventEntity.location];
 	[_wireframe presentInterfaceOnViewController:viewController];
-    
-#ifdef DEBUG
-#else
-    [Answers logCustomEventWithName:@"Events"
-                   customAttributes:@{@"Venue Name & Event Date": [NSString stringWithFormat:@"%@ %@", _eventEntity.location.name, _eventEntity.date.thl_dayOfTheWeek ]}];
-#endif
 }
 
 - (void)checkForInvite {
@@ -201,7 +170,7 @@
     }
 }
 
-//- (void)dealloc {
-//    NSLog(@"Destroyed %@", self);
-//}
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
+}
 @end

@@ -26,6 +26,7 @@
     [super layoutView];
     [self.contentView addSubviews:@[_locationInfoLabel, _readMoreTextButton]];
     
+    WEAKSELF();
     [_locationInfoLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(kTHLEdgeInsetsLow());
         make.left.right.equalTo(kTHLEdgeInsetsNone());
@@ -33,7 +34,7 @@
     }];
     
     [_readMoreTextButton makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_locationInfoLabel.mas_bottom);
+        make.top.equalTo(WSELF.locationInfoLabel.mas_bottom);
         make.left.insets(kTHLEdgeInsetsNone());
         make.bottom.insets(kTHLEdgeInsetsNone());
     }];
@@ -83,9 +84,4 @@
 -(void)hideReadMoreTextButton {
     [self.readMoreTextButton setHidden:YES];
 }
-
-
-//- (void)dealloc {
-//    NSLog(@"Destroyed %@", self);
-//}
 @end

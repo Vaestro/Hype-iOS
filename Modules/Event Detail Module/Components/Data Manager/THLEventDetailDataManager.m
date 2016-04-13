@@ -108,14 +108,14 @@
             if ([[(THLGuestlistInviteEntity *)task.result guestlist].event.objectId isEqualToString:_event.objectId]
                 && [[(THLGuestlistInviteEntity *)task.result guest].objectId isEqualToString:[THLUser currentUser].objectId]
                 && [(THLGuestlistInviteEntity *)task.result isAccepted]) {
-                [SSELF.delegate dataManager:SSELF didGetNotifiedAboutNewGuestlistInvite:task.result forEvent:_event error:task.error];
+                [SSELF.delegate dataManager:SSELF didGetNotifiedAboutNewGuestlistInvite:task.result forEvent:WSELF.event error:task.error];
             }
             return nil;
         }];
     }
 }
 
-//- (void)dealloc {
-//    NSLog(@"Destroyed %@", self);
-//}
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
+}
 @end

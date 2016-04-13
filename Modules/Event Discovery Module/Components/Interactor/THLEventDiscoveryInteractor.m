@@ -37,7 +37,8 @@ static NSString *const kTHLEventDiscoveryModuleViewKey = @"kTHLEventDiscoveryMod
 }
 
 - (DTTimePeriod *)eventDisplayPeriod {
-	return [DTTimePeriod timePeriodWithSize:DTTimePeriodSizeWeek amount:1 startingAt:[NSDate date]];
+//    Starting date is 5 hours before current date/time. 
+	return [DTTimePeriod timePeriodWithSize:DTTimePeriodSizeWeek amount:1 startingAt:[[NSDate date] dateByAddingTimeInterval:-60*300]];
 }
 
 #pragma mark - DataSource Construction

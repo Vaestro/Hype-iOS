@@ -149,9 +149,10 @@
     UIView *buttonBackground = [UIView new];
     buttonBackground.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     [self.view addSubview:buttonBackground];
+    WEAKSELF();
     [buttonBackground makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.left.right.insets(kTHLEdgeInsetsNone());
-        make.top.equalTo(_scrollView.mas_bottom);
+        make.top.equalTo(WSELF.scrollView.mas_bottom);
         make.height.equalTo(80);
     }];
     
@@ -187,7 +188,7 @@
     
     [RACObserve(self, locationInfo) subscribeNext:^(NSString *info) {
         if ([info length] <= 117) {
-            [self.locationInfoView hideReadMoreTextButton];
+            [WSELF.locationInfoView hideReadMoreTextButton];
         }
     }];
     
@@ -249,11 +250,6 @@
 - (THLActionButton *)newBottomBar {
     THLActionButton *button = [[THLActionButton alloc] initWithActionStyle];
     [button setTitle:@"Join Guestlist"];
-    
-//    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(-10, -10, SCREEN_WIDTH, 0.5)];
-//    lineView.backgroundColor = kTHLNUIGrayFontColor;
-//    [button addSubview:lineView];
-//    
     return button;
 }
 
