@@ -40,6 +40,8 @@ static NSString *const kTHLNUIUndef = @"";
 static NSString *const kTHLNUIBoldTitle = @"BoldTitle";
 static NSString *const kTHLNUINavBarTitle = @"NavBarTitle";
 static NSString *const kTHLNUIRegularTitle = @"RegularTitle";
+static NSString *const kTHLNUIDetailBoldTitle = @"DetailBoldTitle";
+
 static NSString *const kTHLNUIDetailTitle = @"DetailTitle";
 static NSString *const kTHLNUIRegularDetailTitle = @"RegularDetailTitle";
 static NSString *const kTHLNUIButtonTitle = @"ButtonTitle";

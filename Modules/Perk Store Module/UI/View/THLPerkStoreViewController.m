@@ -17,6 +17,9 @@
 #import "THLCreditsExplanationView.h"
 #import "Intercom/intercom.h"
 
+static UIEdgeInsets const COLLECTION_VIEW_EDGEINSETS = {10, 10, 10, 10};
+static CGFloat const CELL_SPACING = 5;
+
 @interface THLPerkStoreViewController ()
 <
 UICollectionViewDelegate,
@@ -76,7 +79,7 @@ UICollectionViewDelegateFlowLayout
 }
 
 - (void)layoutView {
-    self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
+    self.view.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     self.navigationController.navigationBar.topItem.title = @"PERKS";
     self.navigationItem.leftBarButtonItem = [self newBarButtonItem];
     self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -149,7 +152,7 @@ UICollectionViewDelegateFlowLayout
     flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
     collectionView.nuiClass = kTHLNUIBackgroundView;
-    collectionView.backgroundColor = kTHLNUISecondaryBackgroundColor;
+    collectionView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     collectionView.alwaysBounceVertical = YES;
     collectionView.delegate = self;
     return collectionView;
@@ -241,7 +244,16 @@ UICollectionViewDelegateFlowLayout
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake((ViewWidth(collectionView)), ViewWidth(collectionView)*0.33);
+    CGFloat width = ([self contentViewWithInsetsWidth] - 10)/2.0;
+    return CGSizeMake(width, width*1.20);
+}
+
+- (CGFloat)contentViewWithInsetsWidth {
+    return ScreenWidth - (COLLECTION_VIEW_EDGEINSETS.left + COLLECTION_VIEW_EDGEINSETS.right);
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return COLLECTION_VIEW_EDGEINSETS;
 }
 
 @end

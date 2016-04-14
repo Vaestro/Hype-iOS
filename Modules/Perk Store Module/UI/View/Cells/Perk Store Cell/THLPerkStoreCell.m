@@ -56,7 +56,7 @@
     
     [_perkTitleLabel makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.centerY.equalTo(0);
-        make.top.left.right.left.insets(kTHLEdgeInsetsNone());
+        make.left.right.insets(kTHLEdgeInsetsHigh());
         
     }];
     
@@ -94,14 +94,17 @@
     UIImageView *imageView = [UIImageView new];
     imageView.contentMode = UIViewContentModeScaleAspectFill;
     imageView.clipsToBounds = YES;
+    imageView.layer.cornerRadius = 5;
+    imageView.layer.masksToBounds = YES;
     [imageView dimView];
     return imageView;
 }
 
 - (UILabel *)newPerkTitleLabel {
-    UILabel *label = THLNUILabel(kTHLNUIRegularTitle);
-    label.lineBreakMode = NSLineBreakByWordWrapping;
-    label.numberOfLines = 3;
+    UILabel *label = THLNUILabel(kTHLNUIDetailBoldTitle);
+    label.adjustsFontSizeToFitWidth = YES;
+    label.numberOfLines = 2;
+    label.minimumScaleFactor = 0.5;
     label.textAlignment = NSTextAlignmentCenter;
     return label;
 }

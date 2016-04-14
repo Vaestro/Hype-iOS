@@ -51,14 +51,13 @@
 - (void)presentInterfaceOnViewController:(UIViewController *)viewController {
     _controller = viewController;
     [_presenter configureView:_view];
-//	UINavigationController *eventNavController = [[UINavigationController alloc] initWithRootViewController:_view];
-//	[_presenter configureNavigationBar:eventNavController.navigationBar];
 	[_controller presentViewController:_view animated:YES completion:NULL];
 }
 
 - (void)dismissInterface {
+    WEAKSELF();
     [_view dismissViewControllerAnimated:YES completion:^{
-        [_presenter.moduleDelegate dismissEventDetailWireframe];
+        [WSELF.presenter.moduleDelegate dismissEventDetailWireframe];
     }];
 }
 
@@ -66,7 +65,7 @@
 	return _presenter;
 }
 
-//- (void)dealloc {
-//    NSLog(@"Destroyed %@", self);
-//}
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
+}
 @end

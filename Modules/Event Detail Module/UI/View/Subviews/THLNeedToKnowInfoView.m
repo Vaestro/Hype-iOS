@@ -76,10 +76,16 @@
 
 - (void)bindView {
     [super bindView];
-
+    WEAKSELF();
     RAC(self.ratioInfoLabel, infoText, @"") = RACObserve(self, ratioText);
     RAC(self.coverInfoLabel, infoText, @"") = RACObserve(self, coverFeeText);
     RAC(self.attireRequirementLabel, text, @"") = RACObserve(self, attireRequirement);
+    [[RACObserve(self, ageRequirement) filter:^BOOL(NSString *value) {
+        return value.length > 2;
+    }] subscribeNext:^(NSString *x) {
+        [WSELF.ageRequirementLabel setText:x];
+    }];
+
 }
 
 - (THLPromotionInfoView *)newRatioInfoLabel {

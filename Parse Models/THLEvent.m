@@ -24,6 +24,7 @@
 @dynamic maleRatio;
 @dynamic femaleRatio;
 @dynamic chatMessage;
+@dynamic ageRequirement;
 
 
 + (void)load {

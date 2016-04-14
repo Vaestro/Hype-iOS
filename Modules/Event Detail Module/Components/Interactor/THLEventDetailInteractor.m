@@ -43,4 +43,8 @@
 - (void)dataManager:(THLEventDetailDataManager *)dataManager didGetNotifiedAboutNewGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite forEvent:(THLEventEntity *)event error:(NSError *)error {
     [self.delegate interactor:self didGetGuestlistInvite:guestlistInvite forEvent:event error:error];
 }
+
+- (void)dealloc {
+    NSLog(@"Destroyed %@", self);
+}
 @end

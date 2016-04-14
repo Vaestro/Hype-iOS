@@ -28,7 +28,9 @@
 #define TouchHeightSmall                    32
 #define ViewWidth(v)                        v.frame.size.width
 #define ViewHeight(v)                       v.frame.size.height
-#define DiscoveryCellHeight(v)              v * 0.66
+#define DiscoveryCellWidth(v)               v.frame.size.width - 10
+
+#define DiscoveryCellHeight(v)              v.frame.size.height * 0.33
 #define ViewX(v)                            v.frame.origin.x
 #define ViewY(v)                            v.frame.origin.y
 #define SelfViewWidth                       self.view.bounds.size.width

@@ -114,21 +114,21 @@ THLWaitlistPresenterDelegate
 }
 
 - (void)presentOnboardingAndLoginInterface {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-
-    BOOL userApproved = [userDefaults boolForKey:@"userApproved"];
-
-    if (userApproved) {
+//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+//
+//    BOOL userApproved = [userDefaults boolForKey:@"userApproved"];
+//
+//    if (userApproved) {
         THLLoginWireframe *loginWireframe = [_dependencyManager newLoginWireframe];
         _currentWireframe = loginWireframe;
         [loginWireframe.moduleInterface setModuleDelegate:self];
         [loginWireframe.moduleInterface presentLoginModuleInterfaceWithOnboardingInWindow:_window];
-    } else {
-        THLWaitlistPresenter *waitlistPresenter = [_dependencyManager newWaitlistPresenter];
-        _waitlistPresenter = waitlistPresenter;
-        _waitlistPresenter.delegate = self;
-        [waitlistPresenter presentInterfaceInWindow:_window];
-    }
+//    } else {
+//        THLWaitlistPresenter *waitlistPresenter = [_dependencyManager newWaitlistPresenter];
+//        _waitlistPresenter = waitlistPresenter;
+//        _waitlistPresenter.delegate = self;
+//        [waitlistPresenter presentInterfaceInWindow:_window];
+//    }
 }
 
 - (void)presentLoginInterfaceOnViewController:(UIViewController *)viewController {

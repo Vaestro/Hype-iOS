@@ -23,5 +23,4 @@
 						 wireframe:(THLEventDetailWireframe *)wireframe;
 
 - (void)configureView:(id<THLEventDetailView>)view;
-- (void)configureNavigationBar:(THLEventNavigationBar *)navBar;
 @end

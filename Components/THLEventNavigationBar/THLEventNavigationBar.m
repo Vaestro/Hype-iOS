@@ -195,8 +195,10 @@
 }
 
 - (UILabel *)newDateLabel {
-    UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
-    
+    UILabel *label = [UILabel new];
+    label.textColor = kTHLNUIPrimaryFontColor;
+    label.font = [UIFont fontWithName:@"OpenSans-Regular" size:16];
+
     BLKFlexibleHeightBarSubviewLayoutAttributes *initialLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
     initialLayoutAttributes.alpha = 1.0;
     [label addLayoutAttributes:initialLayoutAttributes forProgress:0.75];

@@ -84,8 +84,4 @@ static CGFloat MAPVIEW_METERS = 1000;
     textView.tintColor = kTHLNUIPrimaryFontColor;
     return textView;
 }
-
-//- (void)dealloc {
-//    NSLog(@"Destroyed %@", self);
-//}
 @end
