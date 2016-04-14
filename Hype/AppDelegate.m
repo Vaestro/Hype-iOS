@@ -18,15 +18,12 @@
 #import "THLDependencyManager.h"
 #import "THLMasterWireframe.h"
 #import "THLAppearanceUtils.h"
-#import "THLPubnubManager.h"
 #import "Intercom/intercom.h"
 
 //Logging framework
 //#define LOG_LEVEL_DEF ddLogLevel
 #import "CocoaLumberjack.h"
 static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
-
-
 
 #define MIXPANEL_TOKEN @"2946053341530a84c490a107bd3e5fff"
 
@@ -55,12 +52,10 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
 	[Parse setApplicationId:applicationId
 				  clientKey:clientKeyId];
     
-    
-    [[THLPubnubManager sharedInstance] setup];
-    
     //Initialize Intercom
     [Intercom setApiKey:@"ios_sdk-3899f433e0b112fe8daff2cc4f8bfdff18fad071" forAppId:@"eixn8wsn"];
     [Intercom enableLogging];
+    [Intercom setPreviewPosition:ICMPreviewPositionTopLeft];
     
     //Configuring Lumberjack logging framework
     setenv("XcodeColors", "YES", 0);
@@ -147,7 +142,6 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
     
         return nil;
     }];
-    [[THLPubnubManager sharedInstance] didRegisterForRemoteToken:deviceToken];
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel.people addPushDeviceToken:deviceToken];
 }
@@ -156,7 +150,6 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
 {
     DDLogWarn(@"application failed to register for remote notifications with the following error: %@", error);
 }
-
 
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {

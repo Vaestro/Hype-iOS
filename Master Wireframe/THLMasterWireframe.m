@@ -72,6 +72,9 @@ THLWaitlistPresenterDelegate
 
 - (void)routeLoggedInUserFlow {
     [Intercom registerUserWithUserId:[THLUser currentUser].objectId];
+    [Intercom updateUserWithAttributes:@{@"email": [THLUser currentUser].email,
+                                         @"name": [THLUser currentUser].fullName
+                                        }];
     if ([THLUserManager userIsGuest]) {
         [self presentGuestFlow];
     }
@@ -183,10 +186,9 @@ THLWaitlistPresenterDelegate
 	if (!error) {
         [THLUserManager makeCurrentInstallation];
         [THLUserManager logCrashlyticsUser];
-        [Intercom registerUserWithUserId:[THLUser currentUser].objectId];
         Mixpanel *mixpanel = [Mixpanel sharedInstance];
         [mixpanel track:@"CompletedSignup"];
-		[self routeLoggedInUserFlow];
+        		[self routeLoggedInUserFlow];
     } else {
         NSLog(@"Login Error:%@", error);
     }
@@ -194,6 +196,7 @@ THLWaitlistPresenterDelegate
 
 - (void)skipUserLogin {
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
+     [Intercom registerUnidentifiedUser];
     [mixpanel track:@"SkippedSignup"];
     [self presentGuestFlow];
 }

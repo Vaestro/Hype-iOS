@@ -7,19 +7,13 @@
 //
 
 #import "THLHostFlowDependencyManager.h"
-
 #import "THLHostFlowWireframe.h"
-
 #import "THLEventDiscoveryWireframe.h"
 #import "THLUserProfileWireframe.h"
 #import "THLHostDashboardWireframe.h"
-#import "THLChatListViewController.h"
-
 #import "THLEventHostingWireframe.h"
 #import "THLGuestlistReviewWireframe.h"
-
 #import "THLMasterNavigationController.h"
-
 #import "THLAppearanceConstants.h"
 #import "RKNotificationHub.h"
 
@@ -44,7 +38,8 @@ THLGuestlistReviewModuleDelegate
 @implementation THLHostFlowWireframe
 @synthesize moduleDelegate;
 
-- (instancetype)initWithDependencyManager:(id<THLHostFlowDependencyManager>)dependencyManager {
+- (instancetype)initWithDependencyManager:(id<THLHostFlowDependencyManager>)dependencyManager
+{
     if (self = [super init]) {
         _dependencyManager = dependencyManager;
     }
@@ -52,7 +47,8 @@ THLGuestlistReviewModuleDelegate
 }
 
 #pragma mark - Routing
-- (void)configureMasterTabViewControllerAndPresentHostFlowInWindow:(UIWindow *)window {
+- (void)configureMasterTabViewControllerAndPresentHostFlowInWindow:(UIWindow *)window
+{
     _window = window;
     _masterTabBarController = [UITabBarController new];
     [self configureMasterTabViewController:_masterTabBarController];
@@ -60,37 +56,38 @@ THLGuestlistReviewModuleDelegate
     [_window makeKeyAndVisible];
 }
 
-- (void)configureMasterTabViewController:(UITabBarController *)masterTabViewController {
+- (void)configureMasterTabViewController:(UITabBarController *)masterTabViewController
+{
     UINavigationController *discovery = [UINavigationController new];
-    UINavigationController *chat = [UINavigationController new];
     UINavigationController *dashboard = [UINavigationController new];
     UINavigationController *profile = [UINavigationController new];
     
     [self presentEventDiscoveryInterfaceInNavigationController:discovery];
-    [self presentMessageListInterfaceInNavigationController:chat];
     [self presentDashboardInterfaceInNavigationController:dashboard];
     [self presentUserProfileInterfaceInNavigationController:profile];
     
     dashboard.tabBarItem.image = [UIImage imageNamed:@"Lists Icon"];
-    chat.tabBarItem.image = [UIImage imageNamed:@"Inbox Icon"];
     discovery.tabBarItem.image = [UIImage imageNamed:@"Home Icon"];
     profile.tabBarItem.image = [UIImage imageNamed:@"Profile Icon"];
     
-    NSArray *views = @[discovery, chat, dashboard, profile];
+    NSArray *views = @[discovery, dashboard, profile];
     
     masterTabViewController.viewControllers = views;
     masterTabViewController.view.autoresizingMask=(UIViewAutoresizingFlexibleHeight);
 }
 
-- (void)showNotificationBadge {
+- (void)showNotificationBadge
+{
     [[_masterTabBarController.tabBar.items objectAtIndex:1] setBadgeValue:@""];
 }
 
-- (id<THLHostFlowModuleInterface>)moduleInterface {
+- (id<THLHostFlowModuleInterface>)moduleInterface
+{
     return self;
 }
 
-- (void)presentHostFlowInWindow:(UIWindow *)window forEventHosting:(THLEventEntity *)eventEntity {
+- (void)presentHostFlowInWindow:(UIWindow *)window forEventHosting:(THLEventEntity *)eventEntity
+{
     /**
      *  Prevents popup notification from instantiating another event hosting module if one is already instantiated
      */
@@ -100,40 +97,40 @@ THLGuestlistReviewModuleDelegate
     }
 }
 
-- (void)presentEventDiscoveryInterfaceInNavigationController:(UINavigationController *)navigationController {
+- (void)presentEventDiscoveryInterfaceInNavigationController:(UINavigationController *)navigationController
+{
     _eventDiscoveryWireframe = [_dependencyManager newEventDiscoveryWireframe];
     _currentWireframe = _eventDiscoveryWireframe;
     [_eventDiscoveryWireframe.moduleInterface setModuleDelegate:self];
     [_eventDiscoveryWireframe.moduleInterface presentEventDiscoveryInterfaceInNavigationController:navigationController];
 }
 
-- (void)presentMessageListInterfaceInNavigationController:(UINavigationController *)navigationController {
-    THLChatListViewController *chtlvtrl = [[THLChatListViewController alloc] init];
-    [navigationController showViewController:chtlvtrl sender:nil];
-}
-
-- (void)presentDashboardInterfaceInNavigationController:(UINavigationController *)navigationController {
+- (void)presentDashboardInterfaceInNavigationController:(UINavigationController *)navigationController
+{
     _dashboardWireframe = [_dependencyManager newHostDashboardWireframe];
     _currentWireframe = _dashboardWireframe;
     [_dashboardWireframe.moduleInterface setModuleDelegate:self];
     [_dashboardWireframe.moduleInterface presentDashboardInterfaceInNavigationController:navigationController];
 }
 
-- (void)presentUserProfileInterfaceInNavigationController:(UINavigationController *)navigationController {
+- (void)presentUserProfileInterfaceInNavigationController:(UINavigationController *)navigationController
+{
     _userProfileWireframe = [_dependencyManager newUserProfileWireframe];
     _currentWireframe = _userProfileWireframe;
     [_userProfileWireframe.moduleInterface setModuleDelegate:self];
     [_userProfileWireframe.moduleInterface presentUserProfileInterfaceInNavigationController:navigationController];
 }
 
-- (void)presentEventHostingInterfaceForEvent:(THLEventEntity *)eventEntity {
+- (void)presentEventHostingInterfaceForEvent:(THLEventEntity *)eventEntity
+{
     _eventHostingWireframe = [_dependencyManager newEventHostingWireframe];
     _currentWireframe = _eventHostingWireframe;
     [_eventHostingWireframe.moduleInterface setModuleDelegate:self];
     [_eventHostingWireframe.moduleInterface presentEventHostingInterfaceForEvent:eventEntity inWindow:_window];
 }
 
-- (void)presentGuestlistReviewInterfaceForGuestlist:(THLGuestlistEntity *)guestlistEntity inController:(UIViewController *)controller {
+- (void)presentGuestlistReviewInterfaceForGuestlist:(THLGuestlistEntity *)guestlistEntity inController:(UIViewController *)controller
+{
     _guestlistReviewWireframe = [_dependencyManager newGuestlistReviewWireframe];
     _currentWireframe = _guestlistReviewWireframe;
     [_guestlistReviewWireframe.moduleInterface setModuleDelegate:self];

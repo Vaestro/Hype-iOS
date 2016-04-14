@@ -19,8 +19,6 @@
 #import "THLNumberVerificationWireframe.h"
 #import "THLGuestFlowWireframe.h"
 #import "THLHostFlowWireframe.h"
-
-//#import "THLMessageListWireframe.h"
 #import "THLEventDiscoveryWireframe.h"
 #import "THLDashboardWireframe.h"
 #import "THLHostDashboardWireframe.h"
@@ -40,7 +38,6 @@
 #import "THLEntityMapper.h"
 #import "THLViewDataSourceFactory.h"
 #import "THLParseQueryFactory.h"
-#import "THLPubnubQueryFactory.h"
 #import "THLYapDatabaseViewFactory.h"
 #import "THLUserManager.h"
 #import "APAddressBook.h"
@@ -55,7 +52,6 @@
 #import "THLFacebookProfilePictureURLFetchService.h"
 #import "THLGuestlistService.h"
 #import "THLPerkStoreItemService.h"
-#import "THLMessageListService.h"
 
 //Classes
 #import "THLEntities.h"
@@ -73,7 +69,6 @@
 @property (nonatomic, weak) THLNumberVerificationWireframe *numberVerificationWireframe;
 @property (nonatomic, weak) THLGuestFlowWireframe *guestFlowWireframe;
 @property (nonatomic, weak) THLHostFlowWireframe *hostFlowWireframe;
-//@property (nonatomic, weak) THLMessageListWireframe *messageListWireframe;
 @property (nonatomic, weak) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
 @property (nonatomic, weak) THLDashboardWireframe *dashboardWireframe;
 @property (nonatomic, weak) THLHostDashboardWireframe *hostDashboardWireframe;
@@ -94,7 +89,6 @@
 @property (nonatomic, strong) THLViewDataSourceFactory *viewDataSourceFactory;
 @property (nonatomic, strong) THLYapDatabaseViewFactory *yapDatabaseViewFactory;
 @property (nonatomic, strong) THLParseQueryFactory *parseQueryFactory;
-@property (nonatomic, strong) THLPubnubQueryFactory *pubnubQueryFactory;
 @property (nonatomic, strong) CLGeocoder *geocoder;
 @property (nonatomic, strong) APAddressBook *addressBook;
 
@@ -114,14 +108,14 @@
 @property (nonatomic, strong) THLLocationService *locationService;
 @property (nonatomic, strong) THLGuestlistService *guestlistService;
 @property (nonatomic, strong) THLPerkStoreItemService *perkStoreItemService;
-@property (nonatomic, strong) THLMessageListService *messageListItemService;
 
 
 @end
 
 @implementation THLDependencyManager
 #pragma mark - Construction
-- (THLLoginWireframe *)newLoginWireframe {
+- (THLLoginWireframe *)newLoginWireframe
+{
 	THLLoginWireframe *wireframe = [[THLLoginWireframe alloc] initWithLoginService:self.loginService
 																	   userManager:self.userManager
 														  numberVerificationModule:[self newNumberVerificationWireframe].moduleInterface
@@ -130,27 +124,22 @@
 	return wireframe;
 }
 
-- (THLFacebookPictureWireframe *)newFacebookPictureWireframe {
+- (THLFacebookPictureWireframe *)newFacebookPictureWireframe
+{
 	THLFacebookPictureWireframe *wireframe = [[THLFacebookPictureWireframe alloc] initWithFetchService:self.facebookProfilePictureURLFetchService];
 	self.facebookPictureWireframe = wireframe;
 	return wireframe;
 }
 
-- (THLNumberVerificationWireframe *)newNumberVerificationWireframe {
+- (THLNumberVerificationWireframe *)newNumberVerificationWireframe
+{
 	THLNumberVerificationWireframe *wireframe = [[THLNumberVerificationWireframe alloc] init];
 	self.numberVerificationWireframe = wireframe;
 	return wireframe;
 }
-//
-//- (THLMessageListWireframe *)newMessageListWireframe {
-//    THLMessageListWireframe *wireframe = [[THLMessageListWireframe alloc] initWithDataStore:self.messageListDataStore
-//                                                                                     entityMapper:self.entityMapper
-//                                                                         messageListService:self.messageListItemService viewDataSourceFactory:self.viewDataSourceFactory];
-//    self.messageListWireframe = wireframe;
-//    return wireframe;
-//}
 
-- (THLEventDiscoveryWireframe *)newEventDiscoveryWireframe {
+- (THLEventDiscoveryWireframe *)newEventDiscoveryWireframe
+{
 	THLEventDiscoveryWireframe *wireframe = [[THLEventDiscoveryWireframe alloc] initWithDataStore:self.eventDataStore
 																					 entityMapper:self.entityMapper
 																					 eventService:self.eventService
@@ -159,7 +148,8 @@
 	return wireframe;
 }
 
-- (THLDashboardWireframe *)newDashboardWireframe {
+- (THLDashboardWireframe *)newDashboardWireframe
+{
     THLDashboardWireframe *wireframe = [[THLDashboardWireframe alloc] initWithGuestlistService:self.guestlistService
                                                                             entityMappper:self.entityMapper
                                                                          viewDataSourceFactory:self.viewDataSourceFactory
@@ -169,7 +159,8 @@
     return wireframe;
 }
 
-- (THLHostDashboardWireframe *)newHostDashboardWireframe {
+- (THLHostDashboardWireframe *)newHostDashboardWireframe
+{
     THLHostDashboardWireframe *wireframe = [[THLHostDashboardWireframe alloc] initWithGuestlistService:self.guestlistService
                                                                                  entityMappper:self.entityMapper
                                                                          viewDataSourceFactory:self.viewDataSourceFactory
@@ -179,13 +170,15 @@
     return wireframe;
 }
 
-- (THLUserProfileWireframe *)newUserProfileWireframe {
+- (THLUserProfileWireframe *)newUserProfileWireframe
+{
     THLUserProfileWireframe *wireframe = [[THLUserProfileWireframe alloc] init];
     self.userProfileWireframe = wireframe;
     return wireframe;
 }
 
-- (THLEventDetailWireframe *)newEventDetailWireframe {
+- (THLEventDetailWireframe *)newEventDetailWireframe
+{
 	THLEventDetailWireframe *wireframe = [[THLEventDetailWireframe alloc] initWithLocationService:self.locationService
                                                                                  guestlistService:self.guestlistService
 																					entityMappper:self.entityMapper
@@ -194,7 +187,8 @@
 	return wireframe;
 }
 
-- (THLEventHostingWireframe *)newEventHostingWireframe {
+- (THLEventHostingWireframe *)newEventHostingWireframe
+{
     THLEventHostingWireframe *wireframe = [[THLEventHostingWireframe alloc] initWithDataStore:self.guestlistDataStore
                                                                              guestlistService:self.guestlistService
                                                                         viewDataSourceFactory:self.viewDataSourceFactory
@@ -203,7 +197,8 @@
     return wireframe;
 }
 
-- (THLGuestlistInvitationWireframe *)newGuestlistInvitationWireframe {
+- (THLGuestlistInvitationWireframe *)newGuestlistInvitationWireframe
+{
 	THLGuestlistInvitationWireframe *wireframe = [[THLGuestlistInvitationWireframe alloc] initWithGuestlistService:self.guestlistService
                                                                                                       entityMapper:self.entityMapper
 																							 viewDataSourceFactory:self.viewDataSourceFactory
@@ -214,7 +209,8 @@
 	return wireframe;
 }
 
-- (THLGuestlistReviewWireframe *)newGuestlistReviewWireframe {
+- (THLGuestlistReviewWireframe *)newGuestlistReviewWireframe
+{
     THLGuestlistReviewWireframe *wireframe = [[THLGuestlistReviewWireframe alloc] initWithGuestlistService:self.guestlistService
                                                                                                       entityMapper:self.entityMapper
                                                                                                  dataStore:self.guestlistInviteDataStore
@@ -223,19 +219,22 @@
     return wireframe;
 }
 
-- (THLGuestFlowWireframe *)newGuestFlowWireframe {
+- (THLGuestFlowWireframe *)newGuestFlowWireframe
+{
 	THLGuestFlowWireframe *wireframe = [[THLGuestFlowWireframe alloc] initWithDependencyManager:self];
 	self.guestFlowWireframe = wireframe;
 	return wireframe;
 }
 
-- (THLHostFlowWireframe *)newHostFlowWireframe {
+- (THLHostFlowWireframe *)newHostFlowWireframe
+{
     THLHostFlowWireframe *wireframe = [[THLHostFlowWireframe alloc] initWithDependencyManager:self];
     self.hostFlowWireframe = wireframe;
     return wireframe;
 }
 
-- (THLPopupNotificationWireframe *)newPopupNotificationWireframe {
+- (THLPopupNotificationWireframe *)newPopupNotificationWireframe
+{
     THLPopupNotificationWireframe *wireframe = [[THLPopupNotificationWireframe alloc] initWithGuestlistService:self.guestlistService
                                                                                                   entityMapper:self.entityMapper
                                                                                                      dataStore:self.guestlistInviteDataStore];
@@ -243,20 +242,23 @@
     return wireframe;
 }
 
-- (THLPerkStoreWireframe *)newPerkStoreWireframe {
+- (THLPerkStoreWireframe *)newPerkStoreWireframe
+{
     THLPerkStoreWireframe *wireframe = [[THLPerkStoreWireframe alloc] initWithDataStore:self.perkStoreItemDataStore
                                                                            entityMapper:self.entityMapper perkStoreItemService:self.perkStoreItemService viewDataSourceFactory:self.viewDataSourceFactory];
     self.perkStoreWireframe = wireframe;
     return wireframe;
 }
 
-- (THLPerkDetailWireframe *)newPerkDetailWireframe {
+- (THLPerkDetailWireframe *)newPerkDetailWireframe
+{
     THLPerkDetailWireframe *wireframe = [[THLPerkDetailWireframe alloc] initWithPerkStoreItemService:self.perkStoreItemService entityMapper:self.entityMapper];
     self.perkDetailWireframe = wireframe;
     return wireframe;
 }
 
-- (THLWaitlistPresenter *)newWaitlistPresenter {
+- (THLWaitlistPresenter *)newWaitlistPresenter
+{
 	THLWaitlistPresenter *presenter = [[THLWaitlistPresenter alloc] init];
 	self.waitlistPresenter = presenter;
 	return presenter;
@@ -264,7 +266,8 @@
 
 #pragma mark - Lazy Instantiation
 #pragma mark - Wireframes
-- (THLMasterWireframe *)masterWireframe {
+- (THLMasterWireframe *)masterWireframe
+{
 	if (!_masterWireframe) {
 		_masterWireframe = [[THLMasterWireframe alloc] initWithDependencyManager:self];
 	}
@@ -272,28 +275,32 @@
 }
 
 #pragma mark - Common
-- (THLYapDatabaseManager *)databaseManager {
+- (THLYapDatabaseManager *)databaseManager
+{
 	if (!_databaseManager) {
 		_databaseManager = [[THLYapDatabaseManager alloc] init];
 	}
 	return _databaseManager;
 }
 
-- (THLUserManager *)userManager {
+- (THLUserManager *)userManager
+{
 	if (!_userManager) {
 		_userManager = [[THLUserManager alloc] init];
 	}
 	return _userManager;
 }
 
-- (THLEntityMapper *)entityMapper {
+- (THLEntityMapper *)entityMapper
+{
 	if (!_entityMapper) {
 		_entityMapper = [[THLEntityMapper alloc] init];
 	}
 	return _entityMapper;
 }
 
-- (THLViewDataSourceFactory *)viewDataSourceFactory {
+- (THLViewDataSourceFactory *)viewDataSourceFactory
+{
 	if (!_viewDataSourceFactory) {
 		_viewDataSourceFactory = [[THLViewDataSourceFactory alloc] initWithViewFactory:self.yapDatabaseViewFactory
 																	   databaseManager:self.databaseManager];
@@ -301,35 +308,32 @@
 	return _viewDataSourceFactory;
 }
 
-- (THLYapDatabaseViewFactory *)yapDatabaseViewFactory {
+- (THLYapDatabaseViewFactory *)yapDatabaseViewFactory
+{
 	if (!_yapDatabaseViewFactory) {
 		_yapDatabaseViewFactory = [[THLYapDatabaseViewFactory alloc] initWithDatabaseManager:self.databaseManager];
 	}
 	return _yapDatabaseViewFactory;
 }
 
-- (THLParseQueryFactory *)parseQueryFactory {
+- (THLParseQueryFactory *)parseQueryFactory
+{
 	if (!_parseQueryFactory) {
 		_parseQueryFactory = [[THLParseQueryFactory alloc] init];
 	}
 	return _parseQueryFactory;
 }
 
-- (THLPubnubQueryFactory *)pubnubQueryFactory {
-    if (!_pubnubQueryFactory) {
-        _pubnubQueryFactory = [[THLPubnubQueryFactory alloc] init];
-    }
-    return _pubnubQueryFactory;
-}
-
-- (CLGeocoder *)geocoder {
+- (CLGeocoder *)geocoder
+{
 	if (!_geocoder) {
 		_geocoder = [[CLGeocoder alloc] init];
 	}
 	return _geocoder;
 }
 
-- (APAddressBook *)addressBook {
+- (APAddressBook *)addressBook
+{
 	if (!_addressBook) {
 		_addressBook = [[APAddressBook alloc] init];
 	}
@@ -337,49 +341,56 @@
 }
 
 #pragma mark - Data Stores
-- (THLDataStore *)userDataStore {
+- (THLDataStore *)userDataStore
+{
     if (!_userDataStore) {
         _userDataStore = [[THLDataStore alloc] initForKey:@"kUserDataStoreKey" databaseManager:self.databaseManager];
     }
     return _userDataStore;
 }
 
-- (THLDataStore *)eventDataStore {
+- (THLDataStore *)eventDataStore
+{
 	if (!_eventDataStore) {
 		_eventDataStore = [[THLDataStore alloc] initForEntity:[THLEventEntity class] databaseManager:self.databaseManager];
 	}
 	return _eventDataStore;
 }
 
-- (THLDataStore *)guestDataStore {
+- (THLDataStore *)guestDataStore
+{
 	if (!_guestDataStore) {
 		_guestDataStore = [[THLDataStore alloc] initForEntity:[THLGuestEntity class] databaseManager:self.databaseManager];
 	}
 	return _guestDataStore;
 }
 
-- (THLDataStore *)guestlistDataStore {
+- (THLDataStore *)guestlistDataStore
+{
     if (!_guestlistDataStore) {
         _guestlistDataStore = [[THLDataStore alloc] initForEntity:[THLGuestlistEntity class] databaseManager:self.databaseManager];
     }
     return _guestlistDataStore;
 }
 
-- (THLDataStore *)guestlistInviteDataStore {
+- (THLDataStore *)guestlistInviteDataStore
+{
     if (!_guestlistInviteDataStore) {
         _guestlistInviteDataStore = [[THLDataStore alloc] initForEntity:[THLGuestlistInviteEntity class] databaseManager:self.databaseManager];
     }
     return _guestlistInviteDataStore;
 }
 
-- (THLDataStore *)perkStoreItemDataStore {
+- (THLDataStore *)perkStoreItemDataStore
+{
     if (!_perkStoreItemDataStore) {
         _perkStoreItemDataStore = [[THLDataStore alloc] initForEntity:[THLPerkStoreItemEntity class] databaseManager:self.databaseManager];
     }
     return _perkStoreItemDataStore;
 }
 
-- (THLDataStore *)messageListDataStore {
+- (THLDataStore *)messageListDataStore
+{
     if (!_messageListDataStore) {
         _messageListDataStore = [[THLDataStore alloc] initForEntity:[THLMessageListEntity class] databaseManager:self.databaseManager];
     }
@@ -387,53 +398,52 @@
 }
 
 #pragma mark - Services
-- (THLEventService *)eventService {
+- (THLEventService *)eventService
+{
 	if (!_eventService) {
 		_eventService = [[THLEventService alloc] initWithQueryFactory:self.parseQueryFactory];
 	}
 	return _eventService;
 }
 
-- (THLFacebookProfilePictureURLFetchService *)facebookProfilePictureURLFetchService {
+- (THLFacebookProfilePictureURLFetchService *)facebookProfilePictureURLFetchService
+{
 	if (!_facebookProfilePictureURLFetchService) {
 		_facebookProfilePictureURLFetchService = [[THLFacebookProfilePictureURLFetchService alloc] init];
 	}
 	return _facebookProfilePictureURLFetchService;
 }
 
-- (THLLoginService *)loginService {
+- (THLLoginService *)loginService
+{
 	if (!_loginService) {
 		_loginService = [[THLLoginService alloc] init];
 	}
 	return _loginService;
 }
 
-- (THLLocationService *)locationService {
+- (THLLocationService *)locationService
+{
 	if (!_locationService) {
 		_locationService = [[THLLocationService alloc] initWithGeocoder:self.geocoder];
 	}
 	return _locationService;
 }
 
-- (THLGuestlistService *)guestlistService {
+- (THLGuestlistService *)guestlistService
+{
 	if (!_guestlistService) {
 		_guestlistService = [[THLGuestlistService alloc] initWithQueryFactory:self.parseQueryFactory];
 	}
 	return _guestlistService;
 }
 
-- (THLPerkStoreItemService *)perkStoreItemService {
+- (THLPerkStoreItemService *)perkStoreItemService
+{
     if (!_perkStoreItemService) {
         _perkStoreItemService = [[THLPerkStoreItemService alloc] initWithQueryFactory:self.parseQueryFactory];
     }
     return _perkStoreItemService;
-}
-
-- (THLMessageListService *)messageListItemService {
-    if (!_messageListItemService) {
-        _messageListItemService = [[THLMessageListService alloc] initWithQueryFactory:self.pubnubQueryFactory];
-    }
-    return _messageListItemService;
 }
 
 @end

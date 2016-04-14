@@ -15,17 +15,18 @@
 #import "THLLocationEntity.h"
 #import "THLUser.h"
 #import "THLBeaconEntity.h"
-#import "THLPubnubManager.h"
 #import "THLChannelService.h"
 #import "THLHostEntity.h"
 #import "THLBeacon.h"
 #import "THLEntityMapper.h"
 #import "THLGuestEntity.h"
+#import "Intercom/intercom.h"
 
 
 @implementation THLGuestlistService
 
-- (instancetype)initWithQueryFactory:(THLParseQueryFactory *)queryFactory {
+- (instancetype)initWithQueryFactory:(THLParseQueryFactory *)queryFactory
+{
 	if (self = [super init]) {
 		_queryFactory = queryFactory;
 	}
@@ -38,7 +39,8 @@
 #pragma mark - Fetch Guestlists For Host at a Event/Promotion
 //----------------------------------------------------------------
 
-- (BFTask *)fetchGuestlistsForEvent:(NSString *)eventId {
+- (BFTask *)fetchGuestlistsForEvent:(NSString *)eventId
+{
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
     NSMutableArray *completedGuestlists = [NSMutableArray new];
     [[_queryFactory queryForGuestlistsForEvent:eventId] findObjectsInBackgroundWithBlock:^(NSArray *guestlists, NSError *error) {
@@ -62,7 +64,8 @@
 #pragma mark - Fetch Guestlists For Host for Dashboard Notifications
 //----------------------------------------------------------------
 
-- (BFTask *)fetchGuestlistsRequestsForHost {
+- (BFTask *)fetchGuestlistsRequestsForHost
+{
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
     NSMutableArray *completedGuestlists = [NSMutableArray new];
     [[_queryFactory queryForGuestlists] findObjectsInBackgroundWithBlock:^(NSArray *guestlists, NSError *error) {
@@ -83,7 +86,8 @@
 //----------------------------------------------------------------
 #pragma mark - Fetch Guestlist For Guest Using The Guestlist ID
 ////----------------------------------------------------------------
-- (BFTask *)fetchGuestlistWithId:(NSString *)guestlistId {
+- (BFTask *)fetchGuestlistWithId:(NSString *)guestlistId
+{
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
     [[_queryFactory queryForGuestlistWithId] getObjectInBackgroundWithId:guestlistId block:^(PFObject *guestlist, NSError *error) {
         if (!error) {
@@ -110,7 +114,8 @@
 #pragma mark - Create Guestlist For Event
 //----------------------------------------------------------------
 
-- (BFTask *)createGuestlistForEvent:(THLEventEntity *)eventEntity withInvites:(NSArray *)guestPhoneNumbers {
+- (BFTask *)createGuestlistForEvent:(THLEventEntity *)eventEntity withInvites:(NSArray *)guestPhoneNumbers
+{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     NSLocale *enUSPOSIXLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
     [dateFormatter setLocale:enUSPOSIXLocale];
@@ -141,27 +146,17 @@
                                                 @"guestlistId": guestlist.objectId}
                                         block:^(id knownGuestIds, NSError *cloudError) {
                                             if (!cloudError){
+                                                
+                                                [Intercom logEventWithName:@"event_submission" metaData: @{
+                                                                                                         @"event_name": eventEntity.location.name,
+                                                                                                         @"event_date": eventEntity.date.thl_dayString
+                                                                                                         }];
+
                                                 [completionSource setResult:nil];
-                                                
-                                                NSArray *knownGuests = knownGuestIds;
-                                                
-                                                THLChannelService *service = [[THLChannelService alloc] init];
-                                                
-                                                
-                                                if (knownGuests.count > 0)  {
-                                                    for (id guestId in knownGuests) {
-                                                        [service createChannelForOwner:guestId andHost:eventEntity.host.objectId withGuestlist:guestlist.objectId expireEvent:eventEntity.date.thl_sixHoursAhead];
-                                                    }
-                                                    
-                                                    [[THLPubnubManager sharedInstance] publishFirstMessageFromChannel:[NSString stringWithFormat:@"%@_Host", guestlist.objectId] withHost:eventEntity.host andChatMessage:eventEntity.chatMessage];
-                                                }
-                                                
                                             } else {
                                                 [completionSource setError:cloudError];
                                             }
                                         }];
-            
-            
         } else {
             [completionSource setError:error];
         }
@@ -169,7 +164,8 @@
     return completionSource.task;
 }
 
-- (BFTask *)updateGuestlist:(NSString *)guestlistId withInvites:(NSArray *)guestPhoneNumbers forEvent:(THLEventEntity *)eventEntity {
+- (BFTask *)updateGuestlist:(NSString *)guestlistId withInvites:(NSArray *)guestPhoneNumbers forEvent:(THLEventEntity *)eventEntity
+{
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
     [PFCloud callFunctionInBackground:@"sendOutNotifications"
                        withParameters:@{@"eventId": eventEntity.objectId,
@@ -181,18 +177,7 @@
                                     
                                     if (!error){
                                         [completionSource setResult:nil];
-                                        
-                                        NSArray *knownGuests = knownGuestIds;
-                                        
-                                        THLChannelService *service = [[THLChannelService alloc] init];
-                                        
-                                        if (knownGuests.count > 0)  {
-                                            for (id guestId in knownGuests) {
-                                                [service createChannelForOwner:guestId andHost:eventEntity.host.objectId withGuestlist:guestlistId expireEvent:eventEntity.date.thl_sixHoursAhead];
-                                            }
-                                        }
-                                        
-                                    }else {
+                                    } else {
                                         [completionSource setError:error];
                                     }
                                 }];
@@ -205,7 +190,8 @@
 #pragma mark - Fetch Guestlists Invites For Guestlist
 //----------------------------------------------------------------
 
-- (BFTask *)fetchInvitesOnGuestlist:(THLGuestlist *)guestlist {
+- (BFTask *)fetchInvitesOnGuestlist:(THLGuestlist *)guestlist
+{
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
     NSMutableArray *completedGuestlistInvites = [NSMutableArray new];
     [[_queryFactory queryForInvitesOnGuestlist:guestlist] findObjectsInBackgroundWithBlock:^(NSArray *guestlistInvites, NSError *error) {
@@ -224,7 +210,6 @@
         [completionSource setResult:completedGuestlistInvites];
     }];
     return completionSource.task;
-
 }
 
 //----------------------------------------------------------------
@@ -232,7 +217,8 @@
 //----------------------------------------------------------------
 
 //TODO: Temporary - Only fetches first Accepted Guestlist Invite
-- (BFTask *)fetchGuestlistInvitesForUser {
+- (BFTask *)fetchGuestlistInvitesForUser
+{
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
     __block NSMutableArray *completedGuestlistInvites = [NSMutableArray new];
     __block NSMutableArray *unfinishedGuestlistInvites = [NSMutableArray new];
@@ -285,7 +271,8 @@
 #pragma mark - Fetch Guestlist For Guest For a Event/Promotion
 //----------------------------------------------------------------
 
-- (BFTask *)fetchGuestlistInviteForEvent:(THLEventEntity *)event {
+- (BFTask *)fetchGuestlistInviteForEvent:(THLEventEntity *)event
+{
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
     [[_queryFactory queryForGuestlistInviteForEvent:event.objectId] getFirstObjectInBackgroundWithBlock:^(PFObject *guestlistInvite, NSError *error) {
         if (!error) {
@@ -310,7 +297,8 @@
 #pragma mark - Fetch Guestlists For Guest Using The Guestlist Invite ID
 //----------------------------------------------------------------
 
-- (BFTask *)fetchGuestlistInviteWithId:(NSString *)guestlistInviteId {
+- (BFTask *)fetchGuestlistInviteWithId:(NSString *)guestlistInviteId
+{
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
     [[_queryFactory queryForGuestlistInviteWithId] getObjectInBackgroundWithId:guestlistInviteId block:^(PFObject *guestlistInvite, NSError *error) {
         if (!error) {
@@ -334,7 +322,8 @@
 #pragma mark - Update Guest's Guestlist Invite Response Status
 //----------------------------------------------------------------
 
-- (BFTask *)updateGuestlistInvite:(THLGuestlistInvite *)guestlistInvite withResponse:(THLStatus)response {
+- (BFTask *)updateGuestlistInvite:(THLGuestlistInvite *)guestlistInvite withResponse:(THLStatus)response
+{
     NSNumber *castedResponse = [[NSNumber alloc] initWithInt:response];
     guestlistInvite[@"response"] = castedResponse;
     [guestlistInvite saveInBackground];
@@ -346,7 +335,8 @@
 //----------------------------------------------------------------
 
 
-- (BFTask *)updateGuestlistInviteToOpened:(THLGuestlistInvite *)guestlistInvite {
+- (BFTask *)updateGuestlistInviteToOpened:(THLGuestlistInvite *)guestlistInvite
+{
     guestlistInvite[@"didOpen"] = @YES;
     [guestlistInvite saveInBackground];
     return [BFTask taskWithResult:nil];
@@ -356,7 +346,8 @@
 #pragma mark - Update a Guestlist's Review Status
 //----------------------------------------------------------------
 
-- (BFTask *)updateGuestlist:(THLGuestlist *)guestlist withReviewStatus:(THLStatus)reviewStatus {
+- (BFTask *)updateGuestlist:(THLGuestlist *)guestlist withReviewStatus:(THLStatus)reviewStatus
+{
     guestlist[@"reviewStatus"] = [NSNumber numberWithInt:reviewStatus];
     [guestlist saveInBackground];
     return [BFTask taskWithResult:nil];
@@ -366,7 +357,8 @@
 //----------------------------------------------------------------
 #pragma mark - Update a Guestlist Invite's Check In Status
 //----------------------------------------------------------------
-- (BFTask *)updateGuestlistInvite:(THLGuestlistInvite *)guestlistInvite withCheckInStatus:(BOOL)status {
+- (BFTask *)updateGuestlistInvite:(THLGuestlistInvite *)guestlistInvite withCheckInStatus:(BOOL)status
+{
     guestlistInvite[@"checkInStatus"] = [NSNumber numberWithBool:status];
     [guestlistInvite saveInBackground];
     return [BFTask taskWithResult:nil];
@@ -374,7 +366,8 @@
 
 
 
-- (void)dealloc {
+- (void)dealloc
+{
     NSLog(@"Destroyed %@", self);
 }
 @end

@@ -41,8 +41,6 @@ pod 'FBSDKLoginKit'
 pod 'FBSDKShareKit', '= 4.8.0'
 pod 'FacebookImagePicker'
 
-#Pubnub
-pod 'PubNub', '~> 4.2'
 pod 'RKNotificationHub'
 
 #Intercom

@@ -14,7 +14,6 @@
 #import "THLGuestlist.h"
 #import "THLGuestlistInvite.h"
 #import "THLPerkStoreItem.h"
-#import "THLMessageListItem.h"
 #import "THLPurchasedPerkItem.h"
 #import "THLBeaconEntity.h"
 
@@ -27,16 +26,16 @@
 #import "THLPerkStoreItemEntity.h"
 #import "THLPurchasedPerkItemEntity.h"
 #import "THLBeacon.h"
-#import "THLMessageListEntity.h"
-#import "PubNub.h"
 
 @implementation THLEntityMapper
-- (void)mapBaseValuesFromModel:(PFObject *)model toEntity:(THLEntity *)entity {
+- (void)mapBaseValuesFromModel:(PFObject *)model toEntity:(THLEntity *)entity
+{
 	entity.updatedAt = model.updatedAt;
 	entity.objectId = model.objectId;
 }
 
-- (THLEventEntity *)mapEvent:(THLEvent *)event {
+- (THLEventEntity *)mapEvent:(THLEvent *)event
+{
     if ([event isKindOfClass:[THLEvent class]]) {
         THLEventEntity *entity = [THLEventEntity new];
         [self mapBaseValuesFromModel:event toEntity:entity];
@@ -61,14 +60,16 @@
     }
 }
 
-- (NSArray<THLEventEntity *> *)mapEvents:(NSArray *)events {
+- (NSArray<THLEventEntity *> *)mapEvents:(NSArray *)events
+{
     WEAKSELF();
 	return [events linq_select:^id(THLEvent *event) {
 		return [WSELF mapEvent:event];
 	}];
 }
 
-- (THLLocationEntity *)mapLocation:(THLLocation *)location {
+- (THLLocationEntity *)mapLocation:(THLLocation *)location
+{
     if ([location isKindOfClass:[THLLocation class]]) {
         THLLocationEntity *entity = [THLLocationEntity new];
         [self mapBaseValuesFromModel:location toEntity:entity];
@@ -90,14 +91,16 @@
     }
 }
 
-- (NSArray<THLLocationEntity *> *)mapLocations:(NSArray *)locations {
+- (NSArray<THLLocationEntity *> *)mapLocations:(NSArray *)locations
+{
     WEAKSELF();
 	return [locations linq_select:^id(THLLocation *location) {
 		return [WSELF mapLocation:location];
 	}];
 }
 
-- (THLGuestEntity *)mapGuest:(THLUser *)user {
+- (THLGuestEntity *)mapGuest:(THLUser *)user
+{
     if ([user isKindOfClass:[THLUser class]]) {
         THLGuestEntity *entity = [THLGuestEntity new];
         [self mapBaseValuesFromModel:user toEntity:entity];
@@ -131,7 +134,8 @@
     }
 }
 
-- (THLPerkStoreItemEntity *)mapPerkStoreItem:(THLPerkStoreItem *)perkStoreItem {
+- (THLPerkStoreItemEntity *)mapPerkStoreItem:(THLPerkStoreItem *)perkStoreItem
+{
     if ([perkStoreItem isKindOfClass:[THLPerkStoreItem class]]) {
         THLPerkStoreItemEntity *entity = [THLPerkStoreItemEntity new];
         [self mapBaseValuesFromModel:perkStoreItem toEntity:entity];
@@ -145,28 +149,9 @@
     }
 }
 
-//- (THLMessageListEntity *)mapMessageListItem:(THLMessageListItem *)messageListItem {
-//    if ([messageListItem isKindOfClass:[PNHistoryResult class]]) {
-//        PNHistoryResult *result = (PNHistoryResult *)messageListItem;
-//        THLMessageListEntity *entity = [THLMessageListEntity new];
-//        
-//        //[self mapBaseValuesFromModel:(PFObject *) toEntity:<#(THLEntity *)#>]
-//        //[self mapBaseValuesFromModel:perkStoreItem toEntity:entity];
-//        entity.lastMessage = @"message"; //result.data.messages.lastObject;
-//        entity.address = @"Wall street 7";
-//        entity.time = @"yesterday";
-//        entity.updatedAt = [NSDate date];
-//        entity.objectId = @"1324er";
-//        //entity.info = perkStoreItem.info;
-//        //entity.credits = perkStoreItem.credits;
-//        //entity.image = [NSURL URLWithString:perkStoreItem.image.url];
-//        return entity;
-//    } else {
-//        return nil;
-//    }
-//}
 
-- (THLPurchasedPerkItemEntity *)mapPurchasedPerkItem:(THLPurchasedPerkItem *)purchasedPerkItem {
+- (THLPurchasedPerkItemEntity *)mapPurchasedPerkItem:(THLPurchasedPerkItem *)purchasedPerkItem
+{
     if ([purchasedPerkItem isKindOfClass:[THLPurchasedPerkItem class]]) {
         THLPurchasedPerkItemEntity *entity = [THLPurchasedPerkItemEntity new];
         [self mapBaseValuesFromModel:purchasedPerkItem toEntity:entity];
@@ -179,7 +164,8 @@
     }
 }
 
-- (THLGuestlistEntity *)mapGuestlist:(THLGuestlist *)guestlist {
+- (THLGuestlistEntity *)mapGuestlist:(THLGuestlist *)guestlist
+{
     if ([guestlist isKindOfClass:[THLGuestlist class]]) {
         THLGuestlistEntity *entity = [THLGuestlistEntity new];
         [self mapBaseValuesFromModel:guestlist toEntity:entity];
@@ -193,7 +179,8 @@
     }
 }
 
-- (THLBeacon *)mapBeaconEntity:(THLBeaconEntity *)beaconEntity {
+- (THLBeacon *)mapBeaconEntity:(THLBeaconEntity *)beaconEntity
+{
     if ([beaconEntity isKindOfClass:[THLBeaconEntity class]]) {
         THLBeacon *beacon = [THLBeacon new];
         [self mapBaseValuesFromModel:beaconEntity toEntity:beacon];
@@ -207,14 +194,16 @@
 }
 
 
-- (NSArray<THLGuestlistEntity *> *)mapGuestlists:(NSArray *)guestlists {
+- (NSArray<THLGuestlistEntity *> *)mapGuestlists:(NSArray *)guestlists
+{
     WEAKSELF();
     return [guestlists linq_select:^id(THLGuestlist *guestlist) {
         return [WSELF mapGuestlist:guestlist];
     }];
 }
 
-- (THLGuestlistInviteEntity *)mapGuestlistInvite:(THLGuestlistInvite *)guestlistInvite {
+- (THLGuestlistInviteEntity *)mapGuestlistInvite:(THLGuestlistInvite *)guestlistInvite
+{
     if ([guestlistInvite isKindOfClass:[THLGuestlistInvite class]]) {
         THLGuestlistInviteEntity *entity = [THLGuestlistInviteEntity new];
         [self mapBaseValuesFromModel:guestlistInvite toEntity:entity];
@@ -231,38 +220,32 @@
     }
 }
 
-
-
-
-- (NSArray<THLGuestlistInviteEntity *> *)mapGuestlistInvites:(NSArray *)guestlistInvites {
+- (NSArray<THLGuestlistInviteEntity *> *)mapGuestlistInvites:(NSArray *)guestlistInvites
+{
     WEAKSELF();
     return [guestlistInvites linq_select:^id(THLGuestlistInvite *guestlistInvite) {
         return [WSELF mapGuestlistInvite:guestlistInvite];
     }];
 }
 
-- (NSArray<THLPerkStoreItemEntity *> *)mapPerkStoreItems:(NSArray *)perkStoreItems {
+- (NSArray<THLPerkStoreItemEntity *> *)mapPerkStoreItems:(NSArray *)perkStoreItems
+{
     WEAKSELF();
     return [perkStoreItems linq_select:^id(THLPerkStoreItem *perkStoreItem) {
         return [WSELF mapPerkStoreItem:perkStoreItem];
     }];
 }
 
-//- (NSArray<THLMessageListEntity *> *)mapMessageListItems:(NSArray *)messageListItems {
-//    WEAKSELF();
-//    return [messageListItems linq_select:^id(THLMessageListItem *messageListItem) {
-//        return [WSELF mapMessageListItem:messageListItem];
-//    }];
-//}
-
-- (NSArray<THLPurchasedPerkItemEntity*> *)mapPurchasedPerkItems:(NSArray *)purchasedPerkItems {
+- (NSArray<THLPurchasedPerkItemEntity*> *)mapPurchasedPerkItems:(NSArray *)purchasedPerkItems
+{
     WEAKSELF();
     return [purchasedPerkItems linq_select:^id(THLPurchasedPerkItem *purchasedPerkItem) {
         return [WSELF mapPurchasedPerkItem:purchasedPerkItem];
     }];
 }
 
-- (void)dealloc {
+- (void)dealloc
+{
     NSLog(@"Destroyed %@", self);
 }
 @end

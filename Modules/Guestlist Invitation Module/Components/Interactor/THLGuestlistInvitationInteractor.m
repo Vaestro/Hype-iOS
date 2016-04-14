@@ -12,9 +12,8 @@
 #import "THLGuestEntity.h"
 #import "THLGuestlistEntity.h"
 #import "THLGuestlistInvite.h"
-#import "THLChannelService.h"
 #import "THLEventEntity.h"
-#import "THLPubnubManager.h"
+
 
 static NSString *const kGuestEntityFirstNameKey = @"firstName";
 static NSString *const kGuestEntityLastNameKey = @"lastName";

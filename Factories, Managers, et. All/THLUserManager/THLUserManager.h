@@ -18,7 +18,7 @@
 + (BOOL)userIsGuest;
 + (BOOL)userIsHost;
 + (BOOL)isUserCached;
-+ (void) logCrashlyticsUser;
++ (void)logCrashlyticsUser;
 + (void)logUserOut;
 + (BOOL)isUserProfileValid;
 + (BFTask *)makeCurrentInstallation;

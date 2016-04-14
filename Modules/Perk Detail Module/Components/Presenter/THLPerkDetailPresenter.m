@@ -147,11 +147,9 @@ THLPerkDetailInteractorDelegate
     [dateFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSS'Z'"];
     NSString *dateString = [dateFormatter stringFromDate:currDate];
     
-//    [Intercom enableLogging];
     [Intercom logEventWithName:@"store_purchase" metaData: @{
                                                              @"order_date": dateString,
-                                                             @"perk_store_item": _perkStoreItemEntity.name,
-                                                             @"credits_left": [NSNumber numberWithFloat:[THLUser currentUser].credits]
+                                                             @"perk_store_item": _perkStoreItemEntity.name
                                                             }];
     
     [self.confirmationView setSuccessWithTitle:@"Perk Redeemed"

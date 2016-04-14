@@ -29,10 +29,7 @@
 #import "THLUser.h"
 #import "THLParseQueryFactory.h"
 #import "THLGuestlist.h"
-#import "THLChatListItem.h"
 
-#import "THLChatRoomViewController.h"
-#import "THLChatListViewController.h"
 #import "THLGuestlistTicketView.h"
 
 @interface THLGuestlistReviewPresenter()
