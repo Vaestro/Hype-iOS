@@ -10,10 +10,12 @@
 #import "THLActionButton.h"
 #import "THLAppearanceConstants.h"
 #import "THLAlertView.h"
+#import "Intercom/intercom.h"
 
 @interface THLGuestlistTicketView()
 
 @property (nonatomic, strong) THLActionButton *viewPartyButton;
+@property (nonatomic, strong) THLActionButton *contactConceirgeButton;
 @property (nonatomic, strong) UIBarButtonItem *dismissButton;
 @property (nonatomic, strong) UIBarButtonItem *eventDetailsButton;
 @property (nonatomic, strong) UILabel *ticketInstructionLabel;
@@ -53,6 +55,7 @@
     _eventDateLabel = [self newEventDateLabel];
     _arrivalMessageLabel = [self newArrivalMessageLabel];
     _viewPartyButton = [self newViewPartyButton];
+    _contactConceirgeButton = [self newContactConciergeButton];
 }
 
 - (void)layoutView {
@@ -74,7 +77,7 @@
     [ticketBox.layer setCornerRadius:2.0];
     [ticketBox.layer setBorderColor:[[UIColor colorWithRed:0.773 green:0.702 blue:0.345 alpha:1] CGColor]];
     
-    [self.view addSubviews:@[_ticketInstructionLabel, ticketBox, _viewPartyButton]];
+    [self.view addSubviews:@[_ticketInstructionLabel, ticketBox, _viewPartyButton, _contactConceirgeButton]];
     WEAKSELF();
 
     [_ticketInstructionLabel makeConstraints:^(MASConstraintMaker *make) {
@@ -88,8 +91,14 @@
 //        make.bottom.equalTo([WSELF viewPartyButton].mas_top).insets(kTHLEdgeInsetsSuperHigh());
     }];
     
-    [_viewPartyButton makeConstraints:^(MASConstraintMaker *make) {
+    [_contactConceirgeButton makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(kTHLEdgeInsetsSuperHigh());
+        make.centerX.equalTo(0);
+    }];
+    
+    [_viewPartyButton makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(WSELF.contactConceirgeButton.mas_top).insets(kTHLEdgeInsetsHigh());
+        make.left.right.equalTo(kTHLEdgeInsetsSuperHigh());
         make.centerX.equalTo(0);
     }];
     
@@ -217,5 +226,16 @@
     return button;
 }
 
+- (THLActionButton *)newContactConciergeButton {
+    THLActionButton *button = [[THLActionButton alloc] initWithActionStyle];
+    [button setTitle:@"Contact Concierge"];
+    [button addTarget:self action:@selector(openUpChat) forControlEvents:UIControlEventTouchUpInside];
+    return button;
+}
+
+- (void)openUpChat
+{
+    [Intercom presentMessageComposer];
+}
 
 @end
