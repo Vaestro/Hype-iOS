@@ -88,8 +88,13 @@
 //    NSNumber *femaleCoverRange = [NSNumber numberWithFloat:_eventEntity.femaleCoverRange];
     NSNumber *maleCover = [NSNumber numberWithFloat:_eventEntity.maleCover];
     NSNumber *femaleCover = [NSNumber numberWithFloat:_eventEntity.femaleCover];
+    NSNumber *maleSurgePrice = [NSNumber numberWithFloat:_eventEntity.maleSurgePrice];
     if (_eventEntity.maleCover > 0 && _eventEntity.femaleCover == 0) {
-        [self.view setCoverInfo:[NSString stringWithFormat:@"$%@ (Guys only)", maleCover]];
+        if (maleSurgePrice > 0) {
+            [self.view setCoverInfo:[NSString stringWithFormat:@"$%@ - $%@ (Guys only)", maleCover, maleSurgePrice]];
+        } else {
+            [self.view setCoverInfo:[NSString stringWithFormat:@"$%@ (Guys only)", maleCover]];
+        }
     } else if (_eventEntity.maleCover > 0 && _eventEntity.femaleCover > 0) {
         [self.view setCoverInfo:[NSString stringWithFormat:@"$%@ (Guys) $%@ (Girls)", maleCover, femaleCover]];
     } else if (_eventEntity.maleCover == 0) {

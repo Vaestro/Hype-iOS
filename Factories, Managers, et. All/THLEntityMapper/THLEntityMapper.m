@@ -45,8 +45,8 @@
         entity.info = event.promoInfo;
         entity.maleCover = event.maleCoverCharge;
         entity.femaleCover = event.femaleCoverCharge;
-        entity.maleCoverRange = event.maleCoverRange;
-        entity.femaleCoverRange = event.femaleCoverRange;
+        entity.maleSurgePrice = event.maleSurgePrice;
+        entity.femaleSurgePrice= event.femaleSurgePrice;
         entity.location = [self mapLocation:event.location];
         entity.creditsPayout = event.creditsPayout;
         entity.host = (THLHostEntity *)[self mapHost:event[@"host"]];

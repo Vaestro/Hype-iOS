@@ -12,8 +12,8 @@
 @dynamic date;
 @dynamic maleCoverCharge;
 @dynamic femaleCoverCharge;
-@dynamic maleCoverRange;
-@dynamic femaleCoverRange;
+@dynamic maleSurgePrice;
+@dynamic femaleSurgePrice;
 @dynamic title;
 @dynamic promoInfo;
 @dynamic promoImage;
