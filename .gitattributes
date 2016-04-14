@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 *.pbxproj merge=mergepbx
+=======
+*.pbxproj merge=union
+>>>>>>> c0b4e5b4be5ae29381aec8b4b9314162fb2400a8
