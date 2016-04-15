@@ -84,13 +84,12 @@
     [self.view setEventDate:[NSString stringWithFormat:@"%@, %@", _eventEntity.date.thl_weekdayString, _eventEntity.date.thl_timeString]];
 	[self.view setPromoInfo:_eventEntity.info];
     [self.view setPromoImageURL:_eventEntity.imageURL];
-//    NSNumber *maleCoverRange = [NSNumber numberWithFloat:_eventEntity.maleCoverRange];
-//    NSNumber *femaleCoverRange = [NSNumber numberWithFloat:_eventEntity.femaleCoverRange];
+    
     NSNumber *maleCover = [NSNumber numberWithFloat:_eventEntity.maleCover];
     NSNumber *femaleCover = [NSNumber numberWithFloat:_eventEntity.femaleCover];
     NSNumber *maleSurgePrice = [NSNumber numberWithFloat:_eventEntity.maleSurgePrice];
     if (_eventEntity.maleCover > 0 && _eventEntity.femaleCover == 0) {
-        if (maleSurgePrice > 0) {
+        if (maleSurgePrice > 0 && maleSurgePrice > maleCover) {
             [self.view setCoverInfo:[NSString stringWithFormat:@"$%@ - $%@ (Guys only)", maleCover, maleSurgePrice]];
         } else {
             [self.view setCoverInfo:[NSString stringWithFormat:@"$%@ (Guys only)", maleCover]];
