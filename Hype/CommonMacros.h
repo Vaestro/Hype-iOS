@@ -30,7 +30,7 @@
 #define ViewHeight(v)                       v.frame.size.height
 #define DiscoveryCellWidth(v)               v.frame.size.width - 10
 
-#define DiscoveryCellHeight(v)              v.frame.size.height * 0.33
+#define DiscoveryCellHeight(v)              v.frame.size.height * 0.40
 #define ViewX(v)                            v.frame.origin.x
 #define ViewY(v)                            v.frame.origin.y
 #define SelfViewWidth                       self.view.bounds.size.width

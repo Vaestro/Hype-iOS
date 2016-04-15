@@ -22,7 +22,7 @@
 
 + (void)applyGlobalAppearance {
 	[[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
-	[[UINavigationBar appearance] setBarTintColor:kTHLNUIPrimaryBackgroundColor];
+	[[UINavigationBar appearance] setBarTintColor:[UIColor blackColor]];
 //	[[UINavigationBar appearance] setTintColor:[THLStyleKit lightTextColor]];
 	[[UINavigationBar appearance] setTranslucent:NO];
 	[[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : kTHLNUIPrimaryFontColor,

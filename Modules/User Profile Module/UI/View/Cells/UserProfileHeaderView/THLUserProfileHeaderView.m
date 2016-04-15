@@ -30,7 +30,7 @@
 }
 
 - (void)constructView {
-    self.contentView.backgroundColor = kTHLNUISecondaryBackgroundColor;
+    self.contentView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     _iconView = [self newIconView];
     _label = [self newLabel];
     _imageView = [self newImageView];
@@ -39,7 +39,7 @@
 
 - (void)layoutView {
     [self.contentView addSubviews:@[_iconView]];
-    [self.contentView setBackgroundColor:kTHLNUISecondaryBackgroundColor];
+    [self.contentView setBackgroundColor:kTHLNUIPrimaryBackgroundColor];
     [_iconView addGestureRecognizer:_photoTapRecognizer];
     
     WEAKSELF();

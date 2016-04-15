@@ -48,7 +48,7 @@
 #pragma mark - Constructors
 - (UILabel *)newTitleLabel {
     UILabel *label = [UILabel new];
-    label.backgroundColor = kTHLNUISecondaryBackgroundColor;
+    label.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     label.font = [UIFont fontWithName:@"OpenSans-Light" size:16];
 
     label.textColor = [UIColor whiteColor];

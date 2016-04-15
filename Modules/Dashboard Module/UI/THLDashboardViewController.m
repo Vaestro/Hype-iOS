@@ -62,7 +62,7 @@
 }
 
 - (void)layoutView {
-    self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
+    self.view.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     self.navigationItem.title = @"MY EVENTS";
     self.navigationItem.leftBarButtonItem = _messageButton;
 
@@ -121,7 +121,7 @@
 //    flowLayout.footerReferenceSize = CGSizeMake(self.collectionView.frame.size.width, 25);
     flowLayout.sectionInset = UIEdgeInsetsMake(10, 0, 10, 0);
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) collectionViewLayout:flowLayout];
-    collectionView.backgroundColor = kTHLNUISecondaryBackgroundColor;
+    collectionView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     collectionView.alwaysBounceVertical = YES;
     collectionView.delegate = self;
     return collectionView;
@@ -218,7 +218,7 @@
 }
 
 - (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView {
-    return kTHLNUISecondaryBackgroundColor;
+    return kTHLNUIPrimaryBackgroundColor;
 }
 
 - (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state

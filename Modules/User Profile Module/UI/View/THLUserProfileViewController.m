@@ -96,7 +96,7 @@ THLTextEntryViewDelegate
 
 - (void)layoutView {
     
-    self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
+    self.view.backgroundColor = kTHLNUIPrimaryBackgroundColor;
 
     [self.view addSubviews:@[_tableView]];
     
@@ -251,7 +251,7 @@ THLTextEntryViewDelegate
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    cell.backgroundColor = kTHLNUISecondaryBackgroundColor  ;
+    cell.backgroundColor = kTHLNUIPrimaryBackgroundColor  ;
 }
 
 #pragma mark MSMailMessage
@@ -290,7 +290,7 @@ THLTextEntryViewDelegate
     
 //    cell.textLabel.text = [self.tableCellNames objectAtIndex:indexPath.row];
 //    cell.textLabel.textColor = [UIColor whiteColor];
-    cell.contentView.backgroundColor = kTHLNUISecondaryBackgroundColor;
+    cell.contentView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
 //    cell.backgroundColor = kTHLNUISecondaryBackgroundColor;
     cell.title = [self.tableCellNames objectAtIndex:indexPath.row];
     cell.textLabel.backgroundColor = [UIColor clearColor];
@@ -319,7 +319,7 @@ THLTextEntryViewDelegate
 
 - (UITableView *)newTableView {
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-    tableView.backgroundColor = kTHLNUISecondaryBackgroundColor;
+    tableView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     tableView.separatorColor = [UIColor clearColor];
 //    tableView.bounces = YES;
 //    tableView.alwaysBounceVertical = YES;
