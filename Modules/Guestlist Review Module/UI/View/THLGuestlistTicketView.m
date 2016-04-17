@@ -29,7 +29,7 @@
 - (void)showAlertView {
     THLAlertView *alertView = [THLAlertView new];
     [alertView setTitle:@"Success"];
-    [alertView setMessage:@"Please arrive on time and show your ticket at the door for entrance. Your ticket + guestlist can always be found in the 'My Events' tab. If you have any questions, you can message the Host in the 'Chats Tab'. "];
+    [alertView setMessage:@"Please arrive on time and show your ticket at the door for entrance. Your ticket + guestlist can always be found in the 'My Events' tab. If you have any questions, you can contact the concierge anytime in your messages"];
     
     [self.navigationController.view addSubview:alertView];
     [alertView makeConstraints:^(MASConstraintMaker *make) {

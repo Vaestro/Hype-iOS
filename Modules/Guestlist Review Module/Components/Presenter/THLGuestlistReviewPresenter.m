@@ -110,7 +110,7 @@ THLGuestlistReviewInteractorDelegate
     [_ticketView setListNumber:[NSString stringWithFormat:@"%d",_guestlistInviteEntity.ticketNumber]];
     [_ticketView setVenueName:_guestlistInviteEntity.guestlist.event.location.name];
     [_ticketView setEventDate:[NSString stringWithFormat:@"%@", _guestlistEntity.event.date.thl_weekdayString]];
-    [_ticketView setArrivalMessage:[NSString stringWithFormat:@"PLEASE MEET CONCIERGE @ %@", _guestlistEntity.event.date.thl_timeString]];
+    [_ticketView setArrivalMessage:[NSString stringWithFormat:@"Recommended time of arrival: @ %@", _guestlistEntity.event.date.thl_timeString]];
     [_ticketView setShowInstruction:_showInstruction];
 }
 

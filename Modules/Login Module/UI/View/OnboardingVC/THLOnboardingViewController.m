@@ -87,7 +87,7 @@
                                                   backgroundVideo:nil   ];
     
     OnboardingContentViewController *secondPage = [OnboardingContentViewController contentWithTitle:@"DESIGN THE PERFECT NIGHT"
-                                                                                               body:@"Pick the event of your choice, invite your friends to join your party, and plan the night with the party chat."
+                                                                                               body:@"Pick the event of your choice and invite your friends to join your party"
                                                                                               image:nil];
     
     OnboardingContentViewController *thirdPage = [OnboardingContentViewController contentWithTitle:@"EARN GREAT PERKS"
@@ -95,7 +95,7 @@
                                                                                               image:nil];
     
     OnboardingContentViewController *fourthPage = [OnboardingContentViewController contentWithTitle:@"YOUR HYPE TEAM"
-                                                                                               body:@"Our team is always on call to answer any questions you may have to ensure a smooth night."
+                                                                                               body:@"Our team is always available through live chat to answer any questions you have to ensure a smooth night."
                                                                                               image:nil];
 
     OnboardingContentViewController *fifthPage = [OnboardingContentViewController

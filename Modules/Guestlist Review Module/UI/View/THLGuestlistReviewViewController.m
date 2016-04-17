@@ -146,7 +146,7 @@ static CGFloat const CELL_SPACING = 10;
 
 - (void)remakeConstraints {
     WEAKSELF();
-    if (self.navigationController) {
+    if (self.actionBarButton.hidden == TRUE) {
         [_collectionView remakeConstraints:^(MASConstraintMaker *make) {
             make.top.left.right.bottom.insets(kTHLEdgeInsetsNone());
         }];

@@ -152,6 +152,10 @@
         make.bottom.insets(kTHLEdgeInsetsInsanelyHigh());
         make.centerX.equalTo(0);
     }];
+    
+    [_hostNameLabel setHidden:TRUE];
+    [_iconImageView setHidden:TRUE];
+    [label setHidden:TRUE];
 }
 
 - (void)bindView {

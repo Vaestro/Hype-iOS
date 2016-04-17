@@ -85,7 +85,7 @@
 - (void)showAlertView {
     THLAlertView *alertView = [THLAlertView new];
     [alertView setTitle:@"What's Next?"];
-    [alertView setMessage:@"You can view your ticket + guestlist in the 'My Events’ tab. Please arrive on time and show your ticket at the door for entrance. If you have any questions, you can message the Host in the 'Chats Tab'"];
+    [alertView setMessage:@"Please arrive on time and show your ticket at the door for entrance. Your ticket + guestlist can always be found in the 'My Events' tab. If you have any questions, you can contact the concierge anytime in your messages"];
     
     [self.view addSubview:alertView];
     [self.view bringSubviewToFront:alertView];
