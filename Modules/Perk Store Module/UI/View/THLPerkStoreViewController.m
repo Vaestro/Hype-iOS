@@ -81,9 +81,13 @@ UICollectionViewDelegateFlowLayout
 - (void)layoutView {
     self.view.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     self.navigationController.navigationBar.topItem.title = @"PERKS";
-    self.navigationItem.leftBarButtonItem = [self newBarButtonItem];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.automaticallyAdjustsScrollViewInsets = YES;
+    
+    if ([THLUser currentUser])
+    {
+        self.navigationItem.leftBarButtonItem = [self newBarButtonItem];
+    }
     
     _collectionView = [self newCollectionView];
     [self.view addSubviews:@[_labelOne, _userCreditsLabel, _collectionView]];
