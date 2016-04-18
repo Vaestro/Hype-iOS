@@ -35,7 +35,8 @@
 
 #pragma mark VC Lifecycle
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     [self constructView];
     [self layoutView];
@@ -43,17 +44,20 @@
 //    [_refreshCommand execute:nil];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     self.viewAppeared = TRUE;
 }
 
-- (void)viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated
+{
     [super viewDidAppear:animated];
     self.viewAppeared = FALSE;
 }
 
-- (void)constructView {
+- (void)constructView
+{
     _collectionView = [self newCollectionView];
     _scrollView = [self newScrollView];
     _acceptedSectionLabel = [self newAcceptedSectionLabel];
@@ -64,10 +68,13 @@
 - (void)layoutView {
     self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
     self.navigationItem.title = @"MY EVENTS";
-    self.navigationItem.leftBarButtonItem = _messageButton;
-
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.automaticallyAdjustsScrollViewInsets = YES;
+    
+    if ([THLUser currentUser])
+    {
+        self.navigationItem.leftBarButtonItem = _messageButton;
+    }
     
     [self.view addSubviews:@[_collectionView]];
     [_collectionView makeConstraints:^(MASConstraintMaker *make) {

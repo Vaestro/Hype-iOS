@@ -77,7 +77,8 @@ THLTextEntryViewDelegate
 @synthesize userImageURL;
 
 #pragma mark - VC Lifecycle
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     [self constructView];
     [self layoutView];
@@ -85,7 +86,11 @@ THLTextEntryViewDelegate
     
     self.tableCellNames = @[@"Invite Friends",@"Redeem Code", @"Privacy Policy", @"Terms & Conditions", @"Contact Us", @"Logout"];
     self.navigationItem.title = @"MY PROFILE";
-    self.navigationItem.leftBarButtonItem = [self newBarButtonItem];
+    
+    if ([THLUser currentUser])
+    {
+        self.navigationItem.leftBarButtonItem = [self newBarButtonItem];
+    }
 }
 
 #pragma mark - View Setup
