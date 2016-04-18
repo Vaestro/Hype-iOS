@@ -227,7 +227,7 @@
 }
 
 - (THLActionButton *)newContactConciergeButton {
-    THLActionButton *button = [[THLActionButton alloc] initWithActionStyle];
+    THLActionButton *button = [[THLActionButton alloc] initWithInverseStyle];
     [button setTitle:@"Contact Concierge"];
     [button addTarget:self action:@selector(openUpChat) forControlEvents:UIControlEventTouchUpInside];
     return button;
