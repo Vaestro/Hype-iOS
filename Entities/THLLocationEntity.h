@@ -19,6 +19,8 @@
 @property (nonatomic, copy) NSArray *musicTypes;
 @property (nonatomic, copy) NSString *attireRequirement;
 @property (nonatomic, copy) NSURL *imageURL;
+@property (nonatomic, copy) NSDate *timeOpen;
+
 @property (nonatomic) float latitude;
 @property (nonatomic) float longitude;
 

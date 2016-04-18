@@ -21,6 +21,7 @@
 @dynamic coordinate;
 @dynamic musicTypes;
 @dynamic attireRequirement;
+@dynamic timeOpen;
 
 + (void)load {
 	[self registerSubclass];

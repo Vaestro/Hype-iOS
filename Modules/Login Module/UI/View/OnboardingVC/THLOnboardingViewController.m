@@ -94,7 +94,7 @@
                                                                                                body:@"For each friend that attends your event, you will get credits redeemable for perks like a free limo ride."
                                                                                               image:nil];
     
-    OnboardingContentViewController *fourthPage = [OnboardingContentViewController contentWithTitle:@"YOUR HYPE TEAM"
+    OnboardingContentViewController *fourthPage = [OnboardingContentViewController contentWithTitle:@"YOUR PERSONAL CONCIERGE"
                                                                                                body:@"Our team is always available through live chat to answer any questions you have to ensure a smooth night."
                                                                                               image:nil];
 

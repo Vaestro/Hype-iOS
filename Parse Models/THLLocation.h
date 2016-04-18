@@ -22,5 +22,6 @@
 @property (nonatomic, retain) PFGeoPoint *coordinate;
 @property (nonatomic, retain) NSArray *musicTypes;
 @property (nonatomic, retain) NSString *attireRequirement;
+@property (nonatomic, retain) NSDate *timeOpen;
 
 @end
