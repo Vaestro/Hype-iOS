@@ -13,6 +13,7 @@
 #import "UIScrollView+SVPullToRefresh.h"
 #import "THLAppearanceConstants.h"
 #import "Intercom/intercom.h"
+#import "THLUser.h"
 
 @interface THLEventDiscoveryViewController ()
 <
@@ -30,21 +31,26 @@ UICollectionViewDelegateFlowLayout
 @synthesize refreshCommand = _refreshCommand;
 
 #pragma mark - VC Lifecycle
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 	[self layoutView];
 	[self configureBindings];
 	[_refreshCommand execute:nil];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
 	[super viewWillAppear:animated];
 	[_collectionView reloadData];
-    
 }
 
-- (void)layoutView {
-    self.navigationItem.leftBarButtonItem = [self newBarButtonItem];
+- (void)layoutView
+{
+    if ([THLUser currentUser])
+    {
+        self.navigationItem.leftBarButtonItem = [self newBarButtonItem];
+    }
     self.view.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     NSDictionary *size = [NSDictionary dictionaryWithObjectsAndKeys:[UIFont fontWithName:@"Raleway-Regular" size:14.0],NSFontAttributeName, nil];
     self.navigationController.navigationBar.titleTextAttributes = size;
