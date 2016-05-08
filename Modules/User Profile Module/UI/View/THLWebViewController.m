@@ -14,13 +14,22 @@
 
 @implementation THLWebViewController
 
-
-- (void) viewDidAppear:(BOOL)animated {
-    
-    NSURLRequest *request = [NSURLRequest requestWithURL:self.url];
-    [self.webView loadRequest:request];
-    
+- (void)loadView
+{
+    UIWebView *webView = [UIWebView new];
+    webView.scalesPageToFit = YES;
+    self.view = webView;
 }
+
+- (void)setURL:(NSURL *)URL
+{
+    _URL = URL;
+    if (_URL) {
+        NSURLRequest *req = [NSURLRequest requestWithURL:_URL];
+        [(UIWebView *)self.view loadRequest:req];
+    }
+}
+
 
 
 @end

@@ -10,14 +10,15 @@
 #import <Parse/PFObject+Subclass.h>
 #import "THLGuestlist.h"
 #import "THLUser.h"
+@class THLGuestlistTicket;
 
 @interface THLGuestlistInvite : PFObject<PFSubclassing>
 @property (nonatomic, retain) THLUser *guest;
 @property (nonatomic, retain) THLGuestlist *guestlist;
+@property (nonatomic, retain) THLGuestlistTicket *guestlistTicket;
 @property (nonatomic, copy) NSDate *date;
 @property (nonatomic) THLStatus response;
 @property (nonatomic) BOOL didOpen;
 @property (nonatomic) BOOL checkInStatus;
 @property (nonatomic, retain) NSString *invitationCode;
-@property (nonatomic) int ticketNumber;
 @end

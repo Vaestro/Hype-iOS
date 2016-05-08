@@ -16,6 +16,7 @@
 #import "THLPerkStoreItem.h"
 #import "THLPurchasedPerkItem.h"
 #import "THLBeaconEntity.h"
+#import "THLGuestlistTicket.h"
 
 #import "THLEntities.h"
 #import "THLUserEntity.h"
@@ -26,6 +27,7 @@
 #import "THLPerkStoreItemEntity.h"
 #import "THLPurchasedPerkItemEntity.h"
 #import "THLBeacon.h"
+#import "THLGuestlistTicketEntity.h"
 
 @implementation THLEntityMapper
 - (void)mapBaseValuesFromModel:(PFObject *)model toEntity:(THLEntity *)entity
@@ -195,6 +197,23 @@
     }
 }
 
+- (THLGuestlistTicketEntity *)mapGuestlistTicket:(THLGuestlistTicket *)guestlistTicket
+{
+    if ([guestlistTicket isKindOfClass:[THLGuestlistTicket class]]) {
+        THLGuestlistTicketEntity *entity = [THLGuestlistTicketEntity new];
+        [self mapBaseValuesFromModel:guestlistTicket toEntity:entity];
+        entity.sender = [self mapGuest:guestlistTicket[@"sender"]];
+        entity.guestlist = [self mapGuestlist:guestlistTicket[@"guestlist"]];
+        entity.qrCode = [NSURL URLWithString:guestlistTicket.qrCode.url];
+        entity.scanned = guestlistTicket.scanned;
+        return entity;
+    } else {
+        return nil;
+    }
+}
+
+
+
 
 - (NSArray<THLGuestlistEntity *> *)mapGuestlists:(NSArray *)guestlists
 {
@@ -215,7 +234,7 @@
         entity.date = guestlistInvite.date;
         entity.guest = [self mapGuest:guestlistInvite[@"Guest"]];
         entity.guestlist = [self mapGuestlist:guestlistInvite[@"Guestlist"]];
-        entity.ticketNumber = guestlistInvite.ticketNumber;
+        entity.guestlistTicket = [self mapGuestlistTicket:guestlistInvite[@"guestlistTicket"]];
         return entity;
     } else {
         return nil;

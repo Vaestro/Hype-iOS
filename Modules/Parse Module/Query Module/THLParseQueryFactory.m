@@ -13,7 +13,8 @@
 
 @implementation THLParseQueryFactory
 #pragma mark - Event Queries
-- (PFQuery *)queryForEventsStartingOn:(NSDate *)startDate endingOn:(NSDate *)endDate {
+- (PFQuery *)queryForEventsStartingOn:(NSDate *)startDate endingOn:(NSDate *)endDate
+{
     THLUser *currentUser = [THLUser currentUser];
     PFQuery *query = [self baseEventQuery];
     [query whereKey:@"date" greaterThanOrEqualTo:startDate];
@@ -28,12 +29,14 @@
 }
 
 #pragma mark - Guestlist Queries
-- (PFQuery *)queryForGuestlistWithId {
+- (PFQuery *)queryForGuestlistWithId
+{
     PFQuery *query = [self baseGuestlistQuery];
     return query;
 }
 
-- (PFQuery *)queryForGuestlists {
+- (PFQuery *)queryForGuestlists
+{
     PFQuery *eventQuery = [self baseEventQuery];
     [eventQuery whereKey:@"host" equalTo:[THLUser currentUser]];
 
@@ -44,7 +47,8 @@
     return query;
 }
 
-- (PFQuery *)queryForGuestlistsForEvent:(NSString *)eventId {
+- (PFQuery *)queryForGuestlistsForEvent:(NSString *)eventId
+{
     PFQuery *eventQuery = [self baseEventQuery];
     [eventQuery whereKey:@"objectId" equalTo:eventId];
     [eventQuery whereKey:@"host" equalTo:[THLUser currentUser]];
@@ -67,6 +71,7 @@
     [query whereKey:@"Guest" equalTo:[THLUser currentUser]];
     [query whereKey:@"Guestlist" matchesQuery:guestlistQuery];
     [query whereKey:@"response" notEqualTo:[NSNumber numberWithInteger:-1]];
+    [query includeKey:@"Guestlist.guestlistTicket"];
     return query;
 }
 
@@ -77,6 +82,7 @@
 //    [query whereKey:@"date" greaterThanOrEqualTo:[[NSDate date] dateByAddingTimeInterval:-60*300]];
     [query orderByAscending:@"date"];
     [query whereKey:@"response" notEqualTo:[NSNumber numberWithInteger:-1]];
+    [query includeKey:@"Guestlist.guestlistTicket"];
     return query;
 }
 
@@ -84,6 +90,7 @@
     PFQuery *query = [self baseGuestlistInviteQuery];
     [query whereKey:@"Guest" equalTo:[THLUser currentUser].objectId];
     [query orderByAscending:@"date"];
+    [query includeKey:@"Guestlist.guestlistTicket"];
     //[query whereKey:@"response" notEqualTo:[NSNumber numberWithInteger:-1]];
     return query;
 }
@@ -99,6 +106,7 @@
     [query includeKey:@"Guestlist"];
     [query includeKey:@"Guestlist.event"];
     [query includeKey:@"Guestlist.event.location"];
+    [query includeKey:@"Guestlist.guestlistTicket"];
     return query;
 }
 
@@ -250,6 +258,7 @@
     [query includeKey:@"Guestlist.event"];
     [query includeKey:@"Guestlist.event.host"];
     [query includeKey:@"Guestlist.event.location"];
+    [query includeKey:@"Guestlist.guestlistTicket"];
     return query;
 }
 

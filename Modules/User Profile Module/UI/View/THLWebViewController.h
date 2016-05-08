@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface THLWebViewController : UIViewController
-@property (nonatomic, strong) NSURL *url;
+@property (nonatomic) NSURL *URL;
 @end

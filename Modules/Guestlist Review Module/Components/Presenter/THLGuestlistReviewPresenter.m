@@ -29,6 +29,7 @@
 #import "THLUser.h"
 #import "THLParseQueryFactory.h"
 #import "THLGuestlist.h"
+#import "THLGuestlistTicketEntity.h"
 
 #import "THLGuestlistTicketView.h"
 
@@ -107,7 +108,7 @@ THLGuestlistReviewInteractorDelegate
     [_ticketView setDismissCommand:dismissCommand];
     [_ticketView setViewPartyCommand:viewPartyCommand];
     [_ticketView setViewEventDetailsCommand:viewEventDetailsCommand];
-    [_ticketView setListNumber:[NSString stringWithFormat:@"%d",_guestlistInviteEntity.ticketNumber]];
+    [_ticketView setQrCode:_guestlistInviteEntity.guestlistTicket.qrCode];
     [_ticketView setVenueName:_guestlistInviteEntity.guestlist.event.location.name];
     [_ticketView setEventDate:[NSString stringWithFormat:@"%@", _guestlistEntity.event.date.thl_weekdayString]];
     [_ticketView setArrivalMessage:[NSString stringWithFormat:@"Please arrive by %@", _guestlistEntity.event.date.thl_timeString]];

@@ -14,14 +14,13 @@
 #import <DigitsKit/DigitsKit.h>
 #import <Optimizely/Optimizely.h>
 #import "Branch.h"
-//#import <Stripe/Stripe.h>
+#import <Stripe/Stripe.h>
 #import "THLDependencyManager.h"
 #import "THLMasterWireframe.h"
 #import "THLAppearanceUtils.h"
 #import "Intercom/intercom.h"
 
 //Logging framework
-//#define LOG_LEVEL_DEF ddLogLevel
 #import "CocoaLumberjack.h"
 static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
@@ -56,6 +55,9 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
     [Intercom setApiKey:@"ios_sdk-3899f433e0b112fe8daff2cc4f8bfdff18fad071" forAppId:@"eixn8wsn"];
     [Intercom enableLogging];
     [Intercom setPreviewPosition:ICMPreviewPositionTopLeft];
+    
+    //Stripe
+    [Stripe setDefaultPublishableKey:@"pk_test_cGZ7E1Im6VPKQHYUXIkR6sEe"];
     
     //Configuring Lumberjack logging framework
     setenv("XcodeColors", "YES", 0);

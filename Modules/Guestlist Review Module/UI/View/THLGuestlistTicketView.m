@@ -19,7 +19,7 @@
 @property (nonatomic, strong) UIBarButtonItem *dismissButton;
 @property (nonatomic, strong) UIBarButtonItem *eventDetailsButton;
 @property (nonatomic, strong) UILabel *ticketInstructionLabel;
-@property (nonatomic, strong) UILabel *listNumberLabel;
+@property (nonatomic, strong) UIImageView *qrCodeImageView;
 @property (nonatomic, strong) UILabel *venueNameLabel;
 @property (nonatomic, strong) UILabel *eventDateLabel;
 @property (nonatomic, strong) UILabel *arrivalMessageLabel;
@@ -48,7 +48,6 @@
 
 - (void)constructView {
     _ticketInstructionLabel = [self newTicketInstructionLabel];
-    _listNumberLabel = [self newListNumberLabel];
     _dismissButton = [self newDismissButton];
     _eventDetailsButton = [self newEventDetailsButton];
     _venueNameLabel = [self newVenueNameLabel];
@@ -56,6 +55,8 @@
     _arrivalMessageLabel = [self newArrivalMessageLabel];
     _viewPartyButton = [self newViewPartyButton];
     _contactConceirgeButton = [self newContactConciergeButton];
+    _qrCodeImageView = [self newQRCodeImageView];
+    
 }
 
 - (void)layoutView {
@@ -102,17 +103,17 @@
         make.centerX.equalTo(0);
     }];
     
-    [ticketBox addSubviews:@[_listNumberLabel, _venueNameLabel, _eventDateLabel, _arrivalMessageLabel]];
+    [ticketBox addSubviews:@[_qrCodeImageView, _venueNameLabel, _eventDateLabel, _arrivalMessageLabel]];
 
     
-    [_listNumberLabel makeConstraints:^(MASConstraintMaker *make) {
+    [_qrCodeImageView makeConstraints:^(MASConstraintMaker *make) {
         make.top.insets(kTHLEdgeInsetsSuperHigh());
         make.height.equalTo(SCREEN_HEIGHT*0.25);
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
     [_venueNameLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF listNumberLabel].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+        make.top.equalTo([WSELF qrCodeImageView].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
         make.bottom.equalTo([WSELF eventDateLabel].mas_top).insets(kTHLEdgeInsetsSuperHigh());
 
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
@@ -138,8 +139,16 @@
     RAC(self, dismissButton.rac_command) = RACObserve(self, dismissCommand);
     RAC(self, viewPartyButton.rac_command) = RACObserve(self, viewPartyCommand);
     RAC(self, eventDetailsButton.rac_command) = RACObserve(self, viewEventDetailsCommand);
+    
+    WEAKSELF();
+    RACSignal *imageURLSignal = [RACObserve(self, qrCode) filter:^BOOL(NSURL *url) {
+        return url.isValid;
+    }];
+    
+    [imageURLSignal subscribeNext:^(NSURL *url) {
+        [WSELF.qrCodeImageView sd_setImageWithURL:url];
+    }];
 
-    RAC(self, listNumberLabel.text) = RACObserve(self, listNumber);
     RAC(self, venueNameLabel.text) = RACObserve(self, venueName);
     RAC(self, eventDateLabel.text) = RACObserve(self, eventDate);
     RAC(self, arrivalMessageLabel.text  ) = RACObserve(self, arrivalMessage);
@@ -217,6 +226,16 @@
                         forState:UIControlStateNormal];
     return item;
 }
+
+
+- (UIImageView *)newQRCodeImageView
+{
+    UIImageView *view = [UIImageView new];
+    view.contentMode = YES;
+    return view;
+}
+
+
 
 - (THLActionButton *)newViewPartyButton {
     THLActionButton *button = [[THLActionButton alloc] initWithDefaultStyle];

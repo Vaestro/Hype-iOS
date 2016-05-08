@@ -22,6 +22,9 @@
 #import "Intercom/intercom.h"
 #import "THLUser.h"
 #import "Parse.h"
+#import "Stripe.h"
+#import "THLPaymentViewController.h"
+#import "THLWebViewController.h"
 
 typedef NS_ENUM(NSInteger, TableViewSection) {
     TableViewSectionPersonal = 0,
@@ -47,6 +50,7 @@ typedef NS_ENUM(NSInteger, HypelistSectionRow) {
 typedef NS_ENUM(NSUInteger, ApplicationInfoCase){
     InviteFriends = 0,
     RedeemCode,
+    PaymentMethod,
     PrivacyPolicy,
     TermsAndConditions,
     ContactUs,
@@ -59,7 +63,8 @@ static NSString *branchMarketingLink = @"https://bnc.lt/m/aTR7pkSq0q";
 @interface THLUserProfileViewController()
 <
 THLUserPhotoVerificationInterfaceDidHideDelegate,
-THLTextEntryViewDelegate
+THLTextEntryViewDelegate,
+STPPaymentCardTextFieldDelegate
 >
 
 @property (nonatomic, strong) NSArray *urls;
@@ -67,6 +72,7 @@ THLTextEntryViewDelegate
 @property (nonatomic, strong) NSString *siteUrl;
 @property (nonatomic, strong) THLInformationViewController *infoVC;
 @property (nonatomic, strong) RACCommand *dismissVC;
+@property (nonatomic) THLWebViewController *webViewController;
 @end
 
 @implementation THLUserProfileViewController
@@ -84,7 +90,7 @@ THLTextEntryViewDelegate
     [self layoutView];
     [self bindView];
     
-    self.tableCellNames = @[@"Invite Friends",@"Redeem Code", @"Privacy Policy", @"Terms & Conditions", @"Contact Us", @"Logout"];
+    self.tableCellNames = @[@"Invite Friends",@"Redeem Code", @"Payment Method", @"Privacy Policy", @"Terms & Conditions", @"Contact Us", @"Logout"];
     self.navigationItem.title = @"MY PROFILE";
     
     if ([THLUser currentUser])
@@ -144,6 +150,9 @@ THLTextEntryViewDelegate
         case RedeemCode:
             [self presentCodeEntryView];
             break;
+        case PaymentMethod:
+            [self presentPaymentView];
+            break;
         case PrivacyPolicy:
             [self presentModalInformationWithText:[THLResourceManager privacyPolicyText]
                                          andTitle:@"Privacy Policy"];
@@ -192,6 +201,18 @@ THLTextEntryViewDelegate
     invitationCodeEntryView.navigationController.view.backgroundColor = [UIColor clearColor];
     [self.navigationController pushViewController:invitationCodeEntryView animated:YES];
 }
+
+
+- (void)presentPaymentView
+{
+//    _webViewController = [[THLWebViewController alloc]init];
+//    _webViewController.URL = [NSURL URLWithString:@"https://google.com"];
+//    [self.navigationController pushViewController:_webViewController animated:YES];
+    
+    THLPaymentViewController *paymentView = [THLPaymentViewController new];
+    [self.navigationController pushViewController:paymentView animated:NO]; 
+}
+
 
 - (void) presentModalExplanationHowItWorks {
     THLFAQViewController *faqVC = [[THLFAQViewController alloc] init];

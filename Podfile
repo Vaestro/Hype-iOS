@@ -46,6 +46,9 @@ pod 'RKNotificationHub'
 #Intercom
 pod 'Intercom'
 
+#Ticketing
+pod 'PQScanner', '~> 0.1.3'
+
 #Fabric
 pod 'Fabric'
 pod 'Crashlytics'

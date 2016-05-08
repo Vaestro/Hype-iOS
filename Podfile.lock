@@ -140,6 +140,7 @@ PODS:
     - FontasticIcons
     - JCDialPad
     - PhoneKit/Core
+  - PQScanner (0.1.3)
   - ReactiveCocoa (2.5):
     - ReactiveCocoa/UI (= 2.5)
   - ReactiveCocoa/Core (2.5):
@@ -258,6 +259,7 @@ DEPENDENCIES:
   - Parse (= 1.11.0)
   - ParseFacebookUtilsV4
   - PhoneKit
+  - PQScanner (~> 0.1.3)
   - ReactiveCocoa (= 2.5)
   - ReflectableEnum
   - Reveal-iOS-SDK
@@ -324,6 +326,7 @@ SPEC CHECKSUMS:
   Parse: 886af46a0a677402f6374bb97ac212e795f70afe
   ParseFacebookUtilsV4: eab9b4ade12f0800b4d30f6b808bca55ce17a0e9
   PhoneKit: 26f7c49593bc093a20510b2dbb9f7eba6d0b5f83
+  PQScanner: 32bdd45ca2a7d04603687f469a7f5f27841eb1d6
   ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
   ReflectableEnum: bf9d36f8c35122242125140a22b8921d071989aa
   Reveal-iOS-SDK: e2250b3c155bcfac53ae223ddc1f76d08f206c33

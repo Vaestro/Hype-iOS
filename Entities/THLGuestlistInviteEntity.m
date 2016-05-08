@@ -8,6 +8,7 @@
 
 #import "THLGuestlistInviteEntity.h"
 #import "THLGuestlistEntity.h"
+#import "THlGuestlistTicketEntity.h"
 #import "THLGuestEntity.h"
 #import "THLUser.h"
 

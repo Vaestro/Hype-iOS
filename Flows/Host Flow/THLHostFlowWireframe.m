@@ -16,6 +16,7 @@
 #import "THLMasterNavigationController.h"
 #import "THLAppearanceConstants.h"
 #import "RKNotificationHub.h"
+#import "THLTicketScannerController.h"
 
 @interface THLHostFlowWireframe()
 <
@@ -58,9 +59,14 @@ THLGuestlistReviewModuleDelegate
 
 - (void)configureMasterTabViewController:(UITabBarController *)masterTabViewController
 {
+    
+    THLTicketScannerController *ticketScanner = [THLTicketScannerController new];
+    
     UINavigationController *discovery = [UINavigationController new];
     UINavigationController *dashboard = [UINavigationController new];
     UINavigationController *profile = [UINavigationController new];
+    UINavigationController *scanner = [[UINavigationController alloc]initWithRootViewController:ticketScanner];
+    
     
     [self presentEventDiscoveryInterfaceInNavigationController:discovery];
     [self presentDashboardInterfaceInNavigationController:dashboard];
@@ -69,8 +75,9 @@ THLGuestlistReviewModuleDelegate
     dashboard.tabBarItem.image = [UIImage imageNamed:@"Lists Icon"];
     discovery.tabBarItem.image = [UIImage imageNamed:@"Home Icon"];
     profile.tabBarItem.image = [UIImage imageNamed:@"Profile Icon"];
+    scanner.tabBarItem.image = [UIImage imageNamed:@"Calendar Icon"];
     
-    NSArray *views = @[discovery, dashboard, profile];
+    NSArray *views = @[scanner, discovery, dashboard, profile];
     
     masterTabViewController.viewControllers = views;
     masterTabViewController.view.autoresizingMask=(UIViewAutoresizingFlexibleHeight);
