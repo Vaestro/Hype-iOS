@@ -71,7 +71,6 @@
     [query whereKey:@"Guest" equalTo:[THLUser currentUser]];
     [query whereKey:@"Guestlist" matchesQuery:guestlistQuery];
     [query whereKey:@"response" notEqualTo:[NSNumber numberWithInteger:-1]];
-    [query includeKey:@"Guestlist.guestlistTicket"];
     return query;
 }
 
@@ -82,7 +81,6 @@
 //    [query whereKey:@"date" greaterThanOrEqualTo:[[NSDate date] dateByAddingTimeInterval:-60*300]];
     [query orderByAscending:@"date"];
     [query whereKey:@"response" notEqualTo:[NSNumber numberWithInteger:-1]];
-    [query includeKey:@"Guestlist.guestlistTicket"];
     return query;
 }
 
@@ -90,7 +88,6 @@
     PFQuery *query = [self baseGuestlistInviteQuery];
     [query whereKey:@"Guest" equalTo:[THLUser currentUser].objectId];
     [query orderByAscending:@"date"];
-    [query includeKey:@"Guestlist.guestlistTicket"];
     //[query whereKey:@"response" notEqualTo:[NSNumber numberWithInteger:-1]];
     return query;
 }
@@ -106,7 +103,6 @@
     [query includeKey:@"Guestlist"];
     [query includeKey:@"Guestlist.event"];
     [query includeKey:@"Guestlist.event.location"];
-    [query includeKey:@"Guestlist.guestlistTicket"];
     return query;
 }
 
@@ -258,7 +254,7 @@
     [query includeKey:@"Guestlist.event"];
     [query includeKey:@"Guestlist.event.host"];
     [query includeKey:@"Guestlist.event.location"];
-    [query includeKey:@"Guestlist.guestlistTicket"];
+    [query includeKey:@"guestlistTicket"];
     return query;
 }
 

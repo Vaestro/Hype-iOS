@@ -24,38 +24,17 @@
 #import "THLEntityMapper.h"
 #import "THLGuestlist.h"
 
-
-
-#define kServerBaseURL @"https://hypelistnyc.parseapp.com"
-#define kTokenEndpoint @"authenticate"
-
 static NSString *const kTHLGuestlistReviewModuleViewKey = @"kTHLGuestlistReviewModuleViewKey";
-//@class THLGuestlistInviteEntity;
 
 @interface THLGuestlistReviewInteractor()
-<
-ESTBeaconManagerDelegate,
-CLLocationManagerDelegate
->
-//@property (nonatomic) ESTBeaconManager *beaconManager;
-//@property (nonatomic) CLBeaconRegion *beaconRegion;
 @property (nonatomic) int counter;
-@property (nonatomic, strong) CLRegion *venueRegion;
-@property (nonatomic, strong) CLLocation *venueLocation;
-@property (nonatomic, strong) CLLocationManager *locationManager;
-@property (nonatomic, strong) CLLocation *center;
 @end
 
 @implementation THLGuestlistReviewInteractor
 - (instancetype)initWithDataManager:(THLGuestlistReviewDataManager *)dataManager
               viewDataSourceFactory:(id<THLViewDataSourceFactoryInterface>)viewDataSourceFactory {
     if (self = [super init]) {
-        self.locationManager = [CLLocationManager new];
-        _locationManager.delegate = self;
         
-        
-//        self.beaconManager = [ESTBeaconManager new];
-//        _beaconManager.delegate = self;
         _dataManager = dataManager;
         _viewDataSourceFactory = viewDataSourceFactory;
         
@@ -117,81 +96,6 @@ CLLocationManagerDelegate
         return [[NSNumber numberWithInteger:guestlistInvite2.response] compare:[NSNumber numberWithInteger:guestlistInvite1.response]];
     }];
 }
-
-#pragma mark - Handle Location Check In
-- (void)checkInForGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite {
-    
-    _guestlistInvite = guestlistInvite;
-    switch ([ESTBeaconManager authorizationStatus]) {
-        case kCLAuthorizationStatusNotDetermined:
-        case kCLAuthorizationStatusAuthorizedWhenInUse:
-            [self askForPermission];
-            break;
-            
-        case kCLAuthorizationStatusAuthorizedAlways:
-            [self setUpGeofences];
-            break;
-        case kCLAuthorizationStatusDenied:
-        case kCLAuthorizationStatusRestricted:
-            [self showSorryAlert];
-            break;
-    }
-
-}
-
--(void)askForPermission {
-    if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
-        [self.locationManager requestAlwaysAuthorization];
-    } else {
-        [self setUpGeofences];
-    }
-}
-
-- (void)setUpGeofences {
-    
-//    _counter = 0;
-    
-    _center = [[CLLocation alloc]initWithLatitude:_guestlistEntity.event.location.latitude longitude:_guestlistEntity.event.location.longitude];
-
-    
-    [KVNProgress showWithStatus:@"Checking In"];
-    
-    [self.locationManager startUpdatingLocation];
-}
-
-- (void)showSorryAlert {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry"
-                                                    message:@"Need to enable location services in your settings"
-                                                   delegate:self
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
-
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
-    CLLocationDistance meters = [locations[0] distanceFromLocation:_center];
-    
-        if (meters < 70) {
-            [self.locationManager stopUpdatingLocation];
-            [self updateGuestlistInvite:_guestlistInvite withCheckInStatus:YES];
-        } else {
-            [self.locationManager stopUpdatingLocation];
-            [self updateGuestlistInvite:_guestlistInvite withCheckInStatus:NO];
-       }
-};
-
-
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                    message:@"Make sure your location settings are properly enabled"
-                                                   delegate:self
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
-}
-
 
 #pragma mark - Handle Presenter Events
 - (void)updateGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite withResponse:(THLStatus)response {

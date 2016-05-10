@@ -14,6 +14,8 @@
 #import "THLEvent.h"
 #import "THLLocationEntity.h"
 #import "THLUser.h"
+#import "THLGuestlistTicket.h"
+#import "THLGuestlistTicketEntity.h"
 #import "THLBeaconEntity.h"
 #import "THLChannelService.h"
 #import "THLHostEntity.h"
@@ -228,8 +230,10 @@
                 for (PFObject *guestlistInvite in guestlistInvites) {
                     PFObject *guestlist = guestlistInvite[@"Guestlist"];
                     [guestlistInvite setObject:guestlist forKey:@"Guestlist"];
+                    PFObject *guestlistTicket = guestlistInvite[@"guestlistTicket"];
+                    [guestlistInvite setObject:guestlistTicket forKey:guestlistInvite[@"guestlistTicket"]];
                     PFObject *event= guestlistInvite[@"Guestlist"][@"event"];
-                    [guestlist setObject:event forKey:@"event"];
+//                    [guestlist setObject:event forKey:@"event"];
                     PFObject *host = guestlistInvite[@"Guestlist"][@"event"][@"host"];
                     [event setObject:host forKey:@"host"];
                     PFObject *location = guestlistInvite[@"Guestlist"][@"event"][@"location"];
@@ -282,6 +286,8 @@
             [guestlist setObject:owner forKey:@"Owner"];
             PFObject *fetchedEvent = guestlistInvite[@"Guestlist"][@"event"];
             [guestlist setObject:fetchedEvent forKey:@"event"];
+            PFObject *guestlistTicket = guestlistInvite[@"guestlistTicket"];
+            [guestlistInvite setObject:guestlistTicket forKey:@"guestlistTicket"];
             PFObject *location = guestlistInvite[@"Guestlist"][@"event"][@"location"];
             [fetchedEvent setObject:location forKey:@"location"];
             [completionSource setResult:guestlistInvite];
