@@ -801,8 +801,8 @@
 		C8E342081C3B1A9C009FE9B0 /* THLGuestlistReviewHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestlistReviewHeaderView.m; sourceTree = "<group>"; };
 		C8F2FB251BF81A8E004E00B6 /* THLInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLInformationViewController.h; sourceTree = "<group>"; };
 		C8F2FB261BF81A8E004E00B6 /* THLInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLInformationViewController.m; sourceTree = "<group>"; };
-		C8F2FB281BF826B7004E00B6 /* THLWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLWebViewController.h; sourceTree = "<group>"; };
-		C8F2FB291BF826B7004E00B6 /* THLWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLWebViewController.m; sourceTree = "<group>"; };
+		C8F2FB281BF826B7004E00B6 /* THLWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THLWebViewController.h; path = "../Modules/User Profile Module/UI/View/THLWebViewController.h"; sourceTree = "<group>"; };
+		C8F2FB291BF826B7004E00B6 /* THLWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THLWebViewController.m; path = "../Modules/User Profile Module/UI/View/THLWebViewController.m"; sourceTree = "<group>"; };
 		CBE5404991A434142507D7B0 /* THLViewDataSourceSorting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLViewDataSourceSorting.m; sourceTree = "<group>"; };
 		CBE54163EA2D6D75F647F7B1 /* THLViewDataSource+Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "THLViewDataSource+Factory.h"; sourceTree = "<group>"; };
 		CBE545A9A3C66339456E0A06 /* THLViewDataSource+Factory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "THLViewDataSource+Factory.m"; sourceTree = "<group>"; };
@@ -2811,6 +2811,8 @@
 		C8A766551CDA84A600A000C2 /* THLWebViewController */ = {
 			isa = PBXGroup;
 			children = (
+				C8F2FB281BF826B7004E00B6 /* THLWebViewController.h */,
+				C8F2FB291BF826B7004E00B6 /* THLWebViewController.m */,
 			);
 			name = THLWebViewController;
 			sourceTree = "<group>";
@@ -3141,8 +3143,6 @@
 				798D7EB51BF2CCE5001D4593 /* THLUserProfileView.h */,
 				798D7EB21BF2CCD4001D4593 /* THLUserProfileViewController.h */,
 				798D7EB31BF2CCD4001D4593 /* THLUserProfileViewController.m */,
-				C8F2FB281BF826B7004E00B6 /* THLWebViewController.h */,
-				C8F2FB291BF826B7004E00B6 /* THLWebViewController.m */,
 			);
 			path = View;
 			sourceTree = "<group>";

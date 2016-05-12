@@ -347,7 +347,8 @@ STPPaymentCardTextFieldDelegate
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     tableView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     tableView.separatorColor = [UIColor clearColor];
-//    tableView.bounces = YES;
+    
+//    tableView.bounces = NO;
 //    tableView.alwaysBounceVertical = YES;
     tableView.dataSource = self;
     tableView.delegate = self;

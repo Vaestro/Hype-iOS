@@ -140,13 +140,13 @@
     guestlist[@"event"] = [THLEvent objectWithoutDataWithObjectId:eventEntity.objectId];
     [guestlist saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
-            [PFCloud callFunctionInBackground:@"sendOutNotifications"
+            [PFCloud callFunctionInBackground:@"sendOutInvitations"
                                withParameters:@{@"eventId": eventEntity.objectId,
                                                 @"eventName":eventEntity.location.name,
                                                 @"eventTime":iso8601String,
                                                 @"guestPhoneNumbers": guestPhoneNumbers,
                                                 @"guestlistId": guestlist.objectId}
-                                        block:^(id knownGuestIds, NSError *cloudError) {
+                                        block:^(id response, NSError *cloudError) {
                                             if (!cloudError){
                                                 
                                                 [Intercom logEventWithName:@"event_submission" metaData: @{
@@ -169,13 +169,13 @@
 - (BFTask *)updateGuestlist:(NSString *)guestlistId withInvites:(NSArray *)guestPhoneNumbers forEvent:(THLEventEntity *)eventEntity
 {
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
-    [PFCloud callFunctionInBackground:@"sendOutNotifications"
+    [PFCloud callFunctionInBackground:@"sendOutInvitations"
                        withParameters:@{@"eventId": eventEntity.objectId,
                                         @"eventName":eventEntity.location.name,
                                         @"eventTime": eventEntity.date,
                                         @"guestPhoneNumbers": guestPhoneNumbers,
                                         @"guestlistId": guestlistId}
-                                block:^(id knownGuestIds, NSError *error) {
+                                block:^(id response, NSError *error) {
                                     
                                     if (!error){
                                         [completionSource setResult:nil];

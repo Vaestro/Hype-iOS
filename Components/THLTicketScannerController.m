@@ -8,6 +8,8 @@
 
 #import "THLTicketScannerController.h"
 #import "PQScanner.h"
+#import "Parse.h"
+
 
 @interface THLTicketScannerController () <PQScannerDelegate,UIAlertViewDelegate>
 {
