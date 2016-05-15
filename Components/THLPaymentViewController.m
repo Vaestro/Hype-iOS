@@ -78,13 +78,15 @@
 
 - (void)saveCreditCardInfo
 {
+    self.hud.labelText = @"Updating...";
+    [self.hud show:YES];
     [[STPAPIClient sharedClient]
      createTokenWithCard:self.paymentTextField.cardParams
      completion:^(STPToken *token, NSError *error) {
          if (error) {
              [self displayError:error];
          } else {
-             self.hud.labelText = @"Updating...";
+             
              [PFCloud callFunctionInBackground:@"createStripeCustomer"
                                 withParameters:@{@"stripeToken": token.tokenId}
                                          block:^(NSString *response, NSError *cloudError) {
