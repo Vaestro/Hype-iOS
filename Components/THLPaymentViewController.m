@@ -10,10 +10,14 @@
 #import "THLAppearanceConstants.h"
 #import "THLActionButton.h"
 #import "Stripe.h"
+#import "Parse.h"
+#import "THLUser.h"
+#import "MBProgressHUD.h"
 
-@interface THLPaymentViewController ()<STPPaymentCardTextFieldDelegate>
+@interface THLPaymentViewController()<STPPaymentCardTextFieldDelegate>
 @property(nonatomic) STPPaymentCardTextField *paymentTextField;
 @property(nonatomic, strong) THLActionButton *addCard;
+@property (nonatomic, strong) MBProgressHUD *hud;
 @end
 
 @implementation THLPaymentViewController
@@ -31,12 +35,16 @@
     self.paymentTextField.textColor = [UIColor whiteColor];
     self.paymentTextField.delegate = self;
     
+    self.hud = [[MBProgressHUD alloc] initWithView:self.view];
+    
     _addCard = [self newAddCardButton];
-    [self.view addSubviews:@[_paymentTextField, _addCard]];
+    
+    [self.view addSubviews:@[_paymentTextField, _addCard, _hud]];
 }
 
 - (void)layoutView
 {
+    
     [_paymentTextField mas_makeConstraints:^(MASConstraintMaker *make){
         make.centerY.equalTo(0).offset(10);
         make.left.right.insets(kTHLEdgeInsetsHigh());
@@ -46,6 +54,7 @@
     [_addCard mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(WSELF.paymentTextField.mas_bottom).insets(kTHLEdgeInsetsHigh());
         make.centerX.equalTo(0);
+        make.left.right.insets(kTHLEdgeInsetsHigh());
     }];
     
     
@@ -55,19 +64,59 @@
 - (THLActionButton *)newAddCardButton
 {
     THLActionButton *button = [[THLActionButton alloc] initWithDefaultStyle];
-    [button
-     setTitle:@"Save Card"];
-    
+    [button setTitle:@"Add Card"];
+    [button addTarget:self action:@selector(saveCreditCardInfo) forControlEvents:UIControlEventTouchUpInside];
+    button.enabled = NO;
     return button;
 }
 
 
 - (void)paymentCardTextFieldDidChange:(STPPaymentCardTextField *)textField
 {
-    // Toggle navigation, for example
     self.addCard.enabled = textField.isValid;
 }
 
+- (void)saveCreditCardInfo
+{
+    [[STPAPIClient sharedClient]
+     createTokenWithCard:self.paymentTextField.cardParams
+     completion:^(STPToken *token, NSError *error) {
+         if (error) {
+             [self displayError:error];
+         } else {
+             self.hud.labelText = @"Updating...";
+             [PFCloud callFunctionInBackground:@"createStripeCustomer"
+                                withParameters:@{@"stripeToken": token.tokenId}
+                                         block:^(NSString *response, NSError *cloudError) {
+                                             [self.hud hide:YES];
+                                             if (cloudError) {
+                                                 [self displayError:cloudError];
+                                             } else {
+                                                 [self displaySuccess];
+                                             }
+              }];
+         }
+     }];
+}
+
+
+- (void)displayError:(NSError *)error {
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
+                                                      message:[error localizedDescription]
+                                                     delegate:nil
+                                            cancelButtonTitle:NSLocalizedString(@"OK", @"OK")
+                                            otherButtonTitles:nil];
+    [message show];
+}
+
+- (void)displaySuccess {
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Success", @"Success")
+                                                      message:@"Your credit card information has been successfully added"
+                                                     delegate:nil
+                                            cancelButtonTitle:NSLocalizedString(@"OK", @"OK")
+                                            otherButtonTitles:nil];
+    [message show];
+}
 
 @end
 

@@ -35,6 +35,9 @@
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
         if (!error) {
             [completionSource setResult:result];
+        } else if ([[error userInfo][@"error"][@"type"] isEqualToString: @"OAuthException"]) { // Since the request failed, we can check if it was due to an invalid session
+            NSLog(@"The facebook session was invalidated");
+            [PFFacebookUtils unlinkUserInBackground:[PFUser currentUser]];
         } else {
             [completionSource setError:error];
         }

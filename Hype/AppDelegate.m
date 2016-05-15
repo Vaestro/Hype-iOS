@@ -45,7 +45,6 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    
 	// Initialize Parse.
     [Parse enableLocalDatastore];
 	[Parse setApplicationId:applicationId
@@ -65,7 +64,6 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     [[DDTTYLogger sharedInstance] setColorsEnabled:YES];
     
-
 	// [Optional] Track statistics around application opens.
     if (application.applicationState != UIApplicationStateBackground) {
         // Track an app open here if we launch with a push, unless
@@ -80,7 +78,7 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
         }
     }
     
-    [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:nil];
+    [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:(launchOptions)];
     
 //    TODO: Add Stripe class with:  [STPAPIClient class]
     [Fabric with:@[[Digits class], [Crashlytics class]]];
@@ -129,8 +127,9 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
         NSLog(@"deep link data: %@", [params description]);
     }];
     
-	return [[FBSDKApplicationDelegate sharedInstance] application:application
-									didFinishLaunchingWithOptions:launchOptions];
+//	return [[FBSDKApplicationDelegate sharedInstance] application:application
+//									didFinishLaunchingWithOptions:launchOptions];
+    return true;
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
@@ -192,7 +191,7 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-	[FBSDKAppEvents activateApp];   
+	[FBSDKAppEvents activateApp];
     
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     if (currentInstallation.badge != 0) {
@@ -209,10 +208,11 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
     NSLog(@"%@", url);
     
     [[Branch getInstance] handleDeepLink:url];
-	return [[FBSDKApplicationDelegate sharedInstance] application:application
-														  openURL:url
-												sourceApplication:sourceApplication
-													   annotation:annotation];
+    
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                          openURL:url
+                                                sourceApplication:sourceApplication
+                                                       annotation:annotation];
 }
 
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {

@@ -26,7 +26,6 @@
 @dynamic location;
 @dynamic credits;
 @dynamic twilioNumber;
-@dynamic beacon;
 
 + (void)load {
 	[self registerSubclass];

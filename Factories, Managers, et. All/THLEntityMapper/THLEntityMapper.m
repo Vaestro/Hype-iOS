@@ -15,7 +15,6 @@
 #import "THLGuestlistInvite.h"
 #import "THLPerkStoreItem.h"
 #import "THLPurchasedPerkItem.h"
-#import "THLBeaconEntity.h"
 #import "THLGuestlistTicket.h"
 
 #import "THLEntities.h"
@@ -26,7 +25,6 @@
 #import "THLGuestlistInviteEntity.h"
 #import "THLPerkStoreItemEntity.h"
 #import "THLPurchasedPerkItemEntity.h"
-#import "THLBeacon.h"
 #import "THLGuestlistTicketEntity.h"
 
 @implementation THLEntityMapper

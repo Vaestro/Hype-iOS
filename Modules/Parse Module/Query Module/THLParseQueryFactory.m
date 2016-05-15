@@ -118,96 +118,18 @@
     return query;
 }
 
-#pragma mark - Channels Queries
-- (PFQuery *)queryAllChannelsForUserID:(PFUser *)user {
-    PFQuery *guestQuery = [self baseChannelQuery];
-    [guestQuery whereKey:@"guestId" equalTo:user];
-    PFQuery *hostQuery = [self baseChannelQuery];
-    [hostQuery whereKey:@"hostId" equalTo:user];
-    PFQuery *ownerQuery = [self baseChannelQuery];
-    [ownerQuery whereKey:@"ownerId" equalTo:user];
-    PFQuery *query = [PFQuery orQueryWithSubqueries:@[guestQuery,
-                                                      hostQuery,
-                                                      ownerQuery]];
-    [query whereKey:@"date" greaterThan:[NSDate date]];
-    [query includeKey:@"guestlistId"];
-    [query includeKey:@"guestlistId.event"];
-    [query includeKey:@"guestlistId.event.location"];
-    
-    return query;
-}
-
-- (PFQuery *)queryChannelsForUserID:(PFUser *)user {
-    PFQuery *guestQuery = [self baseChannelQuery];
-    [guestQuery whereKey:@"guestId" equalTo:user];
-    PFQuery *hostQuery = [self baseChannelQuery];
-    [hostQuery whereKey:@"hostId" equalTo:user];
-    PFQuery *ownerQuery = [self baseChannelQuery];
-    [ownerQuery whereKey:@"ownerId" equalTo:user];
-    PFQuery *query = [PFQuery orQueryWithSubqueries:@[guestQuery,
-                                                      hostQuery,
-                                                      ownerQuery]];
-    [query whereKey:@"date" greaterThan:[NSDate date]];
-    [query includeKey:@"guestlistId"];
-    [query includeKey:@"guestlistId.event"];
-    [query includeKey:@"guestlistId.event.location"];
-    return query;
-}
-
-- (PFQuery *)queryChannelsForHostID:(PFUser *)user withGuestList:(THLGuestlist *)guestlist {
-    PFQuery *hostQuery = [self baseChannelQuery];
-    [hostQuery whereKey:@"hostId" equalTo:user];
-    PFQuery *guestlistQuery = [self baseChannelQuery];
-    [guestlistQuery whereKey:@"guestlistId" equalTo:guestlist];
-    PFQuery *query = [PFQuery orQueryWithSubqueries:@[hostQuery,
-                                                      guestlistQuery]];
-    [query whereKey:@"date" greaterThan:[NSDate date]];
-    [query includeKey:@"guestlistId"];
-    [query includeKey:@"guestlistId.event"];
-    [query includeKey:@"guestlistId.event.location"];
-    return query;
-}
-
-- (PFQuery *)queryChannelsForGuestID:(PFUser *)user withGuestList:(THLGuestlist *)guestlist {
-    PFQuery *guestQuery = [self baseChannelQuery];
-    [guestQuery whereKey:@"guestId" equalTo:user];
-    PFQuery *guestlistQuery = [self baseChannelQuery];
-    [guestlistQuery whereKey:@"guestlistId" equalTo:guestlist];
-    PFQuery *query = [PFQuery orQueryWithSubqueries:@[guestQuery,
-                                                      guestlistQuery]];
-    [query whereKey:@"date" greaterThan:[NSDate date]];
-    [query includeKey:@"guestlistId"];
-    [query includeKey:@"guestlistId.event"];
-    [query includeKey:@"guestlistId.event.location"];
-    return query;
-}
-
-- (PFQuery *)queryChannelsForOwnerID:(PFUser *)user withGuestList:(THLGuestlist *)guestlist {
-    PFQuery *ownerQuery = [self baseChannelQuery];
-    [ownerQuery whereKey:@"ownerId" equalTo:user];
-    PFQuery *guestlistQuery = [self baseChannelQuery];
-    [guestlistQuery whereKey:@"guestlistId" equalTo:guestlist];
-    PFQuery *query = [PFQuery orQueryWithSubqueries:@[ownerQuery,
-                                                      guestlistQuery]];
-    [query whereKey:@"date" greaterThan:[NSDate date]];
-    [query includeKey:@"guestlistId"];
-    [query includeKey:@"guestlistId.event"];
-    [query includeKey:@"guestlistId.event.location"];
-    return query;
-}
-
 #pragma mark - Class Queries
 
 /**
  *  Generic query for THLUChannel.
  *	Includes: (none)
  */
-- (PFQuery *)baseChannelQuery {
-    //PFQuery *query = [[PFQuery alloc] initWithClassName:@"Channel"];
-    PFQuery *query = [THLChannel query];
-    //[query includeKey:@"event.location"];
-    return query;
-}
+//- (PFQuery *)baseChannelQuery {
+//    //PFQuery *query = [[PFQuery alloc] initWithClassName:@"Channel"];
+////    PFQuery *query = [THLChannel query];
+//    //[query includeKey:@"event.location"];
+//    return query;
+//}
 
 /**
  *  Generic query for THLUser.

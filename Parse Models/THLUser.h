@@ -9,8 +9,7 @@
 #import <Parse/Parse.h>
 #import <Parse/PFObject+Subclass.h>
 #import "THLConstants.h"
-//#import "THLBeaconEntity.h"
-@class THLBeaconEntity;
+
 //@protocol PFSubclassing;
 
 @interface THLUser : PFUser<PFSubclassing>
@@ -29,6 +28,6 @@
 @property (nonatomic) float rating;
 @property (nonatomic) float credits;
 @property (nonatomic, retain) NSString *twilioNumber;
-@property (nonatomic, retain) THLBeaconEntity *beacon;
 @property (nonatomic, copy, readonly) NSString *fullName;
+@property (nonatomic, retain) NSString *stripeCustomerId;
 @end

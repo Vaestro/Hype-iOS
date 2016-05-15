@@ -11,7 +11,6 @@
 
 #import "THLUser.h"
 #import "THLEvent.h"
-#import "THLChannel.h"
 #import "THLLocation.h"
 #import "THLGuestlist.h"
 #import "THLGuestlistInvite.h"

@@ -81,6 +81,7 @@ pod 'DZNEmptyDataSet'
 pod 'IHKeyboardAvoiding'
 pod "FXLabel"
 pod 'BLKFlexibleHeightBar'
+pod 'MBProgressHUD', '~> 0.9.2'
 
 #Geolocation
 pod 'EstimoteSDK'

@@ -7,7 +7,6 @@
 //
 
 #import "THLEntity.h"
-@class THLBeacon;
 
 @interface THLUserEntity : THLEntity
 @property (nonatomic, strong) NSString *firstName;
@@ -21,5 +20,5 @@
 @property (nonatomic, strong) NSString *twilioNumber;
 @property (nonatomic, readonly) NSString *fullName;
 @property (nonatomic, readonly) NSString *intPhoneNumberFormat;
-@property (nonatomic, strong) THLBeacon *beacon;
+@property (nonatomic, strong) NSString *stripeCustomerId;
 @end
