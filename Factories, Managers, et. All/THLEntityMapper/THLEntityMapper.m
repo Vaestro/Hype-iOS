@@ -43,10 +43,8 @@
         entity.title = event.title;
         entity.imageURL = [NSURL URLWithString:event.promoImage.url];
         entity.info = event.promoInfo;
-        entity.maleCover = event.maleCoverCharge;
-        entity.femaleCover = event.femaleCoverCharge;
-        entity.maleSurgePrice = event.maleSurgePrice;
-        entity.femaleSurgePrice= event.femaleSurgePrice;
+        entity.maleTicketPrice = event.maleTicketPrice;
+        entity.femaleTicketPrice= event.femaleTicketPrice;
         entity.location = [self mapLocation:event.location];
         entity.creditsPayout = event.creditsPayout;
         entity.host = (THLHostEntity *)[self mapHost:event[@"host"]];

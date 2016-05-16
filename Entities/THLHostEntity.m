@@ -9,5 +9,4 @@
 #import "THLHostEntity.h"
 
 @implementation THLHostEntity
-@dynamic beacon;
 @end

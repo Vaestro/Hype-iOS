@@ -13,10 +13,8 @@
 
 @interface THLEvent : PFObject<PFSubclassing>
 @property (nonatomic, retain) NSDate *date;
-@property (nonatomic) float maleCoverCharge;
-@property (nonatomic) float femaleCoverCharge;
-@property (nonatomic) float maleSurgePrice;
-@property (nonatomic) float femaleSurgePrice;
+@property (nonatomic) float maleTicketPrice;
+@property (nonatomic) float femaleTicketPrice;
 @property (nonatomic, retain) NSString *title;
 @property (nonatomic, retain) NSString *promoInfo;
 @property (nonatomic, retain) PFFile *promoImage;

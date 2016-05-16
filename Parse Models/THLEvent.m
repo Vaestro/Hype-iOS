@@ -10,10 +10,8 @@
 
 @implementation THLEvent
 @dynamic date;
-@dynamic maleCoverCharge;
-@dynamic femaleCoverCharge;
-@dynamic maleSurgePrice;
-@dynamic femaleSurgePrice;
+@dynamic maleTicketPrice;
+@dynamic femaleTicketPrice;
 @dynamic title;
 @dynamic promoInfo;
 @dynamic promoImage;
