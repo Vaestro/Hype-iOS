@@ -54,7 +54,7 @@ static CGFloat const kTHLEventTitlesViewSeparatorViewHeight = 0.5;
     
     [_locationNeighborhoodLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.insets(kTHLEdgeInsetsNone());
-        make.top.equalTo([WSELF titleLabel].mas_bottom).insets(kTHLEdgeInsetsLow());
+        make.top.equalTo([WSELF titleLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());
     }];
     
     [_dateLabel makeConstraints:^(MASConstraintMaker *make) {

@@ -61,9 +61,9 @@ font-size: 16;
 }
 
 SectionTitle {
-font-name: @primaryRegularFontName;
+font-name: @primaryBoldFontName;
 font-color: @primaryFontColor;
-font-size: 14;
+font-size: 16;
 }
 
 TableCell {
