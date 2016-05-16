@@ -16,7 +16,6 @@ static CGFloat const kTHLEventTitlesViewSeparatorViewHeight = 0.5;
 @property (nonatomic, strong) UILabel *dateLabel;
 @property (nonatomic, strong) UILabel *locationNameLabel;
 @property (nonatomic, strong) UILabel *locationNeighborhoodLabel;
-@property (nonatomic, strong) UIView *separatorView;
 @end
 
 @implementation THLEventTitlesView
@@ -34,15 +33,15 @@ static CGFloat const kTHLEventTitlesViewSeparatorViewHeight = 0.5;
     _dateLabel = [self newDateLabel];
     _locationNameLabel = [self newLocationNameLabel];
     _locationNeighborhoodLabel = [self newLocationNeighborhoodLabel];
-    _separatorView = [self newSeparatorView];
 }
 
 - (void)layoutView {
     [self addSubviews:@[_titleLabel,
                         _dateLabel,
                         _locationNeighborhoodLabel,
-                        _locationNameLabel,
-                        _separatorView]];
+                        _locationNameLabel
+                        ]
+     ];
     
     [_locationNameLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.insets(kTHLEdgeInsetsNone());
@@ -53,15 +52,9 @@ static CGFloat const kTHLEventTitlesViewSeparatorViewHeight = 0.5;
         make.top.equalTo([WSELF locationNameLabel].mas_baseline).insets(kTHLEdgeInsetsLow());
     }];
     
-    [_separatorView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF titleLabel].mas_baseline).insets(kTHLEdgeInsetsHigh());
-        make.size.equalTo(CGSizeMake(SCREEN_WIDTH*0.25, kTHLEventTitlesViewSeparatorViewHeight));
-        make.centerX.offset(0);
-    }];
-    
     [_locationNeighborhoodLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.insets(kTHLEdgeInsetsNone());
-        make.top.equalTo([WSELF separatorView].mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.top.equalTo([WSELF titleLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());
     }];
     
     [_dateLabel makeConstraints:^(MASConstraintMaker *make) {
@@ -75,7 +68,6 @@ static CGFloat const kTHLEventTitlesViewSeparatorViewHeight = 0.5;
     RAC(self.dateLabel, text) = RACObserve(self, dateText);
     RAC(self.locationNameLabel, text) = RACObserve(self, locationNameText);
     RAC(self.locationNeighborhoodLabel, text) = RACObserve(self, locationNeighborhoodText);
-    RAC(self.separatorView, backgroundColor) = RACObserve(self, separatorColor);
 }
 
 #pragma mark - Constructors
@@ -109,9 +101,5 @@ static CGFloat const kTHLEventTitlesViewSeparatorViewHeight = 0.5;
     label.numberOfLines = 1;
     label.textAlignment = NSTextAlignmentCenter;
     return label;
-}
-
-- (UIView *)newSeparatorView {
-    return THLNUIView(kTHLNUIUndef);
 }
 @end
