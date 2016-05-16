@@ -248,7 +248,7 @@
 }
 
 - (THLActionButton *)newBottomBar {
-    THLActionButton *button = [[THLActionButton alloc] initWithActionStyle];
+    THLActionButton *button = [[THLActionButton alloc] initWithInverseStyle];
     [button setTitle:@"Join Guestlist"];
     return button;
 }

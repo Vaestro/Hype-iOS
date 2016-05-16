@@ -35,8 +35,8 @@
         [self.fxLabel setBackgroundColor:[UIColor clearColor]];
         [self.layer setBorderWidth:1.0];
         [self.layer setCornerRadius:2.0];
-//        Accent Color with opacity set at 0.5
-        [self.layer setBorderColor:[[UIColor colorWithRed:0.773 green:0.702 blue:0.345 alpha:0.5] CGColor]];
+//        Accent Color with opacity set at 0.75
+        [self.layer setBorderColor:[[UIColor colorWithRed:0.773 green:0.702 blue:0.345 alpha:0.75] CGColor]];
         [self setTitleColor:kTHLNUIPrimaryFontColor forState:UIControlStateNormal];
     }
     return self;
