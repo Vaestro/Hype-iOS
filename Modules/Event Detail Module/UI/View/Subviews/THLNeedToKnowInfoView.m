@@ -90,7 +90,7 @@
 
 - (THLPromotionInfoView *)newCoverInfoLabel {
     THLPromotionInfoView *coverInfoLabel = [THLPromotionInfoView new];
-    coverInfoLabel.labelText = @"Minimum";
+    coverInfoLabel.labelText = @"Ticket Price";
     return coverInfoLabel;
 }
 

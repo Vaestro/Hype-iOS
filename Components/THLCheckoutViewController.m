@@ -51,7 +51,6 @@
         make.centerX.equalTo(0);
         make.left.bottom.right.insets(kTHLEdgeInsetsHigh());
     }];
-    
 }
 
 
