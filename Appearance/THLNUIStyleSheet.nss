@@ -1,3 +1,4 @@
+@primaryExtraBoldFontName: Raleway-ExtraBold;
 @primaryBoldFontName: Raleway-Bold;
 @primaryMediumFontName: Raleway-Medium;
 @primaryRegularFontName: Raleway-Regular;
@@ -16,9 +17,9 @@ tint-color: @primaryFontColor;
 }
 
 BoldTitle {
-font-name: @primaryBoldFontName;
+font-name: @primaryExtraBoldFontName;
 font-color: @primaryFontColor;
-font-size: 24;
+font-size: 20;
 text-transform: uppercase;
 }
 
