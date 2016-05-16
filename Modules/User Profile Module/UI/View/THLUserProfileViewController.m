@@ -205,29 +205,28 @@ STPPaymentCardTextFieldDelegate
 
 - (void)presentPaymentView
 {
-//    _webViewController = [[THLWebViewController alloc]init];
-//    _webViewController.URL = [NSURL URLWithString:@"https://google.com"];
-//    [self.navigationController pushViewController:_webViewController animated:YES];
-    
     THLPaymentViewController *paymentView = [THLPaymentViewController new];
     [self.navigationController pushViewController:paymentView animated:NO]; 
 }
 
 
-- (void) presentModalExplanationHowItWorks {
+- (void) presentModalExplanationHowItWorks
+{
     THLFAQViewController *faqVC = [[THLFAQViewController alloc] init];
     UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:faqVC];
     [self.view.window.rootViewController presentViewController:navVC animated:YES completion:nil];
 }
 
-- (void) presentModalInformationWithText:(NSString *) text andTitle:(NSString *) title{
+- (void) presentModalInformationWithText:(NSString *) text andTitle:(NSString *) title
+{
     UINavigationController *navVC= [[UINavigationController alloc] initWithRootViewController:_infoVC];
     _infoVC.displayText = text;
     _infoVC.title = title;
     [self.view.window.rootViewController presentViewController:navVC animated:YES completion:nil];
 }
     
-- (void) presentModalUserProfile {
+- (void) presentModalUserProfile
+{
     if ([THLUser currentUser]) {
     THLUserPhotoVerificationViewController *userPhotoVerificationView = [[THLUserPhotoVerificationViewController alloc] initForNavigationController];
     userPhotoVerificationView.renewImageDelegate = self;
@@ -236,7 +235,8 @@ STPPaymentCardTextFieldDelegate
     }
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
     UIView *header = nil;
     CGFloat height = [self tableView:tableView heightForHeaderInSection:section];
     CGRect frame = CGRectMake(0, 0, ScreenWidth, height);

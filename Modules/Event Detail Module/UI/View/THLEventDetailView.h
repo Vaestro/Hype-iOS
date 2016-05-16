@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+@class THLEventEntity;
 @protocol THLEventDetailView <NSObject>
 @property (nonatomic, copy) NSString *titleText;
 @property (nonatomic, copy) NSURL *locationImageURL;
-
+@property (nonatomic, strong) THLEventEntity *event;
 @property (nonatomic, copy) NSURL *promoImageURL;
 @property (nonatomic, copy) NSString *eventName;
 @property (nonatomic, copy) NSString *eventDate;
@@ -27,7 +28,6 @@
 
 @property (nonatomic) BOOL userHasAcceptedInvite;
 @property (nonatomic, strong) CLPlacemark *locationPlacemark;
-@property (nonatomic, strong) RACCommand *actionBarButtonCommand;
 @property (nonatomic, strong) RACCommand *dismissCommand;
 @property (nonatomic) BOOL viewAppeared;
 

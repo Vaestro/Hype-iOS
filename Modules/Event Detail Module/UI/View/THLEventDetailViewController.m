@@ -22,6 +22,8 @@
 #import "SquareCashStyleBehaviorDefiner.h"
 #import "THLActionButton.h"
 #import "THLAlertView.h"
+#import "THLUser.h"
+#import "THLCheckoutViewController.h"
 
 
 @interface THLEventDetailViewController()
@@ -43,6 +45,7 @@
 @synthesize titleText;
 @synthesize locationImageURL;
 @synthesize promoImageURL;
+@synthesize event;
 @synthesize eventName;
 @synthesize eventDate;
 @synthesize promoInfo;
@@ -57,7 +60,6 @@
 @synthesize dismissCommand;
 @synthesize locationPlacemark;
 @synthesize userHasAcceptedInvite;
-@synthesize actionBarButtonCommand;
 @synthesize viewAppeared;
 @synthesize exclusiveEvent;
 
@@ -249,7 +251,8 @@
 
 - (THLActionButton *)newBottomBar {
     THLActionButton *button = [[THLActionButton alloc] initWithActionStyle];
-    [button setTitle:@"Join Guestlist"];
+    [button setTitle:@"GO"];
+    [button addTarget:self action:@selector(checkout:) forControlEvents:UIControlEventTouchUpInside];
     return button;
 }
 
@@ -264,17 +267,44 @@
     return label;
 }
 
-- (THLEventDetailsMapView *)newMapView {
+- (THLEventDetailsMapView *)newMapView
+{
     THLEventDetailsMapView *mapView = [THLEventDetailsMapView new];
     mapView.translatesAutoresizingMaskIntoConstraints = NO;
     return mapView;
 }
 
-- (UIStatusBarStyle) preferredStatusBarStyle {
+- (UIStatusBarStyle) preferredStatusBarStyle
+{
     return UIStatusBarStyleLightContent;
 }
 
 
+#pragma mark - Event handlers
+
+-(void)checkout:(id)sender {
+    
+    if (![THLUser currentUser]) {
+        [self handleNeedLoginAction];
+    } else {
+        [self handleCheckoutAction];
+    }
+}
+
+
+
+#pragma mark - helpers
+
+-(void)handleNeedLoginAction
+{
+    
+}
+
+-(void)handleCheckoutAction
+{
+    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:[[THLCheckoutViewController alloc] initWithEvent:event]];
+    [self presentViewController:navVC animated:YES completion:nil];
+}
 
 
 @end

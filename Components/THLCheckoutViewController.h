@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+@class THLEventEntity;
 
 @interface THLCheckoutViewController : UIViewController
-
+- (id)initWithEvent:(THLEventEntity *)event;
 @end

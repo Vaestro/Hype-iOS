@@ -53,21 +53,6 @@
         [WSELF checkForInvite];
     }];
     
-    RACCommand *actionBarButtonCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        if (![THLUser currentUser]) {
-            [WSELF handleNeedLoginAction];
-        } else {
-            if (WSELF.guestHasAcceptedInvite) {
-                [WSELF.view showAlertView];
-//                [WSELF handleViewGuestlistAction];
-            } else {
-                //            TODO: Create logic so that Guests with Declined Guestlists can have another guestlist invite to the same event if their other one is declined
-                [WSELF handleCreateGuestlistAction];
-            }
-        }
-        return [RACSignal empty];
-    }];
-    
     [RACObserve(self, guestHasAcceptedInvite) subscribeNext:^(id _) {
         [WSELF.view setUserHasAcceptedInvite:WSELF.guestHasAcceptedInvite];
     }];
@@ -80,13 +65,12 @@
     [self.view setTitleText:_eventEntity.location.name];
     [self.view setLocationImageURL:_eventEntity.location.imageURL];
     [self.view setDismissCommand:dismissCommand];
-    
+    [self.view setEvent:_eventEntity];
 	[self.view setEventName:_eventEntity.title];
     [self.view setEventDate:[NSString stringWithFormat:@"%@, %@", _eventEntity.date.thl_weekdayString, _eventEntity.date.thl_timeString]];
 	[self.view setPromoInfo:_eventEntity.info];
     [self.view setPromoImageURL:_eventEntity.imageURL];
     [self.view setCoverInfo: [self generateCoverInfoText]];
-    [self.view setActionBarButtonCommand:actionBarButtonCommand];
     [self.view setLocationInfo:_eventEntity.location.info];
     [self.view setLocationAddress:_eventEntity.location.fullAddress];
     [self.view setLocationMusicTypes:[NSString stringWithFormat:@"%@", [_eventEntity.location.musicTypes componentsJoinedByString:@" | "]]];
@@ -163,7 +147,6 @@
 		[self.view setLocationPlacemark:placemark];
 	}
 }
-
 
 - (void)interactor:(THLEventDetailInteractor *)interactor didGetGuestlistInvite:(THLGuestlistInviteEntity *)guestlistInvite forEvent:(THLEventEntity *)event error:(NSError *)error {
     if (!error && guestlistInvite) {

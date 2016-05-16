@@ -22,4 +22,5 @@
 - (BOOL)thl_isOrAfterToday;
 - (NSString *)thl_dayOfTheWeek;
 - (NSDate *)thl_sixHoursAhead;
+- (NSString *)thl_formattedDate;
 @end

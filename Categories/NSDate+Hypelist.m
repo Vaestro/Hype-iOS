@@ -77,6 +77,10 @@
     return [self dateByAddingTimeInterval:secondsInSixHours];
 }
 
+- (NSString *)thl_formattedDate {
+    return [self formattedDateWithFormat:@"EEEE MMM, yyyy"];
+}
+
 
 - (NSString *)thl_dayString {
     return [self formattedDateWithFormat:@"MM/dd"];
