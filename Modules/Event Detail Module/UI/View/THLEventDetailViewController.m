@@ -175,7 +175,7 @@
 
     RAC(self.locationInfoView, locationInfo) = RACObserve(self, locationInfo);
 
-    RAC(self.needToKnowInfoView, ratioText) = RACObserve(self, ratioInfo);
+    if (ratioInfo != nil) self.needToKnowInfoView.ratioText = ratioInfo;
     RAC(self.needToKnowInfoView, coverFeeText) = RACObserve(self, coverInfo);
     RAC(self.needToKnowInfoView, attireRequirement) = RACObserve(self, locationAttireRequirement);
     RAC(self.needToKnowInfoView, ageRequirement) = RACObserve(self, ageRequirement);
@@ -196,7 +196,7 @@
         [WSELF updateBottomBar];
     }];
     
-    RAC(self.bottomBar, rac_command) = RACObserve(self, actionBarButtonCommand);
+//    RAC(self.bottomBar, rac_command) = RACObserve(self, actionBarButtonCommand);
 }
 
 - (void)updateBottomBar {
@@ -205,7 +205,7 @@
         [[WSELF bottomBar] setTitle:NSLocalizedString(@"You are on the list", nil)];
         [WSELF bottomBar].backgroundColor = kTHLNUIAccentColor;
     } else {
-        [[WSELF bottomBar] setTitle:NSLocalizedString(@"GO", nil)];
+        [[WSELF bottomBar] setTitle:NSLocalizedString(@"Go", nil)];
     }
 }
 
@@ -273,4 +273,8 @@
 - (UIStatusBarStyle) preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
+
+
+
+
 @end

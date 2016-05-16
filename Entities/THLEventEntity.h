@@ -18,10 +18,8 @@
 @property (nonatomic, copy) NSString *info;
 @property (nonatomic) int creditsPayout;
 @property (nonatomic, strong) THLLocationEntity *location;
-@property (nonatomic) float maleCover;
-@property (nonatomic) float femaleCover;
-@property (nonatomic) float maleSurgePrice;
-@property (nonatomic) float femaleSurgePrice;
+@property (nonatomic) float maleTicketPrice;
+@property (nonatomic) float femaleTicketPrice;
 @property (nonatomic, strong) THLHostEntity *host;
 @property (nonatomic) int maleRatio;
 @property (nonatomic) int femaleRatio;

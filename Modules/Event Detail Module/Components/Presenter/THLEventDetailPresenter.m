@@ -85,21 +85,7 @@
     [self.view setEventDate:[NSString stringWithFormat:@"%@, %@", _eventEntity.date.thl_weekdayString, _eventEntity.date.thl_timeString]];
 	[self.view setPromoInfo:_eventEntity.info];
     [self.view setPromoImageURL:_eventEntity.imageURL];
-    
-    NSNumber *maleCover = [NSNumber numberWithFloat:_eventEntity.maleCover];
-    NSNumber *femaleCover = [NSNumber numberWithFloat:_eventEntity.femaleCover];
-    NSNumber *maleSurgePrice = [NSNumber numberWithFloat:_eventEntity.maleSurgePrice];
-    if (_eventEntity.maleCover > 0 && _eventEntity.femaleCover == 0) {
-        if (maleSurgePrice > 0 && maleSurgePrice > maleCover) {
-            [self.view setCoverInfo:[NSString stringWithFormat:@"$%@ - $%@ (Guys only)", maleCover, maleSurgePrice]];
-        } else {
-            [self.view setCoverInfo:[NSString stringWithFormat:@"$%@ (Guys only)", maleCover]];
-        }
-    } else if (_eventEntity.maleCover > 0 && _eventEntity.femaleCover > 0) {
-        [self.view setCoverInfo:[NSString stringWithFormat:@"$%@ (Guys) $%@ (Girls)", maleCover, femaleCover]];
-    } else if (_eventEntity.maleCover == 0) {
-        [self.view setCoverInfo:[NSString stringWithFormat:@"No Cover"]];
-    }
+    [self.view setCoverInfo: [self generateCoverInfoText]];
     [self.view setActionBarButtonCommand:actionBarButtonCommand];
     [self.view setLocationInfo:_eventEntity.location.info];
     [self.view setLocationAddress:_eventEntity.location.fullAddress];
@@ -116,7 +102,7 @@
     } else if (_eventEntity.femaleRatio > 1) {
         [self.view setRatioInfo:[NSString stringWithFormat:@"%d Girls : 1 Guy", _eventEntity.femaleRatio]];
     } else {
-        [self.view setRatioInfo:@"No ratio required"];
+        [self.view setRatioInfo:nil];
     }
 }
 
@@ -131,6 +117,19 @@
     
     [(UIViewController *)_view presentViewController:alert animated:YES completion:nil];
 }
+
+
+- (NSString *)generateCoverInfoText {
+    if ([THLUser currentUser].sex && _eventEntity.maleTicketPrice > 0) {
+        return [NSString stringWithFormat:@"$ %.2f", _eventEntity.maleTicketPrice];
+    } else if ([THLUser currentUser].sex && _eventEntity.femaleTicketPrice > 0) {
+        return [NSString stringWithFormat:@"$ %.2f", _eventEntity.femaleTicketPrice];
+    } else {
+        return @"Free Entry";
+    }
+}
+
+
 
 - (void)presentEventDetailInterfaceForEvent:(THLEventEntity *)eventEntity onViewController:(UIViewController *)viewController {
     _eventEntity = eventEntity;

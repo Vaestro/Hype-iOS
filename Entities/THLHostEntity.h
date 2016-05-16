@@ -7,8 +7,6 @@
 //
 
 #import "THLUserEntity.h"
-@class THLBeacon;
 
 @interface THLHostEntity : THLUserEntity
-@property (nonatomic, strong) THLBeacon *beacon;
 @end

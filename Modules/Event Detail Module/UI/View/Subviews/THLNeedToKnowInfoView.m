@@ -17,8 +17,6 @@
 @property (nonatomic, strong) UILabel *ageRequirementLabel;
 @property (nonatomic, strong) UILabel *attireRequirementLabel;
 @property (nonatomic, strong) UILabel *doormanDiscretionLabel;
-@property (nonatomic, strong) UILabel *surgePriceExplanationLabel;
-
 @end
 
 @implementation THLNeedToKnowInfoView
@@ -30,12 +28,11 @@
     _ageRequirementLabel = [self newAgeRequirementLabel];
     _attireRequirementLabel = [self newAttireRequirementLabel];
     _doormanDiscretionLabel = [self newDoormanDiscretionLabel];
-    _surgePriceExplanationLabel = [self newSurgePriceExplanationLabel];
 }
 
 - (void)layoutView {
     [super layoutView];
-    [self.contentView addSubviews:@[_ratioInfoLabel, _coverInfoLabel, _photoIdLabel, _ageRequirementLabel, _attireRequirementLabel, _doormanDiscretionLabel, _surgePriceExplanationLabel]];
+    [self.contentView addSubviews:@[_ratioInfoLabel, _coverInfoLabel, _photoIdLabel, _ageRequirementLabel, _attireRequirementLabel, _doormanDiscretionLabel]];
     
     WEAKSELF();
     [_ratioInfoLabel makeConstraints:^(MASConstraintMaker *make) {
@@ -48,28 +45,25 @@
         make.left.right.insets(kTHLEdgeInsetsNone());
     }];
     
-    [_attireRequirementLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF coverInfoLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());
-        make.left.right.insets(kTHLEdgeInsetsNone());
-    }];
     
     [_photoIdLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF attireRequirementLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());
-        make.left.right.insets(kTHLEdgeInsetsNone());
+        make.top.equalTo([WSELF coverInfoLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.left.insets(kTHLEdgeInsetsNone());
     }];
     
     [_ageRequirementLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF photoIdLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());
-        make.left.right.insets(kTHLEdgeInsetsNone());
+        make.top.equalTo([WSELF coverInfoLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.right.insets(kTHLEdgeInsetsNone());
     }];
     
-    [_surgePriceExplanationLabel makeConstraints:^(MASConstraintMaker *make) {
+    [_attireRequirementLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF ageRequirementLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());
         make.left.right.insets(kTHLEdgeInsetsNone());
     }];
+
     
     [_doormanDiscretionLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF surgePriceExplanationLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.top.equalTo([WSELF attireRequirementLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());
         make.left.right.bottom.insets(kTHLEdgeInsetsNone());
     }];
 }
@@ -96,13 +90,13 @@
 
 - (THLPromotionInfoView *)newCoverInfoLabel {
     THLPromotionInfoView *coverInfoLabel = [THLPromotionInfoView new];
-    coverInfoLabel.labelText = @"Venue Cover";
+    coverInfoLabel.labelText = @"Minimum";
     return coverInfoLabel;
 }
 
 - (UILabel *)newPhotoIdLabel {
     UILabel *photoIdLabel = THLNUILabel(kTHLNUIDetailTitle);
-    photoIdLabel.text = @"Photo ID Required";
+    photoIdLabel.text = @"Photo ID";
     photoIdLabel.adjustsFontSizeToFitWidth = YES;
     photoIdLabel.minimumScaleFactor = 0.5;
     photoIdLabel.textAlignment = NSTextAlignmentLeft;
@@ -135,13 +129,4 @@
     return label;
 }
 
-- (UILabel *)newSurgePriceExplanationLabel {
-    UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
-    label.text = @"Arrive on time to avoid surge pricing";
-    label.adjustsFontSizeToFitWidth = YES;
-    label.minimumScaleFactor = 0.5;
-    label.textAlignment = NSTextAlignmentLeft;
-    label.numberOfLines = 0;
-    return label;
-}
 @end
