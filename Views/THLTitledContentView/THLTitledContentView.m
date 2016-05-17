@@ -50,13 +50,12 @@
     [_contentView makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF separatorView].mas_bottom);
         make.left.right.equalTo([WSELF titleLabel]);
-        make.bottom.left.right.insets(kTHLEdgeInsetsNone());
+        make.bottom.insets(kTHLEdgeInsetsNone());
     }];
 }
 
 - (void)bindView {
     RAC(self.titleLabel, text) = RACObserve(self, title);
-    RAC(self.titleLabel, textColor) = RACObserve(self, titleColor);
 }
 
 #pragma mark - Constructors

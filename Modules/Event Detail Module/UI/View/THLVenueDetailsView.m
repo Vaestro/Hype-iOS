@@ -97,7 +97,6 @@ static CGRect const kTHLEventNavigationBarDismissButtonFrame = {{33,33},{33,33}}
     THLEventDetailsLocationInfoView *infoView = [THLEventDetailsLocationInfoView new];
 //    infoView.title = NSLocalizedString(@"VENUE DESCRIPTION", nil);
     infoView.translatesAutoresizingMaskIntoConstraints = NO;
-    infoView.dividerColor = [UIColor whiteColor];
     return infoView;
 }
 

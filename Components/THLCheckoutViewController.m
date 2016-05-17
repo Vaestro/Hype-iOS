@@ -14,10 +14,16 @@
 #import "THLUser.h"
 #import "Parse.h"
 #import "THLActionButton.h"
+#import "THLPurchaseDetailsView.h"
+#import "THLNeedToKnowInfoView.h"
 
 
 @interface THLCheckoutViewController ()
 @property (nonatomic) THLEventEntity *event;
+@property (nonatomic, strong) RACCommand *completionAction;
+@property (nonatomic, strong) THLActionButton *purchaseButton;
+@property (nonatomic, strong) THLPurchaseDetailsView *purchaseDetailsView;
+
 @property (nonatomic, strong) MBProgressHUD *hud;
 
 - (void)displayError:(NSString *)error;
@@ -26,13 +32,13 @@
 
 @implementation THLCheckoutViewController
 
-
 #pragma mark - Life cycle
 
-- (id)initWithEvent:(THLEventEntity *)event
+- (id)initWithEvent:(THLEventEntity *)event andCompletionAction:(RACCommand *)completionAction
 {
     if (self = [super init]) {
         self.event = event;
+        self.completionAction = completionAction;
     }
     return self;
 }
@@ -43,26 +49,32 @@
 {
     [super viewDidLoad];
     [self constructView];
+    [self layoutView];
 }
 
-- (void)constructView
-{
+- (void)constructView {
     self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
     self.navigationItem.leftBarButtonItem = [self backBarButton];
     self.navigationItem.titleView = [self navBarTitleLabel];
     
-    THLActionButton *orderButton = [self completeOrderBar];
-    [self.view addSubview:orderButton];
-    
+    _purchaseButton = [self newPurchaseButton];
+    _purchaseDetailsView = [self newPurchaseDetailsView];
+}
+
+- (void)layoutView {
+    [self.view addSubviews:@[_purchaseButton, _purchaseDetailsView]];
     self.hud = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:self.hud];
-    
-    [orderButton makeConstraints:^(MASConstraintMaker *make) {
+    [_purchaseButton makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(0);
         make.left.bottom.right.insets(kTHLEdgeInsetsHigh());
     }];
+    
+    [_purchaseDetailsView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.insets(kTHLEdgeInsetsSuperHigh());
+        make.bottom.equalTo(_purchaseButton.mas_top);
+    }];
 }
-
 
 
 #pragma mark - Constructors
@@ -84,11 +96,31 @@
     return label;
 }
 
-- (THLActionButton *)completeOrderBar {
+- (THLActionButton *)newPurchaseButton {
     THLActionButton *button = [[THLActionButton alloc] initWithDefaultStyle];
     [button setTitle:@"Complete Order"];
     [button addTarget:self action:@selector(buy:) forControlEvents:UIControlEventTouchUpInside];
     return button;
+}
+
+- (THLPurchaseDetailsView *)newPurchaseDetailsView {
+    THLPurchaseDetailsView *purchaseDetailsView = [THLPurchaseDetailsView new];
+    purchaseDetailsView.title = NSLocalizedString(@"Purchase Details",@"Purchase Details");
+
+    float maleServiceCharge = (_event.maleTicketPrice * 0.029) + 0.30;
+    float femaleServiceCharge = (_event.femaleTicketPrice * 0.029) + 0.30;
+    if ([THLUser currentUser].sex == THLSexMale) {
+        purchaseDetailsView.purchaseTitleText = @"Male General Admission";
+        purchaseDetailsView.subtotalAmount = [NSString stringWithFormat:@"$%.2f", _event.maleTicketPrice];
+        purchaseDetailsView.serviceChargeAmount = [NSString stringWithFormat:@"$%.2f", maleServiceCharge];
+        purchaseDetailsView.totalAmount = [NSString stringWithFormat:@"$%.2f", _event.maleTicketPrice + maleServiceCharge];
+    } else if ([THLUser currentUser].sex == THLSexFemale) {
+        purchaseDetailsView.purchaseTitleText = @"Female General Admission";
+        purchaseDetailsView.subtotalAmount = [NSString stringWithFormat:@"$%.2f", _event.femaleTicketPrice];
+        purchaseDetailsView.serviceChargeAmount = [NSString stringWithFormat:@"$%.2f", femaleServiceCharge];
+        purchaseDetailsView.totalAmount = [NSString stringWithFormat:@"$%.2f", _event.femaleTicketPrice + femaleServiceCharge];
+    }
+    return purchaseDetailsView;
 }
 
 #pragma mark - Event handlers
@@ -140,7 +172,9 @@
                                     if (error) {
                                         [self displayError:[error localizedDescription]];
                                     } else {
-                                        
+                                        [self.navigationController dismissViewControllerAnimated:TRUE completion:^{
+                                            [_completionAction execute:nil];
+                                        }];
                                     }
                                 }];
 }

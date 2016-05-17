@@ -72,24 +72,14 @@
     self.navigationItem.leftBarButtonItem = _dismissButton;
     self.navigationItem.rightBarButtonItem = _eventDetailsButton;
     self.navigationItem.title = @"TICKET";
-    
-    UIView *ticketBox = [UIView new];
-    [ticketBox.layer setBorderWidth:3.0];
-    [ticketBox.layer setCornerRadius:2.0];
-    [ticketBox.layer setBorderColor:[[UIColor colorWithRed:0.773 green:0.702 blue:0.345 alpha:1] CGColor]];
-    
-    [self.view addSubviews:@[_ticketInstructionLabel, ticketBox, _viewPartyButton, _contactConceirgeButton]];
+
+
+    [self.view addSubviews:@[_ticketInstructionLabel, _viewPartyButton, _contactConceirgeButton, _qrCodeImageView, _venueNameLabel, _eventDateLabel, _arrivalMessageLabel]];
     WEAKSELF();
 
     [_ticketInstructionLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(75);
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
-    }];
-    
-    [ticketBox makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF ticketInstructionLabel].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
-        make.left.right.equalTo(kTHLEdgeInsetsInsanelyHigh());
-//        make.bottom.equalTo([WSELF viewPartyButton].mas_top).insets(kTHLEdgeInsetsSuperHigh());
     }];
     
     [_contactConceirgeButton makeConstraints:^(MASConstraintMaker *make) {
@@ -103,11 +93,8 @@
         make.centerX.equalTo(0);
     }];
     
-    [ticketBox addSubviews:@[_qrCodeImageView, _venueNameLabel, _eventDateLabel, _arrivalMessageLabel]];
-
-    
     [_qrCodeImageView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.insets(kTHLEdgeInsetsSuperHigh());
+        make.top.equalTo(WSELF.ticketInstructionLabel.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
         make.height.equalTo(SCREEN_HEIGHT*0.25);
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
     }];
@@ -120,13 +107,13 @@
     }];
     
     [_eventDateLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo([WSELF arrivalMessageLabel].mas_top).insets(kTHLEdgeInsetsLow());
+        make.top.equalTo([WSELF venueNameLabel].mas_bottom).insets(kTHLEdgeInsetsLow());
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
     [_arrivalMessageLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo([WSELF eventDateLabel].mas_bottom).insets(kTHLEdgeInsetsLow());
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
-        make.bottom.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
     if (_showInstruction) {

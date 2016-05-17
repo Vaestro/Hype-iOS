@@ -62,6 +62,7 @@
 @synthesize userHasAcceptedInvite;
 @synthesize viewAppeared;
 @synthesize exclusiveEvent;
+@synthesize actionBarButtonCommand;
 
 #pragma mark VC Lifecycle 
 
@@ -198,7 +199,7 @@
         [WSELF updateBottomBar];
     }];
     
-//    RAC(self.bottomBar, rac_command) = RACObserve(self, actionBarButtonCommand);
+    RAC(self.bottomBar, rac_command) = RACObserve(self, actionBarButtonCommand);
 }
 
 - (void)updateBottomBar {
@@ -222,7 +223,6 @@
     THLEventDetailsPromotionInfoView *promoInfoView = [THLEventDetailsPromotionInfoView new];
     promoInfoView.title = NSLocalizedString(@"EVENT DETAILS", nil);
     promoInfoView.translatesAutoresizingMaskIntoConstraints = NO;
-    promoInfoView.dividerColor = [UIColor whiteColor];
     return promoInfoView;
 }
 
@@ -230,7 +230,6 @@
     THLNeedToKnowInfoView *needToKnowInfoView = [THLNeedToKnowInfoView new];
     needToKnowInfoView.title = NSLocalizedString(@"NEED TO KNOW", nil);
     needToKnowInfoView.translatesAutoresizingMaskIntoConstraints = NO;
-    needToKnowInfoView.dividerColor = [UIColor whiteColor];
     return needToKnowInfoView;
 }
 
@@ -238,7 +237,6 @@
     THLEventDetailsLocationInfoView *infoView = [THLEventDetailsLocationInfoView new];
     infoView.title = NSLocalizedString(@"WHAT WE LIKE", nil);
     infoView.translatesAutoresizingMaskIntoConstraints = NO;
-    infoView.dividerColor = [UIColor whiteColor];
     return infoView;
 }
 
@@ -252,7 +250,7 @@
 - (THLActionButton *)newBottomBar {
     THLActionButton *button = [[THLActionButton alloc] initWithInverseStyle];
     [button setTitle:@"GO"];
-    [button addTarget:self action:@selector(checkout:) forControlEvents:UIControlEventTouchUpInside];
+//    [button addTarget:self action:@selector(checkout:) forControlEvents:UIControlEventTouchUpInside];
     return button;
 }
 
@@ -282,27 +280,9 @@
 
 #pragma mark - Event handlers
 
--(void)checkout:(id)sender {
-    
-    if (![THLUser currentUser]) {
-        [self handleNeedLoginAction];
-    } else {
-        [self handleCheckoutAction];
-    }
-}
-
-
-
-#pragma mark - helpers
-
--(void)handleNeedLoginAction
+-(void)showCheckoutView:(UIViewController *)checkoutView
 {
-    
-}
-
--(void)handleCheckoutAction
-{
-    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:[[THLCheckoutViewController alloc] initWithEvent:event]];
+    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:checkoutView];
     [self presentViewController:navVC animated:YES completion:nil];
 }
 
