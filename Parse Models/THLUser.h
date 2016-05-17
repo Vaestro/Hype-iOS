@@ -30,4 +30,5 @@
 @property (nonatomic, retain) NSString *twilioNumber;
 @property (nonatomic, copy, readonly) NSString *fullName;
 @property (nonatomic, retain) NSString *stripeCustomerId;
+- (NSString *)fullName;
 @end

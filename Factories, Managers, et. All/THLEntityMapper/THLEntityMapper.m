@@ -179,38 +179,6 @@
     }
 }
 
-- (THLBeacon *)mapBeaconEntity:(THLBeaconEntity *)beaconEntity
-{
-    if ([beaconEntity isKindOfClass:[THLBeaconEntity class]]) {
-        THLBeacon *beacon = [THLBeacon new];
-        [self mapBaseValuesFromModel:beaconEntity toEntity:beacon];
-        beacon.UUID = beaconEntity.UUID;
-        beacon.major = beaconEntity.major;
-        beacon.minor = beaconEntity.minor;
-        return beacon;
-    } else {
-        return nil;
-    }
-}
-
-- (THLGuestlistTicketEntity *)mapGuestlistTicket:(THLGuestlistTicket *)guestlistTicket
-{
-    if ([guestlistTicket isKindOfClass:[THLGuestlistTicket class]]) {
-        THLGuestlistTicketEntity *entity = [THLGuestlistTicketEntity new];
-        [self mapBaseValuesFromModel:guestlistTicket toEntity:entity];
-        entity.sender = [self mapGuest:guestlistTicket[@"sender"]];
-        entity.guestlist = [self mapGuestlist:guestlistTicket[@"guestlist"]];
-        entity.qrCode = [NSURL URLWithString:guestlistTicket.qrCode.url];
-        entity.scanned = guestlistTicket.scanned;
-        return entity;
-    } else {
-        return nil;
-    }
-}
-
-
-
-
 - (NSArray<THLGuestlistEntity *> *)mapGuestlists:(NSArray *)guestlists
 {
     WEAKSELF();
@@ -230,7 +198,7 @@
         entity.date = guestlistInvite.date;
         entity.guest = [self mapGuest:guestlistInvite[@"Guest"]];
         entity.guestlist = [self mapGuestlist:guestlistInvite[@"Guestlist"]];
-        entity.guestlistTicket = [self mapGuestlistTicket:guestlistInvite[@"guestlistTicket"]];
+        entity.qrCode = [NSURL URLWithString:guestlistInvite.qrCode.url];
         return entity;
     } else {
         return nil;

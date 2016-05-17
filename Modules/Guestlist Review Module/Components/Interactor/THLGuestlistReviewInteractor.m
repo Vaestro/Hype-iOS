@@ -17,8 +17,6 @@
 #import <EstimoteSDK/EstimoteSDK.h>
 #import "THLUser.h"
 #import "THLHostEntity.h"
-#import "THLBeacon.h"
-#import "THLBeaconEntity.h"
 #import "THLParseQueryFactory.h"
 #import <KVNProgress/KVNProgress.h>
 #import "THLEntityMapper.h"
@@ -146,9 +144,5 @@ static NSString *const kTHLGuestlistReviewModuleViewKey = @"kTHLGuestlistReviewM
 - (void)dealloc {
     NSLog(@"Destroyed %@", self);
 }
-
-
-
-
 
 @end

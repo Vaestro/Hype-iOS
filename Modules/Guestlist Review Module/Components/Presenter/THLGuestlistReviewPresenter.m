@@ -108,7 +108,7 @@ THLGuestlistReviewInteractorDelegate
     [_ticketView setDismissCommand:dismissCommand];
     [_ticketView setViewPartyCommand:viewPartyCommand];
     [_ticketView setViewEventDetailsCommand:viewEventDetailsCommand];
-    [_ticketView setQrCode:_guestlistInviteEntity.guestlistTicket.qrCode];
+    [_ticketView setQrCode:_guestlistInviteEntity.qrCode];
     [_ticketView setVenueName:_guestlistInviteEntity.guestlist.event.location.name];
     [_ticketView setEventDate:[NSString stringWithFormat:@"%@", _guestlistEntity.event.date.thl_weekdayString]];
     [_ticketView setArrivalMessage:[NSString stringWithFormat:@"Please arrive by %@", _guestlistEntity.event.date.thl_timeString]];
