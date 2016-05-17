@@ -17,6 +17,8 @@
 #import "THLAppearanceConstants.h"
 #import "RKNotificationHub.h"
 #import "THLTicketScannerController.h"
+#import "THLTicketScannedTableViewController.h"
+#import <ParseUI/ParseUI.h>
 
 @interface THLHostFlowWireframe()
 <
@@ -62,22 +64,19 @@ THLGuestlistReviewModuleDelegate
     
     THLTicketScannerController *ticketScanner = [THLTicketScannerController new];
     
-    UINavigationController *discovery = [UINavigationController new];
-    UINavigationController *dashboard = [UINavigationController new];
+    UINavigationController *dashboard = [[UINavigationController alloc] initWithRootViewController:[[THLTicketScannedTableViewController alloc]initWithClassName:@"GuestlistInvite"]];
     UINavigationController *profile = [UINavigationController new];
     UINavigationController *scanner = [[UINavigationController alloc]initWithRootViewController:ticketScanner];
     
-    
-    [self presentEventDiscoveryInterfaceInNavigationController:discovery];
-    [self presentDashboardInterfaceInNavigationController:dashboard];
     [self presentUserProfileInterfaceInNavigationController:profile];
     
     dashboard.tabBarItem.image = [UIImage imageNamed:@"Lists Icon"];
-    discovery.tabBarItem.image = [UIImage imageNamed:@"Home Icon"];
     profile.tabBarItem.image = [UIImage imageNamed:@"Profile Icon"];
-    scanner.tabBarItem.image = [UIImage imageNamed:@"Calendar Icon"];
+    scanner.tabBarItem.image = [UIImage imageNamed:@"Scanner-Icon"];
     
-    NSArray *views = @[scanner, discovery, dashboard, profile];
+//    PFQueryTableViewController *controller = [[SectionedTableViewController alloc] initWithClassName:@"GuestlisInvite"];
+    
+    NSArray *views = @[scanner, dashboard, profile];
     
     masterTabViewController.viewControllers = views;
     masterTabViewController.view.autoresizingMask=(UIViewAutoresizingFlexibleHeight);

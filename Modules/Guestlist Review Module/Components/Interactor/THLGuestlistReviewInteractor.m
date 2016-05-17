@@ -14,7 +14,6 @@
 #import "THLGuestEntity.h"
 #import "THLEventEntity.h"
 #import "THLLocationEntity.h"
-#import <EstimoteSDK/EstimoteSDK.h>
 #import "THLUser.h"
 #import "THLHostEntity.h"
 #import "THLParseQueryFactory.h"

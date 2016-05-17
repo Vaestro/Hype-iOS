@@ -36,6 +36,7 @@ pod "ReflectableEnum"
 #Parse/Facebook
 pod 'Parse', '= 1.11.0'
 pod 'ParseFacebookUtilsV4'
+pod 'ParseUI'
 pod 'FBSDKCoreKit'
 pod 'FBSDKLoginKit'
 pod 'FBSDKShareKit', '= 4.8.0'
@@ -84,12 +85,10 @@ pod 'BLKFlexibleHeightBar'
 pod 'MBProgressHUD', '~> 0.9.2'
 
 #Geolocation
-pod 'EstimoteSDK'
 pod 'KVNProgress'
 end
 
 #Phone Calls
-pod "PhoneKit"
 pod 'AFNetworking', '~> 3.0'
 
 target 'HypeTests' do
