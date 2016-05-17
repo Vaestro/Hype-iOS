@@ -104,9 +104,9 @@
 
 
 - (NSString *)generateCoverInfoText {
-    if ([THLUser currentUser].sex && _eventEntity.maleTicketPrice > 0) {
+    if ([THLUser currentUser].sex == 1 && _eventEntity.maleTicketPrice > 0) {
         return [NSString stringWithFormat:@"$ %.2f", _eventEntity.maleTicketPrice];
-    } else if ([THLUser currentUser].sex && _eventEntity.femaleTicketPrice > 0) {
+    } else if ([THLUser currentUser].sex == 0 && _eventEntity.femaleTicketPrice > 0) {
         return [NSString stringWithFormat:@"$ %.2f", _eventEntity.femaleTicketPrice];
     } else {
         return @"Free Entry";
