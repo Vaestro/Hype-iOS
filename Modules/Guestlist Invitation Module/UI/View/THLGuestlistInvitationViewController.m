@@ -84,6 +84,8 @@
 	self.navigationItem.leftBarButtonItem = _cancelButton;
 	self.navigationItem.rightBarButtonItem = _commitButton;
     self.navigationItem.title = @"INVITE";
+    
+    if (!_creditsPayout) _invitationDetailsView.hidden = YES;
 }
 
 - (void)configureDataSource {
@@ -135,7 +137,7 @@
 
 - (void)bindView {
     WEAKSELF();
-    RAC(self.invitationDetailsLabel, text, @"") = RACObserve(self, creditsPayout);
+//    RAC(self.invitationDetailsLabel, text, @"") = RACObserve(self, creditsPayout);
     
 	[RACObserve(self, dataSource) subscribeNext:^(id x) {
 		[WSELF configureDataSource];
