@@ -15,6 +15,7 @@
 #import "Parse.h"
 #import "THLActionButton.h"
 #import "THLPurchaseDetailsView.h"
+#import "THLNeedToKnowInfoView.h"
 
 
 @interface THLCheckoutViewController ()
@@ -69,7 +70,7 @@
     }];
     
     [_purchaseDetailsView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.insets(kTHLEdgeInsetsNone());
+        make.top.left.right.insets(kTHLEdgeInsetsSuperHigh());
         make.bottom.equalTo(_purchaseButton.mas_top);
     }];
 }
@@ -104,6 +105,20 @@
 - (THLPurchaseDetailsView *)newPurchaseDetailsView {
     THLPurchaseDetailsView *purchaseDetailsView = [THLPurchaseDetailsView new];
     purchaseDetailsView.title = NSLocalizedString(@"Purchase Details",@"Purchase Details");
+
+    float maleServiceCharge = (_event.maleTicketPrice * 0.029) + 0.30;
+    float femaleServiceCharge = (_event.femaleTicketPrice * 0.029) + 0.30;
+    if ([THLUser currentUser].sex == THLSexMale) {
+        purchaseDetailsView.purchaseTitleText = @"Male General Admission";
+        purchaseDetailsView.subtotalAmount = [NSString stringWithFormat:@"$%.2f", _event.maleTicketPrice];
+        purchaseDetailsView.serviceChargeAmount = [NSString stringWithFormat:@"$%.2f", maleServiceCharge];
+        purchaseDetailsView.totalAmount = [NSString stringWithFormat:@"$%.2f", _event.maleTicketPrice + maleServiceCharge];
+    } else if ([THLUser currentUser].sex == THLSexFemale) {
+        purchaseDetailsView.purchaseTitleText = @"Female General Admission";
+        purchaseDetailsView.subtotalAmount = [NSString stringWithFormat:@"$%.2f", _event.femaleTicketPrice];
+        purchaseDetailsView.serviceChargeAmount = [NSString stringWithFormat:@"$%.2f", femaleServiceCharge];
+        purchaseDetailsView.totalAmount = [NSString stringWithFormat:@"$%.2f", _event.femaleTicketPrice + femaleServiceCharge];
+    }
     return purchaseDetailsView;
 }
 

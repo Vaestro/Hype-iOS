@@ -10,9 +10,7 @@
 
 @interface THLPurchaseDetailsView : THLTitledContentView
 @property (nonatomic, copy) NSString *purchaseTitleText;
-
 @property (nonatomic, copy) NSString *subtotalAmount;
 @property (nonatomic, copy) NSString *serviceChargeAmount;
 @property (nonatomic, copy) NSString *totalAmount;
-
 @end
