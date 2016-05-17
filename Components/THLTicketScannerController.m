@@ -10,6 +10,7 @@
 #import "PQScanner.h"
 #import "Parse.h"
 #import "MBProgressHUD.h"
+#import "THLGuestlistInvite.h"
 
 
 @interface THLTicketScannerController () <PQScannerDelegate,UIAlertViewDelegate>
@@ -17,8 +18,10 @@
     @private PQScanner *_scanner;
 }
 @property (nonatomic, strong) MBProgressHUD *hud;
+
 - (void)displayError:(NSError *)error;
 - (void)displayTicketInfo:(NSDictionary *)ticketInfo;
+- (PFQuery *)guestlistInviteQueryWithId:(NSString *)guestlistInviteId;
 @end
 
 @implementation THLTicketScannerController
@@ -99,12 +102,58 @@ didOpenCaptureFaild:(NSError *)error
 {
     NSString *info = [NSString stringWithFormat:@"%@\n%@\n%@\n%@", [ticketInfo valueForKey:@"name"],[ticketInfo valueForKey:@"sex"], [ticketInfo valueForKey:@"venue"], [ticketInfo valueForKey:@"date"]];
     
-    UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Ticket", @"Ticket")
-                                                      message:info
-                                                     delegate:self
-                                            cancelButtonTitle:NSLocalizedString(@"OK", @"OK")
-                                            otherButtonTitles:nil];
-    [message show];
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Ticket"
+                                                                   message:info
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    
+    UIAlertAction *yesButton = [UIAlertAction actionWithTitle:@"Yes"
+                                              style:UIAlertActionStyleDefault
+                                              handler:^(UIAlertAction *action) {
+                                                  [self.hud show:YES];
+                                                  PFQuery *query = [PFQuery queryWithClassName:@"GuestlistInvite"];
+                                                  [query getObjectInBackgroundWithId:[ticketInfo valueForKey:@"guestlistInviteId"] block:^(PFObject *guestlistInvite, NSError *error) {
+                                                      [self.hud hide:YES];
+                                                      if (error) {
+                                                          [self displayError:error];
+                                                      } else  {
+                                                          guestlistInvite[@"checkInStatus"] = @YES;
+                                                          [guestlistInvite saveInBackgroundWithBlock:^(BOOL succeeded, NSError *cloudError) {
+                                                              if (cloudError) {
+                                                                  [self displayError:cloudError];
+                                                              }
+                                                          }];
+                                                      }
+                                                      
+                                                  }];
+                                                  [_scanner continueScan];
+                                              }];
+    
+    UIAlertAction *noButton = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [_scanner continueScan];
+    }];
+    
+    
+    [alert addAction:yesButton];
+    [alert addAction:noButton];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+
+- (PFQuery *)guestlistInviteQueryWithId:(NSString *)guestlistInviteId
+{
+    PFQuery *query = [THLGuestlistInvite query];
+    [query includeKey:@"Guest"];
+    [query includeKey:@"Guestlist"];
+    [query includeKey:@"Guestlist.Owner"];
+    [query includeKey:@"Guestlist.event"];
+    [query includeKey:@"Guestlist.event.host"];
+    [query includeKey:@"Guestlist.event.location"];
+    
+    [query whereKey:@"objectId" equalTo:guestlistInviteId];
+    return query;
 }
 
 

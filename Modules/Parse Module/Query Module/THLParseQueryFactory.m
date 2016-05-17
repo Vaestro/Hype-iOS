@@ -176,7 +176,6 @@
     [query includeKey:@"Guestlist.event"];
     [query includeKey:@"Guestlist.event.host"];
     [query includeKey:@"Guestlist.event.location"];
-    [query includeKey:@"guestlistTicket"];
     return query;
 }
 
