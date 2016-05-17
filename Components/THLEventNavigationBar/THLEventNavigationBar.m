@@ -229,8 +229,7 @@
     THLEventDetailsPromotionInfoView *promoInfoView = [THLEventDetailsPromotionInfoView new];
     promoInfoView.title = NSLocalizedString(@"EVENT DETAILS", nil);
     promoInfoView.translatesAutoresizingMaskIntoConstraints = NO;
-    promoInfoView.dividerColor = [UIColor whiteColor];
-    
+        
     BLKFlexibleHeightBarSubviewLayoutAttributes *initialLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
     initialLayoutAttributes.alpha = 1.0;
     [promoInfoView addLayoutAttributes:initialLayoutAttributes forProgress:0.75];

@@ -230,8 +230,6 @@
                 for (PFObject *guestlistInvite in guestlistInvites) {
                     PFObject *guestlist = guestlistInvite[@"Guestlist"];
                     [guestlistInvite setObject:guestlist forKey:@"Guestlist"];
-                    PFObject *guestlistTicket = guestlistInvite[@"guestlistTicket"];
-                    [guestlistInvite setObject:guestlistTicket forKey:guestlistInvite[@"guestlistTicket"]];
                     PFObject *event= guestlistInvite[@"Guestlist"][@"event"];
 //                    [guestlist setObject:event forKey:@"event"];
                     PFObject *host = guestlistInvite[@"Guestlist"][@"event"][@"host"];

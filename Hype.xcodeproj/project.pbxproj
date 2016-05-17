@@ -166,6 +166,7 @@
 		79B527B71C6EA777000A0970 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79B527AC1C6EA71A000A0970 /* OpenSans-Regular.ttf */; };
 		79B527B81C6EA777000A0970 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79B527AD1C6EA71A000A0970 /* OpenSans-Semibold.ttf */; };
 		79B527B91C6EA777000A0970 /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79B527AE1C6EA71A000A0970 /* OpenSans-SemiboldItalic.ttf */; };
+		79B6C1BA1CEA3EC50050CDB1 /* THLPurchaseDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B6C1B91CEA3EC50050CDB1 /* THLPurchaseDetailsView.m */; };
 		79B959231BE57C9D00B87799 /* THLGuestlistReviewWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959221BE57C9D00B87799 /* THLGuestlistReviewWireframe.m */; };
 		79B959291BE581A800B87799 /* THLGuestlistReviewDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959281BE581A800B87799 /* THLGuestlistReviewDataManager.m */; };
 		79B9592C1BE581BB00B87799 /* THLGuestlistReviewInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B9592B1BE581BB00B87799 /* THLGuestlistReviewInteractor.m */; };
@@ -636,6 +637,8 @@
 		79B527AC1C6EA71A000A0970 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		79B527AD1C6EA71A000A0970 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
 		79B527AE1C6EA71A000A0970 /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
+		79B6C1B81CEA3EC50050CDB1 /* THLPurchaseDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPurchaseDetailsView.h; sourceTree = "<group>"; };
+		79B6C1B91CEA3EC50050CDB1 /* THLPurchaseDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPurchaseDetailsView.m; sourceTree = "<group>"; };
 		79B9591B1BE5783500B87799 /* THLGuestlistReviewModuleInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistReviewModuleInterface.h; sourceTree = "<group>"; };
 		79B9591D1BE578A200B87799 /* THLGuestlistReviewModuleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistReviewModuleDelegate.h; sourceTree = "<group>"; };
 		79B959211BE57C9D00B87799 /* THLGuestlistReviewWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistReviewWireframe.h; sourceTree = "<group>"; };
@@ -967,6 +970,8 @@
 				799862451C97B6AF004C5326 /* THLTextEntryViewController.m */,
 				3E64EBEB1C5D89CC002BA11B /* THLFAQViewController */,
 				3EECB6921C61451800702540 /* THLFAOSectionView */,
+				79B6C1B81CEA3EC50050CDB1 /* THLPurchaseDetailsView.h */,
+				79B6C1B91CEA3EC50050CDB1 /* THLPurchaseDetailsView.m */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -3575,6 +3580,7 @@
 				217EBEB71BB7AB54006044B6 /* THLUserEntity.m in Sources */,
 				213CE1131BB8D22D00054A2C /* THLLocationService.m in Sources */,
 				79DF30221C714AFB00516199 /* THLCreditsExplanationView.m in Sources */,
+				79B6C1BA1CEA3EC50050CDB1 /* THLPurchaseDetailsView.m in Sources */,
 				791C1F7D1BF13AD300CCF803 /* THLEventHostingPresenter.m in Sources */,
 				2133BFCB1B877CAB002C1DA9 /* THLEvent.m in Sources */,
 				211BB0D41B8CBE980068FD50 /* THLEventTitlesView.m in Sources */,

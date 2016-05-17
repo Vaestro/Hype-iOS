@@ -222,7 +222,6 @@
     THLEventDetailsPromotionInfoView *promoInfoView = [THLEventDetailsPromotionInfoView new];
     promoInfoView.title = NSLocalizedString(@"EVENT DETAILS", nil);
     promoInfoView.translatesAutoresizingMaskIntoConstraints = NO;
-    promoInfoView.dividerColor = [UIColor whiteColor];
     return promoInfoView;
 }
 
@@ -230,7 +229,6 @@
     THLNeedToKnowInfoView *needToKnowInfoView = [THLNeedToKnowInfoView new];
     needToKnowInfoView.title = NSLocalizedString(@"NEED TO KNOW", nil);
     needToKnowInfoView.translatesAutoresizingMaskIntoConstraints = NO;
-    needToKnowInfoView.dividerColor = [UIColor whiteColor];
     return needToKnowInfoView;
 }
 
@@ -238,7 +236,6 @@
     THLEventDetailsLocationInfoView *infoView = [THLEventDetailsLocationInfoView new];
     infoView.title = NSLocalizedString(@"WHAT WE LIKE", nil);
     infoView.translatesAutoresizingMaskIntoConstraints = NO;
-    infoView.dividerColor = [UIColor whiteColor];
     return infoView;
 }
 

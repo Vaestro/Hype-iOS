@@ -11,8 +11,6 @@
 @interface THLTitledContentView : UIView
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) UIColor *titleColor;
-@property (nonatomic, copy) UIColor *dividerColor;
 @property (nonatomic, readonly) UIView *contentView;
 
 - (void)constructView;

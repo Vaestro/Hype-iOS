@@ -12,9 +12,13 @@
 #import "THLLocationEntity.h"
 #import "Parse.h"
 #import "THLActionButton.h"
+#import "THLPurchaseDetailsView.h"
 
 @interface THLCheckoutViewController ()
 @property (nonatomic) THLEventEntity *event;
+@property (nonatomic, strong) THLActionButton *purchaseButton;
+@property (nonatomic, strong) THLPurchaseDetailsView *purchaseDetailsView;
+
 @end
 
 @implementation THLCheckoutViewController
@@ -36,23 +40,31 @@
 {
     [super viewDidLoad];
     [self constructView];
+    [self layoutView];
 }
 
-- (void)constructView
-{
+- (void)constructView {
     self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
     self.navigationItem.leftBarButtonItem = [self backBarButton];
     self.navigationItem.titleView = [self navBarTitleLabel];
     
-    THLActionButton *orderButton = [self completeOrderBar];
-    [self.view addSubview:orderButton];
+    _purchaseButton = [self newPurchaseButton];
+    _purchaseDetailsView = [self newPurchaseDetailsView];
+}
+
+- (void)layoutView {
+    [self.view addSubviews:@[_purchaseButton, _purchaseDetailsView]];
     
-    [orderButton makeConstraints:^(MASConstraintMaker *make) {
+    [_purchaseButton makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(0);
         make.left.bottom.right.insets(kTHLEdgeInsetsHigh());
     }];
+    
+    [_purchaseDetailsView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.insets(kTHLEdgeInsetsNone());
+        make.bottom.equalTo(_purchaseButton.mas_top);
+    }];
 }
-
 
 
 #pragma mark - Constructors
@@ -74,11 +86,17 @@
     return label;
 }
 
-- (THLActionButton *)completeOrderBar {
+- (THLActionButton *)newPurchaseButton {
     THLActionButton *button = [[THLActionButton alloc] initWithDefaultStyle];
     [button setTitle:@"Complete Order"];
     [button addTarget:self action:@selector(charge:) forControlEvents:UIControlEventTouchUpInside];
     return button;
+}
+
+- (THLPurchaseDetailsView *)newPurchaseDetailsView {
+    THLPurchaseDetailsView *purchaseDetailsView = [THLPurchaseDetailsView new];
+    purchaseDetailsView.title = NSLocalizedString(@"Purchase Details",@"Purchase Details");
+    return purchaseDetailsView;
 }
 
 
