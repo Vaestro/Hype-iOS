@@ -27,19 +27,28 @@
 - (void)constructView {
     _titleLabel = [self newTitleLabel];
     _contentView = [self newContentView];
+    _separatorView = [self newSeparatorView];
+
 }
 
 - (void)layoutView {
     [self addSubviews:@[_titleLabel,
-                        _contentView]];
+                        _contentView,
+                        _separatorView]];
     
     [_titleLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.insets(kTHLEdgeInsetsNone());
     }];
     
     WEAKSELF();
+    [_separatorView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo([WSELF titleLabel].mas_baseline).insets(kTHLEdgeInsetsHigh());
+        make.left.equalTo([WSELF titleLabel]);
+        make.size.equalTo(CGSizeMake(40, 2.5));
+    }];
+    
     [_contentView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF titleLabel].mas_bottom);
+        make.top.equalTo([WSELF separatorView].mas_bottom);
         make.left.right.equalTo([WSELF titleLabel]);
         make.bottom.left.right.insets(kTHLEdgeInsetsNone());
     }];
@@ -63,9 +72,8 @@
 }
 
 - (UIView *)newSeparatorView {
-    UIView *view = [UIView new];
-    view.backgroundColor = [UIColor whiteColor];
-    view.alpha = 0.7;
+    UIView *view = THLNUIView(kTHLNUIUndef);
+    view.backgroundColor = kTHLNUIAccentColor;
     return view;
 }
 

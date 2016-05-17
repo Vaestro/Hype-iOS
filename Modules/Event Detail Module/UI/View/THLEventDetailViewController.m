@@ -250,7 +250,7 @@
 }
 
 - (THLActionButton *)newBottomBar {
-    THLActionButton *button = [[THLActionButton alloc] initWithActionStyle];
+    THLActionButton *button = [[THLActionButton alloc] initWithInverseStyle];
     [button setTitle:@"GO"];
     [button addTarget:self action:@selector(checkout:) forControlEvents:UIControlEventTouchUpInside];
     return button;

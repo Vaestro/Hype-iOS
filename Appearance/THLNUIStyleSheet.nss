@@ -1,3 +1,4 @@
+@primaryExtraBoldFontName: Raleway-ExtraBold;
 @primaryBoldFontName: Raleway-Bold;
 @primaryMediumFontName: Raleway-Medium;
 @primaryRegularFontName: Raleway-Regular;
@@ -16,9 +17,9 @@ tint-color: @primaryFontColor;
 }
 
 BoldTitle {
-font-name: @primaryBoldFontName;
+font-name: @primaryExtraBoldFontName;
 font-color: @primaryFontColor;
-font-size: 24;
+font-size: 20;
 text-transform: uppercase;
 }
 
@@ -60,9 +61,9 @@ font-size: 16;
 }
 
 SectionTitle {
-font-name: @primaryRegularFontName;
+font-name: @primaryBoldFontName;
 font-color: @primaryFontColor;
-font-size: 14;
+font-size: 16;
 }
 
 TableCell {
