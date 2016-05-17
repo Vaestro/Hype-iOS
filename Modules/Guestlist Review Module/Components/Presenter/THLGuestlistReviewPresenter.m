@@ -29,7 +29,6 @@
 #import "THLUser.h"
 #import "THLParseQueryFactory.h"
 #import "THLGuestlist.h"
-#import "THLGuestlistTicketEntity.h"
 
 #import "THLGuestlistTicketView.h"
 
