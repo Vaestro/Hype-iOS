@@ -28,9 +28,11 @@
 
 @property (nonatomic) BOOL userHasAcceptedInvite;
 @property (nonatomic, strong) CLPlacemark *locationPlacemark;
+@property (nonatomic, strong) RACCommand *actionBarButtonCommand;
+
 @property (nonatomic, strong) RACCommand *dismissCommand;
 @property (nonatomic) BOOL viewAppeared;
 
 - (void)showAlertView;
-
+-(void)showCheckoutView:(UIViewController *)checkoutView;
 @end

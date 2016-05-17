@@ -20,6 +20,7 @@
 
 @interface THLCheckoutViewController ()
 @property (nonatomic) THLEventEntity *event;
+@property (nonatomic, strong) RACCommand *completionAction;
 @property (nonatomic, strong) THLActionButton *purchaseButton;
 @property (nonatomic, strong) THLPurchaseDetailsView *purchaseDetailsView;
 
@@ -31,13 +32,13 @@
 
 @implementation THLCheckoutViewController
 
-
 #pragma mark - Life cycle
 
-- (id)initWithEvent:(THLEventEntity *)event
+- (id)initWithEvent:(THLEventEntity *)event andCompletionAction:(RACCommand *)completionAction
 {
     if (self = [super init]) {
         self.event = event;
+        self.completionAction = completionAction;
     }
     return self;
 }
@@ -171,7 +172,9 @@
                                     if (error) {
                                         [self displayError:[error localizedDescription]];
                                     } else {
-                                        
+                                        [self.navigationController dismissViewControllerAnimated:TRUE completion:^{
+                                            [_completionAction execute:nil];
+                                        }];
                                     }
                                 }];
 }

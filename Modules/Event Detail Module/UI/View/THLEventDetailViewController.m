@@ -62,6 +62,7 @@
 @synthesize userHasAcceptedInvite;
 @synthesize viewAppeared;
 @synthesize exclusiveEvent;
+@synthesize actionBarButtonCommand;
 
 #pragma mark VC Lifecycle 
 
@@ -198,7 +199,7 @@
         [WSELF updateBottomBar];
     }];
     
-//    RAC(self.bottomBar, rac_command) = RACObserve(self, actionBarButtonCommand);
+    RAC(self.bottomBar, rac_command) = RACObserve(self, actionBarButtonCommand);
 }
 
 - (void)updateBottomBar {
@@ -249,7 +250,7 @@
 - (THLActionButton *)newBottomBar {
     THLActionButton *button = [[THLActionButton alloc] initWithInverseStyle];
     [button setTitle:@"GO"];
-    [button addTarget:self action:@selector(checkout:) forControlEvents:UIControlEventTouchUpInside];
+//    [button addTarget:self action:@selector(checkout:) forControlEvents:UIControlEventTouchUpInside];
     return button;
 }
 
@@ -279,27 +280,9 @@
 
 #pragma mark - Event handlers
 
--(void)checkout:(id)sender {
-    
-    if (![THLUser currentUser]) {
-        [self handleNeedLoginAction];
-    } else {
-        [self handleCheckoutAction];
-    }
-}
-
-
-
-#pragma mark - helpers
-
--(void)handleNeedLoginAction
+-(void)showCheckoutView:(UIViewController *)checkoutView
 {
-    
-}
-
--(void)handleCheckoutAction
-{
-    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:[[THLCheckoutViewController alloc] initWithEvent:event]];
+    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:checkoutView];
     [self presentViewController:navVC animated:YES completion:nil];
 }
 

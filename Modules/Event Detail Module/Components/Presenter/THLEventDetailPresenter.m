@@ -19,6 +19,7 @@
 #import "THLGuestlistEntity.h"
 #import "THLGuestlistInviteEntity.h"
 #import "THLLocationEntity.h"
+#import "THLCheckoutViewController.h"
 
 @interface THLEventDetailPresenter()<THLEventDetailInteractorDelegate>
 
@@ -53,6 +54,26 @@
         [WSELF checkForInvite];
     }];
     
+    RACCommand *createGuestlistActionCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [WSELF handleCreateGuestlistAction];
+        return [RACSignal empty];
+    }];
+    
+    RACCommand *actionBarButtonCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        if (![THLUser currentUser]) {
+            [WSELF handleNeedLoginAction];
+        } else {
+            if (WSELF.guestHasAcceptedInvite) {
+                [WSELF.view showAlertView];
+            } else {
+                //            TODO: Create logic so that Guests with Declined Guestlists can have another guestlist invite to the same event if their other one is declined
+                THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:_eventEntity andCompletionAction:createGuestlistActionCommand];
+                [self.view showCheckoutView:checkoutVC];
+            }
+        }
+        return [RACSignal empty];
+    }];
+    
     [RACObserve(self, guestHasAcceptedInvite) subscribeNext:^(id _) {
         [WSELF.view setUserHasAcceptedInvite:WSELF.guestHasAcceptedInvite];
     }];
@@ -65,6 +86,7 @@
     [self.view setTitleText:_eventEntity.location.name];
     [self.view setLocationImageURL:_eventEntity.location.imageURL];
     [self.view setDismissCommand:dismissCommand];
+    [self.view setActionBarButtonCommand:actionBarButtonCommand];
     [self.view setEvent:_eventEntity];
 	[self.view setEventName:_eventEntity.title];
     [self.view setEventDate:[NSString stringWithFormat:@"%@, %@", _eventEntity.date.thl_weekdayString, _eventEntity.date.thl_timeString]];
@@ -137,7 +159,7 @@
     [self.moduleDelegate eventDetailModule:self guestlist:_guestlistInviteEntity.guestlist guestlistInvite:_guestlistInviteEntity presentGuestlistReviewInterfaceOnController:(UIViewController *)self.view];
 }
 
-- (void)handleCreateGuestlistAction {
+- (void)handleCreateGuestlistAction { 
     [self.moduleDelegate eventDetailModule:self event:_eventEntity presentGuestlistInvitationInterfaceOnController:(UIViewController *)self.view];
 }
 
