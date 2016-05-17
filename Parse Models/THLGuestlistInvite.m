@@ -11,12 +11,12 @@
 @implementation THLGuestlistInvite
 @dynamic guest;
 @dynamic guestlist;
-@dynamic guestlistTicket;
 @dynamic response;
 @dynamic checkInStatus;
 @dynamic didOpen;
 @dynamic date;
 @dynamic invitationCode;
+@dynamic qrCode;
 
 + (void)load {
 	[self registerSubclass];

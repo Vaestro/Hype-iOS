@@ -26,6 +26,7 @@
 @dynamic location;
 @dynamic credits;
 @dynamic twilioNumber;
+@dynamic stripeCustomerId;
 
 + (void)load {
 	[self registerSubclass];

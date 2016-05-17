@@ -9,7 +9,6 @@
 #import "THLEntity.h"
 @class THLGuestEntity;
 @class THLGuestlistEntity;
-@class THLGuestlistTicketEntity;
 
 @interface THLGuestlistInviteEntity : THLEntity
 @property (nonatomic) THLStatus response;
@@ -19,7 +18,7 @@
 @property (nonatomic, copy) NSDate *date;
 @property (nonatomic, strong) THLGuestEntity *guest;
 @property (nonatomic, strong) THLGuestlistEntity *guestlist;
-@property (nonatomic, strong) THLGuestlistTicketEntity *guestlistTicket;
+@property (nonatomic, strong) NSURL *qrCode;
 
 - (BOOL)isAccepted;
 - (BOOL)isPending;

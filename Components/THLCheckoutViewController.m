@@ -7,14 +7,21 @@
 //
 
 #import "THLCheckoutViewController.h"
+#import "MBProgressHUD.h"
 #import "THLAppearanceConstants.h"
 #import "THLEventEntity.h"
 #import "THLLocationEntity.h"
+#import "THLUser.h"
 #import "Parse.h"
 #import "THLActionButton.h"
 
+
 @interface THLCheckoutViewController ()
 @property (nonatomic) THLEventEntity *event;
+@property (nonatomic, strong) MBProgressHUD *hud;
+
+- (void)displayError:(NSString *)error;
+- (void)charge;
 @end
 
 @implementation THLCheckoutViewController
@@ -47,6 +54,9 @@
     THLActionButton *orderButton = [self completeOrderBar];
     [self.view addSubview:orderButton];
     
+    self.hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:self.hud];
+    
     [orderButton makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(0);
         make.left.bottom.right.insets(kTHLEdgeInsetsHigh());
@@ -77,13 +87,9 @@
 - (THLActionButton *)completeOrderBar {
     THLActionButton *button = [[THLActionButton alloc] initWithDefaultStyle];
     [button setTitle:@"Complete Order"];
-    [button addTarget:self action:@selector(charge:) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(buy:) forControlEvents:UIControlEventTouchUpInside];
     return button;
 }
-
-
-
-
 
 #pragma mark - Event handlers
 - (void)back:(id)sender
@@ -91,12 +97,53 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)charge:(id)sender
+- (void)buy:(id)sender
 {
-    
+    self.hud.labelText = NSLocalizedString(@"Processing...", @"Processing...");
+    [self.hud show:YES];
+    if ([THLUser currentUser].stripeCustomerId) {
+        [self chargeCustomer:[THLUser currentUser] forEvent:_event];
+    } else {
+        [self.hud hide:YES];
+        [self displayError:@"You currently don't have a credit card on file. Please add a payment method in your profile"];
+    }
 }
 
 
+#pragma mark - Helpers
+
+- (void)displayError:(NSString *)error
+{
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
+                                                      message:error
+                                                     delegate:nil
+                                            cancelButtonTitle:NSLocalizedString(@"OK", @"OK")
+                                            otherButtonTitles:nil];
+    [message show];
+}
+
+- (void)chargeCustomer:(THLUser *)customer forEvent:(THLEventEntity *)event
+{
+    NSDictionary *purchaseInfo = @{
+                                   @"eventId": event.objectId,
+                                   @"eventTime": event.date,
+                                   @"venue": event.location.name,
+                                   @"amount":  customer.sex == 1 ? [NSNumber numberWithFloat:event.maleTicketPrice] : [NSNumber numberWithFloat:event.maleTicketPrice],
+                                   @"customerName": [customer fullName],
+                                   @"description": customer.sex == 1 ? @"Male GA" : @"Female GA"
+                                   };
+    
+    [PFCloud callFunctionInBackground:@"completeOrder"
+                       withParameters:purchaseInfo
+                                block:^(id object, NSError *error) {
+                                    [self.hud hide:YES];
+                                    if (error) {
+                                        [self displayError:[error localizedDescription]];
+                                    } else {
+                                        
+                                    }
+                                }];
+}
 
 
 @end
