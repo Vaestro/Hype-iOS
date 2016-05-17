@@ -14,8 +14,6 @@
 #import "THLEvent.h"
 #import "THLLocationEntity.h"
 #import "THLUser.h"
-#import "THLGuestlistTicket.h"
-#import "THLGuestlistTicketEntity.h"
 #import "THLChannelService.h"
 #import "THLHostEntity.h"
 #import "THLEntityMapper.h"

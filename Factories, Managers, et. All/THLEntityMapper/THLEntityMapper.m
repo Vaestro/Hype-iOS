@@ -15,7 +15,6 @@
 #import "THLGuestlistInvite.h"
 #import "THLPerkStoreItem.h"
 #import "THLPurchasedPerkItem.h"
-#import "THLGuestlistTicket.h"
 
 #import "THLEntities.h"
 #import "THLUserEntity.h"
@@ -25,7 +24,6 @@
 #import "THLGuestlistInviteEntity.h"
 #import "THLPerkStoreItemEntity.h"
 #import "THLPurchasedPerkItemEntity.h"
-#import "THLGuestlistTicketEntity.h"
 
 @implementation THLEntityMapper
 - (void)mapBaseValuesFromModel:(PFObject *)model toEntity:(THLEntity *)entity
