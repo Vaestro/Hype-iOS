@@ -49,7 +49,7 @@ THLGuestlistInvitationViewEventHandler
 //For Updating An Existing Guestlist
 - (void)presentGuestlistInvitationInterfaceForEvent:(THLEventEntity *)eventEntity withGuestlistId:(NSString *)guestlistId andGuests:(NSArray *)guests inController:(UIViewController *)controller {
     _interactor.eventEntity = eventEntity;
-    if (eventEntity.creditsPayout) _creditsPayout = [NSString stringWithFormat:@"Get $%d.00 for every friend you invite that attends this event", eventEntity.creditsPayout];
+    if (eventEntity.creditsPayout > 0) _creditsPayout = [NSString stringWithFormat:@"Get $%d.00 for every friend you invite that attends this event", eventEntity.creditsPayout];
     [_interactor loadGuestlist:guestlistId withCurrentGuests:guests];
     [_wireframe presentInterfaceInController:controller];
 }
@@ -72,9 +72,7 @@ THLGuestlistInvitationViewEventHandler
 - (void)interactor:(THLGuestlistInvitationInteractor *)interactor didCommitChangesToGuestlist:(NSError *)error {
     self.submitting = NO;
     if(!error) {
-
         [_wireframe dismissInterface];
-        
     } else {
         
     }
@@ -94,10 +92,6 @@ THLGuestlistInvitationViewEventHandler
 
 - (void)view:(id<THLGuestlistInvitationView>)view didRemoveGuest:(THLGuestEntity *)guest {
 	[_interactor removeGuest:guest];
-}
-
-- (void)viewDidCancelInvitations:(id<THLGuestlistInvitationView>)view {
-    [_wireframe dismissInterface];
 }
 
 - (void)viewDidCommitInvitations:(id<THLGuestlistInvitationView>)view {

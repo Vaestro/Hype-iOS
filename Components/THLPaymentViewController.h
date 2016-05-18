@@ -9,4 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface THLPaymentViewController : UIViewController
+- (id)initWithPaymentInfo:(NSArray<NSDictionary *> *)paymentInfo;
 @end

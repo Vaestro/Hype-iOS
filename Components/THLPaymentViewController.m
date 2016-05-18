@@ -17,10 +17,19 @@
 @interface THLPaymentViewController()<STPPaymentCardTextFieldDelegate>
 @property(nonatomic) STPPaymentCardTextField *paymentTextField;
 @property(nonatomic, strong) THLActionButton *addCard;
-@property (nonatomic, strong) MBProgressHUD *hud;
+@property(nonatomic, strong) MBProgressHUD *hud;
+@property(nonatomic, strong) NSArray<NSDictionary *> *paymentInfo;
 @end
 
 @implementation THLPaymentViewController
+
+- (id)initWithPaymentInfo:(NSArray<NSDictionary *> *)paymentInfo
+{
+    if (self = [super init]) {
+        if (paymentInfo) _paymentInfo = paymentInfo;
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -119,6 +128,7 @@
                                             otherButtonTitles:nil];
     [message show];
 }
+
 
 @end
 

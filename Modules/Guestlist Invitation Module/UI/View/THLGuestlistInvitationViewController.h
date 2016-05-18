@@ -10,6 +10,7 @@
 #import "THLGuestlistInvitationView.h"
 #import "THContactPickerView.h"
 #import "FXBlurView.h"
+#import "THLGuestlistEntity.h"
 
 @protocol THContactPickerDelegate;
 @protocol THLGuestlistInvitationView;

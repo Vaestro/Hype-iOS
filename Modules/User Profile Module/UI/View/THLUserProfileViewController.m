@@ -25,6 +25,7 @@
 #import "Stripe.h"
 #import "THLPaymentViewController.h"
 #import "THLWebViewController.h"
+#import "MBProgressHUD.h"
 
 typedef NS_ENUM(NSInteger, TableViewSection) {
     TableViewSectionPersonal = 0,
@@ -73,6 +74,7 @@ STPPaymentCardTextFieldDelegate
 @property (nonatomic, strong) THLInformationViewController *infoVC;
 @property (nonatomic, strong) RACCommand *dismissVC;
 @property (nonatomic) THLWebViewController *webViewController;
+@property (nonatomic, strong) MBProgressHUD *hud;
 @end
 
 @implementation THLUserProfileViewController
@@ -108,8 +110,9 @@ STPPaymentCardTextFieldDelegate
 - (void)layoutView {
     
     self.view.backgroundColor = kTHLNUIPrimaryBackgroundColor;
+    self.hud = [[MBProgressHUD alloc] initWithView:self.view];
 
-    [self.view addSubviews:@[_tableView]];
+    [self.view addSubviews:@[_tableView, _hud]];
     
     [_tableView makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.bottom.insets(UIEdgeInsetsZero);
@@ -205,12 +208,24 @@ STPPaymentCardTextFieldDelegate
 
 - (void)presentPaymentView
 {
-    THLPaymentViewController *paymentView = [THLPaymentViewController new];
-    [self.navigationController pushViewController:paymentView animated:NO]; 
+    [self.hud show:YES];
+    [PFCloud callFunctionInBackground:@"retrievePaymentInfo"
+                       withParameters:@{@"stripeCustomerId": [THLUser currentUser].stripeCustomerId}
+                                block:^(NSArray<NSDictionary *> *cardInfo, NSError *cloudError) {
+                                    [self.hud hide:YES];
+                                    if (cloudError) {
+        
+                                    } else {
+                                        THLPaymentViewController *paymentView = [[THLPaymentViewController alloc]initWithPaymentInfo:cardInfo];
+                                        [self.navigationController pushViewController:paymentView animated:NO];
+                                    }
+                                }];
+
+    
 }
 
 
-- (void) presentModalExplanationHowItWorks
+- (void)presentModalExplanationHowItWorks
 {
     THLFAQViewController *faqVC = [[THLFAQViewController alloc] init];
     UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:faqVC];

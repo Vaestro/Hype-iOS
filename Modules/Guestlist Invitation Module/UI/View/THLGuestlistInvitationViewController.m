@@ -22,6 +22,7 @@
 //Entities
 #import "THLUserEntity.h"
 #import "THLGuestEntity.h"
+#import "THLGuestlistEntity.h"
 #import "UIView+DimView.h"
 
 #define kContactPickerViewHeight 100.0
@@ -34,6 +35,7 @@
 @synthesize creditsPayout = _creditsPayout;
 
 #pragma mark - VC Lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 	[self constructView];
@@ -69,8 +71,6 @@
 - (void)constructView {
     _contactPickerView = [self newContactPickerView];
 	_tableView = [self newTableView];
-	_cancelButton = [self newCancelBarButtonItem];
-	_cancelButton.rac_command = [self newCancelCommand];
 	_commitButton = [self newCommitBarButtonItem];
 	_commitButton.rac_command = [self newCommitCommand];
 	_addedGuests = [NSMutableSet new];
@@ -81,11 +81,8 @@
 - (void)layoutView {
 	[self.view addSubviews:@[_tableView, _contactPickerView, _invitationDetailsView]];
     [_invitationDetailsView addSubview:_invitationDetailsLabel];
-	self.navigationItem.leftBarButtonItem = _cancelButton;
 	self.navigationItem.rightBarButtonItem = _commitButton;
     self.navigationItem.title = @"INVITE";
-    
-    if (!_creditsPayout) _invitationDetailsView.hidden = YES;
 }
 
 - (void)configureDataSource {
@@ -137,7 +134,7 @@
 
 - (void)bindView {
     WEAKSELF();
-//    RAC(self.invitationDetailsLabel, text, @"") = RACObserve(self, creditsPayout);
+    RAC(self.invitationDetailsLabel, text, @"") = RACObserve(self, creditsPayout);
     
 	[RACObserve(self, dataSource) subscribeNext:^(id x) {
 		[WSELF configureDataSource];
@@ -211,18 +208,8 @@
 	return pickerView;
 }
 
-- (UIBarButtonItem *)newCancelBarButtonItem {
-	UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:nil action:NULL];
-
-    [item setTitleTextAttributes:
-     [NSDictionary dictionaryWithObjectsAndKeys:
-      kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
-                        forState:UIControlStateNormal];
-	return item;
-}
-
 - (UIBarButtonItem *)newCommitBarButtonItem {
-	UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Submit " style:UIBarButtonItemStylePlain target:nil action:NULL];
+	UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"Skip" style:UIBarButtonItemStylePlain target:nil action:NULL];
 
     [item setTitleTextAttributes:
      [NSDictionary dictionaryWithObjectsAndKeys:
@@ -240,14 +227,6 @@
 	return command;
 }
 
-- (RACCommand *)newCancelCommand {
-	WEAKSELF();
-	RACCommand *command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-		[WSELF.eventHandler viewDidCancelInvitations:WSELF];
-		return [RACSignal empty];
-	}];
-	return command;
-}
 
 #pragma mark - Layout
 - (void)viewDidLayoutSubviews {
@@ -313,6 +292,9 @@
 	THLGuestEntity *guest = [_dataSource untransformedItemAtIndexPath:indexPath];
 	UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if (_addedGuests.count <= 9) {
+        
+        _commitButton.title = @"Submit";
+        
         if (![_addedGuests containsObject:guest]) {
             [_eventHandler view:self didAddGuest:guest];
             [self addGuest:guest];
@@ -321,6 +303,7 @@
         } else {
             [_eventHandler view:self didRemoveGuest:guest];
             [self removeGuest:guest];
+            if (_addedGuests.count == 0) _commitButton.title = @"Skip";
             cell.accessoryType = UITableViewCellAccessoryNone;
             [_contactPickerView removeContact:guest];
         }

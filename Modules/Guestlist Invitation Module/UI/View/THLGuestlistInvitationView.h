@@ -17,7 +17,5 @@
 @property (nonatomic, strong) NSArray *existingGuests;
 @property (nonatomic, strong) THLSearchViewDataSource *dataSource;
 @property (nonatomic, strong) NSString *creditsPayout;
-
 @property (nonatomic) BOOL showActivityIndicator;
-
 @end
