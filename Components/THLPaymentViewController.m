@@ -98,7 +98,7 @@
              
              [PFCloud callFunctionInBackground:@"createStripeCustomer"
                                 withParameters:@{@"stripeToken": token.tokenId}
-                                         block:^(NSString *response, NSError *cloudError) {
+                                         block:^(NSArray<NSDictionary *> *paymentInfo, NSError *cloudError) {
                                              [self.hud hide:YES];
                                              if (cloudError) {
                                                  [self displayError:cloudError];
