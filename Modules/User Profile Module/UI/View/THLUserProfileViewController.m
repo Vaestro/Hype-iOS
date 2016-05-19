@@ -114,9 +114,10 @@ STPPaymentCardTextFieldDelegate
 
     [self.view addSubviews:@[_tableView, _hud]];
     
-    [_tableView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.bottom.insets(UIEdgeInsetsZero);
-    }];
+    UIEdgeInsets adjustForTabbarInsets = UIEdgeInsetsMake(0, 0, CGRectGetHeight(self.tabBarController.tabBar.frame), 0);
+    self.tableView.contentInset = adjustForTabbarInsets;
+    self.tableView.scrollIndicatorInsets = adjustForTabbarInsets;
+    
 }
 
 -(void)viewDidLayoutSubviews {

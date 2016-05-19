@@ -6,6 +6,7 @@ inhibit_all_warnings!
 
 target 'Hype' do
 #Global Frameworks and Utilities
+use_frameworks!
 pod 'CocoaLumberjack'
 pod 'Masonry', '~> 0.6'
 pod 'NUI', '~> 0.5'

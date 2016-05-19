@@ -19,6 +19,7 @@
 #import "THLMasterWireframe.h"
 #import "THLAppearanceUtils.h"
 #import "Intercom/intercom.h"
+#import "Mixpanel.h"
 
 //Logging framework
 #import "CocoaLumberjack.h"
