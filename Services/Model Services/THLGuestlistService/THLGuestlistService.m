@@ -280,8 +280,6 @@
             [guestlist setObject:owner forKey:@"Owner"];
             PFObject *fetchedEvent = guestlistInvite[@"Guestlist"][@"event"];
             [guestlist setObject:fetchedEvent forKey:@"event"];
-            PFObject *guestlistTicket = guestlistInvite[@"guestlistTicket"];
-            [guestlistInvite setObject:guestlistTicket forKey:@"guestlistTicket"];
             PFObject *location = guestlistInvite[@"Guestlist"][@"event"][@"location"];
             [fetchedEvent setObject:location forKey:@"location"];
             [completionSource setResult:guestlistInvite];

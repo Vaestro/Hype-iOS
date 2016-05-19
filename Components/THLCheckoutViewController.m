@@ -160,14 +160,14 @@
                                    @"eventId": event.objectId,
                                    @"eventTime": event.date,
                                    @"venue": event.location.name,
-                                   @"amount":  customer.sex == 1 ? [NSNumber numberWithFloat:event.maleTicketPrice] : [NSNumber numberWithFloat:event.maleTicketPrice],
+                                   @"amount":  customer.sex == 1 ? [NSNumber numberWithFloat:event.maleTicketPrice] : [NSNumber numberWithFloat:event.femaleTicketPrice],
                                    @"customerName": [customer fullName],
                                    @"description": customer.sex == 1 ? @"Male GA" : @"Female GA"
                                    };
     
     [PFCloud callFunctionInBackground:@"completeOrder"
                        withParameters:purchaseInfo
-                                block:^(id object, NSError *error) {
+                                block:^(NSString *guestlistId, NSError *error) {
                                     [self.hud hide:YES];
                                     if (error) {
                                         [self displayError:[error localizedDescription]];

@@ -20,6 +20,9 @@
 #import "THLGuestlistInviteEntity.h"
 #import "THLLocationEntity.h"
 #import "THLCheckoutViewController.h"
+#import "PFObject+MatchingQuery.h"
+#import "PFQuery.h"
+#import "THLLocalModels.h"
 
 @interface THLEventDetailPresenter()<THLEventDetailInteractorDelegate>
 
@@ -27,6 +30,7 @@
 @property (nonatomic) BOOL guestHasAcceptedInvite;
 @property (nonatomic, strong) THLEventEntity *eventEntity;
 @property (nonatomic, strong) THLGuestlistInviteEntity *guestlistInviteEntity;
+
 @end
 
 @implementation THLEventDetailPresenter
@@ -159,8 +163,60 @@
     [self.moduleDelegate eventDetailModule:self guestlist:_guestlistInviteEntity.guestlist guestlistInvite:_guestlistInviteEntity presentGuestlistReviewInterfaceOnController:(UIViewController *)self.view];
 }
 
-- (void)handleCreateGuestlistAction { 
-    [self.moduleDelegate eventDetailModule:self event:_eventEntity presentGuestlistInvitationInterfaceOnController:(UIViewController *)self.view];
+- (void)handleCreateGuestlistAction {
+    [[self queryForGuestlistInviteForEvent:_eventEntity.objectId ] getFirstObjectInBackgroundWithBlock:^(PFObject *guestlistInvite, NSError *error) {
+        if (!error) {
+            PFObject *guestlist = guestlistInvite[@"Guestlist"];
+            [self.moduleDelegate eventDetailModule:self event:_eventEntity withGuestlistId:guestlist.objectId presentGuestlistInvitationInterfaceOnController:(UIViewController *)self.view];
+        } else {
+            
+        }
+    }];
+
+}
+
+#pragma mark - ThisShitShouldNotBeHereButFuckIt
+
+- (PFQuery *)queryForGuestlistInviteForEvent:(NSString *)eventId {
+    
+    PFQuery *eventQuery = [self baseEventQuery];
+    [eventQuery whereKey:@"objectId" equalTo:eventId];
+    
+    PFQuery *guestlistQuery = [self baseGuestlistQuery];
+    [guestlistQuery whereKey:@"event" matchesQuery:eventQuery];
+    
+    PFQuery *query = [self baseGuestlistInviteQuery];
+    [query whereKey:@"Guest" equalTo:[THLUser currentUser]];
+    [query whereKey:@"Guestlist" matchesQuery:guestlistQuery];
+    [query whereKey:@"response" notEqualTo:[NSNumber numberWithInteger:-1]];
+    return query;
+}
+
+- (PFQuery *)baseEventQuery {
+    PFQuery *query = [THLEvent query];
+    [query includeKey:@"location"];
+    [query includeKey:@"host"];
+    return query;
+}
+
+- (PFQuery *)baseGuestlistQuery {
+    PFQuery *query = [THLGuestlist query];
+    [query includeKey:@"Owner"];
+    [query includeKey:@"event"];
+    [query includeKey:@"event.host"];
+    [query includeKey:@"event.location"];
+    return query;
+}
+
+- (PFQuery *)baseGuestlistInviteQuery {
+    PFQuery *query = [THLGuestlistInvite query];
+    [query includeKey:@"Guest"];
+    [query includeKey:@"Guestlist"];
+    [query includeKey:@"Guestlist.Owner"];
+    [query includeKey:@"Guestlist.event"];
+    [query includeKey:@"Guestlist.event.host"];
+    [query includeKey:@"Guestlist.event.location"];
+    return query;
 }
 
 #pragma mark - THLEventDetailInteractorDelegate
