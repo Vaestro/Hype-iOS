@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09A74A6BED992A7B1182A280 /* libPods-Hype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F57B5490D3E158475778B69E /* libPods-Hype.a */; };
 		2108A8851B8BBF4900B725F6 /* THLMasterWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 2108A8841B8BBF4900B725F6 /* THLMasterWireframe.m */; };
 		2108A8881B8BBF5B00B725F6 /* THLDependencyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2108A8871B8BBF5B00B725F6 /* THLDependencyManager.m */; };
 		211005951B8A318400A540C6 /* THLEventDiscoveryPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 211005941B8A318400A540C6 /* THLEventDiscoveryPresenter.m */; };
@@ -93,7 +94,6 @@
 		21E402E01BBF8371001D0C2C /* THLGuestlistService.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E402DF1BBF8371001D0C2C /* THLGuestlistService.m */; };
 		21E402EE1BBF9A8B001D0C2C /* THLGuestEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E402ED1BBF9A8B001D0C2C /* THLGuestEntity.m */; };
 		21EED1001BB5F842001325A7 /* THLGuestFlowWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 21EED0FF1BB5F842001325A7 /* THLGuestFlowWireframe.m */; };
-		3AADA38E84962FA4B02DA0FC /* libPods-Hype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EF9E18E692E42137236C3A7 /* libPods-Hype.a */; };
 		3E64EBE01C5C14F3002BA11B /* THLUserDataWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E64EBDF1C5C14F3002BA11B /* THLUserDataWorker.m */; };
 		3E64EBEA1C5D89C5002BA11B /* THLFAQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E64EBE91C5D89C5002BA11B /* THLFAQViewController.m */; };
 		3ECD03EF1C58408C00AE325D /* THLUserPhotoVerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD03EE1C58408C00AE325D /* THLUserPhotoVerificationViewController.m */; };
@@ -221,7 +221,6 @@
 		79CE01E61C0A69EC0047E6FA /* THLDashboardTicketCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CE01E51C0A69EC0047E6FA /* THLDashboardTicketCellViewModel.m */; };
 		79DF30221C714AFB00516199 /* THLCreditsExplanationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DF30211C714AFB00516199 /* THLCreditsExplanationView.m */; };
 		79DF30261C72FF1700516199 /* THLEventHostingNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DF30251C72FF1700516199 /* THLEventHostingNavigationBar.m */; };
-		99FDF8D501EA46B4715F6575 /* libPods-HypeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F05C10E3DB30735A22E4D44 /* libPods-HypeTests.a */; };
 		C82D87BF1C25C7E300116328 /* THLConfirmationView.m in Sources */ = {isa = PBXBuildFile; fileRef = C82D87BE1C25C7E300116328 /* THLConfirmationView.m */; };
 		C82D87C31C31CC2200116328 /* THLMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = C82D87C21C31CC2200116328 /* THLMenuView.m */; };
 		C85EE3791C1BC8AD0008C14B /* THLPerkStoreItemEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3781C1BC8AD0008C14B /* THLPerkStoreItemEntity.m */; };
@@ -253,6 +252,7 @@
 		CBE5403C8B7732B36D5ECB5E /* THLViewDataSourceGrouping.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE54FC98A366F3761F89F63 /* THLViewDataSourceGrouping.m */; };
 		CBE54720F63BA2DE2136B454 /* THLViewDataSource+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE545A9A3C66339456E0A06 /* THLViewDataSource+Factory.m */; };
 		CBE547FB5677C373C1DE74C7 /* THLViewDataSourceSorting.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE5404991A434142507D7B0 /* THLViewDataSourceSorting.m */; };
+		F6A083A6F8ADAFC3E6BE66C2 /* libPods-HypeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DDC9FA12A17A94B69C2F1156 /* libPods-HypeTests.a */; };
 		FAB488851C6369110052FA38 /* THLMessageListEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB488841C6369110052FA38 /* THLMessageListEntity.m */; };
 		FAEE45D01C70E4BA0032C91C /* THLChannelService.m in Sources */ = {isa = PBXBuildFile; fileRef = FAEE45CF1C70E4BA0032C91C /* THLChannelService.m */; };
 /* End PBXBuildFile section */
@@ -268,7 +268,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		01997D93697DE8CD59AB2090 /* Pods-HypeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HypeTests/Pods-HypeTests.release.xcconfig"; sourceTree = "<group>"; };
 		2108A8831B8BBF4900B725F6 /* THLMasterWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMasterWireframe.h; sourceTree = "<group>"; };
 		2108A8841B8BBF4900B725F6 /* THLMasterWireframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLMasterWireframe.m; sourceTree = "<group>"; };
 		2108A8861B8BBF5B00B725F6 /* THLDependencyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLDependencyManager.h; sourceTree = "<group>"; };
@@ -474,6 +473,7 @@
 		21EED0FE1BB5F842001325A7 /* THLGuestFlowWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestFlowWireframe.h; sourceTree = "<group>"; };
 		21EED0FF1BB5F842001325A7 /* THLGuestFlowWireframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestFlowWireframe.m; sourceTree = "<group>"; };
 		21EED1011BB5F8A7001325A7 /* THLGuestFlowDependencyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestFlowDependencyManager.h; sourceTree = "<group>"; };
+		3C7622EE8F740A4A39D662D8 /* Pods-Hype.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hype.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hype/Pods-Hype.release.xcconfig"; sourceTree = "<group>"; };
 		3E64EBDE1C5C14F3002BA11B /* THLUserDataWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THLUserDataWorker.h; path = UserDataWorker/THLUserDataWorker.h; sourceTree = "<group>"; };
 		3E64EBDF1C5C14F3002BA11B /* THLUserDataWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THLUserDataWorker.m; path = UserDataWorker/THLUserDataWorker.m; sourceTree = "<group>"; };
 		3E64EBE81C5D89C5002BA11B /* THLFAQViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THLFAQViewController.h; path = THLFAQViewController/THLFAQViewController.h; sourceTree = "<group>"; };
@@ -485,8 +485,7 @@
 		3EECB6901C61450100702540 /* THLFAQSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THLFAQSectionView.m; path = THLFAQSectionView/THLFAQSectionView.m; sourceTree = "<group>"; };
 		3EF951771C56AD770046D4F1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		59B1B5461C74703F00F94DBF /* Hype.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Hype.entitlements; sourceTree = "<group>"; };
-		6F05C10E3DB30735A22E4D44 /* libPods-HypeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HypeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		77CC0D6E93409BE9332C30C1 /* Pods-Hype.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hype.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hype/Pods-Hype.debug.xcconfig"; sourceTree = "<group>"; };
+		60E484FB9674AF98F4FCBC3A /* Pods-Hype.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hype.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hype/Pods-Hype.debug.xcconfig"; sourceTree = "<group>"; };
 		7905CC3E1BE0251000E56878 /* THLGuestlistInviteEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistInviteEntity.h; sourceTree = "<group>"; };
 		7905CC401BE0252700E56878 /* THLGuestlistInviteEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestlistInviteEntity.m; sourceTree = "<group>"; };
 		790603BB1BF5B6810093335E /* THLPromotionInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPromotionInfoView.h; sourceTree = "<group>"; };
@@ -726,7 +725,7 @@
 		79DF30211C714AFB00516199 /* THLCreditsExplanationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLCreditsExplanationView.m; sourceTree = "<group>"; };
 		79DF30241C72FF1700516199 /* THLEventHostingNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventHostingNavigationBar.h; sourceTree = "<group>"; };
 		79DF30251C72FF1700516199 /* THLEventHostingNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventHostingNavigationBar.m; sourceTree = "<group>"; };
-		9EF9E18E692E42137236C3A7 /* libPods-Hype.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hype.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3EB257087011301CF5453E2 /* Pods-HypeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HypeTests/Pods-HypeTests.release.xcconfig"; sourceTree = "<group>"; };
 		C82D87BD1C25C7E300116328 /* THLConfirmationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLConfirmationView.h; sourceTree = "<group>"; };
 		C82D87BE1C25C7E300116328 /* THLConfirmationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLConfirmationView.m; sourceTree = "<group>"; };
 		C82D87C11C31CC2200116328 /* THLMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMenuView.h; sourceTree = "<group>"; };
@@ -797,12 +796,13 @@
 		CBE549410DF951286E27016A /* THLViewDataSourceSorting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLViewDataSourceSorting.h; sourceTree = "<group>"; };
 		CBE54FC98A366F3761F89F63 /* THLViewDataSourceGrouping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLViewDataSourceGrouping.m; sourceTree = "<group>"; };
 		CBE54FD0B5A148F6494B7A84 /* THLViewDataSourceGrouping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLViewDataSourceGrouping.h; sourceTree = "<group>"; };
-		DF514B00F5454AB25CEEF82B /* Pods-HypeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HypeTests/Pods-HypeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		DDC9FA12A17A94B69C2F1156 /* libPods-HypeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HypeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F57B5490D3E158475778B69E /* libPods-Hype.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hype.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9D6070E328B548642530CEE /* Pods-HypeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HypeTests/Pods-HypeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FAB488831C6369110052FA38 /* THLMessageListEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMessageListEntity.h; sourceTree = "<group>"; };
 		FAB488841C6369110052FA38 /* THLMessageListEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLMessageListEntity.m; sourceTree = "<group>"; };
 		FAEE45CE1C70E4BA0032C91C /* THLChannelService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLChannelService.h; sourceTree = "<group>"; };
 		FAEE45CF1C70E4BA0032C91C /* THLChannelService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLChannelService.m; sourceTree = "<group>"; };
-		FBEC3AF4CBE2A8A0A1C3281A /* Pods-Hype.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hype.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hype/Pods-Hype.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -814,7 +814,7 @@
 				790B38EF1C0375B500CB2362 /* libsqlite3.dylib in Frameworks */,
 				794DCCB71BF555150037A03D /* Accelerate.framework in Frameworks */,
 				79730CF81C18B47000D70F4B /* MessageUI.framework in Frameworks */,
-				3AADA38E84962FA4B02DA0FC /* libPods-Hype.a in Frameworks */,
+				09A74A6BED992A7B1182A280 /* libPods-Hype.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -822,7 +822,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99FDF8D501EA46B4715F6575 /* libPods-HypeTests.a in Frameworks */,
+				F6A083A6F8ADAFC3E6BE66C2 /* libPods-HypeTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1505,7 +1505,7 @@
 				211BB0D11B8CBE690068FD50 /* Views */,
 				79259D6E1CAA4C6C00409040 /* Hype.app */,
 				79259D6F1CAA4C6C00409040 /* Hype.xctest */,
-				4166F473B85DABBE273BDBA1 /* Pods */,
+				5F4B55CB31B2A6E67B3A6CFD /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2013,13 +2013,13 @@
 			name = UIImageView;
 			sourceTree = "<group>";
 		};
-		4166F473B85DABBE273BDBA1 /* Pods */ = {
+		5F4B55CB31B2A6E67B3A6CFD /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				77CC0D6E93409BE9332C30C1 /* Pods-Hype.debug.xcconfig */,
-				FBEC3AF4CBE2A8A0A1C3281A /* Pods-Hype.release.xcconfig */,
-				DF514B00F5454AB25CEEF82B /* Pods-HypeTests.debug.xcconfig */,
-				01997D93697DE8CD59AB2090 /* Pods-HypeTests.release.xcconfig */,
+				60E484FB9674AF98F4FCBC3A /* Pods-Hype.debug.xcconfig */,
+				3C7622EE8F740A4A39D662D8 /* Pods-Hype.release.xcconfig */,
+				F9D6070E328B548642530CEE /* Pods-HypeTests.debug.xcconfig */,
+				A3EB257087011301CF5453E2 /* Pods-HypeTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -3180,8 +3180,8 @@
 				79730CF71C18B47000D70F4B /* MessageUI.framework */,
 				790B38EE1C0375B500CB2362 /* libsqlite3.dylib */,
 				794DCCB61BF555150037A03D /* Accelerate.framework */,
-				9EF9E18E692E42137236C3A7 /* libPods-Hype.a */,
-				6F05C10E3DB30735A22E4D44 /* libPods-HypeTests.a */,
+				F57B5490D3E158475778B69E /* libPods-Hype.a */,
+				DDC9FA12A17A94B69C2F1156 /* libPods-HypeTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -3202,13 +3202,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2174A0871B863F6A006826D7 /* Build configuration list for PBXNativeTarget "Hype" */;
 			buildPhases = (
-				37F9819909F19228C46787C0 /* 📦 Check Pods Manifest.lock */,
+				32BA4FEB4A6F2E20FAD9424D /* 📦 Check Pods Manifest.lock */,
 				2174A0601B863F6A006826D7 /* Sources */,
 				2174A0611B863F6A006826D7 /* Frameworks */,
 				2174A0621B863F6A006826D7 /* Resources */,
 				21C6D0091BAE5E3F00DEDDA3 /* Run Script */,
-				2008A4828ECEF862C65B2106 /* 📦 Embed Pods Frameworks */,
-				FF1044DF1577A97D38E6EB59 /* 📦 Copy Pods Resources */,
+				1EF2B13ED67626B7D78C2C83 /* 📦 Embed Pods Frameworks */,
+				CCC565CAE378AAA060135AF7 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3223,12 +3223,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2174A08A1B863F6A006826D7 /* Build configuration list for PBXNativeTarget "HypeTests" */;
 			buildPhases = (
-				3B91922DE21E02744DDCE9B5 /* 📦 Check Pods Manifest.lock */,
+				C1E693D1F3D3DE2DCF4542A7 /* 📦 Check Pods Manifest.lock */,
 				2174A0791B863F6A006826D7 /* Sources */,
 				2174A07A1B863F6A006826D7 /* Frameworks */,
 				2174A07B1B863F6A006826D7 /* Resources */,
-				30EC3321AE34E6262F84F729 /* 📦 Embed Pods Frameworks */,
-				0F4A7D253C5997E4FFAFC4FD /* 📦 Copy Pods Resources */,
+				841086B9B721931E4AD9FF94 /* 📦 Embed Pods Frameworks */,
+				F2B7489D9BDB47A034E17345 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3349,22 +3349,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0F4A7D253C5997E4FFAFC4FD /* 📦 Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HypeTests/Pods-HypeTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2008A4828ECEF862C65B2106 /* 📦 Embed Pods Frameworks */ = {
+		1EF2B13ED67626B7D78C2C83 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3393,7 +3378,22 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" 59e4c5cc715a727c29c12850d2ec4cdd9e6c7d65 461d29ada9ef911416346454692039fabbf73c31c449d2485609dbe7e97c18b0";
 		};
-		30EC3321AE34E6262F84F729 /* 📦 Embed Pods Frameworks */ = {
+		32BA4FEB4A6F2E20FAD9424D /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		841086B9B721931E4AD9FF94 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3408,7 +3408,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HypeTests/Pods-HypeTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		37F9819909F19228C46787C0 /* 📦 Check Pods Manifest.lock */ = {
+		C1E693D1F3D3DE2DCF4542A7 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3423,22 +3423,7 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		3B91922DE21E02744DDCE9B5 /* 📦 Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		FF1044DF1577A97D38E6EB59 /* 📦 Copy Pods Resources */ = {
+		CCC565CAE378AAA060135AF7 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3451,6 +3436,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hype/Pods-Hype-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F2B7489D9BDB47A034E17345 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HypeTests/Pods-HypeTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -3780,7 +3780,7 @@
 		};
 		2174A0881B863F6A006826D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 77CC0D6E93409BE9332C30C1 /* Pods-Hype.debug.xcconfig */;
+			baseConfigurationReference = 60E484FB9674AF98F4FCBC3A /* Pods-Hype.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -3816,7 +3816,7 @@
 		};
 		2174A0891B863F6A006826D7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FBEC3AF4CBE2A8A0A1C3281A /* Pods-Hype.release.xcconfig */;
+			baseConfigurationReference = 3C7622EE8F740A4A39D662D8 /* Pods-Hype.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -3852,7 +3852,7 @@
 		};
 		2174A08B1B863F6A006826D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DF514B00F5454AB25CEEF82B /* Pods-HypeTests.debug.xcconfig */;
+			baseConfigurationReference = F9D6070E328B548642530CEE /* Pods-HypeTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3873,7 +3873,7 @@
 		};
 		2174A08C1B863F6A006826D7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 01997D93697DE8CD59AB2090 /* Pods-HypeTests.release.xcconfig */;
+			baseConfigurationReference = A3EB257087011301CF5453E2 /* Pods-HypeTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
