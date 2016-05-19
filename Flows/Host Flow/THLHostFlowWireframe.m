@@ -16,8 +16,6 @@
 #import "THLMasterNavigationController.h"
 #import "THLAppearanceConstants.h"
 #import "RKNotificationHub.h"
-#import "THLTicketScannerController.h"
-#import "THLTicketScannedTableViewController.h"
 #import <ParseUI/ParseUI.h>
 
 @interface THLHostFlowWireframe()
@@ -62,24 +60,6 @@ THLGuestlistReviewModuleDelegate
 - (void)configureMasterTabViewController:(UITabBarController *)masterTabViewController
 {
     
-    THLTicketScannerController *ticketScanner = [THLTicketScannerController new];
-    
-    UINavigationController *dashboard = [[UINavigationController alloc] initWithRootViewController:[[THLTicketScannedTableViewController alloc]initWithClassName:@"GuestlistInvite"]];
-    UINavigationController *profile = [UINavigationController new];
-    UINavigationController *scanner = [[UINavigationController alloc]initWithRootViewController:ticketScanner];
-    
-    [self presentUserProfileInterfaceInNavigationController:profile];
-    
-    dashboard.tabBarItem.image = [UIImage imageNamed:@"Lists Icon"];
-    profile.tabBarItem.image = [UIImage imageNamed:@"Profile Icon"];
-    scanner.tabBarItem.image = [UIImage imageNamed:@"Scanner-Icon"];
-    
-//    PFQueryTableViewController *controller = [[SectionedTableViewController alloc] initWithClassName:@"GuestlisInvite"];
-    
-    NSArray *views = @[scanner, dashboard, profile];
-    
-    masterTabViewController.viewControllers = views;
-    masterTabViewController.view.autoresizingMask=(UIViewAutoresizingFlexibleHeight);
 }
 
 - (void)showNotificationBadge

@@ -103,6 +103,7 @@
                                              if (cloudError) {
                                                  [self displayError:cloudError];
                                              } else {
+                                                 [[PFUser currentUser] saveEventually];
                                                  [self displaySuccess];
                                              }
               }];

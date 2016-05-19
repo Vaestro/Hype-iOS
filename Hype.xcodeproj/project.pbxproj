@@ -241,8 +241,6 @@
 		C85EE3C11C1BCC940008C14B /* THLPerkStoreItemService.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3BF1C1BCC940008C14B /* THLPerkStoreItemService.m */; };
 		C85EE3C41C1CDE140008C14B /* THLPurchasedPerkItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3C31C1CDE140008C14B /* THLPurchasedPerkItem.m */; };
 		C85EE3C71C1CE1020008C14B /* THLPurchasedPerkItemEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3C61C1CE1020008C14B /* THLPurchasedPerkItemEntity.m */; };
-		C87165FB1CEBA6B100D2E113 /* THLTicketScannedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C87165FA1CEBA6B100D2E113 /* THLTicketScannedTableViewController.m */; };
-		C8A7665E1CDCFD8400A000C2 /* THLTicketScannerController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8A7665D1CDCFD8400A000C2 /* THLTicketScannerController.m */; };
 		C8D1D2A41CD3E864006ADC6A /* THLPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8D1D2A31CD3E864006ADC6A /* THLPaymentViewController.m */; };
 		C8E1B1621BF437F300A9824C /* THLUserProfileInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B1611BF437F300A9824C /* THLUserProfileInteractor.m */; };
 		C8E1B1651BF4380D00A9824C /* THLUserProfileDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B1641BF4380D00A9824C /* THLUserProfileDataManager.m */; };
@@ -775,10 +773,6 @@
 		C85EE3C31C1CDE140008C14B /* THLPurchasedPerkItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPurchasedPerkItem.m; sourceTree = "<group>"; };
 		C85EE3C51C1CE1020008C14B /* THLPurchasedPerkItemEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPurchasedPerkItemEntity.h; sourceTree = "<group>"; };
 		C85EE3C61C1CE1020008C14B /* THLPurchasedPerkItemEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPurchasedPerkItemEntity.m; sourceTree = "<group>"; };
-		C87165F91CEBA6B100D2E113 /* THLTicketScannedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLTicketScannedTableViewController.h; sourceTree = "<group>"; };
-		C87165FA1CEBA6B100D2E113 /* THLTicketScannedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLTicketScannedTableViewController.m; sourceTree = "<group>"; };
-		C8A7665C1CDCFD8400A000C2 /* THLTicketScannerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLTicketScannerController.h; sourceTree = "<group>"; };
-		C8A7665D1CDCFD8400A000C2 /* THLTicketScannerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLTicketScannerController.m; sourceTree = "<group>"; };
 		C8D1D2A21CD3E864006ADC6A /* THLPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPaymentViewController.h; sourceTree = "<group>"; };
 		C8D1D2A31CD3E864006ADC6A /* THLPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPaymentViewController.m; sourceTree = "<group>"; };
 		C8E1B1601BF437F300A9824C /* THLUserProfileInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserProfileInteractor.h; sourceTree = "<group>"; };
@@ -932,9 +926,7 @@
 		211005A81B8A3D5800A540C6 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				C87165F81CEBA65200D2E113 /* THLTicketScannedTableViewController */,
 				C8EE96D21CE93D4F0040A1F0 /* THLCheckoutViewController */,
-				C8A7665B1CDCFD5700A000C2 /* THLTicketScanner */,
 				C8A766551CDA84A600A000C2 /* THLWebViewController */,
 				C8D1D2A11CD3E836006ADC6A /* THLPaymentViewController */,
 				79C93E261C758B47005B4D95 /* TSMessages */,
@@ -2787,15 +2779,6 @@
 			path = THLPerkService;
 			sourceTree = "<group>";
 		};
-		C87165F81CEBA65200D2E113 /* THLTicketScannedTableViewController */ = {
-			isa = PBXGroup;
-			children = (
-				C87165F91CEBA6B100D2E113 /* THLTicketScannedTableViewController.h */,
-				C87165FA1CEBA6B100D2E113 /* THLTicketScannedTableViewController.m */,
-			);
-			name = THLTicketScannedTableViewController;
-			sourceTree = "<group>";
-		};
 		C880963C1C23C1C900C7524F /* THLConfirmationView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2812,15 +2795,6 @@
 				C8F2FB291BF826B7004E00B6 /* THLWebViewController.m */,
 			);
 			name = THLWebViewController;
-			sourceTree = "<group>";
-		};
-		C8A7665B1CDCFD5700A000C2 /* THLTicketScanner */ = {
-			isa = PBXGroup;
-			children = (
-				C8A7665C1CDCFD8400A000C2 /* THLTicketScannerController.h */,
-				C8A7665D1CDCFD8400A000C2 /* THLTicketScannerController.m */,
-			);
-			name = THLTicketScanner;
 			sourceTree = "<group>";
 		};
 		C8CB0ECA1C594AB20044B78D /* UI */ = {
@@ -3623,7 +3597,6 @@
 				79817E491C83D51900DEBE15 /* THLGuestlistTicketView.m in Sources */,
 				7942082F1BD8C250009B86FA /* THLGuestlistEntity.m in Sources */,
 				21CCEDE91B87C87B0066CDAC /* THLDataStore.m in Sources */,
-				C8A7665E1CDCFD8400A000C2 /* THLTicketScannerController.m in Sources */,
 				C8F2FB2A1BF826B7004E00B6 /* THLWebViewController.m in Sources */,
 				21EED1001BB5F842001325A7 /* THLGuestFlowWireframe.m in Sources */,
 				79B959291BE581A800B87799 /* THLGuestlistReviewDataManager.m in Sources */,
@@ -3668,7 +3641,6 @@
 				C85EE38D1C1BCA370008C14B /* THLPerkDetailPresenter.m in Sources */,
 				798D7EB41BF2CCD4001D4593 /* THLUserProfileViewController.m in Sources */,
 				2133C9D91C33469A0020083A /* THLWaitlistPositionViewController.m in Sources */,
-				C87165FB1CEBA6B100D2E113 /* THLTicketScannedTableViewController.m in Sources */,
 				79B959341BE5821B00B87799 /* THLGuestlistReviewViewController.m in Sources */,
 				2121736E1BB34DD3007D817A /* THLStarRatingView.m in Sources */,
 				2133C9BF1C3329BA0020083A /* THLWaitlistEntry.m in Sources */,

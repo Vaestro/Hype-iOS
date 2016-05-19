@@ -210,7 +210,7 @@ STPPaymentCardTextFieldDelegate
 {
     [self.hud show:YES];
     [PFCloud callFunctionInBackground:@"retrievePaymentInfo"
-                       withParameters:@{@"stripeCustomerId": [THLUser currentUser].stripeCustomerId}
+                       withParameters:nil
                                 block:^(NSArray<NSDictionary *> *cardInfo, NSError *cloudError) {
                                     [self.hud hide:YES];
                                     if (cloudError) {

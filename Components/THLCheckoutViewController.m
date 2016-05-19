@@ -27,7 +27,6 @@
 @property (nonatomic, strong) MBProgressHUD *hud;
 
 - (void)displayError:(NSString *)error;
-- (void)charge;
 @end
 
 @implementation THLCheckoutViewController
