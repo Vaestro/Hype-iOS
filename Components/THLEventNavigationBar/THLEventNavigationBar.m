@@ -49,7 +49,7 @@
 }
 
 - (void)layoutView {
-    [self addSubviews:@[_imageView, _titleLabel, _dateLabel, _promotionInfoView, _dismissButton, _minimumTitleLabel, _scrollUpIcon]];
+    [self addSubviews:@[_imageView, _titleLabel, _dateLabel, _dismissButton, _minimumTitleLabel, _scrollUpIcon]];
     
     WEAKSELF();
     [_imageView makeConstraints:^(MASConstraintMaker *make) {
@@ -58,7 +58,7 @@
     
     [_titleLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
-        make.bottom.equalTo([WSELF promotionInfoView].mas_top).insets(kTHLEdgeInsetsSuperHigh());
+        make.bottom.equalTo([WSELF scrollUpIcon].mas_top).insets(kTHLEdgeInsetsSuperHigh());
     }];
     
     [_dateLabel makeConstraints:^(MASConstraintMaker *make) {
@@ -66,10 +66,10 @@
         make.bottom.equalTo([WSELF titleLabel].mas_top).insets(kTHLEdgeInsetsSuperHigh());
     }];
     
-    [_promotionInfoView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
-        make.bottom.equalTo([WSELF scrollUpIcon].mas_top);
-    }];
+//    [_promotionInfoView makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+//        make.bottom.equalTo([WSELF scrollUpIcon].mas_top);
+//    }];
     
     [_dismissButton makeConstraints:^(MASConstraintMaker *make) {
         make.left.insets(kTHLEdgeInsetsSuperHigh());
