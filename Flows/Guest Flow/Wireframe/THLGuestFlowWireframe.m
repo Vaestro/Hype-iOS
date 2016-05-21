@@ -18,7 +18,6 @@
 #import "THLGuestlistReviewWireframe.h"
 #import "THLPerkStoreWireframe.h"
 #import "THLPerkDetailWireframe.h"
-#import "THLMasterNavigationController.h"
 #import "UIColor+SLAddition.h"
 #import "THLAppearanceConstants.h"
 #import "THLUser.h"

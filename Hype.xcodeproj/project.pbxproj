@@ -99,6 +99,7 @@
 		3EECB6911C61450100702540 /* THLFAQSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EECB6901C61450100702540 /* THLFAQSectionView.m */; };
 		3EF951781C56AD770046D4F1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EF951771C56AD770046D4F1 /* MobileCoreServices.framework */; };
 		59B1B5471C74754A00F94DBF /* Hype.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 59B1B5461C74703F00F94DBF /* Hype.entitlements */; };
+		72EB25BADD53575D509E862D /* libPods-Hype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1122275CCE0BBF26BC179D31 /* libPods-Hype.a */; };
 		7905CC411BE0252700E56878 /* THLGuestlistInviteEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7905CC401BE0252700E56878 /* THLGuestlistInviteEntity.m */; };
 		790603BD1BF5B6810093335E /* THLPromotionInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 790603BC1BF5B6810093335E /* THLPromotionInfoView.m */; };
 		790603C31BFB73380093335E /* THLDashboardWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 790603C21BFB73380093335E /* THLDashboardWireframe.m */; };
@@ -141,7 +142,6 @@
 		79752ADE1BEBD8B500D09B2E /* THLConfirmationPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79752ADD1BEBD8B500D09B2E /* THLConfirmationPopupView.m */; };
 		79817E491C83D51900DEBE15 /* THLGuestlistTicketView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79817E481C83D51900DEBE15 /* THLGuestlistTicketView.m */; };
 		798650A41BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 798650A31BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m */; };
-		798B5FCB1BF11BD2002EBCB6 /* THLHostFlowWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 798B5FCA1BF11BD2002EBCB6 /* THLHostFlowWireframe.m */; };
 		798B5FD11BF12D2C002EBCB6 /* THLEventHostingWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 798B5FD01BF12D2C002EBCB6 /* THLEventHostingWireframe.m */; };
 		798D7EAE1BF2CAF9001D4593 /* THLUserProfileWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 798D7EAD1BF2CAF9001D4593 /* THLUserProfileWireframe.m */; };
 		798D7EB11BF2CCC7001D4593 /* THLUserProfilePresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 798D7EB01BF2CCC7001D4593 /* THLUserProfilePresenter.m */; };
@@ -183,7 +183,6 @@
 		79B959611BE9A90B00B87799 /* THLActionContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959601BE9A90B00B87799 /* THLActionContainerView.m */; };
 		79BB15301C657FF50044D943 /* THLSingleLineTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BB152F1C657FF50044D943 /* THLSingleLineTextField.m */; };
 		79BB15331C6CED740044D943 /* THLFxTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BB15321C6CED720044D943 /* THLFxTitleLabel.m */; };
-		79BCB5641BF2AAA30050F283 /* THLMasterNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BCB5631BF2AAA30050F283 /* THLMasterNavigationController.m */; };
 		79C93E2B1C758B5D005B4D95 /* TSMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C93E281C758B5D005B4D95 /* TSMessage.m */; };
 		79C93E2C1C758B5D005B4D95 /* TSMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C93E2A1C758B5D005B4D95 /* TSMessageView.m */; };
 		79C93E2E1C758B69005B4D95 /* TSMessagesDefaultDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = 79C93E2D1C758B69005B4D95 /* TSMessagesDefaultDesign.json */; };
@@ -220,7 +219,6 @@
 		79CE01E61C0A69EC0047E6FA /* THLDashboardTicketCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CE01E51C0A69EC0047E6FA /* THLDashboardTicketCellViewModel.m */; };
 		79DF30221C714AFB00516199 /* THLCreditsExplanationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DF30211C714AFB00516199 /* THLCreditsExplanationView.m */; };
 		79DF30261C72FF1700516199 /* THLEventHostingNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DF30251C72FF1700516199 /* THLEventHostingNavigationBar.m */; };
-		A66EF203E132965B95398A01 /* Pods_Hype.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECDA31360F50F4D1B18FD0B1 /* Pods_Hype.framework */; };
 		C82D87BF1C25C7E300116328 /* THLConfirmationView.m in Sources */ = {isa = PBXBuildFile; fileRef = C82D87BE1C25C7E300116328 /* THLConfirmationView.m */; };
 		C82D87C31C31CC2200116328 /* THLMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = C82D87C21C31CC2200116328 /* THLMenuView.m */; };
 		C85EE3791C1BC8AD0008C14B /* THLPerkStoreItemEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3781C1BC8AD0008C14B /* THLPerkStoreItemEntity.m */; };
@@ -268,6 +266,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		087969FF179D4C9A81CFA2BD /* Pods-HypeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HypeTests/Pods-HypeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		0B3B9603B949E0F6D721EF70 /* Pods-Hype.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hype.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hype/Pods-Hype.debug.xcconfig"; sourceTree = "<group>"; };
+		1122275CCE0BBF26BC179D31 /* libPods-Hype.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hype.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2108A8831B8BBF4900B725F6 /* THLMasterWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMasterWireframe.h; sourceTree = "<group>"; };
 		2108A8841B8BBF4900B725F6 /* THLMasterWireframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLMasterWireframe.m; sourceTree = "<group>"; };
 		2108A8861B8BBF5B00B725F6 /* THLDependencyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLDependencyManager.h; sourceTree = "<group>"; };
@@ -357,6 +358,7 @@
 		213CE1111BB8D22D00054A2C /* THLLocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLLocationService.h; sourceTree = "<group>"; };
 		213CE1121BB8D22D00054A2C /* THLLocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLLocationService.m; sourceTree = "<group>"; };
 		213CE1141BB8D23900054A2C /* THLLocationServiceInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLLocationServiceInterface.h; sourceTree = "<group>"; };
+		214B8276AA5CC0B47FE5C99A /* Pods-HypeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HypeTests/Pods-HypeTests.release.xcconfig"; sourceTree = "<group>"; };
 		215A42841BAA1F1F00D03C35 /* THLNumberVerificationModuleInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLNumberVerificationModuleInterface.h; sourceTree = "<group>"; };
 		215A42851BAA1F2C00D03C35 /* THLNumberVerificationModuleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLNumberVerificationModuleDelegate.h; sourceTree = "<group>"; };
 		215A42891BAA1FFF00D03C35 /* THLNumberVerificationPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLNumberVerificationPresenter.h; sourceTree = "<group>"; };
@@ -473,7 +475,6 @@
 		21EED0FE1BB5F842001325A7 /* THLGuestFlowWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestFlowWireframe.h; sourceTree = "<group>"; };
 		21EED0FF1BB5F842001325A7 /* THLGuestFlowWireframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestFlowWireframe.m; sourceTree = "<group>"; };
 		21EED1011BB5F8A7001325A7 /* THLGuestFlowDependencyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestFlowDependencyManager.h; sourceTree = "<group>"; };
-		3C7622EE8F740A4A39D662D8 /* Pods-Hype.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hype.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hype/Pods-Hype.release.xcconfig"; sourceTree = "<group>"; };
 		3E64EBDE1C5C14F3002BA11B /* THLUserDataWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THLUserDataWorker.h; path = UserDataWorker/THLUserDataWorker.h; sourceTree = "<group>"; };
 		3E64EBDF1C5C14F3002BA11B /* THLUserDataWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THLUserDataWorker.m; path = UserDataWorker/THLUserDataWorker.m; sourceTree = "<group>"; };
 		3E64EBE81C5D89C5002BA11B /* THLFAQViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THLFAQViewController.h; path = THLFAQViewController/THLFAQViewController.h; sourceTree = "<group>"; };
@@ -485,7 +486,6 @@
 		3EECB6901C61450100702540 /* THLFAQSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THLFAQSectionView.m; path = THLFAQSectionView/THLFAQSectionView.m; sourceTree = "<group>"; };
 		3EF951771C56AD770046D4F1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		59B1B5461C74703F00F94DBF /* Hype.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Hype.entitlements; sourceTree = "<group>"; };
-		60E484FB9674AF98F4FCBC3A /* Pods-Hype.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hype.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hype/Pods-Hype.debug.xcconfig"; sourceTree = "<group>"; };
 		7905CC3E1BE0251000E56878 /* THLGuestlistInviteEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistInviteEntity.h; sourceTree = "<group>"; };
 		7905CC401BE0252700E56878 /* THLGuestlistInviteEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestlistInviteEntity.m; sourceTree = "<group>"; };
 		790603BB1BF5B6810093335E /* THLPromotionInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPromotionInfoView.h; sourceTree = "<group>"; };
@@ -569,8 +569,6 @@
 		79527CEF1BF188F80074AF38 /* THLEventHostingInteractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventHostingInteractor.m; sourceTree = "<group>"; };
 		795F13641C3C40B500AC9E76 /* THLWaitlistHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLWaitlistHomeViewController.h; sourceTree = "<group>"; };
 		795F13651C3C40B500AC9E76 /* THLWaitlistHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLWaitlistHomeViewController.m; sourceTree = "<group>"; };
-		796965C11BFD8DDE009034FA /* THLHostFlowModuleInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLHostFlowModuleInterface.h; sourceTree = "<group>"; };
-		796965C21BFD8DE8009034FA /* THLHostFlowModuleDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLHostFlowModuleDelegate.h; sourceTree = "<group>"; };
 		79730CF01C17DC3500D70F4B /* THLUserProfileFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserProfileFooterView.h; sourceTree = "<group>"; };
 		79730CF11C17DC3500D70F4B /* THLUserProfileFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLUserProfileFooterView.m; sourceTree = "<group>"; };
 		79730CF41C18A2AA00D70F4B /* THLUserProfileHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserProfileHeaderView.h; sourceTree = "<group>"; };
@@ -582,9 +580,6 @@
 		79817E481C83D51900DEBE15 /* THLGuestlistTicketView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestlistTicketView.m; sourceTree = "<group>"; };
 		798650A21BEDDC2D0032A661 /* CAGradientLayer+THLGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAGradientLayer+THLGradient.h"; sourceTree = "<group>"; };
 		798650A31BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAGradientLayer+THLGradient.m"; sourceTree = "<group>"; };
-		798B5FC81BF11B31002EBCB6 /* THLHostFlowDependencyManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLHostFlowDependencyManager.h; sourceTree = "<group>"; };
-		798B5FC91BF11BD2002EBCB6 /* THLHostFlowWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLHostFlowWireframe.h; sourceTree = "<group>"; };
-		798B5FCA1BF11BD2002EBCB6 /* THLHostFlowWireframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLHostFlowWireframe.m; sourceTree = "<group>"; };
 		798B5FCD1BF12A85002EBCB6 /* THLEventHostingModuleInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLEventHostingModuleInterface.h; sourceTree = "<group>"; };
 		798B5FCE1BF12A9B002EBCB6 /* THLEventHostingModuleDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLEventHostingModuleDelegate.h; sourceTree = "<group>"; };
 		798B5FCF1BF12D2C002EBCB6 /* THLEventHostingWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventHostingWireframe.h; sourceTree = "<group>"; };
@@ -670,8 +665,6 @@
 		79BB152F1C657FF50044D943 /* THLSingleLineTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLSingleLineTextField.m; sourceTree = "<group>"; };
 		79BB15311C6CED720044D943 /* THLFxTitleLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLFxTitleLabel.h; sourceTree = "<group>"; };
 		79BB15321C6CED720044D943 /* THLFxTitleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLFxTitleLabel.m; sourceTree = "<group>"; };
-		79BCB5621BF2AAA30050F283 /* THLMasterNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMasterNavigationController.h; sourceTree = "<group>"; };
-		79BCB5631BF2AAA30050F283 /* THLMasterNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLMasterNavigationController.m; sourceTree = "<group>"; };
 		79C93E271C758B5D005B4D95 /* TSMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSMessage.h; sourceTree = "<group>"; };
 		79C93E281C758B5D005B4D95 /* TSMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSMessage.m; sourceTree = "<group>"; };
 		79C93E291C758B5D005B4D95 /* TSMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSMessageView.h; sourceTree = "<group>"; };
@@ -725,7 +718,7 @@
 		79DF30211C714AFB00516199 /* THLCreditsExplanationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLCreditsExplanationView.m; sourceTree = "<group>"; };
 		79DF30241C72FF1700516199 /* THLEventHostingNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventHostingNavigationBar.h; sourceTree = "<group>"; };
 		79DF30251C72FF1700516199 /* THLEventHostingNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventHostingNavigationBar.m; sourceTree = "<group>"; };
-		A3EB257087011301CF5453E2 /* Pods-HypeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HypeTests/Pods-HypeTests.release.xcconfig"; sourceTree = "<group>"; };
+		A145945946895EC4AC4FECC9 /* Pods-Hype.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hype.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hype/Pods-Hype.release.xcconfig"; sourceTree = "<group>"; };
 		C82D87BD1C25C7E300116328 /* THLConfirmationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLConfirmationView.h; sourceTree = "<group>"; };
 		C82D87BE1C25C7E300116328 /* THLConfirmationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLConfirmationView.m; sourceTree = "<group>"; };
 		C82D87C11C31CC2200116328 /* THLMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMenuView.h; sourceTree = "<group>"; };
@@ -797,8 +790,6 @@
 		CBE54FC98A366F3761F89F63 /* THLViewDataSourceGrouping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLViewDataSourceGrouping.m; sourceTree = "<group>"; };
 		CBE54FD0B5A148F6494B7A84 /* THLViewDataSourceGrouping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLViewDataSourceGrouping.h; sourceTree = "<group>"; };
 		DDC9FA12A17A94B69C2F1156 /* libPods-HypeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HypeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		ECDA31360F50F4D1B18FD0B1 /* Pods_Hype.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hype.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F9D6070E328B548642530CEE /* Pods-HypeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HypeTests/Pods-HypeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FAB488831C6369110052FA38 /* THLMessageListEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMessageListEntity.h; sourceTree = "<group>"; };
 		FAB488841C6369110052FA38 /* THLMessageListEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLMessageListEntity.m; sourceTree = "<group>"; };
 		FAEE45CE1C70E4BA0032C91C /* THLChannelService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLChannelService.h; sourceTree = "<group>"; };
@@ -814,7 +805,7 @@
 				790B38EF1C0375B500CB2362 /* libsqlite3.dylib in Frameworks */,
 				794DCCB71BF555150037A03D /* Accelerate.framework in Frameworks */,
 				79730CF81C18B47000D70F4B /* MessageUI.framework in Frameworks */,
-				A66EF203E132965B95398A01 /* Pods_Hype.framework in Frameworks */,
+				72EB25BADD53575D509E862D /* libPods-Hype.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -829,6 +820,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		200DD0BDC649B6F5CCAB0873 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0B3B9603B949E0F6D721EF70 /* Pods-Hype.debug.xcconfig */,
+				A145945946895EC4AC4FECC9 /* Pods-Hype.release.xcconfig */,
+				087969FF179D4C9A81CFA2BD /* Pods-HypeTests.debug.xcconfig */,
+				214B8276AA5CC0B47FE5C99A /* Pods-HypeTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		2108A8821B8BBE8100B725F6 /* Dependency Management */ = {
 			isa = PBXGroup;
 			children = (
@@ -1505,7 +1507,7 @@
 				211BB0D11B8CBE690068FD50 /* Views */,
 				79259D6E1CAA4C6C00409040 /* Hype.app */,
 				79259D6F1CAA4C6C00409040 /* Hype.xctest */,
-				5F4B55CB31B2A6E67B3A6CFD /* Pods */,
+				200DD0BDC649B6F5CCAB0873 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1557,9 +1559,7 @@
 		217DC6551BBB7A2500332174 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
-				C8CB0ECB1C594B0D0044B78D /* Flow Components */,
 				217DC6541BBB7A0900332174 /* Guest Flow */,
-				798B5FC71BF11B03002EBCB6 /* Host Flow */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -2013,17 +2013,6 @@
 			name = UIImageView;
 			sourceTree = "<group>";
 		};
-		5F4B55CB31B2A6E67B3A6CFD /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				60E484FB9674AF98F4FCBC3A /* Pods-Hype.debug.xcconfig */,
-				3C7622EE8F740A4A39D662D8 /* Pods-Hype.release.xcconfig */,
-				F9D6070E328B548642530CEE /* Pods-HypeTests.debug.xcconfig */,
-				A3EB257087011301CF5453E2 /* Pods-HypeTests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		790603BE1BFB6EAB0093335E /* Dashboard Module */ = {
 			isa = PBXGroup;
 			children = (
@@ -2183,16 +2172,6 @@
 				79730CF51C18A2AA00D70F4B /* THLUserProfileHeaderView.m */,
 			);
 			path = UserProfileHeaderView;
-			sourceTree = "<group>";
-		};
-		798B5FC71BF11B03002EBCB6 /* Host Flow */ = {
-			isa = PBXGroup;
-			children = (
-				C8CB0ECE1C594B740044B78D /* Wireframe */,
-				C8CB0ECD1C594B560044B78D /* Interface */,
-				C8CB0ECC1C594B400044B78D /* Dependency Management */,
-			);
-			path = "Host Flow";
 			sourceTree = "<group>";
 		};
 		798B5FCC1BF12085002EBCB6 /* Event Hosting Module */ = {
@@ -2797,50 +2776,6 @@
 			name = THLWebViewController;
 			sourceTree = "<group>";
 		};
-		C8CB0ECA1C594AB20044B78D /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				79BCB5621BF2AAA30050F283 /* THLMasterNavigationController.h */,
-				79BCB5631BF2AAA30050F283 /* THLMasterNavigationController.m */,
-			);
-			name = UI;
-			path = "Guest Flow";
-			sourceTree = "<group>";
-		};
-		C8CB0ECB1C594B0D0044B78D /* Flow Components */ = {
-			isa = PBXGroup;
-			children = (
-				C8CB0ECA1C594AB20044B78D /* UI */,
-			);
-			name = "Flow Components";
-			sourceTree = "<group>";
-		};
-		C8CB0ECC1C594B400044B78D /* Dependency Management */ = {
-			isa = PBXGroup;
-			children = (
-				798B5FC81BF11B31002EBCB6 /* THLHostFlowDependencyManager.h */,
-			);
-			name = "Dependency Management";
-			sourceTree = "<group>";
-		};
-		C8CB0ECD1C594B560044B78D /* Interface */ = {
-			isa = PBXGroup;
-			children = (
-				796965C21BFD8DE8009034FA /* THLHostFlowModuleDelegate.h */,
-				796965C11BFD8DDE009034FA /* THLHostFlowModuleInterface.h */,
-			);
-			name = Interface;
-			sourceTree = "<group>";
-		};
-		C8CB0ECE1C594B740044B78D /* Wireframe */ = {
-			isa = PBXGroup;
-			children = (
-				798B5FC91BF11BD2002EBCB6 /* THLHostFlowWireframe.h */,
-				798B5FCA1BF11BD2002EBCB6 /* THLHostFlowWireframe.m */,
-			);
-			name = Wireframe;
-			sourceTree = "<group>";
-		};
 		C8CB0ECF1C5962C00044B78D /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -3181,7 +3116,7 @@
 				790B38EE1C0375B500CB2362 /* libsqlite3.dylib */,
 				794DCCB61BF555150037A03D /* Accelerate.framework */,
 				DDC9FA12A17A94B69C2F1156 /* libPods-HypeTests.a */,
-				ECDA31360F50F4D1B18FD0B1 /* Pods_Hype.framework */,
+				1122275CCE0BBF26BC179D31 /* libPods-Hype.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -3523,7 +3458,6 @@
 				21CE06241BB86995004D10BB /* THLAppearanceUtils.m in Sources */,
 				3ECD03EF1C58408C00AE325D /* THLUserPhotoVerificationViewController.m in Sources */,
 				21E402CF1BBF7688001D0C2C /* THLGuestlistInvitationInteractor.m in Sources */,
-				798B5FCB1BF11BD2002EBCB6 /* THLHostFlowWireframe.m in Sources */,
 				790603C61BFB75CF0093335E /* THLDashboardPresenter.m in Sources */,
 				790603CC1BFB75E50093335E /* THLDashboardDataManager.m in Sources */,
 				2133C9D31C333DDC0020083A /* NSString+EmailAddresses.m in Sources */,
@@ -3651,7 +3585,6 @@
 				79CD27FF1C520293009BC119 /* main.m in Sources */,
 				7942082C1BD82AF6009B86FA /* THLActionBarButton.m in Sources */,
 				218AF3521BB7422100AFAEBF /* THLEventEntity.m in Sources */,
-				79BCB5641BF2AAA30050F283 /* THLMasterNavigationController.m in Sources */,
 				21775F361B8CF72B00609D39 /* THLTitledContentView.m in Sources */,
 				C8E1B16B1BF43DA800A9824C /* THLUserProfileInfoView.m in Sources */,
 				211005951B8A318400A540C6 /* THLEventDiscoveryPresenter.m in Sources */,
@@ -3736,8 +3669,11 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
+				New_Setting = "";
+				New_Setting1 = "";
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -3773,14 +3709,18 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				New_Setting = "";
+				New_Setting1 = "";
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
 		};
 		2174A0881B863F6A006826D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 60E484FB9674AF98F4FCBC3A /* Pods-Hype.debug.xcconfig */;
+			baseConfigurationReference = 0B3B9603B949E0F6D721EF70 /* Pods-Hype.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -3808,6 +3748,7 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				New_Setting = "";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hypelist.hype;
 				PRODUCT_NAME = Hype;
 				PROVISIONING_PROFILE = "";
@@ -3816,7 +3757,7 @@
 		};
 		2174A0891B863F6A006826D7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3C7622EE8F740A4A39D662D8 /* Pods-Hype.release.xcconfig */;
+			baseConfigurationReference = A145945946895EC4AC4FECC9 /* Pods-Hype.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -3844,6 +3785,7 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				New_Setting = "";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hypelist.hype;
 				PRODUCT_NAME = Hype;
 				PROVISIONING_PROFILE = "";
@@ -3852,7 +3794,7 @@
 		};
 		2174A08B1B863F6A006826D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F9D6070E328B548642530CEE /* Pods-HypeTests.debug.xcconfig */;
+			baseConfigurationReference = 087969FF179D4C9A81CFA2BD /* Pods-HypeTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3873,7 +3815,7 @@
 		};
 		2174A08C1B863F6A006826D7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A3EB257087011301CF5453E2 /* Pods-HypeTests.release.xcconfig */;
+			baseConfigurationReference = 214B8276AA5CC0B47FE5C99A /* Pods-HypeTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (

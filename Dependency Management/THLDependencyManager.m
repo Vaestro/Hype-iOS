@@ -10,7 +10,7 @@
 
 //Dependency Management Protocols
 #import "THLGuestFlowDependencyManager.h"
-#import "THLHostFlowDependencyManager.h"
+
 
 //Wireframes
 #import "THLMasterWireframe.h"
@@ -18,19 +18,15 @@
 #import "THLFacebookPictureWireframe.h"
 #import "THLNumberVerificationWireframe.h"
 #import "THLGuestFlowWireframe.h"
-#import "THLHostFlowWireframe.h"
 #import "THLEventDiscoveryWireframe.h"
 #import "THLDashboardWireframe.h"
-#import "THLHostDashboardWireframe.h"
 #import "THLEventDetailWireframe.h"
 #import "THLUserProfileWireframe.h"
-#import "THLEventHostingWireframe.h"
 #import "THLGuestlistInvitationWireframe.h"
 #import "THLGuestlistReviewWireframe.h"
 #import "THLPopupNotificationWireframe.h"
 #import "THLPerkStoreWireframe.h"
 #import "THLPerkDetailWireframe.h"
-#import "THLWaitlistPresenter.h"
 
 //Common
 //#import "THLPushNotificationManager.h"
@@ -68,19 +64,16 @@
 @property (nonatomic, weak) THLFacebookPictureWireframe *facebookPictureWireframe;
 @property (nonatomic, weak) THLNumberVerificationWireframe *numberVerificationWireframe;
 @property (nonatomic, weak) THLGuestFlowWireframe *guestFlowWireframe;
-@property (nonatomic, weak) THLHostFlowWireframe *hostFlowWireframe;
 @property (nonatomic, weak) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
 @property (nonatomic, weak) THLDashboardWireframe *dashboardWireframe;
-@property (nonatomic, weak) THLHostDashboardWireframe *hostDashboardWireframe;
+
 @property (nonatomic, weak) THLUserProfileWireframe *userProfileWireframe;
 @property (nonatomic, weak) THLEventDetailWireframe *eventDetailWireframe;
-@property (nonatomic, weak) THLEventHostingWireframe *eventHostingWireframe;
 @property (nonatomic, weak) THLGuestlistInvitationWireframe *guestlistInvitationWireframe;
 @property (nonatomic, weak) THLGuestlistReviewWireframe *guestlistReviewWireframe;
 @property (nonatomic, weak) THLPopupNotificationWireframe *popupNotificationWireframe;
 @property (nonatomic, weak) THLPerkStoreWireframe *perkStoreWireframe;
 @property (nonatomic, weak) THLPerkDetailWireframe *perkDetailWireframe;
-@property (nonatomic, weak) THLWaitlistPresenter *waitlistPresenter;
 
 //Common
 @property (nonatomic, strong) THLYapDatabaseManager *databaseManager;
@@ -159,16 +152,6 @@
     return wireframe;
 }
 
-- (THLHostDashboardWireframe *)newHostDashboardWireframe
-{
-    THLHostDashboardWireframe *wireframe = [[THLHostDashboardWireframe alloc] initWithGuestlistService:self.guestlistService
-                                                                                 entityMappper:self.entityMapper
-                                                                         viewDataSourceFactory:self.viewDataSourceFactory
-                                                                                     dataStore:self.guestlistDataStore];
-    
-    self.hostDashboardWireframe = wireframe;
-    return wireframe;
-}
 
 - (THLUserProfileWireframe *)newUserProfileWireframe
 {
@@ -187,15 +170,6 @@
 	return wireframe;
 }
 
-- (THLEventHostingWireframe *)newEventHostingWireframe
-{
-    THLEventHostingWireframe *wireframe = [[THLEventHostingWireframe alloc] initWithDataStore:self.guestlistDataStore
-                                                                             guestlistService:self.guestlistService
-                                                                        viewDataSourceFactory:self.viewDataSourceFactory
-                                                                                entityMappper:self.entityMapper];
-    self.eventHostingWireframe = wireframe;
-    return wireframe;
-}
 
 - (THLGuestlistInvitationWireframe *)newGuestlistInvitationWireframe
 {
@@ -226,13 +200,6 @@
 	return wireframe;
 }
 
-- (THLHostFlowWireframe *)newHostFlowWireframe
-{
-    THLHostFlowWireframe *wireframe = [[THLHostFlowWireframe alloc] initWithDependencyManager:self];
-    self.hostFlowWireframe = wireframe;
-    return wireframe;
-}
-
 - (THLPopupNotificationWireframe *)newPopupNotificationWireframe
 {
     THLPopupNotificationWireframe *wireframe = [[THLPopupNotificationWireframe alloc] initWithGuestlistService:self.guestlistService
@@ -257,12 +224,6 @@
     return wireframe;
 }
 
-- (THLWaitlistPresenter *)newWaitlistPresenter
-{
-	THLWaitlistPresenter *presenter = [[THLWaitlistPresenter alloc] init];
-	self.waitlistPresenter = presenter;
-	return presenter;
-}
 
 #pragma mark - Lazy Instantiation
 #pragma mark - Wireframes
