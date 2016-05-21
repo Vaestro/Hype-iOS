@@ -9,18 +9,17 @@
 #import "THLUserPhotoVerificationViewController.h"
 #import "THLActionBarButton.h"
 #import "THLAppearanceConstants.h"
-#import "OLFacebookImage.h"
+//#import "OLFacebookImage.h"
 #import "THLPersonIconView.h"
 #import "THLUser.h"
 #import "THLUserDataWorker.h"
 
-@interface THLUserPhotoVerificationViewController() <OLFacebookImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface THLUserPhotoVerificationViewController() <UINavigationControllerDelegate>
 
 @property (nonatomic, strong) THLActionBarButton *submitButton;
 @property (nonatomic, strong) UITapGestureRecognizer *photoTapRecognizer;
 @property (nonatomic, strong) UILabel *descriptionLabel;
 @property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) OLFacebookImagePickerController *imagePicker;
 @property (nonatomic, strong) NSURL *userImageURL;
 @property (nonatomic, strong) THLPersonIconView *userImageView;
 @property (nonatomic, assign) BOOL needHideSubmitButton;
@@ -236,42 +235,42 @@
 
 #pragma mark GestureRecognizer call Facebook picker
 
-- (void) callFacebookPicker:(UITapGestureRecognizer *) recognizer{
-    _imagePicker = [[OLFacebookImagePickerController alloc] init];
-    _imagePicker.delegate = self;
-    [self presentViewController:_imagePicker
-                      animated:YES
-                    completion:nil];
-}
+//- (void) callFacebookPicker:(UITapGestureRecognizer *) recognizer{
+//    _imagePicker = [[OLFacebookImagePickerController alloc] init];
+//    _imagePicker.delegate = self;
+//    [self presentViewController:_imagePicker
+//                      animated:YES
+//                    completion:nil];
+//}
 
 #pragma mark - OLFacebookImagePickerControllerDelegate methods
 
-- (void)facebookImagePicker:(OLFacebookImagePickerController *)imagePicker didFailWithError:(NSError *)error {
-    [self facebookPickerError:error];
-}
+//- (void)facebookImagePicker:(OLFacebookImagePickerController *)imagePicker didFailWithError:(NSError *)error {
+//    [self facebookPickerError:error];
+//}
 
-- (void)facebookImagePicker:(OLFacebookImagePickerController *)imagePicker didFinishPickingImages:(NSArray *)images {
-    OLFacebookImage *userImage = images.firstObject;
-    [self loadFacebookUserImageWithURL: userImage.thumbURL];
-    [self loadFacebookUserImageWithURL: userImage.fullURL];
-    [_imagePicker dismissViewControllerAnimated:YES completion:nil];
-}
+//- (void)facebookImagePicker:(OLFacebookImagePickerController *)imagePicker didFinishPickingImages:(NSArray *)images {
+//    OLFacebookImage *userImage = images.firstObject;
+//    [self loadFacebookUserImageWithURL: userImage.thumbURL];
+//    [self loadFacebookUserImageWithURL: userImage.fullURL];
+//    [_imagePicker dismissViewControllerAnimated:YES completion:nil];
+//}
 
-- (void)facebookImagePickerDidCancelPickingImages:(OLFacebookImagePickerController *)imagePicker {
-    [_imagePicker dismissViewControllerAnimated:YES completion:nil];
-}
+//- (void)facebookImagePickerDidCancelPickingImages:(OLFacebookImagePickerController *)imagePicker {
+//    [_imagePicker dismissViewControllerAnimated:YES completion:nil];
+//}
 
-- (BOOL) facebookImagePicker:(OLFacebookImagePickerController *)imagePicker shouldSelectImage:(OLFacebookImage *)image{
-    return imagePicker.selected.count < 1;
-}
+//- (BOOL) facebookImagePicker:(OLFacebookImagePickerController *)imagePicker shouldSelectImage:(OLFacebookImage *)image{
+//    return imagePicker.selected.count < 1;
+//}
 
 - (void) facebookImagePickerFailToLoadImage:(NSError *)error {
     [self facebookPickerError:error];
 }
 
-- (void) facebookImagePicker:(OLFacebookImagePickerController *)imagePicker didSelectImage:(OLFacebookImage *)image{
-    
-}
+//- (void) facebookImagePicker:(OLFacebookImagePickerController *)imagePicker didSelectImage:(OLFacebookImage *)image{
+//    
+//}
 
 - (void) facebookPickerError:(NSError *) error {
     [[[UIAlertView alloc] initWithTitle:@"Oops"

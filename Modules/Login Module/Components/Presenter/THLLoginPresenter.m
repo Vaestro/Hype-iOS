@@ -15,7 +15,7 @@
 #import "THLFacebookPictureModuleDelegate.h"
 #import "THLNumberVerificationModuleDelegate.h"
 #import "THLUserPhotoVerificationViewController.h"
-#import "OLFacebookImagePickerController.h"
+//#import "OLFacebookImagePickerController.h"
 #import "THLTextEntryViewController.h"
 
 @interface THLLoginPresenter()

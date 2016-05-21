@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "THLUserPhotoVerificationInterface.h"
-#import "OLFacebookImagePickerController.h"
+//#import "OLFacebookImagePickerController.h"
 
 @class THLUserPhotoVerificationViewController;
 

@@ -63,7 +63,6 @@ static NSString *branchMarketingLink = @"https://bnc.lt/m/aTR7pkSq0q";
 
 @interface THLUserProfileViewController()
 <
-THLUserPhotoVerificationInterfaceDidHideDelegate,
 THLTextEntryViewDelegate,
 STPPaymentCardTextFieldDelegate
 >
@@ -104,7 +103,7 @@ STPPaymentCardTextFieldDelegate
 #pragma mark - View Setup
 - (void)constructView {
     _tableView = [self newTableView];
-    _infoVC = [self newInfoVC];
+//    _infoVC = [self newInfoVC];   
 }
 
 - (void)layoutView {
@@ -114,14 +113,14 @@ STPPaymentCardTextFieldDelegate
 
     [self.view addSubviews:@[_tableView, _hud]];
     
-    UIEdgeInsets adjustForTabbarInsets = UIEdgeInsetsMake(0, 0, CGRectGetHeight(self.tabBarController.tabBar.frame), 0);
-    self.tableView.contentInset = adjustForTabbarInsets;
-    self.tableView.scrollIndicatorInsets = adjustForTabbarInsets;
-    
+    [_tableView makeConstraints:^(MASConstraintMaker *make) {
+        make.right.left.insets(kTHLEdgeInsetsNone());
+        make.edges.equalTo(self.view);
+    }];
 }
 
 -(void)viewDidLayoutSubviews {
-    self.tableView.contentSize = CGSizeMake(self.tableView.frame.size.width, self.tableView.contentSize.height - 1);
+//    self.tableView.contentSize = CGSizeMake(self.tableView.frame.size.width, 800);
 
 }
 - (void)bindView {
