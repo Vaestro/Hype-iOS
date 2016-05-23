@@ -11,7 +11,11 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
+@property (nonatomic, strong) UINavigationController *navController;
+@property (nonatomic, strong) UITabBarController *tabController;
+@property (nonatomic, readonly) int networkStatus;
+- (BOOL)isParseReachable;
 
 @end
+
 

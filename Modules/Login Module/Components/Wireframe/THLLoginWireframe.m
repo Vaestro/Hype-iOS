@@ -10,10 +10,8 @@
 #import "THLLoginInteractor.h"
 #import "THLLoginPresenter.h"
 #import "THLLoginDataManager.h"
-
 #import "THLOnboardingViewController.h"
 #import "THLLoginViewController.h"
-
 #import "THLNumberVerificationModuleInterface.h"
 #import "THLFacebookPictureModuleInterface.h"
 #import "THLUser.h"
@@ -28,7 +26,6 @@
 @property (nonatomic, strong) THLLoginDataManager *dataManager;
 @property (nonatomic, strong) THLLoginInteractor *interactor;
 @property (nonatomic, strong) THLLoginPresenter *presenter;
-
 @property (nonatomic, strong) THLOnboardingViewController *onboardingView;
 @property (nonatomic, strong) THLLoginViewController *loginView;
 @property (nonatomic, strong) UINavigationController *navigationController;
@@ -73,7 +70,7 @@
 	_window = window;
 	[_presenter configureOnboardingView:_onboardingView];
 	_window.rootViewController = _onboardingView;
-    _topViewController = _onboardingView;
+//    _topViewController = _onboardingView;
 	[_window makeKeyAndVisible];
 }
 
@@ -110,9 +107,9 @@
 
 - (void)finishOnboarding {
     WEAKSELF();
-    [_onboardingView dismissViewControllerAnimated:NO completion:^{
-        [WSELF.presenter.moduleDelegate loginModule:WSELF.presenter didLoginUser:nil];
-    }];
+    self.window.rootViewController = nil;
+    [WSELF.presenter.moduleDelegate loginModule:WSELF.presenter didLoginUser:nil];
+    
 }
 
 - (void)presentNumberVerificationInterface:(id<THLNumberVerificationModuleDelegate>)interfaceDelegate {

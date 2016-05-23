@@ -101,7 +101,7 @@
     OnboardingContentViewController *fifthPage = [OnboardingContentViewController
                                                    finalContentWithTitle:@"Signup for a great night tonight"
                                                    body:nil
-                                                   backgroundImage:[UIImage imageNamed:@"OnboardingLoginBG"]
+                                                   backgroundImage:nil 
                                                    buttonText:@"Login with facebook"
                                                    action:^{
                                                     [loginCommand execute:nil];

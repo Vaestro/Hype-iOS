@@ -9,6 +9,7 @@
 //Frameworks
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 #import "THLMasterWireframe.h"
 
@@ -112,12 +113,6 @@ THLPopupNotificationModuleDelegate
         _currentWireframe = loginWireframe;
         [loginWireframe.moduleInterface setModuleDelegate:self];
         [loginWireframe.moduleInterface presentLoginModuleInterfaceWithOnboardingInWindow:_window];
-//    } else {
-//        THLWaitlistPresenter *waitlistPresenter = [_dependencyManager newWaitlistPresenter];
-//        _waitlistPresenter = waitlistPresenter;
-//        _waitlistPresenter.delegate = self;
-//        [waitlistPresenter presentInterfaceInWindow:_window];
-//    }
 }
 
 - (void)presentLoginInterfaceOnViewController:(UIViewController *)viewController {
@@ -156,11 +151,10 @@ THLPopupNotificationModuleDelegate
 #pragma mark - THLLoginModuleDelegate
 - (void)loginModule:(id<THLLoginModuleInterface>)module didLoginUser:(NSError *)error {
 	if (!error) {
-        [THLUserManager makeCurrentInstallation];
         [THLUserManager logCrashlyticsUser];
         Mixpanel *mixpanel = [Mixpanel sharedInstance];
         [mixpanel track:@"CompletedSignup"];
-        		[self routeLoggedInUserFlow];
+        [self routeLoggedInUserFlow];
     } else {
         NSLog(@"Login Error:%@", error);
     }
@@ -181,6 +175,7 @@ THLPopupNotificationModuleDelegate
 - (void)logOutUser {
     [THLUserManager logUserOut];
     [Intercom reset];
+    [FBSDKAccessToken setCurrentAccessToken:nil];
     [_dependencyManager.databaseManager dropDB];
     _guestWireframe = nil;
     [self presentOnboardingAndLoginInterface];

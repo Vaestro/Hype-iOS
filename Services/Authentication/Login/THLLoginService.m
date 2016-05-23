@@ -29,7 +29,7 @@
 - (BFTask *)getFacebookUserDictionary {
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
                                   initWithGraphPath:@"me"
-                                  parameters:@{@"fields": @"id,first_name,last_name,name,gender,verified,email"}
+                                  parameters:@{@"fields": @"id,first_name,last_name,name,gender,verified,email, picture"}
                                   HTTPMethod:@"GET"];
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {

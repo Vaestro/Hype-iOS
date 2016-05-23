@@ -95,7 +95,6 @@
 		21EED1001BB5F842001325A7 /* THLGuestFlowWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 21EED0FF1BB5F842001325A7 /* THLGuestFlowWireframe.m */; };
 		3E64EBE01C5C14F3002BA11B /* THLUserDataWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E64EBDF1C5C14F3002BA11B /* THLUserDataWorker.m */; };
 		3E64EBEA1C5D89C5002BA11B /* THLFAQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E64EBE91C5D89C5002BA11B /* THLFAQViewController.m */; };
-		3ECD03EF1C58408C00AE325D /* THLUserPhotoVerificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ECD03EE1C58408C00AE325D /* THLUserPhotoVerificationViewController.m */; };
 		3EECB6911C61450100702540 /* THLFAQSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EECB6901C61450100702540 /* THLFAQSectionView.m */; };
 		3EF951781C56AD770046D4F1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EF951771C56AD770046D4F1 /* MobileCoreServices.framework */; };
 		59B1B5471C74754A00F94DBF /* Hype.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 59B1B5461C74703F00F94DBF /* Hype.entitlements */; };
@@ -477,9 +476,6 @@
 		3E64EBDF1C5C14F3002BA11B /* THLUserDataWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THLUserDataWorker.m; path = UserDataWorker/THLUserDataWorker.m; sourceTree = "<group>"; };
 		3E64EBE81C5D89C5002BA11B /* THLFAQViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THLFAQViewController.h; path = THLFAQViewController/THLFAQViewController.h; sourceTree = "<group>"; };
 		3E64EBE91C5D89C5002BA11B /* THLFAQViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THLFAQViewController.m; path = THLFAQViewController/THLFAQViewController.m; sourceTree = "<group>"; };
-		3ECD03ED1C58408C00AE325D /* THLUserPhotoVerificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THLUserPhotoVerificationViewController.h; path = UserPhotoVerificationVC/THLUserPhotoVerificationViewController.h; sourceTree = "<group>"; };
-		3ECD03EE1C58408C00AE325D /* THLUserPhotoVerificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THLUserPhotoVerificationViewController.m; path = UserPhotoVerificationVC/THLUserPhotoVerificationViewController.m; sourceTree = "<group>"; };
-		3ED444421C59479C00385A8A /* THLUserPhotoVerificationInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = THLUserPhotoVerificationInterface.h; path = UserPhotoVerificationVC/THLUserPhotoVerificationInterface.h; sourceTree = "<group>"; };
 		3EECB68F1C61450100702540 /* THLFAQSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THLFAQSectionView.h; path = THLFAQSectionView/THLFAQSectionView.h; sourceTree = "<group>"; };
 		3EECB6901C61450100702540 /* THLFAQSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THLFAQSectionView.m; path = THLFAQSectionView/THLFAQSectionView.m; sourceTree = "<group>"; };
 		3EF951771C56AD770046D4F1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -1065,7 +1061,6 @@
 			children = (
 				794AFE401C162315008475B1 /* LoginVC */,
 				794AFE3F1C162309008475B1 /* OnboardingVC */,
-				3ECD03F01C58409400AE325D /* UserPhotoVerificationVC */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1983,16 +1978,6 @@
 				3E64EBE91C5D89C5002BA11B /* THLFAQViewController.m */,
 			);
 			name = THLFAQViewController;
-			sourceTree = "<group>";
-		};
-		3ECD03F01C58409400AE325D /* UserPhotoVerificationVC */ = {
-			isa = PBXGroup;
-			children = (
-				3ECD03ED1C58408C00AE325D /* THLUserPhotoVerificationViewController.h */,
-				3ECD03EE1C58408C00AE325D /* THLUserPhotoVerificationViewController.m */,
-				3ED444421C59479C00385A8A /* THLUserPhotoVerificationInterface.h */,
-			);
-			name = UserPhotoVerificationVC;
 			sourceTree = "<group>";
 		};
 		3EECB6921C61451800702540 /* THLFAOSectionView */ = {
@@ -3456,7 +3441,6 @@
 				219E32A81B8EA63D00214C85 /* THLEventNavigationBar.m in Sources */,
 				C8EE96CE1CE677580040A1F0 /* THLStripeTokenService.m in Sources */,
 				21CE06241BB86995004D10BB /* THLAppearanceUtils.m in Sources */,
-				3ECD03EF1C58408C00AE325D /* THLUserPhotoVerificationViewController.m in Sources */,
 				21E402CF1BBF7688001D0C2C /* THLGuestlistInvitationInteractor.m in Sources */,
 				790603C61BFB75CF0093335E /* THLDashboardPresenter.m in Sources */,
 				790603CC1BFB75E50093335E /* THLDashboardDataManager.m in Sources */,
