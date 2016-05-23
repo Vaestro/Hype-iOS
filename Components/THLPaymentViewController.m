@@ -160,8 +160,7 @@
                                              if (cloudError) {
                                                  [self displayError:cloudError];
                                              } else {
-
-                                                 [[THLUser currentUser] saveEventually];
+                                                 [[THLUser currentUser] fetch];
                                                  [self displaySuccess];
                                                  NSString *last4CardDigits = paymentInfo[0][@"last4"];
                                                  NSString *cardInfoText = [NSString stringWithFormat:@"**** **** **** %@", last4CardDigits];

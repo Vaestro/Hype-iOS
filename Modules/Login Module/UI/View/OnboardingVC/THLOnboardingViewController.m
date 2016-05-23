@@ -84,7 +84,7 @@
     OnboardingContentViewController *firstPage = [OnboardingContentViewController
                                                   initialContentWithTitle:@"WELCOME TO\nTHE HYPE"
                                                   body:@"Discover the most exclusive events happening in NYC"
-                                                  backgroundVideo:nil   ];
+                                                  backgroundVideo:nil];
     
     OnboardingContentViewController *secondPage = [OnboardingContentViewController contentWithTitle:@"DESIGN THE PERFECT NIGHT"
                                                                                                body:@"Pick the event of your choice and invite your friends to join your party"
@@ -101,7 +101,7 @@
     OnboardingContentViewController *fifthPage = [OnboardingContentViewController
                                                    finalContentWithTitle:@"Signup for a great night tonight"
                                                    body:nil
-                                                   backgroundImage:nil 
+                                                   backgroundImage:[UIImage imageNamed:@"OnboardingLoginBG"]
                                                    buttonText:@"Login with facebook"
                                                    action:^{
                                                     [loginCommand execute:nil];
