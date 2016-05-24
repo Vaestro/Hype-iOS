@@ -10,6 +10,9 @@
 #import <Parse/PFQuery.h>
 #import <Parse/PFUser.h>
 #import <ParseUI/PFCollectionViewCell.h>
+#import "THLDashboardNotificationCell.h"
+#import "THLEventInviteCell.h"
+#import "THLPersonIconView.h"
 
 @implementation THLMyEventsViewController
 
@@ -31,6 +34,12 @@
 
 #pragma mark -
 #pragma mark UIViewController
+- (void)loadView {
+    [super loadView];
+
+    [self.collectionView registerClass:[THLEventInviteCell class]
+            forCellWithReuseIdentifier:[THLEventInviteCell identifier]];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -48,8 +57,9 @@
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
     
     const CGRect bounds = UIEdgeInsetsInsetRect(self.view.bounds, layout.sectionInset);
-    CGFloat sideSize = MIN(CGRectGetWidth(bounds), CGRectGetHeight(bounds)) / 2.0f - layout.minimumInteritemSpacing;
-    layout.itemSize = CGSizeMake(sideSize, sideSize);
+    CGFloat sideSize = MIN(CGRectGetWidth(bounds), CGRectGetHeight(bounds));
+    layout.itemSize = CGSizeMake(ViewWidth(self.collectionView) - 25, 125);
+
 }
 
 #pragma mark -
@@ -60,7 +70,9 @@
     [query whereKey:@"Guest" equalTo:[PFUser currentUser]];
     [query includeKey:@"Guest"];
     [query includeKey:@"Guest.event"];
+    [query includeKey:@"Guestlist.Owner"];
     [query includeKey:@"Guestlist.event.location"];
+    
     return query;
 }
 
@@ -71,19 +83,35 @@
 - (PFCollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath
                                   object:(PFObject *)object {
-    PFCollectionViewCell *cell = [super collectionView:collectionView cellForItemAtIndexPath:indexPath object:object];
-    cell.textLabel.textAlignment = NSTextAlignmentCenter;
     
-    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString: object[@"Guestlist"][@"event"][@"location"][@"name"] attributes:nil];
+    THLEventInviteCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[THLEventInviteCell identifier]
+                                                                           forIndexPath:indexPath];
+    
+//    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+
+//    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString: object[@"Guestlist"][@"event"][@"location"][@"name"] attributes:nil];
 //    NSAttributedString *priorityString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"\nPriority: %@", object[@"priority"]]
 //                                                                         attributes:@{ NSFontAttributeName : [UIFont systemFontOfSize:13.0f],
 //                                                                                       NSForegroundColorAttributeName : [UIColor grayColor] }];
 //    [title appendAttributedString:priorityString];
-    cell.textLabel.attributedText = title;
+//    cell.textLabel.attributedText = title;
+    NSDate *date = (NSDate *)object[@"Guestlist"][@"event"][@"date"];
+    NSString *invitationMessage = [NSString stringWithFormat:@"%@ invited you to their party", object[@"Guestlist"][@"Owner"][@"firstName"]];
+    NSString *invitationDate = [NSString stringWithFormat:@"%@, %@", date.thl_weekdayString, date.thl_timeString];
+    cell.senderIntroductionLabel.text = invitationMessage;
+    cell.locationNameLabel.text = object[@"Guestlist"][@"event"][@"location"][@"name"];
+    cell.dateLabel.text = invitationDate;
     
+//    NSData *eventImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:object[@"Guestlist"][@"Owner"][@"image"]]];
+    
+                          
+//    cell.personIconView.image = [UIImage imageWithData:eventImageData];
+//    [cellView setSenderImageURL:_guestlistInviteEntity.guestlist.owner.imageURL];
+
     cell.contentView.layer.borderWidth = 1.0f;
     cell.contentView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    
+//    [cell updateFromObject:object];
+
     return cell;
 }
 @end

@@ -63,14 +63,12 @@
     
     [_senderIntroductionLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(WSELF.iconImageView.mas_top).mas_offset(-10);
-//        make.right.equalTo(SV([WSELF statusView]).mas_centerX).mas_offset(@125);
         make.right.equalTo(kTHLEdgeInsetsHigh());
         make.left.equalTo([WSELF iconImageView].mas_right).insets(kTHLEdgeInsetsHigh());
     }];
     
     [_locationNameLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF senderIntroductionLabel].mas_bottom).insets(kTHLEdgeInsetsLow());
-//        make.right.equalTo(SV([WSELF statusView]).mas_centerX).mas_offset(@125);
         make.right.equalTo(kTHLEdgeInsetsHigh());
         make.left.equalTo([WSELF iconImageView].mas_right).insets(kTHLEdgeInsetsHigh());
         make.centerY.equalTo(0);
@@ -78,23 +76,10 @@
     
     [_dateLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF locationNameLabel].mas_bottom).insets(kTHLEdgeInsetsLow());
-//        make.right.equalTo(SV([WSELF statusView]).mas_centerX).mas_offset(@125);
         make.right.equalTo(kTHLEdgeInsetsHigh());
         make.left.equalTo([WSELF iconImageView].mas_right).insets(kTHLEdgeInsetsHigh());
         make.bottom.equalTo(WSELF.iconImageView.mas_bottom).mas_offset(10);
     }];
-    
-//    [_statusView makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.greaterThanOrEqualTo(SV(WSELF.statusView)).insets(kTHLEdgeInsetsHigh());
-//        make.bottom.lessThanOrEqualTo(SV(WSELF.statusView)).insets(kTHLEdgeInsetsHigh());
-////        make.right.equalTo(SV([WSELF statusView]).mas_right).insets(kTHLEdgeInsetsSuperHigh());
-//        make.left.equalTo([WSELF senderIntroductionLabel].mas_right).insets(kTHLEdgeInsetsHigh());
-//        make.centerY.equalTo([WSELF locationNameLabel].mas_centerY);
-//    }];
-    
-//    if (didOpen == TRUE) {
-//        _statusView.hidden = TRUE;
-//    }
 }
 
 - (void)bindView {

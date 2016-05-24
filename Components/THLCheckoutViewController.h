@@ -10,5 +10,5 @@
 @class THLEventEntity;
 
 @interface THLCheckoutViewController : UIViewController
-- (id)initWithEvent:(THLEventEntity *)event andCompletionAction:(RACCommand *)completionAction;
+- (id)initWithEvent:(THLEventEntity *)event paymentInfo:(NSDictionary *)paymentInfo andCompletionAction:(RACCommand *)completionAction;
 @end

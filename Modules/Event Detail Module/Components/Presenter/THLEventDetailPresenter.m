@@ -71,7 +71,7 @@
                 [WSELF.view showAlertView];
             } else {
                 //            TODO: Create logic so that Guests with Declined Guestlists can have another guestlist invite to the same event if their other one is declined
-                THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:_eventEntity andCompletionAction:createGuestlistActionCommand];
+                THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:_eventEntity paymentInfo:nil andCompletionAction:createGuestlistActionCommand];
                 [self.view showCheckoutView:checkoutVC];
             }
         }
