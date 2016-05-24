@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "OLFacebookImagePickerController.h"
+//#import "OLFacebookImagePickerController.h"
 
 @protocol THLFacebookPictureModuleInterface;
 @protocol THLFacebookPictureModuleDelegate <NSObject>

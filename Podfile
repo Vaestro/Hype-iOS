@@ -38,11 +38,7 @@ pod 'Parse', '= 1.11.0'
 pod 'ParseFacebookUtilsV4'
 pod 'ParseUI'
 pod 'FBSDKCoreKit'
-pod 'FBSDKLoginKit'
-pod 'FBSDKShareKit', '= 4.8.0'
-pod 'FacebookImagePicker'
-
-pod 'RKNotificationHub'
+#pod 'FacebookImagePicker'
 
 #Intercom
 pod 'Intercom'
@@ -54,7 +50,6 @@ pod 'PQScanner', '~> 0.1.3'
 pod 'Fabric'
 pod 'Crashlytics'
 pod 'Digits'
-pod 'TwitterCore'
 pod 'Optimizely-iOS-SDK'
 pod 'Stripe'
 
@@ -83,31 +78,26 @@ pod 'IHKeyboardAvoiding'
 pod "FXLabel"
 pod 'BLKFlexibleHeightBar'
 pod 'MBProgressHUD', '~> 0.9.2'
-
-#Geolocation
 pod 'KVNProgress'
 end
-
-#Phone Calls
-pod 'AFNetworking', '~> 3.0'
 
 target 'HypeTests' do
 pod 'OCMock', '3.1.2'
 pod "Gizou"
 end
 
-post_install do |installer|
-    installer.pods_project.targets.each do |target|
-        target.build_configurations.each do |config|
-            settings = config.build_settings['GCC_PREPROCESSOR_DEFINITIONS']
-            settings = ['$(inherited)'] if settings.nil?
-            
-            if target.name == 'Pods-MyProject-Mixpanel'
-                settings << 'MIXPANEL_DEBUG=1'
-                settings << 'MIXPANEL_ERROR=1'
-            end
-            
-            config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] = settings
-        end
-    end
-end
+#post_install do |installer|
+#    installer.pods_project.targets.each do |target|
+#        target.build_configurations.each do |config|
+#            settings = config.build_settings['GCC_PREPROCESSOR_DEFINITIONS']
+#            settings = ['$(inherited)'] if settings.nil?
+#            
+#            if target.name == 'Pods-MyProject-Mixpanel'
+#                settings << 'MIXPANEL_DEBUG=1'
+#                settings << 'MIXPANEL_ERROR=1'
+#            end
+#            
+#            config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] = settings
+#        end
+#    end
+#end

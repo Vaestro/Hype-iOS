@@ -15,7 +15,6 @@
 #import "THLResourceManager.h"
 #import "THLUserProfileFooterView.h"
 #import "THLUserProfileHeaderView.h"
-#import "THLUserPhotoVerificationViewController.h"
 #import "THLTextEntryViewController.h"
 #import "THLFAQViewController.h"
 #import "THLUserManager.h"
@@ -63,7 +62,6 @@ static NSString *branchMarketingLink = @"https://bnc.lt/m/aTR7pkSq0q";
 
 @interface THLUserProfileViewController()
 <
-THLUserPhotoVerificationInterfaceDidHideDelegate,
 THLTextEntryViewDelegate,
 STPPaymentCardTextFieldDelegate
 >
@@ -85,15 +83,18 @@ STPPaymentCardTextFieldDelegate
 @synthesize userImageURL;
 
 #pragma mark - VC Lifecycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self constructView];
-    [self layoutView];
-    [self bindView];
-    
     self.tableCellNames = @[@"Invite Friends",@"Redeem Code", @"Payment Method", @"Privacy Policy", @"Terms & Conditions", @"Contact Us", @"Logout"];
     self.navigationItem.title = @"MY PROFILE";
+    
+    _tableView = [self newTableView];
+    self.view.backgroundColor = kTHLNUIPrimaryBackgroundColor;
+    
+    [self layoutView];
+    [self configureDataSource];
     
     if ([THLUser currentUser])
     {
@@ -101,30 +102,21 @@ STPPaymentCardTextFieldDelegate
     }
 }
 
-#pragma mark - View Setup
-- (void)constructView {
-    _tableView = [self newTableView];
-    _infoVC = [self newInfoVC];
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.tableView reloadData];
 }
 
+#pragma mark - View Setup
+
 - (void)layoutView {
-    
-    self.view.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     self.hud = [[MBProgressHUD alloc] initWithView:self.view];
 
     [self.view addSubviews:@[_tableView, _hud]];
     
     [_tableView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.bottom.insets(UIEdgeInsetsZero);
+        make.right.top.bottom.left.insets(kTHLEdgeInsetsNone());
     }];
-}
-
--(void)viewDidLayoutSubviews {
-    self.tableView.contentSize = CGSizeMake(self.tableView.frame.size.width, self.tableView.contentSize.height - 1);
-
-}
-- (void)bindView {
-    [self configureDataSource];
 }
 
 - (void)configureDataSource {
@@ -137,6 +129,8 @@ STPPaymentCardTextFieldDelegate
     [tableView registerClass:[THLUserProfileFooterView class] forHeaderFooterViewReuseIdentifier:[THLUserProfileFooterView identifier]];
 }
 
+#pragma mark - <UITableViewDataSource>
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -144,6 +138,67 @@ STPPaymentCardTextFieldDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.tableCellNames count];
 }
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    THLUserProfileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[THLUserProfileTableViewCell identifier] forIndexPath:indexPath];
+    
+    cell.contentView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
+    cell.title = [self.tableCellNames objectAtIndex:indexPath.row];
+    cell.textLabel.backgroundColor = [UIColor clearColor];
+    
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row == LogOut && ![THLUserManager userLoggedIn]) {
+        return 0;
+    }
+    else {
+        return 55;
+    }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *header = nil;
+    CGFloat height = [self tableView:tableView heightForHeaderInSection:section];
+    CGRect frame = CGRectMake(0, 0, ScreenWidth, height);
+    THLUserProfileHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:[THLUserProfileHeaderView identifier]];
+    headerView = [[THLUserProfileHeaderView alloc] initWithFrame:frame];
+    RAC(headerView, userImageURL) = RACObserve(self, userImageURL);
+    RAC(headerView, userName) = RACObserve(self, userName);
+    header = headerView;
+    return header;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    UIView *footer = nil;
+    CGFloat height = [self tableView:tableView heightForFooterInSection:section];
+    CGRect frame = CGRectMake(0, 0, ScreenWidth, height);
+    THLUserProfileFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:[THLUserProfileFooterView identifier]];
+    footerView = [[THLUserProfileFooterView alloc] initWithFrame:frame];
+    footerView.logoutCommand = self.logoutCommand;
+    footerView.emailCommand = self.contactCommand;
+    
+    footer = footerView;
+    return footer;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    THLUserProfileHeaderView *headerView = [THLUserProfileHeaderView new];
+    return [headerView.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    THLUserProfileFooterView *footerView = [THLUserProfileFooterView new];
+    return [footerView.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    cell.backgroundColor = kTHLNUIPrimaryBackgroundColor  ;
+}
+
+#pragma mark - <UITableViewDelegate>
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch(indexPath.row) {
@@ -176,6 +231,8 @@ STPPaymentCardTextFieldDelegate
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+
+#pragma mark -
 
 - (void)handleInviteFriendsAction {
     UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
@@ -247,60 +304,6 @@ STPPaymentCardTextFieldDelegate
     [self.view.window.rootViewController presentViewController:navVC animated:YES completion:nil];
 }
     
-- (void) presentModalUserProfile
-{
-    if ([THLUser currentUser]) {
-    THLUserPhotoVerificationViewController *userPhotoVerificationView = [[THLUserPhotoVerificationViewController alloc] initForNavigationController];
-    userPhotoVerificationView.renewImageDelegate = self;
-    UINavigationController *navVC= [[UINavigationController alloc] initWithRootViewController:userPhotoVerificationView];
-    [self.view.window.rootViewController presentViewController:navVC animated:YES completion:nil];
-    }
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    UIView *header = nil;
-    CGFloat height = [self tableView:tableView heightForHeaderInSection:section];
-    CGRect frame = CGRectMake(0, 0, ScreenWidth, height);
-    THLUserProfileHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:[THLUserProfileHeaderView identifier]];
-    headerView = [[THLUserProfileHeaderView alloc] initWithFrame:frame];
-    RAC(headerView, userImageURL) = RACObserve(self, userImageURL);
-    RAC(headerView, userName) = RACObserve(self, userName);
-    [[headerView.photoTapRecognizer rac_gestureSignal]
-        subscribeNext:^(id x) {
-           [self presentModalUserProfile];
-    }];
-     
-    header = headerView;
-    return header;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    UIView *footer = nil;
-    CGFloat height = [self tableView:tableView heightForFooterInSection:section];
-    CGRect frame = CGRectMake(0, 0, ScreenWidth, height);
-    THLUserProfileFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:[THLUserProfileFooterView identifier]];
-    footerView = [[THLUserProfileFooterView alloc] initWithFrame:frame];
-    footerView.logoutCommand = self.logoutCommand;
-    footerView.emailCommand = self.contactCommand;
-    
-    footer = footerView;
-    return footer;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    THLUserProfileHeaderView *headerView = [THLUserProfileHeaderView new];
-    return [headerView.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    THLUserProfileFooterView *footerView = [THLUserProfileFooterView new];
-    return [footerView.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    cell.backgroundColor = kTHLNUIPrimaryBackgroundColor  ;
-}
 
 #pragma mark MSMailMessage
 -(void)showMailView {
@@ -329,29 +332,6 @@ STPPaymentCardTextFieldDelegate
     [aView show];
 }
 
-#pragma mark UIAlertViewDelegate
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    THLUserProfileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[THLUserProfileTableViewCell identifier] forIndexPath:indexPath];
-    if (!cell) {
-        cell = [[THLUserProfileTableViewCell alloc] init];
-    }
-    
-//    cell.textLabel.text = [self.tableCellNames objectAtIndex:indexPath.row];
-//    cell.textLabel.textColor = [UIColor whiteColor];
-    cell.contentView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
-//    cell.backgroundColor = kTHLNUISecondaryBackgroundColor;
-    cell.title = [self.tableCellNames objectAtIndex:indexPath.row];
-    cell.textLabel.backgroundColor = [UIColor clearColor];
-    return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.row == LogOut && ![THLUserManager userLoggedIn])
-        return 0;
-    else
-        return 55;
-}
-
 #pragma mark - Constructors
 
 - (UIBarButtonItem *)newBarButtonItem
@@ -369,11 +349,10 @@ STPPaymentCardTextFieldDelegate
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     tableView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     tableView.separatorColor = [UIColor clearColor];
-    
-//    tableView.bounces = NO;
-//    tableView.alwaysBounceVertical = YES;
+    tableView.bounces = YES;
     tableView.dataSource = self;
     tableView.delegate = self;
+    tableView.translatesAutoresizingMaskIntoConstraints = NO;
     return tableView;
 }
 

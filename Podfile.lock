@@ -1,19 +1,4 @@
 PODS:
-  - AFNetworking (3.0.4):
-    - AFNetworking/NSURLSession (= 3.0.4)
-    - AFNetworking/Reachability (= 3.0.4)
-    - AFNetworking/Security (= 3.0.4)
-    - AFNetworking/Serialization (= 3.0.4)
-    - AFNetworking/UIKit (= 3.0.4)
-  - AFNetworking/NSURLSession (3.0.4):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.0.4)
-  - AFNetworking/Security (3.0.4)
-  - AFNetworking/Serialization (3.0.4)
-  - AFNetworking/UIKit (3.0.4):
-    - AFNetworking/NSURLSession
   - APAddressBook (0.2.3):
     - APAddressBook/Core (= 0.2.3)
   - APAddressBook/Core (0.2.3)
@@ -58,10 +43,6 @@ PODS:
   - DZNEmptyDataSet (1.7.3)
   - EKAlgorithms (0.2)
   - Fabric (1.6.5)
-  - FacebookImagePicker (2.0.8):
-    - FBSDKCoreKit (~> 4.8.0)
-    - FBSDKLoginKit (~> 4.8.0)
-    - SDWebImage (~> 3.7.2)
   - FBSDKCoreKit (4.8.0):
     - Bolts (~> 1.1)
     - FBSDKCoreKit/arc (= 4.8.0)
@@ -72,8 +53,6 @@ PODS:
     - Bolts (~> 1.1)
     - FBSDKCoreKit/arc
   - FBSDKLoginKit (4.8.0):
-    - FBSDKCoreKit
-  - FBSDKShareKit (4.8.0):
     - FBSDKCoreKit
   - FLEX (2.2.0)
   - FLKAutoLayout (0.2.1)
@@ -140,10 +119,9 @@ PODS:
     - ReactiveCocoa/Core
   - ReflectableEnum (0.1.1)
   - Reveal-iOS-SDK (1.6.2)
-  - RKNotificationHub (2.0.1)
-  - SDWebImage (3.7.5):
-    - SDWebImage/Core (= 3.7.5)
-  - SDWebImage/Core (3.7.5)
+  - SDWebImage (3.7.6):
+    - SDWebImage/Core (= 3.7.6)
+  - SDWebImage/Core (3.7.6)
   - SLPagingView (0.0.5)
   - SSDataSources (0.8.5)
   - Stripe (6.2.0):
@@ -205,7 +183,6 @@ PODS:
   - YLMoment (0.2.0)
 
 DEPENDENCIES:
-  - AFNetworking (~> 3.0)
   - APAddressBook (~> 0.2.1)
   - AutoCoding (~> 2.2)
   - BFKit
@@ -220,10 +197,7 @@ DEPENDENCIES:
   - DZNEmptyDataSet
   - EKAlgorithms (~> 0.2)
   - Fabric
-  - FacebookImagePicker
   - FBSDKCoreKit
-  - FBSDKLoginKit
-  - FBSDKShareKit (= 4.8.0)
   - FLEX (~> 2.0)
   - FormatterKit (~> 1.8)
   - FXLabel
@@ -252,7 +226,6 @@ DEPENDENCIES:
   - ReactiveCocoa (= 2.5)
   - ReflectableEnum
   - Reveal-iOS-SDK
-  - RKNotificationHub
   - SDWebImage (~> 3.7)
   - SLPagingView
   - SSDataSources (~> 0.8)
@@ -262,13 +235,11 @@ DEPENDENCIES:
   - THContactPicker (~> 1.2)
   - TOMSMorphingLabel (~> 0.5)
   - TTTAttributedLabel
-  - TwitterCore
   - Typhoon (~> 3.3)
   - YapDatabase (~> 2.7)
   - YLMoment (~> 0.2.0)
 
 SPEC CHECKSUMS:
-  AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
   APAddressBook: 2a91bf05999548bea210ec9d1a68073f4dc8bfce
   AutoCoding: b47e528426c84346371dd532b8e6458929e4da34
   BFKit: 690e1e90a79ced430405aab7f8f3f976eaa9b6b5
@@ -283,10 +254,8 @@ SPEC CHECKSUMS:
   DZNEmptyDataSet: dd7cca17c1d07dfa78956859b1e70a52505678ef
   EKAlgorithms: 83488651734ba3a63956fcb783b10e82d2ec3388
   Fabric: 338ffd3c2afcab120638907b4251189de9ad17b3
-  FacebookImagePicker: 888e7554898bea596e88556a935835c6141d8aed
   FBSDKCoreKit: 66a935d17b6e00b6b64e604f2eb9b72c9ab7deb8
   FBSDKLoginKit: d893fcbb98d854496925e9ff73c67b896982d3c4
-  FBSDKShareKit: e7577ee3adf80fc04fb656dd133fbb522250672b
   FLEX: bc8a4fb887ed5d3cdf7c2f3bd665f7bb1647cc58
   FLKAutoLayout: 9db6b30c2008d230da608e62c607b11c23b942e6
   FormatterKit: bddde83e054edf9d9ee14f9de3b3a5103db256f4
@@ -317,8 +286,7 @@ SPEC CHECKSUMS:
   ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
   ReflectableEnum: bf9d36f8c35122242125140a22b8921d071989aa
   Reveal-iOS-SDK: e2250b3c155bcfac53ae223ddc1f76d08f206c33
-  RKNotificationHub: d80905a948c79c11673345f807133a0bfd17e320
-  SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
+  SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
   SLPagingView: ba9bb6102cb318ce56f23d0a7e49a46ddcdad7e3
   SSDataSources: b01170fb23b82acf0649194e9189b0bf5f702681
   Stripe: 275524137e6c4cc1058f6d32ece248adf30a21f9
@@ -332,6 +300,6 @@ SPEC CHECKSUMS:
   YapDatabase: d97b1a0bfd6856745a7a398045f3ca32cf248fda
   YLMoment: af44d9d402790049e5490fa6eae9585b89b4090b
 
-PODFILE CHECKSUM: b7244941aaa4ae648feb4e3b4ff0da77c956ca58
+PODFILE CHECKSUM: 91a962b740b4b1498f261d0b5da423a3937d47ba
 
 COCOAPODS: 1.0.0

@@ -12,5 +12,4 @@
 @interface THLUserProfileInfoView : UIView
 @property (nonatomic, copy) NSString *userName;
 @property (nonatomic, copy) NSURL *userImageURL;
-
 @end

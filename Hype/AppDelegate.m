@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
+#import "MBProgressHUD.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "PFFacebookUtils.h"
 #import <Fabric/Fabric.h>
@@ -19,6 +20,7 @@
 #import "THLMasterWireframe.h"
 #import "THLAppearanceUtils.h"
 #import "Intercom/intercom.h"
+#import "Mixpanel.h"
 
 //Logging framework
 #import "CocoaLumberjack.h"
@@ -34,9 +36,15 @@ static NSString *applicationId = @"D0AnOPXqqfz7bfE70WvdlE8dK7Qj1kxgf4rPm8rX";
 static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
 #endif
 
-@interface AppDelegate ()
+@interface AppDelegate (){
+    BOOL firstLaunch;
+}
 @property (nonatomic, strong) THLMasterWireframe *masterWireframe;
 @property (nonatomic, strong) THLDependencyManager *dependencyManager;
+@property (nonatomic, strong) MBProgressHUD *hud;
+
+- (BOOL)shouldProceedToMainInterface:(PFUser *)user;
+- (BOOL)handleActionURL:(NSURL *)url;
 @end
 
 @implementation AppDelegate
@@ -45,10 +53,23 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
 	// Initialize Parse.
     [Parse enableLocalDatastore];
 	[Parse setApplicationId:applicationId
 				  clientKey:clientKeyId];
+    
+    // Track app open
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    
+    
+    if (application.applicationIconBadgeNumber != 0) {
+        application.applicationIconBadgeNumber = 0;
+        [[PFInstallation currentInstallation] saveInBackground];
+    }
+    
     
     //Initialize Intercom
     [Intercom setApiKey:@"ios_sdk-3899f433e0b112fe8daff2cc4f8bfdff18fad071" forAppId:@"eixn8wsn"];
@@ -80,16 +101,10 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
     
     [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:(launchOptions)];
     
-//    TODO: Add Stripe class with:  [STPAPIClient class]
     [Fabric with:@[[Digits class], [Crashlytics class]]];
 
-    // Initialize the library with your
-    // Mixpanel project token, MIXPANEL_TOKEN
     [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
-    
-    // Later, you can get your instance with
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    // Call .identify to flush the People record to Mixpanel
     [mixpanel identify:mixpanel.distinctId];
     
     UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
@@ -134,15 +149,10 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    // Store the deviceToken in the current installation and save it to Parse.
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
-    currentInstallation.deviceToken = @"";
     [currentInstallation setDeviceTokenFromData:deviceToken];
-    currentInstallation.channels = @[ @"global" ];
-    [[currentInstallation saveInBackground] continueWithBlock:^id(BFTask *task) {
-    
-        return nil;
-    }];
+    [currentInstallation saveInBackground];
+     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel.people addPushDeviceToken:deviceToken];
     
@@ -152,7 +162,9 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
-    DDLogWarn(@"application failed to register for remote notifications with the following error: %@", error);
+    if (error.code != 3010) {
+        NSLog(@"Application failed to register for push notifications: %@", error);
+    }
 }
 
 
@@ -191,13 +203,19 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-	[FBSDKAppEvents activateApp];
-    
-    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
-    if (currentInstallation.badge != 0) {
-        currentInstallation.badge = 0;
-        [currentInstallation saveEventually];
+	
+    // Clear badge and update installation, required for auto-incrementing badges.
+    if (application.applicationIconBadgeNumber != 0) {
+        application.applicationIconBadgeNumber = 0;
+        [[PFInstallation currentInstallation] saveInBackground];
     }
+    
+    // Clears out all notifications from Notification Center.
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    application.applicationIconBadgeNumber = 1;
+    application.applicationIconBadgeNumber = 0;
+    
+    [FBSDKAppEvents activateApp];
 }
 
 - (BOOL)application:(UIApplication *)application
@@ -221,5 +239,10 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
     
     return handledByBranch;
 }
+
+#pragma mark - ()
+
+
+
 
 @end

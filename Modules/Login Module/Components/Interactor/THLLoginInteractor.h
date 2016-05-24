@@ -37,14 +37,10 @@
 - (BOOL)shouldAddFacebookInformation;
 - (BOOL)shouldVerifyEmail;
 - (BOOL)shouldVerifyPhoneNumber;
-- (BOOL)shouldPickProfileImage;
 
 - (void)login;
 - (void)addEmail:(NSString *)email;
 - (void)addFacebookInformation;
 - (void)createMixPanelUserProfile;
 - (void)addVerifiedPhoneNumber:(NSString *)phoneNumber;
-- (void)addProfileImage:(UIImage *)profileImage;
-
-
 @end

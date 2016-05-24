@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "THLGuestFlowDependencyManager.h"
-#import "THLHostFlowDependencyManager.h"
 #import "THLYapDatabaseManager.h"
 
 @class THLMasterWireframe;
@@ -16,11 +15,8 @@
 @class THLFacebookPictureWireframe;
 @class THLNumberVerificationWireframe;
 @class THLGuestFlowWireframe;
-@class THLHostFlowWireframe;
-//@class THLMessageListWireframe;
 @class THLEventDiscoveryWireframe;
 @class THLDashboardWireframe;
-@class THLHostDashboardWireframe;
 @class THLUserProfileWireframe;
 @class THLEventDetailWireframe;
 @class THLEventHostingWireframe;
@@ -31,15 +27,13 @@
 @class THLUserManager;
 @class THLPerkStoreWireframe;
 @class THLPerkDetailWireframe;
-@class THLWaitlistPresenter;
 
 /**
  *  Manages all dependenies for the app.
  */
 @interface THLDependencyManager : NSObject
 <
-THLGuestFlowDependencyManager,
-THLHostFlowDependencyManager
+THLGuestFlowDependencyManager
 >
 @property (nonatomic, readonly, strong) THLMasterWireframe *masterWireframe;
 
@@ -47,14 +41,10 @@ THLHostFlowDependencyManager
 - (THLFacebookPictureWireframe *)newFacebookPictureWireframe;
 - (THLNumberVerificationWireframe *)newNumberVerificationWireframe;
 - (THLGuestFlowWireframe *)newGuestFlowWireframe;
-- (THLHostFlowWireframe *)newHostFlowWireframe;
-//- (THLMessageListWireframe *)newMessageListWireframe;
 - (THLEventDiscoveryWireframe *)newEventDiscoveryWireframe;
 - (THLDashboardWireframe *)newDashboardWireframe;
-- (THLHostDashboardWireframe *)newHostDashboardWireframe;
 - (THLEventDetailWireframe *)newEventDetailWireframe;
 - (THLUserProfileWireframe *)newUserProfileWireframe;
-- (THLEventHostingWireframe *)newEventHostingWireframe;
 - (THLGuestlistInvitationWireframe *)newGuestlistInvitationWireframe;
 - (THLGuestlistReviewWireframe *)newGuestlistReviewWireframe;
 - (THLPopupNotificationWireframe *)newPopupNotificationWireframe;
@@ -62,5 +52,4 @@ THLHostFlowDependencyManager
 - (THLPerkDetailWireframe *)newPerkDetailWireframe;
 - (THLUserManager *)userManager;
 - (THLYapDatabaseManager *)databaseManager;
-- (THLWaitlistPresenter *)newWaitlistPresenter;
 @end

@@ -53,10 +53,6 @@
     return _user.email == nil || [_user.email isEqualToString:@""];
 }
 
-- (BOOL)shouldPickProfileImage {
-	return _user.image == nil;
-}
-
 - (void)login {
     WEAKSELF();
 	[[_dataManager login] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
@@ -75,6 +71,11 @@
         [WSELF user].lastName = userDictionary[@"last_name"];
         [WSELF user].email = userDictionary[@"email"];
         [WSELF user].sex = ([userDictionary[@"gender"] isEqualToString:@"male"]) ? THLSexMale : THLSexFemale;
+        
+        NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:userDictionary[@"picture"][@"data"][@"url"]]];
+        PFFile *profilePicture = [PFFile fileWithName:@"profile_picture.png" data:imageData];
+        [profilePicture save];
+        [WSELF user].image = profilePicture;
 //TODO: Add Location and Birthday upon Facebook Approval
 //        [WSELF user].fbBirthday = [[[YLMoment alloc] initWithDateAsString:userDictionary[@"birthday"]] date];
 //        [WSELF user].location = userDictionary[@"location"];

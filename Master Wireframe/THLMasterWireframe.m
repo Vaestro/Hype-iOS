@@ -9,6 +9,7 @@
 //Frameworks
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 #import "THLMasterWireframe.h"
 
@@ -21,16 +22,13 @@
 //Wireframes
 #import "THLLoginWireframe.h"
 #import "THLGuestFlowWireframe.h"
-#import "THLHostFlowWireframe.h"
 #import "THLEventDetailWireframe.h"
 #import "THLGuestlistInvitationWireframe.h"
 #import "THLPopupNotificationWireframe.h"
-#import "THLWaitlistPresenter.h" //Equivalent of wireframe for this instance
 
 //Delegates
 #import "THLLoginModuleDelegate.h"
 #import "THLGuestFlowModuleDelegate.h"
-#import "THLHostFlowModuleDelegate.h"
 
 
 #define ENABLE_WAITLIST
@@ -39,17 +37,13 @@
 <
 THLLoginModuleDelegate,
 THLGuestFlowModuleDelegate,
-THLHostFlowModuleDelegate,
-THLPopupNotificationModuleDelegate,
-THLWaitlistPresenterDelegate
+THLPopupNotificationModuleDelegate
 >
 
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) UIViewController *viewController;
 @property (nonatomic, strong) id currentWireframe;
 @property (nonatomic, strong) THLGuestFlowWireframe *guestWireframe;
-@property (nonatomic, strong) THLHostFlowWireframe *hostWireframe;
-@property (nonatomic, strong) THLWaitlistPresenter *waitlistPresenter;
 
 @end
 
@@ -70,17 +64,14 @@ THLWaitlistPresenterDelegate
     }
 }
 
-- (void)routeLoggedInUserFlow {
+- (void)routeLoggedInUserFlow
+{
     [Intercom registerUserWithUserId:[THLUser currentUser].objectId];
     [Intercom updateUserWithAttributes:@{@"email": [THLUser currentUser].email,
                                          @"name": [THLUser currentUser].fullName
                                         }];
-    if ([THLUserManager userIsGuest]) {
-        [self presentGuestFlow];
-    }
-    else if ([THLUserManager userIsHost]) {
-        [self presentHostFlow];
-    }
+    [self presentGuestFlow];
+    
 }
 
 #pragma mark - Push Notifications
@@ -91,7 +82,6 @@ THLWaitlistPresenterDelegate
         [popupNotificationWireframe.moduleInterface setModuleDelegate:self];
         BFTask *task = [popupNotificationWireframe.moduleInterface presentPopupNotificationModuleInterfaceWithPushInfo:pushInfo];
         [_guestWireframe showNotificationBadge];
-        [_hostWireframe showNotificationBadge];
         if (task.result) {
   
         }
@@ -123,12 +113,6 @@ THLWaitlistPresenterDelegate
         _currentWireframe = loginWireframe;
         [loginWireframe.moduleInterface setModuleDelegate:self];
         [loginWireframe.moduleInterface presentLoginModuleInterfaceWithOnboardingInWindow:_window];
-//    } else {
-//        THLWaitlistPresenter *waitlistPresenter = [_dependencyManager newWaitlistPresenter];
-//        _waitlistPresenter = waitlistPresenter;
-//        _waitlistPresenter.delegate = self;
-//        [waitlistPresenter presentInterfaceInWindow:_window];
-//    }
 }
 
 - (void)presentLoginInterfaceOnViewController:(UIViewController *)viewController {
@@ -153,12 +137,6 @@ THLWaitlistPresenterDelegate
     [_guestWireframe presentGuestFlowInWindow:_window forEventDetail:eventEntity];
 }
 
-- (void)presentHostFlow {
-    _hostWireframe = [_dependencyManager newHostFlowWireframe];
-    _currentWireframe = _hostWireframe;
-    [_hostWireframe.moduleInterface setModuleDelegate:self];
-    [_hostWireframe configureMasterTabViewControllerAndPresentHostFlowInWindow:_window];
-}
 
 /**
  *  Delegates
@@ -169,26 +147,14 @@ THLWaitlistPresenterDelegate
     [self presentGuestFlowForEvent:eventEntity];
 }
 
-#pragma mark - THLWaitlistPresenterDelegate
-- (void)didApproveUserForApp {
-    [self updateUserDefaultsToApproved];
-    [self presentOnboardingAndLoginInterface];
-}
-
-- (void)updateUserDefaultsToApproved {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setBool:TRUE forKey:@"userApproved"];
-    [userDefaults synchronize];
-}
 
 #pragma mark - THLLoginModuleDelegate
 - (void)loginModule:(id<THLLoginModuleInterface>)module didLoginUser:(NSError *)error {
 	if (!error) {
-        [THLUserManager makeCurrentInstallation];
         [THLUserManager logCrashlyticsUser];
         Mixpanel *mixpanel = [Mixpanel sharedInstance];
         [mixpanel track:@"CompletedSignup"];
-        		[self routeLoggedInUserFlow];
+        [self routeLoggedInUserFlow];
     } else {
         NSLog(@"Login Error:%@", error);
     }
@@ -209,9 +175,9 @@ THLWaitlistPresenterDelegate
 - (void)logOutUser {
     [THLUserManager logUserOut];
     [Intercom reset];
+    [FBSDKAccessToken setCurrentAccessToken:nil];
     [_dependencyManager.databaseManager dropDB];
     _guestWireframe = nil;
-    _hostWireframe = nil;
     [self presentOnboardingAndLoginInterface];
 }
 
