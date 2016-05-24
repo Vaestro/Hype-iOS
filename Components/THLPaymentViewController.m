@@ -43,12 +43,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self constructView];
-    [self layoutView];
-}
-
-- (void)constructView
-{
+    
     self.paymentTextField = [STPPaymentCardTextField new];
     self.paymentTextField.textColor = [UIColor whiteColor];
     self.paymentTextField.delegate = self;
@@ -59,7 +54,7 @@
     
     _addCardButton = [self newAddCardButton];
     _removeCardButton = [self newRemoveCardButton];
-
+    
     _titleLabel = [self newTitleLabel];
     _descriptionLabel = [self newDescriptionLabel];
     _securitySymbol = [self newSecuritySymbol];
@@ -71,19 +66,13 @@
     if (_paymentInfo) {
         _titleLabel.text = @"Payment";
         [self.view addSubviews:@[_paymentCardIcon, _cardInfoLabel, _removeCardButton]];
-
+        
     } else {
         [self.view addSubviews:@[_paymentTextField, _addCardButton]];
     }
-}
-
-- (void)layoutView
-{
+    
+    
     WEAKSELF();
-
-    
-
-    
     if (_paymentInfo) {
         [_removeCardButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(0);
@@ -122,7 +111,7 @@
             make.bottom.equalTo([WSELF addCardButton].mas_top).insets(kTHLEdgeInsetsSuperHigh());
         }];
     }
-        
+    
     [_securitySymbol mas_makeConstraints:^(MASConstraintMaker *make){
         make.left.insets(kTHLEdgeInsetsSuperHigh());
         make.centerY.equalTo([WSELF descriptionLabel]);
@@ -131,13 +120,13 @@
     [_descriptionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo([WSELF securitySymbol].mas_right).insets(kTHLEdgeInsetsSuperHigh());
         make.right.insets(kTHLEdgeInsetsSuperHigh());
-
+        
         make.bottom.insets(kTHLEdgeInsetsInsanelyHigh());
         make.width.mas_equalTo(SCREEN_WIDTH*0.75);
     }];
-    
 
 }
+
 
 - (void)paymentCardTextFieldDidChange:(STPPaymentCardTextField *)textField
 {

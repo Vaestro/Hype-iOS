@@ -70,7 +70,6 @@
 	_window = window;
 	[_presenter configureOnboardingView:_onboardingView];
 	_window.rootViewController = _onboardingView;
-//    _topViewController = _onboardingView;
 	[_window makeKeyAndVisible];
 }
 
