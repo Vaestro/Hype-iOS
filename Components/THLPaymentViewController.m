@@ -35,7 +35,7 @@
 - (id)initWithPaymentInfo:(NSArray<NSDictionary *> *)paymentInfo
 {
     if (self = [super init]) {
-        if (paymentInfo) _paymentInfo = paymentInfo;
+        if (paymentInfo.count != 0) _paymentInfo = paymentInfo;
     }
     return self;
 }
@@ -59,19 +59,22 @@
     _descriptionLabel = [self newDescriptionLabel];
     _securitySymbol = [self newSecuritySymbol];
     _paymentCardIcon = [self newPaymentCardIcon];
-    NSString *last4CardDigits = _paymentInfo[0][@"last4"];
-    NSString *cardInfoText = [NSString stringWithFormat:@"**** **** **** %@", last4CardDigits];
-    _cardInfoLabel = [self newCardInfoLabel:cardInfoText];
+
     [self.view addSubviews:@[_titleLabel, _descriptionLabel, _hud, _securitySymbol]];
     if (_paymentInfo) {
         _titleLabel.text = @"Payment";
+        NSString *last4CardDigits = _paymentInfo[0][@"last4"];
+        NSString *cardInfoText = [NSString stringWithFormat:@"**** **** **** %@", last4CardDigits];
+        _cardInfoLabel = [self newCardInfoLabel:cardInfoText];
         [self.view addSubviews:@[_paymentCardIcon, _cardInfoLabel, _removeCardButton]];
         
     } else {
         [self.view addSubviews:@[_paymentTextField, _addCardButton]];
     }
-    
-    
+}
+
+- (void)layoutView
+{
     WEAKSELF();
     if (_paymentInfo) {
         [_removeCardButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -82,7 +85,7 @@
         
         [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make){
             make.left.right.insets(kTHLEdgeInsetsSuperHigh());
-            make.bottom.equalTo([WSELF cardInfoLabel].mas_top).insets(kTHLEdgeInsetsSuperHigh());
+            make.bottom.equalTo([WSELF cardInfoLabel].mas_top).insets(kTHLEdgeInsetsInsanelyHigh());
         }];
         
         [_paymentCardIcon mas_makeConstraints:^(MASConstraintMaker *make){
@@ -103,7 +106,7 @@
         
         [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make){
             make.left.right.insets(kTHLEdgeInsetsSuperHigh());
-            make.bottom.equalTo([WSELF paymentTextField].mas_top).insets(kTHLEdgeInsetsSuperHigh());
+            make.bottom.equalTo([WSELF paymentTextField].mas_top).insets(kTHLEdgeInsetsInsanelyHigh());
         }];
         
         [_paymentTextField mas_makeConstraints:^(MASConstraintMaker *make){
@@ -124,7 +127,65 @@
         make.bottom.insets(kTHLEdgeInsetsInsanelyHigh());
         make.width.mas_equalTo(SCREEN_WIDTH*0.75);
     }];
+}
 
+- (void)updateLayoutForAddPayment {
+    [_removeCardButton removeFromSuperview];
+    [_paymentCardIcon removeFromSuperview];
+    [_cardInfoLabel removeFromSuperview];
+    _titleLabel.text = @"Add Payment";
+
+    [self.view addSubviews:@[_paymentTextField, _addCardButton]];
+    WEAKSELF();
+
+    [_addCardButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(0);
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+        make.bottom.equalTo([WSELF descriptionLabel].mas_top).insets(kTHLEdgeInsetsSuperHigh());
+    }];
+    
+    [_titleLabel mas_remakeConstraints:^(MASConstraintMaker *make){
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+        make.bottom.equalTo([WSELF paymentTextField].mas_top).insets(kTHLEdgeInsetsInsanelyHigh());
+    }];
+    
+    [_paymentTextField mas_makeConstraints:^(MASConstraintMaker *make){
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+        make.bottom.equalTo([WSELF addCardButton].mas_top).insets(kTHLEdgeInsetsSuperHigh());
+    }];
+}
+
+
+- (void)updateLayoutForHasPayment {
+    NSString *last4CardDigits = _paymentInfo[0][@"last4"];
+    NSString *cardInfoText = [NSString stringWithFormat:@"**** **** **** %@", last4CardDigits];
+    _cardInfoLabel = [self newCardInfoLabel:cardInfoText];
+    
+    [self.view addSubviews:@[_paymentCardIcon, _cardInfoLabel,_removeCardButton]];
+    WEAKSELF();
+    [_removeCardButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(0);
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+        make.bottom.equalTo([WSELF descriptionLabel].mas_top).insets(kTHLEdgeInsetsSuperHigh());
+    }];
+    
+    [_paymentCardIcon mas_makeConstraints:^(MASConstraintMaker *make){
+        make.left.insets(kTHLEdgeInsetsSuperHigh());
+        make.bottom.equalTo([WSELF removeCardButton].mas_top).insets(kTHLEdgeInsetsSuperHigh());
+    }];
+    
+    [_cardInfoLabel mas_makeConstraints:^(MASConstraintMaker *make){
+        make.left.equalTo(_paymentCardIcon.mas_right).insets(kTHLEdgeInsetsHigh());
+        make.bottom.equalTo(_paymentCardIcon);
+    }];
+    
+    [_paymentTextField removeFromSuperview];
+    [_addCardButton removeFromSuperview];
+    
+    [_titleLabel mas_remakeConstraints:^(MASConstraintMaker *make){
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+        make.bottom.equalTo([WSELF cardInfoLabel].mas_top).insets(kTHLEdgeInsetsInsanelyHigh());
+    }];
 }
 
 
@@ -151,43 +212,50 @@
                                              if (cloudError) {
                                                  [self displayError:cloudError];
                                              } else {
+                                                 _paymentInfo = paymentInfo;
                                                  [[THLUser currentUser] fetch];
                                                  [self displaySuccess];
-                                                 NSString *last4CardDigits = paymentInfo[0][@"last4"];
-                                                 NSString *cardInfoText = [NSString stringWithFormat:@"**** **** **** %@", last4CardDigits];
-                                                 _cardInfoLabel = [self newCardInfoLabel:cardInfoText];
-
-                                                 [self.view addSubviews:@[_paymentCardIcon, _cardInfoLabel,_removeCardButton]];
-                                                 WEAKSELF();
-                                                 [_removeCardButton mas_makeConstraints:^(MASConstraintMaker *make) {
-                                                     make.centerX.equalTo(0);
-                                                     make.left.right.insets(kTHLEdgeInsetsSuperHigh());
-                                                     make.bottom.equalTo([WSELF descriptionLabel].mas_top).insets(kTHLEdgeInsetsSuperHigh());
-                                                 }];
-                                                 
-                                                 [_paymentCardIcon mas_makeConstraints:^(MASConstraintMaker *make){
-                                                     make.left.insets(kTHLEdgeInsetsSuperHigh());
-                                                     make.bottom.equalTo([WSELF removeCardButton].mas_top).insets(kTHLEdgeInsetsSuperHigh());
-                                                 }];
-                                                 
-                                                 [_cardInfoLabel mas_makeConstraints:^(MASConstraintMaker *make){
-                                                     make.left.equalTo(_paymentCardIcon.mas_right).insets(kTHLEdgeInsetsHigh());
-                                                     make.bottom.equalTo(_paymentCardIcon);
-                                                 }];
-                                                 
-                                                 [_paymentTextField removeFromSuperview];
-                                                 [_addCardButton removeFromSuperview];
-
-                                                 [_titleLabel mas_remakeConstraints:^(MASConstraintMaker *make){
-                                                     make.left.right.insets(kTHLEdgeInsetsSuperHigh());
-                                                     make.bottom.equalTo([WSELF cardInfoLabel].mas_top).insets(kTHLEdgeInsetsSuperHigh());
-                                                 }];
+                                                 [self updateLayoutForHasPayment];
                                              }
               }];
          }
      }];
 }
 
+- (void)deleteCreditCardInfo {
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
+                                                         handler:nil];
+    
+    UIAlertAction* confirmAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {
+                                                              [PFCloud callFunctionInBackground:@"removeCardInfo"
+                                                                                 withParameters:@{@"cardId": _paymentInfo[0][@"id"],
+                                                                                                  @"customerId": [THLUser currentUser].stripeCustomerId}
+                                                            block:^(id  _Nullable object, NSError * _Nullable cloudError) {
+                                                                if (cloudError) {
+                                                                    [self displayError:cloudError];
+                                                                } else {
+                                                                    [self updateLayoutForAddPayment];
+                                                                }
+                                                          }];
+                                                      }];
+    
+    NSString *message = NSStringWithFormat(@"Are you sure you want to remove your card info?");
+    
+    [self showAlertViewWithMessage:message withAction:[[NSArray alloc] initWithObjects:cancelAction, confirmAction, nil]];
+}
+
+- (void)showAlertViewWithMessage:(NSString *)message withAction:(NSArray<UIAlertAction *>*)actions {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    for(UIAlertAction *action in actions) {
+        [alert addAction:action];
+    }
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
 
 - (void)displayError:(NSError *)error {
     UIAlertView *message = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Error")
@@ -221,8 +289,7 @@
 {
     THLActionButton *button = [[THLActionButton alloc] initWithInverseStyle];
     [button setTitle:@"REMOVE CARD"];
-    [button addTarget:self action:@selector(saveCreditCardInfo) forControlEvents:UIControlEventTouchUpInside];
-    button.enabled = NO;
+    [button addTarget:self action:@selector(deleteCreditCardInfo) forControlEvents:UIControlEventTouchUpInside];
     return button;
 }
 

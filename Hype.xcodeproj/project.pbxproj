@@ -116,6 +116,7 @@
 		7942082C1BD82AF6009B86FA /* THLActionBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7942082B1BD82AF6009B86FA /* THLActionBarButton.m */; };
 		7942082F1BD8C250009B86FA /* THLGuestlistEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7942082E1BD8C250009B86FA /* THLGuestlistEntity.m */; };
 		794483041BEC5B5D00EABE23 /* THLStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794483031BEC5B5D00EABE23 /* THLStatusView.m */; };
+		794A9D191CF4ACC300DDAC00 /* THLEventInviteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 794A9D181CF4ACC300DDAC00 /* THLEventInviteCell.m */; };
 		794AFE0D1C10A1B0008475B1 /* THLHostDashboardWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 794AFE0C1C10A1B0008475B1 /* THLHostDashboardWireframe.m */; };
 		794AFE101C10A3CD008475B1 /* THLHostDashboardPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 794AFE0F1C10A3CD008475B1 /* THLHostDashboardPresenter.m */; };
 		794AFE131C10A47D008475B1 /* THLHostDashboardInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 794AFE121C10A47D008475B1 /* THLHostDashboardInteractor.m */; };
@@ -524,6 +525,8 @@
 		794208331BD9A348009B86FA /* THLGuestFlowModuleDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestFlowModuleDelegate.h; sourceTree = "<group>"; };
 		794483021BEC5B5D00EABE23 /* THLStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLStatusView.h; sourceTree = "<group>"; };
 		794483031BEC5B5D00EABE23 /* THLStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLStatusView.m; sourceTree = "<group>"; };
+		794A9D171CF4ACC300DDAC00 /* THLEventInviteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventInviteCell.h; sourceTree = "<group>"; };
+		794A9D181CF4ACC300DDAC00 /* THLEventInviteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventInviteCell.m; sourceTree = "<group>"; };
 		794AFE091C10A115008475B1 /* THLHostDashboardModuleDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLHostDashboardModuleDelegate.h; sourceTree = "<group>"; };
 		794AFE0A1C10A125008475B1 /* THLHostDashboardModuleInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLHostDashboardModuleInterface.h; sourceTree = "<group>"; };
 		794AFE0B1C10A1B0008475B1 /* THLHostDashboardWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLHostDashboardWireframe.h; sourceTree = "<group>"; };
@@ -953,6 +956,8 @@
 				3EECB6921C61451800702540 /* THLFAOSectionView */,
 				79B6C1B81CEA3EC50050CDB1 /* THLPurchaseDetailsView.h */,
 				79B6C1B91CEA3EC50050CDB1 /* THLPurchaseDetailsView.m */,
+				794A9D171CF4ACC300DDAC00 /* THLEventInviteCell.h */,
+				794A9D181CF4ACC300DDAC00 /* THLEventInviteCell.m */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -3314,7 +3319,7 @@
 		};
 		21C6D0091BAE5E3F00DEDDA3 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
@@ -3322,7 +3327,7 @@
 			name = "Run Script";
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" 59e4c5cc715a727c29c12850d2ec4cdd9e6c7d65 461d29ada9ef911416346454692039fabbf73c31c449d2485609dbe7e97c18b0";
 		};
@@ -3420,6 +3425,7 @@
 				798D7EC21BF2E5CF001D4593 /* OnboardingContentViewController.m in Sources */,
 				79CE01E61C0A69EC0047E6FA /* THLDashboardTicketCellViewModel.m in Sources */,
 				798650A41BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m in Sources */,
+				794A9D191CF4ACC300DDAC00 /* THLEventInviteCell.m in Sources */,
 				212173711BB34F15007D817A /* THLRoundImageView.m in Sources */,
 				C85EE3B51C1BCBDD0008C14B /* THLPerkStoreCellViewModel.m in Sources */,
 				3EECB6911C61450100702540 /* THLFAQSectionView.m in Sources */,
@@ -3739,7 +3745,7 @@
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_SHADOW = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Hype/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3776,7 +3782,7 @@
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_SHADOW = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Hype/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

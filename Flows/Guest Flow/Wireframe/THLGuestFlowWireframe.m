@@ -229,9 +229,9 @@ THLLoginModuleDelegate
     [self.moduleDelegate logInUserOnViewController:viewController];
 }
 
-- (void)eventDetailModule:(id<THLEventDetailModuleInterface>)module event:(THLEventEntity *)eventEntity presentGuestlistInvitationInterfaceOnController:(UIViewController *)controller
+- (void)eventDetailModule:(id<THLEventDetailModuleInterface>)module event:(THLEventEntity *)eventEntity withGuestlistId:(NSString *)guestlistId presentGuestlistInvitationInterfaceOnController:(UIViewController *)controller
 {
-    [self presentGuestlistInvitationInterfaceForEvent:eventEntity inController:controller];
+    [self presentGuestlistInvitationInterfaceForEvent:eventEntity withGuestlistId:guestlistId andGuests:nil inController:controller];
 }
 
 - (void)eventDetailModule:(id<THLEventDetailModuleInterface>)module guestlist:(THLGuestlistEntity *)guestlistEntity guestlistInvite:(THLGuestlistInviteEntity *)guestlistInviteEntity presentGuestlistReviewInterfaceOnController:(UIViewController *)controller
@@ -253,6 +253,7 @@ THLLoginModuleDelegate
 - (void)dismissWireframeAndPresentGuestlistReviewWireframeFor:(THLGuestlistInviteEntity *)guestlistInvite guestlist:(THLGuestlistEntity *)guestlist
 {
     _guestlistInvitationWireframe = nil;
+    _guestlistReviewWireframe = nil;
     _eventDetailWireframe = nil;
     [_masterTabBarController setSelectedIndex:1];
     [self presentGuestlistReviewInterfaceForGuestlist:guestlist withGuestlistInvite:guestlistInvite inController:_window.rootViewController andShowInstruction:TRUE];

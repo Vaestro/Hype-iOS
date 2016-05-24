@@ -266,17 +266,24 @@ STPPaymentCardTextFieldDelegate
 - (void)presentPaymentView
 {
     [self.hud show:YES];
-    [PFCloud callFunctionInBackground:@"retrievePaymentInfo"
-                       withParameters:nil
-                                block:^(NSArray<NSDictionary *> *cardInfo, NSError *cloudError) {
-                                    [self.hud hide:YES];
-                                    if (cloudError) {
-        
-                                    } else {
-                                        THLPaymentViewController *paymentView = [[THLPaymentViewController alloc]initWithPaymentInfo:cardInfo];
-                                        [self.navigationController pushViewController:paymentView animated:NO];
-                                    }
-                                }];
+
+    if ([THLUser currentUser].stripeCustomerId) {
+        [PFCloud callFunctionInBackground:@"retrievePaymentInfo"
+                           withParameters:nil
+                                    block:^(NSArray<NSDictionary *> *cardInfo, NSError *cloudError) {
+                                        [self.hud hide:YES];
+                                        if (cloudError) {
+            
+                                        } else {
+                                            THLPaymentViewController *paymentView = [[THLPaymentViewController alloc]initWithPaymentInfo:cardInfo];
+                                            [self.navigationController pushViewController:paymentView animated:NO];
+                                        }
+                                    }];
+    } else {
+        NSArray<NSDictionary *> *emptyCardInfoSet = [[NSArray alloc]init];
+        THLPaymentViewController *paymentView = [[THLPaymentViewController alloc]initWithPaymentInfo:emptyCardInfoSet];
+        [self.navigationController pushViewController:paymentView animated:NO];
+    }
 
     
 }
