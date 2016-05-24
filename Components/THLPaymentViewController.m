@@ -55,6 +55,8 @@
     
     self.hud = [[MBProgressHUD alloc] initWithView:self.view];
     
+    self.view.backgroundColor = [UIColor blackColor];
+    
     _addCardButton = [self newAddCardButton];
     _removeCardButton = [self newRemoveCardButton];
 
