@@ -242,6 +242,7 @@
 		C8E1B1651BF4380D00A9824C /* THLUserProfileDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B1641BF4380D00A9824C /* THLUserProfileDataManager.m */; };
 		C8E1B16B1BF43DA800A9824C /* THLUserProfileInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B16A1BF43DA800A9824C /* THLUserProfileInfoView.m */; };
 		C8E342091C3B1A9C009FE9B0 /* THLGuestlistReviewHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E342081C3B1A9C009FE9B0 /* THLGuestlistReviewHeaderView.m */; };
+		C8E8817D1CF35C2700D1A698 /* THLMyEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E8817C1CF35C2700D1A698 /* THLMyEventsViewController.m */; };
 		C8EE96CE1CE677580040A1F0 /* THLStripeTokenService.m in Sources */ = {isa = PBXBuildFile; fileRef = C8EE96CD1CE677580040A1F0 /* THLStripeTokenService.m */; };
 		C8EE96D51CE93D770040A1F0 /* THLCheckoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8EE96D41CE93D770040A1F0 /* THLCheckoutViewController.m */; };
 		C8F2FB271BF81A8E004E00B6 /* THLInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F2FB261BF81A8E004E00B6 /* THLInformationViewController.m */; };
@@ -770,6 +771,8 @@
 		C8E1B16A1BF43DA800A9824C /* THLUserProfileInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLUserProfileInfoView.m; sourceTree = "<group>"; };
 		C8E342071C3B1A9C009FE9B0 /* THLGuestlistReviewHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistReviewHeaderView.h; sourceTree = "<group>"; };
 		C8E342081C3B1A9C009FE9B0 /* THLGuestlistReviewHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestlistReviewHeaderView.m; sourceTree = "<group>"; };
+		C8E8817B1CF35C2700D1A698 /* THLMyEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMyEventsViewController.h; sourceTree = "<group>"; };
+		C8E8817C1CF35C2700D1A698 /* THLMyEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLMyEventsViewController.m; sourceTree = "<group>"; };
 		C8EE96CC1CE677580040A1F0 /* THLStripeTokenService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLStripeTokenService.h; sourceTree = "<group>"; };
 		C8EE96CD1CE677580040A1F0 /* THLStripeTokenService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLStripeTokenService.m; sourceTree = "<group>"; };
 		C8EE96D31CE93D770040A1F0 /* THLCheckoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLCheckoutViewController.h; sourceTree = "<group>"; };
@@ -924,6 +927,7 @@
 		211005A81B8A3D5800A540C6 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				C8E8817A1CF35BDC00D1A698 /* THLMyEventsViewController */,
 				C8EE96D21CE93D4F0040A1F0 /* THLCheckoutViewController */,
 				C8A766551CDA84A600A000C2 /* THLWebViewController */,
 				C8D1D2A11CD3E836006ADC6A /* THLPaymentViewController */,
@@ -3066,6 +3070,15 @@
 			path = THLGuestlistReviewHeaderView;
 			sourceTree = "<group>";
 		};
+		C8E8817A1CF35BDC00D1A698 /* THLMyEventsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C8E8817B1CF35C2700D1A698 /* THLMyEventsViewController.h */,
+				C8E8817C1CF35C2700D1A698 /* THLMyEventsViewController.m */,
+			);
+			name = THLMyEventsViewController;
+			sourceTree = "<group>";
+		};
 		C8EE96D21CE93D4F0040A1F0 /* THLCheckoutViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -3301,7 +3314,7 @@
 		};
 		21C6D0091BAE5E3F00DEDDA3 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
@@ -3309,7 +3322,7 @@
 			name = "Run Script";
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" 59e4c5cc715a727c29c12850d2ec4cdd9e6c7d65 461d29ada9ef911416346454692039fabbf73c31c449d2485609dbe7e97c18b0";
 		};
@@ -3508,6 +3521,7 @@
 				C8E1B1621BF437F300A9824C /* THLUserProfileInteractor.m in Sources */,
 				79B959541BE91AE300B87799 /* THLPopupNotificationWireframe.m in Sources */,
 				790603CF1BFB75F00093335E /* THLDashboardViewController.m in Sources */,
+				C8E8817D1CF35C2700D1A698 /* THLMyEventsViewController.m in Sources */,
 				211D0BB01B8CEE800073AFDD /* THLEventDetailPresenter.m in Sources */,
 				794AFE211C10C3F3008475B1 /* THLHostDashboardNotificationCell.m in Sources */,
 				C8D1D2A41CD3E864006ADC6A /* THLPaymentViewController.m in Sources */,
@@ -3725,7 +3739,7 @@
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_SHADOW = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Hype/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3762,7 +3776,7 @@
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_SHADOW = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Hype/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

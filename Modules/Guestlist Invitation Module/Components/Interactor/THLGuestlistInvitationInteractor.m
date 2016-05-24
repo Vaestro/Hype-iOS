@@ -142,37 +142,27 @@ static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInv
     }];
 }
 
-- (void)commitChangesToGuestlist {
+- (void)commitChangesToGuestlist
+{
     WEAKSELF();
-    if (_guestlistId == nil) {
+    if (!_addedGuests || !_addedGuests.count) {
+        [WSELF.delegate interactor:WSELF didCommitChangesToGuestlist:nil];
+    } else {
         [[_dataManager submitGuestlistForEvent:_eventEntity withInvites:[self obtainDigits:_addedGuests]] continueWithSuccessBlock:^id(BFTask *task) {
             [[_dataManager getOwnerInviteForEvent:_eventEntity] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *fetchTask) {
                 [WSELF.delegate interactor:WSELF didSubmitInitialGuestlist:fetchTask.result withError:task.error];
                 Mixpanel *mixpanel = [Mixpanel sharedInstance];
                 [mixpanel track:@"Guestlist Submitted" properties:@{
-                                                               @"Number Of Invites": NSStringWithFormat(@"%lu", (unsigned long)_addedGuests.count)
-                                                               }];
+                                                                    @"Number Of Invites": NSStringWithFormat(@"%lu", (unsigned long)_addedGuests.count)
+                                                                    }];
                 [mixpanel.people increment:@"guestlist invites sent" by: [NSNumber numberWithUnsignedInteger:_addedGuests.count]];
                 return nil;
             }];
             return nil;
         }];
-    } else if (_guestlistId != nil) {
-        [[_dataManager updateGuestlist:_guestlistId withInvites:[self obtainDigits:_addedGuests] forEvent:_eventEntity] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
-            [[_dataManager getOwnerInviteForEvent:_eventEntity] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *fetchTask) {
-                [WSELF.delegate interactor:WSELF didSubmitInitialGuestlist:fetchTask.result withError:task.error];
-                Mixpanel *mixpanel = [Mixpanel sharedInstance];
-                [mixpanel track:@"Updated Guestlist" properties:@{
-                 @"NumberOfInvites": NSStringWithFormat(@"%lu", (unsigned long)_addedGuests.count)
-                 }];
-                [mixpanel.people increment:@"guestlist invites sent" by: [NSNumber numberWithUnsignedInteger:_addedGuests.count]];
-
-                return nil;
-                }];
-            return nil;
-        }];
     }
 }
+
 
 //- (void)dealloc {
 //    NSLog(@"Destroyed %@", self);

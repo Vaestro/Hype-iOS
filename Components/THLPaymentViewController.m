@@ -55,6 +55,8 @@
     
     self.hud = [[MBProgressHUD alloc] initWithView:self.view];
     
+    self.view.backgroundColor = [UIColor blackColor];
+    
     _addCardButton = [self newAddCardButton];
     _removeCardButton = [self newRemoveCardButton];
 
@@ -214,7 +216,7 @@
                                                  [self displayError:cloudError];
                                              } else {
                                                  _paymentInfo = paymentInfo;
-                                                 [[THLUser currentUser] saveEventually];
+                                                 [[THLUser currentUser] fetch];
                                                  [self displaySuccess];
                                                  [self updateLayoutForHasPayment];
                                              }

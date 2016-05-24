@@ -23,7 +23,7 @@
 @property (nonatomic, strong) RACCommand *completionAction;
 @property (nonatomic, strong) THLActionButton *purchaseButton;
 @property (nonatomic, strong) THLPurchaseDetailsView *purchaseDetailsView;
-
+@property (nonatomic, strong) NSDictionary *paymentInfo;
 @property (nonatomic, strong) MBProgressHUD *hud;
 
 - (void)displayError:(NSString *)error;
@@ -33,10 +33,11 @@
 
 #pragma mark - Life cycle
 
-- (id)initWithEvent:(THLEventEntity *)event andCompletionAction:(RACCommand *)completionAction
+- (id)initWithEvent:(THLEventEntity *)event paymentInfo:(NSDictionary *)paymentInfo andCompletionAction:(RACCommand *)completionAction
 {
     if (self = [super init]) {
         self.event = event;
+        self.paymentInfo = paymentInfo;
         self.completionAction = completionAction;
     }
     return self;
