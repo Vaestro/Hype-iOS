@@ -190,7 +190,7 @@
                                         if (error) {
                                             [self displayError:[error localizedDescription]];
                                         } else {
-                                            [self.delegate checkoutViewController:self didFinishPurchasingForGuestlistInvite:response];
+//                                            [self.delegate checkoutViewController:self didFinishPurchasingForGuestlistInvite:response];
                                             [self.navigationController dismissViewControllerAnimated:TRUE completion:nil];
                                         }
                                     }];

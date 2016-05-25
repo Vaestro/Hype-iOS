@@ -334,10 +334,10 @@ static CGFloat const CELL_SPACING = 10;
 }
 
 
-- (void)checkoutViewController:(THLCheckoutViewController *)checkoutView didFinishPurchasingForGuestlistInvite:(NSString *)guestlistInviteId
-{
-    self.actionBarButton.hidden = true;
-}
+//- (void)checkoutViewController:(THLCheckoutViewController *)checkoutView didFinishPurchasingForGuestlistInvite:(NSString *)guestlistInviteId
+//{
+//    self.actionBarButton.hidden = true;
+//}
 
 
 
