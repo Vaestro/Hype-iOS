@@ -12,6 +12,7 @@
 @class THLCheckoutViewController;
 @protocol THLCheckoutViewDelegate <NSObject>
 -(void)checkoutViewController:(THLCheckoutViewController *)checkoutView didFinishSubmittingGuestlist:(NSString *)guestlistId;
+-(void)checkoutViewController:(THLCheckoutViewController *)checkoutView didFinishPurchasingForGuestlistInvite:(NSString *)guestlistInviteId;
 @end
 
 @interface THLCheckoutViewController : UIViewController

@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "KLCPopup.h"
+#import "THLGuestlistEntity.h"
+#import "THLGuestlistInviteEntity.h"
 
 typedef NS_OPTIONS(NSInteger, THLGuestlistReviewerStatus) {
     THLGuestlistPendingGuest = 0,
@@ -44,6 +46,8 @@ typedef NS_OPTIONS(NSInteger, THLGuestlistReviewerStatus) {
 @property (nonatomic, strong) RACCommand *menuAddCommand;
 @property (nonatomic) THLStatus guestlistReviewStatus;
 @property (nonatomic, copy) NSString *guestlistReviewStatusTitle;
+@property (nonatomic, strong) THLGuestlistEntity *guestlist;
+@property (nonatomic, strong) THLGuestlistInviteEntity *guestlistInvite;
 
 @property (nonatomic) BOOL viewAppeared;
 
