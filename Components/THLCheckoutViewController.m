@@ -156,28 +156,57 @@
 
 - (void)chargeCustomer:(THLUser *)customer forEvent:(THLEventEntity *)event
 {
-    NSDictionary *purchaseInfo = @{
-                                   @"eventId": event.objectId,
-                                   @"eventTime": event.date,
-                                   @"venue": event.location.name,
-                                   @"amount":  customer.sex == 1 ? [NSNumber numberWithFloat:event.maleTicketPrice] : [NSNumber numberWithFloat:event.femaleTicketPrice],
-                                   @"customerName": [customer fullName],
-                                   @"description": customer.sex == 1 ? @"Male GA" : @"Female GA"
-                                   };
     
-    [PFCloud callFunctionInBackground:@"completeOrder"
-                       withParameters:purchaseInfo
-                                block:^(NSString *guestlistId, NSError *error) {
-                                    [self.hud hide:YES];
-                                    if (error) {
-                                        [self displayError:[error localizedDescription]];
-                                    } else {
-                                        [self.delegate checkoutViewController:self didFinishSubmittingGuestlist:guestlistId];
-                                        [self.navigationController dismissViewControllerAnimated:TRUE completion:^{
-                                            [_completionAction execute:nil];
-                                        }];
-                                    }
-                                }];
+    if (_paymentInfo[@"guestlistInviteId"]) {
+        
+        NSDictionary *purchaseInfo = @{
+                                      @"eventId": event.objectId,
+                                      @"eventTime": event.date,
+                                      @"venue": event.location.name,
+                                      @"amount":  customer.sex == 1 ? [NSNumber numberWithFloat:event.maleTicketPrice] : [NSNumber numberWithFloat:event.femaleTicketPrice],
+                                      @"customerName": [customer fullName],
+                                      @"description": customer.sex == 1 ? @"Male GA" : @"Female GA",
+                                      @"guestlistInviteId": _paymentInfo[@"guestlistInviteId"]
+                                              };
+        
+        
+        [PFCloud callFunctionInBackground:@"completeOrderForInvite"
+                           withParameters:purchaseInfo
+                                    block:^(id response, NSError *error) {
+                                        [self.hud hide:YES];
+                                        if (error) {
+                                            [self displayError:[error localizedDescription]];
+                                        } else {
+                                            [self.delegate checkoutViewController:self didFinishPurchasingForGuestlistInvite:response];
+                                            [self.navigationController dismissViewControllerAnimated:TRUE completion:nil];
+                                        }
+                                    }];
+    } else {
+        
+        NSDictionary *purchaseInfo = @{
+                                       @"eventId": event.objectId,
+                                       @"eventTime": event.date,
+                                       @"venue": event.location.name,
+                                       @"amount":  customer.sex == 1 ? [NSNumber numberWithFloat:event.maleTicketPrice] : [NSNumber numberWithFloat:event.femaleTicketPrice],
+                                       @"customerName": [customer fullName],
+                                       @"description": customer.sex == 1 ? @"Male GA" : @"Female GA"
+                                       };
+        
+        [PFCloud callFunctionInBackground:@"completeOrder"
+                           withParameters:purchaseInfo
+                                    block:^(NSString *guestlistId, NSError *error) {
+                                        [self.hud hide:YES];
+                                        if (error) {
+                                            [self displayError:[error localizedDescription]];
+                                        } else {
+                                            [self.delegate checkoutViewController:self didFinishSubmittingGuestlist:guestlistId];
+                                            [self.navigationController dismissViewControllerAnimated:TRUE completion:^{
+                                                [_completionAction execute:nil];
+                                            }];
+                                        }
+                                    }];
+
+    }
 }
 
 

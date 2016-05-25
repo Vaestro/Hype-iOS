@@ -61,6 +61,7 @@
     _paymentCardIcon = [self newPaymentCardIcon];
 
     [self.view addSubviews:@[_titleLabel, _descriptionLabel, _hud, _securitySymbol]];
+    
     if (_paymentInfo) {
         _titleLabel.text = @"Payment";
         NSString *last4CardDigits = _paymentInfo[0][@"last4"];
@@ -71,10 +72,7 @@
     } else {
         [self.view addSubviews:@[_paymentTextField, _addCardButton]];
     }
-}
-
-- (void)layoutView
-{
+    
     WEAKSELF();
     if (_paymentInfo) {
         [_removeCardButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -127,7 +125,9 @@
         make.bottom.insets(kTHLEdgeInsetsInsanelyHigh());
         make.width.mas_equalTo(SCREEN_WIDTH*0.75);
     }];
+
 }
+
 
 - (void)updateLayoutForAddPayment {
     [_removeCardButton removeFromSuperview];

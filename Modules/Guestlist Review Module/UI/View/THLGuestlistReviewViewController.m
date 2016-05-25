@@ -34,7 +34,7 @@
 static UIEdgeInsets const COLLECTION_VIEW_EDGEINSETS = {10, 10, 10, 10};
 static CGFloat const CELL_SPACING = 10;
 
-@interface THLGuestlistReviewViewController()
+@interface THLGuestlistReviewViewController() <THLCheckoutViewDelegate>
 
 @property (nonatomic, strong) THLGuestlistReviewHeaderView *headerView;
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -329,10 +329,15 @@ static CGFloat const CELL_SPACING = 10;
 {
     NSDictionary *paymentInfo = @{@"guestlistInviteId": _guestlistInvite.objectId};
     THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:_guestlist.event paymentInfo:paymentInfo andCompletionAction:nil];
-    [self presentViewController:checkoutVC animated:YES completion:nil];
+    UINavigationController *navVC = [[UINavigationController alloc]initWithRootViewController:checkoutVC];
+    [self presentViewController:navVC animated:YES completion:nil];
 }
 
 
+- (void)checkoutViewController:(THLCheckoutViewController *)checkoutView didFinishPurchasingForGuestlistInvite:(NSString *)guestlistInviteId
+{
+    self.actionBarButton.hidden = true;
+}
 
 
 

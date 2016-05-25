@@ -241,7 +241,7 @@ STPPaymentCardTextFieldDelegate
         topController = topController.presentedViewController;
     }
     
-    NSString *message = @"Check out this app that gets you into the hottest parties in NYC! Use invitation code 109109 to get started";
+    NSString *message = @"Check out this app that gets you into the hottest parties in NYC!";
     NSString *shareBody = branchMarketingLink;
     
     NSArray *postItems = @[message, shareBody];
@@ -265,9 +265,9 @@ STPPaymentCardTextFieldDelegate
 
 - (void)presentPaymentView
 {
-    [self.hud show:YES];
-
+    
     if ([THLUser currentUser].stripeCustomerId) {
+        [self.hud show:YES];
         [PFCloud callFunctionInBackground:@"retrievePaymentInfo"
                            withParameters:nil
                                     block:^(NSArray<NSDictionary *> *cardInfo, NSError *cloudError) {
