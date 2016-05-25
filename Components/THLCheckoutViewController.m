@@ -172,6 +172,7 @@
                                     if (error) {
                                         [self displayError:[error localizedDescription]];
                                     } else {
+                                        [self.delegate checkoutViewController:self didFinishSubmittingGuestlist:guestlistId];
                                         [self.navigationController dismissViewControllerAnimated:TRUE completion:^{
                                             [_completionAction execute:nil];
                                         }];

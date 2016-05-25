@@ -162,6 +162,7 @@ THLGuestlistReviewInteractorDelegate
     [_view setAcceptCommand:acceptCommand];
     [_view setDeclineCommand:declineCommand];
     [_view setRefreshCommand:refreshCommand];
+    [_view setGuestlist:_guestlistEntity];
     
     THLMenuView *menuView = [THLMenuView new];
     [self configureMenuView:menuView];

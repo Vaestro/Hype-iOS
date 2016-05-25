@@ -34,6 +34,7 @@
 - (BFTask *)submitGuestlistForEvent:(THLEventEntity *)eventEntity withInvites:(NSArray *)guestPhoneNumbers;
 - (BFTask *)getOwnerInviteForEvent:(THLEventEntity *)eventEntity;
 - (BFTask *)updateGuestlist:(NSString *)guestlistId withInvites:(NSArray *)guestPhoneNumbers forEvent:(THLEventEntity *)eventEntity;
+- (BFTask *)submitInvites:(NSArray *)guestPhoneNumbers forGuestlist:(NSString *)guestlistId atEvent:(THLEventEntity *)eventEntity;
 - (void)loadContacts;
 
 @end

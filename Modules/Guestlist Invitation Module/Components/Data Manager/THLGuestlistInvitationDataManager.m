@@ -42,12 +42,14 @@
 	}];
 }
 
-- (BFTask *)submitGuestlistForEvent:(THLEventEntity *)eventEntity withInvites:(NSArray *)guestPhoneNumbers {
-    return [[_guestlistService createGuestlistForEvent:eventEntity withInvites:guestPhoneNumbers] continueWithSuccessBlock:^id(BFTask *task) {
-        
+
+- (BFTask *)submitInvites:(NSArray *)guestPhoneNumbers forGuestlist:(NSString *)guestlistId atEvent:(THLEventEntity *)eventEntity
+{
+    return [[_guestlistService updateGuestlist:guestlistId withInvites:guestPhoneNumbers forEvent:eventEntity] continueWithSuccessBlock:^id(BFTask * task) {
         return [BFTask taskWithResult:nil];
     }];
 }
+
 
 - (BFTask *)getOwnerInviteForEvent:(THLEventEntity *)eventEntity {
     WEAKSELF();

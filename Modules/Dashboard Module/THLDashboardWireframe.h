@@ -26,7 +26,7 @@
 @property (nonatomic, readonly, weak) THLDataStore *dataStore;
 
 - (instancetype)initWithGuestlistService:(id<THLGuestlistServiceInterface>)guestlistService
-                          entityMappper:(THLEntityMapper *)entityMapper
+                          entityMapper:(THLEntityMapper *)entityMapper
                    viewDataSourceFactory:(id<THLViewDataSourceFactoryInterface>)viewDataSourceFactory
                                dataStore:(THLDataStore *)dataStore;
 

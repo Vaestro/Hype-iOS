@@ -144,7 +144,7 @@
 - (THLDashboardWireframe *)newDashboardWireframe
 {
     THLDashboardWireframe *wireframe = [[THLDashboardWireframe alloc] initWithGuestlistService:self.guestlistService
-                                                                            entityMappper:self.entityMapper
+                                                                            entityMapper:self.entityMapper
                                                                          viewDataSourceFactory:self.viewDataSourceFactory
                                                                                      dataStore:self.guestlistInviteDataStore];
 

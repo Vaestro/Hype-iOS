@@ -14,6 +14,11 @@
 #import "THLActionBarButton.h"
 #import "THLGuestlistReviewHeaderView.h"
 #import "THLMenuView.h"
+#import "THLCheckoutViewController.h"
+#import "THLGuestlistEntity.h"
+#import "THLGuestlistInvite.h"
+#import "THLEventEntity.h"
+
 
 #import "THLAppearanceConstants.h"
 #import "UIScrollView+SVPullToRefresh.h"
@@ -48,6 +53,8 @@ static CGFloat const CELL_SPACING = 10;
 @synthesize responseCommand = _responseCommand;
 @synthesize menuAddCommand = _menuAddCommand;
 @synthesize reviewerStatus = _reviewerStatus;
+@synthesize guestlist = _guestlist;
+@synthesize guestlistInvite = _guestlistInvite;
 @synthesize viewAppeared;
 
 @synthesize title = _title;
@@ -286,7 +293,8 @@ static CGFloat const CELL_SPACING = 10;
 
 - (THLActionBarButton *)newActionBarButton {
     THLActionBarButton *actionBarButton = [THLActionBarButton new];
-    actionBarButton.titleLabel.text = @"Purchase Ticket";
+    [actionBarButton setTitle:@"Purchase Ticket" animateChanges:NO];
+    [actionBarButton addTarget:self action:@selector(purchaseTicket:) forControlEvents:UIControlEventTouchUpInside];
     return actionBarButton;
 }
 
@@ -313,6 +321,20 @@ static CGFloat const CELL_SPACING = 10;
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     return COLLECTION_VIEW_EDGEINSETS;
 }
+
+
+#pragma mark - Event Handlers
+
+- (void)purchaseTicket:(id)sender
+{
+    NSDictionary *paymentInfo = @{@"guestlistInviteId": _guestlistInvite.objectId};
+    THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:_guestlist.event paymentInfo:paymentInfo andCompletionAction:nil];
+    [self presentViewController:checkoutVC animated:YES completion:nil];
+}
+
+
+
+
 
 - (void)dealloc {
     NSLog(@"Destroyed %@", self);
