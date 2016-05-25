@@ -112,55 +112,7 @@
 #pragma mark - Create Guestlist For Event
 //----------------------------------------------------------------
 
-- (BFTask *)createGuestlistForEvent:(THLEventEntity *)eventEntity withInvites:(NSArray *)guestPhoneNumbers
-{
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    NSLocale *enUSPOSIXLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
-    [dateFormatter setLocale:enUSPOSIXLocale];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZZZ"];
-    
-    NSString *iso8601String = [dateFormatter stringFromDate:eventEntity.date];
-    
-    BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
-    THLUser *currentUser = [THLUser currentUser];
-    PFObject *guestlist = [PFObject objectWithClassName:@"Guestlist"];
-    guestlist[@"Owner"] = currentUser;
-    guestlist[@"date"] = eventEntity.date;
-    
-    if (eventEntity.requiresApproval) {
-        guestlist[@"reviewStatus"] = [NSNumber numberWithInt:2];
-    } else {
-        guestlist[@"reviewStatus"] = [NSNumber numberWithInt:0];
-    }
-    
-    guestlist[@"event"] = [THLEvent objectWithoutDataWithObjectId:eventEntity.objectId];
-    [guestlist saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            [PFCloud callFunctionInBackground:@"sendOutInvitations"
-                               withParameters:@{@"eventId": eventEntity.objectId,
-                                                @"eventName":eventEntity.location.name,
-                                                @"eventTime":iso8601String,
-                                                @"guestPhoneNumbers": guestPhoneNumbers,
-                                                @"guestlistId": guestlist.objectId}
-                                        block:^(id response, NSError *cloudError) {
-                                            if (!cloudError){
-                                                
-                                                [Intercom logEventWithName:@"event_submission" metaData: @{
-                                                                                                         @"event_name": eventEntity.location.name,
-                                                                                                         @"event_date": eventEntity.date.thl_dayString
-                                                                                                         }];
 
-                                                [completionSource setResult:nil];
-                                            } else {
-                                                [completionSource setError:cloudError];
-                                            }
-                                        }];
-        } else {
-            [completionSource setError:error];
-        }
-    }];
-    return completionSource.task;
-}
 
 - (BFTask *)updateGuestlist:(NSString *)guestlistId withInvites:(NSArray *)guestPhoneNumbers forEvent:(THLEventEntity *)eventEntity
 {
