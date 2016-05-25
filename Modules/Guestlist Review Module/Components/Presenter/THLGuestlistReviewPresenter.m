@@ -29,6 +29,7 @@
 #import "THLUser.h"
 #import "THLParseQueryFactory.h"
 #import "THLGuestlist.h"
+#import "THLCheckoutViewController.h"
 
 #import "THLGuestlistTicketView.h"
 
@@ -136,12 +137,6 @@ THLGuestlistReviewInteractorDelegate
         [WSELF handleDeclineAction];
         return [RACSignal empty];
     }];
-    _responseCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        THLConfirmationView *confirmationView = [THLConfirmationView new];
-        [self configureResponseView:confirmationView];
-        [WSELF handleResponseAction];
-        return [RACSignal empty];
-    }];
     RACCommand *refreshCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         [WSELF handleRefreshAction];
         return [RACSignal empty];
@@ -166,7 +161,6 @@ THLGuestlistReviewInteractorDelegate
     [_view setDataSource:dataSource];
     [_view setAcceptCommand:acceptCommand];
     [_view setDeclineCommand:declineCommand];
-    [_view setResponseCommand:_responseCommand];
     [_view setRefreshCommand:refreshCommand];
     
     THLMenuView *menuView = [THLMenuView new];
@@ -402,6 +396,8 @@ THLGuestlistReviewInteractorDelegate
     self.refreshing = YES;
     [_interactor updateGuestlistInvites];
 }
+
+
 
 - (void)handleResponseAction {
     NSString *ownerName = _guestlistInviteEntity.guestlist.owner.firstName;
