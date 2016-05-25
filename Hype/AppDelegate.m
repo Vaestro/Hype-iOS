@@ -31,9 +31,11 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 #if DEBUG
 static NSString *applicationId = @"5t3F1S3wKnVGIKHob1Qj0Je3sygnFiwqAu6PP400";
 static NSString *clientKeyId = @"xn4Mces2HcFCQYXF2VRj4W1Ot0zIBELl6fHKLGPk";
+static NSString *stripePublishableKey = @"pk_test_cGZ7E1Im6VPKQHYUXIkR6sEe";
 #else
 static NSString *applicationId = @"D0AnOPXqqfz7bfE70WvdlE8dK7Qj1kxgf4rPm8rX";
 static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
+static NSString *stripePublishableKey = @"pk_live_H8u89AfEDonln00iEUB0kKtZ";
 #endif
 
 @interface AppDelegate (){
@@ -77,7 +79,7 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
     [Intercom setPreviewPosition:ICMPreviewPositionTopLeft];
     
     //Stripe
-    [Stripe setDefaultPublishableKey:@"pk_test_cGZ7E1Im6VPKQHYUXIkR6sEe"];
+    [Stripe setDefaultPublishableKey:stripePublishableKey];
     
     //Configuring Lumberjack logging framework
     setenv("XcodeColors", "YES", 0);

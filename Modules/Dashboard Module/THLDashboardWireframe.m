@@ -27,6 +27,7 @@
     if (self = [super init]) {
         _guestlistService = guestlistService;
         _viewDataSourceFactory = viewDataSourceFactory;
+        _entityMapper = entityMapper;
         _dataStore = dataStore;
         [self buildModule];
     }
