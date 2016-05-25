@@ -28,6 +28,7 @@
         _guestlistService = guestlistService;
         _entityMapper = entityMapper;
         _viewDataSourceFactory = viewDataSourceFactory;
+        _entityMapper = entityMapper;
         _dataStore = dataStore;
         [self buildModule];
     }
