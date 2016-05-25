@@ -188,10 +188,63 @@ static CGFloat const CELL_SPACING = 10;
         }];
     }];
     
-//    RAC(self.actionBarButton, rac_command) = RACObserve(self, responseCommand);
     RAC(self.menuButton, rac_command) = RACObserve(self, showMenuCommand);
-
-    }
+    RAC(self.actionBarButton, rac_command) = RACObserve(self, responseCommand);
+    
+    [RACObserve(self, reviewerStatus) subscribeNext:^(NSNumber *status) {
+        if (status == [NSNumber numberWithInteger:0]) {
+            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Buy A Ticket", nil)];
+            [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
+            [[WSELF.headerView menuButton] setHidden:TRUE];
+        }
+        else if (status == [NSNumber numberWithInteger:1]) {
+            [[WSELF actionBarButton] setHidden:TRUE];
+            [[WSELF.headerView menuButton] setHidden:FALSE];
+            [self remakeConstraints];
+            
+        }
+        else if (status == [NSNumber numberWithInteger:2]) {
+            [[WSELF actionBarButton] setHidden:TRUE];
+            [[WSELF.headerView menuButton] setHidden:FALSE];
+            [self remakeConstraints];
+            
+        }
+        else if (status == [NSNumber numberWithInteger:3]) {
+            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Accept or Decline Guestlist", nil)];
+            [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
+            [[WSELF.headerView menuButton] setHidden:TRUE];
+        }
+        else if (status == [NSNumber numberWithInteger:4]) {
+            [[WSELF actionBarButton] setHidden:TRUE];
+            [[WSELF.headerView menuButton] setHidden:TRUE];
+            [self remakeConstraints];
+        }
+        else if (status == [NSNumber numberWithInteger:5]) {
+            [[WSELF actionBarButton] setHidden:TRUE];
+            [[WSELF.headerView menuButton] setHidden:TRUE];
+            [self remakeConstraints];
+        }
+        else if (status == [NSNumber numberWithInteger:6]) {
+            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Checked In", nil)];
+            [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
+            [[WSELF.headerView menuButton] setHidden:FALSE];
+        }
+        else if (status == [NSNumber numberWithInteger:7]) {
+            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Checked In", nil)];
+            [WSELF actionBarButton].backgroundColor = kTHLNUIAccentColor;
+            [[WSELF.headerView menuButton] setHidden:FALSE];
+        }
+        else if (status == [NSNumber numberWithInteger:8]) {
+            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Pending Host Approval", nil)];
+            [[WSELF.headerView menuButton] setHidden:FALSE];
+        }
+        else if (status == [NSNumber numberWithInteger:9]) {
+            [[WSELF actionBarButton].morphingLabel setTextWithoutMorphing:NSLocalizedString(@"Pending Host Approval", nil)];
+            [[WSELF.headerView menuButton] setHidden:FALSE];
+        }
+        [WSELF.view setNeedsDisplay];
+    }];
+}
 
 - (void)configureDataSource:(THLViewDataSource *)dataSource {
     _collectionView.dataSource = dataSource;
