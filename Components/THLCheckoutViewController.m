@@ -109,16 +109,29 @@
 
     float maleServiceCharge = (_event.maleTicketPrice * 0.029) + 0.30;
     float femaleServiceCharge = (_event.femaleTicketPrice * 0.029) + 0.30;
-    if ([THLUser currentUser].sex == THLSexMale) {
-        purchaseDetailsView.purchaseTitleText = @"Male General Admission";
+    NSString *purchaseTitleText;
+    THLUser *currentUser = [THLUser currentUser];
+    if (currentUser.sex == THLSexMale) {
+        purchaseTitleText = @"Male General Admission";
+    } else if (currentUser.sex == THLSexFemale) {
+        purchaseTitleText = @"Female General Admission";
+    }
+    if (currentUser.sex == THLSexMale && _event.maleTicketPrice > 0.0) {
+        purchaseDetailsView.purchaseTitleText = purchaseTitleText;
+        
         purchaseDetailsView.subtotalAmount = [NSString stringWithFormat:@"$%.2f", _event.maleTicketPrice];
         purchaseDetailsView.serviceChargeAmount = [NSString stringWithFormat:@"$%.2f", maleServiceCharge];
         purchaseDetailsView.totalAmount = [NSString stringWithFormat:@"$%.2f", _event.maleTicketPrice + maleServiceCharge];
-    } else if ([THLUser currentUser].sex == THLSexFemale) {
-        purchaseDetailsView.purchaseTitleText = @"Female General Admission";
+    } else if (currentUser.sex == THLSexFemale && _event.femaleTicketPrice > 0.0) {
+        purchaseDetailsView.purchaseTitleText = purchaseTitleText;
         purchaseDetailsView.subtotalAmount = [NSString stringWithFormat:@"$%.2f", _event.femaleTicketPrice];
         purchaseDetailsView.serviceChargeAmount = [NSString stringWithFormat:@"$%.2f", femaleServiceCharge];
         purchaseDetailsView.totalAmount = [NSString stringWithFormat:@"$%.2f", _event.femaleTicketPrice + femaleServiceCharge];
+    } else {
+        purchaseDetailsView.purchaseTitleText = purchaseTitleText;
+        purchaseDetailsView.subtotalAmount = @"FREE";
+        purchaseDetailsView.serviceChargeAmount = @"FREE";
+        purchaseDetailsView.totalAmount = @"FREE";
     }
     return purchaseDetailsView;
 }
