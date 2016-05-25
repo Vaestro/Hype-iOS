@@ -13,6 +13,7 @@
 #import "THLGuestlistEntity.h"
 #import "THLGuestlistInvite.h"
 #import "THLEventEntity.h"
+#import "THLCheckoutViewController.h"
 
 
 static NSString *const kGuestEntityFirstNameKey = @"firstName";
@@ -22,7 +23,7 @@ static NSString *const kGuestEntityObjectIdKey = @"objectId";
 static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInvitationSearchViewKey";
 @class THLGuestlistInviteEntity;
 
-@interface THLGuestlistInvitationInteractor ()
+@interface THLGuestlistInvitationInteractor () <THLCheckoutViewDelegate>
 @property (nonatomic, copy) NSString *guestlistId;
 @property (nonatomic, strong) NSMutableArray *addedGuests;
 @property (nonatomic, strong) NSMutableArray *addedGuestDigits;
@@ -145,9 +146,12 @@ static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInv
 - (void)commitChangesToGuestlist {
     WEAKSELF();
     if (!_addedGuests || !_addedGuests.count) {
-        [WSELF.delegate interactor:WSELF didCommitChangesToGuestlist:nil];
+        [[_dataManager getOwnerInviteForEvent:_eventEntity] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *fetchTask) {
+            [WSELF.delegate interactor:WSELF didSubmitInitialGuestlist:fetchTask.result withError:fetchTask.error];
+            return nil;
+        }];
     } else {
-        [[_dataManager submitGuestlistForEvent:_eventEntity withInvites:[self obtainDigits:_addedGuests]] continueWithSuccessBlock:^id(BFTask *task) {
+        [[_dataManager submitInvites:[self obtainDigits:_addedGuests] forGuestlist:_guestlistId atEvent:_eventEntity] continueWithSuccessBlock:^id(BFTask *task) {
             [[_dataManager getOwnerInviteForEvent:_eventEntity] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *fetchTask) {
                 [WSELF.delegate interactor:WSELF didSubmitInitialGuestlist:fetchTask.result withError:task.error];
                 Mixpanel *mixpanel = [Mixpanel sharedInstance];
@@ -161,6 +165,14 @@ static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInv
         }];
     }
 }
+
+#pragma mark - CheckoutViewDelegate
+
+- (void)checkoutViewController:(THLCheckoutViewController *)checkoutView didFinishSubmittingGuestlist:(NSString *)guestlistId
+{
+    self.guestlistId = guestlistId;
+}
+
 
 
 //- (void)dealloc {
