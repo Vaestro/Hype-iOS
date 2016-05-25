@@ -79,8 +79,11 @@
 }
 
 - (void)layoutView {
-	[self.view addSubviews:@[_tableView, _contactPickerView, _invitationDetailsView]];
-    [_invitationDetailsView addSubview:_invitationDetailsLabel];
+	[self.view addSubviews:@[_tableView, _contactPickerView]];
+    if (_creditsPayout != nil) {
+        [self.view addSubview:_invitationDetailsView];
+        [_invitationDetailsView addSubview:_invitationDetailsLabel];
+    }
 	self.navigationItem.rightBarButtonItem = _commitButton;
     self.navigationItem.title = @"INVITE";
 }

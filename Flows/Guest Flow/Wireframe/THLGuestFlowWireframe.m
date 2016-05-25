@@ -248,6 +248,9 @@ THLLoginModuleDelegate
 - (void)dismissGuestlistInvitationWireframe
 {
     _guestlistInvitationWireframe = nil;
+    _guestlistReviewWireframe = nil;
+    _eventDetailWireframe = nil;
+    [_masterTabBarController setSelectedIndex:1];
 }
 
 - (void)dismissWireframeAndPresentGuestlistReviewWireframeFor:(THLGuestlistInviteEntity *)guestlistInvite guestlist:(THLGuestlistEntity *)guestlist

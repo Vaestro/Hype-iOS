@@ -56,7 +56,9 @@
 
 - (void)dismissInterface {
 	[_view.navigationController dismissViewControllerAnimated:YES completion:^{
-        [_presenter.moduleDelegate dismissGuestlistInvitationWireframe];
+        [_controller dismissViewControllerAnimated:NO completion:^{
+            [_presenter.moduleDelegate dismissGuestlistInvitationWireframe];
+        }];
     }];
 }
 

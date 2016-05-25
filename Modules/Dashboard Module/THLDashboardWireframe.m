@@ -26,6 +26,7 @@
                                dataStore:(THLDataStore *)dataStore {
     if (self = [super init]) {
         _guestlistService = guestlistService;
+        _entityMapper = entityMapper;
         _viewDataSourceFactory = viewDataSourceFactory;
         _entityMapper = entityMapper;
         _dataStore = dataStore;
