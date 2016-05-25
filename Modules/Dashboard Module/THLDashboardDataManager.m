@@ -34,7 +34,7 @@
 //        THLDataStoreDomain *domain = [SSELF domainForPendingOrAcceptedGuestlistInvites];
         NSSet *entities = [NSSet setWithArray:[SSELF.entityMapper mapGuestlistInvites:task.result]];
         NSNumber *unopenedGuestlistInviteCount;
-        //        HACK to get guestlist Invite to update with updated Guestlist
+    
         for (THLGuestlistInviteEntity *guestlistInviteEntity in entities) {
             guestlistInviteEntity.updatedAt = [NSDate date];
             if (!guestlistInviteEntity.didOpen && guestlistInviteEntity.response == THLStatusPending && [guestlistInviteEntity.date thl_isOrAfterToday]) {

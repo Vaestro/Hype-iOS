@@ -45,7 +45,6 @@
         entity.femaleTicketPrice= event.femaleTicketPrice;
         entity.location = [self mapLocation:event.location];
         entity.creditsPayout = event.creditsPayout;
-        entity.host = (THLHostEntity *)[self mapHost:event[@"host"]];
         entity.maleRatio = event.maleRatio;
         entity.femaleRatio = event.femaleRatio;
         entity.requiresApproval = event.requiresApproval;
@@ -107,7 +106,6 @@
         entity.phoneNumber = user.phoneNumber;
         entity.imageURL = [NSURL URLWithString:user.image.url];
         entity.sex = user.sex;
-        entity.rating = user.rating;
         entity.credits = user.credits;
         return entity;
     } else {
@@ -115,22 +113,6 @@
     }
 }
 
-- (THLHostEntity *)mapHost:(THLUser *)user {
-    if ([user isKindOfClass:[THLUser class]]) {
-        THLHostEntity *entity = [THLHostEntity new];
-        [self mapBaseValuesFromModel:user toEntity:entity];
-        entity.firstName = user.firstName;
-        entity.lastName = user.lastName;
-        entity.phoneNumber = user.phoneNumber;
-        entity.twilioNumber = user.twilioNumber;
-        entity.imageURL = [NSURL URLWithString:user.image.url];
-        entity.sex = user.sex;
-        entity.rating = user.rating;
-        return entity;
-    } else {
-        return nil;
-    }
-}
 
 - (THLPerkStoreItemEntity *)mapPerkStoreItem:(THLPerkStoreItem *)perkStoreItem
 {

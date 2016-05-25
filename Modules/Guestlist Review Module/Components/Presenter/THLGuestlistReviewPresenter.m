@@ -498,6 +498,8 @@ THLGuestlistReviewInteractorDelegate
         Mixpanel *mixpanel = [Mixpanel sharedInstance];
         [mixpanel track:@"InviteAccepted"];
         [mixpanel.people increment:@"guestlist invites accepted" by:@1];
+        
+//        [self.delegate interactor:SSELF didUpdateGuestlistInviteResponse:task.error to:response];
 
     }
     /**

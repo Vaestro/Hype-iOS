@@ -142,8 +142,7 @@ static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInv
     }];
 }
 
-- (void)commitChangesToGuestlist
-{
+- (void)commitChangesToGuestlist {
     WEAKSELF();
     if (!_addedGuests || !_addedGuests.count) {
         [WSELF.delegate interactor:WSELF didCommitChangesToGuestlist:nil];

@@ -7,12 +7,19 @@
 //
 
 #import "THLMyEventsViewController.h"
-#import <Parse/PFQuery.h>
-#import <Parse/PFUser.h>
+#import "Parse.h"
 #import <ParseUI/PFCollectionViewCell.h>
 #import "THLDashboardNotificationCell.h"
 #import "THLEventInviteCell.h"
 #import "THLPersonIconView.h"
+#import "MBProgressHUD.h"
+
+
+@interface THLMyEventsViewController()
+@property(nonatomic, strong) MBProgressHUD *hud;
+@end
+
+
 
 @implementation THLMyEventsViewController
 
@@ -43,6 +50,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:_hud];
     self.collectionView.backgroundColor = [UIColor blackColor];
     
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
@@ -61,6 +70,19 @@
     layout.itemSize = CGSizeMake(ViewWidth(self.collectionView) - 25, 125);
 
 }
+
+- (void)objectsWillLoad {
+    [super objectsWillLoad];
+    [self.hud show:YES];
+}
+
+- (void)objectsDidLoad:(NSError *)error {
+    [super objectsDidLoad:error];
+    if (!error) [self.hud hide:YES];
+    [self.collectionView reloadData];
+}
+
+
 
 #pragma mark -
 #pragma mark Data
@@ -102,11 +124,17 @@
     cell.locationNameLabel.text = object[@"Guestlist"][@"event"][@"location"][@"name"];
     cell.dateLabel.text = invitationDate;
     
-//    NSData *eventImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:object[@"Guestlist"][@"Owner"][@"image"]]];
     
-                          
-//    cell.personIconView.image = [UIImage imageWithData:eventImageData];
-//    [cellView setSenderImageURL:_guestlistInviteEntity.guestlist.owner.imageURL];
+    PFFile *imageFile = object[@"Guestlist"][@"Owner"][@"image"];
+    
+    [imageFile getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+        if (!error) {
+            UIImage *personIconPic = [UIImage imageWithData:data];
+            cell.personIconView.image = personIconPic;
+        }
+    }];
+    
+    
 
     cell.contentView.layer.borderWidth = 1.0f;
     cell.contentView.layer.borderColor = [UIColor lightGrayColor].CGColor;
