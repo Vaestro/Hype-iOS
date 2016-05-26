@@ -23,6 +23,7 @@
 #import "THLUser.h"
 #import "Intercom/intercom.h"
 #import "THLMyEventsViewController.h"
+#import "THLDiscoveryViewController.h"
 
 @interface THLGuestFlowWireframe()
 <
@@ -100,11 +101,15 @@ THLLoginModuleDelegate
     UINavigationController *profile = [UINavigationController new];
     
     [self presentDashboardInterfaceInNavigationController:dashboard];
+    
+    THLDiscoveryViewController *discoveryVC = [[THLDiscoveryViewController alloc] initWithClassName:@"Event"];
+    [discovery pushViewController:discoveryVC animated:NO];
+    
+    
 //    THLMyEventsViewController *myEventsVC = [[THLMyEventsViewController alloc]initWithClassName:@"GuestlistInvite"];
 //    [dashboard pushViewController:myEventsVC animated:NO];
     
     [self presentDashboardInterfaceInNavigationController:dashboard];
-    [self presentEventDiscoveryInterfaceInNavigationController:discovery];
     [self presentPerkStoreInterfaceInNavigationController:perks];
     [self presentUserProfileInterfaceInNavigationController:profile];
     
