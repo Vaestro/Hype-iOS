@@ -13,6 +13,7 @@
 #import "THLDiscoveryCell.h"
 #import <ParseUI/PFImageView.h>
 #import "THLAppearanceConstants.h"
+#import "Intercom/intercom.h"
 
 #import "MBProgressHUD.h"
 
@@ -32,6 +33,9 @@
     self.title = @"THIS WEEK IN NEW YORK";
     self.pullToRefreshEnabled = YES;
     self.paginationEnabled = NO;
+   
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Inbox Icon"] style:UIBarButtonItemStylePlain target:self action:@selector(messageButtonPressed)];
     
     return self;
 }
@@ -138,6 +142,14 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return CGSizeMake(DiscoveryCellWidth(collectionView), DiscoveryCellHeight(collectionView));
 }
+
+#pragma mark - event handlers ()
+
+- (void)messageButtonPressed
+{
+    [Intercom presentConversationList];
+}
+
 
 
 
