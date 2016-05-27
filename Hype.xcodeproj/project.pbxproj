@@ -242,6 +242,7 @@
 		C884EE201CF74E0400C47167 /* THLAdmissionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C884EE1F1CF74E0400C47167 /* THLAdmissionsViewController.m */; };
 		C884EE241CF77CB200C47167 /* THLDiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C884EE231CF77CB200C47167 /* THLDiscoveryViewController.m */; };
 		C884EE271CF787CC00C47167 /* THLDiscoveryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C884EE261CF787CC00C47167 /* THLDiscoveryCell.m */; };
+		C884EE2B1CF8C21900C47167 /* THLEventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C884EE2A1CF8C21900C47167 /* THLEventDetailsViewController.m */; };
 		C8D1D2A41CD3E864006ADC6A /* THLPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8D1D2A31CD3E864006ADC6A /* THLPaymentViewController.m */; };
 		C8E1B1621BF437F300A9824C /* THLUserProfileInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B1611BF437F300A9824C /* THLUserProfileInteractor.m */; };
 		C8E1B1651BF4380D00A9824C /* THLUserProfileDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B1641BF4380D00A9824C /* THLUserProfileDataManager.m */; };
@@ -776,6 +777,8 @@
 		C884EE231CF77CB200C47167 /* THLDiscoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLDiscoveryViewController.m; sourceTree = "<group>"; };
 		C884EE251CF787CC00C47167 /* THLDiscoveryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLDiscoveryCell.h; sourceTree = "<group>"; };
 		C884EE261CF787CC00C47167 /* THLDiscoveryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLDiscoveryCell.m; sourceTree = "<group>"; };
+		C884EE291CF8C21900C47167 /* THLEventDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventDetailsViewController.h; sourceTree = "<group>"; };
+		C884EE2A1CF8C21900C47167 /* THLEventDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventDetailsViewController.m; sourceTree = "<group>"; };
 		C8D1D2A21CD3E864006ADC6A /* THLPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPaymentViewController.h; sourceTree = "<group>"; };
 		C8D1D2A31CD3E864006ADC6A /* THLPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPaymentViewController.m; sourceTree = "<group>"; };
 		C8E1B1601BF437F300A9824C /* THLUserProfileInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserProfileInteractor.h; sourceTree = "<group>"; };
@@ -942,6 +945,7 @@
 		211005A81B8A3D5800A540C6 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				C884EE281CF8BDAD00C47167 /* THLEventDetailsViewController */,
 				C884EE211CF77C8400C47167 /* THLDiscoveryViewController */,
 				C8E8817E1CF669D900D1A698 /* THLAdmissionsViewController */,
 				C8E8817A1CF35BDC00D1A698 /* THLMyEventsViewController */,
@@ -2788,6 +2792,15 @@
 			name = THLDiscoveryViewController;
 			sourceTree = "<group>";
 		};
+		C884EE281CF8BDAD00C47167 /* THLEventDetailsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C884EE291CF8C21900C47167 /* THLEventDetailsViewController.h */,
+				C884EE2A1CF8C21900C47167 /* THLEventDetailsViewController.m */,
+			);
+			name = THLEventDetailsViewController;
+			sourceTree = "<group>";
+		};
 		C8A766551CDA84A600A000C2 /* THLWebViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -3635,6 +3648,7 @@
 				21E402C91BBF7675001D0C2C /* THLGuestlistInvitationWireframe.m in Sources */,
 				791C1F8A1BF13BC300CCF803 /* THLEventHostingTableCell.m in Sources */,
 				CBE54720F63BA2DE2136B454 /* THLViewDataSource+Factory.m in Sources */,
+				C884EE2B1CF8C21900C47167 /* THLEventDetailsViewController.m in Sources */,
 				794AFE271C10C41B008475B1 /* THLHostDashboardTicketCell.m in Sources */,
 				CBE5403C8B7732B36D5ECB5E /* THLViewDataSourceGrouping.m in Sources */,
 				79AD95F71C3ADA6200EDB82E /* THLEventDetailMusicTypesView.m in Sources */,
