@@ -239,6 +239,9 @@
 		C85EE3C11C1BCC940008C14B /* THLPerkStoreItemService.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3BF1C1BCC940008C14B /* THLPerkStoreItemService.m */; };
 		C85EE3C41C1CDE140008C14B /* THLPurchasedPerkItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3C31C1CDE140008C14B /* THLPurchasedPerkItem.m */; };
 		C85EE3C71C1CE1020008C14B /* THLPurchasedPerkItemEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3C61C1CE1020008C14B /* THLPurchasedPerkItemEntity.m */; };
+		C884EE201CF74E0400C47167 /* THLAdmissionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C884EE1F1CF74E0400C47167 /* THLAdmissionsViewController.m */; };
+		C884EE241CF77CB200C47167 /* THLDiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C884EE231CF77CB200C47167 /* THLDiscoveryViewController.m */; };
+		C884EE271CF787CC00C47167 /* THLDiscoveryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C884EE261CF787CC00C47167 /* THLDiscoveryCell.m */; };
 		C8D1D2A41CD3E864006ADC6A /* THLPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8D1D2A31CD3E864006ADC6A /* THLPaymentViewController.m */; };
 		C8E1B1621BF437F300A9824C /* THLUserProfileInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B1611BF437F300A9824C /* THLUserProfileInteractor.m */; };
 		C8E1B1651BF4380D00A9824C /* THLUserProfileDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B1641BF4380D00A9824C /* THLUserProfileDataManager.m */; };
@@ -767,6 +770,12 @@
 		C85EE3C31C1CDE140008C14B /* THLPurchasedPerkItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPurchasedPerkItem.m; sourceTree = "<group>"; };
 		C85EE3C51C1CE1020008C14B /* THLPurchasedPerkItemEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPurchasedPerkItemEntity.h; sourceTree = "<group>"; };
 		C85EE3C61C1CE1020008C14B /* THLPurchasedPerkItemEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPurchasedPerkItemEntity.m; sourceTree = "<group>"; };
+		C884EE1E1CF74E0400C47167 /* THLAdmissionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLAdmissionsViewController.h; sourceTree = "<group>"; };
+		C884EE1F1CF74E0400C47167 /* THLAdmissionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLAdmissionsViewController.m; sourceTree = "<group>"; };
+		C884EE221CF77CB200C47167 /* THLDiscoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLDiscoveryViewController.h; sourceTree = "<group>"; };
+		C884EE231CF77CB200C47167 /* THLDiscoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLDiscoveryViewController.m; sourceTree = "<group>"; };
+		C884EE251CF787CC00C47167 /* THLDiscoveryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLDiscoveryCell.h; sourceTree = "<group>"; };
+		C884EE261CF787CC00C47167 /* THLDiscoveryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLDiscoveryCell.m; sourceTree = "<group>"; };
 		C8D1D2A21CD3E864006ADC6A /* THLPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPaymentViewController.h; sourceTree = "<group>"; };
 		C8D1D2A31CD3E864006ADC6A /* THLPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPaymentViewController.m; sourceTree = "<group>"; };
 		C8E1B1601BF437F300A9824C /* THLUserProfileInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserProfileInteractor.h; sourceTree = "<group>"; };
@@ -933,6 +942,8 @@
 		211005A81B8A3D5800A540C6 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				C884EE211CF77C8400C47167 /* THLDiscoveryViewController */,
+				C8E8817E1CF669D900D1A698 /* THLAdmissionsViewController */,
 				C8E8817A1CF35BDC00D1A698 /* THLMyEventsViewController */,
 				C8EE96D21CE93D4F0040A1F0 /* THLCheckoutViewController */,
 				C8A766551CDA84A600A000C2 /* THLWebViewController */,
@@ -2766,6 +2777,17 @@
 			path = THLConfirmationView;
 			sourceTree = "<group>";
 		};
+		C884EE211CF77C8400C47167 /* THLDiscoveryViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C884EE221CF77CB200C47167 /* THLDiscoveryViewController.h */,
+				C884EE231CF77CB200C47167 /* THLDiscoveryViewController.m */,
+				C884EE251CF787CC00C47167 /* THLDiscoveryCell.h */,
+				C884EE261CF787CC00C47167 /* THLDiscoveryCell.m */,
+			);
+			name = THLDiscoveryViewController;
+			sourceTree = "<group>";
+		};
 		C8A766551CDA84A600A000C2 /* THLWebViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -3087,6 +3109,15 @@
 				C8E8817C1CF35C2700D1A698 /* THLMyEventsViewController.m */,
 			);
 			name = THLMyEventsViewController;
+			sourceTree = "<group>";
+		};
+		C8E8817E1CF669D900D1A698 /* THLAdmissionsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C884EE1E1CF74E0400C47167 /* THLAdmissionsViewController.h */,
+				C884EE1F1CF74E0400C47167 /* THLAdmissionsViewController.m */,
+			);
+			name = THLAdmissionsViewController;
 			sourceTree = "<group>";
 		};
 		C8EE96D21CE93D4F0040A1F0 /* THLCheckoutViewController */ = {
@@ -3426,6 +3457,7 @@
 				79B527A41C6E9AED000A0970 /* THLAlertView.m in Sources */,
 				79B9593E1BE7173D00B87799 /* THLGuestlistReviewCellViewModel.m in Sources */,
 				2133BFCE1B877D11002C1DA9 /* THLLocation.m in Sources */,
+				C884EE241CF77CB200C47167 /* THLDiscoveryViewController.m in Sources */,
 				798D7EBA1BF2D588001D4593 /* THLUserProfileTableViewCell.m in Sources */,
 				798D7EC21BF2E5CF001D4593 /* OnboardingContentViewController.m in Sources */,
 				79CE01E61C0A69EC0047E6FA /* THLDashboardTicketCellViewModel.m in Sources */,
@@ -3462,6 +3494,7 @@
 				79DF30261C72FF1700516199 /* THLEventHostingNavigationBar.m in Sources */,
 				216BDD611BC72F9100BBF713 /* THLSearchResultsViewDataSourceHandler.m in Sources */,
 				21775F631B8E17A300609D39 /* THLAddressBookEntryFetchService.m in Sources */,
+				C884EE271CF787CC00C47167 /* THLDiscoveryCell.m in Sources */,
 				219E32A81B8EA63D00214C85 /* THLEventNavigationBar.m in Sources */,
 				C8EE96CE1CE677580040A1F0 /* THLStripeTokenService.m in Sources */,
 				21CE06241BB86995004D10BB /* THLAppearanceUtils.m in Sources */,
@@ -3589,6 +3622,7 @@
 				2121736E1BB34DD3007D817A /* THLStarRatingView.m in Sources */,
 				2133C9BF1C3329BA0020083A /* THLWaitlistEntry.m in Sources */,
 				2108A8881B8BBF5B00B725F6 /* THLDependencyManager.m in Sources */,
+				C884EE201CF74E0400C47167 /* THLAdmissionsViewController.m in Sources */,
 				2110059F1B8A351000A540C6 /* THLEventDiscoveryWireframe.m in Sources */,
 				79BB15301C657FF50044D943 /* THLSingleLineTextField.m in Sources */,
 				79CE01E31C0A69D40047E6FA /* THLDashboardTicketCell.m in Sources */,

@@ -25,6 +25,7 @@
 #import "THLMyEventsViewController.h"
 #import <RKSwipeBetweenViewControllers/RKSwipeBetweenViewControllers.h>
 #import "THLEventTicketViewController.h"
+#import "THLDiscoveryViewController.h"
 
 @interface THLGuestFlowWireframe()
 <
@@ -87,7 +88,6 @@ THLMyEventsViewDelegate
     UINavigationController *perks = [UINavigationController new];
     UINavigationController *profile = [UINavigationController new];
     UIViewController *vc = [UIViewController new];
-//    [self presentDashboardInterfaceInNavigationController:dashboard];
     THLMyEventsViewController *myEventsVC = [[THLMyEventsViewController alloc]initWithClassName:@"GuestlistInvite"];
     myEventsVC.delegate = self;
     UIPageViewController *pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
@@ -99,8 +99,10 @@ THLMyEventsViewDelegate
 
 
     [dashboard addChildViewController:myEventsNavVC];
-//    [self presentDashboardInterfaceInNavigationController:dashboard];
-    [self presentEventDiscoveryInterfaceInNavigationController:discovery];
+    
+    THLDiscoveryViewController *discoveryVC = [[THLDiscoveryViewController alloc] initWithClassName:@"Event"];
+    [discovery pushViewController:discoveryVC animated:NO];
+
     [self presentPerkStoreInterfaceInNavigationController:perks];
     [self presentUserProfileInterfaceInNavigationController:profile];
     
