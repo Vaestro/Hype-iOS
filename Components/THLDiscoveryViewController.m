@@ -12,6 +12,7 @@
 #import "THLDashboardNotificationCell.h"
 #import "THLDiscoveryCell.h"
 #import <ParseUI/PFImageView.h>
+#import "THLAppearanceConstants.h"
 
 #import "MBProgressHUD.h"
 
@@ -53,13 +54,16 @@
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
     
     layout.sectionInset = UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 10.0f);
-    layout.minimumInteritemSpacing = 5.0f;
+    layout.minimumInteritemSpacing = 0.5f;
 }
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
+    
+    layout.minimumInteritemSpacing = 5;
+    layout.minimumLineSpacing = 5;
     
     const CGRect bounds = UIEdgeInsetsInsetRect(self.view.bounds, layout.sectionInset);
     CGFloat sideSize = MIN(CGRectGetWidth(bounds), CGRectGetHeight(bounds));
@@ -112,18 +116,29 @@
     cell.titlesView.locationNameText = object[@"location"][@"name"];
     cell.titlesView.locationNeighborhoodText = object[@"location"][@"neighborhood"];
     
-    PFFile *imageData = object[@"location"][@"image"];
+    PFFile *image = object[@"location"][@"image"];
+    cell.venueImageView.file = object[@"location"][@"image"];
+    [cell.venueImageView loadInBackground];
     
-    [imageData getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-        NSData *imageFile = [imageData getData];
-        cell.venueImageView.image = [UIImage imageWithData:imageFile];
-    }];
+//    PFFile *imageData = object[@"location"][@"image"];
+//    
+//    [imageData getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+//        NSData *imageFile = [imageData getData];
+//        cell.venueImageView.image = [UIImage imageWithData:imageFile];
+//    }];
+//    
     
-    
-    cell.contentView.layer.borderWidth = 1.0f;
-    cell.contentView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+//    cell.contentView.layer.borderWidth = 1.0f;
+//    cell.contentView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     //    [cell updateFromObject:object];
     
     return cell;
 }
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(DiscoveryCellWidth(collectionView), DiscoveryCellHeight(collectionView));
+}
+
+
+
 @end

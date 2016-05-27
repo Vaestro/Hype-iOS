@@ -13,8 +13,8 @@
 #import "UIView+DimView.h"
 
 @implementation THLDiscoveryCell
-@synthesize venueImageView = _venueImageView;
 @synthesize titlesView = _titlesView;
+@synthesize venueImageView = _venueImageView;
 
 
 #pragma mark -
@@ -31,9 +31,13 @@
     
     [_venueImageView makeConstraints:^(MASConstraintMaker *make) {
         make.center.centerOffset(CGPointZero);
-        make.edges.insets(kTHLEdgeInsetsNone());
+        make.top.left.right.bottom.insets(UIEdgeInsetsZero);
     }];
+    
+    [self.contentView bringSubviewToFront:_titlesView];
+
 }
+
 
 
 #pragma mark -
@@ -47,19 +51,18 @@
     return _titlesView;
 }
 
-
-- (PFImageView *)imageView
-{
+- (PFImageView *)venueImageView {
     if (!_venueImageView) {
-        _venueImageView = [PFImageView new];
+        _venueImageView = [[PFImageView alloc] initWithFrame:CGRectZero];
         _venueImageView.contentMode = UIViewContentModeScaleAspectFill;
         _venueImageView.clipsToBounds = YES;
-        _venueImageView.layer.cornerRadius = 5;
-        _venueImageView.layer.masksToBounds = YES;
         [_venueImageView dimView];
+        [self.contentView addSubview:_venueImageView];
     }
     return _venueImageView;
 }
+
+
 
 
 #pragma mark - Public Interface
