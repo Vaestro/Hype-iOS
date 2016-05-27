@@ -23,6 +23,8 @@
 #import "THLUser.h"
 #import "Intercom/intercom.h"
 #import "THLMyEventsViewController.h"
+#import <RKSwipeBetweenViewControllers/RKSwipeBetweenViewControllers.h>
+#import "THLEventTicketViewController.h"
 
 @interface THLGuestFlowWireframe()
 <
@@ -34,7 +36,8 @@ THLGuestlistInvitationModuleDelegate,
 THLGuestlistReviewModuleDelegate,
 THLPerkDetailModuleDelegate,
 THLPerkStoreModuleDelegate,
-THLLoginModuleDelegate
+THLLoginModuleDelegate,
+THLMyEventsViewDelegate
 >
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) id currentWireframe;
@@ -74,36 +77,29 @@ THLLoginModuleDelegate
     [_window makeKeyAndVisible];
 }
 
-//- (void)showNotificationBadge {
-//    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-//    f.numberStyle = NSNumberFormatterDecimalStyle;
-//    NSString *badgeString = [_masterTabBarController.tabBar.items objectAtIndex:1].badgeValue;
-//    NSNumber *currentBadgeValue = [f numberFromString:badgeString];
-//    if (currentBadgeValue == nil) {
-//        [[_masterTabBarController.viewControllers objectAtIndex:1] tabBarItem].badgeValue = @"1";
-//    } else {
-//        NSNumber *newBadgeValue = [NSNumber numberWithFloat:([currentBadgeValue floatValue] + 1)];
-//        [[_masterTabBarController.tabBar.items objectAtIndex:1] setBadgeValue:[NSString stringWithFormat:@"%@", newBadgeValue]];
-//    }
-//}
-
-//- (void)showNotificationBadge {
-//    [[_masterTabBarController.tabBar.items objectAtIndex:1] setBadgeValue:@""];
-//}
-
 - (void)configureMasterTabViewController:(UITabBarController *)masterTabBarController {
     _masterTabBarController = masterTabBarController;
     
     UINavigationController *discovery = [UINavigationController new];
     UINavigationController *dashboard = [UINavigationController new];
+ 
+
     UINavigationController *perks = [UINavigationController new];
     UINavigationController *profile = [UINavigationController new];
-    
-    [self presentDashboardInterfaceInNavigationController:dashboard];
-//    THLMyEventsViewController *myEventsVC = [[THLMyEventsViewController alloc]initWithClassName:@"GuestlistInvite"];
-//    [dashboard pushViewController:myEventsVC animated:NO];
-    
-    [self presentDashboardInterfaceInNavigationController:dashboard];
+    UIViewController *vc = [UIViewController new];
+//    [self presentDashboardInterfaceInNavigationController:dashboard];
+    THLMyEventsViewController *myEventsVC = [[THLMyEventsViewController alloc]initWithClassName:@"GuestlistInvite"];
+    myEventsVC.delegate = self;
+    UIPageViewController *pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
+
+    RKSwipeBetweenViewControllers *myEventsNavVC = [[RKSwipeBetweenViewControllers alloc]initWithRootViewController:pageController];
+    [myEventsNavVC.viewControllerArray addObjectsFromArray:@[myEventsVC, vc]];
+    myEventsNavVC.buttonText = @[@"TICKETS", @"INVITES"];
+    [myEventsNavVC.selectionBar setBackgroundColor:kTHLNUIAccentColor];
+
+
+    [dashboard addChildViewController:myEventsNavVC];
+//    [self presentDashboardInterfaceInNavigationController:dashboard];
     [self presentEventDiscoveryInterfaceInNavigationController:discovery];
     [self presentPerkStoreInterfaceInNavigationController:perks];
     [self presentUserProfileInterfaceInNavigationController:profile];
@@ -135,6 +131,17 @@ THLLoginModuleDelegate
     return self;
 }
 
+- (void)didSelectViewEventTicket:(PFObject *)guestlistInvite {
+    THLEventTicketViewController *eventTicketVC = [[THLEventTicketViewController alloc]initWithGuestlistInvite:guestlistInvite];
+    UIPageViewController *pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
+    
+    RKSwipeBetweenViewControllers *guestlistNavVC = [[RKSwipeBetweenViewControllers alloc]initWithRootViewController:pageController];
+    [guestlistNavVC.viewControllerArray addObjectsFromArray:@[eventTicketVC]];
+    guestlistNavVC.buttonText = @[@"GUESTLIST"];
+    [guestlistNavVC.selectionBar setBackgroundColor:kTHLNUIAccentColor];
+    [_window.rootViewController presentViewController:guestlistNavVC animated:YES completion:nil];
+    
+}
 
 - (void)presentEventDiscoveryInterfaceInNavigationController:(UINavigationController *)navigationController {
 	_eventDiscoveryWireframe = [_dependencyManager newEventDiscoveryWireframe];

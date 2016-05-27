@@ -48,6 +48,7 @@ static CGFloat const CELL_SPACING = 10;
 @synthesize dataSource = _dataSource;
 @synthesize showRefreshAnimation = _showRefreshAnimation;
 @synthesize refreshCommand = _refreshCommand;
+@synthesize viewDismissAndShowTicketCommand = _viewDismissAndShowTicketCommand;
 @synthesize acceptCommand = _acceptCommand;
 @synthesize declineCommand = _declineCommand;
 @synthesize responseCommand = _responseCommand;
@@ -74,12 +75,12 @@ static CGFloat const CELL_SPACING = 10;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.viewAppeared = TRUE;
+//    self.viewAppeared = TRUE;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    self.viewAppeared = FALSE;
+//    self.viewAppeared = FALSE;
 }
 
 - (void)constructView {
@@ -328,7 +329,7 @@ static CGFloat const CELL_SPACING = 10;
 - (void)purchaseTicket:(id)sender
 {
     NSDictionary *paymentInfo = @{@"guestlistInviteId": _guestlistInvite.objectId};
-    THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:_guestlist.event paymentInfo:paymentInfo andCompletionAction:nil];
+    THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:_guestlist.event paymentInfo:paymentInfo andCompletionAction:_viewDismissAndShowTicketCommand];
     UINavigationController *navVC = [[UINavigationController alloc]initWithRootViewController:checkoutVC];
     [self presentViewController:navVC animated:YES completion:nil];
 }

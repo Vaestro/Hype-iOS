@@ -53,7 +53,7 @@
     self.hud = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:_hud];
     self.collectionView.backgroundColor = [UIColor blackColor];
-    
+    self.navigationItem.title = @"Tickets";
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
     
     layout.sectionInset = UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 10.0f);
@@ -108,15 +108,7 @@
     
     THLEventInviteCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[THLEventInviteCell identifier]
                                                                            forIndexPath:indexPath];
-    
-//    cell.textLabel.textAlignment = NSTextAlignmentCenter;
 
-//    NSMutableAttributedString *title = [[NSMutableAttributedString alloc] initWithString: object[@"Guestlist"][@"event"][@"location"][@"name"] attributes:nil];
-//    NSAttributedString *priorityString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"\nPriority: %@", object[@"priority"]]
-//                                                                         attributes:@{ NSFontAttributeName : [UIFont systemFontOfSize:13.0f],
-//                                                                                       NSForegroundColorAttributeName : [UIColor grayColor] }];
-//    [title appendAttributedString:priorityString];
-//    cell.textLabel.attributedText = title;
     NSDate *date = (NSDate *)object[@"Guestlist"][@"event"][@"date"];
     NSString *invitationMessage = [NSString stringWithFormat:@"%@ invited you to their party", object[@"Guestlist"][@"Owner"][@"firstName"]];
     NSString *invitationDate = [NSString stringWithFormat:@"%@, %@", date.thl_weekdayString, date.thl_timeString];
@@ -134,12 +126,21 @@
         }
     }];
     
-    
-
     cell.contentView.layer.borderWidth = 1.0f;
     cell.contentView.layer.borderColor = [UIColor lightGrayColor].CGColor;
 //    [cell updateFromObject:object];
 
     return cell;
 }
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    PFObject *object = [self objectAtIndexPath:indexPath];
+    [self.delegate didSelectViewEventTicket:object];
+    if (!(BOOL)object[@"didOpen"]) {
+        object[@"didOpen"] = @YES;
+        [object saveInBackground];
+    }
+}
+
+
 @end

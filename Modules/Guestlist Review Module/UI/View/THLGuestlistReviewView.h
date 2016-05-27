@@ -36,6 +36,8 @@ typedef NS_OPTIONS(NSInteger, THLGuestlistReviewerStatus) {
 @property (nonatomic, strong) RACCommand *declineCommand;
 @property (nonatomic, strong) RACCommand *responseCommand;
 @property (nonatomic, strong) RACCommand *refreshCommand;
+@property (nonatomic, strong) RACCommand *viewDismissAndShowTicketCommand;
+
 
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *formattedDate;

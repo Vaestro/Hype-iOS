@@ -217,6 +217,7 @@
 		79CE01DF1C0A604B0047E6FA /* THLDashboardNotificationSectionTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CE01DE1C0A604B0047E6FA /* THLDashboardNotificationSectionTitleCell.m */; };
 		79CE01E31C0A69D40047E6FA /* THLDashboardTicketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CE01E21C0A69D40047E6FA /* THLDashboardTicketCell.m */; };
 		79CE01E61C0A69EC0047E6FA /* THLDashboardTicketCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CE01E51C0A69EC0047E6FA /* THLDashboardTicketCellViewModel.m */; };
+		79CE315A1CF7B03F00CEA784 /* THLEventTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CE31591CF7B03F00CEA784 /* THLEventTicketViewController.m */; };
 		79DF30221C714AFB00516199 /* THLCreditsExplanationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DF30211C714AFB00516199 /* THLCreditsExplanationView.m */; };
 		79DF30261C72FF1700516199 /* THLEventHostingNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DF30251C72FF1700516199 /* THLEventHostingNavigationBar.m */; };
 		C82D87BF1C25C7E300116328 /* THLConfirmationView.m in Sources */ = {isa = PBXBuildFile; fileRef = C82D87BE1C25C7E300116328 /* THLConfirmationView.m */; };
@@ -713,6 +714,8 @@
 		79CE01E41C0A69EC0047E6FA /* THLDashboardTicketCellViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLDashboardTicketCellViewModel.h; sourceTree = "<group>"; };
 		79CE01E51C0A69EC0047E6FA /* THLDashboardTicketCellViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLDashboardTicketCellViewModel.m; sourceTree = "<group>"; };
 		79CE01E71C0A69FA0047E6FA /* THLDashboardTicketCellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLDashboardTicketCellView.h; sourceTree = "<group>"; };
+		79CE31581CF7B03F00CEA784 /* THLEventTicketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventTicketViewController.h; sourceTree = "<group>"; };
+		79CE31591CF7B03F00CEA784 /* THLEventTicketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventTicketViewController.m; sourceTree = "<group>"; };
 		79DF30201C714AFB00516199 /* THLCreditsExplanationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLCreditsExplanationView.h; sourceTree = "<group>"; };
 		79DF30211C714AFB00516199 /* THLCreditsExplanationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLCreditsExplanationView.m; sourceTree = "<group>"; };
 		79DF30241C72FF1700516199 /* THLEventHostingNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventHostingNavigationBar.h; sourceTree = "<group>"; };
@@ -946,6 +949,8 @@
 				217EBE891BB78A57006044B6 /* THLViewDataSource */,
 				794FAB651C5F17F400438D49 /* THLActionButton.h */,
 				794FAB661C5F17F400438D49 /* THLActionButton.m */,
+				79CE31581CF7B03F00CEA784 /* THLEventTicketViewController.h */,
+				79CE31591CF7B03F00CEA784 /* THLEventTicketViewController.m */,
 				79BB152E1C657FF50044D943 /* THLSingleLineTextField.h */,
 				79BB152F1C657FF50044D943 /* THLSingleLineTextField.m */,
 				79BB15311C6CED720044D943 /* THLFxTitleLabel.h */,
@@ -3558,6 +3563,7 @@
 				790603C31BFB73380093335E /* THLDashboardWireframe.m in Sources */,
 				795F13661C3C40B500AC9E76 /* THLWaitlistHomeViewController.m in Sources */,
 				C85EE38A1C1BCA200008C14B /* THLPerkDetailWireframe.m in Sources */,
+				79CE315A1CF7B03F00CEA784 /* THLEventTicketViewController.m in Sources */,
 				798D7EBF1BF2E56C001D4593 /* OnboardingViewController.m in Sources */,
 				217EBEBA1BB7AB68006044B6 /* THLHostEntity.m in Sources */,
 				211005981B8A319000A540C6 /* THLEventDiscoveryInteractor.m in Sources */,

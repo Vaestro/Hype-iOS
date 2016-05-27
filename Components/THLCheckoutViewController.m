@@ -191,8 +191,9 @@
                                             [self displayError:[error localizedDescription]];
                                         } else {
 //                                            [self.delegate checkoutViewController:self didFinishPurchasingForGuestlistInvite:response];
-                                            [self.navigationController dismissViewControllerAnimated:TRUE completion:nil];
-                                        }
+                                            [self.navigationController dismissViewControllerAnimated:TRUE completion:^{
+                                                [_completionAction execute:nil];
+                                            }];                                        }
                                     }];
     } else {
         

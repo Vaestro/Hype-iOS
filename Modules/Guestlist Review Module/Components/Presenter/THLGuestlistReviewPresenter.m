@@ -157,7 +157,12 @@ THLGuestlistReviewInteractorDelegate
     [RACObserve(self, reviewerStatus) subscribeNext:^(NSNumber *x) {
         [WSELF.view setReviewerStatus:x];
     }];
-    
+    RACCommand *viewDismissAndShowTicketCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [_wireframe dismissPartyViewAndShowTicketView];
+        return [RACSignal empty];
+    }];
+    [_view setViewDismissAndShowTicketCommand:viewDismissAndShowTicketCommand];
+
     [_view setDataSource:dataSource];
     [_view setAcceptCommand:acceptCommand];
     [_view setDeclineCommand:declineCommand];
