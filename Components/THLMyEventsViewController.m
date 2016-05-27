@@ -19,8 +19,6 @@
 @property(nonatomic, strong) MBProgressHUD *hud;
 @end
 
-
-
 @implementation THLMyEventsViewController
 
 #pragma mark -
@@ -125,9 +123,6 @@
             cell.personIconView.image = personIconPic;
         }
     }];
-    
-    cell.contentView.layer.borderWidth = 1.0f;
-    cell.contentView.layer.borderColor = [UIColor lightGrayColor].CGColor;
 //    [cell updateFromObject:object];
 
     return cell;

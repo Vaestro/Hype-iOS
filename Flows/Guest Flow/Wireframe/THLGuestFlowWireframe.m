@@ -26,6 +26,7 @@
 #import <RKSwipeBetweenViewControllers/RKSwipeBetweenViewControllers.h>
 #import "THLEventTicketViewController.h"
 #import "THLDiscoveryViewController.h"
+#import "THLMyEventsNavigationViewController.h"
 
 @interface THLGuestFlowWireframe()
 <
@@ -70,6 +71,9 @@ THLMyEventsViewDelegate
 	return self;
 }
 
+#pragma mark -
+#pragma mark MasterTabViewController
+
 - (void)configureMasterTabViewControllerAndPresentGuestFlowInWindow:(UIWindow *)window {
     _window = window;
     UITabBarController *masterTabBarController = [UITabBarController new];
@@ -88,15 +92,14 @@ THLMyEventsViewDelegate
     UINavigationController *perks = [UINavigationController new];
     UINavigationController *profile = [UINavigationController new];
     UIViewController *vc = [UIViewController new];
+    
     THLMyEventsViewController *myEventsVC = [[THLMyEventsViewController alloc]initWithClassName:@"GuestlistInvite"];
     myEventsVC.delegate = self;
     UIPageViewController *pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
 
-    RKSwipeBetweenViewControllers *myEventsNavVC = [[RKSwipeBetweenViewControllers alloc]initWithRootViewController:pageController];
+    THLMyEventsNavigationViewController *myEventsNavVC = [[THLMyEventsNavigationViewController alloc]initWithRootViewController:pageController];
     [myEventsNavVC.viewControllerArray addObjectsFromArray:@[myEventsVC, vc]];
     myEventsNavVC.buttonText = @[@"TICKETS", @"INVITES"];
-    [myEventsNavVC.selectionBar setBackgroundColor:kTHLNUIAccentColor];
-
 
     [dashboard addChildViewController:myEventsNavVC];
     
@@ -122,6 +125,21 @@ THLMyEventsViewDelegate
     _masterTabBarController.view.autoresizingMask=(UIViewAutoresizingFlexibleHeight);
 }
 
+#pragma mark -
+#pragma mark MyEventsViewController
+#pragma mark Delegate
+
+- (void)didSelectViewEventTicket:(PFObject *)guestlistInvite {
+    THLEventTicketViewController *eventTicketVC = [[THLEventTicketViewController alloc]initWithGuestlistInvite:guestlistInvite];
+    UIPageViewController *pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
+    
+    RKSwipeBetweenViewControllers *guestlistNavVC = [[RKSwipeBetweenViewControllers alloc]initWithRootViewController:pageController];
+    [guestlistNavVC.viewControllerArray addObjectsFromArray:@[eventTicketVC]];
+    guestlistNavVC.buttonText = @[@"GUESTLIST"];
+    [guestlistNavVC.selectionBar setBackgroundColor:kTHLNUIAccentColor];
+    [_window.rootViewController presentViewController:guestlistNavVC animated:YES completion:nil];
+}
+
 - (void)presentGuestFlowInWindow:(UIWindow *)window forEventDetail:(THLEventEntity *)eventEntity {
     /**
      *  Prevents popup notification from instantiating another event detail module if one is already instantiated
@@ -133,17 +151,7 @@ THLMyEventsViewDelegate
     return self;
 }
 
-- (void)didSelectViewEventTicket:(PFObject *)guestlistInvite {
-    THLEventTicketViewController *eventTicketVC = [[THLEventTicketViewController alloc]initWithGuestlistInvite:guestlistInvite];
-    UIPageViewController *pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
-    
-    RKSwipeBetweenViewControllers *guestlistNavVC = [[RKSwipeBetweenViewControllers alloc]initWithRootViewController:pageController];
-    [guestlistNavVC.viewControllerArray addObjectsFromArray:@[eventTicketVC]];
-    guestlistNavVC.buttonText = @[@"GUESTLIST"];
-    [guestlistNavVC.selectionBar setBackgroundColor:kTHLNUIAccentColor];
-    [_window.rootViewController presentViewController:guestlistNavVC animated:YES completion:nil];
-    
-}
+
 
 - (void)presentEventDiscoveryInterfaceInNavigationController:(UINavigationController *)navigationController {
 	_eventDiscoveryWireframe = [_dependencyManager newEventDiscoveryWireframe];
