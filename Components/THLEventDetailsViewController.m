@@ -72,25 +72,25 @@
 {
     [super viewWillLayoutSubviews];
     
-    [self.scrollView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.insets(kTHLEdgeInsetsNone());
-    }];
-    
-    [self.scrollView.stackView addSubview:self.locationInfoView
-                  withPrecedingMargin:_navBar.frame.size.height + 2*kTHLPaddingHigh()
-                           sideMargin:4*kTHLPaddingHigh()];
-    
-    [self.scrollView.stackView addSubview:self.musicTypesView
-                  withPrecedingMargin:kTHLPaddingHigh()
-                           sideMargin:4*kTHLPaddingHigh()];
-    
-    [self.scrollView.stackView addSubview:self.mapView
-                  withPrecedingMargin:kTHLPaddingHigh()
-                           sideMargin:kTHLPaddingNone()];
-    
-    [self.scrollView.stackView addSubview:self.needToKnowInfoView
-                  withPrecedingMargin:2*kTHLPaddingHigh()
-                           sideMargin:4*kTHLPaddingHigh()];
+//    [self.scrollView makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.left.right.insets(kTHLEdgeInsetsNone());
+//    }];
+//    
+//    [self.scrollView.stackView addSubview:self.locationInfoView
+//                  withPrecedingMargin:_navBar.frame.size.height + 2*kTHLPaddingHigh()
+//                           sideMargin:4*kTHLPaddingHigh()];
+//    
+//    [self.scrollView.stackView addSubview:self.musicTypesView
+//                  withPrecedingMargin:kTHLPaddingHigh()
+//                           sideMargin:4*kTHLPaddingHigh()];
+//    
+//    [self.scrollView.stackView addSubview:self.mapView
+//                  withPrecedingMargin:kTHLPaddingHigh()
+//                           sideMargin:kTHLPaddingNone()];
+//    
+//    [self.scrollView.stackView addSubview:self.needToKnowInfoView
+//                  withPrecedingMargin:2*kTHLPaddingHigh()
+//                           sideMargin:4*kTHLPaddingHigh()];
     
     UIView *buttonBackground = [UIView new];
     buttonBackground.backgroundColor = kTHLNUIPrimaryBackgroundColor;
@@ -98,7 +98,7 @@
     WEAKSELF();
     [buttonBackground makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.left.right.insets(kTHLEdgeInsetsNone());
-        make.top.equalTo(WSELF.scrollView.mas_bottom);
+//        make.top.equalTo(WSELF.scrollView.mas_bottom);
         make.height.equalTo(80);
     }];
     
