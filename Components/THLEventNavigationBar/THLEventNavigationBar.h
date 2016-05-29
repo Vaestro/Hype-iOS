@@ -16,7 +16,7 @@
 @property (nonatomic, copy) NSString *promotionInfo;
 @property (nonatomic, copy) NSURL *locationImageURL;
 @property (nonatomic, copy) NSURL *promoImageURL;
-@property (nonatomic, strong) RACCommand *dismissCommand;
+@property (nonatomic, strong) UIButton *dismissButton;
 @property (nonatomic, strong) RACCommand *detailDisclosureCommand;
 
 - (void)setExclusiveEventLabel;

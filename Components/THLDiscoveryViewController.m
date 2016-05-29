@@ -7,6 +7,7 @@
 //
 
 #import "THLDiscoveryViewController.h"
+#import "THLEventDetailsViewController.h"
 #import "Parse.h"
 #import <ParseUI/PFCollectionViewCell.h>
 #import "THLDashboardNotificationCell.h"
@@ -119,22 +120,8 @@
     cell.titlesView.dateText = invitationDate;
     cell.titlesView.locationNameText = object[@"location"][@"name"];
     cell.titlesView.locationNeighborhoodText = object[@"location"][@"neighborhood"];
-    
-    PFFile *image = object[@"location"][@"image"];
     cell.venueImageView.file = object[@"location"][@"image"];
     [cell.venueImageView loadInBackground];
-    
-//    PFFile *imageData = object[@"location"][@"image"];
-//    
-//    [imageData getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-//        NSData *imageFile = [imageData getData];
-//        cell.venueImageView.image = [UIImage imageWithData:imageFile];
-//    }];
-//    
-    
-//    cell.contentView.layer.borderWidth = 1.0f;
-//    cell.contentView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    //    [cell updateFromObject:object];
     
     return cell;
 }
@@ -142,6 +129,38 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return CGSizeMake(DiscoveryCellWidth(collectionView), DiscoveryCellHeight(collectionView));
 }
+
+
+
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    PFObject *object = [self objectAtIndexPath:indexPath];
+   
+    [self.delegate eventDiscoveryViewControllerWantsToPresentDetailsForEvent:object];
+}
+
+
+//- (NSInteger)numberOfSectionsInCollectionView:(UICollectionViewCell *)collectionView {
+//    
+//    if (self.objects.count != 0) {
+//        
+//        return 1;
+//        
+//    } else {
+//        
+//        UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+//        
+//        messageLabel.text = @"No data is currently available. Please pull down to refresh.";
+//        messageLabel.textColor = [UIColor whiteColor];
+//        messageLabel.numberOfLines = 0;
+//        messageLabel.textAlignment = NSTextAlignmentCenter;
+//        messageLabel.font = [UIFont fontWithName:@"Palatino-Italic" size:20];
+//        [messageLabel sizeToFit];
+//        self.collectionView.backgroundView = messageLabel;
+//    }
+//    
+//    return 0;
+//}
 
 #pragma mark - event handlers ()
 

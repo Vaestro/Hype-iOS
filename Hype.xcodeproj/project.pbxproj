@@ -155,6 +155,7 @@
 		79AD95F41C30CFC400EDB82E /* THLNeedToKnowInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79AD95F31C30CFC400EDB82E /* THLNeedToKnowInfoView.m */; };
 		79AD95F71C3ADA6200EDB82E /* THLEventDetailMusicTypesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79AD95F61C3ADA6200EDB82E /* THLEventDetailMusicTypesView.m */; };
 		79B062BA1CF8B46800A3DC50 /* THLMyEventsNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B062B91CF8B46800A3DC50 /* THLMyEventsNavigationViewController.m */; };
+		79B062BD1CF909F300A3DC50 /* THLPartyNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B062BC1CF909F300A3DC50 /* THLPartyNavigationController.m */; };
 		79B527A41C6E9AED000A0970 /* THLAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B527A31C6E9AED000A0970 /* THLAlertView.m */; };
 		79B527B01C6EA777000A0970 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79B527A51C6EA71A000A0970 /* OpenSans-Bold.ttf */; };
 		79B527B11C6EA777000A0970 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79B527A61C6EA71A000A0970 /* OpenSans-BoldItalic.ttf */; };
@@ -243,6 +244,7 @@
 		C884EE201CF74E0400C47167 /* THLAdmissionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C884EE1F1CF74E0400C47167 /* THLAdmissionsViewController.m */; };
 		C884EE241CF77CB200C47167 /* THLDiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C884EE231CF77CB200C47167 /* THLDiscoveryViewController.m */; };
 		C884EE271CF787CC00C47167 /* THLDiscoveryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C884EE261CF787CC00C47167 /* THLDiscoveryCell.m */; };
+		C884EE2B1CF8C21900C47167 /* THLEventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C884EE2A1CF8C21900C47167 /* THLEventDetailsViewController.m */; };
 		C8D1D2A41CD3E864006ADC6A /* THLPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8D1D2A31CD3E864006ADC6A /* THLPaymentViewController.m */; };
 		C8E1B1621BF437F300A9824C /* THLUserProfileInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B1611BF437F300A9824C /* THLUserProfileInteractor.m */; };
 		C8E1B1651BF4380D00A9824C /* THLUserProfileDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B1641BF4380D00A9824C /* THLUserProfileDataManager.m */; };
@@ -617,6 +619,8 @@
 		79AD95F61C3ADA6200EDB82E /* THLEventDetailMusicTypesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventDetailMusicTypesView.m; sourceTree = "<group>"; };
 		79B062B81CF8B46800A3DC50 /* THLMyEventsNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMyEventsNavigationViewController.h; sourceTree = "<group>"; };
 		79B062B91CF8B46800A3DC50 /* THLMyEventsNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLMyEventsNavigationViewController.m; sourceTree = "<group>"; };
+		79B062BB1CF909F300A3DC50 /* THLPartyNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPartyNavigationController.h; sourceTree = "<group>"; };
+		79B062BC1CF909F300A3DC50 /* THLPartyNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPartyNavigationController.m; sourceTree = "<group>"; };
 		79B527A21C6E9AED000A0970 /* THLAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLAlertView.h; sourceTree = "<group>"; };
 		79B527A31C6E9AED000A0970 /* THLAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLAlertView.m; sourceTree = "<group>"; };
 		79B527A51C6EA71A000A0970 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
@@ -779,6 +783,8 @@
 		C884EE231CF77CB200C47167 /* THLDiscoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLDiscoveryViewController.m; sourceTree = "<group>"; };
 		C884EE251CF787CC00C47167 /* THLDiscoveryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLDiscoveryCell.h; sourceTree = "<group>"; };
 		C884EE261CF787CC00C47167 /* THLDiscoveryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLDiscoveryCell.m; sourceTree = "<group>"; };
+		C884EE291CF8C21900C47167 /* THLEventDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventDetailsViewController.h; sourceTree = "<group>"; };
+		C884EE2A1CF8C21900C47167 /* THLEventDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventDetailsViewController.m; sourceTree = "<group>"; };
 		C8D1D2A21CD3E864006ADC6A /* THLPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPaymentViewController.h; sourceTree = "<group>"; };
 		C8D1D2A31CD3E864006ADC6A /* THLPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPaymentViewController.m; sourceTree = "<group>"; };
 		C8E1B1601BF437F300A9824C /* THLUserProfileInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserProfileInteractor.h; sourceTree = "<group>"; };
@@ -945,6 +951,7 @@
 		211005A81B8A3D5800A540C6 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				C884EE281CF8BDAD00C47167 /* THLEventDetailsViewController */,
 				C884EE211CF77C8400C47167 /* THLDiscoveryViewController */,
 				C8E8817E1CF669D900D1A698 /* THLAdmissionsViewController */,
 				C8E8817A1CF35BDC00D1A698 /* THLMyEventsViewController */,
@@ -969,6 +976,8 @@
 				79B062B81CF8B46800A3DC50 /* THLMyEventsNavigationViewController.h */,
 				79B062B91CF8B46800A3DC50 /* THLMyEventsNavigationViewController.m */,
 				79BB152F1C657FF50044D943 /* THLSingleLineTextField.m */,
+				79B062BB1CF909F300A3DC50 /* THLPartyNavigationController.h */,
+				79B062BC1CF909F300A3DC50 /* THLPartyNavigationController.m */,
 				79BB15311C6CED720044D943 /* THLFxTitleLabel.h */,
 				79BB15321C6CED720044D943 /* THLFxTitleLabel.m */,
 				799862441C97B6AF004C5326 /* THLTextEntryViewController.h */,
@@ -2793,6 +2802,15 @@
 			name = THLDiscoveryViewController;
 			sourceTree = "<group>";
 		};
+		C884EE281CF8BDAD00C47167 /* THLEventDetailsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C884EE291CF8C21900C47167 /* THLEventDetailsViewController.h */,
+				C884EE2A1CF8C21900C47167 /* THLEventDetailsViewController.m */,
+			);
+			name = THLEventDetailsViewController;
+			sourceTree = "<group>";
+		};
 		C8A766551CDA84A600A000C2 /* THLWebViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -3582,6 +3600,7 @@
 				21EED1001BB5F842001325A7 /* THLGuestFlowWireframe.m in Sources */,
 				79B959291BE581A800B87799 /* THLGuestlistReviewDataManager.m in Sources */,
 				791C1F831BF13AEA00CCF803 /* THLEventHostingDataManager.m in Sources */,
+				79B062BD1CF909F300A3DC50 /* THLPartyNavigationController.m in Sources */,
 				215A42A11BAA26D500D03C35 /* THLFacebookPictureInteractor.m in Sources */,
 				794FAB671C5F17F400438D49 /* THLActionButton.m in Sources */,
 				79ABA9BC1C054F42001ABAC7 /* THLDashboardNotificationCellViewModel.m in Sources */,
@@ -3641,6 +3660,7 @@
 				21E402C91BBF7675001D0C2C /* THLGuestlistInvitationWireframe.m in Sources */,
 				791C1F8A1BF13BC300CCF803 /* THLEventHostingTableCell.m in Sources */,
 				CBE54720F63BA2DE2136B454 /* THLViewDataSource+Factory.m in Sources */,
+				C884EE2B1CF8C21900C47167 /* THLEventDetailsViewController.m in Sources */,
 				794AFE271C10C41B008475B1 /* THLHostDashboardTicketCell.m in Sources */,
 				CBE5403C8B7732B36D5ECB5E /* THLViewDataSourceGrouping.m in Sources */,
 				79AD95F71C3ADA6200EDB82E /* THLEventDetailMusicTypesView.m in Sources */,

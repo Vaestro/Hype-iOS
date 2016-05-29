@@ -62,11 +62,7 @@
     [super viewWillLayoutSubviews];
     
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
-    
-    const CGRect bounds = UIEdgeInsetsInsetRect(self.view.bounds, layout.sectionInset);
-    CGFloat sideSize = MIN(CGRectGetWidth(bounds), CGRectGetHeight(bounds));
     layout.itemSize = CGSizeMake(ViewWidth(self.collectionView) - 25, 125);
-
 }
 
 - (void)objectsWillLoad {
@@ -123,7 +119,6 @@
             cell.personIconView.image = personIconPic;
         }
     }];
-//    [cell updateFromObject:object];
 
     return cell;
 }

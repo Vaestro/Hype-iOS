@@ -25,8 +25,10 @@
 #import "THLMyEventsViewController.h"
 #import <RKSwipeBetweenViewControllers/RKSwipeBetweenViewControllers.h>
 #import "THLEventTicketViewController.h"
-#import "THLDiscoveryViewController.h"
 #import "THLMyEventsNavigationViewController.h"
+#import "THLPartyNavigationController.h"
+#import "THLEventDetailsViewController.h"
+#import "THLDiscoveryViewController.h"
 
 @interface THLGuestFlowWireframe()
 <
@@ -39,7 +41,8 @@ THLGuestlistReviewModuleDelegate,
 THLPerkDetailModuleDelegate,
 THLPerkStoreModuleDelegate,
 THLLoginModuleDelegate,
-THLMyEventsViewDelegate
+THLMyEventsViewDelegate,
+THLDiscoveryViewControllerDelegate
 >
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) id currentWireframe;
@@ -104,6 +107,7 @@ THLMyEventsViewDelegate
     [dashboard addChildViewController:myEventsNavVC];
     
     THLDiscoveryViewController *discoveryVC = [[THLDiscoveryViewController alloc] initWithClassName:@"Event"];
+    discoveryVC.delegate = self;
     [discovery pushViewController:discoveryVC animated:NO];
 
     [self presentPerkStoreInterfaceInNavigationController:perks];
@@ -126,18 +130,21 @@ THLMyEventsViewDelegate
 }
 
 #pragma mark -
+#pragma mark EventDiscoveryViewController
+#pragma mark Delegate
+
+- (void)eventDiscoveryViewControllerWantsToPresentDetailsForEvent:(PFObject *)event {
+    THLEventDetailsViewController *eventDetailVC = [[THLEventDetailsViewController alloc]initWithEvent:event];
+    [_window.rootViewController presentViewController:eventDetailVC animated:YES completion:nil];
+}
+
+#pragma mark -
 #pragma mark MyEventsViewController
 #pragma mark Delegate
 
 - (void)didSelectViewEventTicket:(PFObject *)guestlistInvite {
-    THLEventTicketViewController *eventTicketVC = [[THLEventTicketViewController alloc]initWithGuestlistInvite:guestlistInvite];
-    UIPageViewController *pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
-    
-    RKSwipeBetweenViewControllers *guestlistNavVC = [[RKSwipeBetweenViewControllers alloc]initWithRootViewController:pageController];
-    [guestlistNavVC.viewControllerArray addObjectsFromArray:@[eventTicketVC]];
-    guestlistNavVC.buttonText = @[@"GUESTLIST"];
-    [guestlistNavVC.selectionBar setBackgroundColor:kTHLNUIAccentColor];
-    [_window.rootViewController presentViewController:guestlistNavVC animated:YES completion:nil];
+    THLPartyNavigationController *partyNavigationController = [[THLPartyNavigationController alloc] initWithGuestlistInvite:guestlistInvite];
+    [_window.rootViewController presentViewController:partyNavigationController animated:YES completion:nil];
 }
 
 - (void)presentGuestFlowInWindow:(UIWindow *)window forEventDetail:(THLEventEntity *)eventEntity {

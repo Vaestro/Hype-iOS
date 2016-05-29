@@ -14,7 +14,6 @@
 #import "THLAlertView.h"
 
 @interface THLEventNavigationBar()
-@property (nonatomic, strong) UIButton *dismissButton;
 @property (nonatomic, strong) UILabel *dateLabel;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) THLEventDetailsPromotionInfoView *promotionInfoView;
@@ -94,7 +93,7 @@
     RAC(self.titleLabel, text, @"") = RACObserve(self, titleText);
     RAC(self.minimumTitleLabel, text, @"") = RACObserve(self, titleText);
     RAC(self.dateLabel, text, @"") = RACObserve(self, dateText);
-    RAC(self.dismissButton, rac_command) = RACObserve(self, dismissCommand);
+//    RAC(self.dismissButton, rac_command) = RACObserve(self, dismissCommand);
     RAC(self.promotionInfoView, promotionInfo) = RACObserve(self, promotionInfo);
 
     RACSignal *imageURLSignal = [RACObserve(self, locationImageURL) filter:^BOOL(NSURL *url) {
@@ -143,7 +142,7 @@
 
 - (void)addGradientLayer {
 #warning some hacky shit to make sure the gradient layer doesnt draw again so you cant see the event image
-    if (_numberOfLayouts < 2) {
+    if (_numberOfLayouts < 3) {
         CAGradientLayer *gradient = [CAGradientLayer layer];
         
         gradient.frame = self.imageView.bounds;

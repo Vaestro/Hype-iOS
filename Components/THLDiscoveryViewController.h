@@ -9,5 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <ParseUI/PFQueryCollectionViewController.h>
 
+@protocol THLDiscoveryViewControllerDelegate <NSObject>
+- (void)eventDiscoveryViewControllerWantsToPresentDetailsForEvent:(PFObject *)event;
+@end
+
 @interface THLDiscoveryViewController : PFQueryCollectionViewController
+@property (nonatomic, weak) id<THLDiscoveryViewControllerDelegate> delegate;
+
 @end
