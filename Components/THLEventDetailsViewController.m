@@ -19,7 +19,6 @@
 #import "THLPromotionInfoView.h"
 #import "THLEventDetailMusicTypesView.h"
 #import "THLEventNavigationBar.h"
-#import "SquareCashStyleBehaviorDefiner.h"
 #import "THLActionButton.h"
 #import "THLAlertView.h"
 #import "THLUser.h"
@@ -39,6 +38,8 @@
 @property (nonatomic, strong) THLEventDetailsMapView *mapView;
 @property (nonatomic, strong) THLEventNavigationBar *navBar;
 @property (nonatomic) PFObject *event;
+@property (nonatomic) BOOL showNavigationBar;
+@property (nonatomic, strong) UIImageView *eventImageView;
 
 @end
 
@@ -47,14 +48,13 @@
 
 #pragma mark - Life cycle
 
-- (id)initWithEvent:(PFObject *)event
-{
+- (id)initWithEvent:(PFObject *)event andShowNavigationBar:(BOOL)showNavigationBar {
     if (self = [super init]) {
         self.event = event;
+        _showNavigationBar = showNavigationBar;
     }
     return self;
 }
-
 
 
 #pragma mark - UIViewController
@@ -63,42 +63,47 @@
 {
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    self.scrollView.delegate = (id<UIScrollViewDelegate>)_navBar.behaviorDefiner;
     self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
+    [self.scrollView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.insets(kTHLEdgeInsetsNone());
+    }];
     
-}
+    if (_showNavigationBar == TRUE) {
+        self.scrollView.delegate = (id<UIScrollViewDelegate>)self.navBar.behaviorDefiner;
+        
+        [self.scrollView.stackView addSubview:self.locationInfoView
+                          withPrecedingMargin:self.navBar.frame.size.height + 2*kTHLPaddingHigh()
+                                   sideMargin:4*kTHLPaddingHigh()];
+    } else {
+        [self.scrollView.stackView addSubview:self.eventImageView
+                          withPrecedingMargin:2*kTHLPaddingHigh()
+                                   sideMargin:4*kTHLPaddingHigh()];
+        
+        [self.scrollView.stackView addSubview:self.locationInfoView
+                          withPrecedingMargin:kTHLPaddingHigh()
+                                   sideMargin:4*kTHLPaddingHigh()];
+    }
 
-- (void)viewWillLayoutSubviews
-{
-    [super viewWillLayoutSubviews];
+    [self.scrollView.stackView addSubview:self.musicTypesView
+                  withPrecedingMargin:kTHLPaddingHigh()
+                           sideMargin:4*kTHLPaddingHigh()];
     
-//    [self.scrollView makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.left.right.insets(kTHLEdgeInsetsNone());
-//    }];
-//    
-//    [self.scrollView.stackView addSubview:self.locationInfoView
-//                  withPrecedingMargin:_navBar.frame.size.height + 2*kTHLPaddingHigh()
-//                           sideMargin:4*kTHLPaddingHigh()];
-//    
-//    [self.scrollView.stackView addSubview:self.musicTypesView
-//                  withPrecedingMargin:kTHLPaddingHigh()
-//                           sideMargin:4*kTHLPaddingHigh()];
-//    
-//    [self.scrollView.stackView addSubview:self.mapView
-//                  withPrecedingMargin:kTHLPaddingHigh()
-//                           sideMargin:kTHLPaddingNone()];
-//    
-//    [self.scrollView.stackView addSubview:self.needToKnowInfoView
-//                  withPrecedingMargin:2*kTHLPaddingHigh()
-//                           sideMargin:4*kTHLPaddingHigh()];
+    [self.scrollView.stackView addSubview:self.mapView
+                  withPrecedingMargin:kTHLPaddingHigh()
+                           sideMargin:kTHLPaddingNone()];
+    
+    [self.scrollView.stackView addSubview:self.needToKnowInfoView
+                  withPrecedingMargin:2*kTHLPaddingHigh()
+                           sideMargin:4*kTHLPaddingHigh()];
     
     UIView *buttonBackground = [UIView new];
     buttonBackground.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     [self.view addSubview:buttonBackground];
+    
     WEAKSELF();
     [buttonBackground makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.left.right.insets(kTHLEdgeInsetsNone());
-//        make.top.equalTo(WSELF.scrollView.mas_bottom);
+        make.top.equalTo(WSELF.scrollView.mas_bottom);
         make.height.equalTo(80);
     }];
     
@@ -114,12 +119,6 @@
 {
     //    [super viewDidLayoutSubviews]
     [self.navBar addGradientLayer];
-    
-}
-
-- (UIStatusBarStyle) preferredStatusBarStyle
-{
-    return UIStatusBarStyleLightContent;
 }
 
 
@@ -128,24 +127,19 @@
 
 - (THLEventNavigationBar *)navBar
 {
-    if (!_navBar) {
+    if (!_navBar && _showNavigationBar) {
         _navBar = [[THLEventNavigationBar alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, SCREEN_HEIGHT - 80)];
-        _navBar.minimumBarHeight = 65;
-        _navBar.behaviorDefiner = [SquareCashStyleBehaviorDefiner new];
-        _navBar.titleText = _event[@"location"][@"name"];
-        _navBar.dateText = [NSString stringWithFormat:@"%@, %@", ((NSDate *)_event[@"date"]).thl_weekdayString, ((NSDate *)_event[@"date"]).thl_timeString];
-        
+        _navBar.titleLabel.text = _event[@"location"][@"name"];
+        _navBar.dateLabel.text = [NSString stringWithFormat:@"%@, %@", ((NSDate *)_event[@"date"]).thl_weekdayString, ((NSDate *)_event[@"date"]).thl_timeString];
+        [_navBar.dismissButton addTarget:self
+                     action:@selector(dismissCommand)
+          forControlEvents:UIControlEventTouchUpInside];
         if (_event[@"promoImage"]) {
             _navBar.locationImageURL = [NSURL URLWithString:((PFFile *)_event[@"promoImage"]).url];
         } else {
             _navBar.locationImageURL =  [NSURL URLWithString:((PFFile *)_event[@"location"][@"image"]).url];
         }
-        _navBar.dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-            [self dismissCommand];
-            return [RACSignal empty];
-        }];
-        _navBar.promotionInfo = _event[@"info"];
-        if (_event[@"title"] != nil) [_navBar setEventName:_event[@"title"]];
+        if (_event[@"title"] != nil) [_navBar.titleLabel setText:_event[@"title"]];
         [self.view addSubview:_navBar];
         [self.view bringSubviewToFront:_navBar];
     }
@@ -173,7 +167,7 @@
     return _promotionInfoView;
 }
 
-- (THLNeedToKnowInfoView *)newNeedToKnowInfoView
+- (THLNeedToKnowInfoView *)needToKnowInfoView
 {
     if (!_needToKnowInfoView) {
         _needToKnowInfoView = [THLNeedToKnowInfoView new];
@@ -194,6 +188,20 @@
         _locationInfoView.translatesAutoresizingMaskIntoConstraints = NO;
     }
     return _locationInfoView;
+}
+
+- (UIImageView *)eventImageView {
+    if (!_eventImageView) {
+        _eventImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 150)];
+        _eventImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _eventImageView.clipsToBounds = YES;
+        [_eventImageView sd_setImageWithURL:[NSURL URLWithString:((PFFile *)_event[@"location"][@"image"]).url]];
+        _eventImageView.translatesAutoresizingMaskIntoConstraints = NO;
+        [_eventImageView makeConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(150);
+        }];
+    }
+    return _eventImageView;
 }
 
 - (THLEventDetailMusicTypesView *)musicTypesView
@@ -244,11 +252,17 @@
     return _mapView;
 }
 
+
+- (UIStatusBarStyle) preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
 #pragma mark - event handlers ()
 
 - (void)dismissCommand
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:TRUE completion:nil];
 }
 
 

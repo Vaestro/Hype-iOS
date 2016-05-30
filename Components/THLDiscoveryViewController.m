@@ -135,9 +135,8 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     PFObject *object = [self objectAtIndexPath:indexPath];
-    
-    THLEventDetailsViewController *eventDetailVC = [[THLEventDetailsViewController alloc]initWithEvent:object];
-    [self.navigationController presentViewController:eventDetailVC animated:YES completion:nil];
+   
+    [self.delegate eventDiscoveryViewControllerWantsToPresentDetailsForEvent:object];
 }
 
 

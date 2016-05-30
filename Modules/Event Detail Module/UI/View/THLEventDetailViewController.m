@@ -167,13 +167,12 @@
 
 - (void)bindView {
     WEAKSELF();
-    RAC(self.navBar, dateText) = RACObserve(self, eventDate);
-    RAC(self.navBar, titleText) = RACObserve(self, titleText);
-    RAC(self.navBar, dismissCommand) = RACObserve(self, dismissCommand);
-    RAC(self.navBar, locationImageURL) = RACObserve(self, locationImageURL);
-    RAC(self.navBar, promotionInfo) = RACObserve(self, promoInfo);
-    if (eventName != nil) [self.navBar setEventName:eventName];
-    if (exclusiveEvent) [self.navBar setExclusiveEventLabel];
+//    RAC(self.navBar, dateText) = RACObserve(self, eventDate);
+//    RAC(self.navBar, titleText) = RACObserve(self, titleText);
+//    RAC(self.navBar, locationImageURL) = RACObserve(self, locationImageURL);
+//    RAC(self.navBar, promotionInfo) = RACObserve(self, promoInfo);
+//    if (eventName != nil) [self.navBar setEventName:eventName];
+//    if (exclusiveEvent) [self.navBar setExclusiveEventLabel];
     [self.navBar setLocationImageURL:promoImageURL];
 
     RAC(self.locationInfoView, locationInfo) = RACObserve(self, locationInfo);

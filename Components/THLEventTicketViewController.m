@@ -33,7 +33,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.view.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     WEAKSELF();
     [self.ticketInstructionLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.offset(75);

@@ -9,18 +9,13 @@
 #import "THLEventNavigationBar.h"
 #import "THLAppearanceConstants.h"
 #import "UIView+DimView.h"
-#import "THLEventDetailsPromotionInfoView.h"
 #import "BLKFlexibleHeightBarSubviewLayoutAttributes.h"
 #import "THLAlertView.h"
+#import "SquareCashStyleBehaviorDefiner.h"
 
 @interface THLEventNavigationBar()
-@property (nonatomic, strong) UIButton *dismissButton;
-@property (nonatomic, strong) UILabel *dateLabel;
-@property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) THLEventDetailsPromotionInfoView *promotionInfoView;
-@property (nonatomic, strong) UIImageView *imageView;
+
 @property (nonatomic, strong) UIImageView *scrollUpIcon;
-@property (nonatomic, strong) UILabel *minimumTitleLabel;
 @property (nonatomic) int numberOfLayouts;
 
 @end
@@ -28,75 +23,52 @@
 @implementation THLEventNavigationBar
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        [self constructView];
-        [self layoutView];
-        [self bindView];
+        self.behaviorDefiner = [SquareCashStyleBehaviorDefiner new];
+        self.minimumBarHeight = 65;
+        self.backgroundColor = kTHLNUIPrimaryBackgroundColor;
         self.userInteractionEnabled = YES;
         _numberOfLayouts = 0;
+        
+        WEAKSELF();
+        [self.imageView makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.right.bottom.insets(UIEdgeInsetsZero);
+        }];
+        
+        [self.titleLabel makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+            make.bottom.equalTo([WSELF scrollUpIcon].mas_top).insets(kTHLEdgeInsetsSuperHigh());
+        }];
+        
+        [self.dateLabel makeConstraints:^(MASConstraintMaker *make) {
+            make.left.insets(kTHLEdgeInsetsSuperHigh());
+            make.bottom.equalTo([WSELF titleLabel].mas_top).insets(kTHLEdgeInsetsSuperHigh());
+        }];
+
+        [self.dismissButton makeConstraints:^(MASConstraintMaker *make) {
+            make.left.insets(kTHLEdgeInsetsSuperHigh());
+            make.top.offset(30);
+            make.size.mas_equalTo(CGSizeMake(25, 25));
+        }];
+        
+        [self.minimumTitleLabel makeConstraints:^(MASConstraintMaker *make) {
+            make.top.offset(30);
+            make.centerX.equalTo(SV([WSELF minimumTitleLabel]).mas_centerX);
+        }];
+        
+        [self.scrollUpIcon makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.insets(kTHLEdgeInsetsNone());
+            make.centerX.equalTo(SV([WSELF scrollUpIcon]).mas_centerX);
+            make.size.mas_equalTo(CGSizeMake(25, 25));
+        }];
+        
+        [self bindView];
+
     }
     return self;
 }
 
-- (void)constructView {
-    self.backgroundColor = kTHLNUIPrimaryBackgroundColor;
-    _promotionInfoView = [self newPromotionInfoView];
-    _dismissButton = [self newDismissButton];
-    _dateLabel = [self newDateLabel];
-    _titleLabel = [self newTitleLabel];
-    _imageView = [self newImageView];
-    _scrollUpIcon = [self newScrollUpIcon];
-    _minimumTitleLabel = [self newMinimumTitleLabel];
-}
-
-- (void)layoutView {
-    [self addSubviews:@[_imageView, _titleLabel, _dateLabel, _dismissButton, _minimumTitleLabel, _scrollUpIcon]];
-    
-    WEAKSELF();
-    [_imageView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.insets(UIEdgeInsetsZero);
-    }];
-    
-    [_titleLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
-        make.bottom.equalTo([WSELF scrollUpIcon].mas_top).insets(kTHLEdgeInsetsSuperHigh());
-    }];
-    
-    [_dateLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.insets(kTHLEdgeInsetsSuperHigh());
-        make.bottom.equalTo([WSELF titleLabel].mas_top).insets(kTHLEdgeInsetsSuperHigh());
-    }];
-    
-//    [_promotionInfoView makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
-//        make.bottom.equalTo([WSELF scrollUpIcon].mas_top);
-//    }];
-    
-    [_dismissButton makeConstraints:^(MASConstraintMaker *make) {
-        make.left.insets(kTHLEdgeInsetsSuperHigh());
-        make.top.offset(30);
-        make.size.mas_equalTo(CGSizeMake(25, 25));
-    }];
-    
-    [_minimumTitleLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(30);
-        make.centerX.equalTo(SV([WSELF minimumTitleLabel]).mas_centerX);
-    }];
-    
-    [_scrollUpIcon makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.insets(kTHLEdgeInsetsNone());
-        make.centerX.equalTo(SV([WSELF scrollUpIcon]).mas_centerX);
-        make.size.mas_equalTo(CGSizeMake(25, 25));
-    }];
-}
-
 - (void)bindView {
     WEAKSELF();
-    RAC(self.titleLabel, text, @"") = RACObserve(self, titleText);
-    RAC(self.minimumTitleLabel, text, @"") = RACObserve(self, titleText);
-    RAC(self.dateLabel, text, @"") = RACObserve(self, dateText);
-    RAC(self.dismissButton, rac_command) = RACObserve(self, dismissCommand);
-    RAC(self.promotionInfoView, promotionInfo) = RACObserve(self, promotionInfo);
-
     RACSignal *imageURLSignal = [RACObserve(self, locationImageURL) filter:^BOOL(NSURL *url) {
         return url.isValid;
     }];
@@ -114,36 +86,9 @@
     [self.imageView sd_setImageWithURL:promoImageURL];
 }
 
-- (void)setExclusiveEventLabel {
-    UIView *exclusiveLabelBackground = [UIView new];
-    exclusiveLabelBackground.backgroundColor = [UIColor redColor];
-    BLKFlexibleHeightBarSubviewLayoutAttributes *initialLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
-    initialLayoutAttributes.alpha = 1.0;
-    [exclusiveLabelBackground addLayoutAttributes:initialLayoutAttributes forProgress:0.75];
-    
-    BLKFlexibleHeightBarSubviewLayoutAttributes *finalLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
-    finalLayoutAttributes.alpha = 0.0;
-    [exclusiveLabelBackground addLayoutAttributes:finalLayoutAttributes forProgress:0.90];
-    
-    [self addSubview:exclusiveLabelBackground];
-    
-    WEAKSELF();
-    [exclusiveLabelBackground makeConstraints:^(MASConstraintMaker *make) {
-        make.left.insets(kTHLEdgeInsetsSuperHigh());
-        make.bottom.equalTo([WSELF dateLabel].mas_top).insets(kTHLEdgeInsetsSuperHigh());
-    }];
-    
-    UIButton *exclusiveLabel = [self newExclusiveEventLabel];
-    [exclusiveLabelBackground addSubview:exclusiveLabel];
-    [exclusiveLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(kTHLEdgeInsetsSuperHigh());
-        make.top.bottom.equalTo(kTHLEdgeInsetsNone());
-    }];
-}
-
 - (void)addGradientLayer {
 #warning some hacky shit to make sure the gradient layer doesnt draw again so you cant see the event image
-    if (_numberOfLayouts < 2) {
+    if (_numberOfLayouts < 3) {
         CAGradientLayer *gradient = [CAGradientLayer layer];
         
         gradient.frame = self.imageView.bounds;
@@ -171,114 +116,103 @@
 }
 
 #pragma mark - Constructors
-- (UILabel *)newTitleLabel {
-    UILabel *label = THLNUILabel(kTHLNUIBoldTitle);
-    label.adjustsFontSizeToFitWidth = YES;
-    label.numberOfLines = 1;
-    label.minimumScaleFactor = 0.5;
-    label.textAlignment = NSTextAlignmentLeft;
-    
-    BLKFlexibleHeightBarSubviewLayoutAttributes *initialLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
-    initialLayoutAttributes.alpha = 1.0;
-    [label addLayoutAttributes:initialLayoutAttributes forProgress:0.75];
-    
-    BLKFlexibleHeightBarSubviewLayoutAttributes *finalLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
-    finalLayoutAttributes.alpha = 0.0;
-    [label addLayoutAttributes:finalLayoutAttributes forProgress:0.90];
-    
-    return label;
-}
-
-- (UILabel *)newMinimumTitleLabel {
-    UILabel *label = THLNUILabel(kTHLNUIRegularTitle);
-    return label;
-}
-
-- (UILabel *)newDateLabel {
-    UILabel *label = [UILabel new];
-    label.textColor = kTHLNUIPrimaryFontColor;
-    label.font = [UIFont fontWithName:@"OpenSans-Regular" size:16];
-
-    BLKFlexibleHeightBarSubviewLayoutAttributes *initialLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
-    initialLayoutAttributes.alpha = 1.0;
-    [label addLayoutAttributes:initialLayoutAttributes forProgress:0.75];
-    
-    BLKFlexibleHeightBarSubviewLayoutAttributes *finalLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
-    finalLayoutAttributes.alpha = 0.0;
-    [label addLayoutAttributes:finalLayoutAttributes forProgress:0.90];
-    return label;
-}
-
-- (UIButton *)newExclusiveEventLabel {
-    UIButton *label = [UIButton new];
-    [label setTitle:@"Limited Guestlist Space" forState:UIControlStateNormal];
-    [label addTarget:self
-                 action:@selector(showExplanationView)
-       forControlEvents:UIControlEventTouchUpInside];
-    BLKFlexibleHeightBarSubviewLayoutAttributes *initialLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
-    initialLayoutAttributes.alpha = 1.0;
-    [label addLayoutAttributes:initialLayoutAttributes forProgress:0.75];
-    
-    BLKFlexibleHeightBarSubviewLayoutAttributes *finalLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
-    finalLayoutAttributes.alpha = 0.0;
-    [label addLayoutAttributes:finalLayoutAttributes forProgress:0.90];
-    return label;
-}
-
-- (THLEventDetailsPromotionInfoView *)newPromotionInfoView {
-    THLEventDetailsPromotionInfoView *promoInfoView = [THLEventDetailsPromotionInfoView new];
-    promoInfoView.title = NSLocalizedString(@"EVENT DETAILS", nil);
-    promoInfoView.translatesAutoresizingMaskIntoConstraints = NO;
+- (UILabel *)titleLabel
+{
+    if (!_titleLabel) {
+        _titleLabel = THLNUILabel(kTHLNUIBoldTitle);
+        _titleLabel.adjustsFontSizeToFitWidth = YES;
+        _titleLabel.numberOfLines = 1;
+        _titleLabel.minimumScaleFactor = 0.5;
+        _titleLabel.textAlignment = NSTextAlignmentLeft;
         
-    BLKFlexibleHeightBarSubviewLayoutAttributes *initialLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
-    initialLayoutAttributes.alpha = 1.0;
-    [promoInfoView addLayoutAttributes:initialLayoutAttributes forProgress:0.75];
-    
-    BLKFlexibleHeightBarSubviewLayoutAttributes *finalLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
-    finalLayoutAttributes.alpha = 0.0;
-    [promoInfoView addLayoutAttributes:finalLayoutAttributes forProgress:0.90];
-    
-    return promoInfoView;
+        BLKFlexibleHeightBarSubviewLayoutAttributes *initialLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
+        initialLayoutAttributes.alpha = 1.0;
+        [_titleLabel addLayoutAttributes:initialLayoutAttributes forProgress:0.75];
+        
+        BLKFlexibleHeightBarSubviewLayoutAttributes *finalLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
+        finalLayoutAttributes.alpha = 0.0;
+        [_titleLabel addLayoutAttributes:finalLayoutAttributes forProgress:0.90];
+        [self addSubview:_titleLabel];
+    }
+    return _titleLabel;
 }
 
-- (UIImageView *)newImageView {
-    UIImageView *imageView = [UIImageView new];
-    imageView.clipsToBounds = YES;
-    imageView.contentMode = UIViewContentModeScaleAspectFill;
 
-    BLKFlexibleHeightBarSubviewLayoutAttributes *initialLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
-    initialLayoutAttributes.alpha = 1.0;
-    [imageView addLayoutAttributes:initialLayoutAttributes forProgress:0.75];
-    
-    BLKFlexibleHeightBarSubviewLayoutAttributes *finalLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
-    finalLayoutAttributes.alpha = 0.0;
-    [imageView addLayoutAttributes:finalLayoutAttributes forProgress:1.0];
-    
-    return imageView;
+- (UILabel *)minimumTitleLabel {
+    if (!_minimumTitleLabel) {
+        _minimumTitleLabel = THLNUILabel(kTHLNUIRegularTitle);
+        [self addSubview:_minimumTitleLabel];
+    }
+    return _minimumTitleLabel;
 }
 
-- (UIImageView *)newScrollUpIcon {
-    UIImageView *icon = [UIImageView new];
-    icon.image = [UIImage imageNamed:@"scroll_up_icon"];
-    icon.contentMode = UIViewContentModeScaleAspectFit;
-    icon.clipsToBounds = YES;
-    
-    BLKFlexibleHeightBarSubviewLayoutAttributes *initialLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
-    initialLayoutAttributes.alpha = 1.0;
-    [icon addLayoutAttributes:initialLayoutAttributes forProgress:0.1];
-    
-    BLKFlexibleHeightBarSubviewLayoutAttributes *finalLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
-    finalLayoutAttributes.alpha = 0.0;
-    [icon addLayoutAttributes:finalLayoutAttributes forProgress:0.90];
-    
-    return icon;
+- (UILabel *)dateLabel {
+    if (!_dateLabel) {
+        _dateLabel = [UILabel new];
+        _dateLabel.textColor = kTHLNUIPrimaryFontColor;
+        _dateLabel.font = [UIFont fontWithName:@"OpenSans-Regular" size:16];
+
+        BLKFlexibleHeightBarSubviewLayoutAttributes *initialLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
+        initialLayoutAttributes.alpha = 1.0;
+        [_dateLabel addLayoutAttributes:initialLayoutAttributes forProgress:0.75];
+
+        BLKFlexibleHeightBarSubviewLayoutAttributes *finalLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
+        finalLayoutAttributes.alpha = 0.0;
+        [_dateLabel addLayoutAttributes:finalLayoutAttributes forProgress:0.90];
+        [self addSubview:_dateLabel];
+        }
+    return _dateLabel;
 }
 
-- (UIButton *)newDismissButton {
-    UIButton *button = [[UIButton alloc]init];
-    button.frame = CGRectMake(0, 0, 50, 50);
-    [button setImage:[UIImage imageNamed:@"cancel_button"] forState:UIControlStateNormal];
-    return button;
+- (UIImageView *)imageView {
+    if (!_imageView) {
+        _imageView = [UIImageView new];
+        _imageView.clipsToBounds = YES;
+        _imageView.contentMode = UIViewContentModeScaleAspectFill;
+
+        BLKFlexibleHeightBarSubviewLayoutAttributes *initialLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
+        initialLayoutAttributes.alpha = 1.0;
+        [_imageView addLayoutAttributes:initialLayoutAttributes forProgress:0.75];
+        
+        BLKFlexibleHeightBarSubviewLayoutAttributes *finalLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
+        finalLayoutAttributes.alpha = 0.0;
+        [_imageView addLayoutAttributes:finalLayoutAttributes forProgress:1.0];
+        [self addSubview:_imageView];
+
+    }
+    return _imageView;
+}
+
+- (UIImageView *)scrollUpIcon {
+    if (!_scrollUpIcon) {
+        _scrollUpIcon = [UIImageView new];
+        _scrollUpIcon.image = [UIImage imageNamed:@"scroll_up_icon"];
+        _scrollUpIcon.contentMode = UIViewContentModeScaleAspectFit;
+        _scrollUpIcon.clipsToBounds = YES;
+        
+        BLKFlexibleHeightBarSubviewLayoutAttributes *initialLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
+        initialLayoutAttributes.alpha = 1.0;
+        [_scrollUpIcon addLayoutAttributes:initialLayoutAttributes forProgress:0.1];
+        
+        BLKFlexibleHeightBarSubviewLayoutAttributes *finalLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
+        finalLayoutAttributes.alpha = 0.0;
+        [_scrollUpIcon addLayoutAttributes:finalLayoutAttributes forProgress:0.90];
+        [self addSubview:_scrollUpIcon];
+
+    }
+    return _scrollUpIcon;
+}
+
+- (UIButton *)dismissButton {
+    if (!_dismissButton) {
+        _dismissButton = [[UIButton alloc]init];
+        _dismissButton.frame = CGRectMake(0, 0, 50, 50);
+        [_dismissButton setImage:[UIImage imageNamed:@"cancel_button"] forState:UIControlStateNormal];
+        [self addSubview:_dismissButton];
+
+    }
+
+    return _dismissButton;
 }
 
 -(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
@@ -289,7 +223,4 @@
     return NO;
 }
 
-//- (void)dealloc {
-//    NSLog(@"Destroyed %@", self);
-//}
 @end
