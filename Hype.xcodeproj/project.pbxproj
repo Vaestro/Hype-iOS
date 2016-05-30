@@ -112,6 +112,8 @@
 		791C1F861BF13AF500CCF803 /* THLEventHostingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 791C1F851BF13AF500CCF803 /* THLEventHostingViewController.m */; };
 		791C1F8A1BF13BC300CCF803 /* THLEventHostingTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 791C1F891BF13BC300CCF803 /* THLEventHostingTableCell.m */; };
 		791C1F8D1BF13BD900CCF803 /* THLEventHostingTableCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 791C1F8C1BF13BD900CCF803 /* THLEventHostingTableCellViewModel.m */; };
+		792545B91CFC8DA0004CF29A /* THLPartyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 792545B81CFC8DA0004CF29A /* THLPartyViewController.m */; };
+		792545BC1CFCBD61004CF29A /* THLPartyMemberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 792545BB1CFCBD61004CF29A /* THLPartyMemberCell.m */; };
 		794208281BD82641009B86FA /* UIView+DimView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794208271BD82641009B86FA /* UIView+DimView.m */; };
 		7942082C1BD82AF6009B86FA /* THLActionBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7942082B1BD82AF6009B86FA /* THLActionBarButton.m */; };
 		7942082F1BD8C250009B86FA /* THLGuestlistEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7942082E1BD8C250009B86FA /* THLGuestlistEntity.m */; };
@@ -520,6 +522,10 @@
 		791C1F8B1BF13BD900CCF803 /* THLEventHostingTableCellViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventHostingTableCellViewModel.h; sourceTree = "<group>"; };
 		791C1F8C1BF13BD900CCF803 /* THLEventHostingTableCellViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventHostingTableCellViewModel.m; sourceTree = "<group>"; };
 		791C1F8E1BF13BEE00CCF803 /* THLEventHostingTableCellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLEventHostingTableCellView.h; sourceTree = "<group>"; };
+		792545B71CFC8DA0004CF29A /* THLPartyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPartyViewController.h; sourceTree = "<group>"; };
+		792545B81CFC8DA0004CF29A /* THLPartyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPartyViewController.m; sourceTree = "<group>"; };
+		792545BA1CFCBD61004CF29A /* THLPartyMemberCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPartyMemberCell.h; sourceTree = "<group>"; };
+		792545BB1CFCBD61004CF29A /* THLPartyMemberCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPartyMemberCell.m; sourceTree = "<group>"; };
 		79259D6E1CAA4C6C00409040 /* Hype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hype.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79259D6F1CAA4C6C00409040 /* Hype.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Hype.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		794208261BD82641009B86FA /* UIView+DimView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DimView.h"; sourceTree = "<group>"; };
@@ -972,6 +978,8 @@
 				794FAB661C5F17F400438D49 /* THLActionButton.m */,
 				79CE31581CF7B03F00CEA784 /* THLEventTicketViewController.h */,
 				79CE31591CF7B03F00CEA784 /* THLEventTicketViewController.m */,
+				792545B71CFC8DA0004CF29A /* THLPartyViewController.h */,
+				792545B81CFC8DA0004CF29A /* THLPartyViewController.m */,
 				79BB152E1C657FF50044D943 /* THLSingleLineTextField.h */,
 				79B062B81CF8B46800A3DC50 /* THLMyEventsNavigationViewController.h */,
 				79B062B91CF8B46800A3DC50 /* THLMyEventsNavigationViewController.m */,
@@ -988,6 +996,8 @@
 				79B6C1B91CEA3EC50050CDB1 /* THLPurchaseDetailsView.m */,
 				794A9D171CF4ACC300DDAC00 /* THLEventInviteCell.h */,
 				794A9D181CF4ACC300DDAC00 /* THLEventInviteCell.m */,
+				792545BA1CFCBD61004CF29A /* THLPartyMemberCell.h */,
+				792545BB1CFCBD61004CF29A /* THLPartyMemberCell.m */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -3523,6 +3533,7 @@
 				21CE06241BB86995004D10BB /* THLAppearanceUtils.m in Sources */,
 				21E402CF1BBF7688001D0C2C /* THLGuestlistInvitationInteractor.m in Sources */,
 				790603C61BFB75CF0093335E /* THLDashboardPresenter.m in Sources */,
+				792545B91CFC8DA0004CF29A /* THLPartyViewController.m in Sources */,
 				790603CC1BFB75E50093335E /* THLDashboardDataManager.m in Sources */,
 				2133C9D31C333DDC0020083A /* NSString+EmailAddresses.m in Sources */,
 				218AF3441BB7391B00AFAEBF /* THLEventService.m in Sources */,
@@ -3603,6 +3614,7 @@
 				79B062BD1CF909F300A3DC50 /* THLPartyNavigationController.m in Sources */,
 				215A42A11BAA26D500D03C35 /* THLFacebookPictureInteractor.m in Sources */,
 				794FAB671C5F17F400438D49 /* THLActionButton.m in Sources */,
+				792545BC1CFCBD61004CF29A /* THLPartyMemberCell.m in Sources */,
 				79ABA9BC1C054F42001ABAC7 /* THLDashboardNotificationCellViewModel.m in Sources */,
 				2118921B1BAA084300E8A11F /* THLLoginPresenter.m in Sources */,
 				794DCCAC1BF3B31E0037A03D /* UIImageView+Letters.m in Sources */,
