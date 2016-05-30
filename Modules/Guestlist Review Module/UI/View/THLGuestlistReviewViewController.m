@@ -329,7 +329,7 @@ static CGFloat const CELL_SPACING = 10;
 - (void)purchaseTicket:(id)sender
 {
     NSDictionary *paymentInfo = @{@"guestlistInviteId": _guestlistInvite.objectId};
-    THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:_guestlist.event paymentInfo:paymentInfo andCompletionAction:_viewDismissAndShowTicketCommand];
+    THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:nil paymentInfo:paymentInfo];
     UINavigationController *navVC = [[UINavigationController alloc]initWithRootViewController:checkoutVC];
     [self presentViewController:navVC animated:YES completion:nil];
 }

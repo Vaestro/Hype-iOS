@@ -146,6 +146,9 @@
     return _navBar;
 }
 
+-(void)handleViewCheckout {
+    [self.delegate eventDetailsWantsToPresentAdmissionsForEvent:_event];
+}
 
 - (ORStackScrollView *)scrollView
 {
@@ -219,11 +222,12 @@
     if (!_bottomBar) {
         _bottomBar = [[THLActionButton alloc] initWithInverseStyle];
         [_bottomBar setTitle:@"GO"];
+        [_bottomBar addTarget:self action:@selector(handleViewCheckout) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_bottomBar];
     }
-    //    [button addTarget:self action:@selector(checkout:) forControlEvents:UIControlEventTouchUpInside];
     return _bottomBar;
 }
+
 
 
 - (UILabel *)eventNameLabel

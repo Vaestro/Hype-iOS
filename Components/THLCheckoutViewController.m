@@ -9,7 +9,7 @@
 #import "THLCheckoutViewController.h"
 #import "MBProgressHUD.h"
 #import "THLAppearanceConstants.h"
-#import "THLEventEntity.h"
+#import "THLEvent.h"
 #import "THLLocationEntity.h"
 #import "THLUser.h"
 #import "Parse.h"
@@ -19,7 +19,7 @@
 
 
 @interface THLCheckoutViewController ()
-@property (nonatomic) THLEventEntity *event;
+@property (nonatomic) THLEvent *event;
 @property (nonatomic, strong) RACCommand *completionAction;
 @property (nonatomic, strong) THLActionButton *purchaseButton;
 @property (nonatomic, strong) THLPurchaseDetailsView *purchaseDetailsView;
@@ -33,12 +33,11 @@
 
 #pragma mark - Life cycle
 
-- (id)initWithEvent:(THLEventEntity *)event paymentInfo:(NSDictionary *)paymentInfo andCompletionAction:(RACCommand *)completionAction
+- (id)initWithEvent:(PFObject *)event paymentInfo:(NSDictionary *)paymentInfo;
 {
     if (self = [super init]) {
-        self.event = event;
+        self.event = (THLEvent *)event;
         self.paymentInfo = paymentInfo;
-        self.completionAction = completionAction;
     }
     return self;
 }
@@ -167,7 +166,7 @@
     [message show];
 }
 
-- (void)chargeCustomer:(THLUser *)customer forEvent:(THLEventEntity *)event
+- (void)chargeCustomer:(THLUser *)customer forEvent:(THLEvent *)event
 {
     
     if (_paymentInfo[@"guestlistInviteId"]) {
@@ -192,7 +191,6 @@
                                         } else {
 //                                            [self.delegate checkoutViewController:self didFinishPurchasingForGuestlistInvite:response];
                                             [self.navigationController dismissViewControllerAnimated:TRUE completion:^{
-                                                [_completionAction execute:nil];
                                             }];                                        }
                                     }];
     } else {
