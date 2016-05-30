@@ -143,8 +143,10 @@ THLDiscoveryViewControllerDelegate
 #pragma mark Delegate
 
 - (void)didSelectViewEventTicket:(PFObject *)guestlistInvite {
+    UINavigationController *partyNavVC = [UINavigationController new];
     THLPartyNavigationController *partyNavigationController = [[THLPartyNavigationController alloc] initWithGuestlistInvite:guestlistInvite];
-    [_window.rootViewController presentViewController:partyNavigationController animated:YES completion:nil];
+    [partyNavVC addChildViewController:partyNavigationController];
+    [_window.rootViewController presentViewController:partyNavVC animated:YES completion:nil];
 }
 
 - (void)presentGuestFlowInWindow:(UIWindow *)window forEventDetail:(THLEventEntity *)eventEntity {
