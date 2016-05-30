@@ -10,5 +10,5 @@
 #import <Parse/PFObject.h>
 
 @interface THLEventDetailsViewController : UIViewController <UIScrollViewDelegate>
-- (id)initWithEvent:(PFObject *)event;
+- (id)initWithEvent:(PFObject *)event andShowNavigationBar:(BOOL)showNavigationBar;
 @end

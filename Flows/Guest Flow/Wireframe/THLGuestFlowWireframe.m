@@ -134,7 +134,7 @@ THLDiscoveryViewControllerDelegate
 #pragma mark Delegate
 
 - (void)eventDiscoveryViewControllerWantsToPresentDetailsForEvent:(PFObject *)event {
-    THLEventDetailsViewController *eventDetailVC = [[THLEventDetailsViewController alloc]initWithEvent:event];
+    THLEventDetailsViewController *eventDetailVC = [[THLEventDetailsViewController alloc]initWithEvent:event andShowNavigationBar:TRUE];
     [_window.rootViewController presentViewController:eventDetailVC animated:YES completion:nil];
 }
 

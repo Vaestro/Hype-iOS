@@ -9,6 +9,7 @@
 #import "THLAppearanceConstants.h"
 #import "THLEventTicketViewController.h"
 #import "PFObject.h"
+#import "THLEventDetailsViewController.h"
 
 @interface THLPartyNavigationController()
 @property (nonatomic, strong) PFObject *guestlistInvite;
@@ -33,14 +34,12 @@
     self.navigationBar.barTintColor = kTHLNUIPrimaryBackgroundColor; //%%% bartint
     
     THLEventTicketViewController *eventTicketVC = [[THLEventTicketViewController alloc]initWithGuestlistInvite:_guestlistInvite];
-    UIViewController *vc = [UIViewController new];
+    THLEventDetailsViewController *eventDetailsVC = [[THLEventDetailsViewController alloc]initWithEvent:_guestlistInvite[@"Guestlist"][@"event"] andShowNavigationBar:FALSE];
     UIViewController *vc2 = [UIViewController new];
     UIViewController *vc3 = [UIViewController new];
 
-    [self.viewControllerArray addObjectsFromArray:@[eventTicketVC, vc, vc2, vc3]];
+    [self.viewControllerArray addObjectsFromArray:@[eventTicketVC, eventDetailsVC, vc2, vc3]];
     self.buttonText = @[@"TICKET", @"EVENT", @"PARTY", @"CONCIERGE"];
-    
-    [self.pageController setViewControllers:@[vc] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
