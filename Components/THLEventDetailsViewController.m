@@ -218,7 +218,7 @@
 {
     if (!_bottomBar) {
         _bottomBar = [[THLActionButton alloc] initWithInverseStyle];
-        [_bottomBar setTitle:@"GO"];
+        [_bottomBar setTitle:@"VIEW ADMISSIONS"];
         [self.view addSubview:_bottomBar];
     }
     //    [button addTarget:self action:@selector(checkout:) forControlEvents:UIControlEventTouchUpInside];

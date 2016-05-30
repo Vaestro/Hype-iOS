@@ -8,10 +8,12 @@
 
 #import "THLAdmissionsViewController.h"
 #import "Parse.h"
+#import "THLAppearanceConstants.h"
 
 
 @interface THLAdmissionsViewController ()
 @property (nonatomic) PFObject *event;
+@property (nonatomic, strong) UILabel *ticketLabel;
 @end
 
 @implementation THLAdmissionsViewController
@@ -27,6 +29,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    
+    
    
 }
 
