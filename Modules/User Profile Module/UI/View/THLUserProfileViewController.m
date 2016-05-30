@@ -336,7 +336,7 @@ STPPaymentCardTextFieldDelegate
 
 - (UIBarButtonItem *)newBarButtonItem
 {
-    return [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Inbox Icon"] style:UIBarButtonItemStylePlain target:self action:@selector(messageButtonPressed)];
+    return [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Help"] style:UIBarButtonItemStylePlain target:self action:@selector(messageButtonPressed)];
 }
 
 - (void)messageButtonPressed
