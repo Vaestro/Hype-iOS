@@ -146,7 +146,6 @@
     return _navBar;
 }
 
-
 - (ORStackScrollView *)scrollView
 {
     if (!_scrollView) {
@@ -219,11 +218,12 @@
     if (!_bottomBar) {
         _bottomBar = [[THLActionButton alloc] initWithInverseStyle];
         [_bottomBar setTitle:@"VIEW ADMISSIONS"];
+        [_bottomBar addTarget:self action:@selector(handleViewCheckout) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_bottomBar];
     }
-    //    [button addTarget:self action:@selector(checkout:) forControlEvents:UIControlEventTouchUpInside];
     return _bottomBar;
 }
+
 
 
 - (UILabel *)eventNameLabel
@@ -264,6 +264,12 @@
 {
     [self dismissViewControllerAnimated:TRUE completion:nil];
 }
+
+
+-(void)handleViewCheckout {
+    [self.delegate eventDetailsWantsToPresentAdmissionsForEvent:_event];
+}
+
 
 
 

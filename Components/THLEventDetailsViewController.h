@@ -9,6 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <Parse/PFObject.h>
 
+@protocol THLEventDetailsViewControllerDelegate <NSObject>
+- (void)eventDetailsWantsToPresentAdmissionsForEvent:(PFObject *)event;
+@end
+
 @interface THLEventDetailsViewController : UIViewController <UIScrollViewDelegate>
+@property (nonatomic, weak) id<THLEventDetailsViewControllerDelegate> delegate;
+
 - (id)initWithEvent:(PFObject *)event andShowNavigationBar:(BOOL)showNavigationBar;
 @end
+

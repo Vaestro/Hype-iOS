@@ -29,6 +29,7 @@
 #import "THLPartyNavigationController.h"
 #import "THLEventDetailsViewController.h"
 #import "THLDiscoveryViewController.h"
+#import "THLCheckoutViewController.h"
 
 @interface THLGuestFlowWireframe()
 <
@@ -42,7 +43,8 @@ THLPerkDetailModuleDelegate,
 THLPerkStoreModuleDelegate,
 THLLoginModuleDelegate,
 THLMyEventsViewDelegate,
-THLDiscoveryViewControllerDelegate
+THLDiscoveryViewControllerDelegate,
+THLEventDetailsViewControllerDelegate
 >
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) id currentWireframe;
@@ -135,6 +137,7 @@ THLDiscoveryViewControllerDelegate
 
 - (void)eventDiscoveryViewControllerWantsToPresentDetailsForEvent:(PFObject *)event {
     THLEventDetailsViewController *eventDetailVC = [[THLEventDetailsViewController alloc]initWithEvent:event andShowNavigationBar:TRUE];
+    eventDetailVC.delegate = self;
     [_window.rootViewController presentViewController:eventDetailVC animated:YES completion:nil];
 }
 
@@ -149,6 +152,16 @@ THLDiscoveryViewControllerDelegate
     [_window.rootViewController presentViewController:partyNavVC animated:YES completion:nil];
 }
 
+#pragma mark -
+#pragma mark EventDetailsViewController
+#pragma mark Delegate
+
+- (void)eventDetailsWantsToPresentAdmissionsForEvent:(PFObject *)event {
+    THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:event paymentInfo:nil];
+    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:checkoutVC];
+    [[self topViewController] presentViewController:navVC animated:YES completion:nil];
+}
+
 - (void)presentGuestFlowInWindow:(UIWindow *)window forEventDetail:(THLEventEntity *)eventEntity {
     /**
      *  Prevents popup notification from instantiating another event detail module if one is already instantiated
@@ -160,6 +173,25 @@ THLDiscoveryViewControllerDelegate
     return self;
 }
 
+- (UIViewController *)topViewController{
+    return [self topViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+}
+
+- (UIViewController *)topViewController:(UIViewController *)rootViewController
+{
+    if (rootViewController.presentedViewController == nil) {
+        return rootViewController;
+    }
+    
+    if ([rootViewController.presentedViewController isMemberOfClass:[UINavigationController class]]) {
+        UINavigationController *navigationController = (UINavigationController *)rootViewController.presentedViewController;
+        UIViewController *lastViewController = [[navigationController viewControllers] lastObject];
+        return [self topViewController:lastViewController];
+    }
+    
+    UIViewController *presentedViewController = (UIViewController *)rootViewController.presentedViewController;
+    return [self topViewController:presentedViewController];
+}
 
 
 - (void)presentEventDiscoveryInterfaceInNavigationController:(UINavigationController *)navigationController {
