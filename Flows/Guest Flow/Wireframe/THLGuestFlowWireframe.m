@@ -30,6 +30,14 @@
 #import "THLEventDetailsViewController.h"
 #import "THLDiscoveryViewController.h"
 #import "THLCheckoutViewController.h"
+#import "THLPartyInvitationViewController.h"
+#import "THLYapDatabaseManager.h"
+#import "THLDataStore.h"
+#import "THLGuestEntity.h"
+#import "APAddressBook.h"
+#import "THLViewDataSourceFactory.h"
+#import "THLYapDatabaseViewFactory.h"
+#import "THLDependencyManager.h"
 
 @interface THLGuestFlowWireframe()
 <
@@ -44,7 +52,9 @@ THLPerkStoreModuleDelegate,
 THLLoginModuleDelegate,
 THLMyEventsViewDelegate,
 THLDiscoveryViewControllerDelegate,
-THLEventDetailsViewControllerDelegate
+THLEventDetailsViewControllerDelegate,
+THLCheckoutViewControllerDelegate,
+THLPartyInvitationViewControllerDelegate
 >
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) id currentWireframe;
@@ -63,13 +73,18 @@ THLEventDetailsViewControllerDelegate
 @property (nonatomic, strong) UIView *discoveryNavBarItem;
 @property (nonatomic, strong) UIView *guestProfileNavBarItem;
 @property (nonatomic, strong) UIView *dashboardNavBarItem;
+@property (nonatomic, strong) THLYapDatabaseManager *databaseManager;
+@property (nonatomic, strong) THLDataStore *contactsDataStore;
+@property (nonatomic, strong) THLViewDataSourceFactory *viewDataSourceFactory;
+@property (nonatomic, strong) APAddressBook *addressBook;
+@property (nonatomic, strong) THLYapDatabaseViewFactory *yapDatabaseViewFactory;
 
 @end
 
 @implementation THLGuestFlowWireframe
 @synthesize moduleDelegate;
 
-- (instancetype)initWithDependencyManager:(id<THLGuestFlowDependencyManager>)dependencyManager {
+- (instancetype)initWithDependencyManager:(THLDependencyManager *)dependencyManager {
 	if (self = [super init]) {
 		_dependencyManager = dependencyManager;
 	}
@@ -158,8 +173,54 @@ THLEventDetailsViewControllerDelegate
 
 - (void)eventDetailsWantsToPresentAdmissionsForEvent:(PFObject *)event {
     THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:event paymentInfo:nil];
+    checkoutVC.delegate = self;
     UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:checkoutVC];
     [[self topViewController] presentViewController:navVC animated:YES completion:nil];
+}
+
+#pragma mark -
+#pragma mark CheckoutViewController
+#pragma mark Delegate
+- (void)checkoutViewControllerDidFinishCheckoutForEvent:(THLEvent *)event withGuestlistId:(NSString *)guestlistId {
+    THLPartyInvitationViewController *partyInvitationVC = [[THLPartyInvitationViewController alloc] initWithEvent:event
+                                                                                                      guestlistId:guestlistId
+                                                                                                           guests:nil
+                                                                                                  databaseManager:self.dependencyManager.databaseManager
+                                                                                                        dataStore:self.contactsDataStore
+                                                                                            viewDataSourceFactory:self.dependencyManager.viewDataSourceFactory
+                                                                                                      addressBook:self.dependencyManager.addressBook];
+    UINavigationController *invitationNavVC = [[UINavigationController alloc] initWithRootViewController:partyInvitationVC];
+    partyInvitationVC.delegate = self;
+    [[self topViewController] presentViewController:invitationNavVC animated:YES completion:nil];
+}
+
+#pragma mark -
+#pragma mark PartyInvitationViewController
+#pragma mark Delegate
+- (void)partyInvitationViewControllerDidSkipSendingInvitesAndWantsToShowTicket:(PFObject *)invite {
+    [_window.rootViewController dismissViewControllerAnimated:YES completion:^{
+        UINavigationController *partyNavVC = [UINavigationController new];
+        THLPartyNavigationController *partyNavigationController = [[THLPartyNavigationController alloc] initWithGuestlistInvite:invite];
+        [partyNavVC addChildViewController:partyNavigationController];
+        [_window.rootViewController presentViewController:partyNavVC animated:YES completion:nil];
+    }];
+}
+
+- (void)partyInvitationViewControllerDidSubmitInvitesAndWantsToShowTicket:(PFObject *)invite {
+    [_window.rootViewController dismissViewControllerAnimated:YES completion:^{
+        UINavigationController *partyNavVC = [UINavigationController new];
+        THLPartyNavigationController *partyNavigationController = [[THLPartyNavigationController alloc] initWithGuestlistInvite:invite];
+        [partyNavVC addChildViewController:partyNavigationController];
+        [_window.rootViewController presentViewController:partyNavVC animated:YES completion:nil];
+    }];
+}
+
+- (THLDataStore *)contactsDataStore
+{
+    if (!_contactsDataStore) {
+        _contactsDataStore = [[THLDataStore alloc] initForEntity:[THLGuestEntity class] databaseManager:self.dependencyManager.databaseManager];
+    }
+    return _contactsDataStore;
 }
 
 - (void)presentGuestFlowInWindow:(UIWindow *)window forEventDetail:(THLEventEntity *)eventEntity {

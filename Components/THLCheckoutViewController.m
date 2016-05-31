@@ -16,6 +16,8 @@
 #import "THLActionButton.h"
 #import "THLPurchaseDetailsView.h"
 #import "THLNeedToKnowInfoView.h"
+#import "THLGuestlistInvite.h"
+#import "THLGuestlist.h"
 
 
 @interface THLCheckoutViewController ()
@@ -190,8 +192,18 @@
                                             [self displayError:[error localizedDescription]];
                                         } else {
 //                                            [self.delegate checkoutViewController:self didFinishPurchasingForGuestlistInvite:response];
-                                            [self.navigationController dismissViewControllerAnimated:TRUE completion:^{
-                                            }];                                        }
+//                                            [self.navigationController dismissViewControllerAnimated:TRUE completion:^{
+//                                                [_completionAction execute:nil];
+//                                            }];
+                                            [[self queryForGuestlistInviteForEvent:_event.objectId] getFirstObjectInBackgroundWithBlock:^(PFObject *guestlistInvite, NSError *queryError) {
+                                                if (!queryError) {
+                                                    PFObject *guestlist = guestlistInvite[@"Guestlist"];
+                                                    [self.delegate checkoutViewControllerDidFinishCheckoutForEvent:_event withGuestlistId:guestlist.objectId];
+                                                } else {
+                                                    
+                                                }
+                                            }];
+                                    }
                                     }];
     } else {
         
@@ -211,9 +223,17 @@
                                         if (error) {
                                             [self displayError:[error localizedDescription]];
                                         } else {
-                                            [self.delegate checkoutViewController:self didFinishSubmittingGuestlist:guestlistId];
-                                            [self.navigationController dismissViewControllerAnimated:TRUE completion:^{
-                                                [_completionAction execute:nil];
+//                                            [self.delegate checkoutViewController:self didFinishSubmittingGuestlist:guestlistId];
+//                                            [self.navigationController dismissViewControllerAnimated:TRUE completion:^{
+//                                                [_completionAction execute:nil];
+//                                            }];
+                                            [[self queryForGuestlistInviteForEvent:_event.objectId] getFirstObjectInBackgroundWithBlock:^(PFObject *guestlistInvite, NSError *queryError) {
+                                                if (!queryError) {
+                                                    PFObject *guestlist = guestlistInvite[@"Guestlist"];
+                                                    [self.delegate checkoutViewControllerDidFinishCheckoutForEvent:_event withGuestlistId:guestlist.objectId];
+                                                } else {
+                                                    
+                                                }
                                             }];
                                         }
                                     }];
@@ -221,5 +241,50 @@
     }
 }
 
+
+
+#pragma mark - ThisShitShouldNotBeHereButFuckIt
+
+- (PFQuery *)queryForGuestlistInviteForEvent:(NSString *)eventId {
+    
+    PFQuery *eventQuery = [self baseEventQuery];
+    [eventQuery whereKey:@"objectId" equalTo:eventId];
+    
+    PFQuery *guestlistQuery = [self baseGuestlistQuery];
+    [guestlistQuery whereKey:@"event" matchesQuery:eventQuery];
+    
+    PFQuery *query = [self baseGuestlistInviteQuery];
+    [query whereKey:@"Guest" equalTo:[THLUser currentUser]];
+    [query whereKey:@"Guestlist" matchesQuery:guestlistQuery];
+    [query whereKey:@"response" notEqualTo:[NSNumber numberWithInteger:-1]];
+    return query;
+}
+
+- (PFQuery *)baseEventQuery {
+    PFQuery *query = [THLEvent query];
+    [query includeKey:@"location"];
+    [query includeKey:@"host"];
+    return query;
+}
+
+- (PFQuery *)baseGuestlistQuery {
+    PFQuery *query = [THLGuestlist query];
+    [query includeKey:@"Owner"];
+    [query includeKey:@"event"];
+    [query includeKey:@"event.host"];
+    [query includeKey:@"event.location"];
+    return query;
+}
+
+- (PFQuery *)baseGuestlistInviteQuery {
+    PFQuery *query = [THLGuestlistInvite query];
+    [query includeKey:@"Guest"];
+    [query includeKey:@"Guestlist"];
+    [query includeKey:@"Guestlist.Owner"];
+    [query includeKey:@"Guestlist.event"];
+    [query includeKey:@"Guestlist.event.host"];
+    [query includeKey:@"Guestlist.event.location"];
+    return query;
+}
 
 @end

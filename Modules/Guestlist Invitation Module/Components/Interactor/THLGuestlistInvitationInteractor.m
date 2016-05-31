@@ -23,7 +23,7 @@ static NSString *const kGuestEntityObjectIdKey = @"objectId";
 static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInvitationSearchViewKey";
 @class THLGuestlistInviteEntity;
 
-@interface THLGuestlistInvitationInteractor () <THLCheckoutViewDelegate>
+@interface THLGuestlistInvitationInteractor () <THLCheckoutViewControllerDelegate>
 @property (nonatomic, copy) NSString *guestlistId;
 @property (nonatomic, strong) NSMutableArray *addedGuests;
 @property (nonatomic, strong) NSMutableArray *addedGuestDigits;

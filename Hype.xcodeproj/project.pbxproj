@@ -114,6 +114,7 @@
 		791C1F8D1BF13BD900CCF803 /* THLEventHostingTableCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 791C1F8C1BF13BD900CCF803 /* THLEventHostingTableCellViewModel.m */; };
 		792545B91CFC8DA0004CF29A /* THLPartyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 792545B81CFC8DA0004CF29A /* THLPartyViewController.m */; };
 		792545BC1CFCBD61004CF29A /* THLPartyMemberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 792545BB1CFCBD61004CF29A /* THLPartyMemberCell.m */; };
+		792545BF1CFD113B004CF29A /* THLPartyInvitationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 792545BE1CFD113B004CF29A /* THLPartyInvitationViewController.m */; };
 		794208281BD82641009B86FA /* UIView+DimView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794208271BD82641009B86FA /* UIView+DimView.m */; };
 		7942082C1BD82AF6009B86FA /* THLActionBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7942082B1BD82AF6009B86FA /* THLActionBarButton.m */; };
 		7942082F1BD8C250009B86FA /* THLGuestlistEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7942082E1BD8C250009B86FA /* THLGuestlistEntity.m */; };
@@ -526,6 +527,8 @@
 		792545B81CFC8DA0004CF29A /* THLPartyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPartyViewController.m; sourceTree = "<group>"; };
 		792545BA1CFCBD61004CF29A /* THLPartyMemberCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPartyMemberCell.h; sourceTree = "<group>"; };
 		792545BB1CFCBD61004CF29A /* THLPartyMemberCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPartyMemberCell.m; sourceTree = "<group>"; };
+		792545BD1CFD113B004CF29A /* THLPartyInvitationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPartyInvitationViewController.h; sourceTree = "<group>"; };
+		792545BE1CFD113B004CF29A /* THLPartyInvitationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPartyInvitationViewController.m; sourceTree = "<group>"; };
 		79259D6E1CAA4C6C00409040 /* Hype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hype.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79259D6F1CAA4C6C00409040 /* Hype.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Hype.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		794208261BD82641009B86FA /* UIView+DimView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DimView.h"; sourceTree = "<group>"; };
@@ -987,6 +990,8 @@
 				79B062BB1CF909F300A3DC50 /* THLPartyNavigationController.h */,
 				79B062BC1CF909F300A3DC50 /* THLPartyNavigationController.m */,
 				79BB15311C6CED720044D943 /* THLFxTitleLabel.h */,
+				792545BD1CFD113B004CF29A /* THLPartyInvitationViewController.h */,
+				792545BE1CFD113B004CF29A /* THLPartyInvitationViewController.m */,
 				79BB15321C6CED720044D943 /* THLFxTitleLabel.m */,
 				799862441C97B6AF004C5326 /* THLTextEntryViewController.h */,
 				799862451C97B6AF004C5326 /* THLTextEntryViewController.m */,
@@ -3591,6 +3596,7 @@
 				215A429A1BAA25B000D03C35 /* THLFacebookPicturePresenter.m in Sources */,
 				79B9592C1BE581BB00B87799 /* THLGuestlistReviewInteractor.m in Sources */,
 				21E402D91BBF80E6001D0C2C /* THLGuestlist.m in Sources */,
+				792545BF1CFD113B004CF29A /* THLPartyInvitationViewController.m in Sources */,
 				794AFE161C10A4BF008475B1 /* THLHostDashboardDataManager.m in Sources */,
 				794DCCB51BF555020037A03D /* FXBlurView.m in Sources */,
 				798D7EB11BF2CCC7001D4593 /* THLUserProfilePresenter.m in Sources */,
