@@ -17,9 +17,10 @@
 #import "Intercom/intercom.h"
 
 #import "MBProgressHUD.h"
+#import "TTTAttributedLabel.h"
 
 @interface THLDiscoveryViewController ()
-
+@property (nonatomic, strong) TTTAttributedLabel *navBarTitleLabel;
 @end
 
 @implementation THLDiscoveryViewController
@@ -31,7 +32,7 @@
     self = [super initWithClassName:className];
     if (!self) return nil;
     
-    self.title = @"THIS WEEK IN NEW YORK";
+    self.navigationItem.titleView = self.navBarTitleLabel;
     self.pullToRefreshEnabled = YES;
     self.paginationEnabled = NO;
    
@@ -70,10 +71,7 @@
     layout.minimumInteritemSpacing = 5;
     layout.minimumLineSpacing = 5;
     
-    const CGRect bounds = UIEdgeInsetsInsetRect(self.view.bounds, layout.sectionInset);
-    CGFloat sideSize = MIN(CGRectGetWidth(bounds), CGRectGetHeight(bounds));
     layout.itemSize = CGSizeMake(ViewWidth(self.collectionView) - 25, 125);
-    
 }
 
 - (void)objectsWillLoad {
@@ -115,9 +113,8 @@
     
     NSDate *date = (NSDate *)object[@"date"];
 
-    NSString *invitationDate = [NSString stringWithFormat:@"%@, %@", date.thl_weekdayString, date.thl_timeString];
     cell.titlesView.titleText = object[@"title"];
-    cell.titlesView.dateText = invitationDate;
+    cell.titlesView.dateText = [NSString stringWithFormat:@"%@", date.thl_weekdayString];
     cell.titlesView.locationNameText = object[@"location"][@"name"];
     cell.titlesView.locationNeighborhoodText = object[@"location"][@"neighborhood"];
     cell.venueImageView.file = object[@"location"][@"image"];
@@ -140,28 +137,6 @@
 }
 
 
-//- (NSInteger)numberOfSectionsInCollectionView:(UICollectionViewCell *)collectionView {
-//    
-//    if (self.objects.count != 0) {
-//        
-//        return 1;
-//        
-//    } else {
-//        
-//        UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
-//        
-//        messageLabel.text = @"No data is currently available. Please pull down to refresh.";
-//        messageLabel.textColor = [UIColor whiteColor];
-//        messageLabel.numberOfLines = 0;
-//        messageLabel.textAlignment = NSTextAlignmentCenter;
-//        messageLabel.font = [UIFont fontWithName:@"Palatino-Italic" size:20];
-//        [messageLabel sizeToFit];
-//        self.collectionView.backgroundView = messageLabel;
-//    }
-//    
-//    return 0;
-//}
-
 #pragma mark - event handlers ()
 
 - (void)messageButtonPressed
@@ -169,6 +144,29 @@
     [Intercom presentConversationList];
 }
 
+- (TTTAttributedLabel *)navBarTitleLabel
+{
+    if (!_navBarTitleLabel) {
+        _navBarTitleLabel = [TTTAttributedLabel new];
+        _navBarTitleLabel.textColor = [UIColor whiteColor];
+        _navBarTitleLabel.font = [UIFont fontWithName:@"Raleway-Regular" size:14];
+        _navBarTitleLabel.numberOfLines = 0;
+        _navBarTitleLabel.linkAttributes = @{NSForegroundColorAttributeName: kTHLNUIPrimaryFontColor,
+                                             NSUnderlineColorAttributeName: kTHLNUIAccentColor,
+                                    NSUnderlineStyleAttributeName: @(NSUnderlineStyleThick)};
+        _navBarTitleLabel.activeLinkAttributes = @{NSForegroundColorAttributeName: kTHLNUIPrimaryFontColor,
+                                          NSUnderlineStyleAttributeName: @(NSUnderlineStyleNone)};
+        _navBarTitleLabel.textAlignment = NSTextAlignmentCenter;
+        NSString *labelText = @"THIS WEEK IN NEW YORK";
+        _navBarTitleLabel.text = labelText;
+        NSRange city = [labelText rangeOfString:@"NEW YORK"];
+        [_navBarTitleLabel addLinkToURL:[NSURL URLWithString:@""] withRange:city];
+        
+        [_navBarTitleLabel sizeToFit];
+    }
+
+    return _navBarTitleLabel;
+}
 
 
 

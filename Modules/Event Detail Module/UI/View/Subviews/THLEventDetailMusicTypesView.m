@@ -16,12 +16,10 @@
 
 @implementation THLEventDetailMusicTypesView
 - (void)constructView {
-    [super constructView];
     _musicTypesLabel = [self newMusicTypesLabel];
 }
 
 - (void)layoutView {
-    [super layoutView];
     [self.contentView addSubviews:@[_musicTypesLabel]];
     
     [_musicTypesLabel makeConstraints:^(MASConstraintMaker *make) {
@@ -31,7 +29,6 @@
 }
 
 - (void)bindView {
-    [super bindView];
     RAC(self.musicTypesLabel, text) = RACObserve(self, musicTypesInfo);
 }
 

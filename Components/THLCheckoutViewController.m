@@ -18,15 +18,19 @@
 #import "THLNeedToKnowInfoView.h"
 #import "THLGuestlistInvite.h"
 #import "THLGuestlist.h"
+#import "THLImportantInformationView.h"
 
 
 @interface THLCheckoutViewController ()
 @property (nonatomic) THLEvent *event;
 @property (nonatomic, strong) RACCommand *completionAction;
+@property (nonatomic, strong) UIScrollView *scrollView;
+
 @property (nonatomic, strong) THLActionButton *purchaseButton;
 @property (nonatomic, strong) THLPurchaseDetailsView *purchaseDetailsView;
 @property (nonatomic, strong) NSDictionary *paymentInfo;
 @property (nonatomic, strong) MBProgressHUD *hud;
+@property (nonatomic, strong) THLImportantInformationView *importantInformationView;
 
 - (void)displayError:(NSString *)error;
 @end
@@ -49,31 +53,32 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self constructView];
-    [self layoutView];
-}
-
-- (void)constructView {
     self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
     self.navigationItem.leftBarButtonItem = [self backBarButton];
     self.navigationItem.titleView = [self navBarTitleLabel];
-    
-    _purchaseButton = [self newPurchaseButton];
-    _purchaseDetailsView = [self newPurchaseDetailsView];
-}
 
-- (void)layoutView {
-    [self.view addSubviews:@[_purchaseButton, _purchaseDetailsView]];
     self.hud = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:self.hud];
-    [_purchaseButton makeConstraints:^(MASConstraintMaker *make) {
+    
+    WEAKSELF();
+    [self.purchaseButton makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(0);
         make.left.bottom.right.insets(kTHLEdgeInsetsHigh());
     }];
     
-    [_purchaseDetailsView makeConstraints:^(MASConstraintMaker *make) {
+    [self.scrollView makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.insets(kTHLEdgeInsetsNone());
+        make.bottom.equalTo(WSELF.purchaseButton.mas_top);
+    }];
+
+    [self.purchaseDetailsView makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.insets(kTHLEdgeInsetsSuperHigh());
-        make.bottom.equalTo(_purchaseButton.mas_top);
+    }];
+    
+    
+    [self.importantInformationView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.purchaseDetailsView.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
     }];
 }
 
@@ -84,6 +89,25 @@
 {
     return [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_button"] style:UIBarButtonItemStylePlain target:self action:@selector(back:)];
 }
+
+- (UIScrollView *)scrollView {
+    if (!_scrollView) {
+        _scrollView = [UIScrollView new];
+        [self.view addSubview:_scrollView];
+    }
+    return _scrollView;
+}
+- (THLImportantInformationView *)importantInformationView
+{
+    if (!_importantInformationView) {
+        _importantInformationView = [THLImportantInformationView new];
+        _importantInformationView.titleLabel.text = @"Important Information";
+        _importantInformationView.importantInformationLabel.text = @"Your purchase is non-refundable\n\nPlease dress appropriately\n\nDoorman has final say on admission";
+        [self.scrollView addSubview:_importantInformationView];
+    }
+    return _importantInformationView;
+}
+
 
 - (UILabel *)navBarTitleLabel
 {
@@ -97,44 +121,51 @@
     return label;
 }
 
-- (THLActionButton *)newPurchaseButton {
-    THLActionButton *button = [[THLActionButton alloc] initWithDefaultStyle];
-    [button setTitle:@"Complete Order"];
-    [button addTarget:self action:@selector(buy:) forControlEvents:UIControlEventTouchUpInside];
-    return button;
+- (THLActionButton *)purchaseButton {
+    if (!_purchaseButton) {
+        _purchaseButton = [[THLActionButton alloc] initWithDefaultStyle];
+        [_purchaseButton setTitle:@"Complete Order"];
+        [_purchaseButton addTarget:self action:@selector(buy:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_purchaseButton];
+    }
+    return _purchaseButton;
 }
 
-- (THLPurchaseDetailsView *)newPurchaseDetailsView {
-    THLPurchaseDetailsView *purchaseDetailsView = [THLPurchaseDetailsView new];
-    purchaseDetailsView.title = NSLocalizedString(@"Purchase Details",@"Purchase Details");
-
-    float maleServiceCharge = (_event.maleTicketPrice * 0.029) + 0.30;
-    float femaleServiceCharge = (_event.femaleTicketPrice * 0.029) + 0.30;
-    NSString *purchaseTitleText;
-    THLUser *currentUser = [THLUser currentUser];
-    if (currentUser.sex == THLSexMale) {
-        purchaseTitleText = @"Male General Admission";
-    } else if (currentUser.sex == THLSexFemale) {
-        purchaseTitleText = @"Female General Admission";
-    }
-    if (currentUser.sex == THLSexMale && _event.maleTicketPrice > 0.0) {
-        purchaseDetailsView.purchaseTitleText = purchaseTitleText;
+- (THLPurchaseDetailsView *)purchaseDetailsView {
+    if (!_purchaseDetailsView) {
+        _purchaseDetailsView = [THLPurchaseDetailsView new];
+        _purchaseDetailsView.titleLabel.text = @"Purchase Details";
         
-        purchaseDetailsView.subtotalAmount = [NSString stringWithFormat:@"$%.2f", _event.maleTicketPrice];
-        purchaseDetailsView.serviceChargeAmount = [NSString stringWithFormat:@"$%.2f", maleServiceCharge];
-        purchaseDetailsView.totalAmount = [NSString stringWithFormat:@"$%.2f", _event.maleTicketPrice + maleServiceCharge];
-    } else if (currentUser.sex == THLSexFemale && _event.femaleTicketPrice > 0.0) {
-        purchaseDetailsView.purchaseTitleText = purchaseTitleText;
-        purchaseDetailsView.subtotalAmount = [NSString stringWithFormat:@"$%.2f", _event.femaleTicketPrice];
-        purchaseDetailsView.serviceChargeAmount = [NSString stringWithFormat:@"$%.2f", femaleServiceCharge];
-        purchaseDetailsView.totalAmount = [NSString stringWithFormat:@"$%.2f", _event.femaleTicketPrice + femaleServiceCharge];
-    } else {
-        purchaseDetailsView.purchaseTitleText = purchaseTitleText;
-        purchaseDetailsView.subtotalAmount = @"FREE";
-        purchaseDetailsView.serviceChargeAmount = @"FREE";
-        purchaseDetailsView.totalAmount = @"FREE";
+        float maleServiceCharge = (_event.maleTicketPrice * 0.029) + 0.30;
+        float femaleServiceCharge = (_event.femaleTicketPrice * 0.029) + 0.30;
+        NSString *purchaseTitleText;
+        THLUser *currentUser = [THLUser currentUser];
+        if (currentUser.sex == THLSexMale) {
+            purchaseTitleText = @"Male General Admission";
+        } else if (currentUser.sex == THLSexFemale) {
+            purchaseTitleText = @"Female General Admission";
+        }
+        if (currentUser.sex == THLSexMale && _event.maleTicketPrice > 0.0) {
+            _purchaseDetailsView.purchaseTitleLabel.text = purchaseTitleText;
+            
+            _purchaseDetailsView.subtotalLabel.text = [NSString stringWithFormat:@"$%.2f", _event.maleTicketPrice];
+            _purchaseDetailsView.serviceChargeLabel.text = [NSString stringWithFormat:@"$%.2f", maleServiceCharge];
+            _purchaseDetailsView.totalLabel.text = [NSString stringWithFormat:@"$%.2f", _event.maleTicketPrice + maleServiceCharge];
+        } else if (currentUser.sex == THLSexFemale && _event.femaleTicketPrice > 0.0) {
+            _purchaseDetailsView.purchaseTitleLabel.text = purchaseTitleText;
+            _purchaseDetailsView.subtotalLabel.text = [NSString stringWithFormat:@"$%.2f", _event.femaleTicketPrice];
+            _purchaseDetailsView.serviceChargeLabel.text = [NSString stringWithFormat:@"$%.2f", femaleServiceCharge];
+            _purchaseDetailsView.totalLabel.text = [NSString stringWithFormat:@"$%.2f", _event.femaleTicketPrice + femaleServiceCharge];
+        } else {
+            _purchaseDetailsView.purchaseTitleLabel.text = purchaseTitleText;
+            _purchaseDetailsView.subtotalLabel.text = @"FREE";
+            _purchaseDetailsView.serviceChargeLabel.text = @"FREE";
+            _purchaseDetailsView.totalLabel.text = @"FREE";
+        }
+        [self.scrollView addSubview:_purchaseDetailsView];
     }
-    return purchaseDetailsView;
+
+    return _purchaseDetailsView;
 }
 
 #pragma mark - Event handlers

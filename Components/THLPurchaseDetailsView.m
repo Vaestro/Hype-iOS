@@ -11,132 +11,158 @@
 #import "THLPromotionInfoView.h"
 
 @interface THLPurchaseDetailsView()
-@property (nonatomic, strong) UILabel *purchaseTitleLabel;
-@property (nonatomic, strong) UILabel *subtotalLabel;
-@property (nonatomic, strong) UILabel *serviceChargeLabel;
-@property (nonatomic, strong) UILabel *totalLabel;
+@property (nonatomic, strong) UILabel *subtotalDesciptionLabel;
+@property (nonatomic, strong) UILabel *serviceChargeDesciptionLabel;
+@property (nonatomic, strong) UILabel *totalDescriptionLabel;
+
+
 @property (nonatomic, strong) UIView *lineItemSeparatorView;
 
 @end
 
 @implementation THLPurchaseDetailsView
-- (void)constructView {
-    [super constructView];
-    _purchaseTitleLabel = [self newPurchaseTitleLabel];
-    _subtotalLabel = [self newSubtotalLabel];
-    _serviceChargeLabel = [self newServiceChargeLabel];
-    _totalLabel = [self newTotalLabel];
-    _lineItemSeparatorView = [self newLineItemSeparatorView];
-
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
+        [self layoutView];
+    }
+    return self;
 }
 
 - (void)layoutView {
-    [super layoutView];
-    UILabel *subtotalDesciptionLabel = THLNUILabel(kTHLNUIDetailTitle);
-    subtotalDesciptionLabel.text = @"Subtotal";
-    UILabel *serviceChargeDesciptionLabel = THLNUILabel(kTHLNUIDetailTitle);
-    serviceChargeDesciptionLabel.text = @"Service Charge";
-    UILabel *totalDescriptionLabel = THLNUILabel(kTHLNUIDetailTitle);
-    totalDescriptionLabel.text = @"Total";
-    
-    [self.contentView addSubviews:@[_purchaseTitleLabel, subtotalDesciptionLabel, _subtotalLabel, serviceChargeDesciptionLabel, _serviceChargeLabel, totalDescriptionLabel, _totalLabel, _lineItemSeparatorView]];
-    
     WEAKSELF();
-    [_purchaseTitleLabel makeConstraints:^(MASConstraintMaker *make) {
+    [self.purchaseTitleLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.insets(kTHLEdgeInsetsSuperHigh());
         make.left.right.insets(kTHLEdgeInsetsNone());
     }];
     
-    [subtotalDesciptionLabel makeConstraints:^(MASConstraintMaker *make) {
+    [self.subtotalDesciptionLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF purchaseTitleLabel].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
         make.left.insets(kTHLEdgeInsetsNone());
     }];
     
-    [_subtotalLabel makeConstraints:^(MASConstraintMaker *make) {
+    [self.subtotalLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF purchaseTitleLabel].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
-        make.left.equalTo(subtotalDesciptionLabel.mas_right);
+        make.left.equalTo(WSELF.subtotalDesciptionLabel.mas_right);
         make.right.insets(kTHLEdgeInsetsNone());
     }];
     
 
-    [serviceChargeDesciptionLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(subtotalDesciptionLabel.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+    [self.serviceChargeDesciptionLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.subtotalDesciptionLabel.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
         make.left.insets(kTHLEdgeInsetsNone());
     }];
     
-    [_serviceChargeLabel makeConstraints:^(MASConstraintMaker *make) {
+    [self.serviceChargeLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF subtotalLabel].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
-        make.left.equalTo(serviceChargeDesciptionLabel.mas_right);
+        make.left.equalTo(WSELF.serviceChargeDesciptionLabel.mas_right);
         make.right.insets(kTHLEdgeInsetsNone());
     }];
     
-    [_lineItemSeparatorView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(serviceChargeDesciptionLabel.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+    [self.lineItemSeparatorView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.serviceChargeDesciptionLabel.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
         make.left.right.insets(kTHLEdgeInsetsLow());
         make.height.equalTo(0.5);
     }];
     
-    [totalDescriptionLabel makeConstraints:^(MASConstraintMaker *make) {
+    [self.totalDescriptionLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF lineItemSeparatorView].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
-        make.left.insets(kTHLEdgeInsetsNone());
+        make.left.bottom.insets(kTHLEdgeInsetsNone());
     }];
     
-    [_totalLabel makeConstraints:^(MASConstraintMaker *make) {
+    [self.totalLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF lineItemSeparatorView].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
-        make.left.equalTo(totalDescriptionLabel.mas_right);
-        make.right.insets(kTHLEdgeInsetsNone());
+        make.left.equalTo(WSELF.totalDescriptionLabel.mas_right);
+        make.right.bottom.insets(kTHLEdgeInsetsNone());
     }];
 }
 
-- (void)bindView {
-    [super bindView];
-    RAC(self.purchaseTitleLabel, text, @"") = RACObserve(self, purchaseTitleText);
-    RAC(self.subtotalLabel, text, @"") = RACObserve(self, subtotalAmount);
-    RAC(self.serviceChargeLabel, text, @"") = RACObserve(self, serviceChargeAmount);
-    RAC(self.totalLabel, text, @"") = RACObserve(self, totalAmount);
+- (UILabel *)subtotalDesciptionLabel {
+    if (!_subtotalDesciptionLabel) {
+        _subtotalDesciptionLabel = THLNUILabel(kTHLNUIDetailTitle);
+        _subtotalDesciptionLabel.text = @"Subtotal";
+        [self.contentView addSubview:_subtotalDesciptionLabel];
+    }
+    return _subtotalDesciptionLabel;
 }
 
-- (UILabel *)newPurchaseTitleLabel {
-    UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
-    label.adjustsFontSizeToFitWidth = YES;
-    label.minimumScaleFactor = 0.5;
-    label.textAlignment = NSTextAlignmentLeft;
-    label.numberOfLines = 0;
-    [label setTintColor:kTHLNUIAccentColor];
-    return label;
+- (UILabel *)serviceChargeDesciptionLabel {
+    if (!_serviceChargeDesciptionLabel) {
+        _serviceChargeDesciptionLabel = THLNUILabel(kTHLNUIDetailTitle);
+        _serviceChargeDesciptionLabel.text = @"Service Charge";
+        [self.contentView addSubview:_serviceChargeDesciptionLabel];
+    }
+    return _serviceChargeDesciptionLabel;
 }
 
-- (UILabel *)newSubtotalLabel {
-    UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
-    label.adjustsFontSizeToFitWidth = YES;
-    label.minimumScaleFactor = 0.5;
-    label.textAlignment = NSTextAlignmentRight;
-    label.numberOfLines = 0;
-    return label;
+- (UILabel *)totalDescriptionLabel {
+    if (!_totalDescriptionLabel) {
+        _totalDescriptionLabel = THLNUILabel(kTHLNUIDetailTitle);
+        _totalDescriptionLabel.text = @"Total";
+        [self.contentView addSubview:_totalDescriptionLabel];
+    }
+
+    return _totalDescriptionLabel;
 }
 
-- (UILabel *)newServiceChargeLabel {
-    UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
-    label.adjustsFontSizeToFitWidth = YES;
-    label.minimumScaleFactor = 0.5;
-    label.textAlignment = NSTextAlignmentRight;
-    label.numberOfLines = 0;
-    return label;
+- (UILabel *)purchaseTitleLabel {
+    if (!_purchaseTitleLabel) {
+        _purchaseTitleLabel = THLNUILabel(kTHLNUIDetailTitle);
+        _purchaseTitleLabel.adjustsFontSizeToFitWidth = YES;
+        _purchaseTitleLabel.minimumScaleFactor = 0.5;
+        _purchaseTitleLabel.textAlignment = NSTextAlignmentLeft;
+        _purchaseTitleLabel.numberOfLines = 0;
+        [_purchaseTitleLabel setTintColor:kTHLNUIAccentColor];
+        [self.contentView addSubview:_purchaseTitleLabel];
+    }
+
+    return _purchaseTitleLabel;
 }
 
-- (UILabel *)newTotalLabel {
-    UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
-    label.adjustsFontSizeToFitWidth = YES;
-    label.minimumScaleFactor = 0.5;
-    label.textAlignment = NSTextAlignmentRight;
-    label.numberOfLines = 0;
-    return label;
+- (UILabel *)subtotalLabel {
+    if (!_subtotalLabel) {
+        _subtotalLabel = THLNUILabel(kTHLNUIDetailTitle);
+        _subtotalLabel.adjustsFontSizeToFitWidth = YES;
+        _subtotalLabel.minimumScaleFactor = 0.5;
+        _subtotalLabel.textAlignment = NSTextAlignmentRight;
+        _subtotalLabel.numberOfLines = 0;
+        [self.contentView addSubview:_subtotalLabel];
+    }
+    return _subtotalLabel;
 }
 
-- (UIView *)newLineItemSeparatorView {
-    UIView *view = THLNUIView(kTHLNUIUndef);
-    view.backgroundColor = [UIColor grayColor];
-    return view;
+- (UILabel *)serviceChargeLabel {
+    if (!_serviceChargeLabel) {
+        _serviceChargeLabel = THLNUILabel(kTHLNUIDetailTitle);
+        _serviceChargeLabel.adjustsFontSizeToFitWidth = YES;
+        _serviceChargeLabel.minimumScaleFactor = 0.5;
+        _serviceChargeLabel.textAlignment = NSTextAlignmentRight;
+        _serviceChargeLabel.numberOfLines = 0;
+        [self.contentView addSubview:_serviceChargeLabel];
+    }
+
+    return _serviceChargeLabel;
+}
+
+- (UILabel *)totalLabel {
+    if (!_totalLabel) {
+        _totalLabel = THLNUILabel(kTHLNUIDetailTitle);
+        _totalLabel.adjustsFontSizeToFitWidth = YES;
+        _totalLabel.minimumScaleFactor = 0.5;
+        _totalLabel.textAlignment = NSTextAlignmentRight;
+        _totalLabel.numberOfLines = 0;
+        [self.contentView addSubview:_totalLabel];
+    }
+    return _totalLabel;
+}
+
+- (UIView *)lineItemSeparatorView {
+    if (!_lineItemSeparatorView) {
+        _lineItemSeparatorView = THLNUIView(kTHLNUIUndef);
+        _lineItemSeparatorView.backgroundColor = [UIColor grayColor];
+        [self.contentView addSubview:_lineItemSeparatorView];
+    }
+
+    return _lineItemSeparatorView;
 }
 
 @end

@@ -38,8 +38,6 @@
 
 }
 
-
-
 #pragma mark -
 #pragma mark Accessors
 - (THLEventTitlesView *)titlesView
@@ -56,14 +54,13 @@
         _venueImageView = [[PFImageView alloc] initWithFrame:CGRectZero];
         _venueImageView.contentMode = UIViewContentModeScaleAspectFill;
         _venueImageView.clipsToBounds = YES;
+        _venueImageView.layer.cornerRadius = 5;
+        _venueImageView.layer.masksToBounds = YES;
         [_venueImageView dimView];
         [self.contentView addSubview:_venueImageView];
     }
     return _venueImageView;
 }
-
-
-
 
 #pragma mark - Public Interface
 + (NSString *)identifier {

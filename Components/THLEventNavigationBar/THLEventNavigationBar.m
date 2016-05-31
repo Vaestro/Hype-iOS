@@ -88,7 +88,7 @@
 
 - (void)addGradientLayer {
 #warning some hacky shit to make sure the gradient layer doesnt draw again so you cant see the event image
-    if (_numberOfLayouts < 3) {
+    if (_numberOfLayouts < 2) {
         CAGradientLayer *gradient = [CAGradientLayer layer];
         
         gradient.frame = self.imageView.bounds;

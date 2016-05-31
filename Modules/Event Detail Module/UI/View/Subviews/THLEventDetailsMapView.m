@@ -14,31 +14,28 @@ static CGFloat MAPVIEW_METERS = 1000;
 
 @interface THLEventDetailsMapView()
 @property (nonatomic, strong) MKMapView *mapView;
-@property (nonatomic, strong) UITextView *textView;
 @end
 
 @implementation THLEventDetailsMapView
-
-- (void)constructView {
-    [super constructView];
-    _mapView = [self newMapView];
-    _textView = [self newTextView];
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
+        [self layoutView];
+        [self bindView];
+    }
+    return self;
 }
 
+
 - (void)layoutView {
-    [super layoutView];
-    [self.contentView addSubviews:@[_mapView,
-                                    _textView]];
-    
     WEAKSELF();
-    [_mapView makeConstraints:^(MASConstraintMaker *make) {
+    [self.mapView makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(kTHLEdgeInsetsNone());
         make.left.right.equalTo(kTHLEdgeInsetsLow());
 //        make.height.equalTo(_mapView.mas_width).dividedBy(kTHLGoldenRatio);
         make.height.equalTo([WSELF mapView].mas_width).dividedBy(3);
     }];
     
-    [_textView makeConstraints:^(MASConstraintMaker *make) {
+    [self.textView makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
         make.bottom.insets(kTHLEdgeInsetsNone());
         make.top.equalTo([WSELF mapView].mas_bottom).insets(kTHLEdgeInsetsLow());
@@ -47,13 +44,6 @@ static CGFloat MAPVIEW_METERS = 1000;
 
 - (void)bindView {
     WEAKSELF();
-    [super bindView];
-    
-//    [RACObserve(self, locationAddress) subscribeNext:^(id x) {
-//        
-//    }];
-    
-    RAC(self.textView, text) = RACObserve(self, locationAddress);
     
     [[RACObserve(self, locationPlacemark) filter:^BOOL(id value) {
         return value != nil;
@@ -69,19 +59,26 @@ static CGFloat MAPVIEW_METERS = 1000;
 }
 
 #pragma mark - Constructors
-- (MKMapView *)newMapView {
-    MKMapView *mapView = [[MKMapView alloc] init];
-    mapView.clipsToBounds = YES;
-    mapView.userInteractionEnabled = NO;
-    return mapView;
+- (MKMapView *)mapView {
+    if (!_mapView) {
+        _mapView = [[MKMapView alloc] init];
+        _mapView.clipsToBounds = YES;
+        _mapView.userInteractionEnabled = NO;
+        [self addSubview:_mapView];
+    }
+    return _mapView;
 }
 
-- (UITextView *)newTextView {
-    UITextView *textView = THLNUITextView(kTHLNUIDetailTitle);
-    [textView setScrollEnabled:NO];
-    textView.editable = NO;
-    textView.dataDetectorTypes = UIDataDetectorTypeAll;
-    textView.tintColor = kTHLNUIPrimaryFontColor;
-    return textView;
+- (UITextView *)textView {
+    if (!_textView) {
+        _textView = THLNUITextView(kTHLNUIDetailTitle);
+        [_textView setScrollEnabled:NO];
+        _textView.editable = NO;
+        _textView.dataDetectorTypes = UIDataDetectorTypeAll;
+        _textView.tintColor = kTHLNUIPrimaryFontColor;
+        [self addSubview:_textView];
+    }
+
+    return _textView;
 }
 @end

@@ -20,7 +20,6 @@
 
 @implementation THLNeedToKnowInfoView
 - (void)constructView {
-    [super constructView];
     _ratioInfoLabel = [self newRatioInfoLabel];
     _coverInfoLabel = [self newCoverInfoLabel];
     _photoIdLabel = [self newPhotoIdLabel];
@@ -29,7 +28,6 @@
 }
 
 - (void)layoutView {
-    [super layoutView];
     [self.contentView addSubviews:@[_ratioInfoLabel, _coverInfoLabel, _photoIdLabel, _attireRequirementLabel, _doormanDiscretionLabel]];
     
     WEAKSELF();
@@ -62,7 +60,6 @@
 }
 
 - (void)bindView {
-    [super bindView];
     WEAKSELF();
     RAC(self.ratioInfoLabel, infoText, @"") = RACObserve(self, ratioText);
     RAC(self.coverInfoLabel, infoText, @"") = RACObserve(self, coverFeeText);
