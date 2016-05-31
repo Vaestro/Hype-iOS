@@ -20,6 +20,7 @@
 #import "THLGuestlist.h"
 #import "THLImportantInformationView.h"
 
+#import "THLPaymentMethodView.h"
 
 @interface THLCheckoutViewController ()
 @property (nonatomic) THLEvent *event;
@@ -28,11 +29,11 @@
 
 @property (nonatomic, strong) THLActionButton *purchaseButton;
 @property (nonatomic, strong) THLPurchaseDetailsView *purchaseDetailsView;
+@property (nonatomic, strong) THLPaymentMethodView *paymentMethodView;
+
 @property (nonatomic, strong) NSDictionary *paymentInfo;
 @property (nonatomic, strong) MBProgressHUD *hud;
 @property (nonatomic, strong) THLImportantInformationView *importantInformationView;
-
-- (void)displayError:(NSString *)error;
 @end
 
 @implementation THLCheckoutViewController
@@ -50,8 +51,7 @@
 
 #pragma mark - UIViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
     self.navigationItem.leftBarButtonItem = [self backBarButton];
@@ -70,15 +70,38 @@
         make.left.right.top.insets(kTHLEdgeInsetsNone());
         make.bottom.equalTo(WSELF.purchaseButton.mas_top);
     }];
+    
+    [self generateContent];
+}
 
+- (void)generateContent {
+    UIView* contentView = UIView.new;
+    [self.scrollView addSubview:contentView];
+    
+    [contentView makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.scrollView);
+        make.width.equalTo(self.scrollView);
+    }];
+    
+    WEAKSELF();
+    [contentView addSubviews:@[self.purchaseDetailsView, self.paymentMethodView, self.importantInformationView]];
+    
     [self.purchaseDetailsView makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
-    
-    [self.importantInformationView makeConstraints:^(MASConstraintMaker *make) {
+    [self.paymentMethodView makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(WSELF.purchaseDetailsView.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+    }];
+    
+    [self.importantInformationView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.paymentMethodView.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+    }];
+    
+    [contentView makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(WSELF.importantInformationView.bottom);
     }];
 }
 
@@ -103,11 +126,19 @@
         _importantInformationView = [THLImportantInformationView new];
         _importantInformationView.titleLabel.text = @"Important Information";
         _importantInformationView.importantInformationLabel.text = @"Your purchase is non-refundable\n\nPlease dress appropriately\n\nDoorman has final say on admission";
-        [self.scrollView addSubview:_importantInformationView];
+//        [self.scrollView addSubview:_importantInformationView];
     }
     return _importantInformationView;
 }
 
+- (THLPaymentMethodView *)paymentMethodView {
+    if (!_paymentMethodView) {
+        _paymentMethodView = [THLPaymentMethodView new];
+        _paymentMethodView.paymentTitleLabel.text = @"Payment Method";
+        [_paymentMethodView addTarget:self.delegate action:@selector(checkoutViewControllerWantsToPresentPaymentViewController) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _paymentMethodView;
+}
 
 - (UILabel *)navBarTitleLabel
 {
@@ -162,7 +193,7 @@
             _purchaseDetailsView.serviceChargeLabel.text = @"FREE";
             _purchaseDetailsView.totalLabel.text = @"FREE";
         }
-        [self.scrollView addSubview:_purchaseDetailsView];
+//        [self.scrollView addSubview:_purchaseDetailsView];
     }
 
     return _purchaseDetailsView;
@@ -182,7 +213,8 @@
         [self chargeCustomer:[THLUser currentUser] forEvent:_event];
     } else {
         [self.hud hide:YES];
-        [self displayError:@"You currently don't have a credit card on file. Please add a payment method in your profile"];
+        [self.delegate checkoutViewControllerWantsToPresentPaymentViewController];
+//        [self displayError:@"You currently don't have a credit card on file. Please add a payment method in your profile"];
     }
 }
 

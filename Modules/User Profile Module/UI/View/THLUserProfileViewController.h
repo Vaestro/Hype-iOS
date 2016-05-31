@@ -14,6 +14,8 @@
 @protocol THLUserProfileView;
 @protocol THLUserProfileViewControllerDelegate <NSObject>
 - (void)userProfileViewControllerWantsToLogout;
+- (void)userProfileViewControllerWantsToPresentPaymentViewController;
+
 @end
 
 @interface THLUserProfileViewController : UIViewController

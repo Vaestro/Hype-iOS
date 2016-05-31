@@ -39,6 +39,8 @@
 #import "THLYapDatabaseViewFactory.h"
 #import "THLDependencyManager.h"
 #import "THLUserProfileViewController.h"
+#import "SVProgressHUD.h"
+#import "THLPaymentViewController.h"
 
 @interface THLGuestFlowWireframe()
 <
@@ -59,7 +61,7 @@ THLUserProfileViewControllerDelegate
 @property (nonatomic, strong) UITabBarController *masterTabBarController;
 @property (nonatomic, strong) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
 @property (nonatomic, strong) THLDashboardWireframe *dashboardWireframe;
-@property (nonatomic, strong) THLUserProfileWireframe *userProfileWireframe;
+@property (nonatomic, strong) THLUserProfileViewController *userProfileViewController;
 @property (nonatomic, strong) THLEventDetailWireframe  *eventDetailWireframe;
 @property (nonatomic, strong) THLGuestlistInvitationWireframe *guestlistInvitationWireframe;
 @property (nonatomic, strong) THLGuestlistReviewWireframe *guestlistReviewWireframe;
@@ -103,25 +105,18 @@ THLUserProfileViewControllerDelegate
 
     UINavigationController *perks = [UINavigationController new];
     UINavigationController *profile = [UINavigationController new];
-    UIViewController *vc = [UIViewController new];
     
     THLMyEventsViewController *myEventsVC = [[THLMyEventsViewController alloc]initWithClassName:@"GuestlistInvite"];
     myEventsVC.delegate = self;
-    UIPageViewController *pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
-
-    THLMyEventsNavigationViewController *myEventsNavVC = [[THLMyEventsNavigationViewController alloc]initWithRootViewController:pageController];
-    [myEventsNavVC.viewControllerArray addObjectsFromArray:@[myEventsVC, vc]];
-    myEventsNavVC.buttonText = @[@"TICKETS", @"INVITES"];
-
-    [dashboard addChildViewController:myEventsNavVC];
+    [dashboard pushViewController:myEventsVC animated:NO];
     
     THLDiscoveryViewController *discoveryVC = [[THLDiscoveryViewController alloc] initWithClassName:@"Event"];
     discoveryVC.delegate = self;
     [discovery pushViewController:discoveryVC animated:NO];
 
-    THLUserProfileViewController *userProfileVC = [THLUserProfileViewController new];
-    userProfileVC.delegate = self;
-    [profile pushViewController:userProfileVC animated:NO];
+    _userProfileViewController = [THLUserProfileViewController new];
+    _userProfileViewController.delegate = self;
+    [profile pushViewController:_userProfileViewController animated:NO];
     
     [self presentPerkStoreInterfaceInNavigationController:perks];
     
@@ -176,6 +171,9 @@ THLUserProfileViewControllerDelegate
 #pragma mark -
 #pragma mark CheckoutViewController
 #pragma mark Delegate
+- (void)checkoutViewControllerWantsToPresentPaymentViewController {
+    [self presentPaymentViewControllerOn:[self topViewController]];
+}
 - (void)checkoutViewControllerDidFinishCheckoutForEvent:(THLEvent *)event withGuestlistId:(NSString *)guestlistId {
     THLPartyInvitationViewController *partyInvitationVC = [[THLPartyInvitationViewController alloc] initWithEvent:event
                                                                                                       guestlistId:guestlistId
@@ -215,6 +213,31 @@ THLUserProfileViewControllerDelegate
 #pragma mark Delegate
 - (void)userProfileViewControllerWantsToLogout {
     [self.moduleDelegate logOutUser];
+}
+
+- (void)userProfileViewControllerWantsToPresentPaymentViewController {
+    [self presentPaymentViewControllerOn:_userProfileViewController];
+}
+
+- (void)presentPaymentViewControllerOn:(UIViewController *)viewController {
+    if ([THLUser currentUser].stripeCustomerId) {
+        [SVProgressHUD show];
+        [PFCloud callFunctionInBackground:@"retrievePaymentInfo"
+                           withParameters:nil
+                                    block:^(NSArray<NSDictionary *> *cardInfo, NSError *cloudError) {
+                                        [SVProgressHUD dismiss];
+                                        if (cloudError) {
+                                            
+                                        } else {
+                                            THLPaymentViewController *paymentView = [[THLPaymentViewController alloc]initWithPaymentInfo:cardInfo];
+                                            [viewController.navigationController pushViewController:paymentView animated:YES];
+                                        }
+                                    }];
+    } else {
+        NSArray<NSDictionary *> *emptyCardInfoSet = [[NSArray alloc]init];
+        THLPaymentViewController *paymentView = [[THLPaymentViewController alloc]initWithPaymentInfo:emptyCardInfoSet];
+        [viewController.navigationController pushViewController:paymentView animated:YES];
+    }
 }
 
 - (THLDataStore *)contactsDataStore
