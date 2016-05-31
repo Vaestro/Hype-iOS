@@ -38,10 +38,10 @@
 #import "THLViewDataSourceFactory.h"
 #import "THLYapDatabaseViewFactory.h"
 #import "THLDependencyManager.h"
+#import "THLUserProfileViewController.h"
 
 @interface THLGuestFlowWireframe()
 <
-THLUserProfileModuleDelegate,
 THLPerkDetailModuleDelegate,
 THLPerkStoreModuleDelegate,
 THLLoginModuleDelegate,
@@ -50,7 +50,8 @@ THLMyEventsViewDelegate,
 THLDiscoveryViewControllerDelegate,
 THLEventDetailsViewControllerDelegate,
 THLCheckoutViewControllerDelegate,
-THLPartyInvitationViewControllerDelegate
+THLPartyInvitationViewControllerDelegate,
+THLUserProfileViewControllerDelegate
 >
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) id currentWireframe;
@@ -118,8 +119,11 @@ THLPartyInvitationViewControllerDelegate
     discoveryVC.delegate = self;
     [discovery pushViewController:discoveryVC animated:NO];
 
+    THLUserProfileViewController *userProfileVC = [THLUserProfileViewController new];
+    userProfileVC.delegate = self;
+    [profile pushViewController:userProfileVC animated:NO];
+    
     [self presentPerkStoreInterfaceInNavigationController:perks];
-    [self presentUserProfileInterfaceInNavigationController:profile];
     
     dashboard.tabBarItem.image = [UIImage imageNamed:@"Lists Icon"];
     dashboard.tabBarItem.title = @"My Events";
@@ -206,6 +210,13 @@ THLPartyInvitationViewControllerDelegate
     }];
 }
 
+#pragma mark -
+#pragma mark UserProfileViewController
+#pragma mark Delegate
+- (void)userProfileViewControllerWantsToLogout {
+    [self.moduleDelegate logOutUser];
+}
+
 - (THLDataStore *)contactsDataStore
 {
     if (!_contactsDataStore) {
@@ -241,18 +252,16 @@ THLPartyInvitationViewControllerDelegate
     return [self topViewController:presentedViewController];
 }
 
-- (void)presentUserProfileInterfaceInNavigationController:(UINavigationController *)navigationController {
-    _userProfileWireframe = [_dependencyManager newUserProfileWireframe];
-    _currentWireframe = _userProfileWireframe;
-    [_userProfileWireframe.moduleInterface setModuleDelegate:self];
-    [_userProfileWireframe.moduleInterface presentUserProfileInterfaceInNavigationController:navigationController];
-}
-
 - (void)presentPerkStoreInterfaceInNavigationController:(UINavigationController *)navigationController {
     _perkStoreWireframe = [_dependencyManager newPerkStoreWireframe];
     _currentWireframe = _perkStoreWireframe;
     [_perkStoreWireframe.moduleInterface setModuleDelegate:self];
     [_perkStoreWireframe.moduleInterface presentPerkStoreInterfaceInNavigationController:navigationController];
+}
+
+- (void)perkModule:(id<THLPerkStoreModuleInterface>)module userDidSelectPerkStoreItemEntity:(THLPerkStoreItemEntity *)perkStoreItemEntity presentPerkDetailInterfaceOnController:(UIViewController *)controller
+{
+    [self presentPerkDetailInterfaceForPerkStoreItem:perkStoreItemEntity onController:controller];
 }
 
 - (void)presentPerkDetailInterfaceForPerkStoreItem:(THLPerkStoreItemEntity *)perkStoreItemEntity onController:(UIViewController *)controller {
@@ -267,11 +276,6 @@ THLPartyInvitationViewControllerDelegate
     [Intercom presentMessageComposer];
 }
 
-#pragma mark - THLChatRoomModuleDelegate
-- (void)perkModule:(id<THLPerkStoreModuleInterface>)module userDidSelectPerkStoreItemEntity:(THLPerkStoreItemEntity *)perkStoreItemEntity presentPerkDetailInterfaceOnController:(UIViewController *)controller
-{
-    [self presentPerkDetailInterfaceForPerkStoreItem:perkStoreItemEntity onController:controller];
-}
 
 #pragma mark - THLPerkStoreModuleDelegate
 - (void)dismissPerkWireframe
@@ -283,12 +287,6 @@ THLPartyInvitationViewControllerDelegate
 - (void)dismissPerkDetailWireframe
 {
     _perkDetailWireframe = nil;
-}
-
-#pragma mark - THLUserProfileModuleDelegate
-- (void)logOutUser
-{
-    [self.moduleDelegate logOutUser];
 }
 
 - (void)dealloc

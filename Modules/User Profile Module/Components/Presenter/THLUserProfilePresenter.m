@@ -8,11 +8,10 @@
 
 #import "THLUserProfilePresenter.h"
 #import "THLUserProfileWireframe.h"
-#import "THLUserProfileView.h"
-#import "THLUser.h"
+#import "THLUserProfileViewController.h"
 
 @interface THLUserProfilePresenter()
-@property (nonatomic, weak) id<THLUserProfileView> view;
+@property (nonatomic, weak) THLUserProfileViewController *view;
 @end
 
 @implementation THLUserProfilePresenter
@@ -29,12 +28,9 @@
     [_wireframe presentInterfaceInNavigationController:navigationController];
 }
 
-- (void)configureView:(id<THLUserProfileView>)view {
+- (void)configureView:(THLUserProfileViewController *)view {
     _view = view;
     
-    [_view setUserImageURL:[NSURL URLWithString:[THLUser currentUser].image.url]];
-    [_view setUserName:[THLUser currentUser].firstName];
-
     WEAKSELF();
     RACCommand *selectedIndexPathCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
         [WSELF handleIndexPathSelection:(NSIndexPath *)input];
