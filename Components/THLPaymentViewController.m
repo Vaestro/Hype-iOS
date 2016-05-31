@@ -44,10 +44,6 @@
 {
     [super viewDidLoad];
     
-    self.paymentTextField = [STPPaymentCardTextField new];
-    self.paymentTextField.textColor = [UIColor whiteColor];
-    self.paymentTextField.delegate = self;
-    
     self.hud = [[MBProgressHUD alloc] initWithView:self.view];
     
     self.view.backgroundColor = [UIColor blackColor];
@@ -267,6 +263,16 @@
 }
 
 #pragma mark - Accessors
+- (STPPaymentCardTextField *)paymentTextField {
+    if (!_paymentTextField) {
+        _paymentTextField = [STPPaymentCardTextField new];
+        _paymentTextField.textColor = [UIColor whiteColor];
+        _paymentTextField.delegate = self;
+        [self.view addSubview:_paymentTextField];
+    }
+    return _paymentTextField;
+}
+
 
 - (THLActionButton *)addCardButton
 {
