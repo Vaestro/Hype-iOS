@@ -141,7 +141,9 @@ static NSString *stripePublishableKey = @"pk_live_H8u89AfEDonln00iEUB0kKtZ";
     
     [branch initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
         // params are the deep linked params associated with the link that the user clicked before showing up.
-        NSLog(@"deep link data: %@", [params description]);
+        if ([params[BRANCH_INIT_KEY_CLICKED_BRANCH_LINK] boolValue]) {
+            [[Mixpanel sharedInstance] track:@"install" properties:params];
+        }
     }];
     
 //	return [[FBSDKApplicationDelegate sharedInstance] application:application
