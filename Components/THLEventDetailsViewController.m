@@ -25,6 +25,8 @@
 #import "THLCheckoutViewController.h"
 #import "THLImportantInformationView.h"
 #import "THLTitledContentView.h"
+#import "THLLocationService.h"
+#import "THLLocation.h"
 
 
 @interface THLEventDetailsViewController ()
@@ -42,6 +44,7 @@
 @property (nonatomic) PFObject *event;
 @property (nonatomic) BOOL showNavigationBar;
 @property (nonatomic, strong) UIImageView *eventImageView;
+@property (nonatomic, strong) THLLocationService *locationService;
 
 @end
 
@@ -53,6 +56,8 @@
 - (id)initWithEvent:(PFObject *)event andShowNavigationBar:(BOOL)showNavigationBar {
     if (self = [super init]) {
         self.event = event;
+        _locationService = [THLLocationService new];
+
         _showNavigationBar = showNavigationBar;
     }
     return self;
@@ -113,6 +118,9 @@
         make.edges.insets(kTHLEdgeInsetsHigh());
     }];
     
+    THLLocation *location = (THLLocation *)_event[@"location"];
+    
+    [self getPlacemarkForLocation:location.fullAddress];
 }
 
 
@@ -254,10 +262,25 @@
     if (!_mapView) {
         _mapView = [THLEventDetailsMapView new];
         _mapView.translatesAutoresizingMaskIntoConstraints = NO;
+        THLLocation *location = (THLLocation *)_event[@"location"];
+        _mapView.locationAddress = location.fullAddress;
+        _mapView.addressLabel.text = location.fullAddress;
+        _mapView.venueNameLabel.text = _event[@"location"][@"name"];
     }
     return _mapView;
 }
 
+- (BFTask<CLPlacemark *> *)fetchPlacemarkForAddress:(NSString *)address {
+    return [_locationService geocodeAddress:address];
+}
+
+- (void)getPlacemarkForLocation:(NSString *)address {
+    WEAKSELF();
+    [[self fetchPlacemarkForAddress:address] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask<CLPlacemark *> *task) {
+        [WSELF.mapView setLocationPlacemark:task.result];
+        return nil;
+    }];
+}
 
 - (UIStatusBarStyle) preferredStatusBarStyle
 {

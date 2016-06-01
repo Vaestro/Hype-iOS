@@ -167,7 +167,8 @@ viewDataSourceFactory:(THLViewDataSourceFactory *)viewDataSourceFactory
             
             tvCell.name = guest.fullName;
             tvCell.phoneNumber = guest.phoneNumber;
-            
+            tvCell.contentView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
+
             if ([WSELF.addedGuests containsObject:guest]) {
                 tvCell.tintColor = kTHLNUIAccentColor;
                 tvCell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -191,6 +192,10 @@ viewDataSourceFactory:(THLViewDataSourceFactory *)viewDataSourceFactory
             }
         }
     });
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    cell.contentView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
 }
 
 - (THLSearchViewDataSource *)getDataSource {
@@ -627,11 +632,11 @@ viewDataSourceFactory:(THLViewDataSourceFactory *)viewDataSourceFactory
         _contactPickerView = [[THContactPickerView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, kContactPickerViewHeight)];
         _contactPickerView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleWidth;
         _contactPickerView.delegate = self;
-        _contactPickerView.backgroundColor = kTHLNUISecondaryBackgroundColor;
+        _contactPickerView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
         [_contactPickerView setPlaceholderLabelText:@"Type a name or phone number"];
         [_contactPickerView setPlaceholderLabelTextColor:kTHLNUIGrayFontColor];
-        THContactViewStyle *contactViewStyle = [[THContactViewStyle alloc] initWithTextColor:kTHLNUIPrimaryFontColor backgroundColor:kTHLNUIAccentColor cornerRadiusFactor:0];
-        THContactViewStyle *selectedContactViewStyle = [[THContactViewStyle alloc] initWithTextColor:kTHLNUIPrimaryFontColor backgroundColor:[kTHLNUIAccentColor colorWithAlphaComponent:0.67f] cornerRadiusFactor:0];
+        THContactViewStyle *contactViewStyle = [[THContactViewStyle alloc] initWithTextColor:[UIColor blackColor] backgroundColor:kTHLNUIAccentColor cornerRadiusFactor:0];
+        THContactViewStyle *selectedContactViewStyle = [[THContactViewStyle alloc] initWithTextColor:[UIColor blackColor] backgroundColor:[kTHLNUIAccentColor colorWithAlphaComponent:0.67f] cornerRadiusFactor:0];
         
         [_contactPickerView setContactViewStyle:contactViewStyle selectedStyle:selectedContactViewStyle];
         [self.view addSubview:_contactPickerView];

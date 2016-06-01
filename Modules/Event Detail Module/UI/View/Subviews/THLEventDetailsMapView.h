@@ -9,7 +9,9 @@
 #import "THLTitledContentView.h"
 
 @interface THLEventDetailsMapView : UIView
-@property (nonatomic, strong) UITextView *textView;
+@property (nonatomic, strong) UILabel *venueNameLabel;
+
+@property (nonatomic, strong) UILabel *addressLabel;
 @property (nonatomic, copy) NSString *locationAddress;
 @property (nonatomic, copy) CLPlacemark *locationPlacemark;
 @end

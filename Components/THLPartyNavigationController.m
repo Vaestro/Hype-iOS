@@ -9,9 +9,8 @@
 #import "THLAppearanceConstants.h"
 #import "THLEventTicketViewController.h"
 #import "PFObject.h"
-#import "THLEventDetailsViewController.h"
-#import "THLPartyViewController.h"
 #import "Intercom/intercom.h"
+#import "THLGuestlistInvite.h"
 
 @interface THLPartyNavigationController()
 @property (nonatomic, strong) PFObject *guestlistInvite;
@@ -27,8 +26,8 @@
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
         _guestlistInvite = guestlistInvite;
-            UIPageViewController *pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
-            return [self initWithRootViewController:pageController];
+        UIPageViewController *pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
+        return [self initWithRootViewController:pageController];
             }
     return self;
 }
@@ -40,13 +39,22 @@
 
     self.navigationItem.titleView = [self navBarTitleLabel];
     self.navigationBar.barTintColor = kTHLNUIPrimaryBackgroundColor; //%%% bartint
-    
-    THLEventTicketViewController *eventTicketVC = [[THLEventTicketViewController alloc]initWithGuestlistInvite:_guestlistInvite];
-    THLEventDetailsViewController *eventDetailsVC = [[THLEventDetailsViewController alloc]initWithEvent:_guestlistInvite[@"Guestlist"][@"event"] andShowNavigationBar:FALSE];
-    THLPartyViewController *partyVC = [[THLPartyViewController alloc] initWithClassName:@"GuestlistInvite" withGuestlist:_guestlistInvite[@"Guestlist"]];
+    THLGuestlistInvite *invite = (THLGuestlistInvite *)_guestlistInvite;
+    if (invite.response == THLStatusAccepted) {
+        THLEventTicketViewController *eventTicketVC = [[THLEventTicketViewController alloc]initWithGuestlistInvite:_guestlistInvite];
+        _eventDetailsVC = [[THLEventDetailsViewController alloc]initWithEvent:_guestlistInvite[@"Guestlist"][@"event"] andShowNavigationBar:FALSE];
+        _partyVC = [[THLPartyViewController alloc] initWithClassName:@"GuestlistInvite" withGuestlist:_guestlistInvite[@"Guestlist"]];
+        
+        [self.viewControllerArray addObjectsFromArray:@[eventTicketVC, _eventDetailsVC, _partyVC]];
+        self.buttonText = @[@"TICKET", @"EVENT", @"PARTY"];
+    } else {
+        _eventDetailsVC = [[THLEventDetailsViewController alloc]initWithEvent:_guestlistInvite[@"Guestlist"][@"event"] andShowNavigationBar:FALSE];
+        _partyVC = [[THLPartyViewController alloc] initWithClassName:@"GuestlistInvite" withGuestlist:_guestlistInvite[@"Guestlist"]];
+        
+        [self.viewControllerArray addObjectsFromArray:@[_eventDetailsVC, _partyVC]];
+        self.buttonText = @[@"EVENT", @"PARTY"];
+    }
 
-    [self.viewControllerArray addObjectsFromArray:@[eventTicketVC, eventDetailsVC, partyVC]];
-    self.buttonText = @[@"TICKET", @"EVENT", @"PARTY"];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

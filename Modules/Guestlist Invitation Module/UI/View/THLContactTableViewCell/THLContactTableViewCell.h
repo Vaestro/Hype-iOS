@@ -10,7 +10,6 @@
 
 
 @interface THLContactTableViewCell : UITableViewCell
-//@property (nonatomic, copy) UIImage *thumbnail;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *phoneNumber;
 

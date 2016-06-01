@@ -22,7 +22,6 @@
         [self constructView];
         [self layoutView];
         [self bindView];
-        
     }
     return self;
 }
@@ -35,7 +34,7 @@
 
 - (void)layoutView {
     WEAKSELF();
-    [self addSubviews:@[_iconImageView, _nameLabel, _phoneNumberLabel]];
+    [self.contentView addSubviews:@[_iconImageView, _nameLabel, _phoneNumberLabel]];
 
     [_iconImageView makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.left.insets(kTHLEdgeInsetsHigh());
