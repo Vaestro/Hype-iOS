@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/PFObject.h>
 
 @interface THLAdmissionsViewController : UIViewController
-
+-(id)initWithEvent:(PFObject *)event;
 @end

@@ -99,6 +99,8 @@
     
     // mixpanel identify: must be called before
     // people properties can be set
+    [mixpanel identify:self.user.objectId];
+    
     NSString *userSex;
     if (self.user.sex == THLSexMale) {
         userSex = @"Male";

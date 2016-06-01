@@ -255,7 +255,7 @@
 {
     if (!_bottomBar) {
         _bottomBar = [[THLActionButton alloc] initWithInverseStyle];
-        [_bottomBar setTitle:@"GO"];
+        [_bottomBar setTitle:@"VIEW ADMISSIONS"];
         [_bottomBar addTarget:self action:@selector(handleViewCheckout) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_bottomBar];
     }
@@ -315,6 +315,12 @@
 {
     [self dismissViewControllerAnimated:TRUE completion:nil];
 }
+
+
+-(void)handleAdmissions {
+    [self.delegate eventDetailsWantsToPresentAdmissionsForEvent:_event];
+}
+
 
 
 

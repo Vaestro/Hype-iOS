@@ -17,6 +17,8 @@
 #import "THLDependencyManager.h"
 #import "THLUserManager.h"
 #import "Intercom/intercom.h"
+#import "Branch.h"
+#import "Mixpanel.h"
 #import "THLUser.h"
 
 //Wireframes
@@ -70,6 +72,10 @@ THLPopupNotificationModuleDelegate
     [Intercom updateUserWithAttributes:@{@"email": [THLUser currentUser].email,
                                          @"name": [THLUser currentUser].fullName
                                         }];
+    
+    [[Branch getInstance] setIdentity:[THLUser currentUser].objectId];
+    
+    
     [self presentGuestFlow];
     
 }
@@ -170,6 +176,7 @@ THLPopupNotificationModuleDelegate
 - (void)logOutUser {
     [THLUserManager logUserOut];
     [Intercom reset];
+    [[Branch getInstance]logout];
     [FBSDKAccessToken setCurrentAccessToken:nil];
     [_dependencyManager.databaseManager dropDB];
     _guestWireframe = nil;
