@@ -184,7 +184,6 @@
 
     RAC(self.musicTypesView, musicTypesInfo) = RACObserve(self, locationMusicTypes);
 
-    RAC(self.mapView, locationName) = RACObserve(self, locationName);
     RAC(self.mapView, locationAddress) = RACObserve(self, locationAddress);
     RAC(self.mapView, locationPlacemark) = RACObserve(self, locationPlacemark);
     
@@ -220,28 +219,28 @@
 
 - (THLEventDetailsPromotionInfoView *)newPromotionInfoView {
     THLEventDetailsPromotionInfoView *promoInfoView = [THLEventDetailsPromotionInfoView new];
-    promoInfoView.title = NSLocalizedString(@"EVENT DETAILS", nil);
+    promoInfoView.titleLabel.text = NSLocalizedString(@"EVENT DETAILS", nil);
     promoInfoView.translatesAutoresizingMaskIntoConstraints = NO;
     return promoInfoView;
 }
 
 - (THLNeedToKnowInfoView *)newNeedToKnowInfoView {
     THLNeedToKnowInfoView *needToKnowInfoView = [THLNeedToKnowInfoView new];
-    needToKnowInfoView.title = NSLocalizedString(@"NEED TO KNOW", nil);
+    needToKnowInfoView.titleLabel.text = NSLocalizedString(@"NEED TO KNOW", nil);
     needToKnowInfoView.translatesAutoresizingMaskIntoConstraints = NO;
     return needToKnowInfoView;
 }
 
 - (THLEventDetailsLocationInfoView *)newLocationInfoView {
     THLEventDetailsLocationInfoView *infoView = [THLEventDetailsLocationInfoView new];
-    infoView.title = NSLocalizedString(@"WHAT WE LIKE", nil);
+    infoView.titleLabel.text = NSLocalizedString(@"WHAT WE LIKE", nil);
     infoView.translatesAutoresizingMaskIntoConstraints = NO;
     return infoView;
 }
 
 - (THLEventDetailMusicTypesView *)newMusicTypesView {
     THLEventDetailMusicTypesView *musicTypesView = [THLEventDetailMusicTypesView new];
-    musicTypesView.title = NSLocalizedString(@"MUSIC", nil);
+    musicTypesView.titleLabel.text = NSLocalizedString(@"MUSIC", nil);
     musicTypesView.translatesAutoresizingMaskIntoConstraints = NO;
     return musicTypesView;
 }

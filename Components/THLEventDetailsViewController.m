@@ -23,6 +23,8 @@
 #import "THLAlertView.h"
 #import "THLUser.h"
 #import "THLCheckoutViewController.h"
+#import "THLImportantInformationView.h"
+#import "THLTitledContentView.h"
 
 
 @interface THLEventDetailsViewController ()
@@ -30,9 +32,9 @@
 @property (nonatomic, strong) UILabel *eventNameLabel;
 @property (nonatomic, strong) UILabel *dateLabel;
 @property (nonatomic, strong) THLEventDetailsPromotionInfoView *promotionInfoView;
-@property (nonatomic, strong) THLEventDetailsLocationInfoView *locationInfoView;
-@property (nonatomic, strong) THLNeedToKnowInfoView *needToKnowInfoView;
-@property (nonatomic, strong) THLEventDetailMusicTypesView *musicTypesView;
+@property (nonatomic, strong) THLTitledContentView *locationInfoView;
+@property (nonatomic, strong) THLImportantInformationView *needToKnowInfoView;
+@property (nonatomic, strong) THLTitledContentView *musicTypesView;
 @property (nonatomic, strong) THLActionButton *bottomBar;
 @property (nonatomic) BOOL showPromotionInfoView;
 @property (nonatomic, strong) THLEventDetailsMapView *mapView;
@@ -59,8 +61,7 @@
 
 #pragma mark - UIViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
@@ -160,30 +161,29 @@
 {
     if (!_promotionInfoView) {
         _promotionInfoView = [THLEventDetailsPromotionInfoView new];
-        _promotionInfoView.title = NSLocalizedString(@"EVENT DETAILS", nil);
+        _promotionInfoView.titleLabel.text = NSLocalizedString(@"EVENT DETAILS", nil);
         _promotionInfoView.translatesAutoresizingMaskIntoConstraints = NO;
     }
     return _promotionInfoView;
 }
 
-- (THLNeedToKnowInfoView *)needToKnowInfoView
+- (THLImportantInformationView *)needToKnowInfoView
 {
     if (!_needToKnowInfoView) {
-        _needToKnowInfoView = [THLNeedToKnowInfoView new];
-        _needToKnowInfoView.title = NSLocalizedString(@"NEED TO KNOW", nil);
+        _needToKnowInfoView = [THLImportantInformationView new];
+        _needToKnowInfoView.titleLabel.text = NSLocalizedString(@"NEED TO KNOW", nil);
+        _needToKnowInfoView.importantInformationLabel.text = @"Doors open:\nMust have valid 21+ Photo ID\nFinal admission at doorman’s discretion.";
         _needToKnowInfoView.translatesAutoresizingMaskIntoConstraints = NO;
     }
     return _needToKnowInfoView;
 }
 
-- (THLEventDetailsLocationInfoView *)locationInfoView
+- (THLTitledContentView *)locationInfoView
 {
-    
     if (!_locationInfoView) {
-        _locationInfoView = [THLEventDetailsLocationInfoView new];
-        _locationInfoView.locationInfo = _event[@"location"][@"info"];
-        if ([(NSString *)_event[@"location"][@"info"] length] <= 117) [_locationInfoView hideReadMoreTextButton];
-        _locationInfoView.title = NSLocalizedString(@"WHAT WE LIKE", nil);
+        _locationInfoView = [THLTitledContentView new];
+        _locationInfoView.titleLabel.text = @"WHAT WE LIKE";
+        [_locationInfoView addContentText:_event[@"location"][@"info"]];
         _locationInfoView.translatesAutoresizingMaskIntoConstraints = NO;
     }
     return _locationInfoView;
@@ -203,11 +203,15 @@
     return _eventImageView;
 }
 
-- (THLEventDetailMusicTypesView *)musicTypesView
+- (THLTitledContentView *)musicTypesView
 {
     if (!_musicTypesView) {
-        _musicTypesView = [THLEventDetailMusicTypesView new];
-        _musicTypesView.title = NSLocalizedString(@"MUSIC", nil);
+        _musicTypesView = [THLTitledContentView new];
+        _musicTypesView.titleLabel.text = @"MUSIC";
+        NSArray *musicTypesArray = _event[@"location"][@"musicTypes"];
+        NSString *musicTypes = [NSString stringWithFormat:@"%@", [musicTypesArray componentsJoinedByString:@" | "]];
+        [_musicTypesView addContentText:musicTypes];
+
         _musicTypesView.translatesAutoresizingMaskIntoConstraints = NO;
     }
     return _musicTypesView;
@@ -223,8 +227,6 @@
     }
     return _bottomBar;
 }
-
-
 
 - (UILabel *)eventNameLabel
 {

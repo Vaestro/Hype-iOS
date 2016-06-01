@@ -30,7 +30,6 @@ static CGFloat const kTHLFAQSectionSeparatorHeight = 2.0;
 
 - (void) constructView
 {
-    [super constructView];
     _howTitle = [self newTitleLabel];
     _howDescription = [self newDescriptionLabel];
     _howImage = [self newImageView];
@@ -39,7 +38,6 @@ static CGFloat const kTHLFAQSectionSeparatorHeight = 2.0;
 
 - (void) layoutView
 {
-    [super layoutView];
     [self.contentView addSubviews:@[_howTitle,
                                     _howImage,
                                     _howDescription,
@@ -71,7 +69,6 @@ static CGFloat const kTHLFAQSectionSeparatorHeight = 2.0;
 
 - (void) bindView
 {
-    [super bindView];
     RAC(self.howTitle, text) = RACObserve(self, titleString);
     RAC(self.howImage, image) = RACObserve(self, image);
     RAC(self.howDescription, text) = RACObserve(self, descriptionString);

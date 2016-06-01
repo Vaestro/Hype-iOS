@@ -16,17 +16,24 @@
 #import "THLActionButton.h"
 #import "THLPurchaseDetailsView.h"
 #import "THLNeedToKnowInfoView.h"
+#import "THLGuestlistInvite.h"
+#import "THLGuestlist.h"
+#import "THLImportantInformationView.h"
 
+#import "THLPaymentMethodView.h"
 
 @interface THLCheckoutViewController ()
 @property (nonatomic) THLEvent *event;
 @property (nonatomic, strong) RACCommand *completionAction;
+@property (nonatomic, strong) UIScrollView *scrollView;
+
 @property (nonatomic, strong) THLActionButton *purchaseButton;
 @property (nonatomic, strong) THLPurchaseDetailsView *purchaseDetailsView;
+@property (nonatomic, strong) THLPaymentMethodView *paymentMethodView;
+
 @property (nonatomic, strong) NSDictionary *paymentInfo;
 @property (nonatomic, strong) MBProgressHUD *hud;
-
-- (void)displayError:(NSString *)error;
+@property (nonatomic, strong) THLImportantInformationView *importantInformationView;
 @end
 
 @implementation THLCheckoutViewController
@@ -44,34 +51,57 @@
 
 #pragma mark - UIViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    [self constructView];
-    [self layoutView];
-}
-
-- (void)constructView {
     self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
     self.navigationItem.leftBarButtonItem = [self backBarButton];
     self.navigationItem.titleView = [self navBarTitleLabel];
-    
-    _purchaseButton = [self newPurchaseButton];
-    _purchaseDetailsView = [self newPurchaseDetailsView];
-}
 
-- (void)layoutView {
-    [self.view addSubviews:@[_purchaseButton, _purchaseDetailsView]];
     self.hud = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:self.hud];
-    [_purchaseButton makeConstraints:^(MASConstraintMaker *make) {
+    
+    WEAKSELF();
+    [self.purchaseButton makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(0);
         make.left.bottom.right.insets(kTHLEdgeInsetsHigh());
     }];
     
-    [_purchaseDetailsView makeConstraints:^(MASConstraintMaker *make) {
+    [self.scrollView makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.insets(kTHLEdgeInsetsNone());
+        make.bottom.equalTo(WSELF.purchaseButton.mas_top);
+    }];
+    
+    [self generateContent];
+}
+
+- (void)generateContent {
+    UIView* contentView = UIView.new;
+    [self.scrollView addSubview:contentView];
+    
+    [contentView makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.scrollView);
+        make.width.equalTo(self.scrollView);
+    }];
+    
+    WEAKSELF();
+    [contentView addSubviews:@[self.purchaseDetailsView, self.paymentMethodView, self.importantInformationView]];
+    
+    [self.purchaseDetailsView makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.insets(kTHLEdgeInsetsSuperHigh());
-        make.bottom.equalTo(_purchaseButton.mas_top);
+    }];
+    
+    [self.paymentMethodView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.purchaseDetailsView.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+    }];
+    
+    [self.importantInformationView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.paymentMethodView.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+    }];
+    
+    [contentView makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(WSELF.importantInformationView.bottom);
     }];
 }
 
@@ -81,6 +111,33 @@
 - (UIBarButtonItem *)backBarButton
 {
     return [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_button"] style:UIBarButtonItemStylePlain target:self action:@selector(back:)];
+}
+
+- (UIScrollView *)scrollView {
+    if (!_scrollView) {
+        _scrollView = [UIScrollView new];
+        [self.view addSubview:_scrollView];
+    }
+    return _scrollView;
+}
+- (THLImportantInformationView *)importantInformationView
+{
+    if (!_importantInformationView) {
+        _importantInformationView = [THLImportantInformationView new];
+        _importantInformationView.titleLabel.text = @"Important Information";
+        _importantInformationView.importantInformationLabel.text = @"Your purchase is non-refundable\n\nPlease dress appropriately\n\nDoorman has final say on admission";
+//        [self.scrollView addSubview:_importantInformationView];
+    }
+    return _importantInformationView;
+}
+
+- (THLPaymentMethodView *)paymentMethodView {
+    if (!_paymentMethodView) {
+        _paymentMethodView = [THLPaymentMethodView new];
+        _paymentMethodView.paymentTitleLabel.text = @"Payment Method";
+        [_paymentMethodView addTarget:self.delegate action:@selector(checkoutViewControllerWantsToPresentPaymentViewController) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _paymentMethodView;
 }
 
 - (UILabel *)navBarTitleLabel
@@ -95,44 +152,51 @@
     return label;
 }
 
-- (THLActionButton *)newPurchaseButton {
-    THLActionButton *button = [[THLActionButton alloc] initWithDefaultStyle];
-    [button setTitle:@"Complete Order"];
-    [button addTarget:self action:@selector(buy:) forControlEvents:UIControlEventTouchUpInside];
-    return button;
+- (THLActionButton *)purchaseButton {
+    if (!_purchaseButton) {
+        _purchaseButton = [[THLActionButton alloc] initWithDefaultStyle];
+        [_purchaseButton setTitle:@"Complete Order"];
+        [_purchaseButton addTarget:self action:@selector(buy:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_purchaseButton];
+    }
+    return _purchaseButton;
 }
 
-- (THLPurchaseDetailsView *)newPurchaseDetailsView {
-    THLPurchaseDetailsView *purchaseDetailsView = [THLPurchaseDetailsView new];
-    purchaseDetailsView.title = NSLocalizedString(@"Purchase Details",@"Purchase Details");
-
-    float maleServiceCharge = (_event.maleTicketPrice * 0.029) + 0.30;
-    float femaleServiceCharge = (_event.femaleTicketPrice * 0.029) + 0.30;
-    NSString *purchaseTitleText;
-    THLUser *currentUser = [THLUser currentUser];
-    if (currentUser.sex == THLSexMale) {
-        purchaseTitleText = @"Male General Admission";
-    } else if (currentUser.sex == THLSexFemale) {
-        purchaseTitleText = @"Female General Admission";
-    }
-    if (currentUser.sex == THLSexMale && _event.maleTicketPrice > 0.0) {
-        purchaseDetailsView.purchaseTitleText = purchaseTitleText;
+- (THLPurchaseDetailsView *)purchaseDetailsView {
+    if (!_purchaseDetailsView) {
+        _purchaseDetailsView = [THLPurchaseDetailsView new];
+        _purchaseDetailsView.titleLabel.text = @"Purchase Details";
         
-        purchaseDetailsView.subtotalAmount = [NSString stringWithFormat:@"$%.2f", _event.maleTicketPrice];
-        purchaseDetailsView.serviceChargeAmount = [NSString stringWithFormat:@"$%.2f", maleServiceCharge];
-        purchaseDetailsView.totalAmount = [NSString stringWithFormat:@"$%.2f", _event.maleTicketPrice + maleServiceCharge];
-    } else if (currentUser.sex == THLSexFemale && _event.femaleTicketPrice > 0.0) {
-        purchaseDetailsView.purchaseTitleText = purchaseTitleText;
-        purchaseDetailsView.subtotalAmount = [NSString stringWithFormat:@"$%.2f", _event.femaleTicketPrice];
-        purchaseDetailsView.serviceChargeAmount = [NSString stringWithFormat:@"$%.2f", femaleServiceCharge];
-        purchaseDetailsView.totalAmount = [NSString stringWithFormat:@"$%.2f", _event.femaleTicketPrice + femaleServiceCharge];
-    } else {
-        purchaseDetailsView.purchaseTitleText = purchaseTitleText;
-        purchaseDetailsView.subtotalAmount = @"FREE";
-        purchaseDetailsView.serviceChargeAmount = @"FREE";
-        purchaseDetailsView.totalAmount = @"FREE";
+        float maleServiceCharge = (_event.maleTicketPrice * 0.029) + 0.30;
+        float femaleServiceCharge = (_event.femaleTicketPrice * 0.029) + 0.30;
+        NSString *purchaseTitleText;
+        THLUser *currentUser = [THLUser currentUser];
+        if (currentUser.sex == THLSexMale) {
+            purchaseTitleText = @"Male General Admission";
+        } else if (currentUser.sex == THLSexFemale) {
+            purchaseTitleText = @"Female General Admission";
+        }
+        if (currentUser.sex == THLSexMale && _event.maleTicketPrice > 0.0) {
+            _purchaseDetailsView.purchaseTitleLabel.text = purchaseTitleText;
+            
+            _purchaseDetailsView.subtotalLabel.text = [NSString stringWithFormat:@"$%.2f", _event.maleTicketPrice];
+            _purchaseDetailsView.serviceChargeLabel.text = [NSString stringWithFormat:@"$%.2f", maleServiceCharge];
+            _purchaseDetailsView.totalLabel.text = [NSString stringWithFormat:@"$%.2f", _event.maleTicketPrice + maleServiceCharge];
+        } else if (currentUser.sex == THLSexFemale && _event.femaleTicketPrice > 0.0) {
+            _purchaseDetailsView.purchaseTitleLabel.text = purchaseTitleText;
+            _purchaseDetailsView.subtotalLabel.text = [NSString stringWithFormat:@"$%.2f", _event.femaleTicketPrice];
+            _purchaseDetailsView.serviceChargeLabel.text = [NSString stringWithFormat:@"$%.2f", femaleServiceCharge];
+            _purchaseDetailsView.totalLabel.text = [NSString stringWithFormat:@"$%.2f", _event.femaleTicketPrice + femaleServiceCharge];
+        } else {
+            _purchaseDetailsView.purchaseTitleLabel.text = purchaseTitleText;
+            _purchaseDetailsView.subtotalLabel.text = @"FREE";
+            _purchaseDetailsView.serviceChargeLabel.text = @"FREE";
+            _purchaseDetailsView.totalLabel.text = @"FREE";
+        }
+//        [self.scrollView addSubview:_purchaseDetailsView];
     }
-    return purchaseDetailsView;
+
+    return _purchaseDetailsView;
 }
 
 #pragma mark - Event handlers
@@ -149,7 +213,8 @@
         [self chargeCustomer:[THLUser currentUser] forEvent:_event];
     } else {
         [self.hud hide:YES];
-        [self displayError:@"You currently don't have a credit card on file. Please add a payment method in your profile"];
+        [self.delegate checkoutViewControllerWantsToPresentPaymentViewController];
+//        [self displayError:@"You currently don't have a credit card on file. Please add a payment method in your profile"];
     }
 }
 
@@ -190,8 +255,18 @@
                                             [self displayError:[error localizedDescription]];
                                         } else {
 //                                            [self.delegate checkoutViewController:self didFinishPurchasingForGuestlistInvite:response];
-                                            [self.navigationController dismissViewControllerAnimated:TRUE completion:^{
-                                            }];                                        }
+//                                            [self.navigationController dismissViewControllerAnimated:TRUE completion:^{
+//                                                [_completionAction execute:nil];
+//                                            }];
+                                            [[self queryForGuestlistInviteForEvent:_event.objectId] getFirstObjectInBackgroundWithBlock:^(PFObject *guestlistInvite, NSError *queryError) {
+                                                if (!queryError) {
+                                                    PFObject *guestlist = guestlistInvite[@"Guestlist"];
+                                                    [self.delegate checkoutViewControllerDidFinishCheckoutForEvent:_event withGuestlistId:guestlist.objectId];
+                                                } else {
+                                                    
+                                                }
+                                            }];
+                                    }
                                     }];
     } else {
         
@@ -211,9 +286,17 @@
                                         if (error) {
                                             [self displayError:[error localizedDescription]];
                                         } else {
-                                            [self.delegate checkoutViewController:self didFinishSubmittingGuestlist:guestlistId];
-                                            [self.navigationController dismissViewControllerAnimated:TRUE completion:^{
-                                                [_completionAction execute:nil];
+//                                            [self.delegate checkoutViewController:self didFinishSubmittingGuestlist:guestlistId];
+//                                            [self.navigationController dismissViewControllerAnimated:TRUE completion:^{
+//                                                [_completionAction execute:nil];
+//                                            }];
+                                            [[self queryForGuestlistInviteForEvent:_event.objectId] getFirstObjectInBackgroundWithBlock:^(PFObject *guestlistInvite, NSError *queryError) {
+                                                if (!queryError) {
+                                                    PFObject *guestlist = guestlistInvite[@"Guestlist"];
+                                                    [self.delegate checkoutViewControllerDidFinishCheckoutForEvent:_event withGuestlistId:guestlist.objectId];
+                                                } else {
+                                                    
+                                                }
                                             }];
                                         }
                                     }];
@@ -221,5 +304,50 @@
     }
 }
 
+
+
+#pragma mark - ThisShitShouldNotBeHereButFuckIt
+
+- (PFQuery *)queryForGuestlistInviteForEvent:(NSString *)eventId {
+    
+    PFQuery *eventQuery = [self baseEventQuery];
+    [eventQuery whereKey:@"objectId" equalTo:eventId];
+    
+    PFQuery *guestlistQuery = [self baseGuestlistQuery];
+    [guestlistQuery whereKey:@"event" matchesQuery:eventQuery];
+    
+    PFQuery *query = [self baseGuestlistInviteQuery];
+    [query whereKey:@"Guest" equalTo:[THLUser currentUser]];
+    [query whereKey:@"Guestlist" matchesQuery:guestlistQuery];
+    [query whereKey:@"response" notEqualTo:[NSNumber numberWithInteger:-1]];
+    return query;
+}
+
+- (PFQuery *)baseEventQuery {
+    PFQuery *query = [THLEvent query];
+    [query includeKey:@"location"];
+    [query includeKey:@"host"];
+    return query;
+}
+
+- (PFQuery *)baseGuestlistQuery {
+    PFQuery *query = [THLGuestlist query];
+    [query includeKey:@"Owner"];
+    [query includeKey:@"event"];
+    [query includeKey:@"event.host"];
+    [query includeKey:@"event.location"];
+    return query;
+}
+
+- (PFQuery *)baseGuestlistInviteQuery {
+    PFQuery *query = [THLGuestlistInvite query];
+    [query includeKey:@"Guest"];
+    [query includeKey:@"Guestlist"];
+    [query includeKey:@"Guestlist.Owner"];
+    [query includeKey:@"Guestlist.event"];
+    [query includeKey:@"Guestlist.event.host"];
+    [query includeKey:@"Guestlist.event.location"];
+    return query;
+}
 
 @end

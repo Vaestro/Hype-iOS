@@ -17,13 +17,11 @@
 
 @implementation THLEventDetailsLocationInfoView
 - (void)constructView {
-    [super constructView];
     _locationInfoLabel = [self newLocationInfoLabel];
     _readMoreTextButton = [self newReadMoreTextButton];
 }
 
 - (void)layoutView {
-    [super layoutView];
     [self.contentView addSubviews:@[_locationInfoLabel, _readMoreTextButton]];
     
     WEAKSELF();
@@ -41,7 +39,6 @@
 }
 
 - (void)bindView {
-    [super bindView];
     RAC(self.locationInfoLabel, text) = RACObserve(self, locationInfo);
 }
 

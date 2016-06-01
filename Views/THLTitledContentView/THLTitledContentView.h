@@ -10,10 +10,8 @@
 
 @interface THLTitledContentView : UIView
 @property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, copy) NSString *title;
-@property (nonatomic, readonly) UIView *contentView;
 
-- (void)constructView;
-- (void)layoutView;
-- (void)bindView;
+@property (nonatomic, strong) UIView *contentView;
+- (void)addContentText:(NSString *)text;
+
 @end

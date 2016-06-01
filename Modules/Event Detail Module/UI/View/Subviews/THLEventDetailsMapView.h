@@ -8,8 +8,8 @@
 
 #import "THLTitledContentView.h"
 
-@interface THLEventDetailsMapView : THLTitledContentView
-@property (nonatomic, copy) NSString *locationName;
+@interface THLEventDetailsMapView : UIView
+@property (nonatomic, strong) UITextView *textView;
 @property (nonatomic, copy) NSString *locationAddress;
 @property (nonatomic, copy) CLPlacemark *locationPlacemark;
 @end

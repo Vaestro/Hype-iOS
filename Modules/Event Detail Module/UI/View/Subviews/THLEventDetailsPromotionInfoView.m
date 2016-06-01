@@ -19,14 +19,12 @@ static CGFloat const kTHLEventDetailsPromotionInfoViewImageViewHeight = 150;
 @implementation THLEventDetailsPromotionInfoView
 
 - (void)constructView {
-    [super constructView];
     _eventDetailsLabel = [self newEventDetailsLabel];
     _imageView = [self newImageView];
     self.userInteractionEnabled = NO;
 }
 
 - (void)layoutView {
-    [super layoutView];
     [self.contentView addSubviews:@[_eventDetailsLabel,
                                     _imageView]];
     WEAKSELF();
@@ -45,7 +43,6 @@ static CGFloat const kTHLEventDetailsPromotionInfoViewImageViewHeight = 150;
 
 - (void)bindView {
     WEAKSELF();
-    [super bindView];
     RAC(self.eventDetailsLabel, text) = RACObserve(self, promotionInfo);
 //    [RACObserve(self, promotionInfo) subscribeNext:^(NSString *text) {
 //        if (text.length > 1) {

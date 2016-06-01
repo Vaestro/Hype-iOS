@@ -114,6 +114,9 @@
 		791C1F8D1BF13BD900CCF803 /* THLEventHostingTableCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 791C1F8C1BF13BD900CCF803 /* THLEventHostingTableCellViewModel.m */; };
 		792545B91CFC8DA0004CF29A /* THLPartyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 792545B81CFC8DA0004CF29A /* THLPartyViewController.m */; };
 		792545BC1CFCBD61004CF29A /* THLPartyMemberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 792545BB1CFCBD61004CF29A /* THLPartyMemberCell.m */; };
+		792545BF1CFD113B004CF29A /* THLPartyInvitationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 792545BE1CFD113B004CF29A /* THLPartyInvitationViewController.m */; };
+		792545C21CFDDFFB004CF29A /* THLImportantInformationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 792545C11CFDDFFB004CF29A /* THLImportantInformationView.m */; };
+		792545C51CFE400C004CF29A /* THLPaymentMethodView.m in Sources */ = {isa = PBXBuildFile; fileRef = 792545C41CFE400C004CF29A /* THLPaymentMethodView.m */; };
 		794208281BD82641009B86FA /* UIView+DimView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794208271BD82641009B86FA /* UIView+DimView.m */; };
 		7942082C1BD82AF6009B86FA /* THLActionBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7942082B1BD82AF6009B86FA /* THLActionBarButton.m */; };
 		7942082F1BD8C250009B86FA /* THLGuestlistEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7942082E1BD8C250009B86FA /* THLGuestlistEntity.m */; };
@@ -526,6 +529,12 @@
 		792545B81CFC8DA0004CF29A /* THLPartyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPartyViewController.m; sourceTree = "<group>"; };
 		792545BA1CFCBD61004CF29A /* THLPartyMemberCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPartyMemberCell.h; sourceTree = "<group>"; };
 		792545BB1CFCBD61004CF29A /* THLPartyMemberCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPartyMemberCell.m; sourceTree = "<group>"; };
+		792545BD1CFD113B004CF29A /* THLPartyInvitationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPartyInvitationViewController.h; sourceTree = "<group>"; };
+		792545BE1CFD113B004CF29A /* THLPartyInvitationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPartyInvitationViewController.m; sourceTree = "<group>"; };
+		792545C01CFDDFFB004CF29A /* THLImportantInformationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLImportantInformationView.h; sourceTree = "<group>"; };
+		792545C11CFDDFFB004CF29A /* THLImportantInformationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLImportantInformationView.m; sourceTree = "<group>"; };
+		792545C31CFE400C004CF29A /* THLPaymentMethodView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPaymentMethodView.h; sourceTree = "<group>"; };
+		792545C41CFE400C004CF29A /* THLPaymentMethodView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPaymentMethodView.m; sourceTree = "<group>"; };
 		79259D6E1CAA4C6C00409040 /* Hype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hype.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79259D6F1CAA4C6C00409040 /* Hype.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Hype.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		794208261BD82641009B86FA /* UIView+DimView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DimView.h"; sourceTree = "<group>"; };
@@ -987,8 +996,12 @@
 				79B062BB1CF909F300A3DC50 /* THLPartyNavigationController.h */,
 				79B062BC1CF909F300A3DC50 /* THLPartyNavigationController.m */,
 				79BB15311C6CED720044D943 /* THLFxTitleLabel.h */,
+				792545BD1CFD113B004CF29A /* THLPartyInvitationViewController.h */,
+				792545BE1CFD113B004CF29A /* THLPartyInvitationViewController.m */,
 				79BB15321C6CED720044D943 /* THLFxTitleLabel.m */,
 				799862441C97B6AF004C5326 /* THLTextEntryViewController.h */,
+				792545C31CFE400C004CF29A /* THLPaymentMethodView.h */,
+				792545C41CFE400C004CF29A /* THLPaymentMethodView.m */,
 				799862451C97B6AF004C5326 /* THLTextEntryViewController.m */,
 				3E64EBEB1C5D89CC002BA11B /* THLFAQViewController */,
 				3EECB6921C61451800702540 /* THLFAOSectionView */,
@@ -1117,6 +1130,8 @@
 		211BB0D11B8CBE690068FD50 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				792545C01CFDDFFB004CF29A /* THLImportantInformationView.h */,
+				792545C11CFDDFFB004CF29A /* THLImportantInformationView.m */,
 				79B527A11C6E9ADA000A0970 /* THLAlertView */,
 				798D7EBC1BF2E528001D4593 /* Alien */,
 				2121735C1BB34239007D817A /* Promotion Card View */,
@@ -3493,6 +3508,7 @@
 				C884EE241CF77CB200C47167 /* THLDiscoveryViewController.m in Sources */,
 				798D7EBA1BF2D588001D4593 /* THLUserProfileTableViewCell.m in Sources */,
 				798D7EC21BF2E5CF001D4593 /* OnboardingContentViewController.m in Sources */,
+				792545C51CFE400C004CF29A /* THLPaymentMethodView.m in Sources */,
 				79CE01E61C0A69EC0047E6FA /* THLDashboardTicketCellViewModel.m in Sources */,
 				798650A41BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m in Sources */,
 				794A9D191CF4ACC300DDAC00 /* THLEventInviteCell.m in Sources */,
@@ -3508,6 +3524,7 @@
 				211005D51B8A7D2800A540C6 /* NSDate+Utilities.m in Sources */,
 				3E64EBE01C5C14F3002BA11B /* THLUserDataWorker.m in Sources */,
 				218AF34B1BB740DB00AFAEBF /* THLEntity.m in Sources */,
+				792545C21CFDDFFB004CF29A /* THLImportantInformationView.m in Sources */,
 				79527CF01BF188F80074AF38 /* THLEventHostingInteractor.m in Sources */,
 				79B9592F1BE581CC00B87799 /* THLGuestlistReviewPresenter.m in Sources */,
 				79B959571BE9298800B87799 /* THLPopupNotificationPresenter.m in Sources */,
@@ -3591,6 +3608,7 @@
 				215A429A1BAA25B000D03C35 /* THLFacebookPicturePresenter.m in Sources */,
 				79B9592C1BE581BB00B87799 /* THLGuestlistReviewInteractor.m in Sources */,
 				21E402D91BBF80E6001D0C2C /* THLGuestlist.m in Sources */,
+				792545BF1CFD113B004CF29A /* THLPartyInvitationViewController.m in Sources */,
 				794AFE161C10A4BF008475B1 /* THLHostDashboardDataManager.m in Sources */,
 				794DCCB51BF555020037A03D /* FXBlurView.m in Sources */,
 				798D7EB11BF2CCC7001D4593 /* THLUserProfilePresenter.m in Sources */,

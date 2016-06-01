@@ -99,6 +99,8 @@ STPPaymentCardTextFieldDelegate
     if ([THLUser currentUser])
     {
         self.navigationItem.leftBarButtonItem = [self newBarButtonItem];
+        self.userImageURL = [NSURL URLWithString:[THLUser currentUser].image.url];
+        self.userName = [THLUser currentUser].firstName;
     }
 }
 
@@ -220,16 +222,47 @@ STPPaymentCardTextFieldDelegate
                                          andTitle:@"Terms Of Use"];
             break;
         case ContactUs:
-            [contactCommand execute:nil];
+            [self handleContactAction];
             break;
         case LogOut:
-            [logoutCommand execute:nil];
+            [self handleLogOutAction];
             break;
         default: {
             break;
         }
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)handleLogOutAction {
+    
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
+                                                         handler:nil];
+    
+    UIAlertAction* confirmAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {
+                                                              [self.delegate userProfileViewControllerWantsToLogout];
+                                                          }];
+    NSString *message = NSStringWithFormat(@"Are you sure you want to logout of Hype?");
+    
+    [self showAlertViewWithMessage:message withAction:[[NSArray alloc] initWithObjects:cancelAction, confirmAction, nil]];
+
+}
+
+- (void)handleContactAction {
+    [self showMailView];
+}
+
+- (void)showAlertViewWithMessage:(NSString *)message withAction:(NSArray<UIAlertAction *>*)actions {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    for(UIAlertAction *action in actions) {
+        [alert addAction:action];
+    }
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark -
@@ -265,27 +298,7 @@ STPPaymentCardTextFieldDelegate
 
 - (void)presentPaymentView
 {
-    
-    if ([THLUser currentUser].stripeCustomerId) {
-        [self.hud show:YES];
-        [PFCloud callFunctionInBackground:@"retrievePaymentInfo"
-                           withParameters:nil
-                                    block:^(NSArray<NSDictionary *> *cardInfo, NSError *cloudError) {
-                                        [self.hud hide:YES];
-                                        if (cloudError) {
-            
-                                        } else {
-                                            THLPaymentViewController *paymentView = [[THLPaymentViewController alloc]initWithPaymentInfo:cardInfo];
-                                            [self.navigationController pushViewController:paymentView animated:NO];
-                                        }
-                                    }];
-    } else {
-        NSArray<NSDictionary *> *emptyCardInfoSet = [[NSArray alloc]init];
-        THLPaymentViewController *paymentView = [[THLPaymentViewController alloc]initWithPaymentInfo:emptyCardInfoSet];
-        [self.navigationController pushViewController:paymentView animated:NO];
-    }
-
-    
+    [self.delegate userProfileViewControllerWantsToPresentPaymentViewController];
 }
 
 

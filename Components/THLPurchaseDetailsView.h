@@ -9,8 +9,8 @@
 #import "THLTitledContentView.h"
 
 @interface THLPurchaseDetailsView : THLTitledContentView
-@property (nonatomic, copy) NSString *purchaseTitleText;
-@property (nonatomic, copy) NSString *subtotalAmount;
-@property (nonatomic, copy) NSString *serviceChargeAmount;
-@property (nonatomic, copy) NSString *totalAmount;
+@property (nonatomic, strong) UILabel *purchaseTitleLabel;
+@property (nonatomic, strong) UILabel *subtotalLabel;
+@property (nonatomic, strong) UILabel *serviceChargeLabel;
+@property (nonatomic, strong) UILabel *totalLabel;
 @end

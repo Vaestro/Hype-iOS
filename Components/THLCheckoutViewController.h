@@ -8,15 +8,19 @@
 
 #import <UIKit/UIKit.h>
 @class PFObject;
-
+@class THLEvent;
 @class THLCheckoutViewController;
-@protocol THLCheckoutViewDelegate <NSObject>
+@protocol THLCheckoutViewControllerDelegate <NSObject>
+
+-(void)checkoutViewControllerDidFinishCheckoutForEvent:(THLEvent *)event withGuestlistId:(NSString *)guestlistId;
+-(void)checkoutViewControllerWantsToPresentPaymentViewController;
+
 -(void)checkoutViewController:(THLCheckoutViewController *)checkoutView didFinishSubmittingGuestlist:(NSString *)guestlistId;
 -(void)checkoutViewController:(THLCheckoutViewController *)checkoutView didFinishPurchasingForGuestlistInvite:(NSString *)guestlistInviteId;
 @end
 
 @interface THLCheckoutViewController : UIViewController
-@property (nonatomic, weak) id<THLCheckoutViewDelegate> delegate;
+@property (nonatomic, weak) id<THLCheckoutViewControllerDelegate> delegate;
 -(id)initWithEvent:(PFObject *)event paymentInfo:(NSDictionary *)paymentInfo;
 @end
 

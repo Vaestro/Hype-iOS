@@ -7,7 +7,10 @@
 //
 #import "THLUser.h"
 #import <objc/runtime.h>
-
+#import "APContact.h"
+#import "APName.h"
+#import "APPhone.h"
+#import "NBPhoneNumberUtil.h"
 
 
 @implementation THLUser
@@ -34,5 +37,16 @@
 
 - (NSString *)fullName {
 	return [NSString stringWithFormat:@"%@ %@", self.firstName, self.lastName];
+}
+
+- (NSString *)intPhoneNumberFormat {
+    NBPhoneNumberUtil *phoneUtil = [[NBPhoneNumberUtil alloc] init];
+    NSError *anError = nil;
+    NBPhoneNumber *myNumber = [phoneUtil parse:self.phoneNumber
+                                 defaultRegion:@"US" error:&anError];
+    
+    return [NSString stringWithFormat:@"%@", [phoneUtil format:myNumber
+                                                  numberFormat:NBEPhoneNumberFormatE164
+                                                         error:&anError]];
 }
 @end

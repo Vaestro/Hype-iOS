@@ -9,14 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "THLGuestFlowModuleInterface.h"
 @class THLEventEntity;
-
+@class THLDependencyManager;
 @protocol THLGuestFlowDependencyManager;
 @interface THLGuestFlowWireframe : NSObject<THLGuestFlowModuleInterface>
 @property (nonatomic, readonly, weak) id<THLGuestFlowModuleInterface> moduleInterface;
 
 #pragma mark - Dependencies
-@property (nonatomic, readonly) id<THLGuestFlowDependencyManager> dependencyManager;
-- (instancetype)initWithDependencyManager:(id<THLGuestFlowDependencyManager>)dependencyManager;
+@property (nonatomic, readonly) THLDependencyManager *dependencyManager;
+- (instancetype)initWithDependencyManager:(THLDependencyManager *)dependencyManager;
 
 - (void)configureMasterTabViewControllerAndPresentGuestFlowInWindow:(UIWindow *)window;
 - (void)presentGuestFlowInWindow:(UIWindow *)window forEventDetail:(THLEventEntity *)eventEntity;

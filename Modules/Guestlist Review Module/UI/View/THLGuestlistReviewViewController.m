@@ -34,7 +34,7 @@
 static UIEdgeInsets const COLLECTION_VIEW_EDGEINSETS = {10, 10, 10, 10};
 static CGFloat const CELL_SPACING = 10;
 
-@interface THLGuestlistReviewViewController() <THLCheckoutViewDelegate>
+@interface THLGuestlistReviewViewController() <THLCheckoutViewControllerDelegate>
 
 @property (nonatomic, strong) THLGuestlistReviewHeaderView *headerView;
 @property (nonatomic, strong) UICollectionView *collectionView;

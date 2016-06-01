@@ -44,81 +44,67 @@
 {
     [super viewDidLoad];
     
-    self.paymentTextField = [STPPaymentCardTextField new];
-    self.paymentTextField.textColor = [UIColor whiteColor];
-    self.paymentTextField.delegate = self;
-    
     self.hud = [[MBProgressHUD alloc] initWithView:self.view];
     
     self.view.backgroundColor = [UIColor blackColor];
     
-    _addCardButton = [self newAddCardButton];
-    _removeCardButton = [self newRemoveCardButton];
-    
-    _titleLabel = [self newTitleLabel];
-    _descriptionLabel = [self newDescriptionLabel];
-    _securitySymbol = [self newSecuritySymbol];
-    _paymentCardIcon = [self newPaymentCardIcon];
-
-    [self.view addSubviews:@[_titleLabel, _descriptionLabel, _hud, _securitySymbol]];
-    
     if (_paymentInfo) {
-        _titleLabel.text = @"Payment";
+        self.titleLabel.text = @"Payment";
         NSString *last4CardDigits = _paymentInfo[0][@"last4"];
         NSString *cardInfoText = [NSString stringWithFormat:@"**** **** **** %@", last4CardDigits];
-        _cardInfoLabel = [self newCardInfoLabel:cardInfoText];
-        [self.view addSubviews:@[_paymentCardIcon, _cardInfoLabel, _removeCardButton]];
+        _cardInfoLabel = [self cardInfoLabel:cardInfoText];
+//        [self.view addSubviews:@[_paymentCardIcon, _cardInfoLabel, _removeCardButton]];
         
     } else {
-        [self.view addSubviews:@[_paymentTextField, _addCardButton]];
+//        [self.view addSubviews:@[_paymentTextField, _addCardButton]];
     }
     
     WEAKSELF();
     if (_paymentInfo) {
-        [_removeCardButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.removeCardButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(0);
             make.left.right.insets(kTHLEdgeInsetsSuperHigh());
             make.bottom.equalTo([WSELF descriptionLabel].mas_top).insets(kTHLEdgeInsetsSuperHigh());
         }];
         
-        [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make){
+        [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make){
             make.left.right.insets(kTHLEdgeInsetsSuperHigh());
             make.bottom.equalTo([WSELF cardInfoLabel].mas_top).insets(kTHLEdgeInsetsInsanelyHigh());
         }];
         
-        [_paymentCardIcon mas_makeConstraints:^(MASConstraintMaker *make){
+        [self.paymentCardIcon mas_makeConstraints:^(MASConstraintMaker *make){
             make.left.insets(kTHLEdgeInsetsSuperHigh());
             make.bottom.equalTo([WSELF removeCardButton].mas_top).insets(kTHLEdgeInsetsSuperHigh());
         }];
         
-        [_cardInfoLabel mas_makeConstraints:^(MASConstraintMaker *make){
+        [self.cardInfoLabel mas_makeConstraints:^(MASConstraintMaker *make){
             make.left.equalTo(_paymentCardIcon.mas_right).insets(kTHLEdgeInsetsHigh());
             make.bottom.equalTo(_paymentCardIcon);
         }];
     } else {
-        [_addCardButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.addCardButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(0);
             make.left.right.insets(kTHLEdgeInsetsSuperHigh());
             make.bottom.equalTo([WSELF descriptionLabel].mas_top).insets(kTHLEdgeInsetsSuperHigh());
         }];
         
-        [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make){
+        [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make){
             make.left.right.insets(kTHLEdgeInsetsSuperHigh());
             make.bottom.equalTo([WSELF paymentTextField].mas_top).insets(kTHLEdgeInsetsInsanelyHigh());
         }];
         
-        [_paymentTextField mas_makeConstraints:^(MASConstraintMaker *make){
+        [self.paymentTextField mas_makeConstraints:^(MASConstraintMaker *make){
             make.left.right.insets(kTHLEdgeInsetsSuperHigh());
             make.bottom.equalTo([WSELF addCardButton].mas_top).insets(kTHLEdgeInsetsSuperHigh());
         }];
     }
     
-    [_securitySymbol mas_makeConstraints:^(MASConstraintMaker *make){
+    [self.securitySymbol mas_makeConstraints:^(MASConstraintMaker *make){
         make.left.insets(kTHLEdgeInsetsSuperHigh());
         make.centerY.equalTo([WSELF descriptionLabel]);
     }];
     
-    [_descriptionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.descriptionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo([WSELF securitySymbol].mas_right).insets(kTHLEdgeInsetsSuperHigh());
         make.right.insets(kTHLEdgeInsetsSuperHigh());
         
@@ -135,7 +121,6 @@
     [_cardInfoLabel removeFromSuperview];
     _titleLabel.text = @"Add Payment";
 
-    [self.view addSubviews:@[_paymentTextField, _addCardButton]];
     WEAKSELF();
 
     [_addCardButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -159,7 +144,7 @@
 - (void)updateLayoutForHasPayment {
     NSString *last4CardDigits = _paymentInfo[0][@"last4"];
     NSString *cardInfoText = [NSString stringWithFormat:@"**** **** **** %@", last4CardDigits];
-    _cardInfoLabel = [self newCardInfoLabel:cardInfoText];
+    _cardInfoLabel = [self cardInfoLabel:cardInfoText];
     
     [self.view addSubviews:@[_paymentCardIcon, _cardInfoLabel,_removeCardButton]];
     WEAKSELF();
@@ -193,6 +178,8 @@
 {
     self.addCardButton.enabled = textField.isValid;
 }
+
+#pragma mark - Payment Processing
 
 - (void)saveCreditCardInfo
 {
@@ -275,60 +262,97 @@
     [message show];
 }
 
-- (THLActionButton *)newAddCardButton
+#pragma mark - Accessors
+- (STPPaymentCardTextField *)paymentTextField {
+    if (!_paymentTextField) {
+        _paymentTextField = [STPPaymentCardTextField new];
+        _paymentTextField.textColor = [UIColor whiteColor];
+        _paymentTextField.delegate = self;
+        [self.view addSubview:_paymentTextField];
+    }
+    return _paymentTextField;
+}
+
+
+- (THLActionButton *)addCardButton
 {
-    THLActionButton *button = [[THLActionButton alloc] initWithDefaultStyle];
-    [button setTitle:@"ADD CARD"];
-    [button addTarget:self action:@selector(saveCreditCardInfo) forControlEvents:UIControlEventTouchUpInside];
-    button.enabled = NO;
-    return button;
+    if (!_addCardButton) {
+        _addCardButton = [[THLActionButton alloc] initWithDefaultStyle];
+        [_addCardButton setTitle:@"ADD CARD"];
+        [_addCardButton addTarget:self action:@selector(saveCreditCardInfo) forControlEvents:UIControlEventTouchUpInside];
+        _addCardButton.enabled = NO;
+        [self.view addSubview:_addCardButton];
+    }
+    return _addCardButton;
 }
 
 
-- (THLActionButton *)newRemoveCardButton
+- (THLActionButton *)removeCardButton
 {
-    THLActionButton *button = [[THLActionButton alloc] initWithInverseStyle];
-    [button setTitle:@"REMOVE CARD"];
-    [button addTarget:self action:@selector(deleteCreditCardInfo) forControlEvents:UIControlEventTouchUpInside];
-    return button;
+    if (!_removeCardButton) {
+        _removeCardButton = [[THLActionButton alloc] initWithInverseStyle];
+        [_removeCardButton setTitle:@"REMOVE CARD"];
+        [_removeCardButton addTarget:self action:@selector(deleteCreditCardInfo) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_removeCardButton];
+    }
+
+    return _removeCardButton;
 }
 
-- (UILabel *)newTitleLabel {
-    UILabel *label = THLNUILabel(kTHLNUIRegularTitle);
-    label.text = @"Add Payment";
-    return label;
+- (UILabel *)titleLabel {
+    if (!_titleLabel) {
+        _titleLabel = THLNUILabel(kTHLNUIRegularTitle);
+        _titleLabel.text = @"Add Payment";
+        [self.view addSubview:_titleLabel];
+    }
+
+    return _titleLabel;
 }
 
-- (UILabel *)newCardInfoLabel:(NSString *)info {
-    UILabel *label = THLNUILabel(kTHLNUIRegularTitle);
-    label.text = info;
-    return label;
+- (UILabel *)cardInfoLabel:(NSString *)info {
+    if (!_cardInfoLabel) {
+        _cardInfoLabel = THLNUILabel(kTHLNUIRegularTitle);
+        _cardInfoLabel.text = info;
+        [self.view addSubview:_cardInfoLabel];
+    }
+    return _cardInfoLabel;
 }
 
-- (UILabel *)newDescriptionLabel {
-    UILabel *label = [UILabel new];
-    [label setFont:[UIFont fontWithName:@"OpenSans-Regular" size:10]];
-    label.text = @"Your card details are encrypted using SSL before transmission to our secure payment service provider and they will not be stored on this device or our servers.";
-    label.adjustsFontSizeToFitWidth = YES;
-    label.numberOfLines = 4;
-    label.textColor = [kTHLNUIGrayFontColor colorWithAlphaComponent:0.5];
-    return label;
+- (UILabel *)descriptionLabel {
+    if (!_descriptionLabel) {
+        _descriptionLabel = [UILabel new];
+        [_descriptionLabel setFont:[UIFont fontWithName:@"OpenSans-Regular" size:10]];
+        _descriptionLabel.text = @"Your card details are encrypted using SSL before transmission to our secure payment service provider and they will not be stored on this device or our servers.";
+        _descriptionLabel.adjustsFontSizeToFitWidth = YES;
+        _descriptionLabel.numberOfLines = 4;
+        _descriptionLabel.textColor = [kTHLNUIGrayFontColor colorWithAlphaComponent:0.5];
+        [self.view addSubview:_descriptionLabel];
+    }
+    return _descriptionLabel;
 }
 
-- (UIImageView *)newSecuritySymbol {
-    UIImageView *imageView = [UIImageView new];
-    imageView.image = [UIImage imageNamed:@"security_symbol"];
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
-    imageView.clipsToBounds = YES;
-    return imageView;
+- (UIImageView *)securitySymbol {
+    if (!_securitySymbol) {
+        _securitySymbol = [UIImageView new];
+        _securitySymbol.image = [UIImage imageNamed:@"security_symbol"];
+        _securitySymbol.contentMode = UIViewContentModeScaleAspectFit;
+        _securitySymbol.clipsToBounds = YES;
+        [self.view addSubview:_securitySymbol];
+    }
+
+    return _securitySymbol;
 }
 
-- (UIImageView *)newPaymentCardIcon {
-    UIImageView *imageView = [UIImageView new];
-    imageView.image = [UIImage imageNamed:@"payment_card"];
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
-    imageView.clipsToBounds = YES;
-    return imageView;
+- (UIImageView *)paymentCardIcon {
+    if (!_paymentCardIcon) {
+        _paymentCardIcon = [UIImageView new];
+        _paymentCardIcon.image = [UIImage imageNamed:@"payment_card"];
+        _paymentCardIcon.contentMode = UIViewContentModeScaleAspectFit;
+        _paymentCardIcon.clipsToBounds = YES;
+        [self.view addSubview:_paymentCardIcon];
+    }
+
+    return _paymentCardIcon;
 }
 
 @end
