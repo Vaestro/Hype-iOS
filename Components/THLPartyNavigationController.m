@@ -42,7 +42,7 @@
     THLGuestlistInvite *invite = (THLGuestlistInvite *)_guestlistInvite;
     if (invite.response == THLStatusAccepted) {
         THLEventTicketViewController *eventTicketVC = [[THLEventTicketViewController alloc]initWithGuestlistInvite:_guestlistInvite];
-        _eventDetailsVC = [[THLEventDetailsViewController alloc]initWithEvent:_guestlistInvite[@"Guestlist"][@"event"] andShowNavigationBar:FALSE];
+        _eventDetailsVC = [[THLEventDetailsViewController alloc]initWithEvent:_guestlistInvite[@"Guestlist"][@"event"] andGuestlistInvite:_guestlistInvite];
         _partyVC = [[THLPartyViewController alloc] initWithClassName:@"GuestlistInvite" withGuestlist:_guestlistInvite[@"Guestlist"]];
         
         [self.viewControllerArray addObjectsFromArray:@[eventTicketVC, _eventDetailsVC, _partyVC]];

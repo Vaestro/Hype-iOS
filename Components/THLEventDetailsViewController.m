@@ -27,6 +27,7 @@
 #import "THLTitledContentView.h"
 #import "THLLocationService.h"
 #import "THLLocation.h"
+#import "THLGuestlistInvite.h"
 
 
 @interface THLEventDetailsViewController ()
@@ -45,6 +46,7 @@
 @property (nonatomic) BOOL showNavigationBar;
 @property (nonatomic, strong) UIImageView *eventImageView;
 @property (nonatomic, strong) THLLocationService *locationService;
+@property (nonatomic, strong) PFObject *guestlistInvite;
 
 @end
 
@@ -63,6 +65,15 @@
     return self;
 }
 
+- (id)initWithEvent:(PFObject *)event andGuestlistInvite:(PFObject *)guestlistInvite {
+    if (self = [super init]) {
+        self.event = event;
+        self.guestlistInvite = guestlistInvite;
+        _locationService = [THLLocationService new];
+        _showNavigationBar = NO;
+    }
+    return self;
+}
 
 #pragma mark - UIViewController
 
@@ -156,7 +167,12 @@
 }
 
 -(void)handleViewCheckout {
-    [self.delegate eventDetailsWantsToPresentAdmissionsForEvent:_event];
+    if (_guestlistInvite) {
+        NSDictionary *paymentInfo = @{@"guestlistInviteId": _guestlistInvite.objectId};
+        [self.delegate eventDetailsWantsToPresentCheckoutForEvent:_event paymentInfo:paymentInfo];
+    } else {
+        [self.delegate eventDetailsWantsToPresentCheckoutForEvent:_event paymentInfo:nil];
+    }
 }
 
 - (ORStackScrollView *)scrollView
