@@ -53,7 +53,8 @@ THLDiscoveryViewControllerDelegate,
 THLEventDetailsViewControllerDelegate,
 THLCheckoutViewControllerDelegate,
 THLPartyInvitationViewControllerDelegate,
-THLUserProfileViewControllerDelegate
+THLUserProfileViewControllerDelegate,
+THLPartyViewControllerDelegate
 >
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) id currentWireframe;
@@ -154,7 +155,7 @@ THLUserProfileViewControllerDelegate
     UINavigationController *partyNavVC = [UINavigationController new];
     THLPartyNavigationController *partyNavigationController = [[THLPartyNavigationController alloc] initWithGuestlistInvite:guestlistInvite];
     partyNavigationController.eventDetailsVC.delegate = self;
-//    partyNavigationController.partyVC.delegate = self;
+    partyNavigationController.partyVC.delegate = self;
 
     [partyNavVC addChildViewController:partyNavigationController];
     [_window.rootViewController presentViewController:partyNavVC animated:YES completion:nil];
@@ -169,10 +170,7 @@ THLUserProfileViewControllerDelegate
 }
 
 - (void)eventDetailsWantsToPresentCheckoutForEvent:(PFObject *)event paymentInfo:(NSDictionary *)paymentInfo {
-    THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:event paymentInfo:paymentInfo];
-    checkoutVC.delegate = self;
-    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:checkoutVC];
-    [[self topViewController] presentViewController:navVC animated:YES completion:nil];
+    [self presentCheckoutViewController:event paymentInfo:paymentInfo];
 }
 
 #pragma mark -
@@ -182,17 +180,10 @@ THLUserProfileViewControllerDelegate
     [self presentPaymentViewControllerOn:[self topViewController]];
 }
 - (void)checkoutViewControllerDidFinishCheckoutForEvent:(THLEvent *)event withGuestlistId:(NSString *)guestlistId {
-    THLPartyInvitationViewController *partyInvitationVC = [[THLPartyInvitationViewController alloc] initWithEvent:event
-                                                                                                      guestlistId:guestlistId
-                                                                                                           guests:nil
-                                                                                                  databaseManager:self.dependencyManager.databaseManager
-                                                                                                        dataStore:self.contactsDataStore
-                                                                                            viewDataSourceFactory:self.dependencyManager.viewDataSourceFactory
-                                                                                                      addressBook:self.dependencyManager.addressBook];
-    UINavigationController *invitationNavVC = [[UINavigationController alloc] initWithRootViewController:partyInvitationVC];
-    partyInvitationVC.delegate = self;
-    [[self topViewController] presentViewController:invitationNavVC animated:YES completion:nil];
+    [self presentInvitationViewController:event withGuestlistId:guestlistId];
 }
+
+
 
 #pragma mark -
 #pragma mark PartyInvitationViewController
@@ -226,6 +217,25 @@ THLUserProfileViewControllerDelegate
     [self presentPaymentViewControllerOn:_userProfileViewController];
 }
 
+#pragma mark -
+#pragma mark PartyInvitationViewController
+#pragma mark Delegate
+- (void)partyViewControllerWantsToPresentInvitationControllerFor:(THLEvent *)event guestlistId:(NSString *)guestlistId {
+    [self presentInvitationViewController:event withGuestlistId:guestlistId];
+}
+
+- (void)partyViewControllerWantsToPresentCheckoutForEvent:(PFObject *)event paymentInfo:(NSDictionary *)paymentInfo {
+    [self presentCheckoutViewController:event paymentInfo:paymentInfo];
+
+}
+
+- (void)presentCheckoutViewController:(PFObject *)event paymentInfo:(NSDictionary *)paymentInfo {
+    THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:event paymentInfo:paymentInfo];
+    checkoutVC.delegate = self;
+    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:checkoutVC];
+    [[self topViewController] presentViewController:navVC animated:YES completion:nil];
+}
+
 - (void)presentPaymentViewControllerOn:(UIViewController *)viewController {
     if ([THLUser currentUser].stripeCustomerId) {
         [SVProgressHUD show];
@@ -245,6 +255,19 @@ THLUserProfileViewControllerDelegate
         THLPaymentViewController *paymentView = [[THLPaymentViewController alloc]initWithPaymentInfo:emptyCardInfoSet];
         [viewController.navigationController pushViewController:paymentView animated:YES];
     }
+}
+
+- (void)presentInvitationViewController:(THLEvent *)event withGuestlistId:(NSString *)guestlistId {
+    THLPartyInvitationViewController *partyInvitationVC = [[THLPartyInvitationViewController alloc] initWithEvent:event
+                                                                                                      guestlistId:guestlistId
+                                                                                                           guests:nil
+                                                                                                  databaseManager:self.dependencyManager.databaseManager
+                                                                                                        dataStore:self.contactsDataStore
+                                                                                            viewDataSourceFactory:self.dependencyManager.viewDataSourceFactory
+                                                                                                      addressBook:self.dependencyManager.addressBook];
+    UINavigationController *invitationNavVC = [[UINavigationController alloc] initWithRootViewController:partyInvitationVC];
+    partyInvitationVC.delegate = self;
+    [[self topViewController] presentViewController:invitationNavVC animated:YES completion:nil];
 }
 
 - (THLDataStore *)contactsDataStore

@@ -16,7 +16,6 @@
 #import "THLAppearanceConstants.h"
 #import "Intercom/intercom.h"
 
-#import "MBProgressHUD.h"
 #import "TTTAttributedLabel.h"
 
 @interface THLDiscoveryViewController ()

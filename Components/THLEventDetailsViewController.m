@@ -59,7 +59,6 @@
     if (self = [super init]) {
         self.event = event;
         _locationService = [THLLocationService new];
-
         _showNavigationBar = showNavigationBar;
     }
     return self;
@@ -68,7 +67,7 @@
 - (id)initWithEvent:(PFObject *)event andGuestlistInvite:(PFObject *)guestlistInvite {
     if (self = [super init]) {
         self.event = event;
-        self.guestlistInvite = guestlistInvite;
+        _guestlistInvite = guestlistInvite;
         _locationService = [THLLocationService new];
         _showNavigationBar = NO;
     }
@@ -81,17 +80,39 @@
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
-    [self.scrollView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.insets(kTHLEdgeInsetsNone());
-    }];
-    
+
     if (_showNavigationBar == TRUE) {
+        [self.scrollView makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.right.insets(kTHLEdgeInsetsNone());
+        }];
+        
         self.scrollView.delegate = (id<UIScrollViewDelegate>)self.navBar.behaviorDefiner;
         
         [self.scrollView.stackView addSubview:self.locationInfoView
                           withPrecedingMargin:self.navBar.frame.size.height + 2*kTHLPaddingHigh()
                                    sideMargin:4*kTHLPaddingHigh()];
+        UIView *buttonBackground = [UIView new];
+        buttonBackground.backgroundColor = kTHLNUIPrimaryBackgroundColor;
+        [self.view addSubview:buttonBackground];
+        
+        WEAKSELF();
+        [buttonBackground makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.left.right.insets(kTHLEdgeInsetsNone());
+            make.top.equalTo(WSELF.scrollView.mas_bottom);
+            make.height.equalTo(80);
+        }];
+        
+        [buttonBackground addSubview:self.bottomBar];
+        [self.bottomBar makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.insets(kTHLEdgeInsetsHigh());
+        }];
+        
     } else {
+        [self.scrollView makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.insets(kTHLEdgeInsetsNone());
+        }];
+    
+        
         [self.scrollView.stackView addSubview:self.eventImageView
                           withPrecedingMargin:2*kTHLPaddingHigh()
                                    sideMargin:4*kTHLPaddingHigh()];
@@ -112,22 +133,7 @@
     [self.scrollView.stackView addSubview:self.needToKnowInfoView
                   withPrecedingMargin:2*kTHLPaddingHigh()
                            sideMargin:4*kTHLPaddingHigh()];
-    
-    UIView *buttonBackground = [UIView new];
-    buttonBackground.backgroundColor = kTHLNUIPrimaryBackgroundColor;
-    [self.view addSubview:buttonBackground];
-    
-    WEAKSELF();
-    [buttonBackground makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.left.right.insets(kTHLEdgeInsetsNone());
-        make.top.equalTo(WSELF.scrollView.mas_bottom);
-        make.height.equalTo(80);
-    }];
-    
-    [buttonBackground addSubview:self.bottomBar];
-    [self.bottomBar makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.insets(kTHLEdgeInsetsHigh());
-    }];
+
     
     THLLocation *location = (THLLocation *)_event[@"location"];
     

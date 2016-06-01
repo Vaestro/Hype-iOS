@@ -72,7 +72,6 @@ STPPaymentCardTextFieldDelegate
 @property (nonatomic, strong) THLInformationViewController *infoVC;
 @property (nonatomic, strong) RACCommand *dismissVC;
 @property (nonatomic) THLWebViewController *webViewController;
-@property (nonatomic, strong) MBProgressHUD *hud;
 @end
 
 @implementation THLUserProfileViewController
@@ -112,9 +111,7 @@ STPPaymentCardTextFieldDelegate
 #pragma mark - View Setup
 
 - (void)layoutView {
-    self.hud = [[MBProgressHUD alloc] initWithView:self.view];
-
-    [self.view addSubviews:@[_tableView, _hud]];
+    [self.view addSubviews:@[_tableView]];
     
     [_tableView makeConstraints:^(MASConstraintMaker *make) {
         make.right.top.bottom.left.insets(kTHLEdgeInsetsNone());
@@ -306,15 +303,15 @@ STPPaymentCardTextFieldDelegate
 {
     THLFAQViewController *faqVC = [[THLFAQViewController alloc] init];
     UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:faqVC];
-    [self.view.window.rootViewController presentViewController:navVC animated:YES completion:nil];
+    [self presentViewController:navVC animated:YES completion:nil];
 }
 
-- (void) presentModalInformationWithText:(NSString *) text andTitle:(NSString *) title
+- (void) presentModalInformationWithText:(NSString *)text andTitle:(NSString *)title
 {
-    UINavigationController *navVC= [[UINavigationController alloc] initWithRootViewController:_infoVC];
+    UINavigationController *navVC= [[UINavigationController alloc] initWithRootViewController:self.infoVC];
     _infoVC.displayText = text;
     _infoVC.title = title;
-    [self.view.window.rootViewController presentViewController:navVC animated:YES completion:nil];
+    [self presentViewController:navVC animated:YES completion:nil];
 }
     
 
@@ -374,9 +371,11 @@ STPPaymentCardTextFieldDelegate
     return profileInfoView;
 }
 
-- (THLInformationViewController *)newInfoVC {
-    THLInformationViewController *infoVC = [THLInformationViewController new];
-    return infoVC;
+- (THLInformationViewController *)infoVC {
+    if (!_infoVC) {
+        _infoVC = [THLInformationViewController new];
+    }
+    return _infoVC;
 }
 
 - (THLTextEntryViewController *)configureTextEntryView

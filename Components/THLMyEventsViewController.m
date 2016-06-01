@@ -15,6 +15,7 @@
 #import "MBProgressHUD.h"
 #import "THLAppearanceConstants.h"
 #import "THLAttendingEventCell.h"
+#import "SVProgressHUD.h"
 
 #pragma mark -
 #pragma mark SimpleCollectionReusableView
@@ -71,8 +72,6 @@
     NSMutableDictionary *_sections;
 }
 
-@property(nonatomic, strong) MBProgressHUD *hud;
-
 @end
 
 @implementation THLMyEventsViewController
@@ -96,8 +95,6 @@
 #pragma mark UIViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.hud = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.view addSubview:_hud];
     self.collectionView.backgroundColor = [UIColor blackColor];
     self.navigationItem.title = @"Tickets";
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
@@ -120,13 +117,11 @@
 
 - (void)objectsWillLoad {
     [super objectsWillLoad];
-    [self.hud show:YES];
+    [SVProgressHUD show];
 }
 
 - (void)objectsDidLoad:(NSError *)error {
-//    [super objectsDidLoad:error];
-//    if (!error) [self.hud hide:YES];
-//    [self.collectionView reloadData];
+    [SVProgressHUD dismiss];
     
     [super objectsDidLoad:error];
     
@@ -209,7 +204,7 @@
         NSString *invitationDate = [NSString stringWithFormat:@"%@, %@", date.thl_weekdayString, date.thl_timeString];
         cell.venueNameLabel.text = object[@"Guestlist"][@"event"][@"location"][@"name"];
         cell.dateLabel.text = invitationDate;
-        cell.partyTypeLabel.text = @"EVENT TICKEET";
+        cell.partyTypeLabel.text = @"EVENT TICKET";
 
         PFFile *imageFile = object[@"Guestlist"][@"event"][@"location"][@"image"];
         [imageFile getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {

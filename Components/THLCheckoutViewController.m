@@ -21,6 +21,7 @@
 #import "THLImportantInformationView.h"
 
 #import "THLPaymentMethodView.h"
+#import "SVProgressHUD.h"
 
 @interface THLCheckoutViewController ()
 @property (nonatomic) THLEvent *event;
@@ -32,7 +33,6 @@
 @property (nonatomic, strong) THLPaymentMethodView *paymentMethodView;
 
 @property (nonatomic, strong) NSDictionary *paymentInfo;
-@property (nonatomic, strong) MBProgressHUD *hud;
 @property (nonatomic, strong) THLImportantInformationView *importantInformationView;
 @end
 
@@ -57,9 +57,6 @@
     self.navigationItem.leftBarButtonItem = [self backBarButton];
     self.navigationItem.titleView = [self navBarTitleLabel];
 
-    self.hud = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.view addSubview:self.hud];
-    
     WEAKSELF();
     [self.purchaseButton makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(0);
@@ -85,6 +82,7 @@
     
     WEAKSELF();
     [contentView addSubviews:@[self.purchaseDetailsView, self.paymentMethodView, self.importantInformationView]];
+#import "SVProgressHUD.h"
     
     [self.purchaseDetailsView makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.insets(kTHLEdgeInsetsSuperHigh());
@@ -207,12 +205,11 @@
 
 - (void)buy:(id)sender
 {
-    self.hud.labelText = NSLocalizedString(@"Processing...", @"Processing...");
-    [self.hud show:YES];
+    [SVProgressHUD show];
     if ([THLUser currentUser].stripeCustomerId) {
         [self chargeCustomer:[THLUser currentUser] forEvent:_event];
     } else {
-        [self.hud hide:YES];
+        [SVProgressHUD dismiss];
         [self.delegate checkoutViewControllerWantsToPresentPaymentViewController];
 //        [self displayError:@"You currently don't have a credit card on file. Please add a payment method in your profile"];
     }
@@ -250,7 +247,7 @@
         [PFCloud callFunctionInBackground:@"completeOrderForInvite"
                            withParameters:purchaseInfo
                                     block:^(id response, NSError *error) {
-                                        [self.hud hide:YES];
+                                        [SVProgressHUD dismiss];
                                         if (error) {
                                             [self displayError:[error localizedDescription]];
                                         } else {
@@ -282,7 +279,7 @@
         [PFCloud callFunctionInBackground:@"completeOrder"
                            withParameters:purchaseInfo
                                     block:^(NSString *guestlistId, NSError *error) {
-                                        [self.hud hide:YES];
+                                        [SVProgressHUD dismiss];
                                         if (error) {
                                             [self displayError:[error localizedDescription]];
                                         } else {

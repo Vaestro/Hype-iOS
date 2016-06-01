@@ -8,7 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "ParseUI.h"
+@class THLEvent;
+
+@protocol THLPartyViewControllerDelegate <NSObject>
+- (void)partyViewControllerWantsToPresentInvitationControllerFor:(THLEvent *)event guestlistId:(NSString *)guestlistId;
+- (void)partyViewControllerWantsToPresentCheckoutForEvent:(PFObject *)event paymentInfo:(NSDictionary *)paymentInfo;
+
+@end
 
 @interface THLPartyViewController : PFQueryCollectionViewController
-- (instancetype)initWithClassName:(NSString *)className withGuestlist:(PFObject *)guestlist;
+@property (nonatomic, weak) id<THLPartyViewControllerDelegate> delegate;
+
+- (instancetype)initWithClassName:(NSString *)className guestlist:(PFObject *)guestlist usersInvite:(PFObject *)usersInvite;
 @end

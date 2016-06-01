@@ -12,21 +12,23 @@
 #import "Stripe.h"
 #import "Parse.h"
 #import "THLUser.h"
-#import "MBProgressHUD.h"
+#import "SVProgressHUD.h"
 
 @interface THLPaymentViewController()<STPPaymentCardTextFieldDelegate>
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *cardInfoLabel;
 
 @property (nonatomic, strong) UILabel *descriptionLabel;
+@property (nonatomic, strong) UILabel *acceptedPaymentNoticeLabel;
+
 @property (nonatomic, strong) UIImageView *securitySymbol;
 @property (nonatomic, strong) UIImageView *paymentCardIcon;
+@property (nonatomic, strong) UIImageView *acceptedPaymentCardsImage;
 
 @property(nonatomic) STPPaymentCardTextField *paymentTextField;
 @property(nonatomic, strong) THLActionButton *addCardButton;
 @property(nonatomic, strong) THLActionButton *removeCardButton;
 
-@property(nonatomic, strong) MBProgressHUD *hud;
 @property(nonatomic, strong) NSArray<NSDictionary *> *paymentInfo;
 @end
 
@@ -43,8 +45,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.hud = [[MBProgressHUD alloc] initWithView:self.view];
     
     self.view.backgroundColor = [UIColor blackColor];
     
@@ -97,6 +97,7 @@
             make.left.right.insets(kTHLEdgeInsetsSuperHigh());
             make.bottom.equalTo([WSELF addCardButton].mas_top).insets(kTHLEdgeInsetsSuperHigh());
         }];
+        
     }
     
     [self.securitySymbol mas_makeConstraints:^(MASConstraintMaker *make){
@@ -108,10 +109,19 @@
         make.left.equalTo([WSELF securitySymbol].mas_right).insets(kTHLEdgeInsetsSuperHigh());
         make.right.insets(kTHLEdgeInsetsSuperHigh());
         
-        make.bottom.insets(kTHLEdgeInsetsInsanelyHigh());
+        make.bottom.equalTo([WSELF acceptedPaymentNoticeLabel].mas_top).insets(kTHLEdgeInsetsInsanelyHigh());
         make.width.mas_equalTo(SCREEN_WIDTH*0.75);
     }];
 
+    [self.acceptedPaymentNoticeLabel mas_makeConstraints:^(MASConstraintMaker *make){
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+        make.bottom.equalTo([WSELF acceptedPaymentCardsImage].mas_top).insets(kTHLEdgeInsetsInsanelyHigh());
+    }];
+    
+    [self.acceptedPaymentCardsImage mas_makeConstraints:^(MASConstraintMaker *make){
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+        make.bottom.insets(kTHLEdgeInsetsInsanelyHigh());
+    }];
 }
 
 
@@ -182,8 +192,7 @@
 
 - (void)saveCreditCardInfo
 {
-    self.hud.labelText = @"Updating...";
-    [self.hud show:YES];
+    [SVProgressHUD showWithStatus:@"Updating.."];
     [[STPAPIClient sharedClient]
      createTokenWithCard:self.paymentTextField.cardParams
      completion:^(STPToken *token, NSError *error) {
@@ -194,10 +203,11 @@
              [PFCloud callFunctionInBackground:@"createStripeCustomer"
                                 withParameters:@{@"stripeToken": token.tokenId}
                                          block:^(NSArray<NSDictionary *> *paymentInfo, NSError *cloudError) {
-                                             [self.hud hide:YES];
+                                             [SVProgressHUD dismiss];
                                              if (cloudError) {
                                                  [self displayError:cloudError];
                                              } else {
+                                                 
                                                  _paymentInfo = paymentInfo;
                                                  [[THLUser currentUser] fetch];
                                                  [self displaySuccess];
@@ -214,10 +224,14 @@
     
     UIAlertAction* confirmAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction * action) {
+                                                              [SVProgressHUD showWithStatus:@"Deleting.."];
+
                                                               [PFCloud callFunctionInBackground:@"removeCardInfo"
                                                                                  withParameters:@{@"cardId": _paymentInfo[0][@"id"],
                                                                                                   @"customerId": [THLUser currentUser].stripeCustomerId}
                                                             block:^(id  _Nullable object, NSError * _Nullable cloudError) {
+                                                                [SVProgressHUD dismiss];
+
                                                                 if (cloudError) {
                                                                     [self displayError:cloudError];
                                                                 } else {
@@ -352,6 +366,31 @@
     }
 
     return _paymentCardIcon;
+}
+
+- (UILabel *)acceptedPaymentNoticeLabel {
+    if (!_acceptedPaymentNoticeLabel) {
+        _acceptedPaymentNoticeLabel = THLNUILabel(kTHLNUIDetailTitle);
+        _acceptedPaymentNoticeLabel.text = @"We accept";
+        _acceptedPaymentNoticeLabel.textAlignment = kTextAlignmentCenter;
+
+        _acceptedPaymentNoticeLabel.adjustsFontSizeToFitWidth = YES;
+        _acceptedPaymentNoticeLabel.numberOfLines = 1;
+        [self.view addSubview:_acceptedPaymentNoticeLabel];
+    }
+    return _acceptedPaymentNoticeLabel;
+}
+
+- (UIImageView *)acceptedPaymentCardsImage {
+    if (!_acceptedPaymentCardsImage) {
+        _acceptedPaymentCardsImage = [UIImageView new];
+        _acceptedPaymentCardsImage.image = [UIImage imageNamed:@"accepted_payment_icons"];
+        _acceptedPaymentCardsImage.contentMode = UIViewContentModeScaleAspectFit;
+        _acceptedPaymentCardsImage.clipsToBounds = YES;
+        [self.view addSubview:_acceptedPaymentCardsImage];
+    }
+    
+    return _acceptedPaymentCardsImage;
 }
 
 @end

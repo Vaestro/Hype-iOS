@@ -13,13 +13,19 @@
 #import "THLPartyMemberCell.h"
 #import "THLPersonIconView.h"
 #import "THLGuestlistInvite.h"
+#import "SVProgressHUD.h"
+#import "THLActionButton.h"
+#import "THLAppearanceConstants.h"
 
 static UIEdgeInsets const COLLECTION_VIEW_EDGEINSETS = {10, 10, 10, 10};
 static CGFloat const CELL_SPACING = 10;
 
 @interface THLPartyViewController()
-@property(nonatomic, strong) MBProgressHUD *hud;
 @property(nonatomic, strong) PFObject *guestlist;
+@property(nonatomic, strong) THLGuestlistInvite *usersInvite;
+
+@property(nonatomic, strong) THLActionButton *inviteFriendsButton;
+@property(nonatomic, strong) THLActionButton *checkoutButton;
 
 @end
 
@@ -28,13 +34,14 @@ static CGFloat const CELL_SPACING = 10;
 #pragma mark -
 #pragma mark Init
 
-- (instancetype)initWithClassName:(NSString *)className withGuestlist:(PFObject *)guestlist {
+- (instancetype)initWithClassName:(NSString *)className guestlist:(PFObject *)guestlist usersInvite:(PFObject *)usersInvite {
     self = [super initWithClassName:className];
     if (!self) return nil;
 
     self.pullToRefreshEnabled = YES;
     self.paginationEnabled = NO;
     _guestlist = guestlist;
+    _usersInvite = (THLGuestlistInvite *)usersInvite;
     return self;
 }
 
@@ -64,6 +71,20 @@ static CGFloat const CELL_SPACING = 10;
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
     CGFloat width = ([self contentViewWithInsetsWidth] - CELL_SPACING)/2.0;
     layout.itemSize = CGSizeMake(width, width + 10);
+    
+    WEAKSELF();
+    if (_usersInvite.response == THLStatusAccepted) {
+        [self.inviteFriendsButton makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.left.right.equalTo(WSELF.view).insets(kTHLEdgeInsetsHigh());
+            make.height.equalTo(60);
+        }];
+    } else {
+        [self.checkoutButton makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.left.right.equalTo(WSELF.view).insets(kTHLEdgeInsetsHigh());
+            make.height.equalTo(60);
+        }];
+    }
+
 }
 
 - (CGFloat)contentViewWithInsetsWidth {
@@ -72,13 +93,23 @@ static CGFloat const CELL_SPACING = 10;
 
 - (void)objectsWillLoad {
     [super objectsWillLoad];
-//    [self.hud show:YES];
+    [SVProgressHUD show];
 }
 
 - (void)objectsDidLoad:(NSError *)error {
     [super objectsDidLoad:error];
-//    if (!error) [self.hud hide:YES];
+    [SVProgressHUD dismiss];
     [self.collectionView reloadData];
+}
+
+- (void)handleViewInvitationAction {
+    [self.delegate partyViewControllerWantsToPresentInvitationControllerFor:(THLEvent *)_guestlist[@"event"] guestlistId:_guestlist.objectId];
+}
+
+- (void)handleViewCheckoutAction {
+    NSDictionary *paymentInfo = @{@"guestlistInviteId": _usersInvite.objectId};
+
+    [self.delegate partyViewControllerWantsToPresentCheckoutForEvent:_guestlist[@"event"] paymentInfo:paymentInfo];
 }
 
 #pragma mark -
@@ -130,4 +161,29 @@ static CGFloat const CELL_SPACING = 10;
     
     return cell;
 }
+
+- (THLActionButton *)inviteFriendsButton
+{
+    if (!_inviteFriendsButton) {
+        _inviteFriendsButton = [[THLActionButton alloc] initWithInverseStyle];
+        [_inviteFriendsButton setTitle:@"Invite Friends"];
+        [_inviteFriendsButton addTarget:self action:@selector(handleViewInvitationAction) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_inviteFriendsButton];
+    }
+    return _inviteFriendsButton;
+}
+
+- (THLActionButton *)checkoutButton
+{
+    if (!_checkoutButton) {
+        _checkoutButton = [[THLActionButton alloc] initWithInverseStyle];
+        [_checkoutButton setTitle:@"GO"];
+        [_checkoutButton addTarget:self action:@selector(handleViewCheckoutAction) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_checkoutButton];
+    }
+    return _checkoutButton;
+}
+
+
+
 @end
