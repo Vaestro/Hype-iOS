@@ -153,6 +153,9 @@ THLUserProfileViewControllerDelegate
 - (void)didSelectViewEventTicket:(PFObject *)guestlistInvite {
     UINavigationController *partyNavVC = [UINavigationController new];
     THLPartyNavigationController *partyNavigationController = [[THLPartyNavigationController alloc] initWithGuestlistInvite:guestlistInvite];
+    partyNavigationController.eventDetailsVC.delegate = self;
+//    partyNavigationController.partyVC.delegate = self;
+
     [partyNavVC addChildViewController:partyNavigationController];
     [_window.rootViewController presentViewController:partyNavVC animated:YES completion:nil];
 }
@@ -162,7 +165,11 @@ THLUserProfileViewControllerDelegate
 #pragma mark Delegate
 
 - (void)eventDetailsWantsToPresentAdmissionsForEvent:(PFObject *)event {
-    THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:event paymentInfo:nil];
+
+}
+
+- (void)eventDetailsWantsToPresentCheckoutForEvent:(PFObject *)event paymentInfo:(NSDictionary *)paymentInfo {
+    THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:event paymentInfo:paymentInfo];
     checkoutVC.delegate = self;
     UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:checkoutVC];
     [[self topViewController] presentViewController:navVC animated:YES completion:nil];

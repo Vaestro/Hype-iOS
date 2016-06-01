@@ -48,10 +48,14 @@
         [self.imageView sd_setImageWithURL:url];
     }];
     
-    [RACObserve(self, placeholderImageText) subscribeNext:^(NSString *text) {
+    [[RACObserve(self, placeholderImageText) filter:^BOOL(NSString *text) {
+        return text > 0;
+    }] subscribeNext:^(NSString *text) {
         @strongify(self)
         [self.imageView setImageWithString:text
                                       color:kTHLNUIPrimaryBackgroundColor];
+        [[self.imageView layer] setBorderWidth:1.0f];
+        [[self.imageView layer] setBorderColor:kTHLNUIGrayFontColor.CGColor];
     }];
 }
 

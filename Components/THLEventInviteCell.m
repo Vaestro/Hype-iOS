@@ -26,7 +26,7 @@
 #pragma mark UIView
 
 - (void)layoutSubviews {
-//    [super layoutSubviews];
+
     WEAKSELF();
     [_personIconView makeConstraints:^(MASConstraintMaker *make) {
         make.top.greaterThanOrEqualTo(SV(WSELF.personIconView)).insets(kTHLEdgeInsetsHigh());

@@ -36,12 +36,12 @@
         
         [self.titleLabel makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.insets(kTHLEdgeInsetsSuperHigh());
-            make.bottom.equalTo([WSELF scrollUpIcon].mas_top).insets(kTHLEdgeInsetsSuperHigh());
+            make.bottom.equalTo([WSELF dateLabel].mas_top).insets(kTHLEdgeInsetsSuperHigh());
         }];
         
         [self.dateLabel makeConstraints:^(MASConstraintMaker *make) {
-            make.left.insets(kTHLEdgeInsetsSuperHigh());
-            make.bottom.equalTo([WSELF titleLabel].mas_top).insets(kTHLEdgeInsetsSuperHigh());
+            make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+            make.bottom.equalTo([WSELF scrollUpIcon].mas_top).insets(kTHLEdgeInsetsSuperHigh());
         }];
 
         [self.dismissButton makeConstraints:^(MASConstraintMaker *make) {
@@ -123,7 +123,7 @@
         _titleLabel.adjustsFontSizeToFitWidth = YES;
         _titleLabel.numberOfLines = 1;
         _titleLabel.minimumScaleFactor = 0.5;
-        _titleLabel.textAlignment = NSTextAlignmentLeft;
+        _titleLabel.textAlignment = NSTextAlignmentCenter;
         
         BLKFlexibleHeightBarSubviewLayoutAttributes *initialLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
         initialLayoutAttributes.alpha = 1.0;
@@ -141,6 +141,10 @@
 - (UILabel *)minimumTitleLabel {
     if (!_minimumTitleLabel) {
         _minimumTitleLabel = THLNUILabel(kTHLNUIRegularTitle);
+        _minimumTitleLabel.adjustsFontSizeToFitWidth = YES;
+        _minimumTitleLabel.numberOfLines = 1;
+        _minimumTitleLabel.minimumScaleFactor = 0.5;
+        _minimumTitleLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:_minimumTitleLabel];
     }
     return _minimumTitleLabel;
@@ -151,6 +155,10 @@
         _dateLabel = [UILabel new];
         _dateLabel.textColor = kTHLNUIPrimaryFontColor;
         _dateLabel.font = [UIFont fontWithName:@"OpenSans-Regular" size:16];
+        _dateLabel.adjustsFontSizeToFitWidth = YES;
+        _dateLabel.numberOfLines = 1;
+        _dateLabel.minimumScaleFactor = 0.5;
+        _dateLabel.textAlignment = NSTextAlignmentCenter;
 
         BLKFlexibleHeightBarSubviewLayoutAttributes *initialLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
         initialLayoutAttributes.alpha = 1.0;

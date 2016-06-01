@@ -14,6 +14,8 @@ static CGFloat MAPVIEW_METERS = 1000;
 
 @interface THLEventDetailsMapView()
 @property (nonatomic, strong) MKMapView *mapView;
+@property (nonatomic, strong) UIView *overlayView;
+
 @end
 
 @implementation THLEventDetailsMapView
@@ -29,16 +31,25 @@ static CGFloat MAPVIEW_METERS = 1000;
 - (void)layoutView {
     WEAKSELF();
     [self.mapView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(kTHLEdgeInsetsNone());
+        make.top.bottom.equalTo(kTHLEdgeInsetsNone());
         make.left.right.equalTo(kTHLEdgeInsetsLow());
 //        make.height.equalTo(_mapView.mas_width).dividedBy(kTHLGoldenRatio);
         make.height.equalTo([WSELF mapView].mas_width).dividedBy(3);
     }];
     
-    [self.textView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
-        make.bottom.insets(kTHLEdgeInsetsNone());
-        make.top.equalTo([WSELF mapView].mas_bottom).insets(kTHLEdgeInsetsLow());
+    [self.overlayView makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(WSELF.mapView);
+    }];
+    [self.venueNameLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(WSELF.mapView.mas_centerY).insets(kTHLEdgeInsetsLow());
+        make.left.equalTo(WSELF.mapView).insets(kTHLEdgeInsetsSuperHigh());
+        make.right.equalTo(WSELF.mapView);
+    }];
+    
+    [self.addressLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.mapView.mas_centerY).insets(kTHLEdgeInsetsLow());
+        make.left.equalTo(WSELF.venueNameLabel);
+        make.right.equalTo(WSELF.mapView);
     }];
 }
 
@@ -59,6 +70,16 @@ static CGFloat MAPVIEW_METERS = 1000;
 }
 
 #pragma mark - Constructors
+- (UIView *)overlayView {
+    if (!_overlayView) {
+        _overlayView = [[UIView alloc] init];
+        _overlayView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.75];
+
+        [self addSubview:_overlayView];
+    }
+    return _overlayView;
+}
+
 - (MKMapView *)mapView {
     if (!_mapView) {
         _mapView = [[MKMapView alloc] init];
@@ -69,16 +90,23 @@ static CGFloat MAPVIEW_METERS = 1000;
     return _mapView;
 }
 
-- (UITextView *)textView {
-    if (!_textView) {
-        _textView = THLNUITextView(kTHLNUIDetailTitle);
-        [_textView setScrollEnabled:NO];
-        _textView.editable = NO;
-        _textView.dataDetectorTypes = UIDataDetectorTypeAll;
-        _textView.tintColor = kTHLNUIPrimaryFontColor;
-        [self addSubview:_textView];
+- (UILabel *)venueNameLabel {
+    if (!_venueNameLabel) {
+        _venueNameLabel = THLNUILabel(kTHLNUIDetailBoldTitle);
+        _venueNameLabel.numberOfLines = 1;
+        [self addSubview:_venueNameLabel];
+    }
+    
+    return _venueNameLabel;
+}
+
+- (UILabel *)addressLabel {
+    if (!_addressLabel) {
+        _addressLabel = THLNUILabel(kTHLNUIDetailTitle);
+        _addressLabel.numberOfLines = 1;
+        [self addSubview:_addressLabel];
     }
 
-    return _textView;
+    return _addressLabel;
 }
 @end

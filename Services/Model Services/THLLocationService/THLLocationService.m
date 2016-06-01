@@ -11,6 +11,13 @@
 @import CoreLocation;
 
 @implementation THLLocationService
+- (instancetype)init {
+    if (self = [super init]) {
+        _geocoder = [[CLGeocoder alloc] init];
+    }
+    return self;
+}
+
 - (instancetype)initWithGeocoder:(CLGeocoder *)geocoder {
 	if (self = [super init]) {
 		_geocoder = geocoder;

@@ -23,5 +23,5 @@
 @property (nonatomic, retain) NSArray *musicTypes;
 @property (nonatomic, retain) NSString *attireRequirement;
 @property (nonatomic, retain) NSDate *timeOpen;
-
+- (NSString *)fullAddress;
 @end

@@ -9,13 +9,17 @@
 #import <UIKit/UIKit.h>
 #import <Parse/PFObject.h>
 
+
 @protocol THLEventDetailsViewControllerDelegate <NSObject>
 - (void)eventDetailsWantsToPresentAdmissionsForEvent:(PFObject *)event;
+- (void)eventDetailsWantsToPresentCheckoutForEvent:(PFObject *)event paymentInfo:(NSDictionary *)paymentInfo; 
+
 @end
 
 @interface THLEventDetailsViewController : UIViewController <UIScrollViewDelegate>
 @property (nonatomic, weak) id<THLEventDetailsViewControllerDelegate> delegate;
 
 - (id)initWithEvent:(PFObject *)event andShowNavigationBar:(BOOL)showNavigationBar;
+- (id)initWithEvent:(PFObject *)event andGuestlistInvite:(PFObject *)guestlistInvite;
 @end
 

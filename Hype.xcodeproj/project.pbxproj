@@ -117,6 +117,7 @@
 		792545BF1CFD113B004CF29A /* THLPartyInvitationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 792545BE1CFD113B004CF29A /* THLPartyInvitationViewController.m */; };
 		792545C21CFDDFFB004CF29A /* THLImportantInformationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 792545C11CFDDFFB004CF29A /* THLImportantInformationView.m */; };
 		792545C51CFE400C004CF29A /* THLPaymentMethodView.m in Sources */ = {isa = PBXBuildFile; fileRef = 792545C41CFE400C004CF29A /* THLPaymentMethodView.m */; };
+		792545C81CFE97CF004CF29A /* THLAttendingEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 792545C71CFE97CF004CF29A /* THLAttendingEventCell.m */; };
 		794208281BD82641009B86FA /* UIView+DimView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794208271BD82641009B86FA /* UIView+DimView.m */; };
 		7942082C1BD82AF6009B86FA /* THLActionBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7942082B1BD82AF6009B86FA /* THLActionBarButton.m */; };
 		7942082F1BD8C250009B86FA /* THLGuestlistEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7942082E1BD8C250009B86FA /* THLGuestlistEntity.m */; };
@@ -535,6 +536,8 @@
 		792545C11CFDDFFB004CF29A /* THLImportantInformationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLImportantInformationView.m; sourceTree = "<group>"; };
 		792545C31CFE400C004CF29A /* THLPaymentMethodView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPaymentMethodView.h; sourceTree = "<group>"; };
 		792545C41CFE400C004CF29A /* THLPaymentMethodView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPaymentMethodView.m; sourceTree = "<group>"; };
+		792545C61CFE97CF004CF29A /* THLAttendingEventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLAttendingEventCell.h; sourceTree = "<group>"; };
+		792545C71CFE97CF004CF29A /* THLAttendingEventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLAttendingEventCell.m; sourceTree = "<group>"; };
 		79259D6E1CAA4C6C00409040 /* Hype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hype.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79259D6F1CAA4C6C00409040 /* Hype.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Hype.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		794208261BD82641009B86FA /* UIView+DimView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DimView.h"; sourceTree = "<group>"; };
@@ -1000,6 +1003,8 @@
 				792545BE1CFD113B004CF29A /* THLPartyInvitationViewController.m */,
 				79BB15321C6CED720044D943 /* THLFxTitleLabel.m */,
 				799862441C97B6AF004C5326 /* THLTextEntryViewController.h */,
+				792545C61CFE97CF004CF29A /* THLAttendingEventCell.h */,
+				792545C71CFE97CF004CF29A /* THLAttendingEventCell.m */,
 				792545C31CFE400C004CF29A /* THLPaymentMethodView.h */,
 				792545C41CFE400C004CF29A /* THLPaymentMethodView.m */,
 				799862451C97B6AF004C5326 /* THLTextEntryViewController.m */,
@@ -3564,6 +3569,7 @@
 				213CE1131BB8D22D00054A2C /* THLLocationService.m in Sources */,
 				79DF30221C714AFB00516199 /* THLCreditsExplanationView.m in Sources */,
 				79B6C1BA1CEA3EC50050CDB1 /* THLPurchaseDetailsView.m in Sources */,
+				792545C81CFE97CF004CF29A /* THLAttendingEventCell.m in Sources */,
 				791C1F7D1BF13AD300CCF803 /* THLEventHostingPresenter.m in Sources */,
 				2133BFCB1B877CAB002C1DA9 /* THLEvent.m in Sources */,
 				211BB0D41B8CBE980068FD50 /* THLEventTitlesView.m in Sources */,

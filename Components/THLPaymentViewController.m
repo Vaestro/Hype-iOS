@@ -123,18 +123,18 @@
 
     WEAKSELF();
 
-    [_addCardButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.addCardButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(0);
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
         make.bottom.equalTo([WSELF descriptionLabel].mas_top).insets(kTHLEdgeInsetsSuperHigh());
     }];
     
-    [_titleLabel mas_remakeConstraints:^(MASConstraintMaker *make){
+    [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make){
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
         make.bottom.equalTo([WSELF paymentTextField].mas_top).insets(kTHLEdgeInsetsInsanelyHigh());
     }];
     
-    [_paymentTextField mas_makeConstraints:^(MASConstraintMaker *make){
+    [self.paymentTextField mas_makeConstraints:^(MASConstraintMaker *make){
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
         make.bottom.equalTo([WSELF addCardButton].mas_top).insets(kTHLEdgeInsetsSuperHigh());
     }];
@@ -146,28 +146,27 @@
     NSString *cardInfoText = [NSString stringWithFormat:@"**** **** **** %@", last4CardDigits];
     _cardInfoLabel = [self cardInfoLabel:cardInfoText];
     
-    [self.view addSubviews:@[_paymentCardIcon, _cardInfoLabel,_removeCardButton]];
     WEAKSELF();
-    [_removeCardButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.removeCardButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(0);
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
         make.bottom.equalTo([WSELF descriptionLabel].mas_top).insets(kTHLEdgeInsetsSuperHigh());
     }];
     
-    [_paymentCardIcon mas_makeConstraints:^(MASConstraintMaker *make){
+    [self.paymentCardIcon mas_makeConstraints:^(MASConstraintMaker *make){
         make.left.insets(kTHLEdgeInsetsSuperHigh());
         make.bottom.equalTo([WSELF removeCardButton].mas_top).insets(kTHLEdgeInsetsSuperHigh());
     }];
     
-    [_cardInfoLabel mas_makeConstraints:^(MASConstraintMaker *make){
+    [self.cardInfoLabel mas_makeConstraints:^(MASConstraintMaker *make){
         make.left.equalTo(_paymentCardIcon.mas_right).insets(kTHLEdgeInsetsHigh());
         make.bottom.equalTo(_paymentCardIcon);
     }];
     
-    [_paymentTextField removeFromSuperview];
-    [_addCardButton removeFromSuperview];
+    [self.paymentTextField removeFromSuperview];
+    [self.addCardButton removeFromSuperview];
     
-    [_titleLabel mas_remakeConstraints:^(MASConstraintMaker *make){
+    [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make){
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
         make.bottom.equalTo([WSELF cardInfoLabel].mas_top).insets(kTHLEdgeInsetsInsanelyHigh());
     }];
