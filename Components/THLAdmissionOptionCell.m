@@ -25,17 +25,17 @@
 - (void)layoutSubviews
 {
     WEAKSELF();
-    [_titleLabel makeConstraints:^(MASConstraintMaker *make) {
+    [self.titleLabel makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(0);
-        make.left.insets(UIEdgeInsetsZero);
+        make.left.insets(kTHLEdgeInsetsNone());
     }];
     
-    [_iconView makeConstraints:^(MASConstraintMaker *make) {
-        make.right.insets(UIEdgeInsetsZero);
+    [self.iconView makeConstraints:^(MASConstraintMaker *make) {
+        make.right.insets(kTHLEdgeInsetsNone());
         make.centerY.equalTo(0);
     }];
     
-    [_priceLabel makeConstraints:^(MASConstraintMaker *make) {
+    [self.priceLabel makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(0);
         make.right.equalTo([WSELF iconView].mas_left).insets(kTHLEdgeInsetsLow());
     }];
