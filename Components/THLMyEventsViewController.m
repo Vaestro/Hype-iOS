@@ -168,7 +168,8 @@
     [query includeKey:@"Guest.event"];
     [query includeKey:@"Guestlist.Owner"];
     [query includeKey:@"Guestlist.event.location"];
-    
+    NSDate *date = [[NSDate date] dateBySubtractingHours:4];
+    [query whereKey:@"date" greaterThan:date];
     return query;
 }
 
