@@ -106,9 +106,9 @@
 
 - (void)finishOnboarding {
     WEAKSELF();
-    self.window.rootViewController = nil;
-    [WSELF.presenter.moduleDelegate loginModule:WSELF.presenter didLoginUser:nil];
-    
+    [_onboardingView dismissViewControllerAnimated:NO completion:^{
+        [WSELF.presenter.moduleDelegate skipUserLogin];
+    }];
 }
 
 - (void)presentNumberVerificationInterface:(id<THLNumberVerificationModuleDelegate>)interfaceDelegate {

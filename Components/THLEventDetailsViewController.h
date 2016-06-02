@@ -14,7 +14,7 @@
 - (void)eventDetailsWantsToPresentAdmissionsForEvent:(PFObject *)event;
 - (void)eventDetailsWantsToPresentCheckoutForEvent:(PFObject *)event paymentInfo:(NSDictionary *)paymentInfo;
 - (void)eventDetailsWantsToPresentPartyForEvent:(PFObject *)guestlistInvite;
-
+- (void)usersWantsToLogin;
 @end
 
 @interface THLEventDetailsViewController : UIViewController <UIScrollViewDelegate>

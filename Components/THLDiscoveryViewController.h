@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <ParseUI/PFQueryCollectionViewController.h>
+#import "UIScrollView+EmptyDataSet.h"
 
 @protocol THLDiscoveryViewControllerDelegate <NSObject>
 - (void)eventDiscoveryViewControllerWantsToPresentDetailsForEvent:(PFObject *)event;
@@ -15,6 +16,11 @@
 @end
 
 @interface THLDiscoveryViewController : PFQueryCollectionViewController
+<
+DZNEmptyDataSetSource,
+DZNEmptyDataSetDelegate
+>
+
 @property (nonatomic, weak) id<THLDiscoveryViewControllerDelegate> delegate;
 
 @end

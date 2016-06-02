@@ -109,13 +109,13 @@
         make.left.equalTo([WSELF securitySymbol].mas_right).insets(kTHLEdgeInsetsSuperHigh());
         make.right.insets(kTHLEdgeInsetsSuperHigh());
         
-        make.bottom.equalTo([WSELF acceptedPaymentNoticeLabel].mas_top).insets(kTHLEdgeInsetsInsanelyHigh());
+        make.bottom.equalTo([WSELF acceptedPaymentNoticeLabel].mas_top).insets(kTHLEdgeInsetsSuperHigh());
         make.width.mas_equalTo(SCREEN_WIDTH*0.75);
     }];
 
     [self.acceptedPaymentNoticeLabel mas_makeConstraints:^(MASConstraintMaker *make){
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
-        make.bottom.equalTo([WSELF acceptedPaymentCardsImage].mas_top).insets(kTHLEdgeInsetsInsanelyHigh());
+        make.bottom.equalTo([WSELF acceptedPaymentCardsImage].mas_top).insets(kTHLEdgeInsetsSuperHigh());
     }];
     
     [self.acceptedPaymentCardsImage mas_makeConstraints:^(MASConstraintMaker *make){
@@ -197,6 +197,8 @@
      createTokenWithCard:self.paymentTextField.cardParams
      completion:^(STPToken *token, NSError *error) {
          if (error) {
+             [SVProgressHUD dismiss];
+
              [self displayError:error];
          } else {
              

@@ -151,8 +151,9 @@ STPPaymentCardTextFieldDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == LogOut && ![THLUserManager userLoggedIn]) {
         return 0;
-    }
-    else {
+    } else if (indexPath.row == PaymentMethod && ![THLUserManager userLoggedIn]) {
+        return 0;
+    } else {
         return 55;
     }
 }

@@ -18,6 +18,7 @@
 
 #import "TTTAttributedLabel.h"
 #import "THLParseQueryFactory.h"
+#import "THLUser.h"
 
 @interface THLDiscoveryViewController ()
 @property (nonatomic, strong) TTTAttributedLabel *navBarTitleLabel;
@@ -63,6 +64,10 @@
     
     layout.sectionInset = UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 10.0f);
     layout.minimumInteritemSpacing = 0.5f;
+    
+    self.collectionView.emptyDataSetSource = self;
+    self.collectionView.emptyDataSetDelegate = self;
+
 }
 
 - (void)viewWillLayoutSubviews {
@@ -135,16 +140,21 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     PFObject *object = [self objectAtIndexPath:indexPath];
-    
-    [[[_parseQueryFactory localQueryForAcceptedInviteForEvent:object.objectId ] getFirstObjectInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
-        if (task.result != nil) {
-            [self.delegate eventDiscoveryViewControllerWantsToPresentDetailsForAttendingEvent:object invite:task.result];
-        } else {
-            [self.delegate eventDiscoveryViewControllerWantsToPresentDetailsForEvent:object];
-            
-        }
-        return task;
-    }];
+    if ([THLUser currentUser]) {
+        [[[_parseQueryFactory localQueryForAcceptedInviteForEvent:object.objectId ] getFirstObjectInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+            if (task.result != nil) {
+                [self.delegate eventDiscoveryViewControllerWantsToPresentDetailsForAttendingEvent:object invite:task.result];
+            } else {
+                [self.delegate eventDiscoveryViewControllerWantsToPresentDetailsForEvent:object];
+                
+            }
+            return task;
+        }];
+    } else {
+        [self.delegate eventDiscoveryViewControllerWantsToPresentDetailsForEvent:object];
+
+    }
+
 }
 
 
@@ -179,6 +189,40 @@
     return _navBarTitleLabel;
 }
 
+#pragma mark - EmptyDataSetDelegate
+- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView {
+    NSString *text = @"Oops there was an error fetching events";
+    
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:14.0f],
+                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                                 NSParagraphStyleAttributeName: paragraph};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView {
+    return kTHLNUISecondaryBackgroundColor;
+}
+
+- (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state
+{
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:17.0f],
+                                 NSForegroundColorAttributeName: kTHLNUIPrimaryFontColor,
+                                 };
+    
+    NSString *text = @"Refresh";
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (void)emptyDataSetDidTapButton:(UIScrollView *)scrollView
+{
+    [self loadObjects];
+}
 
 
 @end

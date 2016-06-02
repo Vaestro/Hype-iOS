@@ -236,6 +236,10 @@ THLPartyViewControllerDelegate
     [self presentCheckoutViewController:event paymentInfo:paymentInfo];
 }
 
+- (void)usersWantsToLogin {
+    [self.moduleDelegate logInUserOnViewController:[self topViewController]];
+}
+
 - (void)presentPartyNavigationController:(PFObject *)invite {
     UINavigationController *partyNavVC = [UINavigationController new];
     THLPartyNavigationController *partyNavigationController = [[THLPartyNavigationController alloc] initWithGuestlistInvite:invite];
@@ -345,6 +349,10 @@ THLPartyViewControllerDelegate
     [Intercom presentMessageComposer];
 }
 
+- (void)userNeedsLoginOnViewController:(UIViewController *)viewController
+{
+    [self.moduleDelegate logInUserOnViewController:viewController];
+}
 
 #pragma mark - THLPerkStoreModuleDelegate
 - (void)dismissPerkWireframe

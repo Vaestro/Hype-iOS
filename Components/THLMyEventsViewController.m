@@ -16,6 +16,7 @@
 #import "THLAppearanceConstants.h"
 #import "THLAttendingEventCell.h"
 #import "SVProgressHUD.h"
+#import "THLUser.h"
 
 #pragma mark -
 #pragma mark SimpleCollectionReusableView
@@ -106,11 +107,25 @@
     [self.collectionView registerClass:[THLAttendingEventCell class] forCellWithReuseIdentifier:[THLAttendingEventCell identifier]];
 
     [self.collectionView registerClass:[SimpleCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
+    
+    self.collectionView.emptyDataSetSource = self;
+    self.collectionView.emptyDataSetDelegate = self;
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self loadObjects];
+}
+
+- (BFTask<NSArray<__kindof PFObject *> *> *)loadObjects {
+    if ([THLUser currentUser]) {
+        return [super loadObjects];
+    } else {
+        return nil;
+
+    }
+    
 }
 
 - (void)viewWillLayoutSubviews {
@@ -252,6 +267,72 @@
         return CGSizeMake(CGRectGetWidth(self.collectionView.bounds), 40.0f);
     }
     return CGSizeZero;
+}
+
+
+#pragma mark - EmptyDataSetDelegate
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
+    NSString *text = @" ";
+    if ([THLUser currentUser]) {
+        text = @"You do not have any events";
+    } else {
+        text = @"You are not logged in";
+    }
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0f],
+                                 NSForegroundColorAttributeName: kTHLNUIAccentColor};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView {
+    NSString *text = @" ";
+    if ([THLUser currentUser]) {
+        text = @"When you purchase tickets or receive event invites from a friend, they'll show up here";
+    } else {
+        text = @"Please log in to attend an event or view your event invites";
+    }
+    
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:14.0f],
+                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                                 NSParagraphStyleAttributeName: paragraph};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView {
+    return kTHLNUIPrimaryBackgroundColor;
+}
+
+- (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state
+{
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:17.0f],
+                                 NSForegroundColorAttributeName: kTHLNUIPrimaryFontColor,
+                                 };
+    
+    NSString *text = @" ";
+    if ([THLUser currentUser]) {
+        text = @"Refresh";
+    } else {
+        text = @"Login";
+    }
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (void)emptyDataSetDidTapButton:(UIScrollView *)scrollView
+{
+    //    [_refreshCommand execute:nil];
+    if ([THLUser currentUser]) {
+        [self loadObjects];
+    } else {
+        [self.delegate usersWantsToLogin];
+    }
 }
 
 @end

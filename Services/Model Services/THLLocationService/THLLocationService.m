@@ -37,7 +37,4 @@
 	return completionSource.task;
 }
 
-- (void)dealloc {
-    NSLog(@"Destroyed %@", self);
-}
 @end

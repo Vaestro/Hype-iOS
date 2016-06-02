@@ -35,7 +35,6 @@
 @property (nonatomic, strong) ORStackScrollView *scrollView;
 @property (nonatomic, strong) UILabel *eventNameLabel;
 @property (nonatomic, strong) UILabel *dateLabel;
-@property (nonatomic, strong) THLEventDetailsPromotionInfoView *promotionInfoView;
 @property (nonatomic, strong) THLTitledContentView *locationInfoView;
 @property (nonatomic, strong) THLImportantInformationView *needToKnowInfoView;
 @property (nonatomic, strong) THLTitledContentView *musicTypesView;
@@ -183,23 +182,13 @@
     return _scrollView;
 }
 
-- (THLEventDetailsPromotionInfoView *)promotionInfoView
-{
-    if (!_promotionInfoView) {
-        _promotionInfoView = [THLEventDetailsPromotionInfoView new];
-        _promotionInfoView.titleLabel.text = NSLocalizedString(@"EVENT DETAILS", nil);
-        _promotionInfoView.translatesAutoresizingMaskIntoConstraints = NO;
-    }
-    return _promotionInfoView;
-}
-
 - (THLImportantInformationView *)needToKnowInfoView
 {
     if (!_needToKnowInfoView) {
         _needToKnowInfoView = [THLImportantInformationView new];
         _needToKnowInfoView.titleLabel.text = NSLocalizedString(@"NEED TO KNOW", nil);
         _needToKnowInfoView.importantInformationLabel.text = [NSString
-                                                              stringWithFormat:@"Doors Open: %@\nDress Code: %@\nMust have valid 21+ Photo ID\nFinal admission at doorman’s discretion.", ((NSDate *)_event[@"location"][@"openTime"]).thl_timeString, _event[@"location"][@"attireRequirement"]];
+                                                              stringWithFormat:@"Doors open: %@\nDress code: %@\nMust have valid 21+ Photo ID\nFinal admission at doorman’s discretion.", ((NSDate *)_event[@"location"][@"openTime"]).thl_timeString, _event[@"location"][@"attireRequirement"]];
         _needToKnowInfoView.translatesAutoresizingMaskIntoConstraints = NO;
     }
     return _needToKnowInfoView;
@@ -253,8 +242,12 @@
             [_bottomBar setTitle:@"VIEW PARTY"];
             [_bottomBar addTarget:self action:@selector(handleViewParty) forControlEvents:UIControlEventTouchUpInside];
         } else {
-            [_bottomBar setTitle:@"VIEW ADMISSIONS"];
-            [_bottomBar addTarget:self action:@selector(handleViewCheckout) forControlEvents:UIControlEventTouchUpInside];
+            [_bottomBar setTitle:@"GO"];
+            if ([THLUser currentUser]) {
+                [_bottomBar addTarget:self action:@selector(handleViewCheckout) forControlEvents:UIControlEventTouchUpInside];
+            } else {
+                [_bottomBar addTarget:self.delegate action:@selector(usersWantsToLogin) forControlEvents:UIControlEventTouchUpInside];
+            }
         }
         [self.view addSubview:_bottomBar];
     }
