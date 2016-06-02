@@ -155,7 +155,7 @@ static CGFloat const CELL_SPACING = 10;
     }
     else {
         //        TODO: Hack to get placeholder image to show, this logic should not be here
-        cell.nameLabel.text = @"Pending Signup";
+        cell.nameLabel.text = @"User";
         [cell.iconImageView setImage:nil];
     }
     
@@ -165,7 +165,7 @@ static CGFloat const CELL_SPACING = 10;
 - (THLActionButton *)inviteFriendsButton
 {
     if (!_inviteFriendsButton) {
-        _inviteFriendsButton = [[THLActionButton alloc] initWithInverseStyle];
+        _inviteFriendsButton = [[THLActionButton alloc] initWithDefaultStyle];
         [_inviteFriendsButton setTitle:@"Invite Friends"];
         [_inviteFriendsButton addTarget:self action:@selector(handleViewInvitationAction) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_inviteFriendsButton];
@@ -176,7 +176,7 @@ static CGFloat const CELL_SPACING = 10;
 - (THLActionButton *)checkoutButton
 {
     if (!_checkoutButton) {
-        _checkoutButton = [[THLActionButton alloc] initWithInverseStyle];
+        _checkoutButton = [[THLActionButton alloc] initWithDefaultStyle];
         [_checkoutButton setTitle:@"GO"];
         [_checkoutButton addTarget:self action:@selector(handleViewCheckoutAction) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_checkoutButton];

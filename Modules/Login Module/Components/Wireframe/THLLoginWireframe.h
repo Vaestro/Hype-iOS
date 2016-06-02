@@ -42,5 +42,6 @@
 - (void)dismissInterface;
 - (void)finishLogin;
 - (void)finishOnboarding;
+- (void)skipLogin;
 
 @end

@@ -107,6 +107,13 @@
 - (void)finishOnboarding {
     WEAKSELF();
     [_onboardingView dismissViewControllerAnimated:NO completion:^{
+        [WSELF.presenter.moduleDelegate loginModule:WSELF.presenter didLoginUser:nil];
+    }];
+}
+
+- (void)skipLogin {
+    WEAKSELF();
+    [_onboardingView dismissViewControllerAnimated:NO completion:^{
         [WSELF.presenter.moduleDelegate skipUserLogin];
     }];
 }

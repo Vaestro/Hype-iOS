@@ -26,7 +26,7 @@
     self.clipsToBounds = YES;
 
     WEAKSELF();
-    [_iconImageView makeConstraints:^(MASConstraintMaker *make) {
+    [self.iconImageView makeConstraints:^(MASConstraintMaker *make) {
         make.top.insets(kTHLEdgeInsetsHigh()).priorityHigh();
         make.left.top.greaterThanOrEqualTo(SV(WSELF.iconImageView)).insets(kTHLEdgeInsetsHigh());
         make.right.lessThanOrEqualTo(SV(WSELF.iconImageView)).insets(kTHLEdgeInsetsHigh());
@@ -34,18 +34,18 @@
         make.centerX.offset(0);
     }];
     
-    [_nameLabel makeConstraints:^(MASConstraintMaker *make) {
+    [self.nameLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF iconImageView].mas_bottom).insets(kTHLEdgeInsetsLow());
         make.left.right.insets(kTHLEdgeInsetsHigh());
     }];
     
     
-    [_statusLabel makeConstraints:^(MASConstraintMaker *make) {
+    [self.statusLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF nameLabel].mas_bottom).insets(kTHLEdgeInsetsNone());
         make.left.right.insets(kTHLEdgeInsetsHigh());
     }];
     
-    [_statusView makeConstraints:^(MASConstraintMaker *make) {
+    [self.statusView makeConstraints:^(MASConstraintMaker *make) {
         make.top.insets(kTHLEdgeInsetsHigh());
         make.size.equalTo(CGSizeMake(25, 25));
         make.right.equalTo([WSELF iconImageView].mas_right);
@@ -60,6 +60,9 @@
         [_statusView setStatus:WSELF.guestlistInviteStatus];
         [_statusLabel setTextColor:kTHLNUIGrayFontColor];
         switch (WSELF.guestlistInviteStatus) {
+            case THLStatusNone:
+                [_statusLabel setText:@"Pending Signup"];
+                break;
             case THLStatusPending:
                 [_statusLabel setText:@"Pending"];
                 break;

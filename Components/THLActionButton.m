@@ -31,7 +31,7 @@
 - (instancetype)initWithInverseStyle {
     if (self = [super init]) {
         self.inverse = TRUE;
-        [self setTintColor:[UIColor clearColor]];
+        [self setTintColor:kTHLNUIPrimaryFontColor];
         [self.fxLabel setBackgroundColor:[UIColor clearColor]];
         [self.layer setBorderWidth:1.0];
         [self.layer setCornerRadius:2.0];

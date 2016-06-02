@@ -114,7 +114,7 @@ THLNumberVerificationModuleDelegate
 }
 
 - (void)handleSkipAction {
-    [_wireframe finishOnboarding];
+    [_wireframe skipLogin];
     [self.moduleDelegate skipUserLogin];
 }
 

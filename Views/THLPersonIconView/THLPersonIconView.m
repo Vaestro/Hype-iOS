@@ -103,7 +103,7 @@
 }
 
 - (UIImage *)placeHolderImage {
-    UIImage *image = [[UIImage imageNamed:@"Profile Icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIImage *image = [[UIImage imageNamed:@"default_profile_image"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     return image;
 }
 
