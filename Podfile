@@ -38,7 +38,6 @@ pod 'Parse', '= 1.11.0'
 pod 'ParseFacebookUtilsV4'
 pod 'ParseUI'
 pod 'FBSDKCoreKit'
-#pod 'FacebookImagePicker'
 
 #Intercom
 pod 'Intercom'

@@ -228,6 +228,7 @@
 		79CE315A1CF7B03F00CEA784 /* THLEventTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CE31591CF7B03F00CEA784 /* THLEventTicketViewController.m */; };
 		79DF30221C714AFB00516199 /* THLCreditsExplanationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DF30211C714AFB00516199 /* THLCreditsExplanationView.m */; };
 		79DF30261C72FF1700516199 /* THLEventHostingNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DF30251C72FF1700516199 /* THLEventHostingNavigationBar.m */; };
+		C80372DA1D00DD68008848CA /* THLAdmissionOptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C80372D91D00DD68008848CA /* THLAdmissionOptionCell.m */; };
 		C82D87BF1C25C7E300116328 /* THLConfirmationView.m in Sources */ = {isa = PBXBuildFile; fileRef = C82D87BE1C25C7E300116328 /* THLConfirmationView.m */; };
 		C82D87C31C31CC2200116328 /* THLMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = C82D87C21C31CC2200116328 /* THLMenuView.m */; };
 		C85EE3791C1BC8AD0008C14B /* THLPerkStoreItemEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3781C1BC8AD0008C14B /* THLPerkStoreItemEntity.m */; };
@@ -749,6 +750,8 @@
 		79DF30241C72FF1700516199 /* THLEventHostingNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventHostingNavigationBar.h; sourceTree = "<group>"; };
 		79DF30251C72FF1700516199 /* THLEventHostingNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventHostingNavigationBar.m; sourceTree = "<group>"; };
 		81186460483D6143F07FE818 /* libPods-HypeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HypeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C80372D81D00DD68008848CA /* THLAdmissionOptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLAdmissionOptionCell.h; sourceTree = "<group>"; };
+		C80372D91D00DD68008848CA /* THLAdmissionOptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLAdmissionOptionCell.m; sourceTree = "<group>"; };
 		C82D87BD1C25C7E300116328 /* THLConfirmationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLConfirmationView.h; sourceTree = "<group>"; };
 		C82D87BE1C25C7E300116328 /* THLConfirmationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLConfirmationView.m; sourceTree = "<group>"; };
 		C82D87C11C31CC2200116328 /* THLMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMenuView.h; sourceTree = "<group>"; };
@@ -1016,6 +1019,8 @@
 				794A9D181CF4ACC300DDAC00 /* THLEventInviteCell.m */,
 				792545BA1CFCBD61004CF29A /* THLPartyMemberCell.h */,
 				792545BB1CFCBD61004CF29A /* THLPartyMemberCell.m */,
+				C80372D81D00DD68008848CA /* THLAdmissionOptionCell.h */,
+				C80372D91D00DD68008848CA /* THLAdmissionOptionCell.m */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -3607,6 +3612,7 @@
 				211005BF1B8A70BF00A540C6 /* THLEventDiscoveryCell.m in Sources */,
 				798B5FD11BF12D2C002EBCB6 /* THLEventHostingWireframe.m in Sources */,
 				215A428E1BAA200E00D03C35 /* THLNumberVerificationWireframe.m in Sources */,
+				C80372DA1D00DD68008848CA /* THLAdmissionOptionCell.m in Sources */,
 				C85EE3791C1BC8AD0008C14B /* THLPerkStoreItemEntity.m in Sources */,
 				C8E1B1651BF4380D00A9824C /* THLUserProfileDataManager.m in Sources */,
 				215A42A81BAA287900D03C35 /* THLFacebookProfilePictureFactory.m in Sources */,

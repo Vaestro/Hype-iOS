@@ -7,8 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ParseUI.h"
 #import <Parse/PFObject.h>
+#import "UIScrollView+EmptyDataSet.h"
 
-@interface THLAdmissionsViewController : UIViewController
--(id)initWithEvent:(PFObject *)event;
+
+@protocol THLAdmissionsViewDelegate <NSObject>
+- (void)usersWantsToLogin;
+- (void)didSelectAdmissionOption:(PFObject *)AdmissionOption;
+@end
+
+
+@interface THLAdmissionsViewController : PFQueryCollectionViewController
+<
+DZNEmptyDataSetSource,
+DZNEmptyDataSetDelegate
+>
+@property (nonatomic, weak) id<THLAdmissionsViewDelegate> delegate;
+@property (nonatomic) PFObject *event;
 @end

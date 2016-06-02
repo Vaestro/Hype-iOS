@@ -242,9 +242,9 @@
             [_bottomBar setTitle:@"VIEW PARTY"];
             [_bottomBar addTarget:self action:@selector(handleViewParty) forControlEvents:UIControlEventTouchUpInside];
         } else {
-            [_bottomBar setTitle:@"GO"];
+            [_bottomBar setTitle:@"VIEW Admissions"];
             if ([THLUser currentUser]) {
-                [_bottomBar addTarget:self action:@selector(handleViewCheckout) forControlEvents:UIControlEventTouchUpInside];
+                [_bottomBar addTarget:self action:@selector(handleAdmissions) forControlEvents:UIControlEventTouchUpInside];
             } else {
                 [_bottomBar addTarget:self.delegate action:@selector(usersWantsToLogin) forControlEvents:UIControlEventTouchUpInside];
             }
