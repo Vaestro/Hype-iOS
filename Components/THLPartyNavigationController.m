@@ -42,13 +42,13 @@
     THLGuestlistInvite *invite = (THLGuestlistInvite *)_guestlistInvite;
     if (invite.response == THLStatusAccepted) {
         THLEventTicketViewController *eventTicketVC = [[THLEventTicketViewController alloc]initWithGuestlistInvite:_guestlistInvite];
-        _eventDetailsVC = [[THLEventDetailsViewController alloc]initWithEvent:_guestlistInvite[@"Guestlist"][@"event"] andShowNavigationBar:FALSE];
+        _eventDetailsVC = [[THLEventDetailsViewController alloc]initWithEvent:_guestlistInvite[@"Guestlist"][@"event"] guestlistInvite:nil showNavigationBar:FALSE];
         _partyVC = [[THLPartyViewController alloc] initWithClassName:@"GuestlistInvite" guestlist:_guestlistInvite[@"Guestlist"] usersInvite:_guestlistInvite];
         
         [self.viewControllerArray addObjectsFromArray:@[eventTicketVC, _eventDetailsVC, _partyVC]];
         self.buttonText = @[@"TICKET", @"EVENT", @"PARTY"];
     } else {
-        _eventDetailsVC = [[THLEventDetailsViewController alloc]initWithEvent:_guestlistInvite[@"Guestlist"][@"event"] andGuestlistInvite:_guestlistInvite];
+        _eventDetailsVC = [[THLEventDetailsViewController alloc]initWithEvent:_guestlistInvite[@"Guestlist"][@"event"] guestlistInvite:_guestlistInvite showNavigationBar:FALSE];
         _partyVC = [[THLPartyViewController alloc] initWithClassName:@"GuestlistInvite" guestlist:_guestlistInvite[@"Guestlist"] usersInvite:_guestlistInvite];
         
         [self.viewControllerArray addObjectsFromArray:@[_partyVC, _eventDetailsVC]];

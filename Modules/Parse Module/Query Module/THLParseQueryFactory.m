@@ -74,6 +74,23 @@
     return query;
 }
 
+- (PFQuery *)localQueryForAcceptedInviteForEvent:(NSString *)eventId {
+    PFQuery *eventQuery = [self baseEventQuery];
+    [eventQuery whereKey:@"objectId" equalTo:eventId];
+    
+    PFQuery *guestlistQuery = [self baseGuestlistQuery];
+    [guestlistQuery whereKey:@"event" matchesQuery:eventQuery];
+    
+    PFQuery *query = [self baseGuestlistInviteQuery];
+    [query whereKey:@"Guest" equalTo:[THLUser currentUser]];
+    [query whereKey:@"Guestlist" matchesQuery:guestlistQuery];
+    [query whereKey:@"response" equalTo:[NSNumber numberWithInteger:1]];
+    
+    [query fromLocalDatastore];
+    
+    return query;
+}
+
 - (PFQuery *)queryForGuestlistInvitesForUser {
     PFQuery *query = [self baseGuestlistInviteQuery];
     [query whereKey:@"phoneNumber" equalTo:[THLUser currentUser].phoneNumber];

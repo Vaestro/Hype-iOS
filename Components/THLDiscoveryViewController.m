@@ -17,9 +17,12 @@
 #import "Intercom/intercom.h"
 
 #import "TTTAttributedLabel.h"
+#import "THLParseQueryFactory.h"
 
 @interface THLDiscoveryViewController ()
 @property (nonatomic, strong) TTTAttributedLabel *navBarTitleLabel;
+@property (nonatomic, strong) THLParseQueryFactory *parseQueryFactory;
+
 @end
 
 @implementation THLDiscoveryViewController
@@ -37,7 +40,7 @@
    
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Help"] style:UIBarButtonItemStylePlain target:self action:@selector(messageButtonPressed)];
-    
+    _parseQueryFactory = [THLParseQueryFactory new];
     return self;
 }
 
@@ -131,8 +134,16 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     PFObject *object = [self objectAtIndexPath:indexPath];
-   
-    [self.delegate eventDiscoveryViewControllerWantsToPresentDetailsForEvent:object];
+    
+    [[[_parseQueryFactory localQueryForAcceptedInviteForEvent:object.objectId ] getFirstObjectInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+        if (task.result != nil) {
+            [self.delegate eventDiscoveryViewControllerWantsToPresentDetailsForAttendingEvent:object invite:task.result];
+        } else {
+            [self.delegate eventDiscoveryViewControllerWantsToPresentDetailsForEvent:object];
+            
+        }
+        return task;
+    }];
 }
 
 

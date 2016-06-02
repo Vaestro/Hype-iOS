@@ -28,6 +28,7 @@
 #import "THLLocationService.h"
 #import "THLLocation.h"
 #import "THLGuestlistInvite.h"
+#import "THLEvent.h"
 
 
 @interface THLEventDetailsViewController ()
@@ -55,21 +56,12 @@
 
 #pragma mark - Life cycle
 
-- (id)initWithEvent:(PFObject *)event andShowNavigationBar:(BOOL)showNavigationBar {
-    if (self = [super init]) {
-        self.event = event;
-        _locationService = [THLLocationService new];
-        _showNavigationBar = showNavigationBar;
-    }
-    return self;
-}
-
-- (id)initWithEvent:(PFObject *)event andGuestlistInvite:(PFObject *)guestlistInvite {
+- (id)initWithEvent:(PFObject *)event guestlistInvite:(PFObject *)guestlistInvite showNavigationBar:(BOOL)showNavigationBar{
     if (self = [super init]) {
         self.event = event;
         _guestlistInvite = guestlistInvite;
         _locationService = [THLLocationService new];
-        _showNavigationBar = NO;
+        _showNavigationBar = showNavigationBar;
     }
     return self;
 }
@@ -78,9 +70,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
-
+    
     if (_showNavigationBar == TRUE) {
         [self.scrollView makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.right.insets(kTHLEdgeInsetsNone());
@@ -139,7 +132,6 @@
     
     [self getPlacemarkForLocation:location.fullAddress];
 }
-
 
 - (void)viewDidLayoutSubviews
 {
@@ -206,7 +198,8 @@
     if (!_needToKnowInfoView) {
         _needToKnowInfoView = [THLImportantInformationView new];
         _needToKnowInfoView.titleLabel.text = NSLocalizedString(@"NEED TO KNOW", nil);
-        _needToKnowInfoView.importantInformationLabel.text = @"Doors open:\nMust have valid 21+ Photo ID\nFinal admission at doorman’s discretion.";
+        _needToKnowInfoView.importantInformationLabel.text = [NSString
+                                                              stringWithFormat:@"Doors Open: %@\nDress Code: %@\nMust have valid 21+ Photo ID\nFinal admission at doorman’s discretion.", ((NSDate *)_event[@"location"][@"openTime"]).thl_timeString, _event[@"location"][@"attireRequirement"]];
         _needToKnowInfoView.translatesAutoresizingMaskIntoConstraints = NO;
     }
     return _needToKnowInfoView;
@@ -255,8 +248,14 @@
 {
     if (!_bottomBar) {
         _bottomBar = [[THLActionButton alloc] initWithInverseStyle];
-        [_bottomBar setTitle:@"VIEW ADMISSIONS"];
-        [_bottomBar addTarget:self action:@selector(handleViewCheckout) forControlEvents:UIControlEventTouchUpInside];
+        THLGuestlistInvite *invite = (THLGuestlistInvite *)_guestlistInvite;
+        if (invite.response == THLStatusAccepted) {
+            [_bottomBar setTitle:@"VIEW PARTY"];
+            [_bottomBar addTarget:self action:@selector(handleViewParty) forControlEvents:UIControlEventTouchUpInside];
+        } else {
+            [_bottomBar setTitle:@"VIEW ADMISSIONS"];
+            [_bottomBar addTarget:self action:@selector(handleViewCheckout) forControlEvents:UIControlEventTouchUpInside];
+        }
         [self.view addSubview:_bottomBar];
     }
     return _bottomBar;
@@ -321,8 +320,9 @@
     [self.delegate eventDetailsWantsToPresentAdmissionsForEvent:_event];
 }
 
-
-
+-(void)handleViewParty {
+    [self.delegate eventDetailsWantsToPresentPartyForEvent:_guestlistInvite];
+}
 
 - (void)showAlertView {
     THLAlertView *alertView = [THLAlertView new];

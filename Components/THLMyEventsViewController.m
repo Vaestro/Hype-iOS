@@ -108,6 +108,11 @@
     [self.collectionView registerClass:[SimpleCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self loadObjects];
+}
+
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     
@@ -117,11 +122,11 @@
 
 - (void)objectsWillLoad {
     [super objectsWillLoad];
-    [SVProgressHUD show];
+//    [SVProgressHUD show];
 }
 
 - (void)objectsDidLoad:(NSError *)error {
-    [SVProgressHUD dismiss];
+//    [SVProgressHUD dismiss];
     
     [super objectsDidLoad:error];
     

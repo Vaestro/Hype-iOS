@@ -11,6 +11,7 @@
 
 @protocol THLDiscoveryViewControllerDelegate <NSObject>
 - (void)eventDiscoveryViewControllerWantsToPresentDetailsForEvent:(PFObject *)event;
+- (void)eventDiscoveryViewControllerWantsToPresentDetailsForAttendingEvent:(PFObject *)event invite:(PFObject *)invite;
 @end
 
 @interface THLDiscoveryViewController : PFQueryCollectionViewController

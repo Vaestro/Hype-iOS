@@ -257,6 +257,7 @@
 //                                            }];
                                             [[self queryForGuestlistInviteForEvent:_event.objectId] getFirstObjectInBackgroundWithBlock:^(PFObject *guestlistInvite, NSError *queryError) {
                                                 if (!queryError) {
+                                                    [guestlistInvite pinInBackground];
                                                     PFObject *guestlist = guestlistInvite[@"Guestlist"];
                                                     [self.delegate checkoutViewControllerDidFinishCheckoutForEvent:_event withGuestlistId:guestlist.objectId];
                                                 } else {
@@ -289,6 +290,7 @@
 //                                            }];
                                             [[self queryForGuestlistInviteForEvent:_event.objectId] getFirstObjectInBackgroundWithBlock:^(PFObject *guestlistInvite, NSError *queryError) {
                                                 if (!queryError) {
+                                                    [guestlistInvite pinInBackground];
                                                     PFObject *guestlist = guestlistInvite[@"Guestlist"];
                                                     [self.delegate checkoutViewControllerDidFinishCheckoutForEvent:_event withGuestlistId:guestlist.objectId];
                                                 } else {

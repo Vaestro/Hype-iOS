@@ -142,7 +142,12 @@ THLPartyViewControllerDelegate
 #pragma mark Delegate
 
 - (void)eventDiscoveryViewControllerWantsToPresentDetailsForEvent:(PFObject *)event {
-    THLEventDetailsViewController *eventDetailVC = [[THLEventDetailsViewController alloc]initWithEvent:event andShowNavigationBar:TRUE];
+    THLEventDetailsViewController *eventDetailVC = [[THLEventDetailsViewController alloc]initWithEvent:event guestlistInvite:nil showNavigationBar:TRUE];
+    eventDetailVC.delegate = self;
+    [_window.rootViewController presentViewController:eventDetailVC animated:YES completion:nil];
+}
+- (void)eventDiscoveryViewControllerWantsToPresentDetailsForAttendingEvent:(PFObject *)event invite:(PFObject *)invite {
+    THLEventDetailsViewController *eventDetailVC = [[THLEventDetailsViewController alloc]initWithEvent:event guestlistInvite:invite showNavigationBar:TRUE];
     eventDetailVC.delegate = self;
     [_window.rootViewController presentViewController:eventDetailVC animated:YES completion:nil];
 }
@@ -173,6 +178,13 @@ THLPartyViewControllerDelegate
     [self presentCheckoutViewController:event paymentInfo:paymentInfo];
 }
 
+- (void)eventDetailsWantsToPresentPartyForEvent:(PFObject *)guestlistInvite {
+    [_window.rootViewController dismissViewControllerAnimated:YES completion:^{
+        [self presentPartyNavigationController:guestlistInvite];
+    }];
+    [_masterTabBarController setSelectedIndex:1];
+}
+
 #pragma mark -
 #pragma mark CheckoutViewController
 #pragma mark Delegate
@@ -190,20 +202,16 @@ THLPartyViewControllerDelegate
 #pragma mark Delegate
 - (void)partyInvitationViewControllerDidSkipSendingInvitesAndWantsToShowTicket:(PFObject *)invite {
     [_window.rootViewController dismissViewControllerAnimated:YES completion:^{
-        UINavigationController *partyNavVC = [UINavigationController new];
-        THLPartyNavigationController *partyNavigationController = [[THLPartyNavigationController alloc] initWithGuestlistInvite:invite];
-        [partyNavVC addChildViewController:partyNavigationController];
-        [_window.rootViewController presentViewController:partyNavVC animated:YES completion:nil];
+        [self presentPartyNavigationController:invite];
     }];
+
 }
 
 - (void)partyInvitationViewControllerDidSubmitInvitesAndWantsToShowTicket:(PFObject *)invite {
     [_window.rootViewController dismissViewControllerAnimated:YES completion:^{
-        UINavigationController *partyNavVC = [UINavigationController new];
-        THLPartyNavigationController *partyNavigationController = [[THLPartyNavigationController alloc] initWithGuestlistInvite:invite];
-        [partyNavVC addChildViewController:partyNavigationController];
-        [_window.rootViewController presentViewController:partyNavVC animated:YES completion:nil];
+        [self presentPartyNavigationController:invite];
     }];
+
 }
 
 #pragma mark -
@@ -226,6 +234,14 @@ THLPartyViewControllerDelegate
 
 - (void)partyViewControllerWantsToPresentCheckoutForEvent:(PFObject *)event paymentInfo:(NSDictionary *)paymentInfo {
     [self presentCheckoutViewController:event paymentInfo:paymentInfo];
+}
+
+- (void)presentPartyNavigationController:(PFObject *)invite {
+    UINavigationController *partyNavVC = [UINavigationController new];
+    THLPartyNavigationController *partyNavigationController = [[THLPartyNavigationController alloc] initWithGuestlistInvite:invite];
+    [partyNavVC addChildViewController:partyNavigationController];
+    [_window.rootViewController presentViewController:partyNavVC animated:YES completion:nil];
+    [_masterTabBarController setSelectedIndex:1];
 
 }
 
