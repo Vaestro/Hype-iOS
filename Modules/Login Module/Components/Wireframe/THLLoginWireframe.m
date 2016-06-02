@@ -69,6 +69,9 @@
 - (void)presentOnboardingInterfaceInWindow:(UIWindow *)window {
 	_window = window;
 	[_presenter configureOnboardingView:_onboardingView];
+    UIViewController *baseViewController = [UIViewController new];
+    _window.rootViewController = baseViewController;
+    [baseViewController presentViewController:_onboardingView animated:NO completion:nil];
 	_window.rootViewController = _onboardingView;
 	[_window makeKeyAndVisible];
 }
@@ -78,7 +81,9 @@
     [_interactor setUser:[THLUser currentUser]];
     [_presenter configureOnboardingView:_onboardingView];
     _topViewController = _onboardingView;
-    _window.rootViewController = _onboardingView;
+    UIViewController *baseViewController = [UIViewController new];
+    _window.rootViewController = baseViewController;
+    [baseViewController presentViewController:_onboardingView animated:NO completion:nil];
     [_window makeKeyAndVisible];
     [_presenter reroute];
 }
@@ -109,6 +114,7 @@
     [_onboardingView dismissViewControllerAnimated:NO completion:^{
         [WSELF.presenter.moduleDelegate loginModule:WSELF.presenter didLoginUser:nil];
     }];
+
 }
 
 - (void)skipLogin {

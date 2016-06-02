@@ -87,7 +87,7 @@
         }
         [WSELF user].type = THLUserTypeGuest;
         [[WSELF.user saveInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask<NSNumber *> *saveTask) {
-            [_delegate interactor:WSELF didAddFacebookInformation:saveTask.error];
+            [WSELF.delegate interactor:WSELF didAddFacebookInformation:saveTask.error];
             return nil;
         }];
         return nil;
