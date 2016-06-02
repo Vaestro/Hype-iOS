@@ -41,6 +41,7 @@
 #import "THLUserProfileViewController.h"
 #import "SVProgressHUD.h"
 #import "THLPaymentViewController.h"
+#import "THLPerkCollectionViewController.h"
 
 @interface THLGuestFlowWireframe()
 <
@@ -54,7 +55,8 @@ THLEventDetailsViewControllerDelegate,
 THLCheckoutViewControllerDelegate,
 THLPartyInvitationViewControllerDelegate,
 THLUserProfileViewControllerDelegate,
-THLPartyViewControllerDelegate
+THLPartyViewControllerDelegate,
+THLPerkCollectionViewControllerDelegate
 >
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) id currentWireframe;
@@ -100,26 +102,26 @@ THLPartyViewControllerDelegate
 - (void)configureMasterTabViewController:(UITabBarController *)masterTabBarController {
     _masterTabBarController = masterTabBarController;
     
-    UINavigationController *discovery = [UINavigationController new];
-    UINavigationController *dashboard = [UINavigationController new];
- 
-
-    UINavigationController *perks = [UINavigationController new];
-    UINavigationController *profile = [UINavigationController new];
-    
     THLMyEventsViewController *myEventsVC = [[THLMyEventsViewController alloc]initWithClassName:@"GuestlistInvite"];
+    UINavigationController *dashboard = [UINavigationController new];
     myEventsVC.delegate = self;
     [dashboard pushViewController:myEventsVC animated:NO];
     
     THLDiscoveryViewController *discoveryVC = [[THLDiscoveryViewController alloc] initWithClassName:@"Event"];
+    UINavigationController *discovery = [UINavigationController new];
+
     discoveryVC.delegate = self;
     [discovery pushViewController:discoveryVC animated:NO];
 
     _userProfileViewController = [THLUserProfileViewController new];
+    UINavigationController *profile = [UINavigationController new];
     _userProfileViewController.delegate = self;
     [profile pushViewController:_userProfileViewController animated:NO];
     
-    [self presentPerkStoreInterfaceInNavigationController:perks];
+    THLPerkCollectionViewController *perkVC = [[THLPerkCollectionViewController alloc] initWithClassName:@"PerkStoreItem"];
+    perkVC.delegate = self;
+    UINavigationController *perks = [UINavigationController new];
+    [perks pushViewController:perkVC animated:NO];
     
     dashboard.tabBarItem.image = [UIImage imageNamed:@"Lists Icon"];
     dashboard.tabBarItem.title = @"My Events";

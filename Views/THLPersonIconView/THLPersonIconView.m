@@ -12,7 +12,6 @@
 #import "UIImageView+Letters.h"
 
 @interface THLPersonIconView()
-@property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UILabel *unregisteredUserTextLabel;
 @end
 

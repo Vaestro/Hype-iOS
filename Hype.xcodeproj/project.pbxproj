@@ -155,6 +155,7 @@
 		798D7EBA1BF2D588001D4593 /* THLUserProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 798D7EB91BF2D588001D4593 /* THLUserProfileTableViewCell.m */; };
 		798D7EBF1BF2E56C001D4593 /* OnboardingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 798D7EBE1BF2E56C001D4593 /* OnboardingViewController.m */; };
 		798D7EC21BF2E5CF001D4593 /* OnboardingContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 798D7EC11BF2E5CF001D4593 /* OnboardingContentViewController.m */; };
+		7996E2051D00D010006FFDDC /* THLPerkCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7996E2041D00D010006FFDDC /* THLPerkCollectionViewController.m */; };
 		799862461C97B6AF004C5326 /* THLTextEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 799862451C97B6AF004C5326 /* THLTextEntryViewController.m */; };
 		79ABA9B71C053ED6001ABAC7 /* THLDashboardNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79ABA9B61C053ED6001ABAC7 /* THLDashboardNotificationCell.m */; };
 		79ABA9BC1C054F42001ABAC7 /* THLDashboardNotificationCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79ABA9BB1C054F42001ABAC7 /* THLDashboardNotificationCellViewModel.m */; };
@@ -624,6 +625,8 @@
 		798D7EC01BF2E5CF001D4593 /* OnboardingContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnboardingContentViewController.h; sourceTree = "<group>"; };
 		798D7EC11BF2E5CF001D4593 /* OnboardingContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnboardingContentViewController.m; sourceTree = "<group>"; };
 		798D7EC31BF2E634001D4593 /* OnboardingContentViewController_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OnboardingContentViewController_Private.h; sourceTree = "<group>"; };
+		7996E2031D00D010006FFDDC /* THLPerkCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkCollectionViewController.h; sourceTree = "<group>"; };
+		7996E2041D00D010006FFDDC /* THLPerkCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPerkCollectionViewController.m; sourceTree = "<group>"; };
 		799862441C97B6AF004C5326 /* THLTextEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLTextEntryViewController.h; sourceTree = "<group>"; };
 		799862451C97B6AF004C5326 /* THLTextEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLTextEntryViewController.m; sourceTree = "<group>"; };
 		79ABA9B51C053ED6001ABAC7 /* THLDashboardNotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLDashboardNotificationCell.h; sourceTree = "<group>"; };
@@ -992,6 +995,8 @@
 				79CE31591CF7B03F00CEA784 /* THLEventTicketViewController.m */,
 				792545B71CFC8DA0004CF29A /* THLPartyViewController.h */,
 				792545B81CFC8DA0004CF29A /* THLPartyViewController.m */,
+				7996E2031D00D010006FFDDC /* THLPerkCollectionViewController.h */,
+				7996E2041D00D010006FFDDC /* THLPerkCollectionViewController.m */,
 				79BB152E1C657FF50044D943 /* THLSingleLineTextField.h */,
 				79B062B81CF8B46800A3DC50 /* THLMyEventsNavigationViewController.h */,
 				79B062B91CF8B46800A3DC50 /* THLMyEventsNavigationViewController.m */,
@@ -3610,6 +3615,7 @@
 				C85EE3791C1BC8AD0008C14B /* THLPerkStoreItemEntity.m in Sources */,
 				C8E1B1651BF4380D00A9824C /* THLUserProfileDataManager.m in Sources */,
 				215A42A81BAA287900D03C35 /* THLFacebookProfilePictureFactory.m in Sources */,
+				7996E2051D00D010006FFDDC /* THLPerkCollectionViewController.m in Sources */,
 				21B9894A1BC05AF500428B6A /* THLGuestlistInvitationViewController.m in Sources */,
 				215A429A1BAA25B000D03C35 /* THLFacebookPicturePresenter.m in Sources */,
 				79B9592C1BE581BB00B87799 /* THLGuestlistReviewInteractor.m in Sources */,

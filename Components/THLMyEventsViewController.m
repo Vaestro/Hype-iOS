@@ -226,14 +226,11 @@
         cell.venueNameLabel.text = object[@"Guestlist"][@"event"][@"location"][@"name"];
         cell.dateLabel.text = invitationDate;
         cell.partyTypeLabel.text = @"EVENT TICKET";
-
+        
         PFFile *imageFile = object[@"Guestlist"][@"event"][@"location"][@"image"];
-        [imageFile getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
-            if (!error) {
-                UIImage *venuePic = [UIImage imageWithData:data];
-                cell.venueImageView.image = venuePic;
-            }
-        }];
+        NSURL *url = [NSURL URLWithString:imageFile.url];
+        [cell.venueImageView sd_setImageWithURL:url];
+        
         return cell;
 
     }

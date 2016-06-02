@@ -18,6 +18,7 @@
  *  Interface for constructing all queries for Parse servers.
  */
 @interface THLParseQueryFactory : NSObject
+
 #pragma mark - Event Queries
 /**
  *  Query for events with at least one promotion.
