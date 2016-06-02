@@ -99,7 +99,11 @@
     
     // mixpanel identify: must be called before
     // people properties can be set
-    [mixpanel identify:self.user.objectId];
+    [mixpanel createAlias:self.user.objectId
+             forDistinctID:mixpanel.distinctId];
+     // You must call identify if you haven't already
+     // (e.g., when your app launches).
+     [mixpanel identify:mixpanel.distinctId];
     
     NSString *userSex;
     if (self.user.sex == THLSexMale) {
