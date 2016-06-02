@@ -92,6 +92,7 @@
 
 - (PFQuery *)queryForCollection {
     PFQuery *query = [super queryForCollection];
+    [query orderByDescending:@"date"];
     [query includeKey:@"location"];
     [query includeKey:@"venue"];
     
