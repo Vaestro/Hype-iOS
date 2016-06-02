@@ -242,7 +242,7 @@
             [_bottomBar setTitle:@"VIEW PARTY"];
             [_bottomBar addTarget:self action:@selector(handleViewParty) forControlEvents:UIControlEventTouchUpInside];
         } else {
-            [_bottomBar setTitle:@"VIEW Admissions"];
+            [_bottomBar setTitle:@"VIEW ADMISSIONS"];
             if ([THLUser currentUser]) {
                 [_bottomBar addTarget:self action:@selector(handleAdmissions) forControlEvents:UIControlEventTouchUpInside];
             } else {

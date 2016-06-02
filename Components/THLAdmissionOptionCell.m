@@ -48,7 +48,7 @@
         _titleLabel = [UILabel new];
         _titleLabel.backgroundColor = kTHLNUIPrimaryBackgroundColor;
         _titleLabel.font = [UIFont fontWithName:@"OpenSans-Light" size:16];
-        _priceLabel.text = [NSString stringWithFormat:@"%@", title];
+        _titleLabel.text = [NSString stringWithFormat:@"%@", title];
         _titleLabel.textColor = [UIColor whiteColor];
         [self.contentView addSubview:_titleLabel];
     }

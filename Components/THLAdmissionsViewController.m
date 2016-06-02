@@ -177,6 +177,7 @@
 - (PFQuery *)queryForCollection {
     PFQuery *query = [super queryForCollection];
     [query whereKey:@"location" equalTo:_event[@"location"]];
+    [query orderByAscending:@"price"];
     return query;
 }
 
@@ -247,6 +248,12 @@
 {
     [Intercom presentConversationList];
 }
+
+//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+////    return return CGSizeMake(192.f, 192.f);
+//}
+
+
 
 #pragma mark - EmptyDataSetDelegate
 
