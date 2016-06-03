@@ -134,6 +134,13 @@
     
 }
 
+//- (BFTask *)fetchCreditsForUser {
+//    THLUser *currentUser = [THLUser currentUser];
+//    return [[currentUser fetchInBackground] continueWithSuccessBlock:^id(BFTask *task) {
+//        return [BFTask taskWithResult:nil];
+//    }];
+//}
+
 #pragma mark - Accessors
 
 - (UILabel *)creditsTitleLabel {
