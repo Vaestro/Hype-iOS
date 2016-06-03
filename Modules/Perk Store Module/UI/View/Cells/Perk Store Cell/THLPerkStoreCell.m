@@ -38,9 +38,24 @@
         make.left.right.insets(kTHLEdgeInsetsHigh());
     }];
     
+    UIView *creditsLabelBackgroundView = [UIView new];
+    creditsLabelBackgroundView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
+    [self addSubview:creditsLabelBackgroundView];
+    creditsLabelBackgroundView.layer.borderColor = kTHLNUIAccentColor.CGColor;
+    creditsLabelBackgroundView.layer.borderWidth = 1.0f;
+    
+    [creditsLabelBackgroundView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.centerY).insets(kTHLEdgeInsetsLow());
+        make.width.equalTo(WSELF.frame.size.width / 2);
+        make.centerX.equalTo(WSELF);
+    }];
+    
+    [creditsLabelBackgroundView addSubview:self.perkCreditsLabel];
+
     [self.perkCreditsLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(WSELF.centerY).insets(kTHLEdgeInsetsNone());
-        make.left.right.insets(kTHLEdgeInsetsHigh());
+        make.right.left.insets(kTHLEdgeInsetsLow());
+        make.top.bottom.insets(kTHLEdgeInsetsNone());
+
     }];
     
     
@@ -81,7 +96,9 @@
         _perkCreditsLabel = THLNUILabel(kTHLNUIDetailTitle);
         _perkCreditsLabel.numberOfLines = 1;
         _perkCreditsLabel.textAlignment = NSTextAlignmentCenter;
-        [self.contentView addSubview:_perkCreditsLabel];
+        _perkCreditsLabel.adjustsFontSizeToFitWidth = YES;
+        _perkCreditsLabel.minimumScaleFactor = 0.5;
+
     }
     return _perkCreditsLabel;
 

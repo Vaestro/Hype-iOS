@@ -14,6 +14,7 @@
 #import "THLParseQueryFactory.h"
 #import "Intercom/intercom.h"
 #import "THLPerkStoreCell.h"
+#import "THLUser.h"
 
 @interface THLPerkCollectionViewController()
 @property (nonatomic, strong) UIBarButtonItem *intercomBarButton;
@@ -85,13 +86,11 @@
         make.top.equalTo(WSELF.creditBalanceLabel.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
         make.left.bottom.right.equalTo(kTHLEdgeInsetsNone());
     }];
-    
-
-    
 }
 
 - (void)objectsWillLoad {
     [super objectsWillLoad];
+    [self refreshCreditsForUser];
 }
 
 - (void)objectsDidLoad:(NSError *)error {
@@ -134,12 +133,13 @@
     
 }
 
-//- (BFTask *)fetchCreditsForUser {
-//    THLUser *currentUser = [THLUser currentUser];
-//    return [[currentUser fetchInBackground] continueWithSuccessBlock:^id(BFTask *task) {
-//        return [BFTask taskWithResult:nil];
-//    }];
-//}
+- (BFTask *)refreshCreditsForUser {
+    THLUser *currentUser = [THLUser currentUser];
+    return [[currentUser fetchInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withSuccessBlock:^id _Nullable(BFTask<__kindof PFObject *> * _Nonnull task) {
+        [self.creditBalanceLabel setText:NSStringWithFormat(@"$%.2f", currentUser.credits)];
+        return [BFTask taskWithResult:nil];
+    }];
+}
 
 #pragma mark - Accessors
 
