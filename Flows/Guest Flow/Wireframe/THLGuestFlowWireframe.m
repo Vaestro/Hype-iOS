@@ -8,22 +8,10 @@
 #import "THLGuestFlowDependencyManager.h"
 
 #import "THLGuestFlowWireframe.h"
-
-#import "THLEventDiscoveryWireframe.h"
-#import "THLDashboardWireframe.h"
-#import "THLUserProfileWireframe.h"
-#import "THLLoginWireframe.h"
-#import "THLEventDetailWireframe.h"
-#import "THLGuestlistInvitationWireframe.h"
-#import "THLGuestlistReviewWireframe.h"
-#import "THLPerkStoreWireframe.h"
 #import "THLPerkDetailWireframe.h"
-#import "UIColor+SLAddition.h"
-#import "THLAppearanceConstants.h"
 #import "THLUser.h"
 #import "Intercom/intercom.h"
 #import "THLMyEventsViewController.h"
-#import <RKSwipeBetweenViewControllers/RKSwipeBetweenViewControllers.h>
 #import "THLEventTicketViewController.h"
 #import "THLMyEventsNavigationViewController.h"
 #import "THLPartyNavigationController.h"
@@ -31,22 +19,19 @@
 #import "THLDiscoveryViewController.h"
 #import "THLCheckoutViewController.h"
 #import "THLPartyInvitationViewController.h"
-#import "THLYapDatabaseManager.h"
 #import "THLDataStore.h"
-#import "THLGuestEntity.h"
-#import "APAddressBook.h"
-#import "THLViewDataSourceFactory.h"
-#import "THLYapDatabaseViewFactory.h"
 #import "THLDependencyManager.h"
 #import "THLUserProfileViewController.h"
-#import "SVProgressHUD.h"
 #import "THLPaymentViewController.h"
 #import "THLPerkCollectionViewController.h"
+
+#import "THLLoginWireframe.h"
+#import "THLGuestEntity.h"
+#import "SVProgressHUD.h"
 
 @interface THLGuestFlowWireframe()
 <
 THLPerkDetailModuleDelegate,
-THLPerkStoreModuleDelegate,
 THLLoginModuleDelegate,
 
 THLMyEventsViewDelegate,
@@ -62,13 +47,9 @@ THLPerkCollectionViewControllerDelegate
 @property (nonatomic, strong) id currentWireframe;
 @property (nonatomic, nonatomic) UIViewController *containerVC;
 @property (nonatomic, strong) UITabBarController *masterTabBarController;
-@property (nonatomic, strong) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
-@property (nonatomic, strong) THLDashboardWireframe *dashboardWireframe;
+
+
 @property (nonatomic, strong) THLUserProfileViewController *userProfileViewController;
-@property (nonatomic, strong) THLEventDetailWireframe  *eventDetailWireframe;
-@property (nonatomic, strong) THLGuestlistInvitationWireframe *guestlistInvitationWireframe;
-@property (nonatomic, strong) THLGuestlistReviewWireframe *guestlistReviewWireframe;
-@property (nonatomic, strong) THLPerkStoreWireframe *perkStoreWireframe;
 @property (nonatomic, strong) THLPerkDetailWireframe *perkDetailWireframe;
 @property (nonatomic, strong) THLLoginWireframe *loginWireframe;
 
@@ -260,7 +241,7 @@ THLPerkCollectionViewControllerDelegate
 
 - (void)presentPaymentViewControllerOn:(UIViewController *)viewController {
     if ([THLUser currentUser].stripeCustomerId) {
-        [SVProgressHUD show];
+        [SVProgressHUD show]; 
         [PFCloud callFunctionInBackground:@"retrievePaymentInfo"
                            withParameters:nil
                                     block:^(NSArray<NSDictionary *> *cardInfo, NSError *cloudError) {
@@ -327,17 +308,10 @@ THLPerkCollectionViewControllerDelegate
     return [self topViewController:presentedViewController];
 }
 
-- (void)presentPerkStoreInterfaceInNavigationController:(UINavigationController *)navigationController {
-    _perkStoreWireframe = [_dependencyManager newPerkStoreWireframe];
-    _currentWireframe = _perkStoreWireframe;
-    [_perkStoreWireframe.moduleInterface setModuleDelegate:self];
-    [_perkStoreWireframe.moduleInterface presentPerkStoreInterfaceInNavigationController:navigationController];
-}
-
-- (void)perkModule:(id<THLPerkStoreModuleInterface>)module userDidSelectPerkStoreItemEntity:(THLPerkStoreItemEntity *)perkStoreItemEntity presentPerkDetailInterfaceOnController:(UIViewController *)controller
-{
-    [self presentPerkDetailInterfaceForPerkStoreItem:perkStoreItemEntity onController:controller];
-}
+//- (void)perkModule:(id<THLPerkStoreModuleInterface>)module userDidSelectPerkStoreItemEntity:(THLPerkStoreItemEntity *)perkStoreItemEntity presentPerkDetailInterfaceOnController:(UIViewController *)controller
+//{
+//    [self presentPerkDetailInterfaceForPerkStoreItem:perkStoreItemEntity onController:controller];
+//}
 
 - (void)presentPerkDetailInterfaceForPerkStoreItem:(THLPerkStoreItemEntity *)perkStoreItemEntity onController:(UIViewController *)controller {
     _perkDetailWireframe = [_dependencyManager newPerkDetailWireframe];
@@ -354,12 +328,6 @@ THLPerkCollectionViewControllerDelegate
 - (void)userNeedsLoginOnViewController:(UIViewController *)viewController
 {
     [self.moduleDelegate logInUserOnViewController:viewController];
-}
-
-#pragma mark - THLPerkStoreModuleDelegate
-- (void)dismissPerkWireframe
-{
-    _perkStoreWireframe = nil;
 }
 
 #pragma mark - THLPerkDetailModuleDelegate
