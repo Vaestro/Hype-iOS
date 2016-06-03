@@ -45,6 +45,7 @@
 #import "THLPaymentViewController.h"
 #import "THLPerkCollectionViewController.h"
 #import "THLPerkDetailViewController.h"
+#import "THLAdmissionsViewController.h"
 
 
 #define ENABLE_WAITLIST
@@ -52,6 +53,7 @@
 @interface THLMasterWireframe()
 <
 THLLoginModuleDelegate,
+THLAdmissionsViewDelegate,
 THLPopupNotificationModuleDelegate,
 THLMyEventsViewDelegate,
 THLDiscoveryViewControllerDelegate,
@@ -180,6 +182,22 @@ THLPerkCollectionViewControllerDelegate
     _masterTabBarController.view.autoresizingMask=(UIViewAutoresizingFlexibleHeight);
 }
 
+
+#pragma mark - AdmissionsOptionViewDelegate
+
+- (void)didSelectAdmissionOption:(PFObject *)admissionOption forEvent:(PFObject *)event {
+    if ([admissionOption[@"type"] integerValue] == 0) {
+        THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:event paymentInfo:nil];
+        checkoutVC.delegate = self;
+        UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:checkoutVC];
+        [[self topViewController] presentViewController:navVC animated:YES completion:nil];
+    } else if ([admissionOption[@"type"] integerValue] == 1) {
+        
+    }
+}
+
+
+
 #pragma mark -
 #pragma mark EventDiscoveryViewController
 #pragma mark Delegate
@@ -214,7 +232,11 @@ THLPerkCollectionViewControllerDelegate
 #pragma mark Delegate
 
 - (void)eventDetailsWantsToPresentAdmissionsForEvent:(PFObject *)event {
-    
+    THLAdmissionsViewController *admissionsVC = [[THLAdmissionsViewController alloc] initWithClassName:@"AdmissionOption"];
+    admissionsVC.delegate = self;
+    admissionsVC.event = event;
+    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:admissionsVC];
+    [[self topViewController] presentViewController:navVC animated:YES completion:nil];
 }
 
 - (void)eventDetailsWantsToPresentCheckoutForEvent:(PFObject *)event paymentInfo:(NSDictionary *)paymentInfo {
