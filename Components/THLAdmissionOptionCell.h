@@ -10,8 +10,8 @@
 #import "PFCollectionViewCell.h"
 
 @interface THLAdmissionOptionCell : PFCollectionViewCell
-@property (nonatomic) NSString *title;
-@property (nonatomic) float price;
+@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UILabel *priceLabel;
 
 + (NSString *)identifier;
 @end

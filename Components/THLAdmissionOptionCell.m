@@ -11,15 +11,13 @@
 
 
 @interface THLAdmissionOptionCell()
-@property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) UILabel *priceLabel;
 @property (nonatomic, strong) UIImageView *iconView;
 @end
 
 
 @implementation THLAdmissionOptionCell
-@synthesize title;
-@synthesize price;
+@synthesize titleLabel = _titleLabel;
+@synthesize priceLabel = _priceLabel;
 
 
 - (void)layoutSubviews
@@ -48,7 +46,6 @@
         _titleLabel = [UILabel new];
         _titleLabel.backgroundColor = kTHLNUIPrimaryBackgroundColor;
         _titleLabel.font = [UIFont fontWithName:@"OpenSans-Light" size:16];
-        _titleLabel.text = [NSString stringWithFormat:@"%@", title];
         _titleLabel.textColor = [UIColor whiteColor];
         [self.contentView addSubview:_titleLabel];
     }
@@ -62,7 +59,6 @@
         _priceLabel = [UILabel new];
         _priceLabel.backgroundColor = kTHLNUIPrimaryBackgroundColor;
         _priceLabel.font = [UIFont fontWithName:@"OpenSans-Light" size:16];
-        _priceLabel.text = [NSString stringWithFormat:@"$ %.2f", price];
         _priceLabel.textColor = [UIColor whiteColor];
         [self.contentView addSubview:_priceLabel];
     }

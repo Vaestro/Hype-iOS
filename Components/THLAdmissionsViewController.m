@@ -177,7 +177,7 @@
 - (PFQuery *)queryForCollection {
     PFQuery *query = [super queryForCollection];
     [query whereKey:@"location" equalTo:_event[@"location"]];
-    [query orderByAscending:@"price"];
+//    [query orderByAscending:@"price"];
     return query;
 }
 
@@ -190,8 +190,8 @@
                                   object:(PFObject *)object
 {
         THLAdmissionOptionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[THLAdmissionOptionCell identifier] forIndexPath:indexPath];
-        cell.title = object[@"name"];
-        cell.price = [object[@"price"] floatValue];
+        cell.titleLabel.text = object[@"name"];
+        cell.priceLabel.text = [NSString stringWithFormat:@"$ %.2f", [object[@"price"] floatValue]];
         return cell;
 }
 
