@@ -196,12 +196,8 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    PFObject *object = [self objectAtIndexPath:indexPath];
-//    [self.delegate didSelectViewEventTicket:object];
-//    if (!(BOOL)object[@"didOpen"]) {
-//        object[@"didOpen"] = @YES;
-//        [object saveInBackground];
-//    }
+    PFObject *admissionOption = [self objectAtIndexPath:indexPath];
+    [self.delegate didSelectAdmissionOption:admissionOption forEvent:_event];
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {

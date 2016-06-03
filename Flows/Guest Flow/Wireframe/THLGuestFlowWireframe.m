@@ -41,7 +41,6 @@
 #import "THLUserProfileViewController.h"
 #import "SVProgressHUD.h"
 #import "THLPaymentViewController.h"
-#import "THLAdmissionsViewController.h"
 
 @interface THLGuestFlowWireframe()
 <
@@ -50,7 +49,6 @@ THLPerkStoreModuleDelegate,
 THLLoginModuleDelegate,
 
 THLMyEventsViewDelegate,
-THLAdmissionsViewDelegate,
 THLDiscoveryViewControllerDelegate,
 THLEventDetailsViewControllerDelegate,
 THLCheckoutViewControllerDelegate,
@@ -171,14 +169,6 @@ THLPartyViewControllerDelegate
 #pragma mark -
 #pragma mark EventDetailsViewController
 #pragma mark Delegate
-
-- (void)eventDetailsWantsToPresentAdmissionsForEvent:(PFObject *)event {
-    THLAdmissionsViewController *admissionsVC = [[THLAdmissionsViewController alloc] initWithClassName:@"AdmissionOption"];
-    admissionsVC.delegate = self;
-    admissionsVC.event = event;
-    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:admissionsVC];
-    [[self topViewController] presentViewController:navVC animated:YES completion:nil];
-}
 
 - (void)eventDetailsWantsToPresentCheckoutForEvent:(PFObject *)event paymentInfo:(NSDictionary *)paymentInfo {
     [self presentCheckoutViewController:event paymentInfo:paymentInfo];

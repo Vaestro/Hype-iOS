@@ -14,7 +14,7 @@
 
 @protocol THLAdmissionsViewDelegate <NSObject>
 - (void)usersWantsToLogin;
-- (void)didSelectAdmissionOption:(PFObject *)AdmissionOption;
+- (void)didSelectAdmissionOption:(PFObject *)admissionOption forEvent:(PFObject *)event;
 @end
 
 
