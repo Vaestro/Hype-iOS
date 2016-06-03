@@ -9,5 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "THLPerkDetailView.h"
 
+@class PFObject;
+
 @interface THLPerkDetailViewController : UIViewController<THLPerkDetailView>
+@property (nonatomic, copy) NSURL *perkStoreItemImage;
+@property (nonatomic, copy) NSString *perkStoreItemName;
+@property (nonatomic, copy) NSString *perkStoreItemDescription;
+@property (nonatomic) int credits;
+@property (nonatomic, strong) RACCommand *dismissCommand;
+@property (nonatomic, strong) RACCommand *purchaseCommand;
+
+- (id)initWithPerk:(PFObject *)perk;
+
+-(void)showConfirmationView;
+
 @end

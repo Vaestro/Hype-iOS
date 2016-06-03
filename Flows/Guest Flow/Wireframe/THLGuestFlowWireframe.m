@@ -8,7 +8,6 @@
 #import "THLGuestFlowDependencyManager.h"
 
 #import "THLGuestFlowWireframe.h"
-#import "THLPerkDetailWireframe.h"
 #import "THLUser.h"
 #import "Intercom/intercom.h"
 #import "THLMyEventsViewController.h"
@@ -28,10 +27,10 @@
 #import "THLLoginWireframe.h"
 #import "THLGuestEntity.h"
 #import "SVProgressHUD.h"
+#import "THLPerkDetailViewController.h"
 
 @interface THLGuestFlowWireframe()
 <
-THLPerkDetailModuleDelegate,
 THLLoginModuleDelegate,
 
 THLMyEventsViewDelegate,
@@ -50,7 +49,8 @@ THLPerkCollectionViewControllerDelegate
 
 
 @property (nonatomic, strong) THLUserProfileViewController *userProfileViewController;
-@property (nonatomic, strong) THLPerkDetailWireframe *perkDetailWireframe;
+@property (nonatomic, strong) THLPerkCollectionViewController *perkCollectionViewController;
+
 @property (nonatomic, strong) THLLoginWireframe *loginWireframe;
 
 @property (nonatomic, strong) UIView *discoveryNavBarItem;
@@ -99,10 +99,10 @@ THLPerkCollectionViewControllerDelegate
     _userProfileViewController.delegate = self;
     [profile pushViewController:_userProfileViewController animated:NO];
     
-    THLPerkCollectionViewController *perkVC = [[THLPerkCollectionViewController alloc] initWithClassName:@"PerkStoreItem"];
-    perkVC.delegate = self;
+    _perkCollectionViewController = [[THLPerkCollectionViewController alloc] initWithClassName:@"PerkStoreItem"];
+    _perkCollectionViewController.delegate = self;
     UINavigationController *perks = [UINavigationController new];
-    [perks pushViewController:perkVC animated:NO];
+    [perks pushViewController:_perkCollectionViewController animated:NO];
     
     dashboard.tabBarItem.image = [UIImage imageNamed:@"Lists Icon"];
     dashboard.tabBarItem.title = @"My Events";
@@ -219,9 +219,27 @@ THLPerkCollectionViewControllerDelegate
     [self presentCheckoutViewController:event paymentInfo:paymentInfo];
 }
 
+#pragma mark -
+#pragma mark PerkCollectionViewController
+#pragma mark Delegate
+
+- (void)perkStoreViewControllerWantsToPresentDetailsFor:(PFObject *)perk {
+    THLPerkDetailViewController *perkDetailViewController = [[THLPerkDetailViewController alloc] initWithPerk:perk];
+    perkDetailViewController.hidesBottomBarWhenPushed = YES;
+    [_perkCollectionViewController.navigationController pushViewController:perkDetailViewController animated:YES];
+}
+
+#pragma mark -
+#pragma mark LoginViewController
+#pragma mark Delegate
+
 - (void)usersWantsToLogin {
     [self.moduleDelegate logInUserOnViewController:[self topViewController]];
 }
+
+#pragma mark -
+#pragma mark View Controller Presenter
+#pragma mark Delegate
 
 - (void)presentPartyNavigationController:(PFObject *)invite {
     UINavigationController *partyNavVC = [UINavigationController new];
@@ -250,12 +268,15 @@ THLPerkCollectionViewControllerDelegate
                                             
                                         } else {
                                             THLPaymentViewController *paymentView = [[THLPaymentViewController alloc]initWithPaymentInfo:cardInfo];
+                                            paymentView.hidesBottomBarWhenPushed = YES;
+
                                             [viewController.navigationController pushViewController:paymentView animated:YES];
                                         }
                                     }];
     } else {
         NSArray<NSDictionary *> *emptyCardInfoSet = [[NSArray alloc]init];
         THLPaymentViewController *paymentView = [[THLPaymentViewController alloc]initWithPaymentInfo:emptyCardInfoSet];
+        paymentView.hidesBottomBarWhenPushed = YES;
         [viewController.navigationController pushViewController:paymentView animated:YES];
     }
 }
@@ -308,36 +329,9 @@ THLPerkCollectionViewControllerDelegate
     return [self topViewController:presentedViewController];
 }
 
-//- (void)perkModule:(id<THLPerkStoreModuleInterface>)module userDidSelectPerkStoreItemEntity:(THLPerkStoreItemEntity *)perkStoreItemEntity presentPerkDetailInterfaceOnController:(UIViewController *)controller
-//{
-//    [self presentPerkDetailInterfaceForPerkStoreItem:perkStoreItemEntity onController:controller];
-//}
-
-- (void)presentPerkDetailInterfaceForPerkStoreItem:(THLPerkStoreItemEntity *)perkStoreItemEntity onController:(UIViewController *)controller {
-    _perkDetailWireframe = [_dependencyManager newPerkDetailWireframe];
-    _currentWireframe = _perkDetailWireframe;
-    [_perkDetailWireframe.moduleInterface setModuleDelegate:self];
-    [_perkDetailWireframe.moduleInterface presentPerkDetailInterfaceForPerk:perkStoreItemEntity onViewController:controller];
-}
-
 - (void)messageButtonPressed
 {
     [Intercom presentMessageComposer];
 }
 
-- (void)userNeedsLoginOnViewController:(UIViewController *)viewController
-{
-    [self.moduleDelegate logInUserOnViewController:viewController];
-}
-
-#pragma mark - THLPerkDetailModuleDelegate
-- (void)dismissPerkDetailWireframe
-{
-    _perkDetailWireframe = nil;
-}
-
-- (void)dealloc
-{
-    NSLog(@"Destroyed %@", self);
-}
 @end

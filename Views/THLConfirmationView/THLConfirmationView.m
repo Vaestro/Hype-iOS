@@ -228,13 +228,14 @@ static CGFloat const kTHLConfirmationViewButtonHeight = 50;
 }
 
 - (void)layoutSuccessView {
-    _dismissButton.hidden = NO;
 
     [UIView animateWithDuration:0.1
                      animations:^{
                          _activityView.frame = CGRectZero;
                      } completion:^(BOOL finished) {
                          _activityView.hidden = YES;
+                         _dismissButton.hidden = NO;
+
                      }];
     
     [_activityView stopAnimating];
@@ -255,12 +256,17 @@ static CGFloat const kTHLConfirmationViewButtonHeight = 50;
     RAC(_titleLabel, text) = RACObserve(self, confirmationTitle);
     RAC(_messageLabel, text) = RACObserve(self, confirmationMessage);
 
-    [RACObserve(WSELF, declineButtonText) subscribeNext:^(id _) {
-        [_declineButton setTitle:_declineButtonText forState:UIControlStateNormal];
+    [RACObserve(self, declineButtonText) subscribeNext:^(id _) {
+        [WSELF.declineButton setTitle:_declineButtonText forState:UIControlStateNormal];
     }];
     
-    [RACObserve(WSELF, acceptButtonText) subscribeNext:^(id _) {
-        [_acceptButton setTitle:_acceptButtonText forState:UIControlStateNormal];
+    [RACObserve(self, confirmationMessage) subscribeNext:^(NSString *text) {
+        [WSELF.messageLabel setText:text];
+    }];
+    
+    
+    [RACObserve(self, acceptButtonText) subscribeNext:^(id _) {
+        [WSELF.acceptButton setTitle:_acceptButtonText forState:UIControlStateNormal];
     }];
     
     RAC(self.acceptButton, rac_command) = RACObserve(WSELF, acceptCommand);

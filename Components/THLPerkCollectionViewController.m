@@ -39,6 +39,10 @@
 
 #pragma mark -
 #pragma mark UIViewController
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self refreshCreditsForUser];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -90,7 +94,6 @@
 
 - (void)objectsWillLoad {
     [super objectsWillLoad];
-    [self refreshCreditsForUser];
 }
 
 - (void)objectsDidLoad:(NSError *)error {
@@ -140,6 +143,12 @@
         return [BFTask taskWithResult:nil];
     }];
 }
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    PFObject *object = [self objectAtIndexPath:indexPath];
+    [self.delegate perkStoreViewControllerWantsToPresentDetailsFor:object];
+}
+
 
 #pragma mark - Accessors
 
