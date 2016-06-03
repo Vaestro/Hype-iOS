@@ -127,7 +127,7 @@
     [super viewWillLayoutSubviews];
     
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
-    layout.itemSize = CGSizeMake(ViewWidth(self.collectionView) - 25, 125);
+    layout.itemSize = CGSizeMake(ViewWidth(self.collectionView) - 25, 50);
 }
 
 - (void)objectsWillLoad {
@@ -198,10 +198,10 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     PFObject *object = [self objectAtIndexPath:indexPath];
 //    [self.delegate didSelectViewEventTicket:object];
-    if (!(BOOL)object[@"didOpen"]) {
-        object[@"didOpen"] = @YES;
-        [object saveInBackground];
-    }
+//    if (!(BOOL)object[@"didOpen"]) {
+//        object[@"didOpen"] = @YES;
+//        [object saveInBackground];
+//    }
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
