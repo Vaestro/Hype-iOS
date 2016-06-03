@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "THLPerkStoreCellView.h"
+#import "PFCollectionViewCell.h"
 
-@interface THLPerkStoreCell : UICollectionViewCell <THLPerkStoreCellView>
+@interface THLPerkStoreCell : PFCollectionViewCell
+@property (nonatomic, strong) UIImageView *perkImageView;
+@property (nonatomic, strong) UILabel *perkTitleLabel;
+@property (nonatomic, strong) UILabel *perkCreditsLabel;
+@property (nonatomic, strong) UILabel *perkDescriptionLabel;
 + (NSString *)identifier;
 @end

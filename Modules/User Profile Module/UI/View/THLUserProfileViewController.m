@@ -290,6 +290,7 @@ STPPaymentCardTextFieldDelegate
     invitationCodeEntryView.navigationController.navigationBar.shadowImage = [UIImage new];
     invitationCodeEntryView.navigationController.navigationBar.translucent = YES;
     invitationCodeEntryView.navigationController.view.backgroundColor = [UIColor clearColor];
+    invitationCodeEntryView.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:invitationCodeEntryView animated:YES];
 }
 
@@ -309,12 +310,12 @@ STPPaymentCardTextFieldDelegate
 
 - (void) presentModalInformationWithText:(NSString *)text andTitle:(NSString *)title
 {
-    UINavigationController *navVC= [[UINavigationController alloc] initWithRootViewController:self.infoVC];
-    _infoVC.displayText = text;
-    _infoVC.title = title;
-    [self presentViewController:navVC animated:YES completion:nil];
+    self.infoVC.displayText = text;
+    self.infoVC.title = title;
+    self.infoVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:self.infoVC animated:YES];
 }
-    
+
 
 #pragma mark MSMailMessage
 -(void)showMailView {

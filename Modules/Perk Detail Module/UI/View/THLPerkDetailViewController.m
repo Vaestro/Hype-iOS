@@ -11,175 +11,269 @@
 #import "THLAppearanceConstants.h"
 #import "UIView+DimView.h"
 #import "THLActionBarButton.h"
+#import "Parse.h"
+#import "THLConfirmationView.h"
+#import "Intercom/intercom.h"
+#import "THLUser.h"
+#import "THLPerkStoreItem.h"
 
 @interface THLPerkDetailViewController()
 @property (nonatomic, strong) ORStackScrollView *scrollView;
-@property (nonatomic, strong) UITextView *infoText;
-@property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) UILabel *perkDescriptionLabel;
+@property (nonatomic, strong) UIImageView *perkImageView;
 @property (nonatomic, strong) UILabel *itemNameLabel;
 @property (nonatomic, strong) UILabel *itemCreditsLabel;
 @property (nonatomic, strong) UIBarButtonItem *dismissButton;
-@property (nonatomic, strong) THLActionBarButton *barButton;
+@property (nonatomic, strong) THLActionBarButton *purchaseButton;
+@property (nonatomic, strong) THLConfirmationView *confirmationView;
+
+@property (nonatomic, strong) PFObject *perk;
+@property (nonatomic) float userCredits;
+
 
 @end
 
 
 @implementation THLPerkDetailViewController
-@synthesize perkStoreItemImage;
-@synthesize perkStoreItemDescription;
-@synthesize perkStoreItemName = _perkStoreItemName;
-@synthesize credits;
-//@synthesize viewAppeared;
-@synthesize dismissCommand = _dismissCommand;
-@synthesize purchaseCommand = _purchaseCommand;
+- (id)initWithPerk:(PFObject *)perk {
+    self = [super initWithNibName:nil bundle:nil];
+    if (self) {
+        _perk = perk;
+
+    }
+    return self;
+}
 
 #pragma mark VC Lifecycle
-- (void)showConfirmationView:(UIView *)confirmationView {
-    [self.navigationController.view addSubview:confirmationView];
-    [confirmationView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.insets(kTHLEdgeInsetsNone());
-    }];
-    [self.parentViewController.view bringSubviewToFront:confirmationView];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self constructView];
-    [self layoutView];
-    [self configureBindings];
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-}
 
-- (void)constructView {
-    _scrollView = [self newScrollView];
-    _imageView = [self newImageView];
-    _dismissButton = [self newDismissButton];
-    _itemNameLabel = [self newItemNameLabel];
-    _itemCreditsLabel = [self newCreditsNameLabel];
-    _infoText = [self newTextView];
-    _barButton = [self newBarButton];
-}
-
-- (void)layoutView {
-    [self.view addSubviews:@[_scrollView, _imageView, _itemNameLabel, _itemCreditsLabel, _barButton]];
-    
     self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
     self.navigationItem.leftBarButtonItem = _dismissButton;
     self.navigationItem.title = [_perkStoreItemName uppercaseString];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
     WEAKSELF();
-    [_imageView makeConstraints:^(MASConstraintMaker *make) {
+    [self.perkImageView makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.insets(kTHLEdgeInsetsNone());
         make.height.equalTo(SCREEN_HEIGHT * 0.33);
     }];
     
-    [_itemNameLabel makeConstraints:^(MASConstraintMaker *make) {
+    [self.itemNameLabel makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(SV([WSELF itemNameLabel]).mas_centerX).insets(kTHLEdgeInsetsHigh());
-        make.bottom.left.equalTo([WSELF imageView]).insets(kTHLEdgeInsetsHigh());
+        make.bottom.left.equalTo([WSELF perkImageView]).insets(kTHLEdgeInsetsHigh());
     }];
     
-    [_itemCreditsLabel makeConstraints:^(MASConstraintMaker *make) {
+    [self.itemCreditsLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo([WSELF itemNameLabel].mas_right).insets(kTHLEdgeInsetsHigh());
-        make.bottom.right.equalTo([WSELF imageView]).insets(kTHLEdgeInsetsHigh());
+        make.bottom.right.equalTo([WSELF perkImageView]).insets(kTHLEdgeInsetsHigh());
     }];
     
-    [_scrollView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF imageView].mas_bottom);
+    [self.scrollView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo([WSELF perkImageView].mas_bottom);
         make.right.left.insets(kTHLEdgeInsetsNone());
     }];
     
-    [_scrollView.stackView addSubview:_infoText
+    [self.scrollView.stackView addSubview:self.perkDescriptionLabel
                   withPrecedingMargin:kTHLPaddingHigh()
                            sideMargin:kTHLPaddingHigh()];
     
-    [_barButton makeConstraints:^(MASConstraintMaker *make) {
+    [self.purchaseButton makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF scrollView].mas_bottom);
         make.left.right.bottom.insets(kTHLEdgeInsetsNone());
     }];
     
 }
 
-- (void)configureBindings {
+
+- (void)showRedeeemPerkFlow {
     WEAKSELF();
-    RAC(self.dismissButton, rac_command) = RACObserve(self, dismissCommand);
-    
-    [[RACObserve(self, perkStoreItemImage) filter:^BOOL(NSURL *url) {
-        return [url isValid];
-    }] subscribeNext:^(NSURL *url) {
-        [WSELF.imageView sd_setImageWithURL:url];
+    _confirmationView = [THLConfirmationView new];
+    RACCommand *acceptCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [[self purchasePerkStoreItem] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+            [WSELF didPurchasePerk];
+            return nil;
+        }];
+        [WSELF.confirmationView setInProgressWithMessage:@"Redeeming your reward..."];
+        return [RACSignal empty];
     }];
-    
-    RAC(self.itemNameLabel, text) = RACObserve(self, perkStoreItemName);
-    
-    RAC(self.infoText, text) = RACObserve(self, perkStoreItemDescription);
-    
-    RAC(self.barButton, rac_command) = RACObserve(self, purchaseCommand);
-    
-    [[RACObserve(self, credits) map:^id(id creditsInt) {
-        return [NSString stringWithFormat:@"%@.00", creditsInt];
-    }] subscribeNext:^(NSString *convertedCredit) {
-        [WSELF.itemCreditsLabel setText:convertedCredit];
+
+    RACCommand *declineCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [WSELF.confirmationView dismiss];
+        return [RACSignal empty];
     }];
+
+    RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        return [RACSignal empty];
+    }];
+
+    THLPerkStoreItem *perk = (THLPerkStoreItem *)_perk;
+
+    [_confirmationView setAcceptButtonText:@"Yes"];
+    [_confirmationView setDeclineButtonText:@"No"];
+    [_confirmationView setAcceptCommand:acceptCommand];
+    [_confirmationView setDeclineCommand:declineCommand];
+    [_confirmationView setDismissCommand:dismissCommand];
+    [_confirmationView setConfirmationWithTitle:@"Redeem Reward"
+                                        message:[NSString stringWithFormat:@"Are you sure you want to use your credits to pucharse this reward for %i.00 ?", perk.credits]];
+    
+    _userCredits = [THLUser currentUser].credits;
+    
+    _userCredits >= perk.credits ? [self showConfirmationView] : [self errorWithPurchase];
+}
+
+
+- (void)errorWithPurchase {
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Ok"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:nil];
+    
+    NSString *message = NSStringWithFormat(@"You dont have enough credits to redeem this reward");
+    
+    [self showAlertViewWithMessage:message withAction:[[NSArray alloc] initWithObjects:cancelAction, nil]];
+    
+}
+
+- (void)showConfirmationView {
+    [self.navigationController.view addSubview:_confirmationView];
+    [_confirmationView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.bottom.insets(kTHLEdgeInsetsNone());
+    }];
+    [self.parentViewController.view bringSubviewToFront:_confirmationView];
+}
+
+- (void)showAlertViewWithMessage:(NSString *)message withAction:(NSArray<UIAlertAction *>*)actions {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    for(UIAlertAction *action in actions) {
+        [alert addAction:action];
+    }
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)didPurchasePerk {
+    NSDate *currDate = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSS'Z'"];
+    NSString *dateString = [dateFormatter stringFromDate:currDate];
+    
+    [Intercom logEventWithName:@"store_purchase" metaData: @{
+                                                             @"order_date": dateString,
+                                                             @"perk_store_item": _perk[@"name"]
+                                                             }];
+    THLPerkStoreItem *perk = (THLPerkStoreItem *)_perk;
+
+    [self.confirmationView setSuccessWithTitle:@"Perk Redeemed"
+                                       Message:[NSString stringWithFormat:@"You have successfully redeemed your credits for %i. Check your email for further instructions.", perk.credits]];
+}
+
+- (BFTask *)purchasePerkStoreItem {
+    
+    BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
+    THLPerkStoreItem *perk = (THLPerkStoreItem *)_perk;
+
+    [PFCloud callFunctionInBackground:@"purchasePerkStoreItem"
+                       withParameters:@{@"perkStoreItemId" : perk.objectId,
+                                        @"perkStoreItemCost" : [[NSNumber alloc] initWithFloat:perk.credits],
+                                        @"perkStoreItemName" : perk.name,
+                                        @"userEmail" : [THLUser currentUser].email,
+                                        @"userName" : [THLUser currentUser].fullName
+                                        }
+                                block:^(id object, NSError *error) {
+                                    if (!error){
+                                        [completionSource setResult:nil];
+                                    } else {
+                                        [completionSource setError:error];
+                                    }}];
+    
+    return completionSource.task;
 }
 
 #pragma mark - Constructors
 
-- (THLActionBarButton *)newBarButton {
-    THLActionBarButton *barButton = [THLActionBarButton new];
-    barButton.backgroundColor = kTHLNUIAccentColor;
-    [barButton.morphingLabel setTextWithoutMorphing:NSLocalizedString(@"REDEEM CREDITS", nil)];
-    return barButton;
+- (THLActionBarButton *)purchaseButton {
+    if (!_purchaseButton) {
+        _purchaseButton = [THLActionBarButton new];
+        _purchaseButton.backgroundColor = kTHLNUIAccentColor;
+        [_purchaseButton.morphingLabel setTextWithoutMorphing:NSLocalizedString(@"REDEEM CREDITS", nil)];
+        [_purchaseButton addTarget:self action:@selector(showRedeeemPerkFlow) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_purchaseButton];
+    }
+    return _purchaseButton;
 }
 
-- (ORStackScrollView *)newScrollView {
-    ORStackScrollView *scrollView = [ORStackScrollView new];
-    scrollView.stackView.lastMarginHeight = kTHLPaddingHigh();
-    scrollView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
-    return scrollView;
+- (ORStackScrollView *)scrollView {
+    if (!_scrollView) {
+        _scrollView = [ORStackScrollView new];
+        _scrollView.stackView.lastMarginHeight = kTHLPaddingHigh();
+        _scrollView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
+        [self.view addSubview:_scrollView];
+    }
+
+    return _scrollView;
 }
 
-- (UIImageView *)newImageView {
-    UIImageView *imageView = [UIImageView new];
-    imageView.contentMode = UIViewContentModeScaleAspectFill;
-    imageView.clipsToBounds = YES;
-    [imageView dimView];
-    return imageView;
+- (UIImageView *)perkImageView {
+    if (!_perkImageView) {
+        _perkImageView = [UIImageView new];
+        _perkImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _perkImageView.clipsToBounds = YES;
+        [_perkImageView dimView];
+        PFFile *imageFile = _perk[@"image"];
+        NSURL *url = [NSURL URLWithString:imageFile.url];
+        [self.perkImageView sd_setImageWithURL:url];
+        
+        [self.view addSubview:_perkImageView];
+    }
+
+    return _perkImageView;
 }
 
-- (UIBarButtonItem *)newDismissButton {
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Back Button"] style:UIBarButtonItemStylePlain target:nil action:NULL];
-    [barButtonItem setTintColor:[UIColor whiteColor]];
-    return barButtonItem;
+- (UILabel *)itemNameLabel {
+    if (!_itemNameLabel) {
+        _itemNameLabel = THLNUILabel(kTHLNUIBoldTitle);
+        _itemNameLabel.adjustsFontSizeToFitWidth = YES;
+        _itemNameLabel.numberOfLines = 2;
+        _itemNameLabel.minimumScaleFactor = 0.5;
+        _itemNameLabel.textAlignment = NSTextAlignmentLeft;
+        _itemNameLabel.text = _perk[@"name"];
+        [self.view addSubview:_itemNameLabel];
+    }
+
+    return _itemNameLabel;
 }
 
-- (UILabel *)newItemNameLabel {
-    UILabel *label = THLNUILabel(kTHLNUIBoldTitle);
-    label.adjustsFontSizeToFitWidth = YES;
-    label.numberOfLines = 2;
-    label.minimumScaleFactor = 0.5;
-    label.textAlignment = NSTextAlignmentLeft;
-    return label;
+- (UILabel *)itemCreditsLabel {
+    if (!_itemCreditsLabel) {
+        _itemCreditsLabel = THLNUILabel(kTHLNUIBoldTitle);
+        _itemCreditsLabel.adjustsFontSizeToFitWidth = NO;
+        _itemCreditsLabel.numberOfLines = 1;
+        _itemCreditsLabel.minimumScaleFactor = 0.5;
+        _itemCreditsLabel.textColor = kTHLNUIGrayFontColor;
+        _itemCreditsLabel.textAlignment = NSTextAlignmentRight;
+        
+        _itemCreditsLabel.text = [NSString stringWithFormat:@"%@.00", _perk[@"credits"]];
+
+        [self.view addSubview:_itemCreditsLabel];
+    }
+    return _itemCreditsLabel;
 }
 
-- (UILabel *)newCreditsNameLabel {
-    UILabel *label = THLNUILabel(kTHLNUIBoldTitle);
-    label.adjustsFontSizeToFitWidth = NO;
-    label.numberOfLines = 1;
-    label.minimumScaleFactor = 0.5;
-    label.textColor = kTHLNUIGrayFontColor;
-    label.textAlignment = NSTextAlignmentRight;
-    return label;
-}
+- (UILabel *)perkDescriptionLabel {
+    if (!_perkDescriptionLabel) {
+        _perkDescriptionLabel = THLNUILabel(kTHLNUIDetailTitle);
+        [_perkDescriptionLabel setTextAlignment:NSTextAlignmentLeft];
+        _perkDescriptionLabel.text = _perk[@"info"];
 
-- (UITextView *)newTextView {
-    UITextView *textView = THLNUITextView(kTHLNUIDetailTitle);
-    [textView setScrollEnabled:NO];
-    [textView setEditable:NO];
-    [textView setSelectable:NO];
-    [textView setClipsToBounds:YES];
-    [textView setTextAlignment:NSTextAlignmentLeft];
-    return textView;
+        [self.view addSubview:_perkDescriptionLabel];
+    }
+
+    return _perkDescriptionLabel;
 }
 
 @end

@@ -24,14 +24,11 @@
 {
     WEAKSELF();
     [_titlesView makeConstraints:^(MASConstraintMaker *make) {
-        make.center.centerOffset(CGPointZero);
-        make.top.left.greaterThanOrEqualTo(SV(WSELF.titlesView)).insets(kTHLEdgeInsetsHigh());
-        make.bottom.right.lessThanOrEqualTo(SV(WSELF.titlesView)).insets(kTHLEdgeInsetsHigh());
+        make.center.equalTo(0);
     }];
     
     [_venueImageView makeConstraints:^(MASConstraintMaker *make) {
-        make.center.centerOffset(CGPointZero);
-        make.top.left.right.bottom.insets(UIEdgeInsetsZero);
+        make.edges.equalTo(WSELF);
     }];
     
     [self.contentView bringSubviewToFront:_titlesView];

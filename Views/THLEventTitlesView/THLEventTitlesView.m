@@ -36,16 +36,17 @@ static CGFloat const kTHLEventTitlesViewSeparatorViewHeight = 0.5;
 }
 
 - (void)layoutView {
-    [self addSubviews:@[_titleLabel,
-                        _dateLabel,
+    [self addSubviews:@[_locationNameLabel,
+                        _titleLabel,
                         _locationNeighborhoodLabel,
-                        _locationNameLabel
+                        _dateLabel
                         ]
      ];
     
     [_locationNameLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.insets(kTHLEdgeInsetsNone());
     }];
+    
     WEAKSELF();
     [_titleLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.insets(kTHLEdgeInsetsNone());
@@ -54,12 +55,13 @@ static CGFloat const kTHLEventTitlesViewSeparatorViewHeight = 0.5;
     
     [_locationNeighborhoodLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.insets(kTHLEdgeInsetsNone());
-        make.top.equalTo([WSELF titleLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.top.equalTo([WSELF titleLabel].mas_baseline).insets(kTHLEdgeInsetsLow());
     }];
     
     [_dateLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.insets(kTHLEdgeInsetsNone());
         make.top.equalTo([WSELF locationNeighborhoodLabel].mas_baseline).insets(kTHLEdgeInsetsLow());
+        make.left.right.bottom.insets(kTHLEdgeInsetsNone());
+
     }];
 }
 

@@ -11,119 +11,97 @@
 #import "THLAppearanceConstants.h"
 
 @interface THLPerkStoreCell()
-@property (nonatomic, strong) UIImageView *imageView;
-@property (nonatomic, strong) UILabel *perkTitleLabel;
-@property (nonatomic, strong) UILabel *perkCreditsLabel;
-@property (nonatomic, strong) UILabel *perkDescriptionLabel;
+
 @end
 
 
 @implementation THLPerkStoreCell
-@synthesize name;
-@synthesize info;
-@synthesize image;
-@synthesize credits;
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        [self constructView];
         [self layoutView];
-        [self bindView];
     }
     return self;
 }
 
-- (void)constructView {
-    _imageView = [self newImageView];
-    _perkTitleLabel = [self newPerkTitleLabel];
-    _perkCreditsLabel = [self newPerkCreditsLabel];
-    _perkDescriptionLabel = [self newPerkDescriptionLabel];
-    
-}
 
 - (void)layoutView {
     
-    [self.contentView addSubviews:@[_imageView,
-                                    _perkTitleLabel,
-                                    _perkCreditsLabel,
-                                    _perkDescriptionLabel]];
-    
     WEAKSELF();
-    [_imageView makeConstraints:^(MASConstraintMaker *make) {
+    [self.perkImageView makeConstraints:^(MASConstraintMaker *make) {
         make.center.centerOffset(CGPointZero);
-        make.top.left.right.left.insets(kTHLEdgeInsetsNone());
+        make.edges.equalTo(WSELF);
     }];
     
-    [_perkTitleLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.centerY.equalTo(0);
+    [self.perkTitleLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(WSELF.centerY).insets(kTHLEdgeInsetsNone());
         make.left.right.insets(kTHLEdgeInsetsHigh());
-        
     }];
     
-    [_perkCreditsLabel makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.insets(kTHLEdgeInsetsLow());
-        make.top.right.lessThanOrEqualTo(SV(WSELF.imageView)).insets(kTHLEdgeInsetsHigh());
+    UIView *creditsLabelBackgroundView = [UIView new];
+    creditsLabelBackgroundView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
+    [self addSubview:creditsLabelBackgroundView];
+    creditsLabelBackgroundView.layer.borderColor = kTHLNUIAccentColor.CGColor;
+    creditsLabelBackgroundView.layer.borderWidth = 1.0f;
+    
+    [creditsLabelBackgroundView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.centerY).insets(kTHLEdgeInsetsLow());
+        make.width.equalTo(WSELF.frame.size.width / 2);
+        make.centerX.equalTo(WSELF);
+    }];
+    
+    [creditsLabelBackgroundView addSubview:self.perkCreditsLabel];
+
+    [self.perkCreditsLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.right.left.insets(kTHLEdgeInsetsLow());
+        make.top.bottom.insets(kTHLEdgeInsetsNone());
+
     }];
     
     
 }
-
-- (void)bindView {
-    RAC(self.perkTitleLabel, text) = RACObserve(self, name);
-    RAC(self.perkDescriptionLabel, text) = RACObserve(self, info);
-        
-    WEAKSELF();
-    [[RACObserve(self, credits) map:^id(id creditsInt) {
-        return [NSString stringWithFormat:@"%@.00", creditsInt];
-    }] subscribeNext:^(NSString *convertedCredit) {
-        [WSELF.perkCreditsLabel setText:convertedCredit];
-    }];
-    
-    
-    [[RACObserve(self, image) filter:^BOOL(NSURL *url) {
-        return [url isValid];
-    }] subscribeNext:^(NSURL *url) {
-        [WSELF.imageView sd_setImageWithURL:url];
-    }];
-}
-
 
 #pragma mark - Constructors
 
-- (UIImageView *)newImageView {
-    UIImageView *imageView = [UIImageView new];
-    imageView.contentMode = UIViewContentModeScaleAspectFill;
-    imageView.clipsToBounds = YES;
-    imageView.layer.cornerRadius = 5;
-    imageView.layer.masksToBounds = YES;
-    [imageView dimView];
-    return imageView;
+- (UIImageView *)perkImageView {
+    if (!_perkImageView) {
+        _perkImageView = [UIImageView new];
+        _perkImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _perkImageView.clipsToBounds = YES;
+        _perkImageView.layer.cornerRadius = 5;
+        _perkImageView.layer.masksToBounds = YES;
+        [_perkImageView dimView];
+        [self.contentView addSubview:_perkImageView];
+    }
+
+    return _perkImageView;
 }
 
-- (UILabel *)newPerkTitleLabel {
-    UILabel *label = THLNUILabel(kTHLNUIDetailBoldTitle);
-    label.adjustsFontSizeToFitWidth = YES;
-    label.numberOfLines = 2;
-    label.minimumScaleFactor = 0.5;
-    label.textAlignment = NSTextAlignmentCenter;
-    return label;
+- (UILabel *)perkTitleLabel {
+    if (!_perkTitleLabel) {
+        _perkTitleLabel = THLNUILabel(kTHLNUIDetailBoldTitle);
+        _perkTitleLabel.adjustsFontSizeToFitWidth = YES;
+        _perkTitleLabel.numberOfLines = 2;
+        _perkTitleLabel.minimumScaleFactor = 0.5;
+        _perkTitleLabel.textAlignment = NSTextAlignmentCenter;
+        [self.contentView addSubview:_perkTitleLabel];
+    }
+    
+    return _perkTitleLabel;
+  
 }
 
+- (UILabel *)perkCreditsLabel {
+    if (!_perkCreditsLabel) {
+        _perkCreditsLabel = THLNUILabel(kTHLNUIDetailTitle);
+        _perkCreditsLabel.numberOfLines = 1;
+        _perkCreditsLabel.textAlignment = NSTextAlignmentCenter;
+        _perkCreditsLabel.adjustsFontSizeToFitWidth = YES;
+        _perkCreditsLabel.minimumScaleFactor = 0.5;
 
-- (UILabel *)newPerkDescriptionLabel {
-    UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
-    label.lineBreakMode = NSLineBreakByWordWrapping;
-    label.numberOfLines = 3;
-    label.textAlignment = NSTextAlignmentCenter;
-    return label;
-}
+    }
+    return _perkCreditsLabel;
 
-- (UILabel *)newPerkCreditsLabel {
-    UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
-    label.lineBreakMode = NSLineBreakByWordWrapping;
-    label.numberOfLines = 3;
-    label.textAlignment = NSTextAlignmentRight;
-    return label;
 }
 
 + (NSString *)identifier {

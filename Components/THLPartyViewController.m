@@ -73,13 +73,19 @@ static CGFloat const CELL_SPACING = 10;
     layout.itemSize = CGSizeMake(width, width + 10);
     
     WEAKSELF();
+    [self.collectionView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.equalTo(UIEdgeInsetsZero);
+    }];
+    
     if (_usersInvite.response == THLStatusAccepted) {
         [self.inviteFriendsButton makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(WSELF.collectionView.mas_bottom);
             make.bottom.left.right.equalTo(WSELF.view).insets(kTHLEdgeInsetsHigh());
             make.height.equalTo(60);
         }];
     } else {
         [self.checkoutButton makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(WSELF.collectionView.mas_bottom);
             make.bottom.left.right.equalTo(WSELF.view).insets(kTHLEdgeInsetsHigh());
             make.height.equalTo(60);
         }];
@@ -145,13 +151,9 @@ static CGFloat const CELL_SPACING = 10;
         cell.nameLabel.text = object[@"Guest"][@"firstName"];
         
         PFFile *imageFile = object[@"Guest"][@"image"];
-        
-        [imageFile getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
-            if (!error) {
-                UIImage *personIconPic = [UIImage imageWithData:data];
-                cell.iconImageView.image = personIconPic;
-            }
-        }];
+        NSURL *url = [NSURL URLWithString:imageFile.url];
+        [cell.iconImageView setImageURL:url];
+
     }
     else {
         //        TODO: Hack to get placeholder image to show, this logic should not be here

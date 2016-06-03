@@ -42,7 +42,6 @@
     [self.contentView setBackgroundColor:kTHLNUIPrimaryBackgroundColor];
     [_iconView addGestureRecognizer:_photoTapRecognizer];
     
-    WEAKSELF();
     [_iconView makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.insets(kTHLEdgeInsetsHigh());
         make.size.mas_equalTo(CGSizeMake(100, 100));

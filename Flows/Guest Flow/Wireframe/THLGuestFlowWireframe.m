@@ -8,22 +8,9 @@
 #import "THLGuestFlowDependencyManager.h"
 
 #import "THLGuestFlowWireframe.h"
-
-#import "THLEventDiscoveryWireframe.h"
-#import "THLDashboardWireframe.h"
-#import "THLUserProfileWireframe.h"
-#import "THLLoginWireframe.h"
-#import "THLEventDetailWireframe.h"
-#import "THLGuestlistInvitationWireframe.h"
-#import "THLGuestlistReviewWireframe.h"
-#import "THLPerkStoreWireframe.h"
-#import "THLPerkDetailWireframe.h"
-#import "UIColor+SLAddition.h"
-#import "THLAppearanceConstants.h"
 #import "THLUser.h"
 #import "Intercom/intercom.h"
 #import "THLMyEventsViewController.h"
-#import <RKSwipeBetweenViewControllers/RKSwipeBetweenViewControllers.h>
 #import "THLEventTicketViewController.h"
 #import "THLMyEventsNavigationViewController.h"
 #import "THLPartyNavigationController.h"
@@ -31,21 +18,19 @@
 #import "THLDiscoveryViewController.h"
 #import "THLCheckoutViewController.h"
 #import "THLPartyInvitationViewController.h"
-#import "THLYapDatabaseManager.h"
 #import "THLDataStore.h"
-#import "THLGuestEntity.h"
-#import "APAddressBook.h"
-#import "THLViewDataSourceFactory.h"
-#import "THLYapDatabaseViewFactory.h"
 #import "THLDependencyManager.h"
 #import "THLUserProfileViewController.h"
-#import "SVProgressHUD.h"
 #import "THLPaymentViewController.h"
+#import "THLPerkCollectionViewController.h"
+
+#import "THLLoginWireframe.h"
+#import "THLGuestEntity.h"
+#import "SVProgressHUD.h"
+#import "THLPerkDetailViewController.h"
 
 @interface THLGuestFlowWireframe()
 <
-THLPerkDetailModuleDelegate,
-THLPerkStoreModuleDelegate,
 THLLoginModuleDelegate,
 
 THLMyEventsViewDelegate,
@@ -54,20 +39,18 @@ THLEventDetailsViewControllerDelegate,
 THLCheckoutViewControllerDelegate,
 THLPartyInvitationViewControllerDelegate,
 THLUserProfileViewControllerDelegate,
-THLPartyViewControllerDelegate
+THLPartyViewControllerDelegate,
+THLPerkCollectionViewControllerDelegate
 >
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) id currentWireframe;
 @property (nonatomic, nonatomic) UIViewController *containerVC;
 @property (nonatomic, strong) UITabBarController *masterTabBarController;
-@property (nonatomic, strong) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
-@property (nonatomic, strong) THLDashboardWireframe *dashboardWireframe;
+
+
 @property (nonatomic, strong) THLUserProfileViewController *userProfileViewController;
-@property (nonatomic, strong) THLEventDetailWireframe  *eventDetailWireframe;
-@property (nonatomic, strong) THLGuestlistInvitationWireframe *guestlistInvitationWireframe;
-@property (nonatomic, strong) THLGuestlistReviewWireframe *guestlistReviewWireframe;
-@property (nonatomic, strong) THLPerkStoreWireframe *perkStoreWireframe;
-@property (nonatomic, strong) THLPerkDetailWireframe *perkDetailWireframe;
+@property (nonatomic, strong) THLPerkCollectionViewController *perkCollectionViewController;
+
 @property (nonatomic, strong) THLLoginWireframe *loginWireframe;
 
 @property (nonatomic, strong) UIView *discoveryNavBarItem;
@@ -100,26 +83,26 @@ THLPartyViewControllerDelegate
 - (void)configureMasterTabViewController:(UITabBarController *)masterTabBarController {
     _masterTabBarController = masterTabBarController;
     
-    UINavigationController *discovery = [UINavigationController new];
-    UINavigationController *dashboard = [UINavigationController new];
- 
-
-    UINavigationController *perks = [UINavigationController new];
-    UINavigationController *profile = [UINavigationController new];
-    
     THLMyEventsViewController *myEventsVC = [[THLMyEventsViewController alloc]initWithClassName:@"GuestlistInvite"];
+    UINavigationController *dashboard = [UINavigationController new];
     myEventsVC.delegate = self;
     [dashboard pushViewController:myEventsVC animated:NO];
     
     THLDiscoveryViewController *discoveryVC = [[THLDiscoveryViewController alloc] initWithClassName:@"Event"];
+    UINavigationController *discovery = [UINavigationController new];
+
     discoveryVC.delegate = self;
     [discovery pushViewController:discoveryVC animated:NO];
 
     _userProfileViewController = [THLUserProfileViewController new];
+    UINavigationController *profile = [UINavigationController new];
     _userProfileViewController.delegate = self;
     [profile pushViewController:_userProfileViewController animated:NO];
     
-    [self presentPerkStoreInterfaceInNavigationController:perks];
+    _perkCollectionViewController = [[THLPerkCollectionViewController alloc] initWithClassName:@"PerkStoreItem"];
+    _perkCollectionViewController.delegate = self;
+    UINavigationController *perks = [UINavigationController new];
+    [perks pushViewController:_perkCollectionViewController animated:NO];
     
     dashboard.tabBarItem.image = [UIImage imageNamed:@"Lists Icon"];
     dashboard.tabBarItem.title = @"My Events";
@@ -232,9 +215,27 @@ THLPartyViewControllerDelegate
     [self presentCheckoutViewController:event paymentInfo:paymentInfo];
 }
 
+#pragma mark -
+#pragma mark PerkCollectionViewController
+#pragma mark Delegate
+
+- (void)perkStoreViewControllerWantsToPresentDetailsFor:(PFObject *)perk {
+    THLPerkDetailViewController *perkDetailViewController = [[THLPerkDetailViewController alloc] initWithPerk:perk];
+    perkDetailViewController.hidesBottomBarWhenPushed = YES;
+    [_perkCollectionViewController.navigationController pushViewController:perkDetailViewController animated:YES];
+}
+
+#pragma mark -
+#pragma mark LoginViewController
+#pragma mark Delegate
+
 - (void)usersWantsToLogin {
     [self.moduleDelegate logInUserOnViewController:[self topViewController]];
 }
+
+#pragma mark -
+#pragma mark View Controller Presenter
+#pragma mark Delegate
 
 - (void)presentPartyNavigationController:(PFObject *)invite {
     UINavigationController *partyNavVC = [UINavigationController new];
@@ -254,7 +255,7 @@ THLPartyViewControllerDelegate
 
 - (void)presentPaymentViewControllerOn:(UIViewController *)viewController {
     if ([THLUser currentUser].stripeCustomerId) {
-        [SVProgressHUD show];
+        [SVProgressHUD show]; 
         [PFCloud callFunctionInBackground:@"retrievePaymentInfo"
                            withParameters:nil
                                     block:^(NSArray<NSDictionary *> *cardInfo, NSError *cloudError) {
@@ -263,12 +264,15 @@ THLPartyViewControllerDelegate
                                             
                                         } else {
                                             THLPaymentViewController *paymentView = [[THLPaymentViewController alloc]initWithPaymentInfo:cardInfo];
+                                            paymentView.hidesBottomBarWhenPushed = YES;
+
                                             [viewController.navigationController pushViewController:paymentView animated:YES];
                                         }
                                     }];
     } else {
         NSArray<NSDictionary *> *emptyCardInfoSet = [[NSArray alloc]init];
         THLPaymentViewController *paymentView = [[THLPaymentViewController alloc]initWithPaymentInfo:emptyCardInfoSet];
+        paymentView.hidesBottomBarWhenPushed = YES;
         [viewController.navigationController pushViewController:paymentView animated:YES];
     }
 }
@@ -321,49 +325,9 @@ THLPartyViewControllerDelegate
     return [self topViewController:presentedViewController];
 }
 
-- (void)presentPerkStoreInterfaceInNavigationController:(UINavigationController *)navigationController {
-    _perkStoreWireframe = [_dependencyManager newPerkStoreWireframe];
-    _currentWireframe = _perkStoreWireframe;
-    [_perkStoreWireframe.moduleInterface setModuleDelegate:self];
-    [_perkStoreWireframe.moduleInterface presentPerkStoreInterfaceInNavigationController:navigationController];
-}
-
-- (void)perkModule:(id<THLPerkStoreModuleInterface>)module userDidSelectPerkStoreItemEntity:(THLPerkStoreItemEntity *)perkStoreItemEntity presentPerkDetailInterfaceOnController:(UIViewController *)controller
-{
-    [self presentPerkDetailInterfaceForPerkStoreItem:perkStoreItemEntity onController:controller];
-}
-
-- (void)presentPerkDetailInterfaceForPerkStoreItem:(THLPerkStoreItemEntity *)perkStoreItemEntity onController:(UIViewController *)controller {
-    _perkDetailWireframe = [_dependencyManager newPerkDetailWireframe];
-    _currentWireframe = _perkDetailWireframe;
-    [_perkDetailWireframe.moduleInterface setModuleDelegate:self];
-    [_perkDetailWireframe.moduleInterface presentPerkDetailInterfaceForPerk:perkStoreItemEntity onViewController:controller];
-}
-
 - (void)messageButtonPressed
 {
     [Intercom presentMessageComposer];
 }
 
-- (void)userNeedsLoginOnViewController:(UIViewController *)viewController
-{
-    [self.moduleDelegate logInUserOnViewController:viewController];
-}
-
-#pragma mark - THLPerkStoreModuleDelegate
-- (void)dismissPerkWireframe
-{
-    _perkStoreWireframe = nil;
-}
-
-#pragma mark - THLPerkDetailModuleDelegate
-- (void)dismissPerkDetailWireframe
-{
-    _perkDetailWireframe = nil;
-}
-
-- (void)dealloc
-{
-    NSLog(@"Destroyed %@", self);
-}
 @end
