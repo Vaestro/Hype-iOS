@@ -209,7 +209,9 @@
                                              if (cloudError) {
                                                  [self displayError:cloudError];
                                              } else {
-                                                 
+                                                 Mixpanel *mixpanel = [Mixpanel sharedInstance];
+                                                 [mixpanel track:@"Payment Method Addded"];
+
                                                  _paymentInfo = paymentInfo;
                                                  [[THLUser currentUser] fetch];
                                                  [self displaySuccess];
@@ -237,6 +239,8 @@
                                                                 if (cloudError) {
                                                                     [self displayError:cloudError];
                                                                 } else {
+                                                                    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+                                                                    [mixpanel track:@"Payment Method Deleted"];
                                                                     [self updateLayoutForAddPayment];
                                                                 }
                                                           }];

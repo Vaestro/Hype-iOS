@@ -26,16 +26,17 @@
 #import "CocoaLumberjack.h"
 static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
-#define MIXPANEL_TOKEN @"2946053341530a84c490a107bd3e5fff"
-
 #if DEBUG
 static NSString *applicationId = @"5t3F1S3wKnVGIKHob1Qj0Je3sygnFiwqAu6PP400";
 static NSString *clientKeyId = @"xn4Mces2HcFCQYXF2VRj4W1Ot0zIBELl6fHKLGPk";
 static NSString *stripePublishableKey = @"pk_test_cGZ7E1Im6VPKQHYUXIkR6sEe";
+static NSString *mixpanelToken = @"aa573c8ee35b386bff7635df03bdbf18";
+
 #else
 static NSString *applicationId = @"D0AnOPXqqfz7bfE70WvdlE8dK7Qj1kxgf4rPm8rX";
 static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
 static NSString *stripePublishableKey = @"pk_live_H8u89AfEDonln00iEUB0kKtZ";
+static NSString *mixpanelToken = @"2946053341530a84c490a107bd3e5fff";
 #endif
 
 @interface AppDelegate (){
@@ -105,7 +106,7 @@ static NSString *stripePublishableKey = @"pk_live_H8u89AfEDonln00iEUB0kKtZ";
     
     [Fabric with:@[[Digits class], [Crashlytics class]]];
 
-    [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
+    [Mixpanel sharedInstanceWithToken:mixpanelToken];
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel identify:mixpanel.distinctId];
     
