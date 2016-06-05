@@ -159,7 +159,7 @@
     if (!_checkoutButton) {
         _checkoutButton = [[THLActionButton alloc] initWithDefaultStyle];
         [_checkoutButton setTitle:@"Continue"];
-        [_checkoutButton addTarget:self action:@selector(handleViewCheckoutAction) forControlEvents:UIControlEventTouchUpInside];
+        [_checkoutButton addTarget:self action:@selector(checkout:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_checkoutButton];
     }
     return _checkoutButton;
@@ -178,11 +178,9 @@
     [Intercom presentConversationList];
 }
 
-//- (void)handleViewCheckoutAction {
-//    NSDictionary *paymentInfo = @{@"guestlistInviteId": _usersInvite.objectId};
-//    
-//    [self.delegate partyViewControllerWantsToPresentCheckoutForEvent:_guestlist[@"event"] paymentInfo:paymentInfo];
-//}
+- (void)checkout:(id)sender {
+    [self.delegate packageControllerWantsToPresentCheckoutForEvent:_event andAdmissionOption:_admissionOption];
+}
 
 
 

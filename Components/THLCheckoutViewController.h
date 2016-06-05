@@ -22,5 +22,6 @@
 @interface THLCheckoutViewController : UIViewController
 @property (nonatomic, weak) id<THLCheckoutViewControllerDelegate> delegate;
 -(id)initWithEvent:(PFObject *)event paymentInfo:(NSDictionary *)paymentInfo;
+- (id)initWithEvent:(PFObject *)event admissionOption:(PFObject *)admissionOption;
 @end
 

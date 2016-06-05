@@ -24,6 +24,7 @@
 
 @interface THLCheckoutViewController ()
 @property (nonatomic) THLEvent *event;
+@property (nonatomic) PFObject *admissionOption;
 @property (nonatomic, strong) RACCommand *completionAction;
 @property (nonatomic, strong) UIScrollView *scrollView;
 
@@ -44,6 +45,15 @@
     if (self = [super init]) {
         self.event = (THLEvent *)event;
         self.paymentInfo = paymentInfo;
+    }
+    return self;
+}
+
+- (id)initWithEvent:(PFObject *)event admissionOption:(PFObject *)admissionOption;
+{
+    if (self = [super init]) {
+        self.event = (THLEvent *)event;
+        self.admissionOption = admissionOption;
     }
     return self;
 }
@@ -122,7 +132,6 @@
         _importantInformationView = [THLImportantInformationView new];
         _importantInformationView.titleLabel.text = @"Important Information";
         _importantInformationView.importantInformationLabel.text = @"Your purchase is non-refundable\n\nPlease dress appropriately\n\nDoorman has final say on admission";
-//        [self.scrollView addSubview:_importantInformationView];
     }
     return _importantInformationView;
 }
@@ -163,33 +172,20 @@
         _purchaseDetailsView = [THLPurchaseDetailsView new];
         _purchaseDetailsView.titleLabel.text = @"Purchase Details";
         
-        float maleServiceCharge = (_event.maleTicketPrice * 0.029) + 0.30;
-        float femaleServiceCharge = (_event.femaleTicketPrice * 0.029) + 0.30;
-        NSString *purchaseTitleText;
-        THLUser *currentUser = [THLUser currentUser];
-        if (currentUser.sex == THLSexMale) {
-            purchaseTitleText = @"Male General Admission";
-        } else if (currentUser.sex == THLSexFemale) {
-            purchaseTitleText = @"Female General Admission";
-        }
-        if (currentUser.sex == THLSexMale && _event.maleTicketPrice > 0.0) {
+        float serviceCharge = ([_admissionOption[@"price"] floatValue] * 0.029) + 0.30;
+        NSString *purchaseTitleText = _admissionOption[@"name"];
+        
+        if ([_admissionOption[@"price"] floatValue] > 0) {
             _purchaseDetailsView.purchaseTitleLabel.text = purchaseTitleText;
-            
-            _purchaseDetailsView.subtotalLabel.text = [NSString stringWithFormat:@"$%.2f", _event.maleTicketPrice];
-            _purchaseDetailsView.serviceChargeLabel.text = [NSString stringWithFormat:@"$%.2f", maleServiceCharge];
-            _purchaseDetailsView.totalLabel.text = [NSString stringWithFormat:@"$%.2f", _event.maleTicketPrice + maleServiceCharge];
-        } else if (currentUser.sex == THLSexFemale && _event.femaleTicketPrice > 0.0) {
-            _purchaseDetailsView.purchaseTitleLabel.text = purchaseTitleText;
-            _purchaseDetailsView.subtotalLabel.text = [NSString stringWithFormat:@"$%.2f", _event.femaleTicketPrice];
-            _purchaseDetailsView.serviceChargeLabel.text = [NSString stringWithFormat:@"$%.2f", femaleServiceCharge];
-            _purchaseDetailsView.totalLabel.text = [NSString stringWithFormat:@"$%.2f", _event.femaleTicketPrice + femaleServiceCharge];
+            _purchaseDetailsView.subtotalLabel.text = [NSString stringWithFormat:@"$%.2f", [_admissionOption[@"price"] floatValue]];
+            _purchaseDetailsView.serviceChargeLabel.text = [NSString stringWithFormat:@"$%.2f", serviceCharge];
+            _purchaseDetailsView.totalLabel.text = [NSString stringWithFormat:@"$%.2f", [_admissionOption[@"price"] floatValue] + serviceCharge];
         } else {
             _purchaseDetailsView.purchaseTitleLabel.text = purchaseTitleText;
             _purchaseDetailsView.subtotalLabel.text = @"FREE";
             _purchaseDetailsView.serviceChargeLabel.text = @"FREE";
             _purchaseDetailsView.totalLabel.text = @"FREE";
         }
-//        [self.scrollView addSubview:_purchaseDetailsView];
     }
 
     return _purchaseDetailsView;
@@ -235,9 +231,9 @@
                                       @"eventId": event.objectId,
                                       @"eventTime": event.date,
                                       @"venue": event.location.name,
-                                      @"amount":  customer.sex == 1 ? [NSNumber numberWithFloat:event.maleTicketPrice] : [NSNumber numberWithFloat:event.femaleTicketPrice],
+                                      @"amount": [NSNumber numberWithFloat:[_admissionOption[@"price"] floatValue]],
                                       @"customerName": [customer fullName],
-                                      @"description": customer.sex == 1 ? @"Male GA" : @"Female GA",
+                                      @"description": _admissionOption[@"name"],
                                       @"guestlistInviteId": _paymentInfo[@"guestlistInviteId"]
                                               };
         
@@ -270,9 +266,9 @@
                                        @"eventId": event.objectId,
                                        @"eventTime": event.date,
                                        @"venue": event.location.name,
-                                       @"amount":  customer.sex == 1 ? [NSNumber numberWithFloat:event.maleTicketPrice] : [NSNumber numberWithFloat:event.femaleTicketPrice],
+                                       @"amount": [NSNumber numberWithFloat:[_admissionOption[@"price"] floatValue]],
                                        @"customerName": [customer fullName],
-                                       @"description": customer.sex == 1 ? @"Male GA" : @"Female GA"
+                                       @"description": _admissionOption[@"name"],
                                        };
         
         [PFCloud callFunctionInBackground:@"completeOrder"
