@@ -19,7 +19,6 @@
 #import "THLGuestlistInvite.h"
 #import "THLGuestlist.h"
 #import "THLImportantInformationView.h"
-
 #import "THLPaymentMethodView.h"
 #import "SVProgressHUD.h"
 
@@ -82,7 +81,6 @@
     
     WEAKSELF();
     [contentView addSubviews:@[self.purchaseDetailsView, self.paymentMethodView, self.importantInformationView]];
-#import "SVProgressHUD.h"
     
     [self.purchaseDetailsView makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.insets(kTHLEdgeInsetsSuperHigh());

@@ -10,7 +10,7 @@
 #import "Parse.h"
 #import <ParseUI/PFCollectionViewCell.h>
 #import "THLDashboardNotificationCell.h"
-#import "THLEventInviteCell.h"
+#import "THLEventInviteCell.h"  
 #import "THLPersonIconView.h"
 #import "MBProgressHUD.h"
 #import "THLAppearanceConstants.h"
@@ -18,55 +18,8 @@
 #import "SVProgressHUD.h"
 #import "THLUser.h"
 #import "THLGuestlistInvite.h"
+#import "THLCollectionReusableView.h"
 
-#pragma mark -
-#pragma mark SimpleCollectionReusableView
-
-@interface SimpleCollectionReusableView : UICollectionReusableView
-
-@property (nonatomic, strong, readonly) UILabel *label;
-@property (nonatomic, strong, readonly) UIView *separatorView;
-
-@end
-
-@implementation SimpleCollectionReusableView
-
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (!self) return nil;
-
-    _label = THLNUILabel(kTHLNUISectionTitle);
-    _label.textAlignment = NSTextAlignmentLeft;
-    [self addSubview:_label];
-    
-    _separatorView = THLNUIView(kTHLNUIUndef);
-    _separatorView.backgroundColor = kTHLNUIAccentColor;
-    [self addSubview:_separatorView];
-
-    
-    return self;
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    WEAKSELF();
-    [self.label makeConstraints:^(MASConstraintMaker *make) {
-        make.top.insets(kTHLEdgeInsetsHigh());
-        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
-    }];
-    
-    [_separatorView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF label].mas_baseline).insets(kTHLEdgeInsetsHigh());
-        make.left.equalTo([WSELF label]);
-        make.bottom.insets(kTHLEdgeInsetsHigh());
-
-        make.size.equalTo(CGSizeMake(40, 2.5));
-
-    }];
-//    _label.frame = self.bounds;
-}
-
-@end
 
 @interface THLMyEventsViewController()
 {
@@ -107,7 +60,7 @@
     [self.collectionView registerClass:[THLEventInviteCell class] forCellWithReuseIdentifier:[THLEventInviteCell identifier]];
     [self.collectionView registerClass:[THLAttendingEventCell class] forCellWithReuseIdentifier:[THLAttendingEventCell identifier]];
 
-    [self.collectionView registerClass:[SimpleCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
+    [self.collectionView registerClass:[THLCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
     
     self.collectionView.emptyDataSetSource = self;
     self.collectionView.emptyDataSetDelegate = self;
@@ -249,7 +202,7 @@
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
-        SimpleCollectionReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"header" forIndexPath:indexPath];
+        THLCollectionReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"header" forIndexPath:indexPath];
         NSNumber *response = _sectionSortedKeys[indexPath.section];
         if (response == [NSNumber numberWithInteger:1]) {
             view.label.text = @"MY UPCOMING EVENTS";

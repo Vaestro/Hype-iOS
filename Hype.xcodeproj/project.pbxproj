@@ -229,6 +229,7 @@
 		79CE315A1CF7B03F00CEA784 /* THLEventTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CE31591CF7B03F00CEA784 /* THLEventTicketViewController.m */; };
 		79DF30221C714AFB00516199 /* THLCreditsExplanationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DF30211C714AFB00516199 /* THLCreditsExplanationView.m */; };
 		79DF30261C72FF1700516199 /* THLEventHostingNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DF30251C72FF1700516199 /* THLEventHostingNavigationBar.m */; };
+		C80372DA1D00DD68008848CA /* THLAdmissionOptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C80372D91D00DD68008848CA /* THLAdmissionOptionCell.m */; };
 		C82D87BF1C25C7E300116328 /* THLConfirmationView.m in Sources */ = {isa = PBXBuildFile; fileRef = C82D87BE1C25C7E300116328 /* THLConfirmationView.m */; };
 		C82D87C31C31CC2200116328 /* THLMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = C82D87C21C31CC2200116328 /* THLMenuView.m */; };
 		C85EE3791C1BC8AD0008C14B /* THLPerkStoreItemEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3781C1BC8AD0008C14B /* THLPerkStoreItemEntity.m */; };
@@ -252,6 +253,8 @@
 		C884EE241CF77CB200C47167 /* THLDiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C884EE231CF77CB200C47167 /* THLDiscoveryViewController.m */; };
 		C884EE271CF787CC00C47167 /* THLDiscoveryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C884EE261CF787CC00C47167 /* THLDiscoveryCell.m */; };
 		C884EE2B1CF8C21900C47167 /* THLEventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C884EE2A1CF8C21900C47167 /* THLEventDetailsViewController.m */; };
+		C88A01561D04A44200152B37 /* THLCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C88A01551D04A44200152B37 /* THLCollectionReusableView.m */; };
+		C88A01591D04A9E200152B37 /* THLTablePackageDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C88A01581D04A9E200152B37 /* THLTablePackageDetailCell.m */; };
 		C8D1D2A41CD3E864006ADC6A /* THLPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8D1D2A31CD3E864006ADC6A /* THLPaymentViewController.m */; };
 		C8E1B1621BF437F300A9824C /* THLUserProfileInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B1611BF437F300A9824C /* THLUserProfileInteractor.m */; };
 		C8E1B1651BF4380D00A9824C /* THLUserProfileDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B1641BF4380D00A9824C /* THLUserProfileDataManager.m */; };
@@ -262,6 +265,7 @@
 		C8EE96D51CE93D770040A1F0 /* THLCheckoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8EE96D41CE93D770040A1F0 /* THLCheckoutViewController.m */; };
 		C8F2FB271BF81A8E004E00B6 /* THLInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F2FB261BF81A8E004E00B6 /* THLInformationViewController.m */; };
 		C8F2FB2A1BF826B7004E00B6 /* THLWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F2FB291BF826B7004E00B6 /* THLWebViewController.m */; };
+		C8FEE3D51D038C8700244252 /* THLTablePackageDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8FEE3D41D038C8700244252 /* THLTablePackageDetailsViewController.m */; };
 		CBE5403C8B7732B36D5ECB5E /* THLViewDataSourceGrouping.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE54FC98A366F3761F89F63 /* THLViewDataSourceGrouping.m */; };
 		CBE54720F63BA2DE2136B454 /* THLViewDataSource+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE545A9A3C66339456E0A06 /* THLViewDataSource+Factory.m */; };
 		CBE547FB5677C373C1DE74C7 /* THLViewDataSourceSorting.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE5404991A434142507D7B0 /* THLViewDataSourceSorting.m */; };
@@ -752,6 +756,8 @@
 		79DF30241C72FF1700516199 /* THLEventHostingNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventHostingNavigationBar.h; sourceTree = "<group>"; };
 		79DF30251C72FF1700516199 /* THLEventHostingNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventHostingNavigationBar.m; sourceTree = "<group>"; };
 		81186460483D6143F07FE818 /* libPods-HypeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HypeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C80372D81D00DD68008848CA /* THLAdmissionOptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLAdmissionOptionCell.h; sourceTree = "<group>"; };
+		C80372D91D00DD68008848CA /* THLAdmissionOptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLAdmissionOptionCell.m; sourceTree = "<group>"; };
 		C82D87BD1C25C7E300116328 /* THLConfirmationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLConfirmationView.h; sourceTree = "<group>"; };
 		C82D87BE1C25C7E300116328 /* THLConfirmationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLConfirmationView.m; sourceTree = "<group>"; };
 		C82D87C11C31CC2200116328 /* THLMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMenuView.h; sourceTree = "<group>"; };
@@ -806,6 +812,10 @@
 		C884EE261CF787CC00C47167 /* THLDiscoveryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLDiscoveryCell.m; sourceTree = "<group>"; };
 		C884EE291CF8C21900C47167 /* THLEventDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventDetailsViewController.h; sourceTree = "<group>"; };
 		C884EE2A1CF8C21900C47167 /* THLEventDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventDetailsViewController.m; sourceTree = "<group>"; };
+		C88A01541D04A44200152B37 /* THLCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLCollectionReusableView.h; sourceTree = "<group>"; };
+		C88A01551D04A44200152B37 /* THLCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLCollectionReusableView.m; sourceTree = "<group>"; };
+		C88A01571D04A9E200152B37 /* THLTablePackageDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLTablePackageDetailCell.h; sourceTree = "<group>"; };
+		C88A01581D04A9E200152B37 /* THLTablePackageDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLTablePackageDetailCell.m; sourceTree = "<group>"; };
 		C8D1D2A21CD3E864006ADC6A /* THLPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPaymentViewController.h; sourceTree = "<group>"; };
 		C8D1D2A31CD3E864006ADC6A /* THLPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPaymentViewController.m; sourceTree = "<group>"; };
 		C8E1B1601BF437F300A9824C /* THLUserProfileInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserProfileInteractor.h; sourceTree = "<group>"; };
@@ -826,6 +836,8 @@
 		C8F2FB261BF81A8E004E00B6 /* THLInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLInformationViewController.m; sourceTree = "<group>"; };
 		C8F2FB281BF826B7004E00B6 /* THLWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THLWebViewController.h; path = "../Modules/User Profile Module/UI/View/THLWebViewController.h"; sourceTree = "<group>"; };
 		C8F2FB291BF826B7004E00B6 /* THLWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THLWebViewController.m; path = "../Modules/User Profile Module/UI/View/THLWebViewController.m"; sourceTree = "<group>"; };
+		C8FEE3D31D038C8700244252 /* THLTablePackageDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLTablePackageDetailsViewController.h; sourceTree = "<group>"; };
+		C8FEE3D41D038C8700244252 /* THLTablePackageDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLTablePackageDetailsViewController.m; sourceTree = "<group>"; };
 		CAECC775220A839B0B187C83 /* Pods-HypeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HypeTests/Pods-HypeTests.release.xcconfig"; sourceTree = "<group>"; };
 		CBE5404991A434142507D7B0 /* THLViewDataSourceSorting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLViewDataSourceSorting.m; sourceTree = "<group>"; };
 		CBE54163EA2D6D75F647F7B1 /* THLViewDataSource+Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "THLViewDataSource+Factory.h"; sourceTree = "<group>"; };
@@ -972,6 +984,7 @@
 		211005A81B8A3D5800A540C6 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				C8FEE3D21D038C5800244252 /* THLTablePackageDetailsViewController */,
 				C884EE281CF8BDAD00C47167 /* THLEventDetailsViewController */,
 				C884EE211CF77C8400C47167 /* THLDiscoveryViewController */,
 				C8E8817E1CF669D900D1A698 /* THLAdmissionsViewController */,
@@ -1021,6 +1034,12 @@
 				794A9D181CF4ACC300DDAC00 /* THLEventInviteCell.m */,
 				792545BA1CFCBD61004CF29A /* THLPartyMemberCell.h */,
 				792545BB1CFCBD61004CF29A /* THLPartyMemberCell.m */,
+				C80372D81D00DD68008848CA /* THLAdmissionOptionCell.h */,
+				C80372D91D00DD68008848CA /* THLAdmissionOptionCell.m */,
+				C88A01541D04A44200152B37 /* THLCollectionReusableView.h */,
+				C88A01551D04A44200152B37 /* THLCollectionReusableView.m */,
+				C88A01571D04A9E200152B37 /* THLTablePackageDetailCell.h */,
+				C88A01581D04A9E200152B37 /* THLTablePackageDetailCell.m */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -3187,6 +3206,15 @@
 			name = THLCheckoutViewController;
 			sourceTree = "<group>";
 		};
+		C8FEE3D21D038C5800244252 /* THLTablePackageDetailsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C8FEE3D31D038C8700244252 /* THLTablePackageDetailsViewController.h */,
+				C8FEE3D41D038C8700244252 /* THLTablePackageDetailsViewController.m */,
+			);
+			name = THLTablePackageDetailsViewController;
+			sourceTree = "<group>";
+		};
 		CBE54BB68ECECF48FD57301C /* THLViewDataSourceGrouping */ = {
 			isa = PBXGroup;
 			children = (
@@ -3503,6 +3531,7 @@
 				21CCEDFA1B87D5060066CDAC /* PFObject+MatchingQuery.m in Sources */,
 				211005B71B8A446D00A540C6 /* THLViewDataSource.m in Sources */,
 				C8F2FB271BF81A8E004E00B6 /* THLInformationViewController.m in Sources */,
+				C88A01591D04A9E200152B37 /* THLTablePackageDetailCell.m in Sources */,
 				218AF3591BB7455500AFAEBF /* THLEntityMapper.m in Sources */,
 				C85EE3931C1BCA690008C14B /* THLPerkDetailDataManager.m in Sources */,
 				79CE01DF1C0A604B0047E6FA /* THLDashboardNotificationSectionTitleCell.m in Sources */,
@@ -3592,6 +3621,7 @@
 				C85EE3B91C1BCBF30008C14B /* THLPerkStoreViewController.m in Sources */,
 				216BDD581BC71F1800BBF713 /* THLSearchViewDataSource.m in Sources */,
 				79B9595A1BE92FBA00B87799 /* THLPopupNotificationInteractor.m in Sources */,
+				C88A01561D04A44200152B37 /* THLCollectionReusableView.m in Sources */,
 				79CD27E41C520293009BC119 /* AppDelegate.m in Sources */,
 				C82D87C31C31CC2200116328 /* THLMenuView.m in Sources */,
 				794AFE101C10A3CD008475B1 /* THLHostDashboardPresenter.m in Sources */,
@@ -3612,6 +3642,7 @@
 				211005BF1B8A70BF00A540C6 /* THLEventDiscoveryCell.m in Sources */,
 				798B5FD11BF12D2C002EBCB6 /* THLEventHostingWireframe.m in Sources */,
 				215A428E1BAA200E00D03C35 /* THLNumberVerificationWireframe.m in Sources */,
+				C80372DA1D00DD68008848CA /* THLAdmissionOptionCell.m in Sources */,
 				C85EE3791C1BC8AD0008C14B /* THLPerkStoreItemEntity.m in Sources */,
 				C8E1B1651BF4380D00A9824C /* THLUserProfileDataManager.m in Sources */,
 				215A42A81BAA287900D03C35 /* THLFacebookProfilePictureFactory.m in Sources */,
@@ -3665,6 +3696,7 @@
 				79B062BA1CF8B46800A3DC50 /* THLMyEventsNavigationViewController.m in Sources */,
 				79CE315A1CF7B03F00CEA784 /* THLEventTicketViewController.m in Sources */,
 				798D7EBF1BF2E56C001D4593 /* OnboardingViewController.m in Sources */,
+				C8FEE3D51D038C8700244252 /* THLTablePackageDetailsViewController.m in Sources */,
 				217EBEBA1BB7AB68006044B6 /* THLHostEntity.m in Sources */,
 				211005981B8A319000A540C6 /* THLEventDiscoveryInteractor.m in Sources */,
 				21E402EE1BBF9A8B001D0C2C /* THLGuestEntity.m in Sources */,

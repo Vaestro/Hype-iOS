@@ -46,6 +46,8 @@
 #import "THLPerkCollectionViewController.h"
 #import "THLPerkDetailViewController.h"
 #import "THLPopupNotificationView.h"
+#import "THLAdmissionsViewController.h"
+#import "THLTablePackageDetailsViewController.h"
 
 
 #define ENABLE_WAITLIST
@@ -53,6 +55,7 @@
 @interface THLMasterWireframe()
 <
 THLLoginModuleDelegate,
+THLAdmissionsViewDelegate,
 THLPopupNotificationModuleDelegate,
 THLMyEventsViewDelegate,
 THLDiscoveryViewControllerDelegate,
@@ -112,13 +115,23 @@ THLPerkCollectionViewControllerDelegate
 #pragma mark - Push Notifications
 - (BFTask *)handlePushNotification:(NSDictionary *)pushInfo {
     if ([pushInfo objectForKey:@"notificationText"]) {
-        THLPopupNotificationWireframe *popupNotificationWireframe = [_dependencyManager newPopupNotificationWireframe];
-        [popupNotificationWireframe.moduleInterface setModuleDelegate:self];
-        BFTask *task = [popupNotificationWireframe.moduleInterface presentPopupNotificationModuleInterfaceWithPushInfo:pushInfo];
+        THLPopupNotificationView *popupView = [[THLPopupNotificationView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH*0.87, SCREEN_HEIGHT*0.67)];
+        [popupView setMessageLabelText:[pushInfo objectForKey:@"notificationText"]];
+        [popupView setImageViewWithURL:[NSURL URLWithString:[pushInfo objectForKey:@"mainImageURL"]]];
+        [popupView setIconURL:[NSURL URLWithString:[pushInfo objectForKey:@"iconImageURL"]]];
+        [popupView setButtonTitle:@"View Event"];
+        
+        KLCPopup *popup = [KLCPopup popupWithContentView:popupView
+                                                showType:KLCPopupShowTypeBounceIn
+                                             dismissType:KLCPopupDismissTypeBounceOut
+                                                maskType:KLCPopupMaskTypeDimmed
+                                dismissOnBackgroundTouch:YES
+                                   dismissOnContentTouch:YES];
+        popup.dimmedMaskAlpha = 0.8;
+        [popup show];
+        
 //        [_guestWireframe showNotificationBadge];
-        if (task.result) {
-  
-        }
+        BFTask *task;
         return task;
     } else {
         NSLog(@"Notification did not have any text");
@@ -172,21 +185,27 @@ THLPerkCollectionViewControllerDelegate
     _masterTabBarController.viewControllers = views;
     [_masterTabBarController setSelectedIndex:0];
     _masterTabBarController.view.autoresizingMask=(UIViewAutoresizingFlexibleHeight);
-    
-    THLPopupNotificationView *popupView = [[THLPopupNotificationView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH*0.87, SCREEN_HEIGHT*0.67)];
-    [popupView setMessageLabelText:@"HELLO"];
-    [popupView setImageViewWithURL:[NSURL URLWithString:[THLUser currentUser].image.url]];
-    [popupView setIconURL:[NSURL URLWithString:[THLUser currentUser].image.url]];
-
-    KLCPopup *popup = [KLCPopup popupWithContentView:popupView
-                                            showType:KLCPopupShowTypeBounceIn
-                                         dismissType:KLCPopupDismissTypeBounceOut
-                                            maskType:KLCPopupMaskTypeDimmed
-                            dismissOnBackgroundTouch:YES
-                               dismissOnContentTouch:YES];
-    popup.dimmedMaskAlpha = 0.8;
-    [popup show];
 }
+
+
+#pragma mark - AdmissionsOptionViewDelegate
+
+- (void)didSelectAdmissionOption:(PFObject *)admissionOption forEvent:(PFObject *)event {
+    if ([admissionOption[@"type"] integerValue] == 0) {
+        THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:event paymentInfo:nil];
+        checkoutVC.delegate = self;
+        UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:checkoutVC];
+        [[self topViewController] presentViewController:navVC animated:YES completion:nil];
+    } else if ([admissionOption[@"type"] integerValue] == 1) {
+        THLTablePackageDetailsViewController *packageDetailsVC = [[THLTablePackageDetailsViewController alloc] initWithClassName:@"Bottle"];
+        packageDetailsVC.event = event;
+        packageDetailsVC.admissionOption = admissionOption;
+        UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:packageDetailsVC];
+        [[self topViewController] presentViewController:navVC animated:YES completion:nil];
+    }
+}
+
+
 
 #pragma mark -
 #pragma mark EventDiscoveryViewController
@@ -222,7 +241,11 @@ THLPerkCollectionViewControllerDelegate
 #pragma mark Delegate
 
 - (void)eventDetailsWantsToPresentAdmissionsForEvent:(PFObject *)event {
-    
+    THLAdmissionsViewController *admissionsVC = [[THLAdmissionsViewController alloc] initWithClassName:@"AdmissionOption"];
+    admissionsVC.delegate = self;
+    admissionsVC.event = event;
+    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:admissionsVC];
+    [[self topViewController] presentViewController:navVC animated:YES completion:nil];
 }
 
 - (void)eventDetailsWantsToPresentCheckoutForEvent:(PFObject *)event paymentInfo:(NSDictionary *)paymentInfo {
@@ -429,6 +452,8 @@ THLPerkCollectionViewControllerDelegate
 #pragma mark - THLLoginModuleDelegate
 - (void)loginModule:(id<THLLoginModuleInterface>)module didLoginUser:(NSError *)error {
 	if (!error) {
+        [THLUserManager makeCurrentInstallation];
+
         [THLUserManager logCrashlyticsUser];
         Mixpanel *mixpanel = [Mixpanel sharedInstance];
         [mixpanel track:@"CompletedSignup"];

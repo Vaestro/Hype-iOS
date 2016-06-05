@@ -153,10 +153,6 @@ THLPerkCollectionViewControllerDelegate
 #pragma mark EventDetailsViewController
 #pragma mark Delegate
 
-- (void)eventDetailsWantsToPresentAdmissionsForEvent:(PFObject *)event {
-
-}
-
 - (void)eventDetailsWantsToPresentCheckoutForEvent:(PFObject *)event paymentInfo:(NSDictionary *)paymentInfo {
     [self presentCheckoutViewController:event paymentInfo:paymentInfo];
 }

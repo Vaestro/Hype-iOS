@@ -71,9 +71,8 @@
 	[_presenter configureOnboardingView:_onboardingView];
     UIViewController *baseViewController = [UIViewController new];
     _window.rootViewController = baseViewController;
-    [baseViewController presentViewController:_onboardingView animated:NO completion:nil];
-	_window.rootViewController = _onboardingView;
 	[_window makeKeyAndVisible];
+    [baseViewController presentViewController:_onboardingView animated:NO completion:nil];
 }
 
 - (void)presentUserVerificationInterfaceInWindow:(UIWindow *)window {

@@ -186,6 +186,4 @@ static CGFloat const CELL_SPACING = 10;
     return _checkoutButton;
 }
 
-
-
 @end
