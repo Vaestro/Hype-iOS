@@ -254,6 +254,7 @@
 		C884EE271CF787CC00C47167 /* THLDiscoveryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C884EE261CF787CC00C47167 /* THLDiscoveryCell.m */; };
 		C884EE2B1CF8C21900C47167 /* THLEventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C884EE2A1CF8C21900C47167 /* THLEventDetailsViewController.m */; };
 		C88A01561D04A44200152B37 /* THLCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C88A01551D04A44200152B37 /* THLCollectionReusableView.m */; };
+		C88A01591D04A9E200152B37 /* THLTablePackageDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C88A01581D04A9E200152B37 /* THLTablePackageDetailCell.m */; };
 		C8D1D2A41CD3E864006ADC6A /* THLPaymentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8D1D2A31CD3E864006ADC6A /* THLPaymentViewController.m */; };
 		C8E1B1621BF437F300A9824C /* THLUserProfileInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B1611BF437F300A9824C /* THLUserProfileInteractor.m */; };
 		C8E1B1651BF4380D00A9824C /* THLUserProfileDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E1B1641BF4380D00A9824C /* THLUserProfileDataManager.m */; };
@@ -813,6 +814,8 @@
 		C884EE2A1CF8C21900C47167 /* THLEventDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventDetailsViewController.m; sourceTree = "<group>"; };
 		C88A01541D04A44200152B37 /* THLCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLCollectionReusableView.h; sourceTree = "<group>"; };
 		C88A01551D04A44200152B37 /* THLCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLCollectionReusableView.m; sourceTree = "<group>"; };
+		C88A01571D04A9E200152B37 /* THLTablePackageDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLTablePackageDetailCell.h; sourceTree = "<group>"; };
+		C88A01581D04A9E200152B37 /* THLTablePackageDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLTablePackageDetailCell.m; sourceTree = "<group>"; };
 		C8D1D2A21CD3E864006ADC6A /* THLPaymentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPaymentViewController.h; sourceTree = "<group>"; };
 		C8D1D2A31CD3E864006ADC6A /* THLPaymentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPaymentViewController.m; sourceTree = "<group>"; };
 		C8E1B1601BF437F300A9824C /* THLUserProfileInteractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserProfileInteractor.h; sourceTree = "<group>"; };
@@ -1035,6 +1038,8 @@
 				C80372D91D00DD68008848CA /* THLAdmissionOptionCell.m */,
 				C88A01541D04A44200152B37 /* THLCollectionReusableView.h */,
 				C88A01551D04A44200152B37 /* THLCollectionReusableView.m */,
+				C88A01571D04A9E200152B37 /* THLTablePackageDetailCell.h */,
+				C88A01581D04A9E200152B37 /* THLTablePackageDetailCell.m */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -3526,6 +3531,7 @@
 				21CCEDFA1B87D5060066CDAC /* PFObject+MatchingQuery.m in Sources */,
 				211005B71B8A446D00A540C6 /* THLViewDataSource.m in Sources */,
 				C8F2FB271BF81A8E004E00B6 /* THLInformationViewController.m in Sources */,
+				C88A01591D04A9E200152B37 /* THLTablePackageDetailCell.m in Sources */,
 				218AF3591BB7455500AFAEBF /* THLEntityMapper.m in Sources */,
 				C85EE3931C1BCA690008C14B /* THLPerkDetailDataManager.m in Sources */,
 				79CE01DF1C0A604B0047E6FA /* THLDashboardNotificationSectionTitleCell.m in Sources */,

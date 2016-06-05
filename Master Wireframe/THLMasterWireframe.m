@@ -46,6 +46,7 @@
 #import "THLPerkCollectionViewController.h"
 #import "THLPerkDetailViewController.h"
 #import "THLAdmissionsViewController.h"
+#import "THLTablePackageDetailsViewController.h"
 
 
 #define ENABLE_WAITLIST
@@ -192,7 +193,11 @@ THLPerkCollectionViewControllerDelegate
         UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:checkoutVC];
         [[self topViewController] presentViewController:navVC animated:YES completion:nil];
     } else if ([admissionOption[@"type"] integerValue] == 1) {
-        
+        THLTablePackageDetailsViewController *packageDetailsVC = [[THLTablePackageDetailsViewController alloc] initWithClassName:@"Bottle"];
+        packageDetailsVC.event = event;
+        packageDetailsVC.admissionOption = admissionOption;
+        UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:packageDetailsVC];
+        [[self topViewController] presentViewController:navVC animated:YES completion:nil];
     }
 }
 

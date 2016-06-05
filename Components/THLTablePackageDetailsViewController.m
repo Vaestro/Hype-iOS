@@ -18,8 +18,12 @@
 #import "THLUser.h"
 #import "Intercom/intercom.h"
 #import "THLCollectionReusableView.h"
+#import "THLTablePackageDetailCell.h"
+#import "THLActionButton.h"
 
-
+@interface THLTablePackageDetailsViewController()
+@property(nonatomic, strong) THLActionButton *checkoutButton;
+@end
 
 @implementation THLTablePackageDetailsViewController
 @synthesize admissionOption = _admissionOption;
@@ -46,15 +50,63 @@
     layout.sectionInset = UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 10.0f);
     layout.minimumInteritemSpacing = 5.0f;
     
-//    [self.collectionView registerClass:[THLAdmissionOptionCell class] forCellWithReuseIdentifier:[THLAdmissionOptionCell identifier]];
+    [self.collectionView registerClass:[THLTablePackageDetailCell class] forCellWithReuseIdentifier:[THLTablePackageDetailCell identifier]];
     [self.collectionView registerClass:[THLCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
-    
+
     self.collectionView.emptyDataSetSource = self;
     self.collectionView.emptyDataSetDelegate = self;
     
+    WEAKSELF();
+    [self.collectionView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.equalTo(UIEdgeInsetsZero);
+    }];
+    
+    [self.checkoutButton makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.collectionView.mas_bottom);
+        make.bottom.left.right.equalTo(WSELF.view).insets(kTHLEdgeInsetsHigh());
+        make.height.equalTo(60);
+    }];
+
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self loadObjects];
+}
 
+- (BFTask<NSArray<__kindof PFObject *> *> *)loadObjects {
+    if ([THLUser currentUser]) {
+        return [super loadObjects];
+    } else {
+        return nil;
+    }
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    
+    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
+    layout.itemSize = CGSizeMake(ViewWidth(self.collectionView) - 25, 50);
+}
+
+- (void)objectsWillLoad {
+    [super objectsWillLoad];
+}
+
+- (void)objectsDidLoad:(NSError *)error {
+    [super objectsDidLoad:error];
+    [self.collectionView reloadData];
+}
+
+#pragma mark -
+#pragma mark Data
+
+- (PFQuery *)queryForCollection {
+    PFQuery *query = [super queryForCollection];
+    [query whereKey:@"admissionOption" equalTo:_admissionOption];
+    [query orderByAscending:@"amount"];
+    return query;
+}
 
 #pragma mark -
 #pragma mark CollectionView
@@ -63,10 +115,11 @@
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath
                                   object:(PFObject *)object
 {
-//    THLAdmissionOptionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[THLAdmissionOptionCell identifier] forIndexPath:indexPath];
-//    cell.titleLabel.text = object[@"name"];
-//    cell.priceLabel.text = [NSString stringWithFormat:@"$ %.2f", [object[@"price"] floatValue]];
-//    return cell;
+    THLTablePackageDetailCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[THLTablePackageDetailCell identifier] forIndexPath:indexPath];
+    cell.titleLabel.text = object[@"name"];
+    cell.priceLabel.text = [NSString stringWithFormat:@"$ %.2f", [object[@"price"] floatValue]];
+    cell.amountLabel.text = [NSString stringWithFormat:@"x%d", [object[@"amount"] integerValue]];
+    return cell;
     return nil;
 }
 
@@ -82,14 +135,11 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     
-    return CGSizeMake(CGRectGetWidth(self.collectionView.bounds), 40.0f);
+    if ([self.objects count]) {
+        return CGSizeMake(CGRectGetWidth(self.collectionView.bounds), 40.0f);
+    }
+    return CGSizeZero;
 }
-
-
-
-
-
-
 
 - (UILabel *)navBarTitleLabel
 {
@@ -104,6 +154,19 @@
 }
 
 
+- (THLActionButton *)checkoutButton
+{
+    if (!_checkoutButton) {
+        _checkoutButton = [[THLActionButton alloc] initWithDefaultStyle];
+        [_checkoutButton setTitle:@"Continue"];
+        [_checkoutButton addTarget:self action:@selector(handleViewCheckoutAction) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_checkoutButton];
+    }
+    return _checkoutButton;
+}
+
+
+
 #pragma mark - Event handlers
 - (void)back:(id)sender
 {
@@ -114,6 +177,13 @@
 {
     [Intercom presentConversationList];
 }
+
+//- (void)handleViewCheckoutAction {
+//    NSDictionary *paymentInfo = @{@"guestlistInviteId": _usersInvite.objectId};
+//    
+//    [self.delegate partyViewControllerWantsToPresentCheckoutForEvent:_guestlist[@"event"] paymentInfo:paymentInfo];
+//}
+
 
 
 #pragma mark - EmptyDataSetDelegate
