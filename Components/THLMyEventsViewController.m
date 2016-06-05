@@ -17,6 +17,7 @@
 #import "THLAttendingEventCell.h"
 #import "SVProgressHUD.h"
 #import "THLUser.h"
+#import "THLGuestlistInvite.h"
 
 #pragma mark -
 #pragma mark SimpleCollectionReusableView
@@ -155,6 +156,7 @@
         } else {
             _sections[priority] = [NSMutableArray arrayWithObject:object];
         }
+        
     }
 
     _sectionSortedKeys = [[_sections allKeys] sortedArrayUsingSelector:@selector(compare:)];

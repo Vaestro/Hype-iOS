@@ -8,110 +8,115 @@
 
 #import "THLPopupNotificationView.h"
 #import "THLPersonIconView.h"
-#import "THLActionBarButton.h"
+#import "THLActionButton.h"
 #import "UITextView+NUI.h"
 #import "THLAppearanceConstants.h"
 
 static CGFloat const ICON_VIEW_DIMENSION = 50;
 
 @interface THLPopupNotificationView()
+@property (nonatomic, strong) UIImageView *imageView;
+
 @property (nonatomic, strong) THLPersonIconView *iconView;
-@property (nonatomic, strong) UITextView *textView;
-@property (nonatomic, strong) THLActionBarButton *button;
+@property (nonatomic, strong) UILabel *messageLabel;
+@property (nonatomic, strong) THLActionButton *button;
 @end
 
-
 @implementation THLPopupNotificationView
-@synthesize acceptCommand = _acceptCommand;
-@synthesize notificationText = _notificationText;
-@synthesize imageURL = _imageURL;
-@synthesize image = _image;
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        [self constructView];
-        [self layoutView];
-        [self bindView];
-        self.translatesAutoresizingMaskIntoConstraints = NO;
+        self.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     }
     return self;
 }
 
-- (void)constructView {
-    self.backgroundColor = kTHLNUIPrimaryBackgroundColor;
-    
-    _iconView = [self newIconView];
-    _textView = [self newTextView];
-    _button = [self newButton];
-}
+- (void)layoutSubviews {
+    [super layoutSubviews];
 
-- (void)layoutView {
-    [self addSubviews:@[_iconView,
-                        _textView,
-                        _button]];
-    
     WEAKSELF();
-    [_iconView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.insets(kTHLEdgeInsetsHigh());
-        make.centerX.equalTo(0);
+    [self.imageView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.insets(kTHLEdgeInsetsNone());
+        make.bottom.equalTo(WSELF.mas_centerY);
+    }];
+    
+    [self.iconView makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(0);
         make.height.equalTo(ICON_VIEW_DIMENSION);
         make.width.equalTo([WSELF iconView].mas_height);
     }];
     
-    [_textView makeConstraints:^(MASConstraintMaker *make) {
+    [self.messageLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF iconView].mas_bottom).insets(kTHLEdgeInsetsHigh());
         make.left.right.insets(kTHLEdgeInsetsHigh());
         make.width.equalTo(ScreenWidth-4*kTHLInset);
-        make.bottom.insets(kTHLEdgeInsetsHigh());
     }];
-    
-    if (_button.rac_command != nil) {
-        [_button makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo([WSELF textView].mas_bottom).insets(kTHLEdgeInsetsHigh());
-            make.left.right.bottom.insets(kTHLEdgeInsetsHigh());
-        }];
-    }
 
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
+    [self.button makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo([WSELF messageLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.left.right.bottom.insets(kTHLEdgeInsetsHigh());
+    }];
 }
 
 - (void)updateConstraints {
     [super updateConstraints];
 }
 
-- (void)bindView {
-    RAC(self.iconView, imageURL) = RACObserve(self, imageURL);
-    RAC(self.iconView, image) = RACObserve(self, image);
-    RAC(self.textView, text) = RACObserve(self, notificationText);
-    RAC(self.button, rac_command) = RACObserve(self, acceptCommand);
+- (void)setMessageLabelText:(NSString *)text {
+    [self.messageLabel setText:text];
+}
+
+- (void)setButtonTitle:(NSString *)title {
+    [self.button.titleLabel setText:title];
+}
+
+- (void)setButtonTarget:(nullable id)target action:(nonnull SEL)selector forControlEvents:(UIControlEvents)event  {
+    [self.button addTarget:target action:selector forControlEvents:event];
+}
+
+- (void)setIconURL:(NSURL *)url {
+    [self.iconView setImageURL:url];
+}
+
+- (void)setImageViewWithURL:(NSURL *)url {
+    [self.imageView sd_setImageWithURL:url];
 }
 
 #pragma mark - Constructors
-- (THLPersonIconView *)newIconView {
-    THLPersonIconView *iconView = [THLPersonIconView new];
-    return iconView;
+- (UIImageView *)imageView {
+    if (!_imageView) {
+        _imageView = [UIImageView new];
+        [self addSubview:_imageView];
+    }
+    return _imageView;
 }
 
-- (UITextView *)newTextView {
-    UITextView *textView = THLNUITextView(kTHLNUIDetailTitle);
-    [textView setScrollEnabled:NO];
-    [textView setEditable:NO];
-    textView.textAlignment = NSTextAlignmentCenter;
-    textView.userInteractionEnabled = NO;
-    textView.backgroundColor = [UIColor clearColor];
-    return textView;
+- (THLPersonIconView *)iconView {
+    if (!_iconView) {
+        _iconView = [THLPersonIconView new];
+        [self addSubview:_iconView];
+    }
+    return _iconView;
 }
 
-- (THLActionBarButton *)newButton {
-    THLActionBarButton *button = [THLActionBarButton new];
-    [button setTitle:@"VIEW EVENT" animateChanges:NO];
-    return button;
+- (UILabel *)messageLabel {
+    if (!_messageLabel) {
+        _messageLabel = THLNUILabel(kTHLNUIDetailTitle);
+        _messageLabel.textAlignment = NSTextAlignmentCenter;
+        _messageLabel.backgroundColor = [UIColor clearColor];
+
+        [self addSubview:_messageLabel];
+    }
+
+    return _messageLabel;
 }
 
-- (void)dealloc {
-    DLog(@"Destroyed %@", self);
+- (THLActionButton *)button {
+    if (!_button) {
+        _button = [[THLActionButton alloc] initWithDefaultStyle];
+        [_button setTitle:@"VIEW EVENT"];
+        [self addSubview:_button];
+    }
+    return _button;
 }
 @end

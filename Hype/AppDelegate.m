@@ -128,10 +128,9 @@ static NSString *stripePublishableKey = @"pk_live_H8u89AfEDonln00iEUB0kKtZ";
     // Extract the notification data
     NSDictionary *notificationPayload = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
     if (notificationPayload) {
-        NSLog(@"app recieved notification from remote%@", notificationPayload);
         [_masterWireframe handlePushNotification:notificationPayload];
     } else{
-        NSLog(@"app did not recieve notification");
+//        NSLog(@"app did not recieve notification");
     }
     
     // Initialize Branch

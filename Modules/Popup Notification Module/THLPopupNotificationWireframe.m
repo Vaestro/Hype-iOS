@@ -44,16 +44,16 @@
 }
 
 - (void)presentInterface {
-    _view = [THLPopupNotificationView new];
-    [_presenter configureView:_view];
-    KLCPopup *popup = [KLCPopup popupWithContentView:_view
-                                                   showType:KLCPopupShowTypeBounceIn
-                                                dismissType:KLCPopupDismissTypeBounceOut
-                                                   maskType:KLCPopupMaskTypeDimmed
-                                   dismissOnBackgroundTouch:YES
-                                      dismissOnContentTouch:YES];
-    popup.dimmedMaskAlpha = 0.8;
-    [popup show];
+//    _view = [THLPopupNotificationView new];
+//    [_presenter configureView:_view];
+//    KLCPopup *popup = [KLCPopup popupWithContentView:_view
+//                                                   showType:KLCPopupShowTypeBounceIn
+//                                                dismissType:KLCPopupDismissTypeBounceOut
+//                                                   maskType:KLCPopupMaskTypeDimmed
+//                                   dismissOnBackgroundTouch:YES
+//                                      dismissOnContentTouch:YES];
+//    popup.dimmedMaskAlpha = 0.8;
+//    [popup show];
 }
 
 - (void)dealloc {

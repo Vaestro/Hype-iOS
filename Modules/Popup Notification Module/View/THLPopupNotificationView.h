@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "KLCPopup.h"
-#import "THLPopupNotificationViewModel.h"
 
-@protocol THLPopupNotificationViewModel;
-@interface THLPopupNotificationView : UIView<THLPopupNotificationViewModel>
+@interface THLPopupNotificationView : UIView
+- (void)setMessageLabelText:(NSString *)text;
+- (void)setButtonTitle:(NSString *)title;
+- (void)setButtonTarget:(nullable id)target action:(nonnull SEL)selector forControlEvents:(UIControlEvents)event;
+- (void)setIconURL:(NSURL *)url;
+- (void)setImageViewWithURL:(NSURL *)url;
 
 @end
 

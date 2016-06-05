@@ -45,6 +45,7 @@
 #import "THLPaymentViewController.h"
 #import "THLPerkCollectionViewController.h"
 #import "THLPerkDetailViewController.h"
+#import "THLPopupNotificationView.h"
 
 
 #define ENABLE_WAITLIST
@@ -64,19 +65,13 @@ THLPerkCollectionViewControllerDelegate
 >
 
 @property (nonatomic, strong) UIWindow *window;
-@property (nonatomic, strong) id currentWireframe;
-@property (nonatomic, nonatomic) UIViewController *containerVC;
 @property (nonatomic, strong) UITabBarController *masterTabBarController;
-
 
 @property (nonatomic, strong) THLUserProfileViewController *userProfileViewController;
 @property (nonatomic, strong) THLPerkCollectionViewController *perkCollectionViewController;
 
 @property (nonatomic, strong) THLLoginWireframe *loginWireframe;
 
-@property (nonatomic, strong) UIView *discoveryNavBarItem;
-@property (nonatomic, strong) UIView *guestProfileNavBarItem;
-@property (nonatomic, strong) UIView *dashboardNavBarItem;
 @property (nonatomic, strong) THLDataStore *contactsDataStore;
 
 @property (nonatomic, strong) UIViewController *viewController;
@@ -118,7 +113,6 @@ THLPerkCollectionViewControllerDelegate
 - (BFTask *)handlePushNotification:(NSDictionary *)pushInfo {
     if ([pushInfo objectForKey:@"notificationText"]) {
         THLPopupNotificationWireframe *popupNotificationWireframe = [_dependencyManager newPopupNotificationWireframe];
-        _currentWireframe = popupNotificationWireframe;
         [popupNotificationWireframe.moduleInterface setModuleDelegate:self];
         BFTask *task = [popupNotificationWireframe.moduleInterface presentPopupNotificationModuleInterfaceWithPushInfo:pushInfo];
 //        [_guestWireframe showNotificationBadge];
@@ -178,6 +172,20 @@ THLPerkCollectionViewControllerDelegate
     _masterTabBarController.viewControllers = views;
     [_masterTabBarController setSelectedIndex:0];
     _masterTabBarController.view.autoresizingMask=(UIViewAutoresizingFlexibleHeight);
+    
+    THLPopupNotificationView *popupView = [[THLPopupNotificationView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH*0.87, SCREEN_HEIGHT*0.67)];
+    [popupView setMessageLabelText:@"HELLO"];
+    [popupView setImageViewWithURL:[NSURL URLWithString:[THLUser currentUser].image.url]];
+    [popupView setIconURL:[NSURL URLWithString:[THLUser currentUser].image.url]];
+
+    KLCPopup *popup = [KLCPopup popupWithContentView:popupView
+                                            showType:KLCPopupShowTypeBounceIn
+                                         dismissType:KLCPopupDismissTypeBounceOut
+                                            maskType:KLCPopupMaskTypeDimmed
+                            dismissOnBackgroundTouch:YES
+                               dismissOnContentTouch:YES];
+    popup.dimmedMaskAlpha = 0.8;
+    [popup show];
 }
 
 #pragma mark -
@@ -402,14 +410,12 @@ THLPerkCollectionViewControllerDelegate
 
 - (void)presentOnboardingAndLoginInterface {
         THLLoginWireframe *loginWireframe = [_dependencyManager newLoginWireframe];
-        _currentWireframe = loginWireframe;
         [loginWireframe.moduleInterface setModuleDelegate:self];
         [loginWireframe.moduleInterface presentLoginModuleInterfaceWithOnboardingInWindow:_window];
 }
 
 - (void)presentLoginInterfaceOnViewController:(UIViewController *)viewController {
     THLLoginWireframe *loginWireframe = [_dependencyManager newLoginWireframe];
-    _currentWireframe = loginWireframe;
     [loginWireframe.moduleInterface setModuleDelegate:self];
     [loginWireframe.moduleInterface presentLoginModuleInterfaceOnViewController:viewController];
 }
