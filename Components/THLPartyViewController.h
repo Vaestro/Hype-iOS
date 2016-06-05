@@ -13,7 +13,6 @@
 @protocol THLPartyViewControllerDelegate <NSObject>
 - (void)partyViewControllerWantsToPresentInvitationControllerFor:(THLEvent *)event guestlistId:(NSString *)guestlistId;
 - (void)partyViewControllerWantsToPresentCheckoutForEvent:(PFObject *)event paymentInfo:(NSDictionary *)paymentInfo;
-
 @end
 
 @interface THLPartyViewController : PFQueryCollectionViewController

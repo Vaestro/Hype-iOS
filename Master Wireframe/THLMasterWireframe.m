@@ -55,6 +55,7 @@
 <
 THLLoginModuleDelegate,
 THLAdmissionsViewDelegate,
+THLTablePackageControllerDelegate,
 THLPopupNotificationModuleDelegate,
 THLMyEventsViewDelegate,
 THLDiscoveryViewControllerDelegate,
@@ -188,7 +189,7 @@ THLPerkCollectionViewControllerDelegate
 
 - (void)didSelectAdmissionOption:(PFObject *)admissionOption forEvent:(PFObject *)event {
     if ([admissionOption[@"type"] integerValue] == 0) {
-        THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:event paymentInfo:nil];
+        THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:event admissionOption:admissionOption];
         checkoutVC.delegate = self;
         UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:checkoutVC];
         [[self topViewController] presentViewController:navVC animated:YES completion:nil];
@@ -199,6 +200,15 @@ THLPerkCollectionViewControllerDelegate
         UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:packageDetailsVC];
         [[self topViewController] presentViewController:navVC animated:YES completion:nil];
     }
+}
+
+#pragma mark - TablePackageControllerDelegate
+
+- (void)packageControllerWantsToPresentCheckoutForEvent:(PFObject *)event andAdmissionOption:(PFObject *)admissionOption {
+    THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:event admissionOption:admissionOption];
+    checkoutVC.delegate = self;
+    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:checkoutVC];
+    [[self topViewController] presentViewController:navVC animated:YES completion:nil];
 }
 
 
