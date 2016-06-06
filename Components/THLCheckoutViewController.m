@@ -264,15 +264,43 @@
 
 - (void)applyCredits:(id)sender
 {
-    _total -= _creditsAmount;
-    _subTotal -= _creditsAmount;
-    [THLUser currentUser].credits -= _creditsAmount;
-    [[THLUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        if (!error) {
-            [self updateView];
-        }
-    }];
+    
+    UIAlertController * alert=   [UIAlertController
+                                  alertControllerWithTitle:@"Info"
+                                  message:@"If you apply your credits now, you will not be able to get them back"
+                                  preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* ok = [UIAlertAction
+                         actionWithTitle:@"OK"
+                         style:UIAlertActionStyleDefault
+                         handler:^(UIAlertAction * action)
+                         {
+                             _total -= _creditsAmount;
+                             _subTotal -= _creditsAmount;
+                             [THLUser currentUser].credits -= _creditsAmount;
+                             [[THLUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                                 if (!error) {
+                                     [self updateView];
+                                 }
+                             }];
 
+                             [alert dismissViewControllerAnimated:YES completion:nil];
+                             
+                         }];
+    UIAlertAction* cancel = [UIAlertAction
+                             actionWithTitle:@"Cancel"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                                 
+                             }];
+    
+    [alert addAction:ok];
+    [alert addAction:cancel];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
 }
 
 - (void)updateView {
