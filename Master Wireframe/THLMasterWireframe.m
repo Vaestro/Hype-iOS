@@ -201,6 +201,7 @@ THLPerkCollectionViewControllerDelegate
         THLTablePackageDetailsViewController *packageDetailsVC = [[THLTablePackageDetailsViewController alloc] initWithClassName:@"Bottle"];
         packageDetailsVC.event = event;
         packageDetailsVC.admissionOption = admissionOption;
+        packageDetailsVC.delegate = self;
         UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:packageDetailsVC];
         [[self topViewController] presentViewController:navVC animated:YES completion:nil];
     }
