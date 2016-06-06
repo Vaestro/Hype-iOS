@@ -175,7 +175,6 @@ THLPerkCollectionViewControllerDelegate
 }
 
 
-
 #pragma mark -
 #pragma mark PartyInvitationViewController
 #pragma mark Delegate

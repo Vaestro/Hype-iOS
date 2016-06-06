@@ -336,6 +336,7 @@
                                       @"amount": [NSNumber numberWithFloat:_total],
                                       @"customerName": [customer fullName],
                                       @"description": _admissionOption[@"name"],
+                                      @"admissionOptionId" : _admissionOption.objectId,
                                       @"guestlistInviteId": _paymentInfo[@"guestlistInviteId"]
                                               };
         
@@ -370,6 +371,7 @@
                                        @"venue": event.location.name,
                                        @"amount": [NSNumber numberWithFloat:_total],
                                        @"customerName": [customer fullName],
+                                       @"admissionOptionId" : _admissionOption.objectId,
                                        @"description": _admissionOption[@"name"],
                                        };
         

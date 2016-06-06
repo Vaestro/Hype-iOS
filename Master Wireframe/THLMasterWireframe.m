@@ -23,6 +23,7 @@
 #import "THLDataStore.h"
 #import "THLGuestEntity.h"
 #import "SVProgressHUD.h"
+#import "Parse.h"
 
 //Wireframes
 #import "THLLoginWireframe.h"
@@ -490,6 +491,7 @@ THLPerkCollectionViewControllerDelegate
     [THLUserManager logUserOut];
     [Intercom reset];
     [[Branch getInstance]logout];
+    [PFObject unpinAllObjects];
     [FBSDKAccessToken setCurrentAccessToken:nil];
     [_dependencyManager.databaseManager dropDB];
     [self presentOnboardingAndLoginInterface];
