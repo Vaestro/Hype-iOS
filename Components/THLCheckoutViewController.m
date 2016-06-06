@@ -29,6 +29,7 @@
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic) float serviceCharge;
 @property (nonatomic) float total;
+@property (nonatomic) float subTotal;
 @property (nonatomic) float creditsAmount;
 
 @property (nonatomic, strong) THLActionButton *purchaseButton;
@@ -61,6 +62,7 @@
         self.admissionOption = admissionOption;
         
         _serviceCharge = ([_admissionOption[@"price"] floatValue] * 0.029) + 0.30;
+        _subTotal = ([admissionOption[@"price"] floatValue]);
         _total = [_admissionOption[@"price"] floatValue] + _serviceCharge;
         
         if ([THLUser currentUser].credits > [_admissionOption[@"price"] floatValue]) {
@@ -202,7 +204,7 @@
         
         if ([_admissionOption[@"price"] floatValue] > 0) {
             _purchaseDetailsView.purchaseTitleLabel.text = purchaseTitleText;
-            _purchaseDetailsView.subtotalLabel.text = [NSString stringWithFormat:@"$%.2f", [_admissionOption[@"price"] floatValue]];
+            _purchaseDetailsView.subtotalLabel.text = [NSString stringWithFormat:@"$%.2f", _subTotal];
             _purchaseDetailsView.serviceChargeLabel.text = [NSString stringWithFormat:@"$%.2f", _serviceCharge];
             _purchaseDetailsView.totalLabel.text = [NSString stringWithFormat:@"$%.2f", _total];
         } else {
@@ -263,8 +265,23 @@
 - (void)applyCredits:(id)sender
 {
     _total -= _creditsAmount;
-    [_purchaseDetailsView setNeedsDisplay];
+    _subTotal -= _creditsAmount;
+    [THLUser currentUser].credits -= _creditsAmount;
+    [[THLUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (!error) {
+            [self updateView];
+        }
+    }];
+
 }
+
+- (void)updateView {
+    _applyCreditsButton.hidden = YES;
+    _applyCreditsLabel.hidden = YES;
+     _purchaseDetailsView.subtotalLabel.text = [NSString stringWithFormat:@"$%.2f", _subTotal];
+    _purchaseDetailsView.totalLabel.text = [NSString stringWithFormat:@"$%.2f", _total];
+}
+
 
 
 #pragma mark - Helpers
@@ -288,7 +305,7 @@
                                       @"eventId": event.objectId,
                                       @"eventTime": event.date,
                                       @"venue": event.location.name,
-                                      @"amount": [NSNumber numberWithFloat:[_admissionOption[@"price"] floatValue]],
+                                      @"amount": [NSNumber numberWithFloat:_total],
                                       @"customerName": [customer fullName],
                                       @"description": _admissionOption[@"name"],
                                       @"guestlistInviteId": _paymentInfo[@"guestlistInviteId"]
@@ -323,7 +340,7 @@
                                        @"eventId": event.objectId,
                                        @"eventTime": event.date,
                                        @"venue": event.location.name,
-                                       @"amount": [NSNumber numberWithFloat:[_admissionOption[@"price"] floatValue]],
+                                       @"amount": [NSNumber numberWithFloat:_total],
                                        @"customerName": [customer fullName],
                                        @"description": _admissionOption[@"name"],
                                        };
