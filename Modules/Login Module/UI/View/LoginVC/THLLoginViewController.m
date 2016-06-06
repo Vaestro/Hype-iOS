@@ -13,8 +13,16 @@
 #import "THLActionButton.h"
 #import "TTTAttributedLabel.h"
 #import "THLInformationViewController.h"
+#import "THLLoginService.h"
+#import "THLUser.h"
+#import "THLTextEntryViewController.h"
+#import <DigitsKit/DigitsKit.h>
+#import "THLAppearanceConstants.h"
 
 @interface THLLoginViewController()
+<
+THLTextEntryViewDelegate
+>
 @property (nonatomic, strong) UIBarButtonItem *dismissButton;
 @property (nonatomic, strong) UILabel *bodyLabel;
 @property (nonatomic, strong) UIImageView *logoImageView;
@@ -22,6 +30,9 @@
 @property (nonatomic, strong) THLActionButton *facebookLoginButton;
 @property (nonatomic, strong) TTTAttributedLabel *attributedLabel;
 
+@property (nonatomic, strong) THLLoginService *loginService;
+@property (nonatomic, strong) THLTextEntryViewController *userInfoVerificationViewController;
+@property (nonatomic, strong) DGTAppearance *digitsAppearance;
 @end
 
 @implementation THLLoginViewController
@@ -34,7 +45,6 @@
     [super viewDidLoad];
     [self constructView];
     [self layoutView];
-    [self bindView];
 //    self.edgesForExtendedLayout = UIRectEdgeNone;
 }
 
@@ -90,23 +100,100 @@
     [self.view sendSubviewToBack:_backgroundView];
 }
 
-- (void)bindView {
-    RAC(self.dismissButton, rac_command) = RACObserve(self, dismissCommand);
+- (void)handleLogin {
+    _loginService = [THLLoginService new];
+    [[_loginService login] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+        [self reroute];
+        return nil;
+    }];
+}
 
-    RAC(self.facebookLoginButton, rac_command) = RACObserve(self, loginCommand);
-    RAC(self.facebookLoginButton, titleLabel.text) = RACObserve(self, loginText);
-    [RACObserve(self, showActivityIndicator) subscribeNext:^(NSNumber *activityStatus) {
-        if (activityStatus == [NSNumber numberWithInt:0]) {
-            [SVProgressHUD dismiss];
-        }
-        else if (activityStatus == [NSNumber numberWithInt:1]) {
-            [SVProgressHUD show];
-        }
-        else if (activityStatus == [NSNumber numberWithInt:3]) {
-            [SVProgressHUD showErrorWithStatus:@"Error Logging In, Please Try Again."];
+- (void)handleDismiss {
+//    [self.delegate loginViewControllerdidDismiss];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)reroute {
+    if ([_loginService shouldAddFacebookInformation]) {
+        [_loginService saveFacebookUserInformation];
+    } else if ([_loginService shouldVerifyPhoneNumber]) {
+        [self presentNumberVerificationInterfaceInViewController];
+    } else if ([_loginService shouldVerifyEmail]) {
+        [self presentUserInfoVerificationView];
+    } else {
+        [self saveUserAndExitSignupFlow];
+    }
+}
+
+- (void)loginServiceDidSaveUserFacebookInformation {
+    [self reroute];
+}
+
+- (void)saveUserAndExitSignupFlow {
+    WEAKSELF();
+    THLUser *currentUser = [THLUser currentUser];
+    [[currentUser saveInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask<NSNumber *> *task) {
+        [WSELF.delegate loginViewControllerDidFinishSignup];
+        return nil;
+    }];
+}
+
+- (void)presentUserInfoVerificationView {
+    [self.navigationController pushViewController:self.userInfoVerificationViewController animated:YES];
+}
+
+- (void)emailEntryView:(THLTextEntryViewController *)view userDidSubmitEmail:(NSString *)email {
+    [THLUser currentUser].email = email;
+    [self reroute];
+}
+
+- (void)presentNumberVerificationInterfaceInViewController {
+    WEAKSELF();
+    STRONGSELF();
+    DGTAuthenticationConfiguration *configuration = [DGTAuthenticationConfiguration new];
+    
+    configuration.title = NSLocalizedString(@"Number Verification", nil);
+    configuration.appearance = self.digitsAppearance;
+    [[Digits sharedInstance] authenticateWithViewController:self configuration:configuration completion:^(DGTSession *session, NSError *error) {
+        if (!error) {
+            [SSELF handleNumberVerificationSuccess:session];
         }
     }];
 }
+
+#pragma mark - Logic
+- (void)handleNumberVerificationSuccess:(DGTSession *)session {
+    [THLUser currentUser].phoneNumber = session.phoneNumber;
+    [self reroute];
+}
+
+-(BOOL)prefersStatusBarHidden{
+    return YES;
+}
+
+#pragma mark - Accessors
+- (THLTextEntryViewController *)userInfoVerificationViewController {
+    if (!_userInfoVerificationViewController) {
+        _userInfoVerificationViewController  = [[THLTextEntryViewController alloc] initWithNibName:nil bundle:nil];
+        _userInfoVerificationViewController.delegate = self;
+        _userInfoVerificationViewController.titleText = @"Confirm Info";
+        _userInfoVerificationViewController.descriptionText = @"We use your email and phone number to send you confirmations and receipts";
+        _userInfoVerificationViewController.buttonText = @"Continue";
+        _userInfoVerificationViewController.type = THLTextEntryTypeEmail;
+    }
+    return _userInfoVerificationViewController;
+}
+
+- (DGTAppearance *)digitsAppearance {
+    if (!_digitsAppearance) {
+        _digitsAppearance = [DGTAppearance new];
+        _digitsAppearance.backgroundColor = kTHLNUIPrimaryBackgroundColor;
+        _digitsAppearance.accentColor = kTHLNUIAccentColor;
+        _digitsAppearance.logoImage = [UIImage imageNamed:@"Hypelist-Icon"];
+    }
+    return _digitsAppearance;
+}
+
 
 - (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url {
     if ([[url scheme] hasPrefix:@"action"]) {
@@ -159,18 +246,20 @@
 }
 
 - (UIBarButtonItem *)newDismissButton {
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"cancel_button"] style:UIBarButtonItemStylePlain target:nil action:NULL];
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"cancel_button"] style:UIBarButtonItemStylePlain target:self action:@selector(handleDismiss)];
     [item setTintColor:kTHLNUIGrayFontColor];
     [item setTitleTextAttributes:
      [NSDictionary dictionaryWithObjectsAndKeys:
       kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
                         forState:UIControlStateNormal];
+    
     return item;
 }
 
 - (THLActionButton *)newFacebookLoginButton {
     THLActionButton *loginButton = [[THLActionButton alloc] initWithInverseStyle];
     [loginButton setTitle:@"Login with Facebook"];
+    [loginButton addTarget:self action:@selector(handleLogin) forControlEvents:UIControlEventTouchUpInside];
     return loginButton;
 }
 

@@ -29,6 +29,8 @@
 @class THLPerkDetailWireframe;
 @class THLViewDataSourceFactory;
 @class APAddressBook;
+@class THLGuestlistService;
+@class THLDataStore;
 /**
  *  Manages all dependenies for the app.
  */
@@ -55,4 +57,6 @@ THLGuestFlowDependencyManager
 - (THLYapDatabaseManager *)databaseManager;
 - (THLViewDataSourceFactory *)viewDataSourceFactory;
 - (APAddressBook *)addressBook;
+- (THLGuestlistService *)guestlistService;
+- (THLDataStore *)contactsDataStore;
 @end

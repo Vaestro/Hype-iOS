@@ -93,6 +93,7 @@
 @property (nonatomic, strong) THLDataStore *guestlistInviteDataStore;
 @property (nonatomic, strong) THLDataStore *perkStoreItemDataStore;
 @property (nonatomic, strong) THLDataStore *messageListDataStore;
+@property (nonatomic, strong) THLDataStore *contactsDataStore;
 
 //Services
 @property (nonatomic, strong) THLEventService *eventService;
@@ -324,6 +325,14 @@
 		_guestDataStore = [[THLDataStore alloc] initForEntity:[THLGuestEntity class] databaseManager:self.databaseManager];
 	}
 	return _guestDataStore;
+}
+
+- (THLDataStore *)contactsDataStore
+{
+    if (!_contactsDataStore) {
+        _contactsDataStore = [[THLDataStore alloc] initForEntity:[THLGuestEntity class] databaseManager:self.databaseManager];
+    }
+    return _contactsDataStore;
 }
 
 - (THLDataStore *)guestlistDataStore

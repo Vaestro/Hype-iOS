@@ -245,10 +245,10 @@
                                         if (error) {
                                             [self displayError:[error localizedDescription]];
                                         } else {
-//                                            [self.delegate checkoutViewController:self didFinishPurchasingForGuestlistInvite:response];
-//                                            [self.navigationController dismissViewControllerAnimated:TRUE completion:^{
-//                                                [_completionAction execute:nil];
-//                                            }];
+                                             Mixpanel *mixpanel = [Mixpanel sharedInstance];
+                                            [mixpanel track:@"Accepted invite and purchased ticket"];
+                                           [mixpanel.people increment:@"tickets purchased" by:@1];
+                                            
                                             [[self queryForGuestlistInviteForEvent:_event.objectId] getFirstObjectInBackgroundWithBlock:^(PFObject *guestlistInvite, NSError *queryError) {
                                                 if (!queryError) {
                                                     [guestlistInvite pinInBackground];
@@ -278,10 +278,10 @@
                                         if (error) {
                                             [self displayError:[error localizedDescription]];
                                         } else {
-//                                            [self.delegate checkoutViewController:self didFinishSubmittingGuestlist:guestlistId];
-//                                            [self.navigationController dismissViewControllerAnimated:TRUE completion:^{
-//                                                [_completionAction execute:nil];
-//                                            }];
+                                            Mixpanel *mixpanel = [Mixpanel sharedInstance];
+                                            [mixpanel track:@"Purchased ticket"];
+                                            [mixpanel.people increment:@"tickets purchased" by:@1];
+                                            
                                             [[self queryForGuestlistInviteForEvent:_event.objectId] getFirstObjectInBackgroundWithBlock:^(PFObject *guestlistInvite, NSError *queryError) {
                                                 if (!queryError) {
                                                     [guestlistInvite pinInBackground];

@@ -9,7 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "THLLoginViewInterface.h"
 
+@protocol THLLoginViewControllerDelegate <NSObject>
+
+-(void)loginViewControllerDidFinishSignup;
+-(void)loginViewControllerdidDismiss;
+
+@end
 
 @interface THLLoginViewController : UIViewController<THLLoginViewInterface>
+@property (nonatomic, weak) id<THLLoginViewControllerDelegate> delegate;
 
 @end

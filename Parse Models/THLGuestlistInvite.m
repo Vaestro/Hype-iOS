@@ -10,7 +10,10 @@
 
 @implementation THLGuestlistInvite
 @dynamic guest;
+@dynamic sender;
 @dynamic guestlist;
+@dynamic event;
+
 @dynamic response;
 @dynamic checkInStatus;
 @dynamic didOpen;

@@ -15,6 +15,7 @@
 #import "Intercom/intercom.h"
 #import "THLPerkStoreCell.h"
 #import "THLUser.h"
+#import "TTTAttributedLabel.h"
 
 @interface THLPerkCollectionViewController()
 @property (nonatomic, strong) UIBarButtonItem *intercomBarButton;
@@ -22,6 +23,8 @@
 @property (nonatomic, strong) UILabel *creditsTitleLabel;
 @property (nonatomic, strong) UILabel *userCreditsLabel;
 @property (nonatomic, strong) UILabel *creditBalanceLabel;
+@property (nonatomic, strong) TTTAttributedLabel *navBarTitleLabel;
+
 @end
 
 @implementation THLPerkCollectionViewController
@@ -49,7 +52,7 @@
     self.view.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     self.collectionView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
 
-    self.navigationController.navigationBar.topItem.title = @"PERKS";
+    self.navigationItem.titleView = self.navBarTitleLabel;
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.automaticallyAdjustsScrollViewInsets = YES;
     
@@ -151,6 +154,27 @@
 
 
 #pragma mark - Accessors
+- (TTTAttributedLabel *)navBarTitleLabel
+{
+    if (!_navBarTitleLabel) {
+        _navBarTitleLabel = [TTTAttributedLabel new];
+        _navBarTitleLabel.numberOfLines = 1;
+        _navBarTitleLabel.textAlignment = NSTextAlignmentCenter;
+        
+        
+        NSAttributedString *attString = [[NSAttributedString alloc] initWithString:@"PERKS"
+                                                                        attributes:@{
+                                                                                     (id)kCTForegroundColorAttributeName : (id)[UIColor whiteColor].CGColor,
+                                                                                     NSFontAttributeName : [UIFont systemFontOfSize:16],
+                                                                                     NSKernAttributeName : @4.5f
+                                                                                     }];
+        _navBarTitleLabel.text = attString;
+        
+        [_navBarTitleLabel sizeToFit];
+    }
+    
+    return _navBarTitleLabel;
+}
 
 - (UILabel *)creditsTitleLabel {
     if (!_creditsTitleLabel) {

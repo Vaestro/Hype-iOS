@@ -73,6 +73,7 @@ viewDataSourceFactory:(THLViewDataSourceFactory *)viewDataSourceFactory
         addressBook:(APAddressBook *)addressBook {
     if (self = [super init]) {
         self.event = event;
+        self.creditsPayout = [NSString stringWithFormat:@"%d", event.creditsPayout];
         self.databaseManager = databaseManager;
         self.viewDataSourceFactory = viewDataSourceFactory;
         self.addressBook = addressBook;

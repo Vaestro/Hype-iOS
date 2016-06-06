@@ -12,72 +12,158 @@
 #import "SVProgressHUD.h"
 #import "THLResourceManager.h"
 #import "THLActionBarButton.h"
+#import "THLLoginService.h"
+#import "THLUser.h"
+#import "THLTextEntryViewController.h"
+#import <DigitsKit/DigitsKit.h>
+#import "THLAppearanceConstants.h"
 
 //static CGFloat const LOGIN_BUTTON_HEIGHT = 50;
 //static CGFloat const PRIVACY_IMAGEVIEW_DIMENSION = 14;
 
 @interface THLOnboardingViewController()
-@property (nonatomic, strong) OnboardingViewController *onboardingVC;
+<
+THLTextEntryViewDelegate,
+THLLoginServiceDelegate
+>
+@property (nonatomic, strong) OnboardingViewController *onboardingViewController;
+@property (nonatomic, strong) THLLoginService *loginService;
+@property (nonatomic, strong) THLTextEntryViewController *userInfoVerificationViewController;
+@property (nonatomic, strong) DGTAppearance *digitsAppearance;
+
 @end
 
 @implementation THLOnboardingViewController
-@synthesize showActivityIndicator;
-@synthesize skipCommand;
-@synthesize loginCommand;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self constructView];
-    [self layoutView];
-    [self bindView];
     self.edgesForExtendedLayout = UIRectEdgeNone;
-}
-
-- (void)constructView {
-    _onboardingVC = [self newOnboardingViewController];
-}
-
-- (void)layoutView {
     self.view.backgroundColor = [UIColor blackColor];
-    [self addChildViewController:_onboardingVC];
-    [_onboardingVC didMoveToParentViewController:self];
-    
-    [self.view addSubviews:@[_onboardingVC.view]];
-    
-    [_onboardingVC.view makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.insets(UIEdgeInsetsZero);
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+//                                                  forBarMetrics:UIBarMetricsDefault];
+//    self.navigationController.navigationBar.shadowImage = [UIImage new];
+//    self.navigationController.navigationBar.translucent = YES;
+//    self.navigationController.view.backgroundColor = [UIColor clearColor];
+//    self.automaticallyAdjustsScrollViewInsets = NO;
+    [self.onboardingViewController.view makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(UIEdgeInsetsZero);
     }];
 }
 
-- (void)bindView {
-    [RACObserve(self, showActivityIndicator) subscribeNext:^(NSNumber *activityStatus) {
-        if (activityStatus == [NSNumber numberWithInt:0]) {
-            [SVProgressHUD dismiss];
-        }
-        else if (activityStatus == [NSNumber numberWithInt:1]) {
-            [SVProgressHUD show];
-        }
-        else if (activityStatus == [NSNumber numberWithInt:3]) {
-            [SVProgressHUD showErrorWithStatus:@"Error Logging In, Please Try Again."];
+- (void)handleLogin {
+    _loginService = [THLLoginService new];
+    [[_loginService login] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+        [self reroute];
+        return nil;
+    }];
+}
+
+- (void)reroute {
+    if ([_loginService shouldAddFacebookInformation]) {
+        [_loginService saveFacebookUserInformation];
+    } else if ([_loginService shouldVerifyPhoneNumber]) {
+        [self presentNumberVerificationInterfaceInViewController];
+    } else if ([_loginService shouldVerifyEmail]) {
+        [self presentUserInfoVerificationView];
+    } else {
+        [self saveUserAndExitSignupFlow];
+    }
+}
+
+- (void)loginServiceDidSaveUserFacebookInformation {
+    [self reroute];
+}
+
+- (void)saveUserAndExitSignupFlow {
+    WEAKSELF();
+    THLUser *currentUser = [THLUser currentUser];
+    [[currentUser saveInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask<NSNumber *> *task) {
+        [WSELF.delegate onboardingViewControllerdidFinishSignup];
+        return nil;
+    }];
+}
+
+- (void)presentUserInfoVerificationView {
+    [self.navigationController pushViewController:self.userInfoVerificationViewController animated:YES];
+}
+
+- (void)emailEntryView:(THLTextEntryViewController *)view userDidSubmitEmail:(NSString *)email {
+    [THLUser currentUser].email = email;
+    [self reroute];
+}
+
+- (void)presentNumberVerificationInterfaceInViewController {
+    WEAKSELF();
+    STRONGSELF();
+    DGTAuthenticationConfiguration *configuration = [DGTAuthenticationConfiguration new];
+    
+    configuration.title = NSLocalizedString(@"Number Verification", nil);
+    configuration.appearance = self.digitsAppearance;
+    [[Digits sharedInstance] authenticateWithViewController:self configuration:configuration completion:^(DGTSession *session, NSError *error) {
+        if (!error) {
+            [SSELF handleNumberVerificationSuccess:session];
         }
     }];
 }
 
-#pragma mark - Constructors
-- (OnboardingViewController *)newOnboardingViewController {
-    OnboardingViewController *onboardingVC = [OnboardingViewController onboardWithBackgroundVideoURL:[THLResourceManager onboardingVideo] contents:[self onboardingContentViewControllers]];
-    onboardingVC.fontName = @"Raleway-Bold";
-    onboardingVC.titleFontSize = 24;
-    onboardingVC.subtitleFontSize = 36;
-    onboardingVC.bodyFontSize = 18;
-    onboardingVC.topPadding = 0;
-    onboardingVC.underIconPadding = SCREEN_HEIGHT*0.067;
-    onboardingVC.underTitlePadding = 0;
-    onboardingVC.underSubtitlePadding = SCREEN_HEIGHT*0.2;
-    onboardingVC.bottomPadding = -10;
-    onboardingVC.shouldMaskBackground = NO;
-    onboardingVC.shouldFadeTransitions = YES;
-    return onboardingVC;
+#pragma mark - Logic
+- (void)handleNumberVerificationSuccess:(DGTSession *)session {
+    [THLUser currentUser].phoneNumber = session.phoneNumber;
+    [self reroute];
+}
+
+-(BOOL)prefersStatusBarHidden{
+    return YES;
+}
+
+- (void)dealloc {
+    DLog(@"Destroyed Onboarding View Controller");
+}
+
+#pragma mark - Accessors
+- (THLTextEntryViewController *)userInfoVerificationViewController {
+    if (!_userInfoVerificationViewController) {
+        _userInfoVerificationViewController  = [[THLTextEntryViewController alloc] initWithNibName:nil bundle:nil];
+        _userInfoVerificationViewController.delegate = self;
+        _userInfoVerificationViewController.titleText = @"Confirm Info";
+        _userInfoVerificationViewController.descriptionText = @"We use your email and phone number to send you confirmations and receipts";
+        _userInfoVerificationViewController.buttonText = @"Continue";
+        _userInfoVerificationViewController.type = THLTextEntryTypeEmail;
+    }
+    return _userInfoVerificationViewController;
+}
+
+- (DGTAppearance *)digitsAppearance {
+    if (!_digitsAppearance) {
+        _digitsAppearance = [DGTAppearance new];
+        _digitsAppearance.backgroundColor = kTHLNUIPrimaryBackgroundColor;
+        _digitsAppearance.accentColor = kTHLNUIAccentColor;
+        _digitsAppearance.logoImage = [UIImage imageNamed:@"Hypelist-Icon"];
+    }
+    return _digitsAppearance;
+}
+
+- (OnboardingViewController *)onboardingViewController {
+    if (!_onboardingViewController) {
+        _onboardingViewController = [OnboardingViewController onboardWithBackgroundVideoURL:[THLResourceManager onboardingVideo] contents:[self onboardingContentViewControllers]];
+        _onboardingViewController.fontName = @"Raleway-Bold";
+        _onboardingViewController.titleFontSize = 24;
+        _onboardingViewController.subtitleFontSize = 36;
+        _onboardingViewController.bodyFontSize = 18;
+        _onboardingViewController.topPadding = 0;
+        _onboardingViewController.underIconPadding = SCREEN_HEIGHT*0.067;
+        _onboardingViewController.underTitlePadding = 0;
+        _onboardingViewController.underSubtitlePadding = SCREEN_HEIGHT*0.2;
+        _onboardingViewController.bottomPadding = -10;
+        _onboardingViewController.shouldMaskBackground = NO;
+        _onboardingViewController.shouldFadeTransitions = YES;
+        [self addChildViewController:_onboardingViewController];
+        [_onboardingViewController didMoveToParentViewController:self];
+        
+        [self.view addSubviews:@[_onboardingViewController.view]];
+    }
+
+    return _onboardingViewController;
 }
 
 - (NSArray *)onboardingContentViewControllers {
@@ -104,11 +190,11 @@
                                                    backgroundImage:[UIImage imageNamed:@"OnboardingLoginBG"]
                                                    buttonText:@"Login with facebook"
                                                    action:^{
-                                                    [loginCommand execute:nil];
+                                                       [self handleLogin];
                                                    }
                                                    secondaryButtonText:@"I'll signup later"
                                                    secondaryAction:^{
-                                                       [skipCommand execute:nil];
+                                                       [self.delegate onboardingViewControllerdidSkipSignup];
                                                    }];
     
     return @[firstPage,
@@ -116,14 +202,6 @@
              thirdPage,
              fourthPage,
              fifthPage];
-}
-
--(BOOL)prefersStatusBarHidden{
-    return YES;
-}
-
-- (void)dealloc {
-    DLog(@"Destroyed %@", self);
 }
 
 @end

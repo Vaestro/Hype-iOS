@@ -9,6 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "THLOnboardingViewInterface.h"
 
+
+@protocol THLOnboardingViewControllerDelegate <NSObject>
+
+-(void)onboardingViewControllerdidFinishSignup;
+-(void)onboardingViewControllerdidSkipSignup;
+
+@end
+
+
 @interface THLOnboardingViewController : UIViewController<THLOnboardingViewInterface>
+@property (nonatomic, weak) id<THLOnboardingViewControllerDelegate> delegate;
 
 @end

@@ -9,7 +9,15 @@
 #import <Foundation/Foundation.h>
 
 @class BFTask;
+
+
 @protocol THLLoginServiceInterface <NSObject>
+
 - (BFTask *)login;
 - (BFTask *)getFacebookUserDictionary;
+- (void)saveFacebookUserInformation;
+- (BOOL)shouldLogin;
+- (BOOL)shouldAddFacebookInformation;
+- (BOOL)shouldVerifyEmail;
+- (BOOL)shouldVerifyPhoneNumber;
 @end

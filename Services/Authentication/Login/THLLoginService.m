@@ -10,6 +10,7 @@
 #import "PFFacebookUtils.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "SDWebImageManager.h"
+#import "THLUser.h"
 
 @implementation THLLoginService
 - (BFTask *)login {
@@ -43,6 +44,57 @@
         }
     }];
     return completionSource.task;
+}
+
+- (void)saveFacebookUserInformation {
+    WEAKSELF();
+    [[self getFacebookUserDictionary] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+        NSDictionary *userDictionary = task.result;
+        THLUser *currentUser = [THLUser currentUser];
+        currentUser.fbId = userDictionary[@"id"];
+        currentUser.firstName = userDictionary[@"first_name"];
+        currentUser.lastName = userDictionary[@"last_name"];
+        currentUser.fbEmail = userDictionary[@"email"];
+        currentUser.sex = ([userDictionary[@"gender"] isEqualToString:@"male"]) ? THLSexMale : THLSexFemale;
+        
+        NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:userDictionary[@"picture"][@"data"][@"url"]]];
+        PFFile *profilePicture = [PFFile fileWithName:@"profile_picture.png" data:imageData];
+        [profilePicture save];
+        currentUser.image = profilePicture;
+        //TODO: Add Location and Birthday upon Facebook Approval
+        //        [WSELF user].fbBirthday = [[[YLMoment alloc] initWithDateAsString:userDictionary[@"birthday"]] date];
+        //        [WSELF user].location = userDictionary[@"location"];
+        if (userDictionary[@"verified"]) {
+            currentUser.fbVerified = TRUE;
+        }
+        else {
+            currentUser.fbVerified = FALSE;
+        }
+        currentUser.type = THLUserTypeGuest;
+        [[currentUser saveInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask<NSNumber *> *saveTask) {
+            [WSELF.delegate loginServiceDidSaveUserFacebookInformation];
+            return nil;
+        }];
+        return task;
+    }];
+    
+
+}
+
+- (BOOL)shouldLogin {
+    return [THLUser currentUser] == nil;
+}
+
+- (BOOL)shouldAddFacebookInformation {
+    return [THLUser currentUser].fbId == nil;
+}
+
+- (BOOL)shouldVerifyPhoneNumber {
+    return [THLUser currentUser].phoneNumber == nil || [[THLUser currentUser].phoneNumber isEqualToString:@""];
+}
+
+- (BOOL)shouldVerifyEmail {
+    return [THLUser currentUser].email == nil || [[THLUser currentUser].email isEqualToString:@""];
 }
 
 - (void)dealloc {
