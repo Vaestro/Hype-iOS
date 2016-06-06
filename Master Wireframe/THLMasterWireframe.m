@@ -26,6 +26,7 @@
 #import "THLGuestlistService.h"
 #import "THLEvent.h"
 #import "THLGuestlistInvite.h"
+#import "Parse.h"
 
 //Delegates
 #import "THLLoginModuleDelegate.h"
@@ -215,6 +216,7 @@ THLLoginViewControllerDelegate
         packageDetailsVC.delegate = self;
         packageDetailsVC.event = event;
         packageDetailsVC.admissionOption = admissionOption;
+        packageDetailsVC.delegate = self;
         UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:packageDetailsVC];
         [[self topViewController] presentViewController:navVC animated:YES completion:nil];
     }
@@ -503,6 +505,7 @@ THLLoginViewControllerDelegate
     [THLUserManager logUserOut];
     [Intercom reset];
     [[Branch getInstance]logout];
+    [PFObject unpinAllObjects];
     [FBSDKAccessToken setCurrentAccessToken:nil];
     [_dependencyManager.databaseManager dropDB];
     [self presentOnboardingViewController];

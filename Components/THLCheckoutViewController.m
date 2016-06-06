@@ -27,10 +27,16 @@
 @property (nonatomic) PFObject *admissionOption;
 @property (nonatomic, strong) RACCommand *completionAction;
 @property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic) float serviceCharge;
+@property (nonatomic) float total;
+@property (nonatomic) float subTotal;
+@property (nonatomic) float creditsAmount;
 
 @property (nonatomic, strong) THLActionButton *purchaseButton;
 @property (nonatomic, strong) THLPurchaseDetailsView *purchaseDetailsView;
 @property (nonatomic, strong) THLPaymentMethodView *paymentMethodView;
+@property (nonatomic, strong) UIButton *applyCreditsButton;
+@property (nonatomic, strong) UILabel *applyCreditsLabel;
 
 @property (nonatomic, strong) NSDictionary *paymentInfo;
 @property (nonatomic, strong) THLImportantInformationView *importantInformationView;
@@ -54,6 +60,18 @@
     if (self = [super init]) {
         self.event = (THLEvent *)event;
         self.admissionOption = admissionOption;
+        
+        _serviceCharge = ([_admissionOption[@"price"] floatValue] * 0.029) + 0.30;
+        _subTotal = ([admissionOption[@"price"] floatValue]);
+        _total = [_admissionOption[@"price"] floatValue] + _serviceCharge;
+        
+        if ([THLUser currentUser].credits > [_admissionOption[@"price"] floatValue]) {
+            _creditsAmount = [_admissionOption[@"price"] floatValue];
+        } else {
+            _creditsAmount = [THLUser currentUser].credits;
+        }
+        
+        
     }
     return self;
 }
@@ -90,17 +108,27 @@
     }];
     
     WEAKSELF();
-    [contentView addSubviews:@[self.purchaseDetailsView, self.paymentMethodView, self.importantInformationView]];
+    [contentView addSubviews:@[self.purchaseDetailsView, self.paymentMethodView, self.importantInformationView, self.applyCreditsLabel, self.applyCreditsButton]];
     
     [self.purchaseDetailsView makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
-    [self.paymentMethodView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(WSELF.purchaseDetailsView.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
-        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+    [self.applyCreditsLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.purchaseDetailsView.mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.right.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
+    [self.applyCreditsButton makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.purchaseDetailsView.mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.left.insets(kTHLEdgeInsetsSuperHigh());
+    }];
+
+    [self.paymentMethodView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.applyCreditsLabel.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+    }];
+
     [self.importantInformationView makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(WSELF.paymentMethodView.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
@@ -172,14 +200,13 @@
         _purchaseDetailsView = [THLPurchaseDetailsView new];
         _purchaseDetailsView.titleLabel.text = @"Purchase Details";
         
-        float serviceCharge = ([_admissionOption[@"price"] floatValue] * 0.029) + 0.30;
         NSString *purchaseTitleText = _admissionOption[@"name"];
         
         if ([_admissionOption[@"price"] floatValue] > 0) {
             _purchaseDetailsView.purchaseTitleLabel.text = purchaseTitleText;
-            _purchaseDetailsView.subtotalLabel.text = [NSString stringWithFormat:@"$%.2f", [_admissionOption[@"price"] floatValue]];
-            _purchaseDetailsView.serviceChargeLabel.text = [NSString stringWithFormat:@"$%.2f", serviceCharge];
-            _purchaseDetailsView.totalLabel.text = [NSString stringWithFormat:@"$%.2f", [_admissionOption[@"price"] floatValue] + serviceCharge];
+            _purchaseDetailsView.subtotalLabel.text = [NSString stringWithFormat:@"$%.2f", _subTotal];
+            _purchaseDetailsView.serviceChargeLabel.text = [NSString stringWithFormat:@"$%.2f", _serviceCharge];
+            _purchaseDetailsView.totalLabel.text = [NSString stringWithFormat:@"$%.2f", _total];
         } else {
             _purchaseDetailsView.purchaseTitleLabel.text = purchaseTitleText;
             _purchaseDetailsView.subtotalLabel.text = @"FREE";
@@ -190,6 +217,32 @@
 
     return _purchaseDetailsView;
 }
+
+- (UILabel *)applyCreditsLabel
+{
+    if (!_applyCreditsLabel) {
+        _applyCreditsLabel = [UILabel new];
+        _applyCreditsLabel.text = [NSString stringWithFormat:@"$%.2f", _creditsAmount];
+        _applyCreditsLabel.textColor = kTHLNUIAccentColor;
+    }
+    
+    return _applyCreditsLabel;
+}
+
+- (UIButton *)applyCreditsButton
+{
+    if (!_applyCreditsButton) {
+        _applyCreditsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_applyCreditsButton setTitle:@"Apply Credits" forState:UIControlStateNormal];
+        [_applyCreditsButton addTarget:self
+                   action:@selector(applyCredits:)
+         forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _applyCreditsButton;
+}
+
+
+
 
 #pragma mark - Event handlers
 - (void)back:(id)sender
@@ -208,6 +261,55 @@
 //        [self displayError:@"You currently don't have a credit card on file. Please add a payment method in your profile"];
     }
 }
+
+- (void)applyCredits:(id)sender
+{
+    
+    UIAlertController * alert=   [UIAlertController
+                                  alertControllerWithTitle:@"Info"
+                                  message:@"If you apply your credits now, you will not be able to get them back"
+                                  preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* ok = [UIAlertAction
+                         actionWithTitle:@"OK"
+                         style:UIAlertActionStyleDefault
+                         handler:^(UIAlertAction * action)
+                         {
+                             _total -= _creditsAmount;
+                             _subTotal -= _creditsAmount;
+                             [THLUser currentUser].credits -= _creditsAmount;
+                             [[THLUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                                 if (!error) {
+                                     [self updateView];
+                                 }
+                             }];
+
+                             [alert dismissViewControllerAnimated:YES completion:nil];
+                             
+                         }];
+    UIAlertAction* cancel = [UIAlertAction
+                             actionWithTitle:@"Cancel"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [alert dismissViewControllerAnimated:YES completion:nil];
+                                 
+                             }];
+    
+    [alert addAction:ok];
+    [alert addAction:cancel];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
+}
+
+- (void)updateView {
+    _applyCreditsButton.hidden = YES;
+    _applyCreditsLabel.hidden = YES;
+     _purchaseDetailsView.subtotalLabel.text = [NSString stringWithFormat:@"$%.2f", _subTotal];
+    _purchaseDetailsView.totalLabel.text = [NSString stringWithFormat:@"$%.2f", _total];
+}
+
 
 
 #pragma mark - Helpers
@@ -231,9 +333,10 @@
                                       @"eventId": event.objectId,
                                       @"eventTime": event.date,
                                       @"venue": event.location.name,
-                                      @"amount": [NSNumber numberWithFloat:[_admissionOption[@"price"] floatValue]],
+                                      @"amount": [NSNumber numberWithFloat:_total],
                                       @"customerName": [customer fullName],
                                       @"description": _admissionOption[@"name"],
+                                      @"admissionOptionId" : _admissionOption.objectId,
                                       @"guestlistInviteId": _paymentInfo[@"guestlistInviteId"]
                                               };
         
@@ -266,8 +369,9 @@
                                        @"eventId": event.objectId,
                                        @"eventTime": event.date,
                                        @"venue": event.location.name,
-                                       @"amount": [NSNumber numberWithFloat:[_admissionOption[@"price"] floatValue]],
+                                       @"amount": [NSNumber numberWithFloat:_total],
                                        @"customerName": [customer fullName],
+                                       @"admissionOptionId" : _admissionOption.objectId,
                                        @"description": _admissionOption[@"name"],
                                        };
         

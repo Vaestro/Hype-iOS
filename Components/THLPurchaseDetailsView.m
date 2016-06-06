@@ -165,4 +165,13 @@
     return _lineItemSeparatorView;
 }
 
+- (void)display
+{
+    CALayer *layer = self.layer;
+    [layer setNeedsDisplay];
+    [layer displayIfNeeded];
+}
+
+
+
 @end
