@@ -71,7 +71,7 @@ THLPermissionRequestViewControllerDelegate
         [_loginService createMixpanelProfile];
         [self presentPermissionRequestViewController];
     } else {
-        [self saveUserAndExitSignupFlow];
+        [self exitSignupFlow];
     }
 }
 - (void)loginServiceDidSaveUserFacebookInformation {
@@ -81,20 +81,22 @@ THLPermissionRequestViewControllerDelegate
 - (void)applicationDidRegisterForRemoteNotifications {
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:@"Registered for push notification permission"];
-    [self saveUserAndExitSignupFlow];
+    [self exitSignupFlow];
 }
 
 - (void)permissionViewControllerDeclinedPermission {
-    [self saveUserAndExitSignupFlow];
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"Declined push notification permission"];
+    [self exitSignupFlow];
 }
 
-- (void)saveUserAndExitSignupFlow {
-    WEAKSELF();
-    THLUser *currentUser = [THLUser currentUser];
-    [[currentUser saveInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask<NSNumber *> *task) {
-        [WSELF.delegate onboardingViewControllerdidFinishSignup];
-        return nil;
-    }];
+- (void)exitSignupFlow {
+//    WEAKSELF();
+//    THLUser *currentUser = [THLUser currentUser];
+//    [[currentUser saveInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask<NSNumber *> *task) {
+        [self.delegate onboardingViewControllerdidFinishSignup];
+//        return nil;
+//    }];
 }
 
 - (void)presentPermissionRequestViewController {

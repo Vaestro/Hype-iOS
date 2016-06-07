@@ -51,6 +51,7 @@ UIApplicationDelegate
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(SCREEN_WIDTH*0.69);
+        make.centerX.equalTo(0);
         make.bottom.equalTo(WSELF.previewImage.mas_top).insets(kTHLEdgeInsetsSuperHigh());
     }];
 
@@ -68,8 +69,6 @@ UIApplicationDelegate
 }
 
 - (void)declinePermission {
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel track:@"Declined push notification permission"];
     [self.delegate permissionViewControllerDeclinedPermission];
 }
 

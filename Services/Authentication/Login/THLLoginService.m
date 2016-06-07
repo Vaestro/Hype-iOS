@@ -110,7 +110,6 @@
                            @"Gender": userSex
                            }];
     
-    [mixpanel track:@"CompletedSignup"];
 }
 
 - (BOOL)shouldLogin {

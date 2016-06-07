@@ -131,15 +131,18 @@ THLLoginViewControllerDelegate
 - (void)onboardingViewControllerdidFinishSignup {
     [THLUserManager makeCurrentInstallation];
     [THLUserManager logCrashlyticsUser];
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"Completed signup"];
     [PFCloud callFunctionInBackground:@"assignGuestToGuestlistInvite" withParameters:nil];
     [self routeLoggedInUserFlow];
-}
 
+
+}
 
 - (void)onboardingViewControllerdidSkipSignup {
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"Skipped signup"];
     [Intercom registerUnidentifiedUser];
-    [mixpanel track:@"SkippedSignup"];
     [self configureMasterTabViewControllerAndPresentGuestFlowInWindow:_window];
 }
 
@@ -222,6 +225,13 @@ THLLoginViewControllerDelegate
     _masterTabBarController.view.autoresizingMask=(UIViewAutoresizingFlexibleHeight);
 }
 
+- (void)viewInvites {
+    if (!([self topViewController] == _masterTabBarController)) {
+        [_masterTabBarController dismissViewControllerAnimated:YES completion:nil];
+    }
+    [_masterTabBarController setSelectedIndex:1];
+
+}
 
 #pragma mark - AdmissionsOptionViewDelegate
 
@@ -451,15 +461,15 @@ THLLoginViewControllerDelegate
 #pragma mark - Push Notifications
 - (BFTask *)handlePushNotification:(NSDictionary *)pushInfo {
     if ([pushInfo objectForKey:@"guestlistInviteId"]) {
-        NSString *guestlistInviteId = pushInfo[@"guestl1istInviteId"];
-        [[[_dependencyManager guestlistService] fetchGuestlistInviteWithId:guestlistInviteId] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id _Nullable(BFTask * _Nonnull task) {
+        NSString *guestlistInviteId = pushInfo[@"guestlistInviteId"];
+        return [[[_dependencyManager guestlistService] fetchGuestlistInviteWithId:guestlistInviteId] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id _Nullable(BFTask * _Nonnull task) {
             THLGuestlistInvite *invite = task.result;
             THLPopupNotificationView *popupView = [[THLPopupNotificationView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH*0.87, SCREEN_HEIGHT*0.67)];
-            [popupView setMessageLabelText:@"hello"];
+            [popupView setMessageLabelText:[NSString stringWithFormat:@"%@ has invited you\nto party with friends at\n%@\n%@ at %@", invite.sender.firstName, invite.event.location.name, invite.date.thl_dayString, invite.date.thl_timeString]];
             [popupView setImageViewWithURL:[NSURL URLWithString:invite.event.location.image.url]];
             [popupView setIconURL:[NSURL URLWithString:invite.sender.image.url]];
-            [popupView setButtonTitle:@"View Event"];
-            
+            [popupView setButtonTitle:@"View Invite"];
+            [popupView setButtonTarget:self action:@selector(viewInvites) forControlEvents:UIControlEventTouchUpInside];
             KLCPopup *popup = [KLCPopup popupWithContentView:popupView
                                                     showType:KLCPopupShowTypeBounceIn
                                                  dismissType:KLCPopupDismissTypeBounceOut
@@ -470,13 +480,8 @@ THLLoginViewControllerDelegate
             [popup show];
             return task;
         }];
-        
-        
-        //        [_guestWireframe showNotificationBadge];
-        BFTask *task;
-        return task;
     } else {
-        NSLog(@"Notification did not have any text");
+        NSLog(@"Notification was not a guestlistInvite");
         return [BFTask taskWithResult:nil];
     }
 }
