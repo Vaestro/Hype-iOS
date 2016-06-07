@@ -18,5 +18,5 @@
 
 @interface THLLoginViewController : UIViewController<THLLoginViewInterface>
 @property (nonatomic, weak) id<THLLoginViewControllerDelegate> delegate;
-
+- (void)applicationDidRegisterForRemoteNotifications;
 @end

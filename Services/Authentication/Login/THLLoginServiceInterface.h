@@ -12,6 +12,7 @@
 
 
 @protocol THLLoginServiceInterface <NSObject>
+- (void)createMixpanelProfile;
 
 - (BFTask *)login;
 - (BFTask *)getFacebookUserDictionary;

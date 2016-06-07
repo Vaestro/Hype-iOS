@@ -21,4 +21,5 @@
 @interface THLOnboardingViewController : UIViewController<THLOnboardingViewInterface>
 @property (nonatomic, weak) id<THLOnboardingViewControllerDelegate> delegate;
 
+- (void)applicationDidRegisterForRemoteNotifications;
 @end

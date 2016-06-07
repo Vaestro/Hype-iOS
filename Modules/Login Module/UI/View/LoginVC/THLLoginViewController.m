@@ -18,10 +18,12 @@
 #import "THLTextEntryViewController.h"
 #import <DigitsKit/DigitsKit.h>
 #import "THLAppearanceConstants.h"
+#import "THLPermissionRequestViewController.h"
 
 @interface THLLoginViewController()
 <
-THLTextEntryViewDelegate
+THLTextEntryViewDelegate,
+THLPermissionRequestViewControllerDelegate
 >
 @property (nonatomic, strong) UIBarButtonItem *dismissButton;
 @property (nonatomic, strong) UILabel *bodyLabel;
@@ -120,13 +122,25 @@ THLTextEntryViewDelegate
         [self presentNumberVerificationInterfaceInViewController];
     } else if ([_loginService shouldVerifyEmail]) {
         [self presentUserInfoVerificationView];
+    } else if (![[UIApplication sharedApplication] isRegisteredForRemoteNotifications]) {
+        [_loginService createMixpanelProfile];
+        [self presentPermissionRequestViewController];
     } else {
         [self saveUserAndExitSignupFlow];
     }
 }
-
 - (void)loginServiceDidSaveUserFacebookInformation {
     [self reroute];
+}
+
+- (void)applicationDidRegisterForRemoteNotifications {
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"Registered for push notification permission"];
+    [self saveUserAndExitSignupFlow];
+}
+
+- (void)permissionViewControllerDeclinedPermission {
+    [self saveUserAndExitSignupFlow];
 }
 
 - (void)saveUserAndExitSignupFlow {
@@ -138,14 +152,24 @@ THLTextEntryViewDelegate
     }];
 }
 
+- (void)presentPermissionRequestViewController {
+    THLPermissionRequestViewController *permissionRequestViewController = [THLPermissionRequestViewController new];
+    permissionRequestViewController.delegate = self;
+    [self.navigationController pushViewController:permissionRequestViewController animated:YES];
+}
+
 - (void)presentUserInfoVerificationView {
     [self.navigationController pushViewController:self.userInfoVerificationViewController animated:YES];
 }
 
 - (void)emailEntryView:(THLTextEntryViewController *)view userDidSubmitEmail:(NSString *)email {
-    [THLUser currentUser].email = email;
-    [self reroute];
-}
+    THLUser *currentUser = [THLUser currentUser];
+    currentUser.email = email;
+    WEAKSELF();
+    [[currentUser saveInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask<NSNumber *> *task) {
+        [WSELF reroute];
+        return nil;
+    }];}
 
 - (void)presentNumberVerificationInterfaceInViewController {
     WEAKSELF();
@@ -163,8 +187,13 @@ THLTextEntryViewDelegate
 
 #pragma mark - Logic
 - (void)handleNumberVerificationSuccess:(DGTSession *)session {
-    [THLUser currentUser].phoneNumber = session.phoneNumber;
-    [self reroute];
+    THLUser *currentUser = [THLUser currentUser];
+    currentUser.phoneNumber = session.phoneNumber;
+    WEAKSELF();
+    [[currentUser saveInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask<NSNumber *> *task) {
+        [WSELF reroute];
+        return nil;
+    }];
 }
 
 -(BOOL)prefersStatusBarHidden{

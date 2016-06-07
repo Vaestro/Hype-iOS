@@ -81,6 +81,38 @@
 
 }
 
+- (void)createMixpanelProfile {
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    THLUser *user = [THLUser currentUser];
+    
+    // mixpanel identify: must be called before
+    // people properties can be set
+    
+    //        TODO: Call following mixpanel code only when user signs up for the first time. On following logins - only call mixpanel identify with ALIAS ID
+    [mixpanel createAlias:user.objectId
+            forDistinctID:mixpanel.distinctId];
+    // You must call identify if you haven't already
+    // (e.g., when your app launches).
+    [mixpanel identify:mixpanel.distinctId];
+    
+    NSString *userSex;
+    if (user.sex == THLSexMale) {
+        userSex = @"Male";
+    } else if (user.sex == THLSexFemale) {
+        userSex = @"Female";
+    }
+    [mixpanel registerSuperPropertiesOnce:@{@"Gender": userSex}];
+    [mixpanel.people set:@{@"$first_name": user.firstName,
+                           @"$last_name": user.lastName,
+                           @"$email": user.email,
+                           @"$phone": user.phoneNumber,
+                           @"$created": user.createdAt,
+                           @"Gender": userSex
+                           }];
+    
+    [mixpanel track:@"CompletedSignup"];
+}
+
 - (BOOL)shouldLogin {
     return [THLUser currentUser] == nil;
 }
