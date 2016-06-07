@@ -70,8 +70,6 @@
         } else {
             _creditsAmount = [THLUser currentUser].credits;
         }
-        
-        
     }
     return self;
 }
@@ -107,7 +105,6 @@
 
     }
     
-    
     [self.scrollView makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.insets(kTHLEdgeInsetsNone());
         make.bottom.equalTo(WSELF.purchaseButton.mas_top);
@@ -127,6 +124,11 @@
     
     WEAKSELF();
     [contentView addSubviews:@[self.purchaseDetailsView, self.paymentMethodView, self.importantInformationView, self.applyCreditsLabel, self.applyCreditsButton]];
+    
+    if (_creditsAmount == 0) {
+        [_applyCreditsLabel setHidden:YES];
+        [_applyCreditsButton setHidden:YES];
+    }
     
     [self.purchaseDetailsView makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.insets(kTHLEdgeInsetsSuperHigh());

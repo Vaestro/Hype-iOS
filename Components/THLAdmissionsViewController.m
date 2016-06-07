@@ -153,6 +153,11 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     PFObject *admissionOption = [self objectAtIndexPath:indexPath];
+
+    if ([admissionOption[@"type"] integerValue] == 0 && [admissionOption[@"gender"] integerValue] != [THLUser currentUser].sex) {
+        return [self displayWrongTicket];
+    }
+    
     [self.delegate didSelectAdmissionOption:admissionOption forEvent:_event];
 }
 
@@ -199,6 +204,17 @@
 - (void)messageButtonPressed
 {
     [Intercom presentConversationList];
+}
+
+
+- (void)displayWrongTicket
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                    message:@"Please select the ticket that corresponds to your gender"
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
 }
 
 //- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
