@@ -85,10 +85,28 @@
     self.navigationItem.titleView = [self navBarTitleLabel];
 
     WEAKSELF();
-    [self.purchaseButton makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(0);
-        make.left.bottom.right.insets(kTHLEdgeInsetsHigh());
-    }];
+    
+    if ([_admissionOption[@"type"] integerValue] == 0) {
+        [self.purchaseButton makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(0);
+            make.left.bottom.right.insets(kTHLEdgeInsetsHigh());
+        }];
+    } else if ([_admissionOption[@"type"] integerValue] == 1) {
+        
+        THLActionButton *reserveButton = [self reserveButton];
+        
+        [reserveButton makeConstraints:^(MASConstraintMaker *make) {
+            make.right.bottom.insets(kTHLEdgeInsetsHigh());
+            make.left.equalTo(WSELF.view.mas_centerX);
+        }];
+        
+        [self.purchaseButton makeConstraints:^(MASConstraintMaker *make) {
+            make.left.bottom.insets(kTHLEdgeInsetsHigh());
+            make.right.equalTo(WSELF.view.mas_centerX);
+        }];
+
+    }
+    
     
     [self.scrollView makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.insets(kTHLEdgeInsetsNone());
@@ -188,12 +206,23 @@
 - (THLActionButton *)purchaseButton {
     if (!_purchaseButton) {
         _purchaseButton = [[THLActionButton alloc] initWithDefaultStyle];
-        [_purchaseButton setTitle:@"Complete Order"];
+        [_admissionOption[@"type"] integerValue] == 0 ? [_purchaseButton setTitle:@"Complete Order"] : [_purchaseButton setTitle:@"PAY WITH HYPE"];
         [_purchaseButton addTarget:self action:@selector(buy:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_purchaseButton];
     }
     return _purchaseButton;
 }
+
+- (THLActionButton *)reserveButton {
+    THLActionButton *reserveButton = [[THLActionButton alloc] initWithInverseStyle];
+    [reserveButton setTitle:@"PAY AT VENUE"];
+    [reserveButton addTarget:self action:@selector(buy:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:reserveButton];
+    return reserveButton;
+}
+
+
+
 
 - (THLPurchaseDetailsView *)purchaseDetailsView {
     if (!_purchaseDetailsView) {
