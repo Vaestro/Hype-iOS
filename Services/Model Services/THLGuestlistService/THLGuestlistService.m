@@ -254,8 +254,8 @@
         if (!error) {
             PFObject *guestlist = guestlistInvite[@"Guestlist"];
             [guestlistInvite setObject:guestlist forKey:@"Guestlist"];
-            PFObject *owner = guestlistInvite[@"Guestlist"][@"Owner"];
-            [guestlist setObject:owner forKey:@"Owner"];
+//            PFObject *owner = guestlistInvite[@"Guestlist"][@"Owner"];
+//            [guestlist setObject:owner forKey:@"Owner"];
             PFObject *event = guestlistInvite[@"Guestlist"][@"event"];
             [guestlist setObject:event forKey:@"event"];
             PFObject *location = guestlistInvite[@"Guestlist"][@"event"][@"location"];

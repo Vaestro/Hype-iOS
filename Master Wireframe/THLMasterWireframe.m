@@ -465,7 +465,7 @@ THLLoginViewControllerDelegate
         return [[[_dependencyManager guestlistService] fetchGuestlistInviteWithId:guestlistInviteId] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id _Nullable(BFTask * _Nonnull task) {
             THLGuestlistInvite *invite = task.result;
             THLPopupNotificationView *popupView = [[THLPopupNotificationView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH*0.87, SCREEN_HEIGHT*0.67)];
-            [popupView setMessageLabelText:[NSString stringWithFormat:@"%@ has invited you\nto party with friends at\n%@\n%@ at %@", invite.sender.firstName, invite.event.location.name, invite.date.thl_dayString, invite.date.thl_timeString]];
+            [popupView setMessageLabelText:[NSString stringWithFormat:@"%@ has invited you\nto party with friends at\n%@\n%@ at %@", invite.sender.firstName, invite.event.location.name, invite.date.thl_weekdayString, invite.date.thl_timeString]];
             [popupView setImageViewWithURL:[NSURL URLWithString:invite.event.location.image.url]];
             [popupView setIconURL:[NSURL URLWithString:invite.sender.image.url]];
             [popupView setButtonTitle:@"View Invite"];

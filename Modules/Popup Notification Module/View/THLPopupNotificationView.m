@@ -87,6 +87,8 @@ static CGFloat const ICON_VIEW_DIMENSION = 50;
 - (UIImageView *)imageView {
     if (!_imageView) {
         _imageView = [UIImageView new];
+        _imageView.contentMode = UIViewContentModeScaleAspectFill;
+        _imageView.clipsToBounds = YES;
         [self addSubview:_imageView];
     }
     return _imageView;
