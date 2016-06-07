@@ -190,6 +190,7 @@
 		79B9595A1BE92FBA00B87799 /* THLPopupNotificationInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959591BE92FBA00B87799 /* THLPopupNotificationInteractor.m */; };
 		79B9595D1BE934C000B87799 /* THLPopupNotificationDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B9595C1BE934C000B87799 /* THLPopupNotificationDataManager.m */; };
 		79B959611BE9A90B00B87799 /* THLActionContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959601BE9A90B00B87799 /* THLActionContainerView.m */; };
+		79B994EA1D0650D500E0AD33 /* THLPermissionRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B994E91D0650D500E0AD33 /* THLPermissionRequestViewController.m */; };
 		79BB15301C657FF50044D943 /* THLSingleLineTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BB152F1C657FF50044D943 /* THLSingleLineTextField.m */; };
 		79BB15331C6CED740044D943 /* THLFxTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BB15321C6CED720044D943 /* THLFxTitleLabel.m */; };
 		79C93E2B1C758B5D005B4D95 /* TSMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C93E281C758B5D005B4D95 /* TSMessage.m */; };
@@ -696,6 +697,8 @@
 		79B9595E1BE93C1B00B87799 /* THLPopupNotificationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLPopupNotificationView.h; sourceTree = "<group>"; };
 		79B9595F1BE9A90B00B87799 /* THLActionContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLActionContainerView.h; sourceTree = "<group>"; };
 		79B959601BE9A90B00B87799 /* THLActionContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLActionContainerView.m; sourceTree = "<group>"; };
+		79B994E81D0650D500E0AD33 /* THLPermissionRequestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPermissionRequestViewController.h; sourceTree = "<group>"; };
+		79B994E91D0650D500E0AD33 /* THLPermissionRequestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPermissionRequestViewController.m; sourceTree = "<group>"; };
 		79BB152E1C657FF50044D943 /* THLSingleLineTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLSingleLineTextField.h; sourceTree = "<group>"; };
 		79BB152F1C657FF50044D943 /* THLSingleLineTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLSingleLineTextField.m; sourceTree = "<group>"; };
 		79BB15311C6CED720044D943 /* THLFxTitleLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLFxTitleLabel.h; sourceTree = "<group>"; };
@@ -1014,6 +1017,8 @@
 				79B062B81CF8B46800A3DC50 /* THLMyEventsNavigationViewController.h */,
 				79B062B91CF8B46800A3DC50 /* THLMyEventsNavigationViewController.m */,
 				79BB152F1C657FF50044D943 /* THLSingleLineTextField.m */,
+				79B994E81D0650D500E0AD33 /* THLPermissionRequestViewController.h */,
+				79B994E91D0650D500E0AD33 /* THLPermissionRequestViewController.m */,
 				79B062BB1CF909F300A3DC50 /* THLPartyNavigationController.h */,
 				79B062BC1CF909F300A3DC50 /* THLPartyNavigationController.m */,
 				79BB15311C6CED720044D943 /* THLFxTitleLabel.h */,
@@ -3738,6 +3743,7 @@
 				794AFE271C10C41B008475B1 /* THLHostDashboardTicketCell.m in Sources */,
 				CBE5403C8B7732B36D5ECB5E /* THLViewDataSourceGrouping.m in Sources */,
 				79AD95F71C3ADA6200EDB82E /* THLEventDetailMusicTypesView.m in Sources */,
+				79B994EA1D0650D500E0AD33 /* THLPermissionRequestViewController.m in Sources */,
 				CBE547FB5677C373C1DE74C7 /* THLViewDataSourceSorting.m in Sources */,
 				79B959481BE894B800B87799 /* THLPopupNotificationView.m in Sources */,
 				C85EE3901C1BCA500008C14B /* THLPerkDetailInteractor.m in Sources */,

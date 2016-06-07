@@ -19,13 +19,15 @@
 #import "THLUser.h"
 #import "THLGuestlistInvite.h"
 #import "THLCollectionReusableView.h"
-
+#import "Intercom/intercom.h"
+#import "TTTAttributedLabel.h"
 
 @interface THLMyEventsViewController()
 {
     NSArray *_sectionSortedKeys;
     NSMutableDictionary *_sections;
 }
+@property (nonatomic, strong) TTTAttributedLabel *navBarTitleLabel;
 
 @end
 
@@ -38,7 +40,6 @@
     self = [super initWithClassName:className];
     if (!self) return nil;
     
-    self.title = @"My Events";
     self.pullToRefreshEnabled = YES;
     self.paginationEnabled = NO;
     _sections = [NSMutableDictionary dictionary];
@@ -51,7 +52,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.collectionView.backgroundColor = [UIColor blackColor];
-    self.navigationItem.title = @"Tickets";
+    self.navigationItem.titleView = self.navBarTitleLabel;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
+                                             initWithImage:[UIImage imageNamed:@"Help"]
+                                             style:UIBarButtonItemStylePlain
+                                             target:self
+                                             action:@selector(messageButtonPressed)];
+    
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
     
     layout.sectionInset = UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 10.0f);
@@ -216,10 +223,40 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     if ([_sections count]) {
-        return CGSizeMake(CGRectGetWidth(self.collectionView.bounds), 40.0f);
+        return CGSizeMake(CGRectGetWidth(self.collectionView.bounds), 60.0f);
     }
     return CGSizeZero;
 }
+
+#pragma mark - Accessors
+
+- (void)messageButtonPressed
+{
+    [Intercom presentConversationList];
+}
+
+- (TTTAttributedLabel *)navBarTitleLabel
+{
+    if (!_navBarTitleLabel) {
+        _navBarTitleLabel = [TTTAttributedLabel new];
+        _navBarTitleLabel.numberOfLines = 1;
+        _navBarTitleLabel.textAlignment = NSTextAlignmentCenter;
+
+
+        NSAttributedString *attString = [[NSAttributedString alloc] initWithString:@"MY EVENTS"
+                                                                        attributes:@{
+                                                                                     (id)kCTForegroundColorAttributeName : (id)[UIColor whiteColor].CGColor,
+                                                                                     NSFontAttributeName : [UIFont systemFontOfSize:16],
+                                                                                     NSKernAttributeName : @4.5f
+                                                                                     }];
+        _navBarTitleLabel.text = attString;
+
+        [_navBarTitleLabel sizeToFit];
+    }
+    
+    return _navBarTitleLabel;
+}
+
 
 
 #pragma mark - EmptyDataSetDelegate

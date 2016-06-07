@@ -37,12 +37,13 @@ static CGFloat const ICON_VIEW_DIMENSION = 50;
     WEAKSELF();
     [self.imageView makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.insets(kTHLEdgeInsetsNone());
-        make.bottom.equalTo(WSELF.mas_centerY);
+        make.bottom.equalTo(WSELF.mas_centerY).insets(kTHLEdgeInsetsHigh());
     }];
     
     [self.iconView makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(0);
-        make.height.equalTo(ICON_VIEW_DIMENSION);
+        make.centerY.equalTo(WSELF.imageView.mas_bottom);
+        make.centerX.equalTo(0);
+        make.height.equalTo(WSELF.frame.size.width*0.30);
         make.width.equalTo([WSELF iconView].mas_height);
     }];
     
@@ -86,6 +87,8 @@ static CGFloat const ICON_VIEW_DIMENSION = 50;
 - (UIImageView *)imageView {
     if (!_imageView) {
         _imageView = [UIImageView new];
+        _imageView.contentMode = UIViewContentModeScaleAspectFill;
+        _imageView.clipsToBounds = YES;
         [self addSubview:_imageView];
     }
     return _imageView;
@@ -103,6 +106,7 @@ static CGFloat const ICON_VIEW_DIMENSION = 50;
     if (!_messageLabel) {
         _messageLabel = THLNUILabel(kTHLNUIDetailTitle);
         _messageLabel.textAlignment = NSTextAlignmentCenter;
+        _messageLabel.numberOfLines = 0;
         _messageLabel.backgroundColor = [UIColor clearColor];
 
         [self addSubview:_messageLabel];

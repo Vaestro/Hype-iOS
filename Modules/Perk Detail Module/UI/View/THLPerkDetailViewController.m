@@ -61,13 +61,15 @@
     }];
     
     [self.itemNameLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(SV([WSELF itemNameLabel]).mas_centerX).insets(kTHLEdgeInsetsHigh());
-        make.bottom.left.equalTo([WSELF perkImageView]).insets(kTHLEdgeInsetsHigh());
+        make.right.equalTo(SV([WSELF itemNameLabel])).insets(kTHLEdgeInsetsHigh());
+        make.left.equalTo([WSELF perkImageView]).insets(kTHLEdgeInsetsHigh());
+        make.bottom.equalTo([WSELF itemCreditsLabel].mas_top).insets(kTHLEdgeInsetsHigh());
+
     }];
     
     [self.itemCreditsLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo([WSELF itemNameLabel].mas_right).insets(kTHLEdgeInsetsHigh());
-        make.bottom.right.equalTo([WSELF perkImageView]).insets(kTHLEdgeInsetsHigh());
+        make.left.equalTo([WSELF itemNameLabel]);
+        make.bottom.equalTo([WSELF perkImageView]).insets(kTHLEdgeInsetsHigh());
     }];
     
     [self.scrollView makeConstraints:^(MASConstraintMaker *make) {
@@ -250,14 +252,15 @@
 
 - (UILabel *)itemCreditsLabel {
     if (!_itemCreditsLabel) {
-        _itemCreditsLabel = THLNUILabel(kTHLNUIBoldTitle);
+        _itemCreditsLabel = [UILabel new];
+        _itemCreditsLabel.font = [UIFont fontWithName:@"Raleway-Regular" size:20.0f];
+        _itemCreditsLabel.textColor = kTHLNUIAccentColor;
         _itemCreditsLabel.adjustsFontSizeToFitWidth = NO;
         _itemCreditsLabel.numberOfLines = 1;
         _itemCreditsLabel.minimumScaleFactor = 0.5;
-        _itemCreditsLabel.textColor = kTHLNUIGrayFontColor;
         _itemCreditsLabel.textAlignment = NSTextAlignmentRight;
         
-        _itemCreditsLabel.text = [NSString stringWithFormat:@"%@.00", _perk[@"credits"]];
+        _itemCreditsLabel.text = [NSString stringWithFormat:@"$%@.00", _perk[@"credits"]];
 
         [self.view addSubview:_itemCreditsLabel];
     }
@@ -268,6 +271,8 @@
     if (!_perkDescriptionLabel) {
         _perkDescriptionLabel = THLNUILabel(kTHLNUIDetailTitle);
         [_perkDescriptionLabel setTextAlignment:NSTextAlignmentLeft];
+        _perkDescriptionLabel.numberOfLines = 0;
+
         _perkDescriptionLabel.text = _perk[@"info"];
 
         [self.view addSubview:_perkDescriptionLabel];

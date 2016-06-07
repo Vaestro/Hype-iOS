@@ -106,9 +106,7 @@ viewDataSourceFactory:(THLViewDataSourceFactory *)viewDataSourceFactory
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if (self.creditsPayout != nil) {
-        [self.invitationDetailsView addSubview:self.invitationDetailsLabel];
-    }
+
     self.navigationItem.rightBarButtonItem = self.submitButton;
     self.navigationItem.title = @"INVITE";
     
@@ -119,6 +117,9 @@ viewDataSourceFactory:(THLViewDataSourceFactory *)viewDataSourceFactory
 #pragma mark - Layout
 - (void)viewDidLayoutSubviews {
     [self adjustTableFrame];
+    if (_event.creditsPayout > 0) {
+        [self.invitationDetailsView addSubview:self.invitationDetailsLabel];
+    }
 }
 
 - (void)adjustTableFrame {
@@ -606,7 +607,7 @@ viewDataSourceFactory:(THLViewDataSourceFactory *)viewDataSourceFactory
 
 - (UIView *)invitationDetailsView {
     if (!_invitationDetailsView) {
-        _invitationDetailsView = [[UIView alloc] initWithFrame:CGRectMake(0, _tableView.frame.size.height - 20, self.view.frame.size.width, 60)];
+        _invitationDetailsView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 60, self.view.frame.size.width, 60)];
         _invitationDetailsView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
         [self.view addSubview:_invitationDetailsView];
     }
@@ -615,13 +616,15 @@ viewDataSourceFactory:(THLViewDataSourceFactory *)viewDataSourceFactory
 
 - (UILabel *)invitationDetailsLabel {
     if (!_invitationDetailsLabel) {
-        _invitationDetailsLabel = THLNUILabel(kTHLNUIDetailTitle);
+        _invitationDetailsLabel = [UILabel new];
+        _invitationDetailsLabel.font = [UIFont fontWithName:@"Raleway-Regular" size:16.0f];
+        _invitationDetailsLabel.textColor = kTHLNUIAccentColor;
         _invitationDetailsLabel.frame = CGRectMake(0, 0, _invitationDetailsView.frame.size.width*0.67, _invitationDetailsView.frame.size.height);
         _invitationDetailsLabel.center = CGPointMake(_invitationDetailsView.bounds.size.width  / 2,
                                                      _invitationDetailsView.bounds.size.height / 2);
         _invitationDetailsLabel.numberOfLines = 0;
         _invitationDetailsLabel.textAlignment = NSTextAlignmentCenter;
-        if (_event.creditsPayout > 0) _invitationDetailsLabel.text = [NSString stringWithFormat:@"Get $%d.00 for every friend you invite that attends this event", _event.creditsPayout];
+        _invitationDetailsLabel.text = [NSString stringWithFormat:@"Get $%d.00 for every friend you invite that attends this event", _event.creditsPayout];
     }
     
     return _invitationDetailsLabel;

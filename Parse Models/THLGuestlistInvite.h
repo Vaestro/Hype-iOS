@@ -13,7 +13,11 @@
 
 @interface THLGuestlistInvite : PFObject<PFSubclassing>
 @property (nonatomic, retain) THLUser *guest;
+@property (nonatomic, retain) THLUser *sender;
+
 @property (nonatomic, retain) THLGuestlist *guestlist;
+@property (nonatomic, retain) THLEvent *event;
+
 @property (nonatomic, copy) NSDate *date;
 @property (nonatomic) THLStatus response;
 @property (nonatomic) BOOL didOpen;

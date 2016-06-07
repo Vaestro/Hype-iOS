@@ -5,13 +5,12 @@
 //  Created by Phil Meyers IV on 8/24/15.
 //  Copyright (c) 2015 Hypelist. All rights reserved.
 //
+#import "THLMasterWireframe.h"
 
 //Frameworks
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
-
-#import "THLMasterWireframe.h"
 
 //Utilities
 #import "THLDependencyManager.h"
@@ -23,16 +22,17 @@
 #import "THLDataStore.h"
 #import "THLGuestEntity.h"
 #import "SVProgressHUD.h"
+#import "THLGuestlistServiceInterface.h"
+#import "THLGuestlistService.h"
+#import "THLEvent.h"
+#import "THLGuestlistInvite.h"
 #import "Parse.h"
-
-//Wireframes
-#import "THLLoginWireframe.h"
-#import "THLPopupNotificationWireframe.h"
 
 //Delegates
 #import "THLLoginModuleDelegate.h"
 
 //View Controllers
+#import "THLOnboardingViewController.h"
 #import "THLMyEventsViewController.h"
 #import "THLEventTicketViewController.h"
 #import "THLMyEventsNavigationViewController.h"
@@ -46,19 +46,17 @@
 #import "THLPaymentViewController.h"
 #import "THLPerkCollectionViewController.h"
 #import "THLPerkDetailViewController.h"
-#import "THLPopupNotificationView.h"
 #import "THLAdmissionsViewController.h"
 #import "THLTablePackageDetailsViewController.h"
+#import "THLLoginViewController.h"
 
-
-#define ENABLE_WAITLIST
+#import "THLPopupNotificationView.h"
 
 @interface THLMasterWireframe()
 <
 THLLoginModuleDelegate,
 THLAdmissionsViewDelegate,
 THLTablePackageControllerDelegate,
-THLPopupNotificationModuleDelegate,
 THLMyEventsViewDelegate,
 THLDiscoveryViewControllerDelegate,
 THLEventDetailsViewControllerDelegate,
@@ -66,19 +64,19 @@ THLCheckoutViewControllerDelegate,
 THLPartyInvitationViewControllerDelegate,
 THLUserProfileViewControllerDelegate,
 THLPartyViewControllerDelegate,
-THLPerkCollectionViewControllerDelegate
+THLPerkCollectionViewControllerDelegate,
+THLOnboardingViewControllerDelegate,
+THLTablePackageControllerDelegate,
+THLLoginViewControllerDelegate
 >
 
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) UITabBarController *masterTabBarController;
+@property (nonatomic, strong) THLOnboardingViewController *onboardingViewController;
+@property (nonatomic, strong) THLLoginViewController *loginViewController;
 
 @property (nonatomic, strong) THLUserProfileViewController *userProfileViewController;
 @property (nonatomic, strong) THLPerkCollectionViewController *perkCollectionViewController;
-
-@property (nonatomic, strong) THLLoginWireframe *loginWireframe;
-
-@property (nonatomic, strong) THLDataStore *contactsDataStore;
-
 @property (nonatomic, strong) UIViewController *viewController;
 
 @end
@@ -93,10 +91,10 @@ THLPerkCollectionViewControllerDelegate
 
 - (void)presentAppInWindow:(UIWindow *)window {
 	_window = window;
-    if ([THLUserManager isUserCached]) {
-        [THLUserManager isUserProfileValid] ? [self routeLoggedInUserFlow] : [self presentUserVerification];
+    if ([THLUserManager isUserCached] && [THLUserManager isUserProfileValid]) {
+         [self routeLoggedInUserFlow];
     } else {
-        [self presentOnboardingAndLoginInterface];
+        [self presentOnboardingViewController];
     }
 }
 
@@ -114,32 +112,70 @@ THLPerkCollectionViewControllerDelegate
     
 }
 
-#pragma mark - Push Notifications
-- (BFTask *)handlePushNotification:(NSDictionary *)pushInfo {
-    if ([pushInfo objectForKey:@"notificationText"]) {
-        THLPopupNotificationView *popupView = [[THLPopupNotificationView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH*0.87, SCREEN_HEIGHT*0.67)];
-        [popupView setMessageLabelText:[pushInfo objectForKey:@"notificationText"]];
-        [popupView setImageViewWithURL:[NSURL URLWithString:[pushInfo objectForKey:@"mainImageURL"]]];
-        [popupView setIconURL:[NSURL URLWithString:[pushInfo objectForKey:@"iconImageURL"]]];
-        [popupView setButtonTitle:@"View Event"];
-        
-        KLCPopup *popup = [KLCPopup popupWithContentView:popupView
-                                                showType:KLCPopupShowTypeBounceIn
-                                             dismissType:KLCPopupDismissTypeBounceOut
-                                                maskType:KLCPopupMaskTypeDimmed
-                                dismissOnBackgroundTouch:YES
-                                   dismissOnContentTouch:YES];
-        popup.dimmedMaskAlpha = 0.8;
-        [popup show];
-        
-//        [_guestWireframe showNotificationBadge];
-        BFTask *task;
-        return task;
-    } else {
-        NSLog(@"Notification did not have any text");
-        return [BFTask taskWithResult:nil];
+
+
+
+#pragma mark -
+#pragma mark - THLOnboardingViewController
+- (void)presentOnboardingViewController {
+    _onboardingViewController = [THLOnboardingViewController new];
+    _onboardingViewController.delegate = self;
+    UINavigationController *baseNavigationController = [[UINavigationController alloc] initWithRootViewController:_onboardingViewController];
+    [baseNavigationController setNavigationBarHidden:YES];
+    _window.rootViewController = baseNavigationController;
+    [_window makeKeyAndVisible];
+    
+}
+
+#pragma mark Delegate
+- (void)onboardingViewControllerdidFinishSignup {
+    [THLUserManager makeCurrentInstallation];
+    [THLUserManager logCrashlyticsUser];
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"Completed signup"];
+    [PFCloud callFunctionInBackground:@"assignGuestToGuestlistInvite" withParameters:nil];
+    [self routeLoggedInUserFlow];
+
+
+}
+
+- (void)onboardingViewControllerdidSkipSignup {
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"Skipped signup"];
+    [Intercom registerUnidentifiedUser];
+    [self configureMasterTabViewControllerAndPresentGuestFlowInWindow:_window];
+}
+
+- (void)applicationDidRegisterForRemoteNotifications {
+    if (_onboardingViewController) {
+        [_onboardingViewController applicationDidRegisterForRemoteNotifications];
+    } else if (_loginViewController) {
+        [_loginViewController applicationDidRegisterForRemoteNotifications];
     }
 }
+
+
+#pragma mark -
+#pragma mark LoginViewController
+- (void)usersWantsToLogin {
+    [self presentLoginViewController];
+}
+
+- (void)presentLoginViewController {
+    _loginViewController = [THLLoginViewController new];
+    _loginViewController.delegate = self;
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:_loginViewController];
+    [[self topViewController] presentViewController:navigationController animated:YES completion:NULL];
+}
+
+#pragma mark Delegate
+
+- (void)loginViewControllerDidFinishSignup {
+    [self onboardingViewControllerdidFinishSignup];
+}
+
+#pragma mark -
+#pragma mark - MasterTabViewController
 
 - (void)configureMasterTabViewControllerAndPresentGuestFlowInWindow:(UIWindow *)window {
     _window = window;
@@ -189,6 +225,13 @@ THLPerkCollectionViewControllerDelegate
     _masterTabBarController.view.autoresizingMask=(UIViewAutoresizingFlexibleHeight);
 }
 
+- (void)viewInvites {
+    if (!([self topViewController] == _masterTabBarController)) {
+        [_masterTabBarController dismissViewControllerAnimated:YES completion:nil];
+    }
+    [_masterTabBarController setSelectedIndex:1];
+
+}
 
 #pragma mark - AdmissionsOptionViewDelegate
 
@@ -200,6 +243,7 @@ THLPerkCollectionViewControllerDelegate
         [[self topViewController] presentViewController:navVC animated:YES completion:nil];
     } else if ([admissionOption[@"type"] integerValue] == 1) {
         THLTablePackageDetailsViewController *packageDetailsVC = [[THLTablePackageDetailsViewController alloc] initWithClassName:@"Bottle"];
+        packageDetailsVC.delegate = self;
         packageDetailsVC.event = event;
         packageDetailsVC.admissionOption = admissionOption;
         packageDetailsVC.delegate = self;
@@ -273,85 +317,6 @@ THLPerkCollectionViewControllerDelegate
 
 #pragma mark -
 #pragma mark CheckoutViewController
-#pragma mark Delegate
-- (void)checkoutViewControllerWantsToPresentPaymentViewController {
-    [self presentPaymentViewControllerOn:[self topViewController]];
-}
-- (void)checkoutViewControllerDidFinishCheckoutForEvent:(THLEvent *)event withGuestlistId:(NSString *)guestlistId {
-    [self presentInvitationViewController:event withGuestlistId:guestlistId];
-}
-
-
-
-#pragma mark -
-#pragma mark PartyInvitationViewController
-#pragma mark Delegate
-- (void)partyInvitationViewControllerDidSkipSendingInvitesAndWantsToShowTicket:(PFObject *)invite {
-    [_window.rootViewController dismissViewControllerAnimated:YES completion:^{
-        [self presentPartyNavigationController:invite];
-    }];
-    
-}
-
-- (void)partyInvitationViewControllerDidSubmitInvitesAndWantsToShowTicket:(PFObject *)invite {
-    [_window.rootViewController dismissViewControllerAnimated:YES completion:^{
-        [self presentPartyNavigationController:invite];
-    }];
-    
-}
-
-#pragma mark -
-#pragma mark UserProfileViewController
-#pragma mark Delegate
-- (void)userProfileViewControllerWantsToLogout {
-    [self logOutUser];
-}
-
-- (void)userProfileViewControllerWantsToPresentPaymentViewController {
-    [self presentPaymentViewControllerOn:_userProfileViewController];
-}
-
-#pragma mark -
-#pragma mark PartyInvitationViewController
-#pragma mark Delegate
-- (void)partyViewControllerWantsToPresentInvitationControllerFor:(THLEvent *)event guestlistId:(NSString *)guestlistId {
-    [self presentInvitationViewController:event withGuestlistId:guestlistId];
-}
-
-- (void)partyViewControllerWantsToPresentCheckoutForEvent:(PFObject *)event paymentInfo:(NSDictionary *)paymentInfo {
-    [self presentCheckoutViewController:event paymentInfo:paymentInfo];
-}
-
-#pragma mark -
-#pragma mark PerkCollectionViewController
-#pragma mark Delegate
-
-- (void)perkStoreViewControllerWantsToPresentDetailsFor:(PFObject *)perk {
-    THLPerkDetailViewController *perkDetailViewController = [[THLPerkDetailViewController alloc] initWithPerk:perk];
-    perkDetailViewController.hidesBottomBarWhenPushed = YES;
-    [_perkCollectionViewController.navigationController pushViewController:perkDetailViewController animated:YES];
-}
-
-#pragma mark -
-#pragma mark LoginViewController
-#pragma mark Delegate
-
-- (void)usersWantsToLogin {
-    [self logInUserOnViewController:[self topViewController]];
-}
-
-#pragma mark -
-#pragma mark View Controller Presenter
-#pragma mark Delegate
-
-- (void)presentPartyNavigationController:(PFObject *)invite {
-    UINavigationController *partyNavVC = [UINavigationController new];
-    THLPartyNavigationController *partyNavigationController = [[THLPartyNavigationController alloc] initWithGuestlistInvite:invite];
-    [partyNavVC addChildViewController:partyNavigationController];
-    [_window.rootViewController presentViewController:partyNavVC animated:YES completion:nil];
-    [_masterTabBarController setSelectedIndex:1];
-    
-}
 
 - (void)presentCheckoutViewController:(PFObject *)event paymentInfo:(NSDictionary *)paymentInfo {
     THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:event paymentInfo:paymentInfo];
@@ -360,6 +325,16 @@ THLPerkCollectionViewControllerDelegate
     [[self topViewController] presentViewController:navVC animated:YES completion:nil];
 }
 
+#pragma mark Delegate
+- (void)checkoutViewControllerWantsToPresentPaymentViewController {
+    [self presentPaymentViewControllerOn:[self topViewController]];
+}
+- (void)checkoutViewControllerDidFinishCheckoutForEvent:(THLEvent *)event withGuestlistId:(NSString *)guestlistId {
+    [self presentInvitationViewController:event withGuestlistId:guestlistId];
+}
+
+#pragma mark -
+#pragma mark PaymentViewController
 - (void)presentPaymentViewControllerOn:(UIViewController *)viewController {
     if ([THLUser currentUser].stripeCustomerId) {
         [SVProgressHUD show];
@@ -384,12 +359,49 @@ THLPerkCollectionViewControllerDelegate
     }
 }
 
+#pragma mark Delegate
+
+
+#pragma mark -
+#pragma mark UserProfileViewController
+#pragma mark Delegate
+- (void)userProfileViewControllerWantsToLogout {
+    [self logOutUser];
+}
+
+- (void)userProfileViewControllerWantsToPresentPaymentViewController {
+    [self presentPaymentViewControllerOn:_userProfileViewController];
+}
+#pragma mark -
+#pragma mark PartyNavigationController
+
+- (void)presentPartyNavigationController:(PFObject *)invite {
+    UINavigationController *partyNavVC = [UINavigationController new];
+    THLPartyNavigationController *partyNavigationController = [[THLPartyNavigationController alloc] initWithGuestlistInvite:invite];
+    [partyNavVC addChildViewController:partyNavigationController];
+    [_window.rootViewController presentViewController:partyNavVC animated:YES completion:nil];
+    [_masterTabBarController setSelectedIndex:1];
+    
+}
+
+#pragma mark Delegate
+- (void)partyViewControllerWantsToPresentInvitationControllerFor:(THLEvent *)event guestlistId:(NSString *)guestlistId {
+    [self presentInvitationViewController:event withGuestlistId:guestlistId];
+}
+
+- (void)partyViewControllerWantsToPresentCheckoutForEvent:(PFObject *)event paymentInfo:(NSDictionary *)paymentInfo {
+    [self presentCheckoutViewController:event paymentInfo:paymentInfo];
+}
+
+
+#pragma mark -
+#pragma mark PartyInvitationViewController
 - (void)presentInvitationViewController:(THLEvent *)event withGuestlistId:(NSString *)guestlistId {
     THLPartyInvitationViewController *partyInvitationVC = [[THLPartyInvitationViewController alloc] initWithEvent:event
                                                                                                       guestlistId:guestlistId
                                                                                                            guests:nil
                                                                                                   databaseManager:self.dependencyManager.databaseManager
-                                                                                                        dataStore:self.contactsDataStore
+                                                                                                        dataStore:self.dependencyManager.contactsDataStore
                                                                                             viewDataSourceFactory:self.dependencyManager.viewDataSourceFactory
                                                                                                       addressBook:self.dependencyManager.addressBook];
     UINavigationController *invitationNavVC = [[UINavigationController alloc] initWithRootViewController:partyInvitationVC];
@@ -397,13 +409,31 @@ THLPerkCollectionViewControllerDelegate
     [[self topViewController] presentViewController:invitationNavVC animated:YES completion:nil];
 }
 
-- (THLDataStore *)contactsDataStore
-{
-    if (!_contactsDataStore) {
-        _contactsDataStore = [[THLDataStore alloc] initForEntity:[THLGuestEntity class] databaseManager:self.dependencyManager.databaseManager];
-    }
-    return _contactsDataStore;
+#pragma mark Delegate
+- (void)partyInvitationViewControllerDidSkipSendingInvitesAndWantsToShowTicket:(PFObject *)invite {
+    [_window.rootViewController dismissViewControllerAnimated:YES completion:^{
+        [self presentPartyNavigationController:invite];
+    }];
+    
 }
+
+- (void)partyInvitationViewControllerDidSubmitInvitesAndWantsToShowTicket:(PFObject *)invite {
+    [_window.rootViewController dismissViewControllerAnimated:YES completion:^{
+        [self presentPartyNavigationController:invite];
+    }];
+    
+}
+
+#pragma mark -
+#pragma mark PerkCollectionViewController
+#pragma mark Delegate
+
+- (void)perkStoreViewControllerWantsToPresentDetailsFor:(PFObject *)perk {
+    THLPerkDetailViewController *perkDetailViewController = [[THLPerkDetailViewController alloc] initWithPerk:perk];
+    perkDetailViewController.hidesBottomBarWhenPushed = YES;
+    [_perkCollectionViewController.navigationController pushViewController:perkDetailViewController animated:YES];
+}
+
 
 #pragma mark TopViewController Helper
 
@@ -427,65 +457,41 @@ THLPerkCollectionViewControllerDelegate
     return [self topViewController:presentedViewController];
 }
 
+
+#pragma mark - Push Notifications
+- (BFTask *)handlePushNotification:(NSDictionary *)pushInfo {
+    if ([pushInfo objectForKey:@"guestlistInviteId"]) {
+        NSString *guestlistInviteId = pushInfo[@"guestlistInviteId"];
+        return [[[_dependencyManager guestlistService] fetchGuestlistInviteWithId:guestlistInviteId] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id _Nullable(BFTask * _Nonnull task) {
+            THLGuestlistInvite *invite = task.result;
+            THLPopupNotificationView *popupView = [[THLPopupNotificationView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH*0.87, SCREEN_HEIGHT*0.67)];
+            [popupView setMessageLabelText:[NSString stringWithFormat:@"%@ has invited you\nto party with friends at\n%@\n%@ at %@", invite.sender.firstName, invite.event.location.name, invite.date.thl_weekdayString, invite.date.thl_timeString]];
+            [popupView setImageViewWithURL:[NSURL URLWithString:invite.event.location.image.url]];
+            [popupView setIconURL:[NSURL URLWithString:invite.sender.image.url]];
+            [popupView setButtonTitle:@"View Invite"];
+            [popupView setButtonTarget:self action:@selector(viewInvites) forControlEvents:UIControlEventTouchUpInside];
+            KLCPopup *popup = [KLCPopup popupWithContentView:popupView
+                                                    showType:KLCPopupShowTypeBounceIn
+                                                 dismissType:KLCPopupDismissTypeBounceOut
+                                                    maskType:KLCPopupMaskTypeDimmed
+                                    dismissOnBackgroundTouch:YES
+                                       dismissOnContentTouch:YES];
+            popup.dimmedMaskAlpha = 0.8;
+            [popup show];
+            return task;
+        }];
+    } else {
+        NSLog(@"Notification was not a guestlistInvite");
+        return [BFTask taskWithResult:nil];
+    }
+}
+
 - (void)messageButtonPressed
 {
     [Intercom presentMessageComposer];
 }
 
-#pragma mark - Routing
-/**
- *  present modules by setting their delegates to Master Wireframe and calling the module's presenter to initialize the view on the stack
- */
-
-- (void)presentUserVerification {
-    THLLoginWireframe *loginWireframe = [_dependencyManager newLoginWireframe];
-    [loginWireframe.moduleInterface setModuleDelegate:self];
-    [loginWireframe presentUserVerificationInterfaceInWindow:_window];
-}
-
-- (void)presentOnboardingAndLoginInterface {
-        THLLoginWireframe *loginWireframe = [_dependencyManager newLoginWireframe];
-        [loginWireframe.moduleInterface setModuleDelegate:self];
-        [loginWireframe.moduleInterface presentLoginModuleInterfaceWithOnboardingInWindow:_window];
-}
-
-- (void)presentLoginInterfaceOnViewController:(UIViewController *)viewController {
-    THLLoginWireframe *loginWireframe = [_dependencyManager newLoginWireframe];
-    [loginWireframe.moduleInterface setModuleDelegate:self];
-    [loginWireframe.moduleInterface presentLoginModuleInterfaceOnViewController:viewController];
-}
-
-
-/**
- *  Delegates
- */
-
-
-#pragma mark - THLLoginModuleDelegate
-- (void)loginModule:(id<THLLoginModuleInterface>)module didLoginUser:(NSError *)error {
-	if (!error) {
-        [THLUserManager makeCurrentInstallation];
-
-        [THLUserManager logCrashlyticsUser];
-        Mixpanel *mixpanel = [Mixpanel sharedInstance];
-        [mixpanel track:@"CompletedSignup"];
-        [self routeLoggedInUserFlow];
-    } else {
-        NSLog(@"Login Error:%@", error);
-    }
-}
-
-- (void)skipUserLogin {
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-     [Intercom registerUnidentifiedUser];
-    [mixpanel track:@"SkippedSignup"];
-    [self configureMasterTabViewControllerAndPresentGuestFlowInWindow:_window];
-}
-
-#pragma mark - UserFlowDelegate
-- (void)logInUserOnViewController:(UIViewController *)viewController {
-    [self presentLoginInterfaceOnViewController:viewController];
-}
+#pragma mark - LogOut Handler
 
 - (void)logOutUser {
     [THLUserManager logUserOut];
@@ -494,7 +500,7 @@ THLPerkCollectionViewControllerDelegate
     [PFObject unpinAllObjects];
     [FBSDKAccessToken setCurrentAccessToken:nil];
     [_dependencyManager.databaseManager dropDB];
-    [self presentOnboardingAndLoginInterface];
+    [self presentOnboardingViewController];
 }
 
 

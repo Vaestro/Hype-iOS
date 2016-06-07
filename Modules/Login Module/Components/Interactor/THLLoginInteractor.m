@@ -94,29 +94,6 @@
     }];
 }
 
-- (void)createMixPanelUserProfile {
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    
-    // mixpanel identify: must be called before
-    // people properties can be set
-    [mixpanel createAlias:self.user.objectId
-             forDistinctID:mixpanel.distinctId];
-     // You must call identify if you haven't already
-     // (e.g., when your app launches).
-     [mixpanel identify:mixpanel.distinctId];
-    
-    NSString *userSex;
-    if (self.user.sex == THLSexMale) {
-        userSex = @"Male";
-    } else if (self.user.sex == THLSexFemale) {
-        userSex = @"Female";
-    }
-    [mixpanel.people set:@{@"Name": [NSString stringWithFormat:@"%@ %@", self.user.firstName, self.user.lastName],
-                           @"Email": self.user.email,
-                           @"Gender": userSex
-                           }];
-}
-
 - (void)addEmail:(NSString *)email {
     _user.email = email;
     WEAKSELF();

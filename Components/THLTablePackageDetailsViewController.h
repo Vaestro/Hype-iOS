@@ -21,7 +21,7 @@
 DZNEmptyDataSetSource,
 DZNEmptyDataSetDelegate
 >
+@property (nonatomic, weak) id<THLTablePackageControllerDelegate> delegate;
 @property (nonatomic) PFObject *admissionOption;
 @property (nonatomic) PFObject *event;
-@property (nonatomic, weak) id<THLTablePackageControllerDelegate> delegate;
 @end

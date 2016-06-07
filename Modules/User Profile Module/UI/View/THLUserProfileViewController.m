@@ -25,6 +25,7 @@
 #import "THLPaymentViewController.h"
 #import "THLWebViewController.h"
 #import "MBProgressHUD.h"
+#import "TTTAttributedLabel.h"
 
 typedef NS_ENUM(NSInteger, TableViewSection) {
     TableViewSectionPersonal = 0,
@@ -72,6 +73,8 @@ STPPaymentCardTextFieldDelegate
 @property (nonatomic, strong) THLInformationViewController *infoVC;
 @property (nonatomic, strong) RACCommand *dismissVC;
 @property (nonatomic) THLWebViewController *webViewController;
+@property (nonatomic, strong) TTTAttributedLabel *navBarTitleLabel;
+
 @end
 
 @implementation THLUserProfileViewController
@@ -87,7 +90,7 @@ STPPaymentCardTextFieldDelegate
 {
     [super viewDidLoad];
     self.tableCellNames = @[@"Invite Friends",@"Redeem Code", @"Payment Method", @"Privacy Policy", @"Terms & Conditions", @"Contact Us", @"Logout"];
-    self.navigationItem.title = @"MY PROFILE";
+    self.navigationItem.titleView = self.navBarTitleLabel;
     
     _tableView = [self newTableView];
     self.view.backgroundColor = kTHLNUIPrimaryBackgroundColor;
@@ -345,6 +348,28 @@ STPPaymentCardTextFieldDelegate
 }
 
 #pragma mark - Constructors
+
+- (TTTAttributedLabel *)navBarTitleLabel
+{
+    if (!_navBarTitleLabel) {
+        _navBarTitleLabel = [TTTAttributedLabel new];
+        _navBarTitleLabel.numberOfLines = 1;
+        _navBarTitleLabel.textAlignment = NSTextAlignmentCenter;
+        
+        
+        NSAttributedString *attString = [[NSAttributedString alloc] initWithString:@"MY PROFILE"
+                                                                        attributes:@{
+                                                                                     (id)kCTForegroundColorAttributeName : (id)[UIColor whiteColor].CGColor,
+                                                                                     NSFontAttributeName : [UIFont systemFontOfSize:16],
+                                                                                     NSKernAttributeName : @4.5f
+                                                                                     }];
+        _navBarTitleLabel.text = attString;
+        
+        [_navBarTitleLabel sizeToFit];
+    }
+    
+    return _navBarTitleLabel;
+}
 
 - (UIBarButtonItem *)newBarButtonItem
 {

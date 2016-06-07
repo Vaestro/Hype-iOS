@@ -188,6 +188,7 @@
 - (PFQuery *)baseGuestlistInviteQuery {
     PFQuery *query = [THLGuestlistInvite query];
     [query includeKey:@"Guest"];
+    [query includeKey:@"sender"];
     [query includeKey:@"Guestlist"];
     [query includeKey:@"Guestlist.Owner"];
     [query includeKey:@"Guestlist.event"];

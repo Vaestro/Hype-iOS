@@ -9,7 +9,16 @@
 #import <Foundation/Foundation.h>
 
 @class BFTask;
+
+
 @protocol THLLoginServiceInterface <NSObject>
+- (void)createMixpanelProfile;
+
 - (BFTask *)login;
 - (BFTask *)getFacebookUserDictionary;
+- (void)saveFacebookUserInformation;
+- (BOOL)shouldLogin;
+- (BOOL)shouldAddFacebookInformation;
+- (BOOL)shouldVerifyEmail;
+- (BOOL)shouldVerifyPhoneNumber;
 @end

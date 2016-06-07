@@ -8,8 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "THLLoginServiceInterface.h"
+@protocol THLLoginServiceDelegate <NSObject>
 
+-(void)loginServiceDidSaveUserFacebookInformation;
+
+@end
 
 @interface THLLoginService : NSObject<THLLoginServiceInterface>
+@property (nonatomic, weak) id<THLLoginServiceDelegate> delegate;
 
 @end
