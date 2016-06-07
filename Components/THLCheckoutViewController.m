@@ -125,7 +125,7 @@
     WEAKSELF();
     [contentView addSubviews:@[self.purchaseDetailsView, self.paymentMethodView, self.importantInformationView, self.applyCreditsLabel, self.applyCreditsButton]];
     
-    if (_creditsAmount == 0) {
+    if (_creditsAmount <= 0 || [_admissionOption[@"type"] integerValue] == 1) {
         [_applyCreditsLabel setHidden:YES];
         [_applyCreditsButton setHidden:YES];
     }
@@ -296,7 +296,7 @@
 - (void)applyCredits:(id)sender
 {
     
-    UIAlertController * alert=   [UIAlertController
+    UIAlertController * alert=  [UIAlertController
                                   alertControllerWithTitle:@"Info"
                                   message:@"If you apply your credits now, you will not be able to get them back"
                                   preferredStyle:UIAlertControllerStyleAlert];
@@ -308,13 +308,7 @@
                          {
                              _total -= _creditsAmount;
                              _subTotal -= _creditsAmount;
-                             [THLUser currentUser].credits -= _creditsAmount;
-                             [[THLUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-                                 if (!error) {
-                                     [self updateView];
-                                 }
-                             }];
-
+                             [self updateView];
                              [alert dismissViewControllerAnimated:YES completion:nil];
                              
                          }];
@@ -371,7 +365,6 @@
                                       @"guestlistInviteId": _paymentInfo[@"guestlistInviteId"]
                                               };
         
-        
         [PFCloud callFunctionInBackground:@"completeOrderForInvite"
                            withParameters:purchaseInfo
                                     block:^(id response, NSError *error) {
@@ -379,9 +372,12 @@
                                         if (error) {
                                             [self displayError:[error localizedDescription]];
                                         } else {
-                                             Mixpanel *mixpanel = [Mixpanel sharedInstance];
-                                            [mixpanel track:@"Accepted invite and purchased ticket"];
+                                            Mixpanel *mixpanel = [Mixpanel sharedInstance];
+                                           [mixpanel track:@"Accepted invite and purchased ticket"];
                                            [mixpanel.people increment:@"tickets purchased" by:@1];
+                                            
+                                            [[THLUser currentUser] incrementKey:@"credits" byAmount: [NSNumber numberWithFloat:-_creditsAmount]];
+                                            [[THLUser currentUser] saveEventually];
                                             
                                             [[self queryForGuestlistInviteForEvent:_event.objectId] getFirstObjectInBackgroundWithBlock:^(PFObject *guestlistInvite, NSError *queryError) {
                                                 if (!queryError) {
@@ -417,6 +413,9 @@
                                             [mixpanel track:@"Purchased ticket"];
                                             [mixpanel.people increment:@"tickets purchased" by:@1];
                                             
+                                            [[THLUser currentUser] incrementKey:@"credits" byAmount: [NSNumber numberWithFloat:-_creditsAmount]];
+                                            [[THLUser currentUser] saveEventually];
+                                            
                                             [[self queryForGuestlistInviteForEvent:_event.objectId] getFirstObjectInBackgroundWithBlock:^(PFObject *guestlistInvite, NSError *queryError) {
                                                 if (!queryError) {
                                                     [guestlistInvite pinInBackground];
@@ -428,7 +427,6 @@
                                             }];
                                         }
                                     }];
-
     }
 }
 
