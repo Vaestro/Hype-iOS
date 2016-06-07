@@ -147,7 +147,13 @@
 {
         THLAdmissionOptionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[THLAdmissionOptionCell identifier] forIndexPath:indexPath];
         cell.titleLabel.text = object[@"name"];
-        cell.priceLabel.text = [NSString stringWithFormat:@"$ %.2f", [object[@"price"] floatValue]];
+    
+        if ([object[@"price"] floatValue] == 0) {
+            cell.priceLabel.text = @"FREE";
+        } else {
+            cell.priceLabel.text = [NSString stringWithFormat:@"$ %.2f", [object[@"price"] floatValue]];
+        }
+    
         return cell;
 }
 
