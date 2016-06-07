@@ -37,6 +37,7 @@
 @property (nonatomic, strong) THLPaymentMethodView *paymentMethodView;
 @property (nonatomic, strong) UIButton *applyCreditsButton;
 @property (nonatomic, strong) UILabel *applyCreditsLabel;
+@property (nonatomic) bool applyCreditsPressed;
 
 @property (nonatomic, strong) NSDictionary *paymentInfo;
 @property (nonatomic, strong) THLImportantInformationView *importantInformationView;
@@ -64,6 +65,7 @@
         _serviceCharge = ([_admissionOption[@"price"] floatValue] * 0.029) + 0.30;
         _subTotal = ([admissionOption[@"price"] floatValue]);
         _total = [_admissionOption[@"price"] floatValue] + _serviceCharge;
+        _applyCreditsPressed = false;
         
         if ([THLUser currentUser].credits > [_admissionOption[@"price"] floatValue]) {
             _creditsAmount = [_admissionOption[@"price"] floatValue];
@@ -308,6 +310,7 @@
                          {
                              _total -= _creditsAmount;
                              _subTotal -= _creditsAmount;
+                             _applyCreditsPressed = true;
                              [self updateView];
                              [alert dismissViewControllerAnimated:YES completion:nil];
                              
@@ -376,8 +379,10 @@
                                            [mixpanel track:@"Accepted invite and purchased ticket"];
                                            [mixpanel.people increment:@"tickets purchased" by:@1];
                                             
-                                            [[THLUser currentUser] incrementKey:@"credits" byAmount: [NSNumber numberWithFloat:-_creditsAmount]];
-                                            [[THLUser currentUser] saveEventually];
+                                            if (_applyCreditsPressed) {
+                                                [[THLUser currentUser] incrementKey:@"credits" byAmount: [NSNumber numberWithFloat:-_creditsAmount]];
+                                                [[THLUser currentUser] saveEventually];
+                                            }
                                             
                                             [[self queryForGuestlistInviteForEvent:_event.objectId] getFirstObjectInBackgroundWithBlock:^(PFObject *guestlistInvite, NSError *queryError) {
                                                 if (!queryError) {
@@ -413,8 +418,10 @@
                                             [mixpanel track:@"Purchased ticket"];
                                             [mixpanel.people increment:@"tickets purchased" by:@1];
                                             
-                                            [[THLUser currentUser] incrementKey:@"credits" byAmount: [NSNumber numberWithFloat:-_creditsAmount]];
-                                            [[THLUser currentUser] saveEventually];
+                                            if (_applyCreditsPressed) {
+                                                [[THLUser currentUser] incrementKey:@"credits" byAmount: [NSNumber numberWithFloat:-_creditsAmount]];
+                                                [[THLUser currentUser] saveEventually];
+                                            }
                                             
                                             [[self queryForGuestlistInviteForEvent:_event.objectId] getFirstObjectInBackgroundWithBlock:^(PFObject *guestlistInvite, NSError *queryError) {
                                                 if (!queryError) {
