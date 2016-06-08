@@ -396,6 +396,7 @@
 - (void)agreementButtonToggle:(id)sender
 {
     _agreementButton.selected = !_agreementButton.selected; // toggle the selected property, just a simple BOOL
+
 }
 
 
