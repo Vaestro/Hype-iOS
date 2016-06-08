@@ -174,6 +174,11 @@ THLPerkCollectionViewControllerDelegate
     [self presentInvitationViewController:event withGuestlistId:guestlistId];
 }
 
+- (void)checkoutViewControllerDidFinishTableReservationForEvent:(PFObject *)invite {
+    [_window.rootViewController dismissViewControllerAnimated:YES completion:^{
+        [self presentPartyNavigationController:invite];
+    }];
+}
 
 #pragma mark -
 #pragma mark PartyInvitationViewController
@@ -189,7 +194,6 @@ THLPerkCollectionViewControllerDelegate
     [_window.rootViewController dismissViewControllerAnimated:YES completion:^{
         [self presentPartyNavigationController:invite];
     }];
-
 }
 
 #pragma mark -

@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface THLResourceManager : NSObject
++ (NSString *)cancellationPolicyText;
+
 + (NSString *)privacyPolicyText;
 + (NSString *)termsOfUseText;
 + (NSURL *)onboardingVideo;

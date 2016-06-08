@@ -22,6 +22,8 @@
 #import "THLImportantInformationView.h"
 #import "THLPaymentMethodView.h"
 #import "SVProgressHUD.h"
+#import "THLInformationViewController.h"
+#import "THLResourceManager.h"
 
 @interface THLCheckoutViewController ()
 @property (nonatomic) THLEvent *event;
@@ -39,6 +41,12 @@
 @property (nonatomic, strong) THLPaymentMethodView *paymentMethodView;
 @property (nonatomic, strong) UIButton *applyCreditsButton;
 @property (nonatomic, strong) UILabel *applyCreditsLabel;
+@property (nonatomic, strong) TTTAttributedLabel *attributedLabel;
+@property (nonatomic, strong) UIBarButtonItem *backBarButton;
+@property (nonatomic, strong) UILabel *navBarTitleLabel;
+
+@property (nonatomic, strong) UIButton *agreementButton;
+
 @property (nonatomic) bool applyCreditsPressed;
 
 @property (nonatomic, strong) THLImportantInformationView *importantInformationView;
@@ -132,9 +140,34 @@
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
-    [contentView makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(WSELF.importantInformationView.bottom);
-    }];
+    if ([_admissionOption[@"type"] integerValue] == 1) {
+         [contentView addSubviews:@[self.agreementButton, self.attributedLabel]];
+        [self.agreementButton makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(WSELF.importantInformationView.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+            make.width.equalTo(15);
+            make.height.equalTo(WSELF.agreementButton.mas_width);
+            make.left.insets(kTHLEdgeInsetsSuperHigh());
+            make.bottom.insets(kTHLEdgeInsetsSuperHigh());
+
+        }];
+        
+        [self.attributedLabel makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(WSELF.agreementButton);
+            make.left.equalTo(WSELF.agreementButton.mas_right).insets(kTHLEdgeInsetsLow());
+            make.right.equalTo(kTHLEdgeInsetsHigh());
+        }];
+        
+        [contentView makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(WSELF.agreementButton.mas_bottom).offset(25);
+        }];
+    } else {
+        [contentView makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(WSELF.importantInformationView.mas_bottom);
+        }];
+    }
+    
+    
+
 }
 
 
@@ -255,6 +288,61 @@
     return _applyCreditsButton;
 }
 
+- (UIButton *)agreementButton
+{
+    if (!_agreementButton) {
+        _agreementButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_agreementButton setImage:[UIImage imageNamed:@"unchecked_box"] forState:UIControlStateNormal];
+        [_agreementButton setImage:[UIImage imageNamed:@"checked_box"] forState:UIControlStateSelected];
+        [_agreementButton addTarget:self
+                                action:@selector(agreementButtonToggle:)
+                      forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    return _agreementButton;
+}
+
+- (TTTAttributedLabel *)attributedLabel {
+    if (!_attributedLabel) {
+        _attributedLabel = [TTTAttributedLabel new];
+        _attributedLabel.textColor = kTHLNUIGrayFontColor;
+        _attributedLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16];
+        _attributedLabel.numberOfLines = 1;
+        _attributedLabel.adjustsFontSizeToFitWidth = YES;
+        _attributedLabel.minimumScaleFactor = 0.5;
+        _attributedLabel.linkAttributes = @{NSForegroundColorAttributeName: kTHLNUIAccentColor,
+                                    NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
+        _attributedLabel.activeLinkAttributes = @{NSForegroundColorAttributeName: kTHLNUIPrimaryFontColor,
+                                          NSUnderlineStyleAttributeName: @(NSUnderlineStyleNone)};
+        _attributedLabel.textAlignment = NSTextAlignmentCenter;
+        NSString *labelText = @"I have read and understand the Cancellation Policy";
+        _attributedLabel.text = labelText;
+        NSRange agreement = [labelText rangeOfString:@"I have read and understand the"];
+        NSRange cancellation = [labelText rangeOfString:@"Cancellation Policy"];
+        [_attributedLabel addLinkToURL:[NSURL URLWithString:@"action://toggle-agreement"] withRange:agreement];
+        [_attributedLabel addLinkToURL:[NSURL URLWithString:@"action://show-cancellation"] withRange:cancellation];
+        _attributedLabel.delegate = self;
+    }
+    return _attributedLabel;
+}
+
+- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url {
+    if ([[url scheme] hasPrefix:@"action"]) {
+        if ([[url host] hasPrefix:@"show-cancellation"]) {
+            THLInformationViewController *infoVC = [THLInformationViewController new];
+            infoVC.displayText = [THLResourceManager cancellationPolicyText];
+            infoVC.title = @"Cancellation Policy";
+            
+            [self.navigationController pushViewController:infoVC animated:YES];
+
+        } else if ([[url host] hasPrefix:@"toggle-agreement"]) {
+            [self agreementButtonToggle:_attributedLabel];
+        } else {
+            /* deal with http links here */
+        }
+    }
+}
+
 #pragma mark - Event handlers
 - (void)back:(id)sender
 {
@@ -264,7 +352,50 @@
 
 - (void)reserve:(id)sender
 {
-    
+    if (!_agreementButton.selected) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:@"Please check that you agree to the Cancellation Policy"
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    } else {
+        NSDictionary *purchaseInfo = @{
+                                       @"admissionOptionId" : _admissionOption.objectId,
+                                       @"eventId": _event.objectId,
+                                       @"eventTime": _event.date,
+                                       @"locationName": _event.location.name,
+                                       @"descriptionName": _admissionOption[@"name"]
+                                       };
+        
+        [PFCloud callFunctionInBackground:@"createReservation"
+                           withParameters:purchaseInfo
+                                    block:^(NSString *guestlistId, NSError *error) {
+                                        [SVProgressHUD dismiss];
+                                        if (error) {
+                                            [self displayError:[error localizedDescription]];
+                                        } else {
+                                            Mixpanel *mixpanel = [Mixpanel sharedInstance];
+                                            [mixpanel track:@"Reserved a Table"];
+                                            [mixpanel.people increment:@"tables reserved" by:@1];
+                
+                                            [[self queryForGuestlistInviteForEvent:_event.objectId] getFirstObjectInBackgroundWithBlock:^(PFObject *guestlistInvite, NSError *queryError) {
+                                                if (!queryError) {
+                                                    [guestlistInvite pinInBackground];
+                                                    [self.delegate checkoutViewControllerDidFinishTableReservationForEvent:guestlistInvite];
+                                                } else {
+                                                    
+                                                }
+                                            }];
+                                        }
+                                    }];
+    }
+ 
+}
+
+- (void)agreementButtonToggle:(id)sender
+{
+    _agreementButton.selected = !_agreementButton.selected; // toggle the selected property, just a simple BOOL
 }
 
 

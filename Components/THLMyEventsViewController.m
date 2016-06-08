@@ -149,6 +149,7 @@
     [query includeKey:@"Guest"];
     [query includeKey:@"Guest.event"];
     [query includeKey:@"Guestlist.Owner"];
+    [query includeKey:@"Guestlist.admissionOption"];
     [query includeKey:@"Guestlist.event.location"];
     NSDate *date = [[NSDate date] dateBySubtractingHours:4];
     [query whereKey:@"date" greaterThan:date];
@@ -187,7 +188,11 @@
         NSString *invitationDate = [NSString stringWithFormat:@"%@, %@", date.thl_weekdayString, date.thl_timeString];
         cell.venueNameLabel.text = object[@"Guestlist"][@"event"][@"location"][@"name"];
         cell.dateLabel.text = invitationDate;
-        cell.partyTypeLabel.text = @"EVENT TICKET";
+        if (object[@"Guestlist"][@"admissionOption"][@"type"] == [NSNumber numberWithInt:1]) {
+            cell.partyTypeLabel.text = @"TABLE RESERVATION";
+        } else {
+            cell.partyTypeLabel.text = @"EVENT TICKET";
+        }
         
         PFFile *imageFile = object[@"Guestlist"][@"event"][@"location"][@"image"];
         NSURL *url = [NSURL URLWithString:imageFile.url];

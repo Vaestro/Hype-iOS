@@ -508,7 +508,7 @@ THLLoginViewControllerDelegate
     [[Branch getInstance]logout];
     [PFObject unpinAllObjects];
     [FBSDKAccessToken setCurrentAccessToken:nil];
-    [_dependencyManager.databaseManager dropDB];
+//    [_dependencyManager.databaseManager dropDB];
     [self presentOnboardingViewController];
 }
 

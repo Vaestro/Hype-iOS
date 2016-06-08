@@ -9,6 +9,12 @@
 #import "THLResourceManager.h"
 
 @implementation THLResourceManager
++ (NSString *)cancellationPolicyText {
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"Cancellation Policy" ofType:@"txt"];
+    NSString *content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+    return content;
+}
+
 + (NSString *)privacyPolicyText {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"Privacy Policy" ofType:@"txt"];
     NSString *content = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];

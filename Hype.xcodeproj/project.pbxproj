@@ -193,6 +193,7 @@
 		79B994EA1D0650D500E0AD33 /* THLPermissionRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B994E91D0650D500E0AD33 /* THLPermissionRequestViewController.m */; };
 		79BB15301C657FF50044D943 /* THLSingleLineTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BB152F1C657FF50044D943 /* THLSingleLineTextField.m */; };
 		79BB15331C6CED740044D943 /* THLFxTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BB15321C6CED720044D943 /* THLFxTitleLabel.m */; };
+		79C422871D07F6B5005A02FA /* Cancellation Policy.txt in Resources */ = {isa = PBXBuildFile; fileRef = 79C422861D07F6B5005A02FA /* Cancellation Policy.txt */; };
 		79C93E2B1C758B5D005B4D95 /* TSMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C93E281C758B5D005B4D95 /* TSMessage.m */; };
 		79C93E2C1C758B5D005B4D95 /* TSMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C93E2A1C758B5D005B4D95 /* TSMessageView.m */; };
 		79C93E2E1C758B69005B4D95 /* TSMessagesDefaultDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = 79C93E2D1C758B69005B4D95 /* TSMessagesDefaultDesign.json */; };
@@ -703,6 +704,7 @@
 		79BB152F1C657FF50044D943 /* THLSingleLineTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLSingleLineTextField.m; sourceTree = "<group>"; };
 		79BB15311C6CED720044D943 /* THLFxTitleLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLFxTitleLabel.h; sourceTree = "<group>"; };
 		79BB15321C6CED720044D943 /* THLFxTitleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLFxTitleLabel.m; sourceTree = "<group>"; };
+		79C422861D07F6B5005A02FA /* Cancellation Policy.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "Cancellation Policy.txt"; path = "Hype/Resources/Cancellation Policy.txt"; sourceTree = SOURCE_ROOT; };
 		79C93E271C758B5D005B4D95 /* TSMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSMessage.h; sourceTree = "<group>"; };
 		79C93E281C758B5D005B4D95 /* TSMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSMessage.m; sourceTree = "<group>"; };
 		79C93E291C758B5D005B4D95 /* TSMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSMessageView.h; sourceTree = "<group>"; };
@@ -2543,6 +2545,7 @@
 			isa = PBXGroup;
 			children = (
 				794FAB6A1C615DE200438D49 /* Lavo.mov */,
+				79C422861D07F6B5005A02FA /* Cancellation Policy.txt */,
 				79CD27C81C520293009BC119 /* raleway */,
 				79CD27C61C520293009BC119 /* Images.xcassets */,
 				79CD27C71C520293009BC119 /* Privacy Policy.txt */,
@@ -3384,6 +3387,7 @@
 				79CD27FB1C520293009BC119 /* Raleway-ThinItalic.ttf in Resources */,
 				79CD27E51C520293009BC119 /* LaunchScreen.xib in Resources */,
 				79CD27E81C520293009BC119 /* Images.xcassets in Resources */,
+				79C422871D07F6B5005A02FA /* Cancellation Policy.txt in Resources */,
 				79CD27E91C520293009BC119 /* Privacy Policy.txt in Resources */,
 				79CD27F81C520293009BC119 /* Raleway-SemiBold.ttf in Resources */,
 				79CD27E61C520293009BC119 /* Hype.strings in Resources */,

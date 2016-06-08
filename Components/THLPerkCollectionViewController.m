@@ -84,6 +84,7 @@
         make.top.right.left.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
+    
     [self.creditBalanceLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(WSELF.creditsTitleLabel.mas_bottom).insets(kTHLEdgeInsetsHigh());
         make.right.left.insets(kTHLEdgeInsetsNone());
@@ -160,8 +161,6 @@
         _navBarTitleLabel = [TTTAttributedLabel new];
         _navBarTitleLabel.numberOfLines = 1;
         _navBarTitleLabel.textAlignment = NSTextAlignmentCenter;
-        
-        
         NSAttributedString *attString = [[NSAttributedString alloc] initWithString:@"PERKS"
                                                                         attributes:@{
                                                                                      (id)kCTForegroundColorAttributeName : (id)[UIColor whiteColor].CGColor,
@@ -169,7 +168,6 @@
                                                                                      NSKernAttributeName : @4.5f
                                                                                      }];
         _navBarTitleLabel.text = attString;
-        
         [_navBarTitleLabel sizeToFit];
     }
     
