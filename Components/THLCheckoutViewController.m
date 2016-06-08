@@ -11,6 +11,7 @@
 #import "THLAppearanceConstants.h"
 #import "THLEvent.h"
 #import "THLLocationEntity.h"
+#import "THLGuestlistInvite.h"
 #import "THLUser.h"
 #import "Parse.h"
 #import "THLActionButton.h"
@@ -25,6 +26,7 @@
 @interface THLCheckoutViewController ()
 @property (nonatomic) THLEvent *event;
 @property (nonatomic) PFObject *admissionOption;
+@property (nonatomic) THLGuestlistInvite *guestlistInvite;
 @property (nonatomic, strong) RACCommand *completionAction;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic) float serviceCharge;
@@ -39,7 +41,6 @@
 @property (nonatomic, strong) UILabel *applyCreditsLabel;
 @property (nonatomic) bool applyCreditsPressed;
 
-@property (nonatomic, strong) NSDictionary *paymentInfo;
 @property (nonatomic, strong) THLImportantInformationView *importantInformationView;
 @end
 
@@ -47,20 +48,12 @@
 
 #pragma mark - Life cycle
 
-- (id)initWithEvent:(PFObject *)event paymentInfo:(NSDictionary *)paymentInfo;
-{
-    if (self = [super init]) {
-        self.event = (THLEvent *)event;
-        self.paymentInfo = paymentInfo;
-    }
-    return self;
-}
-
-- (id)initWithEvent:(PFObject *)event admissionOption:(PFObject *)admissionOption;
+- (id)initWithEvent:(PFObject *)event admissionOption:(PFObject *)admissionOption guestlistInvite:(PFObject *)guestlistInvite
 {
     if (self = [super init]) {
         self.event = (THLEvent *)event;
         self.admissionOption = admissionOption;
+        self.guestlistInvite = (THLGuestlistInvite *)guestlistInvite;
         
         _serviceCharge = ([_admissionOption[@"price"] floatValue] * 0.029) + 0.30;
         _subTotal = ([admissionOption[@"price"] floatValue]);
@@ -85,27 +78,10 @@
     self.navigationItem.titleView = [self navBarTitleLabel];
 
     WEAKSELF();
-    
-    if ([_admissionOption[@"type"] integerValue] == 0) {
-        [self.purchaseButton makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(0);
-            make.left.bottom.right.insets(kTHLEdgeInsetsHigh());
-        }];
-    } else if ([_admissionOption[@"type"] integerValue] == 1) {
-        
-        THLActionButton *reserveButton = [self reserveButton];
-        
-        [reserveButton makeConstraints:^(MASConstraintMaker *make) {
-            make.right.bottom.insets(kTHLEdgeInsetsHigh());
-            make.left.equalTo(WSELF.view.mas_centerX);
-        }];
-        
-        [self.purchaseButton makeConstraints:^(MASConstraintMaker *make) {
-            make.left.bottom.insets(kTHLEdgeInsetsHigh());
-            make.right.equalTo(WSELF.view.mas_centerX);
-        }];
-
-    }
+    [self.purchaseButton makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(0);
+        make.left.bottom.right.insets(kTHLEdgeInsetsHigh());
+    }];
     
     [self.scrollView makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.insets(kTHLEdgeInsetsNone());
@@ -279,9 +255,6 @@
     return _applyCreditsButton;
 }
 
-
-
-
 #pragma mark - Event handlers
 - (void)back:(id)sender
 {
@@ -367,7 +340,7 @@
 - (void)chargeCustomer:(THLUser *)customer forEvent:(THLEvent *)event
 {
     
-    if (_paymentInfo[@"guestlistInviteId"]) {
+    if (_guestlistInvite) {
         
         NSDictionary *purchaseInfo = @{
                                       @"eventId": event.objectId,
@@ -377,7 +350,7 @@
                                       @"customerName": [customer fullName],
                                       @"description": _admissionOption[@"name"],
                                       @"admissionOptionId" : _admissionOption.objectId,
-                                      @"guestlistInviteId": _paymentInfo[@"guestlistInviteId"]
+                                      @"guestlistInviteId": _guestlistInvite.objectId
                                               };
         
         [PFCloud callFunctionInBackground:@"completeOrderForInvite"

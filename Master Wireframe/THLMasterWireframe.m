@@ -237,7 +237,7 @@ THLLoginViewControllerDelegate
 
 - (void)didSelectAdmissionOption:(PFObject *)admissionOption forEvent:(PFObject *)event {
     if ([admissionOption[@"type"] integerValue] == 0) {
-        THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:event admissionOption:admissionOption];
+        THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:event admissionOption:admissionOption guestlistInvite:nil];
         checkoutVC.delegate = self;
         UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:checkoutVC];
         [[self topViewController] presentViewController:navVC animated:YES completion:nil];
@@ -255,7 +255,7 @@ THLLoginViewControllerDelegate
 #pragma mark - TablePackageControllerDelegate
 
 - (void)packageControllerWantsToPresentCheckoutForEvent:(PFObject *)event andAdmissionOption:(PFObject *)admissionOption {
-    THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:event admissionOption:admissionOption];
+    THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:event admissionOption:admissionOption guestlistInvite:nil];
     checkoutVC.delegate = self;
     UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:checkoutVC];
     [[self topViewController] presentViewController:navVC animated:YES completion:nil];
@@ -304,10 +304,6 @@ THLLoginViewControllerDelegate
     [[self topViewController] presentViewController:navVC animated:YES completion:nil];
 }
 
-- (void)eventDetailsWantsToPresentCheckoutForEvent:(PFObject *)event paymentInfo:(NSDictionary *)paymentInfo {
-    [self presentCheckoutViewController:event paymentInfo:paymentInfo];
-}
-
 - (void)eventDetailsWantsToPresentPartyForEvent:(PFObject *)guestlistInvite {
     [_window.rootViewController dismissViewControllerAnimated:YES completion:^{
         [self presentPartyNavigationController:guestlistInvite];
@@ -318,8 +314,8 @@ THLLoginViewControllerDelegate
 #pragma mark -
 #pragma mark CheckoutViewController
 
-- (void)presentCheckoutViewController:(PFObject *)event paymentInfo:(NSDictionary *)paymentInfo {
-    THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:event paymentInfo:paymentInfo];
+- (void)presentCheckoutViewController:(PFObject *)event guestlistInvite:(THLGuestlistInvite *)guestlistInvite admissionOption:(PFObject *)admissionOption {
+    THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:event admissionOption:admissionOption guestlistInvite:guestlistInvite];
     checkoutVC.delegate = self;
     UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:checkoutVC];
     [[self topViewController] presentViewController:navVC animated:YES completion:nil];
@@ -389,8 +385,21 @@ THLLoginViewControllerDelegate
     [self presentInvitationViewController:event withGuestlistId:guestlistId];
 }
 
-- (void)partyViewControllerWantsToPresentCheckoutForEvent:(PFObject *)event paymentInfo:(NSDictionary *)paymentInfo {
-    [self presentCheckoutViewController:event paymentInfo:paymentInfo];
+- (void)partyViewControllerWantsToPresentCheckoutForEvent:(PFObject *)event withGuestlistInvite:(THLGuestlistInvite *)guestlistInvite {
+    PFQuery *query = [PFQuery queryWithClassName:@"AdmissionOption"];
+    [query whereKey:@"location" equalTo:event[@"location"]];
+    [query whereKey:@"type" equalTo:@0];
+    [query whereKey:@"gender" equalTo:[NSNumber numberWithInt:[THLUser currentUser].sex]];
+    
+    [SVProgressHUD show];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *admissionOption, NSError *error) {
+        [SVProgressHUD dismiss];
+        if (error) {
+            
+        } else {
+            [self presentCheckoutViewController:event guestlistInvite:guestlistInvite admissionOption:admissionOption];
+        }
+    }];
 }
 
 

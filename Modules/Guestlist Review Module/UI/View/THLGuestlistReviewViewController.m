@@ -326,15 +326,6 @@ static CGFloat const CELL_SPACING = 10;
 
 #pragma mark - Event Handlers
 
-- (void)purchaseTicket:(id)sender
-{
-    NSDictionary *paymentInfo = @{@"guestlistInviteId": _guestlistInvite.objectId};
-    THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:nil paymentInfo:paymentInfo];
-    UINavigationController *navVC = [[UINavigationController alloc]initWithRootViewController:checkoutVC];
-    [self presentViewController:navVC animated:YES completion:nil];
-}
-
-
 
 - (void)dealloc {
     NSLog(@"Destroyed %@", self);

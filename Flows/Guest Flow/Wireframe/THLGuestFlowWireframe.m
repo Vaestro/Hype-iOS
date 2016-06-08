@@ -153,9 +153,9 @@ THLPerkCollectionViewControllerDelegate
 #pragma mark EventDetailsViewController
 #pragma mark Delegate
 
-- (void)eventDetailsWantsToPresentCheckoutForEvent:(PFObject *)event paymentInfo:(NSDictionary *)paymentInfo {
-    [self presentCheckoutViewController:event paymentInfo:paymentInfo];
-}
+//- (void)eventDetailsWantsToPresentCheckoutForEvent:(PFObject *)event paymentInfo:(NSDictionary *)paymentInfo {
+//    [self presentCheckoutViewController:event paymentInfo:paymentInfo];
+//}
 
 - (void)eventDetailsWantsToPresentPartyForEvent:(PFObject *)guestlistInvite {
     [_window.rootViewController dismissViewControllerAnimated:YES completion:^{
@@ -210,9 +210,9 @@ THLPerkCollectionViewControllerDelegate
     [self presentInvitationViewController:event withGuestlistId:guestlistId];
 }
 
-- (void)partyViewControllerWantsToPresentCheckoutForEvent:(PFObject *)event paymentInfo:(NSDictionary *)paymentInfo {
-    [self presentCheckoutViewController:event paymentInfo:paymentInfo];
-}
+//- (void)partyViewControllerWantsToPresentCheckoutForEvent:(PFObject *)event paymentInfo:(NSDictionary *)paymentInfo {
+//    [self presentCheckoutViewController:event paymentInfo:paymentInfo];
+//}
 
 #pragma mark -
 #pragma mark PerkCollectionViewController
@@ -245,12 +245,12 @@ THLPerkCollectionViewControllerDelegate
 
 }
 
-- (void)presentCheckoutViewController:(PFObject *)event paymentInfo:(NSDictionary *)paymentInfo {
-    THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:event paymentInfo:paymentInfo];
-    checkoutVC.delegate = self;
-    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:checkoutVC];
-    [[self topViewController] presentViewController:navVC animated:YES completion:nil];
-}
+//- (void)presentCheckoutViewController:(PFObject *)event paymentInfo:(NSDictionary *)paymentInfo {
+//    THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:event paymentInfo:paymentInfo];
+//    checkoutVC.delegate = self;
+//    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:checkoutVC];
+//    [[self topViewController] presentViewController:navVC animated:YES completion:nil];
+//}
 
 - (void)presentPaymentViewControllerOn:(UIViewController *)viewController {
     if ([THLUser currentUser].stripeCustomerId) {

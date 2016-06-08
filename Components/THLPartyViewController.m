@@ -113,9 +113,7 @@ static CGFloat const CELL_SPACING = 10;
 }
 
 - (void)handleViewCheckoutAction {
-    NSDictionary *paymentInfo = @{@"guestlistInviteId": _usersInvite.objectId};
-
-    [self.delegate partyViewControllerWantsToPresentCheckoutForEvent:_guestlist[@"event"] paymentInfo:paymentInfo];
+    [self.delegate partyViewControllerWantsToPresentCheckoutForEvent:_guestlist[@"event"] withGuestlistInvite:_usersInvite];
 }
 
 #pragma mark -

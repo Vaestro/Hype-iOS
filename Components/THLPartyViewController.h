@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "ParseUI.h"
 @class THLEvent;
+@class THLGuestlistInvite;
 
 @protocol THLPartyViewControllerDelegate <NSObject>
 - (void)partyViewControllerWantsToPresentInvitationControllerFor:(THLEvent *)event guestlistId:(NSString *)guestlistId;
-- (void)partyViewControllerWantsToPresentCheckoutForEvent:(PFObject *)event paymentInfo:(NSDictionary *)paymentInfo;
+- (void)partyViewControllerWantsToPresentCheckoutForEvent:(PFObject *)event withGuestlistInvite:(THLGuestlistInvite *)guestlistInvite;
 @end
 
 @interface THLPartyViewController : PFQueryCollectionViewController
