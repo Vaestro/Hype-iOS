@@ -104,7 +104,7 @@
     [query includeKey:@"location"];
     [query includeKey:@"venue"];
     
-    DTTimePeriod *eventDisplayPeriod = [DTTimePeriod timePeriodWithSize:DTTimePeriodSizeWeek amount:1 startingAt:[[NSDate date] dateByAddingTimeInterval:-60*300]];
+    DTTimePeriod *eventDisplayPeriod = [DTTimePeriod timePeriodWithSize:DTTimePeriodSizeMonth amount:1 startingAt:[[NSDate date] dateByAddingTimeInterval:-60*300]];
     
     [query whereKey:@"date" lessThanOrEqualTo:eventDisplayPeriod.EndDate];
     [query whereKey:@"date" greaterThanOrEqualTo:eventDisplayPeriod.StartDate];
