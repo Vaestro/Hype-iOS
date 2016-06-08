@@ -82,7 +82,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
-    self.navigationItem.leftBarButtonItem = [self backBarButton];
+//    self.navigationItem.leftBarButtonItem = [self backBarButton];
     self.navigationItem.titleView = [self navBarTitleLabel];
 
     WEAKSELF();

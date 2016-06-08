@@ -239,16 +239,16 @@ THLLoginViewControllerDelegate
     if ([admissionOption[@"type"] integerValue] == 0) {
         THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:event admissionOption:admissionOption guestlistInvite:nil];
         checkoutVC.delegate = self;
-        UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:checkoutVC];
-        [[self topViewController] presentViewController:navVC animated:YES completion:nil];
+        [[self topViewController].navigationController pushViewController:checkoutVC animated:YES];
+
     } else if ([admissionOption[@"type"] integerValue] == 1) {
         THLTablePackageDetailsViewController *packageDetailsVC = [[THLTablePackageDetailsViewController alloc] initWithClassName:@"Bottle"];
         packageDetailsVC.delegate = self;
         packageDetailsVC.event = event;
         packageDetailsVC.admissionOption = admissionOption;
         packageDetailsVC.delegate = self;
-        UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:packageDetailsVC];
-        [[self topViewController] presentViewController:navVC animated:YES completion:nil];
+        [[self topViewController].navigationController pushViewController:packageDetailsVC animated:YES];
+
     }
 }
 
@@ -257,8 +257,8 @@ THLLoginViewControllerDelegate
 - (void)packageControllerWantsToPresentCheckoutForEvent:(PFObject *)event andAdmissionOption:(PFObject *)admissionOption {
     THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:event admissionOption:admissionOption guestlistInvite:nil];
     checkoutVC.delegate = self;
-    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:checkoutVC];
-    [[self topViewController] presentViewController:navVC animated:YES completion:nil];
+    [[self topViewController].navigationController pushViewController:checkoutVC animated:YES];
+
 }
 
 
@@ -317,8 +317,7 @@ THLLoginViewControllerDelegate
 - (void)presentCheckoutViewController:(PFObject *)event guestlistInvite:(THLGuestlistInvite *)guestlistInvite admissionOption:(PFObject *)admissionOption {
     THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:event admissionOption:admissionOption guestlistInvite:guestlistInvite];
     checkoutVC.delegate = self;
-    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:checkoutVC];
-    [[self topViewController] presentViewController:navVC animated:YES completion:nil];
+    [[self topViewController].navigationController pushViewController:checkoutVC animated:YES];
 }
 
 #pragma mark Delegate
