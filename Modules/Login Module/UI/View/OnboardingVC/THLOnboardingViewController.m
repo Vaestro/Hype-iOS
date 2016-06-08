@@ -54,6 +54,8 @@ THLPermissionRequestViewControllerDelegate
 
 - (void)handleLogin {
     _loginService = [THLLoginService new];
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"Touched facebook login button"];
     [[_loginService login] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
         [self reroute];
         return nil;

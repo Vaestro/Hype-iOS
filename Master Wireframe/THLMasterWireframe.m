@@ -100,18 +100,30 @@ THLLoginViewControllerDelegate
 
 - (void)routeLoggedInUserFlow
 {
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel identify:[THLUser user].objectId];
+    
     [Intercom registerUserWithUserId:[THLUser currentUser].objectId];
     [Intercom updateUserWithAttributes:@{@"email": [THLUser currentUser].email,
                                          @"name": [THLUser currentUser].fullName
-                                        }];
+                                         }];
+    
+    [[Branch getInstance] setIdentity:[THLUser currentUser].objectId];
+    
+    [self configureMasterTabViewControllerAndPresentGuestFlowInWindow:_window];
+}
+
+- (void)routeSignedUpUserFlow {
+    [Intercom registerUserWithUserId:[THLUser currentUser].objectId];
+    [Intercom updateUserWithAttributes:@{@"email": [THLUser currentUser].email,
+                                         @"name": [THLUser currentUser].fullName
+                                         }];
     
     [[Branch getInstance] setIdentity:[THLUser currentUser].objectId];
     
     
     [self configureMasterTabViewControllerAndPresentGuestFlowInWindow:_window];
-    
 }
-
 
 
 
@@ -134,9 +146,7 @@ THLLoginViewControllerDelegate
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:@"Completed signup"];
     [PFCloud callFunctionInBackground:@"assignGuestToGuestlistInvite" withParameters:nil];
-    [self routeLoggedInUserFlow];
-
-
+    [self routeSignedUpUserFlow];
 }
 
 - (void)onboardingViewControllerdidSkipSignup {

@@ -42,6 +42,7 @@ static CGFloat const CELL_SPACING = 10;
     self.paginationEnabled = NO;
     _guestlist = guestlist;
     _usersInvite = (THLGuestlistInvite *)usersInvite;
+    [_usersInvite setObject:guestlist forKey:@"Guestlist"];
     return self;
 }
 

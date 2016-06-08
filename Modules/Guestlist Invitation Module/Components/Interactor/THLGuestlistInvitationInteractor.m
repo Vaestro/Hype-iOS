@@ -147,6 +147,8 @@ static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInv
     WEAKSELF();
     if (!_addedGuests || !_addedGuests.count) {
         [[_dataManager getOwnerInviteForEvent:_eventEntity] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *fetchTask) {
+            Mixpanel *mixpanel = [Mixpanel sharedInstance];
+            [mixpanel track:@"Skipped inviting friends"];
             [WSELF.delegate interactor:WSELF didSubmitInitialGuestlist:fetchTask.result withError:fetchTask.error];
             return nil;
         }];
@@ -155,7 +157,7 @@ static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInv
             [[_dataManager getOwnerInviteForEvent:_eventEntity] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *fetchTask) {
                 [WSELF.delegate interactor:WSELF didSubmitInitialGuestlist:fetchTask.result withError:task.error];
                 Mixpanel *mixpanel = [Mixpanel sharedInstance];
-                [mixpanel track:@"Guestlist Submitted" properties:@{
+                [mixpanel track:@"Guestlist submitted" properties:@{
                                                                     @"Number Of Invites": NSStringWithFormat(@"%lu", (unsigned long)_addedGuests.count)
                                                                     }];
                 [mixpanel.people increment:@"guestlist invites sent" by: [NSNumber numberWithUnsignedInteger:_addedGuests.count]];

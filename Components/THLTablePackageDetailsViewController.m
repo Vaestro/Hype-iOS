@@ -136,7 +136,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     
     if ([self.objects count]) {
-        return CGSizeMake(CGRectGetWidth(self.collectionView.bounds), 40.0f);
+        return CGSizeMake(CGRectGetWidth(self.collectionView.bounds), 60.0f);
     }
     return CGSizeZero;
 }
@@ -175,7 +175,7 @@
 
 - (void)messageButtonPressed
 {
-    [Intercom presentConversationList];
+    [Intercom presentMessageComposer];
 }
 
 - (void)checkout:(id)sender {

@@ -89,7 +89,7 @@
 
 - (void)messageButtonPressed
 {
-    [Intercom presentConversationList];
+    [Intercom presentMessageComposer];
     
 }
 

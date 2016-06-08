@@ -25,7 +25,7 @@
     WEAKSELF();
     [self.titleLabel makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(0);
-        make.left.insets(kTHLEdgeInsetsNone());
+        make.left.insets(kTHLEdgeInsetsHigh());
     }];
     
     [self.iconView makeConstraints:^(MASConstraintMaker *make) {

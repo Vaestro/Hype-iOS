@@ -165,7 +165,7 @@
 
 - (void)messageButtonPressed
 {
-    [Intercom presentConversationList];
+    [Intercom presentMessageComposer];
 }
 
 - (TTTAttributedLabel *)navBarTitleLabel

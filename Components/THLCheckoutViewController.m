@@ -473,17 +473,19 @@
 {
     
     if (_guestlistInvite) {
-        
+        THLGuestlist *guestlist = _guestlistInvite[@"Guestlist"];
+        NSString *guestlistId = guestlist.objectId;
         NSDictionary *purchaseInfo = @{
-                                      @"eventId": event.objectId,
-                                      @"eventTime": event.date,
-                                      @"venue": event.location.name,
-                                      @"amount": [NSNumber numberWithFloat:_total],
-                                      @"customerName": [customer fullName],
-                                      @"description": _admissionOption[@"name"],
-                                      @"admissionOptionId" : _admissionOption.objectId,
-                                      @"guestlistInviteId": _guestlistInvite.objectId
-                                              };
+                                       @"eventId": event.objectId,
+                                       @"eventTime": event.date,
+                                       @"venue": event.location.name,
+                                       @"amount": [NSNumber numberWithFloat:_total],
+                                       @"customerName": [customer fullName],
+                                       @"description": _admissionOption[@"name"],
+                                       @"admissionOptionId" : _admissionOption.objectId,
+                                       @"guestlistId" : guestlistId,
+                                       @"guestlistInviteId": _guestlistInvite.objectId
+                                       };
         
         [PFCloud callFunctionInBackground:@"completeOrderForInvite"
                            withParameters:purchaseInfo
@@ -495,7 +497,9 @@
                                             Mixpanel *mixpanel = [Mixpanel sharedInstance];
                                            [mixpanel track:@"Accepted invite and purchased ticket"];
                                            [mixpanel.people increment:@"tickets purchased" by:@1];
-                                            
+                                            [mixpanel.people trackCharge:[NSNumber numberWithFloat:_total] withProperties:@{
+                                                                                                                            @"$time": [NSDate date]
+                                                                                                                            }];
                                             if (_applyCreditsPressed) {
                                                 [[THLUser currentUser] incrementKey:@"credits" byAmount: [NSNumber numberWithFloat:-_creditsAmount]];
                                                 [[THLUser currentUser] saveEventually];
@@ -534,7 +538,9 @@
                                             Mixpanel *mixpanel = [Mixpanel sharedInstance];
                                             [mixpanel track:@"Purchased ticket"];
                                             [mixpanel.people increment:@"tickets purchased" by:@1];
-                                            
+                                            [mixpanel.people trackCharge:[NSNumber numberWithFloat:_total] withProperties:@{
+                                                                                              @"$time": [NSDate date]
+                                                                                              }];
                                             if (_applyCreditsPressed) {
                                                 [[THLUser currentUser] incrementKey:@"credits" byAmount: [NSNumber numberWithFloat:-_creditsAmount]];
                                                 [[THLUser currentUser] saveEventually];

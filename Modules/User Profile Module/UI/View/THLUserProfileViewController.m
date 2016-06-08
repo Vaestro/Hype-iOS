@@ -378,7 +378,7 @@ STPPaymentCardTextFieldDelegate
 
 - (void)messageButtonPressed
 {
-    [Intercom presentConversationList];
+    [Intercom presentMessageComposer];
 }
 
 

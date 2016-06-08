@@ -19,13 +19,18 @@
 #import "Intercom/intercom.h"
 #import "THLAdmissionOptionCell.h"
 #import "THLCollectionReusableView.h"
-
+#import "TTTAttributedLabel.h"
 
 @interface THLAdmissionsViewController()
+<
+TTTAttributedLabelDelegate
+>
 {
     NSArray *_sectionSortedKeys;
     NSMutableDictionary *_sections;
 }
+@property (nonatomic, strong) TTTAttributedLabel *contactConciergeLabel;
+
 @end
 
 @implementation THLAdmissionsViewController
@@ -64,6 +69,36 @@
     self.collectionView.emptyDataSetSource = self;
     self.collectionView.emptyDataSetDelegate = self;
     
+    WEAKSELF();
+    [self.collectionView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.equalTo(UIEdgeInsetsZero);
+    }];
+    
+    UIView *buttonBackground = [UIView new];
+    buttonBackground.backgroundColor = kTHLNUIPrimaryBackgroundColor;
+    [self.view addSubview:buttonBackground];
+    
+    [buttonBackground makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.left.right.insets(kTHLEdgeInsetsNone());
+        make.top.equalTo(WSELF.collectionView.mas_bottom);
+        make.height.equalTo(80);
+    }];
+    
+    [buttonBackground addSubview:self.contactConciergeLabel];
+    [_contactConciergeLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(kTHLEdgeInsetsSuperHigh());
+        make.left.right.insets(kTHLEdgeInsetsNone());
+    }];
+    
+    UIView *separatorView = THLNUIView(kTHLNUIUndef);
+    separatorView.backgroundColor = kTHLNUIGrayFontColor;
+    [buttonBackground addSubview:separatorView];
+    
+    [separatorView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.equalTo(buttonBackground);
+        make.height.equalTo(0.5);
+        
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -183,7 +218,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     if ([_sections count]) {
-        return CGSizeMake(CGRectGetWidth(self.collectionView.bounds), 40.0f);
+        return CGSizeMake(CGRectGetWidth(self.collectionView.bounds), 60.0f);
     }
     return CGSizeZero;
 }
@@ -201,6 +236,41 @@
     return label;
 }
 
+- (TTTAttributedLabel *)contactConciergeLabel
+{
+    if (!_contactConciergeLabel) {
+        _contactConciergeLabel = [TTTAttributedLabel new];
+        _contactConciergeLabel.textColor = [UIColor whiteColor];
+        _contactConciergeLabel.font = [UIFont fontWithName:@"Raleway-Regular" size:14];
+        _contactConciergeLabel.numberOfLines = 0;
+        _contactConciergeLabel.linkAttributes = @{NSForegroundColorAttributeName: kTHLNUIPrimaryFontColor,
+                                             NSUnderlineColorAttributeName: kTHLNUIAccentColor,
+                                             NSUnderlineStyleAttributeName: @(NSUnderlineStyleThick)};
+        _contactConciergeLabel.activeLinkAttributes = @{NSForegroundColorAttributeName: kTHLNUIPrimaryFontColor,
+                                                   NSUnderlineStyleAttributeName: @(NSUnderlineStyleNone)};
+        _contactConciergeLabel.textAlignment = NSTextAlignmentCenter;
+        NSString *labelText = @"Have a question? Ask your concierge";
+        _contactConciergeLabel.text = labelText;
+        NSRange concierge = [labelText rangeOfString:@"concierge"];
+        [_contactConciergeLabel addLinkToURL:[NSURL URLWithString:@"action://show-intercom"] withRange:concierge];
+        _contactConciergeLabel.delegate = self;
+
+        [_contactConciergeLabel sizeToFit];
+    }
+    
+    return _contactConciergeLabel;
+}
+
+- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url {
+    if ([[url scheme] hasPrefix:@"action"]) {
+        if ([[url host] hasPrefix:@"show-intercom"]) {
+            [self messageButtonPressed];
+        } else {
+            /* deal with http links here */
+        }
+    }
+}
+
 #pragma mark - Event handlers
 - (void)back:(id)sender
 {
@@ -209,7 +279,7 @@
 
 - (void)messageButtonPressed
 {
-    [Intercom presentConversationList];
+    [Intercom presentMessageComposer];
 }
 
 

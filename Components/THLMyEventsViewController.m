@@ -28,6 +28,7 @@
     NSMutableDictionary *_sections;
 }
 @property (nonatomic, strong) TTTAttributedLabel *navBarTitleLabel;
+@property (nonatomic) NSNumber *unopenedInviteCount;
 
 @end
 
@@ -105,7 +106,7 @@
 //    [SVProgressHUD dismiss];
     
     [super objectsDidLoad:error];
-    
+    _unopenedInviteCount = nil;
     [_sections removeAllObjects];
     for (PFObject *object in self.objects) {
         NSNumber *priority = object[@"response"];
@@ -117,10 +118,15 @@
             _sections[priority] = [NSMutableArray arrayWithObject:object];
         }
         
+        THLGuestlistInvite *guestlistInvite = (THLGuestlistInvite *)object;
+        if (!guestlistInvite.didOpen && guestlistInvite.response == THLStatusPending && guestlistInvite.date.thl_isOrAfterToday) {
+            _unopenedInviteCount = @([_unopenedInviteCount intValue] + 1);
+        }
     }
 
     _sectionSortedKeys = [[_sections allKeys] sortedArrayUsingSelector:@selector(compare:)];
     [self.collectionView reloadData];
+    [self updateTabBarBadgeValue];
 }
 
 
@@ -206,7 +212,8 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     PFObject *object = [self objectAtIndexPath:indexPath];
     [self.delegate didSelectViewEventTicket:object];
-    if (!(BOOL)object[@"didOpen"]) {
+    THLGuestlistInvite *guestlistInvite = (THLGuestlistInvite *)object;
+    if (!guestlistInvite.didOpen) {
         object[@"didOpen"] = @YES;
         [object saveInBackground];
     }
@@ -233,11 +240,19 @@
     return CGSizeZero;
 }
 
+- (void)updateTabBarBadgeValue {
+    if (_unopenedInviteCount != nil) {
+        [self.navigationController.tabBarItem setBadgeValue:[NSString stringWithFormat:@"%@", _unopenedInviteCount]];
+    } else {
+        [self.navigationController.tabBarItem setBadgeValue:nil];
+    }
+}
+
 #pragma mark - Accessors
 
 - (void)messageButtonPressed
 {
-    [Intercom presentConversationList];
+    [Intercom presentMessageComposer];
 }
 
 - (TTTAttributedLabel *)navBarTitleLabel
