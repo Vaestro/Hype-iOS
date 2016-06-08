@@ -210,20 +210,25 @@
 - (THLActionButton *)purchaseButton {
     if (!_purchaseButton) {
         _purchaseButton = [[THLActionButton alloc] initWithDefaultStyle];
-        [_admissionOption[@"type"] integerValue] == 0 ? [_purchaseButton setTitle:@"Complete Order"] : [_purchaseButton setTitle:@"PAY WITH HYPE"];
-        [_purchaseButton addTarget:self action:@selector(buy:) forControlEvents:UIControlEventTouchUpInside];
+        [_admissionOption[@"type"] integerValue] == 0 ? [_purchaseButton setTitle:@"COMPLETE ORDER"] : [_purchaseButton setTitle:@"RESERVE"];
+        if ([_admissionOption[@"type"] integerValue] == 0) {
+           [_purchaseButton addTarget:self action:@selector(buy:) forControlEvents:UIControlEventTouchUpInside];
+        } else {
+            [_purchaseButton addTarget:self action:@selector(reserve:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        
         [self.view addSubview:_purchaseButton];
     }
     return _purchaseButton;
 }
 
-- (THLActionButton *)reserveButton {
-    THLActionButton *reserveButton = [[THLActionButton alloc] initWithInverseStyle];
-    [reserveButton setTitle:@"PAY AT VENUE"];
-    [reserveButton addTarget:self action:@selector(buy:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:reserveButton];
-    return reserveButton;
-}
+//- (THLActionButton *)reserveButton {
+//    THLActionButton *reserveButton = [[THLActionButton alloc] initWithInverseStyle];
+//    [reserveButton setTitle:@"PAY AT VENUE"];
+//    [reserveButton addTarget:self action:@selector(buy:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:reserveButton];
+//    return reserveButton;
+//}
 
 
 
@@ -282,6 +287,13 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+
+- (void)reserve:(id)sender
+{
+    
+}
+
 
 - (void)buy:(id)sender
 {
