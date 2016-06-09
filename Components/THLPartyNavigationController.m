@@ -60,8 +60,6 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    
-    self.selectionBar.backgroundColor = kTHLNUIAccentColor;
 }
 
 -(void)dismissViewController {

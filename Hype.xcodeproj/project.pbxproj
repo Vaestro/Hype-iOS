@@ -157,11 +157,11 @@
 		798D7EC21BF2E5CF001D4593 /* OnboardingContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 798D7EC11BF2E5CF001D4593 /* OnboardingContentViewController.m */; };
 		7996E2051D00D010006FFDDC /* THLPerkCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7996E2041D00D010006FFDDC /* THLPerkCollectionViewController.m */; };
 		799862461C97B6AF004C5326 /* THLTextEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 799862451C97B6AF004C5326 /* THLTextEntryViewController.m */; };
+		799D7EE81D0A0BB800646AB1 /* RKSwipeBetweenViewControllers.m in Sources */ = {isa = PBXBuildFile; fileRef = 799D7EE71D0A0BB800646AB1 /* RKSwipeBetweenViewControllers.m */; };
 		79ABA9B71C053ED6001ABAC7 /* THLDashboardNotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79ABA9B61C053ED6001ABAC7 /* THLDashboardNotificationCell.m */; };
 		79ABA9BC1C054F42001ABAC7 /* THLDashboardNotificationCellViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79ABA9BB1C054F42001ABAC7 /* THLDashboardNotificationCellViewModel.m */; };
 		79AD95F41C30CFC400EDB82E /* THLNeedToKnowInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79AD95F31C30CFC400EDB82E /* THLNeedToKnowInfoView.m */; };
 		79AD95F71C3ADA6200EDB82E /* THLEventDetailMusicTypesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79AD95F61C3ADA6200EDB82E /* THLEventDetailMusicTypesView.m */; };
-		79B062BA1CF8B46800A3DC50 /* THLMyEventsNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B062B91CF8B46800A3DC50 /* THLMyEventsNavigationViewController.m */; };
 		79B062BD1CF909F300A3DC50 /* THLPartyNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B062BC1CF909F300A3DC50 /* THLPartyNavigationController.m */; };
 		79B527A41C6E9AED000A0970 /* THLAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B527A31C6E9AED000A0970 /* THLAlertView.m */; };
 		79B527B01C6EA777000A0970 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79B527A51C6EA71A000A0970 /* OpenSans-Bold.ttf */; };
@@ -635,6 +635,8 @@
 		7996E2041D00D010006FFDDC /* THLPerkCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPerkCollectionViewController.m; sourceTree = "<group>"; };
 		799862441C97B6AF004C5326 /* THLTextEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLTextEntryViewController.h; sourceTree = "<group>"; };
 		799862451C97B6AF004C5326 /* THLTextEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLTextEntryViewController.m; sourceTree = "<group>"; };
+		799D7EE61D0A0BB800646AB1 /* RKSwipeBetweenViewControllers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKSwipeBetweenViewControllers.h; sourceTree = "<group>"; };
+		799D7EE71D0A0BB800646AB1 /* RKSwipeBetweenViewControllers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKSwipeBetweenViewControllers.m; sourceTree = "<group>"; };
 		79ABA9B51C053ED6001ABAC7 /* THLDashboardNotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLDashboardNotificationCell.h; sourceTree = "<group>"; };
 		79ABA9B61C053ED6001ABAC7 /* THLDashboardNotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLDashboardNotificationCell.m; sourceTree = "<group>"; };
 		79ABA9B81C053F14001ABAC7 /* THLDashboardNotificationCellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLDashboardNotificationCellView.h; sourceTree = "<group>"; };
@@ -644,8 +646,6 @@
 		79AD95F31C30CFC400EDB82E /* THLNeedToKnowInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLNeedToKnowInfoView.m; sourceTree = "<group>"; };
 		79AD95F51C3ADA6200EDB82E /* THLEventDetailMusicTypesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventDetailMusicTypesView.h; sourceTree = "<group>"; };
 		79AD95F61C3ADA6200EDB82E /* THLEventDetailMusicTypesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventDetailMusicTypesView.m; sourceTree = "<group>"; };
-		79B062B81CF8B46800A3DC50 /* THLMyEventsNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMyEventsNavigationViewController.h; sourceTree = "<group>"; };
-		79B062B91CF8B46800A3DC50 /* THLMyEventsNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLMyEventsNavigationViewController.m; sourceTree = "<group>"; };
 		79B062BB1CF909F300A3DC50 /* THLPartyNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPartyNavigationController.h; sourceTree = "<group>"; };
 		79B062BC1CF909F300A3DC50 /* THLPartyNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPartyNavigationController.m; sourceTree = "<group>"; };
 		79B527A21C6E9AED000A0970 /* THLAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLAlertView.h; sourceTree = "<group>"; };
@@ -1016,8 +1016,6 @@
 				7996E2031D00D010006FFDDC /* THLPerkCollectionViewController.h */,
 				7996E2041D00D010006FFDDC /* THLPerkCollectionViewController.m */,
 				79BB152E1C657FF50044D943 /* THLSingleLineTextField.h */,
-				79B062B81CF8B46800A3DC50 /* THLMyEventsNavigationViewController.h */,
-				79B062B91CF8B46800A3DC50 /* THLMyEventsNavigationViewController.m */,
 				79BB152F1C657FF50044D943 /* THLSingleLineTextField.m */,
 				79B994E81D0650D500E0AD33 /* THLPermissionRequestViewController.h */,
 				79B994E91D0650D500E0AD33 /* THLPermissionRequestViewController.m */,
@@ -2289,6 +2287,15 @@
 			path = Alien;
 			sourceTree = "<group>";
 		};
+		799D7EE51D0A0BA000646AB1 /* RKSwipeBetweenViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				799D7EE61D0A0BB800646AB1 /* RKSwipeBetweenViewControllers.h */,
+				799D7EE71D0A0BB800646AB1 /* RKSwipeBetweenViewControllers.m */,
+			);
+			name = RKSwipeBetweenViewControllers;
+			sourceTree = "<group>";
+		};
 		79ABA9B41C053D6F001ABAC7 /* Notification Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -2467,6 +2474,7 @@
 		79B959491BE8961800B87799 /* Alien */ = {
 			isa = PBXGroup;
 			children = (
+				799D7EE51D0A0BA000646AB1 /* RKSwipeBetweenViewControllers */,
 				79B9594A1BE8964700B87799 /* KLCPopup */,
 			);
 			path = Alien;
@@ -3702,7 +3710,6 @@
 				790603C31BFB73380093335E /* THLDashboardWireframe.m in Sources */,
 				795F13661C3C40B500AC9E76 /* THLWaitlistHomeViewController.m in Sources */,
 				C85EE38A1C1BCA200008C14B /* THLPerkDetailWireframe.m in Sources */,
-				79B062BA1CF8B46800A3DC50 /* THLMyEventsNavigationViewController.m in Sources */,
 				79CE315A1CF7B03F00CEA784 /* THLEventTicketViewController.m in Sources */,
 				798D7EBF1BF2E56C001D4593 /* OnboardingViewController.m in Sources */,
 				C8FEE3D51D038C8700244252 /* THLTablePackageDetailsViewController.m in Sources */,
@@ -3750,6 +3757,7 @@
 				79B994EA1D0650D500E0AD33 /* THLPermissionRequestViewController.m in Sources */,
 				CBE547FB5677C373C1DE74C7 /* THLViewDataSourceSorting.m in Sources */,
 				79B959481BE894B800B87799 /* THLPopupNotificationView.m in Sources */,
+				799D7EE81D0A0BB800646AB1 /* RKSwipeBetweenViewControllers.m in Sources */,
 				C85EE3901C1BCA500008C14B /* THLPerkDetailInteractor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

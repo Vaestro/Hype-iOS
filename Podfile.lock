@@ -119,7 +119,6 @@ PODS:
     - ReactiveCocoa/Core
   - ReflectableEnum (0.1.1)
   - Reveal-iOS-SDK (1.6.2)
-  - RKSwipeBetweenViewControllers (0.1.4)
   - SDWebImage (3.7.6):
     - SDWebImage/Core (= 3.7.6)
   - SDWebImage/Core (3.7.6)
@@ -227,7 +226,6 @@ DEPENDENCIES:
   - ReactiveCocoa (= 2.5)
   - ReflectableEnum
   - Reveal-iOS-SDK
-  - RKSwipeBetweenViewControllers
   - SDWebImage (~> 3.7)
   - SLPagingView
   - SSDataSources (~> 0.8)
@@ -288,7 +286,6 @@ SPEC CHECKSUMS:
   ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
   ReflectableEnum: bf9d36f8c35122242125140a22b8921d071989aa
   Reveal-iOS-SDK: e2250b3c155bcfac53ae223ddc1f76d08f206c33
-  RKSwipeBetweenViewControllers: 2236038119d6f7eb64ff589eb423fcda80cbe962
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
   SLPagingView: ba9bb6102cb318ce56f23d0a7e49a46ddcdad7e3
   SSDataSources: b01170fb23b82acf0649194e9189b0bf5f702681
@@ -303,6 +300,6 @@ SPEC CHECKSUMS:
   YapDatabase: d97b1a0bfd6856745a7a398045f3ca32cf248fda
   YLMoment: af44d9d402790049e5490fa6eae9585b89b4090b
 
-PODFILE CHECKSUM: 4fb70c16c6e794228b3fbcf5d258dfdb0df0aabd
+PODFILE CHECKSUM: c2702720e42fecb56e9699df2532b91e6579e7b6
 
 COCOAPODS: 1.0.0
