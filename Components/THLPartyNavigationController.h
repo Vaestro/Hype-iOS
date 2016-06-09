@@ -12,9 +12,8 @@
 
 @class PFObject;
 //@protocol THLPartyNavigationControllerDelegate <NSObject>
-//
-//-(void)partyNavigationControllerWantsToPresentCheckoutViewController;
-//
+//- (void)partyNavigationControllerWantsToPresentInvitationControllerFor:(THLEvent *)event guestlistId:(NSString *)guestlistId currentGuestsPhoneNumbers:(NSArray *)currentGuestsPhoneNumbers;
+//- (void)partyNavigationControllerWantsToPresentCheckoutForEvent:(PFObject *)event withGuestlistInvite:(THLGuestlistInvite *)guestlistInvite;
 //@end
 
 @interface THLPartyNavigationController : RKSwipeBetweenViewControllers

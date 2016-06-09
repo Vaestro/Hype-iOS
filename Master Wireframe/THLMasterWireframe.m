@@ -296,13 +296,7 @@ THLLoginViewControllerDelegate
 #pragma mark Delegate
 
 - (void)didSelectViewEventTicket:(PFObject *)guestlistInvite {
-    UINavigationController *partyNavVC = [UINavigationController new];
-    THLPartyNavigationController *partyNavigationController = [[THLPartyNavigationController alloc] initWithGuestlistInvite:guestlistInvite];
-    partyNavigationController.eventDetailsVC.delegate = self;
-    partyNavigationController.partyVC.delegate = self;
-    
-    [partyNavVC addChildViewController:partyNavigationController];
-    [_window.rootViewController presentViewController:partyNavVC animated:YES completion:nil];
+    [self presentPartyNavigationController:guestlistInvite];
 }
 
 #pragma mark -
@@ -386,10 +380,15 @@ THLLoginViewControllerDelegate
 - (void)presentPartyNavigationController:(PFObject *)invite {
     UINavigationController *partyNavVC = [UINavigationController new];
     THLPartyNavigationController *partyNavigationController = [[THLPartyNavigationController alloc] initWithGuestlistInvite:invite];
+    partyNavigationController.eventDetailsVC.delegate = self;
+    partyNavigationController.partyVC.delegate = self;
+    
     [partyNavVC addChildViewController:partyNavigationController];
     [_window.rootViewController presentViewController:partyNavVC animated:YES completion:nil];
-    [_masterTabBarController setSelectedIndex:1];
     
+    if (_masterTabBarController.selectedIndex != 1) {
+        [_masterTabBarController setSelectedIndex:1];
+    }
 }
 
 #pragma mark Delegate
@@ -420,7 +419,7 @@ THLLoginViewControllerDelegate
 - (void)presentInvitationViewController:(THLEvent *)event guestlistId:(NSString *)guestlistId currentGuestsPhoneNumbers:(NSArray *)currentGuestsPhoneNumbers {
     THLPartyInvitationViewController *partyInvitationVC = [[THLPartyInvitationViewController alloc] initWithEvent:event
                                                                                                       guestlistId:guestlistId
-                                                                                                           guests:nil
+                                                                                                           guests:currentGuestsPhoneNumbers
                                                                                                   databaseManager:self.dependencyManager.databaseManager
                                                                                                         dataStore:self.dependencyManager.contactsDataStore
                                                                                             viewDataSourceFactory:self.dependencyManager.viewDataSourceFactory

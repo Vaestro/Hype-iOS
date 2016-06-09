@@ -115,7 +115,7 @@ static CGFloat const CELL_SPACING = 10;
 }
 
 - (void)handleViewInvitationAction {
-    [self.delegate partyViewControllerWantsToPresentInvitationControllerFor:(THLEvent *)_guestlist[@"event"] guestlistId:_guestlist.objectId currentGuests:_currentGuestsPhoneNumbers];
+    [self.delegate partyViewControllerWantsToPresentInvitationControllerFor:(THLEvent *)_guestlist[@"event"] guestlistId:_guestlist.objectId currentGuestsPhoneNumbers:_currentGuestsPhoneNumbers];
 }
 
 - (NSArray *)collectGuestsPhoneNumbers:(NSArray *)guestlistInvites {

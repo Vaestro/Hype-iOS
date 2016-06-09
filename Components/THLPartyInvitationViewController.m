@@ -35,7 +35,7 @@ static NSString *const kGuestEntityObjectIdKey = @"objectId";
 static NSString *const kTHLGuestlistInvitationSearchViewKey = @"kTHLGuestlistInvitationSearchViewKey";
 
 @interface THLPartyInvitationViewController()
-@property (nonatomic, strong) NSArray *existingGuests;
+
 @property (nonatomic, strong) THLSearchViewDataSource *dataSource;
 @property (nonatomic, strong) NSString *creditsPayout;
 @property (nonatomic) BOOL showActivityIndicator;
@@ -177,7 +177,7 @@ viewDataSourceFactory:(THLViewDataSourceFactory *)viewDataSourceFactory
                 tvCell.accessoryType = UITableViewCellAccessoryNone;
             }
             
-            if ([WSELF.existingGuests containsObject:guest.intPhoneNumberFormat]) {
+            if ([WSELF.currentGuests containsObject:guest.intPhoneNumberFormat]) {
                 tvCell.name = [NSString stringWithFormat:@"%@ (Already Invited!)", guest.fullName];
                 tvCell.userInteractionEnabled = NO;
                 tvCell.alpha = 0.5;
