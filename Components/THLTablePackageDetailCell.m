@@ -14,21 +14,14 @@
 
 @implementation THLTablePackageDetailCell
 @synthesize titleLabel = _titleLabel;
-@synthesize priceLabel = _priceLabel;
 @synthesize amountLabel = _amountLabel;
 
 
 - (void)layoutSubviews
 {
-    WEAKSELF();
     [_titleLabel makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(0);
         make.left.insets(kTHLEdgeInsetsNone());
-    }];
-    
-    [_priceLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.insets(kTHLEdgeInsetsNone());
-        make.top.equalTo([WSELF titleLabel].mas_bottom).insets(kTHLEdgeInsetsLow());
     }];
     
     [_amountLabel makeConstraints:^(MASConstraintMaker *make) {
@@ -47,18 +40,6 @@
         [self.contentView addSubview:_titleLabel];
     }
     return _titleLabel;
-}
-
-
-- (UILabel *)priceLabel
-{
-    if (!_priceLabel) {
-        _priceLabel = [UILabel new];
-        _priceLabel.font = [UIFont fontWithName:@"OpenSans-Light" size:10];
-        _priceLabel.textColor = kTHLNUIAccentColor;
-        [self.contentView addSubview:_priceLabel];
-    }
-    return _priceLabel;
 }
 
 

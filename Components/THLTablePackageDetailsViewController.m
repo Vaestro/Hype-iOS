@@ -117,7 +117,6 @@
 {
     THLTablePackageDetailCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[THLTablePackageDetailCell identifier] forIndexPath:indexPath];
     cell.titleLabel.text = object[@"name"];
-    cell.priceLabel.text = [NSString stringWithFormat:@"$ %.2f", [object[@"price"] floatValue]];
     cell.amountLabel.text = [NSString stringWithFormat:@"x%d", [object[@"amount"] integerValue]];
     return cell;
     return nil;

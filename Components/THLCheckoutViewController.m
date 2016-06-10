@@ -360,6 +360,9 @@
                                               otherButtonTitles:nil];
         [alert show];
     } else {
+        
+        [SVProgressHUD show];
+        
         NSDictionary *purchaseInfo = @{
                                        @"admissionOptionId" : _admissionOption.objectId,
                                        @"eventId": _event.objectId,
@@ -582,7 +585,6 @@
 - (PFQuery *)baseEventQuery {
     PFQuery *query = [THLEvent query];
     [query includeKey:@"location"];
-    [query includeKey:@"host"];
     return query;
 }
 
@@ -590,7 +592,6 @@
     PFQuery *query = [THLGuestlist query];
     [query includeKey:@"Owner"];
     [query includeKey:@"event"];
-    [query includeKey:@"event.host"];
     [query includeKey:@"event.location"];
     return query;
 }
@@ -601,7 +602,6 @@
     [query includeKey:@"Guestlist"];
     [query includeKey:@"Guestlist.Owner"];
     [query includeKey:@"Guestlist.event"];
-    [query includeKey:@"Guestlist.event.host"];
     [query includeKey:@"Guestlist.event.location"];
     return query;
 }
