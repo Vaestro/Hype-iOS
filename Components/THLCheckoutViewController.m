@@ -35,6 +35,8 @@
 @property (nonatomic) float total;
 @property (nonatomic) float subTotal;
 @property (nonatomic) float creditsAmount;
+@property (nonatomic) float tax;
+@property (nonatomic) float tip;
 
 @property (nonatomic, strong) THLActionButton *purchaseButton;
 @property (nonatomic, strong) THLPurchaseDetailsView *purchaseDetailsView;
@@ -67,6 +69,13 @@
         _subTotal = ([admissionOption[@"price"] floatValue]);
         _total = [_admissionOption[@"price"] floatValue] + _serviceCharge;
         _applyCreditsPressed = false;
+        
+        if ([_admissionOption[@"type"] integerValue] == 1) {
+            _tax = ([admissionOption[@"price"] floatValue] * 0.0865);
+            _tip = ([admissionOption[@"price"] floatValue] * 0.2);
+            _total = [_admissionOption[@"price"] floatValue] + _tax + _tip;
+        }
+        
         
         if ([THLUser currentUser].credits > [_admissionOption[@"price"] floatValue]) {
             _creditsAmount = [_admissionOption[@"price"] floatValue];
@@ -249,11 +258,23 @@
         
         NSString *purchaseTitleText = _admissionOption[@"name"];
         
-        if ([_admissionOption[@"price"] floatValue] > 0) {
+        if ([_admissionOption[@"price"] floatValue] > 0 && [_admissionOption[@"type"] integerValue] == 0) {
             _purchaseDetailsView.purchaseTitleLabel.text = purchaseTitleText;
             _purchaseDetailsView.subtotalLabel.text = [NSString stringWithFormat:@"$%.2f", _subTotal];
             _purchaseDetailsView.serviceChargeLabel.text = [NSString stringWithFormat:@"$%.2f", _serviceCharge];
             _purchaseDetailsView.totalLabel.text = [NSString stringWithFormat:@"$%.2f", _total];
+            _purchaseDetailsView.taxLabel.hidden = YES;
+            _purchaseDetailsView.taxDescriptionLabel.hidden = YES;
+            _purchaseDetailsView.tipLabel.hidden = YES;
+            _purchaseDetailsView.tipDescriptionLabel.hidden = YES;
+        } else if ([_admissionOption[@"price"] floatValue] > 0 && [_admissionOption[@"type"] integerValue] == 1) {
+            _purchaseDetailsView.purchaseTitleLabel.text = purchaseTitleText;
+            _purchaseDetailsView.subtotalLabel.text = [NSString stringWithFormat:@"$%.2f", _subTotal];
+            _purchaseDetailsView.taxLabel.text = [NSString stringWithFormat:@"$%.2f", _tax];
+            _purchaseDetailsView.tipLabel.text = [NSString stringWithFormat:@"$%.2f", _tip];
+            _purchaseDetailsView.totalLabel.text = [NSString stringWithFormat:@"$%.2f", _total];
+            _purchaseDetailsView.serviceChargeLabel.hidden = YES;
+            _purchaseDetailsView.serviceChargeDesciptionLabel.hidden = YES;
         } else {
             _purchaseDetailsView.purchaseTitleLabel.text = purchaseTitleText;
             _purchaseDetailsView.subtotalLabel.text = @"FREE";
