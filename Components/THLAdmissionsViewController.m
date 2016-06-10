@@ -20,6 +20,8 @@
 #import "THLAdmissionOptionCell.h"
 #import "THLCollectionReusableView.h"
 #import "TTTAttributedLabel.h"
+#import "THLTablePackageAdmissionCell.h"
+#import "THLEvent.h"
 
 @interface THLAdmissionsViewController()
 <
@@ -64,6 +66,7 @@ TTTAttributedLabelDelegate
     layout.minimumInteritemSpacing = 5.0f;
     
     [self.collectionView registerClass:[THLAdmissionOptionCell class] forCellWithReuseIdentifier:[THLAdmissionOptionCell identifier]];
+    [self.collectionView registerClass:[THLTablePackageAdmissionCell class] forCellWithReuseIdentifier:[THLTablePackageAdmissionCell identifier]];
     [self.collectionView registerClass:[THLCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
     
     self.collectionView.emptyDataSetSource = self;
@@ -180,16 +183,29 @@ TTTAttributedLabelDelegate
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath
                                   object:(PFObject *)object
 {
+    
+    if ([object[@"type"] integerValue] == 0) {
+        
         THLAdmissionOptionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[THLAdmissionOptionCell identifier] forIndexPath:indexPath];
         cell.titleLabel.text = object[@"name"];
-    
+        
         if ([object[@"price"] floatValue] == 0) {
             cell.priceLabel.text = @"FREE";
         } else {
             cell.priceLabel.text = [NSString stringWithFormat:@"$ %.2f", [object[@"price"] floatValue]];
         }
+        
+        return cell;
+    } else {
+      
+        THLTablePackageAdmissionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[THLTablePackageAdmissionCell identifier] forIndexPath:indexPath];
+        cell.titleLabel.text = object[@"name"];
+        cell.priceLabel.text = [NSString stringWithFormat:@"$%ld total", [object[@"price"] integerValue]];
+        cell.partySizeLabel.text = [NSString stringWithFormat:@"%ld people", [object[@"partySize"] integerValue]];
+        cell.perPersonLabel.text = [NSString stringWithFormat:@"$%.f/person", ceil([object[@"price"] floatValue]/[object[@"partySize"] floatValue])];
     
         return cell;
+    }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -207,9 +223,13 @@ TTTAttributedLabelDelegate
         THLCollectionReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"header" forIndexPath:indexPath];
         NSNumber *response = _sectionSortedKeys[indexPath.section];
         if (response == [NSNumber numberWithInteger:0]) {
+            THLEvent *event = (THLEvent *)_event;
             view.label.text = @"TICKETS";
+            view.subtitleLabel.text = [NSString stringWithFormat:@"Earn $%d credits for each friend you invite that attends", event.creditsPayout];
         } else if (response == [NSNumber numberWithInteger:1]) {
             view.label.text = @"TABLE & BOTTLE SERVICE";
+            view.subtitleLabel.text = nil;
+
         }
         return view;
     }
@@ -218,7 +238,7 @@ TTTAttributedLabelDelegate
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     if ([_sections count]) {
-        return CGSizeMake(CGRectGetWidth(self.collectionView.bounds), 60.0f);
+        return CGSizeMake(CGRectGetWidth(self.collectionView.bounds), 70.0f);
     }
     return CGSizeZero;
 }

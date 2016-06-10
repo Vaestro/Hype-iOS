@@ -23,10 +23,6 @@
 - (void)layoutSubviews
 {
     WEAKSELF();
-    [self.titleLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(0);
-        make.left.insets(kTHLEdgeInsetsHigh());
-    }];
     
     [self.iconView makeConstraints:^(MASConstraintMaker *make) {
         make.right.insets(kTHLEdgeInsetsNone());
@@ -36,17 +32,24 @@
     [self.priceLabel makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(0);
         make.right.equalTo([WSELF iconView].mas_left).insets(kTHLEdgeInsetsLow());
+
     }];
     
+    [self.titleLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(0);
+        make.left.insets(kTHLEdgeInsetsHigh());
+        make.right.equalTo([WSELF priceLabel].mas_left).insets(kTHLEdgeInsetsHigh());
+        
+    }];
 }
 
 - (UILabel *)titleLabel
 {
     if (!_titleLabel) {
-        _titleLabel = [UILabel new];
+        _titleLabel = THLNUILabel(kTHLNUIDetailBoldTitle);
         _titleLabel.backgroundColor = kTHLNUIPrimaryBackgroundColor;
-        _titleLabel.font = [UIFont fontWithName:@"OpenSans-Light" size:16];
-        _titleLabel.textColor = [UIColor whiteColor];
+        _titleLabel.adjustsFontSizeToFitWidth = TRUE;
+        
         [self.contentView addSubview:_titleLabel];
     }
     return _titleLabel;

@@ -5,7 +5,7 @@
 @secondaryRegularFontName: OpenSans-Regular;
 @secondaryLightFontName: OpenSans-Light;
 @primaryFontColor: #FFFFFF;
-@secondaryFontColor: #2BC497;
+@secondaryFontColor: rgba(255,255,255,0.7);
 @primaryBackgroundColor: #1A1F25;
 @secondaryBackgroundColor: #060606;
 @primaryBorderColor: #FFFFFF;
@@ -62,7 +62,7 @@ font-size: 16;
 
 SectionTitle {
 font-name: @primaryBoldFontName;
-font-color: @primaryFontColor;
+font-color: @secondaryFontColor;
 font-size: 16;
 }
 

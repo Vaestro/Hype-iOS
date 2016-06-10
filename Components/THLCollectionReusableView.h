@@ -10,4 +10,6 @@
 
 @interface THLCollectionReusableView : UICollectionReusableView
 @property (nonatomic, strong, readonly) UILabel *label;
+@property (nonatomic, strong, readonly) UILabel *subtitleLabel;
+
 @end

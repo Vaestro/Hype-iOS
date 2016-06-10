@@ -21,7 +21,15 @@
     
     _label = THLNUILabel(kTHLNUISectionTitle);
     _label.textAlignment = NSTextAlignmentLeft;
+    _label.numberOfLines = 1;
+
     [self addSubview:_label];
+    
+    _subtitleLabel = THLNUILabel(kTHLNUIDetailTitle);
+    _subtitleLabel.textAlignment = NSTextAlignmentLeft;
+    _subtitleLabel.numberOfLines = 1;
+    _subtitleLabel.adjustsFontSizeToFitWidth = TRUE;
+    [self addSubview:_subtitleLabel];
     
     _separatorView = THLNUIView(kTHLNUIUndef);
     _separatorView.backgroundColor = kTHLNUIAccentColor;
@@ -39,8 +47,13 @@
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
+    [self.subtitleLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo([WSELF label].mas_baseline).insets(kTHLEdgeInsetsLow());
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+    }];
+    
     [_separatorView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF label].mas_baseline).insets(kTHLEdgeInsetsHigh());
+        make.top.equalTo([WSELF subtitleLabel].mas_baseline).insets(kTHLEdgeInsetsHigh());
         make.left.equalTo([WSELF label]);
         make.bottom.insets(kTHLEdgeInsetsHigh());
         

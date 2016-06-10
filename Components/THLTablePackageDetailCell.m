@@ -17,7 +17,6 @@
 
 @implementation THLTablePackageDetailCell
 @synthesize titleLabel = _titleLabel;
-@synthesize priceLabel = _priceLabel;
 @synthesize amountLabel = _amountLabel;
 @synthesize venueImageView = _venueImageView;
 
@@ -67,8 +66,6 @@
     return _titleLabel;
 }
 
-
-
 - (UIView *)amountView
 {
     if (!_amountView) {
@@ -80,20 +77,6 @@
     }
     return _amountView;
 }
-
-
-
-- (UILabel *)priceLabel
-{
-    if (!_priceLabel) {
-        _priceLabel = [UILabel new];
-        _priceLabel.font = [UIFont fontWithName:@"OpenSans-Light" size:10];
-        _priceLabel.textColor = kTHLNUIAccentColor;
-        [self.contentView addSubview:_priceLabel];
-    }
-    return _priceLabel;
-}
-
 
 - (UILabel *)amountLabel
 {
