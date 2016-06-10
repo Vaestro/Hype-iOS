@@ -12,7 +12,7 @@
 @class THLGuestlistInvite;
 
 @protocol THLPartyViewControllerDelegate <NSObject>
-- (void)partyViewControllerWantsToPresentInvitationControllerFor:(THLEvent *)event guestlistId:(NSString *)guestlistId;
+- (void)partyViewControllerWantsToPresentInvitationControllerFor:(THLEvent *)event guestlistId:(NSString *)guestlistId currentGuestsPhoneNumbers:(NSArray *)currentGuestsPhoneNumbers;
 - (void)partyViewControllerWantsToPresentCheckoutForEvent:(PFObject *)event withGuestlistInvite:(THLGuestlistInvite *)guestlistInvite;
 @end
 

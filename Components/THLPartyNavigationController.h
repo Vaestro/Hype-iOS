@@ -6,15 +6,14 @@
 //  Copyright © 2016 Hypelist. All rights reserved.
 //
 #import <UIKit/UIKit.h>
-#import <RKSwipeBetweenViewControllers/RKSwipeBetweenViewControllers.h>
 #import "THLPartyViewController.h"
 #import "THLEventDetailsViewController.h"
+#import "RKSwipeBetweenViewControllers.h"
 
 @class PFObject;
 //@protocol THLPartyNavigationControllerDelegate <NSObject>
-//
-//-(void)partyNavigationControllerWantsToPresentCheckoutViewController;
-//
+//- (void)partyNavigationControllerWantsToPresentInvitationControllerFor:(THLEvent *)event guestlistId:(NSString *)guestlistId currentGuestsPhoneNumbers:(NSArray *)currentGuestsPhoneNumbers;
+//- (void)partyNavigationControllerWantsToPresentCheckoutForEvent:(PFObject *)event withGuestlistInvite:(THLGuestlistInvite *)guestlistInvite;
 //@end
 
 @interface THLPartyNavigationController : RKSwipeBetweenViewControllers

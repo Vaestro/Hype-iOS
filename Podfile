@@ -64,7 +64,6 @@ pod 'LMGeocoder'
 pod 'TTTAttributedLabel'
 
 #UI
-pod 'RKSwipeBetweenViewControllers'
 pod 'SLPagingView'
 pod 'SVPullToRefresh'
 pod "ORStackView"

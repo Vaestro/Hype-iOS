@@ -12,7 +12,7 @@
 #import <Crashlytics/Crashlytics.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
-//Utilities
+//Utilities 
 #import "THLDependencyManager.h"
 #import "THLUserManager.h"
 #import "Intercom/intercom.h"
@@ -35,7 +35,6 @@
 #import "THLOnboardingViewController.h"
 #import "THLMyEventsViewController.h"
 #import "THLEventTicketViewController.h"
-#import "THLMyEventsNavigationViewController.h"
 #import "THLPartyNavigationController.h"
 #import "THLEventDetailsViewController.h"
 #import "THLDiscoveryViewController.h"
@@ -100,6 +99,8 @@ THLLoginViewControllerDelegate
 
 - (void)routeLoggedInUserFlow
 {
+    [THLUserManager makeCurrentInstallation];
+
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel identify:[THLUser user].objectId];
     
@@ -114,6 +115,8 @@ THLLoginViewControllerDelegate
 }
 
 - (void)routeSignedUpUserFlow {
+    [THLUserManager makeCurrentInstallation];
+
     [Intercom registerUserWithUserId:[THLUser currentUser].objectId];
     [Intercom updateUserWithAttributes:@{@"email": [THLUser currentUser].email,
                                          @"name": [THLUser currentUser].fullName
@@ -141,7 +144,6 @@ THLLoginViewControllerDelegate
 
 #pragma mark Delegate
 - (void)onboardingViewControllerdidFinishSignup {
-    [THLUserManager makeCurrentInstallation];
     [THLUserManager logCrashlyticsUser];
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:@"Completed signup"];
@@ -293,13 +295,7 @@ THLLoginViewControllerDelegate
 #pragma mark Delegate
 
 - (void)didSelectViewEventTicket:(PFObject *)guestlistInvite {
-    UINavigationController *partyNavVC = [UINavigationController new];
-    THLPartyNavigationController *partyNavigationController = [[THLPartyNavigationController alloc] initWithGuestlistInvite:guestlistInvite];
-    partyNavigationController.eventDetailsVC.delegate = self;
-    partyNavigationController.partyVC.delegate = self;
-    
-    [partyNavVC addChildViewController:partyNavigationController];
-    [_window.rootViewController presentViewController:partyNavVC animated:YES completion:nil];
+    [self presentPartyNavigationController:guestlistInvite];
 }
 
 #pragma mark -
@@ -335,7 +331,7 @@ THLLoginViewControllerDelegate
     [self presentPaymentViewControllerOn:[self topViewController]];
 }
 - (void)checkoutViewControllerDidFinishCheckoutForEvent:(THLEvent *)event withGuestlistId:(NSString *)guestlistId {
-    [self presentInvitationViewController:event withGuestlistId:guestlistId];
+    [self presentInvitationViewController:event guestlistId:guestlistId currentGuestsPhoneNumbers:nil];
 }
 
 #pragma mark -
@@ -383,15 +379,20 @@ THLLoginViewControllerDelegate
 - (void)presentPartyNavigationController:(PFObject *)invite {
     UINavigationController *partyNavVC = [UINavigationController new];
     THLPartyNavigationController *partyNavigationController = [[THLPartyNavigationController alloc] initWithGuestlistInvite:invite];
+    partyNavigationController.eventDetailsVC.delegate = self;
+    partyNavigationController.partyVC.delegate = self;
+    
     [partyNavVC addChildViewController:partyNavigationController];
     [_window.rootViewController presentViewController:partyNavVC animated:YES completion:nil];
-    [_masterTabBarController setSelectedIndex:1];
     
+    if (_masterTabBarController.selectedIndex != 1) {
+        [_masterTabBarController setSelectedIndex:1];
+    }
 }
 
 #pragma mark Delegate
-- (void)partyViewControllerWantsToPresentInvitationControllerFor:(THLEvent *)event guestlistId:(NSString *)guestlistId {
-    [self presentInvitationViewController:event withGuestlistId:guestlistId];
+- (void)partyViewControllerWantsToPresentInvitationControllerFor:(THLEvent *)event guestlistId:(NSString *)guestlistId currentGuestsPhoneNumbers:(NSArray *)currentGuestsPhoneNumbers {
+    [self presentInvitationViewController:event guestlistId:guestlistId currentGuestsPhoneNumbers:currentGuestsPhoneNumbers];
 }
 
 - (void)partyViewControllerWantsToPresentCheckoutForEvent:(PFObject *)event withGuestlistInvite:(THLGuestlistInvite *)guestlistInvite {
@@ -414,10 +415,10 @@ THLLoginViewControllerDelegate
 
 #pragma mark -
 #pragma mark PartyInvitationViewController
-- (void)presentInvitationViewController:(THLEvent *)event withGuestlistId:(NSString *)guestlistId {
+- (void)presentInvitationViewController:(THLEvent *)event guestlistId:(NSString *)guestlistId currentGuestsPhoneNumbers:(NSArray *)currentGuestsPhoneNumbers {
     THLPartyInvitationViewController *partyInvitationVC = [[THLPartyInvitationViewController alloc] initWithEvent:event
                                                                                                       guestlistId:guestlistId
-                                                                                                           guests:nil
+                                                                                                           guests:currentGuestsPhoneNumbers
                                                                                                   databaseManager:self.dependencyManager.databaseManager
                                                                                                         dataStore:self.dependencyManager.contactsDataStore
                                                                                             viewDataSourceFactory:self.dependencyManager.viewDataSourceFactory

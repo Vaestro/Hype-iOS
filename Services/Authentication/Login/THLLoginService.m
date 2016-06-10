@@ -88,13 +88,12 @@
     // mixpanel identify: must be called before
     // people properties can be set
     
-    //        TODO: Call following mixpanel code only when user signs up for the first time. On following logins - only call mixpanel identify with ALIAS ID
     [mixpanel createAlias:user.objectId
             forDistinctID:mixpanel.distinctId];
     // You must call identify if you haven't already
     // (e.g., when your app launches).
     [mixpanel identify:mixpanel.distinctId];
-    
+        
     NSString *userSex;
     if (user.sex == THLSexMale) {
         userSex = @"Male";

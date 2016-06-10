@@ -26,6 +26,7 @@ static CGFloat const CELL_SPACING = 10;
 
 @property(nonatomic, strong) THLActionButton *inviteFriendsButton;
 @property(nonatomic, strong) THLActionButton *checkoutButton;
+@property (nonatomic, strong) NSArray *currentGuestsPhoneNumbers;
 
 @end
 
@@ -107,11 +108,22 @@ static CGFloat const CELL_SPACING = 10;
     [super objectsDidLoad:error];
     [SVProgressHUD dismiss];
     [self.collectionView reloadData];
+        
+    _currentGuestsPhoneNumbers = nil;
+    _currentGuestsPhoneNumbers = [self collectGuestsPhoneNumbers:self.objects];
+    
 }
 
 - (void)handleViewInvitationAction {
-    [self.delegate partyViewControllerWantsToPresentInvitationControllerFor:(THLEvent *)_guestlist[@"event"] guestlistId:_guestlist.objectId];
+    [self.delegate partyViewControllerWantsToPresentInvitationControllerFor:(THLEvent *)_guestlist[@"event"] guestlistId:_guestlist.objectId currentGuestsPhoneNumbers:_currentGuestsPhoneNumbers];
 }
+
+- (NSArray *)collectGuestsPhoneNumbers:(NSArray *)guestlistInvites {
+    return [guestlistInvites linq_select:^id(PFObject *guestlistInvite) {
+        return guestlistInvite[@"phoneNumber"];
+    }];
+}
+
 
 - (void)handleViewCheckoutAction {
     [self.delegate partyViewControllerWantsToPresentCheckoutForEvent:_guestlist[@"event"] withGuestlistInvite:_usersInvite];

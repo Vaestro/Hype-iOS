@@ -12,7 +12,6 @@
 #import "Intercom/intercom.h"
 #import "THLMyEventsViewController.h"
 #import "THLEventTicketViewController.h"
-#import "THLMyEventsNavigationViewController.h"
 #import "THLPartyNavigationController.h"
 #import "THLEventDetailsViewController.h"
 #import "THLDiscoveryViewController.h"

@@ -174,12 +174,12 @@
     if (response == [NSNumber numberWithInteger:2]) {
         THLEventInviteCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[THLEventInviteCell identifier] forIndexPath:indexPath];
         NSDate *date = (NSDate *)object[@"Guestlist"][@"event"][@"date"];
-        NSString *invitationMessage = [NSString stringWithFormat:@"%@ invited you to their party", object[@"Guestlist"][@"Owner"][@"firstName"]];
+        NSString *invitationMessage = [NSString stringWithFormat:@"%@ invited you to their party", object[@"sender"][@"firstName"]];
         NSString *invitationDate = [NSString stringWithFormat:@"%@, %@", date.thl_weekdayString, date.thl_timeString];
         cell.senderIntroductionLabel.text = invitationMessage;
         cell.locationNameLabel.text = object[@"Guestlist"][@"event"][@"location"][@"name"];
         cell.dateLabel.text = invitationDate;
-        PFFile *imageFile = object[@"Guestlist"][@"Owner"][@"image"];
+        PFFile *imageFile = object[@"sender"][@"image"];
         [imageFile getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
             if (!error) {
                 UIImage *personIconPic = [UIImage imageWithData:data];
