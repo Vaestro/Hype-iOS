@@ -20,6 +20,7 @@
 #import "THLAdmissionOptionCell.h"
 #import "THLCollectionReusableView.h"
 #import "TTTAttributedLabel.h"
+#import "THLTablePackageAdmissionCell.h"
 
 @interface THLAdmissionsViewController()
 <
@@ -64,6 +65,7 @@ TTTAttributedLabelDelegate
     layout.minimumInteritemSpacing = 5.0f;
     
     [self.collectionView registerClass:[THLAdmissionOptionCell class] forCellWithReuseIdentifier:[THLAdmissionOptionCell identifier]];
+    [self.collectionView registerClass:[THLTablePackageAdmissionCell class] forCellWithReuseIdentifier:[THLTablePackageAdmissionCell identifier]];
     [self.collectionView registerClass:[THLCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
     
     self.collectionView.emptyDataSetSource = self;
@@ -180,16 +182,29 @@ TTTAttributedLabelDelegate
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath
                                   object:(PFObject *)object
 {
+    
+    if ([object[@"type"] integerValue] == 0) {
+        
         THLAdmissionOptionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[THLAdmissionOptionCell identifier] forIndexPath:indexPath];
         cell.titleLabel.text = object[@"name"];
-    
+        
         if ([object[@"price"] floatValue] == 0) {
             cell.priceLabel.text = @"FREE";
         } else {
             cell.priceLabel.text = [NSString stringWithFormat:@"$ %.2f", [object[@"price"] floatValue]];
         }
+        
+        return cell;
+    } else {
+      
+        THLTablePackageAdmissionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[THLTablePackageAdmissionCell identifier] forIndexPath:indexPath];
+        cell.titleLabel.text = object[@"name"];
+        cell.priceLabel.text = [NSString stringWithFormat:@"$%ld total", [object[@"price"] integerValue]];
+        cell.partySizeLabel.text = [NSString stringWithFormat:@"%ld people", [object[@"partySize"] integerValue]];
+        cell.perPersonLabel.text = [NSString stringWithFormat:@"$%.f/person", ceil([object[@"price"] floatValue]/[object[@"partySize"] floatValue])];
     
         return cell;
+    }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
