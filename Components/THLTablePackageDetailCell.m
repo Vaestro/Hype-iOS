@@ -69,7 +69,7 @@
 - (UIView *)amountView
 {
     if (!_amountView) {
-        _amountView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+        _amountView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
         _amountView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
         [[_amountView layer] setBorderWidth:1.0f];
         [[_amountView layer] setBorderColor:kTHLNUIAccentColor.CGColor];

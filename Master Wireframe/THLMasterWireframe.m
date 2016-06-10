@@ -397,7 +397,13 @@ THLLoginViewControllerDelegate
     partyNavigationController.eventDetailsVC.delegate = self;
 //    partyNavigationController.partyVC.delegate = self;
     
+
     [partyNavVC addChildViewController:partyNavigationController];
+    
+    if ([self topViewController] != _masterTabBarController) {
+        [_masterTabBarController dismissViewControllerAnimated:YES completion:nil];
+    }
+    
     [_window.rootViewController presentViewController:partyNavVC animated:YES completion:nil];
     
     if (_masterTabBarController.selectedIndex != 1) {
