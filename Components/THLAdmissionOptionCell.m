@@ -26,13 +26,14 @@
     
     [self.iconView makeConstraints:^(MASConstraintMaker *make) {
         make.right.insets(kTHLEdgeInsetsNone());
+        make.width.equalTo(20);
+        make.height.equalTo(WSELF.iconView.mas_width);
         make.centerY.equalTo(0);
     }];
     
     [self.priceLabel makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(0);
         make.right.equalTo([WSELF iconView].mas_left).insets(kTHLEdgeInsetsLow());
-
     }];
     
     [self.titleLabel makeConstraints:^(MASConstraintMaker *make) {
@@ -63,6 +64,7 @@
         _priceLabel.backgroundColor = kTHLNUIPrimaryBackgroundColor;
         _priceLabel.font = [UIFont fontWithName:@"OpenSans-Light" size:16];
         _priceLabel.textColor = [UIColor whiteColor];
+        _priceLabel.textAlignment = NSTextAlignmentRight;
         [self.contentView addSubview:_priceLabel];
     }
     return _priceLabel;
