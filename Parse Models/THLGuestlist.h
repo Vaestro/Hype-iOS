@@ -10,10 +10,13 @@
 #import <Parse/PFObject+Subclass.h>
 @class THLUser;
 @class THLEvent;
+@class THLAdmissionOption;
 
 @interface THLGuestlist : PFObject<PFSubclassing>
 @property (nonatomic, retain) THLUser *owner;
 @property (nonatomic, retain) THLEvent *event;
+@property (nonatomic, retain) THLAdmissionOption *admissionOption;
+
 @property (nonatomic) THLStatus reviewStatus;
 @property (nonatomic, copy) NSDate *date;
 @end

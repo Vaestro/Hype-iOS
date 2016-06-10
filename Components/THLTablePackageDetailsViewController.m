@@ -23,18 +23,25 @@
 
 @interface THLTablePackageDetailsViewController()
 @property(nonatomic, strong) THLActionButton *checkoutButton;
+@property (nonatomic, strong) PFObject *admissionOption;
+@property (nonatomic, strong) PFObject *event;
+@property (nonatomic) BOOL showActionButton;
+
 @end
 
 @implementation THLTablePackageDetailsViewController
-@synthesize admissionOption = _admissionOption;
-@synthesize event = _event;
 
-- (instancetype)initWithClassName:(NSString *)className {
-    self = [super initWithClassName:className];
+
+- (instancetype)initWithEvent:(PFObject *)event admissionOption:(PFObject *)admissionOption showActionButton:(BOOL)showActionButton {
+    self = [super initWithClassName:@"Bottle"];
     if (!self) return nil;
     
     self.pullToRefreshEnabled = YES;
     self.paginationEnabled = NO;
+    self.admissionOption = admissionOption;
+    self.event = event;
+    
+    self.showActionButton = showActionButton;
     return self;
 }
 
@@ -57,15 +64,22 @@
     self.collectionView.emptyDataSetDelegate = self;
     
     WEAKSELF();
-    [self.collectionView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.equalTo(UIEdgeInsetsZero);
-    }];
-    
-    [self.checkoutButton makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(WSELF.collectionView.mas_bottom);
-        make.bottom.left.right.equalTo(WSELF.view).insets(kTHLEdgeInsetsHigh());
-        make.height.equalTo(60);
-    }];
+    if (_showActionButton) {
+        [self.collectionView makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.right.equalTo(UIEdgeInsetsZero);
+        }];
+        
+        [self.checkoutButton makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(WSELF.collectionView.mas_bottom);
+            make.bottom.left.right.equalTo(WSELF.view).insets(kTHLEdgeInsetsHigh());
+            make.height.equalTo(60);
+        }];
+    } else {
+        [self.collectionView makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(UIEdgeInsetsZero);
+        }];
+    }
+
 
 }
 
@@ -86,7 +100,11 @@
     [super viewWillLayoutSubviews];
     
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
-    layout.itemSize = CGSizeMake(ViewWidth(self.collectionView) - 25, 50);
+    
+    layout.minimumInteritemSpacing = 10;
+    layout.minimumLineSpacing = 10;
+    
+    layout.itemSize = CGSizeMake(ViewWidth(self.collectionView) - 50, 125);
 }
 
 - (void)objectsWillLoad {
@@ -116,9 +134,11 @@
                                   object:(PFObject *)object
 {
     THLTablePackageDetailCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[THLTablePackageDetailCell identifier] forIndexPath:indexPath];
-    cell.titleLabel.text = object[@"name"];
-    cell.priceLabel.text = [NSString stringWithFormat:@"$ %.2f", [object[@"price"] floatValue]];
     cell.amountLabel.text = [NSString stringWithFormat:@"x%d", [object[@"amount"] integerValue]];
+    cell.titleLabel.text = [NSString stringWithFormat:@"%@", object[@"name"]];
+    cell.venueImageView.file = object[@"image"];
+    [cell.venueImageView loadInBackground];
+    
     return cell;
     return nil;
 }

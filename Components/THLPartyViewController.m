@@ -101,12 +101,12 @@ static CGFloat const CELL_SPACING = 10;
 
 - (void)objectsWillLoad {
     [super objectsWillLoad];
-    [SVProgressHUD show];
+//    [SVProgressHUD show];
 }
 
 - (void)objectsDidLoad:(NSError *)error {
     [super objectsDidLoad:error];
-    [SVProgressHUD dismiss];
+//    [SVProgressHUD dismiss];
     [self.collectionView reloadData];
         
     _currentGuestsPhoneNumbers = nil;

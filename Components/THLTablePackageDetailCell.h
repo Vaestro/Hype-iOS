@@ -13,6 +13,8 @@
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *priceLabel;
 @property (nonatomic, strong) UILabel *amountLabel;
+@property(nonatomic, strong) PFImageView *venueImageView;
+
 + (NSString *)identifier;
 @end
 

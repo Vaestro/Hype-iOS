@@ -106,6 +106,8 @@
 		790603C91BFB75D90093335E /* THLDashboardInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 790603C81BFB75D90093335E /* THLDashboardInteractor.m */; };
 		790603CC1BFB75E50093335E /* THLDashboardDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 790603CB1BFB75E50093335E /* THLDashboardDataManager.m */; };
 		790603CF1BFB75F00093335E /* THLDashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 790603CE1BFB75F00093335E /* THLDashboardViewController.m */; };
+		79060B431D0B2BF500D1A00C /* THLTableReservationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79060B421D0B2BF500D1A00C /* THLTableReservationViewController.m */; };
+		79060B461D0B339A00D1A00C /* THLAdmissionOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 79060B451D0B339A00D1A00C /* THLAdmissionOption.m */; };
 		790B38EF1C0375B500CB2362 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 790B38EE1C0375B500CB2362 /* libsqlite3.dylib */; };
 		791C1F7D1BF13AD300CCF803 /* THLEventHostingPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 791C1F7C1BF13AD300CCF803 /* THLEventHostingPresenter.m */; };
 		791C1F831BF13AEA00CCF803 /* THLEventHostingDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 791C1F821BF13AEA00CCF803 /* THLEventHostingDataManager.m */; };
@@ -520,6 +522,10 @@
 		790603CD1BFB75F00093335E /* THLDashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLDashboardViewController.h; sourceTree = "<group>"; };
 		790603CE1BFB75F00093335E /* THLDashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLDashboardViewController.m; sourceTree = "<group>"; };
 		790603D01BFB7B350093335E /* THLDashboardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLDashboardView.h; sourceTree = "<group>"; };
+		79060B411D0B2BF500D1A00C /* THLTableReservationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLTableReservationViewController.h; sourceTree = "<group>"; };
+		79060B421D0B2BF500D1A00C /* THLTableReservationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLTableReservationViewController.m; sourceTree = "<group>"; };
+		79060B441D0B339A00D1A00C /* THLAdmissionOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLAdmissionOption.h; sourceTree = "<group>"; };
+		79060B451D0B339A00D1A00C /* THLAdmissionOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLAdmissionOption.m; sourceTree = "<group>"; };
 		790B38EE1C0375B500CB2362 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = ../../../../usr/lib/libsqlite3.dylib; sourceTree = "<group>"; };
 		791C1F7B1BF13AD300CCF803 /* THLEventHostingPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventHostingPresenter.h; sourceTree = "<group>"; };
 		791C1F7C1BF13AD300CCF803 /* THLEventHostingPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventHostingPresenter.m; sourceTree = "<group>"; };
@@ -1025,6 +1031,8 @@
 				792545BD1CFD113B004CF29A /* THLPartyInvitationViewController.h */,
 				792545BE1CFD113B004CF29A /* THLPartyInvitationViewController.m */,
 				79BB15321C6CED720044D943 /* THLFxTitleLabel.m */,
+				79060B411D0B2BF500D1A00C /* THLTableReservationViewController.h */,
+				79060B421D0B2BF500D1A00C /* THLTableReservationViewController.m */,
 				799862441C97B6AF004C5326 /* THLTextEntryViewController.h */,
 				792545C61CFE97CF004CF29A /* THLAttendingEventCell.h */,
 				792545C71CFE97CF004CF29A /* THLAttendingEventCell.m */,
@@ -1845,6 +1853,8 @@
 				21CCEDF71B87D0260066CDAC /* THLLocalModels.h */,
 				2133BFCC1B877D11002C1DA9 /* THLLocation.h */,
 				2133BFCD1B877D11002C1DA9 /* THLLocation.m */,
+				79060B441D0B339A00D1A00C /* THLAdmissionOption.h */,
+				79060B451D0B339A00D1A00C /* THLAdmissionOption.m */,
 				C85EE3BA1C1BCC190008C14B /* THLPerkStoreItem.h */,
 				C85EE3BB1C1BCC190008C14B /* THLPerkStoreItem.m */,
 				C85EE3C21C1CDE140008C14B /* THLPurchasedPerkItem.h */,
@@ -3568,6 +3578,7 @@
 				79CE01E61C0A69EC0047E6FA /* THLDashboardTicketCellViewModel.m in Sources */,
 				798650A41BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m in Sources */,
 				794A9D191CF4ACC300DDAC00 /* THLEventInviteCell.m in Sources */,
+				79060B431D0B2BF500D1A00C /* THLTableReservationViewController.m in Sources */,
 				212173711BB34F15007D817A /* THLRoundImageView.m in Sources */,
 				C85EE3B51C1BCBDD0008C14B /* THLPerkStoreCellViewModel.m in Sources */,
 				3EECB6911C61450100702540 /* THLFAQSectionView.m in Sources */,
@@ -3655,6 +3666,7 @@
 				790603BD1BF5B6810093335E /* THLPromotionInfoView.m in Sources */,
 				FAEE45D01C70E4BA0032C91C /* THLChannelService.m in Sources */,
 				21CCEDF51B87CFCB0066CDAC /* THLParseQueryFactory.m in Sources */,
+				79060B461D0B339A00D1A00C /* THLAdmissionOption.m in Sources */,
 				79BB15331C6CED740044D943 /* THLFxTitleLabel.m in Sources */,
 				211005BF1B8A70BF00A540C6 /* THLEventDiscoveryCell.m in Sources */,
 				798B5FD11BF12D2C002EBCB6 /* THLEventHostingWireframe.m in Sources */,

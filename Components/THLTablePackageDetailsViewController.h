@@ -14,6 +14,9 @@
 
 @protocol THLTablePackageControllerDelegate <NSObject>
 - (void)packageControllerWantsToPresentCheckoutForEvent:(PFObject *)event andAdmissionOption:(PFObject *)admissionOption;
+
+- (void)didLoadObjects;
+
 @end
 
 @interface THLTablePackageDetailsViewController : PFQueryCollectionViewController
@@ -22,6 +25,6 @@ DZNEmptyDataSetSource,
 DZNEmptyDataSetDelegate
 >
 @property (nonatomic, weak) id<THLTablePackageControllerDelegate> delegate;
-@property (nonatomic) PFObject *admissionOption;
-@property (nonatomic) PFObject *event;
+
+- (instancetype)initWithEvent:(PFObject *)event admissionOption:(PFObject *)admissionOption showActionButton:(BOOL)showActionButton;
 @end

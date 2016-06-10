@@ -8,46 +8,79 @@
 
 #import "THLTablePackageDetailCell.h"
 #import "THLAppearanceConstants.h"
+#import <ParseUI/PFImageView.h>
+#import "UIView+DimView.h"
 
 @interface THLTablePackageDetailCell()
+@property (nonatomic, strong) UIView *amountView;
 @end
 
 @implementation THLTablePackageDetailCell
 @synthesize titleLabel = _titleLabel;
 @synthesize priceLabel = _priceLabel;
 @synthesize amountLabel = _amountLabel;
-
+@synthesize venueImageView = _venueImageView;
 
 - (void)layoutSubviews
 {
     WEAKSELF();
+    [_venueImageView makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(WSELF);
+    }];
+    
     [_titleLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(0);
-        make.left.insets(kTHLEdgeInsetsNone());
+        make.center.equalTo(0);
+//        make.left.insets(kTHLEdgeInsetsNone());
     }];
     
-    [_priceLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.insets(kTHLEdgeInsetsNone());
-        make.top.equalTo([WSELF titleLabel].mas_bottom).insets(kTHLEdgeInsetsLow());
+    self.amountView.layer.cornerRadius = ViewWidth(_amountView)/2.0;
+
+    [self.amountView makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.right.equalTo(kTHLEdgeInsetsSuperHigh());
+        make.height.equalTo(40);
+        make.width.equalTo(WSELF.amountView.mas_height);
     }];
     
-    [_amountLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.right.insets(kTHLEdgeInsetsNone());
-        make.centerY.equalTo(0);
+    [self.amountView addSubview:self.amountLabel];
+
+    
+    [self.contentView bringSubviewToFront:_titleLabel];
+    
+    [self.amountLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(0);
     }];
+    
+//    [_amountLabel makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.insets(kTHLEdgeInsetsNone());
+//        make.centerY.equalTo(0);
+//    }];
+
 }
+
 
 - (UILabel *)titleLabel
 {
     if (!_titleLabel) {
-        _titleLabel = [UILabel new];
-        _titleLabel.backgroundColor = kTHLNUIPrimaryBackgroundColor;
-        _titleLabel.font = [UIFont fontWithName:@"OpenSans-Light" size:16];
-        _titleLabel.textColor = [UIColor whiteColor];
+        _titleLabel = THLNUILabel(kTHLNUIDetailBoldTitle);
         [self.contentView addSubview:_titleLabel];
     }
     return _titleLabel;
 }
+
+
+
+- (UIView *)amountView
+{
+    if (!_amountView) {
+        _amountView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+        _amountView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
+        [[_amountView layer] setBorderWidth:1.0f];
+        [[_amountView layer] setBorderColor:kTHLNUIAccentColor.CGColor];
+        [self.contentView addSubview:_amountView];
+    }
+    return _amountView;
+}
+
 
 
 - (UILabel *)priceLabel
@@ -72,6 +105,17 @@
         [self.contentView addSubview:_amountLabel];
     }
     return _amountLabel;
+}
+
+- (PFImageView *)venueImageView {
+    if (!_venueImageView) {
+        _venueImageView = [[PFImageView alloc] initWithFrame:CGRectZero];
+        _venueImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _venueImageView.clipsToBounds = YES;
+        [_venueImageView dimView];
+        [self.contentView addSubview:_venueImageView];
+    }
+    return _venueImageView;
 }
 
 

@@ -53,7 +53,9 @@
 
 - (UILabel *)partyTypeLabel {
     if (!_partyTypeLabel) {
-        _partyTypeLabel = THLNUILabel(kTHLNUIRegularDetailTitle);
+        _partyTypeLabel = [UILabel new];
+        _partyTypeLabel.font = [UIFont fontWithName:@"Raleway-Medium" size:16.0f];
+        _partyTypeLabel.textColor = kTHLNUIAccentColor;
         _partyTypeLabel.adjustsFontSizeToFitWidth = YES;
         _partyTypeLabel.numberOfLines = 1;
         _partyTypeLabel.minimumScaleFactor = 0.5;

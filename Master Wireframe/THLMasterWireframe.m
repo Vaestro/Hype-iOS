@@ -254,10 +254,7 @@ THLLoginViewControllerDelegate
         [[self topViewController].navigationController pushViewController:checkoutVC animated:YES];
 
     } else if ([admissionOption[@"type"] integerValue] == 1) {
-        THLTablePackageDetailsViewController *packageDetailsVC = [[THLTablePackageDetailsViewController alloc] initWithClassName:@"Bottle"];
-        packageDetailsVC.delegate = self;
-        packageDetailsVC.event = event;
-        packageDetailsVC.admissionOption = admissionOption;
+        THLTablePackageDetailsViewController *packageDetailsVC = [[THLTablePackageDetailsViewController alloc] initWithEvent:event admissionOption:admissionOption showActionButton:YES];
         packageDetailsVC.delegate = self;
         [[self topViewController].navigationController pushViewController:packageDetailsVC animated:YES];
 
@@ -295,7 +292,7 @@ THLLoginViewControllerDelegate
 #pragma mark Delegate
 
 - (void)didSelectViewEventTicket:(PFObject *)guestlistInvite {
-    [self presentPartyNavigationController:guestlistInvite];
+    [self presentPartyNavigationControllerForTicket:guestlistInvite];
 }
 
 #pragma mark -
@@ -312,7 +309,7 @@ THLLoginViewControllerDelegate
 
 - (void)eventDetailsWantsToPresentPartyForEvent:(PFObject *)guestlistInvite {
     [_window.rootViewController dismissViewControllerAnimated:YES completion:^{
-        [self presentPartyNavigationController:guestlistInvite];
+        [self presentPartyNavigationControllerForTicket:guestlistInvite];
     }];
     [_masterTabBarController setSelectedIndex:1];
 }
@@ -332,6 +329,10 @@ THLLoginViewControllerDelegate
 }
 - (void)checkoutViewControllerDidFinishCheckoutForEvent:(THLEvent *)event withGuestlistId:(NSString *)guestlistId {
     [self presentInvitationViewController:event guestlistId:guestlistId currentGuestsPhoneNumbers:nil];
+}
+
+- (void)checkoutViewControllerDidFinishTableReservationForEvent:(PFObject *)invite {
+    [self presentPartyNavigationControllerForTableReservation:invite];
 }
 
 #pragma mark -
@@ -376,11 +377,25 @@ THLLoginViewControllerDelegate
 #pragma mark -
 #pragma mark PartyNavigationController
 
-- (void)presentPartyNavigationController:(PFObject *)invite {
+- (void)presentPartyNavigationControllerForTicket:(PFObject *)invite {
     UINavigationController *partyNavVC = [UINavigationController new];
     THLPartyNavigationController *partyNavigationController = [[THLPartyNavigationController alloc] initWithGuestlistInvite:invite];
     partyNavigationController.eventDetailsVC.delegate = self;
     partyNavigationController.partyVC.delegate = self;
+    
+    [partyNavVC addChildViewController:partyNavigationController];
+    [_window.rootViewController presentViewController:partyNavVC animated:YES completion:nil];
+    
+    if (_masterTabBarController.selectedIndex != 1) {
+        [_masterTabBarController setSelectedIndex:1];
+    }
+}
+
+- (void)presentPartyNavigationControllerForTableReservation:(PFObject *)invite {
+    UINavigationController *partyNavVC = [UINavigationController new];
+    THLPartyNavigationController *partyNavigationController = [[THLPartyNavigationController alloc] initWithGuestlistInvite:invite];
+    partyNavigationController.eventDetailsVC.delegate = self;
+//    partyNavigationController.partyVC.delegate = self;
     
     [partyNavVC addChildViewController:partyNavigationController];
     [_window.rootViewController presentViewController:partyNavVC animated:YES completion:nil];
@@ -431,14 +446,14 @@ THLLoginViewControllerDelegate
 #pragma mark Delegate
 - (void)partyInvitationViewControllerDidSkipSendingInvitesAndWantsToShowTicket:(PFObject *)invite {
     [_window.rootViewController dismissViewControllerAnimated:YES completion:^{
-        [self presentPartyNavigationController:invite];
+        [self presentPartyNavigationControllerForTicket:invite];
     }];
     
 }
 
 - (void)partyInvitationViewControllerDidSubmitInvitesAndWantsToShowTicket:(PFObject *)invite {
     [_window.rootViewController dismissViewControllerAnimated:YES completion:^{
-        [self presentPartyNavigationController:invite];
+        [self presentPartyNavigationControllerForTicket:invite];
     }];
     
 }

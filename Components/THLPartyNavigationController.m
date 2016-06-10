@@ -11,6 +11,8 @@
 #import "PFObject.h"
 #import "Intercom/intercom.h"
 #import "THLGuestlistInvite.h"
+#import "THLAdmissionOption.h"
+#import "THLTableReservationViewController.h"
 
 @interface THLPartyNavigationController()
 @property (nonatomic, strong) PFObject *guestlistInvite;
@@ -40,11 +42,20 @@
     self.navigationItem.titleView = [self navBarTitleLabel];
     self.navigationBar.barTintColor = kTHLNUIPrimaryBackgroundColor; //%%% bartint
     THLGuestlistInvite *invite = (THLGuestlistInvite *)_guestlistInvite;
-    if (invite.response == THLStatusAccepted) {
+    THLGuestlist *guestlist = invite[@"Guestlist"];
+    THLAdmissionOption *admissionOption = guestlist[@"admissionOption"];
+    if (admissionOption.type == [NSNumber numberWithInt:1]) {
+        THLTableReservationViewController *tableReservationViewController = [[THLTableReservationViewController alloc] initWithGuestlistInvite:_guestlistInvite];
+
+        _eventDetailsVC = [[THLEventDetailsViewController alloc]initWithEvent:_guestlistInvite[@"Guestlist"][@"event"] guestlistInvite:nil showNavigationBar:FALSE];
+        
+        [self.viewControllerArray addObjectsFromArray:@[tableReservationViewController, _eventDetailsVC]];
+        self.buttonText = @[@"TABLE", @"EVENT"];
+    } else if (invite.response == THLStatusAccepted) {
         THLEventTicketViewController *eventTicketVC = [[THLEventTicketViewController alloc]initWithGuestlistInvite:_guestlistInvite];
         _eventDetailsVC = [[THLEventDetailsViewController alloc]initWithEvent:_guestlistInvite[@"Guestlist"][@"event"] guestlistInvite:nil showNavigationBar:FALSE];
         _partyVC = [[THLPartyViewController alloc] initWithClassName:@"GuestlistInvite" guestlist:_guestlistInvite[@"Guestlist"] usersInvite:_guestlistInvite];
-        
+
         [self.viewControllerArray addObjectsFromArray:@[eventTicketVC, _eventDetailsVC, _partyVC]];
         self.buttonText = @[@"TICKET", @"EVENT", @"PARTY"];
     } else {
