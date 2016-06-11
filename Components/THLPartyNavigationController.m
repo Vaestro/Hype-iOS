@@ -44,7 +44,7 @@
     THLGuestlistInvite *invite = (THLGuestlistInvite *)_guestlistInvite;
     THLGuestlist *guestlist = invite[@"Guestlist"];
     THLAdmissionOption *admissionOption = guestlist[@"admissionOption"];
-    if (admissionOption.type == [NSNumber numberWithInt:1]) {
+    if ([admissionOption.type integerValue] == 1) {
         THLTableReservationViewController *tableReservationViewController = [[THLTableReservationViewController alloc] initWithGuestlistInvite:_guestlistInvite];
 
         _eventDetailsVC = [[THLEventDetailsViewController alloc]initWithEvent:_guestlistInvite[@"Guestlist"][@"event"] guestlistInvite:nil showNavigationBar:FALSE];

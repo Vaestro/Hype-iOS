@@ -28,14 +28,16 @@
     }];
     
     [_titleLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(0);
-//        make.left.insets(kTHLEdgeInsetsNone());
+        make.centerX.equalTo(0);
+        make.centerY.equalTo(WSELF.mas_centerY).offset(-10);
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
     self.amountView.layer.cornerRadius = ViewWidth(_amountView)/2.0;
 
     [self.amountView makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.right.equalTo(kTHLEdgeInsetsSuperHigh());
+        make.right.bottom.equalTo(kTHLEdgeInsetsSuperHigh());
+
         make.height.equalTo(40);
         make.width.equalTo(WSELF.amountView.mas_height);
     }];
@@ -61,6 +63,10 @@
 {
     if (!_titleLabel) {
         _titleLabel = THLNUILabel(kTHLNUIDetailBoldTitle);
+        _titleLabel.textAlignment = NSTextAlignmentCenter;
+        _titleLabel.adjustsFontSizeToFitWidth = TRUE;
+        _titleLabel.minimumScaleFactor = 0.5;
+        _titleLabel.numberOfLines = 1;
         [self.contentView addSubview:_titleLabel];
     }
     return _titleLabel;

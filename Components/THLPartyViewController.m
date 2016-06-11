@@ -111,7 +111,8 @@ static CGFloat const CELL_SPACING = 10;
         
     _currentGuestsPhoneNumbers = nil;
     _currentGuestsPhoneNumbers = [self collectGuestsPhoneNumbers:self.objects];
-    
+    [self emptyDataSetShouldDisplay:self.collectionView];
+
 }
 
 - (void)handleViewInvitationAction {
@@ -197,4 +198,12 @@ static CGFloat const CELL_SPACING = 10;
     return _checkoutButton;
 }
 
+- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
+{
+    if ([self.objects count] == 0) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
 @end

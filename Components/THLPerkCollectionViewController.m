@@ -103,6 +103,8 @@
 - (void)objectsDidLoad:(NSError *)error {
     [super objectsDidLoad:error];
     [self.collectionView reloadData];
+    [self emptyDataSetShouldDisplay:self.collectionView];
+
 }
 
 #pragma mark -
@@ -208,5 +210,14 @@
         _intercomBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Help"] style:UIBarButtonItemStylePlain target:self action:@selector(messageButtonPressed)];
     }
     return _intercomBarButton;
+}
+
+- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
+{
+    if ([self.objects count] == 0) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 @end

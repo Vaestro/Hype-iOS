@@ -127,6 +127,7 @@
     _sectionSortedKeys = [[_sections allKeys] sortedArrayUsingSelector:@selector(compare:)];
     [self.collectionView reloadData];
     [self updateTabBarBadgeValue];
+    [self emptyDataSetShouldDisplay:self.collectionView];
 }
 
 
@@ -194,7 +195,7 @@
         NSString *invitationDate = [NSString stringWithFormat:@"%@, %@", date.thl_weekdayString, date.thl_timeString];
         cell.venueNameLabel.text = object[@"Guestlist"][@"event"][@"location"][@"name"];
         cell.dateLabel.text = invitationDate;
-        if (object[@"Guestlist"][@"admissionOption"][@"type"] == [NSNumber numberWithInt:1]) {
+        if ([object[@"Guestlist"][@"admissionOption"][@"type"] integerValue] == 1) {
             cell.partyTypeLabel.text = @"TABLE RESERVATION";
         } else {
             cell.partyTypeLabel.text = @"EVENT TICKET";
@@ -341,6 +342,15 @@
         [self loadObjects];
     } else {
         [self.delegate usersWantsToLogin];
+    }
+}
+
+- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
+{
+    if ([self.objects count] == 0) {
+        return YES;
+    } else {
+        return NO;
     }
 }
 

@@ -91,6 +91,7 @@
 - (void)objectsDidLoad:(NSError *)error {
     [super objectsDidLoad:error];
     [self.collectionView reloadData];
+    [self emptyDataSetShouldDisplay:self.collectionView];
 }
 
 
@@ -225,6 +226,16 @@
 - (void)emptyDataSetDidTapButton:(UIScrollView *)scrollView
 {
     [self loadObjects];
+}
+
+
+- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
+{
+    if ([self.objects count] == 0) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 
