@@ -127,6 +127,7 @@
     _sectionSortedKeys = [[_sections allKeys] sortedArrayUsingSelector:@selector(compare:)];
     [self.collectionView reloadData];
     [self updateTabBarBadgeValue];
+    [self emptyDataSetShouldDisplay:self.collectionView];
 }
 
 
@@ -341,6 +342,15 @@
         [self loadObjects];
     } else {
         [self.delegate usersWantsToLogin];
+    }
+}
+
+- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView
+{
+    if ([self.objects count] == 0) {
+        return YES;
+    } else {
+        return NO;
     }
 }
 
