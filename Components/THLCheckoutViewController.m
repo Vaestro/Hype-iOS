@@ -174,8 +174,6 @@
             make.bottom.equalTo(WSELF.importantInformationView.mas_bottom);
         }];
     }
-    
-    
 
 }
 
@@ -240,17 +238,6 @@
     return _purchaseButton;
 }
 
-//- (THLActionButton *)reserveButton {
-//    THLActionButton *reserveButton = [[THLActionButton alloc] initWithInverseStyle];
-//    [reserveButton setTitle:@"PAY AT VENUE"];
-//    [reserveButton addTarget:self action:@selector(buy:) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:reserveButton];
-//    return reserveButton;
-//}
-
-
-
-
 - (THLPurchaseDetailsView *)purchaseDetailsView {
     if (!_purchaseDetailsView) {
         _purchaseDetailsView = [THLPurchaseDetailsView new];
@@ -280,6 +267,10 @@
             _purchaseDetailsView.subtotalLabel.text = @"FREE";
             _purchaseDetailsView.serviceChargeLabel.text = @"FREE";
             _purchaseDetailsView.totalLabel.text = @"FREE";
+            _purchaseDetailsView.taxLabel.hidden = YES;
+            _purchaseDetailsView.taxDescriptionLabel.hidden = YES;
+            _purchaseDetailsView.tipLabel.hidden = YES;
+            _purchaseDetailsView.tipDescriptionLabel.hidden = YES;
         }
     }
 
@@ -549,7 +540,7 @@
                                        @"amount": [NSNumber numberWithFloat:_total],
                                        @"customerName": [customer fullName],
                                        @"admissionOptionId" : _admissionOption.objectId,
-                                       @"description": _admissionOption[@"name"],
+                                       @"description": _admissionOption[@"name"]
                                        };
         
         [PFCloud callFunctionInBackground:@"completeOrder"
