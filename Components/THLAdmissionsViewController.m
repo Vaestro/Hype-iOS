@@ -121,7 +121,7 @@ TTTAttributedLabelDelegate
     [super viewWillLayoutSubviews];
     
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
-    layout.itemSize = CGSizeMake(ViewWidth(self.collectionView) - 25, 50);
+    layout.itemSize = CGSizeMake(ViewWidth(self.collectionView) - 25, 55);
 }
 
 - (void)objectsWillLoad {

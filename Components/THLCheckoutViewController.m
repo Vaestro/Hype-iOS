@@ -118,31 +118,37 @@
     }];
     
     WEAKSELF();
-    [contentView addSubviews:@[self.purchaseDetailsView, self.paymentMethodView, self.importantInformationView, self.applyCreditsLabel, self.applyCreditsButton]];
-    
-    if (_creditsAmount <= 0 || [_admissionOption[@"type"] integerValue] == 1) {
-        [_applyCreditsLabel setHidden:YES];
-        [_applyCreditsButton setHidden:YES];
-    }
+    [contentView addSubviews:@[self.purchaseDetailsView, self.paymentMethodView, self.importantInformationView]];
     
     [self.purchaseDetailsView makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
-    [self.applyCreditsLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(WSELF.purchaseDetailsView.mas_bottom).insets(kTHLEdgeInsetsHigh());
-        make.right.insets(kTHLEdgeInsetsSuperHigh());
-    }];
-    
-    [self.applyCreditsButton makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(WSELF.purchaseDetailsView.mas_bottom).insets(kTHLEdgeInsetsHigh());
-        make.left.insets(kTHLEdgeInsetsSuperHigh());
-    }];
+    if ([_admissionOption[@"type"] integerValue] != 1) {
+        [contentView addSubviews:@[self.applyCreditsLabel, self.applyCreditsButton]];
+        
+        [self.applyCreditsLabel makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(WSELF.purchaseDetailsView.mas_bottom).insets(kTHLEdgeInsetsHigh());
+            make.centerY.equalTo(WSELF.applyCreditsButton);
+            make.right.insets(kTHLEdgeInsetsSuperHigh());
+        }];
+        
+        [self.applyCreditsButton makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(WSELF.purchaseDetailsView.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+            make.left.insets(kTHLEdgeInsetsSuperHigh());
+        }];
+        
+        [self.paymentMethodView makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(WSELF.applyCreditsLabel.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+            make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+        }];
+    } else {
+        [self.paymentMethodView makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(WSELF.purchaseDetailsView.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+            make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+        }];
 
-    [self.paymentMethodView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(WSELF.applyCreditsLabel.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
-        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
-    }];
+    }
 
     [self.importantInformationView makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(WSELF.paymentMethodView.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
@@ -240,37 +246,22 @@
 
 - (THLPurchaseDetailsView *)purchaseDetailsView {
     if (!_purchaseDetailsView) {
-        _purchaseDetailsView = [THLPurchaseDetailsView new];
-        _purchaseDetailsView.titleLabel.text = @"Purchase Details";
-        
-        NSString *purchaseTitleText = _admissionOption[@"name"];
-        
         if ([_admissionOption[@"price"] floatValue] > 0 && [_admissionOption[@"type"] integerValue] == 0) {
-            _purchaseDetailsView.purchaseTitleLabel.text = purchaseTitleText;
-            _purchaseDetailsView.subtotalLabel.text = [NSString stringWithFormat:@"$%.2f", _subTotal];
-            _purchaseDetailsView.serviceChargeLabel.text = [NSString stringWithFormat:@"$%.2f", _serviceCharge];
-            _purchaseDetailsView.totalLabel.text = [NSString stringWithFormat:@"$%.2f", _total];
-            _purchaseDetailsView.taxLabel.hidden = YES;
-            _purchaseDetailsView.taxDescriptionLabel.hidden = YES;
-            _purchaseDetailsView.tipLabel.hidden = YES;
-            _purchaseDetailsView.tipDescriptionLabel.hidden = YES;
+            NSString *subtotal = [NSString stringWithFormat:@"$%.2f", _subTotal];
+            NSString *serviceCharge= [NSString stringWithFormat:@"$%.2f", _serviceCharge];
+            NSString *total = [NSString stringWithFormat:@"$%.2f", _total];
+            NSString *purchaseTitle = _admissionOption[@"name"];
+            _purchaseDetailsView = [[THLPurchaseDetailsView alloc] initForTicketWithSubtotal:subtotal purchaseTitle:purchaseTitle serviceCharge:serviceCharge total:total];
         } else if ([_admissionOption[@"price"] floatValue] > 0 && [_admissionOption[@"type"] integerValue] == 1) {
-            _purchaseDetailsView.purchaseTitleLabel.text = purchaseTitleText;
-            _purchaseDetailsView.subtotalLabel.text = [NSString stringWithFormat:@"$%.2f", _subTotal];
-            _purchaseDetailsView.taxLabel.text = [NSString stringWithFormat:@"$%.2f", _tax];
-            _purchaseDetailsView.tipLabel.text = [NSString stringWithFormat:@"$%.2f", _tip];
-            _purchaseDetailsView.totalLabel.text = [NSString stringWithFormat:@"$%.2f", _total];
-            _purchaseDetailsView.serviceChargeLabel.hidden = YES;
-            _purchaseDetailsView.serviceChargeDesciptionLabel.hidden = YES;
+            NSString *subtotal = [NSString stringWithFormat:@"$%.2f", _subTotal];
+            NSString *tax= [NSString stringWithFormat:@"$%.2f", _tax];
+            NSString *tip = [NSString stringWithFormat:@"$%.2f", _tip];
+            NSString *total = [NSString stringWithFormat:@"$%.2f", _total];
+            NSString *purchaseTitle = _admissionOption[@"name"];
+            _purchaseDetailsView = [[THLPurchaseDetailsView alloc] initForTableReservationWithSubtotal:subtotal purchaseTitle:purchaseTitle tax:tax tip:tip total:total];
         } else {
-            _purchaseDetailsView.purchaseTitleLabel.text = purchaseTitleText;
-            _purchaseDetailsView.subtotalLabel.text = @"FREE";
-            _purchaseDetailsView.serviceChargeLabel.text = @"FREE";
-            _purchaseDetailsView.totalLabel.text = @"FREE";
-            _purchaseDetailsView.taxLabel.hidden = YES;
-            _purchaseDetailsView.taxDescriptionLabel.hidden = YES;
-            _purchaseDetailsView.tipLabel.hidden = YES;
-            _purchaseDetailsView.tipDescriptionLabel.hidden = YES;
+            NSString *purchaseTitle = _admissionOption[@"name"];
+            _purchaseDetailsView = [[THLPurchaseDetailsView alloc] initForTicketWithSubtotal:@"Free" purchaseTitle:purchaseTitle serviceCharge:@"Free" total:@"Free"];
         }
     }
 
@@ -429,38 +420,48 @@
 
 - (void)applyCredits:(id)sender
 {
-    
-    UIAlertController * alert=  [UIAlertController
-                                  alertControllerWithTitle:@"Info"
-                                  message:@"If you apply your credits now, you will not be able to get them back"
-                                  preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction* ok = [UIAlertAction
-                         actionWithTitle:@"OK"
-                         style:UIAlertActionStyleDefault
-                         handler:^(UIAlertAction * action)
-                         {
-                             _total -= _creditsAmount;
-                             _subTotal -= _creditsAmount;
-                             _applyCreditsPressed = true;
-                             [self updateView];
-                             [alert dismissViewControllerAnimated:YES completion:nil];
-                             
-                         }];
-    UIAlertAction* cancel = [UIAlertAction
-                             actionWithTitle:@"Cancel"
+    if ([THLUser currentUser].credits <= 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:@"You do not have any credits to apply to this purchase"
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    } else {
+        UIAlertController * alert=  [UIAlertController
+                                     alertControllerWithTitle:@"Info"
+                                     message:@"If you apply your credits now, you will not be able to get them back"
+                                     preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* ok = [UIAlertAction
+                             actionWithTitle:@"OK"
                              style:UIAlertActionStyleDefault
                              handler:^(UIAlertAction * action)
                              {
+                                 _total -= _creditsAmount;
+                                 _subTotal -= _creditsAmount;
+                                 _applyCreditsPressed = true;
+                                 [self updateView];
                                  [alert dismissViewControllerAnimated:YES completion:nil];
                                  
                              }];
+        UIAlertAction* cancel = [UIAlertAction
+                                 actionWithTitle:@"Cancel"
+                                 style:UIAlertActionStyleDefault
+                                 handler:^(UIAlertAction * action)
+                                 {
+                                     [alert dismissViewControllerAnimated:YES completion:nil];
+                                     
+                                 }];
+        
+        [alert addAction:ok];
+        [alert addAction:cancel];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+        
+    }
     
-    [alert addAction:ok];
-    [alert addAction:cancel];
-    
-    [self presentViewController:alert animated:YES completion:nil];
-    
+
 }
 
 - (void)updateView {
