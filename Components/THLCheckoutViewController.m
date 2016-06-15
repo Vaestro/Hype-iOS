@@ -26,6 +26,9 @@
 #import "THLResourceManager.h"
 
 @interface THLCheckoutViewController ()
+<
+TTTAttributedLabelDelegate
+>
 @property (nonatomic) THLEvent *event;
 @property (nonatomic) PFObject *admissionOption;
 @property (nonatomic) THLGuestlistInvite *guestlistInvite;
@@ -203,7 +206,12 @@
     if (!_importantInformationView) {
         _importantInformationView = [THLImportantInformationView new];
         _importantInformationView.titleLabel.text = @"Important Information";
-        _importantInformationView.importantInformationLabel.text = @"Your purchase is non-refundable\n\nPlease dress appropriately\n\nDoorman has final say on admission";
+        if ([_admissionOption[@"type"] integerValue] == 0) {
+            _importantInformationView.importantInformationLabel.text = @"Your purchase is non-refundable\n\nTicket is valid until 2am the night of the event\n\nPlease dress appropriately\n\nDoorman has final say on admission";
+        } else {
+            _importantInformationView.importantInformationLabel.text = @"You will pay the total at the venue\n\nPlease dress appropriately\n\nDoorman has final say on admission";
+        }
+        
     }
     return _importantInformationView;
 }
@@ -487,7 +495,7 @@
 
 - (void)chargeCustomer:(THLUser *)customer forEvent:(THLEvent *)event
 {
-    
+    [_purchaseButton setEnabled:FALSE];
     if (_guestlistInvite) {
         THLGuestlist *guestlist = _guestlistInvite[@"Guestlist"];
         NSString *guestlistId = guestlist.objectId;
@@ -509,6 +517,8 @@
                                         [SVProgressHUD dismiss];
                                         if (error) {
                                             [self displayError:[error localizedDescription]];
+                                            [_purchaseButton setEnabled:TRUE];
+
                                         } else {
                                             Mixpanel *mixpanel = [Mixpanel sharedInstance];
                                            [mixpanel track:@"Accepted invite and purchased ticket"];
@@ -521,17 +531,10 @@
                                                 [[THLUser currentUser] saveEventually];
                                             }
                                             
-                                            [[self queryForGuestlistInviteForEvent:_event.objectId] getFirstObjectInBackgroundWithBlock:^(PFObject *guestlistInvite, NSError *queryError) {
-                                                if (!queryError) {
-                                                    [guestlistInvite pinInBackground];
-                                                    PFObject *guestlist = guestlistInvite[@"Guestlist"];
-                                                    [self.delegate checkoutViewControllerDidFinishCheckoutForEvent:_event withGuestlistId:guestlist.objectId];
-                                                } else {
-                                                    
-                                                }
-                                            }];
+                                            [_guestlistInvite pinInBackground];
+                                            [self.delegate checkoutViewControllerDidFinishCheckoutForEvent:_event withGuestlistId:guestlist.objectId];
                                     }
-                                    }];
+                                }];
     } else {
         
         NSDictionary *purchaseInfo = @{
@@ -550,6 +553,7 @@
                                         [SVProgressHUD dismiss];
                                         if (error) {
                                             [self displayError:[error localizedDescription]];
+                                            [_purchaseButton setEnabled:TRUE];
                                         } else {
                                             Mixpanel *mixpanel = [Mixpanel sharedInstance];
                                             [mixpanel track:@"Purchased ticket"];
