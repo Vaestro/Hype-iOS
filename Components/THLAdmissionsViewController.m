@@ -121,7 +121,7 @@ TTTAttributedLabelDelegate
     [super viewWillLayoutSubviews];
     
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
-    layout.itemSize = CGSizeMake(ViewWidth(self.collectionView) - 25, 50);
+    layout.itemSize = CGSizeMake(ViewWidth(self.collectionView) - 25, 55);
 }
 
 - (void)objectsWillLoad {
@@ -228,7 +228,7 @@ TTTAttributedLabelDelegate
         if (response == [NSNumber numberWithInteger:0]) {
             THLEvent *event = (THLEvent *)_event;
             view.label.text = @"TICKETS";
-            view.subtitleLabel.text = [NSString stringWithFormat:@"Earn $%d credits for each friend you invite that attends", event.creditsPayout];
+            view.subtitleLabel.text = [NSString stringWithFormat:@"Earn $%d credits when your ticket gets scanned at the venue", event.creditsPayout];
         } else if (response == [NSNumber numberWithInteger:1]) {
             view.label.text = @"TABLE & BOTTLE SERVICE";
             view.subtitleLabel.text = nil;

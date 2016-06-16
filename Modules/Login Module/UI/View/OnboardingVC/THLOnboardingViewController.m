@@ -210,7 +210,7 @@ THLPermissionRequestViewControllerDelegate
                                                                                               image:nil];
     
     OnboardingContentViewController *thirdPage = [OnboardingContentViewController contentWithTitle:@"EARN GREAT PERKS"
-                                                                                               body:@"For each friend that attends your event, you will get credits redeemable for perks like a free limo ride."
+                                                                                               body:@"Every time you attend an event, you will get credits redeemable for perks like a free limo ride."
                                                                                               image:nil];
     
     OnboardingContentViewController *fourthPage = [OnboardingContentViewController contentWithTitle:@"YOUR PERSONAL CONCIERGE"

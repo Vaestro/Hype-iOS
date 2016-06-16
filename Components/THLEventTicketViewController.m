@@ -18,6 +18,7 @@
 @property (nonatomic, strong) UILabel *eventDateLabel;
 @property (nonatomic, strong) UILabel *arrivalMessageLabel;
 @property (nonatomic, strong) PFObject *guestlistInvite;
+@property (nonatomic, strong) UILabel *creditsMessageLabel;
 
 @end
 
@@ -58,6 +59,11 @@
     
     [self.arrivalMessageLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF eventDateLabel].mas_bottom).insets(kTHLEdgeInsetsLow());
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+    }];
+    
+    [self.creditsMessageLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo([WSELF arrivalMessageLabel].mas_bottom).insets(kTHLEdgeInsetsLow());
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
     }];
 }
@@ -141,5 +147,20 @@
         [self.view addSubview:_arrivalMessageLabel];
     }
     return _arrivalMessageLabel;
+}
+
+- (UILabel *)creditsMessageLabel {
+    if (!_creditsMessageLabel) {
+        _creditsMessageLabel = THLNUILabel(kTHLNUIDetailTitle);
+        _creditsMessageLabel.adjustsFontSizeToFitWidth = YES;
+        _creditsMessageLabel.numberOfLines = 1;
+        _creditsMessageLabel.minimumScaleFactor = 0.5;
+        _creditsMessageLabel.textAlignment = NSTextAlignmentCenter;
+        
+        [_creditsMessageLabel setTextColor:kTHLNUIGrayFontColor];
+        _creditsMessageLabel.text = [NSString stringWithFormat:@"Get $%@.00 once your ticket is scanned at the venue", _guestlistInvite[@"Guestlist"][@"event"][@"creditsPayout"]];
+        [self.view addSubview:_creditsMessageLabel];
+    }
+    return _creditsMessageLabel;
 }
 @end

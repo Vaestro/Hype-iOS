@@ -20,6 +20,30 @@
 @implementation THLPurchaseDetailsView
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
+    }
+    return self;
+}
+
+- (instancetype)initForTableReservationWithSubtotal:(NSString *)subtotal purchaseTitle:(NSString *)purchaseTitle tax:(NSString *)tax tip:(NSString *)tip total:(NSString *)total {
+    if (self = [super initWithFrame:CGRectZero]) {
+        self.titleLabel.text = @"Table Reservation Details";
+        self.purchaseTitleLabel.text = purchaseTitle;
+        self.subtotalLabel.text = subtotal;
+        self.taxLabel.text = tax;
+        self.tipLabel.text = tip;
+        self.totalLabel.text = total;
+        [self layoutView];
+    }
+    return self;
+}
+
+- (instancetype)initForTicketWithSubtotal:(NSString *)subtotal purchaseTitle:(NSString *)purchaseTitle serviceCharge:(NSString *)serviceCharge total:(NSString *)total {
+    if (self = [super initWithFrame:CGRectZero]) {
+        self.titleLabel.text = @"Purchase Details";
+        self.purchaseTitleLabel.text = purchaseTitle;
+        self.subtotalLabel.text = subtotal;
+        self.serviceChargeLabel.text = serviceCharge;
+        self.totalLabel.text = total;
         [self layoutView];
     }
     return self;
@@ -43,45 +67,58 @@
         make.right.insets(kTHLEdgeInsetsNone());
     }];
     
-    [self.serviceChargeDesciptionLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(WSELF.subtotalLabel.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
-        make.left.insets(kTHLEdgeInsetsNone());
-    }];
-    
-    [self.serviceChargeLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF subtotalLabel].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
-        make.left.equalTo(WSELF.serviceChargeDesciptionLabel.mas_right);
-        make.right.insets(kTHLEdgeInsetsNone());
-    }];
+    if (_serviceChargeLabel.text) {
+        [self.serviceChargeDesciptionLabel makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(WSELF.subtotalLabel.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+            make.left.insets(kTHLEdgeInsetsNone());
+        }];
+        
+        [self.serviceChargeLabel makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo([WSELF subtotalLabel].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+            make.left.equalTo(WSELF.serviceChargeDesciptionLabel.mas_right);
+            make.right.insets(kTHLEdgeInsetsNone());
+        }];
+    }
 
-    
-    [self.taxDescriptionLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF subtotalLabel].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
-        make.left.insets(kTHLEdgeInsetsNone());
-    }];
+    if (_taxLabel.text) {
 
-    [self.taxLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF subtotalLabel].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
-        make.left.equalTo(WSELF.taxDescriptionLabel.mas_right);
-        make.right.insets(kTHLEdgeInsetsNone());
-    }];
-    
-    [self.tipDescriptionLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF taxDescriptionLabel].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
-        make.left.insets(kTHLEdgeInsetsNone());
-    }];
-    
-    [self.tipLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF taxDescriptionLabel].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
-        make.left.equalTo(WSELF.tipDescriptionLabel.mas_right);
-        make.right.insets(kTHLEdgeInsetsNone());
-    }];
+        [self.taxDescriptionLabel makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo([WSELF subtotalLabel].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+            make.left.insets(kTHLEdgeInsetsNone());
+        }];
 
-    [self.lineItemSeparatorView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(WSELF.tipDescriptionLabel.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
-        make.left.right.insets(kTHLEdgeInsetsLow());
-        make.height.equalTo(0.5);
-    }];
+        [self.taxLabel makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo([WSELF subtotalLabel].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+            make.left.equalTo(WSELF.taxDescriptionLabel.mas_right);
+            make.right.insets(kTHLEdgeInsetsNone());
+        }];
+    }
+    
+    if (_tipLabel.text) {
+
+        [self.tipDescriptionLabel makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo([WSELF taxDescriptionLabel].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+            make.left.insets(kTHLEdgeInsetsNone());
+        }];
+        
+        [self.tipLabel makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo([WSELF taxDescriptionLabel].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+            make.left.equalTo(WSELF.tipDescriptionLabel.mas_right);
+            make.right.insets(kTHLEdgeInsetsNone());
+        }];
+        
+        [self.lineItemSeparatorView makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(WSELF.tipDescriptionLabel.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+            make.left.right.insets(kTHLEdgeInsetsLow());
+            make.height.equalTo(0.5);
+        }];
+    } else {
+        [self.lineItemSeparatorView makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(WSELF.serviceChargeDesciptionLabel.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+            make.left.right.insets(kTHLEdgeInsetsLow());
+            make.height.equalTo(0.5);
+        }];
+    }
     
     [self.totalDescriptionLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF lineItemSeparatorView].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
@@ -105,7 +142,7 @@
 }
 
 - (UILabel *)taxDescriptionLabel {
-    if (!_taxDescriptionLabel) {
+    if (!_taxDescriptionLabel && _taxLabel) {
         _taxDescriptionLabel = THLNUILabel(kTHLNUIDetailTitle);
         _taxDescriptionLabel.text = @"Tax (8.65%)";
         [self.contentView addSubview:_taxDescriptionLabel];
@@ -114,7 +151,7 @@
 }
 
 - (UILabel *)tipDescriptionLabel {
-    if (!_tipDescriptionLabel) {
+    if (!_tipDescriptionLabel && _tipLabel) {
         _tipDescriptionLabel = THLNUILabel(kTHLNUIDetailTitle);
         _tipDescriptionLabel.text = @"Tip (20%)";
         [self.contentView addSubview:_tipDescriptionLabel];
@@ -123,7 +160,7 @@
 }
 
 - (UILabel *)serviceChargeDesciptionLabel {
-    if (!_serviceChargeDesciptionLabel) {
+    if (!_serviceChargeDesciptionLabel && _serviceChargeLabel) {
         _serviceChargeDesciptionLabel = THLNUILabel(kTHLNUIDetailTitle);
         _serviceChargeDesciptionLabel.text = @"Service Charge";
         [self.contentView addSubview:_serviceChargeDesciptionLabel];

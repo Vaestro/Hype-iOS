@@ -117,9 +117,9 @@ viewDataSourceFactory:(THLViewDataSourceFactory *)viewDataSourceFactory
 #pragma mark - Layout
 - (void)viewDidLayoutSubviews {
     [self adjustTableFrame];
-    if (_event.creditsPayout > 0) {
-        [self.invitationDetailsView addSubview:self.invitationDetailsLabel];
-    }
+//    if (_event.creditsPayout > 0) {
+//        [self.invitationDetailsView addSubview:self.invitationDetailsLabel];
+//    }
 }
 
 - (void)adjustTableFrame {

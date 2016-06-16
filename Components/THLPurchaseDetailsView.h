@@ -18,4 +18,9 @@
 @property (nonatomic, strong) UILabel *serviceChargeDesciptionLabel;
 @property (nonatomic, strong) UILabel *taxDescriptionLabel;
 @property (nonatomic, strong) UILabel *tipDescriptionLabel;
+
+- (instancetype)initForTableReservationWithSubtotal:(NSString *)subtotal purchaseTitle:(NSString *)purchaseTitle tax:(NSString *)tax tip:(NSString *)tip total:(NSString *)total;
+
+- (instancetype)initForTicketWithSubtotal:(NSString *)subtotal purchaseTitle:(NSString *)purchaseTitle serviceCharge:(NSString *)serviceCharge total:(NSString *)total;
+
 @end
