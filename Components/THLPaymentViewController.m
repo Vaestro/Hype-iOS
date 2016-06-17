@@ -156,6 +156,9 @@
     NSString *cardInfoText = [NSString stringWithFormat:@"**** **** **** %@", last4CardDigits];
     _cardInfoLabel = [self cardInfoLabel:cardInfoText];
     
+    [self.paymentTextField removeFromSuperview];
+    [self.addCardButton removeFromSuperview];
+    
     WEAKSELF();
     [self.removeCardButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(0);
@@ -173,8 +176,7 @@
         make.bottom.equalTo(_paymentCardIcon);
     }];
     
-    [self.paymentTextField removeFromSuperview];
-    [self.addCardButton removeFromSuperview];
+    
     
     [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make){
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
@@ -192,13 +194,13 @@
 
 - (void)saveCreditCardInfo
 {
+    [_addCardButton setEnabled:FALSE];
     [SVProgressHUD showWithStatus:@"Updating.."];
     [[STPAPIClient sharedClient]
      createTokenWithCard:self.paymentTextField.cardParams
      completion:^(STPToken *token, NSError *error) {
          if (error) {
              [SVProgressHUD dismiss];
-
              [self displayError:error];
          } else {
              
@@ -206,17 +208,19 @@
                                 withParameters:@{@"stripeToken": token.tokenId}
                                          block:^(NSArray<NSDictionary *> *paymentInfo, NSError *cloudError) {
                                              [SVProgressHUD dismiss];
+                                             [_addCardButton setEnabled:TRUE];
                                              if (cloudError) {
                                                  [self displayError:cloudError];
                                              } else {
-                                                 Mixpanel *mixpanel = [Mixpanel sharedInstance];
-                                                 [mixpanel track:@"Payment Method Addded"];
-
+//                                                 Mixpanel *mixpanel = [Mixpanel sharedInstance];
+//                                                 [mixpanel track:@"Payment Method Addded"];
                                                  _paymentInfo = paymentInfo;
-                                                 [[THLUser currentUser] fetch];
-                                                 [self displaySuccess];
-                                                 [self updateLayoutForHasPayment];
-                                             }
+                                                 [[THLUser currentUser] fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable userError) {
+                                                     [self displaySuccess];
+                                                     [self updateLayoutForHasPayment];
+                                                 }];
+                                                 
+                                            }
               }];
          }
      }];

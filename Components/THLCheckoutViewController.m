@@ -69,7 +69,7 @@ TTTAttributedLabelDelegate
         self.guestlistInvite = (THLGuestlistInvite *)guestlistInvite;
         
         _serviceCharge = ([_admissionOption[@"price"] floatValue] * 0.029) + 0.30;
-        _subTotal = ([admissionOption[@"price"] floatValue]);
+        _subTotal = ([_admissionOption[@"price"] floatValue]);
         _total = [_admissionOption[@"price"] floatValue] + _serviceCharge;
         _applyCreditsPressed = false;
         
@@ -417,12 +417,13 @@ TTTAttributedLabelDelegate
 - (void)buy:(id)sender
 {
     [SVProgressHUD show];
-    if ([THLUser currentUser].stripeCustomerId) {
+    if ([_admissionOption[@"price"] integerValue] == 0 ) {
         [self chargeCustomer:[THLUser currentUser] forEvent:_event];
-    } else {
+    } else if ( ![THLUser currentUser].stripeCustomerId){
         [SVProgressHUD dismiss];
         [self.delegate checkoutViewControllerWantsToPresentPaymentViewController];
-//        [self displayError:@"You currently don't have a credit card on file. Please add a payment method in your profile"];
+    } else {
+        [self chargeCustomer:[THLUser currentUser] forEvent:_event];
     }
 }
 
