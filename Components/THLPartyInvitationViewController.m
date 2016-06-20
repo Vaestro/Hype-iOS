@@ -27,6 +27,12 @@
 #import "THLGuestlistInvite.h"
 #import "THLDataStore.h"
 
+//branch
+#import "BranchUniversalObject.h"
+#import "BranchLinkProperties.h"
+
+
+
 #define kContactPickerViewHeight 100.0
 static NSString *const kGuestEntityFirstNameKey = @"firstName";
 static NSString *const kGuestEntityLastNameKey = @"lastName";
@@ -496,20 +502,41 @@ viewDataSourceFactory:(THLViewDataSourceFactory *)viewDataSourceFactory
 - (BFTask *)updateGuestlist:(NSString *)guestlistId withInvites:(NSArray *)guestPhoneNumbers forEvent:(THLEvent *)event
 {
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
-    [PFCloud callFunctionInBackground:@"sendOutInvitations"
-                       withParameters:@{@"eventId": event.objectId,
-                                        @"eventName":event.location.name,
-                                        @"eventTime": event.date,
-                                        @"guestPhoneNumbers": guestPhoneNumbers,
-                                        @"guestlistId": guestlistId}
-                                block:^(id response, NSError *error) {
-                                    
-                                    if (!error){
-                                        [completionSource setResult:nil];
-                                    } else {
-                                        [completionSource setError:error];
-                                    }
-                                }];
+    
+    
+    BranchUniversalObject *branchUniversalObject = [[BranchUniversalObject alloc] initWithCanonicalIdentifier:[NSString stringWithFormat:@"event/%@", event.objectId]];
+    branchUniversalObject.title = event.location.name;
+    branchUniversalObject.contentDescription = event.location.info;
+    branchUniversalObject.imageUrl = event.location.image.url;
+    [branchUniversalObject addMetadataKey:@"eventId" value:event.objectId];
+    
+    BranchLinkProperties *linkProperties = [[BranchLinkProperties alloc] init];
+    linkProperties.feature = @"sharing";
+    linkProperties.channel = @"In-App";
+    [linkProperties addControlParam:@"$desktop_url" withValue:[NSString stringWithFormat:@"http://gethype.co/event/%@", event.objectId]];
+    [linkProperties addControlParam:@"$android_url" withValue:[NSString stringWithFormat:@"http://gethype.co/event/%@", event.objectId]];
+    
+    [branchUniversalObject getShortUrlWithLinkProperties:linkProperties andCallback:^(NSString *url, NSError *linkError) {
+        if (!linkError && url) {
+            [PFCloud callFunctionInBackground:@"sendOutInvitations"
+                               withParameters:@{@"eventId": event.objectId,
+                                                @"eventName":event.location.name,
+                                                @"eventTime": event.date,
+                                                @"guestPhoneNumbers": guestPhoneNumbers,
+                                                @"guestlistId": guestlistId,
+                                                @"branchUrl": url}
+                                        block:^(id response, NSError *cloudError) {
+                                            if (!cloudError){
+                                                [completionSource setResult:nil];
+                                            } else {
+                                                [completionSource setError:cloudError];
+                                            }
+                                        }];
+            
+        }
+    }];
+    
+
     return completionSource.task;
 }
 

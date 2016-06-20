@@ -79,6 +79,10 @@ TTTAttributedLabelDelegate
             _total = [_admissionOption[@"price"] floatValue] + _tax + _tip;
         }
         
+        if ([_admissionOption[@"price"] floatValue] == 0) {
+            _applyCreditsButton.enabled = NO;
+        }
+        
         
         if ([THLUser currentUser].credits > [_admissionOption[@"price"] floatValue]) {
             _creditsAmount = [_admissionOption[@"price"] floatValue];
@@ -96,7 +100,7 @@ TTTAttributedLabelDelegate
     self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
 //    self.navigationItem.leftBarButtonItem = [self backBarButton];
     self.navigationItem.titleView = [self navBarTitleLabel];
-
+    
     WEAKSELF();
     [self.purchaseButton makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(0);
