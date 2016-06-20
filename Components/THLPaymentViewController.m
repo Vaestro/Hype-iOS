@@ -132,7 +132,6 @@
     _titleLabel.text = @"Add Payment";
 
     WEAKSELF();
-
     [self.addCardButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(0);
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
@@ -237,16 +236,20 @@
                                                               [PFCloud callFunctionInBackground:@"removeCardInfo"
                                                                                  withParameters:@{@"cardId": _paymentInfo[0][@"id"],
                                                                                                   @"customerId": [THLUser currentUser].stripeCustomerId}
-                                                            block:^(id  _Nullable object, NSError * _Nullable cloudError) {
-                                                                [SVProgressHUD dismiss];
+                                                                                          block:^(id  _Nullable object, NSError * _Nullable cloudError) {
+                                                                                              [SVProgressHUD dismiss];
 
-                                                                if (cloudError) {
-                                                                    [self displayError:cloudError];
-                                                                } else {
-                                                                    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-                                                                    [mixpanel track:@"Payment Method Deleted"];
-                                                                    [self updateLayoutForAddPayment];
-                                                                }
+                                                                                                if (cloudError) {
+                                                                                                    [self displayError:cloudError];
+                                                                                                } else {
+                                                                                                    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+                                                                                                    [mixpanel track:@"Payment Method Deleted"];
+                                                                                                    
+                                                                                                    [[THLUser currentUser] fetchInBackgroundWithBlock:^(PFObject *user, NSError * _Nullable userError) {
+                                                                                                       [self updateLayoutForAddPayment];
+                                                                                                    }];
+
+                                                                                                }
                                                           }];
                                                       }];
     
