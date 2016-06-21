@@ -28,9 +28,6 @@
 #import "THLGuestlistInvite.h"
 #import "Parse.h"
 
-//Delegates
-#import "THLLoginModuleDelegate.h"
-
 //View Controllers
 #import "THLOnboardingViewController.h"
 #import "THLMyEventsViewController.h"
@@ -54,7 +51,6 @@
 
 @interface THLMasterWireframe()
 <
-THLLoginModuleDelegate,
 THLAdmissionsViewDelegate,
 THLTablePackageControllerDelegate,
 THLMyEventsViewDelegate,

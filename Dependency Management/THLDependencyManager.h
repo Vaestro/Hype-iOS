@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "THLGuestFlowDependencyManager.h"
 #import "THLYapDatabaseManager.h"
 
 @class THLMasterWireframe;
@@ -36,9 +35,6 @@
  *  Manages all dependenies for the app.
  */
 @interface THLDependencyManager : NSObject
-<
-THLGuestFlowDependencyManager
->
 @property (nonatomic, readonly, strong) THLMasterWireframe *masterWireframe;
 
 - (THLLoginWireframe *)newLoginWireframe;

@@ -7,26 +7,7 @@
 //
 
 #import "THLDependencyManager.h"
-
-//Dependency Management Protocols
-#import "THLGuestFlowDependencyManager.h"
-
-
-//Wireframes
 #import "THLMasterWireframe.h"
-#import "THLLoginWireframe.h"
-#import "THLFacebookPictureWireframe.h"
-#import "THLNumberVerificationWireframe.h"
-#import "THLGuestFlowWireframe.h"
-#import "THLEventDiscoveryWireframe.h"
-#import "THLDashboardWireframe.h"
-#import "THLEventDetailWireframe.h"
-#import "THLUserProfileWireframe.h"
-#import "THLGuestlistInvitationWireframe.h"
-#import "THLGuestlistReviewWireframe.h"
-#import "THLPopupNotificationWireframe.h"
-#import "THLPerkStoreWireframe.h"
-#import "THLPerkDetailWireframe.h"
 
 //Common
 //#import "THLPushNotificationManager.h"
@@ -58,22 +39,8 @@
 
 
 @interface THLDependencyManager()
-//Wireframes
 @property (nonatomic, strong) THLMasterWireframe *masterWireframe;
-@property (nonatomic, weak) THLLoginWireframe *loginWireframe;
-@property (nonatomic, weak) THLFacebookPictureWireframe *facebookPictureWireframe;
-@property (nonatomic, weak) THLNumberVerificationWireframe *numberVerificationWireframe;
-@property (nonatomic, weak) THLGuestFlowWireframe *guestFlowWireframe;
-@property (nonatomic, weak) THLEventDiscoveryWireframe *eventDiscoveryWireframe;
-@property (nonatomic, weak) THLDashboardWireframe *dashboardWireframe;
 
-@property (nonatomic, weak) THLUserProfileWireframe *userProfileWireframe;
-@property (nonatomic, weak) THLEventDetailWireframe *eventDetailWireframe;
-@property (nonatomic, weak) THLGuestlistInvitationWireframe *guestlistInvitationWireframe;
-@property (nonatomic, weak) THLGuestlistReviewWireframe *guestlistReviewWireframe;
-@property (nonatomic, weak) THLPopupNotificationWireframe *popupNotificationWireframe;
-@property (nonatomic, weak) THLPerkStoreWireframe *perkStoreWireframe;
-@property (nonatomic, weak) THLPerkDetailWireframe *perkDetailWireframe;
 
 //Common
 @property (nonatomic, strong) THLYapDatabaseManager *databaseManager;
@@ -107,123 +74,6 @@
 @end
 
 @implementation THLDependencyManager
-#pragma mark - Construction
-- (THLLoginWireframe *)newLoginWireframe
-{
-	THLLoginWireframe *wireframe = [[THLLoginWireframe alloc] initWithLoginService:self.loginService
-																	   userManager:self.userManager
-														  numberVerificationModule:[self newNumberVerificationWireframe].moduleInterface
-															 facebookPictureModule:[self newFacebookPictureWireframe].moduleInterface];
-	self.loginWireframe = wireframe;
-	return wireframe;
-}
-
-- (THLFacebookPictureWireframe *)newFacebookPictureWireframe
-{
-	THLFacebookPictureWireframe *wireframe = [[THLFacebookPictureWireframe alloc] initWithFetchService:self.facebookProfilePictureURLFetchService];
-	self.facebookPictureWireframe = wireframe;
-	return wireframe;
-}
-
-- (THLNumberVerificationWireframe *)newNumberVerificationWireframe
-{
-	THLNumberVerificationWireframe *wireframe = [[THLNumberVerificationWireframe alloc] init];
-	self.numberVerificationWireframe = wireframe;
-	return wireframe;
-}
-
-- (THLEventDiscoveryWireframe *)newEventDiscoveryWireframe
-{
-	THLEventDiscoveryWireframe *wireframe = [[THLEventDiscoveryWireframe alloc] initWithDataStore:self.eventDataStore
-																					 entityMapper:self.entityMapper
-																					 eventService:self.eventService
-																			viewDataSourceFactory:self.viewDataSourceFactory];
-	self.eventDiscoveryWireframe = wireframe;
-	return wireframe;
-}
-
-- (THLDashboardWireframe *)newDashboardWireframe
-{
-    THLDashboardWireframe *wireframe = [[THLDashboardWireframe alloc] initWithGuestlistService:self.guestlistService
-                                                                            entityMapper:self.entityMapper
-                                                                         viewDataSourceFactory:self.viewDataSourceFactory
-                                                                                     dataStore:self.guestlistInviteDataStore];
-
-    self.dashboardWireframe = wireframe;
-    return wireframe;
-}
-
-
-- (THLUserProfileWireframe *)newUserProfileWireframe
-{
-    THLUserProfileWireframe *wireframe = [[THLUserProfileWireframe alloc] init];
-    self.userProfileWireframe = wireframe;
-    return wireframe;
-}
-
-- (THLEventDetailWireframe *)newEventDetailWireframe
-{
-	THLEventDetailWireframe *wireframe = [[THLEventDetailWireframe alloc] initWithLocationService:self.locationService
-                                                                                 guestlistService:self.guestlistService
-																					entityMappper:self.entityMapper
-                                                                                  databaseManager:self.databaseManager];
-	self.eventDetailWireframe = wireframe;
-	return wireframe;
-}
-
-
-- (THLGuestlistInvitationWireframe *)newGuestlistInvitationWireframe
-{
-	THLGuestlistInvitationWireframe *wireframe = [[THLGuestlistInvitationWireframe alloc] initWithGuestlistService:self.guestlistService
-                                                                                                      entityMapper:self.entityMapper
-																							 viewDataSourceFactory:self.viewDataSourceFactory
-																									   addressBook:self.addressBook
-																										 dataStore:self.guestDataStore
-                                                                                                        dataStore2:self.guestlistInviteDataStore];
-	self.guestlistInvitationWireframe = wireframe;
-	return wireframe;
-}
-
-- (THLGuestlistReviewWireframe *)newGuestlistReviewWireframe
-{
-    THLGuestlistReviewWireframe *wireframe = [[THLGuestlistReviewWireframe alloc] initWithGuestlistService:self.guestlistService
-                                                                                                      entityMapper:self.entityMapper
-                                                                                                 dataStore:self.guestlistInviteDataStore
-                                                                                             viewDataSourceFactory:self.viewDataSourceFactory];
-    self.guestlistReviewWireframe = wireframe;
-    return wireframe;
-}
-
-- (THLGuestFlowWireframe *)newGuestFlowWireframe
-{
-	THLGuestFlowWireframe *wireframe = [[THLGuestFlowWireframe alloc] initWithDependencyManager:self];
-	self.guestFlowWireframe = wireframe;
-	return wireframe;
-}
-
-- (THLPopupNotificationWireframe *)newPopupNotificationWireframe
-{
-    THLPopupNotificationWireframe *wireframe = [[THLPopupNotificationWireframe alloc] initWithGuestlistService:self.guestlistService
-                                                                                                  entityMapper:self.entityMapper
-                                                                                                     dataStore:self.guestlistInviteDataStore];
-    self.popupNotificationWireframe = wireframe;
-    return wireframe;
-}
-
-- (THLPerkStoreWireframe *)newPerkStoreWireframe
-{
-    THLPerkStoreWireframe *wireframe = [[THLPerkStoreWireframe alloc] initWithDataStore:self.perkStoreItemDataStore
-                                                                           entityMapper:self.entityMapper perkStoreItemService:self.perkStoreItemService viewDataSourceFactory:self.viewDataSourceFactory];
-    self.perkStoreWireframe = wireframe;
-    return wireframe;
-}
-
-- (THLPerkDetailWireframe *)newPerkDetailWireframe
-{
-    THLPerkDetailWireframe *wireframe = [[THLPerkDetailWireframe alloc] initWithPerkStoreItemService:self.perkStoreItemService entityMapper:self.entityMapper];
-    self.perkDetailWireframe = wireframe;
-    return wireframe;
-}
 
 
 #pragma mark - Lazy Instantiation

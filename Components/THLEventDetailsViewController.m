@@ -10,14 +10,11 @@
 #import "ORStackScrollView.h"
 #import "Parse.h"
 //Subviews
-#import "THLEventDetailsLocationInfoView.h"
 #import "THLEventDetailsMapView.h"
-#import "THLEventDetailsPromotionInfoView.h"
 #import "THLNeedToKnowInfoView.h"
 
 #import "THLAppearanceConstants.h"
 #import "THLPromotionInfoView.h"
-#import "THLEventDetailMusicTypesView.h"
 #import "THLEventNavigationBar.h"
 #import "THLActionButton.h"
 #import "THLAlertView.h"

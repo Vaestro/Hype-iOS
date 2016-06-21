@@ -9,7 +9,6 @@
 #import "THLAdmissionsViewController.h"
 #import "Parse.h"
 #import <ParseUI/PFCollectionViewCell.h>
-#import "THLDashboardNotificationCell.h"
 #import "THLEventInviteCell.h"
 #import "THLPersonIconView.h"
 #import "THLAppearanceConstants.h"

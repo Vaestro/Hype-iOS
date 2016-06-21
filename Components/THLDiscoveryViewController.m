@@ -10,7 +10,6 @@
 #import "THLEventDetailsViewController.h"
 #import "Parse.h"
 #import <ParseUI/PFCollectionViewCell.h>
-#import "THLDashboardNotificationCell.h"
 #import "THLDiscoveryCell.h"
 #import <ParseUI/PFImageView.h>
 #import "THLAppearanceConstants.h"
