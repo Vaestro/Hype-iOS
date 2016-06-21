@@ -24,7 +24,6 @@
 #import "Stripe.h"
 #import "THLPaymentViewController.h"
 #import "THLWebViewController.h"
-#import "MBProgressHUD.h"
 #import "TTTAttributedLabel.h"
 
 typedef NS_ENUM(NSInteger, TableViewSection) {

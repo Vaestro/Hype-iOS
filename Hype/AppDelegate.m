@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
-#import "MBProgressHUD.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "PFFacebookUtils.h"
 #import <Fabric/Fabric.h>
@@ -21,10 +20,6 @@
 #import "THLAppearanceUtils.h"
 #import "Intercom/intercom.h"
 #import "Mixpanel.h"
-
-//Logging framework
-#import "CocoaLumberjack.h"
-static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 #if DEBUG
 static NSString *applicationId = @"5t3F1S3wKnVGIKHob1Qj0Je3sygnFiwqAu6PP400";
@@ -44,10 +39,6 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
 }
 @property (nonatomic, strong) THLMasterWireframe *masterWireframe;
 @property (nonatomic, strong) THLDependencyManager *dependencyManager;
-@property (nonatomic, strong) MBProgressHUD *hud;
-
-- (BOOL)shouldProceedToMainInterface:(PFUser *)user;
-- (BOOL)handleActionURL:(NSURL *)url;
 @end
 
 @implementation AppDelegate
@@ -82,13 +73,7 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
     //Stripe
     [Stripe setDefaultPublishableKey:stripePublishableKey];
     
-    //Configuring Lumberjack logging framework
-    setenv("XcodeColors", "YES", 0);
-    [DDLog addLogger:[DDASLLogger sharedInstance]];
-    [DDLog addLogger:[DDTTYLogger sharedInstance]];
-    [[DDTTYLogger sharedInstance] setColorsEnabled:YES];
-    
-	// [Optional] Track statistics around application opens.
+    // [Optional] Track statistics around application opens.
     if (application.applicationState != UIApplicationStateBackground) {
         // Track an app open here if we launch with a push, unless
         // "content_available" was used to trigger a background push (introduced

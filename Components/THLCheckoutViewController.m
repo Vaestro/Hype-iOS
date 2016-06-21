@@ -7,7 +7,6 @@
 //
 
 #import "THLCheckoutViewController.h"
-#import "MBProgressHUD.h"
 #import "THLAppearanceConstants.h"
 #import "THLEvent.h"
 #import "THLLocationEntity.h"
@@ -485,6 +484,20 @@ TTTAttributedLabelDelegate
 }
 
 
+- (void)pinGuestlistInviteForEvent
+{
+    [[self queryForGuestlistInviteForEvent:_event.objectId] getFirstObjectInBackgroundWithBlock:^(PFObject *guestlistInvite, NSError *queryError) {
+        if (!queryError) {
+            [guestlistInvite pinInBackground];
+            PFObject *guestlist = guestlistInvite[@"Guestlist"];
+            [self.delegate checkoutViewControllerDidFinishCheckoutForEvent:_event withGuestlistId:guestlist.objectId];
+        } else {
+            
+        }
+    }];
+}
+
+
 
 #pragma mark - Helpers
 
@@ -571,15 +584,8 @@ TTTAttributedLabelDelegate
                                                 [[THLUser currentUser] saveEventually];
                                             }
                                             
-                                            [[self queryForGuestlistInviteForEvent:_event.objectId] getFirstObjectInBackgroundWithBlock:^(PFObject *guestlistInvite, NSError *queryError) {
-                                                if (!queryError) {
-                                                    [guestlistInvite pinInBackground];
-                                                    PFObject *guestlist = guestlistInvite[@"Guestlist"];
-                                                    [self.delegate checkoutViewControllerDidFinishCheckoutForEvent:_event withGuestlistId:guestlist.objectId];
-                                                } else {
-                                                    
-                                                }
-                                            }];
+                                            [self pinGuestlistInviteForEvent];
+                                            
                                         }
                                     }];
     }

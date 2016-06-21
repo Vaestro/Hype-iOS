@@ -32,7 +32,6 @@
 #import "BranchLinkProperties.h"
 
 
-
 #define kContactPickerViewHeight 100.0
 static NSString *const kGuestEntityFirstNameKey = @"firstName";
 static NSString *const kGuestEntityLastNameKey = @"lastName";
