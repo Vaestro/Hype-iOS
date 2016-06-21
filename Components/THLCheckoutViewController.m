@@ -395,15 +395,8 @@ TTTAttributedLabelDelegate
                                             Mixpanel *mixpanel = [Mixpanel sharedInstance];
                                             [mixpanel track:@"Reserved a Table"];
                                             [mixpanel.people increment:@"tables reserved" by:@1];
-                
-                                            [[self queryForGuestlistInviteForEvent:_event.objectId] getFirstObjectInBackgroundWithBlock:^(PFObject *guestlistInvite, NSError *queryError) {
-                                                if (!queryError) {
-                                                    [guestlistInvite pinInBackground];
-                                                    [self.delegate checkoutViewControllerDidFinishTableReservationForEvent:guestlistInvite];
-                                                } else {
-                                                    
-                                                }
-                                            }];
+                                            
+                                            [self pinGuestlistInviteForReservation];
                                         }
                                     }];
     }
@@ -491,6 +484,18 @@ TTTAttributedLabelDelegate
             [guestlistInvite pinInBackground];
             PFObject *guestlist = guestlistInvite[@"Guestlist"];
             [self.delegate checkoutViewControllerDidFinishCheckoutForEvent:_event withGuestlistId:guestlist.objectId];
+        } else {
+            
+        }
+    }];
+}
+
+- (void)pinGuestlistInviteForReservation
+{
+    [[self queryForGuestlistInviteForEvent:_event.objectId] getFirstObjectInBackgroundWithBlock:^(PFObject *guestlistInvite, NSError *queryError) {
+        if (!queryError) {
+            [guestlistInvite pinInBackground];
+            [self.delegate checkoutViewControllerDidFinishTableReservationForEvent:guestlistInvite];
         } else {
             
         }
