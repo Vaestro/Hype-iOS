@@ -9,7 +9,6 @@
 #import "THLPartyViewController.h"
 #import "Parse.h"
 #import <ParseUI/PFCollectionViewCell.h>
-#import "MBProgressHUD.h"
 #import "THLPartyMemberCell.h"
 #import "THLPersonIconView.h"
 #import "THLGuestlistInvite.h"
@@ -58,8 +57,6 @@ static CGFloat const CELL_SPACING = 10;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.hud = [[MBProgressHUD alloc] initWithView:self.view];
-//    [self.view addSubview:_hud];
     self.collectionView.backgroundColor = [UIColor blackColor];
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
     

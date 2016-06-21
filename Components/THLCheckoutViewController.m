@@ -7,7 +7,6 @@
 //
 
 #import "THLCheckoutViewController.h"
-#import "MBProgressHUD.h"
 #import "THLAppearanceConstants.h"
 #import "THLEvent.h"
 #import "THLLocationEntity.h"
@@ -69,7 +68,7 @@ TTTAttributedLabelDelegate
         self.guestlistInvite = (THLGuestlistInvite *)guestlistInvite;
         
         _serviceCharge = ([_admissionOption[@"price"] floatValue] * 0.029) + 0.30;
-        _subTotal = ([admissionOption[@"price"] floatValue]);
+        _subTotal = ([_admissionOption[@"price"] floatValue]);
         _total = [_admissionOption[@"price"] floatValue] + _serviceCharge;
         _applyCreditsPressed = false;
         
@@ -77,6 +76,10 @@ TTTAttributedLabelDelegate
             _tax = ([admissionOption[@"price"] floatValue] * 0.0865);
             _tip = ([admissionOption[@"price"] floatValue] * 0.2);
             _total = [_admissionOption[@"price"] floatValue] + _tax + _tip;
+        }
+        
+        if ([_admissionOption[@"price"] floatValue] == 0) {
+            _applyCreditsButton.enabled = NO;
         }
         
         
@@ -96,7 +99,7 @@ TTTAttributedLabelDelegate
     self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
 //    self.navigationItem.leftBarButtonItem = [self backBarButton];
     self.navigationItem.titleView = [self navBarTitleLabel];
-
+    
     WEAKSELF();
     [self.purchaseButton makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(0);
@@ -394,15 +397,8 @@ TTTAttributedLabelDelegate
                                             Mixpanel *mixpanel = [Mixpanel sharedInstance];
                                             [mixpanel track:@"Reserved a Table"];
                                             [mixpanel.people increment:@"tables reserved" by:@1];
-                
-                                            [[self queryForGuestlistInviteForEvent:_event.objectId] getFirstObjectInBackgroundWithBlock:^(PFObject *guestlistInvite, NSError *queryError) {
-                                                if (!queryError) {
-                                                    [guestlistInvite pinInBackground];
-                                                    [self.delegate checkoutViewControllerDidFinishTableReservationForEvent:guestlistInvite];
-                                                } else {
-                                                    
-                                                }
-                                            }];
+                                            
+                                            [self pinGuestlistInviteForReservation];
                                         }
                                     }];
     }
@@ -442,12 +438,13 @@ TTTAttributedLabelDelegate
 - (void)buy:(id)sender
 {
     [SVProgressHUD show];
-    if ([THLUser currentUser].stripeCustomerId) {
+    if ([_admissionOption[@"price"] integerValue] == 0 ) {
         [self chargeCustomer:[THLUser currentUser] forEvent:_event];
-    } else {
+    } else if ( ![THLUser currentUser].stripeCustomerId){
         [SVProgressHUD dismiss];
         [self handleNeedsPaymentMethodAction];
-//        [self displayError:@"You currently don't have a credit card on file. Please add a payment method in your profile"];
+    } else {
+        [self chargeCustomer:[THLUser currentUser] forEvent:_event];
     }
 }
 
@@ -502,6 +499,32 @@ TTTAttributedLabelDelegate
     _applyCreditsLabel.hidden = YES;
      _purchaseDetailsView.subtotalLabel.text = [NSString stringWithFormat:@"$%.2f", _subTotal];
     _purchaseDetailsView.totalLabel.text = [NSString stringWithFormat:@"$%.2f", _total];
+}
+
+
+- (void)pinGuestlistInviteForEvent
+{
+    [[self queryForGuestlistInviteForEvent:_event.objectId] getFirstObjectInBackgroundWithBlock:^(PFObject *guestlistInvite, NSError *queryError) {
+        if (!queryError) {
+            [guestlistInvite pinInBackground];
+            PFObject *guestlist = guestlistInvite[@"Guestlist"];
+            [self.delegate checkoutViewControllerDidFinishCheckoutForEvent:_event withGuestlistId:guestlist.objectId];
+        } else {
+            
+        }
+    }];
+}
+
+- (void)pinGuestlistInviteForReservation
+{
+    [[self queryForGuestlistInviteForEvent:_event.objectId] getFirstObjectInBackgroundWithBlock:^(PFObject *guestlistInvite, NSError *queryError) {
+        if (!queryError) {
+            [guestlistInvite pinInBackground];
+            [self.delegate checkoutViewControllerDidFinishTableReservationForEvent:guestlistInvite];
+        } else {
+            
+        }
+    }];
 }
 
 
@@ -591,15 +614,8 @@ TTTAttributedLabelDelegate
                                                 [[THLUser currentUser] saveEventually];
                                             }
                                             
-                                            [[self queryForGuestlistInviteForEvent:_event.objectId] getFirstObjectInBackgroundWithBlock:^(PFObject *guestlistInvite, NSError *queryError) {
-                                                if (!queryError) {
-                                                    [guestlistInvite pinInBackground];
-                                                    PFObject *guestlist = guestlistInvite[@"Guestlist"];
-                                                    [self.delegate checkoutViewControllerDidFinishCheckoutForEvent:_event withGuestlistId:guestlist.objectId];
-                                                } else {
-                                                    
-                                                }
-                                            }];
+                                            [self pinGuestlistInviteForEvent];
+                                            
                                         }
                                     }];
     }

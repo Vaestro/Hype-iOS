@@ -86,7 +86,6 @@ PODS:
   - LinqToObjectiveC (2.1.0)
   - LMGeocoder (1.0.4)
   - Masonry (0.6.4)
-  - MBProgressHUD (0.9.2)
   - Mixpanel (2.9.4):
     - Mixpanel/Mixpanel (= 2.9.4)
   - Mixpanel/Mixpanel (2.9.4)
@@ -109,7 +108,6 @@ PODS:
   - ParseUI (1.2.0):
     - Bolts/Tasks (~> 1.3)
     - Parse (~> 1.9)
-  - PQScanner (0.1.3)
   - ReactiveCocoa (2.5):
     - ReactiveCocoa/UI (= 2.5)
   - ReactiveCocoa/Core (2.5):
@@ -211,7 +209,6 @@ DEPENDENCIES:
   - LinqToObjectiveC (~> 2.0)
   - LMGeocoder
   - Masonry (~> 0.6)
-  - MBProgressHUD (~> 0.9.2)
   - Mixpanel
   - MJRefresh
   - NUI (~> 0.5)
@@ -222,7 +219,6 @@ DEPENDENCIES:
   - Parse (= 1.11.0)
   - ParseFacebookUtilsV4
   - ParseUI
-  - PQScanner (~> 0.1.3)
   - ReactiveCocoa (= 2.5)
   - ReflectableEnum
   - Reveal-iOS-SDK
@@ -270,7 +266,6 @@ SPEC CHECKSUMS:
   LinqToObjectiveC: f0e40c137a458b6b9725c4c7b6a575c0c72e3aec
   LMGeocoder: a0f635f948b0ca420d8d338e54886744cdcb215d
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
-  MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   Mixpanel: 80d2ca9bb38ae91c1044d738e80fe448377ac89f
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   NUI: 53de7278003235deb2a375fe6f04c7a3aa3e49eb
@@ -282,7 +277,6 @@ SPEC CHECKSUMS:
   Parse: 886af46a0a677402f6374bb97ac212e795f70afe
   ParseFacebookUtilsV4: eab9b4ade12f0800b4d30f6b808bca55ce17a0e9
   ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
-  PQScanner: 32bdd45ca2a7d04603687f469a7f5f27841eb1d6
   ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
   ReflectableEnum: bf9d36f8c35122242125140a22b8921d071989aa
   Reveal-iOS-SDK: e2250b3c155bcfac53ae223ddc1f76d08f206c33
@@ -300,6 +294,6 @@ SPEC CHECKSUMS:
   YapDatabase: d97b1a0bfd6856745a7a398045f3ca32cf248fda
   YLMoment: af44d9d402790049e5490fa6eae9585b89b4090b
 
-PODFILE CHECKSUM: c2702720e42fecb56e9699df2532b91e6579e7b6
+PODFILE CHECKSUM: 742ffa18127954943e9622c997607c2930c5cb5f
 
 COCOAPODS: 1.0.0

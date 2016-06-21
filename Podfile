@@ -9,7 +9,6 @@ target 'Hype' do
 pod 'CocoaLumberjack'
 pod 'Masonry', '~> 0.6'
 pod 'NUI', '~> 0.5'
-pod 'CocoaLumberjack'
 pod 'ReactiveCocoa', '2.5'
 pod 'Bolts'
 pod 'BFKit'
@@ -42,9 +41,6 @@ pod 'FBSDKCoreKit'
 #Intercom
 pod 'Intercom'
 
-#Ticketing
-pod 'PQScanner', '~> 0.1.3'
-
 #Fabric
 pod 'Fabric'
 pod 'Crashlytics'
@@ -76,7 +72,6 @@ pod 'DZNEmptyDataSet'
 pod 'IHKeyboardAvoiding'
 pod "FXLabel"
 pod 'BLKFlexibleHeightBar'
-pod 'MBProgressHUD', '~> 0.9.2'
 pod 'KVNProgress'
 end
 

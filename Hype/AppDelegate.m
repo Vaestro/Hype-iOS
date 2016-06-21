@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
-#import "MBProgressHUD.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "PFFacebookUtils.h"
 #import <Fabric/Fabric.h>
@@ -22,10 +21,6 @@
 #import "Intercom/intercom.h"
 #import "Mixpanel.h"
 
-//Logging framework
-#import "CocoaLumberjack.h"
-static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
-
 #if DEBUG
 static NSString *applicationId = @"5t3F1S3wKnVGIKHob1Qj0Je3sygnFiwqAu6PP400";
 static NSString *clientKeyId = @"xn4Mces2HcFCQYXF2VRj4W1Ot0zIBELl6fHKLGPk";
@@ -33,10 +28,10 @@ static NSString *stripePublishableKey = @"pk_test_cGZ7E1Im6VPKQHYUXIkR6sEe";
 static NSString *mixpanelToken = @"aa573c8ee35b386bff7635df03bdbf18";
 
 #else
-static NSString *applicationId = @"D0AnOPXqqfz7bfE70WvdlE8dK7Qj1kxgf4rPm8rX";
-static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
 static NSString *stripePublishableKey = @"pk_live_H8u89AfEDonln00iEUB0kKtZ";
 static NSString *mixpanelToken = @"2946053341530a84c490a107bd3e5fff";
+static NSString *applicationId = @"D0AnOPXqqfz7bfE70WvdlE8dK7Qj1kxgf4rPm8rX";
+static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
 #endif
 
 @interface AppDelegate (){
@@ -44,10 +39,6 @@ static NSString *mixpanelToken = @"2946053341530a84c490a107bd3e5fff";
 }
 @property (nonatomic, strong) THLMasterWireframe *masterWireframe;
 @property (nonatomic, strong) THLDependencyManager *dependencyManager;
-@property (nonatomic, strong) MBProgressHUD *hud;
-
-- (BOOL)shouldProceedToMainInterface:(PFUser *)user;
-- (BOOL)handleActionURL:(NSURL *)url;
 @end
 
 @implementation AppDelegate
@@ -82,13 +73,7 @@ static NSString *mixpanelToken = @"2946053341530a84c490a107bd3e5fff";
     //Stripe
     [Stripe setDefaultPublishableKey:stripePublishableKey];
     
-    //Configuring Lumberjack logging framework
-    setenv("XcodeColors", "YES", 0);
-    [DDLog addLogger:[DDASLLogger sharedInstance]];
-    [DDLog addLogger:[DDTTYLogger sharedInstance]];
-    [[DDTTYLogger sharedInstance] setColorsEnabled:YES];
-    
-	// [Optional] Track statistics around application opens.
+    // [Optional] Track statistics around application opens.
     if (application.applicationState != UIApplicationStateBackground) {
         // Track an app open here if we launch with a push, unless
         // "content_available" was used to trigger a background push (introduced

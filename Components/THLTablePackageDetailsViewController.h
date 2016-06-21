@@ -14,9 +14,7 @@
 
 @protocol THLTablePackageControllerDelegate <NSObject>
 - (void)packageControllerWantsToPresentCheckoutForEvent:(PFObject *)event andAdmissionOption:(PFObject *)admissionOption;
-
 - (void)didLoadObjects;
-
 @end
 
 @interface THLTablePackageDetailsViewController : PFQueryCollectionViewController

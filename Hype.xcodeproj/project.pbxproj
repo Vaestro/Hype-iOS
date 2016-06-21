@@ -234,6 +234,7 @@
 		79DF30221C714AFB00516199 /* THLCreditsExplanationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DF30211C714AFB00516199 /* THLCreditsExplanationView.m */; };
 		79DF30261C72FF1700516199 /* THLEventHostingNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DF30251C72FF1700516199 /* THLEventHostingNavigationBar.m */; };
 		C80372DA1D00DD68008848CA /* THLAdmissionOptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C80372D91D00DD68008848CA /* THLAdmissionOptionCell.m */; };
+		C81B83281D18BFC5008260EE /* THLEventDeepLinkingController.m in Sources */ = {isa = PBXBuildFile; fileRef = C81B83271D18BFC5008260EE /* THLEventDeepLinkingController.m */; };
 		C82D87BF1C25C7E300116328 /* THLConfirmationView.m in Sources */ = {isa = PBXBuildFile; fileRef = C82D87BE1C25C7E300116328 /* THLConfirmationView.m */; };
 		C82D87C31C31CC2200116328 /* THLMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = C82D87C21C31CC2200116328 /* THLMenuView.m */; };
 		C85EE3791C1BC8AD0008C14B /* THLPerkStoreItemEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3781C1BC8AD0008C14B /* THLPerkStoreItemEntity.m */; };
@@ -770,6 +771,8 @@
 		81186460483D6143F07FE818 /* libPods-HypeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HypeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C80372D81D00DD68008848CA /* THLAdmissionOptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLAdmissionOptionCell.h; sourceTree = "<group>"; };
 		C80372D91D00DD68008848CA /* THLAdmissionOptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLAdmissionOptionCell.m; sourceTree = "<group>"; };
+		C81B83261D18BFC5008260EE /* THLEventDeepLinkingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventDeepLinkingController.h; sourceTree = "<group>"; };
+		C81B83271D18BFC5008260EE /* THLEventDeepLinkingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventDeepLinkingController.m; sourceTree = "<group>"; };
 		C82D87BD1C25C7E300116328 /* THLConfirmationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLConfirmationView.h; sourceTree = "<group>"; };
 		C82D87BE1C25C7E300116328 /* THLConfirmationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLConfirmationView.m; sourceTree = "<group>"; };
 		C82D87C11C31CC2200116328 /* THLMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMenuView.h; sourceTree = "<group>"; };
@@ -998,6 +1001,7 @@
 		211005A81B8A3D5800A540C6 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				C81B83251D18BF89008260EE /* THLEventDeepLinkingController */,
 				C8FEE3D21D038C5800244252 /* THLTablePackageDetailsViewController */,
 				C884EE281CF8BDAD00C47167 /* THLEventDetailsViewController */,
 				C884EE211CF77C8400C47167 /* THLDiscoveryViewController */,
@@ -2651,6 +2655,15 @@
 			name = THLEventHostingNavigationBar;
 			sourceTree = "<group>";
 		};
+		C81B83251D18BF89008260EE /* THLEventDeepLinkingController */ = {
+			isa = PBXGroup;
+			children = (
+				C81B83261D18BFC5008260EE /* THLEventDeepLinkingController.h */,
+				C81B83271D18BFC5008260EE /* THLEventDeepLinkingController.m */,
+			);
+			name = THLEventDeepLinkingController;
+			sourceTree = "<group>";
+		};
 		C82D87C01C31CBEB00116328 /* THLMenuView */ = {
 			isa = PBXGroup;
 			children = (
@@ -3750,6 +3763,7 @@
 				215A429D1BAA25E700D03C35 /* THLFacebookPictureWireframe.m in Sources */,
 				C85EE38D1C1BCA370008C14B /* THLPerkDetailPresenter.m in Sources */,
 				798D7EB41BF2CCD4001D4593 /* THLUserProfileViewController.m in Sources */,
+				C81B83281D18BFC5008260EE /* THLEventDeepLinkingController.m in Sources */,
 				2133C9D91C33469A0020083A /* THLWaitlistPositionViewController.m in Sources */,
 				79B959341BE5821B00B87799 /* THLGuestlistReviewViewController.m in Sources */,
 				2121736E1BB34DD3007D817A /* THLStarRatingView.m in Sources */,

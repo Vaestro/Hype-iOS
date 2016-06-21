@@ -12,7 +12,6 @@
 #import "THLDashboardNotificationCell.h"
 #import "THLEventInviteCell.h"  
 #import "THLPersonIconView.h"
-#import "MBProgressHUD.h"
 #import "THLAppearanceConstants.h"
 #import "THLAttendingEventCell.h"
 #import "SVProgressHUD.h"
