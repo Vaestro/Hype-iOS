@@ -26,7 +26,6 @@
              @"email",
 			 @"user_friends"];
 }
-
 - (BFTask *)getFacebookUserDictionary {
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
                                   initWithGraphPath:@"me"
@@ -81,19 +80,17 @@
 
 }
 
-- (void)createMixpanelProfile {
+- (void)createMixpanelAlias {
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     THLUser *user = [THLUser currentUser];
-    
     // mixpanel identify: must be called before
     // people properties can be set
-    
     [mixpanel createAlias:user.objectId
             forDistinctID:mixpanel.distinctId];
     // You must call identify if you haven't already
     // (e.g., when your app launches).
     [mixpanel identify:mixpanel.distinctId];
-        
+    
     NSString *userSex;
     if (user.sex == THLSexMale) {
         userSex = @"Male";
@@ -108,7 +105,26 @@
                            @"$created": user.createdAt,
                            @"Gender": userSex
                            }];
+}
+
+- (void)createMixpanelPeopleProfile {
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    THLUser *user = [THLUser currentUser];
     
+    NSString *userSex;
+    if (user.sex == THLSexMale) {
+        userSex = @"Male";
+    } else if (user.sex == THLSexFemale) {
+        userSex = @"Female";
+    }
+    [mixpanel registerSuperPropertiesOnce:@{@"Gender": userSex}];
+    [mixpanel.people set:@{@"$first_name": user.firstName,
+                           @"$last_name": user.lastName,
+                           @"$email": user.email,
+                           @"$phone": user.phoneNumber,
+                           @"$created": user.createdAt,
+                           @"Gender": userSex
+                           }];
 }
 
 - (BOOL)shouldLogin {

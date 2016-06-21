@@ -70,7 +70,7 @@ THLPermissionRequestViewControllerDelegate
     } else if ([_loginService shouldVerifyEmail]) {
         [self presentUserInfoVerificationView];
     } else if (![[UIApplication sharedApplication] isRegisteredForRemoteNotifications]) {
-        [_loginService createMixpanelProfile];
+        [_loginService createMixpanelAlias];
         [self presentPermissionRequestViewController];
     } else {
         [self exitSignupFlow];

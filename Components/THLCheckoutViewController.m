@@ -370,6 +370,8 @@ TTTAttributedLabelDelegate
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
         [alert show];
+    } else if (![THLUser currentUser].stripeCustomerId) {
+        [self handleNeedsPaymentMethodAction];
     } else {
         
         [SVProgressHUD show];
@@ -407,6 +409,29 @@ TTTAttributedLabelDelegate
  
 }
 
+- (void)handleNeedsPaymentMethodAction {
+    UIAlertAction* confirmAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {
+                                                              [self.delegate checkoutViewControllerWantsToPresentPaymentViewController];
+                                                          }];
+    NSString *message = NSStringWithFormat(@"You currently don't have a credit card on file. Please add a payment method");
+    
+    [self showAlertViewWithMessage:message withAction:[[NSArray alloc] initWithObjects:confirmAction, nil]];
+    
+}
+
+- (void)showAlertViewWithMessage:(NSString *)message withAction:(NSArray<UIAlertAction *>*)actions {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil
+                                                                   message:message
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    for(UIAlertAction *action in actions) {
+        [alert addAction:action];
+    }
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 - (void)agreementButtonToggle:(id)sender
 {
     _agreementButton.selected = !_agreementButton.selected; // toggle the selected property, just a simple BOOL
@@ -421,7 +446,7 @@ TTTAttributedLabelDelegate
         [self chargeCustomer:[THLUser currentUser] forEvent:_event];
     } else {
         [SVProgressHUD dismiss];
-        [self.delegate checkoutViewControllerWantsToPresentPaymentViewController];
+        [self handleNeedsPaymentMethodAction];
 //        [self displayError:@"You currently don't have a credit card on file. Please add a payment method in your profile"];
     }
 }

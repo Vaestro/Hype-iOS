@@ -10,6 +10,7 @@
 #import "THLAppearanceConstants.h"
 #import "PFFile.h"
 #import "PFObject.h"
+#import "THLUser.h"
 
 @interface THLEventTicketViewController()
 @property (nonatomic, strong) UILabel *ticketInstructionLabel;
@@ -37,7 +38,7 @@
     self.view.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     WEAKSELF();
     [self.ticketInstructionLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.offset(75);
+        make.top.equalTo(kTHLEdgeInsetsSuperHigh());
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
@@ -46,26 +47,28 @@
         make.height.equalTo(SCREEN_HEIGHT*0.25);
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
     }];
-    
+
     [self.venueNameLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF qrCodeImageView].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
-    [self.eventDateLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF venueNameLabel].mas_bottom).insets(kTHLEdgeInsetsLow());
-        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
-    }];
-    
-    [self.arrivalMessageLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF eventDateLabel].mas_bottom).insets(kTHLEdgeInsetsLow());
-        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
-    }];
-    
     [self.creditsMessageLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF arrivalMessageLabel].mas_bottom).insets(kTHLEdgeInsetsLow());
+        make.top.equalTo([WSELF venueNameLabel].mas_bottom).insets(kTHLEdgeInsetsInsanelyHigh());
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
     }];
+    
+//    [self.eventDateLabel makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo([WSELF venueNameLabel].mas_bottom).insets(kTHLEdgeInsetsLow());
+//        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+//    }];
+
+
+    [self.arrivalMessageLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(kTHLEdgeInsetsSuperHigh());
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+    }];
+
 }
 
 #pragma mark -
@@ -111,7 +114,8 @@
         _venueNameLabel.numberOfLines = 1;
         _venueNameLabel.minimumScaleFactor = 0.5;
         _venueNameLabel.textAlignment = NSTextAlignmentCenter;
-        _venueNameLabel.text = _guestlistInvite[@"Guestlist"][@"event"][@"location"][@"name"];
+        
+        _venueNameLabel.text = [THLUser currentUser].fullName;
         [self.view addSubview:_venueNameLabel];
     }
     return _venueNameLabel;
@@ -143,7 +147,14 @@
 
         [_arrivalMessageLabel setTextColor:kTHLNUIGrayFontColor];
         NSDate *date = (NSDate *)_guestlistInvite[@"Guestlist"][@"event"][@"date"];
-        _arrivalMessageLabel.text = [NSString stringWithFormat:@"Please arrive by %@", date.thl_timeString];
+//        _arrivalMessageLabel.text = [NSString stringWithFormat:@"Please arrive by %@", date.thl_timeString];
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] init];
+        [attributedString appendAttributedString:[[NSAttributedString alloc] initWithString:@"Please arrive by "
+                                                                                 attributes:@{NSUnderlineStyleAttributeName: @(NSUnderlineStyleNone)}]];
+        [attributedString appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", date.thl_timeString]
+                                                                                 attributes:@{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),
+                                                                                              NSBackgroundColorAttributeName: [UIColor clearColor]}]];
+        _arrivalMessageLabel.attributedText = attributedString;
         [self.view addSubview:_arrivalMessageLabel];
     }
     return _arrivalMessageLabel;
@@ -153,12 +164,20 @@
     if (!_creditsMessageLabel) {
         _creditsMessageLabel = THLNUILabel(kTHLNUIDetailTitle);
         _creditsMessageLabel.adjustsFontSizeToFitWidth = YES;
-        _creditsMessageLabel.numberOfLines = 1;
+        _creditsMessageLabel.numberOfLines = 2;
         _creditsMessageLabel.minimumScaleFactor = 0.5;
         _creditsMessageLabel.textAlignment = NSTextAlignmentCenter;
         
         [_creditsMessageLabel setTextColor:kTHLNUIGrayFontColor];
-        _creditsMessageLabel.text = [NSString stringWithFormat:@"Get $%@.00 once your ticket is scanned at the venue", _guestlistInvite[@"Guestlist"][@"event"][@"creditsPayout"]];
+//        _creditsMessageLabel.text = [NSString stringWithFormat:@"Get your ticket scanned at the venue to receive your $%@.00 credits", _guestlistInvite[@"Guestlist"][@"event"][@"creditsPayout"]];
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] init];
+        [attributedString appendAttributedString:[[NSAttributedString alloc] initWithString:@"Get your ticket scanned at the venue to receive your "
+                                                                                 attributes:@{NSUnderlineStyleAttributeName: @(NSUnderlineStyleNone)}]];
+        [attributedString appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString
+                                                                                             stringWithFormat:@"$%@.00 credits", _guestlistInvite[@"Guestlist"][@"event"][@"creditsPayout"]]
+                                                                                 attributes:@{NSForegroundColorAttributeName: kTHLNUIAccentColor,
+                                                                                              NSBackgroundColorAttributeName: [UIColor clearColor]}]];
+        _creditsMessageLabel.attributedText = attributedString;
         [self.view addSubview:_creditsMessageLabel];
     }
     return _creditsMessageLabel;

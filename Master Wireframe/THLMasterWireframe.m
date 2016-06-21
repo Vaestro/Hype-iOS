@@ -50,6 +50,7 @@
 #import "THLLoginViewController.h"
 
 #import "THLPopupNotificationView.h"
+#import "THLLoginService.h"
 
 @interface THLMasterWireframe()
 <
@@ -104,6 +105,8 @@ THLLoginViewControllerDelegate
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel identify:[THLUser user].objectId];
     
+    [[_dependencyManager loginService] createMixpanelPeopleProfile];
+    
     [Intercom registerUserWithUserId:[THLUser currentUser].objectId];
     [Intercom updateUserWithAttributes:@{@"email": [THLUser currentUser].email,
                                          @"name": [THLUser currentUser].fullName
@@ -116,7 +119,7 @@ THLLoginViewControllerDelegate
 
 - (void)routeSignedUpUserFlow {
     [THLUserManager makeCurrentInstallation];
-
+    
     [Intercom registerUserWithUserId:[THLUser currentUser].objectId];
     [Intercom updateUserWithAttributes:@{@"email": [THLUser currentUser].email,
                                          @"name": [THLUser currentUser].fullName

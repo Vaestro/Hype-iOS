@@ -31,6 +31,7 @@
 @class APAddressBook;
 @class THLGuestlistService;
 @class THLDataStore;
+@class THLLoginService;
 /**
  *  Manages all dependenies for the app.
  */
@@ -59,4 +60,5 @@ THLGuestFlowDependencyManager
 - (APAddressBook *)addressBook;
 - (THLGuestlistService *)guestlistService;
 - (THLDataStore *)contactsDataStore;
+- (THLLoginService *)loginService;
 @end
