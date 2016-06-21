@@ -153,30 +153,6 @@
 }
 
 #pragma mark - Data Stores
-- (THLDataStore *)userDataStore
-{
-    if (!_userDataStore) {
-        _userDataStore = [[THLDataStore alloc] initForKey:@"kUserDataStoreKey" databaseManager:self.databaseManager];
-    }
-    return _userDataStore;
-}
-
-- (THLDataStore *)eventDataStore
-{
-	if (!_eventDataStore) {
-		_eventDataStore = [[THLDataStore alloc] initForEntity:[THLEventEntity class] databaseManager:self.databaseManager];
-	}
-	return _eventDataStore;
-}
-
-- (THLDataStore *)guestDataStore
-{
-	if (!_guestDataStore) {
-		_guestDataStore = [[THLDataStore alloc] initForEntity:[THLGuestEntity class] databaseManager:self.databaseManager];
-	}
-	return _guestDataStore;
-}
-
 - (THLDataStore *)contactsDataStore
 {
     if (!_contactsDataStore) {
@@ -185,37 +161,6 @@
     return _contactsDataStore;
 }
 
-- (THLDataStore *)guestlistDataStore
-{
-    if (!_guestlistDataStore) {
-        _guestlistDataStore = [[THLDataStore alloc] initForEntity:[THLGuestlistEntity class] databaseManager:self.databaseManager];
-    }
-    return _guestlistDataStore;
-}
-
-- (THLDataStore *)guestlistInviteDataStore
-{
-    if (!_guestlistInviteDataStore) {
-        _guestlistInviteDataStore = [[THLDataStore alloc] initForEntity:[THLGuestlistInviteEntity class] databaseManager:self.databaseManager];
-    }
-    return _guestlistInviteDataStore;
-}
-
-- (THLDataStore *)perkStoreItemDataStore
-{
-    if (!_perkStoreItemDataStore) {
-        _perkStoreItemDataStore = [[THLDataStore alloc] initForEntity:[THLPerkStoreItemEntity class] databaseManager:self.databaseManager];
-    }
-    return _perkStoreItemDataStore;
-}
-
-- (THLDataStore *)messageListDataStore
-{
-    if (!_messageListDataStore) {
-        _messageListDataStore = [[THLDataStore alloc] initForEntity:[THLMessageListEntity class] databaseManager:self.databaseManager];
-    }
-    return _messageListDataStore;
-}
 
 #pragma mark - Services
 - (THLEventService *)eventService

@@ -23,7 +23,8 @@
 @interface THLLoginViewController()
 <
 THLTextEntryViewDelegate,
-THLPermissionRequestViewControllerDelegate
+THLPermissionRequestViewControllerDelegate,
+TTTAttributedLabelDelegate
 >
 @property (nonatomic, strong) UIBarButtonItem *dismissButton;
 @property (nonatomic, strong) UILabel *bodyLabel;

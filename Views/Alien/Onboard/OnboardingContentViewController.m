@@ -21,6 +21,9 @@ typedef NS_OPTIONS(NSInteger, THLOnboardingState) {
 static const CGFloat kLogoImageSize = 50.0f;
 
 @interface OnboardingContentViewController ()
+<
+TTTAttributedLabelDelegate
+>
 @property (nonatomic, strong) UIImageView *logoImageView;
 @property (nonatomic) THLOnboardingState onboardingState;
 @end

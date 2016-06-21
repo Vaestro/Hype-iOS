@@ -12,8 +12,6 @@
 #import "UITextView+NUI.h"
 #import "THLAppearanceConstants.h"
 
-static CGFloat const ICON_VIEW_DIMENSION = 50;
-
 @interface THLPopupNotificationView()
 @property (nonatomic, strong) UIImageView *imageView;
 
