@@ -10,7 +10,7 @@
 #import "THLAppearanceConstants.h"
 #import "THLActionButton.h"
 #import "Stripe.h"
-#import "Parse.h"
+#import <Parse/Parse.h>
 #import "THLUser.h"
 #import "SVProgressHUD.h"
 

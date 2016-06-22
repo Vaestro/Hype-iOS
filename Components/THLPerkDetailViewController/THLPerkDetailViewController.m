@@ -11,7 +11,7 @@
 #import "THLAppearanceConstants.h"
 #import "UIView+DimView.h"
 #import "THLActionBarButton.h"
-#import "Parse.h"
+#import <Parse/Parse.h>
 #import "THLConfirmationView.h"
 #import "Intercom/intercom.h"
 #import "THLUser.h"

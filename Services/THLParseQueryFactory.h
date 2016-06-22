@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PFQuery.h"
+#import <Parse/PFQuery.h>
 
 @class THLEvent;
 @class THLUser;

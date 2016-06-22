@@ -8,8 +8,7 @@
 
 #import "THLEventTicketViewController.h"
 #import "THLAppearanceConstants.h"
-#import "PFFile.h"
-#import "PFObject.h"
+#import <Parse/Parse.h>
 #import "THLUser.h"
 
 @interface THLEventTicketViewController()

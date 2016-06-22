@@ -12,7 +12,6 @@
 #import "THLAppearanceConstants.h"
 #import "THLSingleLineTextField.h"
 #import "NSString+EmailAddresses.h"
-#import "Parse.h"
 
 @interface THLTextEntryViewController()
 <

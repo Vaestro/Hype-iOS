@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PFCollectionViewCell.h"
+#import <ParseUI/PFCollectionViewCell.h>
 
 @interface THLAdmissionOptionCell : PFCollectionViewCell
 @property (nonatomic, strong) UILabel *titleLabel;

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PFCollectionViewCell.h"
+#import <ParseUI/PFCollectionViewCell.h>
 
 @interface THLPerkStoreCell : PFCollectionViewCell
 @property (nonatomic, strong) UIImageView *perkImageView;

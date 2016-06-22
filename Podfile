@@ -1,6 +1,6 @@
 # Uncomment this line to define a global platform for your project
 platform :ios, '8.0'
-
+use_frameworks!
 #ignore all warnings from all pods
 inhibit_all_warnings!
 
@@ -20,6 +20,7 @@ pod 'SDWebImage', '~> 3.7'
 pod 'FormatterKit', '~> 1.8'
 pod 'Typhoon', '~> 3.3'
 pod 'Mixpanel'
+pod 'SnapKit', '~> 0.15.0'
 
 #Debugging
 pod 'FLEX', '~> 2.0', :configurations => ['Debug']
@@ -33,7 +34,7 @@ pod 'BlocksKit', '~> 2.2'
 pod "ReflectableEnum"
 
 #Parse/Facebook
-pod 'Parse', '= 1.11.0'
+pod 'Parse'
 pod 'ParseFacebookUtilsV4'
 pod 'ParseUI'
 pod 'FBSDKCoreKit'
@@ -45,7 +46,6 @@ pod 'Intercom'
 pod 'Fabric'
 pod 'Crashlytics'
 pod 'Digits'
-pod 'Optimizely-iOS-SDK'
 pod 'Stripe'
 
 #Branch

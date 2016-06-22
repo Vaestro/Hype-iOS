@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PFCollectionViewCell.h"
+#import <ParseUI/PFCollectionViewCell.h>
 
 @class THLPersonIconView;
 @class THLStatusView;

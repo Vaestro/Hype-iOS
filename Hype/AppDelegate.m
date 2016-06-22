@@ -12,7 +12,6 @@
 #import "PFFacebookUtils.h"
 #import <Fabric/Fabric.h>
 #import <DigitsKit/DigitsKit.h>
-#import <Optimizely/Optimizely.h>
 #import "Branch.h"
 #import <Stripe/Stripe.h>
 #import "THLDependencyManager.h"

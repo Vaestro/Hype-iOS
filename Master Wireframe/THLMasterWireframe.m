@@ -49,6 +49,8 @@
 #import "THLPopupNotificationView.h"
 #import "THLLoginService.h"
 
+#import "Hype-Swift.h"
+
 @interface THLMasterWireframe()
 <
 THLAdmissionsViewDelegate,
@@ -204,10 +206,12 @@ THLLoginViewControllerDelegate
     myEventsVC.delegate = self;
     [dashboard pushViewController:myEventsVC animated:NO];
     
-    THLDiscoveryViewController *discoveryVC = [[THLDiscoveryViewController alloc] initWithClassName:@"Event"];
+    THLVenueDiscoveryViewController *discoveryVC = [[THLVenueDiscoveryViewController alloc] initWithClassName:@"Location"];
+
+//    THLDiscoveryViewController *discoveryVC = [[THLDiscoveryViewController alloc] initWithClassName:@"Event"];
     UINavigationController *discovery = [UINavigationController new];
-    
-    discoveryVC.delegate = self;
+//
+//    discoveryVC.delegate = self;
     [discovery pushViewController:discoveryVC animated:NO];
     
     _userProfileViewController = [THLUserProfileViewController new];
