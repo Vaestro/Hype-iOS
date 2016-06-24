@@ -27,7 +27,6 @@
 #import "THLGuestlistInvite.h"
 #import "THLEvent.h"
 
-
 @interface THLEventDetailsViewController ()
 @property (nonatomic, strong) ORStackScrollView *scrollView;
 @property (nonatomic, strong) UILabel *eventNameLabel;
@@ -48,7 +47,6 @@
 @end
 
 @implementation THLEventDetailsViewController
-
 
 #pragma mark - Life cycle
 

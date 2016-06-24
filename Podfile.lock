@@ -130,7 +130,6 @@ PODS:
     - SDWebImage/Core (= 3.8.1)
   - SDWebImage/Core (3.8.1)
   - SLPagingView (0.0.5)
-  - SnapKit (0.15.0)
   - SSDataSources (0.8.5)
   - Stripe (7.0.2)
   - SVProgressHUD (2.0.3)
@@ -238,7 +237,6 @@ DEPENDENCIES:
   - Reveal-iOS-SDK
   - SDWebImage (~> 3.7)
   - SLPagingView
-  - SnapKit (~> 0.15.0)
   - SSDataSources (~> 0.8)
   - Stripe
   - SVProgressHUD
@@ -297,7 +295,6 @@ SPEC CHECKSUMS:
   Reveal-iOS-SDK: e2250b3c155bcfac53ae223ddc1f76d08f206c33
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   SLPagingView: ba9bb6102cb318ce56f23d0a7e49a46ddcdad7e3
-  SnapKit: 4962eed2ee18e48cbd2b2292fffc57efe7235f87
   SSDataSources: b01170fb23b82acf0649194e9189b0bf5f702681
   Stripe: d1eae5522cf993590f962ac1829a56c2096cf486
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
@@ -310,6 +307,6 @@ SPEC CHECKSUMS:
   YapDatabase: 713d4018cfacbd6e77dd430710ca84730e450980
   YLMoment: af44d9d402790049e5490fa6eae9585b89b4090b
 
-PODFILE CHECKSUM: 9c29cda650fb1f7916e1c92e6d3e59ca8e4bdf3c
+PODFILE CHECKSUM: d2b3238edd6dc507eb771d152ad6246f1abfd811
 
 COCOAPODS: 1.0.1

@@ -1,6 +1,5 @@
 # Uncomment this line to define a global platform for your project
 platform :ios, '8.0'
-use_frameworks!
 #ignore all warnings from all pods
 inhibit_all_warnings!
 
@@ -20,7 +19,6 @@ pod 'SDWebImage', '~> 3.7'
 pod 'FormatterKit', '~> 1.8'
 pod 'Typhoon', '~> 3.3'
 pod 'Mixpanel'
-pod 'SnapKit', '~> 0.15.0'
 
 #Debugging
 pod 'FLEX', '~> 2.0', :configurations => ['Debug']

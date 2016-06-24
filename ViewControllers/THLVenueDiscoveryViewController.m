@@ -1,31 +1,34 @@
 //
-//  THLDiscoveryViewController.m
+//  THLVenueDiscoveryViewController.m
 //  Hype
 //
-//  Created by Daniel Aksenov on 5/26/16.
+//  Created by Edgar Li on 6/22/16.
 //  Copyright © 2016 Hypelist. All rights reserved.
 //
 
-#import "THLDiscoveryViewController.h"
-#import "THLEventDetailsViewController.h"
+#import "THLVenueDiscoveryViewController.h"
+
 #import "Parse.h"
 #import <ParseUI/PFCollectionViewCell.h>
-#import "THLDiscoveryCell.h"
 #import <ParseUI/PFImageView.h>
-#import "THLAppearanceConstants.h"
+#import "THLParseQueryFactory.h"
+
 #import "Intercom/intercom.h"
 
+#import "THLAppearanceConstants.h"
 #import "TTTAttributedLabel.h"
-#import "THLParseQueryFactory.h"
 #import "THLUser.h"
 
-@interface THLDiscoveryViewController ()
+#import "THLDiscoveryCell.h"
+
+
+@interface THLVenueDiscoveryViewController ()
 @property (nonatomic, strong) TTTAttributedLabel *navBarTitleLabel;
 @property (nonatomic, strong) THLParseQueryFactory *parseQueryFactory;
 
 @end
 
-@implementation THLDiscoveryViewController
+@implementation THLVenueDiscoveryViewController
 
 #pragma mark -
 #pragma mark Init
@@ -34,17 +37,9 @@
     self = [super initWithClassName:className];
     if (!self) return nil;
     
-    self.navigationItem.titleView = self.navBarTitleLabel;
     self.pullToRefreshEnabled = YES;
     self.paginationEnabled = NO;
-   
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
-                                             initWithImage:[UIImage imageNamed:@"Help"]
-                                             style:UIBarButtonItemStylePlain
-                                             target:self
-                                             action:@selector(messageButtonPressed)];
-    _parseQueryFactory = [THLParseQueryFactory new];
     return self;
 }
 
@@ -64,11 +59,10 @@
     self.collectionView.backgroundColor = [UIColor blackColor];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.automaticallyAdjustsScrollViewInsets = YES;
-
     
     self.collectionView.emptyDataSetSource = self;
     self.collectionView.emptyDataSetDelegate = self;
-
+    
 }
 
 - (void)viewWillLayoutSubviews {
@@ -100,14 +94,17 @@
 
 - (PFQuery *)queryForCollection {
     PFQuery *query = [super queryForCollection];
-    [query orderByAscending:@"date"];
-    [query includeKey:@"location"];
-    [query includeKey:@"venue"];
     
+    PFQuery *eventQuery = [PFQuery queryWithClassName:@"Event"];
+    [eventQuery includeKey:@"location"];
+    [eventQuery whereKeyExists:@"location"];
+
     DTTimePeriod *eventDisplayPeriod = [DTTimePeriod timePeriodWithSize:DTTimePeriodSizeMonth amount:1 startingAt:[[NSDate date] dateByAddingTimeInterval:-60*300]];
     
-    [query whereKey:@"date" lessThanOrEqualTo:eventDisplayPeriod.EndDate];
-    [query whereKey:@"date" greaterThanOrEqualTo:eventDisplayPeriod.StartDate];
+    [eventQuery whereKey:@"date" lessThanOrEqualTo:eventDisplayPeriod.EndDate];
+    [eventQuery whereKey:@"date" greaterThanOrEqualTo:eventDisplayPeriod.StartDate];
+    
+    [query whereKey:@"objectId" matchesKey:@"locationId" inQuery:eventQuery];
     return query;
 }
 
@@ -120,15 +117,11 @@
                                   object:(PFObject *)object {
     
     THLDiscoveryCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[THLDiscoveryCell identifier]
-                                                                         forIndexPath:indexPath];
+                                                                       forIndexPath:indexPath];
     
-    NSDate *date = (NSDate *)object[@"date"];
-
-    cell.titlesView.titleText = object[@"title"];
-    cell.titlesView.dateText = [NSString stringWithFormat:@"%@", date.thl_weekdayString];
-    cell.titlesView.locationNameText = object[@"location"][@"name"];
-    cell.titlesView.locationNeighborhoodText = object[@"location"][@"neighborhood"];
-    cell.venueImageView.file = object[@"location"][@"image"];
+    cell.titlesView.locationNameText = object[@"name"];
+    cell.titlesView.locationNeighborhoodText = object[@"neighborhood"];
+    cell.venueImageView.file = object[@"image"];
     [cell.venueImageView loadInBackground];
     
     return cell;
@@ -138,55 +131,12 @@
     return CGSizeMake(DiscoveryCellWidth(collectionView), DiscoveryCellHeight(collectionView));
 }
 
+
+
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     PFObject *object = [self objectAtIndexPath:indexPath];
-    if ([THLUser currentUser]) {
-        [[[_parseQueryFactory localQueryForAcceptedInviteForEvent:object.objectId ] getFirstObjectInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
-            if (task.result != nil) {
-                [self.delegate eventDiscoveryViewControllerWantsToPresentDetailsForAttendingEvent:object invite:task.result];
-            } else {
-                [self.delegate eventDiscoveryViewControllerWantsToPresentDetailsForEvent:object];
-                
-            }
-            return task;
-        }];
-    } else {
-        [self.delegate eventDiscoveryViewControllerWantsToPresentDetailsForEvent:object];
-
-    }
-
-}
-
-
-#pragma mark - event handlers ()
-
-- (void)messageButtonPressed
-{
-    [Intercom presentMessageComposer];
-}
-
-- (TTTAttributedLabel *)navBarTitleLabel
-{
-    if (!_navBarTitleLabel) {
-        _navBarTitleLabel = [TTTAttributedLabel new];
-        _navBarTitleLabel.textColor = [UIColor whiteColor];
-        _navBarTitleLabel.font = [UIFont fontWithName:@"Raleway-Regular" size:14];
-        _navBarTitleLabel.numberOfLines = 0;
-        _navBarTitleLabel.linkAttributes = @{NSForegroundColorAttributeName: kTHLNUIPrimaryFontColor,
-                                             NSUnderlineColorAttributeName: kTHLNUIAccentColor,
-                                    NSUnderlineStyleAttributeName: @(NSUnderlineStyleThick)};
-        _navBarTitleLabel.activeLinkAttributes = @{NSForegroundColorAttributeName: kTHLNUIPrimaryFontColor,
-                                          NSUnderlineStyleAttributeName: @(NSUnderlineStyleNone)};
-        _navBarTitleLabel.textAlignment = NSTextAlignmentCenter;
-        NSString *labelText = @"THIS WEEK IN NEW YORK";
-        _navBarTitleLabel.text = labelText;
-        NSRange city = [labelText rangeOfString:@"NEW YORK"];
-        [_navBarTitleLabel addLinkToURL:[NSURL URLWithString:@""] withRange:city];
-        
-        [_navBarTitleLabel sizeToFit];
-    }
-
-    return _navBarTitleLabel;
+    
 }
 
 #pragma mark - EmptyDataSetDelegate

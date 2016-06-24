@@ -48,8 +48,7 @@
 
 #import "THLPopupNotificationView.h"
 #import "THLLoginService.h"
-
-#import "Hype-Swift.h"
+#import "THLVenueDiscoveryViewController.h"
 
 @interface THLMasterWireframe()
 <
@@ -70,6 +69,8 @@ THLLoginViewControllerDelegate
 
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) UITabBarController *masterTabBarController;
+@property (nonatomic, strong) UITabBarController *discoveryTabBarController;
+
 @property (nonatomic, strong) THLOnboardingViewController *onboardingViewController;
 @property (nonatomic, strong) THLLoginViewController *loginViewController;
 
@@ -206,13 +207,21 @@ THLLoginViewControllerDelegate
     myEventsVC.delegate = self;
     [dashboard pushViewController:myEventsVC animated:NO];
     
-    THLVenueDiscoveryViewController *discoveryVC = [[THLVenueDiscoveryViewController alloc] initWithClassName:@"Location"];
+    THLDiscoveryViewController *discoveryVC = [[THLDiscoveryViewController alloc] initWithClassName:@"Event"];
+    THLVenueDiscoveryViewController *venueDiscoveryVC = [[THLVenueDiscoveryViewController alloc] initWithClassName:@"Location"];
 
-//    THLDiscoveryViewController *discoveryVC = [[THLDiscoveryViewController alloc] initWithClassName:@"Event"];
     UINavigationController *discovery = [UINavigationController new];
-//
-//    discoveryVC.delegate = self;
-    [discovery pushViewController:discoveryVC animated:NO];
+    discoveryVC.delegate = self;
+    venueDiscoveryVC.delegate = self;
+    
+    _discoveryTabBarController = [UITabBarController new];
+    _discoveryTabBarController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Switch" style:UIBarButtonItemStylePlain target:self action:@selector(changeVC)];
+    
+    NSArray *discoveryViews = @[discoveryVC, venueDiscoveryVC];
+    _discoveryTabBarController.viewControllers = discoveryViews;
+    [_discoveryTabBarController.tabBar setHidden:YES];
+    
+    [discovery pushViewController:_discoveryTabBarController animated:NO];
     
     _userProfileViewController = [THLUserProfileViewController new];
     UINavigationController *profile = [UINavigationController new];
@@ -238,6 +247,14 @@ THLLoginViewControllerDelegate
     _masterTabBarController.viewControllers = views;
     [_masterTabBarController setSelectedIndex:0];
     _masterTabBarController.view.autoresizingMask=(UIViewAutoresizingFlexibleHeight);
+}
+
+- (void)changeVC {
+    if (_discoveryTabBarController.selectedIndex == 0) {
+        [_discoveryTabBarController setSelectedIndex:1];
+    } else {
+        [_discoveryTabBarController setSelectedIndex:0];
+    }
 }
 
 - (void)viewInvites {
