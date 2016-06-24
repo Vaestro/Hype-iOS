@@ -13,18 +13,11 @@
 
 @interface THLEvent : PFObject<PFSubclassing>
 @property (nonatomic, retain) NSDate *date;
-@property (nonatomic) float maleTicketPrice;
-@property (nonatomic) float femaleTicketPrice;
+@property (nonatomic, retain) THLLocation *location;
 @property (nonatomic, retain) NSString *title;
 @property (nonatomic, retain) NSString *promoInfo;
 @property (nonatomic, retain) PFFile *promoImage;
+@property (nonatomic, retain) NSArray<PFObject *> *admissionOptions;
 @property (nonatomic) int creditsPayout;
-@property (nonatomic, retain) THLLocation *location;
-@property (nonatomic, retain) THLUser *host;
-@property (nonatomic) bool requiresApproval;
-@property (nonatomic) int maleRatio;
-@property (nonatomic) int femaleRatio;
-@property (nonatomic, retain) NSString *chatMessage;
 @property (nonatomic) int ageRequirement;
-
 @end

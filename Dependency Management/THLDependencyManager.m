@@ -12,7 +12,6 @@
 //Common
 //#import "THLPushNotificationManager.h"
 #import "THLYapDatabaseManager.h"
-#import "THLEntityMapper.h"
 #import "THLViewDataSourceFactory.h"
 #import "THLParseQueryFactory.h"
 #import "THLYapDatabaseViewFactory.h"
@@ -45,7 +44,6 @@
 //Common
 @property (nonatomic, strong) THLYapDatabaseManager *databaseManager;
 @property (nonatomic, strong) THLUserManager *userManager;
-@property (nonatomic, strong) THLEntityMapper *entityMapper;
 @property (nonatomic, strong) THLViewDataSourceFactory *viewDataSourceFactory;
 @property (nonatomic, strong) THLYapDatabaseViewFactory *yapDatabaseViewFactory;
 @property (nonatomic, strong) THLParseQueryFactory *parseQueryFactory;
@@ -101,14 +99,6 @@
 		_userManager = [[THLUserManager alloc] init];
 	}
 	return _userManager;
-}
-
-- (THLEntityMapper *)entityMapper
-{
-	if (!_entityMapper) {
-		_entityMapper = [[THLEntityMapper alloc] init];
-	}
-	return _entityMapper;
 }
 
 - (THLViewDataSourceFactory *)viewDataSourceFactory

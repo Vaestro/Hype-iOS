@@ -16,7 +16,6 @@
 #import "THLUser.h"
 #import "THLChannelService.h"
 #import "THLHostEntity.h"
-#import "THLEntityMapper.h"
 #import "THLGuestEntity.h"
 #import "Intercom/intercom.h"
 

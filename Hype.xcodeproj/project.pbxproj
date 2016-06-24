@@ -45,7 +45,6 @@
 		218AF34B1BB740DB00AFAEBF /* THLEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 218AF34A1BB740DB00AFAEBF /* THLEntity.m */; };
 		218AF3521BB7422100AFAEBF /* THLEventEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 218AF3511BB7422100AFAEBF /* THLEventEntity.m */; };
 		218AF3551BB7440800AFAEBF /* THLLocationEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 218AF3541BB7440800AFAEBF /* THLLocationEntity.m */; };
-		218AF3591BB7455500AFAEBF /* THLEntityMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 218AF3581BB7455500AFAEBF /* THLEntityMapper.m */; };
 		219E32A51B8EA62700214C85 /* THLEventNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 219E32A41B8EA62700214C85 /* THLEventNavigationController.m */; };
 		219E32A81B8EA63D00214C85 /* THLEventNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 219E32A71B8EA63D00214C85 /* THLEventNavigationBar.m */; };
 		21CCEDE21B87C62F0066CDAC /* THLYapDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CCEDE11B87C62F0066CDAC /* THLYapDatabaseManager.m */; };
@@ -287,8 +286,6 @@
 		218AF3511BB7422100AFAEBF /* THLEventEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventEntity.m; sourceTree = "<group>"; };
 		218AF3531BB7440800AFAEBF /* THLLocationEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLLocationEntity.h; sourceTree = "<group>"; };
 		218AF3541BB7440800AFAEBF /* THLLocationEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLLocationEntity.m; sourceTree = "<group>"; };
-		218AF3571BB7455500AFAEBF /* THLEntityMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEntityMapper.h; sourceTree = "<group>"; };
-		218AF3581BB7455500AFAEBF /* THLEntityMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEntityMapper.m; sourceTree = "<group>"; };
 		218AF35A1BB745F500AFAEBF /* THLEntities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLEntities.h; sourceTree = "<group>"; };
 		219E32A31B8EA62700214C85 /* THLEventNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventNavigationController.h; sourceTree = "<group>"; };
 		219E32A41B8EA62700214C85 /* THLEventNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventNavigationController.m; sourceTree = "<group>"; };
@@ -909,7 +906,6 @@
 		217EBE8A1BB78A9D006044B6 /* Factories, Managers, et. All */ = {
 			isa = PBXGroup;
 			children = (
-				218AF3561BB7454700AFAEBF /* THLEntityMapper */,
 				217DC64D1BBB75E000332174 /* THLUserManager */,
 				217EBE901BB78EF5006044B6 /* THLViewDataSourceFactory */,
 				21CCEDE31B87C7950066CDAC /* THLYapDatabaseManager */,
@@ -995,15 +991,6 @@
 				217EBEB61BB7AB54006044B6 /* THLUserEntity.m */,
 			);
 			path = Entities;
-			sourceTree = "<group>";
-		};
-		218AF3561BB7454700AFAEBF /* THLEntityMapper */ = {
-			isa = PBXGroup;
-			children = (
-				218AF3571BB7455500AFAEBF /* THLEntityMapper.h */,
-				218AF3581BB7455500AFAEBF /* THLEntityMapper.m */,
-			);
-			path = THLEntityMapper;
 			sourceTree = "<group>";
 		};
 		21937F2D1BB5D0F2005E949E /* Model Services */ = {
@@ -1776,6 +1763,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2174A0871B863F6A006826D7 /* Build configuration list for PBXNativeTarget "Hype" */;
 			buildPhases = (
+				5125C34F19B5F3AB8B811935 /* 📦 Check Pods Manifest.lock */,
 				118A97DA2DBCFA6C91E66E37 /* [CP] Check Pods Manifest.lock */,
 				2174A0601B863F6A006826D7 /* Sources */,
 				2174A0611B863F6A006826D7 /* Frameworks */,
@@ -1783,6 +1771,8 @@
 				21C6D0091BAE5E3F00DEDDA3 /* Run Script */,
 				64D6A345657F885649D847B9 /* [CP] Embed Pods Frameworks */,
 				45E0BDC2A5E83F0632A9713D /* [CP] Copy Pods Resources */,
+				61BFDEF7B4531057D5226F8A /* 📦 Embed Pods Frameworks */,
+				F07F705479C673FBB76B89B8 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1797,12 +1787,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2174A08A1B863F6A006826D7 /* Build configuration list for PBXNativeTarget "HypeTests" */;
 			buildPhases = (
+				DE0EB0F660936B03F0D15F75 /* 📦 Check Pods Manifest.lock */,
 				70C8D6DD71CD5F1E083898FB /* [CP] Check Pods Manifest.lock */,
 				2174A0791B863F6A006826D7 /* Sources */,
 				2174A07A1B863F6A006826D7 /* Frameworks */,
 				2174A07B1B863F6A006826D7 /* Resources */,
 				0C289CD7FC60B1289BF1BF86 /* [CP] Embed Pods Frameworks */,
 				B8B8E8831D5EB3E0D3E586AA /* [CP] Copy Pods Resources */,
+				72D0C74559AF3F0473E2F814 /* 📦 Embed Pods Frameworks */,
+				ADE25E8AB09D5F54722F09F3 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1983,6 +1976,36 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hype/Pods-Hype-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		5125C34F19B5F3AB8B811935 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		61BFDEF7B4531057D5226F8A /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hype/Pods-Hype-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		64D6A345657F885649D847B9 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2013,6 +2036,36 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		72D0C74559AF3F0473E2F814 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HypeTests/Pods-HypeTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ADE25E8AB09D5F54722F09F3 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HypeTests/Pods-HypeTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		B8B8E8831D5EB3E0D3E586AA /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2028,6 +2081,36 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HypeTests/Pods-HypeTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		DE0EB0F660936B03F0D15F75 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F07F705479C673FBB76B89B8 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hype/Pods-Hype-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -2041,7 +2124,6 @@
 				211005B71B8A446D00A540C6 /* THLViewDataSource.m in Sources */,
 				C8F2FB271BF81A8E004E00B6 /* THLInformationViewController.m in Sources */,
 				C88A01591D04A9E200152B37 /* THLTablePackageDetailCell.m in Sources */,
-				218AF3591BB7455500AFAEBF /* THLEntityMapper.m in Sources */,
 				212173661BB34D22007D817A /* HCSStarRatingView.m in Sources */,
 				79CD27FD1C520293009BC119 /* THLResourceManager.m in Sources */,
 				C8E342091C3B1A9C009FE9B0 /* THLGuestlistReviewHeaderView.m in Sources */,

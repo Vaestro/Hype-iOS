@@ -10,20 +10,13 @@
 
 @implementation THLEvent
 @dynamic date;
-@dynamic maleTicketPrice;
-@dynamic femaleTicketPrice;
+@dynamic location;
 @dynamic title;
 @dynamic promoInfo;
 @dynamic promoImage;
-@dynamic location;
+@dynamic admissionOptions;
 @dynamic creditsPayout;
-@dynamic host;
-@dynamic requiresApproval;
-@dynamic maleRatio;
-@dynamic femaleRatio;
-@dynamic chatMessage;
 @dynamic ageRequirement;
-
 
 + (void)load {
 	[self registerSubclass];

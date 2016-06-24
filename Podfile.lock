@@ -2,7 +2,7 @@ PODS:
   - APAddressBook (0.2.3):
     - APAddressBook/Core (= 0.2.3)
   - APAddressBook/Core (0.2.3)
-  - AutoCoding (2.2.2)
+  - AutoCoding (2.2.1)
   - BFKit (1.9.1)
   - BLKFlexibleHeightBar (1.0.2)
   - BlocksKit (2.2.5):
@@ -26,11 +26,7 @@ PODS:
   - Bolts/AppLinks (1.7.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.7.0)
-  - Branch (0.12.3):
-    - Branch/Core (= 0.12.3)
-    - Branch/without-IDFA (= 0.12.3)
-  - Branch/Core (0.12.3)
-  - Branch/without-IDFA (0.12.3)
+  - Branch (0.12.1)
   - CocoaLumberjack (2.3.0):
     - CocoaLumberjack/Default (= 2.3.0)
     - CocoaLumberjack/Extensions (= 2.3.0)
@@ -39,17 +35,17 @@ PODS:
     - CocoaLumberjack/Core
   - CocoaLumberjack/Extensions (2.3.0):
     - CocoaLumberjack/Default
-  - Crashlytics (3.7.1):
+  - Crashlytics (3.7.0):
     - Fabric (~> 1.6.3)
   - DateTools (1.7.0)
-  - Digits (2.2.0):
-    - TwitterCore (= 2.2.0)
+  - Digits (2.1.1):
+    - TwitterCore (= 2.1.1)
   - DZNEmptyDataSet (1.8.1)
   - EKAlgorithms (0.2)
   - Fabric (1.6.7)
-  - FBSDKCoreKit (4.13.1):
+  - FBSDKCoreKit (4.12.0):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.13.1):
+  - FBSDKLoginKit (4.12.0):
     - FBSDKCoreKit
   - FLEX (2.3.0)
   - FLKAutoLayout (0.2.1)
@@ -83,21 +79,21 @@ PODS:
     - FormatterKit/Resources
   - FormatterKit/URLRequestFormatter (1.8.1):
     - FormatterKit/Resources
-  - FXLabel (1.5.9)
-  - GCDObjC (0.3.0)
+  - FXLabel (1.5.8)
+  - GCDObjC (0.2.0)
   - Gizou (0.1.3)
   - iCarousel (1.8.2)
   - IHKeyboardAvoiding (2.5)
   - Intercom (2.3.21)
   - KVNProgress (2.2.4)
-  - libPhoneNumber-iOS (0.8.13)
+  - libPhoneNumber-iOS (0.8.12)
   - LinqToObjectiveC (2.1.0)
-  - LMGeocoder (1.0.7)
+  - LMGeocoder (1.0.4)
   - Masonry (0.6.4)
   - Mixpanel (2.9.9):
     - Mixpanel/Mixpanel (= 2.9.9)
   - Mixpanel/Mixpanel (2.9.9)
-  - MJRefresh (3.1.8)
+  - MJRefresh (3.1.0)
   - NUI (0.5.5):
     - NUIParse
   - NUIParse (1.3)
@@ -124,24 +120,26 @@ PODS:
   - ReactiveCocoa/no-arc (2.5)
   - ReactiveCocoa/UI (2.5):
     - ReactiveCocoa/Core
-  - ReflectableEnum (0.1.2)
+  - ReflectableEnum (0.1.1)
   - Reveal-iOS-SDK (1.6.2)
-  - SDWebImage (3.8.1):
-    - SDWebImage/Core (= 3.8.1)
-  - SDWebImage/Core (3.8.1)
+  - SDWebImage (3.7.6):
+    - SDWebImage/Core (= 3.7.6)
+  - SDWebImage/Core (3.7.6)
   - SLPagingView (0.0.5)
   - SSDataSources (0.8.5)
-  - Stripe (7.0.2)
+  - Stripe (7.0.1):
+    - Stripe/Core (= 7.0.1)
+  - Stripe/Core (7.0.1)
   - SVProgressHUD (2.0.3)
   - SVPullToRefresh (0.4.1)
   - THContactPicker (1.2)
   - TOMSMorphingLabel (0.5.1)
   - TTTAttributedLabel (2.0.0)
-  - TwitterCore (2.2.0):
+  - TwitterCore (2.1.1):
     - Fabric
-  - Typhoon (3.4.8):
-    - Typhoon/no-arc (= 3.4.8)
-  - Typhoon/no-arc (3.4.8)
+  - Typhoon (3.4.7):
+    - Typhoon/no-arc (= 3.4.7)
+  - Typhoon/no-arc (3.4.7)
   - YapDatabase (2.9.1):
     - YapDatabase/Standard (= 2.9.1)
   - YapDatabase/Standard (2.9.1):
@@ -250,37 +248,37 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   APAddressBook: 2a91bf05999548bea210ec9d1a68073f4dc8bfce
-  AutoCoding: 56fa46dbfa89d44189a26ce64e6a470ed8ff4661
+  AutoCoding: b47e528426c84346371dd532b8e6458929e4da34
   BFKit: 843f76d2df76edbae4e522dd8e3dedebb8a46457
   BLKFlexibleHeightBar: b27572a69633d8e33f1f2bbc486b04d8e86f742d
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
-  Branch: eced5b5201554811ecb039c74f9913b72caf6cc5
+  Branch: 32fb6e2048118a7ff23be984e731569517fbc5f3
   CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
-  Crashlytics: 3cdd4c9655be68032a0cf0379e0fb5ef6af22cad
+  Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
   DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
-  Digits: 335c479574eb2bbc50be326c1daf505b68d87135
+  Digits: 999cd0b84b25cdd6dbd7bc903b19c08f3405587d
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   EKAlgorithms: 83488651734ba3a63956fcb783b10e82d2ec3388
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
-  FBSDKCoreKit: 2807fe0da2ddb49a1469da6d6ff597f99912980f
-  FBSDKLoginKit: 6d350cb6a22d6956e9d078885de6ee8a0ebc51b4
+  FBSDKCoreKit: 6e56d5a2a64a755ad4efb5dbeee8f82fb1b99775
+  FBSDKLoginKit: 03f68a8d48c2c8bb81d7eb8097973d483543e1f6
   FLEX: ba80ea13d2c784e85e616137fd4eff164781e364
   FLKAutoLayout: 9db6b30c2008d230da608e62c607b11c23b942e6
   FormatterKit: 11ad17b983200629246a5a466f6f1bfa2df823cb
-  FXLabel: 877f56a3e0ef76b223c67dea3f442c12d3a1d55c
-  GCDObjC: 0c31898f34d8605196ac0343c65b496609d7dee6
+  FXLabel: 14f7d4abb0eb531a0824b327a86f5b790171207f
+  GCDObjC: adcd9941029e3628de539347d3a6777470a65998
   Gizou: 93853bf634a9382c257795db052aa9a75e972c43
   iCarousel: 67c8a43da5a46795b56aadfc96cd36a16f6149b2
   IHKeyboardAvoiding: 8f14fed93405dd2c44ce070a26f780d9e477538c
   Intercom: c05a2e008be2e5064d9045e0e7b919ca267da303
   KVNProgress: 541edcea5a1fef592aceac8d791a410d38cb499d
-  libPhoneNumber-iOS: 3a37004baf779b4262ab29a31a87d2ae668159d4
+  libPhoneNumber-iOS: 3f1889b70403cf7848c0e4136780a0d0aef9016d
   LinqToObjectiveC: f0e40c137a458b6b9725c4c7b6a575c0c72e3aec
-  LMGeocoder: 116e771bce773c82dbac9f59f443129dd26088a3
+  LMGeocoder: a0f635f948b0ca420d8d338e54886744cdcb215d
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
   Mixpanel: 818d1940c2d9402453b349545022a86968097f57
-  MJRefresh: d226bbe0b1ec398f426ba1dc99319b4e51182e19
+  MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   NUI: 53de7278003235deb2a375fe6f04c7a3aa3e49eb
   NUIParse: 2e3885ba7807477266396292626bd387d34c2338
   ObjectiveSugar: a6a25f23d657c19df0a0b972466d5b5ca9f5295c
@@ -291,22 +289,22 @@ SPEC CHECKSUMS:
   ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
-  ReflectableEnum: dc2fa83bba1e74df3a2f319c2ffaea55fd95887e
+  ReflectableEnum: bf9d36f8c35122242125140a22b8921d071989aa
   Reveal-iOS-SDK: e2250b3c155bcfac53ae223ddc1f76d08f206c33
-  SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
+  SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
   SLPagingView: ba9bb6102cb318ce56f23d0a7e49a46ddcdad7e3
   SSDataSources: b01170fb23b82acf0649194e9189b0bf5f702681
-  Stripe: d1eae5522cf993590f962ac1829a56c2096cf486
+  Stripe: b92298b31cf156fb23a029361b57e2fcb6583d57
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
   THContactPicker: e723f7c6ab6e1d6d10d59d618322ab8bfcb00365
   TOMSMorphingLabel: 3e88a2bf5257f8993ebc51fb3109187a0bfb2c4d
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
-  TwitterCore: 115527630bb2986954adc928b8c895a92bcd57e5
-  Typhoon: f2390ad976bd1acaf5680b837781720faf5ff909
+  TwitterCore: abc46da2bc4b76e2c68a74cd8671a071a8e3abbf
+  Typhoon: 0953addabd5a10a930973fcc131c03badc88c4ba
   YapDatabase: 713d4018cfacbd6e77dd430710ca84730e450980
   YLMoment: af44d9d402790049e5490fa6eae9585b89b4090b
 
 PODFILE CHECKSUM: d2b3238edd6dc507eb771d152ad6246f1abfd811
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.0.0
