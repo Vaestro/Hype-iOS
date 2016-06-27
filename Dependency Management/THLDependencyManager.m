@@ -29,13 +29,7 @@
 #import "THLFacebookProfilePictureURLFetchService.h"
 #import "THLGuestlistService.h"
 #import "THLPerkStoreItemService.h"
-
-//Classes
-#import "THLEntities.h"
 #import "THLGuestEntity.h"
-#import "THLGuestlistInviteEntity.h"
-#import "THLPerkStoreItemEntity.h"
-#import "THLMessageListEntity.h"
 
 
 @interface THLDependencyManager()

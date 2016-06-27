@@ -16,8 +16,6 @@
 @property (nonatomic, strong) UILabel *appDetailsLabel;
 @end
 
-static CGFloat const BUTTON_HEIGHT = 60;
-
 @implementation THLUserProfileFooterView
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {

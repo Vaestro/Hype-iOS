@@ -143,20 +143,17 @@
     if ([THLUser currentUser]) {
         [[[_parseQueryFactory localQueryForAcceptedInviteForEvent:object.objectId ] getFirstObjectInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
             if (task.result != nil) {
-                [self.delegate eventDiscoveryViewControllerWantsToPresentDetailsForAttendingEvent:object invite:task.result];
+                [self.delegate eventDiscoveryViewControllerWantsToPresentDetailsForAttendingEvent:object venue:object[@"location"] invite:task.result ];
             } else {
-                [self.delegate eventDiscoveryViewControllerWantsToPresentDetailsForEvent:object];
+                [self.delegate eventDiscoveryViewControllerWantsToPresentDetailsForEvent:object venue:object[@"location"]];
                 
             }
             return task;
         }];
     } else {
-        [self.delegate eventDiscoveryViewControllerWantsToPresentDetailsForEvent:object];
-
+        [self.delegate eventDiscoveryViewControllerWantsToPresentDetailsForEvent:object venue:object[@"location"]];
     }
-
 }
-
 
 #pragma mark - event handlers ()
 

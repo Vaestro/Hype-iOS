@@ -16,8 +16,6 @@
 
 - (void)showWithTitle:(NSString *)title message:(NSString *)message;
 
-- (void)addAction:(UIAlertAction *)action;
-
 - (void)dismiss;
 
 @end

@@ -9,8 +9,6 @@
 #import "THLEventTitlesView.h"
 #import "THLAppearanceConstants.h"
 
-static CGFloat const kTHLEventTitlesViewSeparatorViewHeight = 0.5;
-
 @interface THLEventTitlesView()
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *dateLabel;

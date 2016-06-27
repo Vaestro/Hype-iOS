@@ -39,13 +39,7 @@
 		217EBE8D1BB78AB4006044B6 /* THLYapDatabaseViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 217EBE8C1BB78AB4006044B6 /* THLYapDatabaseViewFactory.m */; };
 		217EBE941BB78F22006044B6 /* THLViewDataSourceFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 217EBE931BB78F22006044B6 /* THLViewDataSourceFactory.m */; };
 		217EBEA51BB7A106006044B6 /* THLLoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 217EBEA41BB7A106006044B6 /* THLLoginService.m */; };
-		217EBEB71BB7AB54006044B6 /* THLUserEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 217EBEB61BB7AB54006044B6 /* THLUserEntity.m */; };
-		217EBEBA1BB7AB68006044B6 /* THLHostEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 217EBEB91BB7AB68006044B6 /* THLHostEntity.m */; };
 		218AF3441BB7391B00AFAEBF /* THLEventService.m in Sources */ = {isa = PBXBuildFile; fileRef = 218AF3431BB7391B00AFAEBF /* THLEventService.m */; };
-		218AF34B1BB740DB00AFAEBF /* THLEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 218AF34A1BB740DB00AFAEBF /* THLEntity.m */; };
-		218AF3521BB7422100AFAEBF /* THLEventEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 218AF3511BB7422100AFAEBF /* THLEventEntity.m */; };
-		218AF3551BB7440800AFAEBF /* THLLocationEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 218AF3541BB7440800AFAEBF /* THLLocationEntity.m */; };
-		218AF3591BB7455500AFAEBF /* THLEntityMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 218AF3581BB7455500AFAEBF /* THLEntityMapper.m */; };
 		219E32A51B8EA62700214C85 /* THLEventNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 219E32A41B8EA62700214C85 /* THLEventNavigationController.m */; };
 		219E32A81B8EA63D00214C85 /* THLEventNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 219E32A71B8EA63D00214C85 /* THLEventNavigationBar.m */; };
 		21CCEDE21B87C62F0066CDAC /* THLYapDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CCEDE11B87C62F0066CDAC /* THLYapDatabaseManager.m */; };
@@ -55,12 +49,11 @@
 		21E402D91BBF80E6001D0C2C /* THLGuestlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E402D81BBF80E6001D0C2C /* THLGuestlist.m */; };
 		21E402DC1BBF8155001D0C2C /* THLGuestlistInvite.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E402DB1BBF8155001D0C2C /* THLGuestlistInvite.m */; };
 		21E402E01BBF8371001D0C2C /* THLGuestlistService.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E402DF1BBF8371001D0C2C /* THLGuestlistService.m */; };
-		21E402EE1BBF9A8B001D0C2C /* THLGuestEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E402ED1BBF9A8B001D0C2C /* THLGuestEntity.m */; };
+		36E96C056F7A3AF6319DE433 /* Pods_Hype.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D987E3A204C08C9E8BA25692 /* Pods_Hype.framework */; };
 		3E64EBEA1C5D89C5002BA11B /* THLFAQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E64EBE91C5D89C5002BA11B /* THLFAQViewController.m */; };
 		3EECB6911C61450100702540 /* THLFAQSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EECB6901C61450100702540 /* THLFAQSectionView.m */; };
 		3EF951781C56AD770046D4F1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EF951771C56AD770046D4F1 /* MobileCoreServices.framework */; };
 		59B1B5471C74754A00F94DBF /* Hype.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 59B1B5461C74703F00F94DBF /* Hype.entitlements */; };
-		7905CC411BE0252700E56878 /* THLGuestlistInviteEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7905CC401BE0252700E56878 /* THLGuestlistInviteEntity.m */; };
 		79060B431D0B2BF500D1A00C /* THLTableReservationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79060B421D0B2BF500D1A00C /* THLTableReservationViewController.m */; };
 		79060B461D0B339A00D1A00C /* THLAdmissionOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 79060B451D0B339A00D1A00C /* THLAdmissionOption.m */; };
 		790B38EF1C0375B500CB2362 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 790B38EE1C0375B500CB2362 /* libsqlite3.dylib */; };
@@ -88,8 +81,6 @@
 		7928ADB31D19CB1900DFC443 /* THLPopupNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928ADB21D19CB1900DFC443 /* THLPopupNotificationView.m */; };
 		7928ADB61D19CB5300DFC443 /* THLEventDetailsMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928ADB51D19CB5300DFC443 /* THLEventDetailsMapView.m */; };
 		794208281BD82641009B86FA /* UIView+DimView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794208271BD82641009B86FA /* UIView+DimView.m */; };
-		7942082C1BD82AF6009B86FA /* THLActionBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 7942082B1BD82AF6009B86FA /* THLActionBarButton.m */; };
-		7942082F1BD8C250009B86FA /* THLGuestlistEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 7942082E1BD8C250009B86FA /* THLGuestlistEntity.m */; };
 		794483041BEC5B5D00EABE23 /* THLStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794483031BEC5B5D00EABE23 /* THLStatusView.m */; };
 		794A9D191CF4ACC300DDAC00 /* THLEventInviteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 794A9D181CF4ACC300DDAC00 /* THLEventInviteCell.m */; };
 		794DCCAC1BF3B31E0037A03D /* UIImageView+Letters.m in Sources */ = {isa = PBXBuildFile; fileRef = 794DCCAB1BF3B31E0037A03D /* UIImageView+Letters.m */; };
@@ -99,6 +90,11 @@
 		794FAB6B1C615DE200438D49 /* Lavo.mov in Resources */ = {isa = PBXBuildFile; fileRef = 794FAB6A1C615DE200438D49 /* Lavo.mov */; };
 		79730CF81C18B47000D70F4B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79730CF71C18B47000D70F4B /* MessageUI.framework */; };
 		79752ADE1BEBD8B500D09B2E /* THLConfirmationPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79752ADD1BEBD8B500D09B2E /* THLConfirmationPopupView.m */; };
+		798402D41D217157006F463B /* THLEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 798402D31D217157006F463B /* THLEntity.m */; };
+		798402D71D2171A9006F463B /* THLEntityMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 798402D61D2171A9006F463B /* THLEntityMapper.m */; };
+		798402DB1D2171E0006F463B /* THLGuestEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 798402DA1D2171E0006F463B /* THLGuestEntity.m */; };
+		798402DE1D217200006F463B /* THLUserEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 798402DD1D217200006F463B /* THLUserEntity.m */; };
+		798402E31D21BD79006F463B /* THLAdmissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798402E21D21BD79006F463B /* THLAdmissionsViewController.swift */; };
 		798650A41BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 798650A31BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m */; };
 		798D7EBF1BF2E56C001D4593 /* OnboardingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 798D7EBE1BF2E56C001D4593 /* OnboardingViewController.m */; };
 		798D7EC21BF2E5CF001D4593 /* OnboardingContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 798D7EC11BF2E5CF001D4593 /* OnboardingContentViewController.m */; };
@@ -120,7 +116,6 @@
 		79B6C1BA1CEA3EC50050CDB1 /* THLPurchaseDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B6C1B91CEA3EC50050CDB1 /* THLPurchaseDetailsView.m */; };
 		79B959441BE8308600B87799 /* THLPersonIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959431BE8308600B87799 /* THLPersonIconView.m */; };
 		79B9594D1BE8966300B87799 /* KLCPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B9594C1BE8966300B87799 /* KLCPopup.m */; };
-		79B959611BE9A90B00B87799 /* THLActionContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B959601BE9A90B00B87799 /* THLActionContainerView.m */; };
 		79B994EA1D0650D500E0AD33 /* THLPermissionRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B994E91D0650D500E0AD33 /* THLPermissionRequestViewController.m */; };
 		79BB15301C657FF50044D943 /* THLSingleLineTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BB152F1C657FF50044D943 /* THLSingleLineTextField.m */; };
 		79BB15331C6CED740044D943 /* THLFxTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BB15321C6CED720044D943 /* THLFxTitleLabel.m */; };
@@ -159,17 +154,14 @@
 		79CE315A1CF7B03F00CEA784 /* THLEventTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CE31591CF7B03F00CEA784 /* THLEventTicketViewController.m */; };
 		79DF30221C714AFB00516199 /* THLCreditsExplanationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DF30211C714AFB00516199 /* THLCreditsExplanationView.m */; };
 		79DF30261C72FF1700516199 /* THLEventHostingNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DF30251C72FF1700516199 /* THLEventHostingNavigationBar.m */; };
-		7BBDF5629F2B084726151904 /* libPods-Hype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC96838BEC292F573051058D /* libPods-Hype.a */; };
 		7D7B044EABDEF9475D0E84DA /* libPods-HypeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95457EE5CFDECE1CB34DB5A3 /* libPods-HypeTests.a */; };
 		C80372DA1D00DD68008848CA /* THLAdmissionOptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C80372D91D00DD68008848CA /* THLAdmissionOptionCell.m */; };
 		C81B83281D18BFC5008260EE /* THLEventDeepLinkingController.m in Sources */ = {isa = PBXBuildFile; fileRef = C81B83271D18BFC5008260EE /* THLEventDeepLinkingController.m */; };
 		C82D87BF1C25C7E300116328 /* THLConfirmationView.m in Sources */ = {isa = PBXBuildFile; fileRef = C82D87BE1C25C7E300116328 /* THLConfirmationView.m */; };
 		C82D87C31C31CC2200116328 /* THLMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = C82D87C21C31CC2200116328 /* THLMenuView.m */; };
-		C85EE3791C1BC8AD0008C14B /* THLPerkStoreItemEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3781C1BC8AD0008C14B /* THLPerkStoreItemEntity.m */; };
 		C85EE3BC1C1BCC190008C14B /* THLPerkStoreItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3BB1C1BCC190008C14B /* THLPerkStoreItem.m */; };
 		C85EE3C11C1BCC940008C14B /* THLPerkStoreItemService.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3BF1C1BCC940008C14B /* THLPerkStoreItemService.m */; };
 		C85EE3C41C1CDE140008C14B /* THLPurchasedPerkItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3C31C1CDE140008C14B /* THLPurchasedPerkItem.m */; };
-		C85EE3C71C1CE1020008C14B /* THLPurchasedPerkItemEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = C85EE3C61C1CE1020008C14B /* THLPurchasedPerkItemEntity.m */; };
 		C884EE201CF74E0400C47167 /* THLAdmissionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C884EE1F1CF74E0400C47167 /* THLAdmissionsViewController.m */; };
 		C884EE241CF77CB200C47167 /* THLDiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C884EE231CF77CB200C47167 /* THLDiscoveryViewController.m */; };
 		C884EE271CF787CC00C47167 /* THLDiscoveryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C884EE261CF787CC00C47167 /* THLDiscoveryCell.m */; };
@@ -188,7 +180,6 @@
 		CBE5403C8B7732B36D5ECB5E /* THLViewDataSourceGrouping.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE54FC98A366F3761F89F63 /* THLViewDataSourceGrouping.m */; };
 		CBE54720F63BA2DE2136B454 /* THLViewDataSource+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE545A9A3C66339456E0A06 /* THLViewDataSource+Factory.m */; };
 		CBE547FB5677C373C1DE74C7 /* THLViewDataSourceSorting.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE5404991A434142507D7B0 /* THLViewDataSourceSorting.m */; };
-		FAB488851C6369110052FA38 /* THLMessageListEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB488841C6369110052FA38 /* THLMessageListEntity.m */; };
 		FAEE45D01C70E4BA0032C91C /* THLChannelService.m in Sources */ = {isa = PBXBuildFile; fileRef = FAEE45CF1C70E4BA0032C91C /* THLChannelService.m */; };
 /* End PBXBuildFile section */
 
@@ -274,22 +265,9 @@
 		217EBEA31BB7A106006044B6 /* THLLoginService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLLoginService.h; sourceTree = "<group>"; };
 		217EBEA41BB7A106006044B6 /* THLLoginService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLLoginService.m; sourceTree = "<group>"; };
 		217EBEA61BB7A114006044B6 /* THLLoginServiceInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLLoginServiceInterface.h; sourceTree = "<group>"; };
-		217EBEB51BB7AB54006044B6 /* THLUserEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserEntity.h; sourceTree = "<group>"; };
-		217EBEB61BB7AB54006044B6 /* THLUserEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLUserEntity.m; sourceTree = "<group>"; };
-		217EBEB81BB7AB68006044B6 /* THLHostEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLHostEntity.h; sourceTree = "<group>"; };
-		217EBEB91BB7AB68006044B6 /* THLHostEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLHostEntity.m; sourceTree = "<group>"; };
 		218AF3421BB7391B00AFAEBF /* THLEventService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventService.h; sourceTree = "<group>"; };
 		218AF3431BB7391B00AFAEBF /* THLEventService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventService.m; sourceTree = "<group>"; };
 		218AF3451BB7393400AFAEBF /* THLEventServiceInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventServiceInterface.h; sourceTree = "<group>"; };
-		218AF3491BB740DB00AFAEBF /* THLEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEntity.h; sourceTree = "<group>"; };
-		218AF34A1BB740DB00AFAEBF /* THLEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEntity.m; sourceTree = "<group>"; };
-		218AF3501BB7422100AFAEBF /* THLEventEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventEntity.h; sourceTree = "<group>"; };
-		218AF3511BB7422100AFAEBF /* THLEventEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventEntity.m; sourceTree = "<group>"; };
-		218AF3531BB7440800AFAEBF /* THLLocationEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLLocationEntity.h; sourceTree = "<group>"; };
-		218AF3541BB7440800AFAEBF /* THLLocationEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLLocationEntity.m; sourceTree = "<group>"; };
-		218AF3571BB7455500AFAEBF /* THLEntityMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEntityMapper.h; sourceTree = "<group>"; };
-		218AF3581BB7455500AFAEBF /* THLEntityMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEntityMapper.m; sourceTree = "<group>"; };
-		218AF35A1BB745F500AFAEBF /* THLEntities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLEntities.h; sourceTree = "<group>"; };
 		219E32A31B8EA62700214C85 /* THLEventNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventNavigationController.h; sourceTree = "<group>"; };
 		219E32A41B8EA62700214C85 /* THLEventNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventNavigationController.m; sourceTree = "<group>"; };
 		219E32A61B8EA63D00214C85 /* THLEventNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventNavigationBar.h; sourceTree = "<group>"; };
@@ -309,8 +287,6 @@
 		21E402DE1BBF8371001D0C2C /* THLGuestlistService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistService.h; sourceTree = "<group>"; };
 		21E402DF1BBF8371001D0C2C /* THLGuestlistService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestlistService.m; sourceTree = "<group>"; };
 		21E402E11BBF837F001D0C2C /* THLGuestlistServiceInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistServiceInterface.h; sourceTree = "<group>"; };
-		21E402EC1BBF9A8B001D0C2C /* THLGuestEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestEntity.h; sourceTree = "<group>"; };
-		21E402ED1BBF9A8B001D0C2C /* THLGuestEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestEntity.m; sourceTree = "<group>"; };
 		2A6667331CAB3D1DEA6DE560 /* Pods-Hype.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hype.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hype/Pods-Hype.debug.xcconfig"; sourceTree = "<group>"; };
 		31864EA66017466943817EB6 /* Pods-Hype.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hype.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hype/Pods-Hype.release.xcconfig"; sourceTree = "<group>"; };
 		3E64EBE81C5D89C5002BA11B /* THLFAQViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLFAQViewController.h; sourceTree = "<group>"; };
@@ -320,15 +296,13 @@
 		3EF951771C56AD770046D4F1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		4C0392A27CC17D305BBCE1E1 /* Pods-HypeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HypeTests/Pods-HypeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		59B1B5461C74703F00F94DBF /* Hype.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Hype.entitlements; sourceTree = "<group>"; };
-		7905CC3E1BE0251000E56878 /* THLGuestlistInviteEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistInviteEntity.h; sourceTree = "<group>"; };
-		7905CC401BE0252700E56878 /* THLGuestlistInviteEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestlistInviteEntity.m; sourceTree = "<group>"; };
 		79060B411D0B2BF500D1A00C /* THLTableReservationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLTableReservationViewController.h; sourceTree = "<group>"; };
 		79060B421D0B2BF500D1A00C /* THLTableReservationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLTableReservationViewController.m; sourceTree = "<group>"; };
 		79060B441D0B339A00D1A00C /* THLAdmissionOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLAdmissionOption.h; sourceTree = "<group>"; };
 		79060B451D0B339A00D1A00C /* THLAdmissionOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLAdmissionOption.m; sourceTree = "<group>"; };
 		790B38EE1C0375B500CB2362 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = ../../../../usr/lib/libsqlite3.dylib; sourceTree = "<group>"; };
-		7917C0EF1D1B3C2E0054BDB0 /* THLVenueDiscoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = THLVenueDiscoveryViewController.h; path = ViewControllers/THLVenueDiscoveryViewController.h; sourceTree = "<group>"; };
-		7917C0F01D1B3C2E0054BDB0 /* THLVenueDiscoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = THLVenueDiscoveryViewController.m; path = ViewControllers/THLVenueDiscoveryViewController.m; sourceTree = "<group>"; };
+		7917C0EF1D1B3C2E0054BDB0 /* THLVenueDiscoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLVenueDiscoveryViewController.h; sourceTree = "<group>"; };
+		7917C0F01D1B3C2E0054BDB0 /* THLVenueDiscoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLVenueDiscoveryViewController.m; sourceTree = "<group>"; };
 		792545B71CFC8DA0004CF29A /* THLPartyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPartyViewController.h; sourceTree = "<group>"; };
 		792545B81CFC8DA0004CF29A /* THLPartyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPartyViewController.m; sourceTree = "<group>"; };
 		792545BA1CFCBD61004CF29A /* THLPartyMemberCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPartyMemberCell.h; sourceTree = "<group>"; };
@@ -379,10 +353,6 @@
 		7928ADDF1D19EE3400DFC443 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = "SnapKit/build/Debug-iphoneos/SnapKit.framework"; sourceTree = "<group>"; };
 		794208261BD82641009B86FA /* UIView+DimView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DimView.h"; sourceTree = "<group>"; };
 		794208271BD82641009B86FA /* UIView+DimView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DimView.m"; sourceTree = "<group>"; };
-		7942082A1BD82AF6009B86FA /* THLActionBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLActionBarButton.h; sourceTree = "<group>"; };
-		7942082B1BD82AF6009B86FA /* THLActionBarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLActionBarButton.m; sourceTree = "<group>"; };
-		7942082D1BD8C250009B86FA /* THLGuestlistEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistEntity.h; sourceTree = "<group>"; };
-		7942082E1BD8C250009B86FA /* THLGuestlistEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestlistEntity.m; sourceTree = "<group>"; };
 		794483021BEC5B5D00EABE23 /* THLStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLStatusView.h; sourceTree = "<group>"; };
 		794483031BEC5B5D00EABE23 /* THLStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLStatusView.m; sourceTree = "<group>"; };
 		794A9D171CF4ACC300DDAC00 /* THLEventInviteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventInviteCell.h; sourceTree = "<group>"; };
@@ -398,6 +368,15 @@
 		79730CF71C18B47000D70F4B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		79752ADC1BEBD8B500D09B2E /* THLConfirmationPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLConfirmationPopupView.h; sourceTree = "<group>"; };
 		79752ADD1BEBD8B500D09B2E /* THLConfirmationPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLConfirmationPopupView.m; sourceTree = "<group>"; };
+		798402D21D217157006F463B /* THLEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEntity.h; sourceTree = "<group>"; };
+		798402D31D217157006F463B /* THLEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEntity.m; sourceTree = "<group>"; };
+		798402D51D2171A9006F463B /* THLEntityMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEntityMapper.h; sourceTree = "<group>"; };
+		798402D61D2171A9006F463B /* THLEntityMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEntityMapper.m; sourceTree = "<group>"; };
+		798402D91D2171E0006F463B /* THLGuestEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestEntity.h; sourceTree = "<group>"; };
+		798402DA1D2171E0006F463B /* THLGuestEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestEntity.m; sourceTree = "<group>"; };
+		798402DC1D217200006F463B /* THLUserEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserEntity.h; sourceTree = "<group>"; };
+		798402DD1D217200006F463B /* THLUserEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLUserEntity.m; sourceTree = "<group>"; };
+		798402E21D21BD79006F463B /* THLAdmissionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLAdmissionsViewController.swift; sourceTree = "<group>"; };
 		798650A21BEDDC2D0032A661 /* CAGradientLayer+THLGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAGradientLayer+THLGradient.h"; sourceTree = "<group>"; };
 		798650A31BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAGradientLayer+THLGradient.m"; sourceTree = "<group>"; };
 		798D7EBD1BF2E56C001D4593 /* OnboardingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnboardingViewController.h; sourceTree = "<group>"; };
@@ -431,8 +410,6 @@
 		79B959431BE8308600B87799 /* THLPersonIconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPersonIconView.m; sourceTree = "<group>"; };
 		79B9594B1BE8966300B87799 /* KLCPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLCPopup.h; sourceTree = "<group>"; };
 		79B9594C1BE8966300B87799 /* KLCPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLCPopup.m; sourceTree = "<group>"; };
-		79B9595F1BE9A90B00B87799 /* THLActionContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLActionContainerView.h; sourceTree = "<group>"; };
-		79B959601BE9A90B00B87799 /* THLActionContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLActionContainerView.m; sourceTree = "<group>"; };
 		79B994E81D0650D500E0AD33 /* THLPermissionRequestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPermissionRequestViewController.h; sourceTree = "<group>"; };
 		79B994E91D0650D500E0AD33 /* THLPermissionRequestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPermissionRequestViewController.m; sourceTree = "<group>"; };
 		79BB152E1C657FF50044D943 /* THLSingleLineTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLSingleLineTextField.h; sourceTree = "<group>"; };
@@ -489,7 +466,6 @@
 		79DF30241C72FF1700516199 /* THLEventHostingNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventHostingNavigationBar.h; sourceTree = "<group>"; };
 		79DF30251C72FF1700516199 /* THLEventHostingNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventHostingNavigationBar.m; sourceTree = "<group>"; };
 		95457EE5CFDECE1CB34DB5A3 /* libPods-HypeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HypeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		AC96838BEC292F573051058D /* libPods-Hype.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hype.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C80372D81D00DD68008848CA /* THLAdmissionOptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLAdmissionOptionCell.h; sourceTree = "<group>"; };
 		C80372D91D00DD68008848CA /* THLAdmissionOptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLAdmissionOptionCell.m; sourceTree = "<group>"; };
 		C81B83261D18BFC5008260EE /* THLEventDeepLinkingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventDeepLinkingController.h; sourceTree = "<group>"; };
@@ -498,8 +474,6 @@
 		C82D87BE1C25C7E300116328 /* THLConfirmationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLConfirmationView.m; sourceTree = "<group>"; };
 		C82D87C11C31CC2200116328 /* THLMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMenuView.h; sourceTree = "<group>"; };
 		C82D87C21C31CC2200116328 /* THLMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLMenuView.m; sourceTree = "<group>"; };
-		C85EE3771C1BC8AD0008C14B /* THLPerkStoreItemEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkStoreItemEntity.h; sourceTree = "<group>"; };
-		C85EE3781C1BC8AD0008C14B /* THLPerkStoreItemEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPerkStoreItemEntity.m; sourceTree = "<group>"; };
 		C85EE3BA1C1BCC190008C14B /* THLPerkStoreItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkStoreItem.h; sourceTree = "<group>"; };
 		C85EE3BB1C1BCC190008C14B /* THLPerkStoreItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPerkStoreItem.m; sourceTree = "<group>"; };
 		C85EE3BE1C1BCC940008C14B /* THLPerkStoreItemService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkStoreItemService.h; sourceTree = "<group>"; };
@@ -507,8 +481,6 @@
 		C85EE3C01C1BCC940008C14B /* THLPerkStoreItemServiceInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkStoreItemServiceInterface.h; sourceTree = "<group>"; };
 		C85EE3C21C1CDE140008C14B /* THLPurchasedPerkItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPurchasedPerkItem.h; sourceTree = "<group>"; };
 		C85EE3C31C1CDE140008C14B /* THLPurchasedPerkItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPurchasedPerkItem.m; sourceTree = "<group>"; };
-		C85EE3C51C1CE1020008C14B /* THLPurchasedPerkItemEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPurchasedPerkItemEntity.h; sourceTree = "<group>"; };
-		C85EE3C61C1CE1020008C14B /* THLPurchasedPerkItemEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPurchasedPerkItemEntity.m; sourceTree = "<group>"; };
 		C884EE1E1CF74E0400C47167 /* THLAdmissionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLAdmissionsViewController.h; sourceTree = "<group>"; };
 		C884EE1F1CF74E0400C47167 /* THLAdmissionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLAdmissionsViewController.m; sourceTree = "<group>"; };
 		C884EE221CF77CB200C47167 /* THLDiscoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLDiscoveryViewController.h; sourceTree = "<group>"; };
@@ -546,8 +518,7 @@
 		CBE549410DF951286E27016A /* THLViewDataSourceSorting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLViewDataSourceSorting.h; sourceTree = "<group>"; };
 		CBE54FC98A366F3761F89F63 /* THLViewDataSourceGrouping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLViewDataSourceGrouping.m; sourceTree = "<group>"; };
 		CBE54FD0B5A148F6494B7A84 /* THLViewDataSourceGrouping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLViewDataSourceGrouping.h; sourceTree = "<group>"; };
-		FAB488831C6369110052FA38 /* THLMessageListEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMessageListEntity.h; sourceTree = "<group>"; };
-		FAB488841C6369110052FA38 /* THLMessageListEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLMessageListEntity.m; sourceTree = "<group>"; };
+		D987E3A204C08C9E8BA25692 /* Pods_Hype.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hype.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAEE45CE1C70E4BA0032C91C /* THLChannelService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLChannelService.h; sourceTree = "<group>"; };
 		FAEE45CF1C70E4BA0032C91C /* THLChannelService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLChannelService.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -561,7 +532,7 @@
 				790B38EF1C0375B500CB2362 /* libsqlite3.dylib in Frameworks */,
 				794DCCB71BF555150037A03D /* Accelerate.framework in Frameworks */,
 				79730CF81C18B47000D70F4B /* MessageUI.framework in Frameworks */,
-				7BBDF5629F2B084726151904 /* libPods-Hype.a in Frameworks */,
+				36E96C056F7A3AF6319DE433 /* Pods_Hype.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -601,7 +572,6 @@
 			children = (
 				79B959491BE8961800B87799 /* Alien */,
 				794AFE2D1C124693008475B1 /* Info VC */,
-				794208291BD82ADB009B86FA /* THLActionBar */,
 				7928ADB71D19CBD900DFC443 /* THLActionButton */,
 				7928ADCA1D19CCC600DFC443 /* THLAdmissionOptionCell */,
 				C8E8817E1CF669D900D1A698 /* THLAdmissionsViewController */,
@@ -681,7 +651,6 @@
 			children = (
 				798D7EBC1BF2E528001D4593 /* Alien */,
 				2121735C1BB34239007D817A /* Promotion Card View */,
-				79B959621BE9A90F00B87799 /* THLActionContainerView */,
 				79B527A11C6E9ADA000A0970 /* THLAlertView */,
 				C880963C1C23C1C900C7524F /* THLConfirmationView */,
 				212173691BB34D46007D817A /* THLEventTitlesView */,
@@ -837,13 +806,12 @@
 		2174A05B1B863F6A006826D7 = {
 			isa = PBXGroup;
 			children = (
-				7928ADDC1D19E76600DFC443 /* ViewControllers */,
 				21CE061E1BB86939004D10BB /* Appearance */,
 				211005D11B8A7D0400A540C6 /* Categories */,
 				211005A81B8A3D5800A540C6 /* Components */,
 				21CCEDD21B87C27D0066CDAC /* Data Stores */,
 				2108A8821B8BBE8100B725F6 /* Dependency Management */,
-				218AF34F1BB7420900AFAEBF /* Entities */,
+				798402D11D217143006F463B /* Entities */,
 				217EBE8A1BB78A9D006044B6 /* Factories, Managers, et. All */,
 				F3E081FDB7C0DB50ADEBB991 /* Frameworks */,
 				79CD27BC1C520293009BC119 /* Hype */,
@@ -852,10 +820,11 @@
 				21CCEDD11B87C24A0066CDAC /* Parse Models */,
 				0ECEB28169244B93795EB448 /* Pods */,
 				21CCEDEB1B87CDD00066CDAC /* Services */,
+				7928ADDC1D19E76600DFC443 /* ViewControllers */,
 				211BB0D11B8CBE690068FD50 /* Views */,
+				7928ADD91D19E00800DFC443 /* Hype-Bridging-Header.h */,
 				79259D6E1CAA4C6C00409040 /* Hype.app */,
 				79259D6F1CAA4C6C00409040 /* Hype.xctest */,
-				7928ADD91D19E00800DFC443 /* Hype-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -909,7 +878,6 @@
 		217EBE8A1BB78A9D006044B6 /* Factories, Managers, et. All */ = {
 			isa = PBXGroup;
 			children = (
-				218AF3561BB7454700AFAEBF /* THLEntityMapper */,
 				217DC64D1BBB75E000332174 /* THLUserManager */,
 				217EBE901BB78EF5006044B6 /* THLViewDataSourceFactory */,
 				21CCEDE31B87C7950066CDAC /* THLYapDatabaseManager */,
@@ -957,53 +925,6 @@
 				218AF3451BB7393400AFAEBF /* THLEventServiceInterface.h */,
 			);
 			path = THLEventService;
-			sourceTree = "<group>";
-		};
-		218AF3481BB740CA00AFAEBF /* Base Class */ = {
-			isa = PBXGroup;
-			children = (
-				218AF3491BB740DB00AFAEBF /* THLEntity.h */,
-				218AF34A1BB740DB00AFAEBF /* THLEntity.m */,
-			);
-			path = "Base Class";
-			sourceTree = "<group>";
-		};
-		218AF34F1BB7420900AFAEBF /* Entities */ = {
-			isa = PBXGroup;
-			children = (
-				218AF3481BB740CA00AFAEBF /* Base Class */,
-				218AF35A1BB745F500AFAEBF /* THLEntities.h */,
-				218AF3501BB7422100AFAEBF /* THLEventEntity.h */,
-				218AF3511BB7422100AFAEBF /* THLEventEntity.m */,
-				21E402EC1BBF9A8B001D0C2C /* THLGuestEntity.h */,
-				21E402ED1BBF9A8B001D0C2C /* THLGuestEntity.m */,
-				7942082D1BD8C250009B86FA /* THLGuestlistEntity.h */,
-				7942082E1BD8C250009B86FA /* THLGuestlistEntity.m */,
-				7905CC3E1BE0251000E56878 /* THLGuestlistInviteEntity.h */,
-				7905CC401BE0252700E56878 /* THLGuestlistInviteEntity.m */,
-				217EBEB81BB7AB68006044B6 /* THLHostEntity.h */,
-				217EBEB91BB7AB68006044B6 /* THLHostEntity.m */,
-				218AF3531BB7440800AFAEBF /* THLLocationEntity.h */,
-				218AF3541BB7440800AFAEBF /* THLLocationEntity.m */,
-				FAB488831C6369110052FA38 /* THLMessageListEntity.h */,
-				FAB488841C6369110052FA38 /* THLMessageListEntity.m */,
-				C85EE3771C1BC8AD0008C14B /* THLPerkStoreItemEntity.h */,
-				C85EE3781C1BC8AD0008C14B /* THLPerkStoreItemEntity.m */,
-				C85EE3C51C1CE1020008C14B /* THLPurchasedPerkItemEntity.h */,
-				C85EE3C61C1CE1020008C14B /* THLPurchasedPerkItemEntity.m */,
-				217EBEB51BB7AB54006044B6 /* THLUserEntity.h */,
-				217EBEB61BB7AB54006044B6 /* THLUserEntity.m */,
-			);
-			path = Entities;
-			sourceTree = "<group>";
-		};
-		218AF3561BB7454700AFAEBF /* THLEntityMapper */ = {
-			isa = PBXGroup;
-			children = (
-				218AF3571BB7455500AFAEBF /* THLEntityMapper.h */,
-				218AF3581BB7455500AFAEBF /* THLEntityMapper.m */,
-			);
-			path = THLEntityMapper;
 			sourceTree = "<group>";
 		};
 		21937F2D1BB5D0F2005E949E /* Model Services */ = {
@@ -1377,17 +1298,9 @@
 			children = (
 				7917C0EF1D1B3C2E0054BDB0 /* THLVenueDiscoveryViewController.h */,
 				7917C0F01D1B3C2E0054BDB0 /* THLVenueDiscoveryViewController.m */,
+				798402E21D21BD79006F463B /* THLAdmissionsViewController.swift */,
 			);
-			name = ViewControllers;
-			sourceTree = "<group>";
-		};
-		794208291BD82ADB009B86FA /* THLActionBar */ = {
-			isa = PBXGroup;
-			children = (
-				7942082A1BD82AF6009B86FA /* THLActionBarButton.h */,
-				7942082B1BD82AF6009B86FA /* THLActionBarButton.m */,
-			);
-			path = THLActionBar;
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		794AFE2D1C124693008475B1 /* Info VC */ = {
@@ -1418,6 +1331,21 @@
 				794DCCB41BF555020037A03D /* FXBlurView.m */,
 			);
 			path = FXBlurView;
+			sourceTree = "<group>";
+		};
+		798402D11D217143006F463B /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				798402D21D217157006F463B /* THLEntity.h */,
+				798402D31D217157006F463B /* THLEntity.m */,
+				798402D51D2171A9006F463B /* THLEntityMapper.h */,
+				798402D61D2171A9006F463B /* THLEntityMapper.m */,
+				798402D91D2171E0006F463B /* THLGuestEntity.h */,
+				798402DA1D2171E0006F463B /* THLGuestEntity.m */,
+				798402DC1D217200006F463B /* THLUserEntity.h */,
+				798402DD1D217200006F463B /* THLUserEntity.m */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		798D7EBC1BF2E528001D4593 /* Alien */ = {
@@ -1489,15 +1417,6 @@
 				79B9594C1BE8966300B87799 /* KLCPopup.m */,
 			);
 			path = KLCPopup;
-			sourceTree = "<group>";
-		};
-		79B959621BE9A90F00B87799 /* THLActionContainerView */ = {
-			isa = PBXGroup;
-			children = (
-				79B9595F1BE9A90B00B87799 /* THLActionContainerView.h */,
-				79B959601BE9A90B00B87799 /* THLActionContainerView.m */,
-			);
-			path = THLActionContainerView;
 			sourceTree = "<group>";
 		};
 		79C93E261C758B47005B4D95 /* TSMessages */ = {
@@ -1754,8 +1673,8 @@
 				79730CF71C18B47000D70F4B /* MessageUI.framework */,
 				790B38EE1C0375B500CB2362 /* libsqlite3.dylib */,
 				794DCCB61BF555150037A03D /* Accelerate.framework */,
-				AC96838BEC292F573051058D /* libPods-Hype.a */,
 				95457EE5CFDECE1CB34DB5A3 /* libPods-HypeTests.a */,
+				D987E3A204C08C9E8BA25692 /* Pods_Hype.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2041,11 +1960,12 @@
 				211005B71B8A446D00A540C6 /* THLViewDataSource.m in Sources */,
 				C8F2FB271BF81A8E004E00B6 /* THLInformationViewController.m in Sources */,
 				C88A01591D04A9E200152B37 /* THLTablePackageDetailCell.m in Sources */,
-				218AF3591BB7455500AFAEBF /* THLEntityMapper.m in Sources */,
 				212173661BB34D22007D817A /* HCSStarRatingView.m in Sources */,
 				79CD27FD1C520293009BC119 /* THLResourceManager.m in Sources */,
 				C8E342091C3B1A9C009FE9B0 /* THLGuestlistReviewHeaderView.m in Sources */,
 				79B527A41C6E9AED000A0970 /* THLAlertView.m in Sources */,
+				798402E31D21BD79006F463B /* THLAdmissionsViewController.swift in Sources */,
+				798402DE1D217200006F463B /* THLUserEntity.m in Sources */,
 				2133BFCE1B877D11002C1DA9 /* THLLocation.m in Sources */,
 				C884EE241CF77CB200C47167 /* THLDiscoveryViewController.m in Sources */,
 				798D7EC21BF2E5CF001D4593 /* OnboardingContentViewController.m in Sources */,
@@ -2062,14 +1982,12 @@
 				79C93E311C758D36005B4D95 /* TSBlurView.m in Sources */,
 				C8EE96D51CE93D770040A1F0 /* THLCheckoutViewController.m in Sources */,
 				211005D51B8A7D2800A540C6 /* NSDate+Utilities.m in Sources */,
-				218AF34B1BB740DB00AFAEBF /* THLEntity.m in Sources */,
 				792545C21CFDDFFB004CF29A /* THLImportantInformationView.m in Sources */,
 				217EBE8D1BB78AB4006044B6 /* THLYapDatabaseViewFactory.m in Sources */,
 				79752ADE1BEBD8B500D09B2E /* THLConfirmationPopupView.m in Sources */,
 				211005D01B8A7D0200A540C6 /* NSDate+Hypelist.m in Sources */,
 				799862461C97B6AF004C5326 /* THLTextEntryViewController.m in Sources */,
 				C85EE3C41C1CDE140008C14B /* THLPurchasedPerkItem.m in Sources */,
-				7905CC411BE0252700E56878 /* THLGuestlistInviteEntity.m in Sources */,
 				79DF30261C72FF1700516199 /* THLEventHostingNavigationBar.m in Sources */,
 				216BDD611BC72F9100BBF713 /* THLSearchResultsViewDataSourceHandler.m in Sources */,
 				21775F631B8E17A300609D39 /* THLAddressBookEntryFetchService.m in Sources */,
@@ -2081,11 +1999,9 @@
 				2133C9D31C333DDC0020083A /* NSString+EmailAddresses.m in Sources */,
 				218AF3441BB7391B00AFAEBF /* THLEventService.m in Sources */,
 				216BDD671BC770CA00BBF713 /* THLSearchViewDataSource+Factory.m in Sources */,
-				218AF3551BB7440800AFAEBF /* THLLocationEntity.m in Sources */,
 				21CCEDE21B87C62F0066CDAC /* THLYapDatabaseManager.m in Sources */,
 				211BB0D81B8CC6DA0068FD50 /* UIView+AddSubviews.m in Sources */,
-				FAB488851C6369110052FA38 /* THLMessageListEntity.m in Sources */,
-				217EBEB71BB7AB54006044B6 /* THLUserEntity.m in Sources */,
+				798402D41D217157006F463B /* THLEntity.m in Sources */,
 				7928ADA11D19C98400DFC443 /* THLUserProfileTableViewCell.m in Sources */,
 				7928AD891D19C7B300DFC443 /* THLNeedToKnowInfoView.m in Sources */,
 				213CE1131BB8D22D00054A2C /* THLLocationService.m in Sources */,
@@ -2100,7 +2016,6 @@
 				C82D87BF1C25C7E300116328 /* THLConfirmationView.m in Sources */,
 				217EBE881BB77ED7006044B6 /* THLEntity+DataStore.m in Sources */,
 				212173601BB34261007D817A /* THLPromotionCardInfoCell.m in Sources */,
-				79B959611BE9A90B00B87799 /* THLActionContainerView.m in Sources */,
 				216BDD581BC71F1800BBF713 /* THLSearchViewDataSource.m in Sources */,
 				C88A01561D04A44200152B37 /* THLCollectionReusableView.m in Sources */,
 				79CD27E41C520293009BC119 /* AppDelegate.m in Sources */,
@@ -2111,6 +2026,7 @@
 				219E32A51B8EA62700214C85 /* THLEventNavigationController.m in Sources */,
 				217EBE941BB78F22006044B6 /* THLViewDataSourceFactory.m in Sources */,
 				794483041BEC5B5D00EABE23 /* THLStatusView.m in Sources */,
+				798402DB1D2171E0006F463B /* THLGuestEntity.m in Sources */,
 				79C93E2C1C758B5D005B4D95 /* TSMessageView.m in Sources */,
 				212173631BB3451F007D817A /* THLPromotionCardInfoView.m in Sources */,
 				FAEE45D01C70E4BA0032C91C /* THLChannelService.m in Sources */,
@@ -2118,7 +2034,6 @@
 				7917C0F11D1B3C2F0054BDB0 /* THLVenueDiscoveryViewController.m in Sources */,
 				79BB15331C6CED740044D943 /* THLFxTitleLabel.m in Sources */,
 				C80372DA1D00DD68008848CA /* THLAdmissionOptionCell.m in Sources */,
-				C85EE3791C1BC8AD0008C14B /* THLPerkStoreItemEntity.m in Sources */,
 				7996E2051D00D010006FFDDC /* THLPerkCollectionViewController.m in Sources */,
 				21E402D91BBF80E6001D0C2C /* THLGuestlist.m in Sources */,
 				792545BF1CFD113B004CF29A /* THLPartyInvitationViewController.m in Sources */,
@@ -2128,7 +2043,6 @@
 				C8E8817D1CF35C2700D1A698 /* THLMyEventsViewController.m in Sources */,
 				C8D1D2A41CD3E864006ADC6A /* THLPaymentViewController.m in Sources */,
 				21E402DC1BBF8155001D0C2C /* THLGuestlistInvite.m in Sources */,
-				7942082F1BD8C250009B86FA /* THLGuestlistEntity.m in Sources */,
 				21CCEDE91B87C87B0066CDAC /* THLDataStore.m in Sources */,
 				7928ADA41D19C9B600DFC443 /* THLOnboardingViewController.m in Sources */,
 				C8F2FB2A1BF826B7004E00B6 /* THLWebViewController.m in Sources */,
@@ -2136,7 +2050,6 @@
 				794FAB671C5F17F400438D49 /* THLActionButton.m in Sources */,
 				792545BC1CFCBD61004CF29A /* THLPartyMemberCell.m in Sources */,
 				794DCCAC1BF3B31E0037A03D /* UIImageView+Letters.m in Sources */,
-				C85EE3C71C1CE1020008C14B /* THLPurchasedPerkItemEntity.m in Sources */,
 				C85EE3C11C1BCC940008C14B /* THLPerkStoreItemService.m in Sources */,
 				217DC6531BBB77AC00332174 /* THLUserManager.m in Sources */,
 				79B9594D1BE8966300B87799 /* KLCPopup.m in Sources */,
@@ -2146,8 +2059,6 @@
 				7928ADB61D19CB5300DFC443 /* THLEventDetailsMapView.m in Sources */,
 				798D7EBF1BF2E56C001D4593 /* OnboardingViewController.m in Sources */,
 				C8FEE3D51D038C8700244252 /* THLTablePackageDetailsViewController.m in Sources */,
-				217EBEBA1BB7AB68006044B6 /* THLHostEntity.m in Sources */,
-				21E402EE1BBF9A8B001D0C2C /* THLGuestEntity.m in Sources */,
 				215A42AC1BAA2A1700D03C35 /* THLFacebookProfilePictureURLFetchService.m in Sources */,
 				21E402E01BBF8371001D0C2C /* THLGuestlistService.m in Sources */,
 				3E64EBEA1C5D89C5002BA11B /* THLFAQViewController.m in Sources */,
@@ -2163,8 +2074,7 @@
 				7928AD861D19C79300DFC443 /* THLParseQueryFactory.m in Sources */,
 				79BB15301C657FF50044D943 /* THLSingleLineTextField.m in Sources */,
 				79CD27FF1C520293009BC119 /* main.m in Sources */,
-				7942082C1BD82AF6009B86FA /* THLActionBarButton.m in Sources */,
-				218AF3521BB7422100AFAEBF /* THLEventEntity.m in Sources */,
+				798402D71D2171A9006F463B /* THLEntityMapper.m in Sources */,
 				21775F361B8CF72B00609D39 /* THLTitledContentView.m in Sources */,
 				CBE54720F63BA2DE2136B454 /* THLViewDataSource+Factory.m in Sources */,
 				C884EE2B1CF8C21900C47167 /* THLEventDetailsViewController.m in Sources */,
@@ -2226,6 +2136,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2273,6 +2184,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;

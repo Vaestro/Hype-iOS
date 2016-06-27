@@ -25,4 +25,6 @@ DZNEmptyDataSetDelegate
 >
 @property (nonatomic, weak) id<THLAdmissionsViewDelegate> delegate;
 @property (nonatomic) PFObject *event;
+@property (nonatomic) PFObject *venue;
+
 @end

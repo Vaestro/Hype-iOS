@@ -118,14 +118,14 @@
     return textView;
 }
 
-- (THLActionBarButton *)newAcceptButton {
-    THLActionBarButton *acceptButton = [THLActionBarButton new];
+- (THLActionButton *)newAcceptButton {
+    THLActionButton *acceptButton = [THLActionButton new];
     acceptButton.backgroundColor = kTHLNUIActionColor;
     return acceptButton;
 }
 
-- (THLActionBarButton *)newDeclineButton {
-    THLActionBarButton *declineButton = [THLActionBarButton new];
+- (THLActionButton *)newDeclineButton {
+    THLActionButton *declineButton = [THLActionButton new];
     declineButton.backgroundColor = kTHLNUIRedColor;
     
     return declineButton;

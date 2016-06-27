@@ -13,6 +13,7 @@
 @dynamic event;
 @dynamic reviewStatus;
 @dynamic date;
+@dynamic admissionOption;
 
 + (void)load {
 	[self registerSubclass];

@@ -56,6 +56,7 @@ THLAdmissionsViewDelegate,
 THLTablePackageControllerDelegate,
 THLMyEventsViewDelegate,
 THLDiscoveryViewControllerDelegate,
+THLVenueDiscoveryViewControllerDelegate,
 THLEventDetailsViewControllerDelegate,
 THLCheckoutViewControllerDelegate,
 THLPartyInvitationViewControllerDelegate,
@@ -296,15 +297,25 @@ THLLoginViewControllerDelegate
 #pragma mark EventDiscoveryViewController
 #pragma mark Delegate
 
-- (void)eventDiscoveryViewControllerWantsToPresentDetailsForEvent:(PFObject *)event {
-    THLEventDetailsViewController *eventDetailVC = [[THLEventDetailsViewController alloc]initWithEvent:event guestlistInvite:nil showNavigationBar:TRUE];
+- (void)eventDiscoveryViewControllerWantsToPresentDetailsForEvent:(PFObject *)event venue:(PFObject *)venue {
+    THLEventDetailsViewController *eventDetailVC = [[THLEventDetailsViewController alloc]initWithVenue:venue event:event guestlistInvite:nil showNavigationBar:TRUE];
     eventDetailVC.delegate = self;
     [_window.rootViewController presentViewController:eventDetailVC animated:YES completion:nil];
 }
-- (void)eventDiscoveryViewControllerWantsToPresentDetailsForAttendingEvent:(PFObject *)event invite:(PFObject *)invite {
-    THLEventDetailsViewController *eventDetailVC = [[THLEventDetailsViewController alloc]initWithEvent:event guestlistInvite:invite showNavigationBar:TRUE];
+- (void)eventDiscoveryViewControllerWantsToPresentDetailsForAttendingEvent:(PFObject *)event venue:(PFObject *)venue invite:(PFObject *)invite {
+    THLEventDetailsViewController *eventDetailVC = [[THLEventDetailsViewController alloc]initWithVenue:venue event:event guestlistInvite:invite showNavigationBar:TRUE];
     eventDetailVC.delegate = self;
     [_window.rootViewController presentViewController:eventDetailVC animated:YES completion:nil];
+}
+
+#pragma mark -
+#pragma mark VenueDiscoveryViewController
+#pragma mark Delegate
+
+- (void)venueDiscoveryViewControllerWantsToPresentDetailsForVenue:(PFObject *)venue {
+    THLEventDetailsViewController *venueDetailVC = [[THLEventDetailsViewController alloc]initWithVenue:venue event:nil guestlistInvite:nil showNavigationBar:YES];
+    venueDetailVC.delegate = self;
+    [_window.rootViewController presentViewController:venueDetailVC animated:YES completion:nil];
 }
 
 #pragma mark -
@@ -319,10 +330,12 @@ THLLoginViewControllerDelegate
 #pragma mark EventDetailsViewController
 #pragma mark Delegate
 
-- (void)eventDetailsWantsToPresentAdmissionsForEvent:(PFObject *)event {
+- (void)eventDetailsWantsToPresentAdmissionsForEvent:(PFObject *)event venue:(PFObject *)venue {
     THLAdmissionsViewController *admissionsVC = [[THLAdmissionsViewController alloc] initWithClassName:@"AdmissionOption"];
     admissionsVC.delegate = self;
     admissionsVC.event = event;
+    admissionsVC.venue = venue;
+
     UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:admissionsVC];
     [[self topViewController] presentViewController:navVC animated:YES completion:nil];
 }

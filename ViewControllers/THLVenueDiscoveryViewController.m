@@ -136,7 +136,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     PFObject *object = [self objectAtIndexPath:indexPath];
-    
+    [self.delegate venueDiscoveryViewControllerWantsToPresentDetailsForVenue:object];
 }
 
 #pragma mark - EmptyDataSetDelegate

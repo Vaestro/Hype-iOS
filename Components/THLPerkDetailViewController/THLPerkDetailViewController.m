@@ -10,7 +10,7 @@
 #import "ORStackScrollView.h"
 #import "THLAppearanceConstants.h"
 #import "UIView+DimView.h"
-#import "THLActionBarButton.h"
+#import "THLActionButton.h"
 #import <Parse/Parse.h>
 #import "THLConfirmationView.h"
 #import "Intercom/intercom.h"
@@ -24,7 +24,7 @@
 @property (nonatomic, strong) UILabel *itemNameLabel;
 @property (nonatomic, strong) UILabel *itemCreditsLabel;
 @property (nonatomic, strong) UIBarButtonItem *dismissButton;
-@property (nonatomic, strong) THLActionBarButton *purchaseButton;
+@property (nonatomic, strong) THLActionButton *purchaseButton;
 @property (nonatomic, strong) THLConfirmationView *confirmationView;
 
 @property (nonatomic, strong) PFObject *perk;
@@ -204,11 +204,11 @@
 
 #pragma mark - Constructors
 
-- (THLActionBarButton *)purchaseButton {
+- (THLActionButton *)purchaseButton {
     if (!_purchaseButton) {
-        _purchaseButton = [THLActionBarButton new];
+        _purchaseButton = [THLActionButton new];
         _purchaseButton.backgroundColor = kTHLNUIAccentColor;
-        [_purchaseButton.morphingLabel setTextWithoutMorphing:NSLocalizedString(@"REDEEM CREDITS", nil)];
+        [_purchaseButton setTitle:@"REDEEM CREDITS"];
         [_purchaseButton addTarget:self action:@selector(showRedeeemPerkFlow) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_purchaseButton];
     }

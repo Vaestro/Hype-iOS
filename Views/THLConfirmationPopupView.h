@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "KLCPopup.h"
-#import "THLActionBarButton.h"
+#import "THLActionButton.h"
 
 @interface THLConfirmationPopupView : UIView
 @property (nonatomic, copy) NSString *confirmationText;
 @property (nonatomic, strong) RACCommand *acceptCommand;
 @property (nonatomic, strong) RACCommand *declineCommand;
-@property (nonatomic, strong) THLActionBarButton *acceptButton;
-@property (nonatomic, strong) THLActionBarButton *declineButton;
+@property (nonatomic, strong) THLActionButton *acceptButton;
+@property (nonatomic, strong) THLActionButton *declineButton;
 @end

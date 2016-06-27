@@ -9,7 +9,6 @@
 #import "THLCheckoutViewController.h"
 #import "THLAppearanceConstants.h"
 #import "THLEvent.h"
-#import "THLLocationEntity.h"
 #import "THLGuestlistInvite.h"
 #import "THLUser.h"
 #import "Parse.h"
@@ -20,9 +19,9 @@
 #import "THLGuestlist.h"
 #import "THLImportantInformationView.h"
 #import "THLPaymentMethodView.h"
-#import "SVProgressHUD.h"
 #import "THLInformationViewController.h"
 #import "THLResourceManager.h"
+#import "SVProgressHUD.h"
 
 @interface THLCheckoutViewController ()
 <

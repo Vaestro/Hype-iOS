@@ -4,4 +4,5 @@
 
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
-#import <ParseUI/PFQueryCollectionViewController.h>
+#import "THLAdmissionOptionCell.h"
+#import "THLPerkStoreCell.h"

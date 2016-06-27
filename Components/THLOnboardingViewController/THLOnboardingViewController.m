@@ -11,7 +11,7 @@
 #import "OnboardingViewController.h"
 #import "SVProgressHUD.h"
 #import "THLResourceManager.h"
-#import "THLActionBarButton.h"
+#import "THLActionButton.h"
 #import "THLLoginService.h"
 #import "THLUser.h"
 #import "THLTextEntryViewController.h"

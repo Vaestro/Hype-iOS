@@ -11,15 +11,15 @@
 
 
 @protocol THLEventDetailsViewControllerDelegate <NSObject>
-- (void)eventDetailsWantsToPresentAdmissionsForEvent:(PFObject *)event;
+- (void)eventDetailsWantsToPresentAdmissionsForEvent:(PFObject *)event venue:(PFObject *)venue;
 - (void)eventDetailsWantsToPresentCheckoutForEvent:(PFObject *)event paymentInfo:(NSDictionary *)paymentInfo;
-- (void)eventDetailsWantsToPresentPartyForEvent:(PFObject *)guestlistInvite;
+- (void)eventDetailsWantsToPresentPartyForEvent:(PFObject *)guestlistInvite venue:(PFObject *)venue;
 - (void)usersWantsToLogin;
 @end
 
 @interface THLEventDetailsViewController : UIViewController <UIScrollViewDelegate>
 @property (nonatomic, weak) id<THLEventDetailsViewControllerDelegate> delegate;
 
-- (id)initWithEvent:(PFObject *)event guestlistInvite:(PFObject *)guestlistInvite showNavigationBar:(BOOL)showNavigationBar;
+- (id)initWithVenue:(PFObject *)venue event:(PFObject *)event guestlistInvite:(PFObject *)guestlistInvite showNavigationBar:(BOOL)showNavigationBar;
 @end
 

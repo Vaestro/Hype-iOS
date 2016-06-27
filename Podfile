@@ -1,9 +1,10 @@
 # Uncomment this line to define a global platform for your project
 platform :ios, '8.0'
 #ignore all warnings from all pods
-inhibit_all_warnings!
 
 target 'Hype' do
+use_frameworks!
+inhibit_all_warnings!
 #Global Frameworks and Utilities
 pod 'CocoaLumberjack'
 pod 'Masonry', '~> 0.6'
@@ -58,19 +59,14 @@ pod 'LMGeocoder'
 pod 'TTTAttributedLabel'
 
 #UI
-pod 'SLPagingView'
 pod 'SVPullToRefresh'
 pod "ORStackView"
-pod 'iCarousel', '~> 1.8'
-pod 'MJRefresh'
 pod 'SVProgressHUD'
 pod 'THContactPicker', '~> 1.2'
-pod "TOMSMorphingLabel", "~> 0.5"
 pod 'DZNEmptyDataSet'
 pod 'IHKeyboardAvoiding'
 pod "FXLabel"
 pod 'BLKFlexibleHeightBar'
-pod 'KVNProgress'
 end
 
 target 'HypeTests' do

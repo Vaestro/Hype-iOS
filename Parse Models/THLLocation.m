@@ -7,7 +7,6 @@
 //
 
 #import "THLLocation.h"
-#import "THLEventEntity.h"
 #import <FormatterKit/TTTAddressFormatter.h>
 
 @implementation THLLocation

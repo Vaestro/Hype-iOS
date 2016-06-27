@@ -202,8 +202,8 @@ TTTAttributedLabelDelegate
       
         THLTablePackageAdmissionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[THLTablePackageAdmissionCell identifier] forIndexPath:indexPath];
         cell.titleLabel.text = object[@"name"];
-        cell.priceLabel.text = [NSString stringWithFormat:@"$%ld total", [object[@"price"] integerValue]];
-        cell.partySizeLabel.text = [NSString stringWithFormat:@"%ld people", [object[@"partySize"] integerValue]];
+        cell.priceLabel.text = [NSString stringWithFormat:@"$%d total", [object[@"price"] integerValue]];
+        cell.partySizeLabel.text = [NSString stringWithFormat:@"%d people", [object[@"partySize"] integerValue]];
         cell.perPersonLabel.text = [NSString stringWithFormat:@"$%.f/person", ceil([object[@"price"] floatValue]/[object[@"partySize"] floatValue])];
     
         return cell;
