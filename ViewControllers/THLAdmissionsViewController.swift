@@ -82,28 +82,29 @@ class THLAdmissionsViewController: UIViewController, UICollectionViewDataSource,
     func loadObjects() {
         var query = PFQuery(className:"Event")
         // Fetch data from the parse platform
-        query.findObjectsInBackgroundWithBlock { (objects, error) in
-            
-            // The find succeeded now rocess the found objects into the countries array
-            if error == nil {
-                
-                // Clear existing country data
-                events.removeAll(keepCapacity: true)
-                admissionOptions.removeAll(keepCapacity: true)
-
-                // Add country objects to our array
-                if let objects = objects as? [PFObject] {
-                    countries = Array(objects.generate())
-                }
-                
-                // reload our data into the collection view
-                self.collectionView.reloadData()
-                
-            } else {
-                // Log details of the failure
-                println("Error: \(error!) \(error!.userInfo!)")
-            }
-        }    }
+//        query.findObjectsInBackgroundWithBlock { (objects, error) in
+//            
+//            // The find succeeded now rocess the found objects into the countries array
+//            if error == nil {
+//                
+//                // Clear existing country data
+//                events.removeAll(keepCapacity: true)
+//                admissionOptions.removeAll(keepCapacity: true)
+//
+//                // Add country objects to our array
+//                if let objects = objects as? [PFObject] {
+//                    countries = Array(objects.generate())
+//                }
+//                
+//                // reload our data into the collection view
+//                self.collectionView.reloadData()
+//                
+//            } else {
+//                // Log details of the failure
+//                println("Error: \(error!) \(error!.userInfo!)")
+//            }
+//        }
+    }
     
     /*
      ==========================================================================================

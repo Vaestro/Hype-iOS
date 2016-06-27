@@ -102,7 +102,7 @@
     PFQuery *query = [super queryForCollection];
     [query orderByAscending:@"date"];
     [query includeKey:@"location"];
-    [query includeKey:@"venue"];
+    [query includeKey:@"admissionOptions"];
     
     DTTimePeriod *eventDisplayPeriod = [DTTimePeriod timePeriodWithSize:DTTimePeriodSizeMonth amount:1 startingAt:[[NSDate date] dateByAddingTimeInterval:-60*300]];
     

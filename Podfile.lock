@@ -39,11 +39,11 @@ PODS:
     - CocoaLumberjack/Core
   - CocoaLumberjack/Extensions (2.3.0):
     - CocoaLumberjack/Default
-  - Crashlytics (3.7.1):
+  - Crashlytics (3.7.2):
     - Fabric (~> 1.6.3)
   - DateTools (1.7.0)
-  - Digits (2.2.0):
-    - TwitterCore (= 2.2.0)
+  - Digits (2.3.0):
+    - TwitterCore (= 2.3.0)
   - DZNEmptyDataSet (1.8.1)
   - EKAlgorithms (0.2)
   - Fabric (1.6.7)
@@ -92,9 +92,9 @@ PODS:
   - LinqToObjectiveC (2.1.0)
   - LMGeocoder (1.0.7)
   - Masonry (0.6.4)
-  - Mixpanel (2.9.9):
-    - Mixpanel/Mixpanel (= 2.9.9)
-  - Mixpanel/Mixpanel (2.9.9)
+  - Mixpanel (3.0.0):
+    - Mixpanel/Mixpanel (= 3.0.0)
+  - Mixpanel/Mixpanel (3.0.0)
   - NUI (0.5.5):
     - NUIParse
   - NUIParse (1.3)
@@ -132,7 +132,7 @@ PODS:
   - SVPullToRefresh (0.4.1)
   - THContactPicker (1.2)
   - TTTAttributedLabel (2.0.0)
-  - TwitterCore (2.2.0):
+  - TwitterCore (2.3.0):
     - Fabric
   - Typhoon (3.4.8):
     - Typhoon/no-arc (= 3.4.8)
@@ -247,9 +247,9 @@ SPEC CHECKSUMS:
   Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
   Branch: eced5b5201554811ecb039c74f9913b72caf6cc5
   CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
-  Crashlytics: 3cdd4c9655be68032a0cf0379e0fb5ef6af22cad
+  Crashlytics: 130ab943f8c78cda7a814b434f270b2e2c8a3cba
   DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
-  Digits: 335c479574eb2bbc50be326c1daf505b68d87135
+  Digits: af82d24ec38035cc555b60f55cca5abc68a76bed
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   EKAlgorithms: 83488651734ba3a63956fcb783b10e82d2ec3388
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
@@ -267,7 +267,7 @@ SPEC CHECKSUMS:
   LinqToObjectiveC: f0e40c137a458b6b9725c4c7b6a575c0c72e3aec
   LMGeocoder: 116e771bce773c82dbac9f59f443129dd26088a3
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
-  Mixpanel: 818d1940c2d9402453b349545022a86968097f57
+  Mixpanel: ac92056ee35a961362513ba11049e67cffcaa1f1
   NUI: 53de7278003235deb2a375fe6f04c7a3aa3e49eb
   NUIParse: 2e3885ba7807477266396292626bd387d34c2338
   ObjectiveSugar: a6a25f23d657c19df0a0b972466d5b5ca9f5295c
@@ -287,7 +287,7 @@ SPEC CHECKSUMS:
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
   THContactPicker: e723f7c6ab6e1d6d10d59d618322ab8bfcb00365
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
-  TwitterCore: 115527630bb2986954adc928b8c895a92bcd57e5
+  TwitterCore: 817eae3e291fa4125b47789e26a4f6f024115c1f
   Typhoon: f2390ad976bd1acaf5680b837781720faf5ff909
   YapDatabase: 713d4018cfacbd6e77dd430710ca84730e450980
   YLMoment: af44d9d402790049e5490fa6eae9585b89b4090b

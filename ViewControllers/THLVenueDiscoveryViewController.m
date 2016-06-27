@@ -94,7 +94,7 @@
 
 - (PFQuery *)queryForCollection {
     PFQuery *query = [super queryForCollection];
-    
+
     PFQuery *eventQuery = [PFQuery queryWithClassName:@"Event"];
     [eventQuery includeKey:@"location"];
     [eventQuery whereKeyExists:@"location"];
