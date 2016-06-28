@@ -57,6 +57,7 @@ pod 'APAddressBook', '~> 0.2.1’
 pod 'libPhoneNumber-iOS', '~> 0.8'
 pod 'LMGeocoder'
 pod 'TTTAttributedLabel'
+pod 'Harpy'
 
 #UI
 pod 'SVPullToRefresh'

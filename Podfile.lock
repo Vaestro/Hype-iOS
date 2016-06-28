@@ -86,6 +86,7 @@ PODS:
   - FXLabel (1.5.9)
   - GCDObjC (0.3.0)
   - Gizou (0.1.3)
+  - Harpy (3.4.10)
   - IHKeyboardAvoiding (2.5)
   - Intercom (2.3.21)
   - libPhoneNumber-iOS (0.8.13)
@@ -210,6 +211,7 @@ DEPENDENCIES:
   - FXLabel
   - GCDObjC (~> 0.2)
   - Gizou
+  - Harpy
   - IHKeyboardAvoiding
   - Intercom
   - libPhoneNumber-iOS (~> 0.8)
@@ -261,6 +263,7 @@ SPEC CHECKSUMS:
   FXLabel: 877f56a3e0ef76b223c67dea3f442c12d3a1d55c
   GCDObjC: 0c31898f34d8605196ac0343c65b496609d7dee6
   Gizou: 93853bf634a9382c257795db052aa9a75e972c43
+  Harpy: 5c40c58072143996e12d185aed2f4dbcc4cda2c2
   IHKeyboardAvoiding: 8f14fed93405dd2c44ce070a26f780d9e477538c
   Intercom: c05a2e008be2e5064d9045e0e7b919ca267da303
   libPhoneNumber-iOS: 3a37004baf779b4262ab29a31a87d2ae668159d4
@@ -292,6 +295,6 @@ SPEC CHECKSUMS:
   YapDatabase: 713d4018cfacbd6e77dd430710ca84730e450980
   YLMoment: af44d9d402790049e5490fa6eae9585b89b4090b
 
-PODFILE CHECKSUM: ffc1cd521c6a04d477183e770c03861056eb7644
+PODFILE CHECKSUM: 79af4191ea8b475ce5df7cfaed3f8bf0bbfa882f
 
 COCOAPODS: 1.0.1

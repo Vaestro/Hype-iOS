@@ -18,7 +18,7 @@
 #import "THLMasterWireframe.h"
 #import "THLAppearanceUtils.h"
 #import "Intercom/intercom.h"
-#import "Mixpanel.h"
+#import <Harpy/Harpy.h>
 
 #if DEBUG
 static NSString *applicationId = @"5t3F1S3wKnVGIKHob1Qj0Je3sygnFiwqAu6PP400";
@@ -56,8 +56,6 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
     // Track app open
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
-    
-    
     if (application.applicationIconBadgeNumber != 0) {
         application.applicationIconBadgeNumber = 0;
         [[PFInstallation currentInstallation] saveInBackground];
@@ -92,14 +90,6 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
 
     [Mixpanel sharedInstanceWithToken:mixpanelToken];
     
-//    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
-//                                                    UIUserNotificationTypeBadge |
-//                                                    UIUserNotificationTypeSound);
-//    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
-//                                                                             categories:nil];
-//    [application registerUserNotificationSettings:settings];
-//    [application registerForRemoteNotifications];
-    
 	[THLAppearanceUtils applyStyles];
 
 	_dependencyManager = [[THLDependencyManager alloc] init];
@@ -108,6 +98,17 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
 	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	[_masterWireframe presentAppInWindow:self.window];
 	
+    // Set the App ID for Harpy
+    [[Harpy sharedInstance] setAppID:@"com.hypelist.hype"];
+    // Set the UIViewController that will present an instance of UIAlertController
+    [[Harpy sharedInstance] setPresentingViewController:_window.rootViewController];
+    // (Optional) Set the App Name for your app
+    [[Harpy sharedInstance] setAppName:@"Hype"];
+    // (Optional) Set the Alert Type for your app
+    [[Harpy sharedInstance] setAlertType:HarpyAlertTypeForce];
+    // Perform check for new version of your app
+    [[Harpy sharedInstance] checkVersion];
+    
     // Extract the notification data
     NSDictionary *notificationPayload = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
     if (notificationPayload) {
@@ -189,7 +190,6 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-	
     // Clear badge and update installation, required for auto-incrementing badges.
     if (application.applicationIconBadgeNumber != 0) {
         application.applicationIconBadgeNumber = 0;
@@ -202,6 +202,22 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
     application.applicationIconBadgeNumber = 0;
     
     [FBSDKAppEvents activateApp];
+    
+    
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+    /*
+     Perform check for new version of your app
+     Useful if user returns to you app from background after being sent tot he App Store,
+     but doesn't update their app before coming back to your app.
+     
+     ONLY USE THIS IF YOU ARE USING *HarpyAlertTypeForce*
+     
+     Also, performs version check on first launch.
+     */
+    [[Harpy sharedInstance] checkVersion];
 }
 
 - (BOOL)application:(UIApplication *)application
