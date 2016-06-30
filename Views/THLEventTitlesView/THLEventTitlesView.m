@@ -92,6 +92,8 @@
     label.lineBreakMode = NSLineBreakByWordWrapping;
     label.numberOfLines = 3;
     label.textAlignment = NSTextAlignmentCenter;
+    label.adjustsFontSizeToFitWidth = YES;
+    label.minimumScaleFactor = 0.5;
     return label;
 }
 
@@ -100,6 +102,8 @@
     label.lineBreakMode = NSLineBreakByWordWrapping;
     label.numberOfLines = 1;
     label.textAlignment = NSTextAlignmentCenter;
+    label.adjustsFontSizeToFitWidth = YES;
+    label.minimumScaleFactor = 0.5;
     return label;
 }
 @end

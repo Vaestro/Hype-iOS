@@ -63,6 +63,11 @@
     self.collectionView.emptyDataSetSource = self;
     self.collectionView.emptyDataSetDelegate = self;
     
+    
+    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
+    
+    layout.sectionInset = UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 10.0f);
+    layout.minimumInteritemSpacing = 5.0f;
 }
 
 - (void)viewWillLayoutSubviews {
@@ -71,10 +76,10 @@
     
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
     
-    layout.minimumInteritemSpacing = 5;
-    layout.minimumLineSpacing = 5;
+    const CGRect bounds = UIEdgeInsetsInsetRect(self.view.bounds, layout.sectionInset);
+    CGFloat sideSize = MIN(CGRectGetWidth(bounds), CGRectGetHeight(bounds)) / 2.0f - layout.minimumInteritemSpacing;
+    layout.itemSize = CGSizeMake(sideSize, sideSize * 1.20);
     
-    layout.itemSize = CGSizeMake(ViewWidth(self.collectionView) - 25, 125);
 }
 
 - (void)objectsWillLoad {
@@ -126,12 +131,6 @@
     
     return cell;
 }
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(DiscoveryCellWidth(collectionView), DiscoveryCellHeight(collectionView));
-}
-
-
 
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {

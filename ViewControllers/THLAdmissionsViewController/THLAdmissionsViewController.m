@@ -227,7 +227,8 @@ TTTAttributedLabelDelegate
         if (response == [NSNumber numberWithInteger:0]) {
             THLEvent *event = (THLEvent *)_event;
             view.label.text = @"TICKETS";
-            view.subtitleLabel.text = [NSString stringWithFormat:@"Earn $%d credits when your ticket gets scanned at the venue", event.creditsPayout];
+            view.subtitleLabel.text = nil;
+//            view.subtitleLabel.text = [NSString stringWithFormat:@"Earn $%d credits when your ticket gets scanned at the venue", event.creditsPayout];
         } else if (response == [NSNumber numberWithInteger:1]) {
             view.label.text = @"TABLE & BOTTLE SERVICE";
             view.subtitleLabel.text = nil;

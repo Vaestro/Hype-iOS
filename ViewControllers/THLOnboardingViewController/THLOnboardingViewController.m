@@ -232,7 +232,6 @@ THLPermissionRequestViewControllerDelegate
     
     return @[firstPage,
              secondPage,
-             thirdPage,
              fourthPage,
              fifthPage];
 }

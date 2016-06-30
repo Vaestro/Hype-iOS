@@ -21,6 +21,8 @@
 + (instancetype)thl_nextWeek;
 - (BOOL)thl_isOrAfterToday;
 - (NSString *)thl_dayOfTheWeek;
+- (NSString *)thl_weekdayInitials;
+
 - (NSDate *)thl_sixHoursAhead;
 - (NSString *)thl_formattedDate;
 @end

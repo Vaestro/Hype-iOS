@@ -129,31 +129,30 @@ TTTAttributedLabelDelegate
         make.top.left.right.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
-    if ([_admissionOption[@"type"] integerValue] != 1) {
-        [contentView addSubviews:@[self.applyCreditsLabel, self.applyCreditsButton]];
-        
-        [self.applyCreditsLabel makeConstraints:^(MASConstraintMaker *make) {
-//            make.top.equalTo(WSELF.purchaseDetailsView.mas_bottom).insets(kTHLEdgeInsetsHigh());
-            make.centerY.equalTo(WSELF.applyCreditsButton);
-            make.right.insets(kTHLEdgeInsetsSuperHigh());
-        }];
-        
-        [self.applyCreditsButton makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(WSELF.purchaseDetailsView.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
-            make.left.insets(kTHLEdgeInsetsSuperHigh());
-        }];
-        
+//    if ([_admissionOption[@"type"] integerValue] != 1) {
+//        [contentView addSubviews:@[self.applyCreditsLabel, self.applyCreditsButton]];
+//        
+//        [self.applyCreditsLabel makeConstraints:^(MASConstraintMaker *make) {
+////            make.top.equalTo(WSELF.purchaseDetailsView.mas_bottom).insets(kTHLEdgeInsetsHigh());
+//            make.centerY.equalTo(WSELF.applyCreditsButton);
+//            make.right.insets(kTHLEdgeInsetsSuperHigh());
+//        }];
+//        
+//        [self.applyCreditsButton makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(WSELF.purchaseDetailsView.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+//            make.left.insets(kTHLEdgeInsetsSuperHigh());
+//        }];
+//        
+//        [self.paymentMethodView makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.equalTo(WSELF.applyCreditsLabel.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+//            make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+//        }];
+//    } else {
         [self.paymentMethodView makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(WSELF.applyCreditsLabel.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+            make.top.equalTo(WSELF.purchaseDetailsView.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
             make.left.right.insets(kTHLEdgeInsetsSuperHigh());
         }];
-    } else {
-        [self.paymentMethodView makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(WSELF.purchaseDetailsView.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
-            make.left.right.insets(kTHLEdgeInsetsSuperHigh());
-        }];
-
-    }
+//    }
 
     [self.importantInformationView makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(WSELF.paymentMethodView.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
@@ -168,7 +167,6 @@ TTTAttributedLabelDelegate
             make.height.equalTo(WSELF.agreementButton.mas_width);
             make.left.insets(kTHLEdgeInsetsSuperHigh());
             make.bottom.insets(kTHLEdgeInsetsSuperHigh());
-
         }];
         
         [self.attributedLabel makeConstraints:^(MASConstraintMaker *make) {
@@ -209,7 +207,7 @@ TTTAttributedLabelDelegate
         _importantInformationView = [THLImportantInformationView new];
         _importantInformationView.titleLabel.text = @"Important Information";
         if ([_admissionOption[@"type"] integerValue] == 0) {
-            _importantInformationView.importantInformationLabel.text = @"Your purchase is non-refundable\n\nTicket is valid until 2am the night of the event\n\nPlease dress appropriately\n\nDoorman has final say on admission";
+            _importantInformationView.importantInformationLabel.text = @"Your purchase is non-refundable\n\nBest Price Guaranteed: Find a better price and we'll match it\n\nTicket is valid until 2am the night of the event\n\nPlease dress appropriately\n\nDoorman has final say on admission";
         } else {
             _importantInformationView.importantInformationLabel.text = @"You will pay the total at the venue\n\nPlease dress appropriately\n\nDoorman has final say on admission";
         }

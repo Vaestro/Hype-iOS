@@ -58,6 +58,7 @@ pod 'libPhoneNumber-iOS', '~> 0.8'
 pod 'LMGeocoder'
 pod 'TTTAttributedLabel'
 pod 'Harpy'
+pod 'SwiftDate'
 
 #UI
 pod 'SVPullToRefresh'

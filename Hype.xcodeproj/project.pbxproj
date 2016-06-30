@@ -49,9 +49,6 @@
 		21E402D91BBF80E6001D0C2C /* THLGuestlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E402D81BBF80E6001D0C2C /* THLGuestlist.m */; };
 		21E402DC1BBF8155001D0C2C /* THLGuestlistInvite.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E402DB1BBF8155001D0C2C /* THLGuestlistInvite.m */; };
 		21E402E01BBF8371001D0C2C /* THLGuestlistService.m in Sources */ = {isa = PBXBuildFile; fileRef = 21E402DF1BBF8371001D0C2C /* THLGuestlistService.m */; };
-		36E96C056F7A3AF6319DE433 /* Pods_Hype.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D987E3A204C08C9E8BA25692 /* Pods_Hype.framework */; };
-		3E64EBEA1C5D89C5002BA11B /* THLFAQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E64EBE91C5D89C5002BA11B /* THLFAQViewController.m */; };
-		3EECB6911C61450100702540 /* THLFAQSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EECB6901C61450100702540 /* THLFAQSectionView.m */; };
 		3EF951781C56AD770046D4F1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EF951771C56AD770046D4F1 /* MobileCoreServices.framework */; };
 		59B1B5471C74754A00F94DBF /* Hype.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 59B1B5461C74703F00F94DBF /* Hype.entitlements */; };
 		79060B431D0B2BF500D1A00C /* THLTableReservationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79060B421D0B2BF500D1A00C /* THLTableReservationViewController.m */; };
@@ -94,7 +91,7 @@
 		798402D71D2171A9006F463B /* THLEntityMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 798402D61D2171A9006F463B /* THLEntityMapper.m */; };
 		798402DB1D2171E0006F463B /* THLGuestEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 798402DA1D2171E0006F463B /* THLGuestEntity.m */; };
 		798402DE1D217200006F463B /* THLUserEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 798402DD1D217200006F463B /* THLUserEntity.m */; };
-		798402E31D21BD79006F463B /* THLAdmissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798402E21D21BD79006F463B /* THLAdmissionsViewController.swift */; };
+		798402E31D21BD79006F463B /* THLSwiftAdmissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798402E21D21BD79006F463B /* THLSwiftAdmissionsViewController.swift */; };
 		798650A41BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 798650A31BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m */; };
 		798D7EBF1BF2E56C001D4593 /* OnboardingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 798D7EBE1BF2E56C001D4593 /* OnboardingViewController.m */; };
 		798D7EC21BF2E5CF001D4593 /* OnboardingContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 798D7EC11BF2E5CF001D4593 /* OnboardingContentViewController.m */; };
@@ -120,10 +117,6 @@
 		79BB15301C657FF50044D943 /* THLSingleLineTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BB152F1C657FF50044D943 /* THLSingleLineTextField.m */; };
 		79BB15331C6CED740044D943 /* THLFxTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BB15321C6CED720044D943 /* THLFxTitleLabel.m */; };
 		79C422871D07F6B5005A02FA /* Cancellation Policy.txt in Resources */ = {isa = PBXBuildFile; fileRef = 79C422861D07F6B5005A02FA /* Cancellation Policy.txt */; };
-		79C93E2B1C758B5D005B4D95 /* TSMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C93E281C758B5D005B4D95 /* TSMessage.m */; };
-		79C93E2C1C758B5D005B4D95 /* TSMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C93E2A1C758B5D005B4D95 /* TSMessageView.m */; };
-		79C93E2E1C758B69005B4D95 /* TSMessagesDefaultDesign.json in Resources */ = {isa = PBXBuildFile; fileRef = 79C93E2D1C758B69005B4D95 /* TSMessagesDefaultDesign.json */; };
-		79C93E311C758D36005B4D95 /* TSBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C93E301C758D36005B4D95 /* TSBlurView.m */; };
 		79CD27E41C520293009BC119 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CD27BE1C520293009BC119 /* AppDelegate.m */; };
 		79CD27E51C520293009BC119 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27BF1C520293009BC119 /* LaunchScreen.xib */; };
 		79CD27E61C520293009BC119 /* Hype.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27C31C520293009BC119 /* Hype.strings */; };
@@ -152,7 +145,8 @@
 		79CD27FF1C520293009BC119 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CD27E01C520293009BC119 /* main.m */; };
 		79CD28031C5202A0009BC119 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79CD28021C5202A0009BC119 /* Info.plist */; };
 		79CE315A1CF7B03F00CEA784 /* THLEventTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CE31591CF7B03F00CEA784 /* THLEventTicketViewController.m */; };
-		79DF30221C714AFB00516199 /* THLCreditsExplanationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DF30211C714AFB00516199 /* THLCreditsExplanationView.m */; };
+		79CEDF3B1D23213400DFB654 /* THLEventPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CEDF3A1D23213400DFB654 /* THLEventPickerViewController.swift */; };
+		79CEDF3F1D257A6700DFB654 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CEDF3E1D257A6600DFB654 /* UIColorExtensions.swift */; };
 		79DF30261C72FF1700516199 /* THLEventHostingNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DF30251C72FF1700516199 /* THLEventHostingNavigationBar.m */; };
 		7D7B044EABDEF9475D0E84DA /* libPods-HypeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95457EE5CFDECE1CB34DB5A3 /* libPods-HypeTests.a */; };
 		C80372DA1D00DD68008848CA /* THLAdmissionOptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C80372D91D00DD68008848CA /* THLAdmissionOptionCell.m */; };
@@ -180,6 +174,7 @@
 		CBE5403C8B7732B36D5ECB5E /* THLViewDataSourceGrouping.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE54FC98A366F3761F89F63 /* THLViewDataSourceGrouping.m */; };
 		CBE54720F63BA2DE2136B454 /* THLViewDataSource+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE545A9A3C66339456E0A06 /* THLViewDataSource+Factory.m */; };
 		CBE547FB5677C373C1DE74C7 /* THLViewDataSourceSorting.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE5404991A434142507D7B0 /* THLViewDataSourceSorting.m */; };
+		F484D9C77B787AF97E0D23CC /* Pods_Hype.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 988D4FFD83B2E2E5737EFBF8 /* Pods_Hype.framework */; };
 		FAEE45D01C70E4BA0032C91C /* THLChannelService.m in Sources */ = {isa = PBXBuildFile; fileRef = FAEE45CF1C70E4BA0032C91C /* THLChannelService.m */; };
 /* End PBXBuildFile section */
 
@@ -289,10 +284,6 @@
 		21E402E11BBF837F001D0C2C /* THLGuestlistServiceInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLGuestlistServiceInterface.h; sourceTree = "<group>"; };
 		2A6667331CAB3D1DEA6DE560 /* Pods-Hype.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hype.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hype/Pods-Hype.debug.xcconfig"; sourceTree = "<group>"; };
 		31864EA66017466943817EB6 /* Pods-Hype.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hype.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hype/Pods-Hype.release.xcconfig"; sourceTree = "<group>"; };
-		3E64EBE81C5D89C5002BA11B /* THLFAQViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLFAQViewController.h; sourceTree = "<group>"; };
-		3E64EBE91C5D89C5002BA11B /* THLFAQViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLFAQViewController.m; sourceTree = "<group>"; };
-		3EECB68F1C61450100702540 /* THLFAQSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLFAQSectionView.h; sourceTree = "<group>"; };
-		3EECB6901C61450100702540 /* THLFAQSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLFAQSectionView.m; sourceTree = "<group>"; };
 		3EF951771C56AD770046D4F1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		4C0392A27CC17D305BBCE1E1 /* Pods-HypeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HypeTests/Pods-HypeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		59B1B5461C74703F00F94DBF /* Hype.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Hype.entitlements; sourceTree = "<group>"; };
@@ -349,7 +340,6 @@
 		7928ADB21D19CB1900DFC443 /* THLPopupNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPopupNotificationView.m; sourceTree = "<group>"; };
 		7928ADB41D19CB5300DFC443 /* THLEventDetailsMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventDetailsMapView.h; sourceTree = "<group>"; };
 		7928ADB51D19CB5300DFC443 /* THLEventDetailsMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventDetailsMapView.m; sourceTree = "<group>"; };
-		7928ADD91D19E00800DFC443 /* Hype-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hype-Bridging-Header.h"; sourceTree = "<group>"; };
 		7928ADDF1D19EE3400DFC443 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = "SnapKit/build/Debug-iphoneos/SnapKit.framework"; sourceTree = "<group>"; };
 		794208261BD82641009B86FA /* UIView+DimView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DimView.h"; sourceTree = "<group>"; };
 		794208271BD82641009B86FA /* UIView+DimView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DimView.m"; sourceTree = "<group>"; };
@@ -376,7 +366,7 @@
 		798402DA1D2171E0006F463B /* THLGuestEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLGuestEntity.m; sourceTree = "<group>"; };
 		798402DC1D217200006F463B /* THLUserEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserEntity.h; sourceTree = "<group>"; };
 		798402DD1D217200006F463B /* THLUserEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLUserEntity.m; sourceTree = "<group>"; };
-		798402E21D21BD79006F463B /* THLAdmissionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLAdmissionsViewController.swift; sourceTree = "<group>"; };
+		798402E21D21BD79006F463B /* THLSwiftAdmissionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLSwiftAdmissionsViewController.swift; sourceTree = "<group>"; };
 		798650A21BEDDC2D0032A661 /* CAGradientLayer+THLGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAGradientLayer+THLGradient.h"; sourceTree = "<group>"; };
 		798650A31BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAGradientLayer+THLGradient.m"; sourceTree = "<group>"; };
 		798D7EBD1BF2E56C001D4593 /* OnboardingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnboardingViewController.h; sourceTree = "<group>"; };
@@ -417,13 +407,6 @@
 		79BB15311C6CED720044D943 /* THLFxTitleLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLFxTitleLabel.h; sourceTree = "<group>"; };
 		79BB15321C6CED720044D943 /* THLFxTitleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLFxTitleLabel.m; sourceTree = "<group>"; };
 		79C422861D07F6B5005A02FA /* Cancellation Policy.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Cancellation Policy.txt"; sourceTree = "<group>"; };
-		79C93E271C758B5D005B4D95 /* TSMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSMessage.h; sourceTree = "<group>"; };
-		79C93E281C758B5D005B4D95 /* TSMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSMessage.m; sourceTree = "<group>"; };
-		79C93E291C758B5D005B4D95 /* TSMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSMessageView.h; sourceTree = "<group>"; };
-		79C93E2A1C758B5D005B4D95 /* TSMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSMessageView.m; sourceTree = "<group>"; };
-		79C93E2D1C758B69005B4D95 /* TSMessagesDefaultDesign.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TSMessagesDefaultDesign.json; sourceTree = "<group>"; };
-		79C93E2F1C758D36005B4D95 /* TSBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSBlurView.h; sourceTree = "<group>"; };
-		79C93E301C758D36005B4D95 /* TSBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSBlurView.m; sourceTree = "<group>"; };
 		79CD27BD1C520293009BC119 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		79CD27BE1C520293009BC119 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		79CD27C01C520293009BC119 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -461,11 +444,13 @@
 		79CD28021C5202A0009BC119 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79CE31581CF7B03F00CEA784 /* THLEventTicketViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventTicketViewController.h; sourceTree = "<group>"; };
 		79CE31591CF7B03F00CEA784 /* THLEventTicketViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventTicketViewController.m; sourceTree = "<group>"; };
-		79DF30201C714AFB00516199 /* THLCreditsExplanationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLCreditsExplanationView.h; sourceTree = "<group>"; };
-		79DF30211C714AFB00516199 /* THLCreditsExplanationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLCreditsExplanationView.m; sourceTree = "<group>"; };
+		79CEDF3A1D23213400DFB654 /* THLEventPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLEventPickerViewController.swift; sourceTree = "<group>"; };
+		79CEDF3D1D244B6F00DFB654 /* Hype-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hype-Bridging-Header.h"; sourceTree = "<group>"; };
+		79CEDF3E1D257A6600DFB654 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColorExtensions.swift; path = Categories/UIColorExtensions.swift; sourceTree = SOURCE_ROOT; };
 		79DF30241C72FF1700516199 /* THLEventHostingNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventHostingNavigationBar.h; sourceTree = "<group>"; };
 		79DF30251C72FF1700516199 /* THLEventHostingNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventHostingNavigationBar.m; sourceTree = "<group>"; };
 		95457EE5CFDECE1CB34DB5A3 /* libPods-HypeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HypeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		988D4FFD83B2E2E5737EFBF8 /* Pods_Hype.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hype.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C80372D81D00DD68008848CA /* THLAdmissionOptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLAdmissionOptionCell.h; sourceTree = "<group>"; };
 		C80372D91D00DD68008848CA /* THLAdmissionOptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLAdmissionOptionCell.m; sourceTree = "<group>"; };
 		C81B83261D18BFC5008260EE /* THLEventDeepLinkingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventDeepLinkingController.h; sourceTree = "<group>"; };
@@ -518,7 +503,6 @@
 		CBE549410DF951286E27016A /* THLViewDataSourceSorting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLViewDataSourceSorting.h; sourceTree = "<group>"; };
 		CBE54FC98A366F3761F89F63 /* THLViewDataSourceGrouping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLViewDataSourceGrouping.m; sourceTree = "<group>"; };
 		CBE54FD0B5A148F6494B7A84 /* THLViewDataSourceGrouping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLViewDataSourceGrouping.h; sourceTree = "<group>"; };
-		D987E3A204C08C9E8BA25692 /* Pods_Hype.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hype.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAEE45CE1C70E4BA0032C91C /* THLChannelService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLChannelService.h; sourceTree = "<group>"; };
 		FAEE45CF1C70E4BA0032C91C /* THLChannelService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLChannelService.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -532,7 +516,7 @@
 				790B38EF1C0375B500CB2362 /* libsqlite3.dylib in Frameworks */,
 				794DCCB71BF555150037A03D /* Accelerate.framework in Frameworks */,
 				79730CF81C18B47000D70F4B /* MessageUI.framework in Frameworks */,
-				36E96C056F7A3AF6319DE433 /* Pods_Hype.framework in Frameworks */,
+				F484D9C77B787AF97E0D23CC /* Pods_Hype.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,45 +558,23 @@
 				794AFE2D1C124693008475B1 /* Info VC */,
 				7928ADB71D19CBD900DFC443 /* THLActionButton */,
 				7928ADCA1D19CCC600DFC443 /* THLAdmissionOptionCell */,
-				C8E8817E1CF669D900D1A698 /* THLAdmissionsViewController */,
 				7928ADC11D19CC6300DFC443 /* THLAttendingEventCell */,
-				C8EE96D21CE93D4F0040A1F0 /* THLCheckoutViewController */,
 				7928ADC91D19CCBE00DFC443 /* THLCollectionReusableView */,
-				C884EE211CF77C8400C47167 /* THLDiscoveryViewController */,
 				C81B83251D18BF89008260EE /* THLEventDeepLinkingController */,
-				C884EE281CF8BDAD00C47167 /* THLEventDetailsViewController */,
 				79DF30231C72FD3200516199 /* THLEventHostingNavigationBar */,
 				7928ADCC1D19CCD700DFC443 /* THLEventInviteCell */,
 				21CE05F71BB84032004D10BB /* THLEventNavigationBar */,
-				21CE05F61BB84026004D10BB /* THLEventNavigationController */,
-				7928ADB81D19CBFD00DFC443 /* THLEventTicketViewController */,
-				3EECB6921C61451800702540 /* THLFAOSectionView */,
-				3E64EBEB1C5D89CC002BA11B /* THLFAQViewController */,
 				7928ADBF1D19CC5000DFC443 /* THLFxTitleLabel */,
 				C8E342061C3A380D009FE9B0 /* THLGuestlistReviewHeaderView */,
-				7928ADC41D19CC9200DFC443 /* THLLoginViewController */,
-				C8E8817A1CF35BDC00D1A698 /* THLMyEventsViewController */,
-				7928ADC61D19CCA500DFC443 /* THLOnboardingViewController */,
-				7928ADBE1D19CC4100DFC443 /* THLPartyInvitationViewController */,
 				7928ADCB1D19CCCF00DFC443 /* THLPartyMemberCell */,
-				7928ADBD1D19CC3500DFC443 /* THLPartyNavigationController */,
-				7928ADB91D19CC0900DFC443 /* THLPartyViewController */,
 				7928ADC21D19CC7000DFC443 /* THLPaymentMethodView */,
-				C8D1D2A11CD3E836006ADC6A /* THLPaymentViewController */,
-				7928ADBA1D19CC1300DFC443 /* THLPerkCollectionViewController */,
-				7928ADC51D19CC9B00DFC443 /* THLPerkDetailViewController */,
-				7928ADBC1D19CC2700DFC443 /* THLPermissionRequestViewController */,
 				7928ADCD1D19CCE000DFC443 /* THLPurchaseDetailsView */,
 				216BDD541BC71EE500BBF713 /* THLSearchViewDataSource */,
 				7928ADBB1D19CC1B00DFC443 /* THLSingleLineTextField */,
 				7928ADC71D19CCAD00DFC443 /* THLTablePackageAdmissionCell */,
 				7928ADC81D19CCB600DFC443 /* THLTablePackageDetailCell */,
-				C8FEE3D21D038C5800244252 /* THLTablePackageDetailsViewController */,
-				7928ADC01D19CC5900DFC443 /* THLTableReservationViewController */,
-				7928ADC31D19CC7A00DFC443 /* THLTextEntryViewController */,
 				217EBE891BB78A57006044B6 /* THLViewDataSource */,
 				C8A766551CDA84A600A000C2 /* THLWebViewController */,
-				79C93E261C758B47005B4D95 /* TSMessages */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -620,6 +582,7 @@
 		211005D11B8A7D0400A540C6 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				79CEDF3E1D257A6600DFB654 /* UIColorExtensions.swift */,
 				3EF9517C1C56B5D40046D4F1 /* UIImageView */,
 				798650A21BEDDC2D0032A661 /* CAGradientLayer+THLGradient.h */,
 				798650A31BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m */,
@@ -652,29 +615,20 @@
 				798D7EBC1BF2E528001D4593 /* Alien */,
 				2121735C1BB34239007D817A /* Promotion Card View */,
 				79B527A11C6E9ADA000A0970 /* THLAlertView */,
+				79CEDF321D230E0900DFB654 /* THLConfirmationPopupView */,
 				C880963C1C23C1C900C7524F /* THLConfirmationView */,
+				79CEDF331D230E1600DFB654 /* THLContactTableViewCell */,
+				79CEDF351D230E3400DFB654 /* THLDashboardNotificationSectionTitleCell */,
+				79CEDF361D230E4A00DFB654 /* THLEventDetailsMapView */,
 				212173691BB34D46007D817A /* THLEventTitlesView */,
+				79CEDF371D230E5200DFB654 /* THLImportantInformationView */,
 				C82D87C01C31CBEB00116328 /* THLMenuView */,
+				79CEDF381D230E8600DFB654 /* THLNeedToKnowInfoView */,
+				79CEDF391D230E8E00DFB654 /* THLPerkStoreCell */,
 				79B959411BE8306300B87799 /* THLPersonIconView */,
 				212173721BB34F19007D817A /* THLRoundImageView */,
 				2121736B1BB34D68007D817A /* THLStarRatingView */,
 				2121736A1BB34D4F007D817A /* THLTitledContentView */,
-				79752ADC1BEBD8B500D09B2E /* THLConfirmationPopupView.h */,
-				79752ADD1BEBD8B500D09B2E /* THLConfirmationPopupView.m */,
-				7928AD9C1D19C91900DFC443 /* THLContactTableViewCell.h */,
-				7928AD9D1D19C91900DFC443 /* THLContactTableViewCell.m */,
-				79DF30201C714AFB00516199 /* THLCreditsExplanationView.h */,
-				79DF30211C714AFB00516199 /* THLCreditsExplanationView.m */,
-				7928AD8A1D19C7DC00DFC443 /* THLDashboardNotificationSectionTitleCell.h */,
-				7928AD8B1D19C7DC00DFC443 /* THLDashboardNotificationSectionTitleCell.m */,
-				7928ADB41D19CB5300DFC443 /* THLEventDetailsMapView.h */,
-				7928ADB51D19CB5300DFC443 /* THLEventDetailsMapView.m */,
-				792545C01CFDDFFB004CF29A /* THLImportantInformationView.h */,
-				792545C11CFDDFFB004CF29A /* THLImportantInformationView.m */,
-				7928AD871D19C7B300DFC443 /* THLNeedToKnowInfoView.h */,
-				7928AD881D19C7B300DFC443 /* THLNeedToKnowInfoView.m */,
-				7928AD901D19C82600DFC443 /* THLPerkStoreCell.h */,
-				7928AD911D19C82600DFC443 /* THLPerkStoreCell.m */,
 				7928ADB11D19CB1900DFC443 /* THLPopupNotificationView.h */,
 				7928ADB21D19CB1900DFC443 /* THLPopupNotificationView.m */,
 				7928AD8D1D19C80400DFC443 /* THLPromotionInfoView.h */,
@@ -806,6 +760,7 @@
 		2174A05B1B863F6A006826D7 = {
 			isa = PBXGroup;
 			children = (
+				79CEDF3D1D244B6F00DFB654 /* Hype-Bridging-Header.h */,
 				21CE061E1BB86939004D10BB /* Appearance */,
 				211005D11B8A7D0400A540C6 /* Categories */,
 				211005A81B8A3D5800A540C6 /* Components */,
@@ -822,7 +777,6 @@
 				21CCEDEB1B87CDD00066CDAC /* Services */,
 				7928ADDC1D19E76600DFC443 /* ViewControllers */,
 				211BB0D11B8CBE690068FD50 /* Views */,
-				7928ADD91D19E00800DFC443 /* Hype-Bridging-Header.h */,
 				79259D6E1CAA4C6C00409040 /* Hype.app */,
 				79259D6F1CAA4C6C00409040 /* Hype.xctest */,
 			);
@@ -1059,24 +1013,6 @@
 			path = "Master Wireframe";
 			sourceTree = "<group>";
 		};
-		3E64EBEB1C5D89CC002BA11B /* THLFAQViewController */ = {
-			isa = PBXGroup;
-			children = (
-				3E64EBE81C5D89C5002BA11B /* THLFAQViewController.h */,
-				3E64EBE91C5D89C5002BA11B /* THLFAQViewController.m */,
-			);
-			path = THLFAQViewController;
-			sourceTree = "<group>";
-		};
-		3EECB6921C61451800702540 /* THLFAOSectionView */ = {
-			isa = PBXGroup;
-			children = (
-				3EECB68F1C61450100702540 /* THLFAQSectionView.h */,
-				3EECB6901C61450100702540 /* THLFAQSectionView.m */,
-			);
-			path = THLFAOSectionView;
-			sourceTree = "<group>";
-		};
 		3EF9517C1C56B5D40046D4F1 /* UIImageView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1296,9 +1232,29 @@
 		7928ADDC1D19E76600DFC443 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				C8E8817E1CF669D900D1A698 /* THLAdmissionsViewController */,
+				C8EE96D21CE93D4F0040A1F0 /* THLCheckoutViewController */,
+				C884EE211CF77C8400C47167 /* THLDiscoveryViewController */,
+				C884EE281CF8BDAD00C47167 /* THLEventDetailsViewController */,
+				21CE05F61BB84026004D10BB /* THLEventNavigationController */,
+				7928ADB81D19CBFD00DFC443 /* THLEventTicketViewController */,
+				7928ADC41D19CC9200DFC443 /* THLLoginViewController */,
+				C8E8817A1CF35BDC00D1A698 /* THLMyEventsViewController */,
+				7928ADC61D19CCA500DFC443 /* THLOnboardingViewController */,
+				7928ADBE1D19CC4100DFC443 /* THLPartyInvitationViewController */,
+				7928ADBD1D19CC3500DFC443 /* THLPartyNavigationController */,
+				7928ADB91D19CC0900DFC443 /* THLPartyViewController */,
+				C8D1D2A11CD3E836006ADC6A /* THLPaymentViewController */,
+				7928ADBA1D19CC1300DFC443 /* THLPerkCollectionViewController */,
+				7928ADC51D19CC9B00DFC443 /* THLPerkDetailViewController */,
+				7928ADBC1D19CC2700DFC443 /* THLPermissionRequestViewController */,
+				C8FEE3D21D038C5800244252 /* THLTablePackageDetailsViewController */,
+				7928ADC01D19CC5900DFC443 /* THLTableReservationViewController */,
+				7928ADC31D19CC7A00DFC443 /* THLTextEntryViewController */,
+				798402E21D21BD79006F463B /* THLSwiftAdmissionsViewController.swift */,
+				79CEDF3A1D23213400DFB654 /* THLEventPickerViewController.swift */,
 				7917C0EF1D1B3C2E0054BDB0 /* THLVenueDiscoveryViewController.h */,
 				7917C0F01D1B3C2E0054BDB0 /* THLVenueDiscoveryViewController.m */,
-				798402E21D21BD79006F463B /* THLAdmissionsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1419,20 +1375,6 @@
 			path = KLCPopup;
 			sourceTree = "<group>";
 		};
-		79C93E261C758B47005B4D95 /* TSMessages */ = {
-			isa = PBXGroup;
-			children = (
-				79C93E2F1C758D36005B4D95 /* TSBlurView.h */,
-				79C93E301C758D36005B4D95 /* TSBlurView.m */,
-				79C93E271C758B5D005B4D95 /* TSMessage.h */,
-				79C93E281C758B5D005B4D95 /* TSMessage.m */,
-				79C93E291C758B5D005B4D95 /* TSMessageView.h */,
-				79C93E2A1C758B5D005B4D95 /* TSMessageView.m */,
-				79C93E2D1C758B69005B4D95 /* TSMessagesDefaultDesign.json */,
-			);
-			path = TSMessages;
-			sourceTree = "<group>";
-		};
 		79CD27BC1C520293009BC119 /* Hype */ = {
 			isa = PBXGroup;
 			children = (
@@ -1516,6 +1458,69 @@
 				79CD28021C5202A0009BC119 /* Info.plist */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		79CEDF321D230E0900DFB654 /* THLConfirmationPopupView */ = {
+			isa = PBXGroup;
+			children = (
+				79752ADC1BEBD8B500D09B2E /* THLConfirmationPopupView.h */,
+				79752ADD1BEBD8B500D09B2E /* THLConfirmationPopupView.m */,
+			);
+			path = THLConfirmationPopupView;
+			sourceTree = "<group>";
+		};
+		79CEDF331D230E1600DFB654 /* THLContactTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				7928AD9C1D19C91900DFC443 /* THLContactTableViewCell.h */,
+				7928AD9D1D19C91900DFC443 /* THLContactTableViewCell.m */,
+			);
+			path = THLContactTableViewCell;
+			sourceTree = "<group>";
+		};
+		79CEDF351D230E3400DFB654 /* THLDashboardNotificationSectionTitleCell */ = {
+			isa = PBXGroup;
+			children = (
+				7928AD8A1D19C7DC00DFC443 /* THLDashboardNotificationSectionTitleCell.h */,
+				7928AD8B1D19C7DC00DFC443 /* THLDashboardNotificationSectionTitleCell.m */,
+			);
+			path = THLDashboardNotificationSectionTitleCell;
+			sourceTree = "<group>";
+		};
+		79CEDF361D230E4A00DFB654 /* THLEventDetailsMapView */ = {
+			isa = PBXGroup;
+			children = (
+				7928ADB41D19CB5300DFC443 /* THLEventDetailsMapView.h */,
+				7928ADB51D19CB5300DFC443 /* THLEventDetailsMapView.m */,
+			);
+			path = THLEventDetailsMapView;
+			sourceTree = "<group>";
+		};
+		79CEDF371D230E5200DFB654 /* THLImportantInformationView */ = {
+			isa = PBXGroup;
+			children = (
+				792545C01CFDDFFB004CF29A /* THLImportantInformationView.h */,
+				792545C11CFDDFFB004CF29A /* THLImportantInformationView.m */,
+			);
+			path = THLImportantInformationView;
+			sourceTree = "<group>";
+		};
+		79CEDF381D230E8600DFB654 /* THLNeedToKnowInfoView */ = {
+			isa = PBXGroup;
+			children = (
+				7928AD871D19C7B300DFC443 /* THLNeedToKnowInfoView.h */,
+				7928AD881D19C7B300DFC443 /* THLNeedToKnowInfoView.m */,
+			);
+			path = THLNeedToKnowInfoView;
+			sourceTree = "<group>";
+		};
+		79CEDF391D230E8E00DFB654 /* THLPerkStoreCell */ = {
+			isa = PBXGroup;
+			children = (
+				7928AD901D19C82600DFC443 /* THLPerkStoreCell.h */,
+				7928AD911D19C82600DFC443 /* THLPerkStoreCell.m */,
+			);
+			path = THLPerkStoreCell;
 			sourceTree = "<group>";
 		};
 		79DF30231C72FD3200516199 /* THLEventHostingNavigationBar */ = {
@@ -1674,7 +1679,7 @@
 				790B38EE1C0375B500CB2362 /* libsqlite3.dylib */,
 				794DCCB61BF555150037A03D /* Accelerate.framework */,
 				95457EE5CFDECE1CB34DB5A3 /* libPods-HypeTests.a */,
-				D987E3A204C08C9E8BA25692 /* Pods_Hype.framework */,
+				988D4FFD83B2E2E5737EFBF8 /* Pods_Hype.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1801,7 +1806,6 @@
 				79B527B11C6EA777000A0970 /* OpenSans-BoldItalic.ttf in Resources */,
 				79B527B21C6EA777000A0970 /* OpenSans-ExtraBold.ttf in Resources */,
 				79B527B31C6EA777000A0970 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
-				79C93E2E1C758B69005B4D95 /* TSMessagesDefaultDesign.json in Resources */,
 				79B527B41C6EA777000A0970 /* OpenSans-Italic.ttf in Resources */,
 				79B527B51C6EA777000A0970 /* OpenSans-Light.ttf in Resources */,
 				79B527B61C6EA777000A0970 /* OpenSans-LightItalic.ttf in Resources */,
@@ -2050,7 +2054,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79C93E2B1C758B5D005B4D95 /* TSMessage.m in Sources */,
+				79CEDF3B1D23213400DFB654 /* THLEventPickerViewController.swift in Sources */,
 				7928AD9B1D19C8D800DFC443 /* THLUserProfileInfoView.m in Sources */,
 				21775F5D1B8E169500609D39 /* THLAddressBookPermissionsRequestService.m in Sources */,
 				211005B71B8A446D00A540C6 /* THLViewDataSource.m in Sources */,
@@ -2060,7 +2064,7 @@
 				79CD27FD1C520293009BC119 /* THLResourceManager.m in Sources */,
 				C8E342091C3B1A9C009FE9B0 /* THLGuestlistReviewHeaderView.m in Sources */,
 				79B527A41C6E9AED000A0970 /* THLAlertView.m in Sources */,
-				798402E31D21BD79006F463B /* THLAdmissionsViewController.swift in Sources */,
+				798402E31D21BD79006F463B /* THLSwiftAdmissionsViewController.swift in Sources */,
 				798402DE1D217200006F463B /* THLUserEntity.m in Sources */,
 				2133BFCE1B877D11002C1DA9 /* THLLocation.m in Sources */,
 				C884EE241CF77CB200C47167 /* THLDiscoveryViewController.m in Sources */,
@@ -2073,9 +2077,7 @@
 				7928ADB31D19CB1900DFC443 /* THLPopupNotificationView.m in Sources */,
 				79060B431D0B2BF500D1A00C /* THLTableReservationViewController.m in Sources */,
 				212173711BB34F15007D817A /* THLRoundImageView.m in Sources */,
-				3EECB6911C61450100702540 /* THLFAQSectionView.m in Sources */,
 				C88A015C1D0B56DE00152B37 /* THLTablePackageAdmissionCell.m in Sources */,
-				79C93E311C758D36005B4D95 /* TSBlurView.m in Sources */,
 				C8EE96D51CE93D770040A1F0 /* THLCheckoutViewController.m in Sources */,
 				211005D51B8A7D2800A540C6 /* NSDate+Utilities.m in Sources */,
 				792545C21CFDDFFB004CF29A /* THLImportantInformationView.m in Sources */,
@@ -2101,7 +2103,6 @@
 				7928ADA11D19C98400DFC443 /* THLUserProfileTableViewCell.m in Sources */,
 				7928AD891D19C7B300DFC443 /* THLNeedToKnowInfoView.m in Sources */,
 				213CE1131BB8D22D00054A2C /* THLLocationService.m in Sources */,
-				79DF30221C714AFB00516199 /* THLCreditsExplanationView.m in Sources */,
 				79B6C1BA1CEA3EC50050CDB1 /* THLPurchaseDetailsView.m in Sources */,
 				7928AD8F1D19C80400DFC443 /* THLPromotionInfoView.m in Sources */,
 				792545C81CFE97CF004CF29A /* THLAttendingEventCell.m in Sources */,
@@ -2123,7 +2124,6 @@
 				217EBE941BB78F22006044B6 /* THLViewDataSourceFactory.m in Sources */,
 				794483041BEC5B5D00EABE23 /* THLStatusView.m in Sources */,
 				798402DB1D2171E0006F463B /* THLGuestEntity.m in Sources */,
-				79C93E2C1C758B5D005B4D95 /* TSMessageView.m in Sources */,
 				212173631BB3451F007D817A /* THLPromotionCardInfoView.m in Sources */,
 				FAEE45D01C70E4BA0032C91C /* THLChannelService.m in Sources */,
 				79060B461D0B339A00D1A00C /* THLAdmissionOption.m in Sources */,
@@ -2138,6 +2138,7 @@
 				7928AD981D19C88E00DFC443 /* THLUserProfileViewController.m in Sources */,
 				C8E8817D1CF35C2700D1A698 /* THLMyEventsViewController.m in Sources */,
 				C8D1D2A41CD3E864006ADC6A /* THLPaymentViewController.m in Sources */,
+				79CEDF3F1D257A6700DFB654 /* UIColorExtensions.swift in Sources */,
 				21E402DC1BBF8155001D0C2C /* THLGuestlistInvite.m in Sources */,
 				21CCEDE91B87C87B0066CDAC /* THLDataStore.m in Sources */,
 				7928ADA41D19C9B600DFC443 /* THLOnboardingViewController.m in Sources */,
@@ -2157,7 +2158,6 @@
 				C8FEE3D51D038C8700244252 /* THLTablePackageDetailsViewController.m in Sources */,
 				215A42AC1BAA2A1700D03C35 /* THLFacebookProfilePictureURLFetchService.m in Sources */,
 				21E402E01BBF8371001D0C2C /* THLGuestlistService.m in Sources */,
-				3E64EBEA1C5D89C5002BA11B /* THLFAQViewController.m in Sources */,
 				2133BFC21B877C08002C1DA9 /* THLUser.m in Sources */,
 				217EBE821BB75FD5006044B6 /* THLDataStoreDomain.m in Sources */,
 				C85EE3BC1C1BCC190008C14B /* THLPerkStoreItem.m in Sources */,
@@ -2319,7 +2319,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
 				ENABLE_BITCODE = NO;
 				EXCLUDED_SOURCE_FILE_NAMES = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2365,7 +2365,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
 				ENABLE_BITCODE = NO;
 				EXCLUDED_SOURCE_FILE_NAMES = "FLEX*";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2398,6 +2398,7 @@
 			baseConfigurationReference = 4C0392A27CC17D305BBCE1E1 /* Pods-HypeTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -2419,6 +2420,7 @@
 			baseConfigurationReference = CAECC775220A839B0B187C83 /* Pods-HypeTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",

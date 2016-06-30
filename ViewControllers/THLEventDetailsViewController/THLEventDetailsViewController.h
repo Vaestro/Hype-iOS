@@ -13,7 +13,7 @@
 @protocol THLEventDetailsViewControllerDelegate <NSObject>
 - (void)eventDetailsWantsToPresentAdmissionsForEvent:(PFObject *)event venue:(PFObject *)venue;
 - (void)eventDetailsWantsToPresentCheckoutForEvent:(PFObject *)event paymentInfo:(NSDictionary *)paymentInfo;
-- (void)eventDetailsWantsToPresentPartyForEvent:(PFObject *)guestlistInvite venue:(PFObject *)venue;
+- (void)eventDetailsWantsToPresentPartyForEvent:(PFObject *)guestlistInvite;
 - (void)usersWantsToLogin;
 @end
 

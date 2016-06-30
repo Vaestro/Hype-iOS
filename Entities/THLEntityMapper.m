@@ -11,10 +11,6 @@
 
 #import "THLLocalModels.h"
 #import "THLUser.h"
-#import "THLGuestlist.h"
-#import "THLGuestlistInvite.h"
-#import "THLPerkStoreItem.h"
-#import "THLPurchasedPerkItem.h"
 
 #import "THLUserEntity.h"
 #import "THLGuestEntity.h"

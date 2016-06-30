@@ -50,6 +50,8 @@
 #import "THLLoginService.h"
 #import "THLVenueDiscoveryViewController.h"
 
+#import "Hype-Swift.h"
+
 @interface THLMasterWireframe()
 <
 THLAdmissionsViewDelegate,
@@ -184,7 +186,6 @@ THLLoginViewControllerDelegate
 }
 
 #pragma mark Delegate
-
 - (void)loginViewControllerDidFinishSignup {
     [self onboardingViewControllerdidFinishSignup];
 }
@@ -331,11 +332,7 @@ THLLoginViewControllerDelegate
 #pragma mark Delegate
 
 - (void)eventDetailsWantsToPresentAdmissionsForEvent:(PFObject *)event venue:(PFObject *)venue {
-    THLAdmissionsViewController *admissionsVC = [[THLAdmissionsViewController alloc] initWithClassName:@"AdmissionOption"];
-    admissionsVC.delegate = self;
-    admissionsVC.event = event;
-    admissionsVC.venue = venue;
-
+    THLSwiftAdmissionsViewController *admissionsVC = [[THLSwiftAdmissionsViewController alloc] initWithVenue:venue event:event];
     UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:admissionsVC];
     [[self topViewController] presentViewController:navVC animated:YES completion:nil];
 }

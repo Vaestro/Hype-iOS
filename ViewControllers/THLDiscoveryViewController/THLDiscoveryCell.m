@@ -24,7 +24,8 @@
 {
     WEAKSELF();
     [_titlesView makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(0);
+        make.left.right.insets(UIEdgeInsetsZero);
+        make.center.equalTo(WSELF);
     }];
     
     [_venueImageView makeConstraints:^(MASConstraintMaker *make) {

@@ -7,48 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-
 @class THLUser;
-@class THLEvent;
-@class THLLocation;
-@class THLGuestlist;
-@class THLGuestlistInvite;
-@class THLPerkStoreItem;
-@class THLPurchasedPerkItem;
-@class THLBeaconEntity;
-@class THLGuestlistTicket;
-
-@class THLUserEntity;
 @class THLGuestEntity;
-@class THLHostEntity;
-@class THLEventEntity;
-@class THLLocationEntity;
-@class THLGuestlistEntity;
-@class THLGuestlistInviteEntity;
-@class THLPerkStoreItemEntity;
-@class THLPurchasedPerkItemEntity;
-@class THLBeacon;
-@class THLGuestlistTicketEntity;
 
 @interface THLEntityMapper : NSObject
-- (THLEventEntity *)mapEvent:(THLEvent *)event;
-- (THLLocationEntity *)mapLocation:(THLLocation *)location;
-//- (THLUserEntity *)mapUser:(THLUser *)user;
 - (THLGuestEntity *)mapGuest:(THLUser *)user;
-- (THLHostEntity *)mapHost:(THLUser *)user;
-- (THLGuestlistEntity *)mapGuestlist:(THLGuestlist *)guestlist;
-- (THLGuestlistInviteEntity *)mapGuestlistInvite:(THLGuestlistInvite *)guestlistInvite;
-- (THLPerkStoreItemEntity *)mapPerkStoreItem:(THLPerkStoreItem *)perkStoreItem;
-- (THLPurchasedPerkItemEntity *)mapPurchasedPerkItem:(THLPurchasedPerkItem *)purchasedPerkItem;
-- (THLBeacon *)mapBeaconEntity:(THLBeaconEntity *)beaconEntity;
-- (THLGuestlistTicketEntity *)mapGuestlistTicket:(THLGuestlistTicket *)guestlistTicket;
 
-//- (NSArray *)mapUsers:(NSArray *)users;
-- (NSArray<THLEventEntity*> *)mapEvents:(NSArray *)events;
-- (NSArray<THLLocationEntity*> *)mapLocations:(NSArray *)locations;
-- (NSArray<THLGuestlistEntity*> *)mapGuestlists:(NSArray *)guestlists;
-- (NSArray<THLGuestlistInviteEntity*> *)mapGuestlistInvites:(NSArray *)guestlistInvites;
-- (NSArray<THLPerkStoreItemEntity*> *)mapPerkStoreItems:(NSArray *)perkStoreItems;
-- (NSArray<THLPurchasedPerkItemEntity*> *)mapPurchasedPerkItems:(NSArray *)purchasedPerkItems;
 
 @end

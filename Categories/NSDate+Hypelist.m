@@ -83,11 +83,21 @@
 
 
 - (NSString *)thl_dayString {
-    return [self formattedDateWithFormat:@"MM/dd"];
+    return [self formattedDateWithFormat:@"d"];
 }
 
 - (NSString *)thl_dayOfTheWeek {
     return [self formattedDateWithFormat:@"EEEE"];
+}
+
+- (NSString *)thl_weekdayInitials {
+    if ([[self formattedDateWithFormat:@"EEEE"] isEqualToString:@"Thursday"]) {
+        return [self formattedDateWithFormat:@"EE"];
+    } else if ([[self formattedDateWithFormat:@"EEEE"] isEqualToString:@"Sunday"]) {
+        return [self formattedDateWithFormat:@"EE"];
+    } else {
+        return [self formattedDateWithFormat:@"E"];
+    }
 }
 
 - (NSString *)thl_dateString {

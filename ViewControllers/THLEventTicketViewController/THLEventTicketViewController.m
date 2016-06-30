@@ -52,10 +52,10 @@
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
-    [self.creditsMessageLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF venueNameLabel].mas_bottom).insets(kTHLEdgeInsetsInsanelyHigh());
-        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
-    }];
+//    [self.creditsMessageLabel makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo([WSELF venueNameLabel].mas_bottom).insets(kTHLEdgeInsetsInsanelyHigh());
+//        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+//    }];
     
 //    [self.eventDateLabel makeConstraints:^(MASConstraintMaker *make) {
 //        make.top.equalTo([WSELF venueNameLabel].mas_bottom).insets(kTHLEdgeInsetsLow());

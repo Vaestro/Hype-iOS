@@ -311,7 +311,7 @@
 }
 
 -(void)handleViewParty {
-    [self.delegate eventDetailsWantsToPresentPartyForEvent:_guestlistInvite venue:_venue];
+    [self.delegate eventDetailsWantsToPresentPartyForEvent:_guestlistInvite];
 }
 
 - (void)showAlertView {

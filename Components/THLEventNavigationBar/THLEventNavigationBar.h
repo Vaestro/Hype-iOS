@@ -20,6 +20,5 @@
 @property (nonatomic, strong) UIButton *dismissButton;
 @property (nonatomic, strong) RACCommand *detailDisclosureCommand;
 
-- (void)setExclusiveEventLabel;
 -(void)addGradientLayer;
 @end

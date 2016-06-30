@@ -83,7 +83,7 @@
     
     [self.purchaseButton makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo([WSELF scrollView].mas_bottom);
-        make.left.right.bottom.insets(kTHLEdgeInsetsNone());
+        make.left.right.bottom.insets(kTHLEdgeInsetsHigh());
     }];
     
 }
@@ -206,8 +206,7 @@
 
 - (THLActionButton *)purchaseButton {
     if (!_purchaseButton) {
-        _purchaseButton = [THLActionButton new];
-        _purchaseButton.backgroundColor = kTHLNUIAccentColor;
+        _purchaseButton = [[THLActionButton alloc] initWithDefaultStyle];
         [_purchaseButton setTitle:@"REDEEM CREDITS"];
         [_purchaseButton addTarget:self action:@selector(showRedeeemPerkFlow) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_purchaseButton];
@@ -222,7 +221,6 @@
         _scrollView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
         [self.view addSubview:_scrollView];
     }
-
     return _scrollView;
 }
 
@@ -280,8 +278,6 @@
         _perkDescriptionLabel.numberOfLines = 0;
 
         _perkDescriptionLabel.text = _perk[@"info"];
-
-        [self.view addSubview:_perkDescriptionLabel];
     }
 
     return _perkDescriptionLabel;

@@ -131,6 +131,7 @@ PODS:
   - Stripe (7.0.2)
   - SVProgressHUD (2.0.3)
   - SVPullToRefresh (0.4.1)
+  - SwiftDate (3.0.8)
   - THContactPicker (1.2)
   - TTTAttributedLabel (2.0.0)
   - TwitterCore (2.3.0):
@@ -234,6 +235,7 @@ DEPENDENCIES:
   - Stripe
   - SVProgressHUD
   - SVPullToRefresh
+  - SwiftDate
   - THContactPicker (~> 1.2)
   - TTTAttributedLabel
   - Typhoon (~> 3.3)
@@ -288,6 +290,7 @@ SPEC CHECKSUMS:
   Stripe: d1eae5522cf993590f962ac1829a56c2096cf486
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
+  SwiftDate: 971f8b9394f664f2226b9c3ab64e801a7291c612
   THContactPicker: e723f7c6ab6e1d6d10d59d618322ab8bfcb00365
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   TwitterCore: 817eae3e291fa4125b47789e26a4f6f024115c1f
@@ -295,6 +298,6 @@ SPEC CHECKSUMS:
   YapDatabase: 713d4018cfacbd6e77dd430710ca84730e450980
   YLMoment: af44d9d402790049e5490fa6eae9585b89b4090b
 
-PODFILE CHECKSUM: 79af4191ea8b475ce5df7cfaed3f8bf0bbfa882f
+PODFILE CHECKSUM: a2712e7b74534f561aef5f267c60046fce6b7698
 
 COCOAPODS: 1.0.1

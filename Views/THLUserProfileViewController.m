@@ -15,7 +15,6 @@
 #import "THLUserProfileFooterView.h"
 #import "THLUserProfileHeaderView.h"
 #import "THLTextEntryViewController.h"
-#import "THLFAQViewController.h"
 #import "THLUserManager.h"
 #import "Intercom/intercom.h"
 #import "THLUser.h"
@@ -302,12 +301,12 @@ STPPaymentCardTextFieldDelegate
 }
 
 
-- (void)presentModalExplanationHowItWorks
-{
-    THLFAQViewController *faqVC = [[THLFAQViewController alloc] init];
-    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:faqVC];
-    [self presentViewController:navVC animated:YES completion:nil];
-}
+//- (void)presentModalExplanationHowItWorks
+//{
+//    THLFAQViewController *faqVC = [[THLFAQViewController alloc] init];
+//    UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:faqVC];
+//    [self presentViewController:navVC animated:YES completion:nil];
+//}
 
 - (void) presentModalInformationWithText:(NSString *)text andTitle:(NSString *)title
 {
@@ -326,7 +325,7 @@ STPPaymentCardTextFieldDelegate
         mail.mailComposeDelegate = self;
         [mail setSubject:@"Contact Us"];
         [mail setMessageBody:@"" isHTML:NO];
-        [mail setToRecipients:@[@"hypeteam@thehypelist.co"]];
+        [mail setToRecipients:@[@"contact@gethype.co"]];
         mail.navigationBar.barStyle = UIBarButtonItemStylePlain;
 
         [[mail navigationBar] setTitleTextAttributes:@{NSForegroundColorAttributeName :kTHLNUIPrimaryFontColor}];
