@@ -9,7 +9,7 @@ inhibit_all_warnings!
 pod 'CocoaLumberjack'
 pod 'Masonry', '~> 0.6'
 pod 'NUI', '~> 0.5'
-pod 'ReactiveCocoa', '2.5'
+pod 'ReactiveCocoa'
 pod 'Bolts'
 pod 'BFKit'
 pod 'DateTools', '~> 1.6'

@@ -147,6 +147,7 @@
 		79CE315A1CF7B03F00CEA784 /* THLEventTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CE31591CF7B03F00CEA784 /* THLEventTicketViewController.m */; };
 		79CEDF3B1D23213400DFB654 /* THLEventPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CEDF3A1D23213400DFB654 /* THLEventPickerViewController.swift */; };
 		79CEDF3F1D257A6700DFB654 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CEDF3E1D257A6600DFB654 /* UIColorExtensions.swift */; };
+		79CEDF411D27092B00DFB654 /* THLEventNavBarTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CEDF401D27092B00DFB654 /* THLEventNavBarTitleView.swift */; };
 		79DF30261C72FF1700516199 /* THLEventHostingNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DF30251C72FF1700516199 /* THLEventHostingNavigationBar.m */; };
 		7D7B044EABDEF9475D0E84DA /* libPods-HypeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95457EE5CFDECE1CB34DB5A3 /* libPods-HypeTests.a */; };
 		C80372DA1D00DD68008848CA /* THLAdmissionOptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C80372D91D00DD68008848CA /* THLAdmissionOptionCell.m */; };
@@ -447,6 +448,7 @@
 		79CEDF3A1D23213400DFB654 /* THLEventPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLEventPickerViewController.swift; sourceTree = "<group>"; };
 		79CEDF3D1D244B6F00DFB654 /* Hype-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hype-Bridging-Header.h"; sourceTree = "<group>"; };
 		79CEDF3E1D257A6600DFB654 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColorExtensions.swift; path = Categories/UIColorExtensions.swift; sourceTree = SOURCE_ROOT; };
+		79CEDF401D27092B00DFB654 /* THLEventNavBarTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLEventNavBarTitleView.swift; sourceTree = "<group>"; };
 		79DF30241C72FF1700516199 /* THLEventHostingNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventHostingNavigationBar.h; sourceTree = "<group>"; };
 		79DF30251C72FF1700516199 /* THLEventHostingNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventHostingNavigationBar.m; sourceTree = "<group>"; };
 		95457EE5CFDECE1CB34DB5A3 /* libPods-HypeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HypeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -645,6 +647,7 @@
 				7928ADA01D19C98400DFC443 /* THLUserProfileTableViewCell.m */,
 				7928AD961D19C88E00DFC443 /* THLUserProfileViewController.h */,
 				7928AD971D19C88E00DFC443 /* THLUserProfileViewController.m */,
+				79CEDF401D27092B00DFB654 /* THLEventNavBarTitleView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2087,6 +2090,7 @@
 				799862461C97B6AF004C5326 /* THLTextEntryViewController.m in Sources */,
 				C85EE3C41C1CDE140008C14B /* THLPurchasedPerkItem.m in Sources */,
 				79DF30261C72FF1700516199 /* THLEventHostingNavigationBar.m in Sources */,
+				79CEDF411D27092B00DFB654 /* THLEventNavBarTitleView.swift in Sources */,
 				216BDD611BC72F9100BBF713 /* THLSearchResultsViewDataSourceHandler.m in Sources */,
 				21775F631B8E17A300609D39 /* THLAddressBookEntryFetchService.m in Sources */,
 				C884EE271CF787CC00C47167 /* THLDiscoveryCell.m in Sources */,

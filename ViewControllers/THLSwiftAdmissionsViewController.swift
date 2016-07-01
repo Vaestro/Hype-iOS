@@ -46,6 +46,8 @@ class THLSwiftAdmissionsViewController: UIViewController, THLEventPickerViewCont
         super.init(nibName: nil, bundle: nil)
         navigationItem.leftBarButtonItem = UIBarButtonItem.init(title: "Back", style: .Plain, target: self, action: #selector(dismiss))
         eventPickerView.delegate = self
+        
+        navigationItem.titleView = THLEventNavBarTitleView.init(venueName: venue["name"] as? String, date: event["date"] as? NSDate)
     }
     
     
@@ -170,6 +172,7 @@ class THLSwiftAdmissionsViewController: UIViewController, THLEventPickerViewCont
                 assert(false, "Unexpected element kind")
             }
     }
+    
     /*
      ==========================================================================================
      Process memory issues
