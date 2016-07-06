@@ -22,6 +22,7 @@
 #import "THLInformationViewController.h"
 #import "THLResourceManager.h"
 #import "SVProgressHUD.h"
+#import "Hype-Swift.h"
 
 @interface THLCheckoutViewController ()
 <
@@ -96,8 +97,8 @@ TTTAttributedLabelDelegate
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
-//    self.navigationItem.leftBarButtonItem = [self backBarButton];
-    self.navigationItem.titleView = [self navBarTitleLabel];
+    self.navigationItem.leftBarButtonItem = [self backBarButton];
+    self.navigationItem.titleView = [[THLEventNavBarTitleView alloc] initWithVenueName:_event.location.name date:_event.date];
     
     WEAKSELF();
     [self.purchaseButton makeConstraints:^(MASConstraintMaker *make) {
@@ -323,11 +324,14 @@ TTTAttributedLabelDelegate
         _attributedLabel.minimumScaleFactor = 0.5;
         _attributedLabel.linkAttributes = @{NSForegroundColorAttributeName: kTHLNUIAccentColor,
                                     NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
+        
         _attributedLabel.activeLinkAttributes = @{NSForegroundColorAttributeName: kTHLNUIPrimaryFontColor,
                                           NSUnderlineStyleAttributeName: @(NSUnderlineStyleNone)};
         _attributedLabel.textAlignment = NSTextAlignmentCenter;
+        
         NSString *labelText = @"I have read and understand the Cancellation Policy";
         _attributedLabel.text = labelText;
+        
         NSRange agreement = [labelText rangeOfString:@"I have read and understand the"];
         NSRange cancellation = [labelText rangeOfString:@"Cancellation Policy"];
         [_attributedLabel addLinkToURL:[NSURL URLWithString:@"action://toggle-agreement"] withRange:agreement];
@@ -357,7 +361,7 @@ TTTAttributedLabelDelegate
 #pragma mark - Event handlers
 - (void)back:(id)sender
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

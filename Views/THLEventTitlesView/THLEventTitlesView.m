@@ -90,7 +90,7 @@
 - (UILabel *)newLocationNameLabel {
     UILabel *label = THLNUILabel(kTHLNUIBoldTitle);
     label.lineBreakMode = NSLineBreakByWordWrapping;
-    label.numberOfLines = 3;
+    label.numberOfLines = 2;
     label.textAlignment = NSTextAlignmentCenter;
     label.adjustsFontSizeToFitWidth = YES;
     label.minimumScaleFactor = 0.5;

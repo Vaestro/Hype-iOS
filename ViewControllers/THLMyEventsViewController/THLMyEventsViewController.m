@@ -248,12 +248,6 @@
 }
 
 #pragma mark - Accessors
-
-- (void)messageButtonPressed
-{
-    [Intercom presentMessageComposer];
-}
-
 - (TTTAttributedLabel *)navBarTitleLabel
 {
     if (!_navBarTitleLabel) {

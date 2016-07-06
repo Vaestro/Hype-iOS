@@ -65,7 +65,6 @@ pod 'SVPullToRefresh'
 pod "ORStackView"
 pod 'SVProgressHUD'
 pod 'THContactPicker', '~> 1.2'
-pod 'DZNEmptyDataSet'
 pod 'IHKeyboardAvoiding'
 pod "FXLabel"
 pod 'BLKFlexibleHeightBar'
@@ -74,6 +73,14 @@ end
 target 'HypeTests' do
 pod 'OCMock', '3.1.2'
 pod "Gizou"
+end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['ENABLE_BITCODE'] = 'NO'
+        end
+    end
 end
 
 #post_install do |installer|

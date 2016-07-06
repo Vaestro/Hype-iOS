@@ -63,7 +63,7 @@ class THLEventPickerViewController: PFQueryCollectionViewController {
         query.includeKey("location")
         query.includeKey("admissionOptions")
         query.whereKey("locationId", equalTo: venueId)
-        query.whereKey("date", greaterThanOrEqualTo: NSDate())
+        query.whereKey("date", greaterThanOrEqualTo: NSDate().dateByAddingTimeInterval(-60.0 * 300.0))
         
         return query
     }

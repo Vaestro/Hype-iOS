@@ -113,7 +113,7 @@ viewDataSourceFactory:(THLViewDataSourceFactory *)viewDataSourceFactory
     [super viewDidLoad];
 
     self.navigationItem.rightBarButtonItem = self.submitButton;
-    self.navigationItem.title = @"INVITE";
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.barButtonTitleLabel];
     
     self.dataSource = [self getDataSource];
     [self configureDataSource];
@@ -685,7 +685,17 @@ viewDataSourceFactory:(THLViewDataSourceFactory *)viewDataSourceFactory
     return _submitButton;
 }
 
-
+- (UILabel *)barButtonTitleLabel
+{
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 225, 40)];
+    label.backgroundColor = [UIColor clearColor];
+    label.numberOfLines = 1;
+    label.textAlignment = NSTextAlignmentLeft;
+    label.textColor = [UIColor whiteColor];
+    label.text = [NSString stringWithFormat:@"INVITE FRIENDS TO YOUR PARTY"];
+    label.adjustsFontSizeToFitWidth = YES;
+    return label;
+}
 
 
 @end

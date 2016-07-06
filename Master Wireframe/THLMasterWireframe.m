@@ -54,6 +54,7 @@
 
 @interface THLMasterWireframe()
 <
+THLSwiftAdmissionsViewControllerDelegate,
 THLAdmissionsViewDelegate,
 THLTablePackageControllerDelegate,
 THLMyEventsViewDelegate,
@@ -73,6 +74,7 @@ THLLoginViewControllerDelegate
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) UITabBarController *masterTabBarController;
 @property (nonatomic, strong) UITabBarController *discoveryTabBarController;
+@property (nonatomic, strong) THLDiscoveryNavBarTitleView *discoveryNavBarTitleView;
 
 @property (nonatomic, strong) THLOnboardingViewController *onboardingViewController;
 @property (nonatomic, strong) THLLoginViewController *loginViewController;
@@ -217,12 +219,21 @@ THLLoginViewControllerDelegate
     venueDiscoveryVC.delegate = self;
     
     _discoveryTabBarController = [UITabBarController new];
-    _discoveryTabBarController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Switch" style:UIBarButtonItemStylePlain target:self action:@selector(changeVC)];
     
     NSArray *discoveryViews = @[discoveryVC, venueDiscoveryVC];
     _discoveryTabBarController.viewControllers = discoveryViews;
     [_discoveryTabBarController.tabBar setHidden:YES];
     
+    _discoveryNavBarTitleView = [[THLDiscoveryNavBarTitleView alloc] initWithFrame:CGRectZero];
+    _discoveryTabBarController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
+                                             initWithImage:[UIImage imageNamed:@"Help"]
+                                             style:UIBarButtonItemStylePlain
+                                             target:self
+                                             action:@selector(messageButtonPressed)];
+    _discoveryTabBarController.navigationItem.titleView = _discoveryNavBarTitleView;
+    [_discoveryNavBarTitleView.eventButton addTarget:self action:@selector(changeVC) forControlEvents:UIControlEventTouchUpInside];
+    [_discoveryNavBarTitleView.venueButton addTarget:self action:@selector(changeVC) forControlEvents:UIControlEventTouchUpInside];
+
     [discovery pushViewController:_discoveryTabBarController animated:NO];
     
     _userProfileViewController = [THLUserProfileViewController new];
@@ -251,10 +262,21 @@ THLLoginViewControllerDelegate
     _masterTabBarController.view.autoresizingMask=(UIViewAutoresizingFlexibleHeight);
 }
 
+- (void)messageButtonPressed
+{
+    [Intercom presentMessageComposer];
+}
+
+
 - (void)changeVC {
     if (_discoveryTabBarController.selectedIndex == 0) {
+        [_discoveryNavBarTitleView.eventButton setSelected:NO];
+        [_discoveryNavBarTitleView.venueButton setSelected:YES];
         [_discoveryTabBarController setSelectedIndex:1];
     } else {
+        [_discoveryNavBarTitleView.eventButton setSelected:YES];
+        [_discoveryNavBarTitleView.venueButton setSelected:NO];
+
         [_discoveryTabBarController setSelectedIndex:0];
     }
 }
@@ -264,12 +286,12 @@ THLLoginViewControllerDelegate
         [_masterTabBarController dismissViewControllerAnimated:YES completion:nil];
     }
     [_masterTabBarController setSelectedIndex:1];
-
 }
 
 #pragma mark - AdmissionsOptionViewDelegate
 
-- (void)didSelectAdmissionOption:(PFObject *)admissionOption forEvent:(PFObject *)event {
+
+- (void)didSelectAdmissionOption:(PFObject *)admissionOption event:(PFObject *)event {
     if ([admissionOption[@"type"] integerValue] == 0) {
         THLCheckoutViewController *checkoutVC = [[THLCheckoutViewController alloc] initWithEvent:event admissionOption:admissionOption guestlistInvite:nil];
         checkoutVC.delegate = self;
@@ -333,6 +355,7 @@ THLLoginViewControllerDelegate
 
 - (void)eventDetailsWantsToPresentAdmissionsForEvent:(PFObject *)event venue:(PFObject *)venue {
     THLSwiftAdmissionsViewController *admissionsVC = [[THLSwiftAdmissionsViewController alloc] initWithVenue:venue event:event];
+    admissionsVC.delegate = self;
     UINavigationController *navVC = [[UINavigationController alloc] initWithRootViewController:admissionsVC];
     [[self topViewController] presentViewController:navVC animated:YES completion:nil];
 }
@@ -447,20 +470,30 @@ THLLoginViewControllerDelegate
 }
 
 - (void)partyViewControllerWantsToPresentCheckoutForEvent:(PFObject *)event withGuestlistInvite:(THLGuestlistInvite *)guestlistInvite {
-    PFQuery *query = [PFQuery queryWithClassName:@"AdmissionOption"];
-    [query whereKey:@"location" equalTo:event[@"location"]];
-    [query whereKey:@"type" equalTo:@0];
-    [query whereKey:@"gender" equalTo:[NSNumber numberWithInt:[THLUser currentUser].sex]];
-    
+    NSArray *admissionOptions = (NSArray *)event[@"admissionOptions"];
+    PFObject *admissionOption;
     [SVProgressHUD show];
-    [query getFirstObjectInBackgroundWithBlock:^(PFObject *admissionOption, NSError *error) {
-        [SVProgressHUD dismiss];
-        if (error) {
-            
-        } else {
-            [self presentCheckoutViewController:event guestlistInvite:guestlistInvite admissionOption:admissionOption];
+
+    for (id option in admissionOptions) {
+        if ([option[@"gender"] integerValue] == [THLUser currentUser].sex) {
+            admissionOption = option;
+            break;
         }
-    }];
+    }
+    
+    [SVProgressHUD dismiss];
+    if (admissionOption) {
+        [self presentCheckoutViewController:event guestlistInvite:guestlistInvite admissionOption:admissionOption];
+
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:@"Could not fetch checkout details. Please contact your concierge for help"
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+
 }
 
 
@@ -554,11 +587,6 @@ THLLoginViewControllerDelegate
         NSLog(@"Notification was not a guestlistInvite");
         return [BFTask taskWithResult:nil];
     }
-}
-
-- (void)messageButtonPressed
-{
-    [Intercom presentMessageComposer];
 }
 
 #pragma mark - LogOut Handler

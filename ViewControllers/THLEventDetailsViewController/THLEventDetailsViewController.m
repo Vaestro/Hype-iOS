@@ -143,8 +143,16 @@
 {
     if (!_navBar && _showNavigationBar) {
         _navBar = [[THLEventNavigationBar alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, SCREEN_HEIGHT - 80)];
-        _navBar.titleLabel.text = _venue[@"name"];
-        _navBar.dateLabel.text = [NSString stringWithFormat:@"%@, %@", ((NSDate *)_event[@"date"]).thl_weekdayString, ((NSDate *)_event[@"date"]).thl_timeString];
+        NSString *eventTitle = _event[@"title"];
+        if (eventTitle == nil || [eventTitle isEqualToString:@""]) {
+            _navBar.titleLabel.text = _venue[@"name"];
+        } else {
+            _navBar.titleLabel.text = _event[@"title"];
+        }
+        if (_event) {
+            _navBar.dateLabel.text = [NSString stringWithFormat:@"%@, %@", ((NSDate *)_event[@"date"]).thl_weekdayString, ((NSDate *)_event[@"date"]).thl_timeString];
+        }
+
         [_navBar.dismissButton addTarget:self
                      action:@selector(dismissCommand)
           forControlEvents:UIControlEventTouchUpInside];
@@ -153,7 +161,7 @@
         } else {
             _navBar.locationImageURL =  [NSURL URLWithString:((PFFile *)_venue[@"image"]).url];
         }
-        if (_event[@"title"] != nil) [_navBar.titleLabel setText:_event[@"title"]];
+
         [self.view addSubview:_navBar];
         [self.view bringSubviewToFront:_navBar];
     }
@@ -185,7 +193,7 @@
         _needToKnowInfoView = [THLImportantInformationView new];
         _needToKnowInfoView.titleLabel.text = NSLocalizedString(@"NEED TO KNOW", nil);
         _needToKnowInfoView.importantInformationLabel.text = [NSString
-                                                              stringWithFormat:@"Doors open: %@ - %@\nDress code: %@\nMust have valid 21+ Photo ID\nFinal admission at doorman’s discretion.", ((NSDate *)_venue[@"openTime"]).thl_timeString, ((NSDate *)_venue[@"closeTime"]).thl_timeString, _venue[@"attireRequirement"]];
+                                                              stringWithFormat:@"Hours: %@ - %@\nDress code: %@\nMust have valid 21+ Photo ID\nFinal admission at doorman’s discretion.", ((NSDate *)_venue[@"openTime"]).thl_timeString, ((NSDate *)_venue[@"closeTime"]).thl_timeString, _venue[@"attireRequirement"]];
         _needToKnowInfoView.translatesAutoresizingMaskIntoConstraints = NO;
     }
     return _needToKnowInfoView;

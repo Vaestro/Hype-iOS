@@ -13,6 +13,7 @@
 #import "THLGuestlistInvite.h"
 #import "THLAdmissionOption.h"
 #import "THLTableReservationViewController.h"
+#import "Hype-Swift.h"
 
 @interface THLPartyNavigationController()
 @property (nonatomic, strong) PFObject *guestlistInvite;
@@ -36,10 +37,12 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.leftBarButtonItem = self.closeButton;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"cancel_button"] style:UIBarButtonItemStylePlain target:self action:@selector(dismissViewController)];
+    
     self.navigationItem.rightBarButtonItem = self.intercomBarButton;
 
-    self.navigationItem.titleView = [self navBarTitleLabel];
+    self.navigationItem.titleView = [[THLEventNavBarTitleView alloc] initWithVenueName:_guestlistInvite[@"event"][@"location"][@"name"] date:_guestlistInvite[@"date"]];
+    
     self.navigationBar.barTintColor = kTHLNUIPrimaryBackgroundColor; //%%% bartint
     THLGuestlistInvite *invite = (THLGuestlistInvite *)_guestlistInvite;
     THLGuestlist *guestlist = invite[@"Guestlist"];

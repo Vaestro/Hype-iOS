@@ -110,6 +110,8 @@
     [eventQuery whereKey:@"date" greaterThanOrEqualTo:eventDisplayPeriod.StartDate];
     
     [query whereKey:@"objectId" matchesKey:@"locationId" inQuery:eventQuery];
+    [query orderByAscending:@"name"];
+
     return query;
 }
 

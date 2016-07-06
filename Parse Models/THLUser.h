@@ -32,4 +32,5 @@
 @property (nonatomic, retain) NSString *stripeCustomerId;
 - (NSString *)fullName;
 - (NSString *)intPhoneNumberFormat;
+
 @end

@@ -44,7 +44,6 @@ PODS:
   - DateTools (1.7.0)
   - Digits (2.3.0):
     - TwitterCore (= 2.3.0)
-  - DZNEmptyDataSet (1.8.1)
   - EKAlgorithms (0.2)
   - Fabric (1.6.7)
   - FBSDKCoreKit (4.13.1):
@@ -87,9 +86,9 @@ PODS:
   - GCDObjC (0.3.0)
   - Gizou (0.1.3)
   - Harpy (3.4.10)
-  - IHKeyboardAvoiding (2.5)
+  - IHKeyboardAvoiding (2.6)
   - Intercom (2.3.21)
-  - libPhoneNumber-iOS (0.8.13)
+  - libPhoneNumber-iOS (0.8.14)
   - LinqToObjectiveC (2.1.0)
   - LMGeocoder (1.0.7)
   - Masonry (0.6.4)
@@ -115,20 +114,16 @@ PODS:
     - Bolts/Tasks (~> 1.3)
     - Parse (~> 1.9)
   - Reachability (3.2)
-  - ReactiveCocoa (2.5):
-    - ReactiveCocoa/UI (= 2.5)
-  - ReactiveCocoa/Core (2.5):
-    - ReactiveCocoa/no-arc
-  - ReactiveCocoa/no-arc (2.5)
-  - ReactiveCocoa/UI (2.5):
-    - ReactiveCocoa/Core
+  - ReactiveCocoa (4.2.1):
+    - Result (~> 2.0)
   - ReflectableEnum (0.1.2)
+  - Result (2.1.2)
   - Reveal-iOS-SDK (1.6.2)
   - SDWebImage (3.8.1):
     - SDWebImage/Core (= 3.8.1)
   - SDWebImage/Core (3.8.1)
   - SSDataSources (0.8.5)
-  - Stripe (7.0.2)
+  - Stripe (8.0.0)
   - SVProgressHUD (2.0.3)
   - SVPullToRefresh (0.4.1)
   - SwiftDate (3.0.8)
@@ -203,7 +198,6 @@ DEPENDENCIES:
   - Crashlytics
   - DateTools (~> 1.6)
   - Digits
-  - DZNEmptyDataSet
   - EKAlgorithms (~> 0.2)
   - Fabric
   - FBSDKCoreKit
@@ -227,7 +221,7 @@ DEPENDENCIES:
   - Parse
   - ParseFacebookUtilsV4
   - ParseUI
-  - ReactiveCocoa (= 2.5)
+  - ReactiveCocoa
   - ReflectableEnum
   - Reveal-iOS-SDK
   - SDWebImage (~> 3.7)
@@ -254,7 +248,6 @@ SPEC CHECKSUMS:
   Crashlytics: 130ab943f8c78cda7a814b434f270b2e2c8a3cba
   DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
   Digits: af82d24ec38035cc555b60f55cca5abc68a76bed
-  DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   EKAlgorithms: 83488651734ba3a63956fcb783b10e82d2ec3388
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   FBSDKCoreKit: 2807fe0da2ddb49a1469da6d6ff597f99912980f
@@ -266,9 +259,9 @@ SPEC CHECKSUMS:
   GCDObjC: 0c31898f34d8605196ac0343c65b496609d7dee6
   Gizou: 93853bf634a9382c257795db052aa9a75e972c43
   Harpy: 5c40c58072143996e12d185aed2f4dbcc4cda2c2
-  IHKeyboardAvoiding: 8f14fed93405dd2c44ce070a26f780d9e477538c
+  IHKeyboardAvoiding: d2541ee56dad83e160cd9aed0468c52247af6f49
   Intercom: c05a2e008be2e5064d9045e0e7b919ca267da303
-  libPhoneNumber-iOS: 3a37004baf779b4262ab29a31a87d2ae668159d4
+  libPhoneNumber-iOS: fb165271ebe7fb32e55da97b83219382f2f9d409
   LinqToObjectiveC: f0e40c137a458b6b9725c4c7b6a575c0c72e3aec
   LMGeocoder: 116e771bce773c82dbac9f59f443129dd26088a3
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
@@ -282,12 +275,13 @@ SPEC CHECKSUMS:
   ParseFacebookUtilsV4: 2f30c2b7021c8005d3042781da7ef87d06589421
   ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
+  ReactiveCocoa: 5a42745f11ea236f405bb9ce5e97c5e3b23562dd
   ReflectableEnum: dc2fa83bba1e74df3a2f319c2ffaea55fd95887e
+  Result: 6e722d4a66b1408680dbfcdf51c0b1c4b706316a
   Reveal-iOS-SDK: e2250b3c155bcfac53ae223ddc1f76d08f206c33
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   SSDataSources: b01170fb23b82acf0649194e9189b0bf5f702681
-  Stripe: d1eae5522cf993590f962ac1829a56c2096cf486
+  Stripe: 1e20396b4dad7b9a08312bf914c233154fb8fcfd
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
   SwiftDate: 971f8b9394f664f2226b9c3ab64e801a7291c612
@@ -298,6 +292,6 @@ SPEC CHECKSUMS:
   YapDatabase: 713d4018cfacbd6e77dd430710ca84730e450980
   YLMoment: af44d9d402790049e5490fa6eae9585b89b4090b
 
-PODFILE CHECKSUM: a2712e7b74534f561aef5f267c60046fce6b7698
+PODFILE CHECKSUM: fd03c910cb4a9ec34cb5176674f5aa392116c704
 
 COCOAPODS: 1.0.1
