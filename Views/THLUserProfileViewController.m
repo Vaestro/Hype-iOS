@@ -23,6 +23,8 @@
 #import "THLPaymentViewController.h"
 #import "THLWebViewController.h"
 #import "TTTAttributedLabel.h"
+#import "BranchUniversalObject.h"
+#import "BranchLinkProperties.h"
 
 typedef NS_ENUM(NSInteger, TableViewSection) {
     TableViewSectionPersonal = 0,
@@ -266,21 +268,27 @@ STPPaymentCardTextFieldDelegate
 #pragma mark -
 
 - (void)handleInviteFriendsAction {
-    UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    BranchUniversalObject *branchUniversalObject = [[BranchUniversalObject alloc] initWithCanonicalIdentifier:[THLUser currentUser].objectId];
+    branchUniversalObject.title = @"User App Invite";
+    branchUniversalObject.contentDescription = @"Invite friends through profile";
+    branchUniversalObject.imageUrl = [THLUser currentUser].image.url;
+    [branchUniversalObject addMetadataKey:@"userId" value:[THLUser currentUser].objectId];
+    [branchUniversalObject addMetadataKey:@"userName" value:[THLUser currentUser].fullName];
     
-    while (topController.presentedViewController) {
-        topController = topController.presentedViewController;
-    }
+    BranchLinkProperties *linkProperties = [[BranchLinkProperties alloc] init];
+    linkProperties.feature = @"referral";
     
     NSString *message = @"Check out this app that gets you into the hottest parties in NYC!";
-    NSString *shareBody = branchMarketingLink;
     
-    NSArray *postItems = @[message, shareBody];
-    
-    UIActivityViewController *activityVC = [[UIActivityViewController alloc]
-                                            initWithActivityItems:postItems
-                                            applicationActivities:nil];
-    [topController presentViewController:activityVC animated:YES completion:nil];
+    [branchUniversalObject showShareSheetWithLinkProperties:linkProperties andShareText:message fromViewController:self completion:nil];
+//    MFMessageComposeViewController *picker = [[MFMessageComposeViewController alloc] init];
+//    picker.messageComposeDelegate = self;
+//    
+//    picker.recipients = [NSArray arrayWithObject:@"9178686312"];   // your recipient number  or self for testing
+//    picker.body = @"test from OS4";
+//    NSData *imageData = UIImagePNGRepresentation([THLUser currentUser].image);
+//    [picker addAttachmentData:imageData typeIdentifier:(NSString *)kUTTypePNG   filename:@"image.png"];
+//    [self presentModalViewController:picker animated:YES];
 }
 
 - (void)presentCodeEntryView {
