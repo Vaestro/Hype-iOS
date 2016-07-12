@@ -19,6 +19,10 @@ static CGFloat MAPVIEW_METERS = 1000;
 @end
 
 @implementation THLEventDetailsMapView
+- (void)dealloc {
+    NSLog(@"YA BOY %@ DEALLOCATED", [self class]);
+}
+
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         [self layoutView];

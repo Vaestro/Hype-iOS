@@ -42,6 +42,7 @@ PODS:
   - Crashlytics (3.7.2):
     - Fabric (~> 1.6.3)
   - DateTools (1.7.0)
+  - DGActivityIndicatorView (2.0)
   - Digits (2.3.0):
     - TwitterCore (= 2.3.0)
   - EKAlgorithms (0.2)
@@ -197,6 +198,7 @@ DEPENDENCIES:
   - CocoaLumberjack
   - Crashlytics
   - DateTools (~> 1.6)
+  - DGActivityIndicatorView
   - Digits
   - EKAlgorithms (~> 0.2)
   - Fabric
@@ -247,6 +249,7 @@ SPEC CHECKSUMS:
   CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
   Crashlytics: 130ab943f8c78cda7a814b434f270b2e2c8a3cba
   DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
+  DGActivityIndicatorView: 52875b025a6ccf6a431a905285c12e2bb95eb559
   Digits: af82d24ec38035cc555b60f55cca5abc68a76bed
   EKAlgorithms: 83488651734ba3a63956fcb783b10e82d2ec3388
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
@@ -292,6 +295,6 @@ SPEC CHECKSUMS:
   YapDatabase: 713d4018cfacbd6e77dd430710ca84730e450980
   YLMoment: af44d9d402790049e5490fa6eae9585b89b4090b
 
-PODFILE CHECKSUM: fd03c910cb4a9ec34cb5176674f5aa392116c704
+PODFILE CHECKSUM: 808e60b517772ef3e53fe84291ef111b34ce6dd2
 
 COCOAPODS: 1.0.1

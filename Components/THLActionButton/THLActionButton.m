@@ -98,4 +98,8 @@
     return CGSizeMake(UIViewNoIntrinsicMetric, 60);
 }
 
+- (void)dealloc {
+    NSLog(@"YA BOY %@ DEALLOCATED", [self class]);
+}
+
 @end

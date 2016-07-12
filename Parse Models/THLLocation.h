@@ -23,5 +23,7 @@
 @property (nonatomic, retain) NSArray *musicTypes;
 @property (nonatomic, retain) NSString *attireRequirement;
 @property (nonatomic, retain) NSDate *timeOpen;
+@property (nonatomic) int imageCount;
+
 - (NSString *)fullAddress;
 @end

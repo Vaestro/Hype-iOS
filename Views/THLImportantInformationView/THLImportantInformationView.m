@@ -37,5 +37,7 @@
 
     return _importantInformationLabel;
 }
-
+- (void)dealloc {
+    NSLog(@"YA BOY %@ DEALLOCATED", [self class]);
+}
 @end

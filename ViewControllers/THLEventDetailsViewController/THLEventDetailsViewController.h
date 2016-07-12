@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Parse/PFObject.h>
 
+@class PFObject;
 
 @protocol THLEventDetailsViewControllerDelegate <NSObject>
 - (void)eventDetailsWantsToPresentAdmissionsForEvent:(PFObject *)event venue:(PFObject *)venue;

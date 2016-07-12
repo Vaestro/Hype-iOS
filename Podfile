@@ -62,6 +62,8 @@ pod 'SwiftDate'
 
 #UI
 pod 'SVPullToRefresh'
+pod 'DGActivityIndicatorView'
+
 pod "ORStackView"
 pod 'SVProgressHUD'
 pod 'THContactPicker', '~> 1.2'

@@ -80,13 +80,8 @@
         
         PFFile *imageFile =  _guestlistInvite[@"qrCode"];
         
-        [imageFile getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
-            if (!error) {
-                UIImage *qrCodeImage = [UIImage imageWithData:data];
-                _qrCodeImageView.image = qrCodeImage;
-            }
-        }];
-        
+        [_qrCodeImageView sd_setImageWithURL:[NSURL URLWithString:imageFile.url]];
+
         [self.view addSubview:_qrCodeImageView];
     }
     return _qrCodeImageView;

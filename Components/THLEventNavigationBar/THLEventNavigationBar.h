@@ -8,17 +8,20 @@
 
 #import <UIKit/UIKit.h>
 #import "BLKFlexibleHeightBar.h"
+#import "SwipeView.h"
+
+@class THLEvent;
+@class THLLocation;
 
 @interface THLEventNavigationBar : BLKFlexibleHeightBar
 @property (nonatomic, strong) UILabel *dateLabel;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, copy) NSString *titleText;
+@property (nonatomic, strong) SwipeView *swipeView;
+
 @property (nonatomic, strong) UILabel *minimumTitleLabel;
-@property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) NSMutableArray *images;
 
-@property (nonatomic, copy) NSURL *locationImageURL;
-@property (nonatomic, strong) UIButton *dismissButton;
-@property (nonatomic, strong) RACCommand *detailDisclosureCommand;
 
--(void)addGradientLayer;
+- (instancetype)initWithFrame:(CGRect)frame event:(THLEvent *)event venue:(THLLocation *)venue;
 @end

@@ -48,10 +48,20 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-	// Initialize Parse.
-    [Parse enableLocalDatastore];
-	[Parse setApplicationId:applicationId
-				  clientKey:clientKeyId];
+    #if DEBUG
+        [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
+            configuration.applicationId = applicationId;
+            configuration.clientKey = clientKeyId;
+            configuration.server = @"https://powerful-tundra-19716.herokuapp.com/parse/";
+//            configuration.server = @"https://07a5246d.ngrok.io/parse/";
+            configuration.localDatastoreEnabled = YES;
+        }]];
+    #else
+        // Initialize Parse.
+        [Parse enableLocalDatastore];
+        [Parse setApplicationId:applicationId
+                  clientKey:clientKeyId];
+    #endif
     
     // Track app open
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
