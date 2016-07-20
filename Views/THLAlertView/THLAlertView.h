@@ -12,7 +12,6 @@
 @interface THLAlertView : FXBlurView
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *message;
-@property (nonatomic, strong) RACCommand *dismissCommand;
 
 - (void)showWithTitle:(NSString *)title message:(NSString *)message;
 

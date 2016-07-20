@@ -31,7 +31,6 @@ TTTAttributedLabelDelegate
 @property (nonatomic) THLEvent *event;
 @property (nonatomic) PFObject *admissionOption;
 @property (nonatomic) THLGuestlistInvite *guestlistInvite;
-@property (nonatomic, strong) RACCommand *completionAction;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic) float serviceCharge;
 @property (nonatomic) float total;

@@ -26,6 +26,7 @@ TTTAttributedLabelDelegate
 >
 @property (nonatomic, strong) UIImageView *logoImageView;
 @property (nonatomic) THLOnboardingState onboardingState;
+@property (nonatomic) TTTAttributedLabel *attritutedLoginLabel;
 @end
 
 @implementation OnboardingContentViewController
@@ -111,12 +112,12 @@ TTTAttributedLabelDelegate
     return self;
 }
 
-+ (instancetype)contentWithTitle:(NSString *)title body:(NSString *)body image:(UIImage *)image {
++ (instancetype)contentWithTitle:(NSString *)title body:(NSString *)body image:(UIImage *)image{
     OnboardingContentViewController *contentVC = [[self alloc] initWithTitle:title body:body image:image];
     return contentVC;
 }
 
-- (instancetype)initWithTitle:(NSString *)title body:(NSString *)body image:(UIImage *)image  {
+- (instancetype)initWithTitle:(NSString *)title body:(NSString *)body image:(UIImage *)image {
     self = [super init];
     
     // hold onto the passed in parameters, and set the action block to an empty block
@@ -267,6 +268,17 @@ TTTAttributedLabelDelegate
         
         [self.view addSubview:self.moviePlayerController.view];
         [self.view sendSubviewToBack:self.moviePlayerController.view];
+        
+//        CAGradientLayer *gradient = [CAGradientLayer layer];
+//        
+//        gradient.frame = self.view.bounds;
+//        gradient.colors = @[(id)[UIColor clearColor].CGColor,
+//                            (id)[UIColor blackColor].CGColor,
+//                            (id)[UIColor blackColor].CGColor,
+//                            (id)[UIColor clearColor].CGColor];
+//        gradient.locations = @[@0.0, @0.25, @0.25, @1.0];
+//        
+//        self.view.layer.mask = gradient;
     }
 }
 
@@ -290,10 +302,21 @@ TTTAttributedLabelDelegate
         make.left.equalTo(kTHLEdgeInsetsSuperHigh());
         make.width.equalTo(SCREEN_WIDTH*0.67);
     }];
+    
+    [self.attritutedLoginLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(kTHLEdgeInsetsSuperHigh());
+        make.top.equalTo(kTHLEdgeInsetsSuperHigh());
+    }];
+    
 }
 
 - (void)layoutView {
-    [self.view addSubviews:@[_imageView, _mainTextLabel, _bodyTextLabel]];
+    [self.view addSubviews:@[_imageView, _mainTextLabel, _secondaryButton, _bodyTextLabel]];
+    
+    [self.attritutedLoginLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(kTHLEdgeInsetsSuperHigh());
+        make.top.equalTo(kTHLEdgeInsetsSuperHigh());
+    }];
     
     [_bodyTextLabel makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_offset(-67);
@@ -315,22 +338,23 @@ TTTAttributedLabelDelegate
 }
 
 - (void)layoutFinalView {
-    [self.view addSubviews:@[_imageView, _logoImageView, _subTextLabel, _bodyTextLabel, _actionButton, _secondaryButton, _attributedLabel]];
     
-    [_secondaryButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.view addSubviews:@[_imageView, _logoImageView, _subTextLabel, _bodyTextLabel, _actionButton, _secondaryButton, _attributedLabel]];
+    WEAKSELF();
+    [self.attritutedLoginLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(kTHLEdgeInsetsSuperHigh());
         make.top.equalTo(kTHLEdgeInsetsSuperHigh());
     }];
     
     [_logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(SV(_logoImageView).centerX);
-        make.bottom.equalTo(SV(_logoImageView).centerY).insets(kTHLEdgeInsetsSuperHigh());
+        make.centerX.equalTo(SV(WSELF.logoImageView).centerX);
+        make.bottom.equalTo(SV(WSELF.logoImageView).centerY).insets(kTHLEdgeInsetsSuperHigh());
         make.size.mas_equalTo(CGSizeMake1(75.0f));
     }];
     
     [_subTextLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(SV(_logoImageView).centerX);
-        make.top.equalTo(SV(_logoImageView).centerY).insets(kTHLEdgeInsetsSuperHigh());
+        make.centerX.equalTo(SV(WSELF.logoImageView).centerX);
+        make.top.equalTo(SV(WSELF.logoImageView).centerY).insets(kTHLEdgeInsetsSuperHigh());
         make.width.equalTo(SCREEN_WIDTH*0.67);
     }];
     
@@ -339,9 +363,16 @@ TTTAttributedLabelDelegate
     }];
     
     [_actionButton makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(_attributedLabel.mas_top).insets(kTHLEdgeInsetsInsanelyHigh());
+        make.bottom.equalTo(_secondaryButton.mas_top).insets(kTHLEdgeInsetsHigh());
         make.centerX.equalTo(SV(_actionButton).centerX);
         make.height.equalTo(58);
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+    }];
+    
+    [_secondaryButton makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(_attributedLabel.mas_top).insets(kTHLEdgeInsetsSuperHigh());
+        make.centerX.equalTo(SV(_actionButton).centerX);
+//        make.height.equalTo(58);
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
@@ -408,8 +439,8 @@ TTTAttributedLabelDelegate
 }
 
 - (THLActionButton *)newActionButton {
-    THLActionButton *actionButton = [[THLActionButton alloc] initWithInverseStyle];
-    [actionButton setTitle:@"Login with Facebook"];
+    THLActionButton *actionButton = [[THLActionButton alloc] initWithFacebookStyle];
+    [actionButton setTitle:@"Connect with Facebook"];
     [actionButton addTarget:self action:@selector(handleButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     return actionButton;
 }
@@ -417,11 +448,34 @@ TTTAttributedLabelDelegate
 - (UIButton *)newSecondActionButton {
     UIButton *secondButton = [UIButton new];
     secondButton.tintColor = [UIColor clearColor];
-    [secondButton setTitle:@"Skip" forState:UIControlStateNormal];
-    [secondButton setTitleColor:kTHLNUIGrayFontColor forState:UIControlStateNormal];
-    secondButton.titleLabel.font = [UIFont fontWithName:@"Raleway-Light" size:16];
+    [secondButton setTitle:@"Don’t want to use Facebook?" forState:UIControlStateNormal];
+    [secondButton setTitleColor:kTHLNUIPrimaryFontColor forState:UIControlStateNormal];
+    secondButton.titleLabel.font = [UIFont fontWithName:@"Raleway-Bold" size:16];
     [secondButton addTarget:self action:@selector(handleSecondaryButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     return secondButton;
+}
+
+- (TTTAttributedLabel *)attritutedLoginLabel {
+    if (!_attritutedLoginLabel) {
+        _attritutedLoginLabel = [TTTAttributedLabel new];
+        _attritutedLoginLabel.textColor = kTHLNUIGrayFontColor;
+        _attritutedLoginLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16];
+        _attritutedLoginLabel.numberOfLines = 0;
+        _attritutedLoginLabel.adjustsFontSizeToFitWidth = YES;
+        _attritutedLoginLabel.minimumScaleFactor = 0.5;
+        _attritutedLoginLabel.linkAttributes = @{NSForegroundColorAttributeName: kTHLNUIPrimaryFontColor,
+                                                 NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
+        _attritutedLoginLabel.activeLinkAttributes = @{NSForegroundColorAttributeName: kTHLNUIAccentColor,
+                                                       NSUnderlineStyleAttributeName: @(NSUnderlineStyleNone)};
+        _attritutedLoginLabel.textAlignment = NSTextAlignmentCenter;
+        NSString *labelText = @"Already have an account? Log in";
+        _attritutedLoginLabel.text = labelText;
+        NSRange login = [labelText rangeOfString:@"Log in"];
+        [_attritutedLoginLabel addLinkToURL:[NSURL URLWithString:@"action://show-login"] withRange:login];
+        _attritutedLoginLabel.delegate = self;
+        [self.view addSubview:_attritutedLoginLabel];
+    }
+    return _attritutedLoginLabel;
 }
 
 - (TTTAttributedLabel *)newAttributedLabel {
@@ -458,7 +512,9 @@ TTTAttributedLabelDelegate
 
 - (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url {
     if ([[url scheme] hasPrefix:@"action"]) {
-        if ([[url host] hasPrefix:@"show-privacy"]) {
+        if ([[url host] hasPrefix:@"show-login"]) {
+            [self.loginDelegate onboardingViewControllerWantsToShowLoginView];
+        } else if ([[url host] hasPrefix:@"show-privacy"]) {
             THLInformationViewController *infoVC = [THLInformationViewController new];
             UINavigationController *navVC= [[UINavigationController alloc] initWithRootViewController:infoVC];
             [self.view.window.rootViewController presentViewController:navVC animated:YES completion:nil];

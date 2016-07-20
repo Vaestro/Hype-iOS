@@ -9,22 +9,23 @@
 #import <UIKit/UIKit.h>
 #import "FXBlurView.h"
 
-@interface THLConfirmationView : FXBlurView
-//@property (nonatomic, strong) RACCommand *dismissCommand;
-@property (nonatomic, strong) NSString *confirmationTitle;
-@property (nonatomic, strong) NSString *confirmationMessage;
-@property (nonatomic, strong) NSString *declineButtonText;
-@property (nonatomic, strong) NSString *acceptButtonText;
-@property (nonatomic, strong) RACCommand *acceptCommand;
-@property (nonatomic, strong) RACCommand *declineCommand;
-@property (nonatomic, strong) RACCommand *dismissCommand;
+@protocol THLConfirmationViewDelegate <NSObject>
+-(void)confirmationViewDidAcceptAction;
+-(void)confirmationViewDidDeclineAction;
+@end
 
-- (void)setResponseFlowWithTitle:(NSString *)title message:(NSString *)message;
-- (void)setConfirmationWithTitle:(NSString *)title message:(NSString *)message;
+@interface THLConfirmationView : FXBlurView
+@property (nonatomic, weak) id<THLConfirmationViewDelegate> delegate;
+
+@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UILabel *messageLabel;
+@property (nonatomic, strong) UIButton *acceptButton;
+@property (nonatomic, strong) UIButton *declineButton;
+@property (nonatomic, strong) UIButton *dismissButton;
+
 - (void)setInProgressWithMessage:(NSString *)messageText;
 - (void)setSuccessWithTitle:(NSString *)titleText Message:(NSString *)messageText;
 - (void)dismiss;
-- (void)dismissResponseFlow;
 
 #pragma mark Subclassing
 

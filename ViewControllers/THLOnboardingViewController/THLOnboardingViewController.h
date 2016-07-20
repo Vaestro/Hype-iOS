@@ -12,7 +12,7 @@
 
 -(void)onboardingViewControllerdidFinishSignup;
 -(void)onboardingViewControllerdidSkipSignup;
-
+-(void)usersWantsToLogin;
 @end
 
 

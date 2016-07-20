@@ -92,19 +92,19 @@
 
 - (void)bindView {
     WEAKSELF();
-    RAC(self.textView, text) = RACObserve(WSELF, confirmationText);
-    RAC(self.acceptButton, rac_command) = RACObserve(WSELF, acceptCommand);
-    [[self.acceptButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        [WSELF dismissPresentingPopup];
-    }];
-    RAC(self.declineButton, rac_command) = RACObserve(WSELF, declineCommand);
-    [[self.declineButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        [WSELF dismissPresentingPopup];
-    }];
-    
-    [[self.dismissButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        [WSELF dismissPresentingPopup];
-    }];
+//    RAC(self.textView, text) = RACObserve(WSELF, confirmationText);
+//    RAC(self.acceptButton, rac_command) = RACObserve(WSELF, acceptCommand);
+//    [[self.acceptButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+//        [WSELF dismissPresentingPopup];
+//    }];
+//    RAC(self.declineButton, rac_command) = RACObserve(WSELF, declineCommand);
+//    [[self.declineButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+//        [WSELF dismissPresentingPopup];
+//    }];
+//    
+//    [[self.dismissButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+//        [WSELF dismissPresentingPopup];
+//    }];
 }
 
 #pragma mark - Constructors

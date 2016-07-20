@@ -28,6 +28,17 @@
     return self;
 }
 
+- (instancetype)initWithFacebookStyle {
+    if (self = [super init]) {
+        self.inverse = FALSE;
+        self.fxLabel.backgroundColor = kTHLNUIBlueColor;
+        [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.layer setCornerRadius:2.0];
+        
+    }
+    return self;
+}
+
 - (instancetype)initWithInverseStyle {
     if (self = [super init]) {
         self.inverse = TRUE;
@@ -73,13 +84,11 @@
     } else {
         [self.fxLabel setTextColor:[UIColor blackColor]];
     }
-
 }
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor {
     [super setBackgroundColor:backgroundColor];
-    [self.layer setBorderColor:[[UIColor clearColor] CGColor]];
-    [self.fxLabel setTextColor:[UIColor blackColor]];
+//    [self.layer setBorderColor:[[UIColor clearColor] CGColor]];
 }
 
 - (FXLabel *)fxLabel {
@@ -97,9 +106,4 @@
 - (CGSize)intrinsicContentSize {
     return CGSizeMake(UIViewNoIntrinsicMetric, 60);
 }
-
-- (void)dealloc {
-    NSLog(@"YA BOY %@ DEALLOCATED", [self class]);
-}
-
 @end

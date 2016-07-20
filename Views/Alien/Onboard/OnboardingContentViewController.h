@@ -16,6 +16,11 @@
 
 typedef void (^action_callback)(OnboardingViewController *onboardController);
 
+@protocol OnboardingContentViewControllerDelegate <NSObject>
+
+-(void)onboardingViewControllerWantsToShowLoginView;
+@end
+
 @interface OnboardingContentViewController : UIViewController {
     NSString *_titleText;
     NSString *_subtitleText;
@@ -34,6 +39,8 @@ typedef void (^action_callback)(OnboardingViewController *onboardController);
     UIButton *_secondaryButton;
 
 }
+
+@property (nonatomic, weak) id<OnboardingContentViewControllerDelegate> loginDelegate;
 
 @property (nonatomic) OnboardingViewController *delegate;
 

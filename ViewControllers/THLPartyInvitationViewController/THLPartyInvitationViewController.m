@@ -171,10 +171,11 @@ viewDataSourceFactory:(THLViewDataSourceFactory *)viewDataSourceFactory
             THLContactTableViewCell *tvCell = (THLContactTableViewCell *)cell;
             THLGuestEntity *guest = (THLGuestEntity *)object;
             
-            tvCell.name = guest.fullName;
-            tvCell.phoneNumber = guest.phoneNumber;
+            tvCell.nameLabel.text = guest.fullName;
+            tvCell.phoneNumberLabel.text = guest.phoneNumber;
+            tvCell.iconImageView.placeholderImageText = guest.fullName;
             tvCell.contentView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
-
+            
             if ([WSELF.addedGuests containsObject:guest]) {
                 tvCell.tintColor = kTHLNUIAccentColor;
                 tvCell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -183,7 +184,7 @@ viewDataSourceFactory:(THLViewDataSourceFactory *)viewDataSourceFactory
             }
             
             if ([WSELF.currentGuests containsObject:guest.intPhoneNumberFormat]) {
-                tvCell.name = [NSString stringWithFormat:@"%@ (Already Invited!)", guest.fullName];
+                tvCell.nameLabel.text = [NSString stringWithFormat:@"%@ (Already Invited!)", guest.fullName];
                 tvCell.userInteractionEnabled = NO;
                 tvCell.alpha = 0.5;
                 [tvCell maskView].alpha = 0.5;

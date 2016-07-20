@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface THLUserProfileTableViewCell : UITableViewCell
-@property (nonatomic, copy) NSString *title;
+@property (nonatomic, strong) UILabel *titleLabel;
 
 + (NSString *)identifier;
 @end

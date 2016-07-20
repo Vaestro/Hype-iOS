@@ -38,8 +38,8 @@
 //    }];
     
 
-    RAC(self.contactUsButton, rac_command) = RACObserve(self, emailCommand);
-    RAC(self.logoutButton, rac_command) = RACObserve(self, logoutCommand);
+//    RAC(self.contactUsButton, rac_command) = RACObserve(self, emailCommand);
+//    RAC(self.logoutButton, rac_command) = RACObserve(self, logoutCommand);
 }
 
 - (UIButton *)newContactUsButton {

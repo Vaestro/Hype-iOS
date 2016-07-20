@@ -119,10 +119,10 @@
     
     NSDate *date = (NSDate *)object[@"date"];
 
-    cell.titlesView.titleText = object[@"title"];
-    cell.titlesView.dateText = [NSString stringWithFormat:@"%@", date.thl_weekdayString];
-    cell.titlesView.locationNameText = object[@"location"][@"name"];
-    cell.titlesView.locationNeighborhoodText = object[@"location"][@"neighborhood"];
+    cell.titlesView.titleLabel.text = object[@"title"];
+    cell.titlesView.dateLabel.text = [NSString stringWithFormat:@"%@", date.thl_weekdayString];
+    cell.titlesView.locationNameLabel.text = object[@"location"][@"name"];
+    cell.titlesView.locationNeighborhoodLabel.text = object[@"location"][@"neighborhood"];
     cell.venueImageView.file = object[@"location"][@"image"];
     [cell.venueImageView loadInBackground];
     

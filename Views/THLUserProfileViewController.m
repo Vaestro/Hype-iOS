@@ -70,16 +70,16 @@ STPPaymentCardTextFieldDelegate
 @property (nonatomic, strong) NSArray *tableCellNames;
 @property (nonatomic, strong) NSString *siteUrl;
 @property (nonatomic, strong) THLInformationViewController *infoVC;
-@property (nonatomic, strong) RACCommand *dismissVC;
+//@property (nonatomic, strong) RACCommand *dismissVC;
 @property (nonatomic) THLWebViewController *webViewController;
 @property (nonatomic, strong) TTTAttributedLabel *navBarTitleLabel;
 
 @end
 
 @implementation THLUserProfileViewController
-@synthesize selectedIndexPathCommand;
-@synthesize contactCommand;
-@synthesize logoutCommand;
+//@synthesize selectedIndexPathCommand;
+//@synthesize contactCommand;
+//@synthesize logoutCommand;
 @synthesize userName;
 @synthesize userImageURL;
 
@@ -144,7 +144,7 @@ STPPaymentCardTextFieldDelegate
     THLUserProfileTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[THLUserProfileTableViewCell identifier] forIndexPath:indexPath];
     
     cell.contentView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
-    cell.title = [self.tableCellNames objectAtIndex:indexPath.row];
+    cell.titleLabel.text = [self.tableCellNames objectAtIndex:indexPath.row];
     cell.textLabel.backgroundColor = [UIColor clearColor];
     
     return cell;
@@ -167,8 +167,6 @@ STPPaymentCardTextFieldDelegate
     CGRect frame = CGRectMake(0, 0, ScreenWidth, height);
     THLUserProfileHeaderView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:[THLUserProfileHeaderView identifier]];
     headerView = [[THLUserProfileHeaderView alloc] initWithFrame:frame];
-    RAC(headerView, userImageURL) = RACObserve(self, userImageURL);
-    RAC(headerView, userName) = RACObserve(self, userName);
     header = headerView;
     return header;
 }
@@ -179,8 +177,8 @@ STPPaymentCardTextFieldDelegate
     CGRect frame = CGRectMake(0, 0, ScreenWidth, height);
     THLUserProfileFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:[THLUserProfileFooterView identifier]];
     footerView = [[THLUserProfileFooterView alloc] initWithFrame:frame];
-    footerView.logoutCommand = self.logoutCommand;
-    footerView.emailCommand = self.contactCommand;
+//    footerView.logoutCommand = self.logoutCommand;
+//    footerView.emailCommand = self.contactCommand;
     
     footer = footerView;
     return footer;

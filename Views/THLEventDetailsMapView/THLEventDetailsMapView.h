@@ -8,10 +8,14 @@
 
 #import "THLTitledContentView.h"
 
+@class CLPlacemark;
 @interface THLEventDetailsMapView : UIView
 @property (nonatomic, strong) UILabel *venueNameLabel;
 
 @property (nonatomic, strong) UILabel *addressLabel;
 @property (nonatomic, copy) NSString *locationAddress;
 @property (nonatomic, copy) CLPlacemark *locationPlacemark;
+
+- (void)displayPlacemark:(CLPlacemark *)placemark;
+
 @end

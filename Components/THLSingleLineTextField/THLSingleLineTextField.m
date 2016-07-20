@@ -52,8 +52,8 @@
         _style = style;
         _floatingLabelHeight = labelHeight;
         self.borderStyle = UITextBorderStyleNone;
-        self.backgroundColor = [UIColor clearColor];
-        [self addLineView];
+        self.backgroundColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.10];
+//        [self addLineView];
         [self updateUI];
     }
     return self;
@@ -200,7 +200,8 @@
 {
     [self propertyInit];
     
-    self.backgroundColor = [UIColor clearColor];
+//    self.backgroundColor = [UIColor clearColor];
+    
     
     self.placeholderLabel = [UILabel new];
     self.placeholderLabel.backgroundColor = [UIColor clearColor];

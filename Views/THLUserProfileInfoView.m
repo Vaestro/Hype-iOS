@@ -24,7 +24,6 @@
     if (self = [super initWithFrame:frame]) {
         [self constructView];
         [self layoutView];
-        [self bindView];
         self.translatesAutoresizingMaskIntoConstraints = NO;
     }
     return self;
@@ -64,11 +63,6 @@
 
 - (void)updateConstraints {
     [super updateConstraints];
-}
-
-- (void)bindView {
-    RAC(self.iconView, imageURL) = RACObserve(self, userImageURL);
-    RAC(self.label, text) = RACObserve(self, userName);
 }
 
 #pragma mark - Construtors

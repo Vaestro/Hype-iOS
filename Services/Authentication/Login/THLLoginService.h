@@ -7,14 +7,32 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "THLLoginServiceInterface.h"
+
 @protocol THLLoginServiceDelegate <NSObject>
 
--(void)loginServiceDidSaveUserFacebookInformation;
+-(void)loginServiceDidLoginUser;
+-(void)loginServiceNeedsUserToSignup;
+
+-(void)loginServiceDidSignupUser;
+-(void)loginServiceNeedsUserToLogin;
 
 @end
 
-@interface THLLoginService : NSObject<THLLoginServiceInterface>
+@interface THLLoginService : NSObject
 @property (nonatomic, weak) id<THLLoginServiceDelegate> delegate;
 
+- (void)login;
+- (void)loginWithFacebook;
+- (void)loginWithEmail:(NSString *)email andPassword:(NSString *)password;
+
+- (void)signUpWithFacebook;
+- (void)signUpWithEmail:(NSString *)email password:(NSString *)password firstName:(NSString *)firstName lastName:(NSString *)lastName sex:(THLSex)sex;
+
+- (void)createMixpanelAlias;
+- (void)createMixpanelPeopleProfile;
+- (void)saveFacebookUserInformation;
+- (BOOL)shouldLogin;
+- (BOOL)shouldAddFacebookInformation;
+- (BOOL)shouldVerifyEmail;
+- (BOOL)shouldVerifyPhoneNumber;
 @end

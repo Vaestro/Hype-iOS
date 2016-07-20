@@ -47,8 +47,8 @@
 }
 
 - (void)bindView {
-    RAC(self.typeLabel, text) = RACObserve(self, labelText);
-    RAC(self.textLabel, text) = RACObserve(self, infoText);
+//    RAC(self.typeLabel, text) = RACObserve(self, labelText);
+//    RAC(self.textLabel, text) = RACObserve(self, infoText);
 }
 
 #pragma mark - Constructors

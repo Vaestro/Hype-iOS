@@ -9,6 +9,8 @@
 #import "THLOnboardingViewController.h"
 #import "THLAppearanceConstants.h"
 #import "OnboardingViewController.h"
+#import "OnboardingContentViewController.h"
+
 #import "SVProgressHUD.h"
 #import "THLResourceManager.h"
 #import "THLActionButton.h"
@@ -18,20 +20,22 @@
 #import <DigitsKit/DigitsKit.h>
 #import "THLAppearanceConstants.h"
 #import "THLPermissionRequestViewController.h"
+#import "THLSignUpViewController.h"
 
 //static CGFloat const LOGIN_BUTTON_HEIGHT = 50;
 //static CGFloat const PRIVACY_IMAGEVIEW_DIMENSION = 14;
 
 @interface THLOnboardingViewController()
 <
+THLLoginServiceDelegate,
+OnboardingContentViewControllerDelegate,
 THLTextEntryViewDelegate,
 THLLoginServiceDelegate,
 THLPermissionRequestViewControllerDelegate
 >
 @property (nonatomic, strong) OnboardingViewController *onboardingViewController;
 @property (nonatomic, strong) THLLoginService *loginService;
-@property (nonatomic, strong) THLTextEntryViewController *userInfoVerificationViewController;
-@property (nonatomic, strong) DGTAppearance *digitsAppearance;
+@property (nonatomic, strong) THLSignUpViewController *signUpViewController;
 
 @end
 
@@ -41,43 +45,20 @@ THLPermissionRequestViewControllerDelegate
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.view.backgroundColor = [UIColor blackColor];
-//    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
-//                                                  forBarMetrics:UIBarMetricsDefault];
-//    self.navigationController.navigationBar.shadowImage = [UIImage new];
-//    self.navigationController.navigationBar.translucent = YES;
-//    self.navigationController.view.backgroundColor = [UIColor clearColor];
-//    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.loginService = [THLLoginService new];
+    self.loginService.delegate = self;
+    
     [self.onboardingViewController.view makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(UIEdgeInsetsZero);
     }];
 }
 
-- (void)handleLogin {
-    _loginService = [THLLoginService new];
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel track:@"Touched facebook login button"];
-    [[_loginService login] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
-        [self reroute];
-        return nil;
-    }];
+- (void)handleFacebookSignUp {
+    [_loginService signUpWithFacebook];
 }
 
-- (void)reroute {
-    if ([_loginService shouldAddFacebookInformation]) {
-        [_loginService saveFacebookUserInformation];
-    } else if ([_loginService shouldVerifyPhoneNumber]) {
-        [self presentNumberVerificationInterfaceInViewController];
-    } else if ([_loginService shouldVerifyEmail]) {
-        [self presentUserInfoVerificationView];
-    } else if (![[UIApplication sharedApplication] isRegisteredForRemoteNotifications]) {
-        [_loginService createMixpanelAlias];
-        [self presentPermissionRequestViewController];
-    } else {
-        [self exitSignupFlow];
-    }
-}
-- (void)loginServiceDidSaveUserFacebookInformation {
-    [self reroute];
+- (void)showEmailSignUp {
+    [self.navigationController pushViewController:self.signUpViewController animated:true];
 }
 
 - (void)applicationDidRegisterForRemoteNotifications {
@@ -86,99 +67,31 @@ THLPermissionRequestViewControllerDelegate
     [self exitSignupFlow];
 }
 
-- (void)permissionViewControllerDeclinedPermission {
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel track:@"Declined push notification permission"];
-    [self exitSignupFlow];
-}
-
 - (void)exitSignupFlow {
-//    WEAKSELF();
-//    THLUser *currentUser = [THLUser currentUser];
-//    [[currentUser saveInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask<NSNumber *> *task) {
-        [self.delegate onboardingViewControllerdidFinishSignup];
-//        return nil;
-//    }];
+    [self.delegate onboardingViewControllerdidFinishSignup];
 }
 
-- (void)presentPermissionRequestViewController {
-    THLPermissionRequestViewController *permissionRequestViewController = [THLPermissionRequestViewController new];
-    permissionRequestViewController.delegate = self;
-    [self.navigationController pushViewController:permissionRequestViewController animated:YES];
-}
-
-- (void)presentUserInfoVerificationView {
-    [self.navigationController pushViewController:self.userInfoVerificationViewController animated:YES];
-}
-
-- (void)emailEntryView:(THLTextEntryViewController *)view userDidSubmitEmail:(NSString *)email {
-    THLUser *currentUser = [THLUser currentUser];
-    currentUser.email = email;
-    WEAKSELF();
-    [[currentUser saveInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask<NSNumber *> *task) {
-        [WSELF reroute];
-        return nil;
-    }];}
-
-- (void)presentNumberVerificationInterfaceInViewController {
-    WEAKSELF();
-    STRONGSELF();
-    DGTAuthenticationConfiguration *configuration = [DGTAuthenticationConfiguration new];
-    
-    configuration.title = NSLocalizedString(@"Number Verification", nil);
-    configuration.appearance = self.digitsAppearance;
-    [[Digits sharedInstance] authenticateWithViewController:self configuration:configuration completion:^(DGTSession *session, NSError *error) {
-        if (!error) {
-            [SSELF handleNumberVerificationSuccess:session];
-        }
-    }];
-}
-
-#pragma mark - Logic
-- (void)handleNumberVerificationSuccess:(DGTSession *)session {
-    THLUser *currentUser = [THLUser currentUser];
-    currentUser.phoneNumber = session.phoneNumber;
-    WEAKSELF();
-    [[currentUser saveInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask<NSNumber *> *task) {
-        [WSELF reroute];
-        return nil;
-    }];
+- (void)onboardingViewControllerWantsToShowLoginView {
+    [self.delegate usersWantsToLogin];
 }
 
 -(BOOL)prefersStatusBarHidden{
     return YES;
 }
 
-- (void)dealloc {
-    DLog(@"Destroyed Onboarding View Controller");
-}
-
 #pragma mark - Accessors
-- (THLTextEntryViewController *)userInfoVerificationViewController {
-    if (!_userInfoVerificationViewController) {
-        _userInfoVerificationViewController  = [[THLTextEntryViewController alloc] initWithNibName:nil bundle:nil];
-        _userInfoVerificationViewController.delegate = self;
-        _userInfoVerificationViewController.titleText = @"Confirm Info";
-        _userInfoVerificationViewController.descriptionText = @"We use your email and phone number to send you confirmations and receipts";
-        _userInfoVerificationViewController.buttonText = @"Continue";
-        _userInfoVerificationViewController.type = THLTextEntryTypeEmail;
+- (THLSignUpViewController *)signUpViewController {
+    if (!_signUpViewController) {
+        _signUpViewController  = [[THLSignUpViewController alloc] initWithNibName:nil bundle:nil];
     }
-    return _userInfoVerificationViewController;
+    return _signUpViewController;
 }
 
-- (DGTAppearance *)digitsAppearance {
-    if (!_digitsAppearance) {
-        _digitsAppearance = [DGTAppearance new];
-        _digitsAppearance.backgroundColor = kTHLNUIPrimaryBackgroundColor;
-        _digitsAppearance.accentColor = kTHLNUIAccentColor;
-        _digitsAppearance.logoImage = [UIImage imageNamed:@"Hypelist-Icon"];
-    }
-    return _digitsAppearance;
-}
 
 - (OnboardingViewController *)onboardingViewController {
     if (!_onboardingViewController) {
         _onboardingViewController = [OnboardingViewController onboardWithBackgroundVideoURL:[THLResourceManager onboardingVideo] contents:[self onboardingContentViewControllers]];
+        
         _onboardingViewController.fontName = @"Raleway-Bold";
         _onboardingViewController.titleFontSize = 24;
         _onboardingViewController.subtitleFontSize = 36;
@@ -212,7 +125,7 @@ THLPermissionRequestViewControllerDelegate
     OnboardingContentViewController *thirdPage = [OnboardingContentViewController contentWithTitle:@"EARN GREAT PERKS"
                                                                                                body:@"Every time you attend an event, you will get credits redeemable for perks like a free limo ride."
                                                                                               image:nil];
-    
+
     OnboardingContentViewController *fourthPage = [OnboardingContentViewController contentWithTitle:@"YOUR PERSONAL CONCIERGE"
                                                                                                body:@"Our team is always available through live chat to answer any questions you have to ensure a smooth night."
                                                                                               image:nil];
@@ -223,12 +136,17 @@ THLPermissionRequestViewControllerDelegate
                                                    backgroundImage:[UIImage imageNamed:@"OnboardingLoginBG"]
                                                    buttonText:@"Login with facebook"
                                                    action:^{
-                                                       [self handleLogin];
+                                                       [self handleFacebookSignUp];
                                                    }
                                                    secondaryButtonText:@"I'll signup later"
                                                    secondaryAction:^{
-                                                       [self.delegate onboardingViewControllerdidSkipSignup];
+                                                       [self showEmailSignUp];
                                                    }];
+    firstPage.loginDelegate = self;
+    secondPage.loginDelegate = self;
+    thirdPage.loginDelegate = self;
+    fourthPage.loginDelegate = self;
+    fifthPage.loginDelegate = self;
     
     return @[firstPage,
              secondPage,

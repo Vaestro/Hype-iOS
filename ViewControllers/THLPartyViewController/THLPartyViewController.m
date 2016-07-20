@@ -161,7 +161,7 @@ static CGFloat const CELL_SPACING = 10;
         
         PFFile *imageFile = object[@"Guest"][@"image"];
         NSURL *url = [NSURL URLWithString:imageFile.url];
-        [cell.iconImageView setImageURL:url];
+        [cell.iconImageView.imageView sd_setImageWithURL:url];
 
     }
     else {

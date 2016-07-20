@@ -10,7 +10,7 @@
 
 @interface THLUserProfileFooterView : UITableViewHeaderFooterView
 + (NSString *)identifier;
-@property (nonatomic, strong) RACCommand *emailCommand;
-@property (nonatomic, strong) RACCommand *logoutCommand;
+//@property (nonatomic, strong) RACCommand *emailCommand;
+//@property (nonatomic, strong) RACCommand *logoutCommand;
 
 @end

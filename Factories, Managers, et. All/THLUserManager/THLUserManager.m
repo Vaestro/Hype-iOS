@@ -43,15 +43,14 @@
 }
 
 + (BOOL)isUserCached {
-    return [self currentUser] || [self isFacebookLinkedWithUser];
+    return [self currentUser];
 }
 
 + (BOOL)isUserProfileValid {
     if ([[self currentUser].phoneNumber isEqualToString:@""]
         || [[self currentUser].email isEqualToString:@""]
         || [self currentUser].email == nil
-        || [self currentUser].phoneNumber == nil
-        || [self currentUser].image == nil) {
+        || [self currentUser].phoneNumber == nil) {
         return NO;
     } else {
         return YES;

@@ -18,6 +18,10 @@
 #import "THLPerkStoreItem.h"
 
 @interface THLPerkDetailViewController()
+<
+THLConfirmationViewDelegate
+>
+
 @property (nonatomic, strong) ORStackScrollView *scrollView;
 @property (nonatomic, strong) UILabel *perkDescriptionLabel;
 @property (nonatomic, strong) UIImageView *perkImageView;
@@ -88,47 +92,15 @@
     
 }
 
+#pragma mark - Event Handlers
 
-- (void)showRedeeemPerkFlow {
-    WEAKSELF();
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel track:@"Touched redeem perk button" properties:@{@"Perk Name": NSStringWithFormat(@"%@", _perk[@"name"])}];
-    
-    _confirmationView = [THLConfirmationView new];
-    RACCommand *acceptCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [[self purchasePerkStoreItem] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
-            [WSELF didPurchasePerk];
-            return nil;
-        }];
-        [WSELF.confirmationView setInProgressWithMessage:@"Redeeming your reward..."];
-        return [RACSignal empty];
-    }];
-
-    RACCommand *declineCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [WSELF.confirmationView dismiss];
-        return [RACSignal empty];
-    }];
-
-    RACCommand *dismissCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
-        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-        return [RACSignal empty];
-    }];
-
+- (void)handlePurchaseAction {
     THLPerkStoreItem *perk = (THLPerkStoreItem *)_perk;
-
-    [_confirmationView setAcceptButtonText:@"Yes"];
-    [_confirmationView setDeclineButtonText:@"No"];
-    [_confirmationView setAcceptCommand:acceptCommand];
-    [_confirmationView setDeclineCommand:declineCommand];
-    [_confirmationView setDismissCommand:dismissCommand];
-    [_confirmationView setConfirmationWithTitle:@"Redeem Reward"
-                                        message:[NSString stringWithFormat:@"Are you sure you want to use your credits to pucharse this reward for %i.00 ?", perk.credits]];
-    
     _userCredits = [THLUser currentUser].credits;
-    
     _userCredits >= perk.credits ? [self showConfirmationView] : [self errorWithPurchase];
 }
 
+#pragma mark - Alert View
 
 - (void)errorWithPurchase {
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Ok"
@@ -139,14 +111,6 @@
     
     [self showAlertViewWithMessage:message withAction:[[NSArray alloc] initWithObjects:cancelAction, nil]];
     
-}
-
-- (void)showConfirmationView {
-    [self.navigationController.view addSubview:_confirmationView];
-    [_confirmationView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.insets(kTHLEdgeInsetsNone());
-    }];
-    [self.parentViewController.view bringSubviewToFront:_confirmationView];
 }
 
 - (void)showAlertViewWithMessage:(NSString *)message withAction:(NSArray<UIAlertAction *>*)actions {
@@ -160,6 +124,28 @@
     
     [self presentViewController:alert animated:YES completion:nil];
 }
+
+#pragma mark - Confirmation View
+
+- (void)showConfirmationView {
+    [self.navigationController.view addSubview:self.confirmationView];
+    [self.confirmationView makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.bottom.insets(kTHLEdgeInsetsNone());
+    }];
+    [self.parentViewController.view bringSubviewToFront:self.confirmationView];
+}
+
+#pragma mark - THLConfirmationView Delegate
+- (void)confirmationViewDidAcceptAction {
+    WEAKSELF();
+    [[self purchasePerkStoreItem] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
+        [WSELF didPurchasePerk];
+        return nil;
+    }];
+    [self.confirmationView setInProgressWithMessage:@"Redeeming your reward..."];
+}
+
+#pragma mark - Perk Purchase
 
 - (void)didPurchasePerk {
     NSDate *currDate = [NSDate date];
@@ -175,7 +161,7 @@
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:@"Redeemed perk" properties:@{@"Perk Name": NSStringWithFormat(@"%@", perk.name)}];
     [mixpanel.people increment:@"perks redeemed" by:@1];
-
+    
     [self.confirmationView setSuccessWithTitle:@"Perk Redeemed"
                                        Message:[NSString stringWithFormat:@"You have successfully redeemed your credits for %i. Check your email for further instructions.", perk.credits]];
 }
@@ -184,7 +170,7 @@
     
     BFTaskCompletionSource *completionSource = [BFTaskCompletionSource taskCompletionSource];
     THLPerkStoreItem *perk = (THLPerkStoreItem *)_perk;
-
+    
     [PFCloud callFunctionInBackground:@"purchasePerkStoreItem"
                        withParameters:@{@"perkStoreItemId" : perk.objectId,
                                         @"perkStoreItemCost" : [[NSNumber alloc] initWithFloat:perk.credits],
@@ -202,13 +188,24 @@
     return completionSource.task;
 }
 
-#pragma mark - Constructors
+#pragma mark - Accessors
+
+- (THLConfirmationView *)confirmationView {
+    if (!_confirmationView) {
+        _confirmationView = [THLConfirmationView new];
+        _confirmationView.delegate = self;
+        THLPerkStoreItem *perk = (THLPerkStoreItem *)_perk;
+        _confirmationView.titleLabel.text = @"Redeem Reward";
+        _confirmationView.messageLabel.text = [NSString stringWithFormat:@"Are you sure you want to use your credits to purchase this reward for %i.00 ?", perk.credits];
+    }
+    return _confirmationView;
+}
 
 - (THLActionButton *)purchaseButton {
     if (!_purchaseButton) {
         _purchaseButton = [[THLActionButton alloc] initWithDefaultStyle];
         [_purchaseButton setTitle:@"REDEEM CREDITS"];
-        [_purchaseButton addTarget:self action:@selector(showRedeeemPerkFlow) forControlEvents:UIControlEventTouchUpInside];
+        [_purchaseButton addTarget:self action:@selector(handlePurchaseAction) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_purchaseButton];
     }
     return _purchaseButton;

@@ -9,9 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface THLEventTitlesView : UIView
-@property (nonatomic, copy) NSString *titleText;
-@property (nonatomic, copy) NSString *dateText;
-@property (nonatomic, copy) NSString *locationNameText;
-@property (nonatomic, copy) NSString *locationNeighborhoodText;
-@property (nonatomic, copy) UIColor *separatorColor;
+@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UILabel *dateLabel;
+@property (nonatomic, strong) UILabel *locationNameLabel;
+@property (nonatomic, strong) UILabel *locationNeighborhoodLabel;
 @end

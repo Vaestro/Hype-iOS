@@ -7,311 +7,255 @@
 //
 
 #import "THLLoginViewController.h"
+#import "THLLoginService.h"
+
 #import "THLAppearanceConstants.h"
 #import "SVProgressHUD.h"
 #import "THLResourceManager.h"
 #import "THLActionButton.h"
 #import "TTTAttributedLabel.h"
 #import "THLInformationViewController.h"
-#import "THLLoginService.h"
 #import "THLUser.h"
 #import "THLTextEntryViewController.h"
 #import <DigitsKit/DigitsKit.h>
 #import "THLAppearanceConstants.h"
 #import "THLPermissionRequestViewController.h"
+#import "JVFloatLabeledTextField.h"
+
+#import "NSString+EmailAddresses.h"
 
 @interface THLLoginViewController()
 <
+THLLoginServiceDelegate,
 THLTextEntryViewDelegate,
 THLPermissionRequestViewControllerDelegate,
-TTTAttributedLabelDelegate
+TTTAttributedLabelDelegate,
+UITextFieldDelegate
 >
 @property (nonatomic, strong) UIBarButtonItem *dismissButton;
 @property (nonatomic, strong) UILabel *bodyLabel;
 @property (nonatomic, strong) UIImageView *logoImageView;
 @property (nonatomic, strong) UIImageView *backgroundView;
 @property (nonatomic, strong) THLActionButton *facebookLoginButton;
+@property (nonatomic, strong) THLActionButton *emailLoginButton;
+
 @property (nonatomic, strong) TTTAttributedLabel *attributedLabel;
 
 @property (nonatomic, strong) THLLoginService *loginService;
 @property (nonatomic, strong) THLTextEntryViewController *userInfoVerificationViewController;
 @property (nonatomic, strong) DGTAppearance *digitsAppearance;
+
+@property (nonatomic, strong) JVFloatLabeledTextField *emailField;
+@property (nonatomic, strong) JVFloatLabeledTextField *passwordField;
+
 @end
 
 @implementation THLLoginViewController
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self constructView];
-    [self layoutView];
-//    self.edgesForExtendedLayout = UIRectEdgeNone;
-}
 
-- (void)constructView {
-    _backgroundView = [self newBackgroundView];
-    _logoImageView = [self newLogoImageView];
-    _dismissButton = [self newDismissButton];
-    _bodyLabel = [self newBodyLabel];
-    _facebookLoginButton = [self newFacebookLoginButton];
-    _attributedLabel = [self newAttributedLabel];
-}
-
-- (void)layoutView {
     self.view.backgroundColor = [UIColor blackColor];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                                                   forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.view.backgroundColor = [UIColor clearColor];
-    self.navigationItem.leftBarButtonItem = _dismissButton;
-        
-    [self.view addSubviews:@[_backgroundView, _logoImageView, _bodyLabel, _facebookLoginButton, _attributedLabel]];
+    self.navigationItem.leftBarButtonItem = self.dismissButton;
+    
+    self.loginService = [THLLoginService new];
+    self.loginService.delegate = self;
+    
     WEAKSELF();
-    [_logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(SV([WSELF logoImageView]).centerX);
-        make.bottom.equalTo(SV([WSELF logoImageView]).centerY).insets(kTHLEdgeInsetsSuperHigh());
-        make.size.mas_equalTo(CGSizeMake1(75.0f));
+    [self.logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_offset(75);
+        make.centerX.equalTo(0);
+        make.size.mas_equalTo(CGSizeMake1(50.0f));
     }];
     
-    [_bodyLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(SV([WSELF logoImageView]).centerX);
-        make.top.equalTo(SV([WSELF logoImageView]).centerY).insets(kTHLEdgeInsetsSuperHigh());
+    [self.bodyLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(0);
+        make.top.equalTo([WSELF logoImageView].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
         make.width.equalTo(SCREEN_WIDTH*0.67);
     }];
     
-    [_backgroundView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.top.equalTo(UIEdgeInsetsZero);
-    }];
-    
-    [_facebookLoginButton makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo([WSELF attributedLabel].mas_top).insets(kTHLEdgeInsetsInsanelyHigh());
-        make.centerX.equalTo(SV([WSELF facebookLoginButton]).centerX);
+    [self.facebookLoginButton makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo([WSELF emailField].mas_top).insets(kTHLEdgeInsetsSuperHigh());
+        make.centerX.equalTo(0);
         make.height.equalTo(50);
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
-    [_attributedLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_offset(-35);
-        make.centerX.equalTo(SV([WSELF attributedLabel]).centerX);
+    [self.emailField makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo([WSELF passwordField].mas_top).insets(kTHLEdgeInsetsHigh());
+        make.centerX.equalTo(0);
+        make.height.equalTo(50);
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
-    [self.view sendSubviewToBack:_backgroundView];
+    [self.passwordField makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo([WSELF emailLoginButton].mas_top).insets(kTHLEdgeInsetsHigh());
+        make.centerX.equalTo(0);
+        make.height.equalTo(50);
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+    }];
+    
+    [self.emailLoginButton makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_offset(-35);
+        make.centerX.equalTo(0);
+        make.height.equalTo(50);
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+    }];
+    
 }
 
-- (void)handleLogin {
-    _loginService = [THLLoginService new];
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel track:@"Touched facebook login button"];
-    [[_loginService login] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *task) {
-        [self reroute];
-        return nil;
-    }];
+- (void)handleFacebookLogin {
+    [_loginService loginWithFacebook];
 }
+
+- (void)handleEmailLogin {
+    [_loginService loginWithEmail:_emailField.text andPassword:_passwordField.text];
+}
+
 
 - (void)handleDismiss {
-//    [self.delegate loginViewControllerdidDismiss];
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)reroute {
-    if ([_loginService shouldAddFacebookInformation]) {
-        [_loginService saveFacebookUserInformation];
-    } else if ([_loginService shouldVerifyPhoneNumber]) {
-        [self presentNumberVerificationInterfaceInViewController];
-    } else if ([_loginService shouldVerifyEmail]) {
-        [self presentUserInfoVerificationView];
-    } else if (![[UIApplication sharedApplication] isRegisteredForRemoteNotifications]) {
-        [_loginService createMixpanelAlias];
-        [self presentPermissionRequestViewController];
-    } else {
-        [self saveUserAndExitSignupFlow];
-    }
-}
-- (void)loginServiceDidSaveUserFacebookInformation {
-    [self reroute];
+    [self.navigationController dismissViewControllerAnimated:true completion:nil];
 }
 
 - (void)applicationDidRegisterForRemoteNotifications {
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:@"Registered for push notification permission"];
-    [self saveUserAndExitSignupFlow];
+    [self.delegate loginViewControllerDidFinishSignup];
 }
 
 - (void)permissionViewControllerDeclinedPermission {
-    [self saveUserAndExitSignupFlow];
+    [self.delegate loginViewControllerDidFinishSignup];
 }
 
-- (void)saveUserAndExitSignupFlow {
-    WEAKSELF();
-    THLUser *currentUser = [THLUser currentUser];
-    [[currentUser saveInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask<NSNumber *> *task) {
-        [WSELF.delegate loginViewControllerDidFinishSignup];
-        return nil;
-    }];
+#pragma mark - THLLoginServiceDelegate
+- (void)loginServiceDidLoginUser {
+    [self.delegate loginViewControllerDidFinishSignup];
 }
 
-- (void)presentPermissionRequestViewController {
-    THLPermissionRequestViewController *permissionRequestViewController = [THLPermissionRequestViewController new];
-    permissionRequestViewController.delegate = self;
-    [self.navigationController pushViewController:permissionRequestViewController animated:YES];
+
+#pragma mark - UITextFieldDelegate
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if ([_emailField.text isValidEmailAddress] && _passwordField.text.length > 6) {
+        _emailLoginButton.enabled = true;
+        _emailLoginButton.backgroundColor = kTHLNUIAccentColor;
+    } else {
+        _emailLoginButton.enabled = false;
+        _emailLoginButton.backgroundColor = [UIColor clearColor];
+    }
 }
 
-- (void)presentUserInfoVerificationView {
-    [self.navigationController pushViewController:self.userInfoVerificationViewController animated:YES];
-}
-
-- (void)emailEntryView:(THLTextEntryViewController *)view userDidSubmitEmail:(NSString *)email {
-    THLUser *currentUser = [THLUser currentUser];
-    currentUser.email = email;
-    WEAKSELF();
-    [[currentUser saveInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask<NSNumber *> *task) {
-        [WSELF reroute];
-        return nil;
-    }];}
-
-- (void)presentNumberVerificationInterfaceInViewController {
-    WEAKSELF();
-    STRONGSELF();
-    DGTAuthenticationConfiguration *configuration = [DGTAuthenticationConfiguration new];
-    
-    configuration.title = NSLocalizedString(@"Number Verification", nil);
-    configuration.appearance = self.digitsAppearance;
-    [[Digits sharedInstance] authenticateWithViewController:self configuration:configuration completion:^(DGTSession *session, NSError *error) {
-        if (!error) {
-            [SSELF handleNumberVerificationSuccess:session];
-        }
-    }];
-}
-
-#pragma mark - Logic
-- (void)handleNumberVerificationSuccess:(DGTSession *)session {
-    THLUser *currentUser = [THLUser currentUser];
-    currentUser.phoneNumber = session.phoneNumber;
-    WEAKSELF();
-    [[currentUser saveInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask<NSNumber *> *task) {
-        [WSELF reroute];
-        return nil;
-    }];
-}
-
--(BOOL)prefersStatusBarHidden{
-    return YES;
-}
 
 #pragma mark - Accessors
-- (THLTextEntryViewController *)userInfoVerificationViewController {
-    if (!_userInfoVerificationViewController) {
-        _userInfoVerificationViewController  = [[THLTextEntryViewController alloc] initWithNibName:nil bundle:nil];
-        _userInfoVerificationViewController.delegate = self;
-        _userInfoVerificationViewController.titleText = @"Confirm Info";
-        _userInfoVerificationViewController.descriptionText = @"We use your email and phone number to send you confirmations and receipts";
-        _userInfoVerificationViewController.buttonText = @"Continue";
-        _userInfoVerificationViewController.type = THLTextEntryTypeEmail;
+- (JVFloatLabeledTextField *)emailField {
+    if (!_emailField) {
+        _emailField = [[JVFloatLabeledTextField alloc] initWithFrame:CGRectMake(0, 0, 260, 100)];
+        [_emailField setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:@"Email Address" attributes:@{NSForegroundColorAttributeName: kTHLNUIGrayFontColor}]];
+        _emailField.backgroundColor =[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.10];
+        _emailField.delegate = self;
+        _emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        _emailField.autocorrectionType = UITextAutocorrectionTypeNo;
+        [self.view addSubview:_emailField];
     }
-    return _userInfoVerificationViewController;
+ 
+    return _emailField;
 }
 
-- (DGTAppearance *)digitsAppearance {
-    if (!_digitsAppearance) {
-        _digitsAppearance = [DGTAppearance new];
-        _digitsAppearance.backgroundColor = kTHLNUIPrimaryBackgroundColor;
-        _digitsAppearance.accentColor = kTHLNUIAccentColor;
-        _digitsAppearance.logoImage = [UIImage imageNamed:@"Hypelist-Icon"];
+- (JVFloatLabeledTextField *)passwordField {
+    if (!_passwordField) {
+        _passwordField = [[JVFloatLabeledTextField alloc] initWithFrame:CGRectMake(0, 0, 260, 100)];
+        [_passwordField setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:@"Password" attributes:@{NSForegroundColorAttributeName: kTHLNUIGrayFontColor}]];
+        _passwordField.backgroundColor =[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.10];
+        _passwordField.delegate = self;
+        _passwordField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        _passwordField.autocorrectionType = UITextAutocorrectionTypeNo;
+
+        [self.view addSubview:_passwordField];
+
     }
-    return _digitsAppearance;
+    return _passwordField;
 }
 
-
-- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url {
-    if ([[url scheme] hasPrefix:@"action"]) {
-        if ([[url host] hasPrefix:@"show-privacy"]) {
-            THLInformationViewController *infoVC = [THLInformationViewController new];
-            UINavigationController *navVC= [[UINavigationController alloc] initWithRootViewController:infoVC];
-            [self.view.window.rootViewController presentViewController:navVC animated:YES completion:nil];
-            infoVC.displayText = [THLResourceManager privacyPolicyText];
-            infoVC.title = @"Privacy Policy";
-        } else if ([[url host] hasPrefix:@"show-terms"]) {
-            THLInformationViewController *infoVC = [THLInformationViewController new];
-            UINavigationController *navVC= [[UINavigationController alloc] initWithRootViewController:infoVC];
-            [self.view.window.rootViewController presentViewController:navVC animated:YES completion:nil];
-            infoVC.displayText = [THLResourceManager termsOfUseText];
-            infoVC.title = @"Terms Of Use";
-        }
-    } else {
-        /* deal with http links here */
+- (UILabel *)bodyLabel {
+    if (!_bodyLabel) {
+        _bodyLabel = [UILabel new];
+        _bodyLabel.text = @"Welcome back. It's good seeing you again";
+        _bodyLabel.textColor = kTHLNUIGrayFontColor;
+        _bodyLabel.font = [UIFont fontWithName:@"Raleway-Light" size:18];
+        _bodyLabel.numberOfLines = 0;
+        _bodyLabel.adjustsFontSizeToFitWidth = YES;
+        _bodyLabel.minimumScaleFactor = 0.5;
+        _bodyLabel.textAlignment = NSTextAlignmentCenter;
+        [_bodyLabel sizeToFit];
+        [self.view addSubview:_bodyLabel];
     }
+    return _bodyLabel;
 }
 
-#pragma mark - Constructors
-- (UILabel *)newBodyLabel {
-    UILabel *bodyLabel = [UILabel new];
-    bodyLabel.text = @"Signup for a great night tonight";
-    bodyLabel.textColor = kTHLNUIGrayFontColor;
-    bodyLabel.font = [UIFont fontWithName:@"Raleway-Light" size:24];
-    bodyLabel.numberOfLines = 0;
-    bodyLabel.adjustsFontSizeToFitWidth = YES;
-    bodyLabel.minimumScaleFactor = 0.5;
-    bodyLabel.textAlignment = NSTextAlignmentCenter;
-    [bodyLabel sizeToFit];
-    return bodyLabel;
+- (UIImageView *)logoImageView {
+    if (!_logoImageView) {
+        _logoImageView = [UIImageView new];
+        _logoImageView.image = [UIImage imageNamed:@"Hypelist-Icon"];
+        _logoImageView.contentMode = UIViewContentModeScaleAspectFit;
+        _logoImageView.clipsToBounds = YES;
+        [self.view addSubview:_logoImageView];
+    }
+
+    return _logoImageView;
 }
 
-- (UIImageView *)newLogoImageView {
-    UIImageView *imageView = [UIImageView new];
-    imageView.image = [UIImage imageNamed:@"Hypelist-Icon"];
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
-    imageView.clipsToBounds = YES;
-    return imageView;
+- (UIImageView *)backgroundView {
+    if (!_backgroundView) {
+        _backgroundView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+        _backgroundView.clipsToBounds = YES;
+        _backgroundView.contentMode = UIViewContentModeScaleAspectFill;
+        [_backgroundView setImage:[UIImage imageNamed:@"OnboardingLoginBG"]];
+        [self.view addSubview:_backgroundView];
+        [self.view sendSubviewToBack:_backgroundView];
+    }
+
+    return _backgroundView;
 }
 
-- (UIImageView *)newBackgroundView {
-    UIImageView *imageView = [UIImageView new];
-    imageView.clipsToBounds = YES;
-    imageView.contentMode = UIViewContentModeScaleAspectFill;
-    [imageView setImage:[UIImage imageNamed:@"OnboardingLoginBG"]];
-    return imageView;
-}
-
-- (UIBarButtonItem *)newDismissButton {
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"cancel_button"] style:UIBarButtonItemStylePlain target:self action:@selector(handleDismiss)];
-    [item setTintColor:kTHLNUIGrayFontColor];
-    [item setTitleTextAttributes:
-     [NSDictionary dictionaryWithObjectsAndKeys:
-      kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
-                        forState:UIControlStateNormal];
+- (UIBarButtonItem *)dismissButton {
+    if (!_dismissButton) {
+        _dismissButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"cancel_button"] style:UIBarButtonItemStylePlain target:self action:@selector(handleDismiss)];
+        [_dismissButton setTintColor:kTHLNUIGrayFontColor];
+        [_dismissButton setTitleTextAttributes:
+         [NSDictionary dictionaryWithObjectsAndKeys:
+          kTHLNUIGrayFontColor, NSForegroundColorAttributeName,nil]
+                            forState:UIControlStateNormal];
+    }
     
-    return item;
+    return _dismissButton;
 }
 
-- (THLActionButton *)newFacebookLoginButton {
-    THLActionButton *loginButton = [[THLActionButton alloc] initWithInverseStyle];
-    [loginButton setTitle:@"Login with Facebook"];
-    [loginButton addTarget:self action:@selector(handleLogin) forControlEvents:UIControlEventTouchUpInside];
-    return loginButton;
+- (THLActionButton *)facebookLoginButton {
+    if (!_facebookLoginButton) {
+        _facebookLoginButton = [[THLActionButton alloc] initWithFacebookStyle];
+        [_facebookLoginButton setTitle:@"Continue with Facebook"];
+        [_facebookLoginButton addTarget:self action:@selector(handleFacebookLogin) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_facebookLoginButton];
+    }
+
+    return _facebookLoginButton;
 }
 
-- (TTTAttributedLabel *)newAttributedLabel {
-    TTTAttributedLabel *tttLabel = [TTTAttributedLabel new];
-    tttLabel.textColor = kTHLNUIGrayFontColor;
-    tttLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16];
-    tttLabel.numberOfLines = 0;
-    tttLabel.adjustsFontSizeToFitWidth = YES;
-    tttLabel.minimumScaleFactor = 0.5;
-    tttLabel.linkAttributes = @{NSForegroundColorAttributeName: kTHLNUIGrayFontColor,
-                                NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
-    tttLabel.activeLinkAttributes = @{NSForegroundColorAttributeName: kTHLNUIPrimaryFontColor,
-                                      NSUnderlineStyleAttributeName: @(NSUnderlineStyleNone)};
-    tttLabel.textAlignment = NSTextAlignmentCenter;
-    NSString *labelText = @"By signing up, you agree to our Privacy Policy, Terms & Conditions, and are over the age of 21";
-    tttLabel.text = labelText;
-    NSRange privacy = [labelText rangeOfString:@"Privacy Policy"];
-    NSRange terms = [labelText rangeOfString:@"Terms & Conditions"];
-    [tttLabel addLinkToURL:[NSURL URLWithString:@"action://show-privacy"] withRange:privacy];
-    [tttLabel addLinkToURL:[NSURL URLWithString:@"action://show-terms"] withRange:terms];
-    tttLabel.delegate = self;
-    return tttLabel;
+- (THLActionButton *)emailLoginButton {
+    if (!_emailLoginButton) {
+        _emailLoginButton = [[THLActionButton alloc] initWithInverseStyle];
+        [_emailLoginButton setTitle:@"Login"];
+        _emailLoginButton.enabled = false;
+        [_emailLoginButton addTarget:self action:@selector(handleEmailLogin) forControlEvents:UIControlEventTouchUpInside];
+
+        [self.view addSubview:_emailLoginButton];
+
+    }
+    return _emailLoginButton;
 }
 
 @end

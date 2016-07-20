@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "THLPersonIconView.h"
 
 @interface THLContactTableViewCell : UITableViewCell
-@property (nonatomic, copy) NSString *name;
-@property (nonatomic, copy) NSString *phoneNumber;
+@property (nonatomic, strong) THLPersonIconView *iconImageView;
+@property (nonatomic, strong) UILabel *nameLabel;
+@property (nonatomic, strong) UILabel *phoneNumberLabel;
 
 + (NSString *)identifier;
 @end

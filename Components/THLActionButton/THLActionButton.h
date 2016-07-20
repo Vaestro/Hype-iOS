@@ -10,6 +10,7 @@
 
 @interface THLActionButton : UIButton
 - (instancetype)initWithDefaultStyle;
+- (instancetype)initWithFacebookStyle;
 - (instancetype)initWithInverseStyle;
 - (instancetype)initWithActionStyle;
 - (void)setTitle:(NSString *)title;

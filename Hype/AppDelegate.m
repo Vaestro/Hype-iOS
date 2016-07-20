@@ -109,7 +109,7 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
 	[_masterWireframe presentAppInWindow:self.window];
 	
     // Set the App ID for Harpy
-    [[Harpy sharedInstance] setAppID:@"com.hypelist.hype"];
+//    [[Harpy sharedInstance] setAppID:@"com.hypelist.hype"];
     // Set the UIViewController that will present an instance of UIAlertController
     [[Harpy sharedInstance] setPresentingViewController:_window.rootViewController];
     // (Optional) Set the App Name for your app

@@ -11,6 +11,7 @@
 #import "THLAppearanceConstants.h"
 #import "UIView+DimView.h"
 #import "THLUserManager.h"
+#import "THLUser.h"
 
 @interface THLUserProfileHeaderView()
 @property (nonatomic, strong) UILabel *label;
@@ -62,8 +63,8 @@
 }
 
 - (void)bindView {
-    RAC(self.iconView, imageURL) = RACObserve(self, userImageURL);
-    RAC(self.label, text, @"") = RACObserve(self, userName);
+//    RAC(self.iconView, imageURL) = RACObserve(self, userImageURL);
+//    RAC(self.label, text, @"") = RACObserve(self, userName);
     
 }
 
@@ -74,12 +75,17 @@
 #pragma mark - Construtors
 - (THLPersonIconView *)newIconView {
     THLPersonIconView *iconView = [THLPersonIconView new];
+    PFFile *imageFile = [THLUser currentUser].image;
+    NSURL *url = [NSURL URLWithString:imageFile.url];
+    [iconView.imageView sd_setImageWithURL:url];
+
     return iconView;
 }
 
 - (UILabel *)newLabel {
     UILabel *label = THLNUILabel(kTHLNUIRegularTitle);
     [label setTextColor:kTHLNUIPrimaryFontColor];
+//    label.text = [THLUser currentUser].fullName;
     label.adjustsFontSizeToFitWidth = YES;
     label.minimumScaleFactor = 0.5;
     label.numberOfLines = 1;

@@ -51,36 +51,9 @@
         make.right.equalTo([WSELF iconImageView].mas_right);
     }];
     
-    [self bindView];
 }
 
-- (void)bindView {
-    WEAKSELF();
-    [RACObserve(self, guestlistInviteStatus) subscribeNext:^(id x) {
-        [_statusView setStatus:WSELF.guestlistInviteStatus];
-        [_statusLabel setTextColor:kTHLNUIGrayFontColor];
-        switch (WSELF.guestlistInviteStatus) {
-            case THLStatusNone:
-                [_statusLabel setText:@"Pending Signup"];
-                break;
-            case THLStatusPending:
-                [_statusLabel setText:@"Pending"];
-                break;
-            case THLStatusAccepted:
-                [_statusLabel setText:@"Confirmed"];
-                break;
-            case THLStatusDeclined:
-                [_statusLabel setText:@"Declined"];
-                break;
-            case THLStatusCheckedIn:
-                [_statusLabel setText:@"Checked-In"];
-                break;
-            default:
-                break;
-        }
-    }];
-    
-}
+
 
 #pragma mark - Constructors
 - (THLPersonIconView *)iconImageView {
@@ -110,6 +83,26 @@
         _statusLabel.adjustsFontSizeToFitWidth = YES;
         _statusLabel.minimumScaleFactor = 0.5;
         _statusLabel.textAlignment = NSTextAlignmentCenter;
+        [_statusLabel setTextColor:kTHLNUIGrayFontColor];
+        switch (self.guestlistInviteStatus) {
+            case THLStatusNone:
+                [_statusLabel setText:@"Pending Signup"];
+                break;
+            case THLStatusPending:
+                [_statusLabel setText:@"Pending"];
+                break;
+            case THLStatusAccepted:
+                [_statusLabel setText:@"Confirmed"];
+                break;
+            case THLStatusDeclined:
+                [_statusLabel setText:@"Declined"];
+                break;
+            case THLStatusCheckedIn:
+                [_statusLabel setText:@"Checked-In"];
+                break;
+            default:
+                break;
+        }
         [self.contentView addSubview:_statusLabel];
 
     }
@@ -119,9 +112,8 @@
 
 - (THLStatusView *)statusView {
     if (!_statusView) {
-        _statusView = [THLStatusView new];
+        _statusView = [[THLStatusView alloc] initWithStatus:self.guestlistInviteStatus];
         [self.contentView addSubview:_statusView];
-
     }
     return _statusView;
 }

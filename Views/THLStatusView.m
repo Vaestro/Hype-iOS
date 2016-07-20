@@ -14,18 +14,12 @@
 @end
 
 @implementation THLStatusView
-- (instancetype)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) {
-        [self bindView];
+- (instancetype)initWithStatus:(THLStatus)status {
+    if (self = [super initWithFrame:CGRectZero]) {
+        self.status = status;
+        [self drawingForStatus];
     }
     return self;
-}
-
-- (void)bindView {
-    WEAKSELF();
-    [RACObserve(self, status) subscribeNext:^(NSNumber *status) {
-        [WSELF drawingForStatus];
-    }];
 }
 
 - (void)drawingForStatus {

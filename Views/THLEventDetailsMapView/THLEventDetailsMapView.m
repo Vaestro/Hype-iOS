@@ -58,13 +58,13 @@ static CGFloat MAPVIEW_METERS = 1000;
 }
 
 - (void)bindView {
-    WEAKSELF();
+//    WEAKSELF();
     
-    [[RACObserve(self, locationPlacemark) filter:^BOOL(id value) {
-        return value != nil;
-    }] subscribeNext:^(id x) {
-        [WSELF displayPlacemark:(CLPlacemark *)x];
-    }];
+//    [[RACObserve(self, locationPlacemark) filter:^BOOL(id value) {
+//        return value != nil;
+//    }] subscribeNext:^(id x) {
+//        [WSELF displayPlacemark:(CLPlacemark *)x];
+//    }];
 }
 
 - (void)displayPlacemark:(CLPlacemark *)placemark {

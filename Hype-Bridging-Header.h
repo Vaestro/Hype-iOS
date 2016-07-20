@@ -21,3 +21,4 @@
 #import <BLKFlexibleHeightBar/BLKFlexibleHeightBarSubviewLayoutAttributes.h>
 #import <BLKFlexibleHeightBar/SquareCashStyleBehaviorDefiner.h>
 #import "SwipeView.h"
+#import "THLActionButton.h"

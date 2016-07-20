@@ -10,49 +10,38 @@
 #import "THLAppearanceConstants.h"
 
 @interface THLUserProfileTableViewCell()
-@property (nonatomic, strong) UILabel *titleLabel;
 
 @end
 
 @implementation THLUserProfileTableViewCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        [self constructView];
-        [self layoutView];
-        [self bindView];
+        
+        self.accessoryView = [[ UIImageView alloc ]
+                              initWithImage:[UIImage imageNamed:@"cell_disclosure_icon" ]];
+        
+        [self.titleLabel makeConstraints:^(MASConstraintMaker *make) {
+            make.top.bottom.insets(kTHLEdgeInsetsNone());
+            make.left.equalTo(kTHLEdgeInsetsSuperHigh());
+            make.right.equalTo(kTHLEdgeInsetsNone());
+        }];
         
     }
     return self;
 }
 
-- (void)constructView {
-    _titleLabel = [self newTitleLabel];
-    self.accessoryView = [[ UIImageView alloc ]
-                            initWithImage:[UIImage imageNamed:@"cell_disclosure_icon" ]];
-}
-
-- (void)layoutView {
-    [self addSubviews:@[_titleLabel]];
-    [_titleLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.insets(kTHLEdgeInsetsNone());
-        make.left.equalTo(kTHLEdgeInsetsSuperHigh());
-        make.right.equalTo(kTHLEdgeInsetsNone());
-    }];
-
-}
-
-- (void)bindView {
-    RAC(self.titleLabel, text) = RACObserve(self, title);
-}
-
 #pragma mark - Constructors
-- (UILabel *)newTitleLabel {
-    UILabel *label = [UILabel new];
-    label.backgroundColor = kTHLNUIPrimaryBackgroundColor;
-    label.font = [UIFont fontWithName:@"OpenSans-Light" size:16];
+- (UILabel *)titleLabel {
+    if (!_titleLabel) {
+        _titleLabel = [UILabel new];
+        _titleLabel.backgroundColor = kTHLNUIPrimaryBackgroundColor;
+        _titleLabel.font = [UIFont fontWithName:@"OpenSans-Light" size:16];
+        
+        _titleLabel.textColor = [UIColor whiteColor];
+        [self.contentView addSubview:_titleLabel];
+    }
 
-    label.textColor = [UIColor whiteColor];
-    return label;
+    return _titleLabel;
 }
 
 #pragma mark - Public Interface

@@ -30,7 +30,7 @@
         make.top.left.right.bottom.insets(kTHLEdgeInsetsHigh());
     }];
     
-    RAC(self.titleLabel, text, @"") = RACObserve(self, titleText);
+//    RAC(self.titleLabel, text, @"") = RACObserve(self, titleText);
 }
 
 - (UILabel *)newTitleLabel {

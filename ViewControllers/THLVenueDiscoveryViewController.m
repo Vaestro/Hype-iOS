@@ -126,8 +126,8 @@
     THLDiscoveryCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[THLDiscoveryCell identifier]
                                                                        forIndexPath:indexPath];
     
-    cell.titlesView.locationNameText = object[@"name"];
-    cell.titlesView.locationNeighborhoodText = object[@"neighborhood"];
+    cell.titlesView.locationNameLabel.text = object[@"name"];
+    cell.titlesView.locationNeighborhoodLabel.text = object[@"neighborhood"];
     cell.venueImageView.file = object[@"image"];
     [cell.venueImageView loadInBackground];
     
@@ -142,7 +142,7 @@
 
 #pragma mark - EmptyDataSetDelegate
 - (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView {
-    NSString *text = @"Oops there was an error fetching events";
+    NSString *text = @"Oops there was an error fetching venues";
     
     NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
     paragraph.lineBreakMode = NSLineBreakByWordWrapping;

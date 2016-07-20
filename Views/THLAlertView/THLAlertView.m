@@ -73,12 +73,7 @@
 
 - (void)bindView {
     WEAKSELF();
-    RAC(_titleLabel, text) = RACObserve(self, title);
-    RAC(_messageLabel, text) = RACObserve(self, message);
-    
-    [[self.dismissButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-        [WSELF dismiss];
-    }];
+
 }
 
 - (void)showWithTitle:(NSString *)title message:(NSString *)message {

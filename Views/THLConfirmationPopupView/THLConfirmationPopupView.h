@@ -12,8 +12,8 @@
 
 @interface THLConfirmationPopupView : UIView
 @property (nonatomic, copy) NSString *confirmationText;
-@property (nonatomic, strong) RACCommand *acceptCommand;
-@property (nonatomic, strong) RACCommand *declineCommand;
+//@property (nonatomic, strong) RACCommand *acceptCommand;
+//@property (nonatomic, strong) RACCommand *declineCommand;
 @property (nonatomic, strong) THLActionButton *acceptButton;
 @property (nonatomic, strong) THLActionButton *declineButton;
 @end

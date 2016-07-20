@@ -308,7 +308,7 @@ SwipeViewDelegate
                         (id)[UIColor blackColor].CGColor,
                         (id)[UIColor blackColor].CGColor,
                         (id)[UIColor clearColor].CGColor];
-    gradient.locations = @[@0.0, @0.25, @0.25, @1.0];
+    gradient.locations = @[@0.0, @0.25, @0.75, @1.0];
     
     view.layer.mask = gradient;
     

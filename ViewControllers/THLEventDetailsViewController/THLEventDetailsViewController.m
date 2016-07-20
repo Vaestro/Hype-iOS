@@ -347,7 +347,7 @@
 - (void)getPlacemarkForLocation:(NSString *)address {
     WEAKSELF();
     [[self fetchPlacemarkForAddress:address] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask<CLPlacemark *> *task) {
-        [WSELF.mapView setLocationPlacemark:task.result];
+        [WSELF.mapView displayPlacemark:task.result];
         return nil;
     }];
 }

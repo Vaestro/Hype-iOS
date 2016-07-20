@@ -31,7 +31,7 @@ UITextFieldDelegate
     [super viewDidLoad];
     [self constructView];
     [self layoutView];
-    [self bindView];
+//    [self bindView];
 }
 
 - (void)constructView {
@@ -95,51 +95,51 @@ UITextFieldDelegate
     }];
 }
 
-- (void)bindView {
-    WEAKSELF();
-    RAC(self.titleLabel, text, @"") = RACObserve(self, titleText);
-    RAC(self.descriptionLabel, text, @"") = RACObserve(self, descriptionText);
-    [RACObserve(self, buttonText) subscribeNext:^(id x) {
-        [self.submitButton setTitle:_buttonText];
-    }];
-    
-    switch (self.type) {
-        case THLTextEntryTypeEmail: {
-            _submitButton.rac_command = [[RACCommand alloc] initWithEnabled:[self validEmailSignal] signalBlock:^RACSignal *(id input) {
-                [WSELF.delegate emailEntryView:WSELF userDidSubmitEmail:WSELF.textField.text];
-                return [RACSignal empty];
-            }];
-            break;
-        }
-        case THLTextEntryTypeCode: {
-            _submitButton.rac_command = [[RACCommand alloc] initWithEnabled:[self validInputSignal] signalBlock:^RACSignal *(id input) {
-                [WSELF submitTextForValidation];
-                return [RACSignal empty];
-            }];
-            break;
-        }
-        case THLTextEntryTypeRedeemCode: {
-            _submitButton.rac_command = [[RACCommand alloc] initWithEnabled:[self validInputSignal] signalBlock:^RACSignal *(id input) {
-                [WSELF.delegate codeEntryView:WSELF userDidSubmitRedemptionCode:_textField.text];
-                return [RACSignal empty];
-            }];
-            break;
-        }
-    }
-}
-
-- (RACSignal *)validEmailSignal {
-    return [_textField.rac_textSignal map:^id(NSString *input) {
-        return @([input isValidEmailAddress]);
-    }];
-}
-
-- (RACSignal *)validInputSignal {
-    WEAKSELF();
-    return [_textField.rac_textSignal map:^id(NSString *input) {
-        return @(input.length == WSELF.textLength);
-    }];
-}
+//- (void)bindView {
+//    WEAKSELF();
+//    RAC(self.titleLabel, text, @"") = RACObserve(self, titleText);
+//    RAC(self.descriptionLabel, text, @"") = RACObserve(self, descriptionText);
+//    [RACObserve(self, buttonText) subscribeNext:^(id x) {
+//        [self.submitButton setTitle:_buttonText];
+//    }];
+//    
+//    switch (self.type) {
+//        case THLTextEntryTypeEmail: {
+//            _submitButton.rac_command = [[RACCommand alloc] initWithEnabled:[self validEmailSignal] signalBlock:^RACSignal *(id input) {
+//                [WSELF.delegate emailEntryView:WSELF userDidSubmitEmail:WSELF.textField.text];
+//                return [RACSignal empty];
+//            }];
+//            break;
+//        }
+//        case THLTextEntryTypeCode: {
+//            _submitButton.rac_command = [[RACCommand alloc] initWithEnabled:[self validInputSignal] signalBlock:^RACSignal *(id input) {
+//                [WSELF submitTextForValidation];
+//                return [RACSignal empty];
+//            }];
+//            break;
+//        }
+//        case THLTextEntryTypeRedeemCode: {
+//            _submitButton.rac_command = [[RACCommand alloc] initWithEnabled:[self validInputSignal] signalBlock:^RACSignal *(id input) {
+//                [WSELF.delegate codeEntryView:WSELF userDidSubmitRedemptionCode:_textField.text];
+//                return [RACSignal empty];
+//            }];
+//            break;
+//        }
+//    }
+//}
+//
+//- (RACSignal *)validEmailSignal {
+//    return [_textField.rac_textSignal map:^id(NSString *input) {
+//        return @([input isValidEmailAddress]);
+//    }];
+//}
+//
+//- (RACSignal *)validInputSignal {
+//    WEAKSELF();
+//    return [_textField.rac_textSignal map:^id(NSString *input) {
+//        return @(input.length == WSELF.textLength);
+//    }];
+//}
 
 - (void)submitTextForValidation {
     [_delegate codeEntryView:self userDidSubmitCode:_textField.text];
