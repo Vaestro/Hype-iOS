@@ -30,7 +30,6 @@
 
 @interface THLEventDetailsViewController ()
 @property (nonatomic, strong) UIScrollView *scrollView;
-@property (nonatomic, strong) UIButton *dismissButton;
 
 @property (nonatomic, strong) UILabel *eventNameLabel;
 @property (nonatomic, strong) UILabel *dateLabel;
@@ -78,23 +77,29 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
     
-    self.scrollView.contentInset = UIEdgeInsetsMake(self.navBar.maximumBarHeight, 0.0, 0.0, 0.0);
 
-    [self.scrollView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.insets(kTHLEdgeInsetsNone());
-    }];
     
     // Configure a separate UITableViewDelegate and UIScrollViewDelegate (optional)
     self.delegateSplitter = [[BLKDelegateSplitter alloc] initWithFirstDelegate:(id<UIScrollViewDelegate>)self.navBar.behaviorDefiner secondDelegate:self];
     self.scrollView.delegate = (id<UIScrollViewDelegate>)self.delegateSplitter;
 
-    WEAKSELF();
+    self.scrollView.contentInset = UIEdgeInsetsMake(self.navBar.maximumBarHeight, 0.0, 0.0, 0.0);
     
-    [self.bottomBar makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(WSELF.scrollView.mas_bottom).insets(kTHLEdgeInsetsHigh());
-        make.left.right.bottom.insets(kTHLEdgeInsetsHigh());
-    }];
-    
+    if (_showNavigationBar) {
+        [self.scrollView makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.top.insets(kTHLEdgeInsetsNone());
+        }];
+        WEAKSELF();
+        
+        [self.bottomBar makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(WSELF.scrollView.mas_bottom).insets(kTHLEdgeInsetsHigh());
+            make.left.right.bottom.insets(kTHLEdgeInsetsHigh());
+        }];
+    } else {
+        [self.scrollView makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.insets(kTHLEdgeInsetsNone());
+        }];
+    }
     [self generateContent];
 }
 
@@ -113,11 +118,27 @@
 
     [contentView addSubviews:@[self.locationInfoView, self.musicTypesView, self.mapView, self.needToKnowInfoView]];
     
-    [self.locationInfoView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.insets(kTHLEdgeInsetsSuperHigh());
-        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
-    }];
-    
+    if (_showNavigationBar) {
+        [self.locationInfoView makeConstraints:^(MASConstraintMaker *make) {
+            make.top.insets(kTHLEdgeInsetsSuperHigh());
+            make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+        }];
+        
+    } else {
+        [contentView addSubview:self.eventImageView];
+        
+        [self.eventImageView makeConstraints:^(MASConstraintMaker *make) {
+            make.top.insets(kTHLEdgeInsetsSuperHigh());
+            make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+        }];
+        
+        [self.locationInfoView makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(WSELF.eventImageView.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+            make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+        }];
+        
+    }
+
     [self.musicTypesView makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(WSELF.locationInfoView.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
@@ -139,11 +160,7 @@
     
     [self.view bringSubviewToFront:_navBar];
 
-    [self.dismissButton makeConstraints:^(MASConstraintMaker *make) {
-        make.left.insets(kTHLEdgeInsetsSuperHigh());
-        make.top.offset(30);
-        make.size.mas_equalTo(CGSizeMake(25, 25));
-    }];
+
     
     THLLocation *venue = (THLLocation *)_venue;
     [self getPlacemarkForLocation:venue.fullAddress];
@@ -151,11 +168,6 @@
 
 #pragma mark -
 #pragma mark Event Handlers
-
-- (void)dismissCommand{
-    [self dismissViewControllerAnimated:TRUE completion:nil];
-}
-
 -(void)handleAdmissions {
     [self.delegate eventDetailsWantsToPresentAdmissionsForEvent:_event venue:_venue];
 }
@@ -185,6 +197,10 @@
     }
 }
 
+- (void)dismissCommand{
+    [self dismissViewControllerAnimated:TRUE completion:nil];
+}
+
 #pragma mark -
 #pragma mark Accessors
 
@@ -210,6 +226,10 @@
 
         _navBar = [[THLEventNavigationBar alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(self.view.frame), SCREEN_HEIGHT - 80) event:event venue:venue];
         _navBar.minimumTitleLabel.text = _venue[@"name"];
+        [_navBar.dismissButton addTarget:self
+                           action:@selector(dismissCommand)
+                 forControlEvents:UIControlEventTouchUpInside];
+        
         NSString *eventTitle = _event[@"title"];
         if (eventTitle == nil || [eventTitle isEqualToString:@""]) {
             _navBar.titleLabel.text = _venue[@"name"];
@@ -273,25 +293,11 @@
     return _musicTypesView;
 }
 
-- (UIButton *)dismissButton {
-    if (!_dismissButton) {
-        _dismissButton = [[UIButton alloc]init];
-        _dismissButton.frame = CGRectMake(0, 0, 50, 50);
-        [_dismissButton setImage:[UIImage imageNamed:@"cancel_button"] forState:UIControlStateNormal];
-        [_dismissButton addTarget:self
-                               action:@selector(dismissCommand)
-                     forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:_dismissButton];
-        
-    }
-    
-    return _dismissButton;
-}
 
 
 - (THLActionButton *)bottomBar
 {
-    if (!_bottomBar) {
+    if (!_bottomBar && _showNavigationBar) {
         _bottomBar = [[THLActionButton alloc] initWithInverseStyle];
         THLGuestlistInvite *invite = (THLGuestlistInvite *)_guestlistInvite;
         if (invite.response == THLStatusAccepted) {

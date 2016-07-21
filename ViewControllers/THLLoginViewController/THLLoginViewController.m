@@ -23,6 +23,7 @@
 #import "JVFloatLabeledTextField.h"
 
 #import "NSString+EmailAddresses.h"
+#import "IHKeyboardAvoiding.h"
 
 @interface THLLoginViewController()
 <
@@ -32,6 +33,9 @@ THLPermissionRequestViewControllerDelegate,
 TTTAttributedLabelDelegate,
 UITextFieldDelegate
 >
+@property (nonatomic, strong) UIView *containerView;
+
+
 @property (nonatomic, strong) UIBarButtonItem *dismissButton;
 @property (nonatomic, strong) UILabel *bodyLabel;
 @property (nonatomic, strong) UIImageView *logoImageView;
@@ -64,8 +68,14 @@ UITextFieldDelegate
     
     self.loginService = [THLLoginService new];
     self.loginService.delegate = self;
+    self.loginService.navigationController = self.navigationController;
     
     WEAKSELF();
+    [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.equalTo(UIEdgeInsetsZero);
+        make.bottom.equalTo(WSELF.emailLoginButton.mas_top).insets(kTHLEdgeInsetsSuperHigh());
+    }];
+    
     [self.logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_offset(75);
         make.centerX.equalTo(0);
@@ -93,7 +103,7 @@ UITextFieldDelegate
     }];
     
     [self.passwordField makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo([WSELF emailLoginButton].mas_top).insets(kTHLEdgeInsetsHigh());
+        make.bottom.insets(kTHLEdgeInsetsHigh());
         make.centerX.equalTo(0);
         make.height.equalTo(50);
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
@@ -138,19 +148,32 @@ UITextFieldDelegate
 
 
 #pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField endEditing:YES];
+    return NO;
+}
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     if ([_emailField.text isValidEmailAddress] && _passwordField.text.length > 6) {
         _emailLoginButton.enabled = true;
-        _emailLoginButton.backgroundColor = kTHLNUIAccentColor;
     } else {
         _emailLoginButton.enabled = false;
-        _emailLoginButton.backgroundColor = [UIColor clearColor];
     }
 }
 
 
 #pragma mark - Accessors
+
+- (UIView *)containerView {
+    if (!_containerView) {
+        _containerView = [UIView new];
+        //    TODO: Keyboard avoiding doesnt work on re-opening
+        [IHKeyboardAvoiding setAvoidingView:_containerView];
+        [self.view addSubview:_containerView];
+    }
+    return _containerView;
+}
+
 - (JVFloatLabeledTextField *)emailField {
     if (!_emailField) {
         _emailField = [[JVFloatLabeledTextField alloc] initWithFrame:CGRectMake(0, 0, 260, 100)];
@@ -159,7 +182,7 @@ UITextFieldDelegate
         _emailField.delegate = self;
         _emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         _emailField.autocorrectionType = UITextAutocorrectionTypeNo;
-        [self.view addSubview:_emailField];
+        [self.containerView addSubview:_emailField];
     }
  
     return _emailField;
@@ -174,7 +197,7 @@ UITextFieldDelegate
         _passwordField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         _passwordField.autocorrectionType = UITextAutocorrectionTypeNo;
 
-        [self.view addSubview:_passwordField];
+        [self.containerView addSubview:_passwordField];
 
     }
     return _passwordField;
@@ -191,7 +214,7 @@ UITextFieldDelegate
         _bodyLabel.minimumScaleFactor = 0.5;
         _bodyLabel.textAlignment = NSTextAlignmentCenter;
         [_bodyLabel sizeToFit];
-        [self.view addSubview:_bodyLabel];
+        [self.containerView addSubview:_bodyLabel];
     }
     return _bodyLabel;
 }
@@ -202,7 +225,7 @@ UITextFieldDelegate
         _logoImageView.image = [UIImage imageNamed:@"Hypelist-Icon"];
         _logoImageView.contentMode = UIViewContentModeScaleAspectFit;
         _logoImageView.clipsToBounds = YES;
-        [self.view addSubview:_logoImageView];
+        [self.containerView addSubview:_logoImageView];
     }
 
     return _logoImageView;
@@ -236,10 +259,10 @@ UITextFieldDelegate
 
 - (THLActionButton *)facebookLoginButton {
     if (!_facebookLoginButton) {
-        _facebookLoginButton = [[THLActionButton alloc] initWithFacebookStyle];
+        _facebookLoginButton = [[THLActionButton alloc] initWithDefaultStyle];
         [_facebookLoginButton setTitle:@"Continue with Facebook"];
         [_facebookLoginButton addTarget:self action:@selector(handleFacebookLogin) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:_facebookLoginButton];
+        [self.containerView addSubview:_facebookLoginButton];
     }
 
     return _facebookLoginButton;

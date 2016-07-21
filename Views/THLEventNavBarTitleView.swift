@@ -43,7 +43,7 @@ class THLEventNavBarTitleView: UIView {
         locationLabel.textAlignment = .Center
         locationLabel.adjustsFontSizeToFitWidth = true
 
-        dateLabel.text = date?.thl_formattedDate()
+        dateLabel.text = date?.thl_weekdayString
         dateLabel.font = UIFont.init(name: "Raleway-Bold", size: 14.0)
         dateLabel.textColor = UIColor.lightGrayColor()
         dateLabel.textAlignment = .Center

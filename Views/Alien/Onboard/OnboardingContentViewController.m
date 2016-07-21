@@ -285,9 +285,10 @@ TTTAttributedLabelDelegate
 - (void)layoutInitialView {
     [self.view addSubviews:@[_logoImageView, _mainTextLabel, _bodyTextLabel]];
     
+    WEAKSELF();
     [_logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(kTHLEdgeInsetsSuperHigh());
-        make.top.equalTo(kTHLEdgeInsetsInsanelyHigh());
+        make.top.equalTo(WSELF.attritutedLoginLabel);
         make.size.mas_equalTo(CGSizeMake1(kLogoImageSize));
     }];
     
@@ -348,13 +349,13 @@ TTTAttributedLabelDelegate
     
     [_logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(SV(WSELF.logoImageView).centerX);
-        make.bottom.equalTo(SV(WSELF.logoImageView).centerY).insets(kTHLEdgeInsetsSuperHigh());
+        make.bottom.equalTo(SV(WSELF.logoImageView).centerY).offset(-50);
         make.size.mas_equalTo(CGSizeMake1(75.0f));
     }];
     
     [_subTextLabel makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(SV(WSELF.logoImageView).centerX);
-        make.top.equalTo(SV(WSELF.logoImageView).centerY).insets(kTHLEdgeInsetsSuperHigh());
+        make.top.equalTo(WSELF.logoImageView.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
         make.width.equalTo(SCREEN_WIDTH*0.67);
     }];
     
@@ -439,7 +440,7 @@ TTTAttributedLabelDelegate
 }
 
 - (THLActionButton *)newActionButton {
-    THLActionButton *actionButton = [[THLActionButton alloc] initWithFacebookStyle];
+    THLActionButton *actionButton = [[THLActionButton alloc] initWithDefaultStyle];
     [actionButton setTitle:@"Connect with Facebook"];
     [actionButton addTarget:self action:@selector(handleButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     return actionButton;
@@ -468,7 +469,7 @@ TTTAttributedLabelDelegate
         _attritutedLoginLabel.activeLinkAttributes = @{NSForegroundColorAttributeName: kTHLNUIAccentColor,
                                                        NSUnderlineStyleAttributeName: @(NSUnderlineStyleNone)};
         _attritutedLoginLabel.textAlignment = NSTextAlignmentCenter;
-        NSString *labelText = @"Already have an account? Log in";
+        NSString *labelText = @"Already a member? Log in";
         _attritutedLoginLabel.text = labelText;
         NSRange login = [labelText rangeOfString:@"Log in"];
         [_attritutedLoginLabel addLinkToURL:[NSURL URLWithString:@"action://show-login"] withRange:login];

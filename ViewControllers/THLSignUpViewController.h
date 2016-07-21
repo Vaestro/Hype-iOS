@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol THLSignUpViewControllerDelegate <NSObject>
+
+-(void)signUpViewControllerDidFinishSignup;
+
+@end
 
 @interface THLSignUpViewController : UIViewController
+@property (nonatomic, weak) id<THLSignUpViewControllerDelegate> delegate;
 
 @end

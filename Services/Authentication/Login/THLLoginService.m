@@ -55,7 +55,7 @@ THLPermissionRequestViewControllerDelegate
     WEAKSELF();
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {   // Hooray! Let them use the app now.
-            THLUser *currentUser = [THLUser currentUser];
+            THLUser *currentUser = (THLUser *)user;
             currentUser.firstName = firstName;
             currentUser.lastName = lastName;
             currentUser.sex = sex;
@@ -212,7 +212,8 @@ THLPermissionRequestViewControllerDelegate
     
     configuration.title = NSLocalizedString(@"Number Verification", nil);
     configuration.appearance = self.digitsAppearance;
-    [[Digits sharedInstance] authenticateWithViewController:[self topViewController] configuration:configuration completion:^(DGTSession *session, NSError *error) {
+//    [[Digits sharedInstance]logOut];
+    [[Digits sharedInstance] authenticateWithViewController:self.navigationController configuration:configuration completion:^(DGTSession *session, NSError *error) {
         if (!error) {
             [SSELF handleNumberVerificationSuccess:session];
         }
@@ -233,7 +234,7 @@ THLPermissionRequestViewControllerDelegate
 #pragma mark - Email Verification
 
 - (void)presentUserInfoVerificationView {
-    [[self topViewController].navigationController pushViewController:self.userInfoVerificationViewController animated:YES];
+    [self.navigationController pushViewController:self.userInfoVerificationViewController animated:YES];
 }
 
 - (void)emailEntryView:(THLTextEntryViewController *)view userDidSubmitEmail:(NSString *)email {
@@ -342,7 +343,7 @@ THLPermissionRequestViewControllerDelegate
 }
 
 - (void)presentPermissionRequestViewController {
-    [[self topViewController].navigationController pushViewController:self.permissionRequestViewController animated:YES];
+    [self.navigationController pushViewController:self.permissionRequestViewController animated:YES];
 }
 
 #pragma mark - Accessors
@@ -356,12 +357,11 @@ THLPermissionRequestViewControllerDelegate
 
 - (THLTextEntryViewController *)userInfoVerificationViewController {
     if (!_userInfoVerificationViewController) {
-        _userInfoVerificationViewController  = [[THLTextEntryViewController alloc] initWithNibName:nil bundle:nil];
+        _userInfoVerificationViewController  = [[THLTextEntryViewController alloc] initWithType:THLTextEntryTypeEmail
+                                                                                          title:@"Confirm Info"
+                                                                                    description:@"We use your email and phone number to send you confirmations and receipts"
+                                                                                     buttonText:@"Continue"];
         _userInfoVerificationViewController.delegate = self;
-        _userInfoVerificationViewController.titleText = @"Confirm Info";
-        _userInfoVerificationViewController.descriptionText = @"We use your email and phone number to send you confirmations and receipts";
-        _userInfoVerificationViewController.buttonText = @"Continue";
-        _userInfoVerificationViewController.type = THLTextEntryTypeEmail;
     }
     return _userInfoVerificationViewController;
 }
@@ -374,27 +374,5 @@ THLPermissionRequestViewControllerDelegate
         _digitsAppearance.logoImage = [UIImage imageNamed:@"Hypelist-Icon"];
     }
     return _digitsAppearance;
-}
-
-#pragma mark TopViewController Helper
-
-- (UIViewController *)topViewController{
-    return [self topViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
-}
-
-- (UIViewController *)topViewController:(UIViewController *)rootViewController
-{
-    if (rootViewController.presentedViewController == nil) {
-        return rootViewController;
-    }
-    
-    if ([rootViewController.presentedViewController isMemberOfClass:[UINavigationController class]]) {
-        UINavigationController *navigationController = (UINavigationController *)rootViewController.presentedViewController;
-        UIViewController *lastViewController = [[navigationController viewControllers] lastObject];
-        return [self topViewController:lastViewController];
-    }
-    
-    UIViewController *presentedViewController = (UIViewController *)rootViewController.presentedViewController;
-    return [self topViewController:presentedViewController];
 }
 @end

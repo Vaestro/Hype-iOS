@@ -113,7 +113,7 @@
     label.textAlignment = NSTextAlignmentCenter;
     label.textColor = [UIColor whiteColor];
     NSDate *date =_guestlistInvite[@"Guestlist"][@"event"][@"date"];
-    label.text = [NSString stringWithFormat:@"%@ \n %@",_guestlistInvite[@"Guestlist"][@"event"][@"location"][@"name"], date.thl_formattedDate];
+    label.text = [NSString stringWithFormat:@"%@ \n %@",_guestlistInvite[@"Guestlist"][@"event"][@"location"][@"name"], date.thl_weekdayString];
     [label sizeToFit];
     return label;
 }

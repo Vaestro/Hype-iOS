@@ -20,6 +20,7 @@
 
 @interface THLLoginService : NSObject
 @property (nonatomic, weak) id<THLLoginServiceDelegate> delegate;
+@property (nonatomic, strong) UINavigationController *navigationController;
 
 - (void)login;
 - (void)loginWithFacebook;

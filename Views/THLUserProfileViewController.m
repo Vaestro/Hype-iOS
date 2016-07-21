@@ -410,13 +410,9 @@ STPPaymentCardTextFieldDelegate
 
 - (THLTextEntryViewController *)configureTextEntryView
 {
-    THLTextEntryViewController *invitationCodeEntryView = [[THLTextEntryViewController alloc] initWithNibName:nil bundle:nil];
+    THLTextEntryViewController *invitationCodeEntryView = [[THLTextEntryViewController alloc] initWithType:THLTextEntryTypeRedeemCode title:@"Redeem Code" description:@"Enter your code to redeem credits" buttonText:@"Submit Code"];
     invitationCodeEntryView.delegate = self;
-    invitationCodeEntryView.titleText = @"Redeem Code";
-    invitationCodeEntryView.descriptionText = @"Enter your code to redeem credits";
-    invitationCodeEntryView.buttonText = @"Submit Code";
     invitationCodeEntryView.textLength = 6;
-    invitationCodeEntryView.type = THLTextEntryTypeRedeemCode;
     return invitationCodeEntryView;
 }
 

@@ -22,6 +22,7 @@
 @property (nonatomic, strong) UILabel *minimumTitleLabel;
 @property (nonatomic, strong) NSMutableArray *images;
 
+@property (nonatomic, strong) UIButton *dismissButton;
 
 - (instancetype)initWithFrame:(CGRect)frame event:(THLEvent *)event venue:(THLLocation *)venue;
 @end

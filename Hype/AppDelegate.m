@@ -129,8 +129,9 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
     
     // Initialize Branch
     Branch *branch = [Branch getInstance];
-    //#warning Remove for launch
-//    Branch *branch = [Branch getTestInstance];
+    
+    //    This will allow the Branch SDK to pass the user’s Mixpanel Distinct ID to our servers. Branch will then pass that Distinct ID to Mixpanel when logging any event.
+    [[Branch getInstance] setRequestMetadataKey:@"$mixpanel_distinct_id" value:[Mixpanel sharedInstance].distinctId];
     
     [branch initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
         // params are the deep linked params associated with the link that the user clicked before showing up.

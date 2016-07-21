@@ -104,15 +104,20 @@ SwipeViewDelegate
             make.centerX.equalTo(0);
             make.size.mas_equalTo(CGSizeMake(25, 25));
         }];
+        
+        [self.dismissButton makeConstraints:^(MASConstraintMaker *make) {
+            make.left.insets(kTHLEdgeInsetsSuperHigh());
+            make.size.mas_equalTo(CGSizeMake(25, 25));
+            make.centerY.equalTo(WSELF.minimumTitleLabel);
+        }];
     }
     return self;
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-
-
 }
+
 
 #pragma mark - Accessors
 - (UILabel *)titleLabel
@@ -250,6 +255,20 @@ SwipeViewDelegate
 
 
 }
+
+- (UIButton *)dismissButton {
+    if (!_dismissButton) {
+        _dismissButton = [[UIButton alloc]init];
+        _dismissButton.frame = CGRectMake(0, 0, 50, 50);
+        [_dismissButton setImage:[UIImage imageNamed:@"cancel_button"] forState:UIControlStateNormal];
+
+        [self addSubview:_dismissButton];
+        
+    }
+    
+    return _dismissButton;
+}
+
 
 
 -(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {

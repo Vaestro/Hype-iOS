@@ -8,7 +8,6 @@
 
 #import "THLTextEntryViewController.h"
 #import "IHKeyboardAvoiding.h"
-#import "THLActionButton.h"
 #import "THLAppearanceConstants.h"
 #import "THLSingleLineTextField.h"
 #import "NSString+EmailAddresses.h"
@@ -17,77 +16,67 @@
 <
 UITextFieldDelegate
 >
+@property (nonatomic, assign) THLTextEntryType type;
+
 @property (nonatomic, strong) UIView *containerView;
+
+@property (nonatomic, strong) THLSingleLineTextField *textField;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *descriptionLabel;
-@property (nonatomic, strong) THLSingleLineTextField *textField;
 @property (nonatomic, strong) THLActionButton *submitButton;
 
+@property (nonatomic, strong) NSString *titleText;
+@property (nonatomic, strong) NSString *descriptionText;
+@property (nonatomic, strong) NSString *buttonText;
+ 
 @end
 
 @implementation THLTextEntryViewController
+
+- (instancetype)initWithType:(THLTextEntryType)type title:(NSString *)titleText description:(NSString *)descriptionText buttonText:(NSString *)buttonText {
+    self = [super initWithNibName:nil bundle:nil];
+    if (!self) return nil;
+    
+    self.type = type;
+    self.titleText = titleText;
+    self.descriptionText = descriptionText;
+    self.buttonText = buttonText;
+    
+    return self;
+}
+
 #pragma mark - VC Lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self constructView];
-    [self layoutView];
-//    [self bindView];
-}
-
-- (void)constructView {
-    _titleLabel = [self newTitleLabel];
-    _descriptionLabel = [self newDescriptionLabel];
-    switch (self.type) {
-        case THLTextEntryTypeEmail: {
-            _textField = [self newEmailField];
-            break;
-        }
-        case THLTextEntryTypeCode: {
-            _textField = [self newCodeField];
-            break;
-        }
-        case THLTextEntryTypeRedeemCode: {
-            _textField = [self newRedeemCodeField];
-            break;
-        }
-    }
-    _submitButton = [self newSubmitButton];
-}
-
-- (void)layoutView {
+    
     self.view.backgroundColor = kTHLNUISecondaryBackgroundColor;
-    _containerView = [UIView new];
-//    TODO: Keyboard avoiding doesnt work on re-opening
-    [IHKeyboardAvoiding setAvoidingView:_containerView];
-    
-    [self.view addSubviews:@[_containerView,
-                             _submitButton]];
+
+
     WEAKSELF();
-    [_submitButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.left.right.insets(kTHLEdgeInsetsSuperHigh());
-        make.height.mas_equalTo(kSubmitButtonHeight);
-    }];
     
-    [_containerView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
         make.top.insets(kTHLEdgeInsetsNone());
         make.bottom.equalTo(WSELF.submitButton.mas_top).insets(kTHLEdgeInsetsSuperHigh());
     }];
     
-    [_containerView addSubviews:@[_titleLabel, _descriptionLabel, _textField]];
+    [self.submitButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.left.right.insets(kTHLEdgeInsetsSuperHigh());
+        make.height.mas_equalTo(kSubmitButtonHeight);
+    }];
     
-    [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.insets(kTHLEdgeInsetsNone());
         make.bottom.equalTo(WSELF.descriptionLabel.mas_top).insets(kTHLEdgeInsetsSuperHigh());
     }];
     
-    [_descriptionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.descriptionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.insets(kTHLEdgeInsetsNone());
         make.bottom.equalTo([WSELF textField].mas_top).insets(kTHLEdgeInsetsSuperHigh());
         make.width.mas_equalTo(SCREEN_WIDTH*0.75);
     }];
     
-    [_textField mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.textField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.insets(kTHLEdgeInsetsNone());
         make.height.mas_equalTo(@50);
         make.width.mas_equalTo(SCREEN_WIDTH*0.80);
@@ -95,54 +84,33 @@ UITextFieldDelegate
     }];
 }
 
-//- (void)bindView {
-//    WEAKSELF();
-//    RAC(self.titleLabel, text, @"") = RACObserve(self, titleText);
-//    RAC(self.descriptionLabel, text, @"") = RACObserve(self, descriptionText);
-//    [RACObserve(self, buttonText) subscribeNext:^(id x) {
-//        [self.submitButton setTitle:_buttonText];
-//    }];
-//    
-//    switch (self.type) {
-//        case THLTextEntryTypeEmail: {
-//            _submitButton.rac_command = [[RACCommand alloc] initWithEnabled:[self validEmailSignal] signalBlock:^RACSignal *(id input) {
-//                [WSELF.delegate emailEntryView:WSELF userDidSubmitEmail:WSELF.textField.text];
-//                return [RACSignal empty];
-//            }];
-//            break;
-//        }
-//        case THLTextEntryTypeCode: {
-//            _submitButton.rac_command = [[RACCommand alloc] initWithEnabled:[self validInputSignal] signalBlock:^RACSignal *(id input) {
-//                [WSELF submitTextForValidation];
-//                return [RACSignal empty];
-//            }];
-//            break;
-//        }
-//        case THLTextEntryTypeRedeemCode: {
-//            _submitButton.rac_command = [[RACCommand alloc] initWithEnabled:[self validInputSignal] signalBlock:^RACSignal *(id input) {
-//                [WSELF.delegate codeEntryView:WSELF userDidSubmitRedemptionCode:_textField.text];
-//                return [RACSignal empty];
-//            }];
-//            break;
-//        }
-//    }
-//}
-//
-//- (RACSignal *)validEmailSignal {
-//    return [_textField.rac_textSignal map:^id(NSString *input) {
-//        return @([input isValidEmailAddress]);
-//    }];
-//}
-//
-//- (RACSignal *)validInputSignal {
-//    WEAKSELF();
-//    return [_textField.rac_textSignal map:^id(NSString *input) {
-//        return @(input.length == WSELF.textLength);
-//    }];
-//}
+- (void)handleEmailEntry {
+    if ([self.textField.text isValidEmailAddress]) {
+        [self.delegate emailEntryView:self userDidSubmitEmail:self.textField.text];
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:@"Please enter a valid email address"
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+    
+}
 
-- (void)submitTextForValidation {
-    [_delegate codeEntryView:self userDidSubmitCode:_textField.text];
+- (void)handleCodeEntry {
+    if (self.textField.text.length > 0) {
+        [self.delegate codeEntryView:self userDidSubmitRedemptionCode:_textField.text];
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:@"Please enter a valid code"
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+    
+    
 }
 
 #pragma mark - UITextFieldDelegate
@@ -151,63 +119,76 @@ UITextFieldDelegate
     return NO;
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if (self.type == THLTextEntryTypeCode) {
-        return string.length <= _textLength && [string isEqualToString:[string stringByTrimmingCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]]];
-    }
-    return TRUE;
-}
-
 #pragma mark - Constructors
-- (UILabel *)newTitleLabel {
-    UILabel *label = THLNUILabel(kTHLNUIRegularTitle);
-    return label;
+- (UIView *)containerView {
+    if (!_containerView) {
+        _containerView = [UIView new];
+        //    TODO: Keyboard avoiding doesnt work on re-opening
+        [IHKeyboardAvoiding setAvoidingView:_containerView];
+        [self.view addSubview:_containerView];
+    }
+    return _containerView;
 }
 
-- (UILabel *)newDescriptionLabel {
-    UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
-    label.numberOfLines = 0;
-    label.textColor = [kTHLNUIGrayFontColor colorWithAlphaComponent:0.5];
-    return label;
+- (UILabel *)titleLabel {
+    if (!_titleLabel) {
+        _titleLabel = THLNUILabel(kTHLNUIRegularTitle);
+        _titleLabel.text = _titleText;
+        [self.containerView addSubview:_titleLabel];
+    }
+
+    return _titleLabel;
 }
 
-- (THLSingleLineTextField *)newCodeField {
-    THLSingleLineTextField *codeField = [[THLSingleLineTextField alloc] initWithFrame:CGRectMake(0, 0, 260, 30) labelHeight:15 style:THLSingleLineTextFieldStyleNone];
-    [codeField setPlaceholder:@"Code"];
-    codeField.delegate = self;
-    WEAKSELF();
-    [codeField setValidationBlock:^NSDictionary *(THLSingleLineTextField *textField, NSString *text) {
-        [NSThread sleepForTimeInterval:0];
-        if (text.length != WSELF.textLength) {
-            return @{ VALIDATION_INDICATOR_NO : [NSString stringWithFormat:@"Code must be %@ digits", [NSNumber numberWithInteger:WSELF.textLength]]};
-            //            return @{ VALIDATION_INDICATOR_YES : @"Correct" };
+- (UILabel *)descriptionLabel {
+    if (!_descriptionLabel) {
+        _descriptionLabel = THLNUILabel(kTHLNUIDetailTitle);
+        _descriptionLabel.numberOfLines = 0;
+        _descriptionLabel.text = _descriptionText;
+
+        _descriptionLabel.textColor = [kTHLNUIGrayFontColor colorWithAlphaComponent:0.5];
+        [self.containerView addSubview:_descriptionLabel];
+    }
+
+    return _descriptionLabel;
+}
+
+- (THLSingleLineTextField *)textField {
+    if (!_textField) {
+        switch (self.type) {
+            case THLTextEntryTypeEmail: {
+                _textField = [[THLSingleLineTextField alloc] initWithFrame:CGRectMake(20, 70, 260, 30) labelHeight:15 style:THLSingleLineTextFieldStyleEmail];
+                break;
+            }
+            case THLTextEntryTypeRedeemCode: {
+                _textField = [[THLSingleLineTextField alloc] initWithFrame:CGRectMake(20, 70, 260, 30) labelHeight:15 style:THLSingleLineTextFieldStyleNone];
+                [_textField setPlaceholder:@"Code"];
+                break;
+            }
         }
-        return nil;
-    }];
-    return codeField;
+        _textField.delegate = self;
+        [self.containerView addSubview:_textField];
+    }
+    return _textField;
 }
 
-- (THLSingleLineTextField *)newEmailField {
-    THLSingleLineTextField *textFieldEmail = [[THLSingleLineTextField alloc] initWithFrame:CGRectMake(20, 70, 260, 30) labelHeight:15 style:THLSingleLineTextFieldStyleEmail];
-    textFieldEmail.delegate = self;
-    return textFieldEmail;
+- (THLActionButton *)submitButton {
+    if (!_submitButton) {
+        _submitButton = [[THLActionButton alloc] initWithInverseStyle];
+        [_submitButton setTitle:self.buttonText];
+        switch (self.type) {
+            case THLTextEntryTypeEmail: {
+                [_submitButton addTarget:self action:@selector(handleEmailEntry) forControlEvents:UIControlEventTouchUpInside];
+                break;
+            }
+            case THLTextEntryTypeRedeemCode: {
+                [_submitButton addTarget:self action:@selector(handleCodeEntry) forControlEvents:UIControlEventTouchUpInside];
+                break;
+            }
+        }
+        [self.view addSubview:_submitButton];
+    }
+    return _submitButton;
 }
 
-- (THLSingleLineTextField *)newRedeemCodeField {
-    THLSingleLineTextField *codeField = [[THLSingleLineTextField alloc] initWithFrame:CGRectMake(20, 70, 260, 30) labelHeight:15 style:THLSingleLineTextFieldStyleNone];
-    [codeField setPlaceholder:@"Code"];
-    codeField.delegate = self;
-    return codeField;
-}
-
-
-
-- (THLActionButton *)newSubmitButton {
-    THLActionButton *button = [[THLActionButton alloc] initWithInverseStyle];
-    return button;
-}
-
-- (void)dealloc {
-    NSLog(@"Destroyed %@", self);
-}
 @end

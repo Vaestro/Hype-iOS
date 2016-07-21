@@ -31,7 +31,8 @@ THLLoginServiceDelegate,
 OnboardingContentViewControllerDelegate,
 THLTextEntryViewDelegate,
 THLLoginServiceDelegate,
-THLPermissionRequestViewControllerDelegate
+THLPermissionRequestViewControllerDelegate,
+THLSignUpViewControllerDelegate
 >
 @property (nonatomic, strong) OnboardingViewController *onboardingViewController;
 @property (nonatomic, strong) THLLoginService *loginService;
@@ -47,7 +48,8 @@ THLPermissionRequestViewControllerDelegate
     self.view.backgroundColor = [UIColor blackColor];
     self.loginService = [THLLoginService new];
     self.loginService.delegate = self;
-    
+    self.loginService.navigationController = self.navigationController;
+
     [self.onboardingViewController.view makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(UIEdgeInsetsZero);
     }];
@@ -79,10 +81,15 @@ THLPermissionRequestViewControllerDelegate
     return YES;
 }
 
+- (void)signUpViewControllerDidFinishSignup {
+    [self exitSignupFlow];
+}
+
 #pragma mark - Accessors
 - (THLSignUpViewController *)signUpViewController {
     if (!_signUpViewController) {
         _signUpViewController  = [[THLSignUpViewController alloc] initWithNibName:nil bundle:nil];
+        _signUpViewController.delegate = self;
     }
     return _signUpViewController;
 }

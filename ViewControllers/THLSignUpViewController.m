@@ -23,6 +23,7 @@
 #import "JVFloatLabeledTextField.h"
 
 #import "NSString+EmailAddresses.h"
+#import "IHKeyboardAvoiding.h"
 
 @interface THLSignUpViewController()
 <
@@ -32,6 +33,7 @@ THLPermissionRequestViewControllerDelegate,
 TTTAttributedLabelDelegate,
 UITextFieldDelegate
 >
+@property (nonatomic, strong) UIView *containerView;
 
 @property (nonatomic, strong) UIButton *dismissButton;
 @property (nonatomic, strong) UILabel *bodyLabel;
@@ -62,8 +64,17 @@ UITextFieldDelegate
     self.view.backgroundColor = [UIColor blackColor];
     self.loginService = [THLLoginService new];
     self.loginService.delegate = self;
-    
+    self.loginService.navigationController = self.navigationController;
+
     WEAKSELF();
+
+    [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(UIEdgeInsetsZero);
+        make.top.equalTo(WSELF.dismissButton.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+        make.bottom.equalTo(WSELF.submitButton.mas_top).insets(kTHLEdgeInsetsSuperHigh());
+        
+    }];
+    
     [self.dismissButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(kTHLEdgeInsetsSuperHigh());
         make.top.equalTo(kTHLEdgeInsetsSuperHigh());
@@ -127,7 +138,7 @@ UITextFieldDelegate
     }];
     
     [self.passwordField makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo([WSELF submitButton].mas_top).insets(kTHLEdgeInsetsHigh());
+        make.bottom.insets(kTHLEdgeInsetsHigh());
         make.centerX.equalTo(0);
         make.height.equalTo(50);
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
@@ -162,9 +173,15 @@ UITextFieldDelegate
 }
 
 #pragma mark - THLLoginServiceDelegate
-
+- (void)loginServiceDidLoginUser {
+    [self.delegate signUpViewControllerDidFinishSignup];
+}
 
 #pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField endEditing:YES];
+    return NO;
+}
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     [self validateFields];
@@ -209,6 +226,17 @@ UITextFieldDelegate
 }
 
 #pragma mark - Accessors
+
+- (UIView *)containerView {
+    if (!_containerView) {
+        _containerView = [UIView new];
+        //    TODO: Keyboard avoiding doesnt work on re-opening
+        [IHKeyboardAvoiding setAvoidingView:_containerView];
+        [self.view addSubview:_containerView];
+    }
+    return _containerView;
+}
+
 - (JVFloatLabeledTextField *)fullNameField {
     if (!_fullNameField) {
         _fullNameField = [[JVFloatLabeledTextField alloc] initWithFrame:CGRectMake(0, 0, 260, 100)];
@@ -216,7 +244,7 @@ UITextFieldDelegate
         _fullNameField.backgroundColor =[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.10];
         _fullNameField.delegate = self;
         _fullNameField.autocorrectionType = UITextAutocorrectionTypeNo;
-        [self.view addSubview:_fullNameField];
+        [self.containerView addSubview:_fullNameField];
     }
     
     return _fullNameField;
@@ -232,7 +260,7 @@ UITextFieldDelegate
         _genderRadioButtonLabel.adjustsFontSizeToFitWidth = YES;
         _genderRadioButtonLabel.minimumScaleFactor = 0.5;
         _genderRadioButtonLabel.textAlignment = NSTextAlignmentLeft;
-        [self.view addSubview:_genderRadioButtonLabel];
+        [self.containerView addSubview:_genderRadioButtonLabel];
     }
     return _genderRadioButtonLabel;
 }
@@ -246,7 +274,7 @@ UITextFieldDelegate
         [_maleRadioButton addTarget:self
                              action:@selector(maleRadioButtonToggle:)
                    forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:_maleRadioButton];
+        [self.containerView addSubview:_maleRadioButton];
 
     }
     
@@ -263,7 +291,7 @@ UITextFieldDelegate
         [_maleTextButton addTarget:self
                              action:@selector(maleRadioButtonToggle:)
                    forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:_maleTextButton];
+        [self.containerView addSubview:_maleTextButton];
         
     }
     
@@ -279,7 +307,7 @@ UITextFieldDelegate
         [_femaleRadioButton addTarget:self
                              action:@selector(femaleRadioButtonToggle:)
                    forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:_femaleRadioButton];
+        [self.containerView addSubview:_femaleRadioButton];
 
     }
     
@@ -296,7 +324,7 @@ UITextFieldDelegate
         [_femaleTextButton addTarget:self
                              action:@selector(femaleRadioButtonToggle:)
                    forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:_femaleTextButton];
+        [self.containerView addSubview:_femaleTextButton];
         
     }
     
@@ -311,7 +339,7 @@ UITextFieldDelegate
         _emailField.delegate = self;
         _emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         _emailField.autocorrectionType = UITextAutocorrectionTypeNo;
-        [self.view addSubview:_emailField];
+        [self.containerView addSubview:_emailField];
     }
     
     return _emailField;
@@ -326,7 +354,7 @@ UITextFieldDelegate
         _passwordField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         _passwordField.autocorrectionType = UITextAutocorrectionTypeNo;
         
-        [self.view addSubview:_passwordField];
+        [self.containerView addSubview:_passwordField];
         
     }
     return _passwordField;
@@ -343,7 +371,7 @@ UITextFieldDelegate
         _bodyLabel.minimumScaleFactor = 0.5;
         _bodyLabel.textAlignment = NSTextAlignmentCenter;
         [_bodyLabel sizeToFit];
-        [self.view addSubview:_bodyLabel];
+        [self.containerView addSubview:_bodyLabel];
     }
     return _bodyLabel;
 }
@@ -354,7 +382,7 @@ UITextFieldDelegate
         _logoImageView.image = [UIImage imageNamed:@"Hypelist-Icon"];
         _logoImageView.contentMode = UIViewContentModeScaleAspectFit;
         _logoImageView.clipsToBounds = YES;
-        [self.view addSubview:_logoImageView];
+        [self.containerView addSubview:_logoImageView];
     }
     
     return _logoImageView;
