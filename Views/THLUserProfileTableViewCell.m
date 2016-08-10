@@ -17,15 +17,12 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
-        self.accessoryView = [[ UIImageView alloc ]
-                              initWithImage:[UIImage imageNamed:@"cell_disclosure_icon" ]];
+//        self.accessoryView = [[ UIImageView alloc ]
+//                              initWithImage:[UIImage imageNamed:@"cell_disclosure_icon" ]];
         
         [self.titleLabel makeConstraints:^(MASConstraintMaker *make) {
-            make.top.bottom.insets(kTHLEdgeInsetsNone());
-            make.left.equalTo(kTHLEdgeInsetsSuperHigh());
-            make.right.equalTo(kTHLEdgeInsetsNone());
+            make.edges.insets(kTHLEdgeInsetsNone());
         }];
-        
     }
     return self;
 }
@@ -36,7 +33,7 @@
         _titleLabel = [UILabel new];
         _titleLabel.backgroundColor = kTHLNUIPrimaryBackgroundColor;
         _titleLabel.font = [UIFont fontWithName:@"OpenSans-Light" size:16];
-        
+        _titleLabel.textAlignment = NSTextAlignmentCenter;
         _titleLabel.textColor = [UIColor whiteColor];
         [self.contentView addSubview:_titleLabel];
     }

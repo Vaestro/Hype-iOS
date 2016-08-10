@@ -19,6 +19,7 @@
 @dynamic price;
 @dynamic type;
 @dynamic venue;
+@dynamic partySize;
 
 + (void)load {
     [self registerSubclass];

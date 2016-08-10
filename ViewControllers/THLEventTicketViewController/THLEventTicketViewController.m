@@ -143,7 +143,7 @@
         NSDate *date = (NSDate *)_guestlistInvite[@"Guestlist"][@"event"][@"date"];
 //        _arrivalMessageLabel.text = [NSString stringWithFormat:@"Please arrive by %@", date.thl_timeString];
         NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] init];
-        [attributedString appendAttributedString:[[NSAttributedString alloc] initWithString:@"Please arrive by "
+        [attributedString appendAttributedString:[[NSAttributedString alloc] initWithString:@"Best time to arrive: "
                                                                                  attributes:@{NSUnderlineStyleAttributeName: @(NSUnderlineStyleNone)}]];
         [attributedString appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@", date.thl_timeString]
                                                                                  attributes:@{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle),

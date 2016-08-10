@@ -46,8 +46,6 @@
     }];
 }
 
-
-
 #pragma mark - Accessors
 
 - (UIView *)contentView {
@@ -61,7 +59,7 @@
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = THLNUILabel(kTHLNUISectionTitle);
-        _titleLabel.alpha = 0.7;
+        _titleLabel.adjustsFontSizeToFitWidth = true;
         [self addSubview:_titleLabel];
     }
     return _titleLabel;

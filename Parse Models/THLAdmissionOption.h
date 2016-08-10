@@ -17,5 +17,6 @@
 @property (nonatomic, retain) NSNumber *price;
 @property (nonatomic, retain) NSNumber *type;
 @property (nonatomic, retain) NSString *venue;
+@property (nonatomic, retain) NSNumber *partySize;
 
 @end

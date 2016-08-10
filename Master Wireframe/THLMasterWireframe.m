@@ -51,6 +51,7 @@
 #import "THLVenueDiscoveryViewController.h"
 
 #import "Hype-Swift.h"
+#import "THLReservationRequestViewController.h"
 
 @interface THLMasterWireframe()
 <
@@ -68,7 +69,8 @@ THLPartyViewControllerDelegate,
 THLPerkCollectionViewControllerDelegate,
 THLOnboardingViewControllerDelegate,
 THLTablePackageControllerDelegate,
-THLLoginViewControllerDelegate
+THLLoginViewControllerDelegate,
+THLReservationRequestViewControllerDelegate
 >
 
 @property (nonatomic, strong) UIWindow *window;
@@ -298,7 +300,8 @@ THLLoginViewControllerDelegate
         [[self topViewController].navigationController pushViewController:checkoutVC animated:YES];
 
     } else if ([admissionOption[@"type"] integerValue] == 1) {
-        THLTablePackageDetailsViewController *packageDetailsVC = [[THLTablePackageDetailsViewController alloc] initWithEvent:event admissionOption:admissionOption showActionButton:YES];
+//        THLReservationRequestViewController *packageDetailsVC = [[THLReservationRequestViewController alloc] initWithEvent:event admissionOption:admissionOption];
+       THLTablePackageDetailsViewController *packageDetailsVC = [[THLTablePackageDetailsViewController alloc] initWithEvent:event admissionOption:admissionOption showActionButton:YES];
         packageDetailsVC.delegate = self;
         [[self topViewController].navigationController pushViewController:packageDetailsVC animated:YES];
 

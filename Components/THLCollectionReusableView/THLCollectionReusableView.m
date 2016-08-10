@@ -22,6 +22,7 @@
     _label = THLNUILabel(kTHLNUISectionTitle);
     _label.textAlignment = NSTextAlignmentLeft;
     _label.numberOfLines = 1;
+    _label.adjustsFontSizeToFitWidth = true;
 
     [self addSubview:_label];
     

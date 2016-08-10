@@ -12,9 +12,7 @@
 @interface THLTablePackageDetailCell : PFCollectionViewCell
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *amountLabel;
-@property(nonatomic, strong) PFImageView *venueImageView;
 
-@property (nonatomic, strong) UILabel *partySizeLabel;
 + (NSString *)identifier;
 @end
 

@@ -37,12 +37,15 @@
     self = [super initWithClassName:@"Bottle"];
     if (!self) return nil;
     
-    self.pullToRefreshEnabled = YES;
-    self.paginationEnabled = NO;
+    self.pullToRefreshEnabled = false;
+    self.paginationEnabled = false;
+    self.loadingViewEnabled = false;
+    
     self.admissionOption = admissionOption;
     self.event = event;
+
+   self.showActionButton = showActionButton;
     
-    self.showActionButton = showActionButton;
     return self;
 }
 
@@ -57,15 +60,26 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Help"] style:UIBarButtonItemStylePlain target:self action:@selector(messageButtonPressed)];
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
     
-    layout.sectionInset = UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 10.0f);
+//    layout.sectionInset = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f);
+//    layout.minimumInteritemSpacing = 0.0f;
+//    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+
+    layout.sectionInset = UIEdgeInsetsMake(10.0f, 10.0f, 0.0f, 10.0f);
     layout.minimumInteritemSpacing = 5.0f;
     
+
+    layout.scrollDirection = UICollectionViewScrollDirectionVertical;
+
     [self.collectionView registerClass:[THLTablePackageDetailCell class] forCellWithReuseIdentifier:[THLTablePackageDetailCell identifier]];
     [self.collectionView registerClass:[THLCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header"];
 
     self.collectionView.emptyDataSetSource = self;
     self.collectionView.emptyDataSetDelegate = self;
-    
+//    self.collectionView.alwaysBounceVertical = false;
+//    [self.collectionView makeConstraints:^(MASConstraintMaker *make) {
+//        make.edges.equalTo(UIEdgeInsetsZero);
+//    }];
+
     WEAKSELF();
     if (_showActionButton) {
         [self.collectionView makeConstraints:^(MASConstraintMaker *make) {
@@ -82,8 +96,6 @@
             make.edges.equalTo(UIEdgeInsetsZero);
         }];
     }
-
-
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -107,7 +119,9 @@
     layout.minimumInteritemSpacing = 10;
     layout.minimumLineSpacing = 10;
     
-    layout.itemSize = CGSizeMake(ViewWidth(self.collectionView) - 50, 125);
+    layout.itemSize = CGSizeMake(ViewWidth(self.collectionView) - 20, 125);
+    
+//    layout.itemSize = CGSizeMake(self.view.frame.size.width, 150.0f);
 }
 
 - (void)objectsWillLoad {
@@ -117,7 +131,7 @@
 - (void)objectsDidLoad:(NSError *)error {
     [super objectsDidLoad:error];
     [self.collectionView reloadData];
-    [self emptyDataSetShouldDisplay:self.collectionView];
+//    [self emptyDataSetShouldDisplay:self.collectionView];
 }
 
 #pragma mark -
@@ -138,10 +152,8 @@
                                   object:(PFObject *)object
 {
     THLTablePackageDetailCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[THLTablePackageDetailCell identifier] forIndexPath:indexPath];
-    cell.amountLabel.text = [NSString stringWithFormat:@"x%d", [object[@"amount"] integerValue]];
+    cell.amountLabel.text = [NSString stringWithFormat:@"%li", [object[@"amount"] integerValue]];
     cell.titleLabel.text = [NSString stringWithFormat:@"%@", object[@"name"]];
-    cell.venueImageView.file = object[@"image"];
-    [cell.venueImageView loadInBackground];
     
     return cell;
     return nil;
@@ -158,7 +170,7 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    
+//    
     if ([self.objects count]) {
         return CGSizeMake(CGRectGetWidth(self.collectionView.bounds), 60.0f);
     }
@@ -205,7 +217,6 @@
 - (void)checkout:(id)sender {
     [self.delegate packageControllerWantsToPresentCheckoutForEvent:_event andAdmissionOption:_admissionOption];
 }
-
 
 #pragma mark - EmptyDataSetDelegate
 
@@ -259,5 +270,7 @@
         return NO;
     }
 }
+
+
 
 @end

@@ -91,6 +91,9 @@
 		798D7EBF1BF2E56C001D4593 /* OnboardingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 798D7EBE1BF2E56C001D4593 /* OnboardingViewController.m */; };
 		798D7EC21BF2E5CF001D4593 /* OnboardingContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 798D7EC11BF2E5CF001D4593 /* OnboardingContentViewController.m */; };
 		7996E2051D00D010006FFDDC /* THLPerkCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7996E2041D00D010006FFDDC /* THLPerkCollectionViewController.m */; };
+		799831181D4AC50900BB5BFE /* THLSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 799831171D4AC50900BB5BFE /* THLSelectView.m */; };
+		7998311B1D4B9E6500BB5BFE /* THLReservationRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7998311A1D4B9E6500BB5BFE /* THLReservationRequestViewController.m */; };
+		7998311E1D4C06CA00BB5BFE /* THLTablePackageDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7998311D1D4C06CA00BB5BFE /* THLTablePackageDetailView.m */; };
 		799862461C97B6AF004C5326 /* THLTextEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 799862451C97B6AF004C5326 /* THLTextEntryViewController.m */; };
 		799B06991D2C3D600091B4CD /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 799B06981D2C3D600091B4CD /* UIScrollView+EmptyDataSet.m */; };
 		799B069C1D2DA5F30091B4CD /* SwipeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 799B069B1D2DA5F20091B4CD /* SwipeView.m */; };
@@ -367,6 +370,12 @@
 		798D7EC31BF2E634001D4593 /* OnboardingContentViewController_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OnboardingContentViewController_Private.h; sourceTree = "<group>"; };
 		7996E2031D00D010006FFDDC /* THLPerkCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkCollectionViewController.h; sourceTree = "<group>"; };
 		7996E2041D00D010006FFDDC /* THLPerkCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPerkCollectionViewController.m; sourceTree = "<group>"; };
+		799831161D4AC4F400BB5BFE /* THLSelectView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLSelectView.h; sourceTree = "<group>"; };
+		799831171D4AC50900BB5BFE /* THLSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLSelectView.m; sourceTree = "<group>"; };
+		799831191D4B9E5900BB5BFE /* THLReservationRequestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLReservationRequestViewController.h; sourceTree = "<group>"; };
+		7998311A1D4B9E6500BB5BFE /* THLReservationRequestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLReservationRequestViewController.m; sourceTree = "<group>"; };
+		7998311C1D4C058F00BB5BFE /* THLTablePackageDetailView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLTablePackageDetailView.h; sourceTree = "<group>"; };
+		7998311D1D4C06CA00BB5BFE /* THLTablePackageDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLTablePackageDetailView.m; sourceTree = "<group>"; };
 		799862441C97B6AF004C5326 /* THLTextEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLTextEntryViewController.h; sourceTree = "<group>"; };
 		799862451C97B6AF004C5326 /* THLTextEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLTextEntryViewController.m; sourceTree = "<group>"; };
 		799B06971D2C3D600091B4CD /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
@@ -576,6 +585,10 @@
 				C8A766551CDA84A600A000C2 /* THLWebViewController */,
 				79FBFCCD1D30511F00F291E7 /* THLEventHeaderStyleBehaviorDefiner.h */,
 				79FBFCCE1D30513500F291E7 /* THLEventHeaderStyleBehaviorDefiner.m */,
+				799831161D4AC4F400BB5BFE /* THLSelectView.h */,
+				799831171D4AC50900BB5BFE /* THLSelectView.m */,
+				7998311C1D4C058F00BB5BFE /* THLTablePackageDetailView.h */,
+				7998311D1D4C06CA00BB5BFE /* THLTablePackageDetailView.m */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1213,6 +1226,8 @@
 				7917C0F01D1B3C2E0054BDB0 /* THLVenueDiscoveryViewController.m */,
 				795EF50F1D3E9B1900485B11 /* THLSignUpViewController.h */,
 				795EF50D1D3E9B0700485B11 /* THLSignUpViewController.m */,
+				799831191D4B9E5900BB5BFE /* THLReservationRequestViewController.h */,
+				7998311A1D4B9E6500BB5BFE /* THLReservationRequestViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2095,6 +2110,7 @@
 				799862461C97B6AF004C5326 /* THLTextEntryViewController.m in Sources */,
 				C85EE3C41C1CDE140008C14B /* THLPurchasedPerkItem.m in Sources */,
 				79CEDF411D27092B00DFB654 /* THLEventNavBarTitleView.swift in Sources */,
+				7998311B1D4B9E6500BB5BFE /* THLReservationRequestViewController.m in Sources */,
 				799B06A61D2EA9580091B4CD /* THLEventFlexibleHeaderView.swift in Sources */,
 				216BDD611BC72F9100BBF713 /* THLSearchResultsViewDataSourceHandler.m in Sources */,
 				21775F631B8E17A300609D39 /* THLAddressBookEntryFetchService.m in Sources */,
@@ -2159,10 +2175,12 @@
 				79B86C311D36DACA0033768D /* JVFloatLabeledTextView.m in Sources */,
 				79B86C301D36DACA0033768D /* JVFloatLabeledTextField.m in Sources */,
 				79B9594D1BE8966300B87799 /* KLCPopup.m in Sources */,
+				7998311E1D4C06CA00BB5BFE /* THLTablePackageDetailView.m in Sources */,
 				2108A8851B8BBF4900B725F6 /* THLMasterWireframe.m in Sources */,
 				79CE315A1CF7B03F00CEA784 /* THLEventTicketViewController.m in Sources */,
 				7928AD921D19C82600DFC443 /* THLPerkStoreCell.m in Sources */,
 				7928ADB61D19CB5300DFC443 /* THLEventDetailsMapView.m in Sources */,
+				799831181D4AC50900BB5BFE /* THLSelectView.m in Sources */,
 				798D7EBF1BF2E56C001D4593 /* OnboardingViewController.m in Sources */,
 				C8FEE3D51D038C8700244252 /* THLTablePackageDetailsViewController.m in Sources */,
 				215A42AC1BAA2A1700D03C35 /* THLFacebookProfilePictureURLFetchService.m in Sources */,
