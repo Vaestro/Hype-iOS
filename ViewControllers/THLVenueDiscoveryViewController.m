@@ -126,10 +126,11 @@
     THLDiscoveryCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[THLDiscoveryCell identifier]
                                                                        forIndexPath:indexPath];
     
-    cell.titlesView.locationNameLabel.text = object[@"name"];
-    cell.titlesView.locationNeighborhoodLabel.text = object[@"neighborhood"];
     cell.venueImageView.file = object[@"image"];
     [cell.venueImageView loadInBackground];
+    cell.titlesView.locationNameLabel.text = object[@"name"];
+    cell.titlesView.locationNeighborhoodLabel.text = object[@"neighborhood"];
+
     
     return cell;
 }

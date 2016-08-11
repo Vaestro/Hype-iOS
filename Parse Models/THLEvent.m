@@ -17,6 +17,7 @@
 @dynamic admissionOptions;
 @dynamic creditsPayout;
 @dynamic ageRequirement;
+@dynamic featured;
 
 + (void)load {
 	[self registerSubclass];

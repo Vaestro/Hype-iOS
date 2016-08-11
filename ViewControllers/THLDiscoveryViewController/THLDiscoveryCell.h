@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <ParseUI/PFCollectionViewCell.h>
 #import "THLEventTitlesView.h"
-#import "THLAppearanceConstants.h"
-
 
 @interface THLDiscoveryCell : PFCollectionViewCell
 @property(nonatomic, strong) THLEventTitlesView *titlesView;
 @property(nonatomic, strong) PFImageView *venueImageView;
+@property(nonatomic, strong) UILabel *eventCategoryLabel;
+
 + (NSString *)identifier;
 @end

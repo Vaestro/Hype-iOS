@@ -18,6 +18,7 @@
 #import "TTTAttributedLabel.h"
 #import "THLParseQueryFactory.h"
 #import "THLUser.h"
+#import "THLEvent.h"
 
 @interface THLDiscoveryViewController ()
 @property (nonatomic, strong) TTTAttributedLabel *navBarTitleLabel;
@@ -95,7 +96,8 @@
 
 - (PFQuery *)queryForCollection {
     PFQuery *query = [super queryForCollection];
-    [query orderByAscending:@"date"];
+    [query orderByDescending:@"featured"];
+    [query addAscendingOrder:@"date"];
     [query includeKey:@"location"];
     [query includeKey:@"admissionOptions"];
     
@@ -117,14 +119,22 @@
     THLDiscoveryCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[THLDiscoveryCell identifier]
                                                                          forIndexPath:indexPath];
     
-    NSDate *date = (NSDate *)object[@"date"];
+    THLEvent *event = (THLEvent *)object;
 
-    cell.titlesView.titleLabel.text = object[@"title"];
-    cell.titlesView.dateLabel.text = [NSString stringWithFormat:@"%@", date.thl_weekdayString];
-    cell.titlesView.locationNameLabel.text = object[@"location"][@"name"];
-    cell.titlesView.locationNeighborhoodLabel.text = object[@"location"][@"neighborhood"];
-    cell.venueImageView.file = object[@"location"][@"image"];
+
+    cell.venueImageView.file = event.location.image;
     [cell.venueImageView loadInBackground];
+    
+    cell.titlesView.titleLabel.text = event.title;
+    cell.titlesView.dateLabel.text = [NSString stringWithFormat:@"%@", event.date.thl_weekdayString];
+    cell.titlesView.locationNameLabel.text = event.location.name;
+    cell.titlesView.locationNeighborhoodLabel.text = event.location.neighborhood;
+
+    if (event.featured == true) {
+        cell.eventCategoryLabel.hidden = false;
+    } else {
+        cell.eventCategoryLabel.hidden = true;
+    }
     
     return cell;
 }

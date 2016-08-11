@@ -20,4 +20,6 @@
 @property (nonatomic, retain) NSArray<PFObject *> *admissionOptions;
 @property (nonatomic) int creditsPayout;
 @property (nonatomic) int ageRequirement;
+@property (nonatomic) BOOL featured;
+
 @end

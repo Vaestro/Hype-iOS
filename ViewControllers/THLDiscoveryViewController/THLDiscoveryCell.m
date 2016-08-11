@@ -13,9 +13,6 @@
 #import "UIView+DimView.h"
 
 @implementation THLDiscoveryCell
-@synthesize titlesView = _titlesView;
-@synthesize venueImageView = _venueImageView;
-
 
 #pragma mark -
 #pragma mark UIView
@@ -23,17 +20,16 @@
 - (void)layoutSubviews
 {
     WEAKSELF();
-    [_titlesView makeConstraints:^(MASConstraintMaker *make) {
+
+    [self.venueImageView makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(WSELF);
+    }];
+    
+    [self.titlesView makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.insets(UIEdgeInsetsZero);
         make.center.equalTo(WSELF);
     }];
     
-    [_venueImageView makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(WSELF);
-    }];
-    
-    [self.contentView bringSubviewToFront:_titlesView];
-
 }
 
 #pragma mark -
@@ -45,6 +41,23 @@
         [self.contentView addSubview:_titlesView];
     }
     return _titlesView;
+}
+
+- (UILabel *)eventCategoryLabel
+{
+    if (!_eventCategoryLabel) {
+        _eventCategoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0, 0.0, 125.0, 30.0)];
+        _eventCategoryLabel.font = [UIFont fontWithName:@"OpenSans-ExtraBold" size:12.0];
+        _eventCategoryLabel.text = @"FEATURED EVENT";
+        _eventCategoryLabel.textColor = [UIColor blackColor];
+        _eventCategoryLabel.numberOfLines = 1;
+        _eventCategoryLabel.textAlignment = NSTextAlignmentCenter;
+        _eventCategoryLabel.adjustsFontSizeToFitWidth = YES;
+        _eventCategoryLabel.minimumScaleFactor = 0.5;
+        _eventCategoryLabel.backgroundColor = kTHLNUIAccentColor;
+        [self.contentView addSubview:_eventCategoryLabel];
+    }
+    return _eventCategoryLabel;
 }
 
 - (PFImageView *)venueImageView {
