@@ -67,7 +67,6 @@ font-size: 16;
 }
 
 TableCell {
-background-color: @primaryBackgroundColor;
 font-size: 18;
 }
 

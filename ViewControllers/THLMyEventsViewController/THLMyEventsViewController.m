@@ -270,6 +270,11 @@
     return _navBarTitleLabel;
 }
 
+- (void)messageButtonPressed
+{
+    [Intercom presentMessageComposer];
+}
+
 
 
 #pragma mark - EmptyDataSetDelegate

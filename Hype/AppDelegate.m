@@ -19,6 +19,7 @@
 #import "THLAppearanceUtils.h"
 #import "Intercom/intercom.h"
 #import <Harpy/Harpy.h>
+#import "THLAppearanceConstants.h"
 
 #if DEBUG
 static NSString *applicationId = @"5t3F1S3wKnVGIKHob1Qj0Je3sygnFiwqAu6PP400";
@@ -75,10 +76,16 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
     //Initialize Intercom
     [Intercom setApiKey:@"ios_sdk-3899f433e0b112fe8daff2cc4f8bfdff18fad071" forAppId:@"eixn8wsn"];
     [Intercom enableLogging];
-    [Intercom setPreviewPosition:ICMPreviewPositionTopLeft];
     
     //Stripe
     [Stripe setDefaultPublishableKey:stripePublishableKey];
+    [[STPPaymentConfiguration sharedConfiguration] setSmsAutofillDisabled:YES];
+    [[STPTheme defaultTheme] setPrimaryBackgroundColor:kTHLNUIPrimaryBackgroundColor];
+    [[STPTheme defaultTheme] setSecondaryBackgroundColor:kTHLNUISecondaryBackgroundColor];
+    [[STPTheme defaultTheme] setPrimaryForegroundColor:kTHLNUIPrimaryFontColor];
+    [[STPTheme defaultTheme] setSecondaryForegroundColor:kTHLNUIAccentColor];
+
+    [[STPTheme defaultTheme] setAccentColor:kTHLNUIAccentColor];
     
     // [Optional] Track statistics around application opens.
     if (application.applicationState != UIApplicationStateBackground) {

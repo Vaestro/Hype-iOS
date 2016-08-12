@@ -26,11 +26,11 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
-  - Branch (0.12.4):
-    - Branch/Core (= 0.12.4)
-    - Branch/without-IDFA (= 0.12.4)
-  - Branch/Core (0.12.4)
-  - Branch/without-IDFA (0.12.4)
+  - Branch (0.12.5):
+    - Branch/Core (= 0.12.5)
+    - Branch/without-IDFA (= 0.12.5)
+  - Branch/Core (0.12.5)
+  - Branch/without-IDFA (0.12.5)
   - CocoaLumberjack (2.3.0):
     - CocoaLumberjack/Default (= 2.3.0)
     - CocoaLumberjack/Extensions (= 2.3.0)
@@ -39,14 +39,14 @@ PODS:
     - CocoaLumberjack/Core
   - CocoaLumberjack/Extensions (2.3.0):
     - CocoaLumberjack/Default
-  - Crashlytics (3.7.2):
+  - Crashlytics (3.7.3):
     - Fabric (~> 1.6.3)
   - DateTools (1.7.0)
-  - DGActivityIndicatorView (2.0)
+  - DGActivityIndicatorView (2.1)
   - Digits (2.3.0):
     - TwitterCore (= 2.3.0)
   - EKAlgorithms (0.2)
-  - Fabric (1.6.7)
+  - Fabric (1.6.8)
   - FBSDKCoreKit (4.14.0):
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.14.0):
@@ -86,16 +86,16 @@ PODS:
   - FXLabel (1.5.9)
   - GCDObjC (0.3.0)
   - Gizou (0.1.3)
-  - Harpy (4.0.3)
+  - Harpy (4.0.4)
   - IHKeyboardAvoiding (2.6)
-  - Intercom (3.0.0)
+  - Intercom (3.0.9)
   - libPhoneNumber-iOS (0.8.15)
   - LinqToObjectiveC (2.1.0)
-  - LMGeocoder (1.0.7)
+  - LMGeocoder (1.0.8)
   - Masonry (0.6.4)
-  - Mixpanel (3.0.0):
-    - Mixpanel/Mixpanel (= 3.0.0)
-  - Mixpanel/Mixpanel (3.0.0)
+  - Mixpanel (3.0.2):
+    - Mixpanel/Mixpanel (= 3.0.2)
+  - Mixpanel/Mixpanel (3.0.2)
   - NUI (0.5.5):
     - NUIParse
   - NUIParse (1.3)
@@ -103,7 +103,7 @@ PODS:
   - OCMock (3.1.2)
   - ORStackView (3.0.1):
     - FLKAutoLayout (~> 0.2)
-  - Parse (1.14.1):
+  - Parse (1.14.2):
     - Bolts/Tasks (~> 1.8)
   - ParseFacebookUtilsV4 (1.11.1):
     - Bolts/Tasks (>= 1.6)
@@ -124,7 +124,7 @@ PODS:
     - SDWebImage/Core (= 3.8.1)
   - SDWebImage/Core (3.8.1)
   - SSDataSources (0.8.5)
-  - Stripe (8.0.2)
+  - Stripe (8.0.4)
   - SVProgressHUD (2.0.3)
   - SVPullToRefresh (0.4.1)
   - SwiftDate (3.0.8)
@@ -245,14 +245,14 @@ SPEC CHECKSUMS:
   BLKFlexibleHeightBar: b27572a69633d8e33f1f2bbc486b04d8e86f742d
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
-  Branch: f5a2eada319b7ac0c7e492c195c6c23f3cf345e3
+  Branch: 42307809efa9f23a55f40d8375ef8193bfe62b7c
   CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
-  Crashlytics: 130ab943f8c78cda7a814b434f270b2e2c8a3cba
+  Crashlytics: 76f6beaff70acf226139582c09c78461597c2b98
   DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
-  DGActivityIndicatorView: 52875b025a6ccf6a431a905285c12e2bb95eb559
+  DGActivityIndicatorView: 1942ae657a8d247c035f229422b2d15a8adbe5b6
   Digits: af82d24ec38035cc555b60f55cca5abc68a76bed
   EKAlgorithms: 83488651734ba3a63956fcb783b10e82d2ec3388
-  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
+  Fabric: 5755268d0171435ab167e3d0878a28a777deaf10
   FBSDKCoreKit: 6e020b5db0b5bd1e01f5fb0902131befd129a502
   FBSDKLoginKit: da563567a108050ef83739c8c8c001ee9e25fa13
   FLEX: ba80ea13d2c784e85e616137fd4eff164781e364
@@ -261,20 +261,20 @@ SPEC CHECKSUMS:
   FXLabel: 877f56a3e0ef76b223c67dea3f442c12d3a1d55c
   GCDObjC: 0c31898f34d8605196ac0343c65b496609d7dee6
   Gizou: 93853bf634a9382c257795db052aa9a75e972c43
-  Harpy: 9f3e4016375d4df99d64d05c98d351874ced8328
+  Harpy: 78d9f8e8b52fbe9d1e7cfe67206fa75b745b944b
   IHKeyboardAvoiding: d2541ee56dad83e160cd9aed0468c52247af6f49
-  Intercom: 5eeaa2828f19eefc1e887c543edba6b521db9f67
+  Intercom: 4ac33caa622bcba93f7e6284b38493a47dfcd76a
   libPhoneNumber-iOS: 62a740e1ea5741060f5cec0f788b52071115cf31
   LinqToObjectiveC: f0e40c137a458b6b9725c4c7b6a575c0c72e3aec
-  LMGeocoder: 116e771bce773c82dbac9f59f443129dd26088a3
+  LMGeocoder: 7682148ce0bc55e483ceaa0eefdae4494d7102be
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
-  Mixpanel: ac92056ee35a961362513ba11049e67cffcaa1f1
+  Mixpanel: 0e4f1f9a2ac612b589b2894830038418c2587428
   NUI: 53de7278003235deb2a375fe6f04c7a3aa3e49eb
   NUIParse: 2e3885ba7807477266396292626bd387d34c2338
   ObjectiveSugar: a6a25f23d657c19df0a0b972466d5b5ca9f5295c
   OCMock: a10ea9f0a6e921651f96f78b6faee95ebc813b92
   ORStackView: a1bb52748cd0ae29891c140baf22ff8972fb363c
-  Parse: 4f72b1c01b3fc9038bea045681b6cc1b070c081e
+  Parse: 4335d65f40cb3d43190d723144bbe1afb9c38230
   ParseFacebookUtilsV4: 2f30c2b7021c8005d3042781da7ef87d06589421
   ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
@@ -284,7 +284,7 @@ SPEC CHECKSUMS:
   Reveal-iOS-SDK: e2250b3c155bcfac53ae223ddc1f76d08f206c33
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   SSDataSources: b01170fb23b82acf0649194e9189b0bf5f702681
-  Stripe: 3dfcde17037996e00db0a2f6dbfdedb7ad2ae55b
+  Stripe: c3e325e0309dcdcb478191dbd298082823a210c1
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
   SwiftDate: 971f8b9394f664f2226b9c3ab64e801a7291c612

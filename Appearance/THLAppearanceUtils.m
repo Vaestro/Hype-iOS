@@ -22,8 +22,8 @@
 
 + (void)applyGlobalAppearance {
 	[[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
-	[[UINavigationBar appearance] setBarTintColor:[UIColor blackColor]];
-//	[[UINavigationBar appearance] setTintColor:[THLStyleKit lightTextColor]];
+    [[UINavigationBar appearance] setTintColor:kTHLNUIGrayFontColor];
+    
 	[[UINavigationBar appearance] setTranslucent:NO];
 	[[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : kTHLNUIPrimaryFontColor,
                                                            NSFontAttributeName: [UIFont fontWithName:@"Raleway-Regular" size:18.0],
@@ -33,10 +33,7 @@
 
 	[[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)
 														 forBarMetrics:UIBarMetricsDefault];
-    [[UINavigationBar appearance] setTintColor:kTHLNUIGrayFontColor];
 
-    
-    
     [[UITabBar appearance] setTintColor:kTHLNUIAccentColor];
     [[UITabBar appearance] setBarStyle:UIBarStyleBlack];
     [[UITabBar appearance] setTranslucent:NO];

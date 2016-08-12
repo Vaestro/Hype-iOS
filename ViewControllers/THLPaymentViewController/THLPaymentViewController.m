@@ -13,8 +13,12 @@
 #import <Parse/Parse.h>
 #import "THLUser.h"
 #import "SVProgressHUD.h"
+#import "STPAddCardViewController.h"
 
-@interface THLPaymentViewController()<STPPaymentCardTextFieldDelegate>
+@interface THLPaymentViewController()
+<
+STPAddCardViewControllerDelegate
+>
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *cardInfoLabel;
 
@@ -25,7 +29,6 @@
 @property (nonatomic, strong) UIImageView *paymentCardIcon;
 @property (nonatomic, strong) UIImageView *acceptedPaymentCardsImage;
 
-@property(nonatomic) STPPaymentCardTextField *paymentTextField;
 @property(nonatomic, strong) THLActionButton *addCardButton;
 @property(nonatomic, strong) THLActionButton *removeCardButton;
 
@@ -56,7 +59,7 @@
 //        [self.view addSubviews:@[_paymentCardIcon, _cardInfoLabel, _removeCardButton]];
         
     } else {
-//        [self.view addSubviews:@[_paymentTextField, _addCardButton]];
+        [self payButtonTapped];
     }
     
     WEAKSELF();
@@ -90,12 +93,7 @@
         
         [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make){
             make.left.right.insets(kTHLEdgeInsetsSuperHigh());
-            make.bottom.equalTo([WSELF paymentTextField].mas_top).insets(kTHLEdgeInsetsInsanelyHigh());
-        }];
-        
-        [self.paymentTextField mas_makeConstraints:^(MASConstraintMaker *make){
-            make.left.right.insets(kTHLEdgeInsetsSuperHigh());
-            make.bottom.equalTo([WSELF addCardButton].mas_top).insets(kTHLEdgeInsetsSuperHigh());
+            make.bottom.equalTo([WSELF addCardButton].mas_top).insets(kTHLEdgeInsetsInsanelyHigh());
         }];
         
     }
@@ -140,12 +138,7 @@
     
     [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make){
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
-        make.bottom.equalTo([WSELF paymentTextField].mas_top).insets(kTHLEdgeInsetsInsanelyHigh());
-    }];
-    
-    [self.paymentTextField mas_makeConstraints:^(MASConstraintMaker *make){
-        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
-        make.bottom.equalTo([WSELF addCardButton].mas_top).insets(kTHLEdgeInsetsSuperHigh());
+        make.bottom.equalTo([WSELF addCardButton].mas_top).insets(kTHLEdgeInsetsInsanelyHigh());
     }];
 }
 
@@ -155,7 +148,6 @@
     NSString *cardInfoText = [NSString stringWithFormat:@"**** **** **** %@", last4CardDigits];
     _cardInfoLabel = [self cardInfoLabel:cardInfoText];
     
-    [self.paymentTextField removeFromSuperview];
     [self.addCardButton removeFromSuperview];
     
     WEAKSELF();
@@ -175,55 +167,80 @@
         make.bottom.equalTo(_paymentCardIcon);
     }];
     
-    
-    
     [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make){
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
         make.bottom.equalTo([WSELF cardInfoLabel].mas_top).insets(kTHLEdgeInsetsInsanelyHigh());
     }];
 }
 
-
-- (void)paymentCardTextFieldDidChange:(STPPaymentCardTextField *)textField
-{
-    self.addCardButton.enabled = textField.isValid;
-}
-
 #pragma mark - Payment Processing
-
-- (void)saveCreditCardInfo
-{
-    [_addCardButton setEnabled:FALSE];
-    [SVProgressHUD showWithStatus:@"Updating.."];
-    [[STPAPIClient sharedClient]
-     createTokenWithCard:self.paymentTextField.cardParams
-     completion:^(STPToken *token, NSError *error) {
-         if (error) {
-             [SVProgressHUD dismiss];
-             [self displayError:error];
-         } else {
-             
-             [PFCloud callFunctionInBackground:@"createStripeCustomer"
-                                withParameters:@{@"stripeToken": token.tokenId}
-                                         block:^(NSArray<NSDictionary *> *paymentInfo, NSError *cloudError) {
-                                             [SVProgressHUD dismiss];
-                                             [_addCardButton setEnabled:TRUE];
-                                             if (cloudError) {
-                                                 [self displayError:cloudError];
-                                             } else {
-//                                                 Mixpanel *mixpanel = [Mixpanel sharedInstance];
-//                                                 [mixpanel track:@"Payment Method Addded"];
-                                                 _paymentInfo = paymentInfo;
-                                                 [[THLUser currentUser] fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable userError) {
-                                                     [self displaySuccess];
-                                                     [self updateLayoutForHasPayment];
-                                                 }];
-                                                 
-                                            }
-              }];
-         }
-     }];
+- (void)payButtonTapped {
+    STPAddCardViewController *addCardViewController = [[STPAddCardViewController alloc] init];
+    addCardViewController.delegate = self;
+    // STPAddCardViewController must be shown inside a UINavigationController.
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:addCardViewController];
+    [self presentViewController:navigationController animated:YES completion:nil];
 }
+
+#pragma mark STPAddCardViewControllerDelegate
+
+- (void)addCardViewControllerDidCancel:(STPAddCardViewController *)addCardViewController {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)addCardViewController:(STPAddCardViewController *)addCardViewController
+               didCreateToken:(STPToken *)token
+                   completion:(STPErrorBlock)completion {
+                    [PFCloud callFunctionInBackground:@"createStripeCustomer"
+                                       withParameters:@{@"stripeToken": token.tokenId}
+                                                block:^(NSArray<NSDictionary *> *paymentInfo, NSError *cloudError) {
+                                                    [SVProgressHUD dismiss];
+                                                    if (cloudError) {
+                                                        [self dismissViewControllerAnimated:YES completion:nil];
+                                                        [self displayError:cloudError];
+                                                    } else {
+                                                        _paymentInfo = paymentInfo;
+                                                        [[THLUser currentUser] fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable userError) {
+                                                            [self updateLayoutForHasPayment];
+                                                            [self dismissViewControllerAnimated:YES completion:nil];
+                                                        }];
+                                                    }
+                                                }];
+}
+
+//- (void)saveCreditCardInfo
+//{
+//    [_addCardButton setEnabled:FALSE];
+//    [SVProgressHUD showWithStatus:@"Updating.."];
+//    [[STPAPIClient sharedClient]
+//     createTokenWithCard:self.paymentTextField.cardParams
+//     completion:^(STPToken *token, NSError *error) {
+//         if (error) {
+//             [SVProgressHUD dismiss];
+//             [self displayError:error];
+//         } else {
+//             
+//             [PFCloud callFunctionInBackground:@"createStripeCustomer"
+//                                withParameters:@{@"stripeToken": token.tokenId}
+//                                         block:^(NSArray<NSDictionary *> *paymentInfo, NSError *cloudError) {
+//                                             [SVProgressHUD dismiss];
+//                                             [_addCardButton setEnabled:TRUE];
+//                                             if (cloudError) {
+//                                                 [self displayError:cloudError];
+//                                             } else {
+////                                                 Mixpanel *mixpanel = [Mixpanel sharedInstance];
+////                                                 [mixpanel track:@"Payment Method Addded"];
+//                                                 _paymentInfo = paymentInfo;
+//                                                 [[THLUser currentUser] fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable userError) {
+//                                                     [self displaySuccess];
+//                                                     [self updateLayoutForHasPayment];
+//                                                 }];
+//                                                 
+//                                            }
+//              }];
+//         }
+//     }];
+//}
 
 - (void)deleteCreditCardInfo {
     UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
@@ -289,24 +306,14 @@
 }
 
 #pragma mark - Accessors
-- (STPPaymentCardTextField *)paymentTextField {
-    if (!_paymentTextField) {
-        _paymentTextField = [STPPaymentCardTextField new];
-        _paymentTextField.textColor = [UIColor whiteColor];
-        _paymentTextField.delegate = self;
-        [self.view addSubview:_paymentTextField];
-    }
-    return _paymentTextField;
-}
-
 
 - (THLActionButton *)addCardButton
 {
     if (!_addCardButton) {
         _addCardButton = [[THLActionButton alloc] initWithDefaultStyle];
         [_addCardButton setTitle:@"ADD CARD"];
-        [_addCardButton addTarget:self action:@selector(saveCreditCardInfo) forControlEvents:UIControlEventTouchUpInside];
-        _addCardButton.enabled = NO;
+        [_addCardButton addTarget:self action:@selector(payButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+//        _addCardButton.enabled = NO;
         [self.view addSubview:_addCardButton];
     }
     return _addCardButton;
@@ -328,7 +335,7 @@
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = THLNUILabel(kTHLNUIRegularTitle);
-        _titleLabel.text = @"Add Payment";
+        _titleLabel.text = @"Payment Method";
         [self.view addSubview:_titleLabel];
     }
 
