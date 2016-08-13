@@ -111,6 +111,7 @@
 		79B527B71C6EA777000A0970 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79B527AC1C6EA71A000A0970 /* OpenSans-Regular.ttf */; };
 		79B527B81C6EA777000A0970 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79B527AD1C6EA71A000A0970 /* OpenSans-Semibold.ttf */; };
 		79B527B91C6EA777000A0970 /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79B527AE1C6EA71A000A0970 /* OpenSans-SemiboldItalic.ttf */; };
+		79B59F061D5E78CB00E374A4 /* THLHypeConciergeInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B59F051D5E78CB00E374A4 /* THLHypeConciergeInfoView.m */; };
 		79B6C1BA1CEA3EC50050CDB1 /* THLPurchaseDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B6C1B91CEA3EC50050CDB1 /* THLPurchaseDetailsView.m */; };
 		79B86C301D36DACA0033768D /* JVFloatLabeledTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B86C2B1D36DACA0033768D /* JVFloatLabeledTextField.m */; };
 		79B86C311D36DACA0033768D /* JVFloatLabeledTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79B86C2D1D36DACA0033768D /* JVFloatLabeledTextView.m */; };
@@ -399,6 +400,8 @@
 		79B527AC1C6EA71A000A0970 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		79B527AD1C6EA71A000A0970 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
 		79B527AE1C6EA71A000A0970 /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
+		79B59F051D5E78CB00E374A4 /* THLHypeConciergeInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLHypeConciergeInfoView.m; sourceTree = "<group>"; };
+		79B59F071D5E78DF00E374A4 /* THLHypeConciergeInfoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLHypeConciergeInfoView.h; sourceTree = "<group>"; };
 		79B6C1B81CEA3EC50050CDB1 /* THLPurchaseDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPurchaseDetailsView.h; sourceTree = "<group>"; };
 		79B6C1B91CEA3EC50050CDB1 /* THLPurchaseDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPurchaseDetailsView.m; sourceTree = "<group>"; };
 		79B86C2A1D36DACA0033768D /* JVFloatLabeledTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVFloatLabeledTextField.h; sourceTree = "<group>"; };
@@ -655,6 +658,8 @@
 				79CEDF401D27092B00DFB654 /* THLEventNavBarTitleView.swift */,
 				799B06A51D2EA9580091B4CD /* THLEventFlexibleHeaderView.swift */,
 				79CEDF421D27180600DFB654 /* THLDiscoveryNavBarTitleView.swift */,
+				79B59F071D5E78DF00E374A4 /* THLHypeConciergeInfoView.h */,
+				79B59F051D5E78CB00E374A4 /* THLHypeConciergeInfoView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2161,6 +2166,7 @@
 				795EF50E1D3E9B0700485B11 /* THLSignUpViewController.m in Sources */,
 				C8D1D2A41CD3E864006ADC6A /* THLPaymentViewController.m in Sources */,
 				79CEDF3F1D257A6700DFB654 /* UIColorExtensions.swift in Sources */,
+				79B59F061D5E78CB00E374A4 /* THLHypeConciergeInfoView.m in Sources */,
 				21E402DC1BBF8155001D0C2C /* THLGuestlistInvite.m in Sources */,
 				21CCEDE91B87C87B0066CDAC /* THLDataStore.m in Sources */,
 				7928ADA41D19C9B600DFC443 /* THLOnboardingViewController.m in Sources */,
@@ -2259,6 +2265,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2307,6 +2314,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;

@@ -25,30 +25,12 @@
 #import "TTTAttributedLabel.h"
 #import "BranchUniversalObject.h"
 #import "BranchLinkProperties.h"
-
-typedef NS_ENUM(NSInteger, TableViewSection) {
-    TableViewSectionPersonal = 0,
-    TableViewSectionHypelist,
-    TableViewSection_Count
-};
-
-typedef NS_ENUM(NSInteger, PersonalSectionRow) {
-    PersonalSectionRowRewards = 0,
-    PersonalSectionRow_Count
-};
-
-typedef NS_ENUM(NSInteger, HypelistSectionRow) {
-    HypelistSectionRowWriteAReview = 0,
-    HypelistSectionRowFAQ,
-    HypelistSectionRowTermsAndConditions,
-    HypelistSectionRowPrivacyPolicy,
-    HypelistSectionRowContactUs,
-    HypelistSectionRowLogout,
-    HypelistSectionRow_Count
-};
+#import "THLHypeConciergeInfoView.h"
+#import "KLCPopup.h"
 
 typedef NS_ENUM(NSUInteger, ApplicationInfoCase){
-    InviteFriends = 0,
+    HypeConcierge = 0,
+    InviteFriends,
     RedeemCode,
     PaymentMethod,
     PrivacyPolicy,
@@ -88,7 +70,7 @@ STPPaymentCardTextFieldDelegate
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.tableCellNames = @[@"Invite Friends",@"Redeem Code", @"Payment Method", @"Privacy Policy", @"Terms & Conditions", @"Contact Us", @"Logout"];
+    self.tableCellNames = @[@"Hype Concierge", @"Invite Friends",@"Redeem Code", @"Payment Method", @"Privacy Policy", @"Terms & Conditions", @"Contact Us", @"Logout"];
     self.navigationItem.titleView = self.navBarTitleLabel;
     
     _tableView = [self newTableView];
@@ -177,9 +159,6 @@ STPPaymentCardTextFieldDelegate
     CGRect frame = CGRectMake(0, 0, ScreenWidth, height);
     THLUserProfileFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:[THLUserProfileFooterView identifier]];
     footerView = [[THLUserProfileFooterView alloc] initWithFrame:frame];
-//    footerView.logoutCommand = self.logoutCommand;
-//    footerView.emailCommand = self.contactCommand;
-    
     footer = footerView;
     return footer;
 }
@@ -202,6 +181,9 @@ STPPaymentCardTextFieldDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch(indexPath.row) {
+        case HypeConcierge:
+            [self presentHypeConciergeInfo];
+            break;
         case InviteFriends:
             [self handleInviteFriendsAction];
             break;
@@ -230,6 +212,18 @@ STPPaymentCardTextFieldDelegate
         }
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)presentHypeConciergeInfo {
+    THLHypeConciergeInfoView *conciergeView = [[THLHypeConciergeInfoView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH*0.87, SCREEN_HEIGHT*0.67)];
+    KLCPopup *popup = [KLCPopup popupWithContentView:conciergeView
+                                            showType:KLCPopupShowTypeSlideInFromBottom
+                                         dismissType:KLCPopupDismissTypeSlideOutToBottom
+                                            maskType:KLCPopupMaskTypeDimmed
+                            dismissOnBackgroundTouch:YES
+                               dismissOnContentTouch:NO];
+    popup.dimmedMaskAlpha = 0.5;
+    [popup show];
 }
 
 - (void)handleLogOutAction {

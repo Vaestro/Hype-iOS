@@ -10,11 +10,11 @@
 #import "KLCPopup.h"
 
 @interface THLPopupNotificationView : UIView
-- (void)setMessageLabelText:(NSString *)text;
-- (void)setButtonTitle:(NSString *)title;
+- (void)setMessageLabelText:(nullable NSString *)text;
+- (void)setButtonTitle:(nullable NSString *)title;
 - (void)setButtonTarget:(nullable id)target action:(nonnull SEL)selector forControlEvents:(UIControlEvents)event;
-- (void)setIconURL:(NSURL *)url;
-- (void)setImageViewWithURL:(NSURL *)url;
+- (void)setIconURL:(nullable NSURL *)url;
+- (void)setImageViewWithURL:(nullable NSURL *)url;
 
 @end
 
