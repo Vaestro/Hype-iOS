@@ -3,13 +3,11 @@ platform :ios, '8.0'
 #ignore all warnings from all pods
 
 target 'Hype' do
-use_frameworks!
-inhibit_all_warnings!
+
 #Global Frameworks and Utilities
 pod 'CocoaLumberjack'
 pod 'Masonry', '~> 0.6'
 pod 'NUI', '~> 0.5'
-pod 'ReactiveCocoa'
 pod 'Bolts'
 pod 'BFKit'
 pod 'DateTools', '~> 1.6'
@@ -58,7 +56,6 @@ pod 'libPhoneNumber-iOS', '~> 0.8'
 pod 'LMGeocoder'
 pod 'TTTAttributedLabel'
 pod 'Harpy'
-pod 'SwiftDate'
 
 #UI
 pod 'SVPullToRefresh'

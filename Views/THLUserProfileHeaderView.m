@@ -23,49 +23,21 @@
 @implementation THLUserProfileHeaderView
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        [self constructView];
-        [self layoutView];
-        [self bindView];
+        self.contentView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
+//        self.label = [self newLabel];
+//        self.imageView = [self newImageView];
+//        self.photoTapRecognizer = [self tapGestureRecognizer];
+        
+        [self.contentView setBackgroundColor:kTHLNUIPrimaryBackgroundColor];
+//        [self.iconView addGestureRecognizer:_photoTapRecognizer];
+        
+        [self.iconView makeConstraints:^(MASConstraintMaker *make) {
+            make.top.bottom.insets(kTHLEdgeInsetsHigh());
+            make.size.mas_equalTo(CGSizeMake(100, 100));
+            make.centerX.equalTo(0);
+        }];
     }
     return self;
-}
-
-- (void)constructView {
-    self.contentView.backgroundColor = kTHLNUIPrimaryBackgroundColor;
-    _iconView = [self newIconView];
-    _label = [self newLabel];
-    _imageView = [self newImageView];
-    _photoTapRecognizer = [self tapGestureRecognizer];
-}
-
-- (void)layoutView {
-    [self.contentView addSubviews:@[_iconView]];
-    [self.contentView setBackgroundColor:kTHLNUIPrimaryBackgroundColor];
-    [_iconView addGestureRecognizer:_photoTapRecognizer];
-    
-    [_iconView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.insets(kTHLEdgeInsetsHigh());
-        make.size.mas_equalTo(CGSizeMake(100, 100));
-        make.centerX.equalTo(0);
-    }];
-    
-    if (![THLUserManager userLoggedIn]) {
-        _iconView.hidden = TRUE;
-    }
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-}
-
-- (void)updateConstraints {
-    [super updateConstraints];
-}
-
-- (void)bindView {
-//    RAC(self.iconView, imageURL) = RACObserve(self, userImageURL);
-//    RAC(self.label, text, @"") = RACObserve(self, userName);
-    
 }
 
 - (CGSize)sizeThatFits:(CGSize)size {
@@ -73,16 +45,24 @@
 }
 
 #pragma mark - Construtors
-- (THLPersonIconView *)newIconView {
-    THLPersonIconView *iconView = [THLPersonIconView new];
-    PFFile *imageFile = [THLUser currentUser].image;
-    NSURL *url = [NSURL URLWithString:imageFile.url];
-    [iconView.imageView sd_setImageWithURL:url];
+- (THLPersonIconView *)iconView {
+    if (!_iconView) {
+        _iconView = [THLPersonIconView new];
+        if ([THLUser currentUser].image) {
+            PFFile *imageFile = [THLUser currentUser].image;
+            NSURL *url = [NSURL URLWithString:imageFile.url];
+            [_iconView.imageView sd_setImageWithURL:url];
+        } else {
+            [_iconView setImage:nil];
+        }
+        [self.contentView
+         addSubview:_iconView];
+    }
 
-    return iconView;
+    return _iconView;
 }
 
-- (UILabel *)newLabel {
+- (UILabel *)nameLabel {
     UILabel *label = THLNUILabel(kTHLNUIRegularTitle);
     [label setTextColor:kTHLNUIPrimaryFontColor];
 //    label.text = [THLUser currentUser].fullName;
@@ -93,12 +73,16 @@
     return label;
 }
 
-- (UIImageView *)newImageView {
-    UIImageView *imageView = [UIImageView new];
-    imageView.image = [UIImage imageNamed:@"user_profile_cover"];
-    imageView.clipsToBounds = YES;
-    imageView.contentMode = UIViewContentModeScaleAspectFill;
-    return imageView;
+- (UIImageView *)imageView {
+    if (!_imageView) {
+        _imageView = [UIImageView new];
+        _imageView.image = [UIImage imageNamed:@"user_profile_cover"];
+        _imageView.clipsToBounds = YES;
+        _imageView.contentMode = UIViewContentModeScaleAspectFill;
+        [self addSubview:_imageView];
+    }
+
+    return _imageView;
 }
 
 + (NSString *)identifier {

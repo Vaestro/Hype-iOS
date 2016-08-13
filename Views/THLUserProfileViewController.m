@@ -52,39 +52,31 @@ STPPaymentCardTextFieldDelegate
 @property (nonatomic, strong) NSArray *tableCellNames;
 @property (nonatomic, strong) NSString *siteUrl;
 @property (nonatomic, strong) THLInformationViewController *infoVC;
-//@property (nonatomic, strong) RACCommand *dismissVC;
 @property (nonatomic) THLWebViewController *webViewController;
 @property (nonatomic, strong) TTTAttributedLabel *navBarTitleLabel;
 
 @end
 
 @implementation THLUserProfileViewController
-//@synthesize selectedIndexPathCommand;
-//@synthesize contactCommand;
-//@synthesize logoutCommand;
-@synthesize userName;
-@synthesize userImageURL;
 
 #pragma mark - VC Lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.view.backgroundColor = [UIColor clearColor];
+    
     self.tableCellNames = @[@"Hype Concierge", @"Invite Friends",@"Redeem Code", @"Payment Method", @"Privacy Policy", @"Terms & Conditions", @"Contact Us", @"Logout"];
-    self.navigationItem.titleView = self.navBarTitleLabel;
     
     _tableView = [self newTableView];
     self.view.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     
     [self layoutView];
     [self configureDataSource];
-    
-    if ([THLUser currentUser])
-    {
-        self.navigationItem.leftBarButtonItem = [self newBarButtonItem];
-        self.userImageURL = [NSURL URLWithString:[THLUser currentUser].image.url];
-        self.userName = [THLUser currentUser].firstName;
-    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -345,29 +337,6 @@ STPPaymentCardTextFieldDelegate
 }
 
 #pragma mark - Constructors
-
-- (TTTAttributedLabel *)navBarTitleLabel
-{
-    if (!_navBarTitleLabel) {
-        _navBarTitleLabel = [TTTAttributedLabel new];
-        _navBarTitleLabel.numberOfLines = 1;
-        _navBarTitleLabel.textAlignment = NSTextAlignmentCenter;
-        
-        
-        NSAttributedString *attString = [[NSAttributedString alloc] initWithString:@"MY PROFILE"
-                                                                        attributes:@{
-                                                                                     (id)kCTForegroundColorAttributeName : (id)[UIColor whiteColor].CGColor,
-                                                                                     NSFontAttributeName : [UIFont systemFontOfSize:16],
-                                                                                     NSKernAttributeName : @4.5f
-                                                                                     }];
-        _navBarTitleLabel.text = attString;
-        
-        [_navBarTitleLabel sizeToFit];
-    }
-    
-    return _navBarTitleLabel;
-}
-
 - (UIBarButtonItem *)newBarButtonItem
 {
     return [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Help"] style:UIBarButtonItemStylePlain target:self action:@selector(messageButtonPressed)];

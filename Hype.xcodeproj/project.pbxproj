@@ -179,7 +179,7 @@
 		CBE5403C8B7732B36D5ECB5E /* THLViewDataSourceGrouping.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE54FC98A366F3761F89F63 /* THLViewDataSourceGrouping.m */; };
 		CBE54720F63BA2DE2136B454 /* THLViewDataSource+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE545A9A3C66339456E0A06 /* THLViewDataSource+Factory.m */; };
 		CBE547FB5677C373C1DE74C7 /* THLViewDataSourceSorting.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE5404991A434142507D7B0 /* THLViewDataSourceSorting.m */; };
-		F484D9C77B787AF97E0D23CC /* Pods_Hype.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 988D4FFD83B2E2E5737EFBF8 /* Pods_Hype.framework */; };
+		D1735F3A20F814A2F1312646 /* libPods-Hype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9EA84295D2FA918E0C4B353 /* libPods-Hype.a */; };
 		FAEE45D01C70E4BA0032C91C /* THLChannelService.m in Sources */ = {isa = PBXBuildFile; fileRef = FAEE45CF1C70E4BA0032C91C /* THLChannelService.m */; };
 /* End PBXBuildFile section */
 
@@ -466,7 +466,6 @@
 		79FBFCCD1D30511F00F291E7 /* THLEventHeaderStyleBehaviorDefiner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLEventHeaderStyleBehaviorDefiner.h; sourceTree = "<group>"; };
 		79FBFCCE1D30513500F291E7 /* THLEventHeaderStyleBehaviorDefiner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventHeaderStyleBehaviorDefiner.m; sourceTree = "<group>"; };
 		95457EE5CFDECE1CB34DB5A3 /* libPods-HypeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HypeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		988D4FFD83B2E2E5737EFBF8 /* Pods_Hype.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hype.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C80372D81D00DD68008848CA /* THLAdmissionOptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLAdmissionOptionCell.h; sourceTree = "<group>"; };
 		C80372D91D00DD68008848CA /* THLAdmissionOptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLAdmissionOptionCell.m; sourceTree = "<group>"; };
 		C81B83261D18BFC5008260EE /* THLEventDeepLinkingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventDeepLinkingController.h; sourceTree = "<group>"; };
@@ -508,6 +507,7 @@
 		C8F2FB291BF826B7004E00B6 /* THLWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLWebViewController.m; sourceTree = "<group>"; };
 		C8FEE3D31D038C8700244252 /* THLTablePackageDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLTablePackageDetailsViewController.h; sourceTree = "<group>"; };
 		C8FEE3D41D038C8700244252 /* THLTablePackageDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLTablePackageDetailsViewController.m; sourceTree = "<group>"; };
+		C9EA84295D2FA918E0C4B353 /* libPods-Hype.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hype.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAECC775220A839B0B187C83 /* Pods-HypeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HypeTests/Pods-HypeTests.release.xcconfig"; sourceTree = "<group>"; };
 		CBE5404991A434142507D7B0 /* THLViewDataSourceSorting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLViewDataSourceSorting.m; sourceTree = "<group>"; };
 		CBE54163EA2D6D75F647F7B1 /* THLViewDataSource+Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "THLViewDataSource+Factory.h"; sourceTree = "<group>"; };
@@ -528,7 +528,7 @@
 				790B38EF1C0375B500CB2362 /* libsqlite3.dylib in Frameworks */,
 				794DCCB71BF555150037A03D /* Accelerate.framework in Frameworks */,
 				79730CF81C18B47000D70F4B /* MessageUI.framework in Frameworks */,
-				F484D9C77B787AF97E0D23CC /* Pods_Hype.framework in Frameworks */,
+				D1735F3A20F814A2F1312646 /* libPods-Hype.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1706,7 +1706,7 @@
 				790B38EE1C0375B500CB2362 /* libsqlite3.dylib */,
 				794DCCB61BF555150037A03D /* Accelerate.framework */,
 				95457EE5CFDECE1CB34DB5A3 /* libPods-HypeTests.a */,
-				988D4FFD83B2E2E5737EFBF8 /* Pods_Hype.framework */,
+				C9EA84295D2FA918E0C4B353 /* libPods-Hype.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
