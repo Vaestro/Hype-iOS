@@ -16,6 +16,8 @@
 #import "DGActivityIndicatorView.h"
 #import "THLEvent.h"
 #import "THLLocation.h"
+#import "THLActionButton.h"
+#import "THLPromotionInfoView.h"
 
 @interface THLEventNavigationBar()
 <
@@ -30,6 +32,9 @@ SwipeViewDelegate
 
 @property (nonatomic, strong) UIPageControl *pageControl;
 @property (nonatomic, strong) UIView *loadingView;
+
+@property (nonatomic, strong) THLActionButton *viewPromotionDetailsButton;
+@property (nonatomic, strong) THLPromotionInfoView *promotionInfoView;
 
 @end
 
@@ -88,10 +93,25 @@ SwipeViewDelegate
             make.bottom.equalTo([WSELF dateLabel].mas_top).insets(kTHLEdgeInsetsSuperHigh());
         }];
         
-        [self.dateLabel makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.insets(kTHLEdgeInsetsSuperHigh());
-            make.bottom.equalTo([WSELF scrollUpIcon].mas_top).insets(kTHLEdgeInsetsSuperHigh());
-        }];
+        if (self.event[@"promoInfo"] != nil || [self.event[@"promoInfo"] isEqualToString:@""]) {
+            [self.dateLabel makeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+                make.bottom.equalTo([WSELF viewPromotionDetailsButton].mas_top).insets(kTHLEdgeInsetsSuperHigh());
+            }];
+            
+            [self.viewPromotionDetailsButton makeConstraints:^(MASConstraintMaker *make) {
+                make.width.equalTo(100);
+                make.height.equalTo(30);
+                make.centerX.equalTo(0);
+                make.bottom.equalTo([WSELF scrollUpIcon].mas_top).insets(kTHLEdgeInsetsSuperHigh());
+            }];
+        } else {
+            [self.dateLabel makeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+                make.bottom.equalTo([WSELF scrollUpIcon].mas_top).insets(kTHLEdgeInsetsSuperHigh());
+            }];
+        }
+
         
         [self.minimumTitleLabel makeConstraints:^(MASConstraintMaker *make) {
             make.top.offset(30);
@@ -118,8 +138,25 @@ SwipeViewDelegate
     [super layoutSubviews];
 }
 
+- (void)handleViewPromotionDetails {
+    [self addSubview:self.promotionInfoView];
+}
+
 
 #pragma mark - Accessors
+
+- (THLPromotionInfoView *)promotionInfoView
+{
+    if (!_promotionInfoView) {
+        _promotionInfoView = [[THLPromotionInfoView alloc] initWithFrame:CGRectMake(0.0, 0.0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        _promotionInfoView.promotionTitleLabel.text = self.event[@"title"];
+        _promotionInfoView.promotionDetailsLabel.text = self.event[@"promoInfo"];
+        
+
+    }
+    return _promotionInfoView;
+}
+
 - (UILabel *)titleLabel
 {
     if (!_titleLabel) {
@@ -140,6 +177,7 @@ SwipeViewDelegate
     }
     return _titleLabel;
 }
+
 
 
 - (UILabel *)minimumTitleLabel {
@@ -185,6 +223,25 @@ SwipeViewDelegate
         [self addSubview:_dateLabel];
     }
     return _dateLabel;
+}
+
+- (THLActionButton *)viewPromotionDetailsButton {
+    if (!_viewPromotionDetailsButton) {
+        _viewPromotionDetailsButton = [[THLActionButton alloc] initWithDefaultStyle];
+        [_viewPromotionDetailsButton setTitle:@"VIEW DETAILS"];
+        [_viewPromotionDetailsButton addTarget:self action:@selector(handleViewPromotionDetails) forControlEvents:UIControlEventTouchUpInside];
+        
+        BLKFlexibleHeightBarSubviewLayoutAttributes *initialLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
+        initialLayoutAttributes.alpha = 1.0;
+        [_viewPromotionDetailsButton addLayoutAttributes:initialLayoutAttributes forProgress:0.5];
+        
+        BLKFlexibleHeightBarSubviewLayoutAttributes *finalLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
+        finalLayoutAttributes.alpha = 0.0;
+        [_viewPromotionDetailsButton addLayoutAttributes:finalLayoutAttributes forProgress:0.9];
+        
+        [self addSubview:_viewPromotionDetailsButton];
+    }
+    return _viewPromotionDetailsButton;
 }
 
 - (UIPageControl *)pageControl {

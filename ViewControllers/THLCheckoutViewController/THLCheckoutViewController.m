@@ -14,7 +14,6 @@
 #import "Parse.h"
 #import "THLActionButton.h"
 #import "THLPurchaseDetailsView.h"
-#import "THLNeedToKnowInfoView.h"
 #import "THLGuestlistInvite.h"
 #import "THLGuestlist.h"
 #import "THLImportantInformationView.h"

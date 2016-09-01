@@ -103,6 +103,7 @@
     
     DTTimePeriod *eventDisplayPeriod = [DTTimePeriod timePeriodWithSize:DTTimePeriodSizeMonth amount:1 startingAt:[[NSDate date] dateByAddingTimeInterval:-60*300]];
     
+    [query whereKey:@"hidden" notEqualTo:[NSNumber numberWithBool:true]];
     [query whereKey:@"date" lessThanOrEqualTo:eventDisplayPeriod.EndDate];
     [query whereKey:@"date" greaterThanOrEqualTo:eventDisplayPeriod.StartDate];
     return query;

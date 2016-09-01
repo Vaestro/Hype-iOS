@@ -20,6 +20,7 @@
 @dynamic date;
 @dynamic invitationCode;
 @dynamic qrCode;
+@dynamic admissionDescription;
 
 + (void)load {
 	[self registerSubclass];

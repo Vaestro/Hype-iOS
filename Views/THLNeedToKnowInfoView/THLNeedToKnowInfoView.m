@@ -20,8 +20,6 @@
 
 @implementation THLNeedToKnowInfoView
 - (void)constructView {
-    _ratioInfoLabel = [self newRatioInfoLabel];
-    _coverInfoLabel = [self newCoverInfoLabel];
     _photoIdLabel = [self newPhotoIdLabel];
     _attireRequirementLabel = [self newAttireRequirementLabel];
     _doormanDiscretionLabel = [self newDoormanDiscretionLabel];
@@ -70,18 +68,6 @@
 //        [WSELF.photoIdLabel setText: [NSString stringWithFormat:@"Must have valid %@+ ID",x]];
 //    }];
 
-}
-
-- (THLPromotionInfoView *)newRatioInfoLabel {
-    THLPromotionInfoView *ratioInfoLabel = [THLPromotionInfoView new];
-    ratioInfoLabel.labelText = @"Suggested Ratio";
-    return ratioInfoLabel;
-}
-
-- (THLPromotionInfoView *)newCoverInfoLabel {
-    THLPromotionInfoView *coverInfoLabel = [THLPromotionInfoView new];
-    coverInfoLabel.labelText = @"Ticket Price";
-    return coverInfoLabel;
 }
 
 - (UILabel *)newPhotoIdLabel {

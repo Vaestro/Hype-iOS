@@ -10,70 +10,110 @@
 #import "THLAppearanceConstants.h"
 
 @interface THLPromotionInfoView()
-@property (nonatomic, strong) UILabel *typeLabel;
-@property (nonatomic, strong) UILabel *textLabel;
-@property (nonatomic, strong) UIView *separatorView;
+@property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) UIButton *dismissButton;
+
 @end
 
 @implementation THLPromotionInfoView
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        [self constructView];
-        [self layoutView];
-        [self bindView];
+        WEAKSELF();
+        
+        self.tintColor = [UIColor blackColor];
+        self.blurRadius = 100.0f;
+        
+        [self.scrollView makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.top.insets(kTHLEdgeInsetsNone());
+            make.bottom.equalTo([WSELF dismissButton].mas_top).insets(kTHLEdgeInsetsInsanelyHigh());
+        }];
+        
+        [self.dismissButton makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.insets(kTHLEdgeInsetsInsanelyHigh());
+
+            make.left.right.insets(kTHLEdgeInsetsHigh());
+        }];
+
+        [self generateContent];
+
     }
     return self;
 }
 
-- (void)constructView {
-    _typeLabel = [self newTypeLabel];
-    _textLabel = [self newTextLabel];
-}
-
-- (void)layoutView {
-    [self addSubviews:@[_typeLabel, _textLabel]];
+- (void)generateContent {
     WEAKSELF();
-    [_typeLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.insets(kTHLEdgeInsetsNone());
-        make.left.insets(kTHLEdgeInsetsNone());
-        make.right.equalTo([WSELF textLabel].mas_left).insets(kTHLEdgeInsetsNone());
-        make.width.equalTo(WSELF.textLabel);
+    UIView* contentView = UIView.new;
+    [self.scrollView addSubview:contentView];
+    
+    [contentView makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(WSELF.scrollView);
+        make.width.equalTo(WSELF.scrollView);
     }];
     
-    [_textLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.right.bottom.insets(kTHLEdgeInsetsNone());
-        make.left.equalTo([WSELF typeLabel].mas_right).insets(kTHLEdgeInsetsNone());
+    [contentView addSubviews:@[self.promotionTitleLabel, self.promotionDetailsLabel]];
+    
+    [self.promotionTitleLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.top.insets(kTHLEdgeInsetsInsanelyHigh());
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+    }];
+    
+    [self.promotionDetailsLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo([WSELF promotionTitleLabel].mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+
+    }];
+    
+    [contentView makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(WSELF.promotionDetailsLabel.mas_bottom);
     }];
 }
 
-- (void)bindView {
-//    RAC(self.typeLabel, text) = RACObserve(self, labelText);
-//    RAC(self.textLabel, text) = RACObserve(self, infoText);
+- (void)dismiss {
+    [self removeFromSuperview];
 }
+
 
 #pragma mark - Constructors
-- (UILabel *)newTypeLabel {
-    UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
-    label.adjustsFontSizeToFitWidth = YES;
-    label.minimumScaleFactor = 0.5;
-    label.textAlignment = NSTextAlignmentLeft;
-    label.numberOfLines = 0;
-    return label;
+- (UIScrollView *)scrollView {
+    if (!_scrollView) {
+        _scrollView = [UIScrollView new];
+        [self addSubview:_scrollView];
+    }
+    return _scrollView;
 }
 
-- (UILabel *)newTextLabel {
-    UILabel *label = THLNUILabel(kTHLNUIDetailTitle);
-    label.adjustsFontSizeToFitWidth = YES;
-    label.minimumScaleFactor = 0.5;
-    label.textAlignment = NSTextAlignmentRight;
-    label.numberOfLines = 0;
-    return label;
+- (UILabel *)promotionTitleLabel {
+    if (!_promotionTitleLabel) {
+        _promotionTitleLabel = THLNUILabel(kTHLNUIDetailBoldTitle);
+        _promotionTitleLabel.adjustsFontSizeToFitWidth = YES;
+        _promotionTitleLabel.minimumScaleFactor = 0.5;
+        _promotionTitleLabel.textAlignment = NSTextAlignmentLeft;
+        _promotionTitleLabel.numberOfLines = 0;
+    }
+    return _promotionTitleLabel;
 }
 
-- (UIView *)newSeparatorView {
-    UIView *view = [UIView new];
-    view.backgroundColor = [UIColor whiteColor];
-    view.alpha = 0.7;
-    return view;
+- (UILabel *)promotionDetailsLabel {
+    if (!_promotionDetailsLabel) {
+        _promotionDetailsLabel = THLNUILabel(kTHLNUIDetailTitle);
+        _promotionDetailsLabel.adjustsFontSizeToFitWidth = YES;
+        _promotionDetailsLabel.minimumScaleFactor = 0.5;
+        _promotionDetailsLabel.textAlignment = NSTextAlignmentLeft;
+        _promotionDetailsLabel.numberOfLines = 0;
+    }
+    return _promotionDetailsLabel;
+}
+
+- (UIButton *)dismissButton {
+    if (!_dismissButton) {
+        _dismissButton = [[UIButton alloc]init];
+        _dismissButton.frame = CGRectMake(0, 0, 50, 50);
+        [_dismissButton setImage:[UIImage imageNamed:@"cancel_button"] forState:UIControlStateNormal];
+        [_dismissButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_dismissButton];
+        
+    }
+    
+    return _dismissButton;
 }
 @end

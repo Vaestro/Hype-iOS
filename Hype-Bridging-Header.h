@@ -22,3 +22,6 @@
 #import <BLKFlexibleHeightBar/SquareCashStyleBehaviorDefiner.h>
 #import "SwipeView.h"
 #import "THLActionButton.h"
+#import "TTTAttributedLabel.h"
+#import "THLAppearanceConstants.h"
+#import "Intercom/intercom.h"

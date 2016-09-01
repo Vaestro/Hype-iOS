@@ -8,7 +8,6 @@
 
 #import "THLPurchaseDetailsView.h"
 #import "THLAppearanceConstants.h"
-#import "THLPromotionInfoView.h"
 
 @interface THLPurchaseDetailsView()
 @property (nonatomic, strong) UILabel *subtotalDesciptionLabel;

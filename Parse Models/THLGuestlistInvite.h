@@ -23,5 +23,7 @@
 @property (nonatomic) BOOL didOpen;
 @property (nonatomic) BOOL checkInStatus;
 @property (nonatomic, retain) NSString *invitationCode;
+@property (nonatomic, retain) NSString *admissionDescription;
+
 @property (nonatomic, retain) PFFile *qrCode;
 @end

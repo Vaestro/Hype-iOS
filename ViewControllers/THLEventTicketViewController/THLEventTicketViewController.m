@@ -13,6 +13,8 @@
 
 @interface THLEventTicketViewController()
 @property (nonatomic, strong) UILabel *ticketInstructionLabel;
+@property (nonatomic, strong) UILabel *ticketTypeLabel;
+
 @property (nonatomic, strong) UIImageView *qrCodeImageView;
 @property (nonatomic, strong) UILabel *venueNameLabel;
 @property (nonatomic, strong) UILabel *eventDateLabel;
@@ -36,8 +38,14 @@
     [super viewDidLoad];
     self.view.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     WEAKSELF();
-    [self.ticketInstructionLabel makeConstraints:^(MASConstraintMaker *make) {
+    
+    [self.ticketTypeLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(kTHLEdgeInsetsSuperHigh());
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+    }];
+    
+    [self.ticketInstructionLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.ticketTypeLabel.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
@@ -99,6 +107,22 @@
         [self.view addSubview:_ticketInstructionLabel];
     }
     return _ticketInstructionLabel;
+}
+
+- (UILabel *)ticketTypeLabel {
+    if (!_ticketTypeLabel) {
+        _ticketTypeLabel = THLNUILabel(kTHLNUIDetailBoldTitle);
+        _ticketTypeLabel.adjustsFontSizeToFitWidth = YES;
+        _ticketTypeLabel.numberOfLines = 1;
+        _ticketTypeLabel.minimumScaleFactor = 0.5;
+        _ticketTypeLabel.textAlignment = NSTextAlignmentCenter;
+        NSString *ticketTypeText = _guestlistInvite[@"admissionDescription"];
+        NSString *upperCasedText = [ticketTypeText uppercaseString];
+        _ticketTypeLabel.text = upperCasedText;
+        
+        [self.view addSubview:_ticketTypeLabel];
+    }
+    return _ticketTypeLabel;
 }
 
 - (UILabel *)venueNameLabel {

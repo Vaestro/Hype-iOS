@@ -74,6 +74,7 @@
     WEAKSELF();
     [_fxLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(WSELF.titleEdgeInsets);
+        make.left.right.insets(kTHLEdgeInsetsHigh());
     }];
 }
 
@@ -98,6 +99,9 @@
         label.textAlignment = NSTextAlignmentCenter;
         label.characterSpacing = 0.25f;
         label.font = [UIFont fontWithName:@"Raleway-Regular" size:14];
+        label.adjustsFontSizeToFitWidth = YES;
+        label.numberOfLines = 1;
+        label.minimumScaleFactor = 0.5;
         _fxLabel = label;
     }
     return _fxLabel;

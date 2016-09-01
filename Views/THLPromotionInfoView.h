@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FXBlurView.h"
 
-@interface THLPromotionInfoView : UIView
-@property (nonatomic, copy) NSString *labelText;
-@property (nonatomic, copy) NSString *infoText;
+@interface THLPromotionInfoView : FXBlurView
+@property (nonatomic, strong) UILabel *promotionTitleLabel;
+@property (nonatomic, strong) UILabel *promotionDetailsLabel;
 @end
