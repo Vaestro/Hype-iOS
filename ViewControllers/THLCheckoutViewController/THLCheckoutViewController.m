@@ -22,6 +22,7 @@
 #import "THLResourceManager.h"
 #import "SVProgressHUD.h"
 #import "Hype-Swift.h"
+#import "Branch.h"
 
 @interface THLCheckoutViewController ()
 <
@@ -573,6 +574,13 @@ TTTAttributedLabelDelegate
                                             [mixpanel.people trackCharge:[NSNumber numberWithFloat:_total] withProperties:@{
                                                                                                                             @"$time": [NSDate date]
                                                                                                                             }];
+                                            [[Branch getInstance] userCompletedAction:@"purchase" withState:@{@"$amount":NSStringWithFormat(@"%f", _total)}];
+                                            if ([THLUser currentUser].sex == THLSexMale) {
+                                                [[Branch getInstance] userCompletedAction:@"maleTicketPurchase"];
+                                            } else {
+                                                [[Branch getInstance] userCompletedAction:@"femaleTicketPurchase"];
+                                            }
+
                                             if (_applyCreditsPressed) {
                                                 [[THLUser currentUser] incrementKey:@"credits" byAmount: [NSNumber numberWithFloat:-_creditsAmount]];
                                                 [[THLUser currentUser] saveEventually];
@@ -608,6 +616,13 @@ TTTAttributedLabelDelegate
                                             [mixpanel.people trackCharge:[NSNumber numberWithFloat:_total] withProperties:@{
                                                                                               @"$time": [NSDate date]
                                                                                               }];
+                                            [[Branch getInstance] userCompletedAction:@"purchase" withState:@{@"$amount":NSStringWithFormat(@"%f", _total)}];
+                                            if ([THLUser currentUser].sex == THLSexMale) {
+                                                [[Branch getInstance] userCompletedAction:@"maleTicketPurchase"];
+                                            } else {
+                                                [[Branch getInstance] userCompletedAction:@"femaleTicketPurchase"];
+                                            }
+                                            
                                             if (_applyCreditsPressed) {
                                                 [[THLUser currentUser] incrementKey:@"credits" byAmount: [NSNumber numberWithFloat:-_creditsAmount]];
                                                 [[THLUser currentUser] saveEventually];

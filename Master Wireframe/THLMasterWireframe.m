@@ -119,7 +119,8 @@ THLReservationRequestViewControllerDelegate
                                          }];
     
     [[Branch getInstance] setIdentity:[THLUser currentUser].objectId];
-    
+    [[Branch getInstance] userCompletedAction:@"logIn"];
+
     [self configureMasterTabViewControllerAndPresentGuestFlowInWindow:_window];
 }
 
@@ -132,7 +133,8 @@ THLReservationRequestViewControllerDelegate
                                          }];
     
     [[Branch getInstance] setIdentity:[THLUser currentUser].objectId];
-    
+    [[Branch getInstance] userCompletedAction:@"signUp"];
+
     
     [self configureMasterTabViewControllerAndPresentGuestFlowInWindow:_window];
 }
