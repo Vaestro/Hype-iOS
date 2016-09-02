@@ -33,7 +33,7 @@ SwipeViewDelegate
 @property (nonatomic, strong) UIPageControl *pageControl;
 @property (nonatomic, strong) UIView *loadingView;
 
-@property (nonatomic, strong) THLActionButton *viewPromotionDetailsButton;
+@property (nonatomic, strong) UIButton *viewPromotionDetailsButton;
 @property (nonatomic, strong) THLPromotionInfoView *promotionInfoView;
 
 @end
@@ -225,12 +225,16 @@ SwipeViewDelegate
     return _dateLabel;
 }
 
-- (THLActionButton *)viewPromotionDetailsButton {
+- (UIButton *)viewPromotionDetailsButton {
     if (!_viewPromotionDetailsButton) {
-        _viewPromotionDetailsButton = [[THLActionButton alloc] initWithDefaultStyle];
-        [_viewPromotionDetailsButton setTitle:@"VIEW DETAILS"];
+        _viewPromotionDetailsButton = [[UIButton alloc] init];
+        [_viewPromotionDetailsButton setTitle:@"VIEW DETAILS" forState:UIControlStateNormal];
+        _viewPromotionDetailsButton.titleLabel.adjustsFontSizeToFitWidth = true;
+        [_viewPromotionDetailsButton.layer setCornerRadius:5.0f];
+        [_viewPromotionDetailsButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)];
+        [_viewPromotionDetailsButton setBackgroundColor:kTHLNUIAccentColor];
+        [_viewPromotionDetailsButton setTitleColor:[UIColor blackColor]];
         [_viewPromotionDetailsButton addTarget:self action:@selector(handleViewPromotionDetails) forControlEvents:UIControlEventTouchUpInside];
-        
         BLKFlexibleHeightBarSubviewLayoutAttributes *initialLayoutAttributes = [BLKFlexibleHeightBarSubviewLayoutAttributes new];
         initialLayoutAttributes.alpha = 1.0;
         [_viewPromotionDetailsButton addLayoutAttributes:initialLayoutAttributes forProgress:0.5];
