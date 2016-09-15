@@ -31,7 +31,7 @@ class THLEventFlexibleHeaderView : BLKFlexibleHeightBar {
         super.init(frame: frame)
         self.behaviorDefiner = SquareCashStyleBehaviorDefiner()
         self.minimumBarHeight = 65;
-        self.userInteractionEnabled = true;
+        self.isUserInteractionEnabled = true;
     }
     
     convenience init () {
@@ -41,7 +41,7 @@ class THLEventFlexibleHeaderView : BLKFlexibleHeightBar {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        swipeView.pagingEnabled = true
+        swipeView.isPagingEnabled = true
     }
     
 }

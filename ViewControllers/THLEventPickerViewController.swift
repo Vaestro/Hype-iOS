@@ -9,7 +9,7 @@
 import UIKit
 
 protocol THLEventPickerViewControllerDelegate {
-    func eventPickerDidSelectEvent(event: PFObject)
+    func eventPickerDidSelectEvent(_ event: PFObject)
 }
 
 class THLEventPickerViewController: PFQueryCollectionViewController {
@@ -22,11 +22,11 @@ class THLEventPickerViewController: PFQueryCollectionViewController {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
         layout.minimumInteritemSpacing = 0.0
-        layout.scrollDirection = UICollectionViewScrollDirection.Horizontal
+        layout.scrollDirection = UICollectionViewScrollDirection.horizontal
         self.init(collectionViewLayout: layout, className: "Event")
         self.venueId = venueId
         selectedEvent = event
-        self.collectionView!.backgroundColor = UIColor.blackColor()
+        self.collectionView!.backgroundColor = UIColor.black
         pullToRefreshEnabled = false
         loadingViewEnabled = false
         paginationEnabled = false
@@ -45,7 +45,7 @@ class THLEventPickerViewController: PFQueryCollectionViewController {
 
     // MARK: Data
 
-    override func objectsDidLoad(error: NSError?) {
+    override func objectsDidLoad(_ error: Error?) {
         super.objectsDidLoad(error)
 
         if (selectedEvent == nil) {
@@ -53,60 +53,60 @@ class THLEventPickerViewController: PFQueryCollectionViewController {
         }
     }
 
-    override func queryForCollection() -> PFQuery {
+    override func queryForCollection() -> PFQuery<PFObject> {
         let query: PFQuery = super.queryForCollection()
 
-        query.orderByAscending("date")
+        query.order(byAscending: "date")
         query.includeKey("location")
         query.includeKey("admissionOptions")
         query.whereKey("locationId", equalTo: venueId)
-        query.whereKey("date", greaterThanOrEqualTo: NSDate().dateByAddingTimeInterval(-60.0 * 300.0))
+        query.whereKey("date", greaterThanOrEqualTo: Date().addingTimeInterval(-60.0 * 300.0))
 
         return query
     }
 
     // MARK: CollectionView
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFCollectionViewCell? {
-        let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath, object: object)
-        cell?.textLabel.textAlignment = .Center
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath, object: PFObject?) -> PFCollectionViewCell? {
+        let cell = super.collectionView(collectionView, cellForItemAt: indexPath, object: object)
+        cell?.textLabel.textAlignment = .center
 
-        let date = object?["date"] as! NSDate
+        let date = object?["date"] as! Date
 
-        cell?.textLabel.text = "\(date.thl_weekdayInitials())\n\n\(date.thl_dayString)"
-        cell?.textLabel.textAlignment = .Center
+        cell?.textLabel.text = "\((date as NSDate).thl_weekdayInitials())\n\n\((date as NSDate).thl_dayString)"
+        cell?.textLabel.textAlignment = .center
 
-        cell?.textLabel.textColor = UIColor.whiteColor()
+        cell?.textLabel.textColor = UIColor.white
 
-        cell?.contentView.backgroundColor = UIColor.blackColor()
+        cell?.contentView.backgroundColor = UIColor.black
 
-        if (objectAtIndexPath(indexPath) == selectedEvent) {
-            collectionView.selectItemAtIndexPath(indexPath, animated: true, scrollPosition: .None)
-            self.collectionView(collectionView, didSelectItemAtIndexPath: indexPath)
+        if (self.object(at: indexPath) == selectedEvent) {
+            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition())
+            self.collectionView(collectionView, didSelectItemAt: indexPath)
             cell?.contentView.layer.borderWidth = 1.0
             cell?.contentView.layer.cornerRadius = 5.0
 
-            cell?.contentView.layer.borderColor = UIColor.customGoldColor().CGColor
+            cell?.contentView.layer.borderColor = UIColor.customGoldColor().cgColor
         }
 
         return cell
     }
 
 
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let cell = collectionView.cellForItemAtIndexPath(indexPath)
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
 
         cell?.contentView.layer.borderWidth = 1.0
         cell?.contentView.layer.cornerRadius = 5.0
 
-        cell?.contentView.layer.borderColor = UIColor.customGoldColor().CGColor
+        cell?.contentView.layer.borderColor = UIColor.customGoldColor().cgColor
 
-        let object = objectAtIndexPath(indexPath)
+        let object = self.object(at: indexPath)
         delegate?.eventPickerDidSelectEvent(object!)
     }
 
-    override func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
-        let cell = collectionView .cellForItemAtIndexPath(indexPath)
+    override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = collectionView .cellForItem(at: indexPath)
         cell?.contentView.layer.borderWidth = 0.0
     }
 

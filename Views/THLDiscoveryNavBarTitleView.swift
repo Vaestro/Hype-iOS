@@ -8,42 +8,42 @@
 
 import UIKit
 
-public class THLDiscoveryNavBarTitleView: UIView {
+open class THLDiscoveryNavBarTitleView: UIView {
     // MARK:- Init
-    public var eventButton: UIButton
-    public var venueButton: UIButton
+    open var eventButton: UIButton
+    open var venueButton: UIButton
 
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     override init(frame:CGRect) {
-        eventButton = UIButton.init(frame: CGRectMake(0, 0, 70, 20))
-        venueButton = UIButton.init(frame: CGRectMake(70, 0, 70, 20))
+        eventButton = UIButton.init(frame: CGRect(x: 0, y: 0, width: 70, height: 20))
+        venueButton = UIButton.init(frame: CGRect(x: 70, y: 0, width: 70, height: 20))
 
-        super.init(frame: CGRectMake(0,0,140,20))
+        super.init(frame: CGRect(x: 0,y: 0,width: 140,height: 20))
     }
     
     // MARK:- UIView
     
-    override public func layoutSubviews() {
+    override open func layoutSubviews() {
         super.layoutSubviews()
         
-        eventButton.setTitle("EVENTS", forState: .Normal)
-        eventButton.setTitleColor(UIColor.customGoldColor(), forState: UIControlState.Selected)
-        eventButton.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
+        eventButton.setTitle("EVENTS", for: UIControlState())
+        eventButton.setTitleColor(UIColor.customGoldColor(), for: UIControlState.selected)
+        eventButton.setTitleColor(UIColor.gray, for: UIControlState())
 
         eventButton.titleLabel!.font = UIFont.init(name: "OpenSans-Semibold", size: 14.0)
-        eventButton.titleLabel!.textAlignment = .Center
-        eventButton.selected = true
+        eventButton.titleLabel!.textAlignment = .center
+        eventButton.isSelected = true
         
-        venueButton.setTitle("VENUES", forState: .Normal)
-        venueButton.setTitleColor(UIColor.customGoldColor(), forState: UIControlState.Selected)
-        venueButton.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
+        venueButton.setTitle("VENUES", for: UIControlState())
+        venueButton.setTitleColor(UIColor.customGoldColor(), for: UIControlState.selected)
+        venueButton.setTitleColor(UIColor.gray, for: UIControlState())
 
         venueButton.titleLabel!.font = UIFont.init(name: "Raleway-Bold", size: 14.0)
-        venueButton.titleLabel!.textAlignment = .Center
-        venueButton.selected = false
+        venueButton.titleLabel!.textAlignment = .center
+        venueButton.isSelected = false
 
         self.addSubview(eventButton)
         self.addSubview(venueButton)
