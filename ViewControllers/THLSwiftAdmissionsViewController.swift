@@ -7,12 +7,17 @@
 //
 
 import UIKit
+import TTTAttributedLabel
 
 @objc protocol THLSwiftAdmissionsViewControllerDelegate {
     func didSelectAdmissionOption(_ admissionOption: PFObject, event: PFObject)
 }
 
-class THLSwiftAdmissionsViewController: UIViewController, THLEventPickerViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, TTTAttributedLabelDelegate {
+class THLSwiftAdmissionsViewController: UIViewController, THLEventPickerViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, TTTAttributedLabelDelegate, EPPickerDelegate {
+    public func epContactPicker(_: EPContactsPicker, didSubmitInvitesAndWantsToShowInquiry: THLGuestlistInvite) {
+        
+    }
+
     //  MARK: -
     //  MARK: Init
     var delegate: THLSwiftAdmissionsViewControllerDelegate?
@@ -97,9 +102,9 @@ class THLSwiftAdmissionsViewController: UIViewController, THLEventPickerViewCont
         self.contactConciergeLabel.linkAttributes = [NSForegroundColorAttributeName: UIColor.white, NSUnderlineColorAttributeName: UIColor.customGoldColor(), NSUnderlineStyleAttributeName: NSUnderlineStyle.styleThick.rawValue]
         self.contactConciergeLabel.activeLinkAttributes = [NSForegroundColorAttributeName: UIColor.white, NSUnderlineStyleAttributeName: NSUnderlineStyle.styleNone.rawValue]
         self.contactConciergeLabel.textAlignment = .center
-        let labelText: NSString! = "Have a question? Ask your concierge"
+        let labelText: NSString! = "OR GO WITH A HOST"
         self.contactConciergeLabel.text = labelText as String
-        let concierge: NSRange = labelText.range(of: "concierge")
+        let concierge: NSRange = labelText.range(of: "HOST")
         contactConciergeLabel.addLink(to: URL(string: "action://show-intercom")!, with: concierge)
         self.contactConciergeLabel.delegate = self
         contactConciergeLabel.sizeToFit()
@@ -183,7 +188,10 @@ class THLSwiftAdmissionsViewController: UIViewController, THLEventPickerViewCont
     }
 
     func messageButtonPressed() {
-        Intercom.presentMessageComposer()
+        let contactPickerScene = EPContactsPicker(delegate: self, multiSelection:true, subtitleCellType: SubtitleCellValue.phoneNumber, event: self.event as! THLEvent)
+        
+        self.navigationController?.pushViewController(contactPickerScene, animated: true)
+//        Intercom.presentMessageComposer()
     }
     /*
      ==========================================================================================

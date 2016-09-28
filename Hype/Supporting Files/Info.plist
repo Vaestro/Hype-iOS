@@ -169,5 +169,7 @@
 	</array>
 	<key>branch_key</key>
 	<string>key_live_mcn4eSLxVcOhtbGNQOa7JlioDrh1m25Y</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Hype needs your contacts to help you invite your friends.</string>
 </dict>
 </plist>

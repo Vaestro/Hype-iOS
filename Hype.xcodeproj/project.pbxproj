@@ -50,6 +50,7 @@
 		790B38EF1C0375B500CB2362 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 790B38EE1C0375B500CB2362 /* libsqlite3.dylib */; };
 		7916AC4D1D3969DD00F0CE4E /* THLDashboardNotificationSectionTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7916AC4C1D3969DD00F0CE4E /* THLDashboardNotificationSectionTitleCell.m */; };
 		7917C0F11D1B3C2F0054BDB0 /* THLVenueDiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7917C0F01D1B3C2E0054BDB0 /* THLVenueDiscoveryViewController.m */; };
+		7923524A1D947490007D3262 /* THLEventDiscoveryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792352491D947490007D3262 /* THLEventDiscoveryCell.swift */; };
 		792545B91CFC8DA0004CF29A /* THLPartyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 792545B81CFC8DA0004CF29A /* THLPartyViewController.m */; };
 		792545BC1CFCBD61004CF29A /* THLPartyMemberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 792545BB1CFCBD61004CF29A /* THLPartyMemberCell.m */; };
 		792545BF1CFD113B004CF29A /* THLPartyInvitationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 792545BE1CFD113B004CF29A /* THLPartyInvitationViewController.m */; };
@@ -71,6 +72,12 @@
 		7928ADB01D19CABC00DFC443 /* THLLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928ADAF1D19CABC00DFC443 /* THLLoginViewController.m */; };
 		7928ADB31D19CB1900DFC443 /* THLPopupNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928ADB21D19CB1900DFC443 /* THLPopupNotificationView.m */; };
 		7928ADB61D19CB5300DFC443 /* THLEventDetailsMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928ADB51D19CB5300DFC443 /* THLEventDetailsMapView.m */; };
+		79319DD41D9AED88000DEE69 /* EPConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79319DCE1D9AED88000DEE69 /* EPConstants.swift */; };
+		79319DD51D9AED88000DEE69 /* EPContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79319DCF1D9AED88000DEE69 /* EPContact.swift */; };
+		79319DD61D9AED88000DEE69 /* EPContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79319DD01D9AED88000DEE69 /* EPContactCell.swift */; };
+		79319DD71D9AED88000DEE69 /* EPContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79319DD11D9AED88000DEE69 /* EPContactCell.xib */; };
+		79319DD81D9AED88000DEE69 /* EPContactsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79319DD21D9AED88000DEE69 /* EPContactsPicker.swift */; };
+		79319DD91D9AED88000DEE69 /* EPExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79319DD31D9AED88000DEE69 /* EPExtensions.swift */; };
 		794208281BD82641009B86FA /* UIView+DimView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794208271BD82641009B86FA /* UIView+DimView.m */; };
 		794483041BEC5B5D00EABE23 /* THLStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794483031BEC5B5D00EABE23 /* THLStatusView.m */; };
 		794A9D191CF4ACC300DDAC00 /* THLEventInviteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 794A9D181CF4ACC300DDAC00 /* THLEventInviteCell.m */; };
@@ -80,6 +87,7 @@
 		794FAB671C5F17F400438D49 /* THLActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 794FAB661C5F17F400438D49 /* THLActionButton.m */; };
 		794FAB6B1C615DE200438D49 /* Lavo.mov in Resources */ = {isa = PBXBuildFile; fileRef = 794FAB6A1C615DE200438D49 /* Lavo.mov */; };
 		795EF50E1D3E9B0700485B11 /* THLSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 795EF50D1D3E9B0700485B11 /* THLSignUpViewController.m */; };
+		796AD92B1D908D3E006DCEDA /* THLEventDiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796AD92A1D908D3E006DCEDA /* THLEventDiscoveryViewController.swift */; };
 		79730CF81C18B47000D70F4B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79730CF71C18B47000D70F4B /* MessageUI.framework */; };
 		79752ADE1BEBD8B500D09B2E /* THLConfirmationPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79752ADD1BEBD8B500D09B2E /* THLConfirmationPopupView.m */; };
 		798402D41D217157006F463B /* THLEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 798402D31D217157006F463B /* THLEntity.m */; };
@@ -155,7 +163,8 @@
 		79CEDF411D27092B00DFB654 /* THLEventNavBarTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CEDF401D27092B00DFB654 /* THLEventNavBarTitleView.swift */; };
 		79CEDF431D27180600DFB654 /* THLDiscoveryNavBarTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CEDF421D27180600DFB654 /* THLDiscoveryNavBarTitleView.swift */; };
 		79FBFCCF1D30513500F291E7 /* THLEventHeaderStyleBehaviorDefiner.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FBFCCE1D30513500F291E7 /* THLEventHeaderStyleBehaviorDefiner.m */; };
-		7D7B044EABDEF9475D0E84DA /* libPods-HypeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95457EE5CFDECE1CB34DB5A3 /* libPods-HypeTests.a */; };
+		AAD9436FBD9DAF1F610FAB73 /* Pods_HypeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83D794813D7BCA4185F2A377 /* Pods_HypeTests.framework */; };
+		B816AE7D41D19341A4AF74B0 /* Pods_Hype.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9257C7C03B1F24B40F4AD84A /* Pods_Hype.framework */; };
 		C80372DA1D00DD68008848CA /* THLAdmissionOptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C80372D91D00DD68008848CA /* THLAdmissionOptionCell.m */; };
 		C81B83281D18BFC5008260EE /* THLEventDeepLinkingController.m in Sources */ = {isa = PBXBuildFile; fileRef = C81B83271D18BFC5008260EE /* THLEventDeepLinkingController.m */; };
 		C82D87BF1C25C7E300116328 /* THLConfirmationView.m in Sources */ = {isa = PBXBuildFile; fileRef = C82D87BE1C25C7E300116328 /* THLConfirmationView.m */; };
@@ -179,7 +188,6 @@
 		CBE5403C8B7732B36D5ECB5E /* THLViewDataSourceGrouping.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE54FC98A366F3761F89F63 /* THLViewDataSourceGrouping.m */; };
 		CBE54720F63BA2DE2136B454 /* THLViewDataSource+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE545A9A3C66339456E0A06 /* THLViewDataSource+Factory.m */; };
 		CBE547FB5677C373C1DE74C7 /* THLViewDataSourceSorting.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE5404991A434142507D7B0 /* THLViewDataSourceSorting.m */; };
-		D1735F3A20F814A2F1312646 /* libPods-Hype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C9EA84295D2FA918E0C4B353 /* libPods-Hype.a */; };
 		FAEE45D01C70E4BA0032C91C /* THLChannelService.m in Sources */ = {isa = PBXBuildFile; fileRef = FAEE45CF1C70E4BA0032C91C /* THLChannelService.m */; };
 /* End PBXBuildFile section */
 
@@ -289,6 +297,7 @@
 		7916AC4C1D3969DD00F0CE4E /* THLDashboardNotificationSectionTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLDashboardNotificationSectionTitleCell.m; sourceTree = "<group>"; };
 		7917C0EF1D1B3C2E0054BDB0 /* THLVenueDiscoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLVenueDiscoveryViewController.h; sourceTree = "<group>"; };
 		7917C0F01D1B3C2E0054BDB0 /* THLVenueDiscoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLVenueDiscoveryViewController.m; sourceTree = "<group>"; };
+		792352491D947490007D3262 /* THLEventDiscoveryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLEventDiscoveryCell.swift; sourceTree = "<group>"; };
 		792545B71CFC8DA0004CF29A /* THLPartyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPartyViewController.h; sourceTree = "<group>"; };
 		792545B81CFC8DA0004CF29A /* THLPartyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPartyViewController.m; sourceTree = "<group>"; };
 		792545BA1CFCBD61004CF29A /* THLPartyMemberCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPartyMemberCell.h; sourceTree = "<group>"; };
@@ -334,6 +343,12 @@
 		7928ADB41D19CB5300DFC443 /* THLEventDetailsMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventDetailsMapView.h; sourceTree = "<group>"; };
 		7928ADB51D19CB5300DFC443 /* THLEventDetailsMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventDetailsMapView.m; sourceTree = "<group>"; };
 		7928ADDF1D19EE3400DFC443 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = "SnapKit/build/Debug-iphoneos/SnapKit.framework"; sourceTree = "<group>"; };
+		79319DCE1D9AED88000DEE69 /* EPConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPConstants.swift; sourceTree = "<group>"; };
+		79319DCF1D9AED88000DEE69 /* EPContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPContact.swift; sourceTree = "<group>"; };
+		79319DD01D9AED88000DEE69 /* EPContactCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPContactCell.swift; sourceTree = "<group>"; };
+		79319DD11D9AED88000DEE69 /* EPContactCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EPContactCell.xib; sourceTree = "<group>"; };
+		79319DD21D9AED88000DEE69 /* EPContactsPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPContactsPicker.swift; sourceTree = "<group>"; };
+		79319DD31D9AED88000DEE69 /* EPExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPExtensions.swift; sourceTree = "<group>"; };
 		794208261BD82641009B86FA /* UIView+DimView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DimView.h"; sourceTree = "<group>"; };
 		794208271BD82641009B86FA /* UIView+DimView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DimView.m"; sourceTree = "<group>"; };
 		794483021BEC5B5D00EABE23 /* THLStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLStatusView.h; sourceTree = "<group>"; };
@@ -350,6 +365,7 @@
 		794FAB6A1C615DE200438D49 /* Lavo.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Lavo.mov; sourceTree = "<group>"; };
 		795EF50D1D3E9B0700485B11 /* THLSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLSignUpViewController.m; sourceTree = "<group>"; };
 		795EF50F1D3E9B1900485B11 /* THLSignUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLSignUpViewController.h; sourceTree = "<group>"; };
+		796AD92A1D908D3E006DCEDA /* THLEventDiscoveryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLEventDiscoveryViewController.swift; sourceTree = "<group>"; };
 		79730CF71C18B47000D70F4B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		79752ADC1BEBD8B500D09B2E /* THLConfirmationPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLConfirmationPopupView.h; sourceTree = "<group>"; };
 		79752ADD1BEBD8B500D09B2E /* THLConfirmationPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLConfirmationPopupView.m; sourceTree = "<group>"; };
@@ -465,7 +481,8 @@
 		79CEDF421D27180600DFB654 /* THLDiscoveryNavBarTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLDiscoveryNavBarTitleView.swift; sourceTree = "<group>"; };
 		79FBFCCD1D30511F00F291E7 /* THLEventHeaderStyleBehaviorDefiner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLEventHeaderStyleBehaviorDefiner.h; sourceTree = "<group>"; };
 		79FBFCCE1D30513500F291E7 /* THLEventHeaderStyleBehaviorDefiner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventHeaderStyleBehaviorDefiner.m; sourceTree = "<group>"; };
-		95457EE5CFDECE1CB34DB5A3 /* libPods-HypeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HypeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		83D794813D7BCA4185F2A377 /* Pods_HypeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HypeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9257C7C03B1F24B40F4AD84A /* Pods_Hype.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Hype.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C80372D81D00DD68008848CA /* THLAdmissionOptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLAdmissionOptionCell.h; sourceTree = "<group>"; };
 		C80372D91D00DD68008848CA /* THLAdmissionOptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLAdmissionOptionCell.m; sourceTree = "<group>"; };
 		C81B83261D18BFC5008260EE /* THLEventDeepLinkingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventDeepLinkingController.h; sourceTree = "<group>"; };
@@ -507,7 +524,6 @@
 		C8F2FB291BF826B7004E00B6 /* THLWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLWebViewController.m; sourceTree = "<group>"; };
 		C8FEE3D31D038C8700244252 /* THLTablePackageDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLTablePackageDetailsViewController.h; sourceTree = "<group>"; };
 		C8FEE3D41D038C8700244252 /* THLTablePackageDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLTablePackageDetailsViewController.m; sourceTree = "<group>"; };
-		C9EA84295D2FA918E0C4B353 /* libPods-Hype.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hype.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAECC775220A839B0B187C83 /* Pods-HypeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HypeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HypeTests/Pods-HypeTests.release.xcconfig"; sourceTree = "<group>"; };
 		CBE5404991A434142507D7B0 /* THLViewDataSourceSorting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLViewDataSourceSorting.m; sourceTree = "<group>"; };
 		CBE54163EA2D6D75F647F7B1 /* THLViewDataSource+Factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "THLViewDataSource+Factory.h"; sourceTree = "<group>"; };
@@ -528,7 +544,7 @@
 				790B38EF1C0375B500CB2362 /* libsqlite3.dylib in Frameworks */,
 				794DCCB71BF555150037A03D /* Accelerate.framework in Frameworks */,
 				79730CF81C18B47000D70F4B /* MessageUI.framework in Frameworks */,
-				D1735F3A20F814A2F1312646 /* libPods-Hype.a in Frameworks */,
+				B816AE7D41D19341A4AF74B0 /* Pods_Hype.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -536,7 +552,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7D7B044EABDEF9475D0E84DA /* libPods-HypeTests.a in Frameworks */,
+				AAD9436FBD9DAF1F610FAB73 /* Pods_HypeTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -566,6 +582,7 @@
 		211005A81B8A3D5800A540C6 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				79319DCD1D9AED88000DEE69 /* EPContactsPIcker */,
 				79B86C291D36DACA0033768D /* JVFloatLabeledTextField */,
 				79B959491BE8961800B87799 /* Alien */,
 				794AFE2D1C124693008475B1 /* Info VC */,
@@ -660,6 +677,7 @@
 				79CEDF421D27180600DFB654 /* THLDiscoveryNavBarTitleView.swift */,
 				79B59F071D5E78DF00E374A4 /* THLHypeConciergeInfoView.h */,
 				79B59F051D5E78CB00E374A4 /* THLHypeConciergeInfoView.m */,
+				792352491D947490007D3262 /* THLEventDiscoveryCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1229,12 +1247,26 @@
 				79CEDF3A1D23213400DFB654 /* THLEventPickerViewController.swift */,
 				7917C0EF1D1B3C2E0054BDB0 /* THLVenueDiscoveryViewController.h */,
 				7917C0F01D1B3C2E0054BDB0 /* THLVenueDiscoveryViewController.m */,
+				796AD92A1D908D3E006DCEDA /* THLEventDiscoveryViewController.swift */,
 				795EF50F1D3E9B1900485B11 /* THLSignUpViewController.h */,
 				795EF50D1D3E9B0700485B11 /* THLSignUpViewController.m */,
 				799831191D4B9E5900BB5BFE /* THLReservationRequestViewController.h */,
 				7998311A1D4B9E6500BB5BFE /* THLReservationRequestViewController.m */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		79319DCD1D9AED88000DEE69 /* EPContactsPIcker */ = {
+			isa = PBXGroup;
+			children = (
+				79319DCE1D9AED88000DEE69 /* EPConstants.swift */,
+				79319DCF1D9AED88000DEE69 /* EPContact.swift */,
+				79319DD01D9AED88000DEE69 /* EPContactCell.swift */,
+				79319DD11D9AED88000DEE69 /* EPContactCell.xib */,
+				79319DD21D9AED88000DEE69 /* EPContactsPicker.swift */,
+				79319DD31D9AED88000DEE69 /* EPExtensions.swift */,
+			);
+			path = EPContactsPIcker;
 			sourceTree = "<group>";
 		};
 		794AFE2D1C124693008475B1 /* Info VC */ = {
@@ -1705,8 +1737,8 @@
 				79730CF71C18B47000D70F4B /* MessageUI.framework */,
 				790B38EE1C0375B500CB2362 /* libsqlite3.dylib */,
 				794DCCB61BF555150037A03D /* Accelerate.framework */,
-				95457EE5CFDECE1CB34DB5A3 /* libPods-HypeTests.a */,
-				C9EA84295D2FA918E0C4B353 /* libPods-Hype.a */,
+				9257C7C03B1F24B40F4AD84A /* Pods_Hype.framework */,
+				83D794813D7BCA4185F2A377 /* Pods_HypeTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1778,7 +1810,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = THL;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = Hypelist;
 				TargetAttributes = {
 					2174A0631B863F6A006826D7 = {
@@ -1854,6 +1886,7 @@
 				79CD27E91C520293009BC119 /* Privacy Policy.txt in Resources */,
 				79CD27F81C520293009BC119 /* Raleway-SemiBold.ttf in Resources */,
 				79CD27E61C520293009BC119 /* Hype.strings in Resources */,
+				79319DD71D9AED88000DEE69 /* EPContactCell.xib in Resources */,
 				79CD27F31C520293009BC119 /* Raleway-Light.ttf in Resources */,
 				21CE06281BB87FE8004D10BB /* THLNUIStyleSheet.nss in Resources */,
 				79CD27ED1C520293009BC119 /* Raleway-BoldItalic.ttf in Resources */,
@@ -2101,6 +2134,7 @@
 				7928ADAA1D19C9E200DFC443 /* THLUserProfileHeaderView.m in Sources */,
 				799B069C1D2DA5F30091B4CD /* SwipeView.m in Sources */,
 				798650A41BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m in Sources */,
+				79319DD81D9AED88000DEE69 /* EPContactsPicker.swift in Sources */,
 				794A9D191CF4ACC300DDAC00 /* THLEventInviteCell.m in Sources */,
 				7928ADB31D19CB1900DFC443 /* THLPopupNotificationView.m in Sources */,
 				79FBFCCF1D30513500F291E7 /* THLEventHeaderStyleBehaviorDefiner.m in Sources */,
@@ -2146,6 +2180,7 @@
 				216BDD581BC71F1800BBF713 /* THLSearchViewDataSource.m in Sources */,
 				C88A01561D04A44200152B37 /* THLCollectionReusableView.m in Sources */,
 				79CD27E41C520293009BC119 /* AppDelegate.m in Sources */,
+				79319DD41D9AED88000DEE69 /* EPConstants.swift in Sources */,
 				7928ADA91D19C9E200DFC443 /* THLUserProfileFooterView.m in Sources */,
 				217EBEA51BB7A106006044B6 /* THLLoginService.m in Sources */,
 				7928ADAD1D19CA0D00DFC443 /* THLPerkDetailViewController.m in Sources */,
@@ -2177,16 +2212,20 @@
 				794FAB671C5F17F400438D49 /* THLActionButton.m in Sources */,
 				792545BC1CFCBD61004CF29A /* THLPartyMemberCell.m in Sources */,
 				794DCCAC1BF3B31E0037A03D /* UIImageView+Letters.m in Sources */,
+				79319DD91D9AED88000DEE69 /* EPExtensions.swift in Sources */,
 				C85EE3C11C1BCC940008C14B /* THLPerkStoreItemService.m in Sources */,
 				217DC6531BBB77AC00332174 /* THLUserManager.m in Sources */,
 				79B86C311D36DACA0033768D /* JVFloatLabeledTextView.m in Sources */,
 				79B86C301D36DACA0033768D /* JVFloatLabeledTextField.m in Sources */,
 				79B9594D1BE8966300B87799 /* KLCPopup.m in Sources */,
+				7923524A1D947490007D3262 /* THLEventDiscoveryCell.swift in Sources */,
 				7998311E1D4C06CA00BB5BFE /* THLTablePackageDetailView.m in Sources */,
+				79319DD61D9AED88000DEE69 /* EPContactCell.swift in Sources */,
 				2108A8851B8BBF4900B725F6 /* THLMasterWireframe.m in Sources */,
 				79CE315A1CF7B03F00CEA784 /* THLEventTicketViewController.m in Sources */,
 				7928AD921D19C82600DFC443 /* THLPerkStoreCell.m in Sources */,
 				7928ADB61D19CB5300DFC443 /* THLEventDetailsMapView.m in Sources */,
+				796AD92B1D908D3E006DCEDA /* THLEventDiscoveryViewController.swift in Sources */,
 				799831181D4AC50900BB5BFE /* THLSelectView.m in Sources */,
 				798D7EBF1BF2E56C001D4593 /* OnboardingViewController.m in Sources */,
 				C8FEE3D51D038C8700244252 /* THLTablePackageDetailsViewController.m in Sources */,
@@ -2208,6 +2247,7 @@
 				CBE54720F63BA2DE2136B454 /* THLViewDataSource+Factory.m in Sources */,
 				79B86C321D36DACA0033768D /* NSString+TextDirectionality.m in Sources */,
 				C884EE2B1CF8C21900C47167 /* THLEventDetailsViewController.m in Sources */,
+				79319DD51D9AED88000DEE69 /* EPContact.swift in Sources */,
 				CBE5403C8B7732B36D5ECB5E /* THLViewDataSourceGrouping.m in Sources */,
 				79B994EA1D0650D500E0AD33 /* THLPermissionRequestViewController.m in Sources */,
 				CBE547FB5677C373C1DE74C7 /* THLViewDataSourceSorting.m in Sources */,
@@ -2248,6 +2288,7 @@
 		2174A0851B863F6A006826D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -2258,14 +2299,15 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -2284,12 +2326,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				New_Setting = "";
 				New_Setting1 = "";
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0;
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
@@ -2297,6 +2340,7 @@
 		2174A0861B863F6A006826D7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -2307,14 +2351,15 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2326,12 +2371,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				New_Setting = "";
 				New_Setting1 = "";
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
@@ -2341,6 +2388,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2A6667331CAB3D1DEA6DE560 /* Pods-Hype.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -2354,7 +2402,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
 				ENABLE_BITCODE = NO;
 				EXCLUDED_SOURCE_FILE_NAMES = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2367,7 +2414,7 @@
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_SHADOW = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Hype/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2388,6 +2435,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 31864EA66017466943817EB6 /* Pods-Hype.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
@@ -2401,7 +2449,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
 				ENABLE_BITCODE = NO;
 				EXCLUDED_SOURCE_FILE_NAMES = "FLEX*";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2414,7 +2461,7 @@
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_SHADOW = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Hype/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2434,8 +2481,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4C0392A27CC17D305BBCE1E1 /* Pods-HypeTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -2456,8 +2503,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CAECC775220A839B0B187C83 /* Pods-HypeTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = "$(inherited)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",

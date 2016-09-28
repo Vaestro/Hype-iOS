@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import BLKFlexibleHeightBar
 
 class THLEventFlexibleHeaderView : BLKFlexibleHeightBar {
     // MARK:- Init

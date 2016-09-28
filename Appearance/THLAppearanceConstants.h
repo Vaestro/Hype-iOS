@@ -10,7 +10,8 @@
 #define Hype_THLAppearanceConstants_h
 
 #import "CommonMacros.h"
-#import "UIImageView+WebCache.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+
 //NUI
 #import "NUIAppearance.h"
 #import "UIButton+NUI.h"

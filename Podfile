@@ -1,5 +1,6 @@
 # Uncomment this line to define a global platform for your project
 platform :ios, '8.0'
+use_frameworks!
 #ignore all warnings from all pods
 
 target 'Hype' do
@@ -18,6 +19,10 @@ pod 'SDWebImage', '~> 3.7'
 pod 'FormatterKit', '~> 1.8'
 pod 'Typhoon', '~> 3.3'
 pod 'Mixpanel'
+
+#SWIFT
+pod 'SnapKit', '~> 3.0'
+pod 'Bolts-Swift'
 
 #Debugging
 pod 'FLEX', '~> 2.0', :configurations => ['Debug']
@@ -71,12 +76,4 @@ end
 target 'HypeTests' do
 pod 'OCMock', '3.1.2'
 pod 'Gizou'
-end
-
-post_install do |installer|
-    installer.pods_project.targets.each do |target|
-        target.build_configurations.each do |config|
-            config.build_settings['ENABLE_BITCODE'] = 'NO'
-        end
-    end
 end

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Parse
+import ParseUI
 
 protocol THLEventPickerViewControllerDelegate {
     func eventPickerDidSelectEvent(_ event: PFObject)

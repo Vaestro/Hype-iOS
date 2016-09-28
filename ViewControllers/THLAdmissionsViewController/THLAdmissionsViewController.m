@@ -272,9 +272,9 @@ TTTAttributedLabelDelegate
         _contactConciergeLabel.activeLinkAttributes = @{NSForegroundColorAttributeName: kTHLNUIPrimaryFontColor,
                                                    NSUnderlineStyleAttributeName: @(NSUnderlineStyleNone)};
         _contactConciergeLabel.textAlignment = NSTextAlignmentCenter;
-        NSString *labelText = @"Have a question? Ask your concierge";
+        NSString *labelText = @"OR GO WITH A HOST";
         _contactConciergeLabel.text = labelText;
-        NSRange concierge = [labelText rangeOfString:@"concierge"];
+        NSRange concierge = [labelText rangeOfString:@"HOST"];
         [_contactConciergeLabel addLinkToURL:[NSURL URLWithString:@"action://show-intercom"] withRange:concierge];
         _contactConciergeLabel.delegate = self;
 

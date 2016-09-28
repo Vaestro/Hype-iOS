@@ -59,7 +59,6 @@ THLSwiftAdmissionsViewControllerDelegate,
 THLAdmissionsViewDelegate,
 THLTablePackageControllerDelegate,
 THLMyEventsViewDelegate,
-THLDiscoveryViewControllerDelegate,
 THLVenueDiscoveryViewControllerDelegate,
 THLEventDetailsViewControllerDelegate,
 THLCheckoutViewControllerDelegate,
@@ -70,7 +69,8 @@ THLPerkCollectionViewControllerDelegate,
 THLOnboardingViewControllerDelegate,
 THLTablePackageControllerDelegate,
 THLLoginViewControllerDelegate,
-THLReservationRequestViewControllerDelegate
+THLReservationRequestViewControllerDelegate,
+THLEventDiscoveryViewControllerDelegate
 >
 
 @property (nonatomic, strong) UIWindow *window;
@@ -215,7 +215,7 @@ THLReservationRequestViewControllerDelegate
     myEventsVC.delegate = self;
     [dashboard pushViewController:myEventsVC animated:NO];
     
-    THLDiscoveryViewController *discoveryVC = [[THLDiscoveryViewController alloc] initWithClassName:@"Event"];
+    THLEventDiscoveryViewController *discoveryVC = [[THLEventDiscoveryViewController alloc] initWithClassName:@"Event"];
     THLVenueDiscoveryViewController *venueDiscoveryVC = [[THLVenueDiscoveryViewController alloc] initWithClassName:@"Location"];
 
     UINavigationController *discovery = [UINavigationController new];
