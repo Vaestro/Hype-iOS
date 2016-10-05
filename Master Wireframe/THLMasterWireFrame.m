@@ -46,6 +46,7 @@
 #import "THLTablePackageDetailsViewController.h"
 #import "THLLoginViewController.h"
 
+
 #import "THLPopupNotificationView.h"
 #import "THLLoginService.h"
 #import "THLVenueDiscoveryViewController.h"
@@ -77,6 +78,7 @@ THLEventDiscoveryViewControllerDelegate
 @property (nonatomic, strong) UITabBarController *masterTabBarController;
 @property (nonatomic, strong) UITabBarController *discoveryTabBarController;
 @property (nonatomic, strong) THLDiscoveryNavBarTitleView *discoveryNavBarTitleView;
+@property (nonatomic, strong) THLChatViewController *chatViewController;
 
 @property (nonatomic, strong) THLOnboardingViewController *onboardingViewController;
 @property (nonatomic, strong) THLLoginViewController *loginViewController;
@@ -268,7 +270,12 @@ THLEventDiscoveryViewControllerDelegate
 
 - (void)messageButtonPressed
 {
-    [Intercom presentMessageComposer];
+    // Show chat view controller
+    UINavigationController *chat = [UINavigationController new];
+   _chatViewController = [THLChatViewController new];
+    [chat pushViewController:_chatViewController animated:NO];
+    [[self topViewController] presentViewController:chat animated:YES completion:nil];
+    
 }
 
 

@@ -71,6 +71,7 @@ pod 'THContactPicker', '~> 1.2'
 pod 'IHKeyboardAvoiding'
 pod 'FXLabel'
 pod 'BLKFlexibleHeightBar'
+pod 'JSQMessagesViewController'
 end
 
 target 'HypeTests' do

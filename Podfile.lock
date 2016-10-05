@@ -90,6 +90,9 @@ PODS:
   - Harpy (4.0.5)
   - IHKeyboardAvoiding (2.6)
   - Intercom (3.0.12)
+  - JSQMessagesViewController (7.3.4):
+    - JSQSystemSoundPlayer (~> 2.0.1)
+  - JSQSystemSoundPlayer (2.0.1)
   - libPhoneNumber-iOS (0.8.16)
   - LinqToObjectiveC (2.1.0)
   - LMGeocoder (1.0.8)
@@ -210,6 +213,7 @@ DEPENDENCIES:
   - Harpy
   - IHKeyboardAvoiding
   - Intercom
+  - JSQMessagesViewController
   - libPhoneNumber-iOS (~> 0.8)
   - LinqToObjectiveC (~> 2.0)
   - LMGeocoder
@@ -263,6 +267,8 @@ SPEC CHECKSUMS:
   Harpy: 7fa1b794fe274781ee0b94106ba1787bcefd7c04
   IHKeyboardAvoiding: d2541ee56dad83e160cd9aed0468c52247af6f49
   Intercom: b709f2055c8ab0333c255d0ad49886598d14705f
+  JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
+  JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   libPhoneNumber-iOS: acb5805f67892db37adc3440290a367923672b51
   LinqToObjectiveC: f0e40c137a458b6b9725c4c7b6a575c0c72e3aec
   LMGeocoder: 7682148ce0bc55e483ceaa0eefdae4494d7102be
@@ -292,6 +298,6 @@ SPEC CHECKSUMS:
   YapDatabase: b1e43555a34a5298e23a045be96817a5ef0da58f
   YLMoment: af44d9d402790049e5490fa6eae9585b89b4090b
 
-PODFILE CHECKSUM: e55728b0c5b72f8ca8bafecee57653381b265314
+PODFILE CHECKSUM: 20f4bbed815ae67144ad30b9dace89528fef4fbd
 
 COCOAPODS: 1.0.1

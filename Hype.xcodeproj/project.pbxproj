@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2108A8851B8BBF4900B725F6 /* THLMasterWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 2108A8841B8BBF4900B725F6 /* THLMasterWireframe.m */; };
+		2108A8851B8BBF4900B725F6 /* THLMasterWireFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 2108A8841B8BBF4900B725F6 /* THLMasterWireFrame.m */; };
 		2108A8881B8BBF5B00B725F6 /* THLDependencyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2108A8871B8BBF5B00B725F6 /* THLDependencyManager.m */; };
 		211005B71B8A446D00A540C6 /* THLViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 211005B61B8A446D00A540C6 /* THLViewDataSource.m */; };
 		211005D01B8A7D0200A540C6 /* NSDate+Hypelist.m in Sources */ = {isa = PBXBuildFile; fileRef = 211005CF1B8A7D0200A540C6 /* NSDate+Hypelist.m */; };
@@ -189,6 +189,7 @@
 		CBE54720F63BA2DE2136B454 /* THLViewDataSource+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE545A9A3C66339456E0A06 /* THLViewDataSource+Factory.m */; };
 		CBE547FB5677C373C1DE74C7 /* THLViewDataSourceSorting.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE5404991A434142507D7B0 /* THLViewDataSourceSorting.m */; };
 		FAEE45D01C70E4BA0032C91C /* THLChannelService.m in Sources */ = {isa = PBXBuildFile; fileRef = FAEE45CF1C70E4BA0032C91C /* THLChannelService.m */; };
+		FF2741A11DA21D5A0001C117 /* THLChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2741A01DA21D5A0001C117 /* THLChatViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -203,7 +204,7 @@
 
 /* Begin PBXFileReference section */
 		2108A8831B8BBF4900B725F6 /* THLMasterWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMasterWireframe.h; sourceTree = "<group>"; };
-		2108A8841B8BBF4900B725F6 /* THLMasterWireframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLMasterWireframe.m; sourceTree = "<group>"; };
+		2108A8841B8BBF4900B725F6 /* THLMasterWireFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLMasterWireFrame.m; sourceTree = "<group>"; };
 		2108A8861B8BBF5B00B725F6 /* THLDependencyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLDependencyManager.h; sourceTree = "<group>"; };
 		2108A8871B8BBF5B00B725F6 /* THLDependencyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLDependencyManager.m; sourceTree = "<group>"; };
 		211005B51B8A446D00A540C6 /* THLViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLViewDataSource.h; sourceTree = "<group>"; };
@@ -533,6 +534,7 @@
 		CBE54FD0B5A148F6494B7A84 /* THLViewDataSourceGrouping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLViewDataSourceGrouping.h; sourceTree = "<group>"; };
 		FAEE45CE1C70E4BA0032C91C /* THLChannelService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLChannelService.h; sourceTree = "<group>"; };
 		FAEE45CF1C70E4BA0032C91C /* THLChannelService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLChannelService.m; sourceTree = "<group>"; };
+		FF2741A01DA21D5A0001C117 /* THLChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLChatViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -992,7 +994,7 @@
 			isa = PBXGroup;
 			children = (
 				2108A8831B8BBF4900B725F6 /* THLMasterWireframe.h */,
-				2108A8841B8BBF4900B725F6 /* THLMasterWireframe.m */,
+				2108A8841B8BBF4900B725F6 /* THLMasterWireFrame.m */,
 			);
 			path = "Master Wireframe";
 			sourceTree = "<group>";
@@ -1248,6 +1250,7 @@
 				7917C0EF1D1B3C2E0054BDB0 /* THLVenueDiscoveryViewController.h */,
 				7917C0F01D1B3C2E0054BDB0 /* THLVenueDiscoveryViewController.m */,
 				796AD92A1D908D3E006DCEDA /* THLEventDiscoveryViewController.swift */,
+				FF2741A01DA21D5A0001C117 /* THLChatViewController.swift */,
 				795EF50F1D3E9B1900485B11 /* THLSignUpViewController.h */,
 				795EF50D1D3E9B0700485B11 /* THLSignUpViewController.m */,
 				799831191D4B9E5900BB5BFE /* THLReservationRequestViewController.h */,
@@ -2210,6 +2213,7 @@
 				C8F2FB2A1BF826B7004E00B6 /* THLWebViewController.m in Sources */,
 				79B062BD1CF909F300A3DC50 /* THLPartyNavigationController.m in Sources */,
 				794FAB671C5F17F400438D49 /* THLActionButton.m in Sources */,
+				FF2741A11DA21D5A0001C117 /* THLChatViewController.swift in Sources */,
 				792545BC1CFCBD61004CF29A /* THLPartyMemberCell.m in Sources */,
 				794DCCAC1BF3B31E0037A03D /* UIImageView+Letters.m in Sources */,
 				79319DD91D9AED88000DEE69 /* EPExtensions.swift in Sources */,
@@ -2221,7 +2225,7 @@
 				7923524A1D947490007D3262 /* THLEventDiscoveryCell.swift in Sources */,
 				7998311E1D4C06CA00BB5BFE /* THLTablePackageDetailView.m in Sources */,
 				79319DD61D9AED88000DEE69 /* EPContactCell.swift in Sources */,
-				2108A8851B8BBF4900B725F6 /* THLMasterWireframe.m in Sources */,
+				2108A8851B8BBF4900B725F6 /* THLMasterWireFrame.m in Sources */,
 				79CE315A1CF7B03F00CEA784 /* THLEventTicketViewController.m in Sources */,
 				7928AD921D19C82600DFC443 /* THLPerkStoreCell.m in Sources */,
 				7928ADB61D19CB5300DFC443 /* THLEventDetailsMapView.m in Sources */,
