@@ -1,5 +1,5 @@
 # Uncomment this line to define a global platform for your project
-platform :ios, '8.0'
+platform :ios, '9.0'
 use_frameworks!
 #ignore all warnings from all pods
 
@@ -23,6 +23,7 @@ pod 'Mixpanel'
 #SWIFT
 pod 'SnapKit', '~> 3.0'
 pod 'Bolts-Swift'
+pod 'PopupDialog', '~> 0.5'
 
 #Debugging
 pod 'FLEX', '~> 2.0', :configurations => ['Debug']

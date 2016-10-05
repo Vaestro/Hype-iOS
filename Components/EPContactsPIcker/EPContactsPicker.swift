@@ -8,6 +8,7 @@
 
 import UIKit
 import Contacts
+import PopupDialog
 
 public protocol EPPickerDelegate {
 	func epContactPicker(_: EPContactsPicker, didContactFetchFailed error: NSError)
@@ -347,14 +348,58 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
 //        
 //        branchUniversalObject.getShortUrl(with: linkProperties,  andCallback: { (url: String, error: Error?) in
 //            if error == nil, let url = optUrl {
-                PFCloud.callFunction(inBackground: "submitHypeConnectInquiry", withParameters: ["guestPhoneNumbers": selectedContacts,
-                                                                                                "eventId": event?.objectId,
-                                                                                                "eventTime":event?.date
-                    ]) {
+        let guestPhoneNumbers = selectedContacts.map { $0.phoneNumbers[0].phoneNumber }
+        
+        var eventId:String = String()
+        var eventDate:Date = Date()
+        if let connectEvent = event {
+            eventId = connectEvent.objectId!
+            eventDate = connectEvent.date!
+        }
+                PFCloud.callFunction(inBackground: "submitConnectInquiry", withParameters: ["guestPhoneNumbers": guestPhoneNumbers,
+                                                                                                "eventId": eventId,
+                                                                                                "eventTime":eventDate,
+                                                                                                "description":"Hype Connect",
+                                                                                                "admissionOptionId":"5m9RI5T9Mr"]) {
                         (guestlistInvite, error) in
-                        if error == nil {
-                            // ratings is 4.5
-                    }
+                            print(error)
+                            print(guestlistInvite)
+                            if error == nil {
+                                (guestlistInvite as! THLGuestlistInvite).pinInBackground()
+                                // Prepare the popup assets
+                                let title = "SUCCESS"
+                                let message = "Your inquiry was submitted!"
+                                
+                                // Create the dialog
+                                let popup = PopupDialog(title: title, message: message)
+                                
+                                // Create buttons
+                                let buttonOne = CancelButton(title: "OK") {
+                                    self.navigationController?.dismiss(animated: true, completion: nil)
+                                }
+                                
+                                popup.addButton(buttonOne)
+                                
+                                // Present dialog
+                                self.present(popup, animated: true, completion: nil)
+                            } else {
+                                // Prepare the popup assets
+                                let title = "ERROR"
+                                let message = "There was an issue with creating your inquiry. Please try again later!"
+                                
+                                // Create the dialog
+                                let popup = PopupDialog(title: title, message: message)
+                                
+                                // Create buttons
+                                let buttonOne = CancelButton(title: "OK") {
+                                    print("You canceled the car dialog.")
+                                }
+                                
+                                popup.addButton(buttonOne)
+                                
+                                // Present dialog
+                                self.present(popup, animated: true, completion: nil)
+                            }
                 }
 //            }
 //        })

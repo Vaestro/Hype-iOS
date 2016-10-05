@@ -11,6 +11,7 @@ import TTTAttributedLabel
 
 @objc protocol THLSwiftAdmissionsViewControllerDelegate {
     func didSelectAdmissionOption(_ admissionOption: PFObject, event: PFObject)
+    
 }
 
 class THLSwiftAdmissionsViewController: UIViewController, THLEventPickerViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, TTTAttributedLabelDelegate, EPPickerDelegate {

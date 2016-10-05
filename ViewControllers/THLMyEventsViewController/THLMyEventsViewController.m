@@ -195,6 +195,8 @@
         cell.dateLabel.text = invitationDate;
         if ([object[@"Guestlist"][@"admissionOption"][@"type"] integerValue] == 1) {
             cell.partyTypeLabel.text = @"TABLE RESERVATION";
+        } else if ([object[@"Guestlist"][@"admissionOption"][@"type"] integerValue] == 2) {
+            cell.partyTypeLabel.text = @"HYPE CONNECT";
         } else {
             cell.partyTypeLabel.text = @"EVENT TICKET";
         }
