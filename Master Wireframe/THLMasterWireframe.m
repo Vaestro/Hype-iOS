@@ -120,8 +120,13 @@ THLEventDiscoveryViewControllerDelegate
     
     [[Branch getInstance] setIdentity:[THLUser currentUser].objectId];
     [[Branch getInstance] userCompletedAction:@"logIn"];
+    
+    if ([THLUserManager userIsHost]) {
+        [self presentHostFlowInWindow:_window];
 
-    [self configureMasterTabViewControllerAndPresentGuestFlowInWindow:_window];
+    } else {
+        [self configureMasterTabViewControllerAndPresentGuestFlowInWindow:_window];
+    }
 }
 
 - (void)routeSignedUpUserFlow {
@@ -139,7 +144,12 @@ THLEventDiscoveryViewControllerDelegate
     [self configureMasterTabViewControllerAndPresentGuestFlowInWindow:_window];
 }
 
-
+- (void)presentHostFlowInWindow:(UIWindow *)window {
+    _window = window;
+    THLHostDashboardViewController *hostDashboardViewController = [THLHostDashboardViewController new];
+    _window.rootViewController = hostDashboardViewController;
+    [_window makeKeyAndVisible];
+}
 
 #pragma mark -
 #pragma mark - THLOnboardingViewController

@@ -86,6 +86,7 @@
 		794DCCB71BF555150037A03D /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 794DCCB61BF555150037A03D /* Accelerate.framework */; };
 		794FAB671C5F17F400438D49 /* THLActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 794FAB661C5F17F400438D49 /* THLActionButton.m */; };
 		794FAB6B1C615DE200438D49 /* Lavo.mov in Resources */ = {isa = PBXBuildFile; fileRef = 794FAB6A1C615DE200438D49 /* Lavo.mov */; };
+		795569BE1DA6B8D8006E4049 /* THLAvailableInquiriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795569BD1DA6B8D8006E4049 /* THLAvailableInquiriesViewController.swift */; };
 		795EF50E1D3E9B0700485B11 /* THLSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 795EF50D1D3E9B0700485B11 /* THLSignUpViewController.m */; };
 		796AD92B1D908D3E006DCEDA /* THLEventDiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796AD92A1D908D3E006DCEDA /* THLEventDiscoveryViewController.swift */; };
 		79730CF81C18B47000D70F4B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79730CF71C18B47000D70F4B /* MessageUI.framework */; };
@@ -162,6 +163,8 @@
 		79CEDF3F1D257A6700DFB654 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CEDF3E1D257A6600DFB654 /* UIColorExtensions.swift */; };
 		79CEDF411D27092B00DFB654 /* THLEventNavBarTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CEDF401D27092B00DFB654 /* THLEventNavBarTitleView.swift */; };
 		79CEDF431D27180600DFB654 /* THLDiscoveryNavBarTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CEDF421D27180600DFB654 /* THLDiscoveryNavBarTitleView.swift */; };
+		79F462D11DA6A6E6004BB49C /* CAPSPageMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F462D01DA6A6E6004BB49C /* CAPSPageMenu.swift */; };
+		79F462D31DA6AAA0004BB49C /* THLHostDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F462D21DA6AAA0004BB49C /* THLHostDashboardViewController.swift */; };
 		79FBFCCF1D30513500F291E7 /* THLEventHeaderStyleBehaviorDefiner.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FBFCCE1D30513500F291E7 /* THLEventHeaderStyleBehaviorDefiner.m */; };
 		AAD9436FBD9DAF1F610FAB73 /* Pods_HypeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83D794813D7BCA4185F2A377 /* Pods_HypeTests.framework */; };
 		B816AE7D41D19341A4AF74B0 /* Pods_Hype.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9257C7C03B1F24B40F4AD84A /* Pods_Hype.framework */; };
@@ -363,6 +366,7 @@
 		794FAB651C5F17F400438D49 /* THLActionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLActionButton.h; sourceTree = "<group>"; };
 		794FAB661C5F17F400438D49 /* THLActionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLActionButton.m; sourceTree = "<group>"; };
 		794FAB6A1C615DE200438D49 /* Lavo.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Lavo.mov; sourceTree = "<group>"; };
+		795569BD1DA6B8D8006E4049 /* THLAvailableInquiriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLAvailableInquiriesViewController.swift; sourceTree = "<group>"; };
 		795EF50D1D3E9B0700485B11 /* THLSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLSignUpViewController.m; sourceTree = "<group>"; };
 		795EF50F1D3E9B1900485B11 /* THLSignUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLSignUpViewController.h; sourceTree = "<group>"; };
 		796AD92A1D908D3E006DCEDA /* THLEventDiscoveryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLEventDiscoveryViewController.swift; sourceTree = "<group>"; };
@@ -479,6 +483,8 @@
 		79CEDF3E1D257A6600DFB654 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColorExtensions.swift; path = Categories/UIColorExtensions.swift; sourceTree = SOURCE_ROOT; };
 		79CEDF401D27092B00DFB654 /* THLEventNavBarTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLEventNavBarTitleView.swift; sourceTree = "<group>"; };
 		79CEDF421D27180600DFB654 /* THLDiscoveryNavBarTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLDiscoveryNavBarTitleView.swift; sourceTree = "<group>"; };
+		79F462D01DA6A6E6004BB49C /* CAPSPageMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAPSPageMenu.swift; sourceTree = "<group>"; };
+		79F462D21DA6AAA0004BB49C /* THLHostDashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLHostDashboardViewController.swift; sourceTree = "<group>"; };
 		79FBFCCD1D30511F00F291E7 /* THLEventHeaderStyleBehaviorDefiner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLEventHeaderStyleBehaviorDefiner.h; sourceTree = "<group>"; };
 		79FBFCCE1D30513500F291E7 /* THLEventHeaderStyleBehaviorDefiner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventHeaderStyleBehaviorDefiner.m; sourceTree = "<group>"; };
 		83D794813D7BCA4185F2A377 /* Pods_HypeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HypeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -582,6 +588,7 @@
 		211005A81B8A3D5800A540C6 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				79F462D01DA6A6E6004BB49C /* CAPSPageMenu.swift */,
 				79319DCD1D9AED88000DEE69 /* EPContactsPIcker */,
 				79B86C291D36DACA0033768D /* JVFloatLabeledTextField */,
 				79B959491BE8961800B87799 /* Alien */,
@@ -1249,6 +1256,8 @@
 				7917C0F01D1B3C2E0054BDB0 /* THLVenueDiscoveryViewController.m */,
 				796AD92A1D908D3E006DCEDA /* THLEventDiscoveryViewController.swift */,
 				795EF50F1D3E9B1900485B11 /* THLSignUpViewController.h */,
+				79F462D21DA6AAA0004BB49C /* THLHostDashboardViewController.swift */,
+				795569BD1DA6B8D8006E4049 /* THLAvailableInquiriesViewController.swift */,
 				795EF50D1D3E9B0700485B11 /* THLSignUpViewController.m */,
 				799831191D4B9E5900BB5BFE /* THLReservationRequestViewController.h */,
 				7998311A1D4B9E6500BB5BFE /* THLReservationRequestViewController.m */,
@@ -2144,6 +2153,7 @@
 				C8EE96D51CE93D770040A1F0 /* THLCheckoutViewController.m in Sources */,
 				211005D51B8A7D2800A540C6 /* NSDate+Utilities.m in Sources */,
 				792545C21CFDDFFB004CF29A /* THLImportantInformationView.m in Sources */,
+				795569BE1DA6B8D8006E4049 /* THLAvailableInquiriesViewController.swift in Sources */,
 				217EBE8D1BB78AB4006044B6 /* THLYapDatabaseViewFactory.m in Sources */,
 				79752ADE1BEBD8B500D09B2E /* THLConfirmationPopupView.m in Sources */,
 				211005D01B8A7D0200A540C6 /* NSDate+Hypelist.m in Sources */,
@@ -2177,6 +2187,7 @@
 				211BB0D41B8CBE980068FD50 /* THLEventTitlesView.m in Sources */,
 				C82D87BF1C25C7E300116328 /* THLConfirmationView.m in Sources */,
 				217EBE881BB77ED7006044B6 /* THLEntity+DataStore.m in Sources */,
+				79F462D11DA6A6E6004BB49C /* CAPSPageMenu.swift in Sources */,
 				216BDD581BC71F1800BBF713 /* THLSearchViewDataSource.m in Sources */,
 				C88A01561D04A44200152B37 /* THLCollectionReusableView.m in Sources */,
 				79CD27E41C520293009BC119 /* AppDelegate.m in Sources */,
@@ -2236,6 +2247,7 @@
 				C85EE3BC1C1BCC190008C14B /* THLPerkStoreItem.m in Sources */,
 				79B959441BE8308600B87799 /* THLPersonIconView.m in Sources */,
 				C81B83281D18BFC5008260EE /* THLEventDeepLinkingController.m in Sources */,
+				79F462D31DA6AAA0004BB49C /* THLHostDashboardViewController.swift in Sources */,
 				2133C9BF1C3329BA0020083A /* THLWaitlistEntry.m in Sources */,
 				2108A8881B8BBF5B00B725F6 /* THLDependencyManager.m in Sources */,
 				C884EE201CF74E0400C47167 /* THLAdmissionsViewController.m in Sources */,
