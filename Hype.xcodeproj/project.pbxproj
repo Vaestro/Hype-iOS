@@ -87,6 +87,8 @@
 		794FAB671C5F17F400438D49 /* THLActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 794FAB661C5F17F400438D49 /* THLActionButton.m */; };
 		794FAB6B1C615DE200438D49 /* Lavo.mov in Resources */ = {isa = PBXBuildFile; fileRef = 794FAB6A1C615DE200438D49 /* Lavo.mov */; };
 		795569BE1DA6B8D8006E4049 /* THLAvailableInquiriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795569BD1DA6B8D8006E4049 /* THLAvailableInquiriesViewController.swift */; };
+		795569C01DA70ECF006E4049 /* THLInquiryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795569BF1DA70ECF006E4049 /* THLInquiryTableViewCell.swift */; };
+		795569C21DA71403006E4049 /* THLInquiry.m in Sources */ = {isa = PBXBuildFile; fileRef = 795569C11DA71403006E4049 /* THLInquiry.m */; };
 		795EF50E1D3E9B0700485B11 /* THLSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 795EF50D1D3E9B0700485B11 /* THLSignUpViewController.m */; };
 		796AD92B1D908D3E006DCEDA /* THLEventDiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796AD92A1D908D3E006DCEDA /* THLEventDiscoveryViewController.swift */; };
 		79730CF81C18B47000D70F4B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79730CF71C18B47000D70F4B /* MessageUI.framework */; };
@@ -367,6 +369,9 @@
 		794FAB661C5F17F400438D49 /* THLActionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLActionButton.m; sourceTree = "<group>"; };
 		794FAB6A1C615DE200438D49 /* Lavo.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Lavo.mov; sourceTree = "<group>"; };
 		795569BD1DA6B8D8006E4049 /* THLAvailableInquiriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLAvailableInquiriesViewController.swift; sourceTree = "<group>"; };
+		795569BF1DA70ECF006E4049 /* THLInquiryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLInquiryTableViewCell.swift; sourceTree = "<group>"; };
+		795569C11DA71403006E4049 /* THLInquiry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLInquiry.m; sourceTree = "<group>"; };
+		795569C31DA7140F006E4049 /* THLInquiry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLInquiry.h; sourceTree = "<group>"; };
 		795EF50D1D3E9B0700485B11 /* THLSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLSignUpViewController.m; sourceTree = "<group>"; };
 		795EF50F1D3E9B1900485B11 /* THLSignUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLSignUpViewController.h; sourceTree = "<group>"; };
 		796AD92A1D908D3E006DCEDA /* THLEventDiscoveryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLEventDiscoveryViewController.swift; sourceTree = "<group>"; };
@@ -684,6 +689,7 @@
 				79CEDF421D27180600DFB654 /* THLDiscoveryNavBarTitleView.swift */,
 				79B59F071D5E78DF00E374A4 /* THLHypeConciergeInfoView.h */,
 				79B59F051D5E78CB00E374A4 /* THLHypeConciergeInfoView.m */,
+				795569BF1DA70ECF006E4049 /* THLInquiryTableViewCell.swift */,
 				792352491D947490007D3262 /* THLEventDiscoveryCell.swift */,
 			);
 			path = Views;
@@ -911,6 +917,8 @@
 				2133BFCD1B877D11002C1DA9 /* THLLocation.m */,
 				C85EE3BA1C1BCC190008C14B /* THLPerkStoreItem.h */,
 				C85EE3BB1C1BCC190008C14B /* THLPerkStoreItem.m */,
+				795569C31DA7140F006E4049 /* THLInquiry.h */,
+				795569C11DA71403006E4049 /* THLInquiry.m */,
 				C85EE3C21C1CDE140008C14B /* THLPurchasedPerkItem.h */,
 				C85EE3C31C1CDE140008C14B /* THLPurchasedPerkItem.m */,
 				2133BFC01B877C08002C1DA9 /* THLUser.h */,
@@ -2156,6 +2164,7 @@
 				795569BE1DA6B8D8006E4049 /* THLAvailableInquiriesViewController.swift in Sources */,
 				217EBE8D1BB78AB4006044B6 /* THLYapDatabaseViewFactory.m in Sources */,
 				79752ADE1BEBD8B500D09B2E /* THLConfirmationPopupView.m in Sources */,
+				795569C21DA71403006E4049 /* THLInquiry.m in Sources */,
 				211005D01B8A7D0200A540C6 /* NSDate+Hypelist.m in Sources */,
 				799862461C97B6AF004C5326 /* THLTextEntryViewController.m in Sources */,
 				C85EE3C41C1CDE140008C14B /* THLPurchasedPerkItem.m in Sources */,
@@ -2234,6 +2243,7 @@
 				79319DD61D9AED88000DEE69 /* EPContactCell.swift in Sources */,
 				2108A8851B8BBF4900B725F6 /* THLMasterWireframe.m in Sources */,
 				79CE315A1CF7B03F00CEA784 /* THLEventTicketViewController.m in Sources */,
+				795569C01DA70ECF006E4049 /* THLInquiryTableViewCell.swift in Sources */,
 				7928AD921D19C82600DFC443 /* THLPerkStoreCell.m in Sources */,
 				7928ADB61D19CB5300DFC443 /* THLEventDetailsMapView.m in Sources */,
 				796AD92B1D908D3E006DCEDA /* THLEventDiscoveryViewController.swift in Sources */,

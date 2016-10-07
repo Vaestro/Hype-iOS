@@ -31,6 +31,8 @@
 #import <Branch/BranchLinkProperties.h>
 
 #import "THLEvent.h"
+#import "THLInquiry.h"
+
 #import "THLGuestlistInvite.h"
 
 #import "UIView+dimView.h"
