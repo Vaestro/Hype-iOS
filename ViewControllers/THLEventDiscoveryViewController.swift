@@ -78,17 +78,17 @@ extension THLEventDiscoveryViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath, object: PFObject?) -> THLEventDiscoveryCell? {
         let cell:THLEventDiscoveryCell = collectionView.dequeueReusableCell(withReuseIdentifier: "THLEventDiscoveryCell", for: indexPath) as! THLEventDiscoveryCell
         
-        let event:THLEvent = object as! THLEvent
-        cell.venueImageView.file = event.location.image
+        var event:THLEvent? = object as? THLEvent
+        cell.venueImageView.file = event?.location?.image
         cell.venueImageView.loadInBackground()
-        cell.venueNameLabel.text = event.location.name.uppercased()
-        cell.eventTitleLabel.text = event.title
-        cell.venueNeighborhoodLabel.text = event.location.neighborhood.uppercased()
+        cell.venueNameLabel.text = event?.location?.name.uppercased()
+        cell.eventTitleLabel.text = event?.title
+        cell.venueNeighborhoodLabel.text = event?.location?.neighborhood.uppercased()
         
-        let dateText = ((event.date! as NSDate).thl_weekdayString)
+        let dateText = ((event?.date as! NSDate).thl_weekdayString)
         cell.eventDateLabel.text = dateText
         
-        if (event.featured == true) {
+        if (event?.featured == true) {
             cell.eventCategoryLabel.isHidden = false
         } else {
             cell.eventCategoryLabel.isHidden = true

@@ -49,7 +49,7 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    #if DEBUG
+//    #if DEBUG
         [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
             configuration.applicationId = applicationId;
             configuration.clientKey = clientKeyId;
@@ -57,12 +57,12 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
 //            configuration.server = @"https://07a5246d.ngrok.io/parse/";
             configuration.localDatastoreEnabled = YES;
         }]];
-    #else
-        // Initialize Parse.
-        [Parse enableLocalDatastore];
-        [Parse setApplicationId:applicationId
-                  clientKey:clientKeyId];
-    #endif
+//    #else
+//        // Initialize Parse.
+//        [Parse enableLocalDatastore];
+//        [Parse setApplicationId:applicationId
+//                  clientKey:clientKeyId];
+//    #endif
     
     // Track app open
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];

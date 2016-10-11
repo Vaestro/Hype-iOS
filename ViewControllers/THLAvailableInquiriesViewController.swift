@@ -38,6 +38,8 @@ class THLAvailableInquiriesViewController: PFQueryTableViewController {
         
         query.addAscendingOrder("date")
         query.includeKey("Guestlist")
+        query.includeKey("Guestlist.event")
+        query.includeKey("Guestlist.event.location")
         query.includeKey("Guestlist.Owner")
         
         return query
@@ -61,6 +63,16 @@ extension THLAvailableInquiriesViewController {
         
         cell.inquirySenderLabel.text = "\(senderFirstName)"
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let inquiry: PFObject? = super.object(at: indexPath)
+
+        let inquiryMenuController = THLInquiryMenuViewController(inquiry:inquiry!)
+        var navigationController = UINavigationController()
+        navigationController.setViewControllers([inquiryMenuController], animated: false)
+        self.present(navigationController, animated: true)
+        
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

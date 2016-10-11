@@ -72,6 +72,7 @@
 		7928ADB01D19CABC00DFC443 /* THLLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928ADAF1D19CABC00DFC443 /* THLLoginViewController.m */; };
 		7928ADB31D19CB1900DFC443 /* THLPopupNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928ADB21D19CB1900DFC443 /* THLPopupNotificationView.m */; };
 		7928ADB61D19CB5300DFC443 /* THLEventDetailsMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928ADB51D19CB5300DFC443 /* THLEventDetailsMapView.m */; };
+		792CFFB11DA874B2009E7C7E /* THLGuestlistTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792CFFB01DA874B2009E7C7E /* THLGuestlistTableViewController.swift */; };
 		79319DD41D9AED88000DEE69 /* EPConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79319DCE1D9AED88000DEE69 /* EPConstants.swift */; };
 		79319DD51D9AED88000DEE69 /* EPContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79319DCF1D9AED88000DEE69 /* EPContact.swift */; };
 		79319DD61D9AED88000DEE69 /* EPContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79319DD01D9AED88000DEE69 /* EPContactCell.swift */; };
@@ -89,6 +90,7 @@
 		795569BE1DA6B8D8006E4049 /* THLAvailableInquiriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795569BD1DA6B8D8006E4049 /* THLAvailableInquiriesViewController.swift */; };
 		795569C01DA70ECF006E4049 /* THLInquiryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795569BF1DA70ECF006E4049 /* THLInquiryTableViewCell.swift */; };
 		795569C21DA71403006E4049 /* THLInquiry.m in Sources */ = {isa = PBXBuildFile; fileRef = 795569C11DA71403006E4049 /* THLInquiry.m */; };
+		795569C51DA81BA4006E4049 /* THLInquiryMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795569C41DA81BA3006E4049 /* THLInquiryMenuViewController.swift */; };
 		795EF50E1D3E9B0700485B11 /* THLSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 795EF50D1D3E9B0700485B11 /* THLSignUpViewController.m */; };
 		796AD92B1D908D3E006DCEDA /* THLEventDiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796AD92A1D908D3E006DCEDA /* THLEventDiscoveryViewController.swift */; };
 		79730CF81C18B47000D70F4B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79730CF71C18B47000D70F4B /* MessageUI.framework */; };
@@ -348,6 +350,7 @@
 		7928ADB41D19CB5300DFC443 /* THLEventDetailsMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventDetailsMapView.h; sourceTree = "<group>"; };
 		7928ADB51D19CB5300DFC443 /* THLEventDetailsMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventDetailsMapView.m; sourceTree = "<group>"; };
 		7928ADDF1D19EE3400DFC443 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = "SnapKit/build/Debug-iphoneos/SnapKit.framework"; sourceTree = "<group>"; };
+		792CFFB01DA874B2009E7C7E /* THLGuestlistTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLGuestlistTableViewController.swift; sourceTree = "<group>"; };
 		79319DCE1D9AED88000DEE69 /* EPConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPConstants.swift; sourceTree = "<group>"; };
 		79319DCF1D9AED88000DEE69 /* EPContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPContact.swift; sourceTree = "<group>"; };
 		79319DD01D9AED88000DEE69 /* EPContactCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPContactCell.swift; sourceTree = "<group>"; };
@@ -372,6 +375,7 @@
 		795569BF1DA70ECF006E4049 /* THLInquiryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLInquiryTableViewCell.swift; sourceTree = "<group>"; };
 		795569C11DA71403006E4049 /* THLInquiry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLInquiry.m; sourceTree = "<group>"; };
 		795569C31DA7140F006E4049 /* THLInquiry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLInquiry.h; sourceTree = "<group>"; };
+		795569C41DA81BA3006E4049 /* THLInquiryMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLInquiryMenuViewController.swift; sourceTree = "<group>"; };
 		795EF50D1D3E9B0700485B11 /* THLSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLSignUpViewController.m; sourceTree = "<group>"; };
 		795EF50F1D3E9B1900485B11 /* THLSignUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLSignUpViewController.h; sourceTree = "<group>"; };
 		796AD92A1D908D3E006DCEDA /* THLEventDiscoveryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLEventDiscoveryViewController.swift; sourceTree = "<group>"; };
@@ -1266,8 +1270,10 @@
 				795EF50F1D3E9B1900485B11 /* THLSignUpViewController.h */,
 				79F462D21DA6AAA0004BB49C /* THLHostDashboardViewController.swift */,
 				795569BD1DA6B8D8006E4049 /* THLAvailableInquiriesViewController.swift */,
+				795569C41DA81BA3006E4049 /* THLInquiryMenuViewController.swift */,
 				795EF50D1D3E9B0700485B11 /* THLSignUpViewController.m */,
 				799831191D4B9E5900BB5BFE /* THLReservationRequestViewController.h */,
+				792CFFB01DA874B2009E7C7E /* THLGuestlistTableViewController.swift */,
 				7998311A1D4B9E6500BB5BFE /* THLReservationRequestViewController.m */,
 			);
 			path = ViewControllers;
@@ -2166,6 +2172,7 @@
 				79752ADE1BEBD8B500D09B2E /* THLConfirmationPopupView.m in Sources */,
 				795569C21DA71403006E4049 /* THLInquiry.m in Sources */,
 				211005D01B8A7D0200A540C6 /* NSDate+Hypelist.m in Sources */,
+				795569C51DA81BA4006E4049 /* THLInquiryMenuViewController.swift in Sources */,
 				799862461C97B6AF004C5326 /* THLTextEntryViewController.m in Sources */,
 				C85EE3C41C1CDE140008C14B /* THLPurchasedPerkItem.m in Sources */,
 				79CEDF411D27092B00DFB654 /* THLEventNavBarTitleView.swift in Sources */,
@@ -2246,6 +2253,7 @@
 				795569C01DA70ECF006E4049 /* THLInquiryTableViewCell.swift in Sources */,
 				7928AD921D19C82600DFC443 /* THLPerkStoreCell.m in Sources */,
 				7928ADB61D19CB5300DFC443 /* THLEventDetailsMapView.m in Sources */,
+				792CFFB11DA874B2009E7C7E /* THLGuestlistTableViewController.swift in Sources */,
 				796AD92B1D908D3E006DCEDA /* THLEventDiscoveryViewController.swift in Sources */,
 				799831181D4AC50900BB5BFE /* THLSelectView.m in Sources */,
 				798D7EBF1BF2E56C001D4593 /* OnboardingViewController.m in Sources */,
