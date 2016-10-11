@@ -190,6 +190,8 @@
 		CBE547FB5677C373C1DE74C7 /* THLViewDataSourceSorting.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE5404991A434142507D7B0 /* THLViewDataSourceSorting.m */; };
 		FAEE45D01C70E4BA0032C91C /* THLChannelService.m in Sources */ = {isa = PBXBuildFile; fileRef = FAEE45CF1C70E4BA0032C91C /* THLChannelService.m */; };
 		FF2741A11DA21D5A0001C117 /* THLChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2741A01DA21D5A0001C117 /* THLChatViewController.swift */; };
+		FF9BF5FF1DAC572800442209 /* THLChatEntryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9BF5FE1DAC572800442209 /* THLChatEntryTableViewController.swift */; };
+		FFE70C9F1DA86F2900E57AC0 /* THLChatSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE70C9E1DA86F2900E57AC0 /* THLChatSocketManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -535,6 +537,8 @@
 		FAEE45CE1C70E4BA0032C91C /* THLChannelService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLChannelService.h; sourceTree = "<group>"; };
 		FAEE45CF1C70E4BA0032C91C /* THLChannelService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLChannelService.m; sourceTree = "<group>"; };
 		FF2741A01DA21D5A0001C117 /* THLChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLChatViewController.swift; sourceTree = "<group>"; };
+		FF9BF5FE1DAC572800442209 /* THLChatEntryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLChatEntryTableViewController.swift; sourceTree = "<group>"; };
+		FFE70C9E1DA86F2900E57AC0 /* THLChatSocketManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLChatSocketManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -642,6 +646,7 @@
 		2118920A1BAA039700E8A11F /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				21937F2D1BB5D0F2005E949E /* Model Services */,
 				217EBEA21BB7A0F2006044B6 /* Login */,
 			);
 			path = Authentication;
@@ -887,7 +892,8 @@
 				C8EE96CC1CE677580040A1F0 /* THLStripeTokenService.h */,
 				C8EE96CD1CE677580040A1F0 /* THLStripeTokenService.m */,
 			);
-			path = "Model Services";
+			name = "Model Services";
+			path = "../Model Services";
 			sourceTree = "<group>";
 		};
 		21CCEDD11B87C24A0066CDAC /* Parse Models */ = {
@@ -941,9 +947,9 @@
 		21CCEDEB1B87CDD00066CDAC /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				FF30597E1DA86D80009DDC93 /* Chat */,
 				2118920A1BAA039700E8A11F /* Authentication */,
 				21CCEDEF1B87CE210066CDAC /* Fetching */,
-				21937F2D1BB5D0F2005E949E /* Model Services */,
 				21775F571B8E15E400609D39 /* Permissions Request */,
 				7928AD841D19C79300DFC443 /* THLParseQueryFactory.h */,
 				7928AD851D19C79300DFC443 /* THLParseQueryFactory.m */,
@@ -1255,6 +1261,7 @@
 				795EF50D1D3E9B0700485B11 /* THLSignUpViewController.m */,
 				799831191D4B9E5900BB5BFE /* THLReservationRequestViewController.h */,
 				7998311A1D4B9E6500BB5BFE /* THLReservationRequestViewController.m */,
+				FF9BF5FE1DAC572800442209 /* THLChatEntryTableViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1755,6 +1762,14 @@
 			path = THLChannelService;
 			sourceTree = "<group>";
 		};
+		FF30597E1DA86D80009DDC93 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				FFE70C9E1DA86F2900E57AC0 /* THLChatSocketManager.swift */,
+			);
+			name = Chat;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2145,6 +2160,7 @@
 				212173711BB34F15007D817A /* THLRoundImageView.m in Sources */,
 				C88A015C1D0B56DE00152B37 /* THLTablePackageAdmissionCell.m in Sources */,
 				C8EE96D51CE93D770040A1F0 /* THLCheckoutViewController.m in Sources */,
+				FFE70C9F1DA86F2900E57AC0 /* THLChatSocketManager.swift in Sources */,
 				211005D51B8A7D2800A540C6 /* NSDate+Utilities.m in Sources */,
 				792545C21CFDDFFB004CF29A /* THLImportantInformationView.m in Sources */,
 				217EBE8D1BB78AB4006044B6 /* THLYapDatabaseViewFactory.m in Sources */,
@@ -2206,6 +2222,7 @@
 				C8D1D2A41CD3E864006ADC6A /* THLPaymentViewController.m in Sources */,
 				79CEDF3F1D257A6700DFB654 /* UIColorExtensions.swift in Sources */,
 				79B59F061D5E78CB00E374A4 /* THLHypeConciergeInfoView.m in Sources */,
+				FF9BF5FF1DAC572800442209 /* THLChatEntryTableViewController.swift in Sources */,
 				21E402DC1BBF8155001D0C2C /* THLGuestlistInvite.m in Sources */,
 				21CCEDE91B87C87B0066CDAC /* THLDataStore.m in Sources */,
 				7928ADA41D19C9B600DFC443 /* THLOnboardingViewController.m in Sources */,

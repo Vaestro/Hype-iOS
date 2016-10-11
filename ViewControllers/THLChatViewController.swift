@@ -16,13 +16,12 @@ class THLChatViewController : JSQMessagesViewController {
     var messages = [JSQMessage]()
     var outgoingBubbleImageView: JSQMessagesBubbleImage!
     var incomingBubbleImageView: JSQMessagesBubbleImage!
-    
+    var chatMateId: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.senderId = "TESTID";
-        self.senderDisplayName = "Drake";
+       self.senderId = THLUser.current()?.phoneNumber;
+        self.senderDisplayName = "My Name";
         // Set up navbar
         self.navigationItem.title = "CHAT";
     
@@ -30,18 +29,17 @@ class THLChatViewController : JSQMessagesViewController {
         self.navigationItem.leftBarButtonItem = barBack
         
         setupBubbles()
-        setupAvatars();
+        setupAvatars()
+        
+        listenForMessages()
+        
+    
+        
         
         
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        addMessage(id:"Promoter", text: "Hey are you coming?")
-        
-        addMessage(id: senderId, text: "Yea I will be there!")
-        addMessage(id: senderId, text: "Where is it exactly?")
-      
         finishReceivingMessage()
     }
     
@@ -70,12 +68,13 @@ class THLChatViewController : JSQMessagesViewController {
         return JSQMessagesAvatarImageFactory.avatarImage(with: UIImage(named: "default_profile_image"), diameter: 20)
     }
     
-    override func didPressSend(_ button: UIButton, withMessageText text: String, senderId: String, senderDisplayName: String, date: Date) {
-        
+    override func didPressSend(_ button: UIButton, withMessageText text: String, senderId: String,
+        senderDisplayName: String, date: Date) {
         addMessage(id: senderId, text: text);
-        addMessage(id: "Promoter", text: "Turn Up!!");
         self.finishSendingMessage(animated: true)
         JSQSystemSoundPlayer.jsq_playMessageSentSound()
+        THLChatSocketManager.sharedInstance.sendMessageToServer(message: text, to: chatMateId!)
+        
         
     }
     
@@ -92,6 +91,16 @@ class THLChatViewController : JSQMessagesViewController {
     private func setupAvatars() {
         collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize(width: kJSQMessagesCollectionViewAvatarSizeDefault, height:kJSQMessagesCollectionViewAvatarSizeDefault )
         collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize(width: kJSQMessagesCollectionViewAvatarSizeDefault, height:kJSQMessagesCollectionViewAvatarSizeDefault )
+    }
+    
+    private func listenForMessages() {
+        THLChatSocketManager.sharedInstance.socket.on("gotNewMessage") { (dataArray, socketAck) -> Void in
+            var map = dataArray[0] as! [String: String]
+            if(map["from"] == self.chatMateId) {
+                self.addMessage(id: map["from"]!, text: map["msg"]!)
+            }
+            self.finishReceivingMessage()
+        }
     }
     
     private func addMessage(id: String, text: String) {

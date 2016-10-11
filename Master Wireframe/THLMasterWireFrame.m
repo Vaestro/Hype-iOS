@@ -78,7 +78,7 @@ THLEventDiscoveryViewControllerDelegate
 @property (nonatomic, strong) UITabBarController *masterTabBarController;
 @property (nonatomic, strong) UITabBarController *discoveryTabBarController;
 @property (nonatomic, strong) THLDiscoveryNavBarTitleView *discoveryNavBarTitleView;
-@property (nonatomic, strong) THLChatViewController *chatViewController;
+@property (nonatomic, strong) THLChatEntryTableViewController *chatEntryTableViewController;
 
 @property (nonatomic, strong) THLOnboardingViewController *onboardingViewController;
 @property (nonatomic, strong) THLLoginViewController *loginViewController;
@@ -122,7 +122,9 @@ THLEventDiscoveryViewControllerDelegate
     
     [[Branch getInstance] setIdentity:[THLUser currentUser].objectId];
     [[Branch getInstance] userCompletedAction:@"logIn"];
-
+    [[THLChatSocketManager sharedInstance] establishConnection];
+    
+   
     [self configureMasterTabViewControllerAndPresentGuestFlowInWindow:_window];
 }
 
@@ -136,7 +138,9 @@ THLEventDiscoveryViewControllerDelegate
     
     [[Branch getInstance] setIdentity:[THLUser currentUser].objectId];
     [[Branch getInstance] userCompletedAction:@"signUp"];
-
+    
+    [[THLChatSocketManager sharedInstance] establishConnection];
+    
     
     [self configureMasterTabViewControllerAndPresentGuestFlowInWindow:_window];
 }
@@ -271,10 +275,11 @@ THLEventDiscoveryViewControllerDelegate
 - (void)messageButtonPressed
 {
     // Show chat view controller
-    UINavigationController *chat = [UINavigationController new];
-   _chatViewController = [THLChatViewController new];
-    [chat pushViewController:_chatViewController animated:NO];
-    [[self topViewController] presentViewController:chat animated:YES completion:nil];
+    UINavigationController *chatEntry = [UINavigationController new];
+    _chatEntryTableViewController = [THLChatEntryTableViewController new];
+    [chatEntry pushViewController:_chatEntryTableViewController animated:NO];
+    [[self topViewController] presentViewController:chatEntry animated:YES completion:nil];
+    
     
 }
 
