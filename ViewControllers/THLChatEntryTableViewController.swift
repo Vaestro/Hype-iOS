@@ -11,13 +11,19 @@ import UIKit
 class THLChatEntryTableViewController: UITableViewController {
 
     var promoters = [String]()
-    
+    var roomIds = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        promoters.append("Chat With Bilal")
-        promoters.append("Chat With TestUser")
+        // Hard coded stuff for testing
+        var usersPN = (THLUser.current()?.phoneNumber)!
+        if(usersPN == "+15715502992" || usersPN == "+19178686312") {
+            promoters.append("Your Inquiry")
+            roomIds.append("tjP5OTYg6w");
+        }
         self.navigationItem.title = "MESSAGES";
+        let barBack = UIBarButtonItem(title: "<", style: UIBarButtonItemStyle.plain, target: self, action: "back")
+        self.navigationItem.leftBarButtonItem = barBack
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -25,7 +31,16 @@ class THLChatEntryTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-       tableView.register(UITableViewCell.self, forCellReuseIdentifier: "defaultId")
+       //tableView.register(UITableViewCell.self, forCellReuseIdentifier: "defaultId")
+        //tableView.register(THLChatEntryCell.self, forCellReuseIdentifier: "chatEntry")
+        
+        tableView = UITableView(frame: view.bounds, style: .grouped)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = UIColor.black
+        tableView.register(THLChatEntryCell.self, forCellReuseIdentifier: "EntryCell")
+       
         
         
     }
@@ -44,13 +59,19 @@ class THLChatEntryTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return promoters.count
+        return roomIds.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "defaultId", for: indexPath)
-        cell.textLabel!.text = promoters[indexPath.row]
+        //let cell = tableView.dequeueReusableCell(withIdentifier: "chatEntry", for: indexPath)
+        let cell = tableView.dequeueReusableCell( withIdentifier: "EntryCell", for: indexPath) as! THLChatEntryCell
+        cell.priceLabel.text = "Your Inquiry"
+        cell.background.backgroundColor = UIColor.black
+        cell.priceLabel.backgroundColor = UIColor.black
+        cell.nameLabel.backgroundColor = UIColor.black
+        cell.typeLabel.backgroundColor = UIColor.black
+        cell.backgroundColor = UIColor.black
         
         return cell
     }
@@ -66,14 +87,22 @@ class THLChatEntryTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var promotersNumber = String()
-        if(promoters[indexPath.row] == "Chat With Edgar") {
+        var usersPN = (THLUser.current()?.phoneNumber)!
+        if(usersPN == "+15715502992") {
             promotersNumber = "+19178686312"
         } else {
             promotersNumber = "+15715502992"
         }
         var chatViewController = THLChatViewController()
         chatViewController.chatMateId = promotersNumber
+        chatViewController.chatRoomId = roomIds[indexPath.row];
+        print("The Chat room id being passed is: ")
+        print(roomIds[indexPath.row])
         self.navigationController?.pushViewController(chatViewController, animated: true)
+    }
+    
+    func back() {
+        dismiss(animated: true, completion: nil)
     }
     
    

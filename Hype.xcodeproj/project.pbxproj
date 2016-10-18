@@ -190,6 +190,7 @@
 		CBE547FB5677C373C1DE74C7 /* THLViewDataSourceSorting.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE5404991A434142507D7B0 /* THLViewDataSourceSorting.m */; };
 		FAEE45D01C70E4BA0032C91C /* THLChannelService.m in Sources */ = {isa = PBXBuildFile; fileRef = FAEE45CF1C70E4BA0032C91C /* THLChannelService.m */; };
 		FF2741A11DA21D5A0001C117 /* THLChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2741A01DA21D5A0001C117 /* THLChatViewController.swift */; };
+		FF35417F1DB45182004DD268 /* THLChatEntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF35417E1DB45180004DD268 /* THLChatEntryCell.swift */; };
 		FF9BF5FF1DAC572800442209 /* THLChatEntryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9BF5FE1DAC572800442209 /* THLChatEntryTableViewController.swift */; };
 		FFE70C9F1DA86F2900E57AC0 /* THLChatSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE70C9E1DA86F2900E57AC0 /* THLChatSocketManager.swift */; };
 /* End PBXBuildFile section */
@@ -537,6 +538,7 @@
 		FAEE45CE1C70E4BA0032C91C /* THLChannelService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLChannelService.h; sourceTree = "<group>"; };
 		FAEE45CF1C70E4BA0032C91C /* THLChannelService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLChannelService.m; sourceTree = "<group>"; };
 		FF2741A01DA21D5A0001C117 /* THLChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLChatViewController.swift; sourceTree = "<group>"; };
+		FF35417E1DB45180004DD268 /* THLChatEntryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLChatEntryCell.swift; sourceTree = "<group>"; };
 		FF9BF5FE1DAC572800442209 /* THLChatEntryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLChatEntryTableViewController.swift; sourceTree = "<group>"; };
 		FFE70C9E1DA86F2900E57AC0 /* THLChatSocketManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLChatSocketManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -685,6 +687,7 @@
 				79B59F071D5E78DF00E374A4 /* THLHypeConciergeInfoView.h */,
 				79B59F051D5E78CB00E374A4 /* THLHypeConciergeInfoView.m */,
 				792352491D947490007D3262 /* THLEventDiscoveryCell.swift */,
+				FF35417E1DB45180004DD268 /* THLChatEntryCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2152,6 +2155,7 @@
 				7928ADAA1D19C9E200DFC443 /* THLUserProfileHeaderView.m in Sources */,
 				799B069C1D2DA5F30091B4CD /* SwipeView.m in Sources */,
 				798650A41BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m in Sources */,
+				FF35417F1DB45182004DD268 /* THLChatEntryCell.swift in Sources */,
 				79319DD81D9AED88000DEE69 /* EPContactsPicker.swift in Sources */,
 				794A9D191CF4ACC300DDAC00 /* THLEventInviteCell.m in Sources */,
 				7928ADB31D19CB1900DFC443 /* THLPopupNotificationView.m in Sources */,

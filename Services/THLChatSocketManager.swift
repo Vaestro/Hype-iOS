@@ -8,6 +8,7 @@
 
 import UIKit
 import SocketIO
+import Foundation
 
 class THLChatSocketManager: NSObject {
     
@@ -35,27 +36,40 @@ class THLChatSocketManager: NSObject {
     
     func connectUser() {
         socket.emit("user connected", (THLUser.current()?.phoneNumber)!)
-        listenForNotifications()
-        //listenForMessages()
-        
+         listenForOtherMessages()
+         listenForYourMessageSend()
     }
     
     func stopListeningForMessages() {
         
     }
     
-    func listenForNotifications() {
-         socket.on("gotNewData") { (dataArray, socketAck) -> Void in
-            print("Update menu item")
+    func listenForOtherMessages() {
+         socket.on("gotNewNotification") { (dataArray, socketAck) -> Void in
+           // TODO update icon
+          
+            
         }
     }
     
-    func sendMessageToServer(message: String, to: String) {
+    func listenForYourMessageSend() {
+        socket.on("msgSuccess") { (dataArray, socketAck) -> Void in
+           print("Your message was sent succesfully..!")
+            //UIApplication.shared.keyWindow?.rootViewController?.navigationItem.title = "TESTMSG"
+         
+            
+        }
+    }
+    
+    func sendMessageToServer(message: String, to: String, roomId: String) {
         var usersPN = (THLUser.current()?.phoneNumber)!
-        print(usersPN)
-        print(to)
-        let data = ["to": to,"msg":message, "from": usersPN]
+        let data = ["to": to,"msg":message, "from": usersPN, "roomId": roomId]
         socket.emit("chat message", data)
+    }
+    
+    func getMessageHistory(roomId: String, user: String) {
+        let data = ["roomId": roomId, "userPN": user]
+        socket.emit("get messages", data)
     }
     
 }
