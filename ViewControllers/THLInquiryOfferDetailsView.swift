@@ -1,0 +1,75 @@
+//
+//  THLInquiryOfferDetailsView.swift
+//  Hype
+//
+//  Created by Edgar Li on 10/14/16.
+//  Copyright © 2016 Hypelist. All rights reserved.
+//
+
+import UIKit
+import SnapKit
+
+class THLInquiryOfferDetailsView: UIViewController {
+    
+    var inquiryOffer: PFObject
+    var inquiry: PFObject
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    init(inquiry: PFObject, offer: PFObject) {
+        self.inquiryOffer = offer
+        self.inquiry = inquiry
+        super.init(nibName:nil, bundle:nil)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let superview = self.view!
+        superview.backgroundColor = UIColor.black
+        let offerMessageLabel = UILabel()
+        offerMessageLabel.text = inquiryOffer.value(forKey: "message") as? String
+        offerMessageLabel.textColor = UIColor.white
+        superview.addSubview(offerMessageLabel)
+        offerMessageLabel.snp.makeConstraints { (make) -> Void in
+            make.center.equalTo(superview)
+        }
+        
+        let button = UIButton()
+        button.setTitle("CONNECT", for: .normal)
+        button.addTarget(self, action: #selector(handleConnect), for: UIControlEvents.touchUpInside)
+        button.backgroundColor = UIColor.black
+        superview.addSubview(button)
+        button.snp.makeConstraints { (make) -> Void in
+            make.width.equalTo(200)
+            make.height.equalTo(60)
+            make.bottom.equalTo(superview.snp.bottom).offset(-20)
+            make.centerX.equalTo(superview.snp.centerX)
+        }
+        // Do any additional setup after loading the view.
+    }
+    
+    func handleConnect() {
+        inquiryOffer["accepted"] = true
+        inquiry["connected"] = true
+        inquiryOffer.saveInBackground()
+        inquiry.saveInBackground()
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}

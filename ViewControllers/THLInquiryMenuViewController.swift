@@ -7,14 +7,12 @@
 //
 
 import UIKit
+import PopupDialog
 
 class THLInquiryMenuViewController: UIViewController {
     
     var pageMenu : CAPSPageMenu?
     var inquiry: PFObject?
-    var guestlist: PFObject?
-    var event: PFObject?
-    var location: PFObject?
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -22,16 +20,13 @@ class THLInquiryMenuViewController: UIViewController {
     
     init(inquiry: PFObject) {
         self.inquiry = inquiry
-        self.guestlist = inquiry.value(forKey: "Guestlist") as! PFObject?
-        self.event = inquiry.value(forKey: "event") as! PFObject?
-        self.location = inquiry.value(forKey: "location") as! PFObject?
 
         super.init(nibName: nil, bundle: nil)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = location?.value(forKey: "name") as? String
+        self.navigationItem.title = "Inquiry"
 
         // Initialize view controllers to display and place in array
         var controllerArray : [UIViewController] = []
@@ -54,15 +49,42 @@ class THLInquiryMenuViewController: UIViewController {
     }
     
     func handleConnect() {
-        var interestedPromoters:[PFObject]? = self.inquiry?.value(forKey: "interestedPromoters") as? [PFObject]
-        if (interestedPromoters == nil) {
-            interestedPromoters = [PFObject]()
-            interestedPromoters?.append(THLUser.current()!)
-        } else {
-            interestedPromoters?.insert(THLUser.current()!, at: 0)
+        var offer = PFObject(className:"InquiryOffer")
+        offer["message"] = "Hello I am host"
+        offer["accepted"] = false
+        offer["Host"] = THLUser.current()
+        offer.saveInBackground {(success, error) in
+            if (success) {
+                var offers:[PFObject]? = self.inquiry?.value(forKey: "Offers") as? [PFObject]
+                if (offers == nil) {
+                    offers = [PFObject]()
+                    offers?.append(offer)
+                } else {
+                    offers?.insert(offer, at: 0)
+                }
+                self.inquiry?["Offers"] = offers
+                self.inquiry?.saveInBackground()
+            } else {
+                // Prepare the popup assets
+                let title = "ERROR"
+                let message = "There was an issue with creating your inquiry. Please try again later!"
+                
+                // Create the dialog
+                let popup = PopupDialog(title: title, message: message)
+                
+                // Create buttons
+                let buttonOne = CancelButton(title: "OK") {
+                    print("You canceled the car dialog.")
+                }
+                
+                popup.addButton(buttonOne)
+                
+                // Present dialog
+                self.present(popup, animated: true, completion: nil)
+            }
         }
-        self.inquiry?["interestedPromoters"] = interestedPromoters
-        self.inquiry?.saveInBackground()
+        
+        
     }
     
     override func didReceiveMemoryWarning() {

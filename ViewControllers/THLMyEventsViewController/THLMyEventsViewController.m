@@ -19,6 +19,7 @@
 #import "THLCollectionReusableView.h"
 #import "Intercom/intercom.h"
 #import "TTTAttributedLabel.h"
+#import "Hype-Swift.h"
 
 @interface THLMyEventsViewController()
 {
@@ -154,6 +155,9 @@
     [query includeKey:@"Guest"];
     [query includeKey:@"Guest.event"];
     [query includeKey:@"Guestlist.Owner"];
+    [query includeKey:@"Guestlist.Inquiry"];
+    [query includeKey:@"Guestlist.Inquiry.Offers"];
+
     [query includeKey:@"Guestlist.admissionOption"];
     [query includeKey:@"Guestlist.event.location"];
     NSDate *date = [[NSDate date] dateBySubtractingHours:4];
@@ -212,7 +216,12 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     PFObject *object = [self objectAtIndexPath:indexPath];
-    [self.delegate didSelectViewEventTicket:object];
+    if ([object[@"Guestlist"][@"admissionOption"][@"type"] integerValue] == 2) {
+        [self.delegate didSelectViewInquiry:object[@"Guestlist"][@"Inquiry"]];
+
+    } else {
+        [self.delegate didSelectViewEventTicket:object];
+    }
     THLGuestlistInvite *guestlistInvite = (THLGuestlistInvite *)object;
     if (!guestlistInvite.didOpen) {
         object[@"didOpen"] = @YES;

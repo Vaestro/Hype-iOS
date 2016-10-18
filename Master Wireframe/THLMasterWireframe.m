@@ -364,6 +364,10 @@ THLEventDiscoveryViewControllerDelegate
     [self presentPartyNavigationControllerForTicket:guestlistInvite];
 }
 
+- (void)didSelectViewInquiry:(PFObject *)inquiry {
+    [self presentOffersForInquiry:inquiry];
+}
+
 #pragma mark -
 #pragma mark EventDetailsViewController
 #pragma mark Delegate
@@ -442,6 +446,19 @@ THLEventDiscoveryViewControllerDelegate
 - (void)userProfileViewControllerWantsToPresentPaymentViewController {
     [self presentPaymentViewControllerOn:_userProfileViewController];
 }
+
+#pragma mark -
+#pragma mark InquiryOffersViewController
+
+- (void)presentOffersForInquiry:(PFObject *)inquiry {
+    THLInquiryOffersViewController *offersView = [[THLInquiryOffersViewController alloc] initWithInquiry:inquiry];
+    UINavigationController *navigationVC = [UINavigationController new];
+    [navigationVC addChildViewController:offersView];
+
+    [_window.rootViewController presentViewController:navigationVC animated:YES completion:nil];
+}
+
+
 #pragma mark -
 #pragma mark PartyNavigationController
 

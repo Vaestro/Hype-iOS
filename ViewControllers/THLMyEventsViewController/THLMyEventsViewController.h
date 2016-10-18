@@ -13,6 +13,7 @@
 @protocol THLMyEventsViewDelegate <NSObject>
 - (void)usersWantsToLogin;
 - (void)didSelectViewEventTicket:(PFObject *)guestlistInvite;
+- (void)didSelectViewInquiry:(PFObject *)inquiry;
 @end
 
 @interface THLMyEventsViewController : PFQueryCollectionViewController

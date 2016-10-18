@@ -27,11 +27,11 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
-  - Branch (0.12.11):
-    - Branch/Core (= 0.12.11)
-    - Branch/without-IDFA (= 0.12.11)
-  - Branch/Core (0.12.11)
-  - Branch/without-IDFA (0.12.11)
+  - Branch (0.12.12):
+    - Branch/Core (= 0.12.12)
+    - Branch/without-IDFA (= 0.12.12)
+  - Branch/Core (0.12.12)
+  - Branch/without-IDFA (0.12.12)
   - CocoaLumberjack (2.4.0):
     - CocoaLumberjack/Default (= 2.4.0)
     - CocoaLumberjack/Extensions (= 2.4.0)
@@ -50,7 +50,7 @@ PODS:
   - Fabric (1.6.9)
   - FBSDKCoreKit (4.16.0):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.16.0):
+  - FBSDKLoginKit (4.16.1):
     - FBSDKCoreKit
   - FLEX (2.4.0)
   - FLKAutoLayout (0.2.1)
@@ -89,8 +89,8 @@ PODS:
   - Gizou (0.1.3)
   - Harpy (4.0.6)
   - IHKeyboardAvoiding (2.6)
-  - Intercom (3.0.12)
-  - libPhoneNumber-iOS (0.8.16)
+  - Intercom (3.0.13)
+  - libPhoneNumber-iOS (0.8.17)
   - LinqToObjectiveC (2.1.0)
   - LMGeocoder (1.0.8)
   - Masonry (0.6.4)
@@ -122,7 +122,7 @@ PODS:
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
-  - SnapKit (3.0.1)
+  - SnapKit (3.0.2)
   - SSDataSources (0.8.5)
   - Stripe (9.0.0)
   - SVProgressHUD (2.0.3)
@@ -246,7 +246,7 @@ SPEC CHECKSUMS:
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   Bolts-Swift: fa98d1b59fc1acea9b21a21306dcdca1c85e3737
-  Branch: a620b19dc96fffabb7873a86c80c77c75395a664
+  Branch: 714cc02afc4676902f14f949157cdbf8c73f64f4
   CocoaLumberjack: aa9dcab71bdf9eaf2a63bbd9ddc87863efe45457
   Crashlytics: 27acca95a01b042a8294291dd6dff27f8f6af6d7
   DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
@@ -255,7 +255,7 @@ SPEC CHECKSUMS:
   EKAlgorithms: 83488651734ba3a63956fcb783b10e82d2ec3388
   Fabric: bc5bec42cef4bcf1ee3ce0e218fc518e4b44dfbb
   FBSDKCoreKit: 7a6baaed4a2b2a244ba253346713bdbc74df135b
-  FBSDKLoginKit: 9a514a55a7d05190f64d4ef09502737588b5b561
+  FBSDKLoginKit: 469a56cebe2e1ed62b1621d0b155970fd6aac2d8
   FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
   FLKAutoLayout: 9db6b30c2008d230da608e62c607b11c23b942e6
   FormatterKit: 11ad17b983200629246a5a466f6f1bfa2df823cb
@@ -264,8 +264,8 @@ SPEC CHECKSUMS:
   Gizou: 93853bf634a9382c257795db052aa9a75e972c43
   Harpy: 04c313691bfb7ae931eed36e0604e25f8e18b0ff
   IHKeyboardAvoiding: d2541ee56dad83e160cd9aed0468c52247af6f49
-  Intercom: b709f2055c8ab0333c255d0ad49886598d14705f
-  libPhoneNumber-iOS: acb5805f67892db37adc3440290a367923672b51
+  Intercom: 9ed3b0f6fd8a9e3b575cb51aa1e97bf4c3251d22
+  libPhoneNumber-iOS: 9f083847f8cb9b81064cff2ed2c98cbf18d9f9f2
   LinqToObjectiveC: f0e40c137a458b6b9725c4c7b6a575c0c72e3aec
   LMGeocoder: 7682148ce0bc55e483ceaa0eefdae4494d7102be
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
@@ -283,7 +283,7 @@ SPEC CHECKSUMS:
   ReflectableEnum: dc2fa83bba1e74df3a2f319c2ffaea55fd95887e
   Reveal-iOS-SDK: e2250b3c155bcfac53ae223ddc1f76d08f206c33
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
-  SnapKit: f818b8326d45b4e1c777d0ab27b5c0a3624bfdeb
+  SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
   SSDataSources: b01170fb23b82acf0649194e9189b0bf5f702681
   Stripe: 935c6deb5e96cbd29d247074bf3aa98a8438e22c
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
