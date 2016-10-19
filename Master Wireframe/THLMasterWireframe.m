@@ -452,7 +452,8 @@ THLEventDiscoveryViewControllerDelegate
 
 - (void)presentOffersForInquiry:(PFObject *)inquiry {
     THLInquiryOffersViewController *offersView = [[THLInquiryOffersViewController alloc] initWithInquiry:inquiry];
-    UINavigationController *navigationVC = [UINavigationController new];
+    UINavigationController *navigationVC = [[UINavigationController alloc] initWithNavigationBarClass:[THLBoldNavigationBar class] toolbarClass:nil];
+    
     [navigationVC addChildViewController:offersView];
 
     [_window.rootViewController presentViewController:navigationVC animated:YES completion:nil];

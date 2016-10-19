@@ -31,7 +31,7 @@ class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UIT
         offersTableView = UITableView.init(frame: CGRect.zero)
         super.init(nibName: nil, bundle: nil)
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "back_button"), style: .plain, target: self, action: #selector(THLInquiryOffersViewController.dismiss as (THLInquiryOffersViewController) -> () -> ()))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "back_button"), style: .plain, target: self, action: #selector(THLInquiryOffersViewController.dismiss as (THLInquiryOffersViewController) -> () -> ()))
         offersTableView.delegate = self
     }
     
@@ -48,8 +48,9 @@ class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UIT
         offersTableView.emptyDataSetSource = self
         offersTableView.emptyDataSetDelegate = self
         
-        offersTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-    
+        offersTableView.register(THLInquiryOfferTableViewCell.self, forCellReuseIdentifier: "THLInquiryOfferTableViewCell")
+        offersTableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        
         offersTableView.rowHeight = 60.0
         
         if let inquiryOffers = inquiry["Offers"] as! [PFObject]? {
@@ -61,7 +62,6 @@ class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UIT
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Offers"
     }
     
     override func viewWillLayoutSubviews() {
@@ -89,12 +89,13 @@ class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let inquiry: PFObject = self.offers[indexPath.row] as! PFObject
         
-        let cell:UITableViewCell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
+        let cellIdentifier = "cell"
         
-        cell.textLabel?.text = "Offer"
-        cell.textLabel?.textColor = UIColor.white
-        cell.backgroundColor = UIColor.black
+        let cell:THLInquiryOfferTableViewCell = tableView.dequeueReusableCell(withIdentifier: "THLInquiryOfferTableViewCell", for: indexPath) as! THLInquiryOfferTableViewCell
+        cell.hostNameLabel.text = "Offer"
+        cell.locationAndDateLabel.text = "Poop"
         return cell
         
     }
