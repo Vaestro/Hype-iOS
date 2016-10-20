@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import ParseUI
 
 class THLInquiryOfferTableViewCell: UITableViewCell {
     
@@ -19,20 +20,20 @@ class THLInquiryOfferTableViewCell: UITableViewCell {
         self.contentView.addSubview(hostImageView)
         
         hostNameLabel.snp.makeConstraints { (make) -> Void in
-            make.left.equalTo(hostImageView.snp.right)
+            make.left.equalTo(hostImageView.snp.right).offset(10)
             make.bottom.equalTo(self.contentView.snp.centerY)
         }
         
         locationAndDateLabel.snp.makeConstraints { (make) -> Void in
-            make.left.equalTo(hostImageView.snp.right)
+            make.left.equalTo(hostImageView.snp.right).offset(10)
             make.top.equalTo(self.contentView.snp.centerY)
         }
         
         hostImageView.snp.makeConstraints { (make) -> Void in
             make.left.equalTo(10)
-            make.width.equalTo(25)
-            make.height.equalTo(25)
-            make.centerY.equalTo(self)
+            make.width.equalTo(30)
+            make.height.equalTo(30)
+            make.centerY.equalTo(self.contentView.snp.centerY)
         }
     }
 
@@ -63,8 +64,8 @@ class THLInquiryOfferTableViewCell: UITableViewCell {
         return label
     }()
     
-    lazy var hostImageView: UIImageView = {
-        var imageView = UIImageView()
+    lazy var hostImageView: PFImageView = {
+        var imageView = PFImageView()
         imageView.contentMode = UIViewContentMode.scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 5

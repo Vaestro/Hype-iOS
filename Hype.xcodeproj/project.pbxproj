@@ -85,6 +85,7 @@
 		794A9D191CF4ACC300DDAC00 /* THLEventInviteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 794A9D181CF4ACC300DDAC00 /* THLEventInviteCell.m */; };
 		794DA4311DB6D988000C5F67 /* THLBoldNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794DA4301DB6D988000C5F67 /* THLBoldNavigationBar.swift */; };
 		794DA4331DB6E537000C5F67 /* THLInquiryOfferTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794DA4321DB6E537000C5F67 /* THLInquiryOfferTableCellView.swift */; };
+		794DA4351DB82DC4000C5F67 /* THLGuestProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794DA4341DB82DC3000C5F67 /* THLGuestProfileViewController.swift */; };
 		794DCCAC1BF3B31E0037A03D /* UIImageView+Letters.m in Sources */ = {isa = PBXBuildFile; fileRef = 794DCCAB1BF3B31E0037A03D /* UIImageView+Letters.m */; };
 		794DCCB51BF555020037A03D /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794DCCB41BF555020037A03D /* FXBlurView.m */; };
 		794DCCB71BF555150037A03D /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 794DCCB61BF555150037A03D /* Accelerate.framework */; };
@@ -370,6 +371,7 @@
 		794A9D181CF4ACC300DDAC00 /* THLEventInviteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventInviteCell.m; sourceTree = "<group>"; };
 		794DA4301DB6D988000C5F67 /* THLBoldNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLBoldNavigationBar.swift; sourceTree = "<group>"; };
 		794DA4321DB6E537000C5F67 /* THLInquiryOfferTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLInquiryOfferTableCellView.swift; sourceTree = "<group>"; };
+		794DA4341DB82DC3000C5F67 /* THLGuestProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLGuestProfileViewController.swift; sourceTree = "<group>"; };
 		794DCCAA1BF3B31E0037A03D /* UIImageView+Letters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Letters.h"; sourceTree = "<group>"; };
 		794DCCAB1BF3B31E0037A03D /* UIImageView+Letters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Letters.m"; sourceTree = "<group>"; };
 		794DCCB31BF555020037A03D /* FXBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXBlurView.h; sourceTree = "<group>"; };
@@ -1285,6 +1287,7 @@
 				799831191D4B9E5900BB5BFE /* THLReservationRequestViewController.h */,
 				792CFFB01DA874B2009E7C7E /* THLGuestlistTableViewController.swift */,
 				792BB4D01DB1507900B673B8 /* THLInquiryOfferDetailsView.swift */,
+				794DA4341DB82DC3000C5F67 /* THLGuestProfileViewController.swift */,
 				7998311A1D4B9E6500BB5BFE /* THLReservationRequestViewController.m */,
 				794DA4321DB6E537000C5F67 /* THLInquiryOfferTableCellView.swift */,
 			);
@@ -2248,6 +2251,7 @@
 				7928ADA41D19C9B600DFC443 /* THLOnboardingViewController.m in Sources */,
 				799B06991D2C3D600091B4CD /* UIScrollView+EmptyDataSet.m in Sources */,
 				792BB4D11DB1507900B673B8 /* THLInquiryOfferDetailsView.swift in Sources */,
+				794DA4351DB82DC4000C5F67 /* THLGuestProfileViewController.swift in Sources */,
 				C8F2FB2A1BF826B7004E00B6 /* THLWebViewController.m in Sources */,
 				79B062BD1CF909F300A3DC50 /* THLPartyNavigationController.m in Sources */,
 				794FAB671C5F17F400438D49 /* THLActionButton.m in Sources */,

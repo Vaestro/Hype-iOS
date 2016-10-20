@@ -157,6 +157,7 @@
     [query includeKey:@"Guestlist.Owner"];
     [query includeKey:@"Guestlist.Inquiry"];
     [query includeKey:@"Guestlist.Inquiry.Offers"];
+    [query includeKey:@"Guestlist.Inquiry.Offers.Host"];
 
     [query includeKey:@"Guestlist.admissionOption"];
     [query includeKey:@"Guestlist.event.location"];

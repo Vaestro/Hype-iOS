@@ -26,28 +26,27 @@ class THLInquiryMenuViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Inquiry"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancel_button"), style: .plain, target: self, action: #selector(THLInquiryMenuViewController.dismiss as (THLInquiryMenuViewController) -> () -> ()))
+        
+        let superview = self.view!
 
-        // Initialize view controllers to display and place in array
-        var controllerArray : [UIViewController] = []
-        
-        let controller1 : UIViewController = UIViewController()
-        controller1.view.backgroundColor = UIColor.orange
-        controller1.title = "PENDING"
-        controllerArray.append(controller1)
-        
-        let connectButton = UIButton(frame: CGRect(x: 0.0,y: 0.0,width:100.0,height:50.0))
+        let connectButton = UIButton()
         connectButton.titleLabel?.text = "CONNECT"
+        connectButton.titleLabel?.textColor = UIColor.black
         connectButton.addTarget(self, action: #selector(handleConnect), for: UIControlEvents.touchUpInside)
-        connectButton.backgroundColor = UIColor.black
-        controller1.view.addSubview(connectButton)
-        // Initialize scroll menu
-        let rect = CGRect(x: 0.0, y: 50.0, width: self.view.frame.width, height: 500)
-        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: rect, pageMenuOptions: nil)
-        
-        self.view.addSubview(pageMenu!.view)
+        connectButton.backgroundColor = UIColor.customGoldColor()
+        superview.addSubview(connectButton)
+    
+        connectButton.snp.makeConstraints { (make) -> Void in
+            make.width.equalTo(200)
+            make.height.equalTo(60)
+            make.center.equalTo(superview.snp.center)
+        }
     }
     
+    func dismiss() {
+        self.dismiss(animated: true, completion: nil)
+    }
     func handleConnect() {
         var offer = PFObject(className:"InquiryOffer")
         offer["message"] = "Hello I am host"
@@ -64,6 +63,21 @@ class THLInquiryMenuViewController: UIViewController {
                 }
                 self.inquiry?["Offers"] = offers
                 self.inquiry?.saveInBackground()
+                let title = "SUCCESS"
+                let message = "Your offer was submitted!"
+                
+                // Create the dialog
+                let popup = PopupDialog(title: title, message: message)
+                
+                // Create buttons
+                let buttonOne = CancelButton(title: "OK") {
+                    print("You canceled the car dialog.")
+                }
+                
+                popup.addButton(buttonOne)
+                
+                // Present dialog
+                self.present(popup, animated: true, completion: nil)
             } else {
                 // Prepare the popup assets
                 let title = "ERROR"

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ParseUI.h"
+#import <ParseUI/PFQueryCollectionViewController.h>
 #import "UIScrollView+EmptyDataSet.h"
 
 @protocol THLMyEventsViewDelegate <NSObject>

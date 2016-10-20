@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import PopupDialog
 
 class THLInquiryOfferDetailsView: UIViewController {
     
@@ -54,7 +55,40 @@ class THLInquiryOfferDetailsView: UIViewController {
         inquiryOffer["accepted"] = true
         inquiry["connected"] = true
         inquiryOffer.saveInBackground()
-        inquiry.saveInBackground()
+        inquiry.saveInBackground{(success, error) in
+            if (success) {
+                let title = "SUCCESS"
+                let message = "You are now connected with this host!"
+                
+                // Create the dialog
+                let popup = PopupDialog(title: title, message: message)
+                
+                // Create buttons
+                let buttonOne = CancelButton(title: "OK") {
+                }
+                
+                popup.addButton(buttonOne)
+                
+                // Present dialog
+                self.present(popup, animated: true, completion: nil)
+            } else {
+                // Prepare the popup assets
+                let title = "ERROR"
+                let message = "There was an issue with connecting you with the host. Please try again later!"
+                
+                // Create the dialog
+                let popup = PopupDialog(title: title, message: message)
+                
+                // Create buttons
+                let buttonOne = CancelButton(title: "OK") {
+                }
+                
+                popup.addButton(buttonOne)
+                
+                // Present dialog
+                self.present(popup, animated: true, completion: nil)
+            }
+        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -38,10 +38,9 @@ class THLAvailableInquiriesViewController: PFQueryTableViewController {
         
         query.addAscendingOrder("date")
         query.includeKey("Offers")
-        query.includeKey("Guestlist")
-        query.includeKey("Guestlist.event")
-        query.includeKey("Guestlist.event.location")
-        query.includeKey("Guestlist.Owner")
+        query.includeKey("Event")
+        query.includeKey("Event.location")
+        query.includeKey("Sender")
         
         return query
     }
@@ -55,14 +54,20 @@ extension THLAvailableInquiriesViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let inquiry: THLInquiry = super.object(at: indexPath) as! THLInquiry
     
-        let cellIdentifier = "cell"
-//        let guestlist:THLGuestlist = inquiry.value(forKey: "Guestlist") as! THLGuestlist
-//        let owner:THLUser = guestlist.value(forKey: "Owner") as! THLUser
-//        let senderFirstName:String = owner.value(forKey: "firstName") as! String
+        let event:PFObject = inquiry.value(forKey: "Event") as! PFObject
+        let venue:PFObject = event.value(forKey: "location") as! PFObject
+        let venueName:String = venue.value(forKey: "name") as! String
+
+        let sender:PFObject = inquiry.value(forKey: "Sender") as! PFObject
+        let senderFirstName:String = sender.value(forKey: "firstName") as! String
+        let date = inquiry.value(forKey: "date") as? Date
         
         let cell:THLInquiryTableViewCell = tableView.dequeueReusableCell(withIdentifier: "THLInquiryTableViewCell", for: indexPath) as! THLInquiryTableViewCell
         
-//        cell.inquirySenderLabel.text = "\(senderFirstName)"
+        cell.inquirySenderLabel.text = "\(senderFirstName) is interested in going to"
+        cell.venueNameLabel.text = venueName
+        cell.dateLabel.text = (date! as NSDate).thl_weekdayString
+
         return cell
     }
     
@@ -70,7 +75,7 @@ extension THLAvailableInquiriesViewController {
         let inquiry: PFObject? = super.object(at: indexPath)
 
         let inquiryMenuController = THLInquiryMenuViewController(inquiry:inquiry!)
-        var navigationController = UINavigationController()
+        let navigationController = UINavigationController.init(navigationBarClass: THLBoldNavigationBar.self, toolbarClass: nil)
         navigationController.setViewControllers([inquiryMenuController], animated: false)
         self.present(navigationController, animated: true)
         

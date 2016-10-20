@@ -15,6 +15,8 @@ class THLInquiryTableViewCell: UITableViewCell {
         let containerView:UIView = UIView()
         self.contentView.addSubview(containerView)
         self.contentView.backgroundColor = UIColor.black
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.gray.cgColor
         
         containerView.addSubview(inquirySenderLabel)
         containerView.addSubview(venueNameLabel)

@@ -81,7 +81,7 @@ THLEventDiscoveryViewControllerDelegate
 @property (nonatomic, strong) THLOnboardingViewController *onboardingViewController;
 @property (nonatomic, strong) THLLoginViewController *loginViewController;
 
-@property (nonatomic, strong) THLUserProfileViewController *userProfileViewController;
+@property (nonatomic, strong) THLGuestProfileViewController *userProfileViewController;
 @property (nonatomic, strong) THLPerkCollectionViewController *perkCollectionViewController;
 @property (nonatomic, strong) UIViewController *viewController;
 
@@ -221,9 +221,9 @@ THLEventDiscoveryViewControllerDelegate
     _masterTabBarController = masterTabBarController;
     
     THLMyEventsViewController *myEventsVC = [[THLMyEventsViewController alloc]initWithClassName:@"GuestlistInvite"];
-    UINavigationController *dashboard = [UINavigationController new];
+    UINavigationController *profile = [UINavigationController new];
     myEventsVC.delegate = self;
-    [dashboard pushViewController:myEventsVC animated:NO];
+    [profile pushViewController:myEventsVC animated:NO];
     
     THLEventDiscoveryViewController *discoveryVC = [[THLEventDiscoveryViewController alloc] initWithClassName:@"Event"];
     THLVenueDiscoveryViewController *venueDiscoveryVC = [[THLVenueDiscoveryViewController alloc] initWithClassName:@"Location"];
@@ -250,26 +250,21 @@ THLEventDiscoveryViewControllerDelegate
 
     [discovery pushViewController:_discoveryTabBarController animated:NO];
     
-    _userProfileViewController = [THLUserProfileViewController new];
-    UINavigationController *profile = [UINavigationController new];
-    _userProfileViewController.delegate = self;
-    [profile pushViewController:_userProfileViewController animated:NO];
+//    _userProfileViewController = [THLGuestProfileViewController new];
+//    _userProfileViewController.myEventsViewController.delegate = self;
+//    UINavigationController *profile = [UINavigationController new];
+////    _userProfileViewController.delegate = self;
+//    [profile pushViewController:_userProfileViewController animated:NO];
+    UIViewController *messagesViewController = [UIViewController new];
     
-    _perkCollectionViewController = [[THLPerkCollectionViewController alloc] initWithClassName:@"PerkStoreItem"];
-    _perkCollectionViewController.delegate = self;
-    UINavigationController *perks = [UINavigationController new];
-    [perks pushViewController:_perkCollectionViewController animated:NO];
-    
-    dashboard.tabBarItem.image = [UIImage imageNamed:@"Lists Icon"];
-    dashboard.tabBarItem.title = @"My Events";
+    messagesViewController.tabBarItem.image = [UIImage imageNamed:@"Lists Icon"];
+    messagesViewController.tabBarItem.title = @"My Events";
     discovery.tabBarItem.image = [UIImage imageNamed:@"Home Icon"];
     discovery.tabBarItem.title = @"Discover";
     profile.tabBarItem.image = [UIImage imageNamed:@"Profile Icon"];
     profile.tabBarItem.title = @"Profile";
-    perks.tabBarItem.image = [UIImage imageNamed:@"Perks Icon"];
-    perks.tabBarItem.title = @"Perks";
     
-    NSArray *views = @[discovery, dashboard, perks, profile];
+    NSArray *views = @[discovery, messagesViewController, profile];
     
     _masterTabBarController.viewControllers = views;
     [_masterTabBarController setSelectedIndex:0];

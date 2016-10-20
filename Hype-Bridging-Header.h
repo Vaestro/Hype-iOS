@@ -37,3 +37,6 @@
 
 #import "UIView+dimView.h"
 #import "THLParseQueryFactory.h"
+#import "THLPersonIconView.h"
+
+#import "THLMyEventsViewController.h"
