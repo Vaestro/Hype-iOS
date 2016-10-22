@@ -131,10 +131,6 @@ THLEventDiscoveryViewControllerDelegate
     }
 
     [[THLChatSocketManager sharedInstance] establishConnection];
-    
-   
-    [self configureMasterTabViewControllerAndPresentGuestFlowInWindow:_window];
-
 }
 
 - (void)routeSignedUpUserFlow {

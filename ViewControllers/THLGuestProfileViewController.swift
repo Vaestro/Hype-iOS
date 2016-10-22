@@ -11,10 +11,20 @@ import UIKit
 @objc protocol THLGuestProfileViewControllerDelegate {
     func didSelectViewInquiry(_ guestlistInvite: PFObject)
     func didSelectViewEventTicket(_ guestlistInvite: PFObject)
+    func userProfileViewControllerWantsToLogout()
+    func userProfileViewControllerWantsToPresentPaymentViewController()
 
 }
 
-class THLGuestProfileViewController: UIViewController, THLMyUpcomingEventsViewControllerDelegate {
+class THLGuestProfileViewController: UIViewController, THLMyUpcomingEventsViewControllerDelegate, THLUserProfileViewControllerDelegate {
+    public func userProfileViewControllerWantsToPresentPaymentViewController() {
+        delegate?.userProfileViewControllerWantsToPresentPaymentViewController()
+    }
+
+    public func userProfileViewControllerWantsToLogout() {
+        delegate?.userProfileViewControllerWantsToLogout()
+    }
+
     internal func didSelectViewEventTicket(_ guestlistInvite: PFObject) {
         delegate?.didSelectViewEventTicket(guestlistInvite)
 
@@ -29,9 +39,12 @@ class THLGuestProfileViewController: UIViewController, THLMyUpcomingEventsViewCo
 
     var pageMenu : CAPSPageMenu?
     var myEventsViewController : THLMyUpcomingEventsViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Menu Icon"), style: .plain, target: self, action: #selector(THLGuestProfileViewController.presentSettings as (THLGuestProfileViewController) -> () -> ()))
+
         guestImageView.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(25)
             make.size.equalTo(CGSize(width:100,height:100))
@@ -61,6 +74,15 @@ class THLGuestProfileViewController: UIViewController, THLMyUpcomingEventsViewCo
         pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: rect, pageMenuOptions: nil)
         
         self.view.addSubview(pageMenu!.view)
+    }
+    
+    func presentSettings() {
+        var navigationConroller = UINavigationController()
+        var settingsViewController = THLUserProfileViewController()
+        navigationConroller.pushViewController(settingsViewController, animated: false)
+        settingsViewController.delegate = self;
+        self.present(navigationConroller, animated: true, completion: nil)
+        
     }
     
     lazy var guestImageView: THLPersonIconView = {

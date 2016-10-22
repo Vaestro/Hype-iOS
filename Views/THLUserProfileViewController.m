@@ -68,7 +68,13 @@ STPPaymentCardTextFieldDelegate
                                                   forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
-    self.navigationController.view.backgroundColor = [UIColor clearColor];
+    self.navigationController.view.backgroundColor = [UIColor blackColor];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
+                                             initWithImage:[UIImage imageNamed:@"cancel_button"]
+                                             style:UIBarButtonItemStylePlain
+                                             target:self
+                                             action:@selector(dismiss)];
     
     self.tableCellNames = @[@"Hype Concierge", @"Invite Friends",@"Redeem Code", @"Payment Method", @"Privacy Policy", @"Terms & Conditions", @"Contact Us", @"Logout"];
     
@@ -157,7 +163,7 @@ STPPaymentCardTextFieldDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     THLUserProfileHeaderView *headerView = [THLUserProfileHeaderView new];
-    return [headerView.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -231,6 +237,10 @@ STPPaymentCardTextFieldDelegate
     
     [self showAlertViewWithMessage:message withAction:[[NSArray alloc] initWithObjects:cancelAction, confirmAction, nil]];
 
+}
+
+-(void)dismiss {
+    [self dismissViewControllerAnimated:true completion:nil];
 }
 
 - (void)handleContactAction {
