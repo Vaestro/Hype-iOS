@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2108A8851B8BBF4900B725F6 /* THLMasterWireframe.m in Sources */ = {isa = PBXBuildFile; fileRef = 2108A8841B8BBF4900B725F6 /* THLMasterWireframe.m */; };
+		2108A8851B8BBF4900B725F6 /* THLMasterWireFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 2108A8841B8BBF4900B725F6 /* THLMasterWireFrame.m */; };
 		2108A8881B8BBF5B00B725F6 /* THLDependencyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2108A8871B8BBF5B00B725F6 /* THLDependencyManager.m */; };
 		211005B71B8A446D00A540C6 /* THLViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 211005B61B8A446D00A540C6 /* THLViewDataSource.m */; };
 		211005D01B8A7D0200A540C6 /* NSDate+Hypelist.m in Sources */ = {isa = PBXBuildFile; fileRef = 211005CF1B8A7D0200A540C6 /* NSDate+Hypelist.m */; };
@@ -203,6 +203,10 @@
 		CBE54720F63BA2DE2136B454 /* THLViewDataSource+Factory.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE545A9A3C66339456E0A06 /* THLViewDataSource+Factory.m */; };
 		CBE547FB5677C373C1DE74C7 /* THLViewDataSourceSorting.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE5404991A434142507D7B0 /* THLViewDataSourceSorting.m */; };
 		FAEE45D01C70E4BA0032C91C /* THLChannelService.m in Sources */ = {isa = PBXBuildFile; fileRef = FAEE45CF1C70E4BA0032C91C /* THLChannelService.m */; };
+		FF2741A11DA21D5A0001C117 /* THLChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2741A01DA21D5A0001C117 /* THLChatViewController.swift */; };
+		FF35417F1DB45182004DD268 /* THLChatEntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF35417E1DB45180004DD268 /* THLChatEntryCell.swift */; };
+		FF9BF5FF1DAC572800442209 /* THLChatEntryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9BF5FE1DAC572800442209 /* THLChatEntryTableViewController.swift */; };
+		FFE70C9F1DA86F2900E57AC0 /* THLChatSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFE70C9E1DA86F2900E57AC0 /* THLChatSocketManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -217,7 +221,7 @@
 
 /* Begin PBXFileReference section */
 		2108A8831B8BBF4900B725F6 /* THLMasterWireframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLMasterWireframe.h; sourceTree = "<group>"; };
-		2108A8841B8BBF4900B725F6 /* THLMasterWireframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLMasterWireframe.m; sourceTree = "<group>"; };
+		2108A8841B8BBF4900B725F6 /* THLMasterWireFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLMasterWireFrame.m; sourceTree = "<group>"; };
 		2108A8861B8BBF5B00B725F6 /* THLDependencyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLDependencyManager.h; sourceTree = "<group>"; };
 		2108A8871B8BBF5B00B725F6 /* THLDependencyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLDependencyManager.m; sourceTree = "<group>"; };
 		211005B51B8A446D00A540C6 /* THLViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLViewDataSource.h; sourceTree = "<group>"; };
@@ -562,6 +566,10 @@
 		CBE54FD0B5A148F6494B7A84 /* THLViewDataSourceGrouping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLViewDataSourceGrouping.h; sourceTree = "<group>"; };
 		FAEE45CE1C70E4BA0032C91C /* THLChannelService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLChannelService.h; sourceTree = "<group>"; };
 		FAEE45CF1C70E4BA0032C91C /* THLChannelService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLChannelService.m; sourceTree = "<group>"; };
+		FF2741A01DA21D5A0001C117 /* THLChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLChatViewController.swift; sourceTree = "<group>"; };
+		FF35417E1DB45180004DD268 /* THLChatEntryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLChatEntryCell.swift; sourceTree = "<group>"; };
+		FF9BF5FE1DAC572800442209 /* THLChatEntryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLChatEntryTableViewController.swift; sourceTree = "<group>"; };
+		FFE70C9E1DA86F2900E57AC0 /* THLChatSocketManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLChatSocketManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -671,6 +679,7 @@
 		2118920A1BAA039700E8A11F /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				21937F2D1BB5D0F2005E949E /* Model Services */,
 				217EBEA21BB7A0F2006044B6 /* Login */,
 			);
 			path = Authentication;
@@ -710,6 +719,7 @@
 				79B59F051D5E78CB00E374A4 /* THLHypeConciergeInfoView.m */,
 				795569BF1DA70ECF006E4049 /* THLInquiryTableViewCell.swift */,
 				792352491D947490007D3262 /* THLEventDiscoveryCell.swift */,
+				FF35417E1DB45180004DD268 /* THLChatEntryCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -917,7 +927,8 @@
 				C8EE96CC1CE677580040A1F0 /* THLStripeTokenService.h */,
 				C8EE96CD1CE677580040A1F0 /* THLStripeTokenService.m */,
 			);
-			path = "Model Services";
+			name = "Model Services";
+			path = "../Model Services";
 			sourceTree = "<group>";
 		};
 		21CCEDD11B87C24A0066CDAC /* Parse Models */ = {
@@ -973,9 +984,9 @@
 		21CCEDEB1B87CDD00066CDAC /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				FF30597E1DA86D80009DDC93 /* Chat */,
 				2118920A1BAA039700E8A11F /* Authentication */,
 				21CCEDEF1B87CE210066CDAC /* Fetching */,
-				21937F2D1BB5D0F2005E949E /* Model Services */,
 				21775F571B8E15E400609D39 /* Permissions Request */,
 				7928AD841D19C79300DFC443 /* THLParseQueryFactory.h */,
 				7928AD851D19C79300DFC443 /* THLParseQueryFactory.m */,
@@ -1026,7 +1037,7 @@
 			isa = PBXGroup;
 			children = (
 				2108A8831B8BBF4900B725F6 /* THLMasterWireframe.h */,
-				2108A8841B8BBF4900B725F6 /* THLMasterWireframe.m */,
+				2108A8841B8BBF4900B725F6 /* THLMasterWireFrame.m */,
 			);
 			path = "Master Wireframe";
 			sourceTree = "<group>";
@@ -1282,6 +1293,7 @@
 				7917C0EF1D1B3C2E0054BDB0 /* THLVenueDiscoveryViewController.h */,
 				7917C0F01D1B3C2E0054BDB0 /* THLVenueDiscoveryViewController.m */,
 				796AD92A1D908D3E006DCEDA /* THLEventDiscoveryViewController.swift */,
+				FF2741A01DA21D5A0001C117 /* THLChatViewController.swift */,
 				795EF50F1D3E9B1900485B11 /* THLSignUpViewController.h */,
 				79F462D21DA6AAA0004BB49C /* THLHostDashboardViewController.swift */,
 				7964645C1DAE95A000DA1F51 /* THLInquiryOffersViewController.swift */,
@@ -1296,6 +1308,7 @@
 				7998311A1D4B9E6500BB5BFE /* THLReservationRequestViewController.m */,
 				79E945B61DBA7ED900EC753D /* THLMyUpcomingEventsViewController.swift */,
 				794DA4321DB6E537000C5F67 /* THLInquiryOfferTableCellView.swift */,
+				FF9BF5FE1DAC572800442209 /* THLChatEntryTableViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1796,6 +1809,14 @@
 			path = THLChannelService;
 			sourceTree = "<group>";
 		};
+		FF30597E1DA86D80009DDC93 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				FFE70C9E1DA86F2900E57AC0 /* THLChatSocketManager.swift */,
+			);
+			name = Chat;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2178,6 +2199,7 @@
 				7928ADAA1D19C9E200DFC443 /* THLUserProfileHeaderView.m in Sources */,
 				799B069C1D2DA5F30091B4CD /* SwipeView.m in Sources */,
 				798650A41BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m in Sources */,
+				FF35417F1DB45182004DD268 /* THLChatEntryCell.swift in Sources */,
 				79319DD81D9AED88000DEE69 /* EPContactsPicker.swift in Sources */,
 				794A9D191CF4ACC300DDAC00 /* THLEventInviteCell.m in Sources */,
 				7928ADB31D19CB1900DFC443 /* THLPopupNotificationView.m in Sources */,
@@ -2186,6 +2208,7 @@
 				212173711BB34F15007D817A /* THLRoundImageView.m in Sources */,
 				C88A015C1D0B56DE00152B37 /* THLTablePackageAdmissionCell.m in Sources */,
 				C8EE96D51CE93D770040A1F0 /* THLCheckoutViewController.m in Sources */,
+				FFE70C9F1DA86F2900E57AC0 /* THLChatSocketManager.swift in Sources */,
 				211005D51B8A7D2800A540C6 /* NSDate+Utilities.m in Sources */,
 				792545C21CFDDFFB004CF29A /* THLImportantInformationView.m in Sources */,
 				795569BE1DA6B8D8006E4049 /* THLAvailableInquiriesViewController.swift in Sources */,
@@ -2253,6 +2276,7 @@
 				C8D1D2A41CD3E864006ADC6A /* THLPaymentViewController.m in Sources */,
 				79CEDF3F1D257A6700DFB654 /* UIColorExtensions.swift in Sources */,
 				79B59F061D5E78CB00E374A4 /* THLHypeConciergeInfoView.m in Sources */,
+				FF9BF5FF1DAC572800442209 /* THLChatEntryTableViewController.swift in Sources */,
 				21E402DC1BBF8155001D0C2C /* THLGuestlistInvite.m in Sources */,
 				21CCEDE91B87C87B0066CDAC /* THLDataStore.m in Sources */,
 				7928ADA41D19C9B600DFC443 /* THLOnboardingViewController.m in Sources */,
@@ -2263,6 +2287,7 @@
 				79B062BD1CF909F300A3DC50 /* THLPartyNavigationController.m in Sources */,
 				794FAB671C5F17F400438D49 /* THLActionButton.m in Sources */,
 				79E945B71DBA7ED900EC753D /* THLMyUpcomingEventsViewController.swift in Sources */,
+				FF2741A11DA21D5A0001C117 /* THLChatViewController.swift in Sources */,
 				792545BC1CFCBD61004CF29A /* THLPartyMemberCell.m in Sources */,
 				794DCCAC1BF3B31E0037A03D /* UIImageView+Letters.m in Sources */,
 				79319DD91D9AED88000DEE69 /* EPExtensions.swift in Sources */,
@@ -2275,7 +2300,7 @@
 				7923524A1D947490007D3262 /* THLEventDiscoveryCell.swift in Sources */,
 				7998311E1D4C06CA00BB5BFE /* THLTablePackageDetailView.m in Sources */,
 				79319DD61D9AED88000DEE69 /* EPContactCell.swift in Sources */,
-				2108A8851B8BBF4900B725F6 /* THLMasterWireframe.m in Sources */,
+				2108A8851B8BBF4900B725F6 /* THLMasterWireFrame.m in Sources */,
 				79CE315A1CF7B03F00CEA784 /* THLEventTicketViewController.m in Sources */,
 				795569C01DA70ECF006E4049 /* THLInquiryTableViewCell.swift in Sources */,
 				7928AD921D19C82600DFC443 /* THLPerkStoreCell.m in Sources */,

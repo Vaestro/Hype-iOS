@@ -19,6 +19,7 @@ pod 'SDWebImage', '~> 3.7'
 pod 'FormatterKit', '~> 1.8'
 pod 'Typhoon', '~> 3.3'
 pod 'Mixpanel'
+pod 'Socket.IO-Client-Swift'
 
 #SWIFT
 pod 'SnapKit', '~> 3.0'
@@ -72,6 +73,7 @@ pod 'THContactPicker', '~> 1.2'
 pod 'IHKeyboardAvoiding'
 pod 'FXLabel'
 pod 'BLKFlexibleHeightBar'
+pod 'JSQMessagesViewController'
 end
 
 target 'HypeTests' do

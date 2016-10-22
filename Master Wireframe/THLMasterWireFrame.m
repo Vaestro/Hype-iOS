@@ -46,6 +46,7 @@
 #import "THLTablePackageDetailsViewController.h"
 #import "THLLoginViewController.h"
 
+
 #import "THLPopupNotificationView.h"
 #import "THLLoginService.h"
 #import "THLVenueDiscoveryViewController.h"
@@ -78,6 +79,7 @@ THLEventDiscoveryViewControllerDelegate
 @property (nonatomic, strong) UITabBarController *masterTabBarController;
 @property (nonatomic, strong) UITabBarController *discoveryTabBarController;
 @property (nonatomic, strong) THLDiscoveryNavBarTitleView *discoveryNavBarTitleView;
+@property (nonatomic, strong) THLChatEntryTableViewController *chatEntryTableViewController;
 
 @property (nonatomic, strong) THLOnboardingViewController *onboardingViewController;
 @property (nonatomic, strong) THLLoginViewController *loginViewController;
@@ -121,13 +123,18 @@ THLEventDiscoveryViewControllerDelegate
     
     [[Branch getInstance] setIdentity:[THLUser currentUser].objectId];
     [[Branch getInstance] userCompletedAction:@"logIn"];
-    
-    if ([THLUserManager userIsHost]) {
+     if ([THLUserManager userIsHost]) {
         [self presentHostFlowInWindow:_window];
 
     } else {
         [self configureMasterTabViewControllerAndPresentGuestFlowInWindow:_window];
     }
+
+    [[THLChatSocketManager sharedInstance] establishConnection];
+    
+   
+    [self configureMasterTabViewControllerAndPresentGuestFlowInWindow:_window];
+
 }
 
 - (void)routeSignedUpUserFlow {
@@ -140,7 +147,9 @@ THLEventDiscoveryViewControllerDelegate
     
     [[Branch getInstance] setIdentity:[THLUser currentUser].objectId];
     [[Branch getInstance] userCompletedAction:@"signUp"];
-
+    
+    [[THLChatSocketManager sharedInstance] establishConnection];
+    
     
     [self configureMasterTabViewControllerAndPresentGuestFlowInWindow:_window];
 }
@@ -273,7 +282,13 @@ THLEventDiscoveryViewControllerDelegate
 
 - (void)messageButtonPressed
 {
-    [Intercom presentMessageComposer];
+    // Show chat view controller
+    UINavigationController *chatEntry = [UINavigationController new];
+    _chatEntryTableViewController = [THLChatEntryTableViewController new];
+    [chatEntry pushViewController:_chatEntryTableViewController animated:NO];
+    [[self topViewController] presentViewController:chatEntry animated:YES completion:nil];
+    
+    
 }
 
 
@@ -625,6 +640,7 @@ THLEventDiscoveryViewControllerDelegate
     [[Branch getInstance]logout];
     [PFObject unpinAllObjects];
     [FBSDKAccessToken setCurrentAccessToken:nil];
+    [[THLChatSocketManager sharedInstance] closeConnection];
 //    [_dependencyManager.databaseManager dropDB];
     [self presentOnboardingViewController];
 }
