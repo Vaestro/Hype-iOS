@@ -55,6 +55,7 @@
 
 @interface THLMasterWireframe()
 <
+THLGuestProfileViewControllerDelegate,
 THLSwiftAdmissionsViewControllerDelegate,
 THLAdmissionsViewDelegate,
 THLTablePackageControllerDelegate,
@@ -220,10 +221,10 @@ THLEventDiscoveryViewControllerDelegate
 - (void)configureMasterTabViewController:(UITabBarController *)masterTabBarController {
     _masterTabBarController = masterTabBarController;
     
-    THLMyEventsViewController *myEventsVC = [[THLMyEventsViewController alloc]initWithClassName:@"GuestlistInvite"];
-    UINavigationController *profile = [UINavigationController new];
-    myEventsVC.delegate = self;
-    [profile pushViewController:myEventsVC animated:NO];
+//    THLMyEventsViewController *myEventsVC = [[THLMyEventsViewController alloc]initWithClassName:@"GuestlistInvite"];
+//    UINavigationController *profile = [UINavigationController new];
+//    myEventsVC.delegate = self;
+//    [profile pushViewController:myEventsVC animated:NO];
     
     THLEventDiscoveryViewController *discoveryVC = [[THLEventDiscoveryViewController alloc] initWithClassName:@"Event"];
     THLVenueDiscoveryViewController *venueDiscoveryVC = [[THLVenueDiscoveryViewController alloc] initWithClassName:@"Location"];
@@ -250,11 +251,10 @@ THLEventDiscoveryViewControllerDelegate
 
     [discovery pushViewController:_discoveryTabBarController animated:NO];
     
-//    _userProfileViewController = [THLGuestProfileViewController new];
-//    _userProfileViewController.myEventsViewController.delegate = self;
-//    UINavigationController *profile = [UINavigationController new];
-////    _userProfileViewController.delegate = self;
-//    [profile pushViewController:_userProfileViewController animated:NO];
+    _userProfileViewController = [THLGuestProfileViewController new];
+    _userProfileViewController.delegate = self;
+    UINavigationController *profile = [UINavigationController new];
+    [profile pushViewController:_userProfileViewController animated:NO];
     UIViewController *messagesViewController = [UIViewController new];
     
     messagesViewController.tabBarItem.image = [UIImage imageNamed:@"Lists Icon"];

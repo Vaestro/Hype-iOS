@@ -40,3 +40,4 @@
 #import "THLPersonIconView.h"
 
 #import "THLMyEventsViewController.h"
+#import "NSDate+Utilities.h"

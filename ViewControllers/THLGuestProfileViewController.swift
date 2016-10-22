@@ -8,10 +8,27 @@
 
 import UIKit
 
-class THLGuestProfileViewController: UIViewController {
-    
+@objc protocol THLGuestProfileViewControllerDelegate {
+    func didSelectViewInquiry(_ guestlistInvite: PFObject)
+    func didSelectViewEventTicket(_ guestlistInvite: PFObject)
+
+}
+
+class THLGuestProfileViewController: UIViewController, THLMyUpcomingEventsViewControllerDelegate {
+    internal func didSelectViewEventTicket(_ guestlistInvite: PFObject) {
+        delegate?.didSelectViewEventTicket(guestlistInvite)
+
+    }
+
+    internal func didSelectViewInquiry(_ guestlistInvite: PFObject) {
+        delegate?.didSelectViewInquiry(guestlistInvite)
+
+    }
+
+    var delegate: THLGuestProfileViewControllerDelegate?
+
     var pageMenu : CAPSPageMenu?
-    var myEventsViewController : THLMyEventsViewController?
+    var myEventsViewController : THLMyUpcomingEventsViewController?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,8 +41,9 @@ class THLGuestProfileViewController: UIViewController {
         // Initialize view controllers to display and place in array
         var controllerArray : [UIViewController] = []
         
-        myEventsViewController = THLMyEventsViewController.init(className: "GuestlistInvite")
-        myEventsViewController?.title = "TICKETS"
+        myEventsViewController = THLMyUpcomingEventsViewController()
+        myEventsViewController?.delegate = self;
+        myEventsViewController?.title = "MY EVENTS"
         controllerArray.append(myEventsViewController!)
         
         let controller2 : UIViewController = UIViewController()

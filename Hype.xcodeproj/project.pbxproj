@@ -172,6 +172,8 @@
 		79CEDF3F1D257A6700DFB654 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CEDF3E1D257A6600DFB654 /* UIColorExtensions.swift */; };
 		79CEDF411D27092B00DFB654 /* THLEventNavBarTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CEDF401D27092B00DFB654 /* THLEventNavBarTitleView.swift */; };
 		79CEDF431D27180600DFB654 /* THLDiscoveryNavBarTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CEDF421D27180600DFB654 /* THLDiscoveryNavBarTitleView.swift */; };
+		79E945B71DBA7ED900EC753D /* THLMyUpcomingEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E945B61DBA7ED900EC753D /* THLMyUpcomingEventsViewController.swift */; };
+		79E945B91DBA911E00EC753D /* THLMyEventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E945B81DBA911E00EC753D /* THLMyEventsTableViewCell.swift */; };
 		79F462D11DA6A6E6004BB49C /* CAPSPageMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F462D01DA6A6E6004BB49C /* CAPSPageMenu.swift */; };
 		79F462D31DA6AAA0004BB49C /* THLHostDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F462D21DA6AAA0004BB49C /* THLHostDashboardViewController.swift */; };
 		79FBFCCF1D30513500F291E7 /* THLEventHeaderStyleBehaviorDefiner.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FBFCCE1D30513500F291E7 /* THLEventHeaderStyleBehaviorDefiner.m */; };
@@ -502,6 +504,8 @@
 		79CEDF3E1D257A6600DFB654 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColorExtensions.swift; path = Categories/UIColorExtensions.swift; sourceTree = SOURCE_ROOT; };
 		79CEDF401D27092B00DFB654 /* THLEventNavBarTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLEventNavBarTitleView.swift; sourceTree = "<group>"; };
 		79CEDF421D27180600DFB654 /* THLDiscoveryNavBarTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLDiscoveryNavBarTitleView.swift; sourceTree = "<group>"; };
+		79E945B61DBA7ED900EC753D /* THLMyUpcomingEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLMyUpcomingEventsViewController.swift; sourceTree = "<group>"; };
+		79E945B81DBA911E00EC753D /* THLMyEventsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLMyEventsTableViewCell.swift; sourceTree = "<group>"; };
 		79F462D01DA6A6E6004BB49C /* CAPSPageMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAPSPageMenu.swift; sourceTree = "<group>"; };
 		79F462D21DA6AAA0004BB49C /* THLHostDashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLHostDashboardViewController.swift; sourceTree = "<group>"; };
 		79FBFCCD1D30511F00F291E7 /* THLEventHeaderStyleBehaviorDefiner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLEventHeaderStyleBehaviorDefiner.h; sourceTree = "<group>"; };
@@ -1283,12 +1287,14 @@
 				7964645C1DAE95A000DA1F51 /* THLInquiryOffersViewController.swift */,
 				795569BD1DA6B8D8006E4049 /* THLAvailableInquiriesViewController.swift */,
 				795569C41DA81BA3006E4049 /* THLInquiryMenuViewController.swift */,
+				79E945B81DBA911E00EC753D /* THLMyEventsTableViewCell.swift */,
 				795EF50D1D3E9B0700485B11 /* THLSignUpViewController.m */,
 				799831191D4B9E5900BB5BFE /* THLReservationRequestViewController.h */,
 				792CFFB01DA874B2009E7C7E /* THLGuestlistTableViewController.swift */,
 				792BB4D01DB1507900B673B8 /* THLInquiryOfferDetailsView.swift */,
 				794DA4341DB82DC3000C5F67 /* THLGuestProfileViewController.swift */,
 				7998311A1D4B9E6500BB5BFE /* THLReservationRequestViewController.m */,
+				79E945B61DBA7ED900EC753D /* THLMyUpcomingEventsViewController.swift */,
 				794DA4321DB6E537000C5F67 /* THLInquiryOfferTableCellView.swift */,
 			);
 			path = ViewControllers;
@@ -2206,6 +2212,7 @@
 				21CCEDE21B87C62F0066CDAC /* THLYapDatabaseManager.m in Sources */,
 				211BB0D81B8CC6DA0068FD50 /* UIView+AddSubviews.m in Sources */,
 				798402D41D217157006F463B /* THLEntity.m in Sources */,
+				79E945B91DBA911E00EC753D /* THLMyEventsTableViewCell.swift in Sources */,
 				7928ADA11D19C98400DFC443 /* THLUserProfileTableViewCell.m in Sources */,
 				7928AD891D19C7B300DFC443 /* THLNeedToKnowInfoView.m in Sources */,
 				213CE1131BB8D22D00054A2C /* THLLocationService.m in Sources */,
@@ -2255,6 +2262,7 @@
 				C8F2FB2A1BF826B7004E00B6 /* THLWebViewController.m in Sources */,
 				79B062BD1CF909F300A3DC50 /* THLPartyNavigationController.m in Sources */,
 				794FAB671C5F17F400438D49 /* THLActionButton.m in Sources */,
+				79E945B71DBA7ED900EC753D /* THLMyUpcomingEventsViewController.swift in Sources */,
 				792545BC1CFCBD61004CF29A /* THLPartyMemberCell.m in Sources */,
 				794DCCAC1BF3B31E0037A03D /* UIImageView+Letters.m in Sources */,
 				79319DD91D9AED88000DEE69 /* EPExtensions.swift in Sources */,
