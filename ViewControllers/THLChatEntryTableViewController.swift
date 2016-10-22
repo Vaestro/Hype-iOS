@@ -12,14 +12,24 @@ class THLChatEntryTableViewController: UITableViewController {
 
     var promoters = [String]()
     var roomIds = [String]()
+    var mateIds = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Hard coded stuff for testing
         var usersPN = (THLUser.current()?.phoneNumber)!
-        if(usersPN == "+15715502992" || usersPN == "+19178686312") {
+        if(usersPN == "+15715502992") {
             promoters.append("Your Inquiry")
             roomIds.append("tjP5OTYg6w");
+            roomIds.append("U593pjlBNl");
+            mateIds.append("+19178686312")
+            mateIds.append("+17038151183")
+        } else if(usersPN == "+19178686312") {
+            roomIds.append("tjP5OTYg6w");
+            mateIds.append("+15715502992")
+        } else if(usersPN == "+17038151183") {
+            roomIds.append("U593pjlBNl");
+            mateIds.append("+15715502992")
         }
         self.navigationItem.title = "MESSAGES";
         let barBack = UIBarButtonItem(title: "<", style: UIBarButtonItemStyle.plain, target: self, action: "back")
@@ -34,11 +44,13 @@ class THLChatEntryTableViewController: UITableViewController {
        //tableView.register(UITableViewCell.self, forCellReuseIdentifier: "defaultId")
         //tableView.register(THLChatEntryCell.self, forCellReuseIdentifier: "chatEntry")
         
-        tableView = UITableView(frame: view.bounds, style: .grouped)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.separatorStyle = .none
-        tableView.backgroundColor = UIColor.black
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        
+        tableView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
+        
+        
         tableView.register(THLChatEntryCell.self, forCellReuseIdentifier: "EntryCell")
        
         
@@ -67,11 +79,14 @@ class THLChatEntryTableViewController: UITableViewController {
         //let cell = tableView.dequeueReusableCell(withIdentifier: "chatEntry", for: indexPath)
         let cell = tableView.dequeueReusableCell( withIdentifier: "EntryCell", for: indexPath) as! THLChatEntryCell
         cell.priceLabel.text = "Your Inquiry"
-        cell.background.backgroundColor = UIColor.black
         cell.priceLabel.backgroundColor = UIColor.black
-        cell.nameLabel.backgroundColor = UIColor.black
-        cell.typeLabel.backgroundColor = UIColor.black
+        cell.priceLabel.alpha = 0.9
+        cell.dateLabel.text = "1 Week Ago"
+        
+       
         cell.backgroundColor = UIColor.black
+        cell.alpha = 0.9
+        
         
         return cell
     }
@@ -86,15 +101,11 @@ class THLChatEntryTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var promotersNumber = String()
+       
         var usersPN = (THLUser.current()?.phoneNumber)!
-        if(usersPN == "+15715502992") {
-            promotersNumber = "+19178686312"
-        } else {
-            promotersNumber = "+15715502992"
-        }
+        
         var chatViewController = THLChatViewController()
-        chatViewController.chatMateId = promotersNumber
+        chatViewController.chatMateId = mateIds[indexPath.row];
         chatViewController.chatRoomId = roomIds[indexPath.row];
         print("The Chat room id being passed is: ")
         print(roomIds[indexPath.row])

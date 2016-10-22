@@ -55,9 +55,7 @@ class THLChatSocketManager: NSObject {
     func listenForYourMessageSend() {
         socket.on("msgSuccess") { (dataArray, socketAck) -> Void in
            print("Your message was sent succesfully..!")
-            //UIApplication.shared.keyWindow?.rootViewController?.navigationItem.title = "TESTMSG"
-         
-            
+           
         }
     }
     

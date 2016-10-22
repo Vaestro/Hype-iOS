@@ -15,6 +15,8 @@ class THLChatEntryCell: UITableViewCell {
     var typeLabel: UILabel!
     var nameLabel: UILabel!
     var priceLabel: UILabel!
+    var userImage : UIImageView!
+    var dateLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,22 +34,37 @@ class THLChatEntryCell: UITableViewCell {
         
         background = UIView(frame: CGRect.zero)
         background.alpha = 1.0
-        contentView.addSubview(background)
+        //contentView.addSubview(background)
         
         nameLabel = UILabel(frame: CGRect.zero)
         nameLabel.textAlignment = .left
         nameLabel.textColor = UIColor.white
-        contentView.addSubview(nameLabel)
+        //contentView.addSubview(nameLabel)
         
         typeLabel = UILabel(frame: CGRect.zero)
         typeLabel.textAlignment = .center
         typeLabel.textColor = UIColor.white
-        contentView.addSubview(typeLabel)
+        //contentView.addSubview(typeLabel)
         
-        priceLabel = UILabel(frame: CGRect.zero)
+        priceLabel = UILabel()
         priceLabel.textAlignment = .center
         priceLabel.textColor = UIColor.white
+        priceLabel.font = UIFont(name:"OpenSans-Light", size: 16)
         contentView.addSubview(priceLabel)
+        
+        dateLabel = UILabel()
+        dateLabel.textAlignment = .center
+        dateLabel.textColor = UIColor.customGoldColor()
+        dateLabel.font = UIFont(name:"OpenSans-Light", size:12)
+        contentView.addSubview(dateLabel)
+        
+        let image = UIImage(named: "default_profile_image")
+        userImage = UIImageView(image: image!)
+        contentView.addSubview(userImage)
+        
+        
+        
+        
         
     }
     
@@ -63,10 +80,26 @@ class THLChatEntryCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        background.frame = CGRect(x: 0, y: padding, width:frame.width, height: frame.height - 2 * padding)
-        typeLabel.frame = CGRect(x: padding, y: (frame.height - 25)/2, width: 40, height: 25)
-        priceLabel.frame = CGRect(x: frame.width - 100, y: padding, width: 100, height: frame.height - 2 * padding)
-        nameLabel.frame = CGRect(x: typeLabel.frame.maxX + 10, y: 0, width: frame.width - priceLabel.frame.width - (typeLabel.frame.maxX + 10), height: frame.height)
+        
+        priceLabel.snp.makeConstraints { (make) -> Void in
+           make.bottom.left.right.equalTo(contentView)
+           make.bottom.top.bottom.equalTo(contentView);
+        }
+        
+        userImage.snp.makeConstraints{ (make) -> Void in
+            
+            make.height.equalTo(contentView.frame.size.height/2)
+            make.width.width.equalTo((contentView.frame.size.width/5))
+            make.centerY.equalTo(contentView)
+            make.leftMargin.equalTo(4)
+            
+        }
+        
+        dateLabel.snp.makeConstraints{ (make) -> Void in
+           
+            make.bottom.top.bottom.equalTo(contentView);
+            make.rightMargin.equalTo(4)
+        }
     }
     
     

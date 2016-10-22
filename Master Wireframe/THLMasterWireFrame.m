@@ -614,6 +614,7 @@ THLEventDiscoveryViewControllerDelegate
     [[Branch getInstance]logout];
     [PFObject unpinAllObjects];
     [FBSDKAccessToken setCurrentAccessToken:nil];
+    [[THLChatSocketManager sharedInstance] closeConnection];
 //    [_dependencyManager.databaseManager dropDB];
     [self presentOnboardingViewController];
 }
