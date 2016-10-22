@@ -92,11 +92,13 @@ extension THLMyUpcomingEventsViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let guestlistInvite = object(at: indexPath)
         let guestlist = guestlistInvite?.value(forKey: "Guestlist") as! PFObject
+        let inquiry = guestlist.value(forKey: "Inquiry") as! PFObject
+
         let admissionOption = guestlist.value(forKey: "admissionOption") as! PFObject
         let admissionType:Int = admissionOption.value(forKey: "type") as! Int
         
         if (admissionType == 2) {
-            delegate?.didSelectViewInquiry(guestlistInvite!)
+            delegate?.didSelectViewInquiry(inquiry)
         } else {
             delegate?.didSelectViewEventTicket(guestlistInvite!)
 

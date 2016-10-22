@@ -89,9 +89,8 @@ class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let inquiryOffer: PFObject = self.offers[indexPath.row] as! PFObject
+        let inquiryOffer: PFObject = self.offers[indexPath.row] as PFObject
         let host:PFObject = inquiryOffer["Host"] as! PFObject
-        let cellIdentifier = "cell"
         
         let cell:THLInquiryOfferTableViewCell = tableView.dequeueReusableCell(withIdentifier: "THLInquiryOfferTableViewCell", for: indexPath) as! THLInquiryOfferTableViewCell
         cell.hostNameLabel.text = host["firstName"] as! String?
@@ -123,14 +122,14 @@ class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString {
-        let str = "No Admission Options Available"
+        let str = "HANG TIGHT, YOUR CONNECT IS IN PROGRESS. WE’LL LET YOU KONW WHEN WE FIND HOSTS THAT WOULD BE A GOOD MATCH FOR YOU"
         let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)]
         return NSAttributedString(string: str, attributes: attrs)
     }
     
-    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString {
-        let str = "Please check another event or contact your concierge for help"
-        let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)]
-        return NSAttributedString(string: str, attributes: attrs)
-    }
+//    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString {
+//        let str = "Please check another event or contact your concierge for help"
+//        let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)]
+//        return NSAttributedString(string: str, attributes: attrs)
+//    }
 }
