@@ -15,7 +15,7 @@ public protocol EPPickerDelegate {
     func epContactPicker(_: EPContactsPicker, didCancel error: NSError)
     func epContactPicker(_: EPContactsPicker, didSelectContact contact: EPContact)
 	func epContactPicker(_: EPContactsPicker, didSelectMultipleContacts contacts: [EPContact])
-    func epContactPicker(_: EPContactsPicker, didSubmitInvitesAndWantsToShowInquiry: THLGuestlistInvite)
+    func epContactPicker(_: EPContactsPicker, didSubmitInvitesAndWantsToShowInquiry: PFObject)
 }
 
 public extension EPPickerDelegate {
@@ -362,10 +362,10 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
                                                                                                 "description":"Hype Connect",
                                                                                                 "admissionOptionId":"5m9RI5T9Mr"]) {
                         (guestlistInvite, error) in
-                            print(error)
-                            print(guestlistInvite)
                             if error == nil {
-                                (guestlistInvite as! THLGuestlistInvite).pinInBackground()
+                                (guestlistInvite as! PFObject).pinInBackground()
+                                let guestlist = (guestlistInvite as! PFObject).value(forKey: "Guestlist") as! PFObject
+                                let inquiry = guestlist.value(forKey: "Inquiry") as! PFObject
                                 // Prepare the popup assets
                                 let title = "SUCCESS"
                                 let message = "Your inquiry was submitted!"
@@ -375,7 +375,7 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
                                 
                                 // Create buttons
                                 let buttonOne = CancelButton(title: "OK") {
-                                    self.navigationController?.dismiss(animated: true, completion: nil)
+                                    self.contactDelegate?.epContactPicker(self, didSubmitInvitesAndWantsToShowInquiry: inquiry)
                                 }
                                 
                                 popup.addButton(buttonOne)

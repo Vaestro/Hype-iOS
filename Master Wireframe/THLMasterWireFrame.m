@@ -310,6 +310,12 @@ THLEventDiscoveryViewControllerDelegate
 
 #pragma mark - AdmissionsOptionViewDelegate
 
+-(void)didSubmitInquiry:(PFObject *)inquiry {
+    [_window.rootViewController dismissViewControllerAnimated:YES completion:^{
+        [self presentOffersForInquiry:inquiry];
+    }];
+    [_masterTabBarController setSelectedIndex:2];
+}
 
 - (void)didSelectAdmissionOption:(PFObject *)admissionOption event:(PFObject *)event {
     if ([admissionOption[@"type"] integerValue] == 0) {

@@ -11,12 +11,12 @@ import TTTAttributedLabel
 
 @objc protocol THLSwiftAdmissionsViewControllerDelegate {
     func didSelectAdmissionOption(_ admissionOption: PFObject, event: PFObject)
-    
+    func didSubmitInquiry(_ inquiry: PFObject)
 }
 
 class THLSwiftAdmissionsViewController: UIViewController, THLEventPickerViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, TTTAttributedLabelDelegate, EPPickerDelegate {
-    public func epContactPicker(_: EPContactsPicker, didSubmitInvitesAndWantsToShowInquiry: THLGuestlistInvite) {
-        
+    public func epContactPicker(_: EPContactsPicker, didSubmitInvitesAndWantsToShowInquiry: PFObject) {
+        self.delegate?.didSubmitInquiry(didSubmitInvitesAndWantsToShowInquiry)
     }
 
     //  MARK: -
@@ -192,7 +192,6 @@ class THLSwiftAdmissionsViewController: UIViewController, THLEventPickerViewCont
         let contactPickerScene = EPContactsPicker(delegate: self, multiSelection:true, subtitleCellType: SubtitleCellValue.phoneNumber, event: self.event as! THLEvent)
         
         self.navigationController?.pushViewController(contactPickerScene, animated: true)
-//        Intercom.presentMessageComposer()
     }
     /*
      ==========================================================================================
