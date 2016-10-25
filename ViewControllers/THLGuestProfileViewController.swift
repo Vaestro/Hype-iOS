@@ -11,6 +11,8 @@ import UIKit
 @objc protocol THLGuestProfileViewControllerDelegate {
     func didSelectViewInquiry(_ guestlistInvite: PFObject)
     func didSelectViewEventTicket(_ guestlistInvite: PFObject)
+    func didSelectViewHostedEvent(_ guestlistInvite: PFObject)
+
     func userProfileViewControllerWantsToLogout()
     func userProfileViewControllerWantsToPresentPaymentViewController()
 
@@ -24,6 +26,11 @@ class THLGuestProfileViewController: UIViewController, THLMyUpcomingEventsViewCo
     public func userProfileViewControllerWantsToLogout() {
         delegate?.userProfileViewControllerWantsToLogout()
     }
+    
+    public func didSelectViewHostedEvent(_ guestlistInvite: PFObject) {
+        delegate?.didSelectViewHostedEvent(guestlistInvite)
+    }
+
 
     internal func didSelectViewEventTicket(_ guestlistInvite: PFObject) {
         delegate?.didSelectViewEventTicket(guestlistInvite)

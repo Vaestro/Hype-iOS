@@ -10,7 +10,12 @@ import UIKit
 import SnapKit
 import PopupDialog
 
+@objc protocol THLInquiryOfferDetailsViewDelegate {
+    func didAcceptInquiryOffer()
+}
+
 class THLInquiryOfferDetailsView: UIViewController {
+    var delegate: THLInquiryOfferDetailsViewDelegate?
     
     var inquiryOffer: PFObject
     var inquiry: PFObject
@@ -65,6 +70,7 @@ class THLInquiryOfferDetailsView: UIViewController {
                 
                 // Create buttons
                 let buttonOne = CancelButton(title: "OK") {
+                    self.delegate?.didAcceptInquiryOffer()
                 }
                 
                 popup.addButton(buttonOne)

@@ -8,13 +8,23 @@
 
 import UIKit
 
-class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+@objc protocol THLInquiryOffersViewControllerDelegate {
+    func didAcceptInquiryOfferAndWantsToPresentPartyMenuWithInvite(_ guestlistInvite: PFObject)
+}
+
+class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, THLInquiryOfferDetailsViewDelegate {
+    public func didAcceptInquiryOffer() {
+        self.delegate?.didAcceptInquiryOfferAndWantsToPresentPartyMenuWithInvite(guestlistInvite)
+    }
     
     //  MARK: -
     //  MARK: Init
+    var delegate: THLInquiryOffersViewControllerDelegate?
     
     var offersTableView: UITableView
     
+    var guestlistInvite: PFObject
+    var guestlist: PFObject
     var inquiry: PFObject
     
     var offers: [PFObject]
@@ -25,8 +35,11 @@ class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UIT
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(inquiry: PFObject) {
-        self.inquiry = inquiry
+    init(guestlistInvite: PFObject) {
+        self.guestlistInvite = guestlistInvite
+        self.guestlist = guestlistInvite.value(forKey: "Guestlist") as! PFObject
+        self.inquiry = guestlist.value(forKey: "Inquiry") as! PFObject
+        
         self.offers = Array()
         offersTableView = UITableView.init(frame: CGRect.zero)
         super.init(nibName: nil, bundle: nil)
@@ -104,6 +117,7 @@ class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UIT
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let offer = offers[indexPath.row]
         let inquiryOfferDetailsView = THLInquiryOfferDetailsView(inquiry: inquiry, offer: offer)
+        inquiryOfferDetailsView.delegate = self
         self.navigationController?.pushViewController(inquiryOfferDetailsView, animated: true)
         
     }

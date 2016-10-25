@@ -13,6 +13,7 @@ import ParseUI
 
 protocol THLMyUpcomingEventsViewControllerDelegate: class {
     func didSelectViewInquiry(_ guestlistInvite: PFObject)
+    func didSelectViewHostedEvent(_ guestlistInvite: PFObject)
     func didSelectViewEventTicket(_ guestlistInvite: PFObject)
 
 }
@@ -90,7 +91,7 @@ extension THLMyUpcomingEventsViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let guestlistInvite = object(at: indexPath)
+        let guestlistInvite = object(at: indexPath) as PFObject!
         let guestlist = guestlistInvite?.value(forKey: "Guestlist") as! PFObject
         let inquiry = guestlist.value(forKey: "Inquiry") as! PFObject
 
@@ -98,7 +99,11 @@ extension THLMyUpcomingEventsViewController {
         let admissionType:Int = admissionOption.value(forKey: "type") as! Int
         
         if (admissionType == 2) {
-            delegate?.didSelectViewInquiry(inquiry)
+            if ((inquiry.value(forKey: "connected") as! Bool) == true) {
+                delegate?.didSelectViewHostedEvent(guestlistInvite!)
+            } else {
+                delegate?.didSelectViewInquiry(guestlistInvite!)
+            }
         } else {
             delegate?.didSelectViewEventTicket(guestlistInvite!)
 

@@ -80,6 +80,7 @@
 		79319DD71D9AED88000DEE69 /* EPContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79319DD11D9AED88000DEE69 /* EPContactCell.xib */; };
 		79319DD81D9AED88000DEE69 /* EPContactsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79319DD21D9AED88000DEE69 /* EPContactsPicker.swift */; };
 		79319DD91D9AED88000DEE69 /* EPExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79319DD31D9AED88000DEE69 /* EPExtensions.swift */; };
+		7941BC1E1DBFA05600A84F54 /* THLPartyMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7941BC1D1DBFA05600A84F54 /* THLPartyMenuController.swift */; };
 		794208281BD82641009B86FA /* UIView+DimView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794208271BD82641009B86FA /* UIView+DimView.m */; };
 		794483041BEC5B5D00EABE23 /* THLStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = 794483031BEC5B5D00EABE23 /* THLStatusView.m */; };
 		794A9D191CF4ACC300DDAC00 /* THLEventInviteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 794A9D181CF4ACC300DDAC00 /* THLEventInviteCell.m */; };
@@ -369,6 +370,7 @@
 		79319DD11D9AED88000DEE69 /* EPContactCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EPContactCell.xib; sourceTree = "<group>"; };
 		79319DD21D9AED88000DEE69 /* EPContactsPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPContactsPicker.swift; sourceTree = "<group>"; };
 		79319DD31D9AED88000DEE69 /* EPExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPExtensions.swift; sourceTree = "<group>"; };
+		7941BC1D1DBFA05600A84F54 /* THLPartyMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLPartyMenuController.swift; sourceTree = "<group>"; };
 		794208261BD82641009B86FA /* UIView+DimView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DimView.h"; sourceTree = "<group>"; };
 		794208271BD82641009B86FA /* UIView+DimView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DimView.m"; sourceTree = "<group>"; };
 		794483021BEC5B5D00EABE23 /* THLStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLStatusView.h; sourceTree = "<group>"; };
@@ -1309,6 +1311,7 @@
 				79E945B61DBA7ED900EC753D /* THLMyUpcomingEventsViewController.swift */,
 				794DA4321DB6E537000C5F67 /* THLInquiryOfferTableCellView.swift */,
 				FF9BF5FE1DAC572800442209 /* THLChatEntryTableViewController.swift */,
+				7941BC1D1DBFA05600A84F54 /* THLPartyMenuController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2232,6 +2235,7 @@
 				2133C9D31C333DDC0020083A /* NSString+EmailAddresses.m in Sources */,
 				218AF3441BB7391B00AFAEBF /* THLEventService.m in Sources */,
 				216BDD671BC770CA00BBF713 /* THLSearchViewDataSource+Factory.m in Sources */,
+				7941BC1E1DBFA05600A84F54 /* THLPartyMenuController.swift in Sources */,
 				21CCEDE21B87C62F0066CDAC /* THLYapDatabaseManager.m in Sources */,
 				211BB0D81B8CC6DA0068FD50 /* UIView+AddSubviews.m in Sources */,
 				798402D41D217157006F463B /* THLEntity.m in Sources */,
