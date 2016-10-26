@@ -56,6 +56,7 @@
 
 @interface THLMasterWireframe()
 <
+THLInquiryOffersViewControllerDelegate,
 THLGuestProfileViewControllerDelegate,
 THLSwiftAdmissionsViewControllerDelegate,
 THLAdmissionsViewDelegate,
@@ -374,12 +375,16 @@ THLEventDiscoveryViewControllerDelegate
 #pragma mark MyEventsViewController
 #pragma mark Delegate
 
+- (void)didSelectViewHostedEvent:(PFObject *)guestlistInvite {
+    [self presentPartyMenuForConnect:guestlistInvite];
+}
+
 - (void)didSelectViewEventTicket:(PFObject *)guestlistInvite {
     [self presentPartyNavigationControllerForTicket:guestlistInvite];
 }
 
-- (void)didSelectViewInquiry:(PFObject *)inquiry {
-    [self presentOffersForInquiry:inquiry];
+- (void)didSelectViewInquiry:(PFObject *)guestlistInvite {
+    [self presentOffersForInquiry:guestlistInvite];
 }
 
 #pragma mark -
@@ -464,18 +469,43 @@ THLEventDiscoveryViewControllerDelegate
 #pragma mark -
 #pragma mark InquiryOffersViewController
 
-- (void)presentOffersForInquiry:(PFObject *)inquiry {
-    THLInquiryOffersViewController *offersView = [[THLInquiryOffersViewController alloc] initWithInquiry:inquiry];
+- (void)presentOffersForInquiry:(PFObject *)guestlistInvite {
+    THLInquiryOffersViewController *offersView = [[THLInquiryOffersViewController alloc] initWithGuestlistInvite:guestlistInvite];
+    offersView.delegate = self;
     UINavigationController *navigationVC = [[UINavigationController alloc] initWithNavigationBarClass:[THLBoldNavigationBar class] toolbarClass:nil];
     
     [navigationVC addChildViewController:offersView];
 
+    
     [_window.rootViewController presentViewController:navigationVC animated:YES completion:nil];
+    
+
+}
+
+- (void)didAcceptInquiryOfferAndWantsToPresentPartyMenuWithInvite:(PFObject *)guestlistInvite {
+    [self presentPartyMenuForConnect:guestlistInvite];
 }
 
 
 #pragma mark -
 #pragma mark PartyNavigationController
+
+- (void)presentPartyMenuForConnect:(PFObject *)invite {
+    THLPartyMenuController *partyMenu = [[THLPartyMenuController alloc] init];
+    UINavigationController *navigationVC = [[UINavigationController alloc] initWithNavigationBarClass:[THLBoldNavigationBar class] toolbarClass:nil];
+    
+    [navigationVC addChildViewController:partyMenu];
+    
+    if ([self topViewController] != _masterTabBarController) {
+        [_masterTabBarController dismissViewControllerAnimated:YES completion:nil];
+    }
+    
+    [_window.rootViewController presentViewController:navigationVC animated:YES completion:nil];
+    
+    if (_masterTabBarController.selectedIndex != 2) {
+        [_masterTabBarController setSelectedIndex:2];
+    }
+}
 
 - (void)presentPartyNavigationControllerForTicket:(PFObject *)invite {
     UINavigationController *partyNavVC = [UINavigationController new];
