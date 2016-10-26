@@ -89,7 +89,7 @@ class THLChatEntryCell: UITableViewCell {
         userImage.snp.makeConstraints{ (make) -> Void in
             
             make.height.equalTo(contentView.frame.size.height/2)
-            make.width.width.equalTo((contentView.frame.size.width/5))
+            make.width.width.equalTo((contentView.frame.size.width/6))
             make.centerY.equalTo(contentView)
             make.leftMargin.equalTo(4)
             

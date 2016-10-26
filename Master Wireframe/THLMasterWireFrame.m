@@ -260,16 +260,18 @@ THLEventDiscoveryViewControllerDelegate
     _userProfileViewController.delegate = self;
     UINavigationController *profile = [UINavigationController new];
     [profile pushViewController:_userProfileViewController animated:NO];
-    UIViewController *messagesViewController = [UIViewController new];
     
-    messagesViewController.tabBarItem.image = [UIImage imageNamed:@"Lists Icon"];
-    messagesViewController.tabBarItem.title = @"My Events";
+    UINavigationController *chatEntry = [UINavigationController new];
+    _chatEntryTableViewController = [THLChatEntryTableViewController new];
+    [chatEntry pushViewController:_chatEntryTableViewController animated:NO];
+    chatEntry.tabBarItem.image = [UIImage imageNamed:@"message"];
+    chatEntry.tabBarItem.title = @"Messages";
     discovery.tabBarItem.image = [UIImage imageNamed:@"Home Icon"];
     discovery.tabBarItem.title = @"Discover";
     profile.tabBarItem.image = [UIImage imageNamed:@"Profile Icon"];
     profile.tabBarItem.title = @"Profile";
     
-    NSArray *views = @[discovery, messagesViewController, profile];
+    NSArray *views = @[discovery, chatEntry, profile];
     
     _masterTabBarController.viewControllers = views;
     [_masterTabBarController setSelectedIndex:0];

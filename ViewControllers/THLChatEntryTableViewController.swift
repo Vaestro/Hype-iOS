@@ -10,27 +10,11 @@ import UIKit
 
 class THLChatEntryTableViewController: UITableViewController {
 
-    var promoters = [String]()
-    var roomIds = [String]()
-    var mateIds = [String]()
+    var roomData = [[String: String]]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Hard coded stuff for testing
-        var usersPN = (THLUser.current()?.phoneNumber)!
-        if(usersPN == "+15715502992") {
-            promoters.append("Your Inquiry")
-            roomIds.append("tjP5OTYg6w");
-            roomIds.append("U593pjlBNl");
-            mateIds.append("+19178686312")
-            mateIds.append("+17038151183")
-        } else if(usersPN == "+19178686312") {
-            roomIds.append("tjP5OTYg6w");
-            mateIds.append("+15715502992")
-        } else if(usersPN == "+17038151183") {
-            roomIds.append("U593pjlBNl");
-            mateIds.append("+15715502992")
-        }
         self.navigationItem.title = "MESSAGES";
         let barBack = UIBarButtonItem(title: "<", style: UIBarButtonItemStyle.plain, target: self, action: "back")
         self.navigationItem.leftBarButtonItem = barBack
@@ -56,6 +40,23 @@ class THLChatEntryTableViewController: UITableViewController {
         
         
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated);
+        
+        var main =  UIApplication.shared.keyWindow?.rootViewController as! UITabBarController
+        main.tabBar.items?[1].image = UIImage(named:"message")
+        listenForRooms()
+        THLChatSocketManager.sharedInstance.getChatRooms()
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        THLChatSocketManager.sharedInstance.socket.off("send rooms")
+        self.roomData.removeAll()
+        self.tableView.reloadData()
+        
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -71,18 +72,30 @@ class THLChatEntryTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return roomIds.count
+        return roomData.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //let cell = tableView.dequeueReusableCell(withIdentifier: "chatEntry", for: indexPath)
         let cell = tableView.dequeueReusableCell( withIdentifier: "EntryCell", for: indexPath) as! THLChatEntryCell
-        cell.priceLabel.text = "Your Inquiry"
+        cell.priceLabel.text = roomData[indexPath.row]["roomTitle"]
         cell.priceLabel.backgroundColor = UIColor.black
         cell.priceLabel.alpha = 0.9
-        cell.dateLabel.text = "1 Week Ago"
-        
+        cell.dateLabel.text = roomData[indexPath.row]["chatMateName"]
+        if(roomData[indexPath.row]["chatMateImage"] != nil) {
+            
+            let url = NSURL(string:roomData[indexPath.row]["chatMateImage"]!)
+            var components = NSURLComponents(url: url as! URL, resolvingAgainstBaseURL: true)! as NSURLComponents
+            components.scheme = "https"
+            
+            var data = NSData(contentsOf:components.url!)
+            if data != nil {
+               cell.userImage.image = UIImage(data:data! as Data)
+            }
+        } else {
+            cell.userImage.image = UIImage(named: "default_profile_image")
+        }
        
         cell.backgroundColor = UIColor.black
         cell.alpha = 0.9
@@ -101,19 +114,45 @@ class THLChatEntryTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       
-        var usersPN = (THLUser.current()?.phoneNumber)!
-        
         var chatViewController = THLChatViewController()
-        chatViewController.chatMateId = mateIds[indexPath.row];
-        chatViewController.chatRoomId = roomIds[indexPath.row];
-        print("The Chat room id being passed is: ")
-        print(roomIds[indexPath.row])
+        print(indexPath.row)
+        chatViewController.chatMateId = roomData[indexPath.row]["chatMateId"]
+        chatViewController.chatRoomId = roomData[indexPath.row]["roomId"];
+        chatViewController.chatMateName = roomData[indexPath.row]["chatMateName"]
         self.navigationController?.pushViewController(chatViewController, animated: true)
     }
     
     func back() {
         dismiss(animated: true, completion: nil)
+    }
+    
+    func listenForRooms() {
+        THLChatSocketManager.sharedInstance.socket.on("send rooms") { (dataArray, socketAck) -> Void in
+            var rooms = dataArray[0] as! [String:[NSDictionary]]
+            var roomsArray = [[String]]();
+                for room in rooms["rooms"]! {
+                    
+                    
+                  
+                    var curRoomInfo = [String: String]()
+                    curRoomInfo["roomId"] = room["roomId"] as! String
+                    curRoomInfo["roomTitle"] = room["roomTitle"] as! String
+                    curRoomInfo["date"] = room["date"] as! String
+                    curRoomInfo["chatMateName"] = room["chatMateName"] as! String
+                    curRoomInfo["chatMateId"] = room["chatMateId"] as! String
+                    if(room["chatMateImage"] != nil) {
+                        curRoomInfo["chatMateImage"] = room["chatMateImage"] as! String
+                    }
+                    self.roomData.append(curRoomInfo)
+                    
+                    
+                }
+            
+                self.tableView.reloadData()
+            
+            
+        }
+        
     }
     
    

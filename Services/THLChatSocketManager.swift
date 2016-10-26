@@ -35,9 +35,9 @@ class THLChatSocketManager: NSObject {
     }
     
     func connectUser() {
-        socket.emit("user connected", (THLUser.current()?.phoneNumber)!)
-         listenForOtherMessages()
-         listenForYourMessageSend()
+        socket.emit("user connected", (THLUser.current()?.objectId)!)
+        listenForOtherMessages()
+        listenForYourMessageSend()
     }
     
     func stopListeningForMessages() {
@@ -46,8 +46,11 @@ class THLChatSocketManager: NSObject {
     
     func listenForOtherMessages() {
          socket.on("gotNewNotification") { (dataArray, socketAck) -> Void in
-           // TODO update icon
-          
+           //update icon
+            var main =  UIApplication.shared.keyWindow?.rootViewController as! UITabBarController
+            main.tabBar.items?[1].image = UIImage(named:"new_message")
+            
+         
             
         }
     }
@@ -60,14 +63,21 @@ class THLChatSocketManager: NSObject {
     }
     
     func sendMessageToServer(message: String, to: String, roomId: String) {
-        var usersPN = (THLUser.current()?.phoneNumber)!
-        let data = ["to": to,"msg":message, "from": usersPN, "roomId": roomId]
+        var usersID = (THLUser.current()?.objectId)!
+        let data = ["to": to,"msg":message, "from": usersID, "roomId": roomId]
         socket.emit("chat message", data)
     }
     
     func getMessageHistory(roomId: String, user: String) {
         let data = ["roomId": roomId, "userPN": user]
         socket.emit("get messages", data)
+    }
+    
+    func getChatRooms() {
+        var userId = (THLUser.current()?.objectId)!
+        let data = ["userId": userId]
+        socket.emit("get rooms", data)
+        
     }
     
 }

@@ -18,13 +18,14 @@ class THLChatViewController : JSQMessagesViewController {
     var incomingBubbleImageView: JSQMessagesBubbleImage!
     var chatMateId: String?
     var chatRoomId: String?
+    var chatMateName: String?
     
     override func viewDidLoad() {
        super.viewDidLoad()
-       self.senderId = THLUser.current()?.phoneNumber;
+       self.senderId = THLUser.current()?.objectId;
         self.senderDisplayName = "My Name";
         // Set up navbar
-        self.navigationItem.title = "CHAT";
+        self.navigationItem.title = "CHAT WITH " + chatMateName!;
     
         let barBack = UIBarButtonItem(title: "<", style: UIBarButtonItemStyle.plain, target: self, action: "back")
         self.navigationItem.leftBarButtonItem = barBack
@@ -42,6 +43,7 @@ class THLChatViewController : JSQMessagesViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.messages.removeAll()
         grabMessagesOnDisk()
         getMessageHistory()
         finishReceivingMessage()
@@ -89,7 +91,8 @@ class THLChatViewController : JSQMessagesViewController {
     }
     
     func back() {
-        dismiss(animated: true, completion: nil)
+        //dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
     private func setupBubbles() {
@@ -106,6 +109,7 @@ class THLChatViewController : JSQMessagesViewController {
     private func listenForMessages() {
         THLChatSocketManager.sharedInstance.socket.on("gotNewMessage") { (dataArray, socketAck) -> Void in
             var map = dataArray[0] as! [String: String]
+            print("GOT THE MESSAGE")
             if(map["from"] == self.chatMateId) {
                 self.addMessage(id: map["from"]!, text: map["msg"]!)
             }
@@ -138,6 +142,7 @@ class THLChatViewController : JSQMessagesViewController {
                 var msgArray = [[String]]();
                 for msg in messages["messages"]! {
                     let tuple = [msg.value(forKey: "owner"), msg.value(forKey:"msg")]
+                    print(tuple)
                     msgArray.append(tuple as! [String])
                     
                 }
@@ -150,8 +155,8 @@ class THLChatViewController : JSQMessagesViewController {
     }
         
     private func getMessageHistory() {
-        let usersPN = (THLUser.current()?.phoneNumber)!
-        THLChatSocketManager.sharedInstance.getMessageHistory(roomId: self.chatRoomId!, user: usersPN)
+        let usersID = (THLUser.current()?.objectId)!
+        THLChatSocketManager.sharedInstance.getMessageHistory(roomId: self.chatRoomId!, user: usersID)
     
     }
   
