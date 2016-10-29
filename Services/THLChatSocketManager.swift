@@ -14,7 +14,7 @@ class THLChatSocketManager: NSObject {
     
     static let sharedInstance = THLChatSocketManager()
     
-    let socket: SocketIOClient = SocketIOClient(socketURL: NSURL(string: "https://hype-messenger-server.herokuapp.com")! as URL)
+    let socket: SocketIOClient = SocketIOClient(socketURL: NSURL(string: "https://hype-messenger-server.herokuapp.com/")! as URL)
     
    override init() {
         super.init()
@@ -78,6 +78,22 @@ class THLChatSocketManager: NSObject {
         let data = ["userId": userId]
         socket.emit("get rooms", data)
         
+    }
+    
+    func createChatRoom(hostId: String) {
+        var userId = (THLUser.current()?.objectId)!
+       
+        PFCloud.callFunction(inBackground: "createChatRoom",
+                             withParameters: ["userId" : userId,
+                                              "hostId": hostId]) {
+        (something, error) in
+            if error == nil {
+                print("SUCCESS")
+            } else {
+                print("FAIL")
+                
+            }
+        }
     }
     
 }
