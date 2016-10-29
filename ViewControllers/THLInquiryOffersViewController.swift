@@ -64,7 +64,7 @@ class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UIT
         offersTableView.register(THLInquiryOfferTableViewCell.self, forCellReuseIdentifier: "THLInquiryOfferTableViewCell")
         offersTableView.separatorStyle = UITableViewCellSeparatorStyle.none
         
-        offersTableView.rowHeight = 60.0
+        offersTableView.rowHeight = 125.0
         
         if let inquiryOffers = inquiry["Offers"] as! [PFObject]? {
             offers = inquiryOffers
@@ -107,7 +107,10 @@ class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UIT
         
         let cell:THLInquiryOfferTableViewCell = tableView.dequeueReusableCell(withIdentifier: "THLInquiryOfferTableViewCell", for: indexPath) as! THLInquiryOfferTableViewCell
         cell.hostNameLabel.text = host["firstName"] as! String?
-        cell.locationAndDateLabel.text = "TODO: Need to add event object to Inquiry Offer"
+        cell.eventTitleLabel.text = "TODO: Need to add event object to Inquiry Offer"
+        cell.dateTimeLabel.text = "TODO: Need to add event object to Inquiry Offer"
+        cell.messagePreviewLabel.text = inquiryOffer.value(forKey: "message") as! String?
+
         cell.hostImageView.file = host["image"] as! PFFile?
         cell.hostImageView.loadInBackground()
         return cell
