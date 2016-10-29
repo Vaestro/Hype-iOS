@@ -125,7 +125,7 @@ THLEventDiscoveryViewControllerDelegate
     [[Branch getInstance] setIdentity:[THLUser currentUser].objectId];
     [[Branch getInstance] userCompletedAction:@"logIn"];
      if ([THLUserManager userIsHost]) {
-        [self presentHostFlowInWindow:_window];
+        [self configureHostTabViewControllerAndPresentHostFlowInWindow:_window];
 
     } else {
         [self configureMasterTabViewControllerAndPresentGuestFlowInWindow:_window];
@@ -149,13 +149,6 @@ THLEventDiscoveryViewControllerDelegate
     
     
     [self configureMasterTabViewControllerAndPresentGuestFlowInWindow:_window];
-}
-
-- (void)presentHostFlowInWindow:(UIWindow *)window {
-    _window = window;
-    THLHostDashboardViewController *hostDashboardViewController = [THLHostDashboardViewController new];
-    _window.rootViewController = hostDashboardViewController;
-    [_window makeKeyAndVisible];
 }
 
 #pragma mark -
@@ -214,6 +207,38 @@ THLEventDiscoveryViewControllerDelegate
 }
 
 #pragma mark -
+#pragma mark - HostTabViewController
+
+- (void)configureHostTabViewControllerAndPresentHostFlowInWindow:(UIWindow *)window {
+    _window = window;
+    UITabBarController *hostTabBarController = [UITabBarController new];
+    
+    THLHostDashboardViewController *inquiryDiscoveryView = [THLHostDashboardViewController new];
+    UIViewController *messagesView = [UIViewController new];
+    THLUserProfileViewController *userProfileViewController = [THLUserProfileViewController new];
+    userProfileViewController.delegate = self;
+    UINavigationController *profileView = [UINavigationController new];
+    [profileView pushViewController:userProfileViewController animated:NO];
+
+    inquiryDiscoveryView.tabBarItem.image = [UIImage imageNamed:@"Home Icon"];
+    inquiryDiscoveryView.tabBarItem.title = @"Discover";
+    messagesView.tabBarItem.image = [UIImage imageNamed:@"message"];
+    messagesView.tabBarItem.title = @"Messages";
+    profileView.tabBarItem.image = [UIImage imageNamed:@"Profile Icon"];
+    profileView.tabBarItem.title = @"Profile";
+    
+    NSArray *views = @[inquiryDiscoveryView, messagesView, profileView];
+    
+    hostTabBarController.viewControllers = views;
+    [hostTabBarController setSelectedIndex:0];
+    hostTabBarController.view.autoresizingMask=(UIViewAutoresizingFlexibleHeight);
+    
+    _window.rootViewController = hostTabBarController;
+    [_window makeKeyAndVisible];
+}
+
+
+#pragma mark -
 #pragma mark - MasterTabViewController
 
 - (void)configureMasterTabViewControllerAndPresentGuestFlowInWindow:(UIWindow *)window {
@@ -226,11 +251,6 @@ THLEventDiscoveryViewControllerDelegate
 
 - (void)configureMasterTabViewController:(UITabBarController *)masterTabBarController {
     _masterTabBarController = masterTabBarController;
-    
-//    THLMyEventsViewController *myEventsVC = [[THLMyEventsViewController alloc]initWithClassName:@"GuestlistInvite"];
-//    UINavigationController *profile = [UINavigationController new];
-//    myEventsVC.delegate = self;
-//    [profile pushViewController:myEventsVC animated:NO];
     
     THLEventDiscoveryViewController *discoveryVC = [[THLEventDiscoveryViewController alloc] initWithClassName:@"Event"];
     THLVenueDiscoveryViewController *venueDiscoveryVC = [[THLVenueDiscoveryViewController alloc] initWithClassName:@"Location"];

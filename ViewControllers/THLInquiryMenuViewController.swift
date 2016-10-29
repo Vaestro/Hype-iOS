@@ -47,7 +47,12 @@ class THLInquiryMenuViewController: UIViewController {
     func dismiss() {
         self.dismiss(animated: true, completion: nil)
     }
+    
     func handleConnect() {
+        
+    }
+    
+    func submitOffer() {
         var offer = PFObject(className:"InquiryOffer")
         offer["message"] = "Hello I am host"
         offer["accepted"] = false

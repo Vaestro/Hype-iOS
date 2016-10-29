@@ -364,8 +364,8 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
                         (guestlistInvite, error) in
                             if error == nil {
                                 (guestlistInvite as! PFObject).pinInBackground()
-                                let guestlist = (guestlistInvite as! PFObject).value(forKey: "Guestlist") as! PFObject
-                                let inquiry = guestlist.value(forKey: "Inquiry") as! PFObject
+//                                let guestlist = (guestlistInvite as! PFObject).value(forKey: "Guestlist") as! PFObject
+//                                let inquiry = guestlist.value(forKey: "Inquiry") as! PFObject
                                 // Prepare the popup assets
                                 let title = "SUCCESS"
                                 let message = "Your inquiry was submitted!"
@@ -375,7 +375,7 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
                                 
                                 // Create buttons
                                 let buttonOne = CancelButton(title: "OK") {
-                                    self.contactDelegate?.epContactPicker(self, didSubmitInvitesAndWantsToShowInquiry: inquiry)
+                                    self.contactDelegate?.epContactPicker(self, didSubmitInvitesAndWantsToShowInquiry: (guestlistInvite as! PFObject))
                                 }
                                 
                                 popup.addButton(buttonOne)
