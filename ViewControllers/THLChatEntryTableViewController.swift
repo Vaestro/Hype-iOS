@@ -53,8 +53,7 @@ class THLChatEntryTableViewController: UITableViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         THLChatSocketManager.sharedInstance.socket.off("send rooms")
-        self.roomData.removeAll()
-        self.tableView.reloadData()
+        
         
     }
 
@@ -82,7 +81,7 @@ class THLChatEntryTableViewController: UITableViewController {
         cell.priceLabel.text = roomData[indexPath.row]["roomTitle"]
         cell.priceLabel.backgroundColor = UIColor.black
         cell.priceLabel.alpha = 0.9
-        cell.dateLabel.text = roomData[indexPath.row]["chatMateName"]
+        cell.dateLabel.text = roomData[indexPath.row]["dateString"]
         if(roomData[indexPath.row]["chatMateImage"] != nil) {
             
             let url = NSURL(string:roomData[indexPath.row]["chatMateImage"]!)
@@ -128,6 +127,8 @@ class THLChatEntryTableViewController: UITableViewController {
     
     func listenForRooms() {
         THLChatSocketManager.sharedInstance.socket.on("send rooms") { (dataArray, socketAck) -> Void in
+            self.roomData.removeAll()
+            self.tableView.reloadData()
             var rooms = dataArray[0] as! [String:[NSDictionary]]
             var roomsArray = [[String]]();
                 for room in rooms["rooms"]! {
@@ -138,6 +139,7 @@ class THLChatEntryTableViewController: UITableViewController {
                     curRoomInfo["roomId"] = room["roomId"] as! String
                     curRoomInfo["roomTitle"] = room["roomTitle"] as! String
                     curRoomInfo["date"] = room["date"] as! String
+                    curRoomInfo["dateString"] = room["dateString"] as! String
                     curRoomInfo["chatMateName"] = room["chatMateName"] as! String
                     curRoomInfo["chatMateId"] = room["chatMateId"] as! String
                     if(room["chatMateImage"] != nil) {

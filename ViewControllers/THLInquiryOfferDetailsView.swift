@@ -70,6 +70,8 @@ class THLInquiryOfferDetailsView: UIViewController {
                 
                 // Create buttons
                 let buttonOne = CancelButton(title: "OK") {
+                    let hostId = (self.inquiryOffer["Host"] as! THLUser).objectId
+                    THLChatSocketManager.sharedInstance.createChatRoom(hostId: hostId!)
                     self.delegate?.didAcceptInquiryOffer()
                 }
                 

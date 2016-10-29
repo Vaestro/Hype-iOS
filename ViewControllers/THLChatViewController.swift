@@ -48,6 +48,7 @@ class THLChatViewController : JSQMessagesViewController {
         getMessageHistory()
         finishReceivingMessage()
         
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
