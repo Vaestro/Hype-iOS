@@ -9,10 +9,14 @@
 import UIKit
 import PopupDialog
 
-class THLSubmitInquiryOfferViewController: UIViewController {
+class THLSubmitInquiryOfferViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     
     var inquiry: PFObject?
     var messageTextField: UITextField?
+    var dateTextField: UITextField?
+    var venueTextField: UITextField?
+    
+    var availableVenues: [String]
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -22,7 +26,10 @@ class THLSubmitInquiryOfferViewController: UIViewController {
         self.inquiry = inquiry
         
         self.messageTextField = UITextField()
-
+        self.dateTextField = UITextField()
+        self.venueTextField = UITextField()
+        self.availableVenues = [String]()
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -35,25 +42,140 @@ class THLSubmitInquiryOfferViewController: UIViewController {
         messageTextField?.backgroundColor = UIColor.gray
         superview.addSubview(messageTextField!)
         
-        messageTextField?.snp.makeConstraints { (make) -> Void in
-            make.left.equalTo(superview.snp.left).offset(50)
-            make.right.equalTo(superview.snp.right).offset(-50)
-            make.height.equalTo(300)
-            make.center.equalTo(superview.snp.center)
-        }
+        self.dateTextField?.delegate = self
+        dateTextField?.backgroundColor = UIColor.gray
+        superview.addSubview(dateTextField!)
+
+        self.venueTextField?.delegate = self
+        venueTextField?.backgroundColor = UIColor.gray
+        superview.addSubview(venueTextField!)
         
         let submitButton = UIButton()
-        submitButton.titleLabel?.text = "CONNECT"
-        submitButton.titleLabel?.textColor = UIColor.black
+        submitButton.setTitle("CONNECT", for: UIControlState.normal)
+        submitButton.setTitleColor(UIColor.black, for: UIControlState.normal)
         submitButton.addTarget(self, action: #selector(submitOffer  ), for: UIControlEvents.touchUpInside)
         submitButton.backgroundColor = UIColor.customGoldColor()
         superview.addSubview(submitButton)
         
         submitButton.snp.makeConstraints { (make) -> Void in
-            make.width.equalTo(200)
+            make.left.equalTo(superview.snp.left).offset(10)
+            make.right.equalTo(superview.snp.right).offset(-10)
             make.height.equalTo(60)
-            make.bottom.equalTo(superview.snp.bottom).offset(-50)
+            make.bottom.equalTo(superview.snp.bottom).offset(-10)
         }
+        
+        messageTextField?.snp.makeConstraints { (make) -> Void in
+            make.left.equalTo(superview.snp.left).offset(10)
+            make.right.equalTo(superview.snp.right).offset(-10)
+            make.height.equalTo(150)
+            make.bottom.equalTo(submitButton.snp.top).offset(-10)
+        }
+        
+        venueTextField?.snp.makeConstraints { (make) -> Void in
+            make.left.equalTo(superview.snp.left).offset(10)
+            make.right.equalTo(superview.snp.right).offset(-10)
+            make.height.equalTo(60)
+            make.bottom.equalTo((messageTextField?.snp.top)!).offset(-10)
+        }
+        
+        dateTextField?.snp.makeConstraints { (make) -> Void in
+            make.left.equalTo(superview.snp.left).offset(10)
+            make.right.equalTo(superview.snp.right).offset(-10)
+            make.height.equalTo(60)
+            make.bottom.equalTo((venueTextField?.snp.top)!).offset(-10)
+        }
+        
+
+
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if (textField == dateTextField) {
+            let datePickerView:UIDatePicker = UIDatePicker()
+            
+            datePickerView.datePickerMode = UIDatePickerMode.dateAndTime
+            
+            textField.inputView = datePickerView
+            
+            datePickerView.addTarget(self, action: #selector(THLSubmitInquiryOfferViewController.datePickerValueChanged), for: UIControlEvents.valueChanged)
+            
+            let toolBar = UIToolbar()
+            toolBar.barStyle = UIBarStyle.default
+            toolBar.isTranslucent = true
+            toolBar.tintColor = UIColor.black
+            toolBar.sizeToFit()
+            
+            let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(THLSubmitInquiryOfferViewController.datePickerFinished))
+            let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.plain, target: self, action: #selector(THLSubmitInquiryOfferViewController.datePickerFinished))
+            
+            toolBar.setItems([cancelButton, doneButton], animated: false)
+            toolBar.isUserInteractionEnabled = true
+            
+            textField.inputAccessoryView = toolBar
+        } else if (textField == venueTextField) {
+            if (self.availableVenues.isEmpty) {
+                let venueQuery = PFQuery(className:"Location")
+                venueQuery.addAscendingOrder("name")
+                venueQuery.findObjectsInBackground(block: { (objects:[PFObject]?, error: Error?) in
+                    
+                    if error == nil {
+                        // The find succeeded.
+                        // Do something with the found objects
+                        if let objects = objects {
+                            for object in objects {
+                                let venueName = object.value(forKey: "name") as! String
+                                self.availableVenues.append(venueName)
+                            }
+                            let venuePickerView = UIPickerView()
+                            venuePickerView.delegate = self
+                            self.venueTextField?.inputView = venuePickerView
+                        }
+                    } else {
+                        // Log details of the failure
+                    }
+                })
+
+            } else {
+                let venuePickerView = UIPickerView()
+                venuePickerView.delegate = self
+                self.venueTextField?.inputView = venuePickerView
+            }
+            
+        }
+    }
+    
+    func datePickerValueChanged(sender:UIDatePicker) {
+        
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.dateStyle = DateFormatter.Style.medium
+        
+        dateFormatter.timeStyle = DateFormatter.Style.short
+        
+        dateTextField?.text = dateFormatter.string(from: sender.date)
+        
+    }
+    
+    func datePickerFinished(sender:UIDatePicker) {
+        
+        dateTextField?.resignFirstResponder()
+    }
+    
+    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return availableVenues.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return availableVenues[row]
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        venueTextField?.text = availableVenues[row]
     }
     
     func dismiss() {
