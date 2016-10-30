@@ -222,12 +222,17 @@ THLEventDiscoveryViewControllerDelegate
 
     inquiryDiscoveryView.tabBarItem.image = [UIImage imageNamed:@"Home Icon"];
     inquiryDiscoveryView.tabBarItem.title = @"Discover";
-    messagesView.tabBarItem.image = [UIImage imageNamed:@"message"];
-    messagesView.tabBarItem.title = @"Messages";
+   
+    UINavigationController *chatEntry = [UINavigationController new];
+    _chatEntryTableViewController = [THLChatEntryTableViewController new];
+    [chatEntry pushViewController:_chatEntryTableViewController animated:NO];
+    chatEntry.tabBarItem.image = [UIImage imageNamed:@"message"];
+    chatEntry.tabBarItem.title = @"Messages";
+    
     profileView.tabBarItem.image = [UIImage imageNamed:@"Profile Icon"];
     profileView.tabBarItem.title = @"Profile";
     
-    NSArray *views = @[inquiryDiscoveryView, messagesView, profileView];
+    NSArray *views = @[inquiryDiscoveryView, chatEntry, profileView];
     
     hostTabBarController.viewControllers = views;
     [hostTabBarController setSelectedIndex:0];
