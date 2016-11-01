@@ -176,6 +176,7 @@
 		79CEDF431D27180600DFB654 /* THLDiscoveryNavBarTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CEDF421D27180600DFB654 /* THLDiscoveryNavBarTitleView.swift */; };
 		79E945B71DBA7ED900EC753D /* THLMyUpcomingEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E945B61DBA7ED900EC753D /* THLMyUpcomingEventsViewController.swift */; };
 		79E945B91DBA911E00EC753D /* THLMyEventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E945B81DBA911E00EC753D /* THLMyEventsTableViewCell.swift */; };
+		79EB0C331DC942A200E0AD9E /* THLConnectedHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EB0C321DC942A200E0AD9E /* THLConnectedHostViewController.swift */; };
 		79F462D11DA6A6E6004BB49C /* CAPSPageMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F462D01DA6A6E6004BB49C /* CAPSPageMenu.swift */; };
 		79F462D31DA6AAA0004BB49C /* THLHostDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F462D21DA6AAA0004BB49C /* THLHostDashboardViewController.swift */; };
 		79FBFCCF1D30513500F291E7 /* THLEventHeaderStyleBehaviorDefiner.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FBFCCE1D30513500F291E7 /* THLEventHeaderStyleBehaviorDefiner.m */; };
@@ -514,6 +515,7 @@
 		79CEDF421D27180600DFB654 /* THLDiscoveryNavBarTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLDiscoveryNavBarTitleView.swift; sourceTree = "<group>"; };
 		79E945B61DBA7ED900EC753D /* THLMyUpcomingEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLMyUpcomingEventsViewController.swift; sourceTree = "<group>"; };
 		79E945B81DBA911E00EC753D /* THLMyEventsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLMyEventsTableViewCell.swift; sourceTree = "<group>"; };
+		79EB0C321DC942A200E0AD9E /* THLConnectedHostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLConnectedHostViewController.swift; sourceTree = "<group>"; };
 		79F462D01DA6A6E6004BB49C /* CAPSPageMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAPSPageMenu.swift; sourceTree = "<group>"; };
 		79F462D21DA6AAA0004BB49C /* THLHostDashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLHostDashboardViewController.swift; sourceTree = "<group>"; };
 		79FBFCCD1D30511F00F291E7 /* THLEventHeaderStyleBehaviorDefiner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLEventHeaderStyleBehaviorDefiner.h; sourceTree = "<group>"; };
@@ -1315,6 +1317,7 @@
 				FF9BF5FE1DAC572800442209 /* THLChatEntryTableViewController.swift */,
 				7941BC1F1DC10F4A00A84F54 /* THLSubmitInquiryOfferViewController.swift */,
 				7941BC1D1DBFA05600A84F54 /* THLPartyMenuController.swift */,
+				79EB0C321DC942A200E0AD9E /* THLConnectedHostViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1881,13 +1884,14 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = THL;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = Hypelist;
 				TargetAttributes = {
 					2174A0631B863F6A006826D7 = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = 8QRD6SFSHS;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2325,6 +2329,7 @@
 				217EBE821BB75FD5006044B6 /* THLDataStoreDomain.m in Sources */,
 				C85EE3BC1C1BCC190008C14B /* THLPerkStoreItem.m in Sources */,
 				79B959441BE8308600B87799 /* THLPersonIconView.m in Sources */,
+				79EB0C331DC942A200E0AD9E /* THLConnectedHostViewController.swift in Sources */,
 				C81B83281D18BFC5008260EE /* THLEventDeepLinkingController.m in Sources */,
 				79F462D31DA6AAA0004BB49C /* THLHostDashboardViewController.swift in Sources */,
 				2133C9BF1C3329BA0020083A /* THLWaitlistEntry.m in Sources */,
@@ -2517,6 +2522,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.hypelist.hype;
 				PRODUCT_NAME = Hype;
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Hype-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;

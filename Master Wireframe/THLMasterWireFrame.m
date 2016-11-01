@@ -516,7 +516,7 @@ THLEventDiscoveryViewControllerDelegate
 #pragma mark PartyNavigationController
 
 - (void)presentPartyMenuForConnect:(PFObject *)invite {
-    THLPartyMenuController *partyMenu = [[THLPartyMenuController alloc] init];
+    THLPartyMenuController *partyMenu = [[THLPartyMenuController alloc] initWithGuestlistInvite:invite];
     UINavigationController *navigationVC = [[UINavigationController alloc] initWithNavigationBarClass:[THLBoldNavigationBar class] toolbarClass:nil];
     
     [navigationVC addChildViewController:partyMenu];

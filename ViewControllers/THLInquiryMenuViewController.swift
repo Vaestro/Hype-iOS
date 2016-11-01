@@ -12,6 +12,8 @@ import PopupDialog
 class THLInquiryMenuViewController: UIViewController {
     
     var inquiry: PFObject?
+    var guestlistTableView: THLGuestlistTableViewController!
+    var connectButton: UIButton!
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -19,7 +21,10 @@ class THLInquiryMenuViewController: UIViewController {
     
     init(inquiry: PFObject) {
         self.inquiry = inquiry
-
+        self.connectButton = UIButton()
+        
+        let guestlistId = inquiry["guestlistId"] as! String
+        self.guestlistTableView = THLGuestlistTableViewController(guestlistId: guestlistId)
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -30,18 +35,21 @@ class THLInquiryMenuViewController: UIViewController {
         let superview = self.view!
         superview.backgroundColor = UIColor.black
         
-        let connectButton = UIButton()
-        connectButton.titleLabel?.text = "CONNECT"
-        connectButton.titleLabel?.textColor = UIColor.black
+        superview.addSubview(guestlistTableView.tableView)
+        
+        connectButton.setTitle("CONNECT", for: UIControlState.normal)
+        connectButton.setTitleColor(UIColor.black, for: UIControlState.normal)
         connectButton.addTarget(self, action: #selector(handleConnect), for: UIControlEvents.touchUpInside)
         connectButton.backgroundColor = UIColor.customGoldColor()
         superview.addSubview(connectButton)
     
-        connectButton.snp.makeConstraints { (make) -> Void in
-            make.width.equalTo(200)
-            make.height.equalTo(60)
-            make.center.equalTo(superview.snp.center)
-        }
+
+    }
+    
+    override func viewDidLayoutSubviews() {
+        guestlistTableView.tableView!.frame = CGRect(x:0,y:0,width:view.frame.size.width, height:view.frame.size.height - 60)
+        connectButton.frame = CGRect(x:0,y:guestlistTableView.tableView!.frame.size.height,width:view.frame.size.width, height:60)
+
     }
     
     func dismiss() {
@@ -49,7 +57,7 @@ class THLInquiryMenuViewController: UIViewController {
     }
     
     func handleConnect() {
-        var submitInquiryView = THLSubmitInquiryOfferViewController(inquiry: self.inquiry!)
+        let submitInquiryView = THLSubmitInquiryOfferViewController(inquiry: self.inquiry!)
         self.navigationController?.pushViewController(submitInquiryView, animated: true)
     }
     
