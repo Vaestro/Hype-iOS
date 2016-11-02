@@ -30,6 +30,8 @@ class THLChatViewController : JSQMessagesViewController {
         let barBack = UIBarButtonItem(title: "<", style: UIBarButtonItemStyle.plain, target: self, action: "back")
         self.navigationItem.leftBarButtonItem = barBack
         
+        self.inputToolbar.contentView.leftBarButtonItem = nil
+        
         setupBubbles()
         setupAvatars()
         listenForMessageHistory()
@@ -78,7 +80,8 @@ class THLChatViewController : JSQMessagesViewController {
     override func collectionView(_ collectionView: JSQMessagesCollectionView,
                                  avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource {
         
-        return JSQMessagesAvatarImageFactory.avatarImage(with: UIImage(named: "default_profile_image"), diameter: 20)
+       
+        return JSQMessagesAvatarImageFactory.avatarImage(with: UIImage() , diameter: 1)
     }
     
     override func didPressSend(_ button: UIButton, withMessageText text: String, senderId: String,
@@ -103,14 +106,14 @@ class THLChatViewController : JSQMessagesViewController {
     }
     
     private func setupAvatars() {
-        collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize(width: kJSQMessagesCollectionViewAvatarSizeDefault, height:kJSQMessagesCollectionViewAvatarSizeDefault )
-        collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize(width: kJSQMessagesCollectionViewAvatarSizeDefault, height:kJSQMessagesCollectionViewAvatarSizeDefault )
+        collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSize.zero
+        collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSize.zero
     }
     
     private func listenForMessages() {
         THLChatSocketManager.sharedInstance.socket.on("gotNewMessage") { (dataArray, socketAck) -> Void in
             var map = dataArray[0] as! [String: String]
-            print("GOT THE MESSAGE")
+           
             if(map["from"] == self.chatMateId) {
                 self.addMessage(id: map["from"]!, text: map["msg"]!)
             }

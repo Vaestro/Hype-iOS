@@ -12,12 +12,13 @@ class THLChatEntryTableViewController: UITableViewController {
 
     var roomData = [[String: String]]()
     
+    var roomChecked = [String: Date]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "MESSAGES";
-        let barBack = UIBarButtonItem(title: "<", style: UIBarButtonItemStyle.plain, target: self, action: "back")
-        self.navigationItem.leftBarButtonItem = barBack
+        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -72,6 +73,7 @@ class THLChatEntryTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return roomData.count
+       
     }
 
     
@@ -82,6 +84,7 @@ class THLChatEntryTableViewController: UITableViewController {
         cell.priceLabel.backgroundColor = UIColor.black
         cell.priceLabel.alpha = 0.9
         cell.dateLabel.text = roomData[indexPath.row]["dateString"]
+        
         if(roomData[indexPath.row]["chatMateImage"] != nil) {
             
             let url = NSURL(string:roomData[indexPath.row]["chatMateImage"]!)
@@ -93,11 +96,24 @@ class THLChatEntryTableViewController: UITableViewController {
                cell.userImage.image = UIImage(data:data! as Data)
             }
         } else {
+           
             cell.userImage.image = UIImage(named: "default_profile_image")
         }
-       
+        
+        
+        if(roomData[indexPath.row]["hasNew"] == "true") {
+        
+            cell.newImage.alpha = 1
+        } else {
+            cell.newImage.alpha = 0
+        }
+        
+            
+        
         cell.backgroundColor = UIColor.black
         cell.alpha = 0.9
+        
+        cell.msgLabel.text = roomData[indexPath.row]["lastMessage"]
         
         
         return cell
@@ -114,11 +130,12 @@ class THLChatEntryTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var chatViewController = THLChatViewController()
-        print(indexPath.row)
+        
         chatViewController.chatMateId = roomData[indexPath.row]["chatMateId"]
         chatViewController.chatRoomId = roomData[indexPath.row]["roomId"];
         chatViewController.chatMateName = roomData[indexPath.row]["chatMateName"]
         self.navigationController?.pushViewController(chatViewController, animated: true)
+        
     }
     
     func back() {
@@ -138,12 +155,29 @@ class THLChatEntryTableViewController: UITableViewController {
                     var curRoomInfo = [String: String]()
                     curRoomInfo["roomId"] = room["roomId"] as! String
                     curRoomInfo["roomTitle"] = room["roomTitle"] as! String
+                    // CHECK IF DATES MATCH(MESSAGE IS NEW)
+                    if(room["lastMessage"] != nil) {
+                        curRoomInfo["lastMessage"] = room["lastMessage"] as! String
+                        curRoomInfo["lastMsgOwner"] = room["lastMsgOwner"] as! String
+                        let hasNew = room["hasNew"] as! Bool
+                        if(hasNew) {
+                            curRoomInfo["hasNew"] = "true";
+                        } else {
+                            curRoomInfo["hasNew"] = "false";
+                        }
+                    } else {
+                        curRoomInfo["lastMessage"] = "Start a conversation.."
+                        curRoomInfo["lastMsgOwner"] = THLUser.current()?.objectId
+                        curRoomInfo["hasNew"] = "true"
+                    }
                     curRoomInfo["date"] = room["date"] as! String
                     curRoomInfo["dateString"] = room["dateString"] as! String
                     curRoomInfo["chatMateName"] = room["chatMateName"] as! String
                     curRoomInfo["chatMateId"] = room["chatMateId"] as! String
                     if(room["chatMateImage"] != nil) {
                         curRoomInfo["chatMateImage"] = room["chatMateImage"] as! String
+                    } else {
+                        curRoomInfo["chatMateImage"] = nil
                     }
                     self.roomData.append(curRoomInfo)
                     

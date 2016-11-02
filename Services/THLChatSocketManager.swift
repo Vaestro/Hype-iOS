@@ -21,7 +21,7 @@ class THLChatSocketManager: NSObject {
     
         socket.on("connect") {(data, ack) -> Void in
             //Check for new messages in data
-            print(data)
+            
             self.connectUser();
         }
     
@@ -88,9 +88,9 @@ class THLChatSocketManager: NSObject {
                                               "hostId": hostId]) {
         (something, error) in
             if error == nil {
-                print("SUCCESS")
+                
             } else {
-                print("FAIL")
+                
                 
             }
         }

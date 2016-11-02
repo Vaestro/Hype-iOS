@@ -308,8 +308,9 @@ THLEventDiscoveryViewControllerDelegate
 {
     // Show chat view controller
     UINavigationController *chatEntry = [UINavigationController new];
+    
     _chatEntryTableViewController = [THLChatEntryTableViewController new];
-    [chatEntry pushViewController:_chatEntryTableViewController animated:NO];
+    [chatEntry pushViewController:[THLProfilePicChooserViewController new] animated:NO];
     [[self topViewController] presentViewController:chatEntry animated:YES completion:nil];
     
     

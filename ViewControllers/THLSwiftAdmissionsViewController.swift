@@ -190,8 +190,12 @@ class THLSwiftAdmissionsViewController: UIViewController, THLEventPickerViewCont
 
     func messageButtonPressed() {
         let contactPickerScene = EPContactsPicker(delegate: self, multiSelection:true, subtitleCellType: SubtitleCellValue.phoneNumber, event: self.event as! THLEvent)
-        
-        self.navigationController?.pushViewController(contactPickerScene, animated: true)
+        if(THLUser.current()?.value(forKey: "image") == nil){
+            let vc = THLProfilePicChooserViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            self.navigationController?.pushViewController(contactPickerScene, animated: true)
+        }
     }
     /*
      ==========================================================================================

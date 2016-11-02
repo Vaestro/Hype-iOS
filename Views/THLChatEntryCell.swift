@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import ParseUI
 
 class THLChatEntryCell: UITableViewCell {
     let padding: CGFloat = 5
@@ -15,8 +16,10 @@ class THLChatEntryCell: UITableViewCell {
     var typeLabel: UILabel!
     var nameLabel: UILabel!
     var priceLabel: UILabel!
-    var userImage : UIImageView!
+    var userImage : PFImageView!
     var dateLabel: UILabel!
+    var msgLabel: UILabel!
+    var newImage : PFImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -58,9 +61,24 @@ class THLChatEntryCell: UITableViewCell {
         dateLabel.font = UIFont(name:"OpenSans-Light", size:12)
         contentView.addSubview(dateLabel)
         
+        msgLabel = UILabel()
+        msgLabel.textAlignment = .center
+        msgLabel.textColor = UIColor.white
+        msgLabel.font = UIFont(name:"OpenSans-Light", size:12)
+        msgLabel.numberOfLines = 1
+        
+        contentView.addSubview(msgLabel)
+        
         let image = UIImage(named: "default_profile_image")
-        userImage = UIImageView(image: image!)
+        userImage = PFImageView(image: image!)
+        userImage.contentMode = UIViewContentMode.scaleAspectFill
+        
         contentView.addSubview(userImage)
+        
+        let cImage = UIImage(named: "checked_box")
+        newImage = PFImageView(image: cImage!)
+        newImage.contentMode = UIViewContentMode.scaleAspectFill
+        contentView.addSubview(newImage)
         
         
         
@@ -81,14 +99,25 @@ class THLChatEntryCell: UITableViewCell {
         super.layoutSubviews()
         
         
+       
         priceLabel.snp.makeConstraints { (make) -> Void in
-           make.bottom.left.right.equalTo(contentView)
-           make.bottom.top.bottom.equalTo(contentView);
+           make.left.right.equalTo(contentView)
+           make.topMargin.equalTo(4);
         }
+        
+        msgLabel.snp.makeConstraints { (make) -> Void in
+            
+            make.centerX.equalTo(contentView);
+            make.bottom.top.bottom.equalTo(contentView);
+            make.width.lessThanOrEqualTo(175)
+            make.topMargin.equalTo(4);
+        }
+        
+       
         
         userImage.snp.makeConstraints{ (make) -> Void in
             
-            make.height.equalTo(contentView.frame.size.height/2)
+            make.height.equalTo(contentView.frame.size.height/3)
             make.width.width.equalTo((contentView.frame.size.width/6))
             make.centerY.equalTo(contentView)
             make.leftMargin.equalTo(4)
@@ -96,9 +125,14 @@ class THLChatEntryCell: UITableViewCell {
         }
         
         dateLabel.snp.makeConstraints{ (make) -> Void in
-           
-            make.bottom.top.bottom.equalTo(contentView);
+            make.topMargin.equalTo(5);
             make.rightMargin.equalTo(4)
+        }
+        
+        newImage.snp.makeConstraints{ (make) -> Void in
+            make.centerY.equalTo(contentView)
+            make.rightMargin.equalTo(8)
+            
         }
     }
     
