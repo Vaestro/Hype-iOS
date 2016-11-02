@@ -271,11 +271,6 @@ THLEventDiscoveryViewControllerDelegate
     [_discoveryTabBarController.tabBar setHidden:YES];
     
     _discoveryNavBarTitleView = [[THLDiscoveryNavBarTitleView alloc] initWithFrame:CGRectZero];
-    _discoveryTabBarController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
-                                             initWithImage:[UIImage imageNamed:@"Help"]
-                                             style:UIBarButtonItemStylePlain
-                                             target:self
-                                             action:@selector(messageButtonPressed)];
     _discoveryTabBarController.navigationItem.titleView = _discoveryNavBarTitleView;
     [_discoveryNavBarTitleView.eventButton addTarget:self action:@selector(changeVC) forControlEvents:UIControlEventTouchUpInside];
     [_discoveryNavBarTitleView.venueButton addTarget:self action:@selector(changeVC) forControlEvents:UIControlEventTouchUpInside];
