@@ -11,8 +11,9 @@ import PopupDialog
 
 class THLInquiryMenuViewController: UIViewController {
     
-    var pageMenu : CAPSPageMenu?
     var inquiry: PFObject?
+    var guestlistTableView: THLGuestlistTableViewController!
+    var connectButton: UIButton!
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -20,7 +21,10 @@ class THLInquiryMenuViewController: UIViewController {
     
     init(inquiry: PFObject) {
         self.inquiry = inquiry
-
+        self.connectButton = UIButton()
+        
+        let guestlistId = inquiry["guestlistId"] as! String
+        self.guestlistTableView = THLGuestlistTableViewController(guestlistId: guestlistId)
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -29,19 +33,23 @@ class THLInquiryMenuViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancel_button"), style: .plain, target: self, action: #selector(THLInquiryMenuViewController.dismiss as (THLInquiryMenuViewController) -> () -> ()))
         
         let superview = self.view!
-
-        let connectButton = UIButton()
-        connectButton.titleLabel?.text = "CONNECT"
-        connectButton.titleLabel?.textColor = UIColor.black
+        superview.backgroundColor = UIColor.black
+        
+        superview.addSubview(guestlistTableView.tableView)
+        
+        connectButton.setTitle("CONNECT", for: UIControlState.normal)
+        connectButton.setTitleColor(UIColor.black, for: UIControlState.normal)
         connectButton.addTarget(self, action: #selector(handleConnect), for: UIControlEvents.touchUpInside)
         connectButton.backgroundColor = UIColor.customGoldColor()
         superview.addSubview(connectButton)
     
-        connectButton.snp.makeConstraints { (make) -> Void in
-            make.width.equalTo(200)
-            make.height.equalTo(60)
-            make.center.equalTo(superview.snp.center)
-        }
+
+    }
+    
+    override func viewDidLayoutSubviews() {
+        guestlistTableView.tableView!.frame = CGRect(x:0,y:0,width:view.frame.size.width, height:view.frame.size.height - 60)
+        connectButton.frame = CGRect(x:0,y:guestlistTableView.tableView!.frame.size.height,width:view.frame.size.width, height:60)
+
     }
     
     func dismiss() {
@@ -49,61 +57,8 @@ class THLInquiryMenuViewController: UIViewController {
     }
     
     func handleConnect() {
-        
-    }
-    
-    func submitOffer() {
-        var offer = PFObject(className:"InquiryOffer")
-        offer["message"] = "Hello I am host"
-        offer["accepted"] = false
-        offer["Host"] = THLUser.current()
-        offer.saveInBackground {(success, error) in
-            if (success) {
-                var offers:[PFObject]? = self.inquiry?.value(forKey: "Offers") as? [PFObject]
-                if (offers == nil) {
-                    offers = [PFObject]()
-                    offers?.append(offer)
-                } else {
-                    offers?.insert(offer, at: 0)
-                }
-                self.inquiry?["Offers"] = offers
-                self.inquiry?.saveInBackground()
-                let title = "SUCCESS"
-                let message = "Your offer was submitted!"
-                
-                // Create the dialog
-                let popup = PopupDialog(title: title, message: message)
-                
-                // Create buttons
-                let buttonOne = CancelButton(title: "OK") {
-                    print("You canceled the car dialog.")
-                }
-                
-                popup.addButton(buttonOne)
-                
-                // Present dialog
-                self.present(popup, animated: true, completion: nil)
-            } else {
-                // Prepare the popup assets
-                let title = "ERROR"
-                let message = "There was an issue with creating your inquiry. Please try again later!"
-                
-                // Create the dialog
-                let popup = PopupDialog(title: title, message: message)
-                
-                // Create buttons
-                let buttonOne = CancelButton(title: "OK") {
-                    print("You canceled the car dialog.")
-                }
-                
-                popup.addButton(buttonOne)
-                
-                // Present dialog
-                self.present(popup, animated: true, completion: nil)
-            }
-        }
-        
-        
+        let submitInquiryView = THLSubmitInquiryOfferViewController(inquiry: self.inquiry!)
+        self.navigationController?.pushViewController(submitInquiryView, animated: true)
     }
     
     override func didReceiveMemoryWarning() {

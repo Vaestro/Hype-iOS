@@ -54,7 +54,7 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
             configuration.applicationId = applicationId;
             configuration.clientKey = clientKeyId;
             configuration.server = @"https://powerful-tundra-19716.herokuapp.com/parse/";
-           //configuration.server = @"https://2282a8f6.ngrok.io/parse/";
+//           configuration.server = @"https://51770b13.ngrok.io/parse/";
             configuration.localDatastoreEnabled = YES;
         }]];
 //    #else

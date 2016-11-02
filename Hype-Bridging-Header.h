@@ -42,3 +42,5 @@
 #import "THLMyEventsViewController.h"
 #import "NSDate+Utilities.h"
 #import "THLUserProfileViewController.h"
+
+#import "THLEventDetailsViewController.h"
