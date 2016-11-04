@@ -73,9 +73,11 @@ class THLEventPickerViewController: PFQueryCollectionViewController {
         let cell = super.collectionView(collectionView, cellForItemAt: indexPath, object: object)
         cell?.textLabel.textAlignment = .center
 
-        let date = object?["date"] as! Date
+        let date = object?.value(forKey: "date") as? Date
+        let dateInitials:String = (date! as NSDate).thl_weekdayInitials() as String!
+        let dayString:String = (date! as NSDate).thl_dayString as String!
 
-        cell?.textLabel.text = "\((date as NSDate).thl_weekdayInitials())\n\n\((date as NSDate).thl_dayString)"
+        cell?.textLabel.text = "\(dateInitials)\n\n\(dayString)"
         cell?.textLabel.textAlignment = .center
 
         cell?.textLabel.textColor = UIColor.white

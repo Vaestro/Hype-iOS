@@ -37,6 +37,12 @@ class THLInquiryOfferDetailsView: UIViewController {
         super.init(nibName:nil, bundle:nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+
+        (self.navigationController?.navigationBar as! THLBoldNavigationBar).titleLabel.text = ""
+        (self.navigationController?.navigationBar as! THLBoldNavigationBar).subtitleLabel.text = ""
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

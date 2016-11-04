@@ -18,7 +18,8 @@ class THLBoldNavigationBar : UINavigationBar {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        self.frame = CGRect(x:0, y:0, width:frame.size.width, height:60)
+
         self.backgroundColor = UIColor.black
         
         titleLabel.font = UIFont(name:"Raleway-Bold",size:20)
@@ -28,13 +29,28 @@ class THLBoldNavigationBar : UINavigationBar {
         titleLabel.minimumScaleFactor = 0.5
         titleLabel.textAlignment = .left
         titleLabel.textColor = UIColor.white
-        titleLabel.text = "INQUIRY FOR CLUB"
+        
+        subtitleLabel.font = UIFont(name:"Raleway-Bold",size:16)
+        subtitleLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+        subtitleLabel.numberOfLines = 1
+        subtitleLabel.adjustsFontSizeToFitWidth = true
+        subtitleLabel.minimumScaleFactor = 0.5
+        subtitleLabel.textAlignment = .left
+        subtitleLabel.textColor = UIColor.gray
 
         self.addSubview(titleLabel)
+        self.addSubview(subtitleLabel)
+
         titleLabel.snp.makeConstraints { (make) -> Void in
-            make.left.equalTo(10)
-            make.centerY.equalTo(self)
+            make.top.equalTo(self.snp.top).offset(10)
+            make.left.equalTo(self.snp.left).offset(10)
         }
+        
+        subtitleLabel.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.left.equalTo(self.snp.left).offset(10)
+        }
+        
         
     }
     

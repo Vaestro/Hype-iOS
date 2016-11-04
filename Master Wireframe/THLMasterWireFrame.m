@@ -214,7 +214,6 @@ THLEventDiscoveryViewControllerDelegate
     UITabBarController *hostTabBarController = [UITabBarController new];
     
     THLHostDashboardViewController *inquiryDiscoveryView = [THLHostDashboardViewController new];
-    UIViewController *messagesView = [UIViewController new];
     THLUserProfileViewController *userProfileViewController = [THLUserProfileViewController new];
     userProfileViewController.delegate = self;
     UINavigationController *profileView = [UINavigationController new];
@@ -223,9 +222,10 @@ THLEventDiscoveryViewControllerDelegate
     inquiryDiscoveryView.tabBarItem.image = [UIImage imageNamed:@"Home Icon"];
     inquiryDiscoveryView.tabBarItem.title = @"Discover";
    
-    UINavigationController *chatEntry = [UINavigationController new];
+    UINavigationController *chatEntry = [[UINavigationController alloc] initWithNavigationBarClass:[THLBoldNavigationBar class] toolbarClass:nil];
     _chatEntryTableViewController = [THLChatEntryTableViewController new];
     [chatEntry pushViewController:_chatEntryTableViewController animated:NO];
+    
     chatEntry.tabBarItem.image = [UIImage imageNamed:@"message"];
     chatEntry.tabBarItem.title = @"Messages";
     
@@ -282,7 +282,7 @@ THLEventDiscoveryViewControllerDelegate
     UINavigationController *profile = [UINavigationController new];
     [profile pushViewController:_userProfileViewController animated:NO];
     
-    UINavigationController *chatEntry = [UINavigationController new];
+    UINavigationController *chatEntry = [[UINavigationController alloc] initWithNavigationBarClass:[THLBoldNavigationBar class] toolbarClass:nil];
     _chatEntryTableViewController = [THLChatEntryTableViewController new];
     [chatEntry pushViewController:_chatEntryTableViewController animated:NO];
     chatEntry.tabBarItem.image = [UIImage imageNamed:@"message"];
@@ -329,7 +329,7 @@ THLEventDiscoveryViewControllerDelegate
     if (!([self topViewController] == _masterTabBarController)) {
         [_masterTabBarController dismissViewControllerAnimated:YES completion:nil];
     }
-    [_masterTabBarController setSelectedIndex:1];
+    [_masterTabBarController setSelectedIndex:2];
 }
 
 #pragma mark - AdmissionsOptionViewDelegate
@@ -423,7 +423,7 @@ THLEventDiscoveryViewControllerDelegate
     [_window.rootViewController dismissViewControllerAnimated:YES completion:^{
         [self presentPartyNavigationControllerForTicket:guestlistInvite];
     }];
-    [_masterTabBarController setSelectedIndex:1];
+    [_masterTabBarController setSelectedIndex:2];
 }
 
 #pragma mark -
@@ -537,8 +537,8 @@ THLEventDiscoveryViewControllerDelegate
     [partyNavVC addChildViewController:partyNavigationController];
     [_window.rootViewController presentViewController:partyNavVC animated:YES completion:nil];
     
-    if (_masterTabBarController.selectedIndex != 1) {
-        [_masterTabBarController setSelectedIndex:1];
+    if (_masterTabBarController.selectedIndex != 2) {
+        [_masterTabBarController setSelectedIndex:2];
     }
 }
 
@@ -557,8 +557,8 @@ THLEventDiscoveryViewControllerDelegate
     
     [_window.rootViewController presentViewController:partyNavVC animated:YES completion:nil];
     
-    if (_masterTabBarController.selectedIndex != 1) {
-        [_masterTabBarController setSelectedIndex:1];
+    if (_masterTabBarController.selectedIndex != 2) {
+        [_masterTabBarController setSelectedIndex:2];
     }
 }
 

@@ -15,7 +15,7 @@ class THLChatEntryCell: UITableViewCell {
     var background: UIView!
     var typeLabel: UILabel!
     var nameLabel: UILabel!
-    var priceLabel: UILabel!
+    var titleLabel: UILabel!
     var userImage : PFImageView!
     var dateLabel: UILabel!
     var msgLabel: UILabel!
@@ -45,24 +45,24 @@ class THLChatEntryCell: UITableViewCell {
         //contentView.addSubview(nameLabel)
         
         typeLabel = UILabel(frame: CGRect.zero)
-        typeLabel.textAlignment = .center
+        typeLabel.textAlignment = .left
         typeLabel.textColor = UIColor.white
         //contentView.addSubview(typeLabel)
         
-        priceLabel = UILabel()
-        priceLabel.textAlignment = .center
-        priceLabel.textColor = UIColor.white
-        priceLabel.font = UIFont(name:"OpenSans-Light", size: 16)
-        contentView.addSubview(priceLabel)
+        titleLabel = UILabel()
+        titleLabel.textAlignment = .left
+        titleLabel.textColor = UIColor.white
+        titleLabel.font = UIFont(name:"OpenSans-Light", size: 16)
+        contentView.addSubview(titleLabel)
         
         dateLabel = UILabel()
-        dateLabel.textAlignment = .center
+        dateLabel.textAlignment = .right
         dateLabel.textColor = UIColor.customGoldColor()
         dateLabel.font = UIFont(name:"OpenSans-Light", size:12)
         contentView.addSubview(dateLabel)
         
         msgLabel = UILabel()
-        msgLabel.textAlignment = .center
+        msgLabel.textAlignment = .left
         msgLabel.textColor = UIColor.white
         msgLabel.font = UIFont(name:"OpenSans-Light", size:12)
         msgLabel.numberOfLines = 1
@@ -100,38 +100,37 @@ class THLChatEntryCell: UITableViewCell {
         
         
        
-        priceLabel.snp.makeConstraints { (make) -> Void in
-           make.left.right.equalTo(contentView)
+        titleLabel.snp.makeConstraints { (make) -> Void in
+            make.left.equalTo(userImage.snp.right).offset(5)
+           make.right.equalTo(dateLabel.snp.left).offset(5)
            make.topMargin.equalTo(4);
         }
         
         msgLabel.snp.makeConstraints { (make) -> Void in
-            
-            make.centerX.equalTo(contentView);
-            make.bottom.top.bottom.equalTo(contentView);
-            make.width.lessThanOrEqualTo(175)
-            make.topMargin.equalTo(4);
+            make.left.equalTo(userImage.snp.right).offset(5)
+            make.right.equalTo(dateLabel.snp.left).offset(5)
+            make.top.equalTo(titleLabel.snp.bottom)
         }
         
        
         
         userImage.snp.makeConstraints{ (make) -> Void in
             
-            make.height.equalTo(contentView.frame.size.height/3)
-            make.width.width.equalTo((contentView.frame.size.width/6))
+            make.height.equalTo(contentView.frame.size.height/1.33)
+            make.width.equalTo(userImage.snp.height)
             make.centerY.equalTo(contentView)
-            make.leftMargin.equalTo(4)
+            make.leftMargin.equalTo(5)
             
         }
         
         dateLabel.snp.makeConstraints{ (make) -> Void in
             make.topMargin.equalTo(5);
-            make.rightMargin.equalTo(4)
+            make.rightMargin.equalTo(5)
         }
         
         newImage.snp.makeConstraints{ (make) -> Void in
             make.centerY.equalTo(contentView)
-            make.rightMargin.equalTo(8)
+            make.rightMargin.equalTo(5)
             
         }
     }

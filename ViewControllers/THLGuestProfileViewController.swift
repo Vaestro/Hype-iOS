@@ -18,7 +18,7 @@ import UIKit
 
 }
 
-class THLGuestProfileViewController: UIViewController, THLMyUpcomingEventsViewControllerDelegate, THLUserProfileViewControllerDelegate {
+class THLGuestProfileViewController: UIViewController, THLMyUpcomingEventsViewControllerDelegate, THLUserProfileViewControllerDelegate, THLMyInvitesViewControllerDelegate {
     public func userProfileViewControllerWantsToPresentPaymentViewController() {
         delegate?.userProfileViewControllerWantsToPresentPaymentViewController()
     }
@@ -49,6 +49,7 @@ class THLGuestProfileViewController: UIViewController, THLMyUpcomingEventsViewCo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.black
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Menu Icon"), style: .plain, target: self, action: #selector(THLGuestProfileViewController.presentSettings as (THLGuestProfileViewController) -> () -> ()))
 
@@ -66,15 +67,10 @@ class THLGuestProfileViewController: UIViewController, THLMyUpcomingEventsViewCo
         myEventsViewController?.title = "MY EVENTS"
         controllerArray.append(myEventsViewController!)
         
-        let controller2 : UIViewController = UIViewController()
-        controller2.view.backgroundColor = UIColor.orange
+        let controller2 : THLMyInvitesViewController = THLMyInvitesViewController()
         controller2.title = "INVITES"
+        controller2.delegate = self;
         controllerArray.append(controller2)
-        
-        let controller3 : UIViewController = UIViewController()
-        controller3.view.backgroundColor = UIColor.gray
-        controller3.title = "PAST"
-        controllerArray.append(controller3)
         
         // Initialize scroll menu
         let rect = CGRect(x: 0.0, y: 150.0, width: self.view.frame.width, height: self.view.frame.height - 150.0)

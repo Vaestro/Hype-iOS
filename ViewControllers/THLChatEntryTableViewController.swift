@@ -17,8 +17,6 @@ class THLChatEntryTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "MESSAGES";
-        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -33,13 +31,8 @@ class THLChatEntryTableViewController: UITableViewController {
         tableView.dataSource = self
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         
-        tableView.backgroundColor = UIColor.black.withAlphaComponent(0.9)
-        
-        
+        tableView.backgroundColor = UIColor.black
         tableView.register(THLChatEntryCell.self, forCellReuseIdentifier: "EntryCell")
-       
-        
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -49,7 +42,8 @@ class THLChatEntryTableViewController: UITableViewController {
         main.tabBar.items?[1].image = UIImage(named:"message")
         listenForRooms()
         THLChatSocketManager.sharedInstance.getChatRooms()
-        
+        (self.navigationController?.navigationBar as! THLBoldNavigationBar).titleLabel.text = "MESSAGES"
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -80,9 +74,9 @@ class THLChatEntryTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //let cell = tableView.dequeueReusableCell(withIdentifier: "chatEntry", for: indexPath)
         let cell = tableView.dequeueReusableCell( withIdentifier: "EntryCell", for: indexPath) as! THLChatEntryCell
-        cell.priceLabel.text = roomData[indexPath.row]["roomTitle"]
-        cell.priceLabel.backgroundColor = UIColor.black
-        cell.priceLabel.alpha = 0.9
+        cell.titleLabel.text = roomData[indexPath.row]["roomTitle"]
+        cell.titleLabel.backgroundColor = UIColor.black
+        cell.titleLabel.alpha = 0.9
         cell.dateLabel.text = roomData[indexPath.row]["dateString"]
         
         if(roomData[indexPath.row]["chatMateImage"] != nil) {

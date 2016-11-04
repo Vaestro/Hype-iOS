@@ -74,6 +74,7 @@
 		7928ADB61D19CB5300DFC443 /* THLEventDetailsMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928ADB51D19CB5300DFC443 /* THLEventDetailsMapView.m */; };
 		792BB4D11DB1507900B673B8 /* THLInquiryOfferDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792BB4D01DB1507900B673B8 /* THLInquiryOfferDetailsView.swift */; };
 		792CFFB11DA874B2009E7C7E /* THLGuestlistTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792CFFB01DA874B2009E7C7E /* THLGuestlistTableViewController.swift */; };
+		793096CB1DCB970000B8EB25 /* THLMyInvitesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793096CA1DCB970000B8EB25 /* THLMyInvitesViewController.swift */; };
 		79319DD41D9AED88000DEE69 /* EPConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79319DCE1D9AED88000DEE69 /* EPConstants.swift */; };
 		79319DD51D9AED88000DEE69 /* EPContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79319DCF1D9AED88000DEE69 /* EPContact.swift */; };
 		79319DD61D9AED88000DEE69 /* EPContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79319DD01D9AED88000DEE69 /* EPContactCell.swift */; };
@@ -367,6 +368,7 @@
 		7928ADDF1D19EE3400DFC443 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = "SnapKit/build/Debug-iphoneos/SnapKit.framework"; sourceTree = "<group>"; };
 		792BB4D01DB1507900B673B8 /* THLInquiryOfferDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLInquiryOfferDetailsView.swift; sourceTree = "<group>"; };
 		792CFFB01DA874B2009E7C7E /* THLGuestlistTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLGuestlistTableViewController.swift; sourceTree = "<group>"; };
+		793096CA1DCB970000B8EB25 /* THLMyInvitesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLMyInvitesViewController.swift; sourceTree = "<group>"; };
 		79319DCE1D9AED88000DEE69 /* EPConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPConstants.swift; sourceTree = "<group>"; };
 		79319DCF1D9AED88000DEE69 /* EPContact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPContact.swift; sourceTree = "<group>"; };
 		79319DD01D9AED88000DEE69 /* EPContactCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EPContactCell.swift; sourceTree = "<group>"; };
@@ -1312,6 +1314,7 @@
 				799831191D4B9E5900BB5BFE /* THLReservationRequestViewController.h */,
 				792CFFB01DA874B2009E7C7E /* THLGuestlistTableViewController.swift */,
 				792BB4D01DB1507900B673B8 /* THLInquiryOfferDetailsView.swift */,
+				793096CA1DCB970000B8EB25 /* THLMyInvitesViewController.swift */,
 				794DA4341DB82DC3000C5F67 /* THLGuestProfileViewController.swift */,
 				7998311A1D4B9E6500BB5BFE /* THLReservationRequestViewController.m */,
 				79E945B61DBA7ED900EC753D /* THLMyUpcomingEventsViewController.swift */,
@@ -2309,6 +2312,7 @@
 				C85EE3C11C1BCC940008C14B /* THLPerkStoreItemService.m in Sources */,
 				217DC6531BBB77AC00332174 /* THLUserManager.m in Sources */,
 				79B86C311D36DACA0033768D /* JVFloatLabeledTextView.m in Sources */,
+				793096CB1DCB970000B8EB25 /* THLMyInvitesViewController.swift in Sources */,
 				794DA4331DB6E537000C5F67 /* THLInquiryOfferTableCellView.swift in Sources */,
 				79B86C301D36DACA0033768D /* JVFloatLabeledTextField.m in Sources */,
 				79B9594D1BE8966300B87799 /* KLCPopup.m in Sources */,
