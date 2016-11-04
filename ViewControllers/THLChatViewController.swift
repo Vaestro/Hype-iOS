@@ -24,25 +24,20 @@ class THLChatViewController : JSQMessagesViewController {
        super.viewDidLoad()
        self.senderId = THLUser.current()?.objectId;
         self.senderDisplayName = "My Name";
-        // Set up navbar
-        self.navigationItem.title = "CHAT WITH " + chatMateName!;
-    
-        let barBack = UIBarButtonItem(title: "<", style: UIBarButtonItemStyle.plain, target: self, action: "back")
-        self.navigationItem.leftBarButtonItem = barBack
+        self.collectionView.backgroundColor = UIColor.black
+        self.view.backgroundColor = UIColor.black
         
+        // Set up navbar
+        self.navigationItem.title = "CHAT WITH " + chatMateName!;        
         self.inputToolbar.contentView.leftBarButtonItem = nil
         
         setupBubbles()
         setupAvatars()
         listenForMessageHistory()
         listenForMessages()
-       
-        
-    
-        
-        
-        
+        (self.navigationController?.navigationBar as! THLBoldNavigationBar).titleLabel.text = ""
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.messages.removeAll()
@@ -50,7 +45,7 @@ class THLChatViewController : JSQMessagesViewController {
         getMessageHistory()
         finishReceivingMessage()
         
-        
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -77,6 +72,13 @@ class THLChatViewController : JSQMessagesViewController {
         }
     }
     
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! JSQMessagesCollectionViewCell
+        let message = messages[indexPath.item]
+        cell.textView?.textColor = UIColor.black
+        return cell
+    }
+    
     override func collectionView(_ collectionView: JSQMessagesCollectionView,
                                  avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource {
         
@@ -101,7 +103,7 @@ class THLChatViewController : JSQMessagesViewController {
     
     private func setupBubbles() {
         
-        outgoingBubbleImageView = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImage(with: UIColor.black)
+        outgoingBubbleImageView = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImage(with: UIColor.white)
         incomingBubbleImageView =  JSQMessagesBubbleImageFactory().incomingMessagesBubbleImage(with: UIColor.customGoldColor())
     }
     

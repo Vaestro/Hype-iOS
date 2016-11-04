@@ -57,7 +57,9 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
     override open func viewDidLoad() {
         super.viewDidLoad()
         self.title = EPGlobalConstants.Strings.contactsTitle
-
+        self.view.backgroundColor = UIColor.black
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        
         registerContactCell()
         inititlizeBarButtons()
         initializeSearchBar()
@@ -322,6 +324,24 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
         return sortedContactKeys[section]
     }
     
+    override open func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let sectionTitle = self.tableView(tableView, titleForHeaderInSection: section)
+        if (sectionTitle == nil) {
+            return nil
+        }
+        
+        let label = UILabel(frame: CGRect(x:10, y:5, width:tableView.bounds.size.width, height:20))
+        label.backgroundColor = UIColor.clear
+        label.textColor = UIColor.white
+        label.text = sectionTitle
+        
+        let headerView = UIView(frame: CGRect(x:0, y:0, width:tableView.bounds.size.width, height:20))
+        headerView.backgroundColor = UIColor.black
+        
+        headerView.addSubview(label)
+        
+        return headerView
+    }
     // MARK: - Button Actions
     
     func onTouchCancelButton() {

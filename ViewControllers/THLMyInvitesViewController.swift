@@ -1,8 +1,8 @@
 //
-//  THLMyUpcomingEventsViewController.swift
+//  THLMyInvitesViewController.swift
 //  Hype
 //
-//  Created by Edgar Li on 10/21/16.
+//  Created by Edgar Li on 11/3/16.
 //  Copyright © 2016 Hypelist. All rights reserved.
 //
 
@@ -11,18 +11,18 @@ import UIKit
 import Parse
 import ParseUI
 
-protocol THLMyUpcomingEventsViewControllerDelegate: class {
+protocol THLMyInvitesViewControllerDelegate: class {
     func didSelectViewInquiry(_ guestlistInvite: PFObject)
     func didSelectViewHostedEvent(_ guestlistInvite: PFObject)
     func didSelectViewEventTicket(_ guestlistInvite: PFObject)
-
+    
 }
 
-class THLMyUpcomingEventsViewController: PFQueryTableViewController {
+class THLMyInvitesViewController: PFQueryTableViewController {
     
     // MARK: Init
-    var delegate: THLMyUpcomingEventsViewControllerDelegate?
-
+    var delegate: THLMyInvitesViewControllerDelegate?
+    
     convenience init() {
         self.init(style: .plain, className: "GuestlistInvite")
         
@@ -46,10 +46,10 @@ class THLMyUpcomingEventsViewController: PFQueryTableViewController {
         
         let user:PFUser = PFUser.current()!
         let date = NSDate().subtractingHours(4) as NSDate
-
+        
         query.whereKey("Guest", equalTo: user)
         query.whereKey("date", greaterThan: date)
-        query.whereKey("response", equalTo: 1)
+        query.whereKey("response", equalTo: 2)
 
         query.includeKey("Guest")
         query.includeKey("Guest.event")
@@ -61,12 +61,12 @@ class THLMyUpcomingEventsViewController: PFQueryTableViewController {
         query.includeKey("Guestlist.event.location")
         
         query.addAscendingOrder("date")
-
+        
         return query
     }
 }
 
-extension THLMyUpcomingEventsViewController {
+extension THLMyInvitesViewController {
     
     // MARK: TableView
     
@@ -78,7 +78,10 @@ extension THLMyUpcomingEventsViewController {
         let venue:PFObject = event.value(forKey: "location") as! PFObject
         let venueName:String = venue.value(forKey: "name") as! String
         let partyType:String = guestlistInvite.value(forKey: "admissionDescription") as! String
-        let eventTitle:String = "\(partyType) AT \(venueName)"
+        let sender:PFObject = guestlistInvite.value(forKey: "sender") as! PFObject
+        let senderName:String = sender.value(forKey: "firstName") as! String
+        
+        let eventTitle:String = "\(senderName) INVITED YOU TO PARTY AT \(venueName)"
         let date = guestlistInvite.value(forKey: "date") as? Date
         
         let cell:THLMyEventsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "THLMyEventsTableViewCell", for: indexPath) as! THLMyEventsTableViewCell
@@ -94,13 +97,12 @@ extension THLMyUpcomingEventsViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let guestlistInvite = object(at: indexPath) as PFObject!
         let guestlist = guestlistInvite?.value(forKey: "Guestlist") as! PFObject
-
+        
         let admissionOption = guestlist.value(forKey: "admissionOption") as! PFObject
         let admissionType:Int = admissionOption.value(forKey: "type") as! Int
         
         if (admissionType == 2) {
             let inquiry = guestlist.value(forKey: "Inquiry") as! PFObject
-
             if ((inquiry.value(forKey: "connected") as! Bool) == true) {
                 delegate?.didSelectViewHostedEvent(guestlistInvite!)
             } else {

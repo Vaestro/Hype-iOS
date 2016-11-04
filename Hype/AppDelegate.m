@@ -26,6 +26,7 @@ static NSString *applicationId = @"5t3F1S3wKnVGIKHob1Qj0Je3sygnFiwqAu6PP400";
 static NSString *clientKeyId = @"xn4Mces2HcFCQYXF2VRj4W1Ot0zIBELl6fHKLGPk";
 static NSString *stripePublishableKey = @"pk_test_cGZ7E1Im6VPKQHYUXIkR6sEe";
 static NSString *mixpanelToken = @"aa573c8ee35b386bff7635df03bdbf18";
+static NSString *serverURL = @"https://powerful-tundra-19716.herokuapp.com/parse/";
 
 #else
 static NSString *stripePublishableKey = @"pk_live_H8u89AfEDonln00iEUB0kKtZ";
@@ -51,8 +52,8 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
     
 //    #if DEBUG
         [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
-            configuration.applicationId = applicationId;
-            configuration.clientKey = clientKeyId;
+            configuration.applicationId = @"5t3F1S3wKnVGIKHob1Qj0Je3sygnFiwqAu6PP400";
+            configuration.clientKey = @"xn4Mces2HcFCQYXF2VRj4W1Ot0zIBELl6fHKLGPk";
             configuration.server = @"https://powerful-tundra-19716.herokuapp.com/parse/";
 //           configuration.server = @"https://51770b13.ngrok.io/parse/";
             configuration.localDatastoreEnabled = YES;

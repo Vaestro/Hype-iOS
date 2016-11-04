@@ -25,6 +25,8 @@ class EPContactCell: UITableViewCell {
         selectionStyle = UITableViewCellSelectionStyle.none
         contactContainerView.layer.masksToBounds = true
         contactContainerView.layer.cornerRadius = contactContainerView.frame.size.width/2
+        
+        super.backgroundColor = UIColor.black
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

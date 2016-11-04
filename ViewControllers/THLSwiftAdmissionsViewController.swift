@@ -98,11 +98,11 @@ class THLSwiftAdmissionsViewController: UIViewController, THLEventPickerViewCont
 
         self.contactConciergeLabel = TTTAttributedLabel.init(frame: CGRect.zero)
         self.contactConciergeLabel.textColor = UIColor.white
-        self.contactConciergeLabel.font = UIFont(name: "Raleway-Regular", size: 14)
+        self.contactConciergeLabel.font = UIFont(name: "Raleway-Bold", size: 16)
         self.contactConciergeLabel.numberOfLines = 0
         self.contactConciergeLabel.linkAttributes = [NSForegroundColorAttributeName: UIColor.white, NSUnderlineColorAttributeName: UIColor.customGoldColor(), NSUnderlineStyleAttributeName: NSUnderlineStyle.styleThick.rawValue]
         self.contactConciergeLabel.activeLinkAttributes = [NSForegroundColorAttributeName: UIColor.white, NSUnderlineStyleAttributeName: NSUnderlineStyle.styleNone.rawValue]
-        self.contactConciergeLabel.textAlignment = .center
+        self.contactConciergeLabel.textAlignment = .left
         let labelText: NSString! = "OR GO WITH A HOST"
         self.contactConciergeLabel.text = labelText as String
         let concierge: NSRange = labelText.range(of: "HOST")
@@ -228,8 +228,8 @@ class THLSwiftAdmissionsViewController: UIViewController, THLEventPickerViewCont
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: tablePackageAdmissionCollectionViewIdentifier, for: indexPath) as!THLTablePackageAdmissionCell
             cell.titleLabel.text = admissionOption["name"] as? String
-            cell.priceLabel.text = "\((admissionOption["price"] as AnyObject).floatValue) total"
-            cell.partySizeLabel.text = "\((admissionOption["partySize"] as AnyObject).floatValue) people"
+            cell.priceLabel.text = NSString(format: "%.f total", (admissionOption["price"] as AnyObject).floatValue) as String
+            cell.partySizeLabel.text = NSString(format: "%.f people", (admissionOption["partySize"] as AnyObject).floatValue) as String
             cell.perPersonLabel.text = NSString(format: "%.f/person", (admissionOption["price"] as AnyObject).floatValue/(admissionOption["partySize"] as AnyObject).floatValue) as String
 
             return cell

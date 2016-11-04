@@ -40,20 +40,33 @@ class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UIT
         self.guestlist = guestlistInvite.value(forKey: "Guestlist") as! PFObject
         self.inquiry = guestlist.value(forKey: "Inquiry") as! PFObject
         
+
+        
         self.offers = Array()
         offersTableView = UITableView.init(frame: CGRect.zero)
         super.init(nibName: nil, bundle: nil)
-        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancel_button"), style: .plain, target: self, action: #selector(THLInquiryOffersViewController.dismiss as (THLInquiryOffersViewController) -> () -> ()))
+
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancel_icon"), style: .plain, target: self, action: #selector(THLInquiryOffersViewController.dismiss as (THLInquiryOffersViewController) -> () -> ()))
         offersTableView.delegate = self
     }
     
     
     //  MARK: -
     //  MARK: UIViewController
+    override func viewWillAppear(_ animated: Bool) {
+        let event = inquiry.value(forKey: "Event") as! PFObject
+        let venueName = event.value(forKey: "venueName") as! String
+        
+        let date = inquiry.value(forKey: "date") as! Date
+        (self.navigationController?.navigationBar as! THLBoldNavigationBar).titleLabel.text = "INQUIRY FOR \(venueName.uppercased())"
+        (self.navigationController?.navigationBar as! THLBoldNavigationBar).subtitleLabel.text = (date as! NSDate).thl_weekdayString
+    }
     
     override func loadView() {
         super.loadView()
+
+
+
         offersTableView = UITableView(frame: UIScreen.main.bounds, style: UITableViewStyle.plain)
         offersTableView.backgroundColor = UIColor.black
         offersTableView.delegate = self
@@ -104,11 +117,15 @@ class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UIT
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let inquiryOffer: PFObject = self.offers[indexPath.row] as PFObject
         let host:PFObject = inquiryOffer["Host"] as! PFObject
+        let hostName = host["firstName"] as! String?
+        let venue = inquiryOffer.value(forKey: "Venue") as! PFObject
+        let venueName = venue.value(forKey: "name") as! String
+        let offerDateTime = inquiryOffer.value(forKey: "date") as! NSDate
         
         let cell:THLInquiryOfferTableViewCell = tableView.dequeueReusableCell(withIdentifier: "THLInquiryOfferTableViewCell", for: indexPath) as! THLInquiryOfferTableViewCell
-        cell.hostNameLabel.text = host["firstName"] as! String?
-        cell.eventTitleLabel.text = "TODO: Need to add event object to Inquiry Offer"
-        cell.dateTimeLabel.text = "TODO: Need to add event object to Inquiry Offer"
+        cell.hostNameLabel.text = hostName?.uppercased()
+        cell.eventTitleLabel.text = venueName.uppercased()
+        cell.dateTimeLabel.text = offerDateTime.thl_weekdayString
         cell.messagePreviewLabel.text = inquiryOffer.value(forKey: "message") as! String?
 
         cell.hostImageView.file = host["image"] as! PFFile?
