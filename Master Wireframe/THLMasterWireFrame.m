@@ -148,6 +148,7 @@ THLEventDiscoveryViewControllerDelegate
     [[THLChatSocketManager sharedInstance] establishConnection];
     
     
+    
     [self configureMasterTabViewControllerAndPresentGuestFlowInWindow:_window];
 }
 

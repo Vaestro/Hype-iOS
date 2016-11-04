@@ -17,6 +17,7 @@
 #import "THLPermissionRequestViewController.h"
 
 #import "THLAppearanceConstants.h"
+#import "Hype-Swift.h"
 
 @interface THLLoginService()
 <
@@ -62,6 +63,7 @@ THLPermissionRequestViewControllerDelegate
             currentUser.type = THLUserTypeGuest;
             [[currentUser saveInBackground] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask<NSNumber *> *saveTask) {
                 [WSELF checkForCompletedProfile];
+                [[THLChatSocketManager sharedInstance] createChatRoomWithHostId:@"Qeuyb9rJYu"];
                 return nil;
             }];
         } else {
