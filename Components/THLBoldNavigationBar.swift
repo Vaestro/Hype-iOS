@@ -18,7 +18,6 @@ class THLBoldNavigationBar : UINavigationBar {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.frame = CGRect(x:0, y:0, width:frame.size.width, height:60)
 
         self.backgroundColor = UIColor.black
         
@@ -47,7 +46,7 @@ class THLBoldNavigationBar : UINavigationBar {
         }
         
         subtitleLabel.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.top.equalTo(titleLabel.snp.bottom)
             make.left.equalTo(self.snp.left).offset(10)
         }
         
@@ -56,7 +55,9 @@ class THLBoldNavigationBar : UINavigationBar {
     
 
     
-    override func draw(_ rect: CGRect) {
-        
+    
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        var screenRect = UIScreen.main.bounds
+        return CGSize(width: screenRect.size.width, height: 65)
     }
 }

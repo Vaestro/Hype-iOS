@@ -422,7 +422,18 @@ THLEventDiscoveryViewControllerDelegate
 
 - (void)eventDetailsWantsToPresentPartyForEvent:(PFObject *)guestlistInvite {
     [_window.rootViewController dismissViewControllerAnimated:YES completion:^{
-        [self presentPartyNavigationControllerForTicket:guestlistInvite];
+        if ([guestlistInvite[@"Guestlist"][@"admissionOption"][@"type"] integerValue] == 2) {
+            
+            if (guestlistInvite[@"Guestlist"][@"Inquiry"][@"connected"] == [NSNumber numberWithInt:1]) {
+                [self presentPartyMenuForConnect:guestlistInvite];
+            } else {
+                [self presentOffersForInquiry:guestlistInvite];
+            }
+
+        } else {
+            [self presentPartyNavigationControllerForTicket:guestlistInvite];
+
+        }
     }];
     [_masterTabBarController setSelectedIndex:2];
 }

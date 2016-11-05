@@ -60,6 +60,7 @@ class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UIT
         let date = inquiry.value(forKey: "date") as! Date
         (self.navigationController?.navigationBar as! THLBoldNavigationBar).titleLabel.text = "INQUIRY FOR \(venueName.uppercased())"
         (self.navigationController?.navigationBar as! THLBoldNavigationBar).subtitleLabel.text = (date as! NSDate).thl_weekdayString
+        
     }
     
     override func loadView() {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 @objc protocol THLGuestProfileViewControllerDelegate {
     func didSelectViewInquiry(_ guestlistInvite: PFObject)
@@ -79,23 +80,32 @@ class THLGuestProfileViewController: UIViewController, THLMyUpcomingEventsViewCo
         self.view.addSubview(pageMenu!.view)
     }
     
+    override func viewDidLayoutSubviews() {
+        guestImageView.layer.cornerRadius = guestImageView.frame.size.width/2.0
+
+    }
+    
     func presentSettings() {
-        var navigationConroller = UINavigationController()
-        var settingsViewController = THLUserProfileViewController()
+        let navigationConroller = UINavigationController()
+        let settingsViewController = THLUserProfileViewController()
         navigationConroller.pushViewController(settingsViewController, animated: false)
         settingsViewController.delegate = self;
         self.present(navigationConroller, animated: true, completion: nil)
         
     }
     
-    lazy var guestImageView: THLPersonIconView = {
-        var imageView = THLPersonIconView()
+    lazy var guestImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.clipsToBounds = true
+        imageView.tintColor = UIColor.black;
+        imageView.contentMode = UIViewContentMode.scaleAspectFill
+        
         if ((THLUser.current()?.image) != nil) {
-            var imageFile:PFFile = THLUser.current()!.image
-            var url:NSURL = NSURL(string:imageFile.url!)!
-            imageView.image = nil
+            let imageFile = THLUser.current()?.image as PFFile!
+            let url = URL(string: imageFile!.url as String!)
+            imageView.kf.setImage(with: url)
         } else {
-            imageView.image = nil
+            imageView.image = UIImage(named: "default_profile_image")!.withRenderingMode(.alwaysOriginal)
         }
         self.view.addSubview(imageView)
         return imageView
