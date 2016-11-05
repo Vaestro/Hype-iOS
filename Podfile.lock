@@ -27,11 +27,11 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
-  - Branch (0.12.12):
-    - Branch/Core (= 0.12.12)
-    - Branch/without-IDFA (= 0.12.12)
-  - Branch/Core (0.12.12)
-  - Branch/without-IDFA (0.12.12)
+  - Branch (0.12.15):
+    - Branch/Core (= 0.12.15)
+    - Branch/without-IDFA (= 0.12.15)
+  - Branch/Core (0.12.15)
+  - Branch/without-IDFA (0.12.15)
   - CocoaLumberjack (2.4.0):
     - CocoaLumberjack/Default (= 2.4.0)
     - CocoaLumberjack/Extensions (= 2.4.0)
@@ -43,14 +43,14 @@ PODS:
   - Crashlytics (3.8.3):
     - Fabric (~> 1.6.3)
   - DateTools (1.7.0)
-  - DGActivityIndicatorView (2.1)
+  - DGActivityIndicatorView (2.1.1)
   - Digits (2.5.0):
     - TwitterCore (= 2.5.0)
   - EKAlgorithms (0.2)
-  - Fabric (1.6.10)
-  - FBSDKCoreKit (4.16.1):
+  - Fabric (1.6.11)
+  - FBSDKCoreKit (4.17.0):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.16.1):
+  - FBSDKLoginKit (4.17.0):
     - FBSDKCoreKit
   - FLEX (2.4.0)
   - FLKAutoLayout (0.2.1)
@@ -87,9 +87,9 @@ PODS:
   - FXLabel (1.5.9)
   - GCDObjC (0.3.0)
   - Gizou (0.1.3)
-  - Harpy (4.0.6)
+  - Harpy (4.0.7)
   - IHKeyboardAvoiding (2.6)
-  - Intercom (3.0.17)
+  - Intercom (3.0.18)
   - JSQMessagesViewController (7.3.4):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
@@ -127,9 +127,9 @@ PODS:
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
   - SnapKit (3.0.2)
-  - Socket.IO-Client-Swift (8.0.2)
+  - Socket.IO-Client-Swift (8.1.1)
   - SSDataSources (0.8.5)
-  - Stripe (9.0.0)
+  - Stripe (9.1.0)
   - SVProgressHUD (2.0.3)
   - SVPullToRefresh (0.4.1)
   - THContactPicker (1.2)
@@ -254,25 +254,25 @@ SPEC CHECKSUMS:
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   Bolts-Swift: fa98d1b59fc1acea9b21a21306dcdca1c85e3737
-  Branch: 714cc02afc4676902f14f949157cdbf8c73f64f4
+  Branch: 076dda33e7062b5bdefc1be209e2cd863141b7f3
   CocoaLumberjack: aa9dcab71bdf9eaf2a63bbd9ddc87863efe45457
   Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
   DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
-  DGActivityIndicatorView: 1942ae657a8d247c035f229422b2d15a8adbe5b6
+  DGActivityIndicatorView: ff2c76073d79692f724863c8dd38685866a03cb6
   Digits: c69ee2d1a6acf728c5d159f1bd335e4882bd3225
   EKAlgorithms: 83488651734ba3a63956fcb783b10e82d2ec3388
-  Fabric: c73f371ee543e3f0b80608f2674750e4910d1669
-  FBSDKCoreKit: 6feac4e8921ccd7afa83fb1df6291dc6eec42c7c
-  FBSDKLoginKit: 469a56cebe2e1ed62b1621d0b155970fd6aac2d8
+  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
+  FBSDKCoreKit: 30a21d2d7b92984b3d80497113433c00824c35e9
+  FBSDKLoginKit: 42b7129ac0373ca99eaf4cbebf4d07bd42371f59
   FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
   FLKAutoLayout: 9db6b30c2008d230da608e62c607b11c23b942e6
   FormatterKit: 11ad17b983200629246a5a466f6f1bfa2df823cb
   FXLabel: 877f56a3e0ef76b223c67dea3f442c12d3a1d55c
   GCDObjC: 0c31898f34d8605196ac0343c65b496609d7dee6
   Gizou: 93853bf634a9382c257795db052aa9a75e972c43
-  Harpy: 04c313691bfb7ae931eed36e0604e25f8e18b0ff
+  Harpy: 365eca4561369b4ebfeb188b18155d5e9768c939
   IHKeyboardAvoiding: d2541ee56dad83e160cd9aed0468c52247af6f49
-  Intercom: 96e2ee799db55c04e7ece023756ddd70e0cf7390
+  Intercom: d75f2d90c465c6f92417d481cc588c46ba48da44
   JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   Kingfisher: 6c67e3e57f2d81a9cfdfa25052cd86f33ceac9bb
@@ -295,9 +295,9 @@ SPEC CHECKSUMS:
   Reveal-iOS-SDK: e2250b3c155bcfac53ae223ddc1f76d08f206c33
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
-  Socket.IO-Client-Swift: 136598e4a81a42b0e6855e7f94a0e5a6efdc5ff8
+  Socket.IO-Client-Swift: 5c18fa2af9df8a19d20e4df815141103c1f7079b
   SSDataSources: b01170fb23b82acf0649194e9189b0bf5f702681
-  Stripe: 935c6deb5e96cbd29d247074bf3aa98a8438e22c
+  Stripe: f9acdd48bd3e4f1b4a91ed260317982db7a2ed65
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
   THContactPicker: e723f7c6ab6e1d6d10d59d618322ab8bfcb00365
