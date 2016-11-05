@@ -151,7 +151,7 @@ class THLChatEntryTableViewController: UITableViewController {
             if(rooms["rooms"]?.count != self.roomData.count)
             {
                 self.roomData.removeAll()
-                
+                print("One")
                 for room in rooms["rooms"]! {
                     var curRoomInfo = [String: String]()
                     curRoomInfo["roomId"] = room["roomId"] as! String
@@ -186,7 +186,9 @@ class THLChatEntryTableViewController: UITableViewController {
                 }
                 
                 //self.tableView.reloadData()
+                print("two")
                 self.tableView.performSelector(onMainThread:Selector("reloadData"), with: nil, waitUntilDone: true)
+                print("three")
             }
             
             

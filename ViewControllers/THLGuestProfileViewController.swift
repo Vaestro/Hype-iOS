@@ -88,6 +88,11 @@ class THLGuestProfileViewController: UIViewController, THLMyUpcomingEventsViewCo
         
     }
     
+    func presentProfilePicSettings() {
+        let vc = THLProfilePicChooserViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     lazy var guestImageView: THLPersonIconView = {
         var imageView = THLPersonIconView()
         if ((THLUser.current()?.image) != nil) {
@@ -98,6 +103,9 @@ class THLGuestProfileViewController: UIViewController, THLMyUpcomingEventsViewCo
             imageView.image = nil
         }
         self.view.addSubview(imageView)
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(THLGuestProfileViewController.presentProfilePicSettings))
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(tapGestureRecognizer)
         return imageView
     }()
     
