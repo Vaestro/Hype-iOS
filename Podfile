@@ -25,6 +25,7 @@ pod 'Socket.IO-Client-Swift'
 pod 'SnapKit', '~> 3.0'
 pod 'Bolts-Swift'
 pod 'PopupDialog', '~> 0.5'
+pod 'Kingfisher'
 
 #Debugging
 pod 'FLEX', '~> 2.0', :configurations => ['Debug']

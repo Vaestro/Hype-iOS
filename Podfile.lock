@@ -93,6 +93,7 @@ PODS:
   - JSQMessagesViewController (7.3.4):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
+  - Kingfisher (3.1.4)
   - libPhoneNumber-iOS (0.8.17)
   - LinqToObjectiveC (2.1.0)
   - LMGeocoder (1.0.8)
@@ -216,6 +217,7 @@ DEPENDENCIES:
   - IHKeyboardAvoiding
   - Intercom
   - JSQMessagesViewController
+  - Kingfisher
   - libPhoneNumber-iOS (~> 0.8)
   - LinqToObjectiveC (~> 2.0)
   - LMGeocoder
@@ -273,6 +275,7 @@ SPEC CHECKSUMS:
   Intercom: 96e2ee799db55c04e7ece023756ddd70e0cf7390
   JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
+  Kingfisher: 6c67e3e57f2d81a9cfdfa25052cd86f33ceac9bb
   libPhoneNumber-iOS: 9f083847f8cb9b81064cff2ed2c98cbf18d9f9f2
   LinqToObjectiveC: f0e40c137a458b6b9725c4c7b6a575c0c72e3aec
   LMGeocoder: 7682148ce0bc55e483ceaa0eefdae4494d7102be
@@ -304,6 +307,6 @@ SPEC CHECKSUMS:
   YapDatabase: b1e43555a34a5298e23a045be96817a5ef0da58f
   YLMoment: af44d9d402790049e5490fa6eae9585b89b4090b
 
-PODFILE CHECKSUM: 2e2095298110e98ef46745280bd9d906c7d8be78
+PODFILE CHECKSUM: 8590d57975507107c978a2d2f7135e6e0509347b
 
 COCOAPODS: 1.0.1
