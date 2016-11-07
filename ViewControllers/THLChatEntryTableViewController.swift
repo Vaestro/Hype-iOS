@@ -10,18 +10,19 @@ import UIKit
 
 class THLChatEntryTableViewController: UITableViewController {
     
+    // The data for all the rooms retrieved from the server
     var roomData = [[String: String]]()
+    // The images dictionary
+    var userImages = [[String: UIImage]]()
     
     var roomChecked = [String: Date]()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.navigationItem.title = "MESSAGES";
         
-        
-
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -37,7 +38,8 @@ class THLChatEntryTableViewController: UITableViewController {
         
         tableView.backgroundColor = UIColor.black
         tableView.register(THLChatEntryCell.self, forCellReuseIdentifier: "EntryCell")
-
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "defaultId")
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -48,7 +50,7 @@ class THLChatEntryTableViewController: UITableViewController {
         listenForRooms()
         THLChatSocketManager.sharedInstance.getChatRooms()
         (self.navigationController?.navigationBar as! THLBoldNavigationBar).titleLabel.text = "MESSAGES"
-
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -77,7 +79,6 @@ class THLChatEntryTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //let cell = tableView.dequeueReusableCell(withIdentifier: "chatEntry", for: indexPath)
         let cell = tableView.dequeueReusableCell( withIdentifier: "EntryCell", for: indexPath) as! THLChatEntryCell
         cell.titleLabel.text = roomData[indexPath.row]["roomTitle"]
         cell.titleLabel.backgroundColor = UIColor.black
@@ -86,14 +87,13 @@ class THLChatEntryTableViewController: UITableViewController {
         
         if(roomData[indexPath.row]["chatMateImage"] != nil) {
             
-            let url = NSURL(string:roomData[indexPath.row]["chatMateImage"]!)
-            var components = NSURLComponents(url: url as! URL, resolvingAgainstBaseURL: true)! as NSURLComponents
-            components.scheme = "https"
+            let url = URL(string:roomData[indexPath.row]["chatMateImage"]!)
             
-            var data = NSData(contentsOf:components.url!)
-            if data != nil {
-                cell.userImage.image = UIImage(data:data! as Data)
-            }
+            
+            let image = UIImage(named: "default_profile_iamge")
+            cell.userImage.kf.setImage(with: url , placeholder:image)
+            
+            
         } else {
             
             cell.userImage.image = UIImage(named: "default_profile_image")
@@ -113,6 +113,9 @@ class THLChatEntryTableViewController: UITableViewController {
         cell.alpha = 0.9
         
         cell.msgLabel.text = roomData[indexPath.row]["lastMessage"]
+        
+        /*let cell = tableView.dequeueReusableCell(withIdentifier: "defaultId", for: indexPath)
+         cell.textLabel?.text = roomData[indexPath.row]["roomTitle"]*/
         
         
         return cell
@@ -151,7 +154,7 @@ class THLChatEntryTableViewController: UITableViewController {
             if(rooms["rooms"]?.count != self.roomData.count)
             {
                 self.roomData.removeAll()
-                print("One")
+                
                 for room in rooms["rooms"]! {
                     var curRoomInfo = [String: String]()
                     curRoomInfo["roomId"] = room["roomId"] as! String
@@ -180,21 +183,23 @@ class THLChatEntryTableViewController: UITableViewController {
                     } else {
                         curRoomInfo["chatMateImage"] = nil
                     }
+                    
                     self.roomData.append(curRoomInfo)
                     
                     
                 }
                 
-                //self.tableView.reloadData()
-                print("two")
+                
                 self.tableView.performSelector(onMainThread:Selector("reloadData"), with: nil, waitUntilDone: true)
-                print("three")
+                
             }
             
             
         }
         
     }
+    
+    
     
     
     

@@ -20,15 +20,15 @@ class THLChatEntryCell: UITableViewCell {
     var dateLabel: UILabel!
     var msgLabel: UILabel!
     var newImage : PFImageView!
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     
@@ -71,13 +71,13 @@ class THLChatEntryCell: UITableViewCell {
         
         let image = UIImage(named: "default_profile_image")
         userImage = PFImageView(image: image!)
-        userImage.contentMode = UIViewContentMode.scaleAspectFill
+        userImage.contentMode = UIViewContentMode.scaleAspectFit
         
         contentView.addSubview(userImage)
         
         let cImage = UIImage(named: "checked_box")
         newImage = PFImageView(image: cImage!)
-        newImage.contentMode = UIViewContentMode.scaleAspectFill
+        newImage.contentMode = UIViewContentMode.scaleAspectFit
         contentView.addSubview(newImage)
         
         
@@ -99,11 +99,11 @@ class THLChatEntryCell: UITableViewCell {
         super.layoutSubviews()
         
         
-       
+        
         titleLabel.snp.makeConstraints { (make) -> Void in
             make.left.equalTo(userImage.snp.right).offset(5)
-           make.right.equalTo(dateLabel.snp.left).offset(5)
-           make.topMargin.equalTo(4);
+            make.right.equalTo(dateLabel.snp.left).offset(5)
+            make.topMargin.equalTo(4);
         }
         
         msgLabel.snp.makeConstraints { (make) -> Void in
@@ -112,11 +112,11 @@ class THLChatEntryCell: UITableViewCell {
             make.top.equalTo(titleLabel.snp.bottom)
         }
         
-       
+        
         
         userImage.snp.makeConstraints{ (make) -> Void in
             
-            make.height.equalTo(contentView.frame.size.height/1.33)
+            make.height.equalTo(contentView.snp.height).multipliedBy(0.8)
             make.width.equalTo(userImage.snp.height)
             make.centerY.equalTo(contentView)
             make.leftMargin.equalTo(5)
@@ -136,5 +136,5 @@ class THLChatEntryCell: UITableViewCell {
     }
     
     
-
+    
 }

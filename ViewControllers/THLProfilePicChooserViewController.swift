@@ -15,6 +15,8 @@ class THLProfilePicChooserViewController: UIViewController, UIImagePickerControl
     let imagePicker = UIImagePickerController()
      let logo = UIImageView(image: UIImage(named: "default_profile_image"))
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,7 +28,11 @@ class THLProfilePicChooserViewController: UIViewController, UIImagePickerControl
         let bottomView = UIView()
         bottomView.backgroundColor = UIColor.black
         
-        
+        if ((THLUser.current()?.image) != nil) {
+            let imageFile = THLUser.current()?.image as PFFile!
+            let url = URL(string: imageFile!.url as String!)
+            logo.kf.setImage(with: url)
+        }
         
         self.view.addSubview(topView)
         self.view.addSubview(bottomView)
@@ -100,16 +106,24 @@ class THLProfilePicChooserViewController: UIViewController, UIImagePickerControl
             let imageFile = PFFile(name:"image.png", data:imageData!)
             var userPhoto = PFObject(className:"UserPhoto")
             var query = PFUser.query()
-            logo.image = pickedImage
             query?.getObjectInBackground(withId: (THLUser.current()?.objectId)!) {
                 (curUser: PFObject?, error: Error?) -> Void in
                 if error != nil {
                     print(error)
                 } else if let curUser = curUser {
                     curUser["image"] = imageFile
-                    curUser.saveInBackground()
+                    curUser.saveInBackground {
+                        (success, error) -> Void in
+                        if (success) {
+                            // The object has been saved.
+                            self.logo.image = pickedImage
+                            THLUser.current()?.image = imageFile
+                        } else {
+                            // There was a problem, check error.description
+                        }
+                    }
                     THLUser.current()?.setValue(imageFile, forKey: "image")
-                    self.navigationController?.popViewController(animated: true)
+                    //self.navigationController?.popViewController(animated: true)
                 }
             }
         }
