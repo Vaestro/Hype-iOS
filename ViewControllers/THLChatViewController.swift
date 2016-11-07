@@ -21,14 +21,18 @@ class THLChatViewController : JSQMessagesViewController {
     var chatMateName: String?
     
     override func viewDidLoad() {
-       super.viewDidLoad()
-       self.senderId = THLUser.current()?.objectId;
+        super.viewDidLoad()
+        self.senderId = THLUser.current()?.objectId;
         self.senderDisplayName = "My Name";
         self.collectionView.backgroundColor = UIColor.black
         self.view.backgroundColor = UIColor.black
         
         // Set up navbar
+<<<<<<< HEAD
             
+=======
+        self.navigationItem.title = "CHAT WITH " + chatMateName!;
+>>>>>>> 850514c76a0760347b4c663bc0a4aa9092d5645c
         self.inputToolbar.contentView.leftBarButtonItem = nil
         
         setupBubbles()
@@ -47,7 +51,7 @@ class THLChatViewController : JSQMessagesViewController {
         getMessageHistory()
         finishReceivingMessage()
         
-
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -55,7 +59,7 @@ class THLChatViewController : JSQMessagesViewController {
         THLChatSocketManager.sharedInstance.socket.off("gotNewMessage")
     }
     
-   
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return messages.count
     }
@@ -84,12 +88,12 @@ class THLChatViewController : JSQMessagesViewController {
     override func collectionView(_ collectionView: JSQMessagesCollectionView,
                                  avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource {
         
-       
+        
         return JSQMessagesAvatarImageFactory.avatarImage(with: UIImage() , diameter: 1)
     }
     
     override func didPressSend(_ button: UIButton, withMessageText text: String, senderId: String,
-        senderDisplayName: String, date: Date) {
+                               senderDisplayName: String, date: Date) {
         addMessage(id: senderId, text: text);
         self.finishSendingMessage(animated: true)
         JSQSystemSoundPlayer.jsq_playMessageSentSound()
@@ -117,7 +121,7 @@ class THLChatViewController : JSQMessagesViewController {
     private func listenForMessages() {
         THLChatSocketManager.sharedInstance.socket.on("gotNewMessage") { (dataArray, socketAck) -> Void in
             var map = dataArray[0] as! [String: String]
-           
+            
             if(map["from"] == self.chatMateId) {
                 self.addMessage(id: map["from"]!, text: map["msg"]!)
             }
@@ -133,7 +137,7 @@ class THLChatViewController : JSQMessagesViewController {
     private func grabMessagesOnDisk() {
         let defaults = UserDefaults.standard
         if((defaults.array(forKey: self.chatRoomId!)) != nil) {
-           let msgArray = defaults.array(forKey: self.chatRoomId!) as! [[String]]
+            let msgArray = defaults.array(forKey: self.chatRoomId!) as! [[String]]
             for ms in msgArray {
                 addMessage(id: ms[0], text: ms[1])
             }
@@ -150,7 +154,7 @@ class THLChatViewController : JSQMessagesViewController {
                 var msgArray = [[String]]();
                 for msg in messages["messages"]! {
                     let tuple = [msg.value(forKey: "owner"), msg.value(forKey:"msg")]
-                    print(tuple)
+                    
                     msgArray.append(tuple as! [String])
                     
                 }
@@ -161,11 +165,11 @@ class THLChatViewController : JSQMessagesViewController {
             }
         }
     }
-        
+    
     private func getMessageHistory() {
         let usersID = (THLUser.current()?.objectId)!
         THLChatSocketManager.sharedInstance.getMessageHistory(roomId: self.chatRoomId!, user: usersID)
-    
+        
     }
-  
+    
 }

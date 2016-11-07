@@ -16,15 +16,15 @@ class THLChatSocketManager: NSObject {
     
     let socket: SocketIOClient = SocketIOClient(socketURL: NSURL(string: "https://hype-messenger-server.herokuapp.com/")! as URL)
     
-   override init() {
+    override init() {
         super.init()
-    
+        
         socket.on("connect") {(data, ack) -> Void in
             //Check for new messages in data
             
             self.connectUser();
         }
-    
+        
     }
     func establishConnection() {
         socket.connect()
@@ -45,20 +45,20 @@ class THLChatSocketManager: NSObject {
     }
     
     func listenForOtherMessages() {
-         socket.on("gotNewNotification") { (dataArray, socketAck) -> Void in
-           //update icon
+        socket.on("gotNewNotification") { (dataArray, socketAck) -> Void in
+            //update icon
             var main =  UIApplication.shared.keyWindow?.rootViewController as! UITabBarController
             main.tabBar.items?[1].image = UIImage(named:"new_message")
             
-         
+            
             
         }
     }
     
     func listenForYourMessageSend() {
         socket.on("msgSuccess") { (dataArray, socketAck) -> Void in
-           print("Your message was sent succesfully..!")
-           
+            print("Your message was sent succesfully..!")
+            
         }
     }
     
@@ -82,17 +82,17 @@ class THLChatSocketManager: NSObject {
     
     func createChatRoom(hostId: String) {
         var userId = (THLUser.current()?.objectId)!
-       
+        
         PFCloud.callFunction(inBackground: "createChatRoom",
                              withParameters: ["userId" : userId,
                                               "hostId": hostId]) {
-        (something, error) in
-            if error == nil {
-                
-            } else {
-                
-                
-            }
+                                                (something, error) in
+                                                if error == nil {
+                                                    
+                                                } else {
+                                                    
+                                                    
+                                                }
         }
     }
     
