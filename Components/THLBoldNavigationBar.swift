@@ -8,17 +8,23 @@
 
 import UIKit
 
+let kNavigationBarIncrease:CGFloat = 20.0
+
 class THLBoldNavigationBar : UINavigationBar {
     var titleLabel: UILabel = UILabel()
     var subtitleLabel = UILabel()
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
+        
+        initialize()
+
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+        initialize()
         self.backgroundColor = UIColor.black
         
         titleLabel.font = UIFont(name:"Raleway-Bold",size:20)
@@ -40,24 +46,50 @@ class THLBoldNavigationBar : UINavigationBar {
         self.addSubview(titleLabel)
         self.addSubview(subtitleLabel)
 
+
+        
+        
+    }
+    
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let classNamesToReposition = ["_UIBarBackground"]
+        for view: UIView in self.subviews {
+            let className = NSStringFromClass(view.classForCoder)
+            if classNamesToReposition.contains(NSStringFromClass(view.classForCoder)) {
+                let bounds = self.bounds
+                var frame = view.frame
+                frame.origin.y = bounds.origin.y + kNavigationBarIncrease - 20.0
+                frame.size.height = bounds.size.height + 20.0
+                view.frame = frame
+            }
+        }
+        
         titleLabel.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(self.snp.top).offset(10)
+            make.bottom.equalTo(subtitleLabel.snp.top)
             make.left.equalTo(self.snp.left).offset(10)
         }
         
         subtitleLabel.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(titleLabel.snp.bottom)
+            make.bottom.equalTo(self.snp.bottom)
             make.left.equalTo(self.snp.left).offset(10)
         }
-        
-        
     }
-    
+
+    func initialize() {
+        self.transform = CGAffineTransform(translationX: 0, y: -(kNavigationBarIncrease))
+    }
 
     
-    
     override func sizeThatFits(_ size: CGSize) -> CGSize {
-        var screenRect = UIScreen.main.bounds
-        return CGSize(width: screenRect.size.width, height: 65)
+        var amendedSize = super.sizeThatFits(size)
+        amendedSize.height += kNavigationBarIncrease
+        return amendedSize
     }
+    
+//    override func sizeThatFits(_ size: CGSize) -> CGSize {
+//        let screenRect = UIScreen.main.bounds
+//        return CGSize(width: screenRect.size.width, height: 65)
+//    }
 }

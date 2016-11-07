@@ -39,7 +39,6 @@
 #import "THLParseQueryFactory.h"
 #import "THLPersonIconView.h"
 
-#import "THLMyEventsViewController.h"
 #import "NSDate+Utilities.h"
 #import "THLUserProfileViewController.h"
 

@@ -17,9 +17,6 @@ class THLChatEntryTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.navigationItem.title = "MESSAGES";
-        
         
 
         // Uncomment the following line to preserve selection between presentations
@@ -48,6 +45,7 @@ class THLChatEntryTableViewController: UITableViewController {
         listenForRooms()
         THLChatSocketManager.sharedInstance.getChatRooms()
         (self.navigationController?.navigationBar as! THLBoldNavigationBar).titleLabel.text = "MESSAGES"
+        (self.navigationController?.navigationBar as! THLBoldNavigationBar).subtitleLabel.text = ""
 
     }
     

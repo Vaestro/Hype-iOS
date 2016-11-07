@@ -30,11 +30,9 @@
 
 //View Controllers
 #import "THLOnboardingViewController.h"
-#import "THLMyEventsViewController.h"
 #import "THLEventTicketViewController.h"
 #import "THLPartyNavigationController.h"
 #import "THLEventDetailsViewController.h"
-#import "THLDiscoveryViewController.h"
 #import "THLCheckoutViewController.h"
 #import "THLPartyInvitationViewController.h"
 #import "THLDependencyManager.h"
@@ -42,7 +40,6 @@
 #import "THLPaymentViewController.h"
 #import "THLPerkCollectionViewController.h"
 #import "THLPerkDetailViewController.h"
-#import "THLAdmissionsViewController.h"
 #import "THLTablePackageDetailsViewController.h"
 #import "THLLoginViewController.h"
 
@@ -59,9 +56,7 @@
 THLInquiryOffersViewControllerDelegate,
 THLGuestProfileViewControllerDelegate,
 THLSwiftAdmissionsViewControllerDelegate,
-THLAdmissionsViewDelegate,
 THLTablePackageControllerDelegate,
-THLMyEventsViewDelegate,
 THLVenueDiscoveryViewControllerDelegate,
 THLEventDetailsViewControllerDelegate,
 THLCheckoutViewControllerDelegate,
@@ -287,11 +282,8 @@ THLEventDiscoveryViewControllerDelegate
     _chatEntryTableViewController = [THLChatEntryTableViewController new];
     [chatEntry pushViewController:_chatEntryTableViewController animated:NO];
     chatEntry.tabBarItem.image = [UIImage imageNamed:@"message"];
-    chatEntry.tabBarItem.title = @"Messages";
     discovery.tabBarItem.image = [UIImage imageNamed:@"Home Icon"];
-    discovery.tabBarItem.title = @"Discover";
     profile.tabBarItem.image = [UIImage imageNamed:@"Profile Icon"];
-    profile.tabBarItem.title = @"Profile";
     
     NSArray *views = @[discovery, chatEntry, profile];
     

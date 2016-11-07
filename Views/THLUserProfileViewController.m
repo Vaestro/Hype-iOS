@@ -25,12 +25,10 @@
 #import "TTTAttributedLabel.h"
 #import "BranchUniversalObject.h"
 #import "BranchLinkProperties.h"
-#import "THLHypeConciergeInfoView.h"
 #import "KLCPopup.h"
 
 typedef NS_ENUM(NSUInteger, ApplicationInfoCase){
-    HypeConcierge = 0,
-    InviteFriends,
+    InviteFriends = 0,
     RedeemCode,
     PaymentMethod,
     PrivacyPolicy,
@@ -179,9 +177,6 @@ STPPaymentCardTextFieldDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch(indexPath.row) {
-        case HypeConcierge:
-            [self presentHypeConciergeInfo];
-            break;
         case InviteFriends:
             [self handleInviteFriendsAction];
             break;
@@ -210,18 +205,6 @@ STPPaymentCardTextFieldDelegate
         }
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-
-- (void)presentHypeConciergeInfo {
-    THLHypeConciergeInfoView *conciergeView = [[THLHypeConciergeInfoView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH*0.87, SCREEN_HEIGHT*0.67)];
-    KLCPopup *popup = [KLCPopup popupWithContentView:conciergeView
-                                            showType:KLCPopupShowTypeSlideInFromBottom
-                                         dismissType:KLCPopupDismissTypeSlideOutToBottom
-                                            maskType:KLCPopupMaskTypeDimmed
-                            dismissOnBackgroundTouch:YES
-                               dismissOnContentTouch:NO];
-    popup.dimmedMaskAlpha = 0.5;
-    [popup show];
 }
 
 - (void)handleLogOutAction {

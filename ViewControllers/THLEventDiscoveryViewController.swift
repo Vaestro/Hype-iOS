@@ -43,8 +43,8 @@ class SimpleCollectionReusableView : UICollectionReusableView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        titleLabel.frame = CGRect(x:10,y:5,width:frame.size.width,height:20)
-        subtitleLabel.frame = CGRect(x:10,y:25,width:frame.size.width,height:20)
+        titleLabel.frame = CGRect(x:10,y:10,width:frame.size.width,height:20)
+        subtitleLabel.frame = CGRect(x:10,y:30,width:frame.size.width,height:20)
     }
 }
 
@@ -211,7 +211,7 @@ extension THLEventDiscoveryViewController {
     
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         if sections.count > 0 {
-            return CGSize(width: collectionView.bounds.width, height: 50.0)
+            return CGSize(width: collectionView.bounds.width, height: 55.0)
         }
         return CGSize.zero
     }

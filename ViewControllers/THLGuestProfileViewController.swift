@@ -52,7 +52,7 @@ class THLGuestProfileViewController: UIViewController, THLMyUpcomingEventsViewCo
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.black
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Menu Icon"), style: .plain, target: self, action: #selector(THLGuestProfileViewController.presentSettings as (THLGuestProfileViewController) -> () -> ()))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "Settings"), style: .plain, target: self, action: #selector(THLGuestProfileViewController.presentSettings as (THLGuestProfileViewController) -> () -> ()))
 
         guestImageView.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(25)

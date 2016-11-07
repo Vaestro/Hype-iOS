@@ -21,7 +21,8 @@
 //                              initWithImage:[UIImage imageNamed:@"cell_disclosure_icon" ]];
         
         [self.titleLabel makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.insets(kTHLEdgeInsetsNone());
+            make.right.top.bottom.insets(kTHLEdgeInsetsNone());
+            make.left.offset(20);
         }];
     }
     return self;
@@ -32,8 +33,8 @@
     if (!_titleLabel) {
         _titleLabel = [UILabel new];
         _titleLabel.backgroundColor = kTHLNUIPrimaryBackgroundColor;
-        _titleLabel.font = [UIFont fontWithName:@"OpenSans-Light" size:16];
-        _titleLabel.textAlignment = NSTextAlignmentCenter;
+        _titleLabel.font = [UIFont fontWithName:@"OpenSans-Light" size:20];
+        _titleLabel.textAlignment = NSTextAlignmentLeft;
         _titleLabel.textColor = [UIColor whiteColor];
         [self.contentView addSubview:_titleLabel];
     }
