@@ -20,6 +20,7 @@
 #import "Intercom/intercom.h"
 #import <Harpy/Harpy.h>
 #import "THLAppearanceConstants.h"
+#import "Hype-Swift.h"
 
 #if DEBUG
 static NSString *applicationId = @"5t3F1S3wKnVGIKHob1Qj0Je3sygnFiwqAu6PP400";
@@ -38,7 +39,9 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
 @interface AppDelegate (){
     BOOL firstLaunch;
 }
-@property (nonatomic, strong) THLMasterWireframe *masterWireframe;
+@property (nonatomic) THLMasterRouter *masterWireframe;
+
+//@property (nonatomic, strong) THLMasterWireframe *masterWireframe;
 @property (nonatomic, strong) THLDependencyManager *dependencyManager;
 @end
 
@@ -111,10 +114,13 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
 	[THLAppearanceUtils applyStyles];
 
 	_dependencyManager = [[THLDependencyManager alloc] init];
-	_masterWireframe = [_dependencyManager masterWireframe];
 
 	self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-	[_masterWireframe presentAppInWindow:self.window];
+    _masterWireframe = [THLMasterRouter new];
+    [_masterWireframe presentAppIn:_window];
+//    _masterWireframe = [[THLMasterRouter alloc] initWithWindow:self.window];
+
+//	[_masterWireframe presentAppInWindow:self.window];
 	
     // Set the App ID for Harpy
 //    [[Harpy sharedInstance] setAppID:@"com.hypelist.hype"];
@@ -130,7 +136,7 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
     // Extract the notification data
     NSDictionary *notificationPayload = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
     if (notificationPayload) {
-        [_masterWireframe handlePushNotification:notificationPayload];
+//        [_masterWireframe handlePushNotification:notificationPayload];
     } else{
 //        NSLog(@"app did not recieve notification");
     }
@@ -163,7 +169,7 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
     [mixpanel.people addPushDeviceToken:deviceToken];
     
     [Intercom setDeviceToken:deviceToken];
-    [_masterWireframe applicationDidRegisterForRemoteNotifications];
+//    [_masterWireframe applicationDidRegisterForRemoteNotifications];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
@@ -199,13 +205,13 @@ static NSString *clientKeyId = @"deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq";
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-    [[_masterWireframe handlePushNotification:userInfo] continueWithBlock:^id(BFTask *task) {
-        if (completionHandler) {
-            UIBackgroundFetchResult result = (!task.faulted) ? UIBackgroundFetchResultNewData : UIBackgroundFetchResultFailed;
-            completionHandler(result);
-        }
-        return nil;
-    }];
+//    [[_masterWireframe handlePushNotification:userInfo] continueWithBlock:^id(BFTask *task) {
+//        if (completionHandler) {
+//            UIBackgroundFetchResult result = (!task.faulted) ? UIBackgroundFetchResultNewData : UIBackgroundFetchResultFailed;
+//            completionHandler(result);
+//        }
+//        return nil;
+//    }];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {

@@ -43,3 +43,4 @@
 #import "THLUserProfileViewController.h"
 
 #import "THLEventDetailsViewController.h"
+#import "THLUserManager.h"
