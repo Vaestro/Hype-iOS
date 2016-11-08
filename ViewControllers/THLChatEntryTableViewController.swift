@@ -20,11 +20,6 @@ class THLChatEntryTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-<<<<<<< HEAD
-=======
-        
-        self.navigationItem.title = "MESSAGES";
->>>>>>> 850514c76a0760347b4c663bc0a4aa9092d5645c
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -53,12 +48,8 @@ class THLChatEntryTableViewController: UITableViewController {
         listenForRooms()
         THLChatSocketManager.sharedInstance.getChatRooms()
         (self.navigationController?.navigationBar as! THLBoldNavigationBar).titleLabel.text = "MESSAGES"
-<<<<<<< HEAD
         (self.navigationController?.navigationBar as! THLBoldNavigationBar).subtitleLabel.text = ""
 
-=======
-        
->>>>>>> 850514c76a0760347b4c663bc0a4aa9092d5645c
     }
     
     override func viewWillDisappear(_ animated: Bool) {

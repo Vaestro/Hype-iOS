@@ -28,11 +28,6 @@ class THLChatViewController : JSQMessagesViewController {
         self.view.backgroundColor = UIColor.black
         
         // Set up navbar
-<<<<<<< HEAD
-            
-=======
-        self.navigationItem.title = "CHAT WITH " + chatMateName!;
->>>>>>> 850514c76a0760347b4c663bc0a4aa9092d5645c
         self.inputToolbar.contentView.leftBarButtonItem = nil
         
         setupBubbles()
