@@ -26,6 +26,8 @@ pod 'SnapKit', '~> 3.0'
 pod 'Bolts-Swift'
 pod 'PopupDialog', '~> 0.5'
 pod 'Kingfisher'
+pod "TextFieldEffects"
+pod 'PhoneNumberKit', '~> 1.0'
 
 #Debugging
 pod 'FLEX', '~> 2.0', :configurations => ['Debug']
@@ -75,6 +77,8 @@ pod 'IHKeyboardAvoiding'
 pod 'FXLabel'
 pod 'BLKFlexibleHeightBar'
 pod 'JSQMessagesViewController'
+pod 'TPKeyboardAvoiding'
+
 end
 
 target 'HypeTests' do

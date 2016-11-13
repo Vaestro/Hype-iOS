@@ -8,6 +8,11 @@
 
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
+#import <ParseFacebookUtilsV4/PFFacebookUtils.h>
+#import <Bolts/Bolts.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+
 #import <TTTAttributedLabel/TTTAttributedLabel.h>
 
 #import "THLAdmissionOptionCell.h"
@@ -26,6 +31,9 @@
 #import "THLActionButton.h"
 
 #import "Intercom/intercom.h"
+
+#import <Mixpanel/Mixpanel.h>
+
 #import <Branch/Branch.h>
 #import <Branch/BranchUniversalObject.h>
 #import <Branch/BranchLinkProperties.h>
@@ -44,3 +52,6 @@
 
 #import "THLEventDetailsViewController.h"
 #import "THLUserManager.h"
+
+#import <TPKeyboardAvoiding/TPKeyboardAvoidingScrollView.h>
+#import "NSString+EmailAddresses.h"

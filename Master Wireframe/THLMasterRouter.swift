@@ -9,10 +9,11 @@
 @objc class THLMasterRouter: NSObject, THLWelcomeViewDelegate {
     var window: UIWindow
     var welcomeView: THLWelcomeViewController
-    
+
     override init() {
         self.window = UIWindow()
         self.welcomeView = THLWelcomeViewController()
+
         super.init()
     }
     
@@ -29,7 +30,18 @@
     
     func presentWelcomeView() {
         self.welcomeView.delegate = self
-        self.window.rootViewController = welcomeView
+        let onboardingNavigationController = UINavigationController()
+        onboardingNavigationController.addChildViewController(welcomeView)
+        self.window.rootViewController = onboardingNavigationController
         window.makeKeyAndVisible()
+    }
+    
+    func didConnectWithFacebookAndReceivedUserData(userData:[String:AnyObject]) {
+        presentAccountRegistrationView(userData:userData)
+    }
+    
+    func presentAccountRegistrationView(userData:[String:AnyObject]) {
+        let accountRegistrationViewController = THLAccountRegistrationViewController(userData)
+        welcomeView.navigationController?.pushViewController(accountRegistrationViewController, animated: true)
     }
 }

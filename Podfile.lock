@@ -119,6 +119,12 @@ PODS:
   - ParseUI (1.2.0):
     - Bolts/Tasks (~> 1.3)
     - Parse (~> 1.9)
+  - PhoneNumberKit (1.0.1):
+    - PhoneNumberKit/PhoneNumberKitCore (= 1.0.1)
+    - PhoneNumberKit/UIKit (= 1.0.1)
+  - PhoneNumberKit/PhoneNumberKitCore (1.0.1)
+  - PhoneNumberKit/UIKit (1.0.1):
+    - PhoneNumberKit/PhoneNumberKitCore
   - PopupDialog (0.5.0)
   - Reachability (3.2)
   - ReflectableEnum (0.1.2)
@@ -132,7 +138,9 @@ PODS:
   - Stripe (9.1.0)
   - SVProgressHUD (2.0.3)
   - SVPullToRefresh (0.4.1)
+  - TextFieldEffects (1.3.0)
   - THContactPicker (1.2)
+  - TPKeyboardAvoiding (1.3)
   - TTTAttributedLabel (2.0.0)
   - TwitterCore (2.5.0):
     - Fabric
@@ -230,6 +238,7 @@ DEPENDENCIES:
   - Parse
   - ParseFacebookUtilsV4
   - ParseUI
+  - PhoneNumberKit (~> 1.0)
   - PopupDialog (~> 0.5)
   - ReflectableEnum
   - Reveal-iOS-SDK
@@ -240,7 +249,9 @@ DEPENDENCIES:
   - Stripe
   - SVProgressHUD
   - SVPullToRefresh
+  - TextFieldEffects
   - THContactPicker (~> 1.2)
+  - TPKeyboardAvoiding
   - TTTAttributedLabel
   - Typhoon (~> 3.3)
   - YapDatabase (~> 2.7)
@@ -289,6 +300,7 @@ SPEC CHECKSUMS:
   Parse: 4335d65f40cb3d43190d723144bbe1afb9c38230
   ParseFacebookUtilsV4: 2f30c2b7021c8005d3042781da7ef87d06589421
   ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
+  PhoneNumberKit: 0b5ea9a5454d201656db766343e9d768f8542496
   PopupDialog: 9890441b81105b9076757af2afe2b037be682f3e
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   ReflectableEnum: dc2fa83bba1e74df3a2f319c2ffaea55fd95887e
@@ -300,13 +312,15 @@ SPEC CHECKSUMS:
   Stripe: f9acdd48bd3e4f1b4a91ed260317982db7a2ed65
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
+  TextFieldEffects: ef594746f17997c813e07633f8ae5acaf9b04f27
   THContactPicker: e723f7c6ab6e1d6d10d59d618322ab8bfcb00365
+  TPKeyboardAvoiding: a5138f318c06fb3e151f886e18ce4a72695d9cbe
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   TwitterCore: 95c46af93112768a7983bd370d66023553601d01
   Typhoon: c0950bb9f2e835eb8a7dc6983160109b6baf2dda
   YapDatabase: b1e43555a34a5298e23a045be96817a5ef0da58f
   YLMoment: af44d9d402790049e5490fa6eae9585b89b4090b
 
-PODFILE CHECKSUM: 8590d57975507107c978a2d2f7135e6e0509347b
+PODFILE CHECKSUM: 5d8e9aa9bd753ac429aaa3d726ffc72aae8005a7
 
 COCOAPODS: 1.0.1

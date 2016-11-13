@@ -8,9 +8,13 @@
 
 import AVFoundation
 import SnapKit
+import Mixpanel
+import Parse
+import ParseFacebookUtilsV4
+
 
 protocol THLWelcomeViewDelegate {
-    
+    func didConnectWithFacebookAndReceivedUserData(userData:[String:AnyObject])
 }
 
 class THLWelcomeViewController: UIViewController {
@@ -19,6 +23,28 @@ class THLWelcomeViewController: UIViewController {
     var avPlayer: AVPlayer!
     var avPlayerLayer: AVPlayerLayer!
     var paused: Bool = false
+    
+    override func viewWillAppear(_ animated: Bool) {
+        // Hide the navigation bar on the this view controller
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        // Show the navigation bar on other view controllers
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        avPlayer.play()
+        paused = false
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        avPlayer.pause()
+        paused = true
+    }
     
     override func viewDidLoad() {
         
@@ -94,26 +120,50 @@ class THLWelcomeViewController: UIViewController {
         p.seek(to: kCMTimeZero)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        avPlayer.play()
-        paused = false
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        avPlayer.pause()
-        paused = true
-    }
-    
     func handleFacebookConnect() {
+        let mixpanel = Mixpanel.sharedInstance()
+        mixpanel.track("Touched facebook signup button")
         
+        PFFacebookUtils.logInInBackground(withReadPermissions: ["public_profile", "user_photos","email", "user_friends"], block: {(user: PFUser?, error: Error?) -> Void in
+            if let user = user {
+                if user.isNew {
+                    self.requestFacebookInformation()
+                    print("New user signed up and logged in through Facebook!")
+                } else {
+                    self.requestFacebookInformation()
+                    
+                    print("Returning user logged in through Facebook!")
+                }
+            } else {
+                print("Uh oh. The user cancelled the Facebook login.")
+            }
+            
+        })
+    }
+    
+    func requestFacebookInformation() {
+        let graphRequest:FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id,first_name,last_name,name,gender,verified,email, picture.type(large)"])
+        
+        graphRequest.start(completionHandler: { (connection, result, error) -> Void in
+            
+            if ((error) != nil) {
+                print("Error: \(error)")
+            }
+            else {
+                let data:[String:AnyObject] = result as! [String : AnyObject]
+                self.delegate?.didConnectWithFacebookAndReceivedUserData(userData: data)
+            }
+        })
+
     }
     
     func handleEmailConnect() {
         
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
     
     lazy var logoLabel: UILabel = {
         var label = UILabel()
