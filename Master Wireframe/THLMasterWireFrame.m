@@ -29,7 +29,6 @@
 #import "Parse.h"
 
 //View Controllers
-#import "THLOnboardingViewController.h"
 #import "THLEventTicketViewController.h"
 #import "THLPartyNavigationController.h"
 #import "THLEventDetailsViewController.h"
@@ -41,8 +40,6 @@
 #import "THLPerkCollectionViewController.h"
 #import "THLPerkDetailViewController.h"
 #import "THLTablePackageDetailsViewController.h"
-#import "THLLoginViewController.h"
-
 
 #import "THLPopupNotificationView.h"
 #import "THLLoginService.h"
@@ -64,9 +61,7 @@ THLPartyInvitationViewControllerDelegate,
 THLUserProfileViewControllerDelegate,
 THLPartyViewControllerDelegate,
 THLPerkCollectionViewControllerDelegate,
-THLOnboardingViewControllerDelegate,
 THLTablePackageControllerDelegate,
-THLLoginViewControllerDelegate,
 THLReservationRequestViewControllerDelegate,
 THLEventDiscoveryViewControllerDelegate
 >
@@ -76,9 +71,6 @@ THLEventDiscoveryViewControllerDelegate
 @property (nonatomic, strong) UITabBarController *discoveryTabBarController;
 @property (nonatomic, strong) THLDiscoveryNavBarTitleView *discoveryNavBarTitleView;
 @property (nonatomic, strong) THLChatEntryTableViewController *chatEntryTableViewController;
-
-@property (nonatomic, strong) THLOnboardingViewController *onboardingViewController;
-@property (nonatomic, strong) THLLoginViewController *loginViewController;
 
 @property (nonatomic, strong) THLGuestProfileViewController *userProfileViewController;
 @property (nonatomic, strong) THLPerkCollectionViewController *perkCollectionViewController;
@@ -99,7 +91,7 @@ THLEventDiscoveryViewControllerDelegate
     if ([THLUserManager isUserCached] && [THLUserManager isUserProfileValid]) {
          [self routeLoggedInUserFlow];
     } else {
-        [self presentOnboardingViewController];
+//        [self presentOnboardingViewController];
     }
 }
 
@@ -145,61 +137,6 @@ THLEventDiscoveryViewControllerDelegate
     
     
     [self configureMasterTabViewControllerAndPresentGuestFlowInWindow:_window];
-}
-
-#pragma mark -
-#pragma mark - THLOnboardingViewController
-- (void)presentOnboardingViewController {
-    _onboardingViewController = [THLOnboardingViewController new];
-    _onboardingViewController.delegate = self;
-    UINavigationController *baseNavigationController = [[UINavigationController alloc] initWithRootViewController:_onboardingViewController];
-    [baseNavigationController setNavigationBarHidden:YES];
-    _window.rootViewController = baseNavigationController;
-    [_window makeKeyAndVisible];
-    
-}
-
-#pragma mark Delegate
-- (void)onboardingViewControllerdidFinishSignup {
-    [THLUserManager logCrashlyticsUser];
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel track:@"Completed signup"];
-    [PFCloud callFunctionInBackground:@"assignGuestToGuestlistInvite" withParameters:nil];
-    [self routeSignedUpUserFlow];
-}
-
-- (void)onboardingViewControllerdidSkipSignup {
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel track:@"Skipped signup"];
-    [Intercom registerUnidentifiedUser];
-    [self configureMasterTabViewControllerAndPresentGuestFlowInWindow:_window];
-}
-
-- (void)applicationDidRegisterForRemoteNotifications {
-    if (_onboardingViewController) {
-        [_onboardingViewController applicationDidRegisterForRemoteNotifications];
-    } else if (_loginViewController) {
-        [_loginViewController applicationDidRegisterForRemoteNotifications];
-    }
-}
-
-
-#pragma mark -
-#pragma mark LoginViewController
-- (void)usersWantsToLogin {
-    [self presentLoginViewController];
-}
-
-- (void)presentLoginViewController {
-    _loginViewController = [THLLoginViewController new];
-    _loginViewController.delegate = self;
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:_loginViewController];
-    [[self topViewController] presentViewController:navigationController animated:YES completion:NULL];
-}
-
-#pragma mark Delegate
-- (void)loginViewControllerDidFinishSignup {
-    [self onboardingViewControllerdidFinishSignup];
 }
 
 #pragma mark -
@@ -701,7 +638,6 @@ THLEventDiscoveryViewControllerDelegate
     [FBSDKAccessToken setCurrentAccessToken:nil];
     [[THLChatSocketManager sharedInstance] closeConnection];
 //    [_dependencyManager.databaseManager dropDB];
-    [self presentOnboardingViewController];
 }
 
 

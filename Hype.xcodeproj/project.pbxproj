@@ -65,11 +65,9 @@
 		7928AD9B1D19C8D800DFC443 /* THLUserProfileInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928AD9A1D19C8D800DFC443 /* THLUserProfileInfoView.m */; };
 		7928AD9E1D19C91900DFC443 /* THLContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928AD9D1D19C91900DFC443 /* THLContactTableViewCell.m */; };
 		7928ADA11D19C98400DFC443 /* THLUserProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928ADA01D19C98400DFC443 /* THLUserProfileTableViewCell.m */; };
-		7928ADA41D19C9B600DFC443 /* THLOnboardingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928ADA31D19C9B600DFC443 /* THLOnboardingViewController.m */; };
 		7928ADA91D19C9E200DFC443 /* THLUserProfileFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928ADA61D19C9E200DFC443 /* THLUserProfileFooterView.m */; };
 		7928ADAA1D19C9E200DFC443 /* THLUserProfileHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928ADA81D19C9E200DFC443 /* THLUserProfileHeaderView.m */; };
 		7928ADAD1D19CA0D00DFC443 /* THLPerkDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928ADAC1D19CA0D00DFC443 /* THLPerkDetailViewController.m */; };
-		7928ADB01D19CABC00DFC443 /* THLLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928ADAF1D19CABC00DFC443 /* THLLoginViewController.m */; };
 		7928ADB31D19CB1900DFC443 /* THLPopupNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928ADB21D19CB1900DFC443 /* THLPopupNotificationView.m */; };
 		7928ADB61D19CB5300DFC443 /* THLEventDetailsMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928ADB51D19CB5300DFC443 /* THLEventDetailsMapView.m */; };
 		792BB4D11DB1507900B673B8 /* THLInquiryOfferDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792BB4D01DB1507900B673B8 /* THLInquiryOfferDetailsView.swift */; };
@@ -114,8 +112,6 @@
 		798402DE1D217200006F463B /* THLUserEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 798402DD1D217200006F463B /* THLUserEntity.m */; };
 		798402E31D21BD79006F463B /* THLSwiftAdmissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798402E21D21BD79006F463B /* THLSwiftAdmissionsViewController.swift */; };
 		798650A41BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 798650A31BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m */; };
-		798D7EBF1BF2E56C001D4593 /* OnboardingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 798D7EBE1BF2E56C001D4593 /* OnboardingViewController.m */; };
-		798D7EC21BF2E5CF001D4593 /* OnboardingContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 798D7EC11BF2E5CF001D4593 /* OnboardingContentViewController.m */; };
 		7996E2051D00D010006FFDDC /* THLPerkCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7996E2041D00D010006FFDDC /* THLPerkCollectionViewController.m */; };
 		799831181D4AC50900BB5BFE /* THLSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 799831171D4AC50900BB5BFE /* THLSelectView.m */; };
 		7998311B1D4B9E6500BB5BFE /* THLReservationRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7998311A1D4B9E6500BB5BFE /* THLReservationRequestViewController.m */; };
@@ -353,16 +349,12 @@
 		7928AD9D1D19C91900DFC443 /* THLContactTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLContactTableViewCell.m; sourceTree = "<group>"; };
 		7928AD9F1D19C98400DFC443 /* THLUserProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserProfileTableViewCell.h; sourceTree = "<group>"; };
 		7928ADA01D19C98400DFC443 /* THLUserProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLUserProfileTableViewCell.m; sourceTree = "<group>"; };
-		7928ADA21D19C9B600DFC443 /* THLOnboardingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLOnboardingViewController.h; sourceTree = "<group>"; };
-		7928ADA31D19C9B600DFC443 /* THLOnboardingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLOnboardingViewController.m; sourceTree = "<group>"; };
 		7928ADA51D19C9E200DFC443 /* THLUserProfileFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserProfileFooterView.h; sourceTree = "<group>"; };
 		7928ADA61D19C9E200DFC443 /* THLUserProfileFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLUserProfileFooterView.m; sourceTree = "<group>"; };
 		7928ADA71D19C9E200DFC443 /* THLUserProfileHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserProfileHeaderView.h; sourceTree = "<group>"; };
 		7928ADA81D19C9E200DFC443 /* THLUserProfileHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLUserProfileHeaderView.m; sourceTree = "<group>"; };
 		7928ADAB1D19CA0D00DFC443 /* THLPerkDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkDetailViewController.h; sourceTree = "<group>"; };
 		7928ADAC1D19CA0D00DFC443 /* THLPerkDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPerkDetailViewController.m; sourceTree = "<group>"; };
-		7928ADAE1D19CABC00DFC443 /* THLLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLLoginViewController.h; sourceTree = "<group>"; };
-		7928ADAF1D19CABC00DFC443 /* THLLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLLoginViewController.m; sourceTree = "<group>"; };
 		7928ADB11D19CB1900DFC443 /* THLPopupNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPopupNotificationView.h; sourceTree = "<group>"; };
 		7928ADB21D19CB1900DFC443 /* THLPopupNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPopupNotificationView.m; sourceTree = "<group>"; };
 		7928ADB41D19CB5300DFC443 /* THLEventDetailsMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventDetailsMapView.h; sourceTree = "<group>"; };
@@ -424,11 +416,6 @@
 		798402E21D21BD79006F463B /* THLSwiftAdmissionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLSwiftAdmissionsViewController.swift; sourceTree = "<group>"; };
 		798650A21BEDDC2D0032A661 /* CAGradientLayer+THLGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAGradientLayer+THLGradient.h"; sourceTree = "<group>"; };
 		798650A31BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAGradientLayer+THLGradient.m"; sourceTree = "<group>"; };
-		798D7EBD1BF2E56C001D4593 /* OnboardingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnboardingViewController.h; sourceTree = "<group>"; };
-		798D7EBE1BF2E56C001D4593 /* OnboardingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnboardingViewController.m; sourceTree = "<group>"; };
-		798D7EC01BF2E5CF001D4593 /* OnboardingContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnboardingContentViewController.h; sourceTree = "<group>"; };
-		798D7EC11BF2E5CF001D4593 /* OnboardingContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnboardingContentViewController.m; sourceTree = "<group>"; };
-		798D7EC31BF2E634001D4593 /* OnboardingContentViewController_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OnboardingContentViewController_Private.h; sourceTree = "<group>"; };
 		7996E2031D00D010006FFDDC /* THLPerkCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkCollectionViewController.h; sourceTree = "<group>"; };
 		7996E2041D00D010006FFDDC /* THLPerkCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPerkCollectionViewController.m; sourceTree = "<group>"; };
 		799831161D4AC4F400BB5BFE /* THLSelectView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLSelectView.h; sourceTree = "<group>"; };
@@ -1191,15 +1178,6 @@
 			path = THLTextEntryViewController;
 			sourceTree = "<group>";
 		};
-		7928ADC41D19CC9200DFC443 /* THLLoginViewController */ = {
-			isa = PBXGroup;
-			children = (
-				7928ADAE1D19CABC00DFC443 /* THLLoginViewController.h */,
-				7928ADAF1D19CABC00DFC443 /* THLLoginViewController.m */,
-			);
-			path = THLLoginViewController;
-			sourceTree = "<group>";
-		};
 		7928ADC51D19CC9B00DFC443 /* THLPerkDetailViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1207,15 +1185,6 @@
 				7928ADAC1D19CA0D00DFC443 /* THLPerkDetailViewController.m */,
 			);
 			path = THLPerkDetailViewController;
-			sourceTree = "<group>";
-		};
-		7928ADC61D19CCA500DFC443 /* THLOnboardingViewController */ = {
-			isa = PBXGroup;
-			children = (
-				7928ADA21D19C9B600DFC443 /* THLOnboardingViewController.h */,
-				7928ADA31D19C9B600DFC443 /* THLOnboardingViewController.m */,
-			);
-			path = THLOnboardingViewController;
 			sourceTree = "<group>";
 		};
 		7928ADC71D19CCAD00DFC443 /* THLTablePackageAdmissionCell */ = {
@@ -1287,8 +1256,6 @@
 				C8EE96D21CE93D4F0040A1F0 /* THLCheckoutViewController */,
 				C884EE281CF8BDAD00C47167 /* THLEventDetailsViewController */,
 				7928ADB81D19CBFD00DFC443 /* THLEventTicketViewController */,
-				7928ADC41D19CC9200DFC443 /* THLLoginViewController */,
-				7928ADC61D19CCA500DFC443 /* THLOnboardingViewController */,
 				7928ADBE1D19CC4100DFC443 /* THLPartyInvitationViewController */,
 				7928ADBD1D19CC3500DFC443 /* THLPartyNavigationController */,
 				7928ADB91D19CC0900DFC443 /* THLPartyViewController */,
@@ -1355,18 +1322,6 @@
 			path = "Info VC";
 			sourceTree = "<group>";
 		};
-		794DCCB11BF554E30037A03D /* Onboard */ = {
-			isa = PBXGroup;
-			children = (
-				798D7EC01BF2E5CF001D4593 /* OnboardingContentViewController.h */,
-				798D7EC11BF2E5CF001D4593 /* OnboardingContentViewController.m */,
-				798D7EC31BF2E634001D4593 /* OnboardingContentViewController_Private.h */,
-				798D7EBD1BF2E56C001D4593 /* OnboardingViewController.h */,
-				798D7EBE1BF2E56C001D4593 /* OnboardingViewController.m */,
-			);
-			path = Onboard;
-			sourceTree = "<group>";
-		};
 		794DCCB21BF554F20037A03D /* FXBlurView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1395,7 +1350,6 @@
 			isa = PBXGroup;
 			children = (
 				794DCCB21BF554F20037A03D /* FXBlurView */,
-				794DCCB11BF554E30037A03D /* Onboard */,
 			);
 			path = Alien;
 			sourceTree = "<group>";
@@ -2185,7 +2139,6 @@
 				798402DE1D217200006F463B /* THLUserEntity.m in Sources */,
 				79CEDF431D27180600DFB654 /* THLDiscoveryNavBarTitleView.swift in Sources */,
 				2133BFCE1B877D11002C1DA9 /* THLLocation.m in Sources */,
-				798D7EC21BF2E5CF001D4593 /* OnboardingContentViewController.m in Sources */,
 				792545C51CFE400C004CF29A /* THLPaymentMethodView.m in Sources */,
 				7928AD9E1D19C91900DFC443 /* THLContactTableViewCell.m in Sources */,
 				7928ADAA1D19C9E200DFC443 /* THLUserProfileHeaderView.m in Sources */,
@@ -2238,7 +2191,6 @@
 				7928AD8F1D19C80400DFC443 /* THLPromotionInfoView.m in Sources */,
 				792545C81CFE97CF004CF29A /* THLAttendingEventCell.m in Sources */,
 				2133BFCB1B877CAB002C1DA9 /* THLEvent.m in Sources */,
-				7928ADB01D19CABC00DFC443 /* THLLoginViewController.m in Sources */,
 				7916AC4D1D3969DD00F0CE4E /* THLDashboardNotificationSectionTitleCell.m in Sources */,
 				211BB0D41B8CBE980068FD50 /* THLEventTitlesView.m in Sources */,
 				C82D87BF1C25C7E300116328 /* THLConfirmationView.m in Sources */,
@@ -2273,7 +2225,6 @@
 				FF9BF5FF1DAC572800442209 /* THLChatEntryTableViewController.swift in Sources */,
 				21E402DC1BBF8155001D0C2C /* THLGuestlistInvite.m in Sources */,
 				21CCEDE91B87C87B0066CDAC /* THLDataStore.m in Sources */,
-				7928ADA41D19C9B600DFC443 /* THLOnboardingViewController.m in Sources */,
 				799B06991D2C3D600091B4CD /* UIScrollView+EmptyDataSet.m in Sources */,
 				792BB4D11DB1507900B673B8 /* THLInquiryOfferDetailsView.swift in Sources */,
 				794DA4351DB82DC4000C5F67 /* THLGuestProfileViewController.swift in Sources */,
@@ -2306,7 +2257,6 @@
 				796AD92B1D908D3E006DCEDA /* THLEventDiscoveryViewController.swift in Sources */,
 				799831181D4AC50900BB5BFE /* THLSelectView.m in Sources */,
 				794DA4311DB6D988000C5F67 /* THLBoldNavigationBar.swift in Sources */,
-				798D7EBF1BF2E56C001D4593 /* OnboardingViewController.m in Sources */,
 				C8FEE3D51D038C8700244252 /* THLTablePackageDetailsViewController.m in Sources */,
 				215A42AC1BAA2A1700D03C35 /* THLFacebookProfilePictureURLFetchService.m in Sources */,
 				21E402E01BBF8371001D0C2C /* THLGuestlistService.m in Sources */,

@@ -55,3 +55,4 @@
 
 #import <TPKeyboardAvoiding/TPKeyboardAvoidingScrollView.h>
 #import "NSString+EmailAddresses.h"
+#import "THLVenueDiscoveryViewController.h"

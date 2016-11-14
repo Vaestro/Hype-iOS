@@ -77,7 +77,7 @@ class THLPhoneNumberVerificationViewController: UIViewController {
     
     
     func handleVerifyButtonTapped() {
-        
+        self.delegate?.didVerifyPhoneNumber()
     }
     
     func label() -> UILabel {

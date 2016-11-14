@@ -11,9 +11,12 @@ import TextFieldEffects
 import SnapKit
 import PopupDialog
 import PhoneNumberKit
+import Parse
+import Mixpanel
+import Branch
 
 protocol THLAccountRegistrationViewControllerDelegate {
-    func didCompleteRegistration()
+    func accountRegistrationViewDidCompleteRegistration()
 }
 
 class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVerificationViewControllerDelegate {
@@ -25,7 +28,8 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
     var lastNameTextField = UITextField()
     var emailTextField = UITextField()
     var phoneNumberTextField = UITextField()
-
+    var passwordTextField = UITextField()
+    
     var maleRadioButton = UIButton()
     var femaleRadioButton = UIButton()
     
@@ -206,6 +210,18 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
             make.height.equalTo(50)
         }
         
+        if (userData == nil) {
+            passwordTextField = constructTextField()
+            passwordTextField.placeholder = "Password"
+            scrollView.addSubview(passwordTextField)
+            passwordTextField.snp.makeConstraints { (make) -> Void in
+                make.top.equalTo(phoneNumberTextField.snp.bottom).offset(10)
+                make.left.equalTo(view.snp.left).offset(20)
+                make.right.equalTo(view.snp.right).offset(-20)
+                make.height.equalTo(50)
+            }
+        }
+        
         continueButton.snp.makeConstraints { (make) in
             make.left.equalTo(view.snp.left).offset(25)
             make.right.equalTo(view.snp.right).offset(-25)
@@ -256,6 +272,7 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
     }
     
     func presentValidatePhoneNumberViewController() {
+        
         let phoneNumberVerificationViewController = THLPhoneNumberVerificationViewController()
         phoneNumberVerificationViewController.delegate = self
         self.navigationController?.pushViewController(phoneNumberVerificationViewController, animated: true)
@@ -304,6 +321,14 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
     }
     
     func didVerifyPhoneNumber() {
+        if (userData == nil) {
+            registerVerifiedEmailUser()
+        } else {
+            registerVerifiedFacebookUser()
+        }
+    }
+    
+    func registerVerifiedFacebookUser() {
         let currentUser = THLUser.current()
         currentUser?.fbId = userData?["id"] as! String
         currentUser?.firstName = firstNameTextField.text
@@ -314,7 +339,7 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
         let picture:[String : AnyObject] = userData?["picture"] as! [String : AnyObject]
         let pictureData:[String : AnyObject] = picture["data"] as! [String : AnyObject]
         let url = pictureData["url"] as! String
-    
+        
         let imageData = NSData(contentsOf: URL(string: url)!)
         let profilePicture = PFFile(name: "profile_picture.png", data: imageData as! Data)
         
@@ -326,10 +351,67 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
         else {
             currentUser?.fbVerified = false
         }
+        currentUser?.phoneNumber = phoneNumberTextField.text
+
         currentUser?.type = THLUserType.guest
         currentUser?.saveInBackground{(success, error) in
-            self.delegate?.didCompleteRegistration()
+            self.createMixpanelAlias()
+            self.setupBranch()
+            do {
+                try PFCloud.callFunction("assignGuestToGuestlistInvite", withParameters: nil)
+
+            } catch {
+                
+            }
+            THLUser.makeCurrentInstallation()
+            THLChatSocketManager.sharedInstance.establishConnection()
+            self.delegate?.accountRegistrationViewDidCompleteRegistration()
         }
+    }
+    
+    func registerVerifiedEmailUser() {
+        let newUser = THLUser()
+        newUser.firstName = firstNameTextField.text
+        newUser.lastName = lastNameTextField.text
+        newUser.email = emailTextField.text
+        newUser.username = emailTextField.text
+        newUser.password = passwordTextField.text
+        newUser.sex = maleRadioButton.isSelected == true ? THLSex.male : THLSex.female
+        newUser.phoneNumber = phoneNumberTextField.text
+        newUser.type = THLUserType.guest
+        newUser.signUpInBackground{(success,error) in
+            self.createMixpanelAlias()
+            self.setupBranch()
+            do {
+                try PFCloud.callFunction("assignGuestToGuestlistInvite", withParameters: nil)
+                
+            } catch {
+                
+            }
+            THLUser.makeCurrentInstallation()
+            THLChatSocketManager.sharedInstance.establishConnection()
+            self.delegate?.accountRegistrationViewDidCompleteRegistration()
+        }
+    }
+    
+    func createMixpanelAlias() {
+        let mixpanel = Mixpanel.sharedInstance()
+        let user = THLUser.current()
+        // mixpanel identify: must be called before
+        // people properties can be set
+        mixpanel.createAlias((user?.objectId)!, forDistinctID: mixpanel.distinctId)
+        // You must call identify if you haven't already
+        // (e.g., when your app launches).
+        mixpanel.identify(mixpanel.distinctId)
+
+        mixpanel.registerSuperPropertiesOnce(["Gender": (user?.sex == THLSex.male) ? "Male" : "Female"])
+        mixpanel.people.set(["$first_name": user?.firstName, "$last_name": user?.lastName, "$email": user?.email, "$phone": user?.phoneNumber!, "$created": user?.createdAt, "Gender": (user?.sex == THLSex.male) ? "Male" : "Female"])
+        mixpanel.track("completed registration")
+    }
+    
+    func setupBranch() {
+        Branch.getInstance().setIdentity(THLUser.current()?.objectId)
+        Branch.getInstance().userCompletedAction("signUp")
     }
     
     func label() -> UILabel {

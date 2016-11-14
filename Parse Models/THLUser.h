@@ -32,5 +32,6 @@
 @property (nonatomic, retain) NSString *stripeCustomerId;
 - (NSString *)fullName;
 - (NSString *)intPhoneNumberFormat;
++ (BFTask *)makeCurrentInstallation;
 
 @end
