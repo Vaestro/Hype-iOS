@@ -14,8 +14,9 @@ import ParseFacebookUtilsV4
 
 
 protocol THLWelcomeViewDelegate {
-    func didConnectWithFacebookAndReceivedUserData(userData:[String:AnyObject])
+    func welcomeViewDidConnectWithFacebookAndReceivedUserData(userData:[String:AnyObject])
     func welcomeViewWantsToPresentLoginView()
+    func welcomeViewDidLoginWithFacebookAndWantsToPresentGuestInterface()
 }
 
 class THLWelcomeViewController: UIViewController {
@@ -127,11 +128,11 @@ class THLWelcomeViewController: UIViewController {
         
         PFFacebookUtils.logInInBackground(withReadPermissions: ["public_profile", "user_photos","email", "user_friends"], block: {(user: PFUser?, error: Error?) -> Void in
             if let user = user {
-                if user.isNew {
+                if (user.email == nil) {
                     self.requestFacebookInformation()
                     print("New user signed up and logged in through Facebook!")
                 } else {
-                    self.requestFacebookInformation()
+                    self.delegate?.welcomeViewDidLoginWithFacebookAndWantsToPresentGuestInterface()
                     
                     print("Returning user logged in through Facebook!")
                 }
@@ -152,7 +153,7 @@ class THLWelcomeViewController: UIViewController {
             }
             else {
                 let data:[String:AnyObject] = result as! [String : AnyObject]
-                self.delegate?.didConnectWithFacebookAndReceivedUserData(userData: data)
+                self.delegate?.welcomeViewDidConnectWithFacebookAndReceivedUserData(userData: data)
             }
         })
 
@@ -166,6 +167,8 @@ class THLWelcomeViewController: UIViewController {
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    
+    // Constructors
     
     lazy var logoLabel: UILabel = {
         var label = UILabel()

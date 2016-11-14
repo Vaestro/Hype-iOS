@@ -28,6 +28,7 @@
         }
     }
     
+    // Welcome View Controller
     func presentWelcomeView() {
         self.welcomeView.delegate = self
         let onboardingNavigationController = UINavigationController()
@@ -36,13 +37,29 @@
         window.makeKeyAndVisible()
     }
     
+    //WelcomeViewController Delegate
     func welcomeViewWantsToPresentLoginView() {
         let loginView = THLSwiftLoginViewController()
         loginView.delegate = self
         welcomeView.navigationController?.pushViewController(loginView, animated: true)
-
     }
     
+    func welcomeViewDidConnectWithFacebookAndReceivedUserData(userData:[String:AnyObject]) {
+        presentAccountRegistrationView(userData:userData)
+    }
+    
+    func welcomeViewDidLoginWithFacebookAndWantsToPresentGuestInterface() {
+        
+    }
+    
+    //Account Registration View Controller
+    
+    func presentAccountRegistrationView(userData:[String:AnyObject]) {
+        let accountRegistrationViewController = THLAccountRegistrationViewController(userData)
+        welcomeView.navigationController?.pushViewController(accountRegistrationViewController, animated: true)
+    }
+    
+    //Login View Controller Delegate
     func loginViewWantsToPresentAccountRegistration() {
         let accountRegistrationViewController = THLAccountRegistrationViewController(nil)
         welcomeView.navigationController?.pushViewController(accountRegistrationViewController, animated: true)
@@ -50,14 +67,5 @@
     
     func didLogin() {
         
-    }
-    
-    func didConnectWithFacebookAndReceivedUserData(userData:[String:AnyObject]) {
-        presentAccountRegistrationView(userData:userData)
-    }
-    
-    func presentAccountRegistrationView(userData:[String:AnyObject]) {
-        let accountRegistrationViewController = THLAccountRegistrationViewController(userData)
-        welcomeView.navigationController?.pushViewController(accountRegistrationViewController, animated: true)
     }
 }

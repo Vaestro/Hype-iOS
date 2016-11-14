@@ -98,6 +98,16 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
         femaleRadioButton = radioButton()
         femaleRadioButton.addTarget(self, action: #selector(femaleRadioButtonToggle), for: .touchUpInside)
         
+        
+        if let gender = userData?["gender"] {
+            let genderString = gender as! String
+            if (genderString == "male") {
+                maleRadioButtonToggle(self)
+            } else {
+                femaleRadioButtonToggle(self)
+            }
+        }
+        
         emailTextField = constructTextField()
         emailTextField.placeholder = "Email"
         if let email = userData?["email"] {
@@ -269,7 +279,11 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
     }
     
     func validateFields() -> Bool {
-        if firstNameTextField.text?.isEmpty ?? false && lastNameTextField.text?.isEmpty ?? false && self.checkGenderSelected() && self.validateEmailAddress() {
+        let isFirstNameValid = firstNameTextField.text?.isEmpty == false
+        let isLastNameValid = lastNameTextField.text?.isEmpty == false
+        let isPhoneNumberValid = phoneNumberTextField.text?.isEmpty == false
+
+        if isFirstNameValid && isLastNameValid && self.checkGenderSelected() && self.validateEmailAddress() && isPhoneNumberValid {
             return true
         }
         else {
