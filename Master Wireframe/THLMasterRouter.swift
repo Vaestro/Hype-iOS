@@ -6,7 +6,7 @@
 //  Copyright © 2016 Hypelist. All rights reserved.
 //
 
-@objc class THLMasterRouter: NSObject, THLWelcomeViewDelegate {
+@objc class THLMasterRouter: NSObject, THLWelcomeViewDelegate, THLSwiftLoginViewControllerDelegate {
     var window: UIWindow
     var welcomeView: THLWelcomeViewController
 
@@ -34,6 +34,22 @@
         onboardingNavigationController.addChildViewController(welcomeView)
         self.window.rootViewController = onboardingNavigationController
         window.makeKeyAndVisible()
+    }
+    
+    func welcomeViewWantsToPresentLoginView() {
+        let loginView = THLSwiftLoginViewController()
+        loginView.delegate = self
+        welcomeView.navigationController?.pushViewController(loginView, animated: true)
+
+    }
+    
+    func loginViewWantsToPresentAccountRegistration() {
+        let accountRegistrationViewController = THLAccountRegistrationViewController(nil)
+        welcomeView.navigationController?.pushViewController(accountRegistrationViewController, animated: true)
+    }
+    
+    func didLogin() {
+        
     }
     
     func didConnectWithFacebookAndReceivedUserData(userData:[String:AnyObject]) {

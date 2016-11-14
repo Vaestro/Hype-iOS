@@ -15,6 +15,7 @@ import ParseFacebookUtilsV4
 
 protocol THLWelcomeViewDelegate {
     func didConnectWithFacebookAndReceivedUserData(userData:[String:AnyObject])
+    func welcomeViewWantsToPresentLoginView()
 }
 
 class THLWelcomeViewController: UIViewController {
@@ -158,7 +159,8 @@ class THLWelcomeViewController: UIViewController {
     }
     
     func handleEmailConnect() {
-        
+        self.delegate?.welcomeViewWantsToPresentLoginView()
+
     }
     
     override var prefersStatusBarHidden: Bool {

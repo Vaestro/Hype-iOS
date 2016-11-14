@@ -33,7 +33,7 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(_ userData: [String:AnyObject]) {
+    init(_ userData: [String:AnyObject]?) {
         self.userData = userData
         
         super.init(nibName:nil, bundle:nil)
@@ -107,6 +107,8 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
         phoneNumberTextField = constructTextField()
         phoneNumberTextField.textColor = UIColor.gray
         phoneNumberTextField.placeholder = "Phone Number"
+        phoneNumberTextField.keyboardType = .numberPad
+        
         if let phoneNumber = userData?["phone_number"] {
             phoneNumberTextField.text = phoneNumber as! String
         }
@@ -230,9 +232,7 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
         
         let buttonTwo = DefaultButton(title: "CONFIRM") {
             let currentUser = THLUser.current()
-            currentUser?.deleteInBackground{(success, error) in
-                self.navigationController?.popViewController(animated: true)
-            }
+            self.navigationController?.popViewController(animated: true)
         }
 
         popup.addButtons([buttonOne, buttonTwo])
@@ -353,7 +353,7 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
     
     func constructTextField() -> UITextField {
         let textField = HoshiTextField(frame: CGRect.zero)
-        textField.placeholderColor = UIColor.darkGray
+        textField.placeholderColor = UIColor.lightGray
         textField.borderInactiveColor = UIColor.lightGray
         textField.borderActiveColor = UIColor.white
 
