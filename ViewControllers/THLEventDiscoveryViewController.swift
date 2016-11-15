@@ -12,8 +12,8 @@ import ParseUI
 import BoltsSwift
 
 @objc protocol THLEventDiscoveryViewControllerDelegate {
-    func eventDiscoveryViewControllerWantsToPresentDetailsForEvent(_ event: PFObject, venue: PFObject)
-    func eventDiscoveryViewControllerWantsToPresentDetailsForAttendingEvent(_ event: PFObject, venue: PFObject, invite: PFObject)
+    func eventDiscoveryViewWantsToPresentDetailsForEvent(_ event: PFObject, venue: PFObject)
+    func eventDiscoveryViewWantsToPresentDetailsForAttendingEvent(_ event: PFObject, venue: PFObject, invite: PFObject)
 }
 
 class SimpleCollectionReusableView : UICollectionReusableView {
@@ -61,7 +61,6 @@ class THLEventDiscoveryViewController: PFQueryCollectionViewController {
         layout.minimumInteritemSpacing = 5.0
         self.init(collectionViewLayout: layout, className: className)
         
-        title = "Sectioned Collection"
         pullToRefreshEnabled = true
         paginationEnabled = false
     }
@@ -180,16 +179,16 @@ extension THLEventDiscoveryViewController {
             let invite: PFObject?
             do {
                 invite = try queryFactory.localQueryForAcceptedInvite(forEvent: event?.objectId).getFirstObject()
-                self.delegate?.eventDiscoveryViewControllerWantsToPresentDetailsForAttendingEvent(event!, venue: event?.value(forKey: "location") as! PFObject, invite: invite! as PFObject)
+                self.delegate?.eventDiscoveryViewWantsToPresentDetailsForAttendingEvent(event!, venue: event?.value(forKey: "location") as! PFObject, invite: invite! as PFObject)
             } catch _ {
                 invite = nil
-                self.delegate?.eventDiscoveryViewControllerWantsToPresentDetailsForEvent(event!, venue: event?.value(forKey: "location") as! PFObject)
+                self.delegate?.eventDiscoveryViewWantsToPresentDetailsForEvent(event!, venue: event?.value(forKey: "location") as! PFObject)
 
             }
 
 
         } else {
-            self.delegate?.eventDiscoveryViewControllerWantsToPresentDetailsForEvent(event!, venue: event?.value(forKey: "location") as! PFObject)
+            self.delegate?.eventDiscoveryViewWantsToPresentDetailsForEvent(event!, venue: event?.value(forKey: "location") as! PFObject)
         }
         
     }

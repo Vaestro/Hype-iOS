@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ParseUI.h"
+#import <ParseUI/ParseUI.h>
 #import <Parse/PFObject.h>
 #import "UIScrollView+EmptyDataSet.h"
 
