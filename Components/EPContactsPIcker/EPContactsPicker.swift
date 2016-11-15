@@ -9,13 +9,15 @@
 import UIKit
 import Contacts
 import PopupDialog
-
+import Branch
 public protocol EPPickerDelegate {
 	func epContactPicker(_: EPContactsPicker, didContactFetchFailed error: NSError)
     func epContactPicker(_: EPContactsPicker, didCancel error: NSError)
     func epContactPicker(_: EPContactsPicker, didSelectContact contact: EPContact)
 	func epContactPicker(_: EPContactsPicker, didSelectMultipleContacts contacts: [EPContact])
     func epContactPicker(_: EPContactsPicker, didSubmitInvitesAndWantsToShowInquiry: PFObject)
+    func epContactPickerDidSubmitInvitesAndWantsToShowEvent()
+
 }
 
 public extension EPPickerDelegate {
@@ -40,7 +42,8 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
     // MARK: - Properties
     
     open var contactDelegate: EPPickerDelegate?
-    var event: THLEvent?
+    var event: PFObject?
+    var guestlistId: String?
     var contactsStore: CNContactStore?
     var resultSearchController = UISearchController()
     var orderedContacts = [String: [CNContact]]() //Contacts ordered in dicitonary alphabetically
@@ -128,7 +131,16 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
         contactDelegate = delegate
     }
 
-    convenience public init(delegate: EPPickerDelegate?, multiSelection : Bool, subtitleCellType: SubtitleCellValue, event: THLEvent) {
+    convenience public init(delegate: EPPickerDelegate?, multiSelection : Bool, subtitleCellType: SubtitleCellValue, event: PFObject, guestlistId: String) {
+        self.init(style: .plain)
+        self.multiSelectEnabled = multiSelection
+        contactDelegate = delegate
+        subtitleCellValue = subtitleCellType
+        self.event = event
+        self.guestlistId = guestlistId
+    }
+    
+    convenience public init(delegate: EPPickerDelegate?, multiSelection : Bool, subtitleCellType: SubtitleCellValue, event: PFObject) {
         self.init(style: .plain)
         self.multiSelectEnabled = multiSelection
         contactDelegate = delegate
@@ -353,74 +365,92 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
 //        contactDelegate?.epContactPicker(self, didSelectMultipleContacts: selectedContacts)
 //        dismiss(animated: true, completion: nil)
         
-//        let branchUniversalObject: BranchUniversalObject = BranchUniversalObject(canonicalIdentifier: "event/\(event?.objectId)")
-//        branchUniversalObject.title = event.location.name
-//        branchUniversalObject.contentDescription = event.location.info
-//        branchUniversalObject.imageUrl = event.location.image.url
-//        branchUniversalObject.addMetadataKey("eventID", value: event?.objectId)
-//        branchUniversalObject.addMetadataKey("admissionOption", value: "HypeConnect")
-//        
-//        let linkProperties: BranchLinkProperties = BranchLinkProperties()
-//        linkProperties.feature = "sharing"
-//        linkProperties.channel = "in-app"
-//        linkProperties.addControlParam("$desktop_url", withValue: "http://gethype.co/event/\(event?.objectId)")
-//        linkProperties.addControlParam("$android_url", withValue: "http://gethype.co/event/\(event?.objectId)")
-//        
-//        branchUniversalObject.getShortUrl(with: linkProperties,  andCallback: { (url: String, error: Error?) in
-//            if error == nil, let url = optUrl {
         let guestPhoneNumbers = selectedContacts.map { $0.phoneNumbers[0].phoneNumber }
         
-        var eventId:String = String()
-        var eventDate:Date = Date()
-        if let connectEvent = event {
-            eventId = connectEvent.objectId!
-            eventDate = connectEvent.date!
-        }
-                PFCloud.callFunction(inBackground: "submitConnectInquiry", withParameters: ["guestPhoneNumbers": guestPhoneNumbers,
-                                                                                                "eventId": eventId,
-                                                                                                "eventTime":eventDate,
-                                                                                                "description":"Hype Connect",
-                                                                                                "admissionOptionId":"5m9RI5T9Mr"]) {
-                        (guestlistInvite, error) in
-                            if error == nil {
-                                (guestlistInvite as! PFObject).pinInBackground()
-//                                let guestlist = (guestlistInvite as! PFObject).value(forKey: "Guestlist") as! PFObject
-//                                let inquiry = guestlist.value(forKey: "Inquiry") as! PFObject
-                                // Prepare the popup assets
-                                let title = "SUCCESS"
-                                let message = "Your inquiry was submitted!"
-                                
-                                // Create the dialog
-                                let popup = PopupDialog(title: title, message: message)
-                                
-                                // Create buttons
-                                let buttonOne = CancelButton(title: "OK") {
-                                    self.contactDelegate?.epContactPicker(self, didSubmitInvitesAndWantsToShowInquiry: (guestlistInvite as! PFObject))
-                                }
-                                
-                                popup.addButton(buttonOne)
-                                
-                                // Present dialog
-                                self.present(popup, animated: true, completion: nil)
-                            } else {
-                                // Prepare the popup assets
-                                let title = "ERROR"
-                                let message = "There was an issue with creating your inquiry. Please try again later!"
-                                
-                                // Create the dialog
-                                let popup = PopupDialog(title: title, message: message)
-                                
-                                // Create buttons
-                                let buttonOne = CancelButton(title: "OK") {
-                                    print("You canceled the car dialog.")
-                                }
-                                
-                                popup.addButton(buttonOne)
-                                
-                                // Present dialog
-                                self.present(popup, animated: true, completion: nil)
-                            }
+        let eventId:String = (event?.objectId)!
+        let eventDate:Date = event?.value(forKey: "date") as! Date
+        let location:PFObject = event?.value(forKey: "location") as! PFObject
+        let locationName:String = location.value(forKey: "name") as! String
+        let locationInfo:String = location.value(forKey: "info") as! String
+
+        let branchUniversalObject: BranchUniversalObject = BranchUniversalObject(canonicalIdentifier: "event/\(event?.objectId)")
+        branchUniversalObject.title = locationName
+        branchUniversalObject.contentDescription = locationInfo
+        branchUniversalObject.addMetadataKey("eventID", value: (event?.objectId)!)
+//        branchUniversalObject.addMetadataKey("admissionOption", value: "GeneralAdmission")
+        
+        let linkProperties: BranchLinkProperties = BranchLinkProperties()
+        linkProperties.feature = "sharing"
+        linkProperties.channel = "in-app"
+        linkProperties.addControlParam("$desktop_url", withValue: "http://gethype.co/event/\((event?.objectId)!)")
+        linkProperties.addControlParam("$android_url", withValue: "http://gethype.co/event/\((event?.objectId)!)")
+        
+        branchUniversalObject.getShortUrl(with: linkProperties, andCallback: {
+            (url, error) in
+            if error == nil {
+                PFCloud.callFunction(inBackground: "sendOutInvitations", withParameters: ["eventId": eventId, "eventName": locationName, "eventTime": eventDate, "guestPhoneNumbers": guestPhoneNumbers, "guestlistId": self.guestlistId, "branchUrl": url]) {
+                    (response, cloudError) in
+                        if cloudError == nil {
+                            self.dismiss(animated: true, completion: {
+                                self.contactDelegate?.epContactPickerDidSubmitInvitesAndWantsToShowEvent()
+                            })
+
+                        }
+                        else {
+                            
+                        }
                 }
+            }
+
+        })
+
+        
+
+//                PFCloud.callFunction(inBackground: "submitConnectInquiry", withParameters: ["guestPhoneNumbers": guestPhoneNumbers,
+//                                                                                                "eventId": eventId,
+//                                                                                                "eventTime":eventDate,
+//                                                                                                "description":"Hype Connect",
+//                                                                                                "admissionOptionId":"5m9RI5T9Mr"]) {
+//                        (guestlistInvite, error) in
+//                            if error == nil {
+//                                (guestlistInvite as! PFObject).pinInBackground()
+////                                let guestlist = (guestlistInvite as! PFObject).value(forKey: "Guestlist") as! PFObject
+////                                let inquiry = guestlist.value(forKey: "Inquiry") as! PFObject
+//                                // Prepare the popup assets
+//                                let title = "SUCCESS"
+//                                let message = "Your inquiry was submitted!"
+//                                
+//                                // Create the dialog
+//                                let popup = PopupDialog(title: title, message: message)
+//                                
+//                                // Create buttons
+//                                let buttonOne = CancelButton(title: "OK") {
+//                                    self.contactDelegate?.epContactPicker(self, didSubmitInvitesAndWantsToShowInquiry: (guestlistInvite as! PFObject))
+//                                }
+//                                
+//                                popup.addButton(buttonOne)
+//                                
+//                                // Present dialog
+//                                self.present(popup, animated: true, completion: nil)
+//                            } else {
+//                                // Prepare the popup assets
+//                                let title = "ERROR"
+//                                let message = "There was an issue with creating your inquiry. Please try again later!"
+//                                
+//                                // Create the dialog
+//                                let popup = PopupDialog(title: title, message: message)
+//                                
+//                                // Create buttons
+//                                let buttonOne = CancelButton(title: "OK") {
+//                                    print("You canceled the car dialog.")
+//                                }
+//                                
+//                                popup.addButton(buttonOne)
+//                                
+//                                // Present dialog
+//                                self.present(popup, animated: true, completion: nil)
+//                            }
+//                }
 //            }
 //        })
     }

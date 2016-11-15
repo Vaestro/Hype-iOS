@@ -14,10 +14,10 @@ import TTTAttributedLabel
     func didSubmitInquiry(_ inquiry: PFObject)
 }
 
-class THLSwiftAdmissionsViewController: UIViewController, THLEventPickerViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, TTTAttributedLabelDelegate, EPPickerDelegate {
-    public func epContactPicker(_: EPContactsPicker, didSubmitInvitesAndWantsToShowInquiry: PFObject) {
-        self.delegate?.didSubmitInquiry(didSubmitInvitesAndWantsToShowInquiry)
-    }
+class THLSwiftAdmissionsViewController: UIViewController, THLEventPickerViewControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, TTTAttributedLabelDelegate {
+//    public func epContactPicker(_: EPContactsPicker, didSubmitInvitesAndWantsToShowInquiry: PFObject) {
+//        self.delegate?.didSubmitInquiry(didSubmitInvitesAndWantsToShowInquiry)
+//    }
 
     //  MARK: -
     //  MARK: Init
@@ -90,27 +90,27 @@ class THLSwiftAdmissionsViewController: UIViewController, THLEventPickerViewCont
         self.view.addSubview(eventPickerView.view)
         self.view.addSubview(admissionOptionCollectionView)
 
-        buttonBackground.backgroundColor = UIColor.black
-        self.view!.addSubview(buttonBackground)
-
-        separatorView.backgroundColor = UIColor.gray
-        buttonBackground.addSubview(separatorView)
-
-        self.contactConciergeLabel = TTTAttributedLabel.init(frame: CGRect.zero)
-        self.contactConciergeLabel.textColor = UIColor.white
-        self.contactConciergeLabel.font = UIFont(name: "Raleway-Bold", size: 16)
-        self.contactConciergeLabel.numberOfLines = 0
-        self.contactConciergeLabel.linkAttributes = [NSForegroundColorAttributeName: UIColor.white, NSUnderlineColorAttributeName: UIColor.customGoldColor(), NSUnderlineStyleAttributeName: NSUnderlineStyle.styleThick.rawValue]
-        self.contactConciergeLabel.activeLinkAttributes = [NSForegroundColorAttributeName: UIColor.white, NSUnderlineStyleAttributeName: NSUnderlineStyle.styleNone.rawValue]
-        self.contactConciergeLabel.textAlignment = .left
-        let labelText: NSString! = "OR GO WITH A HOST"
-        self.contactConciergeLabel.text = labelText as String
-        let concierge: NSRange = labelText.range(of: "HOST")
-        contactConciergeLabel.addLink(to: URL(string: "action://show-intercom")!, with: concierge)
-        self.contactConciergeLabel.delegate = self
-        contactConciergeLabel.sizeToFit()
-
-        buttonBackground.addSubview(self.contactConciergeLabel)
+//        buttonBackground.backgroundColor = UIColor.black
+//        self.view!.addSubview(buttonBackground)
+//
+//        separatorView.backgroundColor = UIColor.gray
+//        buttonBackground.addSubview(separatorView)
+//
+//        self.contactConciergeLabel = TTTAttributedLabel.init(frame: CGRect.zero)
+//        self.contactConciergeLabel.textColor = UIColor.white
+//        self.contactConciergeLabel.font = UIFont(name: "Raleway-Bold", size: 16)
+//        self.contactConciergeLabel.numberOfLines = 0
+//        self.contactConciergeLabel.linkAttributes = [NSForegroundColorAttributeName: UIColor.white, NSUnderlineColorAttributeName: UIColor.customGoldColor(), NSUnderlineStyleAttributeName: NSUnderlineStyle.styleThick.rawValue]
+//        self.contactConciergeLabel.activeLinkAttributes = [NSForegroundColorAttributeName: UIColor.white, NSUnderlineStyleAttributeName: NSUnderlineStyle.styleNone.rawValue]
+//        self.contactConciergeLabel.textAlignment = .left
+//        let labelText: NSString! = "OR GO WITH A HOST"
+//        self.contactConciergeLabel.text = labelText as String
+//        let concierge: NSRange = labelText.range(of: "HOST")
+//        contactConciergeLabel.addLink(to: URL(string: "action://show-intercom")!, with: concierge)
+//        self.contactConciergeLabel.delegate = self
+//        contactConciergeLabel.sizeToFit()
+//
+//        buttonBackground.addSubview(self.contactConciergeLabel)
     }
 
     override func viewDidLoad() {
@@ -122,10 +122,10 @@ class THLSwiftAdmissionsViewController: UIViewController, THLEventPickerViewCont
         self.eventPickerView.view.frame.size.height = 100.0
 
         admissionOptionCollectionView.frame = CGRect(x: 0, y: 0 + eventPickerView.view.frame.size.height, width: self.view.frame.size.width, height: self.view.frame.size.height - eventPickerView.view.frame.size.height - 80.0)
-        buttonBackground.frame = CGRect(x: 0, y: eventPickerView.view.frame.size.height + admissionOptionCollectionView.frame.size.height, width: view.frame.size.width, height: 80.0)
-        separatorView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 0.5)
-
-        contactConciergeLabel.center = buttonBackground .convert(buttonBackground.center, from: buttonBackground.superview)
+//        buttonBackground.frame = CGRect(x: 0, y: eventPickerView.view.frame.size.height + admissionOptionCollectionView.frame.size.height, width: view.frame.size.width, height: 80.0)
+//        separatorView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 0.5)
+//
+//        contactConciergeLabel.center = buttonBackground .convert(buttonBackground.center, from: buttonBackground.superview)
     }
 
     override func viewWillLayoutSubviews() {
@@ -180,7 +180,7 @@ class THLSwiftAdmissionsViewController: UIViewController, THLEventPickerViewCont
     func attributedLabel(_ label: TTTAttributedLabel, didSelectLinkWith url: URL) {
         if (url.scheme?.hasPrefix("action"))! {
             if url.host!.hasPrefix("show-intercom") {
-                self.messageButtonPressed()
+//                self.messageButtonPressed()
             } else {
                 /* deal with http links here */
                 /* deal with http links here */
@@ -188,15 +188,15 @@ class THLSwiftAdmissionsViewController: UIViewController, THLEventPickerViewCont
         }
     }
 
-    func messageButtonPressed() {
-        let contactPickerScene = EPContactsPicker(delegate: self, multiSelection:true, subtitleCellType: SubtitleCellValue.phoneNumber, event: self.event as! THLEvent)
-        if(THLUser.current()?.value(forKey: "image") == nil){
-            let vc = THLProfilePicChooserViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
-        } else {
-            self.navigationController?.pushViewController(contactPickerScene, animated: true)
-        }
-    }
+//    func messageButtonPressed() {
+//        let contactPickerScene = EPContactsPicker(delegate: self, multiSelection:true, subtitleCellType: SubtitleCellValue.phoneNumber, event: self.event as! THLEvent)
+//        if(THLUser.current()?.value(forKey: "image") == nil){
+//            let vc = THLProfilePicChooserViewController()
+//            self.navigationController?.pushViewController(vc, animated: true)
+//        } else {
+//            self.navigationController?.pushViewController(contactPickerScene, animated: true)
+//        }
+//    }
     /*
      ==========================================================================================
      UICollectionView protocol required methods

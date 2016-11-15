@@ -7,9 +7,11 @@
 //
 
 import SVProgressHUD
+import Bolts
+import Branch
+import Parse
 
-@objc class THLMasterRouter: NSObject, THLWelcomeViewDelegate, THLAccountRegistrationViewControllerDelegate, THLSwiftLoginViewControllerDelegate, THLEventDiscoveryViewControllerDelegate, THLVenueDiscoveryViewControllerDelegate, THLGuestProfileViewControllerDelegate, THLEventDetailsViewControllerDelegate, THLSwiftAdmissionsViewControllerDelegate, THLPartyViewControllerDelegate, THLCheckoutViewControllerDelegate, THLTablePackageControllerDelegate  {
-
+@objc class THLMasterRouter: NSObject, THLWelcomeViewDelegate, THLAccountRegistrationViewControllerDelegate, THLSwiftLoginViewControllerDelegate, THLEventDiscoveryViewControllerDelegate, THLVenueDiscoveryViewControllerDelegate, THLGuestProfileViewControllerDelegate, THLEventDetailsViewControllerDelegate, THLSwiftAdmissionsViewControllerDelegate, THLPartyViewControllerDelegate, THLCheckoutViewControllerDelegate, THLTablePackageControllerDelegate, EPPickerDelegate {
 
     var window: UIWindow
     var welcomeView: THLWelcomeViewController
@@ -134,7 +136,7 @@ import SVProgressHUD
     public func eventDetailsWantsToPresentParty(forEvent guestlistInvite: PFObject!) {
         window.rootViewController!.dismiss(animated: true, completion: {() -> Void in
             let guestlist:PFObject = guestlistInvite.value(forKey: "Guestlist") as! PFObject
-            let admissionOption:PFObject = guestlist.value(forKey: "admissionType") as! PFObject
+            let admissionOption:PFObject = guestlist.value(forKey: "admissionOption") as! PFObject
             let admissionType:Int = admissionOption.value(forKey: "type") as! Int
 
 //            let inquiry:PFObject = guestlist.value(forKey: "Inquiry") as! PFObject
@@ -161,13 +163,15 @@ import SVProgressHUD
         if admissionType == 0 {
             let checkoutView = THLCheckoutViewController(event: event, admissionOption: admissionOption, guestlistInvite: nil)
             checkoutView?.delegate = self
-            self.topViewController().navigationController!.pushViewController(checkoutView!, animated: true)
+            let topView = self.topViewController() as! UINavigationController
+            topView.pushViewController(checkoutView!, animated: true)
         }
         else if admissionType == 1 {
             //        THLReservationRequestViewController *packageDetailsVC = [[THLReservationRequestViewController alloc] initWithEvent:event admissionOption:admissionOption];
             let packageDetailsView = THLTablePackageDetailsViewController(event: event, admissionOption: admissionOption, showActionButton: true)
             packageDetailsView?.delegate = self
-            self.topViewController().navigationController!.pushViewController(packageDetailsView!, animated: true)
+            let topView = self.topViewController() as! UINavigationController
+            topView.pushViewController(packageDetailsView!, animated: true)
         }
     }
     
@@ -237,7 +241,8 @@ import SVProgressHUD
             var emptyCardInfoSet = [[AnyHashable: Any]]()
             var paymentView = THLPaymentViewController(paymentInfo: emptyCardInfoSet)
             paymentView?.hidesBottomBarWhenPushed = true
-            viewController.navigationController!.pushViewController(paymentView!, animated: true)
+            let topView = self.topViewController() as! UINavigationController
+            topView.pushViewController(paymentView!, animated: true)
         }
     }
     
@@ -247,7 +252,7 @@ import SVProgressHUD
         let partyNavigationController = THLPartyNavigationController(guestlistInvite: invite)
         partyNavigationController?.eventDetailsVC.delegate = self
         partyNavigationController?.partyVC.delegate = self
-        partyNavigationController?.addChildViewController(partyNavigationController!)
+        partyNavVC.addChildViewController(partyNavigationController!)
         window.rootViewController!.present(partyNavVC, animated: true, completion: { _ in })
         if guestMainTabBarController.selectedIndex != 2 {
             guestMainTabBarController.selectedIndex = 2
@@ -270,7 +275,9 @@ import SVProgressHUD
     }
     
     internal func partyViewControllerWantsToPresentInvitationController(for event: THLEvent!, guestlistId: String!, currentGuestsPhoneNumbers: [Any]!) {
-        
+        let contactPickerScene = EPContactsPicker(delegate: self, multiSelection:true, subtitleCellType: SubtitleCellValue.phoneNumber, event: event, guestlistId: guestlistId)
+        let topView = self.topViewController() as! UINavigationController
+        topView.pushViewController(contactPickerScene, animated: true)
     }
     
     internal func partyViewControllerWantsToPresentCheckout(forEvent event: PFObject!, with guestlistInvite: THLGuestlistInvite!) {
@@ -279,10 +286,21 @@ import SVProgressHUD
     
     // MARK: Table Package View Controller Delegate
     public func packageControllerWantsToPresentCheckout(forEvent event: PFObject!, andAdmissionOption admissionOption: PFObject!) {
-        
+        let checkoutView = THLCheckoutViewController(event: event, admissionOption: admissionOption, guestlistInvite: nil)
+        checkoutView?.delegate = self
+        let topView = self.topViewController() as! UINavigationController
+        topView.pushViewController(checkoutView!, animated: true)
     }
 
     public func didLoadObjects() {
+        
+    }
+    
+    public func epContactPickerDidSubmitInvitesAndWantsToShowEvent() {
+        
+    }
+    
+    public func epContactPicker(_: EPContactsPicker, didSubmitInvitesAndWantsToShowInquiry: PFObject) {
         
     }
     
@@ -295,7 +313,7 @@ import SVProgressHUD
     }
     
     internal func didSelectViewEventTicket(_ guestlistInvite: PFObject) {
-        
+        self.presentPartyNavigationControllerforTicket(invite: guestlistInvite)
     }
 
     internal func didSelectViewHostedEvent(_ guestlistInvite: PFObject) {
@@ -316,7 +334,7 @@ import SVProgressHUD
     
     
     func topViewController() -> UIViewController {
-        return self.topViewController(UIApplication.shared.keyWindow!.rootViewController!)
+        return self.topViewController(window.rootViewController!)
     }
     
     func topViewController(_ rootViewController: UIViewController) -> UIViewController {
@@ -325,11 +343,52 @@ import SVProgressHUD
         }
         if type(of: rootViewController.presentedViewController) == UINavigationController.self {
             let navigationController = (rootViewController.presentedViewController as! UINavigationController)
-            let lastViewController = navigationController.viewControllers.last!
+            let lastViewController = navigationController.visibleViewController!
             return self.topViewController(lastViewController)
         }
         let presentedViewController = (rootViewController.presentedViewController as UIViewController!)
         return self.topViewController(presentedViewController!)
     }
-
+    
+//    func handlePushNotification(_ pushInfo: [AnyHashable: Any]) -> BFTask {
+//        if (pushInfo["guestlistInviteId"] as! String) {
+//            var guestlistInviteId = pushInfo["guestlistInviteId"]
+//            return
+//                dependencyManager.guestlistService().fetchGuestlistInvite(withId: guestlistInviteId)
+//            BFExecutor.mainThread()
+//            var Nullable: Any?
+//            do {
+//                var invite = task.isResult
+//                var popupView = THLPopupNotificationView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH * 0.87, height: SCREEN_HEIGHT * 0.67))
+//                popupView.messageLabelText = "\(invite.sender.firstName) has invited you\nto party with friends at\n\(invite.event.location.name)\n\(invite.date!.thl_weekdayString) at \(invite.date!.thl_timeString)"
+//                popupView.setImageViewWithURL(URL(string: invite.event.location.image.url)!)
+//                popupView.iconURL = URL(string: invite.sender.image.url)!
+//                popupView.buttonTitle = "View Invite"
+//                popupView.setButtonTarget(self, action: #selector(self.viewInvites), forControlEvents: .touchUpInside)
+//                var popup = KLCPopup(contentView: popupView, showType: KLCPopupShowTypeBounceIn, dismissType: KLCPopupDismissTypeBounceOut, maskType: KLCPopupMaskTypeDimmed, dismissOnBackgroundTouch: true, dismissOnContentTouch: true)
+//                popup.dimmedMaskAlpha = 0.8
+//                popup.show()
+//                return task
+//            }
+//        }
+//        else {
+//            print("Notification was not a guestlistInvite")
+//            return BFTask(result: nil)
+//        }
+//    }
+    // MARK: - LogOut Handler
+    
+    func logOutUser() {
+        THLUserManager.logUserOut()
+        Branch.getInstance().logout()
+        do {
+            try PFObject.unpinAllObjects()
+        } catch {
+            
+        }
+        
+        FBSDKAccessToken.setCurrent(nil)
+        THLChatSocketManager.sharedInstance.closeConnection()
+        //    [_dependencyManager.databaseManager dropDB];
+    }
 }
