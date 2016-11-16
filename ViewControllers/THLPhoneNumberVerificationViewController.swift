@@ -21,12 +21,14 @@ import PopupDialog
 import PhoneNumberKit
 
 protocol THLPhoneNumberVerificationViewControllerDelegate {
-    func didVerifyPhoneNumber()
+    func didVerifyPhoneNumber(enteredCode: String)
 }
 
 class THLPhoneNumberVerificationViewController: UIViewController {
     var delegate: THLPhoneNumberVerificationViewControllerDelegate?
-    
+    var verificationCodeTextField = UITextField()
+    var userPN = ""
+    var code = ""
     override func viewDidLoad() {
         view.backgroundColor = UIColor.black
         
@@ -44,9 +46,9 @@ class THLPhoneNumberVerificationViewController: UIViewController {
         subtitleLabel.textColor = UIColor.gray
         subtitleLabel.text = "Enter the 4-digit code sent to you"
         
-        let verificationCodeTextField = constructTextField()
-        verificationCodeTextField.placeholder = "Verification Code"
         
+        verificationCodeTextField.placeholder = "Verification Code"
+        verificationCodeTextField = constructTextField()
         scrollView.addSubview(subtitleLabel)
       
         scrollView.addSubview(verificationCodeTextField)
@@ -77,7 +79,9 @@ class THLPhoneNumberVerificationViewController: UIViewController {
     
     
     func handleVerifyButtonTapped() {
-        self.delegate?.didVerifyPhoneNumber()
+        self.delegate?.didVerifyPhoneNumber(enteredCode: self.verificationCodeTextField.text!)
+        
+        
     }
     
     func label() -> UILabel {
@@ -115,4 +119,7 @@ class THLPhoneNumberVerificationViewController: UIViewController {
         
         return textField
     }
+   
+    
+  
 }

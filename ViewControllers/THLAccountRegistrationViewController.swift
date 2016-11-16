@@ -32,7 +32,7 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
     
     var maleRadioButton = UIButton()
     var femaleRadioButton = UIButton()
-    
+    var code = ""
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -275,6 +275,12 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
         
         let phoneNumberVerificationViewController = THLPhoneNumberVerificationViewController()
         phoneNumberVerificationViewController.delegate = self
+        // Don't want to create a new verification code if one has been created already
+        if(self.code == "") {
+            self.code = randomCode(length: 4)
+            sendVerificationSMS()
+        }
+        
         self.navigationController?.pushViewController(phoneNumberVerificationViewController, animated: true)
     }
     
@@ -320,11 +326,13 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
         return (femaleRadioButton.isSelected || maleRadioButton.isSelected)
     }
     
-    func didVerifyPhoneNumber() {
-        if (userData == nil) {
-            registerVerifiedEmailUser()
-        } else {
-            registerVerifiedFacebookUser()
+    func didVerifyPhoneNumber(enteredCode: String) {
+        if(self.code == enteredCode) {
+            if (userData == nil) {
+                registerVerifiedEmailUser()
+            } else {
+                registerVerifiedFacebookUser()
+            }
         }
     }
     
@@ -412,6 +420,37 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
     func setupBranch() {
         Branch.getInstance().setIdentity(THLUser.current()?.objectId)
         Branch.getInstance().userCompletedAction("signUp")
+    }
+    
+    func randomCode(length: Int) -> String {
+        
+        let letters : NSString = "0123456789"
+        let len = UInt32(letters.length)
+        
+        var randomString = ""
+        
+        for _ in 0 ..< length {
+            let rand = arc4random_uniform(len)
+            var nextChar = letters.character(at: Int(rand))
+            randomString += NSString(characters: &nextChar, length: 1) as String
+        }
+        
+        return randomString
+    }
+    func sendVerificationSMS() {
+        let code = self.code
+        let userPN = phoneNumberTextField.text!
+        PFCloud.callFunction(inBackground: "sendVerifySMS",
+                                withParameters: ["userPN": userPN,
+                                                "code": code]) {
+                                                (res, error) in
+                                                if error == nil {
+                                                    print("TEXT SENT")
+                                                } else {
+                                                    print("TEXT FAILED")
+                                                }
+        }
+        
     }
     
     func label() -> UILabel {
