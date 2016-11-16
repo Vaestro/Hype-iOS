@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "THContactPickerView.h"
+#import <THContactPicker/THContactPickerView.h>
 
 @class THLGuestEntity;
 @class THLSearchViewDataSource;

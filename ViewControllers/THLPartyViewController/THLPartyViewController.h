@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ParseUI.h"
+#import <ParseUI/ParseUI.h>
 @class THLEvent;
 @class THLGuestlistInvite;
 

@@ -191,9 +191,9 @@
 -(void)handleViewCheckout {
     if (_guestlistInvite) {
         NSDictionary *paymentInfo = @{@"guestlistInviteId": _guestlistInvite.objectId};
-        [self.delegate eventDetailsWantsToPresentCheckoutForEvent:_event paymentInfo:paymentInfo];
+//        [self.delegate eventDetailsWantsToPresentCheckoutForEvent:_event paymentInfo:paymentInfo];
     } else {
-        [self.delegate eventDetailsWantsToPresentCheckoutForEvent:_event paymentInfo:nil];
+//        [self.delegate eventDetailsWantsToPresentCheckoutForEvent:_event paymentInfo:nil];
     }
 }
 
