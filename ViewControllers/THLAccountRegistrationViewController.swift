@@ -114,6 +114,8 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
         
         emailTextField = constructTextField()
         emailTextField.placeholder = "Email"
+        emailTextField.autocapitalizationType = UITextAutocapitalizationType.none
+
         if let email = userData?["email"] {
             emailTextField.text = email as! String
         }
@@ -213,6 +215,9 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
         if (userData == nil) {
             passwordTextField = constructTextField()
             passwordTextField.placeholder = "Password"
+            passwordTextField.isSecureTextEntry = true
+            passwordTextField.autocapitalizationType = UITextAutocapitalizationType.none
+            
             scrollView.addSubview(passwordTextField)
             passwordTextField.snp.makeConstraints { (make) -> Void in
                 make.top.equalTo(phoneNumberTextField.snp.bottom).offset(10)
@@ -305,7 +310,7 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
         let isFirstNameValid = firstNameTextField.text?.isEmpty == false
         let isLastNameValid = lastNameTextField.text?.isEmpty == false
         let isPhoneNumberValid = phoneNumberTextField.text?.isEmpty == false
-
+        
         if isFirstNameValid && isLastNameValid && self.checkGenderSelected() && self.validateEmailAddress() && isPhoneNumberValid {
             return true
         }

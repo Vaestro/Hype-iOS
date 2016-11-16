@@ -46,7 +46,7 @@ class THLSwiftLoginViewController: UIViewController, TTTAttributedLabelDelegate 
         
         passwordTextField = constructTextField()
         passwordTextField.placeholder = "Password"
-        
+        passwordTextField.isSecureTextEntry = true
         
         scrollView.addSubview(titleLabel)
         scrollView.addSubview(emailTextField)
@@ -124,7 +124,9 @@ class THLSwiftLoginViewController: UIViewController, TTTAttributedLabelDelegate 
     }
     
     func validateFields() -> Bool {
-        if passwordTextField.text?.isEmpty ?? false && self.validateEmailAddress() {
+        let isPasswordValid = (passwordTextField.text?.characters.count)! > 6
+        
+        if isPasswordValid == true && self.validateEmailAddress() {
             return true
         }
         else {
@@ -196,6 +198,8 @@ class THLSwiftLoginViewController: UIViewController, TTTAttributedLabelDelegate 
         textField.borderInactiveColor = UIColor.lightGray
         textField.borderActiveColor = UIColor.white
         textField.placeholderFontScale = 1.0
+        textField.autocapitalizationType = UITextAutocapitalizationType.none
+        
         
         return textField
     }
