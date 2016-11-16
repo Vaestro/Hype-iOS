@@ -327,7 +327,8 @@ import Parse
     }
     
     internal func userProfileViewControllerWantsToLogout() {
-        
+        self.logOutUser()
+
     }
     
     internal func userProfileViewControllerWantsToPresentPaymentViewController() {
@@ -391,6 +392,7 @@ import Parse
         
         FBSDKAccessToken.setCurrent(nil)
         THLChatSocketManager.sharedInstance.closeConnection()
+        window.rootViewController = welcomeView
         //    [_dependencyManager.databaseManager dropDB];
     }
 }

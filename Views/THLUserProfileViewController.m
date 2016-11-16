@@ -74,7 +74,7 @@ STPPaymentCardTextFieldDelegate
                                              target:self
                                              action:@selector(dismiss)];
     
-    self.tableCellNames = @[@"Hype Concierge", @"Invite Friends",@"Redeem Code", @"Payment Method", @"Privacy Policy", @"Terms & Conditions", @"Contact Us", @"Logout"];
+    self.tableCellNames = @[@"Invite Friends",@"Redeem Code", @"Payment Method", @"Privacy Policy", @"Terms & Conditions", @"Contact Us", @"Logout"];
     
     _tableView = [self newTableView];
     self.view.backgroundColor = kTHLNUIPrimaryBackgroundColor;
