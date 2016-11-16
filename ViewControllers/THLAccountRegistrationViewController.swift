@@ -417,8 +417,14 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
         // (e.g., when your app launches).
         mixpanel.identify(mixpanel.distinctId)
 
-        mixpanel.registerSuperPropertiesOnce(["Gender": (user?.sex == THLSex.male) ? "Male" : "Female"])
-        mixpanel.people.set(["$first_name": user?.firstName, "$last_name": user?.lastName, "$email": user?.email, "$phone": user?.phoneNumber!, "$created": user?.createdAt, "Gender": (user?.sex == THLSex.male) ? "Male" : "Female"])
+        let firstName = user!.firstName as String
+        let lastName = user!.lastName as String
+        let email = user!.email! as String
+        let phone = user!.phoneNumber as String
+        let createdAt = user!.createdAt! as Date
+        let gender = (user?.sex == THLSex.male) ? "Male" : "Female"
+        mixpanel.registerSuperPropertiesOnce(["Gender": gender])
+        mixpanel.people.set(["$first_name": firstName, "$last_name": lastName, "$email": email, "$phone": phone, "$created": createdAt, "Gender": gender])
         mixpanel.track("completed registration")
     }
     
