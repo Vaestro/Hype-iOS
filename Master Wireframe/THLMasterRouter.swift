@@ -45,7 +45,8 @@ import Parse
     func welcomeViewWantsToPresentLoginView() {
         let loginView = THLSwiftLoginViewController()
         loginView.delegate = self
-        window.rootViewController!.navigationController?.pushViewController(loginView, animated: true)
+        let navigationController = (window.rootViewController as! UINavigationController)
+        navigationController.pushViewController(loginView, animated: true)
     }
     
     func welcomeViewDidConnectWithFacebookAndReceivedUserData(userData:[String:AnyObject]) {
@@ -60,7 +61,8 @@ import Parse
     
     func presentAccountRegistrationView(userData:[String:AnyObject]) {
         let accountRegistrationViewController = THLAccountRegistrationViewController(userData)
-        window.rootViewController!.navigationController?.pushViewController(accountRegistrationViewController, animated: true)
+        let navigationController = (window.rootViewController as! UINavigationController)
+        navigationController.pushViewController(accountRegistrationViewController, animated: true)
     }
     
     // MARK: Account Registration View Controller Delegate
@@ -71,7 +73,8 @@ import Parse
     // MARK: Login View Controller Delegate
     func loginViewWantsToPresentAccountRegistration() {
         let accountRegistrationViewController = THLAccountRegistrationViewController(nil)
-        window.rootViewController!.navigationController?.pushViewController(accountRegistrationViewController, animated: true)
+        let navigationController = (window.rootViewController as! UINavigationController)
+        navigationController.pushViewController(accountRegistrationViewController, animated: true)
     }
     
     func loginViewDidLoginAndWantsToPresentGuestInterface() {
