@@ -14,13 +14,10 @@ import Parse
 @objc class THLMasterRouter: NSObject, THLWelcomeViewDelegate, THLAccountRegistrationViewControllerDelegate, THLSwiftLoginViewControllerDelegate, THLEventDiscoveryViewControllerDelegate, THLVenueDiscoveryViewControllerDelegate, THLGuestProfileViewControllerDelegate, THLEventDetailsViewControllerDelegate, THLSwiftAdmissionsViewControllerDelegate, THLPartyViewControllerDelegate, THLCheckoutViewControllerDelegate, THLTablePackageControllerDelegate, EPPickerDelegate {
 
     var window: UIWindow
-    var welcomeView: THLWelcomeViewController
     var guestMainTabBarController = UITabBarController()
     
     override init() {
         self.window = UIWindow()
-        self.welcomeView = THLWelcomeViewController()
-
         super.init()
     }
     
@@ -36,7 +33,8 @@ import Parse
     
     // MARK: Welcome View Controller
     func presentWelcomeView() {
-        self.welcomeView.delegate = self
+        let welcomeView = THLWelcomeViewController()
+        welcomeView.delegate = self
         let onboardingNavigationController = UINavigationController()
         onboardingNavigationController.addChildViewController(welcomeView)
         self.window.rootViewController = onboardingNavigationController
@@ -47,7 +45,7 @@ import Parse
     func welcomeViewWantsToPresentLoginView() {
         let loginView = THLSwiftLoginViewController()
         loginView.delegate = self
-        welcomeView.navigationController?.pushViewController(loginView, animated: true)
+        window.rootViewController!.navigationController?.pushViewController(loginView, animated: true)
     }
     
     func welcomeViewDidConnectWithFacebookAndReceivedUserData(userData:[String:AnyObject]) {
@@ -62,7 +60,7 @@ import Parse
     
     func presentAccountRegistrationView(userData:[String:AnyObject]) {
         let accountRegistrationViewController = THLAccountRegistrationViewController(userData)
-        welcomeView.navigationController?.pushViewController(accountRegistrationViewController, animated: true)
+        window.rootViewController!.navigationController?.pushViewController(accountRegistrationViewController, animated: true)
     }
     
     // MARK: Account Registration View Controller Delegate
@@ -73,7 +71,7 @@ import Parse
     // MARK: Login View Controller Delegate
     func loginViewWantsToPresentAccountRegistration() {
         let accountRegistrationViewController = THLAccountRegistrationViewController(nil)
-        welcomeView.navigationController?.pushViewController(accountRegistrationViewController, animated: true)
+        window.rootViewController!.navigationController?.pushViewController(accountRegistrationViewController, animated: true)
     }
     
     func loginViewDidLoginAndWantsToPresentGuestInterface() {
@@ -390,6 +388,7 @@ import Parse
         
         FBSDKAccessToken.setCurrent(nil)
         THLChatSocketManager.sharedInstance.closeConnection()
+        let welcomeView = THLWelcomeViewController()
         window.rootViewController = welcomeView
         //    [_dependencyManager.databaseManager dropDB];
     }
