@@ -85,6 +85,8 @@ import Parse
     }
     
     func presentGuestInterface() {
+        // Connect to chat server socket first
+        THLChatSocketManager.sharedInstance.establishConnection()
         guestMainTabBarController = UITabBarController()
         let eventDiscoveryView = THLEventDiscoveryViewController(className: "Event")
         let venueDiscoveryView = THLVenueDiscoveryViewController(className: "Location")

@@ -28,7 +28,7 @@ pod 'PopupDialog', '~> 0.5'
 pod 'Kingfisher'
 pod "TextFieldEffects"
 pod 'PhoneNumberKit', '~> 1.0'
-
+pod 'MRCountryPicker', '~> 0.0.5'
 #Debugging
 pod 'FLEX', '~> 2.0', :configurations => ['Debug']
 pod 'Reveal-iOS-SDK', :configurations => ['Debug']

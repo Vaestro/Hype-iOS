@@ -14,12 +14,13 @@ import PhoneNumberKit
 import Parse
 import Mixpanel
 import Branch
+import MRCountryPicker
 
 protocol THLAccountRegistrationViewControllerDelegate {
     func accountRegistrationViewDidCompleteRegistration()
 }
 
-class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVerificationViewControllerDelegate {
+class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVerificationViewControllerDelegate, MRCountryPickerDelegate {
     var delegate: THLAccountRegistrationViewControllerDelegate?
     
     var userData: [String:AnyObject]?
@@ -29,10 +30,11 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
     var emailTextField = UITextField()
     var phoneNumberTextField = UITextField()
     var passwordTextField = UITextField()
-    
+    var countryPicker =  MRCountryPicker()
     var maleRadioButton = UIButton()
     var femaleRadioButton = UIButton()
     var code = ""
+    var countryCode = "+1"
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -44,6 +46,9 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
     }
     
     override func viewDidLoad() {
+        
+       
+        
         view.backgroundColor = UIColor.black
 
         let backButton = UIBarButtonItem(image: UIImage(named:"back_button"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(backButtonTapped))
@@ -119,6 +124,10 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
         if let email = userData?["email"] {
             emailTextField.text = email as! String
         }
+        countryPicker.countryPickerDelegate = self
+        countryPicker.showPhoneNumbers = true
+        countryPicker.setCountry("US")
+        
         
         phoneNumberTextField = constructTextField()
         phoneNumberTextField.textColor = UIColor.gray
@@ -134,7 +143,7 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
         scrollView.addSubview(lastNameTextField)
         scrollView.addSubview(emailTextField)
         scrollView.addSubview(phoneNumberTextField)
-
+        scrollView.addSubview(countryPicker)
         scrollView.addSubview(genderRadioButtonLabel)
         scrollView.addSubview(maleTextButton)
         scrollView.addSubview(femaleTextButton)
@@ -205,13 +214,20 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
             make.height.equalTo(50)
         }
         
+        countryPicker.snp.makeConstraints { (make) -> Void in
+            make.top.equalTo(emailTextField.snp.bottom).offset(20)
+            make.left.equalTo(view.snp.left).offset(0)
+            make.right.equalTo(view.snp.right).offset(0)
+            make.height.equalTo(50)
+        }
+        
         phoneNumberTextField.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(emailTextField.snp.bottom).offset(10)
+            make.top.equalTo(countryPicker.snp.bottom).offset(0)
             make.left.equalTo(view.snp.left).offset(20)
             make.right.equalTo(view.snp.right).offset(-20)
             make.height.equalTo(50)
         }
-        
+       
         if (userData == nil) {
             passwordTextField = constructTextField()
             passwordTextField.placeholder = "Password"
@@ -377,7 +393,6 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
                 
             }
             THLUser.makeCurrentInstallation()
-            THLChatSocketManager.sharedInstance.establishConnection()
             self.delegate?.accountRegistrationViewDidCompleteRegistration()
         }
     }
@@ -402,7 +417,6 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
                 
             }
             THLUser.makeCurrentInstallation()
-            THLChatSocketManager.sharedInstance.establishConnection()
             self.delegate?.accountRegistrationViewDidCompleteRegistration()
         }
     }
@@ -450,7 +464,7 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
     }
     func sendVerificationSMS() {
         let code = self.code
-        let userPN = phoneNumberTextField.text!
+        let userPN = self.countryCode + phoneNumberTextField.text!
         PFCloud.callFunction(inBackground: "sendVerifySMS",
                                 withParameters: ["userPN": userPN,
                                                 "code": code]) {
@@ -462,6 +476,11 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
                                                 }
         }
         
+    }
+    
+    // a picker item was selected
+    func countryPhoneCodePicker(_ picker: MRCountryPicker, didSelectCountryWithName name: String, countryCode: String, phoneCode: String, flag: UIImage) {
+       self.countryCode = phoneCode
     }
     
     func label() -> UILabel {

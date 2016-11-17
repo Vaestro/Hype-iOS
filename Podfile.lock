@@ -101,6 +101,7 @@ PODS:
   - Mixpanel (3.0.6):
     - Mixpanel/Mixpanel (= 3.0.6)
   - Mixpanel/Mixpanel (3.0.6)
+  - MRCountryPicker (0.0.5)
   - NUI (0.5.5):
     - NUIParse
   - NUIParse (1.3)
@@ -231,6 +232,7 @@ DEPENDENCIES:
   - LMGeocoder
   - Masonry (~> 0.6)
   - Mixpanel
+  - MRCountryPicker (~> 0.0.5)
   - NUI (~> 0.5)
   - ObjectiveSugar
   - OCMock (= 3.1.2)
@@ -292,6 +294,7 @@ SPEC CHECKSUMS:
   LMGeocoder: 7682148ce0bc55e483ceaa0eefdae4494d7102be
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
   Mixpanel: c462992e6fe84d74a8d0408c0b25852ddd067e4b
+  MRCountryPicker: 0610c8a019b4f8bd2695d42607fde026a0082d90
   NUI: 53de7278003235deb2a375fe6f04c7a3aa3e49eb
   NUIParse: 2e3885ba7807477266396292626bd387d34c2338
   ObjectiveSugar: a6a25f23d657c19df0a0b972466d5b5ca9f5295c
@@ -321,6 +324,6 @@ SPEC CHECKSUMS:
   YapDatabase: b1e43555a34a5298e23a045be96817a5ef0da58f
   YLMoment: af44d9d402790049e5490fa6eae9585b89b4090b
 
-PODFILE CHECKSUM: 5d8e9aa9bd753ac429aaa3d726ffc72aae8005a7
+PODFILE CHECKSUM: c44d44abc6ad5bf5a23c65aac1702d720dd90f67
 
 COCOAPODS: 1.0.1
