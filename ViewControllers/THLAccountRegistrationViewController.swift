@@ -234,12 +234,24 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
             passwordTextField.isSecureTextEntry = true
             passwordTextField.autocapitalizationType = UITextAutocapitalizationType.none
             
+            let passwordLengthLabel = UILabel()
+            passwordLengthLabel.textColor = UIColor.gray
+            passwordLengthLabel.font = UIFont.systemFont(ofSize: 14.0)
+            passwordLengthLabel.textAlignment = .left
+            passwordLengthLabel.text = "Password must be at least 6 characters long"
+            scrollView.addSubview(passwordLengthLabel)
             scrollView.addSubview(passwordTextField)
             passwordTextField.snp.makeConstraints { (make) -> Void in
                 make.top.equalTo(phoneNumberTextField.snp.bottom).offset(10)
                 make.left.equalTo(view.snp.left).offset(20)
                 make.right.equalTo(view.snp.right).offset(-20)
                 make.height.equalTo(50)
+            }
+            passwordLengthLabel.snp.makeConstraints { (make) -> Void in
+                make.top.equalTo(passwordTextField.snp.bottom).offset(0)
+                make.left.equalTo(view.snp.left).offset(20)
+                make.right.equalTo(view.snp.right).offset(-20)
+                
             }
         }
         
@@ -289,7 +301,11 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
     }
     
     func handleContinueButtonTapped() {
-        validateFields() == true ? presentValidatePhoneNumberViewController() : presentErrorMessage("Error", message:"Please complete all fields")
+        if (userData == nil) {
+            validateFieldsForEmailUser() == true ? presentValidatePhoneNumberViewController() : presentErrorMessage("Error", message:"Please complete all fields")
+        } else {
+            validateFields() == true ? presentValidatePhoneNumberViewController() : presentErrorMessage("Error", message:"Please complete all fields")
+        }
     }
     
     func presentValidatePhoneNumberViewController() {
@@ -328,13 +344,30 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
         let isPhoneNumberValid = phoneNumberTextField.text?.isEmpty == false
         
         if isFirstNameValid && isLastNameValid && self.checkGenderSelected() && self.validateEmailAddress() && isPhoneNumberValid {
+            
             return true
         }
         else {
             return false
         }
     }
-    
+
+    func validateFieldsForEmailUser() -> Bool {
+        let isFirstNameValid = firstNameTextField.text?.isEmpty == false
+        let isLastNameValid = lastNameTextField.text?.isEmpty == false
+        let isPhoneNumberValid = phoneNumberTextField.text?.isEmpty == false
+        let password:String = passwordTextField.text!
+        let isPasswordValid = password.characters.count > 6
+
+        if isFirstNameValid && isLastNameValid && self.checkGenderSelected() && self.validateEmailAddress() && isPhoneNumberValid && isPasswordValid {
+            
+            return true
+        }
+        else {
+            return false
+        }
+    }
+
     func validateEmailAddress() -> Bool {
         if let email = emailTextField.text {
             return email.isValidEmailAddress()

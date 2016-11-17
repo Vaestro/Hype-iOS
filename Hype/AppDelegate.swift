@@ -11,22 +11,23 @@ import Fabric
 import Mixpanel
 import Branch
 
+#if DEBUG
+    let applicationId = "5t3F1S3wKnVGIKHob1Qj0Je3sygnFiwqAu6PP400"
+    let clientKeyId = "xn4Mces2HcFCQYXF2VRj4W1Ot0zIBELl6fHKLGPk"
+    let stripePublishableKey = "pk_test_cGZ7E1Im6VPKQHYUXIkR6sEe"
+    let mixpanelToken = "aa573c8ee35b386bff7635df03bdbf18"
+    let serverURL = "https://powerful-tundra-19716.herokuapp.com/parse/"
+#else
+    let stripePublishableKey = "pk_live_H8u89AfEDonln00iEUB0kKtZ"
+    let mixpanelToken = "2946053341530a84c490a107bd3e5fff"
+    let applicationId = "D0AnOPXqqfz7bfE70WvdlE8dK7Qj1kxgf4rPm8rX"
+    let clientKeyId = "deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq"
+#endif
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    #if DEBUG
-    var applicationId = "5t3F1S3wKnVGIKHob1Qj0Je3sygnFiwqAu6PP400"
-    var clientKeyId = "xn4Mces2HcFCQYXF2VRj4W1Ot0zIBELl6fHKLGPk"
-    var stripePublishableKey = "pk_test_cGZ7E1Im6VPKQHYUXIkR6sEe"
-    var mixpanelToken = "aa573c8ee35b386bff7635df03bdbf18"
-    var serverURL = "https://powerful-tundra-19716.herokuapp.com/parse/"
-    #else
-    var stripePublishableKey = "pk_live_H8u89AfEDonln00iEUB0kKtZ"
-    var mixpanelToken = "2946053341530a84c490a107bd3e5fff"
-    var applicationId = "D0AnOPXqqfz7bfE70WvdlE8dK7Qj1kxgf4rPm8rX"
-    var clientKeyId = "deljp8TeDlGAvlNeN58H7K3e3qJkQbDujkv3rpjq"
-    #endif
+
     
     var window: UIWindow?
     

@@ -18,7 +18,7 @@ protocol THLMyUpcomingEventsViewControllerDelegate: class {
 
 }
 
-class THLMyUpcomingEventsViewController: PFQueryTableViewController {
+class THLMyUpcomingEventsViewController: PFQueryTableViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
     // MARK: Init
     var delegate: THLMyUpcomingEventsViewControllerDelegate?
@@ -37,6 +37,9 @@ class THLMyUpcomingEventsViewController: PFQueryTableViewController {
         tableView?.register(THLMyEventsTableViewCell.self, forCellReuseIdentifier: "THLMyEventsTableViewCell")
         tableView?.separatorStyle = UITableViewCellSeparatorStyle.none
         tableView?.backgroundColor = UIColor.black
+        
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
     }
     
     // MARK: Data
@@ -116,4 +119,20 @@ extension THLMyUpcomingEventsViewController {
         return 125.0;//Choose your custom row height
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString {
+        let str = "No Upcoming Events"
+        let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)]
+        return NSAttributedString(string: str, attributes: attrs)
+    }
+    
+    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString {
+        let str = "Your upcoming tickets/reservations will show here"
+        let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)]
+        return NSAttributedString(string: str, attributes: attrs)
+    }
 }

@@ -121,7 +121,7 @@ class THLSwiftAdmissionsViewController: UIViewController, THLEventPickerViewCont
     override func viewDidLayoutSubviews() {
         self.eventPickerView.view.frame.size.height = 100.0
 
-        admissionOptionCollectionView.frame = CGRect(x: 0, y: 0 + eventPickerView.view.frame.size.height, width: self.view.frame.size.width, height: self.view.frame.size.height - eventPickerView.view.frame.size.height - 80.0)
+        admissionOptionCollectionView.frame = CGRect(x: 0, y: 0 + eventPickerView.view.frame.size.height, width: self.view.frame.size.width, height: self.view.frame.size.height)
 //        buttonBackground.frame = CGRect(x: 0, y: eventPickerView.view.frame.size.height + admissionOptionCollectionView.frame.size.height, width: view.frame.size.width, height: 80.0)
 //        separatorView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 0.5)
 //
