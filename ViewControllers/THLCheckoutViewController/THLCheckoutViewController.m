@@ -394,9 +394,9 @@ TTTAttributedLabelDelegate
                                         if (error) {
                                             [self displayError:[error localizedDescription]];
                                         } else {
-                                            Mixpanel *mixpanel = [Mixpanel sharedInstance];
-                                            [mixpanel track:@"Reserved a Table"];
-                                            [mixpanel.people increment:@"tables reserved" by:@1];
+//                                            Mixpanel *mixpanel = [Mixpanel sharedInstance];
+//                                            [mixpanel track:@"Reserved a Table"];
+//                                            [mixpanel.people increment:@"tables reserved" by:@1];
                                             
                                             [self pinGuestlistInviteForReservation];
                                         }
@@ -568,12 +568,12 @@ TTTAttributedLabelDelegate
                                             [_purchaseButton setEnabled:TRUE];
 
                                         } else {
-                                            Mixpanel *mixpanel = [Mixpanel sharedInstance];
-                                           [mixpanel track:@"Accepted invite and purchased ticket"];
-                                           [mixpanel.people increment:@"tickets purchased" by:@1];
-                                            [mixpanel.people trackCharge:[NSNumber numberWithFloat:_total] withProperties:@{
-                                                                                                                            @"$time": [NSDate date]
-                                                                                                                            }];
+//                                            Mixpanel *mixpanel = [Mixpanel sharedInstance];
+//                                           [mixpanel track:@"Accepted invite and purchased ticket"];
+//                                           [mixpanel.people increment:@"tickets purchased" by:@1];
+//                                            [mixpanel.people trackCharge:[NSNumber numberWithFloat:_total] withProperties:@{
+//                                                                                                                            @"$time": [NSDate date]
+//                                                                                                                            }];
                                             [[Branch getInstance] userCompletedAction:@"purchase" withState:@{@"$amount":NSStringWithFormat(@"%f", _total)}];
                                             if ([THLUser currentUser].sex == THLSexMale) {
                                                 [[Branch getInstance] userCompletedAction:@"maleTicketPurchase"];
@@ -610,12 +610,12 @@ TTTAttributedLabelDelegate
                                             [self displayError:[error localizedDescription]];
                                             [_purchaseButton setEnabled:TRUE];
                                         } else {
-                                            Mixpanel *mixpanel = [Mixpanel sharedInstance];
-                                            [mixpanel track:@"Purchased ticket"];
-                                            [mixpanel.people increment:@"tickets purchased" by:@1];
-                                            [mixpanel.people trackCharge:[NSNumber numberWithFloat:_total] withProperties:@{
-                                                                                              @"$time": [NSDate date]
-                                                                                              }];
+//                                            Mixpanel *mixpanel = [Mixpanel sharedInstance];
+//                                            [mixpanel track:@"Purchased ticket"];
+//                                            [mixpanel.people increment:@"tickets purchased" by:@1];
+//                                            [mixpanel.people trackCharge:[NSNumber numberWithFloat:_total] withProperties:@{
+//                                                                                              @"$time": [NSDate date]
+//                                                                                              }];
                                             [[Branch getInstance] userCompletedAction:@"purchase" withState:@{@"$amount":NSStringWithFormat(@"%f", _total)}];
                                             if ([THLUser currentUser].sex == THLSexMale) {
                                                 [[Branch getInstance] userCompletedAction:@"maleTicketPurchase"];

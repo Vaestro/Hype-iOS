@@ -98,9 +98,7 @@ PODS:
   - LinqToObjectiveC (2.1.0)
   - LMGeocoder (1.0.8)
   - Masonry (0.6.4)
-  - Mixpanel (3.0.6):
-    - Mixpanel/Mixpanel (= 3.0.6)
-  - Mixpanel/Mixpanel (3.0.6)
+  - Mixpanel-swift (2.1.0)
   - MRCountryPicker (0.0.5)
   - NUI (0.5.5):
     - NUIParse
@@ -231,7 +229,7 @@ DEPENDENCIES:
   - LinqToObjectiveC (~> 2.0)
   - LMGeocoder
   - Masonry (~> 0.6)
-  - Mixpanel
+  - Mixpanel-swift
   - MRCountryPicker (~> 0.0.5)
   - NUI (~> 0.5)
   - ObjectiveSugar
@@ -293,7 +291,7 @@ SPEC CHECKSUMS:
   LinqToObjectiveC: f0e40c137a458b6b9725c4c7b6a575c0c72e3aec
   LMGeocoder: 7682148ce0bc55e483ceaa0eefdae4494d7102be
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
-  Mixpanel: c462992e6fe84d74a8d0408c0b25852ddd067e4b
+  Mixpanel-swift: 8bd335e85ea645dd5eacc1bb61f4b418fb4998d7
   MRCountryPicker: 0610c8a019b4f8bd2695d42607fde026a0082d90
   NUI: 53de7278003235deb2a375fe6f04c7a3aa3e49eb
   NUIParse: 2e3885ba7807477266396292626bd387d34c2338
@@ -324,6 +322,6 @@ SPEC CHECKSUMS:
   YapDatabase: b1e43555a34a5298e23a045be96817a5ef0da58f
   YLMoment: af44d9d402790049e5490fa6eae9585b89b4090b
 
-PODFILE CHECKSUM: c44d44abc6ad5bf5a23c65aac1702d720dd90f67
+PODFILE CHECKSUM: aa96b782faafe18c2db9805ab8865e61142e980e
 
 COCOAPODS: 1.0.1

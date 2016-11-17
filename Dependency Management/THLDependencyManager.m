@@ -22,7 +22,7 @@
 #import "THLDataStore.h"
 
 //Services
-#import "THLLoginService.h"
+
 #import "THLEventService.h"
 #import "THLLocationService.h"
 #import "THLFacebookProfilePictureURLFetchService.h"
@@ -163,13 +163,6 @@
 	return _facebookProfilePictureURLFetchService;
 }
 
-- (THLLoginService *)loginService
-{
-	if (!_loginService) {
-		_loginService = [[THLLoginService alloc] init];
-	}
-	return _loginService;
-}
 
 - (THLLocationService *)locationService
 {

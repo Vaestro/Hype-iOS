@@ -33,7 +33,6 @@
 		217EBE881BB77ED7006044B6 /* THLEntity+DataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 217EBE871BB77ED7006044B6 /* THLEntity+DataStore.m */; };
 		217EBE8D1BB78AB4006044B6 /* THLYapDatabaseViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 217EBE8C1BB78AB4006044B6 /* THLYapDatabaseViewFactory.m */; };
 		217EBE941BB78F22006044B6 /* THLViewDataSourceFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 217EBE931BB78F22006044B6 /* THLViewDataSourceFactory.m */; };
-		217EBEA51BB7A106006044B6 /* THLLoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = 217EBEA41BB7A106006044B6 /* THLLoginService.m */; };
 		218AF3441BB7391B00AFAEBF /* THLEventService.m in Sources */ = {isa = PBXBuildFile; fileRef = 218AF3431BB7391B00AFAEBF /* THLEventService.m */; };
 		219E32A81B8EA63D00214C85 /* THLEventNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 219E32A71B8EA63D00214C85 /* THLEventNavigationBar.m */; };
 		21CCEDE21B87C62F0066CDAC /* THLYapDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CCEDE11B87C62F0066CDAC /* THLYapDatabaseManager.m */; };
@@ -98,13 +97,13 @@
 		795569C01DA70ECF006E4049 /* THLInquiryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795569BF1DA70ECF006E4049 /* THLInquiryTableViewCell.swift */; };
 		795569C21DA71403006E4049 /* THLInquiry.m in Sources */ = {isa = PBXBuildFile; fileRef = 795569C11DA71403006E4049 /* THLInquiry.m */; };
 		795569C51DA81BA4006E4049 /* THLInquiryMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795569C41DA81BA3006E4049 /* THLInquiryMenuViewController.swift */; };
-		795EF50E1D3E9B0700485B11 /* THLSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 795EF50D1D3E9B0700485B11 /* THLSignUpViewController.m */; };
 		7964645D1DAE95A000DA1F51 /* THLInquiryOffersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7964645C1DAE95A000DA1F51 /* THLInquiryOffersViewController.swift */; };
 		79651F581DD8F3870057AD63 /* THLPhoneNumberVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79651F571DD8F3870057AD63 /* THLPhoneNumberVerificationViewController.swift */; };
 		79651F5A1DD933DE0057AD63 /* THLSwiftLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79651F591DD933DE0057AD63 /* THLSwiftLoginViewController.swift */; };
 		796AD92B1D908D3E006DCEDA /* THLEventDiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796AD92A1D908D3E006DCEDA /* THLEventDiscoveryViewController.swift */; };
 		79730CF81C18B47000D70F4B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79730CF71C18B47000D70F4B /* MessageUI.framework */; };
 		79752ADE1BEBD8B500D09B2E /* THLConfirmationPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 79752ADD1BEBD8B500D09B2E /* THLConfirmationPopupView.m */; };
+		797D7EC01DDD12F700D6C426 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797D7EBF1DDD12F700D6C426 /* AppDelegate.swift */; };
 		797DB4881DD5126E00C772C7 /* THLAccountRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797DB4871DD5126E00C772C7 /* THLAccountRegistrationViewController.swift */; };
 		798402D41D217157006F463B /* THLEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 798402D31D217157006F463B /* THLEntity.m */; };
 		798402D71D2171A9006F463B /* THLEntityMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 798402D61D2171A9006F463B /* THLEntityMapper.m */; };
@@ -145,7 +144,6 @@
 		79BB15331C6CED740044D943 /* THLFxTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BB15321C6CED720044D943 /* THLFxTitleLabel.m */; };
 		79C422871D07F6B5005A02FA /* Cancellation Policy.txt in Resources */ = {isa = PBXBuildFile; fileRef = 79C422861D07F6B5005A02FA /* Cancellation Policy.txt */; };
 		79CCD5C51DD00F4500F79B9F /* THLDiscoveryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CCD5C41DD00F4500F79B9F /* THLDiscoveryCell.m */; };
-		79CD27E41C520293009BC119 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CD27BE1C520293009BC119 /* AppDelegate.m */; };
 		79CD27E51C520293009BC119 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27BF1C520293009BC119 /* LaunchScreen.xib */; };
 		79CD27E61C520293009BC119 /* Hype.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27C31C520293009BC119 /* Hype.strings */; };
 		79CD27E81C520293009BC119 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27C61C520293009BC119 /* Images.xcassets */; };
@@ -170,7 +168,6 @@
 		79CD27FB1C520293009BC119 /* Raleway-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27DA1C520293009BC119 /* Raleway-ThinItalic.ttf */; };
 		79CD27FC1C520293009BC119 /* Terms of Use.txt in Resources */ = {isa = PBXBuildFile; fileRef = 79CD27DB1C520293009BC119 /* Terms of Use.txt */; };
 		79CD27FD1C520293009BC119 /* THLResourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CD27DD1C520293009BC119 /* THLResourceManager.m */; };
-		79CD27FF1C520293009BC119 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CD27E01C520293009BC119 /* main.m */; };
 		79CD28031C5202A0009BC119 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79CD28021C5202A0009BC119 /* Info.plist */; };
 		79CE315A1CF7B03F00CEA784 /* THLEventTicketViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CE31591CF7B03F00CEA784 /* THLEventTicketViewController.m */; };
 		79CEDF3B1D23213400DFB654 /* THLEventPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CEDF3A1D23213400DFB654 /* THLEventPickerViewController.swift */; };
@@ -281,9 +278,6 @@
 		217EBE921BB78F22006044B6 /* THLViewDataSourceFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLViewDataSourceFactory.h; sourceTree = "<group>"; };
 		217EBE931BB78F22006044B6 /* THLViewDataSourceFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLViewDataSourceFactory.m; sourceTree = "<group>"; };
 		217EBEA11BB79953006044B6 /* THLViewDataSource_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLViewDataSource_Private.h; sourceTree = "<group>"; };
-		217EBEA31BB7A106006044B6 /* THLLoginService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLLoginService.h; sourceTree = "<group>"; };
-		217EBEA41BB7A106006044B6 /* THLLoginService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLLoginService.m; sourceTree = "<group>"; };
-		217EBEA61BB7A114006044B6 /* THLLoginServiceInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLLoginServiceInterface.h; sourceTree = "<group>"; };
 		218AF3421BB7391B00AFAEBF /* THLEventService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventService.h; sourceTree = "<group>"; };
 		218AF3431BB7391B00AFAEBF /* THLEventService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventService.m; sourceTree = "<group>"; };
 		218AF3451BB7393400AFAEBF /* THLEventServiceInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventServiceInterface.h; sourceTree = "<group>"; };
@@ -395,8 +389,6 @@
 		795569C11DA71403006E4049 /* THLInquiry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLInquiry.m; sourceTree = "<group>"; };
 		795569C31DA7140F006E4049 /* THLInquiry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLInquiry.h; sourceTree = "<group>"; };
 		795569C41DA81BA3006E4049 /* THLInquiryMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLInquiryMenuViewController.swift; sourceTree = "<group>"; };
-		795EF50D1D3E9B0700485B11 /* THLSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLSignUpViewController.m; sourceTree = "<group>"; };
-		795EF50F1D3E9B1900485B11 /* THLSignUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLSignUpViewController.h; sourceTree = "<group>"; };
 		7964645C1DAE95A000DA1F51 /* THLInquiryOffersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLInquiryOffersViewController.swift; sourceTree = "<group>"; };
 		79651F571DD8F3870057AD63 /* THLPhoneNumberVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLPhoneNumberVerificationViewController.swift; sourceTree = "<group>"; };
 		79651F591DD933DE0057AD63 /* THLSwiftLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLSwiftLoginViewController.swift; sourceTree = "<group>"; };
@@ -404,6 +396,7 @@
 		79730CF71C18B47000D70F4B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		79752ADC1BEBD8B500D09B2E /* THLConfirmationPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLConfirmationPopupView.h; sourceTree = "<group>"; };
 		79752ADD1BEBD8B500D09B2E /* THLConfirmationPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLConfirmationPopupView.m; sourceTree = "<group>"; };
+		797D7EBF1DDD12F700D6C426 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		797DB4871DD5126E00C772C7 /* THLAccountRegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLAccountRegistrationViewController.swift; sourceTree = "<group>"; };
 		798402D21D217157006F463B /* THLEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEntity.h; sourceTree = "<group>"; };
 		798402D31D217157006F463B /* THLEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEntity.m; sourceTree = "<group>"; };
@@ -470,8 +463,6 @@
 		79C422861D07F6B5005A02FA /* Cancellation Policy.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Cancellation Policy.txt"; sourceTree = "<group>"; };
 		79CCD5C31DD00F4500F79B9F /* THLDiscoveryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLDiscoveryCell.h; sourceTree = "<group>"; };
 		79CCD5C41DD00F4500F79B9F /* THLDiscoveryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLDiscoveryCell.m; sourceTree = "<group>"; };
-		79CD27BD1C520293009BC119 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		79CD27BE1C520293009BC119 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		79CD27C01C520293009BC119 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		79CD27C11C520293009BC119 /* CommonMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonMacros.h; sourceTree = "<group>"; };
 		79CD27C21C520293009BC119 /* Hype-PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Hype-PrefixHeader.pch"; sourceTree = "<group>"; };
@@ -500,7 +491,6 @@
 		79CD27DC1C520293009BC119 /* THLResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLResourceManager.h; sourceTree = "<group>"; };
 		79CD27DD1C520293009BC119 /* THLResourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLResourceManager.m; sourceTree = "<group>"; };
 		79CD27DF1C520293009BC119 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		79CD27E01C520293009BC119 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		79CD27E11C520293009BC119 /* THLConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLConstants.h; sourceTree = "<group>"; };
 		79CD27E21C520293009BC119 /* THLStylingConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLStylingConstants.h; sourceTree = "<group>"; };
 		79CD27E31C520293009BC119 /* THLTweaksConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLTweaksConstants.h; sourceTree = "<group>"; };
@@ -678,7 +668,6 @@
 			isa = PBXGroup;
 			children = (
 				21937F2D1BB5D0F2005E949E /* Model Services */,
-				217EBEA21BB7A0F2006044B6 /* Login */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -894,16 +883,6 @@
 				217EBE911BB78F16006044B6 /* THLViewDataSourceFactoryInterface.h */,
 			);
 			path = THLViewDataSourceFactory;
-			sourceTree = "<group>";
-		};
-		217EBEA21BB7A0F2006044B6 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				217EBEA31BB7A106006044B6 /* THLLoginService.h */,
-				217EBEA41BB7A106006044B6 /* THLLoginService.m */,
-				217EBEA61BB7A114006044B6 /* THLLoginServiceInterface.h */,
-			);
-			path = Login;
 			sourceTree = "<group>";
 		};
 		218AF3411BB7390E00AFAEBF /* THLEventService */ = {
@@ -1272,13 +1251,11 @@
 				7917C0F01D1B3C2E0054BDB0 /* THLVenueDiscoveryViewController.m */,
 				796AD92A1D908D3E006DCEDA /* THLEventDiscoveryViewController.swift */,
 				FF2741A01DA21D5A0001C117 /* THLChatViewController.swift */,
-				795EF50F1D3E9B1900485B11 /* THLSignUpViewController.h */,
 				79F462D21DA6AAA0004BB49C /* THLHostDashboardViewController.swift */,
 				7964645C1DAE95A000DA1F51 /* THLInquiryOffersViewController.swift */,
 				795569BD1DA6B8D8006E4049 /* THLAvailableInquiriesViewController.swift */,
 				795569C41DA81BA3006E4049 /* THLInquiryMenuViewController.swift */,
 				79E945B81DBA911E00EC753D /* THLMyEventsTableViewCell.swift */,
-				795EF50D1D3E9B0700485B11 /* THLSignUpViewController.m */,
 				799831191D4B9E5900BB5BFE /* THLReservationRequestViewController.h */,
 				792CFFB01DA874B2009E7C7E /* THLGuestlistTableViewController.swift */,
 				792BB4D01DB1507900B673B8 /* THLInquiryOfferDetailsView.swift */,
@@ -1506,8 +1483,7 @@
 			children = (
 				79CD27C41C520293009BC119 /* Resources */,
 				79CD27DE1C520293009BC119 /* Supporting Files */,
-				79CD27BD1C520293009BC119 /* AppDelegate.h */,
-				79CD27BE1C520293009BC119 /* AppDelegate.m */,
+				797D7EBF1DDD12F700D6C426 /* AppDelegate.swift */,
 				79CD27C11C520293009BC119 /* CommonMacros.h */,
 				79CD27C21C520293009BC119 /* Hype-PrefixHeader.pch */,
 				59B1B5461C74703F00F94DBF /* Hype.entitlements */,
@@ -1565,7 +1541,6 @@
 			isa = PBXGroup;
 			children = (
 				79CD27DF1C520293009BC119 /* Info.plist */,
-				79CD27E01C520293009BC119 /* main.m */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -2198,10 +2173,8 @@
 				79F462D11DA6A6E6004BB49C /* CAPSPageMenu.swift in Sources */,
 				216BDD581BC71F1800BBF713 /* THLSearchViewDataSource.m in Sources */,
 				C88A01561D04A44200152B37 /* THLCollectionReusableView.m in Sources */,
-				79CD27E41C520293009BC119 /* AppDelegate.m in Sources */,
 				79319DD41D9AED88000DEE69 /* EPConstants.swift in Sources */,
 				7928ADA91D19C9E200DFC443 /* THLUserProfileFooterView.m in Sources */,
-				217EBEA51BB7A106006044B6 /* THLLoginService.m in Sources */,
 				7928ADAD1D19CA0D00DFC443 /* THLPerkDetailViewController.m in Sources */,
 				217EBE941BB78F22006044B6 /* THLViewDataSourceFactory.m in Sources */,
 				794483041BEC5B5D00EABE23 /* THLStatusView.m in Sources */,
@@ -2218,7 +2191,6 @@
 				794DCCB51BF555020037A03D /* FXBlurView.m in Sources */,
 				794208281BD82641009B86FA /* UIView+DimView.m in Sources */,
 				7928AD981D19C88E00DFC443 /* THLUserProfileViewController.m in Sources */,
-				795EF50E1D3E9B0700485B11 /* THLSignUpViewController.m in Sources */,
 				C8D1D2A41CD3E864006ADC6A /* THLPaymentViewController.m in Sources */,
 				79CEDF3F1D257A6700DFB654 /* UIColorExtensions.swift in Sources */,
 				79B59F061D5E78CB00E374A4 /* THLHypeConciergeInfoView.m in Sources */,
@@ -2231,6 +2203,7 @@
 				C8F2FB2A1BF826B7004E00B6 /* THLWebViewController.m in Sources */,
 				79B062BD1CF909F300A3DC50 /* THLPartyNavigationController.m in Sources */,
 				794FAB671C5F17F400438D49 /* THLActionButton.m in Sources */,
+				797D7EC01DDD12F700D6C426 /* AppDelegate.swift in Sources */,
 				79CCD5C51DD00F4500F79B9F /* THLDiscoveryCell.m in Sources */,
 				797DB4881DD5126E00C772C7 /* THLAccountRegistrationViewController.swift in Sources */,
 				79E945B71DBA7ED900EC753D /* THLMyUpcomingEventsViewController.swift in Sources */,
@@ -2272,7 +2245,6 @@
 				7928AD861D19C79300DFC443 /* THLParseQueryFactory.m in Sources */,
 				79BB15301C657FF50044D943 /* THLSingleLineTextField.m in Sources */,
 				FF3541831DC9670C004DD268 /* THLProfilePicChooserViewController.swift in Sources */,
-				79CD27FF1C520293009BC119 /* main.m in Sources */,
 				798402D71D2171A9006F463B /* THLEntityMapper.m in Sources */,
 				21775F361B8CF72B00609D39 /* THLTitledContentView.m in Sources */,
 				79651F5A1DD933DE0057AD63 /* THLSwiftLoginViewController.swift in Sources */,

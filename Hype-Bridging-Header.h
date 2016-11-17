@@ -14,7 +14,6 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "Intercom/intercom.h"
-#import <Mixpanel/Mixpanel.h>
 #import <Branch/Branch.h>
 #import <Branch/BranchUniversalObject.h>
 #import <Branch/BranchLinkProperties.h>
@@ -29,6 +28,7 @@
 #import "NSDate+Utilities.h"
 #import "NSString+EmailAddresses.h"
 #import <SVProgressHUD/SVProgressHUD.h>
+#import "THLAppearanceUtils.h"
 
 #import <BLKFlexibleHeightBar/BLKFlexibleHeightBarSubviewLayoutAttributes.h>
 #import <BLKFlexibleHeightBar/SquareCashStyleBehaviorDefiner.h>

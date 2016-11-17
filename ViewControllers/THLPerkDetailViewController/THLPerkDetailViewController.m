@@ -158,9 +158,9 @@ THLConfirmationViewDelegate
                                                              @"perk_store_item": _perk[@"name"]
                                                              }];
     THLPerkStoreItem *perk = (THLPerkStoreItem *)_perk;
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel track:@"Redeemed perk" properties:@{@"Perk Name": NSStringWithFormat(@"%@", perk.name)}];
-    [mixpanel.people increment:@"perks redeemed" by:@1];
+//    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+//    [mixpanel track:@"Redeemed perk" properties:@{@"Perk Name": NSStringWithFormat(@"%@", perk.name)}];
+//    [mixpanel.people increment:@"perks redeemed" by:@1];
     
     [self.confirmationView setSuccessWithTitle:@"Perk Redeemed"
                                        Message:[NSString stringWithFormat:@"You have successfully redeemed your credits for %i. Check your email for further instructions.", perk.credits]];

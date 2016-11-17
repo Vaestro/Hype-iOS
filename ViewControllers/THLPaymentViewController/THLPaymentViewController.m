@@ -259,8 +259,8 @@ STPAddCardViewControllerDelegate
                                                                                                 if (cloudError) {
                                                                                                     [self displayError:cloudError];
                                                                                                 } else {
-                                                                                                    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-                                                                                                    [mixpanel track:@"Payment Method Deleted"];
+//                                                                                                    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+//                                                                                                    [mixpanel track:@"Payment Method Deleted"];
                                                                                                     
                                                                                                     [[THLUser currentUser] fetchInBackgroundWithBlock:^(PFObject *user, NSError * _Nullable userError) {
                                                                                                        [self updateLayoutForAddPayment];

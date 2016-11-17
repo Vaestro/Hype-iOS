@@ -17,7 +17,7 @@
 #import "THLUserManager.h"
 #import "Intercom/intercom.h"
 #import "Branch.h"
-#import "Mixpanel.h"
+
 #import "THLUser.h"
 #import "THLDataStore.h"
 #import "THLGuestEntity.h"
@@ -42,7 +42,6 @@
 #import "THLTablePackageDetailsViewController.h"
 
 #import "THLPopupNotificationView.h"
-#import "THLLoginService.h"
 #import "THLVenueDiscoveryViewController.h"
 
 #import "Hype-Swift.h"
@@ -99,11 +98,11 @@ THLEventDiscoveryViewControllerDelegate
 {
     [THLUserManager makeCurrentInstallation];
 
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel identify:[THLUser user].objectId];
-    
-    [[_dependencyManager loginService] createMixpanelPeopleProfile];
-    
+//    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+//    [mixpanel identify:[THLUser user].objectId];
+//    
+//    [[_dependencyManager loginService] createMixpanelPeopleProfile];
+//    
     [Intercom registerUserWithUserId:[THLUser currentUser].objectId];
     [Intercom updateUserWithAttributes:@{@"email": [THLUser currentUser].email,
                                          @"name": [THLUser currentUser].fullName

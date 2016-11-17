@@ -18,7 +18,7 @@ pod 'AutoCoding', '~> 2.2'
 pod 'SDWebImage', '~> 3.7'
 pod 'FormatterKit', '~> 1.8'
 pod 'Typhoon', '~> 3.3'
-pod 'Mixpanel'
+pod 'Mixpanel-swift'
 pod 'Socket.IO-Client-Swift'
 
 #SWIFT
