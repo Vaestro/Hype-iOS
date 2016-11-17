@@ -123,8 +123,8 @@ class THLWelcomeViewController: UIViewController {
     }
     
     func handleFacebookConnect() {
-        let mixpanel = Mixpanel.sharedInstance()
-        mixpanel.track("Touched facebook signup button")
+        let mixpanel = Mixpanel.mainInstance()
+        mixpanel.track(event:"Touched facebook signup button")
         
         PFFacebookUtils.logInInBackground(withReadPermissions: ["public_profile", "user_photos","email", "user_friends"], block: {(user: PFUser?, error: Error?) -> Void in
             if let user = user {

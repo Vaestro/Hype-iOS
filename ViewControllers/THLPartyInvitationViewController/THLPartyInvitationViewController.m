@@ -372,22 +372,22 @@ viewDataSourceFactory:(THLViewDataSourceFactory *)viewDataSourceFactory
     if (!_addedGuests || !_addedGuests.count) {
         [[self getOwnerInviteForEvent] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *fetchTask) {
             [self.delegate partyInvitationViewControllerDidSkipSendingInvitesAndWantsToShowTicket:fetchTask.result];
-            Mixpanel *mixpanel = [Mixpanel sharedInstance];
-            [mixpanel track:@"Guestlist Submitted" properties:@{
-                                                                @"Number Of Invites": NSStringWithFormat(@"%lu", (unsigned long)_addedGuests.count)
-                                                                }];
-            [mixpanel.people increment:@"guestlist invites sent" by: [NSNumber numberWithUnsignedInteger:_addedGuests.count]];
+//            Mixpanel *mixpanel = [Mixpanel sharedInstance];
+//            [mixpanel track:@"Guestlist Submitted" properties:@{
+//                                                                @"Number Of Invites": NSStringWithFormat(@"%lu", (unsigned long)_addedGuests.count)
+//                                                                }];
+//            [mixpanel.people increment:@"guestlist invites sent" by: [NSNumber numberWithUnsignedInteger:_addedGuests.count]];
             return nil;
         }];
     } else {
         [[self submitInvites:[self obtainDigits:_addedGuests] forGuestlist:_guestlistId atEvent:_event] continueWithSuccessBlock:^id(BFTask *task) {
             [[self getOwnerInviteForEvent] continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:^id(BFTask *fetchTask) {
                 [self.delegate partyInvitationViewControllerDidSubmitInvitesAndWantsToShowTicket:fetchTask.result];
-                Mixpanel *mixpanel = [Mixpanel sharedInstance];
-                [mixpanel track:@"Guestlist Submitted" properties:@{
-                                                                    @"Number Of Invites": NSStringWithFormat(@"%lu", (unsigned long)_addedGuests.count)
-                                                                    }];
-                [mixpanel.people increment:@"guestlist invites sent" by: [NSNumber numberWithUnsignedInteger:_addedGuests.count]];
+//                Mixpanel *mixpanel = [Mixpanel sharedInstance];
+//                [mixpanel track:@"Guestlist Submitted" properties:@{
+//                                                                    @"Number Of Invites": NSStringWithFormat(@"%lu", (unsigned long)_addedGuests.count)
+//                                                                    }];
+//                [mixpanel.people increment:@"guestlist invites sent" by: [NSNumber numberWithUnsignedInteger:_addedGuests.count]];
                 return nil;
             }];
         return nil;

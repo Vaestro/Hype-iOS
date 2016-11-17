@@ -393,29 +393,32 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
         newUser.phoneNumber = phoneNumberTextField.text
         newUser.type = THLUserType.guest
         newUser.signUpInBackground{(success,error) in
-            self.createMixpanelAlias()
-            self.setupBranch()
-            do {
-                try PFCloud.callFunction("assignGuestToGuestlistInvite", withParameters: nil)
-                
-            } catch {
-                
+            if success {
+                self.createMixpanelAlias()
+                self.setupBranch()
+                do {
+                    try PFCloud.callFunction("assignGuestToGuestlistInvite", withParameters: nil)
+                    
+                } catch {
+                    
+                }
+                THLUser.makeCurrentInstallation()
+                THLChatSocketManager.sharedInstance.establishConnection()
+                self.delegate?.accountRegistrationViewDidCompleteRegistration()
             }
-            THLUser.makeCurrentInstallation()
-            THLChatSocketManager.sharedInstance.establishConnection()
-            self.delegate?.accountRegistrationViewDidCompleteRegistration()
+       
         }
     }
     
     func createMixpanelAlias() {
-        let mixpanel = Mixpanel.sharedInstance()
+        let mixpanel = Mixpanel.mainInstance()
         let user = THLUser.current()
         // mixpanel identify: must be called before
         // people properties can be set
-        mixpanel.createAlias((user?.objectId)!, forDistinctID: mixpanel.distinctId)
+        mixpanel.createAlias((user?.objectId)!, distinctId: mixpanel.distinctId)
         // You must call identify if you haven't already
         // (e.g., when your app launches).
-        mixpanel.identify(mixpanel.distinctId)
+        mixpanel.identify(distinctId: mixpanel.distinctId)
 
         let firstName = user!.firstName as String
         let lastName = user!.lastName as String
@@ -424,8 +427,8 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
         let createdAt = user!.createdAt! as Date
         let gender = (user?.sex == THLSex.male) ? "Male" : "Female"
         mixpanel.registerSuperPropertiesOnce(["Gender": gender])
-        mixpanel.people.set(["$first_name": firstName, "$last_name": lastName, "$email": email, "$phone": phone, "$created": createdAt, "Gender": gender])
-        mixpanel.track("completed registration")
+        mixpanel.people.set(properties: ["$first_name": firstName, "$last_name": lastName, "$email": email, "$phone": phone, "$created": createdAt, "Gender": gender])
+        mixpanel.track(event: "completed registration")
     }
     
     func setupBranch() {

@@ -14,7 +14,6 @@ import Parse
 @objc class THLMasterRouter: NSObject, THLWelcomeViewDelegate, THLAccountRegistrationViewControllerDelegate, THLSwiftLoginViewControllerDelegate, THLEventDiscoveryViewControllerDelegate, THLVenueDiscoveryViewControllerDelegate, THLGuestProfileViewControllerDelegate, THLEventDetailsViewControllerDelegate, THLSwiftAdmissionsViewControllerDelegate, THLPartyViewControllerDelegate, THLCheckoutViewControllerDelegate, THLTablePackageControllerDelegate, EPPickerDelegate {
 
     var window: UIWindow
-    var guestMainTabBarController = UITabBarController()
     
     override init() {
         self.window = UIWindow()
@@ -61,6 +60,7 @@ import Parse
     
     func presentAccountRegistrationView(userData:[String:AnyObject]) {
         let accountRegistrationViewController = THLAccountRegistrationViewController(userData)
+        accountRegistrationViewController.delegate = self
         let navigationController = (window.rootViewController as! UINavigationController)
         navigationController.pushViewController(accountRegistrationViewController, animated: true)
     }
@@ -76,6 +76,7 @@ import Parse
     // MARK: Login View Controller Delegate
     func loginViewWantsToPresentAccountRegistration() {
         let accountRegistrationViewController = THLAccountRegistrationViewController(nil)
+        accountRegistrationViewController.delegate = self
         let navigationController = (window.rootViewController as! UINavigationController)
         navigationController.pushViewController(accountRegistrationViewController, animated: true)
     }
@@ -85,7 +86,7 @@ import Parse
     }
     
     func presentGuestInterface() {
-        guestMainTabBarController = UITabBarController()
+        let guestMainTabBarController = UITabBarController()
         let eventDiscoveryView = THLEventDiscoveryViewController(className: "Event")
         let venueDiscoveryView = THLVenueDiscoveryViewController(className: "Location")
         let discoveryNavigationController = UINavigationController()
@@ -158,7 +159,8 @@ import Parse
                 self.presentPartyNavigationControllerforTicket(invite: guestlistInvite)
 //            }
         })
-        guestMainTabBarController.selectedIndex = 2
+        let tabBarController = window.rootViewController as! UITabBarController
+        tabBarController.selectedIndex = 2
     }
     
     // MARK: Admissions View Controller Delegate
@@ -258,8 +260,10 @@ import Parse
         partyNavigationController?.partyVC.delegate = self
         partyNavVC.addChildViewController(partyNavigationController!)
         window.rootViewController!.present(partyNavVC, animated: true, completion: { _ in })
-        if guestMainTabBarController.selectedIndex != 2 {
-            guestMainTabBarController.selectedIndex = 2
+        let tabBarController = window.rootViewController as! UITabBarController
+
+        if tabBarController.selectedIndex != 2 {
+            tabBarController.selectedIndex = 2
         }
     }
     
@@ -269,12 +273,15 @@ import Parse
         partyNavigationController?.eventDetailsVC.delegate = self
         //    partyNavigationController.partyVC.delegate = self;
         partyNavVC.addChildViewController(partyNavigationController!)
-        if self.topViewController() != guestMainTabBarController {
-            guestMainTabBarController.dismiss(animated: true, completion: { _ in })
+        
+        let tabBarController = window.rootViewController as! UITabBarController
+
+        if self.topViewController() != tabBarController {
+            tabBarController.dismiss(animated: true, completion: { _ in })
         }
         window.rootViewController!.present(partyNavVC, animated: true, completion: { _ in })
-        if guestMainTabBarController.selectedIndex != 2 {
-            guestMainTabBarController.selectedIndex = 2
+        if tabBarController.selectedIndex != 2 {
+            tabBarController.selectedIndex = 2
         }
     }
     
@@ -394,6 +401,7 @@ import Parse
         
         FBSDKAccessToken.setCurrent(nil)
         THLChatSocketManager.sharedInstance.closeConnection()
+        
         let welcomeView = THLWelcomeViewController()
         window.rootViewController = welcomeView
         //    [_dependencyManager.databaseManager dropDB];
