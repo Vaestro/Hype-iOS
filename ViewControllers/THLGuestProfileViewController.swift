@@ -75,7 +75,23 @@ class THLGuestProfileViewController: UIViewController, THLMyUpcomingEventsViewCo
         
         // Initialize scroll menu
         let rect = CGRect(x: 0.0, y: 150.0, width: self.view.frame.width, height: self.view.frame.height - 150.0)
-        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: rect, pageMenuOptions: nil)
+        // Customize menu (Optional)
+        let parameters: [CAPSPageMenuOption] = [
+            .menuItemSeparatorWidth(4.3),
+            .viewBackgroundColor(UIColor(red: 247.0/255.0, green: 247.0/255.0, blue: 247.0/255.0, alpha: 1.0)),
+            .bottomMenuHairlineColor(UIColor.customGoldColor()),
+            .selectionIndicatorColor(UIColor.customGoldColor()),
+            .menuMargin(20.0),
+            .menuHeight(40.0),
+            .selectedMenuItemLabelColor(UIColor.customGoldColor()),
+            .unselectedMenuItemLabelColor(UIColor.white),
+            .menuItemFont(UIFont(name: "HelveticaNeue-Medium", size: 14.0)!),
+            .useMenuLikeSegmentedControl(true),
+            .menuItemSeparatorRoundEdges(true),
+            .selectionIndicatorHeight(2.0),
+            .menuItemSeparatorPercentageHeight(0.1)
+        ]
+        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: rect, pageMenuOptions: parameters)
         
         self.view.addSubview(pageMenu!.view)
     }
