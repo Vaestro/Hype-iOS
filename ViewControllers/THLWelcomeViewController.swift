@@ -148,7 +148,7 @@ class THLWelcomeViewController: UIViewController {
         
         graphRequest.start(completionHandler: { (connection, result, error) -> Void in
             
-            if ((error) != nil) {
+            if (error != nil) {
                 print("Error: \(error)")
             }
             else {

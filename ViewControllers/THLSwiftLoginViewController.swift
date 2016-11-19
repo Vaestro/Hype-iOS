@@ -43,7 +43,8 @@ class THLSwiftLoginViewController: UIViewController, TTTAttributedLabelDelegate 
         
         emailTextField = constructTextField()
         emailTextField.placeholder = "Email"
-        
+        emailTextField.keyboardType = .emailAddress
+
         passwordTextField = constructTextField()
         passwordTextField.placeholder = "Password"
         passwordTextField.isSecureTextEntry = true

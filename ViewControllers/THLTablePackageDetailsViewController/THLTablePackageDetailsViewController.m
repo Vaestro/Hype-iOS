@@ -9,10 +9,8 @@
 #import "THLTablePackageDetailsViewController.h"
 #import "Parse.h"
 #import <ParseUI/PFCollectionViewCell.h>
-#import "THLEventInviteCell.h"
 #import "THLPersonIconView.h"
 #import "THLAppearanceConstants.h"
-#import "THLAttendingEventCell.h"
 #import "SVProgressHUD.h"
 #import "THLUser.h"
 #import "Intercom/intercom.h"

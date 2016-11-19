@@ -72,7 +72,7 @@ class THLBoldNavigationBar : UINavigationBar {
         }
         
         subtitleLabel.snp.makeConstraints { (make) -> Void in
-            make.bottom.equalTo(self.snp.bottom)
+            make.bottom.equalTo(self.snp.bottom).offset(10)
             make.left.equalTo(self.snp.left).offset(10)
         }
     }

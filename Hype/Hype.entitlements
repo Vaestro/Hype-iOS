@@ -12,5 +12,9 @@
 	<array>
 		<string>merchant.com.hype</string>
 	</array>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>$(AppIdentifierPrefix)com.hypelist.hype</string>
+	</array>
 </dict>
 </plist>

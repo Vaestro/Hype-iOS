@@ -42,6 +42,11 @@ class THLMyUpcomingEventsViewController: PFQueryTableViewController, DZNEmptyDat
         tableView.emptyDataSetDelegate = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.loadObjects()
+    }
+    
     // MARK: Data
     
     override func queryForTable() -> PFQuery<PFObject> {

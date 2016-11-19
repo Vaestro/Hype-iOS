@@ -80,8 +80,6 @@ class THLPhoneNumberVerificationViewController: UIViewController {
     
     func handleVerifyButtonTapped() {
         self.delegate?.didVerifyPhoneNumber(enteredCode: self.verificationCodeTextField.text!)
-        
-        
     }
     
     func label() -> UILabel {

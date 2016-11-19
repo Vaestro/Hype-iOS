@@ -7,7 +7,6 @@
 //
 import Stripe
 import ParseFacebookUtilsV4
-import Fabric
 import Mixpanel
 import Branch
 
@@ -146,12 +145,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // pass the url to the handle deep link call
         Branch.getInstance().handleDeepLink(url)
         
-        return true
+        return FBSDKApplicationDelegate.sharedInstance().application(application, open: url as URL!, sourceApplication: sourceApplication, annotation: annotation)
     }
+    
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
-        Branch.getInstance().continue(userActivity)
+        let handledByBranch:Bool = Branch.getInstance().continue(userActivity)
         
-        return true
+        return handledByBranch
     }
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.

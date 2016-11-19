@@ -104,6 +104,11 @@
 	return [self mediumDateString];
 }
 
+- (NSString *)thl_longDateString {
+    return [self longDateString];
+}
+
+
 - (NSString *)thl_timeString {
 	return [self shortTimeString];
 }

@@ -11,7 +11,7 @@
 #import "UIScrollView+EmptyDataSet.h"
 
 @protocol THLVenueDiscoveryViewControllerDelegate <NSObject>
-- (void)venueDiscoveryViewControllerWantsToPresentDetailsForVenue:(PFObject *)event;
+- (void)venueDiscoveryViewControllerWantsToPresentDetailsForVenue:(PFObject *)venue;
 @end
 
 @interface THLVenueDiscoveryViewController : PFQueryCollectionViewController

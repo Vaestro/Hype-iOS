@@ -13,9 +13,6 @@
 #import "NBPhoneNumberUtil.h"
 #import "PFFacebookUtils.h"
 #import "FBSDKCoreKit.h"
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
-
 
 @implementation THLUser
 @dynamic fbId;

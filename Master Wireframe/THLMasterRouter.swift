@@ -11,7 +11,7 @@ import Bolts
 import Branch
 import Parse
 
-@objc class THLMasterRouter: NSObject, THLWelcomeViewDelegate, THLAccountRegistrationViewControllerDelegate, THLSwiftLoginViewControllerDelegate, THLEventDiscoveryViewControllerDelegate, THLVenueDiscoveryViewControllerDelegate, THLGuestProfileViewControllerDelegate, THLEventDetailsViewControllerDelegate, THLSwiftAdmissionsViewControllerDelegate, THLPartyViewControllerDelegate, THLCheckoutViewControllerDelegate, THLTablePackageControllerDelegate, EPPickerDelegate {
+@objc class THLMasterRouter: NSObject, THLWelcomeViewDelegate, THLAccountRegistrationViewControllerDelegate, THLSwiftLoginViewControllerDelegate, THLDiscoveryViewControllerDelegate, THLGuestProfileViewControllerDelegate, THLEventDetailsViewControllerDelegate, THLSwiftAdmissionsViewControllerDelegate, THLPartyViewControllerDelegate, THLCheckoutViewControllerDelegate, THLTablePackageControllerDelegate, EPPickerDelegate {
 
     var window: UIWindow
     
@@ -90,13 +90,11 @@ import Parse
         // Connect to chat server socket first
         THLChatSocketManager.sharedInstance.establishConnection()
         let guestMainTabBarController = UITabBarController()
-        let eventDiscoveryView = THLEventDiscoveryViewController(className: "Event")
-        let venueDiscoveryView = THLVenueDiscoveryViewController(className: "Location")
-        let discoveryNavigationController = UINavigationController()
-        eventDiscoveryView.delegate = self
-        venueDiscoveryView.delegate = self
-        
-        discoveryNavigationController.pushViewController(eventDiscoveryView, animated: false)
+
+        let discoveryView = THLDiscoveryViewController()
+        discoveryView.delegate = self
+//        let discoveryNavigationController = UINavigationController(navigationBarClass: THLBoldNavigationBar.self, toolbarClass: nil)
+//        discoveryNavigationController.pushViewController(discoveryView, animated: false)
         
         let guestProfileView = THLGuestProfileViewController()
         guestProfileView.delegate = self
@@ -107,10 +105,10 @@ import Parse
         let conversationsView = THLChatEntryTableViewController()
         conversationsNavigationController.pushViewController(conversationsView, animated: false)
         conversationsNavigationController.tabBarItem.image = UIImage(named: "message")!
-        discoveryNavigationController.tabBarItem.image = UIImage(named: "Home Icon")!
+        discoveryView.tabBarItem.image = UIImage(named: "Home Icon")!
         profileNavigationController.tabBarItem.image = UIImage(named: "Profile Icon")!
         
-        let views = [discoveryNavigationController, conversationsNavigationController, profileNavigationController]
+        let views = [discoveryView, conversationsNavigationController, profileNavigationController]
         
         guestMainTabBarController.viewControllers = views
         guestMainTabBarController.selectedIndex = 0
@@ -120,7 +118,7 @@ import Parse
         window.makeKeyAndVisible()
     }
     
-    // MARK: Event Discovery View Controller Delegate
+    // MARK: Discovery View Controller Delegate
     internal func eventDiscoveryViewWantsToPresentDetailsForEvent(_ event: PFObject, venue: PFObject) {
         let eventDetailView = THLEventDetailsViewController(venue: venue, event: event, guestlistInvite: nil, showNavigationBar: true)
         eventDetailView?.delegate = self
@@ -133,8 +131,14 @@ import Parse
         window.rootViewController!.present(eventDetailView!, animated: true, completion: { _ in })
     }
     
+    internal func venueDiscoveryViewControllerWantsToPresentDetails(forVenue venue: PFObject!) {
+        let eventDetailView = THLEventDetailsViewController(venue: venue, event: nil, guestlistInvite: nil, showNavigationBar: true)
+        eventDetailView?.delegate = self
+        window.rootViewController!.present(eventDetailView!, animated: true, completion: { _ in })
+    }
+    
     // MARK: Event Details View Controller Delegate
-    public func eventDetailsWantsToPresentAdmissions(forEvent event: PFObject!, venue: PFObject!) {
+    public func eventDetailsWantsToPresentAdmissions(forEvent event: PFObject?, venue: PFObject!) {
         let admissionsView = THLSwiftAdmissionsViewController(venue: venue, event: event)
         admissionsView.delegate = self
         let navigationViewController = UINavigationController(rootViewController: admissionsView)
@@ -188,7 +192,8 @@ import Parse
     internal func presentCheckoutViewController(_ event: PFObject, guestlistInvite: THLGuestlistInvite, admissionOption: PFObject) {
         let checkoutView = THLCheckoutViewController(event: event, admissionOption: admissionOption, guestlistInvite: guestlistInvite)
         checkoutView?.delegate = self
-        self.topViewController().navigationController!.pushViewController(checkoutView!, animated: true)
+        let topView = topViewController() as! UINavigationController
+        topView.pushViewController(checkoutView!, animated: true)
     }
     
     // MARK: Checkout View Controller Delegate
@@ -211,10 +216,9 @@ import Parse
     // MARK: PartyInvitationViewController
     
     func presentInvitationViewController(_ event: THLEvent, guestlistId: String, currentGuestsPhoneNumbers: [Any]) {
-//        var partyInvitationVC = THLPartyInvitationViewController(event, guestlistId: guestlistId, guests: currentGuestsPhoneNumbers, databaseManager: self.dependencyManager.databaseManager, dataStore: self.dependencyManager.contactsDataStore, viewDataSourceFactory: self.dependencyManager.viewDataSourceFactory, addressBook: self.dependencyManager.addressBook)
-//        var invitationNavVC = UINavigationController(rootViewController: partyInvitationVC)
-//        partyInvitationVC.delegate = self
-//        self.topViewController!.present(invitationNavVC, animated: true, completion: { _ in })
+        let contactPickerScene = EPContactsPicker(delegate: self, multiSelection:true, subtitleCellType: SubtitleCellValue.phoneNumber, event: event, guestlistId: guestlistId)
+        let topView = self.topViewController() as! UINavigationController
+        topView.pushViewController(contactPickerScene, animated: true)
     }
     // MARK: Delegate
     
@@ -240,15 +244,17 @@ import Parse
                 if (error != nil) {
                     
                 } else {
-                    var paymentView = THLPaymentViewController(paymentInfo: cardInfo as! [[AnyHashable: Any]])
+                    let paymentView = THLPaymentViewController(paymentInfo: cardInfo as! [[AnyHashable: Any]])
                     paymentView?.hidesBottomBarWhenPushed = true
-                    viewController.navigationController!.pushViewController(paymentView!, animated: true)
+                    let topView = self.topViewController() as! UINavigationController
+
+                    topView.pushViewController(paymentView!, animated: true)
                 }
             }
         }
         else {
-            var emptyCardInfoSet = [[AnyHashable: Any]]()
-            var paymentView = THLPaymentViewController(paymentInfo: emptyCardInfoSet)
+            let emptyCardInfoSet = [[AnyHashable: Any]]()
+            let paymentView = THLPaymentViewController(paymentInfo: emptyCardInfoSet)
             paymentView?.hidesBottomBarWhenPushed = true
             let topView = self.topViewController() as! UINavigationController
             topView.pushViewController(paymentView!, animated: true)
@@ -295,7 +301,19 @@ import Parse
     }
     
     internal func partyViewControllerWantsToPresentCheckout(forEvent event: PFObject!, with guestlistInvite: THLGuestlistInvite!) {
+        var admissionOptions = (event["admissionOptions"] as! [PFObject])
+        var admissionOption: PFObject!
+        SVProgressHUD.show()
+        for option: PFObject in admissionOptions {
+            let genderForOption = option.value(forKey: "gender") as? NSInteger
+            if genderForOption == THLUser.current()?.sex.rawValue
+            {
+                admissionOption = option
+            }
+        }
+        SVProgressHUD.dismiss()
         
+        presentCheckoutViewController(event, guestlistInvite: guestlistInvite, admissionOption: admissionOption)
     }
     
     // MARK: Table Package View Controller Delegate
@@ -311,7 +329,14 @@ import Parse
     }
     
     public func epContactPickerDidSubmitInvitesAndWantsToShowEvent() {
+        let tabBarController = window.rootViewController as! UITabBarController
         
+        if self.topViewController() != tabBarController {
+            tabBarController.dismiss(animated: true, completion: { _ in })
+        }
+        if tabBarController.selectedIndex != 2 {
+            tabBarController.selectedIndex = 2
+        }
     }
     
     public func epContactPicker(_: EPContactsPicker, didSubmitInvitesAndWantsToShowInquiry: PFObject) {
@@ -334,9 +359,6 @@ import Parse
         
     }
 
-    public func venueDiscoveryViewControllerWantsToPresentDetails(forVenue event: PFObject!) {
-        
-    }
     
     internal func userProfileViewControllerWantsToLogout() {
         self.logOutUser()
@@ -344,7 +366,7 @@ import Parse
     }
     
     internal func userProfileViewControllerWantsToPresentPaymentViewController() {
-        
+        self.presentPaymentViewController(on: topViewController())
     }
     
     

@@ -21,8 +21,6 @@
 #import "DateTools.h"
 #import "Bolts.h"
 
-#import <Crashlytics/Crashlytics.h>
-
 #import "CommonMacros.h"
 #import "THLConstants.h"
 #import "THLGlobalCategories.h"

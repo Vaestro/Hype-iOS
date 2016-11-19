@@ -78,7 +78,8 @@ class THLGuestProfileViewController: UIViewController, THLMyUpcomingEventsViewCo
         // Customize menu (Optional)
         let parameters: [CAPSPageMenuOption] = [
             .menuItemSeparatorWidth(4.3),
-            .viewBackgroundColor(UIColor(red: 247.0/255.0, green: 247.0/255.0, blue: 247.0/255.0, alpha: 1.0)),
+            .scrollMenuBackgroundColor(UIColor.black),
+            .viewBackgroundColor(UIColor.black),
             .bottomMenuHairlineColor(UIColor.customGoldColor()),
             .selectionIndicatorColor(UIColor.customGoldColor()),
             .menuMargin(20.0),
@@ -113,6 +114,7 @@ class THLGuestProfileViewController: UIViewController, THLMyUpcomingEventsViewCo
 
     func presentProfilePicSettings() {
         let vc = THLProfilePicChooserViewController()
+        vc.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

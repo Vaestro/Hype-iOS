@@ -29,6 +29,8 @@ pod 'Kingfisher'
 pod "TextFieldEffects"
 pod 'PhoneNumberKit', '~> 1.0'
 pod 'MRCountryPicker', '~> 0.0.5'
+pod 'PermissionScope'
+
 #Debugging
 pod 'FLEX', '~> 2.0', :configurations => ['Debug']
 pod 'Reveal-iOS-SDK', :configurations => ['Debug']
@@ -49,10 +51,6 @@ pod 'FBSDKCoreKit'
 #Intercom
 pod 'Intercom'
 
-#Fabric
-pod 'Fabric'
-pod 'Crashlytics'
-pod 'Digits'
 pod 'Stripe'
 
 #Branch

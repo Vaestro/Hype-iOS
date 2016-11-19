@@ -16,7 +16,9 @@
 @property (nonatomic, strong) UILabel *ticketTypeLabel;
 
 @property (nonatomic, strong) UIImageView *qrCodeImageView;
+@property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UILabel *venueNameLabel;
+
 @property (nonatomic, strong) UILabel *eventDateLabel;
 @property (nonatomic, strong) UILabel *arrivalMessageLabel;
 @property (nonatomic, strong) PFObject *guestlistInvite;
@@ -38,27 +40,39 @@
     [super viewDidLoad];
     self.view.backgroundColor = kTHLNUIPrimaryBackgroundColor;
     WEAKSELF();
-    
-    [self.ticketTypeLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(kTHLEdgeInsetsSuperHigh());
+
+    [self.ticketInstructionLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.top.insets(kTHLEdgeInsetsSuperHigh());
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
-    [self.ticketInstructionLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(WSELF.ticketTypeLabel.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+    [self.nameLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.ticketInstructionLabel.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+    }];
+
+    [self.ticketTypeLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.nameLabel.mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+    }];
+    
+    [self.venueNameLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.ticketTypeLabel.mas_bottom).insets(kTHLEdgeInsetsHigh());
+        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
+    }];
+
+    [self.eventDateLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(WSELF.venueNameLabel.mas_bottom).insets(kTHLEdgeInsetsHigh());
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
     }];
     
     [self.qrCodeImageView makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(WSELF.ticketInstructionLabel.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
+        make.top.equalTo(WSELF.eventDateLabel.mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
         make.height.equalTo(SCREEN_HEIGHT*0.25);
         make.left.right.insets(kTHLEdgeInsetsSuperHigh());
     }];
 
-    [self.venueNameLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo([WSELF qrCodeImageView].mas_bottom).insets(kTHLEdgeInsetsSuperHigh());
-        make.left.right.insets(kTHLEdgeInsetsSuperHigh());
-    }];
+
     
 //    [self.creditsMessageLabel makeConstraints:^(MASConstraintMaker *make) {
 //        make.top.equalTo([WSELF venueNameLabel].mas_bottom).insets(kTHLEdgeInsetsInsanelyHigh());
@@ -111,7 +125,10 @@
 
 - (UILabel *)ticketTypeLabel {
     if (!_ticketTypeLabel) {
-        _ticketTypeLabel = THLNUILabel(kTHLNUIDetailBoldTitle);
+//        _ticketTypeLabel = THLNUILabel(kTHLNUIDetailBoldTitle);
+        _ticketTypeLabel = [UILabel new];
+        _ticketTypeLabel.font = [UIFont fontWithName:@"Raleway-Bold" size:20.0];
+        _ticketTypeLabel.textColor = kTHLNUIAccentColor;
         _ticketTypeLabel.adjustsFontSizeToFitWidth = YES;
         _ticketTypeLabel.numberOfLines = 1;
         _ticketTypeLabel.minimumScaleFactor = 0.5;
@@ -125,15 +142,29 @@
     return _ticketTypeLabel;
 }
 
+- (UILabel *)nameLabel {
+    if (!_nameLabel) {
+        _nameLabel = THLNUILabel(kTHLNUIDetailBoldTitle);
+        _nameLabel.adjustsFontSizeToFitWidth = YES;
+        _nameLabel.numberOfLines = 1;
+        _nameLabel.minimumScaleFactor = 0.5;
+        _nameLabel.textAlignment = NSTextAlignmentCenter;
+        
+        _nameLabel.text = [THLUser currentUser].fullName;
+        [self.view addSubview:_nameLabel];
+    }
+    return _nameLabel;
+}
+
 - (UILabel *)venueNameLabel {
     if (!_venueNameLabel) {
-        _venueNameLabel = THLNUILabel(kTHLNUIRegularDetailTitle);
+        _venueNameLabel = THLNUILabel(kTHLNUIDetailBoldTitle);
         _venueNameLabel.adjustsFontSizeToFitWidth = YES;
         _venueNameLabel.numberOfLines = 1;
         _venueNameLabel.minimumScaleFactor = 0.5;
         _venueNameLabel.textAlignment = NSTextAlignmentCenter;
         
-        _venueNameLabel.text = [THLUser currentUser].fullName;
+        _venueNameLabel.text = _guestlistInvite[@"event"][@"location"][@"name"];
         [self.view addSubview:_venueNameLabel];
     }
     return _venueNameLabel;
@@ -148,7 +179,7 @@
         _eventDateLabel.textAlignment = NSTextAlignmentCenter;
         [_eventDateLabel setTextColor:kTHLNUIGrayFontColor];
         NSDate *date = (NSDate *)_guestlistInvite[@"Guestlist"][@"event"][@"date"];
-        _eventDateLabel.text = date.thl_weekdayString;
+        _eventDateLabel.text = date.thl_longDateString;
         
         [self.view addSubview:_eventDateLabel];
     }

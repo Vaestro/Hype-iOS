@@ -9,7 +9,6 @@
 #import "THLAppearanceConstants.h"
 #import "THLEventTicketViewController.h"
 #import "PFObject.h"
-#import "Intercom/intercom.h"
 #import "THLGuestlistInvite.h"
 #import "THLAdmissionOption.h"
 #import "THLTableReservationViewController.h"
@@ -18,7 +17,6 @@
 @interface THLPartyNavigationController()
 @property (nonatomic, strong) PFObject *guestlistInvite;
 @property (nonatomic, strong) UIBarButtonItem *closeButton;
-@property (nonatomic, strong) UIBarButtonItem *intercomBarButton;
 
 @end
 
@@ -39,8 +37,6 @@
     [super viewDidLoad];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"cancel_button"] style:UIBarButtonItemStylePlain target:self action:@selector(dismissViewController)];
     
-    self.navigationItem.rightBarButtonItem = self.intercomBarButton;
-
     self.navigationItem.titleView = [[THLEventNavBarTitleView alloc] initWithVenueName:_guestlistInvite[@"event"][@"location"][@"name"] date:_guestlistInvite[@"date"]];
     
     self.navigationBar.barTintColor = kTHLNUIPrimaryBackgroundColor; //%%% bartint
@@ -90,19 +86,6 @@
                             forState:UIControlStateNormal];
     }
     return _closeButton;
-}
-
-- (UIBarButtonItem *)intercomBarButton {
-    if (!_intercomBarButton) {
-        _intercomBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Help"] style:UIBarButtonItemStylePlain target:self action:@selector(messageButtonPressed)];
-    }
-    return _intercomBarButton;
-}
-
-- (void)messageButtonPressed
-{
-    [Intercom presentMessageComposer];
-    
 }
 
 - (UILabel *)navBarTitleLabel

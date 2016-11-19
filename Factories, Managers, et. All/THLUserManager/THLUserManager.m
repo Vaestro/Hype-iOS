@@ -10,8 +10,6 @@
 #import "THLUser.h"
 #import "PFFacebookUtils.h"
 #import "FBSDKCoreKit.h"
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
 
 @implementation THLUserManager
 - (instancetype)init {
@@ -79,12 +77,12 @@
     [THLUser logOut];
 }
 
-+ (void) logCrashlyticsUser {
-    // You can call any combination of these three methods
-    [CrashlyticsKit setUserIdentifier:[NSString stringWithFormat:@"%@", [self currentUser].objectId]];
-    [CrashlyticsKit setUserEmail:[self currentUser].email];
-    [CrashlyticsKit setUserName:[self currentUser].fullName];
-}
+//+ (void) logCrashlyticsUser {
+//    // You can call any combination of these three methods
+//    [CrashlyticsKit setUserIdentifier:[NSString stringWithFormat:@"%@", [self currentUser].objectId]];
+//    [CrashlyticsKit setUserEmail:[self currentUser].email];
+//    [CrashlyticsKit setUserName:[self currentUser].fullName];
+//}
 
 + (void)handleInvalidatedSession {
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil];

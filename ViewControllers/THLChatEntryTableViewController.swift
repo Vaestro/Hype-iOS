@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import PermissionScope
 
-class THLChatEntryTableViewController: UITableViewController {
+class THLChatEntryTableViewController: UITableViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
     // The data for all the rooms retrieved from the server
     var roomData = [[String: String]]()
@@ -32,12 +33,27 @@ class THLChatEntryTableViewController: UITableViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.emptyDataSetSource = self
+        tableView.emptyDataSetDelegate = self
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         
         tableView.backgroundColor = UIColor.black
         tableView.register(THLChatEntryCell.self, forCellReuseIdentifier: "EntryCell")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "defaultId")
         
+        let permissionScope = PermissionScope()
+        // Set up permissions
+        permissionScope.headerLabel.text = "Don't miss out"
+        permissionScope.bodyLabel.text = "We'll notify you know when someone messages you"
+        permissionScope.addPermission(NotificationsPermission(notificationCategories: nil),
+                                      message: "Enabling notifications makes sure you never miss a beat")
+        
+        // Show dialog with callbacks
+        permissionScope.show({ finished, results in
+            print("got results \(results)")
+        }, cancelled: { (results) -> Void in
+            print("thing was cancelled")
+        })
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -194,6 +210,19 @@ class THLChatEntryTableViewController: UITableViewController {
             }
             
             
+        }
+        
+        
+        func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString {
+            let str = "No Messages"
+            let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)]
+            return NSAttributedString(string: str, attributes: attrs)
+        }
+        
+        func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString {
+            let str = "When you receive a message, it will show here"
+            let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)]
+            return NSAttributedString(string: str, attributes: attrs)
         }
         
     }

@@ -20,7 +20,7 @@ class THLProfilePicChooserViewController: UIViewController, UIImagePickerControl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = "SET PROFILE PIC";
+        self.navigationItem.title = "ADD PROFILE PICTURE";
         imagePicker.delegate = self
         
         let topView = UIView()
@@ -65,7 +65,7 @@ class THLProfilePicChooserViewController: UIViewController, UIImagePickerControl
         var tutorialsBtn = UIButton()
         
         tutorialsBtn.setTitle("Upload A Picture", for: UIControlState.normal)
-        tutorialsBtn.setTitleColor(UIColor.white, for: UIControlState.normal)
+        tutorialsBtn.setTitleColor(UIColor.black, for: UIControlState.normal)
         tutorialsBtn.backgroundColor = UIColor.customGoldColor()
         tutorialsBtn.addTarget(self, action: #selector(THLProfilePicChooserViewController.ratingButtonTapped(_:)), for: .touchUpInside)
         

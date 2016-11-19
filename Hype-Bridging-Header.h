@@ -57,4 +57,4 @@
 #import "THLCheckoutViewController.h"
 #import "THLTablePackageDetailsViewController.h"
 #import "THLPaymentViewController.h"
-#import "THLPartyInvitationViewController.h"
+

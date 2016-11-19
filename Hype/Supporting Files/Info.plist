@@ -29,7 +29,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0.18.9</string>
+	<string>1.0.18.15</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -123,8 +123,16 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Hype needs access to your bluetooth so that you can check-in at beacon-equipped venues</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Hype needs access to your calendar to add your upcoming events to your calendar</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Hype needs your contacts to help you invite your friends.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Hype needs access to your microphone to enable voice commands for concierge</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Hype needs access to your motion sensor enable parallex effects</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Hype needs your photos to help you pick a profile picture</string>
 	<key>UIAppFonts</key>

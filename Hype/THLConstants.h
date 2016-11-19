@@ -28,8 +28,8 @@ typedef NS_ENUM(NSInteger, THLStatus) {
 
 typedef NS_ENUM(NSInteger, THLSex) {
 	THLSexUnreported = 0,
-	THLSexMale,
-	THLSexFemale,
+	THLSexMale = 1,
+	THLSexFemale = 2,
 	THLSex_Count
 };
 

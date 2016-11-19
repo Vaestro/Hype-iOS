@@ -27,7 +27,7 @@ class THLSwiftAdmissionsViewController: UIViewController, THLEventPickerViewCont
     var admissionOptionCollectionView: UICollectionView
 
     var venue: PFObject
-    var event: PFObject
+    var event: PFObject?
     var admissionOptions: [PFObject]
 
     var sections: [Int: [PFObject]] = Dictionary()
@@ -48,7 +48,7 @@ class THLSwiftAdmissionsViewController: UIViewController, THLEventPickerViewCont
         fatalError("init(coder:) has not been implemented")
     }
 
-    init(venue: PFObject, event: PFObject) {
+    init(venue: PFObject, event: PFObject?) {
         self.venue = venue
         self.event = event
         self.admissionOptions = Array()
@@ -59,7 +59,7 @@ class THLSwiftAdmissionsViewController: UIViewController, THLEventPickerViewCont
 
         admissionOptionCollectionView = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: layout)
         eventPickerView = THLEventPickerViewController(venueId: venue.objectId, event: event)
-        navBarTitleView = THLEventNavBarTitleView.init(venueName: venue["name"] as? String, date: event["date"] as? Date)
+        navBarTitleView = THLEventNavBarTitleView.init(venueName: venue["name"] as? String, date: event?["date"] as? Date)
 
         contactConciergeLabel = TTTAttributedLabel.init(frame:CGRect.zero)
         buttonBackground = UIView()
@@ -264,7 +264,7 @@ class THLSwiftAdmissionsViewController: UIViewController, THLEventPickerViewCont
             return displayTicketGenderError()
         }
 
-        delegate?.didSelectAdmissionOption(admissionOption!, event: event)
+        delegate?.didSelectAdmissionOption(admissionOption!, event: event!)
     }
 
 

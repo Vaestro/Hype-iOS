@@ -14,23 +14,22 @@ import PhoneNumberKit
 import Parse
 import Mixpanel
 import Branch
-import MRCountryPicker
 
 protocol THLAccountRegistrationViewControllerDelegate {
     func accountRegistrationViewDidCompleteRegistration()
 }
 
-class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVerificationViewControllerDelegate, MRCountryPickerDelegate {
+class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVerificationViewControllerDelegate {
     var delegate: THLAccountRegistrationViewControllerDelegate?
     
     var userData: [String:AnyObject]?
+    let phoneNumberKit = PhoneNumberKit()
     
     var firstNameTextField = UITextField()
     var lastNameTextField = UITextField()
     var emailTextField = UITextField()
     var phoneNumberTextField = UITextField()
     var passwordTextField = UITextField()
-    var countryPicker =  MRCountryPicker()
     var maleRadioButton = UIButton()
     var femaleRadioButton = UIButton()
     var code = ""
@@ -80,12 +79,14 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
         
         firstNameTextField = constructTextField()
         firstNameTextField.placeholder = "First Name"
+        firstNameTextField.keyboardType = .namePhonePad
         if let firstName = userData?["first_name"] {
             firstNameTextField.text =  firstName as! String
         }
         
         lastNameTextField = constructTextField()
         lastNameTextField.placeholder = "Last Name"
+        lastNameTextField.keyboardType = .namePhonePad
         if let lastName = userData?["last_name"] {
             lastNameTextField.text =  lastName as! String
         }
@@ -120,19 +121,17 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
         emailTextField = constructTextField()
         emailTextField.placeholder = "Email"
         emailTextField.autocapitalizationType = UITextAutocapitalizationType.none
-
+        emailTextField.keyboardType = .emailAddress
+        
         if let email = userData?["email"] {
             emailTextField.text = email as! String
         }
-        countryPicker.countryPickerDelegate = self
-        countryPicker.showPhoneNumbers = true
-        countryPicker.setCountry("US")
         
         
         phoneNumberTextField = constructTextField()
         phoneNumberTextField.textColor = UIColor.gray
         phoneNumberTextField.placeholder = "Phone Number"
-        phoneNumberTextField.keyboardType = .numberPad
+        phoneNumberTextField.keyboardType = .phonePad
         
         if let phoneNumber = userData?["phone_number"] {
             phoneNumberTextField.text = phoneNumber as! String
@@ -143,7 +142,7 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
         scrollView.addSubview(lastNameTextField)
         scrollView.addSubview(emailTextField)
         scrollView.addSubview(phoneNumberTextField)
-        scrollView.addSubview(countryPicker)
+        
         scrollView.addSubview(genderRadioButtonLabel)
         scrollView.addSubview(maleTextButton)
         scrollView.addSubview(femaleTextButton)
@@ -214,15 +213,8 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
             make.height.equalTo(50)
         }
         
-        countryPicker.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(emailTextField.snp.bottom).offset(20)
-            make.left.equalTo(view.snp.left).offset(10)
-            make.right.equalTo(view.snp.right).offset(-10)
-            make.height.equalTo(50)
-        }
-        
         phoneNumberTextField.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(countryPicker.snp.bottom).offset(-5)
+            make.top.equalTo(emailTextField.snp.bottom).offset(10)
             make.left.equalTo(view.snp.left).offset(20)
             make.right.equalTo(view.snp.right).offset(-20)
             make.height.equalTo(50)
@@ -413,8 +405,15 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
         else {
             currentUser?.fbVerified = false
         }
-        currentUser?.phoneNumber = phoneNumberTextField.text
+        let phoneNumberOriginal = phoneNumberTextField.text
+        do {
+            let phoneNumber = try phoneNumberKit.parse(phoneNumberOriginal!)
+            currentUser?.phoneNumber = phoneNumberKit.format(phoneNumber, toType: .e164)
 
+        } catch {
+            currentUser?.phoneNumber = phoneNumberOriginal
+        }
+        
         currentUser?.type = THLUserType.guest
         currentUser?.saveInBackground{(success, error) in
             self.createMixpanelAlias()
@@ -438,7 +437,16 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
         newUser.username = emailTextField.text
         newUser.password = passwordTextField.text
         newUser.sex = maleRadioButton.isSelected == true ? THLSex.male : THLSex.female
-        newUser.phoneNumber = phoneNumberTextField.text
+        
+        let phoneNumberOriginal = phoneNumberTextField.text
+        do {
+            let phoneNumber = try phoneNumberKit.parse(phoneNumberOriginal!)
+            newUser.phoneNumber = phoneNumberKit.format(phoneNumber, toType: .e164)
+            
+        } catch {
+            newUser.phoneNumber = phoneNumberOriginal
+        }
+        
         newUser.type = THLUserType.guest
         newUser.signUpInBackground{(success,error) in
             if success {
@@ -512,11 +520,6 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
                                                 }
         }
         
-    }
-    
-    // a picker item was selected
-    func countryPhoneCodePicker(_ picker: MRCountryPicker, didSelectCountryWithName name: String, countryCode: String, phoneCode: String, flag: UIImage) {
-       self.countryCode = phoneCode
     }
     
     func label() -> UILabel {

@@ -75,15 +75,10 @@ class THLChatEntryCell: UITableViewCell {
         
         contentView.addSubview(userImage)
         
-        let cImage = UIImage(named: "checked_box")
+        let cImage = UIImage(named: "new_icon")
         newImage = PFImageView(image: cImage!)
         newImage.contentMode = UIViewContentMode.scaleAspectFit
         contentView.addSubview(newImage)
-        
-        
-        
-        
-        
     }
     
     required init?(coder aDecoder: NSCoder) {

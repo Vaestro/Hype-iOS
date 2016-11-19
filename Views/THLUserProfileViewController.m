@@ -315,7 +315,7 @@ STPPaymentCardTextFieldDelegate
 
         [[mail navigationBar] setTitleTextAttributes:@{NSForegroundColorAttributeName :kTHLNUIPrimaryFontColor}];
         [[mail navigationBar] setTintColor:kTHLNUIPrimaryFontColor];
-        [self.view.window.rootViewController presentViewController:mail animated:YES completion:NULL];
+        [self presentViewController:mail animated:YES completion:NULL];
     }
     else
     {
