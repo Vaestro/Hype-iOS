@@ -15,9 +15,6 @@ class THLChatEntryTableViewController: UITableViewController {
     // The images dictionary
     var userImages = [[String: UIImage]]()
     
-    var roomChecked = [String: Date]()
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,6 +35,13 @@ class THLChatEntryTableViewController: UITableViewController {
         tableView.register(THLChatEntryCell.self, forCellReuseIdentifier: "EntryCell")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "defaultId")
         
+       
+        
+        
+       
+        listenForRooms()
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -45,7 +49,6 @@ class THLChatEntryTableViewController: UITableViewController {
         
         var main =  UIApplication.shared.keyWindow?.rootViewController as! UITabBarController
         main.tabBar.items?[1].image = UIImage(named:"message")
-        listenForRooms()
         THLChatSocketManager.sharedInstance.getChatRooms()
         (self.navigationController?.navigationBar as! THLBoldNavigationBar).titleLabel.text = "MESSAGES"
         (self.navigationController?.navigationBar as! THLBoldNavigationBar).subtitleLabel.text = ""
@@ -150,10 +153,7 @@ class THLChatEntryTableViewController: UITableViewController {
             var rooms = dataArray[0] as! [String:[NSDictionary]]
             var roomsArray = [[String]]();
             
-            if(rooms["rooms"]?.count != self.roomData.count)
-            {
-                self.roomData.removeAll()
-                
+            self.roomData.removeAll()
                 for room in rooms["rooms"]! {
                     var curRoomInfo = [String: String]()
                     curRoomInfo["roomId"] = room["roomId"] as! String
@@ -175,7 +175,13 @@ class THLChatEntryTableViewController: UITableViewController {
                     }
                     curRoomInfo["date"] = room["date"] as! String
                     curRoomInfo["dateString"] = room["dateString"] as! String
-                    curRoomInfo["chatMateName"] = room["chatMateName"] as! String
+                    if(room["chatMateName"] != nil)
+                    {
+                        curRoomInfo["chatMateName"] = room["chatMateName"] as! String
+                    } else {
+                        curRoomInfo["chatMateName"] = "No Name Provided"
+                    }
+                    
                     curRoomInfo["chatMateId"] = room["chatMateId"] as! String
                     if(room["chatMateImage"] != nil) {
                         curRoomInfo["chatMateImage"] = room["chatMateImage"] as! String
@@ -191,11 +197,17 @@ class THLChatEntryTableViewController: UITableViewController {
                 
                 self.tableView.performSelector(onMainThread:Selector("reloadData"), with: nil, waitUntilDone: true)
                 
-            }
+            
             
             
         }
         
+    }
+    
+    func handleRefresh(_ refreshControl: UIRefreshControl) {
+        print("CALLED")
+        THLChatSocketManager.sharedInstance.getChatRooms()
+        refreshControl.endRefreshing()
     }
     
     
