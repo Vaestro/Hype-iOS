@@ -13,6 +13,7 @@ import PopupDialog
 import PhoneNumberKit
 import Parse
 import TTTAttributedLabel
+import Mixpanel
 
 protocol THLSwiftLoginViewControllerDelegate {
     func loginViewDidLoginAndWantsToPresentGuestInterface()
@@ -100,6 +101,8 @@ class THLSwiftLoginViewController: UIViewController, TTTAttributedLabelDelegate 
         let password:String = passwordTextField.text!
         PFUser.logInWithUsername(inBackground: email, password: password, block: {(user: PFUser?, error: Error?) -> Void in
             if (user != nil) {
+                let mixpanel = Mixpanel.mainInstance()
+                mixpanel.track(event: "used logged in")
                 self.delegate?.loginViewDidLoginAndWantsToPresentGuestInterface()
             } else {
                 self.presentErrorMessage("Error", message: "The email or password you have entered does not match a valid account. Please check that you have entered your information correctly and try again")

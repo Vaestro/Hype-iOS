@@ -87,7 +87,7 @@ class THLEventDiscoveryViewController: PFQueryCollectionViewController {
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
             layout.minimumInteritemSpacing = 5
             layout.minimumLineSpacing = 5
-            layout.itemSize = CGSize(width: view.bounds.size.width - 25, height: 125)
+            layout.itemSize = CGSize(width: view.bounds.size.width - 25, height: view.bounds.height/3)
         }
     }
     
@@ -115,10 +115,11 @@ class THLEventDiscoveryViewController: PFQueryCollectionViewController {
         if let objects = objects as? [PFObject] {
             for object in objects {
                 let date = (object["date"] as? Date)
-                let day = Calendar.current.component(.day, from: date!)
-                var array = sections[day] ?? Array()
+                let timeIntervalDouble = date?.timeIntervalSinceNow
+                let timeInterval = Int(timeIntervalDouble!)
+                var array = sections[timeInterval] ?? Array()
                 array.append(object)
-                sections[day] = array
+                sections[timeInterval] = array
             }
         }
         sectionKeys = sections.keys.sorted(by: <)
