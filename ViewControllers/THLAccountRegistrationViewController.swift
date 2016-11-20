@@ -450,9 +450,11 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
         newUser.type = THLUserType.guest
         newUser.signUpInBackground{(success,error) in
             if success {
+                
                 self.createMixpanelAlias()
                 self.setupBranch()
                 do {
+                    
                     try PFCloud.callFunction("assignGuestToGuestlistInvite", withParameters: nil)
                     
                 } catch {
@@ -461,6 +463,7 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
                 THLUser.makeCurrentInstallation()
                 self.delegate?.accountRegistrationViewDidCompleteRegistration()
             }
+            
 
         }
     }
