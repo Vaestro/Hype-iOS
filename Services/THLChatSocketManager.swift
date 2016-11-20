@@ -96,4 +96,21 @@ class THLChatSocketManager: NSObject {
         }
     }
     
+    func createSupportChatRoom() {
+        var userId = (THLUser.current()?.objectId)!
+        
+        PFCloud.callFunction(inBackground: "createSupportChatRoom",
+                             withParameters: ["userId" : userId]) {
+                                                (something, error) in
+                                                if error == nil {
+                                                    
+                                                } else {
+                                                    
+                                                    
+                                                }
+        }
+    }
+    
+    
+    
 }
