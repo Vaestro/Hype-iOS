@@ -76,6 +76,7 @@ pod 'FXLabel'
 pod 'BLKFlexibleHeightBar'
 pod 'JSQMessagesViewController'
 pod 'TPKeyboardAvoiding'
+pod 'Whisper'
 
 end
 

@@ -9,6 +9,7 @@
 import UIKit
 import SocketIO
 import Foundation
+import Whisper
 
 class THLChatSocketManager: NSObject {
     
@@ -49,7 +50,10 @@ class THLChatSocketManager: NSObject {
             //update icon
             var main =  UIApplication.shared.keyWindow?.rootViewController as! UITabBarController
             main.tabBar.items?[1].image = UIImage(named:"new_message")
+            let murmur = Murmur(title: "You got a new message!")
             
+            // Show and hide a message after delay
+            show(whistle: murmur, action: .show(2.5))
             
             
         }

@@ -42,6 +42,7 @@ class THLChatViewController : JSQMessagesViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.messages.removeAll()
+        THLChatSocketManager.sharedInstance.socket.off("gotNewNotification")
         grabMessagesOnDisk()
         getMessageHistory()
         finishReceivingMessage()
@@ -52,6 +53,7 @@ class THLChatViewController : JSQMessagesViewController {
     override func viewWillDisappear(_ animated: Bool) {
         THLChatSocketManager.sharedInstance.socket.off("send message history")
         THLChatSocketManager.sharedInstance.socket.off("gotNewMessage")
+        THLChatSocketManager.sharedInstance.listenForOtherMessages()
     }
     
     

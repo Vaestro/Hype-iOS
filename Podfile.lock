@@ -140,6 +140,7 @@ PODS:
   - Typhoon (3.5.1):
     - Typhoon/no-arc (= 3.5.1)
   - Typhoon/no-arc (3.5.1)
+  - Whisper (4.0.0)
   - YapDatabase (2.9.2):
     - YapDatabase/Standard (= 2.9.2)
   - YapDatabase/Standard (2.9.2):
@@ -246,6 +247,7 @@ DEPENDENCIES:
   - TPKeyboardAvoiding
   - TTTAttributedLabel
   - Typhoon (~> 3.3)
+  - Whisper
   - YapDatabase (~> 2.7)
   - YLMoment (~> 0.2.0)
 
@@ -308,9 +310,10 @@ SPEC CHECKSUMS:
   TPKeyboardAvoiding: a5138f318c06fb3e151f886e18ce4a72695d9cbe
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   Typhoon: c0950bb9f2e835eb8a7dc6983160109b6baf2dda
+  Whisper: 08be92623311f8e53201e62e17f6d7b9599a4714
   YapDatabase: b1e43555a34a5298e23a045be96817a5ef0da58f
   YLMoment: af44d9d402790049e5490fa6eae9585b89b4090b
 
-PODFILE CHECKSUM: 21c57a6f6c5f4aebb5b00c00cf32ac1182e329f0
+PODFILE CHECKSUM: 5757abc7f69f6fd65568b7e8338d03254559e7a4
 
 COCOAPODS: 1.0.1
