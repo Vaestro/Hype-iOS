@@ -47,6 +47,7 @@ class THLChatEntryTableViewController: UITableViewController, DZNEmptyDataSetSou
         
         // Show dialog with callbacks
         permissionScope.show({ finished, results in
+            THLUser.makeCurrentInstallation()
             print("got results \(results)")
         }, cancelled: { (results) -> Void in
             print("thing was cancelled")

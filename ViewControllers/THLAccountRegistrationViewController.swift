@@ -460,7 +460,6 @@ class THLAccountRegistrationViewController: UIViewController, THLPhoneNumberVeri
                 } catch {
                     
                 }
-                THLUser.makeCurrentInstallation()
                 self.delegate?.accountRegistrationViewDidCompleteRegistration()
             }
             

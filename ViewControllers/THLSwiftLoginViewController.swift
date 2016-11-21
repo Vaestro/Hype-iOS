@@ -14,6 +14,7 @@ import PhoneNumberKit
 import Parse
 import TTTAttributedLabel
 import Mixpanel
+import Branch
 
 protocol THLSwiftLoginViewControllerDelegate {
     func loginViewDidLoginAndWantsToPresentGuestInterface()
@@ -102,7 +103,10 @@ class THLSwiftLoginViewController: UIViewController, TTTAttributedLabelDelegate 
         PFUser.logInWithUsername(inBackground: email, password: password, block: {(user: PFUser?, error: Error?) -> Void in
             if (user != nil) {
                 let mixpanel = Mixpanel.mainInstance()
-                mixpanel.track(event: "used logged in")
+                mixpanel.track(event: "login")
+                Branch.getInstance().setIdentity(THLUser.current()?.objectId)
+                Branch.getInstance().userCompletedAction("login")
+                THLUser.makeCurrentInstallation()
                 self.delegate?.loginViewDidLoginAndWantsToPresentGuestInterface()
             } else {
                 self.presentErrorMessage("Error", message: "The email or password you have entered does not match a valid account. Please check that you have entered your information correctly and try again")
