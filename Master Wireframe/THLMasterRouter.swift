@@ -88,6 +88,7 @@ import Parse
 
         // Connect to chat server socket first
         THLChatSocketManager.sharedInstance.establishConnection()
+        THLChatSocketManager.sharedInstance.checkAndCreateSupportChat()
         let guestMainTabBarController = UITabBarController()
 
         let discoveryView = THLDiscoveryViewController()
