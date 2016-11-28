@@ -12,6 +12,8 @@
 @property (NS_NONATOMIC_IOSONLY, readonly) BOOL thl_isTomorrow;
 @property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *thl_weekdayString;
 @property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *thl_dateString;
+@property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *thl_monthDateString;
+
 @property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *thl_longDateString;
 @property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *thl_timeString;
 @property (NS_NONATOMIC_IOSONLY, readonly, copy) NSString *thl_dateTimeString;

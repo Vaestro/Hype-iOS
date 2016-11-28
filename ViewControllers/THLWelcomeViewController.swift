@@ -11,7 +11,8 @@ import SnapKit
 import Mixpanel
 import Parse
 import ParseFacebookUtilsV4
-
+import Mixpanel
+import Branch
 
 protocol THLWelcomeViewDelegate {
     func welcomeViewDidConnectWithFacebookAndReceivedUserData(userData:[String:AnyObject])
@@ -132,6 +133,11 @@ class THLWelcomeViewController: UIViewController {
                     self.requestFacebookInformation()
                     print("New user signed up and logged in through Facebook!")
                 } else {
+                    let mixpanel = Mixpanel.mainInstance()
+                    mixpanel.track(event: "login")
+                    Branch.getInstance().setIdentity(THLUser.current()?.objectId)
+                    Branch.getInstance().userCompletedAction("login")
+                    THLUser.makeCurrentInstallation()
                     self.delegate?.welcomeViewDidLoginWithFacebookAndWantsToPresentGuestInterface()
                     
                     print("Returning user logged in through Facebook!")

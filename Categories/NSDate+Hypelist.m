@@ -104,6 +104,11 @@
 	return [self mediumDateString];
 }
 
+- (NSString *)thl_monthDateString {
+    return [self formattedDateWithFormat:@"MMM dd"];
+}
+
+
 - (NSString *)thl_longDateString {
     return [self longDateString];
 }

@@ -52,8 +52,8 @@ class THLEventDiscoveryViewController: PFQueryCollectionViewController {
     
     // MARK: Init
     var delegate: THLEventDiscoveryViewControllerDelegate?
-    var sections: [Int: [PFObject]] = Dictionary()
-    var sectionKeys: [Int] = Array()
+    var sections: [String: [PFObject]] = Dictionary()
+    var sectionKeys: [String] = Array()
 
     convenience init(className: String?) {
         let layout = UICollectionViewFlowLayout()
@@ -114,12 +114,16 @@ class THLEventDiscoveryViewController: PFQueryCollectionViewController {
         sections.removeAll(keepingCapacity: false)
         if let objects = objects as? [PFObject] {
             for object in objects {
-                let date = (object["date"] as? Date)
-                let timeIntervalDouble = date?.timeIntervalSinceNow
-                let timeInterval = Int(timeIntervalDouble!)
-                var array = sections[timeInterval] ?? Array()
+                let date = (object["date"] as? NSDate)
+//                let timeIntervalDouble = date?.timeIntervalSinceNow
+//                let timeInterval = Int(timeIntervalDouble!)
+                let dateformatter = DateFormatter()
+                
+                dateformatter.dateFormat = "MM-dd-yy"
+                let formattedDate = dateformatter.string(from: date as! Date)
+                var array = sections[formattedDate] ?? Array()
                 array.append(object)
-                sections[timeInterval] = array
+                sections[formattedDate] = array
             }
         }
         sectionKeys = sections.keys.sorted(by: <)
@@ -202,7 +206,7 @@ extension THLEventDiscoveryViewController {
             let date:NSDate = event?.value(forKey:"date") as! NSDate
             
             view.titleLabel.text = date.thl_dayOfTheWeek().uppercased()
-            view.subtitleLabel.text = date.thl_dateString.uppercased()
+            view.subtitleLabel.text = date.thl_monthDateString.uppercased()
             return view
         }
         return super.collectionView(collectionView, viewForSupplementaryElementOfKind: kind, at: indexPath)
@@ -216,3 +220,4 @@ extension THLEventDiscoveryViewController {
         return CGSize.zero
     }
 }
+
