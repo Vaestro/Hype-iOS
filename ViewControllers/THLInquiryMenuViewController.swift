@@ -27,6 +27,19 @@ class THLInquiryMenuViewController: UIViewController {
         self.guestlistTableView = THLGuestlistTableViewController(guestlistId: guestlistId)
         super.init(nibName: nil, bundle: nil)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let sender = inquiry?.value(forKey: "Sender") as! PFObject
+        let senderName = sender.value(forKey: "firstName") as! String
+        let event = inquiry?.value(forKey: "Event") as! PFObject
+        let location = event.value(forKey: "location") as! PFObject
+        let locationName = location.value(forKey: "name") as! String
+        let title = "\(senderName)'s inquiry for \(locationName)"
+        let date = event.value(forKey: "date") as! Date
+        let subtitle = (date as NSDate).thl_weekdayString
+        (self.navigationController?.navigationBar as! THLBoldNavigationBar).titleLabel.text = "\(title.uppercased())"
+        (self.navigationController?.navigationBar as! THLBoldNavigationBar).subtitleLabel.text = "\(subtitle?.uppercased())"
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

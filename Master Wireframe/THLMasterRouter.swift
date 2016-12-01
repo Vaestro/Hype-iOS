@@ -11,7 +11,7 @@ import Bolts
 import Branch
 import Parse
 
-@objc class THLMasterRouter: NSObject, THLWelcomeViewDelegate, THLAccountRegistrationViewControllerDelegate, THLSwiftLoginViewControllerDelegate, THLDiscoveryViewControllerDelegate, THLGuestProfileViewControllerDelegate, THLEventDetailsViewControllerDelegate, THLSwiftAdmissionsViewControllerDelegate, THLPartyViewControllerDelegate, THLCheckoutViewControllerDelegate, THLTablePackageControllerDelegate, EPPickerDelegate {
+@objc class THLMasterRouter: NSObject, THLWelcomeViewDelegate, THLAccountRegistrationViewControllerDelegate, THLSwiftLoginViewControllerDelegate, THLDiscoveryViewControllerDelegate, THLGuestProfileViewControllerDelegate, THLEventDetailsViewControllerDelegate, THLSwiftAdmissionsViewControllerDelegate, THLPartyViewControllerDelegate, THLCheckoutViewControllerDelegate, THLTablePackageControllerDelegate, EPPickerDelegate, THLInquiryOffersViewControllerDelegate, THLUserProfileViewControllerDelegate {
 
     var window: UIWindow
     
@@ -23,10 +23,18 @@ import Parse
     func presentApp(in window: UIWindow) {
         self.window = window
         if THLUserManager.isUserCached() && THLUserManager.isUserProfileValid() {
-            self.presentGuestInterface()
+            self.routeLoggedInUser()
         }
         else {
             self.presentWelcomeView()
+        }
+    }
+    
+    func routeLoggedInUser() {
+        if THLUserManager.userIsHost() {
+            self.presentHostInterface()
+        } else {
+            self.presentGuestInterface()
         }
     }
     
@@ -53,7 +61,7 @@ import Parse
     }
     
     func welcomeViewDidLoginWithFacebookAndWantsToPresentGuestInterface() {
-        presentGuestInterface()
+        self.routeLoggedInUser()
     }
     
     // MARK: Account Registration View Controller
@@ -81,7 +89,7 @@ import Parse
     }
     
     func loginViewDidLoginAndWantsToPresentGuestInterface() {
-        presentGuestInterface()
+        self.routeLoggedInUser()
     }
     
     func presentGuestInterface() {
@@ -115,6 +123,31 @@ import Parse
         guestMainTabBarController.view.autoresizingMask = (.flexibleHeight)
         
         window.rootViewController = guestMainTabBarController
+        window.makeKeyAndVisible()
+    }
+    
+    func presentHostInterface() {
+        let hostTabBarController = UITabBarController()
+        let inquiryDiscoveryView = THLHostDashboardViewController()
+        inquiryDiscoveryView.tabBarItem.image = UIImage(named: "Home Icon")!
+
+        let guestProfileView = THLGuestProfileViewController()
+        guestProfileView.delegate = self
+        let profileNavigationController = UINavigationController()
+        profileNavigationController.pushViewController(guestProfileView, animated: false)
+        profileNavigationController.tabBarItem.image = UIImage(named: "Profile Icon")!
+
+        let conversationsNavigationController = UINavigationController(navigationBarClass: THLBoldNavigationBar.self, toolbarClass: nil)
+        let conversationsView = THLChatEntryTableViewController()
+        conversationsNavigationController.pushViewController(conversationsView, animated: false)
+        conversationsNavigationController.tabBarItem.image = UIImage(named: "message")!
+        
+        let views = [inquiryDiscoveryView, conversationsNavigationController, profileNavigationController]
+        hostTabBarController.viewControllers = views
+        hostTabBarController.selectedIndex = 0
+        hostTabBarController.view.autoresizingMask = (.flexibleHeight)
+        
+        window.rootViewController = hostTabBarController
         window.makeKeyAndVisible()
     }
     
@@ -188,6 +221,13 @@ import Parse
         }
     }
     
+    internal func didSelectHypeConnectForEvent(_ event: PFObject) {
+        let contactPickerScene = EPContactsPicker(delegate: self, partyType: .connect, multiSelection:true, subtitleCellType: SubtitleCellValue.phoneNumber, event: event)
+        let topView = self.topViewController() as! UINavigationController
+        topView.pushViewController(contactPickerScene, animated: true)
+    }
+
+    
     // MARK: Checkout View Controller
     internal func presentCheckoutViewController(_ event: PFObject, guestlistInvite: THLGuestlistInvite, admissionOption: PFObject) {
         let checkoutView = THLCheckoutViewController(event: event, admissionOption: admissionOption, guestlistInvite: guestlistInvite)
@@ -216,7 +256,7 @@ import Parse
     // MARK: PartyInvitationViewController
     
     func presentInvitationViewController(_ event: THLEvent, guestlistId: String, currentGuestsPhoneNumbers: [Any]) {
-        let contactPickerScene = EPContactsPicker(delegate: self, multiSelection:true, subtitleCellType: SubtitleCellValue.phoneNumber, event: event, guestlistId: guestlistId)
+        let contactPickerScene = EPContactsPicker(delegate: self, partyType: .generalAdmission, multiSelection:true, subtitleCellType: SubtitleCellValue.phoneNumber, event: event, guestlistId: guestlistId)
         let topView = self.topViewController() as! UINavigationController
         topView.pushViewController(contactPickerScene, animated: true)
     }
@@ -232,6 +272,11 @@ import Parse
         window.rootViewController!.dismiss(animated: true, completion: {() -> Void in
             self.presentPartyNavigationControllerforTicket(invite: invite)
         })
+    }
+    
+    // MARK: InquiryOffersViewController
+    internal func didAcceptInquiryOfferAndWantsToPresentPartyMenuWithInvite(_ guestlistInvite: PFObject) {
+        self.presentPartyMenuforConnect(guestlistInvite)
     }
     
     // MARK: Payment View Controller
@@ -295,7 +340,7 @@ import Parse
     }
     
     internal func partyViewControllerWantsToPresentInvitationController(for event: THLEvent!, guestlistId: String!, currentGuestsPhoneNumbers: [Any]!) {
-        let contactPickerScene = EPContactsPicker(delegate: self, multiSelection:true, subtitleCellType: SubtitleCellValue.phoneNumber, event: event, guestlistId: guestlistId)
+        let contactPickerScene = EPContactsPicker(delegate: self, partyType: .connect, multiSelection:true, subtitleCellType: SubtitleCellValue.phoneNumber, event: event, guestlistId: guestlistId)
         let topView = self.topViewController() as! UINavigationController
         topView.pushViewController(contactPickerScene, animated: true)
     }
@@ -340,15 +385,28 @@ import Parse
     }
     
     public func epContactPicker(_: EPContactsPicker, didSubmitInvitesAndWantsToShowInquiry: PFObject) {
+        let tabBarController = window.rootViewController as! UITabBarController
         
+        if self.topViewController() != tabBarController {
+            tabBarController.dismiss(animated: true, completion: { _ in })
+        }
+        if tabBarController.selectedIndex != 2 {
+            tabBarController.selectedIndex = 2
+        }
+        
+        self.presentOffersForInquiryWithGuestlistInvite(guestlistInvite: didSubmitInvitesAndWantsToShowInquiry)
     }
     
-    internal func didSubmitInquiry(_ inquiry: PFObject) {
-        
+    func presentOffersForInquiryWithGuestlistInvite(guestlistInvite: PFObject) {
+        let offersView = THLInquiryOffersViewController(guestlistInvite: guestlistInvite)
+        offersView.delegate = self
+        let navigationVC = UINavigationController(navigationBarClass: THLBoldNavigationBar.self, toolbarClass: nil)
+        navigationVC.addChildViewController(offersView)
+        window.rootViewController!.present(navigationVC, animated: true, completion: { _ in })
     }
 
     internal func didSelectViewInquiry(_ guestlistInvite: PFObject) {
-        
+        presentOffersForInquiryWithGuestlistInvite(guestlistInvite: guestlistInvite)
     }
     
     internal func didSelectViewEventTicket(_ guestlistInvite: PFObject) {
@@ -356,13 +414,26 @@ import Parse
     }
 
     internal func didSelectViewHostedEvent(_ guestlistInvite: PFObject) {
-        
+        presentPartyMenuforConnect(guestlistInvite)
     }
-
     
-    internal func userProfileViewControllerWantsToLogout() {
-        self.logOutUser()
+    internal func presentPartyMenuforConnect(_ invite: PFObject) {
+        let partyMenu = THLPartyMenuController(guestlistInvite: invite)
+        let navigationVC = UINavigationController(navigationBarClass: THLBoldNavigationBar.self, toolbarClass: nil)
+        navigationVC.addChildViewController(partyMenu)
+        let tabBarController = window.rootViewController as! UITabBarController
 
+        if self.topViewController() != tabBarController {
+            tabBarController.dismiss(animated: true, completion: { _ in })
+        }
+        window.rootViewController!.present(navigationVC, animated: true, completion: { _ in })
+        if tabBarController.selectedIndex != 2 {
+            tabBarController.selectedIndex = 2
+        }
+    }
+    
+    public func userProfileViewControllerWantsToLogout() {
+        self.logOutUser()
     }
     
     internal func userProfileViewControllerWantsToPresentPaymentViewController() {
@@ -414,7 +485,7 @@ import Parse
 //        }
 //    }
     // MARK: - LogOut Handler
-    
+
     func logOutUser() {
         THLUserManager.logUserOut()
         Branch.getInstance().logout()
