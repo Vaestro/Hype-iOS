@@ -384,7 +384,7 @@ TTTAttributedLabelDelegate
                                        @"eventId": _event.objectId,
                                        @"eventTime": _event.date,
                                        @"locationName": _event.location.name,
-                                       @"descriptionName": _admissionOption[@"name"]
+                                       @"description": _admissionOption[@"name"]
                                        };
         
         [PFCloud callFunctionInBackground:@"createReservation"

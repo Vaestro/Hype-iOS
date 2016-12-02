@@ -30,6 +30,7 @@ pod "TextFieldEffects"
 pod 'PhoneNumberKit', '~> 1.0'
 pod 'MRCountryPicker', '~> 0.0.5'
 pod 'PermissionScope'
+pod 'Eureka', '~> 2.0.0-beta.1'
 
 #Debugging
 pod 'FLEX', '~> 2.0', :configurations => ['Debug']

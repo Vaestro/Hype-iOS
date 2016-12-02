@@ -15,7 +15,7 @@ protocol THLMyUpcomingEventsViewControllerDelegate: class {
     func didSelectViewInquiry(_ guestlistInvite: PFObject)
     func didSelectViewHostedEvent(_ guestlistInvite: PFObject)
     func didSelectViewEventTicket(_ guestlistInvite: PFObject)
-
+    func didSelectViewTableReservation(_ guestlistInvite: PFObject)
 }
 
 class THLMyUpcomingEventsViewController: PFQueryTableViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
@@ -114,6 +114,8 @@ extension THLMyUpcomingEventsViewController {
             } else {
                 delegate?.didSelectViewInquiry(guestlistInvite!)
             }
+        } else if (admissionType == 1) {
+            delegate?.didSelectViewTableReservation(guestlistInvite!)
         } else {
             delegate?.didSelectViewEventTicket(guestlistInvite!)
         }

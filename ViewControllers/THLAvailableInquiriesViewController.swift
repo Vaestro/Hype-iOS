@@ -29,6 +29,9 @@ class THLAvailableInquiriesViewController: PFQueryTableViewController {
         tableView?.register(THLInquiryTableViewCell.self, forCellReuseIdentifier: "THLInquiryTableViewCell")
         tableView?.separatorStyle = UITableViewCellSeparatorStyle.none
         tableView?.backgroundColor = UIColor.black
+        
+        (self.navigationController?.navigationBar as! THLBoldNavigationBar).titleLabel.text = "INQUIRIES"
+        (self.navigationController?.navigationBar as! THLBoldNavigationBar).subtitleLabel.text = ""
     }
     
     // MARK: Data

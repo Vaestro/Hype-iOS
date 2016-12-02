@@ -128,8 +128,11 @@ import Parse
     
     func presentHostInterface() {
         let hostTabBarController = UITabBarController()
-        let inquiryDiscoveryView = THLHostDashboardViewController()
-        inquiryDiscoveryView.tabBarItem.image = UIImage(named: "Home Icon")!
+        let inquiryDiscoveryView = THLAvailableInquiriesViewController()
+        let inquiryDiscoveryNavigationController = UINavigationController(navigationBarClass: THLBoldNavigationBar.self, toolbarClass: nil)
+        inquiryDiscoveryNavigationController.addChildViewController(inquiryDiscoveryView)
+        
+        inquiryDiscoveryNavigationController.tabBarItem.image = UIImage(named: "Home Icon")!
 
         let guestProfileView = THLGuestProfileViewController()
         guestProfileView.delegate = self
@@ -142,7 +145,7 @@ import Parse
         conversationsNavigationController.pushViewController(conversationsView, animated: false)
         conversationsNavigationController.tabBarItem.image = UIImage(named: "message")!
         
-        let views = [inquiryDiscoveryView, conversationsNavigationController, profileNavigationController]
+        let views = [inquiryDiscoveryNavigationController, conversationsNavigationController, profileNavigationController]
         hostTabBarController.viewControllers = views
         hostTabBarController.selectedIndex = 0
         hostTabBarController.view.autoresizingMask = (.flexibleHeight)
@@ -415,6 +418,9 @@ import Parse
 
     internal func didSelectViewHostedEvent(_ guestlistInvite: PFObject) {
         presentPartyMenuforConnect(guestlistInvite)
+    }
+    internal func didSelectViewTableReservation(_ guestlistInvite: PFObject) {
+        self.presentPartyNavigationControllerforTableReservation(invite: guestlistInvite)
     }
     
     internal func presentPartyMenuforConnect(_ invite: PFObject) {

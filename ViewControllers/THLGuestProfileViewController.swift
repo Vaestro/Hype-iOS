@@ -13,6 +13,7 @@ import Kingfisher
     func didSelectViewInquiry(_ guestlistInvite: PFObject)
     func didSelectViewEventTicket(_ guestlistInvite: PFObject)
     func didSelectViewHostedEvent(_ guestlistInvite: PFObject)
+    func didSelectViewTableReservation(_ guestlistInvite: PFObject)
 
     func userProfileViewControllerWantsToLogout()
     func userProfileViewControllerWantsToPresentPaymentViewController()
@@ -20,6 +21,10 @@ import Kingfisher
 }
 
 class THLGuestProfileViewController: UIViewController, THLMyUpcomingEventsViewControllerDelegate, THLUserProfileViewControllerDelegate, THLMyInvitesViewControllerDelegate {
+    internal func didSelectViewTableReservation(_ guestlistInvite: PFObject) {
+        self.delegate?.didSelectViewTableReservation(guestlistInvite)
+    }
+
     public func userProfileViewControllerWantsToPresentPaymentViewController() {
         delegate?.userProfileViewControllerWantsToPresentPaymentViewController()
     }

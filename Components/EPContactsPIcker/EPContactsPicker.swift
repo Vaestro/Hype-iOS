@@ -82,6 +82,11 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
             controller.dimsBackgroundDuringPresentation = false
             controller.searchBar.sizeToFit()
             controller.searchBar.delegate = self
+            controller.searchBar.setValue("Done", forKey: "_cancelButtonText")
+            let textFieldInsideSearchBar = controller.searchBar.value(forKey: "searchField") as? UITextField
+            
+            textFieldInsideSearchBar?.textColor = UIColor.black
+            
             self.tableView.tableHeaderView = controller.searchBar
             self.navigationController?.extendedLayoutIncludesOpaqueBars = true
             return controller
@@ -93,7 +98,7 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
 //        self.navigationItem.leftBarButtonItem = cancelButton
         
         if multiSelectEnabled {
-            let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(onTouchDoneButton))
+            let doneButton = UIBarButtonItem(title: "Submit", style: UIBarButtonItemStyle.done, target: self, action: #selector(onTouchDoneButton))
             self.navigationItem.rightBarButtonItem = doneButton
             
         }
@@ -410,7 +415,7 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
         branchUniversalObject.getShortUrl(with: linkProperties, andCallback: {
             (url, error) in
             if error == nil {
-                PFCloud.callFunction(inBackground: "sendOutInvitations", withParameters: ["eventId": eventId, "eventName": locationName, "eventTime": eventDate, "guestPhoneNumbers": guestPhoneNumbers, "guestlistId": self.guestlistId, "branchUrl": url]) {
+                PFCloud.callFunction(inBackground: "sendOutInvitations", withParameters: ["eventId": eventId, "eventName": locationName, "eventTime": eventDate, "guestPhoneNumbers": guestPhoneNumbers, "guestlistId": self.guestlistId!, "branchUrl": url]) {
                     (response, cloudError) in
                     if cloudError == nil {
                         self.dismiss(animated: true, completion: {
@@ -442,6 +447,9 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
                                                                                         (guestlistInvite, error) in
                                                                                         if error == nil {
                                                                                             (guestlistInvite as! PFObject).pinInBackground()
+                                                                                            let guestlist = (guestlistInvite as! PFObject).value(forKey: "Guestlist") as! PFObject
+                                                                                            self.guestlistId = guestlist.objectId!
+                                                                                            
                                                                                             //                                let guestlist = (guestlistInvite as! PFObject).value(forKey: "Guestlist") as! PFObject
                                                                                             //                                let inquiry = guestlist.value(forKey: "Inquiry") as! PFObject
                                                                                             // Prepare the popup assets
@@ -453,7 +461,7 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
                                                                                             
                                                                                             // Create buttons
                                                                                             let buttonOne = CancelButton(title: "OK") {
-                                                                                                self.contactDelegate?.epContactPicker(self, didSubmitInvitesAndWantsToShowInquiry: (guestlistInvite as! PFObject))
+                                                                                                self.sendOutInvitations()
                                                                                             }
                                                                                             
                                                                                             popup.addButton(buttonOne)

@@ -12,7 +12,7 @@
 
 @implementation THLAppearanceUtils
 + (void)applyStyles {
-	[self applyNUIStylesheet];
+//	[self applyNUIStylesheet];
 	[self applyGlobalAppearance];
 }
 
