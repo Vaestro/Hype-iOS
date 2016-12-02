@@ -233,8 +233,12 @@
         NSString *eventTitle = _event[@"title"];
         if (eventTitle == nil || [eventTitle isEqualToString:@""]) {
             _navBar.titleLabel.text = _venue[@"name"];
+            _navBar.titleLabel.textColor = [UIColor whiteColor];
+
         } else {
             _navBar.titleLabel.text = _event[@"title"];
+            _navBar.titleLabel.textColor = [UIColor whiteColor];
+
         }
         if (_event) {
             _navBar.dateLabel.text = [NSString stringWithFormat:@"%@, %@", ((NSDate *)_event[@"date"]).thl_weekdayString, ((NSDate *)_event[@"date"]).thl_timeString];
@@ -259,6 +263,8 @@
     if (!_needToKnowInfoView) {
         _needToKnowInfoView = [THLImportantInformationView new];
         _needToKnowInfoView.titleLabel.text = NSLocalizedString(@"NEED TO KNOW", nil);
+        _needToKnowInfoView.titleLabel.textColor = [UIColor whiteColor];
+
         _needToKnowInfoView.importantInformationLabel.text = [NSString
                                                               stringWithFormat:@"Hours: %@ - %@\nDress code: %@\nMust have valid 21+ Photo ID\nFinal admission at doorman’s discretion.", ((NSDate *)_venue[@"openTime"]).thl_timeString, ((NSDate *)_venue[@"closeTime"]).thl_timeString, _venue[@"attireRequirement"]];
         _needToKnowInfoView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -271,6 +277,8 @@
     if (!_locationInfoView) {
         _locationInfoView = [THLTitledContentView new];
         _locationInfoView.titleLabel.text = @"WHAT WE LIKE";
+        _locationInfoView.titleLabel.textColor = [UIColor whiteColor];
+
         [_locationInfoView addContentText:_venue[@"info"]];
         _locationInfoView.translatesAutoresizingMaskIntoConstraints = NO;
     }
@@ -284,6 +292,8 @@
     if (!_musicTypesView) {
         _musicTypesView = [THLTitledContentView new];
         _musicTypesView.titleLabel.text = @"MUSIC";
+        _musicTypesView.titleLabel.textColor = [UIColor whiteColor];
+
         NSArray *musicTypesArray = _venue[@"musicTypes"];
         NSString *musicTypes = [NSString stringWithFormat:@"%@", [musicTypesArray componentsJoinedByString:@" | "]];
         [_musicTypesView addContentText:musicTypes];
@@ -320,6 +330,7 @@
 {
     if (!_eventNameLabel) {
         _eventNameLabel = THLNUILabel(kTHLNUIRegularTitle);
+        _eventNameLabel.textColor = [UIColor whiteColor];
     }
     return _eventNameLabel;
 }

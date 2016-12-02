@@ -20,6 +20,7 @@
     if (!self) return nil;
     
     _label = THLNUILabel(kTHLNUISectionTitle);
+    _label.textColor = [UIColor whiteColor];
     _label.textAlignment = NSTextAlignmentLeft;
     _label.numberOfLines = 1;
     _label.adjustsFontSizeToFitWidth = true;
@@ -27,6 +28,8 @@
     [self addSubview:_label];
     
     _subtitleLabel = THLNUILabel(kTHLNUIDetailTitle);
+    _subtitleLabel.textColor = [UIColor whiteColor];
+
     _subtitleLabel.textAlignment = NSTextAlignmentLeft;
     _subtitleLabel.numberOfLines = 1;
     _subtitleLabel.adjustsFontSizeToFitWidth = TRUE;

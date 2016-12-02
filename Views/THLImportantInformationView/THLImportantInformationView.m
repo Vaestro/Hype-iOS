@@ -28,6 +28,8 @@
 - (UILabel *)importantInformationLabel {
     if (!_importantInformationLabel) {
         _importantInformationLabel = THLNUILabel(kTHLNUIDetailTitle);
+        _importantInformationLabel.textColor = [UIColor whiteColor];
+
         _importantInformationLabel.adjustsFontSizeToFitWidth = YES;
         _importantInformationLabel.minimumScaleFactor = 0.5;
         _importantInformationLabel.textAlignment = NSTextAlignmentLeft;

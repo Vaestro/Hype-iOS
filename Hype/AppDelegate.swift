@@ -9,6 +9,7 @@ import Stripe
 import ParseFacebookUtilsV4
 import Mixpanel
 import Branch
+import AVFoundation
 
 #if DEBUG
     let stripePublishableKey = "pk_test_cGZ7E1Im6VPKQHYUXIkR6sEe"

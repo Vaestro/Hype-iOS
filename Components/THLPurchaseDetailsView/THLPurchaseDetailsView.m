@@ -134,6 +134,8 @@
 - (UILabel *)subtotalDesciptionLabel {
     if (!_subtotalDesciptionLabel) {
         _subtotalDesciptionLabel = THLNUILabel(kTHLNUIDetailTitle);
+        _subtotalDesciptionLabel.textColor = [UIColor whiteColor];
+
         _subtotalDesciptionLabel.text = @"Subtotal";
         [self.contentView addSubview:_subtotalDesciptionLabel];
     }
@@ -143,6 +145,8 @@
 - (UILabel *)taxDescriptionLabel {
     if (!_taxDescriptionLabel && _taxLabel) {
         _taxDescriptionLabel = THLNUILabel(kTHLNUIDetailTitle);
+        _taxDescriptionLabel.textColor = [UIColor whiteColor];
+
         _taxDescriptionLabel.text = @"Tax (8.65%)";
         [self.contentView addSubview:_taxDescriptionLabel];
     }
@@ -152,6 +156,8 @@
 - (UILabel *)tipDescriptionLabel {
     if (!_tipDescriptionLabel && _tipLabel) {
         _tipDescriptionLabel = THLNUILabel(kTHLNUIDetailTitle);
+        _tipDescriptionLabel.textColor = [UIColor whiteColor];
+
         _tipDescriptionLabel.text = @"Tip (20%)";
         [self.contentView addSubview:_tipDescriptionLabel];
     }
@@ -161,6 +167,8 @@
 - (UILabel *)serviceChargeDesciptionLabel {
     if (!_serviceChargeDesciptionLabel && _serviceChargeLabel) {
         _serviceChargeDesciptionLabel = THLNUILabel(kTHLNUIDetailTitle);
+        _serviceChargeDesciptionLabel.textColor = [UIColor whiteColor];
+
         _serviceChargeDesciptionLabel.text = @"Service Charge";
         [self.contentView addSubview:_serviceChargeDesciptionLabel];
     }
@@ -170,6 +178,8 @@
 - (UILabel *)totalDescriptionLabel {
     if (!_totalDescriptionLabel) {
         _totalDescriptionLabel = THLNUILabel(kTHLNUIDetailTitle);
+        _totalDescriptionLabel.textColor = [UIColor whiteColor];
+
         _totalDescriptionLabel.text = @"Total";
         [self.contentView addSubview:_totalDescriptionLabel];
     }
@@ -180,6 +190,9 @@
 - (UILabel *)purchaseTitleLabel {
     if (!_purchaseTitleLabel) {
         _purchaseTitleLabel = THLNUILabel(kTHLNUIDetailTitle);
+        
+        _purchaseTitleLabel.textColor = [UIColor whiteColor];
+
         _purchaseTitleLabel.adjustsFontSizeToFitWidth = YES;
         _purchaseTitleLabel.minimumScaleFactor = 0.5;
         _purchaseTitleLabel.textAlignment = NSTextAlignmentLeft;
@@ -194,6 +207,8 @@
 - (UILabel *)subtotalLabel {
     if (!_subtotalLabel) {
         _subtotalLabel = THLNUILabel(kTHLNUIDetailTitle);
+        _subtotalLabel.textColor = [UIColor whiteColor];
+
         _subtotalLabel.adjustsFontSizeToFitWidth = YES;
         _subtotalLabel.minimumScaleFactor = 0.5;
         _subtotalLabel.textAlignment = NSTextAlignmentRight;
@@ -206,6 +221,8 @@
 - (UILabel *)taxLabel {
     if (!_taxLabel) {
         _taxLabel = THLNUILabel(kTHLNUIDetailTitle);
+        _taxLabel.textColor = [UIColor whiteColor];
+
         _taxLabel.adjustsFontSizeToFitWidth = YES;
         _taxLabel.minimumScaleFactor = 0.5;
         _taxLabel.textAlignment = NSTextAlignmentRight;
@@ -218,6 +235,8 @@
 - (UILabel *)tipLabel {
     if (!_tipLabel) {
         _tipLabel = THLNUILabel(kTHLNUIDetailTitle);
+        _tipLabel.textColor = [UIColor whiteColor];
+
         _tipLabel.adjustsFontSizeToFitWidth = YES;
         _tipLabel.minimumScaleFactor = 0.5;
         _tipLabel.textAlignment = NSTextAlignmentRight;
@@ -230,6 +249,8 @@
 - (UILabel *)serviceChargeLabel {
     if (!_serviceChargeLabel) {
         _serviceChargeLabel = THLNUILabel(kTHLNUIDetailTitle);
+        _serviceChargeLabel.textColor = [UIColor whiteColor];
+
         _serviceChargeLabel.adjustsFontSizeToFitWidth = YES;
         _serviceChargeLabel.minimumScaleFactor = 0.5;
         _serviceChargeLabel.textAlignment = NSTextAlignmentRight;
@@ -243,6 +264,8 @@
 - (UILabel *)totalLabel {
     if (!_totalLabel) {
         _totalLabel = THLNUILabel(kTHLNUIDetailTitle);
+        _totalLabel.textColor = [UIColor whiteColor];
+
         _totalLabel.adjustsFontSizeToFitWidth = YES;
         _totalLabel.minimumScaleFactor = 0.5;
         _totalLabel.textAlignment = NSTextAlignmentRight;

@@ -39,6 +39,7 @@
 - (UILabel *)titleLabel {
     if (!_paymentTitleLabel) {
         _paymentTitleLabel = THLNUILabel(kTHLNUIDetailTitle);
+        _paymentTitleLabel.textColor = [UIColor whiteColor];
         [self addSubview:_paymentTitleLabel];
     }
     return _paymentTitleLabel;

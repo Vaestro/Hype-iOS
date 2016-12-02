@@ -43,7 +43,9 @@
 #pragma mark - Constructors
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
-        _titleLabel = THLNUILabel(kTHLNUIRegularTitle);
+        _titleLabel = [UILabel new];
+        _titleLabel.font = [UIFont fontWithName:@"Raleway-ExtraBold" size:20];
+        _titleLabel.textColor = [UIColor whiteColor];
         _titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         _titleLabel.numberOfLines = 3;
         _titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -67,7 +69,9 @@
 
 - (UILabel *)locationNameLabel {
     if (!_locationNameLabel) {
-        _locationNameLabel = THLNUILabel(kTHLNUIBoldTitle);
+        _locationNameLabel = [UILabel new];
+        _locationNameLabel.font = [UIFont fontWithName:@"Raleway-ExtraBold" size:20];
+        _locationNameLabel.textColor = [UIColor whiteColor];
         _locationNameLabel.lineBreakMode = NSLineBreakByWordWrapping;
         _locationNameLabel.numberOfLines = 2;
         _locationNameLabel.textAlignment = NSTextAlignmentCenter;
@@ -81,7 +85,9 @@
 
 - (UILabel *)locationNeighborhoodLabel {
     if (!_locationNeighborhoodLabel) {
-        _locationNeighborhoodLabel = THLNUILabel(kTHLNUIDetailTitle);
+        _locationNeighborhoodLabel = [UILabel new];
+        _locationNeighborhoodLabel.font = [UIFont fontWithName:@"OpenSans-Light" size:16];
+        _locationNeighborhoodLabel.textColor = [UIColor whiteColor];
         _locationNeighborhoodLabel.lineBreakMode = NSLineBreakByWordWrapping;
         _locationNeighborhoodLabel.numberOfLines = 1;
         _locationNeighborhoodLabel.textAlignment = NSTextAlignmentCenter;
