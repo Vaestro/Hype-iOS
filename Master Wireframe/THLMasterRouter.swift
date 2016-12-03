@@ -127,6 +127,9 @@ import Parse
     }
     
     func presentHostInterface() {
+        THLChatSocketManager.sharedInstance.establishConnection()
+        THLChatSocketManager.sharedInstance.checkAndCreateSupportChat()
+        
         let hostTabBarController = UITabBarController()
         let inquiryDiscoveryView = THLAvailableInquiriesViewController()
         let inquiryDiscoveryNavigationController = UINavigationController(navigationBarClass: THLBoldNavigationBar.self, toolbarClass: nil)

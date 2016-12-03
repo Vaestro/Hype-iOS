@@ -37,9 +37,13 @@ class THLAvailableInquiriesViewController: PFQueryTableViewController {
     // MARK: Data
     
     override func queryForTable() -> PFQuery<PFObject> {
+        let date = NSDate().subtractingHours(4) as NSDate
+
         let query: PFQuery = super.queryForTable()
         
         query.addAscendingOrder("date")
+        query.whereKey("connected", notEqualTo: true)
+        query.whereKey("date", greaterThan: date)
         query.includeKey("Offers")
         query.includeKey("Event")
         query.includeKey("Event.location")

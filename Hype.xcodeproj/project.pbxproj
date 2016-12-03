@@ -82,6 +82,7 @@
 		795569C01DA70ECF006E4049 /* THLInquiryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795569BF1DA70ECF006E4049 /* THLInquiryTableViewCell.swift */; };
 		795569C21DA71403006E4049 /* THLInquiry.m in Sources */ = {isa = PBXBuildFile; fileRef = 795569C11DA71403006E4049 /* THLInquiry.m */; };
 		795569C51DA81BA4006E4049 /* THLInquiryMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795569C41DA81BA3006E4049 /* THLInquiryMenuViewController.swift */; };
+		7955B20C1DF3217700CA0A07 /* THLHostUpcomingEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7955B20B1DF3217700CA0A07 /* THLHostUpcomingEventsViewController.swift */; };
 		7964645D1DAE95A000DA1F51 /* THLInquiryOffersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7964645C1DAE95A000DA1F51 /* THLInquiryOffersViewController.swift */; };
 		79651F581DD8F3870057AD63 /* THLPhoneNumberVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79651F571DD8F3870057AD63 /* THLPhoneNumberVerificationViewController.swift */; };
 		79651F5A1DD933DE0057AD63 /* THLSwiftLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79651F591DD933DE0057AD63 /* THLSwiftLoginViewController.swift */; };
@@ -339,6 +340,7 @@
 		795569C11DA71403006E4049 /* THLInquiry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLInquiry.m; sourceTree = "<group>"; };
 		795569C31DA7140F006E4049 /* THLInquiry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLInquiry.h; sourceTree = "<group>"; };
 		795569C41DA81BA3006E4049 /* THLInquiryMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLInquiryMenuViewController.swift; sourceTree = "<group>"; };
+		7955B20B1DF3217700CA0A07 /* THLHostUpcomingEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLHostUpcomingEventsViewController.swift; sourceTree = "<group>"; };
 		7964645C1DAE95A000DA1F51 /* THLInquiryOffersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLInquiryOffersViewController.swift; sourceTree = "<group>"; };
 		79651F571DD8F3870057AD63 /* THLPhoneNumberVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLPhoneNumberVerificationViewController.swift; sourceTree = "<group>"; };
 		79651F591DD933DE0057AD63 /* THLSwiftLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLSwiftLoginViewController.swift; sourceTree = "<group>"; };
@@ -1080,6 +1082,7 @@
 				79651F591DD933DE0057AD63 /* THLSwiftLoginViewController.swift */,
 				7941BC1D1DBFA05600A84F54 /* THLPartyMenuController.swift */,
 				FF3541821DC9670C004DD268 /* THLProfilePicChooserViewController.swift */,
+				7955B20B1DF3217700CA0A07 /* THLHostUpcomingEventsViewController.swift */,
 				797DB4871DD5126E00C772C7 /* THLAccountRegistrationViewController.swift */,
 				79EB0C321DC942A200E0AD9E /* THLConnectedHostViewController.swift */,
 				793222C41DD2475E008462EC /* THLWelcomeViewController.swift */,
@@ -1951,6 +1954,7 @@
 				7941BC201DC10F4A00A84F54 /* THLSubmitInquiryOfferViewController.swift in Sources */,
 				7941BC1E1DBFA05600A84F54 /* THLPartyMenuController.swift in Sources */,
 				211BB0D81B8CC6DA0068FD50 /* UIView+AddSubviews.m in Sources */,
+				7955B20C1DF3217700CA0A07 /* THLHostUpcomingEventsViewController.swift in Sources */,
 				798402D41D217157006F463B /* THLEntity.m in Sources */,
 				79E945B91DBA911E00EC753D /* THLMyEventsTableViewCell.swift in Sources */,
 				7928ADA11D19C98400DFC443 /* THLUserProfileTableViewCell.m in Sources */,

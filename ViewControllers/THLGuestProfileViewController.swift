@@ -20,7 +20,11 @@ import Kingfisher
 
 }
 
-class THLGuestProfileViewController: UIViewController, THLMyUpcomingEventsViewControllerDelegate, THLUserProfileViewControllerDelegate, THLMyInvitesViewControllerDelegate {
+class THLGuestProfileViewController: UIViewController, THLMyUpcomingEventsViewControllerDelegate, THLUserProfileViewControllerDelegate, THLMyInvitesViewControllerDelegate, THLHostUpcomingEventsViewControllerDelegate {
+    internal func didSelectViewConnectedInquiry(_ inquiry: PFObject) {
+        
+    }
+
     internal func didSelectViewTableReservation(_ guestlistInvite: PFObject) {
         self.delegate?.didSelectViewTableReservation(guestlistInvite)
     }
@@ -51,7 +55,6 @@ class THLGuestProfileViewController: UIViewController, THLMyUpcomingEventsViewCo
     var delegate: THLGuestProfileViewControllerDelegate?
 
     var pageMenu : CAPSPageMenu?
-    var myEventsViewController : THLMyUpcomingEventsViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,15 +71,25 @@ class THLGuestProfileViewController: UIViewController, THLMyUpcomingEventsViewCo
         // Initialize view controllers to display and place in array
         var controllerArray : [UIViewController] = []
         
-        myEventsViewController = THLMyUpcomingEventsViewController()
-        myEventsViewController?.delegate = self;
-        myEventsViewController?.title = "MY EVENTS"
-        controllerArray.append(myEventsViewController!)
+        if THLUser.current()?.type == THLUserType.host {
+            let myEventsViewController = THLHostUpcomingEventsViewController()
+            myEventsViewController.delegate = self;
+            myEventsViewController.title = "MY EVENTS"
+            
+            controllerArray.append(myEventsViewController)
+        } else {
+            let myEventsViewController = THLMyUpcomingEventsViewController()
+            myEventsViewController.delegate = self;
+            myEventsViewController.title = "MY EVENTS"
+            controllerArray.append(myEventsViewController)
+            
+            let controller2 : THLMyInvitesViewController = THLMyInvitesViewController()
+            controller2.title = "INVITES"
+            controller2.delegate = self;
+            controllerArray.append(controller2)
+        }
         
-        let controller2 : THLMyInvitesViewController = THLMyInvitesViewController()
-        controller2.title = "INVITES"
-        controller2.delegate = self;
-        controllerArray.append(controller2)
+
         
         // Initialize scroll menu
         let rect = CGRect(x: 0.0, y: 150.0, width: self.view.frame.width, height: self.view.frame.height - 150.0)

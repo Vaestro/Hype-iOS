@@ -70,28 +70,34 @@ class THLInquiryMenuViewController: UIViewController {
     }
     
     func handleConnect() {
-        
-        let venueQuery = PFQuery(className:"Location")
-        venueQuery.addAscendingOrder("name")
-        venueQuery.findObjectsInBackground(block: { (objects:[PFObject]?, error: Error?) in
-            
-            if error == nil {
-                // The find succeeded.
-                // Do something with the found objects
-                var availableVenues = [String]()
-                if let objects = objects {
-                    for object in objects {
-                        let venueName = object.value(forKey: "name") as! String
-                        availableVenues.append(venueName)
-                    }
-                }
+        if(THLUser.current()?.value(forKey: "image") == nil){
+            let vc = THLProfilePicChooserViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let venueQuery = PFQuery(className:"Location")
+            venueQuery.addAscendingOrder("name")
+            venueQuery.findObjectsInBackground(block: { (objects:[PFObject]?, error: Error?) in
                 
-                let submitInquiryView = THLSubmitInquiryOfferViewController(inquiry: self.inquiry!, availableVenues:availableVenues)
-                self.navigationController?.pushViewController(submitInquiryView, animated: true)
-            } else {
-                // Log details of the failure
-            }
-        })
+                if error == nil {
+                    // The find succeeded.
+                    // Do something with the found objects
+                    var availableVenues = [String]()
+                    if let objects = objects {
+                        for object in objects {
+                            let venueName = object.value(forKey: "name") as! String
+                            availableVenues.append(venueName)
+                        }
+                    }
+                    
+                    let submitInquiryView = THLSubmitInquiryOfferViewController(inquiry: self.inquiry!, availableVenues:availableVenues)
+                    self.navigationController?.pushViewController(submitInquiryView, animated: true)
+                } else {
+                    // Log details of the failure
+                }
+            })
+        }
+        
+
         
 
     }

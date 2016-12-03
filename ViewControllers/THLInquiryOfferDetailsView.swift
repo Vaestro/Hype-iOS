@@ -162,8 +162,10 @@ class THLInquiryOfferDetailsView: UIViewController {
     
     func handleConnect() {
         inquiryOffer["accepted"] = true
+    
         inquiry["connected"] = true
         inquiry["AcceptedOffer"] = inquiryOffer
+        inquiry["acceptedHostId"] = host.objectId
         inquiryOffer.saveInBackground()
         inquiry.saveInBackground{(success, error) in
             if (success) {
