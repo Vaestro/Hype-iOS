@@ -11,7 +11,7 @@ import UIKit
 import Parse
 import ParseUI
 protocol THLHostUpcomingEventsViewControllerDelegate: class {
-    func didSelectViewConnectedInquiry(_ inquiry: PFObject)
+    func didSelectViewInquiryMenuView(_ inquiry: PFObject)
 }
 
 class THLHostUpcomingEventsViewController: PFQueryTableViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
@@ -89,7 +89,7 @@ extension THLHostUpcomingEventsViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let inquiry: PFObject? = super.object(at: indexPath)
         
-        self.delegate?.didSelectViewConnectedInquiry(inquiry!)
+        self.delegate?.didSelectViewInquiryMenuView(inquiry!)
         
     }
     

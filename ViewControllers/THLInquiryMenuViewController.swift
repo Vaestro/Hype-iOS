@@ -31,14 +31,28 @@ class THLInquiryMenuViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         let sender = inquiry?.value(forKey: "Sender") as! PFObject
         let senderName = sender.value(forKey: "firstName") as! String
-        let event = inquiry?.value(forKey: "Event") as! PFObject
-        let location = event.value(forKey: "location") as! PFObject
-        let locationName = location.value(forKey: "name") as! String
-        let title = "\(senderName)'s inquiry for \(locationName)"
-        let date = event.value(forKey: "date") as! Date
-        let subtitle = (date as NSDate).thl_weekdayString
-        (self.navigationController?.navigationBar as! THLBoldNavigationBar).titleLabel.text = "\(title.uppercased())"
-        (self.navigationController?.navigationBar as! THLBoldNavigationBar).subtitleLabel.text = "\(subtitle?.uppercased())"
+        let status = inquiry?.value(forKey: "connected") as! Bool
+        if status == false {
+            let event:PFObject = inquiry?.value(forKey: "Venue") as! PFObject
+            let venue:PFObject = inquiry?.value(forKey: "Venue") as! PFObject
+            let venueName:String = venue.value(forKey: "name") as! String
+            let title = "\(senderName)'s inquiry for \(venueName)"
+            let date = event.value(forKey: "date") as! Date
+            let subtitle = (date as NSDate).thl_weekdayString
+            (self.navigationController?.navigationBar as! THLBoldNavigationBar).titleLabel.text = "\(title.uppercased())"
+            (self.navigationController?.navigationBar as! THLBoldNavigationBar).subtitleLabel.text = "\(subtitle?.uppercased())"
+        } else {
+            let inquiryOffer:PFObject = inquiry?.value(forKey:"AcceptedOffer") as! PFObject
+            let venue:PFObject = inquiryOffer.value(forKey: "Venue") as! PFObject
+            let venueName:String = venue.value(forKey: "name") as! String
+            let title = "\(senderName)'s inquiry for \(venueName)"
+            let date = inquiryOffer.value(forKey: "date") as! Date
+            let subtitle = (date as NSDate).thl_weekdayString
+            (self.navigationController?.navigationBar as! THLBoldNavigationBar).titleLabel.text = "\(title.uppercased())"
+            (self.navigationController?.navigationBar as! THLBoldNavigationBar).subtitleLabel.text = "\(subtitle?.uppercased())"
+        }
+
+
     }
 
     override func viewDidLoad() {
@@ -50,9 +64,16 @@ class THLInquiryMenuViewController: UIViewController {
         
         superview.addSubview(guestlistTableView.tableView)
         
-        connectButton.setTitle("CONNECT", for: UIControlState.normal)
+        let status = inquiry?.value(forKey: "connected") as! Bool
+        if status == true {
+            connectButton.setTitle("MESSAGE", for: UIControlState.normal)
+
+        } else {
+            connectButton.setTitle("CONNECT", for: UIControlState.normal)
+
+        }
         connectButton.setTitleColor(UIColor.black, for: UIControlState.normal)
-        connectButton.addTarget(self, action: #selector(handleConnect), for: UIControlEvents.touchUpInside)
+        connectButton.addTarget(self, action: #selector(handleButtonTapped), for: UIControlEvents.touchUpInside)
         connectButton.backgroundColor = UIColor.customGoldColor()
         superview.addSubview(connectButton)
     
@@ -67,6 +88,19 @@ class THLInquiryMenuViewController: UIViewController {
     
     func dismiss() {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func handleButtonTapped() {
+        let status = inquiry?.value(forKey: "connected") as! Bool
+        if status == true {
+            handleMessage()
+        } else {
+            handleConnect()
+        }
+    }
+    
+    func handleMessage() {
+        
     }
     
     func handleConnect() {

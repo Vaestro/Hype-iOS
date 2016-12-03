@@ -426,6 +426,17 @@ import Parse
         self.presentPartyNavigationControllerforTableReservation(invite: guestlistInvite)
     }
     
+    internal func didSelectViewInquiryMenuView(_ inquiry:PFObject) {
+        self.presentInquiryMenu(forInquiry: inquiry)
+    }
+    
+    func presentInquiryMenu(forInquiry inquiry:PFObject) {
+        let inquiryMenuController = THLInquiryMenuViewController(inquiry:inquiry)
+        let navigationController = UINavigationController.init(navigationBarClass: THLBoldNavigationBar.self, toolbarClass: nil)
+        navigationController.setViewControllers([inquiryMenuController], animated: false)
+        window.rootViewController!.present(navigationController, animated: true, completion: { _ in })
+
+    }
     internal func presentPartyMenuforConnect(_ invite: PFObject) {
         let partyMenu = THLPartyMenuController(guestlistInvite: invite)
         let navigationVC = UINavigationController(navigationBarClass: THLBoldNavigationBar.self, toolbarClass: nil)
