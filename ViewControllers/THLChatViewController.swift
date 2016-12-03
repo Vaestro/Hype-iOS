@@ -82,12 +82,27 @@ class THLChatViewController : JSQMessagesViewController {
         return cell
     }
     
+   
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellBottomLabelAt indexPath: IndexPath!) -> CGFloat {
+        return 0.0
+    }
+    
+   
+    override func collectionView(_ collectionView: JSQMessagesCollectionView, attributedTextForCellBottomLabelAt indexPath: IndexPath!) -> NSAttributedString? {
+        /*let myString = "Swift Attributed String"
+        let myAttribute = [ NSBackgroundColorAttributeName: UIColor.yellow ]
+        let myAttrString = NSAttributedString(string: myString, attributes: myAttribute)
+        return myAttrString*/
+        return nil
+    }
+    
     override func collectionView(_ collectionView: JSQMessagesCollectionView,
                                  avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource {
         
         
         return JSQMessagesAvatarImageFactory.avatarImage(with: UIImage() , diameter: 1)
     }
+    
     
     override func didPressSend(_ button: UIButton, withMessageText text: String, senderId: String,
                                senderDisplayName: String, date: Date) {
