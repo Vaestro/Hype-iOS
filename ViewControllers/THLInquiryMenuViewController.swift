@@ -9,30 +9,39 @@
 import UIKit
 import PopupDialog
 
+public enum InquiryStatus {
+    case available
+    case submittedOffer
+    case connected
+}
+
 class THLInquiryMenuViewController: UIViewController {
     
     var inquiry: PFObject?
     var guestlistTableView: THLGuestlistTableViewController!
     var connectButton: UIButton!
-    
+    var inquiryStatus:InquiryStatus = .available
+    var inquiryOffer: PFObject?
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     init(inquiry: PFObject) {
         self.inquiry = inquiry
+
         self.connectButton = UIButton()
         
         let guestlistId = inquiry["guestlistId"] as! String
         self.guestlistTableView = THLGuestlistTableViewController(guestlistId: guestlistId)
         super.init(nibName: nil, bundle: nil)
+        self.inquiryStatus = getInquiryStatus()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         let sender = inquiry?.value(forKey: "Sender") as! PFObject
         let senderName = sender.value(forKey: "firstName") as! String
-        let status = inquiry?.value(forKey: "connected") as! Bool
-        if status == false {
+        if inquiryStatus == .available {
             let event:PFObject = inquiry?.value(forKey: "Event") as! PFObject
             let venue:PFObject = event.value(forKey: "location") as! PFObject
             let venueName:String = venue.value(forKey: "name") as! String
@@ -41,11 +50,20 @@ class THLInquiryMenuViewController: UIViewController {
             let subtitle = (date as NSDate).thl_weekdayString
             (self.navigationController?.navigationBar as! THLBoldNavigationBar).titleLabel.text = "\(title.uppercased())"
             (self.navigationController?.navigationBar as! THLBoldNavigationBar).subtitleLabel.text = "\(subtitle?.uppercased())"
+            
+        } else if (inquiryStatus == .submittedOffer) {
+            let venue:PFObject = inquiryOffer!.value(forKey: "Venue") as! PFObject
+            let venueName:String = venue.value(forKey: "name") as! String
+            let title = "Pending response from \(senderName) for \(venueName)"
+            let date = inquiryOffer?.value(forKey: "date") as! Date
+            let subtitle = (date as NSDate).thl_weekdayString
+            (self.navigationController?.navigationBar as! THLBoldNavigationBar).titleLabel.text = "\(title.uppercased())"
+            (self.navigationController?.navigationBar as! THLBoldNavigationBar).subtitleLabel.text = "\(subtitle?.uppercased())"
         } else {
             let inquiryOffer:PFObject = inquiry?.value(forKey:"AcceptedOffer") as! PFObject
             let venue:PFObject = inquiryOffer.value(forKey: "Venue") as! PFObject
             let venueName:String = venue.value(forKey: "name") as! String
-            let title = "\(senderName)'s inquiry for \(venueName)"
+            let title = "\(senderName)'s party for \(venueName)"
             let date = inquiryOffer.value(forKey: "date") as! Date
             let subtitle = (date as NSDate).thl_weekdayString
             (self.navigationController?.navigationBar as! THLBoldNavigationBar).titleLabel.text = "\(title.uppercased())"
@@ -63,14 +81,12 @@ class THLInquiryMenuViewController: UIViewController {
         superview.backgroundColor = UIColor.black
         
         superview.addSubview(guestlistTableView.tableView)
-        
-        let status = inquiry?.value(forKey: "connected") as! Bool
-        if status == true {
+        if inquiryStatus == .connected {
             connectButton.setTitle("MESSAGE", for: UIControlState.normal)
-
+        } else if (inquiryStatus == .submittedOffer) {
+            connectButton.isHidden = true
         } else {
             connectButton.setTitle("CONNECT", for: UIControlState.normal)
-
         }
         connectButton.setTitleColor(UIColor.black, for: UIControlState.normal)
         connectButton.addTarget(self, action: #selector(handleButtonTapped), for: UIControlEvents.touchUpInside)
@@ -91,8 +107,7 @@ class THLInquiryMenuViewController: UIViewController {
     }
     
     func handleButtonTapped() {
-        let status = inquiry?.value(forKey: "connected") as! Bool
-        if status == true {
+        if inquiryStatus == .connected {
             handleMessage()
         } else {
             handleConnect()
@@ -130,10 +145,32 @@ class THLInquiryMenuViewController: UIViewController {
                 }
             })
         }
+    }
+    
+    func getInquiryStatus() -> InquiryStatus {
+        let status = inquiry?.value(forKey: "connected") as! Bool
+        if status == true {
+            return .connected
+        } else {
+            let currentHostId:String = THLUser.current()!.objectId!
+            var hostIds = [String]()
+            if let inquiryOffers:[PFObject] = inquiry?.value(forKey:"Offers") as! [PFObject]? {
+                for offer in inquiryOffers {
+                    let host = offer.value(forKey: "Host") as! PFObject
+                    let hostId = host.objectId
+                    hostIds.append(hostId!)
+                    self.inquiryOffer = offer
+                }
+                if (hostIds.contains(currentHostId)) {
+                    return .submittedOffer
+                } else {
+                    return .available
+                }
+            } else  {
+                return .available
+            }
         
-
-        
-
+        }
     }
     
     override func didReceiveMemoryWarning() {

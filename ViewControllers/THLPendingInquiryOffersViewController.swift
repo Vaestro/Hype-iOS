@@ -51,7 +51,7 @@ class THLPendingInquiryOffersViewController: PFQueryTableViewController, DZNEmpt
         
         query.addAscendingOrder("date")
         query.whereKey("Host", equalTo: currentUser)
-        query.whereKey("accepted", equalTo: true)
+        query.whereKey("accepted", equalTo: false)
         query.whereKey("date", greaterThan: date)
 
         query.includeKey("Venue")
