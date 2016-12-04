@@ -52,7 +52,6 @@
 		7928ADA11D19C98400DFC443 /* THLUserProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928ADA01D19C98400DFC443 /* THLUserProfileTableViewCell.m */; };
 		7928ADA91D19C9E200DFC443 /* THLUserProfileFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928ADA61D19C9E200DFC443 /* THLUserProfileFooterView.m */; };
 		7928ADAA1D19C9E200DFC443 /* THLUserProfileHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928ADA81D19C9E200DFC443 /* THLUserProfileHeaderView.m */; };
-		7928ADAD1D19CA0D00DFC443 /* THLPerkDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928ADAC1D19CA0D00DFC443 /* THLPerkDetailViewController.m */; };
 		7928ADB31D19CB1900DFC443 /* THLPopupNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928ADB21D19CB1900DFC443 /* THLPopupNotificationView.m */; };
 		7928ADB61D19CB5300DFC443 /* THLEventDetailsMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928ADB51D19CB5300DFC443 /* THLEventDetailsMapView.m */; };
 		792BB4D11DB1507900B673B8 /* THLInquiryOfferDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792BB4D01DB1507900B673B8 /* THLInquiryOfferDetailsView.swift */; };
@@ -98,7 +97,6 @@
 		798402E31D21BD79006F463B /* THLSwiftAdmissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798402E21D21BD79006F463B /* THLSwiftAdmissionsViewController.swift */; };
 		798650A41BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 798650A31BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m */; };
 		7989D7E41DDE3E4F00E38E25 /* THLDiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7989D7E31DDE3E4F00E38E25 /* THLDiscoveryViewController.swift */; };
-		7996E2051D00D010006FFDDC /* THLPerkCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7996E2041D00D010006FFDDC /* THLPerkCollectionViewController.m */; };
 		799831181D4AC50900BB5BFE /* THLSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 799831171D4AC50900BB5BFE /* THLSelectView.m */; };
 		7998311B1D4B9E6500BB5BFE /* THLReservationRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7998311A1D4B9E6500BB5BFE /* THLReservationRequestViewController.m */; };
 		7998311E1D4C06CA00BB5BFE /* THLTablePackageDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7998311D1D4C06CA00BB5BFE /* THLTablePackageDetailView.m */; };
@@ -301,8 +299,6 @@
 		7928ADA61D19C9E200DFC443 /* THLUserProfileFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLUserProfileFooterView.m; sourceTree = "<group>"; };
 		7928ADA71D19C9E200DFC443 /* THLUserProfileHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserProfileHeaderView.h; sourceTree = "<group>"; };
 		7928ADA81D19C9E200DFC443 /* THLUserProfileHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLUserProfileHeaderView.m; sourceTree = "<group>"; };
-		7928ADAB1D19CA0D00DFC443 /* THLPerkDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkDetailViewController.h; sourceTree = "<group>"; };
-		7928ADAC1D19CA0D00DFC443 /* THLPerkDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPerkDetailViewController.m; sourceTree = "<group>"; };
 		7928ADB11D19CB1900DFC443 /* THLPopupNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPopupNotificationView.h; sourceTree = "<group>"; };
 		7928ADB21D19CB1900DFC443 /* THLPopupNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPopupNotificationView.m; sourceTree = "<group>"; };
 		7928ADB41D19CB5300DFC443 /* THLEventDetailsMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventDetailsMapView.h; sourceTree = "<group>"; };
@@ -363,8 +359,6 @@
 		798650A21BEDDC2D0032A661 /* CAGradientLayer+THLGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAGradientLayer+THLGradient.h"; sourceTree = "<group>"; };
 		798650A31BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAGradientLayer+THLGradient.m"; sourceTree = "<group>"; };
 		7989D7E31DDE3E4F00E38E25 /* THLDiscoveryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLDiscoveryViewController.swift; sourceTree = "<group>"; };
-		7996E2031D00D010006FFDDC /* THLPerkCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkCollectionViewController.h; sourceTree = "<group>"; };
-		7996E2041D00D010006FFDDC /* THLPerkCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPerkCollectionViewController.m; sourceTree = "<group>"; };
 		799831161D4AC4F400BB5BFE /* THLSelectView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLSelectView.h; sourceTree = "<group>"; };
 		799831171D4AC50900BB5BFE /* THLSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLSelectView.m; sourceTree = "<group>"; };
 		799831191D4B9E5900BB5BFE /* THLReservationRequestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLReservationRequestViewController.h; sourceTree = "<group>"; };
@@ -917,15 +911,6 @@
 			path = THLPartyViewController;
 			sourceTree = "<group>";
 		};
-		7928ADBA1D19CC1300DFC443 /* THLPerkCollectionViewController */ = {
-			isa = PBXGroup;
-			children = (
-				7996E2031D00D010006FFDDC /* THLPerkCollectionViewController.h */,
-				7996E2041D00D010006FFDDC /* THLPerkCollectionViewController.m */,
-			);
-			path = THLPerkCollectionViewController;
-			sourceTree = "<group>";
-		};
 		7928ADBB1D19CC1B00DFC443 /* THLSingleLineTextField */ = {
 			isa = PBXGroup;
 			children = (
@@ -978,15 +963,6 @@
 				799862451C97B6AF004C5326 /* THLTextEntryViewController.m */,
 			);
 			path = THLTextEntryViewController;
-			sourceTree = "<group>";
-		};
-		7928ADC51D19CC9B00DFC443 /* THLPerkDetailViewController */ = {
-			isa = PBXGroup;
-			children = (
-				7928ADAB1D19CA0D00DFC443 /* THLPerkDetailViewController.h */,
-				7928ADAC1D19CA0D00DFC443 /* THLPerkDetailViewController.m */,
-			);
-			path = THLPerkDetailViewController;
 			sourceTree = "<group>";
 		};
 		7928ADC71D19CCAD00DFC443 /* THLTablePackageAdmissionCell */ = {
@@ -1052,8 +1028,6 @@
 				7928ADBD1D19CC3500DFC443 /* THLPartyNavigationController */,
 				7928ADB91D19CC0900DFC443 /* THLPartyViewController */,
 				C8D1D2A11CD3E836006ADC6A /* THLPaymentViewController */,
-				7928ADBA1D19CC1300DFC443 /* THLPerkCollectionViewController */,
-				7928ADC51D19CC9B00DFC443 /* THLPerkDetailViewController */,
 				7928ADBC1D19CC2700DFC443 /* THLPermissionRequestViewController */,
 				C8FEE3D21D038C5800244252 /* THLTablePackageDetailsViewController */,
 				7928ADC01D19CC5900DFC443 /* THLTableReservationViewController */,
@@ -1973,7 +1947,6 @@
 				C88A01561D04A44200152B37 /* THLCollectionReusableView.m in Sources */,
 				79319DD41D9AED88000DEE69 /* EPConstants.swift in Sources */,
 				7928ADA91D19C9E200DFC443 /* THLUserProfileFooterView.m in Sources */,
-				7928ADAD1D19CA0D00DFC443 /* THLPerkDetailViewController.m in Sources */,
 				794483041BEC5B5D00EABE23 /* THLStatusView.m in Sources */,
 				798402DB1D2171E0006F463B /* THLGuestEntity.m in Sources */,
 				7964645D1DAE95A000DA1F51 /* THLInquiryOffersViewController.swift in Sources */,
@@ -1981,7 +1954,6 @@
 				79060B461D0B339A00D1A00C /* THLAdmissionOption.m in Sources */,
 				7917C0F11D1B3C2F0054BDB0 /* THLVenueDiscoveryViewController.m in Sources */,
 				C80372DA1D00DD68008848CA /* THLAdmissionOptionCell.m in Sources */,
-				7996E2051D00D010006FFDDC /* THLPerkCollectionViewController.m in Sources */,
 				21E402D91BBF80E6001D0C2C /* THLGuestlist.m in Sources */,
 				794DCCB51BF555020037A03D /* FXBlurView.m in Sources */,
 				794208281BD82641009B86FA /* UIView+DimView.m in Sources */,

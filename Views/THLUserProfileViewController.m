@@ -16,7 +16,6 @@
 #import "THLUserProfileHeaderView.h"
 #import "THLTextEntryViewController.h"
 #import "THLUserManager.h"
-#import "Intercom/intercom.h"
 #import "THLUser.h"
 #import "Parse.h"
 #import "Stripe.h"
@@ -335,10 +334,6 @@ STPPaymentCardTextFieldDelegate
     return [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Help"] style:UIBarButtonItemStylePlain target:self action:@selector(messageButtonPressed)];
 }
 
-- (void)messageButtonPressed
-{
-    [Intercom presentMessageComposer];
-}
 
 
 - (UITableView *)newTableView {

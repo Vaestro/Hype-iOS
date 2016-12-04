@@ -45,6 +45,7 @@
 {
     if (!_titleLabel) {
         _titleLabel = THLNUILabel(kTHLNUIDetailBoldTitle);
+        _titleLabel.textColor = [UIColor whiteColor];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         _titleLabel.adjustsFontSizeToFitWidth = TRUE;
         _titleLabel.minimumScaleFactor = 0.5;

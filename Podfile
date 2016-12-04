@@ -9,10 +9,9 @@ target 'Hype' do
 pod 'CocoaLumberjack'
 pod 'Masonry', '~> 0.6'
 pod 'NUI', '~> 0.5'
-pod 'Bolts'
 pod 'BFKit'
+pod 'Bolts'
 pod 'DateTools', '~> 1.6'
-pod 'YapDatabase', '~> 2.7'
 pod 'EKAlgorithms', '~> 0.2'
 pod 'AutoCoding', '~> 2.2'
 pod 'SDWebImage', '~> 3.7'
@@ -28,7 +27,6 @@ pod 'PopupDialog', '~> 0.5'
 pod 'Kingfisher'
 pod "TextFieldEffects"
 pod 'PhoneNumberKit', '~> 1.0'
-pod 'MRCountryPicker', '~> 0.0.5'
 pod 'PermissionScope'
 pod 'Eureka', '~> 2.0.0-beta.1'
 
@@ -49,9 +47,6 @@ pod 'ParseFacebookUtilsV4'
 pod 'ParseUI'
 pod 'FBSDKCoreKit'
 
-#Intercom
-pod 'Intercom'
-
 pod 'Stripe'
 
 #Branch
@@ -69,9 +64,7 @@ pod 'Harpy'
 #UI
 pod 'SVPullToRefresh'
 pod 'DGActivityIndicatorView'
-pod 'ORStackView'
 pod 'SVProgressHUD'
-pod 'THContactPicker', '~> 1.2'
 pod 'IHKeyboardAvoiding'
 pod 'FXLabel'
 pod 'BLKFlexibleHeightBar'

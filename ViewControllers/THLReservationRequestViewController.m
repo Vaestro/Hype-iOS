@@ -12,7 +12,6 @@
 #import "THLAppearanceConstants.h"
 #import "SVProgressHUD.h"
 #import "THLUser.h"
-#import "Intercom/intercom.h"
 #import "THLActionButton.h"
 #import "Hype-Swift.h"
 #import "THLSelectView.h"
@@ -251,10 +250,6 @@ THLSelectViewDelegate
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)messageButtonPressed
-{
-    [Intercom presentMessageComposer];
-}
 
 - (void)checkout:(id)sender {
     [self.delegate reservationRequestControllerWantsToPresentReviewForReservation:_event andAdmissionOption:_admissionOption];

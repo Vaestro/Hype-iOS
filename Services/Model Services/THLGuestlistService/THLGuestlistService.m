@@ -13,7 +13,6 @@
 #import "THLEvent.h"
 #import "THLUser.h"
 #import "THLChannelService.h"
-#import "Intercom/intercom.h"
 
 
 @implementation THLGuestlistService

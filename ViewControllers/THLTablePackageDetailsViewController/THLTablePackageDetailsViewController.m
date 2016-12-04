@@ -13,7 +13,7 @@
 #import "THLAppearanceConstants.h"
 #import "SVProgressHUD.h"
 #import "THLUser.h"
-#import "Intercom/intercom.h"
+
 #import "THLCollectionReusableView.h"
 #import "THLTablePackageDetailCell.h"
 #import "THLActionButton.h"
@@ -55,7 +55,6 @@
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back_button"] style:UIBarButtonItemStylePlain target:self action:@selector(back:)];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Help"] style:UIBarButtonItemStylePlain target:self action:@selector(messageButtonPressed)];
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionViewLayout;
     
 //    layout.sectionInset = UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f);
@@ -207,10 +206,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)messageButtonPressed
-{
-    [Intercom presentMessageComposer];
-}
+
 
 - (void)checkout:(id)sender {
     [self.delegate packageControllerWantsToPresentCheckoutForEvent:_event andAdmissionOption:_admissionOption];
