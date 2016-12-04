@@ -21,7 +21,7 @@ import Kingfisher
 
 }
 
-class THLGuestProfileViewController: UIViewController, THLMyUpcomingEventsViewControllerDelegate, THLUserProfileViewControllerDelegate, THLMyInvitesViewControllerDelegate, THLHostUpcomingEventsViewControllerDelegate {
+class THLGuestProfileViewController: UIViewController, THLMyUpcomingEventsViewControllerDelegate, THLUserProfileViewControllerDelegate, THLMyInvitesViewControllerDelegate, THLHostUpcomingEventsViewControllerDelegate, THLPendingInquiryOffersViewControllerDelegate {
     internal func didSelectViewInquiryMenuView(_ inquiry: PFObject) {
         self.delegate?.didSelectViewInquiryMenuView(inquiry)
     }
@@ -76,8 +76,13 @@ class THLGuestProfileViewController: UIViewController, THLMyUpcomingEventsViewCo
             let myEventsViewController = THLHostUpcomingEventsViewController()
             myEventsViewController.delegate = self;
             myEventsViewController.title = "MY EVENTS"
-            
             controllerArray.append(myEventsViewController)
+            
+            
+            let controller2 : THLPendingInquiryOffersViewController = THLPendingInquiryOffersViewController()
+            controller2.title = "PENDING"
+            controller2.delegate = self;
+            controllerArray.append(controller2)
         } else {
             let myEventsViewController = THLMyUpcomingEventsViewController()
             myEventsViewController.delegate = self;

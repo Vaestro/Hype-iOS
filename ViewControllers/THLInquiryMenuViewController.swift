@@ -33,8 +33,8 @@ class THLInquiryMenuViewController: UIViewController {
         let senderName = sender.value(forKey: "firstName") as! String
         let status = inquiry?.value(forKey: "connected") as! Bool
         if status == false {
-            let event:PFObject = inquiry?.value(forKey: "Venue") as! PFObject
-            let venue:PFObject = inquiry?.value(forKey: "Venue") as! PFObject
+            let event:PFObject = inquiry?.value(forKey: "Event") as! PFObject
+            let venue:PFObject = event.value(forKey: "location") as! PFObject
             let venueName:String = venue.value(forKey: "name") as! String
             let title = "\(senderName)'s inquiry for \(venueName)"
             let date = event.value(forKey: "date") as! Date

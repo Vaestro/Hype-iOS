@@ -165,6 +165,7 @@
 		79EB0C331DC942A200E0AD9E /* THLConnectedHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EB0C321DC942A200E0AD9E /* THLConnectedHostViewController.swift */; };
 		79F462D11DA6A6E6004BB49C /* CAPSPageMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F462D01DA6A6E6004BB49C /* CAPSPageMenu.swift */; };
 		79F462D31DA6AAA0004BB49C /* THLHostDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F462D21DA6AAA0004BB49C /* THLHostDashboardViewController.swift */; };
+		79F4905D1DF3870B00A0CCDE /* THLPendingInquiryOffersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F4905C1DF3870B00A0CCDE /* THLPendingInquiryOffersViewController.swift */; };
 		79F877421DE233DC006892D2 /* THLSwiftCheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F877411DE233DB006892D2 /* THLSwiftCheckoutViewController.swift */; };
 		79FBFCCF1D30513500F291E7 /* THLEventHeaderStyleBehaviorDefiner.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FBFCCE1D30513500F291E7 /* THLEventHeaderStyleBehaviorDefiner.m */; };
 		AAD9436FBD9DAF1F610FAB73 /* Pods_HypeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83D794813D7BCA4185F2A377 /* Pods_HypeTests.framework */; };
@@ -458,6 +459,7 @@
 		79EB0C321DC942A200E0AD9E /* THLConnectedHostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLConnectedHostViewController.swift; sourceTree = "<group>"; };
 		79F462D01DA6A6E6004BB49C /* CAPSPageMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAPSPageMenu.swift; sourceTree = "<group>"; };
 		79F462D21DA6AAA0004BB49C /* THLHostDashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLHostDashboardViewController.swift; sourceTree = "<group>"; };
+		79F4905C1DF3870B00A0CCDE /* THLPendingInquiryOffersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLPendingInquiryOffersViewController.swift; sourceTree = "<group>"; };
 		79F877411DE233DB006892D2 /* THLSwiftCheckoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLSwiftCheckoutViewController.swift; sourceTree = "<group>"; };
 		79FBFCCD1D30511F00F291E7 /* THLEventHeaderStyleBehaviorDefiner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLEventHeaderStyleBehaviorDefiner.h; sourceTree = "<group>"; };
 		79FBFCCE1D30513500F291E7 /* THLEventHeaderStyleBehaviorDefiner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventHeaderStyleBehaviorDefiner.m; sourceTree = "<group>"; };
@@ -1084,6 +1086,7 @@
 				FF3541821DC9670C004DD268 /* THLProfilePicChooserViewController.swift */,
 				7955B20B1DF3217700CA0A07 /* THLHostUpcomingEventsViewController.swift */,
 				797DB4871DD5126E00C772C7 /* THLAccountRegistrationViewController.swift */,
+				79F4905C1DF3870B00A0CCDE /* THLPendingInquiryOffersViewController.swift */,
 				79EB0C321DC942A200E0AD9E /* THLConnectedHostViewController.swift */,
 				793222C41DD2475E008462EC /* THLWelcomeViewController.swift */,
 				7989D7E31DDE3E4F00E38E25 /* THLDiscoveryViewController.swift */,
@@ -1983,6 +1986,7 @@
 				794DCCB51BF555020037A03D /* FXBlurView.m in Sources */,
 				794208281BD82641009B86FA /* UIView+DimView.m in Sources */,
 				7928AD981D19C88E00DFC443 /* THLUserProfileViewController.m in Sources */,
+				79F4905D1DF3870B00A0CCDE /* THLPendingInquiryOffersViewController.swift in Sources */,
 				C8D1D2A41CD3E864006ADC6A /* THLPaymentViewController.m in Sources */,
 				79CEDF3F1D257A6700DFB654 /* UIColorExtensions.swift in Sources */,
 				79B59F061D5E78CB00E374A4 /* THLHypeConciergeInfoView.m in Sources */,

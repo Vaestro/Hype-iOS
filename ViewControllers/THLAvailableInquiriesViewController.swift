@@ -11,7 +11,7 @@ import UIKit
 import Parse
 import ParseUI
 
-class THLAvailableInquiriesViewController: PFQueryTableViewController {
+class THLAvailableInquiriesViewController: PFQueryTableViewController, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
     
     // MARK: Init
     
@@ -22,6 +22,11 @@ class THLAvailableInquiriesViewController: PFQueryTableViewController {
         paginationEnabled = false
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.loadObjects()
+    }
+    
     // MARK: UIViewController
     override func loadView() {
         super.loadView()
@@ -29,6 +34,9 @@ class THLAvailableInquiriesViewController: PFQueryTableViewController {
         tableView?.register(THLInquiryTableViewCell.self, forCellReuseIdentifier: "THLInquiryTableViewCell")
         tableView?.separatorStyle = UITableViewCellSeparatorStyle.none
         tableView?.backgroundColor = UIColor.black
+        
+        tableView?.emptyDataSetSource = self
+        tableView?.emptyDataSetDelegate = self
         
         (self.navigationController?.navigationBar as! THLBoldNavigationBar).titleLabel.text = "INQUIRIES"
         (self.navigationController?.navigationBar as! THLBoldNavigationBar).subtitleLabel.text = ""
@@ -87,6 +95,19 @@ extension THLAvailableInquiriesViewController {
         self.present(navigationController, animated: true)
         
     }
+    
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString {
+        let str = "No Available Hype Connect Inquiries"
+        let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)]
+        return NSAttributedString(string: str, attributes: attrs)
+    }
+    
+    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString {
+        let str = "Any Hype Connect inquiries will be shown here"
+        let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)]
+        return NSAttributedString(string: str, attributes: attrs)
+    }
+    
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100.0;//Choose your custom row height
