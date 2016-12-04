@@ -11,9 +11,15 @@ import UIKit
 import Parse
 import ParseUI
 
+protocol THLAvailableInquiriesViewControllerDelegate: class {
+    func didWantToPresentInquiryMenuFor(inquiry: PFObject)
+}
+
+
 class THLAvailableInquiriesViewController: PFQueryTableViewController, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
     
     // MARK: Init
+    var delegate:THLAvailableInquiriesViewControllerDelegate?
     
     convenience init() {
         self.init(style: .plain, className: "Inquiry")
@@ -88,11 +94,8 @@ extension THLAvailableInquiriesViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let inquiry: PFObject? = super.object(at: indexPath)
+        self.delegate?.didWantToPresentInquiryMenuFor(inquiry: inquiry!)
 
-        let inquiryMenuController = THLInquiryMenuViewController(inquiry:inquiry!)
-        let navigationController = UINavigationController.init(navigationBarClass: THLBoldNavigationBar.self, toolbarClass: nil)
-        navigationController.setViewControllers([inquiryMenuController], animated: false)
-        self.present(navigationController, animated: true)
         
     }
     

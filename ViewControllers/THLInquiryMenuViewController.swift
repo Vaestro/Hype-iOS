@@ -9,6 +9,10 @@
 import UIKit
 import PopupDialog
 
+protocol THLInquiryMenuViewControllerDelegate: class {
+    func didWantToPresentSubmitInquiryOfferView(inquiry: PFObject, availableVenues:[String])
+}
+
 public enum InquiryStatus {
     case available
     case submittedOffer
@@ -16,7 +20,7 @@ public enum InquiryStatus {
 }
 
 class THLInquiryMenuViewController: UIViewController {
-    
+    var delegate: THLInquiryMenuViewControllerDelegate?
     var inquiry: PFObject?
     var guestlistTableView: THLGuestlistTableViewController!
     var connectButton: UIButton!
@@ -138,8 +142,8 @@ class THLInquiryMenuViewController: UIViewController {
                         }
                     }
                     
-                    let submitInquiryView = THLSubmitInquiryOfferViewController(inquiry: self.inquiry!, availableVenues:availableVenues)
-                    self.navigationController?.pushViewController(submitInquiryView, animated: true)
+                    self.delegate?.didWantToPresentSubmitInquiryOfferView(inquiry: self.inquiry!, availableVenues:availableVenues)
+
                 } else {
                     // Log details of the failure
                 }

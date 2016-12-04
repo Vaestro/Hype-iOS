@@ -10,8 +10,13 @@ import UIKit
 import PopupDialog
 import Eureka
 
+protocol THLSubmitInquiryOfferViewControllerDelegate: class {
+    func didSubmitInquiryOffer()
+}
+
 class THLSubmitInquiryOfferViewController: FormViewController {
     
+    var delegate: THLSubmitInquiryOfferViewControllerDelegate?
     var inquiry: PFObject!
     
     var availableVenues: [String]
@@ -147,8 +152,9 @@ class THLSubmitInquiryOfferViewController: FormViewController {
                 let popup = PopupDialog(title: title, message: message)
                 
                 // Create buttons
+                
                 let buttonOne = CancelButton(title: "OK") {
-                    print("You canceled the car dialog.")
+                    self.delegate?.didSubmitInquiryOffer()
                 }
                 
                 popup.addButton(buttonOne)

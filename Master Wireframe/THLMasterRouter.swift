@@ -11,7 +11,9 @@ import Bolts
 import Branch
 import Parse
 
-@objc class THLMasterRouter: NSObject, THLWelcomeViewDelegate, THLAccountRegistrationViewControllerDelegate, THLSwiftLoginViewControllerDelegate, THLDiscoveryViewControllerDelegate, THLGuestProfileViewControllerDelegate, THLEventDetailsViewControllerDelegate, THLSwiftAdmissionsViewControllerDelegate, THLPartyViewControllerDelegate, THLCheckoutViewControllerDelegate, THLTablePackageControllerDelegate, EPPickerDelegate, THLInquiryOffersViewControllerDelegate, THLUserProfileViewControllerDelegate {
+@objc class THLMasterRouter: NSObject, THLWelcomeViewDelegate, THLAccountRegistrationViewControllerDelegate, THLSwiftLoginViewControllerDelegate, THLDiscoveryViewControllerDelegate, THLGuestProfileViewControllerDelegate, THLEventDetailsViewControllerDelegate, THLSwiftAdmissionsViewControllerDelegate, THLPartyViewControllerDelegate, THLCheckoutViewControllerDelegate, THLTablePackageControllerDelegate, EPPickerDelegate, THLInquiryOffersViewControllerDelegate, THLUserProfileViewControllerDelegate, THLAvailableInquiriesViewControllerDelegate, THLInquiryMenuViewControllerDelegate, THLSubmitInquiryOfferViewControllerDelegate {
+
+
 
     var window: UIWindow
     
@@ -132,6 +134,7 @@ import Parse
         
         let hostTabBarController = UITabBarController()
         let inquiryDiscoveryView = THLAvailableInquiriesViewController()
+        inquiryDiscoveryView.delegate = self
         let inquiryDiscoveryNavigationController = UINavigationController(navigationBarClass: THLBoldNavigationBar.self, toolbarClass: nil)
         inquiryDiscoveryNavigationController.addChildViewController(inquiryDiscoveryView)
         
@@ -476,6 +479,34 @@ import Parse
         }
         let presentedViewController = (rootViewController.presentedViewController as UIViewController!)
         return self.topViewController(presentedViewController!)
+    }
+    
+    func didWantToPresentInquiryMenuFor(inquiry: PFObject) {
+        
+        let inquiryMenuController = THLInquiryMenuViewController(inquiry:inquiry)
+        inquiryMenuController.delegate = self
+        let navigationController = UINavigationController.init(navigationBarClass: THLBoldNavigationBar.self, toolbarClass: nil)
+        navigationController.setViewControllers([inquiryMenuController], animated: false)
+        window.rootViewController!.present(navigationController, animated: true)
+    }
+    
+    func didWantToPresentSubmitInquiryOfferView(inquiry: PFObject, availableVenues:[String]) {
+        
+        let submitInquiryView = THLSubmitInquiryOfferViewController(inquiry: inquiry, availableVenues:availableVenues)
+        submitInquiryView.delegate = self
+        let topView = self.topViewController() as! UINavigationController
+        topView.pushViewController(submitInquiryView, animated: true)
+    }
+    
+    internal func didSubmitInquiryOffer() {
+        let tabBarController = window.rootViewController as! UITabBarController
+
+        if self.topViewController() != tabBarController {
+            tabBarController.dismiss(animated: true, completion: { _ in })
+        }
+        if tabBarController.selectedIndex != 2 {
+            tabBarController.selectedIndex = 2
+        }
     }
     
 //    func handlePushNotification(_ pushInfo: [AnyHashable: Any]) -> BFTask {
