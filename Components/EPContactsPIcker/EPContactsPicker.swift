@@ -374,21 +374,17 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
         contactDelegate?.epContactPicker(self, didCancel: NSError(domain: "EPContactPickerErrorDomain", code: 2, userInfo: [ NSLocalizedDescriptionKey: "User Canceled Selection"]))
         dismiss(animated: true, completion: nil)
     }
-    
-    func sendInvitationsForGeneralAdmission() {
-        
-    }
+
     func onTouchDoneButton() {
 //        contactDelegate?.epContactPicker(self, didSelectMultipleContacts: selectedContacts)
 //        dismiss(animated: true, completion: nil)
-  
         
         if (partyType == .generalAdmission) {
             self.sendOutInvitations()
         } else {
             self.submitConnectInquiry()
             
-                    }
+        }
     }
     
     func sendOutInvitations() {
