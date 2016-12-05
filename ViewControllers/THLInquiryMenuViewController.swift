@@ -96,6 +96,8 @@ class THLInquiryMenuViewController: UIViewController {
         connectButton.addTarget(self, action: #selector(handleButtonTapped), for: UIControlEvents.touchUpInside)
         connectButton.backgroundColor = UIColor.customGoldColor()
         superview.addSubview(connectButton)
+        
+        listenHandlerForChatRoom()
     
 
     }
@@ -119,7 +121,24 @@ class THLInquiryMenuViewController: UIViewController {
     }
     
     func handleMessage() {
-        
+        let sender = inquiry?.value(forKey: "Sender") as! PFObject
+        THLChatSocketManager.sharedInstance.getSpecificChatRoom(hostId: (THLUser.current()?.objectId)!, guestId: sender.objectId!)
+    }
+    
+    func listenHandlerForChatRoom() {
+        THLChatSocketManager.sharedInstance.socket.on("send specific room") { (dataArray, socketAck) -> Void in
+            let chatRoomDict = dataArray[0] as! NSDictionary
+            var chatRoomId = chatRoomDict["room"]
+            //let navigationConroller = UINavigationController(navigationBarClass: THLBoldNavigationBar.self, toolbarClass: nil)
+            let chatViewController = THLChatViewController()
+            let sender = self.inquiry?.value(forKey: "Sender") as! PFObject
+            chatViewController.chatMateId = sender.objectId
+            chatViewController.chatRoomId = chatRoomId as! String?
+            chatViewController.chatMateName = "Guest"
+            self.navigationController?.pushViewController(chatViewController, animated: false)
+            //self.present(navigationConroller, animated: true, completion: nil)
+            
+        }
     }
     
     func handleConnect() {
