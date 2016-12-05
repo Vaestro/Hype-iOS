@@ -104,10 +104,28 @@ class THLConnectedHostViewController: UIViewController {
             make.bottom.equalTo(hostImageView.snp.bottom)
         }
         // Do any additional setup after loading the view.
+        
+        listenHandlerForChatRoom()
     }
     
     func handleMessageAction() {
-
+        
+        THLChatSocketManager.sharedInstance.getSpecificChatRoom(hostId: self.host.objectId!, guestId: (THLUser.current()?.objectId)!)
+    }
+    
+    func listenHandlerForChatRoom() {
+        THLChatSocketManager.sharedInstance.socket.on("send specific room") { (dataArray, socketAck) -> Void in
+            let chatRoomDict = dataArray[0] as! NSDictionary
+            var chatRoomId = chatRoomDict["room"]
+            let navigationConroller = UINavigationController(navigationBarClass: THLBoldNavigationBar.self, toolbarClass: nil)
+            let chatViewController = THLChatViewController()
+            chatViewController.chatMateId = self.host.objectId
+            chatViewController.chatRoomId = chatRoomId as! String?
+            chatViewController.chatMateName = "Host"
+            navigationConroller.pushViewController(chatViewController, animated: false)
+            self.present(navigationConroller, animated: true, completion: nil)
+            
+        }
     }
     
     func constructTitleLabel() -> UILabel {

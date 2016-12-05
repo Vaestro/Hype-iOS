@@ -84,6 +84,12 @@ class THLChatSocketManager: NSObject {
         
     }
     
+    func getSpecificChatRoom(hostId: String, guestId: String) {
+        let data = ["hostId": hostId,
+                    "guestId": guestId]
+        socket.emit("get specific room", data)
+    }
+    
     func createChatRoom(hostId: String) {
         var userId = (THLUser.current()?.objectId)!
         
