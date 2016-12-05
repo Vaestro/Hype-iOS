@@ -57,3 +57,4 @@
 #import "THLTablePackageDetailsViewController.h"
 #import "THLPaymentViewController.h"
 
+#import "THLPartyViewController.h"

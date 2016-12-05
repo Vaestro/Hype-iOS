@@ -22,6 +22,7 @@ public enum InquiryStatus {
 class THLInquiryMenuViewController: UIViewController {
     var delegate: THLInquiryMenuViewControllerDelegate?
     var inquiry: PFObject?
+    
     var guestlistTableView: THLGuestlistTableViewController!
     var connectButton: UIButton!
     var inquiryStatus:InquiryStatus = .available

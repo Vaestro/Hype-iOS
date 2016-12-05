@@ -54,14 +54,21 @@ extension THLGuestlistTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let guestlistInvite: PFObject = super.object(at: indexPath) as PFObject!
         
-        let guest:PFObject? = guestlistInvite.value(forKey: "Guest") as? PFObject
-        let guestName:String? = guest?.value(forKey: "firstName") as? String
-        
+//        let guest:PFObject? = guestlistInvite.value(forKey: "Guest") as? PFObject
         let cell:THLMyEventsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "THLMyEventsTableViewCell", for: indexPath) as! THLMyEventsTableViewCell
+
+        if let guest = guestlistInvite.value(forKey: "Guest") as? PFObject {
+            let guestName:String? = guest.value(forKey: "firstName") as? String
+            cell.eventTitleLabel.text = guestName?.uppercased()
+            cell.venueImageView.file = guest["image"] as! PFFile?
+            cell.venueImageView.loadInBackground()
+        } else {
+            cell.eventTitleLabel.text = "Pending Signup"
+            cell.venueImageView.image = UIImage.init(named: "default_profile_icon")
+        }
         
-        cell.eventTitleLabel.text = guestName?.uppercased()
-        cell.venueImageView.file = guest?["image"] as! PFFile?
-        cell.venueImageView.loadInBackground()
+        
+     
         
         return cell
     }
