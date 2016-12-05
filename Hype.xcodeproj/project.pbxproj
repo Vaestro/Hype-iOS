@@ -18,10 +18,7 @@
 		2133C9BF1C3329BA0020083A /* THLWaitlistEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 2133C9BE1C3329BA0020083A /* THLWaitlistEntry.m */; };
 		2133C9D31C333DDC0020083A /* NSString+EmailAddresses.m in Sources */ = {isa = PBXBuildFile; fileRef = 2133C9D11C333DDC0020083A /* NSString+EmailAddresses.m */; };
 		213CE1131BB8D22D00054A2C /* THLLocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 213CE1121BB8D22D00054A2C /* THLLocationService.m */; };
-		215A42AC1BAA2A1700D03C35 /* THLFacebookProfilePictureURLFetchService.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A42AB1BAA2A1700D03C35 /* THLFacebookProfilePictureURLFetchService.m */; };
 		21775F361B8CF72B00609D39 /* THLTitledContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21775F351B8CF72B00609D39 /* THLTitledContentView.m */; };
-		21775F5D1B8E169500609D39 /* THLAddressBookPermissionsRequestService.m in Sources */ = {isa = PBXBuildFile; fileRef = 21775F5C1B8E169500609D39 /* THLAddressBookPermissionsRequestService.m */; };
-		21775F631B8E17A300609D39 /* THLAddressBookEntryFetchService.m in Sources */ = {isa = PBXBuildFile; fileRef = 21775F621B8E17A300609D39 /* THLAddressBookEntryFetchService.m */; };
 		217DC6531BBB77AC00332174 /* THLUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 217DC6521BBB77AC00332174 /* THLUserManager.m */; };
 		218AF3441BB7391B00AFAEBF /* THLEventService.m in Sources */ = {isa = PBXBuildFile; fileRef = 218AF3431BB7391B00AFAEBF /* THLEventService.m */; };
 		219E32A81B8EA63D00214C85 /* THLEventNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 219E32A71B8EA63D00214C85 /* THLEventNavigationBar.m */; };
@@ -228,14 +225,8 @@
 		213CE1111BB8D22D00054A2C /* THLLocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLLocationService.h; sourceTree = "<group>"; };
 		213CE1121BB8D22D00054A2C /* THLLocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLLocationService.m; sourceTree = "<group>"; };
 		213CE1141BB8D23900054A2C /* THLLocationServiceInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLLocationServiceInterface.h; sourceTree = "<group>"; };
-		215A42AA1BAA2A1700D03C35 /* THLFacebookProfilePictureURLFetchService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLFacebookProfilePictureURLFetchService.h; sourceTree = "<group>"; };
-		215A42AB1BAA2A1700D03C35 /* THLFacebookProfilePictureURLFetchService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLFacebookProfilePictureURLFetchService.m; sourceTree = "<group>"; };
 		21775F341B8CF72B00609D39 /* THLTitledContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLTitledContentView.h; sourceTree = "<group>"; };
 		21775F351B8CF72B00609D39 /* THLTitledContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLTitledContentView.m; sourceTree = "<group>"; };
-		21775F5B1B8E169500609D39 /* THLAddressBookPermissionsRequestService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLAddressBookPermissionsRequestService.h; sourceTree = "<group>"; };
-		21775F5C1B8E169500609D39 /* THLAddressBookPermissionsRequestService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLAddressBookPermissionsRequestService.m; sourceTree = "<group>"; };
-		21775F611B8E17A300609D39 /* THLAddressBookEntryFetchService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLAddressBookEntryFetchService.h; sourceTree = "<group>"; };
-		21775F621B8E17A300609D39 /* THLAddressBookEntryFetchService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLAddressBookEntryFetchService.m; sourceTree = "<group>"; };
 		217DC6511BBB77AC00332174 /* THLUserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserManager.h; sourceTree = "<group>"; };
 		217DC6521BBB77AC00332174 /* THLUserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLUserManager.m; sourceTree = "<group>"; };
 		218AF3421BB7391B00AFAEBF /* THLEventService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventService.h; sourceTree = "<group>"; };
@@ -678,15 +669,6 @@
 			path = THLLocationService;
 			sourceTree = "<group>";
 		};
-		215A42A91BAA29A200D03C35 /* Facebook Image Fetching */ = {
-			isa = PBXGroup;
-			children = (
-				215A42AA1BAA2A1700D03C35 /* THLFacebookProfilePictureURLFetchService.h */,
-				215A42AB1BAA2A1700D03C35 /* THLFacebookProfilePictureURLFetchService.m */,
-			);
-			path = "Facebook Image Fetching";
-			sourceTree = "<group>";
-		};
 		2174A05B1B863F6A006826D7 = {
 			isa = PBXGroup;
 			children = (
@@ -708,32 +690,6 @@
 				79259D6E1CAA4C6C00409040 /* Hype.app */,
 				79259D6F1CAA4C6C00409040 /* Hype.xctest */,
 			);
-			sourceTree = "<group>";
-		};
-		21775F571B8E15E400609D39 /* Permissions Request */ = {
-			isa = PBXGroup;
-			children = (
-				21775F5F1B8E177B00609D39 /* Address Book Permissions */,
-			);
-			path = "Permissions Request";
-			sourceTree = "<group>";
-		};
-		21775F5F1B8E177B00609D39 /* Address Book Permissions */ = {
-			isa = PBXGroup;
-			children = (
-				21775F5B1B8E169500609D39 /* THLAddressBookPermissionsRequestService.h */,
-				21775F5C1B8E169500609D39 /* THLAddressBookPermissionsRequestService.m */,
-			);
-			path = "Address Book Permissions";
-			sourceTree = "<group>";
-		};
-		21775F601B8E178100609D39 /* Address Book Fetching */ = {
-			isa = PBXGroup;
-			children = (
-				21775F611B8E17A300609D39 /* THLAddressBookEntryFetchService.h */,
-				21775F621B8E17A300609D39 /* THLAddressBookEntryFetchService.m */,
-			);
-			path = "Address Book Fetching";
 			sourceTree = "<group>";
 		};
 		217DC64D1BBB75E000332174 /* THLUserManager */ = {
@@ -811,21 +767,10 @@
 			children = (
 				FF30597E1DA86D80009DDC93 /* Chat */,
 				2118920A1BAA039700E8A11F /* Authentication */,
-				21CCEDEF1B87CE210066CDAC /* Fetching */,
-				21775F571B8E15E400609D39 /* Permissions Request */,
 				7928AD841D19C79300DFC443 /* THLParseQueryFactory.h */,
 				7928AD851D19C79300DFC443 /* THLParseQueryFactory.m */,
 			);
 			path = Services;
-			sourceTree = "<group>";
-		};
-		21CCEDEF1B87CE210066CDAC /* Fetching */ = {
-			isa = PBXGroup;
-			children = (
-				21775F601B8E178100609D39 /* Address Book Fetching */,
-				215A42A91BAA29A200D03C35 /* Facebook Image Fetching */,
-			);
-			path = Fetching;
 			sourceTree = "<group>";
 		};
 		21CE05F71BB84032004D10BB /* THLEventNavigationBar */ = {
@@ -1883,7 +1828,6 @@
 				79CEDF3B1D23213400DFB654 /* THLEventPickerViewController.swift in Sources */,
 				7928AD9B1D19C8D800DFC443 /* THLUserProfileInfoView.m in Sources */,
 				793222C51DD2475E008462EC /* THLWelcomeViewController.swift in Sources */,
-				21775F5D1B8E169500609D39 /* THLAddressBookPermissionsRequestService.m in Sources */,
 				C8F2FB271BF81A8E004E00B6 /* THLInformationViewController.m in Sources */,
 				C88A01591D04A9E200152B37 /* THLTablePackageDetailCell.m in Sources */,
 				79CD27FD1C520293009BC119 /* THLResourceManager.m in Sources */,
@@ -1920,7 +1864,6 @@
 				79651F581DD8F3870057AD63 /* THLPhoneNumberVerificationViewController.swift in Sources */,
 				7998311B1D4B9E6500BB5BFE /* THLReservationRequestViewController.m in Sources */,
 				799B06A61D2EA9580091B4CD /* THLEventFlexibleHeaderView.swift in Sources */,
-				21775F631B8E17A300609D39 /* THLAddressBookEntryFetchService.m in Sources */,
 				219E32A81B8EA63D00214C85 /* THLEventNavigationBar.m in Sources */,
 				C8EE96CE1CE677580040A1F0 /* THLStripeTokenService.m in Sources */,
 				21CE06241BB86995004D10BB /* THLAppearanceUtils.m in Sources */,
@@ -1998,7 +1941,6 @@
 				799831181D4AC50900BB5BFE /* THLSelectView.m in Sources */,
 				794DA4311DB6D988000C5F67 /* THLBoldNavigationBar.swift in Sources */,
 				C8FEE3D51D038C8700244252 /* THLTablePackageDetailsViewController.m in Sources */,
-				215A42AC1BAA2A1700D03C35 /* THLFacebookProfilePictureURLFetchService.m in Sources */,
 				21E402E01BBF8371001D0C2C /* THLGuestlistService.m in Sources */,
 				2133BFC21B877C08002C1DA9 /* THLUser.m in Sources */,
 				C85EE3BC1C1BCC190008C14B /* THLPerkStoreItem.m in Sources */,

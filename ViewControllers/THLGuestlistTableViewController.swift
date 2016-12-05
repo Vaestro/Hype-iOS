@@ -64,7 +64,7 @@ extension THLGuestlistTableViewController {
             cell.venueImageView.loadInBackground()
         } else {
             cell.eventTitleLabel.text = "Pending Signup"
-            cell.venueImageView.image = UIImage.init(named: "default_profile_icon")
+            cell.venueImageView.image = UIImage.init(named: "default_profile_image")
         }
         
         

@@ -19,6 +19,9 @@ pod 'FormatterKit', '~> 1.8'
 pod 'Typhoon', '~> 3.3'
 pod 'Mixpanel-swift'
 pod 'Socket.IO-Client-Swift'
+pod 'libPhoneNumber-iOS', '~> 0.8'
+pod 'LMGeocoder'
+pod 'APAddressBook', '~> 0.2.1’
 
 #SWIFT
 pod 'SnapKit', '~> 3.0'
@@ -29,7 +32,7 @@ pod "TextFieldEffects"
 pod 'PhoneNumberKit', '~> 1.0'
 pod 'PermissionScope'
 pod 'Eureka', '~> 2.0.0-beta.1'
-
+pod 'NVActivityIndicatorView'
 #Debugging
 pod 'FLEX', '~> 2.0', :configurations => ['Debug']
 pod 'Reveal-iOS-SDK', :configurations => ['Debug']
@@ -55,14 +58,10 @@ pod 'Branch'
 #Helpers
 pod 'SSDataSources', '~> 0.8'
 pod 'YLMoment', '~> 0.2.0'
-pod 'APAddressBook', '~> 0.2.1’
-pod 'libPhoneNumber-iOS', '~> 0.8'
-pod 'LMGeocoder'
 pod 'TTTAttributedLabel'
 pod 'Harpy'
 
 #UI
-pod 'SVPullToRefresh'
 pod 'DGActivityIndicatorView'
 pod 'SVProgressHUD'
 pod 'IHKeyboardAvoiding'

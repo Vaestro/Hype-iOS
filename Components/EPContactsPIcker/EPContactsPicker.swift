@@ -10,6 +10,8 @@ import UIKit
 import Contacts
 import PopupDialog
 import Branch
+import NVActivityIndicatorView
+
 public protocol EPPickerDelegate {
 	func epContactPicker(_: EPContactsPicker, didContactFetchFailed error: NSError)
     func epContactPicker(_: EPContactsPicker, didCancel error: NSError)
@@ -42,7 +44,7 @@ public enum PartyType{
     case connect
 }
 
-open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
+open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate, NVActivityIndicatorViewable {
     
     // MARK: - Properties
     
@@ -53,7 +55,7 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
     var resultSearchController = UISearchController()
     var orderedContacts = [String: [CNContact]]() //Contacts ordered in dicitonary alphabetically
     var sortedContactKeys = [String]()
-    
+    var activityIndicator:NVActivityIndicatorView?
     var selectedContacts = [EPContact]()
     var filteredContacts = [CNContact]()
     
@@ -378,8 +380,12 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
     func onTouchDoneButton() {
 //        contactDelegate?.epContactPicker(self, didSelectMultipleContacts: selectedContacts)
 //        dismiss(animated: true, completion: nil)
-        
+        self.activityIndicator = NVActivityIndicatorView(frame: view.frame, type: NVActivityIndicatorType.ballPulse, color: UIColor.white, padding: 0)
+
+        self.activityIndicator?.startAnimating()
+
         if (partyType == .generalAdmission) {
+            
             self.sendOutInvitations()
         } else {
             self.submitConnectInquiry()
@@ -416,6 +422,8 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
                     if cloudError == nil {
                         self.dismiss(animated: true, completion: {
                             self.contactDelegate?.epContactPickerDidSubmitInvitesAndWantsToShowEvent()
+                            self.activityIndicator?.stopAnimating()
+
                         })
                     } else {
                         

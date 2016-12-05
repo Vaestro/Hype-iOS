@@ -39,7 +39,8 @@ class THLPartyMenuController: UIViewController, THLConnectedHostViewControllerDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view.backgroundColor = UIColor.black
+
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancel_button"), style: .plain, target: self, action: #selector(THLPartyMenuController.dismiss as (THLPartyMenuController) -> () -> ()))
 
         // Initialize view controllers to display and place in array
@@ -60,8 +61,26 @@ class THLPartyMenuController: UIViewController, THLConnectedHostViewControllerDe
         controllerArray.append(controller3)
         
         // Initialize scroll menu
-        let rect = CGRect(x: 0.0, y: 50.0, width: self.view.frame.width, height: self.view.frame.height)
-        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: rect, pageMenuOptions: nil)
+        let rect = CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: self.view.frame.height)
+        
+        let parameters: [CAPSPageMenuOption] = [
+            .menuItemSeparatorWidth(4.3),
+            .scrollMenuBackgroundColor(UIColor.black),
+            .viewBackgroundColor(UIColor.black),
+            .bottomMenuHairlineColor(UIColor.white),
+            .selectionIndicatorColor(UIColor.white),
+            .menuMargin(20.0),
+            .menuHeight(40.0),
+            .selectedMenuItemLabelColor(UIColor.white),
+            .unselectedMenuItemLabelColor(UIColor.white),
+            .menuItemFont(UIFont(name: "HelveticaNeue-Medium", size: 14.0)!),
+            .useMenuLikeSegmentedControl(true),
+            .menuItemSeparatorRoundEdges(true),
+            .selectionIndicatorHeight(2.0),
+            .menuItemSeparatorPercentageHeight(0.1)
+        ]
+        
+        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: rect, pageMenuOptions: parameters)
         
         self.view.addSubview(pageMenu!.view)
     }
