@@ -193,20 +193,16 @@ import Parse
             let admissionOption:PFObject = guestlist.value(forKey: "admissionOption") as! PFObject
             let admissionType:Int = admissionOption.value(forKey: "type") as! Int
 
-//            let inquiry:PFObject = guestlist.value(forKey: "Inquiry") as! PFObject
-//            let inquiryConnectedStatus:Int = inquiry.value(forKey: "connected") as! Int
-
-//            if admissionType == 2 {
-//                if inquiryConnectedStatus == 1 {
-//                    self.presentPartyMenu(forConnect: guestlistInvite)
-//                }
-//                else {
-//                    self.presentOffers(forInquiry: guestlistInvite)
-//                }
-//            }
-//            else {
+            if (admissionType == 2) {
+                let inquiry = guestlist.value(forKey: "Inquiry") as! PFObject
+                if ((inquiry.value(forKey: "connected") as! Bool) == true) {
+                    self.presentPartyMenuforConnect(guestlistInvite)
+                } else {
+                    self.presentInquiryMenu(forInquiry: inquiry)
+                }
+            } else {
                 self.presentPartyNavigationControllerforTicket(invite: guestlistInvite)
-//            }
+            }
         })
         let tabBarController = window.rootViewController as! UITabBarController
         tabBarController.selectedIndex = 2

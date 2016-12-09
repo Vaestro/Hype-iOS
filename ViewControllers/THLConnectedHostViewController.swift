@@ -55,7 +55,8 @@ class THLConnectedHostViewController: UIViewController {
         superview.addSubview(hostImageView)
         
         let offerMessageLabel = constructBodyTitleLabel()
-        offerMessageLabel.text = "Communicate with David and let him know when you will be able to meet him at the venue. Once you arrive, please check-in with David to receive your credits."
+        let hostName:String = host.value(forKey: "firstName") as! String
+        offerMessageLabel.text = "Communicate with \(hostName) and let them know when you will be able to meet them at the venue. Once you arrive, please check-in with \(hostName) to receive your credits."
         superview.addSubview(offerMessageLabel)
         
         let hostNameLabel = constructTitleLabel()

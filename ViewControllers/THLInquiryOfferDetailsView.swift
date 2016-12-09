@@ -177,7 +177,10 @@ class THLInquiryOfferDetailsView: UIViewController {
                 
                 // Create buttons
                 let buttonOne = CancelButton(title: "OK") {
+                    let currentUserName:String = THLUser.current()!.firstName
                     let hostId = (self.inquiryOffer["Host"] as! THLUser).objectId
+                    let messageText = "\(currentUserName) has accepted your offer. You are now able to communicate with the group and bring them to the event"
+                    PFCloud.callFunction(inBackground: "sendPushNotification", withParameters: ["message": messageText, "recipientId": hostId!])
                     THLChatSocketManager.sharedInstance.createChatRoom(hostId: hostId!)
                     self.delegate?.didAcceptInquiryOffer()
                 }

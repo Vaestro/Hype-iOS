@@ -129,22 +129,24 @@ class THLSubmitInquiryOfferViewController: FormViewController {
         let venueName:String = valuesDictionary["venueField"] as! String
         let dateTime:Date = valuesDictionary["dateField"] as! Date
         let inquiryId:String = self.inquiry.objectId!
+        let guestlistId:String = self.inquiry.value(forKey: "guestlistId") as! String
 
         PFCloud.callFunction(inBackground: "submitOfferForInquiry", withParameters: ["message": messageText,
                                                                                     "venueName": venueName,
                                                                                     "dateTime": dateTime,
-                                                                                    "inquiryId": inquiryId]) {
+                                                                                    "inquiryId": inquiryId,
+                                                                                    "guestlistId":guestlistId]) {
                 (inquiryOffer, error) in
             if (!(error != nil)) {
-                var offers:[PFObject]? = self.inquiry?.value(forKey: "Offers") as? [PFObject]
-                if (offers == nil) {
-                    offers = [PFObject]()
-                    offers?.append(inquiryOffer as! PFObject)
-                } else {
-                    offers?.insert(inquiryOffer as! PFObject, at: 0)
-                }
-                self.inquiry?["Offers"] = offers
-                self.inquiry?.saveInBackground()
+//                var offers:[PFObject]? = self.inquiry?.value(forKey: "Offers") as? [PFObject]
+//                if (offers == nil) {
+//                    offers = [PFObject]()
+//                    offers?.append(inquiryOffer as! PFObject)
+//                } else {
+//                    offers?.insert(inquiryOffer as! PFObject, at: 0)
+//                }
+//                self.inquiry?["Offers"] = offers
+//                self.inquiry?.saveInBackground()
                 let title = "SUCCESS"
                 let message = "Your offer was submitted!"
                 
