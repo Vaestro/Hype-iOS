@@ -118,15 +118,19 @@ class THLConnectedHostViewController: UIViewController {
         THLChatSocketManager.sharedInstance.socket.on("send specific room") { (dataArray, socketAck) -> Void in
             let chatRoomDict = dataArray[0] as! NSDictionary
             var chatRoomId = chatRoomDict["room"]
-            let navigationConroller = UINavigationController(navigationBarClass: THLBoldNavigationBar.self, toolbarClass: nil)
-            let chatViewController = THLChatViewController()
-            chatViewController.chatMateId = self.host.objectId
-            chatViewController.chatRoomId = chatRoomId as! String?
-            chatViewController.chatMateName = "Host"
-            navigationConroller.pushViewController(chatViewController, animated: false)
-            self.present(navigationConroller, animated: true, completion: nil)
-            
-        }
+            let resultController = THLChatViewController()
+            resultController.chatMateId = self.host.objectId
+            resultController.chatRoomId = chatRoomId as! String?
+            resultController.chatMateName = "Host"
+            resultController.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "<-", style: UIBarButtonItemStyle.plain, target: self, action: "goBack")
+            let navController = UINavigationController(navigationBarClass: THLBoldNavigationBar.self, toolbarClass: nil) // Creating a navigation controller with VC1 at the root of the navigation stack.
+            navController.setViewControllers([resultController], animated: false)
+            self.present(navController, animated:false, completion: nil)
+    }
+    }
+    func goBack(){
+        dismiss(animated: false, completion: nil)
+ 
     }
     
     func constructTitleLabel() -> UILabel {
