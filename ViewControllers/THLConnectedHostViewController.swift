@@ -22,6 +22,7 @@ import ParseUI
 
 @objc protocol THLConnectedHostViewControllerDelegate {
     func didAcceptInquiryOffer()
+    func openMessageView(ctrl: THLChatViewController)
 }
 
 class THLConnectedHostViewController: UIViewController {
@@ -122,15 +123,9 @@ class THLConnectedHostViewController: UIViewController {
             resultController.chatMateId = self.host.objectId
             resultController.chatRoomId = chatRoomId as! String?
             resultController.chatMateName = "Host"
-            resultController.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "<-", style: UIBarButtonItemStyle.plain, target: self, action: "goBack")
-            let navController = UINavigationController(navigationBarClass: THLBoldNavigationBar.self, toolbarClass: nil) // Creating a navigation controller with VC1 at the root of the navigation stack.
-            navController.setViewControllers([resultController], animated: false)
-            self.present(navController, animated:false, completion: nil)
-    }
-    }
-    func goBack(){
-        dismiss(animated: false, completion: nil)
- 
+            self.delegate?.openMessageView(ctrl: resultController)
+            
+        }
     }
     
     func constructTitleLabel() -> UILabel {

@@ -14,6 +14,8 @@ class THLPartyMenuController: UIViewController, THLConnectedHostViewControllerDe
         
     }
     
+    
+    
     var pageMenu : CAPSPageMenu?
     var guestlistInvite : PFObject
     var guestlist : PFObject
@@ -42,7 +44,7 @@ class THLPartyMenuController: UIViewController, THLConnectedHostViewControllerDe
         self.view.backgroundColor = UIColor.black
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancel_button"), style: .plain, target: self, action: #selector(THLPartyMenuController.dismiss as (THLPartyMenuController) -> () -> ()))
-
+        
         // Initialize view controllers to display and place in array
         var controllerArray : [UIViewController] = []
         
@@ -84,9 +86,17 @@ class THLPartyMenuController: UIViewController, THLConnectedHostViewControllerDe
         
         self.view.addSubview(pageMenu!.view)
     }
+    override func viewWillAppear(_ animated: Bool) {
+        (self.navigationController?.navigationBar as! THLBoldNavigationBar).titleLabel.text = ""
+        (self.navigationController?.navigationBar as! THLBoldNavigationBar).subtitleLabel.text = ""
+    }
     
     func dismiss() {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func openMessageView(ctrl: THLChatViewController) {
+        self.navigationController?.pushViewController(ctrl, animated: false)
     }
     
     override func didReceiveMemoryWarning() {
