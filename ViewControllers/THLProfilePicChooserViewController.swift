@@ -13,20 +13,15 @@ class THLProfilePicChooserViewController: UIViewController, UIImagePickerControl
 
     
     let imagePicker = UIImagePickerController()
-     let logo = UIImageView(image: UIImage(named: "default_profile_image"))
-    
+    let logo = UIImageView(image: UIImage(named: "default_profile_image"))
+    var messageView = UILabel()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view.backgroundColor = UIColor.black
         self.navigationItem.title = "ADD PROFILE PICTURE";
         imagePicker.delegate = self
-        
-        let topView = UIView()
-        topView.backgroundColor = UIColor.black
-        let bottomView = UIView()
-        bottomView.backgroundColor = UIColor.black
         
         if ((THLUser.current()?.image) != nil) {
             let imageFile = THLUser.current()?.image as PFFile!
@@ -34,35 +29,29 @@ class THLProfilePicChooserViewController: UIViewController, UIImagePickerControl
             logo.kf.setImage(with: url)
         }
         
-        self.view.addSubview(topView)
-        self.view.addSubview(bottomView)
+        messageView.font = UIFont(name:"OpenSans-Light",size:16)
+        messageView.lineBreakMode = NSLineBreakMode.byWordWrapping
+        messageView.numberOfLines = 0
+        messageView.textAlignment = .left
+        messageView.textColor = UIColor.gray
+        self.view.addSubview(logo)
+        self.view.addSubview(messageView)
         
-        
-        topView.snp.makeConstraints { (make) -> Void in
-            make.top.left.right.equalTo(0)
-            make.height.equalTo(self.view.snp_height).multipliedBy(0.5)
-        }
-        
-        bottomView.snp.makeConstraints { (make) -> Void in
-            make.left.bottom.equalTo(0)
-            make.height.equalTo(self.view.snp_height).multipliedBy(0.5)
-             make.width.equalTo(self.view.snp_width)
-           
-        }
-        
-       
-        topView.addSubview(logo)
         logo.snp.makeConstraints { (make) -> Void in
-            make.centerX.equalTo(topView)
-            make.centerY.equalTo(topView)
+            make.top.equalTo(messageView.snp.bottom).offset(20)
+            make.centerX.equalTo(self.view)
             make.width.equalTo(100)
-            make.height.equalTo(110)
+            make.height.equalTo(100)
+        }
+        messageView.snp.makeConstraints { (make) -> Void in
+            make.width.equalTo(250)
+            make.top.equalTo(self.view).offset(100)
+            make.centerX.equalTo(self.view)
         }
         
         
         
-        
-        var tutorialsBtn = UIButton()
+        let tutorialsBtn = UIButton()
         
         tutorialsBtn.setTitle("Upload A Picture", for: UIControlState.normal)
         tutorialsBtn.setTitleColor(UIColor.black, for: UIControlState.normal)
@@ -71,11 +60,11 @@ class THLProfilePicChooserViewController: UIViewController, UIImagePickerControl
         
         
         
-        bottomView.addSubview(tutorialsBtn)
+        self.view.addSubview(tutorialsBtn)
         
         tutorialsBtn.snp.makeConstraints { (make) -> Void in
-            make.centerX.equalTo(bottomView)
-            make.centerY.equalTo(bottomView)
+            make.top.equalTo(logo.snp.bottom).offset(50)
+            make.centerX.equalTo(self.view)
             make.width.equalTo(200)
             make.height.equalTo(50)
         }

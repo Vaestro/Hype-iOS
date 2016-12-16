@@ -70,7 +70,7 @@ pod 'BLKFlexibleHeightBar'
 pod 'JSQMessagesViewController'
 pod 'TPKeyboardAvoiding'
 pod 'Whisper'
-
+pod 'SwiftMessages'
 end
 
 target 'HypeTests' do

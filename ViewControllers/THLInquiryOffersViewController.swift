@@ -28,6 +28,7 @@ class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UIT
     var inquiry: PFObject
     
     var offers: [PFObject]
+
     
     let offersTableViewIdentifier = "offersTableViewIdentifier"
     
@@ -39,8 +40,8 @@ class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UIT
         self.guestlistInvite = guestlistInvite
         self.guestlist = guestlistInvite.value(forKey: "Guestlist") as! PFObject
         self.inquiry = guestlist.value(forKey: "Inquiry") as! PFObject
-        
 
+        
         
         self.offers = Array()
         offersTableView = UITableView.init(frame: CGRect.zero)
@@ -53,15 +54,7 @@ class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UIT
     
     //  MARK: -
     //  MARK: UIViewController
-    override func viewWillAppear(_ animated: Bool) {
-        let event = inquiry.value(forKey: "Event") as! PFObject
-        let venueName = event.value(forKey: "venueName") as! String
-        
-        let date = inquiry.value(forKey: "date") as! Date
-        (self.navigationController?.navigationBar as! THLBoldNavigationBar).titleLabel.text = "INQUIRY FOR \(venueName.uppercased())"
-        (self.navigationController?.navigationBar as! THLBoldNavigationBar).subtitleLabel.text = (date as! NSDate).thl_weekdayString
-        
-    }
+
     
     override func loadView() {
         super.loadView()
@@ -85,7 +78,8 @@ class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UIT
         }
         
         self.view.addSubview(offersTableView)
-    }
+        
+            }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,6 +90,8 @@ class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UIT
 //        layout.itemSize = CGSize(width: self.view.frame.size.width - 25, height: 55)
 //        layout.headerReferenceSize = CGSize(width: admissionOptionCollectionView.bounds.width, height: 70.0)
     }
+    
+
     
     func dismiss() {
         self.dismiss(animated: true, completion: nil)

@@ -111,8 +111,31 @@ class THLConnectedHostViewController: UIViewController {
     }
     
     func handleMessageAction() {
-        
-        THLChatSocketManager.sharedInstance.getSpecificChatRoom(hostId: self.host.objectId!, guestId: (THLUser.current()?.objectId)!)
+        if checkForInquiryOwner() {
+            THLChatSocketManager.sharedInstance.getSpecificChatRoom(hostId: self.host.objectId!, guestId: (THLUser.current()?.objectId)!)
+        } else {
+            // Prepare the popup assets
+            let title = "OOPS"
+            let message = "Only the creator of your party can message the host!"
+            
+            // Create the dialog
+            let popup = PopupDialog(title: title, message: message)
+            
+            // Create buttons
+            let buttonOne = CancelButton(title: "OK") {
+            }
+            
+            popup.addButton(buttonOne)
+            
+            // Present dialog
+            self.present(popup, animated: true, completion: nil)
+        }
+    }
+    
+    func checkForInquiryOwner() -> Bool {
+        let inquiryOwner:PFObject = inquiry.value(forKey:"Sender") as! PFObject
+        let currentUser = THLUser.current()
+        return inquiryOwner.objectId == currentUser!.objectId
     }
     
     func listenHandlerForChatRoom() {
