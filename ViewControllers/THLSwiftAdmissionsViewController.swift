@@ -8,6 +8,7 @@
 
 import UIKit
 import TTTAttributedLabel
+import PopupDialog
 
 @objc protocol THLSwiftAdmissionsViewControllerDelegate {
     func didSelectAdmissionOption(_ admissionOption: PFObject, event: PFObject)
@@ -186,6 +187,35 @@ class THLSwiftAdmissionsViewController: UIViewController, THLEventPickerViewCont
     }
 
     func messageButtonPressed() {
+        // Prepare the popup assets
+        let title = "HYPE CONNECT"
+        let message = "Hype Connect allows you to connect with hosts at multiple venues every night where you can take advantage of some of the perks of going with a host like VIP walk-in, complimentary drinks, etc."
+        let image = UIImage(named: "hype_connect_promo")
+        
+        // Create the dialog
+        let popup = PopupDialog(title: title, message: message, image: image)
+        
+        // Create buttons
+        let buttonOne = CancelButton(title: "CANCEL") {
+            
+        }
+        
+        let buttonTwo = DefaultButton(title: "LET'S GO") {
+            self.handleHypeConnectOption()
+        }
+        
+        // Add buttons to dialog
+        // Alternatively, you can use popup.addButton(buttonOne)
+        // to add a single button
+        popup.addButtons([buttonOne, buttonTwo])
+        
+        // Present dialog
+        self.present(popup, animated: true, completion: nil)
+        
+
+    }
+    
+    func handleHypeConnectOption() {
         if(THLUser.current()?.value(forKey: "image") == nil){
             let vc = THLProfilePicChooserViewController()
             self.navigationController?.pushViewController(vc, animated: true)

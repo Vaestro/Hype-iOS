@@ -110,12 +110,7 @@ extension THLMyInvitesViewController {
         let admissionType:Int = admissionOption.value(forKey: "type") as! Int
         
         if (admissionType == 2) {
-            let inquiry = guestlist.value(forKey: "Inquiry") as! PFObject
-            if ((inquiry.value(forKey: "connected") as! Bool) == true) {
-                delegate?.didSelectViewHostedEvent(guestlistInvite!)
-            } else {
-                delegate?.didSelectViewInquiry(guestlistInvite!)
-            }
+            delegate?.didSelectViewInquiry(guestlistInvite!)
         } else {
             delegate?.didSelectViewEventTicket(guestlistInvite!)
         }

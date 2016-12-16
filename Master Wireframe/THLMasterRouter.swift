@@ -11,7 +11,12 @@ import Bolts
 import Branch
 import Parse
 
-@objc class THLMasterRouter: NSObject, THLWelcomeViewDelegate, THLAccountRegistrationViewControllerDelegate, THLSwiftLoginViewControllerDelegate, THLDiscoveryViewControllerDelegate, THLGuestProfileViewControllerDelegate, THLEventDetailsViewControllerDelegate, THLSwiftAdmissionsViewControllerDelegate, THLPartyViewControllerDelegate, THLCheckoutViewControllerDelegate, THLTablePackageControllerDelegate, EPPickerDelegate, THLInquiryOffersViewControllerDelegate, THLUserProfileViewControllerDelegate, THLAvailableInquiriesViewControllerDelegate, THLInquiryMenuViewControllerDelegate, THLSubmitInquiryOfferViewControllerDelegate {
+@objc class THLMasterRouter: NSObject, THLWelcomeViewDelegate, THLAccountRegistrationViewControllerDelegate, THLSwiftLoginViewControllerDelegate, THLDiscoveryViewControllerDelegate, THLGuestProfileViewControllerDelegate, THLEventDetailsViewControllerDelegate, THLSwiftAdmissionsViewControllerDelegate, THLPartyViewControllerDelegate, THLCheckoutViewControllerDelegate, THLTablePackageControllerDelegate, EPPickerDelegate, THLInquiryOffersViewControllerDelegate, THLUserProfileViewControllerDelegate, THLAvailableInquiriesViewControllerDelegate, THLInquiryMenuViewControllerDelegate, THLSubmitInquiryOfferViewControllerDelegate, THLPartyMenuControllerDelegate {
+
+    public func partyViewControllerWantsToPresentInvitationController(for event: THLEvent!, guestlistId: String!, currentGuestsPhoneNumbers: [Any]!) {
+        
+    }
+
 
 
 
@@ -344,7 +349,7 @@ import Parse
         }
     }
     
-    internal func partyViewControllerWantsToPresentInvitationController(for event: THLEvent!, guestlistId: String!, currentGuestsPhoneNumbers: [Any]!) {
+    internal func guestlistTableViewWantsToPresentInvitationController(for event: PFObject!, guestlistId: String!, currentGuestsPhoneNumbers: [Any]!) {
         let contactPickerScene = EPContactsPicker(delegate: self, partyType: .connect, multiSelection:true, subtitleCellType: SubtitleCellValue.phoneNumber, event: event, guestlistId: guestlistId)
         let topView = self.topViewController() as! UINavigationController
         topView.pushViewController(contactPickerScene, animated: true)
@@ -411,7 +416,7 @@ import Parse
     }
 
     internal func didSelectViewInquiry(_ guestlistInvite: PFObject) {
-        presentOffersForInquiryWithGuestlistInvite(guestlistInvite: guestlistInvite)
+        presentPartyMenuforConnect(guestlistInvite)
     }
     
     internal func didSelectViewEventTicket(_ guestlistInvite: PFObject) {
@@ -440,6 +445,7 @@ import Parse
         let partyMenu = THLPartyMenuController(guestlistInvite: invite)
         let navigationVC = UINavigationController(navigationBarClass: THLBoldNavigationBar.self, toolbarClass: nil)
         navigationVC.addChildViewController(partyMenu)
+        partyMenu.delegate = self
         let tabBarController = window.rootViewController as! UITabBarController
 
         if self.topViewController() != tabBarController {

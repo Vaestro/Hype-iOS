@@ -37,7 +37,8 @@ class THLInquiryMenuViewController: UIViewController {
         self.connectButton = UIButton()
         
         let guestlistId = inquiry["guestlistId"] as! String
-        self.guestlistTableView = THLGuestlistTableViewController(guestlistId: guestlistId)
+        let event:PFObject = inquiry.value(forKey: "Event") as! PFObject
+        self.guestlistTableView = THLGuestlistTableViewController(guestlistId: guestlistId, event:event)
         super.init(nibName: nil, bundle: nil)
         self.inquiryStatus = getInquiryStatus()
 
