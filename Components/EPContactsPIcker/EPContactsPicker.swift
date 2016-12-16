@@ -382,7 +382,10 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
 //        dismiss(animated: true, completion: nil)
         self.activityIndicator = NVActivityIndicatorView(frame: view.frame, type: NVActivityIndicatorType.ballPulse, color: UIColor.white, padding: 0)
 
-        self.activityIndicator?.startAnimating()
+        //self.activityIndicator?.startAnimating()
+        let size = CGSize(width: 30, height:30)
+        
+        startAnimating(size, message: "Loading...", type: NVActivityIndicatorType(rawValue: 0) )
 
         if (partyType == .generalAdmission) {
             
@@ -420,9 +423,11 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
                 PFCloud.callFunction(inBackground: "sendOutInvitations", withParameters: ["eventId": eventId, "eventName": locationName, "eventTime": eventDate, "guestPhoneNumbers": guestPhoneNumbers, "guestlistId": self.guestlistId!, "branchUrl": url]) {
                     (response, cloudError) in
                     if cloudError == nil {
+                        print("DONE")
                         self.dismiss(animated: true, completion: {
                             self.contactDelegate?.epContactPickerDidSubmitInvitesAndWantsToShowEvent()
-                            self.activityIndicator?.stopAnimating()
+                            //self.activityIndicator?.stopAnimating()
+                            self.stopAnimating()
 
                         })
                     } else {
@@ -442,7 +447,7 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
         let location:PFObject = event?.value(forKey: "location") as! PFObject
         let locationName:String = location.value(forKey: "name") as! String
         let locationInfo:String = location.value(forKey: "info") as! String
-        
+        print("SUBMITTED")
         PFCloud.callFunction(inBackground: "submitConnectInquiry", withParameters: ["guestPhoneNumbers": guestPhoneNumbers,
                                                                                     "eventId": eventId,
                                                                                     "eventTime":eventDate,
