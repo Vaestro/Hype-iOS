@@ -3,7 +3,7 @@ PODS:
     - APAddressBook/Core (= 0.2.3)
   - APAddressBook/Core (0.2.3)
   - AutoCoding (2.2.2)
-  - BFKit (1.9.2)
+  - BFKit (1.9.3)
   - BLKFlexibleHeightBar (1.0.2)
   - BlocksKit (2.2.5):
     - BlocksKit/All (= 2.2.5)
@@ -82,7 +82,7 @@ PODS:
   - FXLabel (1.5.9)
   - GCDObjC (0.3.0)
   - Gizou (0.1.3)
-  - Harpy (4.0.10)
+  - Harpy (4.0.11)
   - IHKeyboardAvoiding (2.6)
   - JSQMessagesViewController (7.3.4):
     - JSQSystemSoundPlayer (~> 2.0.1)
@@ -111,11 +111,11 @@ PODS:
     - Bolts/Tasks (~> 1.3)
     - Parse (~> 1.9)
   - PermissionScope (1.1.1)
-  - PhoneNumberKit (1.1.0):
-    - PhoneNumberKit/PhoneNumberKitCore (= 1.1.0)
-    - PhoneNumberKit/UIKit (= 1.1.0)
-  - PhoneNumberKit/PhoneNumberKitCore (1.1.0)
-  - PhoneNumberKit/UIKit (1.1.0):
+  - PhoneNumberKit (1.2.0):
+    - PhoneNumberKit/PhoneNumberKitCore (= 1.2.0)
+    - PhoneNumberKit/UIKit (= 1.2.0)
+  - PhoneNumberKit/PhoneNumberKitCore (1.2.0)
+  - PhoneNumberKit/UIKit (1.2.0):
     - PhoneNumberKit/PhoneNumberKitCore
   - PopupDialog (0.5.0)
   - ReflectableEnum (0.1.2)
@@ -127,7 +127,7 @@ PODS:
   - Socket.IO-Client-Swift (8.1.2)
   - SSDataSources (0.8.5)
   - Stripe (9.2.0)
-  - SVProgressHUD (2.1.1)
+  - SVProgressHUD (2.1.2)
   - TextFieldEffects (1.3.0)
   - TPKeyboardAvoiding (1.3.1)
   - TTTAttributedLabel (2.0.0)
@@ -199,7 +199,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   APAddressBook: 2a91bf05999548bea210ec9d1a68073f4dc8bfce
   AutoCoding: 56fa46dbfa89d44189a26ce64e6a470ed8ff4661
-  BFKit: c8f1a85a04f8d350089da8693806a472d475d1f8
+  BFKit: e581dc0609b462aea9ceb02417ceb5b26ede3316
   BLKFlexibleHeightBar: b27572a69633d8e33f1f2bbc486b04d8e86f742d
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
@@ -217,7 +217,7 @@ SPEC CHECKSUMS:
   FXLabel: 877f56a3e0ef76b223c67dea3f442c12d3a1d55c
   GCDObjC: 0c31898f34d8605196ac0343c65b496609d7dee6
   Gizou: 93853bf634a9382c257795db052aa9a75e972c43
-  Harpy: af469b5f7b09e35257ddbf35a068a87940bfc1b2
+  Harpy: 4afe4976f2bcf61bd25969ecb266dd17043d065a
   IHKeyboardAvoiding: d2541ee56dad83e160cd9aed0468c52247af6f49
   JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
@@ -236,7 +236,7 @@ SPEC CHECKSUMS:
   ParseFacebookUtilsV4: 2f30c2b7021c8005d3042781da7ef87d06589421
   ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
   PermissionScope: a30c16e015779ba27c97c124e7539e27b5829de2
-  PhoneNumberKit: 9a59056fcba31af704c97d23de9205c9b3192608
+  PhoneNumberKit: 59da40656353c5267aa69a3ae3b240c4e57cff97
   PopupDialog: 9890441b81105b9076757af2afe2b037be682f3e
   ReflectableEnum: dc2fa83bba1e74df3a2f319c2ffaea55fd95887e
   Reveal-iOS-SDK: e2250b3c155bcfac53ae223ddc1f76d08f206c33
@@ -245,7 +245,7 @@ SPEC CHECKSUMS:
   Socket.IO-Client-Swift: 542d82e6708f9901b3f6c1d134fb60fa0d09d4d1
   SSDataSources: b01170fb23b82acf0649194e9189b0bf5f702681
   Stripe: a47770e82db059d0e7e160f9aabc2997055ee911
-  SVProgressHUD: 1127180503b9a308ddf7006f3cc58fc05cc1092d
+  SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   TextFieldEffects: ef594746f17997c813e07633f8ae5acaf9b04f27
   TPKeyboardAvoiding: 0d6af20e95e2850f4c621841225b59ec7d8dd852
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
