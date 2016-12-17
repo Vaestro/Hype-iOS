@@ -12,7 +12,7 @@ import PopupDialog
 import Parse
 import ParseUI
 
-@objc protocol THLInquiryOfferDetailsViewDelegate {
+protocol THLInquiryOfferDetailsViewDelegate {
     func didAcceptInquiryOffer()
 }
 
@@ -33,12 +33,12 @@ class THLInquiryOfferDetailsView: UIViewController {
         self.inquiry = inquiry
         self.host = inquiryOffer.value(forKey:"Host") as! PFObject
         self.venue = inquiryOffer.value(forKey:"Venue") as! PFObject
-
+        
         super.init(nibName:nil, bundle:nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-
+        
         (self.navigationController?.navigationBar as! THLBoldNavigationBar).titleLabel.text = ""
         (self.navigationController?.navigationBar as! THLBoldNavigationBar).subtitleLabel.text = ""
     }
@@ -90,7 +90,7 @@ class THLInquiryOfferDetailsView: UIViewController {
         
         let button = UIButton()
         button.setTitle("CONNECT", for: .normal)
-        button.addTarget(self, action: #selector(handleConnect), for: UIControlEvents.touchUpInside)
+        button.addTarget(self, action: #selector(handleConnectButton), for: UIControlEvents.touchUpInside)
         button.backgroundColor = UIColor.customGoldColor()
         superview.addSubview(button)
         
@@ -123,7 +123,7 @@ class THLInquiryOfferDetailsView: UIViewController {
             make.top.equalTo(offerMessageLabel.snp.bottom).offset(10)
             make.left.equalTo(superview.snp.left).offset(10)
             make.right.equalTo(superview.snp.right).offset(-10)
-
+            
             make.height.equalTo(100)
         }
         
@@ -160,10 +160,43 @@ class THLInquiryOfferDetailsView: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    
+    
+    
+    func handleConnectButton() {
+        if checkForInquiryOwner() {
+            handleConnect()
+        } else {
+            // Prepare the popup assets
+            let title = "OOPS"
+            let message = "Only the creator of your party can accept a Host's offer!"
+            
+            // Create the dialog
+            let popup = PopupDialog(title: title, message: message)
+            
+            // Create buttons
+            let buttonOne = CancelButton(title: "OK") {
+            }
+            
+            popup.addButton(buttonOne)
+            
+            // Present dialog
+            self.present(popup, animated: true, completion: nil)
+        }
+    }
+    
+    func checkForInquiryOwner() -> Bool {
+        let inquiryOwner:PFObject = inquiry.value(forKey:"Sender") as! PFObject
+        let currentUser = THLUser.current()
+        return inquiryOwner.objectId == currentUser!.objectId
+    }
+    
     func handleConnect() {
         inquiryOffer["accepted"] = true
+        
         inquiry["connected"] = true
         inquiry["AcceptedOffer"] = inquiryOffer
+        inquiry["acceptedHostId"] = host.objectId
         inquiryOffer.saveInBackground()
         inquiry.saveInBackground{(success, error) in
             if (success) {
@@ -175,7 +208,10 @@ class THLInquiryOfferDetailsView: UIViewController {
                 
                 // Create buttons
                 let buttonOne = CancelButton(title: "OK") {
+                    let currentUserName:String = THLUser.current()!.firstName
                     let hostId = (self.inquiryOffer["Host"] as! THLUser).objectId
+                    let messageText = "\(currentUserName) has accepted your offer. You are now able to communicate with the group and bring them to the event"
+                    PFCloud.callFunction(inBackground: "sendPushNotification", withParameters: ["message": messageText, "recipientId": hostId!])
                     THLChatSocketManager.sharedInstance.createChatRoom(hostId: hostId!)
                     self.delegate?.didAcceptInquiryOffer()
                 }
@@ -216,7 +252,7 @@ class THLInquiryOfferDetailsView: UIViewController {
         label.textColor = UIColor.white
         return label
     }
-
+    
     func constructBodyTitleLabel() -> UILabel {
         let label = UILabel()
         label.font = UIFont(name:"OpenSans-Bold",size:16)
@@ -250,7 +286,7 @@ class THLInquiryOfferDetailsView: UIViewController {
         return imageView
     }
     
-
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

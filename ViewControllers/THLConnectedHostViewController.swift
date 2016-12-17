@@ -21,7 +21,8 @@ import Parse
 import ParseUI
 
 @objc protocol THLConnectedHostViewControllerDelegate {
-    func didAcceptInquiryOffer()
+    
+    func openMessageView(ctrl: THLChatViewController)
 }
 
 class THLConnectedHostViewController: UIViewController {
@@ -55,7 +56,8 @@ class THLConnectedHostViewController: UIViewController {
         superview.addSubview(hostImageView)
         
         let offerMessageLabel = constructBodyTitleLabel()
-        offerMessageLabel.text = "Communicate with David and let him know when you will be able to meet him at the venue. Once you arrive, please check-in with David to receive your credits."
+        let hostName:String = host.value(forKey: "firstName") as! String
+        offerMessageLabel.text = "Communicate with \(hostName) and let them know when you will be able to meet them at the venue. Once you arrive, please check-in with \(hostName) to receive your credits."
         superview.addSubview(offerMessageLabel)
         
         let hostNameLabel = constructTitleLabel()
@@ -104,10 +106,49 @@ class THLConnectedHostViewController: UIViewController {
             make.bottom.equalTo(hostImageView.snp.bottom)
         }
         // Do any additional setup after loading the view.
+        
+        listenHandlerForChatRoom()
     }
     
     func handleMessageAction() {
-
+        if checkForInquiryOwner() {
+            THLChatSocketManager.sharedInstance.getSpecificChatRoom(hostId: self.host.objectId!, guestId: (THLUser.current()?.objectId)!)
+        } else {
+            // Prepare the popup assets
+            let title = "OOPS"
+            let message = "Only the creator of your party can message the host!"
+            
+            // Create the dialog
+            let popup = PopupDialog(title: title, message: message)
+            
+            // Create buttons
+            let buttonOne = CancelButton(title: "OK") {
+            }
+            
+            popup.addButton(buttonOne)
+            
+            // Present dialog
+            self.present(popup, animated: true, completion: nil)
+        }
+    }
+    
+    func checkForInquiryOwner() -> Bool {
+        let inquiryOwner:PFObject = inquiry.value(forKey:"Sender") as! PFObject
+        let currentUser = THLUser.current()
+        return inquiryOwner.objectId == currentUser!.objectId
+    }
+    
+    func listenHandlerForChatRoom() {
+        THLChatSocketManager.sharedInstance.socket.on("send specific room") { (dataArray, socketAck) -> Void in
+            let chatRoomDict = dataArray[0] as! NSDictionary
+            var chatRoomId = chatRoomDict["room"]
+            let resultController = THLChatViewController()
+            resultController.chatMateId = self.host.objectId
+            resultController.chatRoomId = chatRoomId as! String?
+            resultController.chatMateName = "Host"
+            self.delegate?.openMessageView(ctrl: resultController)
+            
+        }
     }
     
     func constructTitleLabel() -> UILabel {
