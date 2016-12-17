@@ -3,7 +3,7 @@ PODS:
     - APAddressBook/Core (= 0.2.3)
   - APAddressBook/Core (0.2.3)
   - AutoCoding (2.2.2)
-  - BFKit (1.9.2)
+  - BFKit (1.9.3)
   - BLKFlexibleHeightBar (1.0.2)
   - BlocksKit (2.2.5):
     - BlocksKit/All (= 2.2.5)
@@ -27,28 +27,28 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
-  - Branch (0.12.16):
-    - Branch/Core (= 0.12.16)
-    - Branch/without-IDFA (= 0.12.16)
-  - Branch/Core (0.12.16)
-  - Branch/without-IDFA (0.12.16)
-  - CocoaLumberjack (2.4.0):
-    - CocoaLumberjack/Default (= 2.4.0)
-    - CocoaLumberjack/Extensions (= 2.4.0)
-  - CocoaLumberjack/Core (2.4.0)
-  - CocoaLumberjack/Default (2.4.0):
+  - Branch (0.12.19):
+    - Branch/Core (= 0.12.19)
+    - Branch/without-IDFA (= 0.12.19)
+  - Branch/Core (0.12.19)
+  - Branch/without-IDFA (0.12.19)
+  - CocoaLumberjack (3.0.0):
+    - CocoaLumberjack/Default (= 3.0.0)
+    - CocoaLumberjack/Extensions (= 3.0.0)
+  - CocoaLumberjack/Core (3.0.0)
+  - CocoaLumberjack/Default (3.0.0):
     - CocoaLumberjack/Core
-  - CocoaLumberjack/Extensions (2.4.0):
+  - CocoaLumberjack/Extensions (3.0.0):
     - CocoaLumberjack/Default
   - DateTools (1.7.0)
   - DGActivityIndicatorView (2.1.1)
   - EKAlgorithms (0.2)
-  - FBSDKCoreKit (4.17.0):
+  - Eureka (2.0.0-beta.1)
+  - FBSDKCoreKit (4.18.0):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.17.0):
+  - FBSDKLoginKit (4.18.0):
     - FBSDKCoreKit
   - FLEX (2.4.0)
-  - FLKAutoLayout (0.2.1)
   - FormatterKit (1.8.1):
     - FormatterKit/AddressFormatter (= 1.8.1)
     - FormatterKit/ArrayFormatter (= 1.8.1)
@@ -82,26 +82,23 @@ PODS:
   - FXLabel (1.5.9)
   - GCDObjC (0.3.0)
   - Gizou (0.1.3)
-  - Harpy (4.0.9)
+  - Harpy (4.0.11)
   - IHKeyboardAvoiding (2.6)
-  - Intercom (3.0.19)
   - JSQMessagesViewController (7.3.4):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
-  - Kingfisher (3.2.1)
-  - libPhoneNumber-iOS (0.8.17)
+  - Kingfisher (3.2.2)
+  - libPhoneNumber-iOS (0.9.1)
   - LinqToObjectiveC (2.1.0)
   - LMGeocoder (1.0.8)
   - Masonry (0.6.4)
-  - Mixpanel-swift (2.1.0)
-  - MRCountryPicker (0.0.5)
+  - Mixpanel-swift (2.1.1)
   - NUI (0.5.5):
     - NUIParse
   - NUIParse (1.3)
+  - NVActivityIndicatorView (3.1)
   - ObjectiveSugar (1.1.0)
   - OCMock (3.1.2)
-  - ORStackView (3.0.1):
-    - FLKAutoLayout (~> 0.2)
   - Parse (1.14.2):
     - Bolts/Tasks (~> 1.8)
   - ParseFacebookUtilsV4 (1.11.1):
@@ -114,14 +111,13 @@ PODS:
     - Bolts/Tasks (~> 1.3)
     - Parse (~> 1.9)
   - PermissionScope (1.1.1)
-  - PhoneNumberKit (1.0.1):
-    - PhoneNumberKit/PhoneNumberKitCore (= 1.0.1)
-    - PhoneNumberKit/UIKit (= 1.0.1)
-  - PhoneNumberKit/PhoneNumberKitCore (1.0.1)
-  - PhoneNumberKit/UIKit (1.0.1):
+  - PhoneNumberKit (1.2.0):
+    - PhoneNumberKit/PhoneNumberKitCore (= 1.2.0)
+    - PhoneNumberKit/UIKit (= 1.2.0)
+  - PhoneNumberKit/PhoneNumberKitCore (1.2.0)
+  - PhoneNumberKit/UIKit (1.2.0):
     - PhoneNumberKit/PhoneNumberKitCore
   - PopupDialog (0.5.0)
-  - Reachability (3.2)
   - ReflectableEnum (0.1.2)
   - Reveal-iOS-SDK (1.6.2)
   - SDWebImage (3.8.2):
@@ -131,66 +127,20 @@ PODS:
   - Socket.IO-Client-Swift (8.1.2)
   - SSDataSources (0.8.5)
   - Stripe (9.2.0)
-  - SVProgressHUD (2.0.4)
-  - SVPullToRefresh (0.4.1)
+  - SVProgressHUD (2.1.2)
+  - SwiftMessages (3.1.1)
   - TextFieldEffects (1.3.0)
-  - THContactPicker (1.2)
-  - TPKeyboardAvoiding (1.3)
+  - TPKeyboardAvoiding (1.3.1)
   - TTTAttributedLabel (2.0.0)
-  - Typhoon (3.5.1):
-    - Typhoon/no-arc (= 3.5.1)
-  - Typhoon/no-arc (3.5.1)
+  - Typhoon (3.6.0):
+    - Typhoon/DeallocNotifier (= 3.6.0)
+    - Typhoon/IntrospectionUtils (= 3.6.0)
+    - Typhoon/no-arc (= 3.6.0)
+  - Typhoon/DeallocNotifier (3.6.0)
+  - Typhoon/IntrospectionUtils (3.6.0)
+  - Typhoon/no-arc (3.6.0):
+    - Typhoon/IntrospectionUtils
   - Whisper (4.0.0)
-  - YapDatabase (2.9.2):
-    - YapDatabase/Standard (= 2.9.2)
-  - YapDatabase/Standard (2.9.2):
-    - YapDatabase/Standard/Core (= 2.9.2)
-    - YapDatabase/Standard/Extensions (= 2.9.2)
-  - YapDatabase/Standard/Core (2.9.2):
-    - CocoaLumberjack (~> 2)
-  - YapDatabase/Standard/Extensions (2.9.2):
-    - YapDatabase/Standard/Core
-    - YapDatabase/Standard/Extensions/ActionManager (= 2.9.2)
-    - YapDatabase/Standard/Extensions/CloudKit (= 2.9.2)
-    - YapDatabase/Standard/Extensions/ConnectionProxy (= 2.9.2)
-    - YapDatabase/Standard/Extensions/CrossProcessNotification (= 2.9.2)
-    - YapDatabase/Standard/Extensions/FilteredViews (= 2.9.2)
-    - YapDatabase/Standard/Extensions/FullTextSearch (= 2.9.2)
-    - YapDatabase/Standard/Extensions/Hooks (= 2.9.2)
-    - YapDatabase/Standard/Extensions/Relationships (= 2.9.2)
-    - YapDatabase/Standard/Extensions/RTreeIndex (= 2.9.2)
-    - YapDatabase/Standard/Extensions/SearchResults (= 2.9.2)
-    - YapDatabase/Standard/Extensions/SecondaryIndex (= 2.9.2)
-    - YapDatabase/Standard/Extensions/Views (= 2.9.2)
-  - YapDatabase/Standard/Extensions/ActionManager (2.9.2):
-    - Reachability (~> 3)
-    - YapDatabase/Standard/Core
-    - YapDatabase/Standard/Extensions/Views
-  - YapDatabase/Standard/Extensions/CloudKit (2.9.2):
-    - YapDatabase/Standard/Core
-  - YapDatabase/Standard/Extensions/ConnectionProxy (2.9.2):
-    - YapDatabase/Standard/Core
-  - YapDatabase/Standard/Extensions/CrossProcessNotification (2.9.2):
-    - YapDatabase/Standard/Core
-  - YapDatabase/Standard/Extensions/FilteredViews (2.9.2):
-    - YapDatabase/Standard/Core
-    - YapDatabase/Standard/Extensions/Views
-  - YapDatabase/Standard/Extensions/FullTextSearch (2.9.2):
-    - YapDatabase/Standard/Core
-  - YapDatabase/Standard/Extensions/Hooks (2.9.2):
-    - YapDatabase/Standard/Core
-  - YapDatabase/Standard/Extensions/Relationships (2.9.2):
-    - YapDatabase/Standard/Core
-  - YapDatabase/Standard/Extensions/RTreeIndex (2.9.2):
-    - YapDatabase/Standard/Core
-  - YapDatabase/Standard/Extensions/SearchResults (2.9.2):
-    - YapDatabase/Standard/Core
-    - YapDatabase/Standard/Extensions/FullTextSearch
-    - YapDatabase/Standard/Extensions/Views
-  - YapDatabase/Standard/Extensions/SecondaryIndex (2.9.2):
-    - YapDatabase/Standard/Core
-  - YapDatabase/Standard/Extensions/Views (2.9.2):
-    - YapDatabase/Standard/Core
   - YLMoment (0.2.0)
 
 DEPENDENCIES:
@@ -206,6 +156,7 @@ DEPENDENCIES:
   - DateTools (~> 1.6)
   - DGActivityIndicatorView
   - EKAlgorithms (~> 0.2)
+  - Eureka (~> 2.0.0-beta.1)
   - FBSDKCoreKit
   - FLEX (~> 2.0)
   - FormatterKit (~> 1.8)
@@ -214,7 +165,6 @@ DEPENDENCIES:
   - Gizou
   - Harpy
   - IHKeyboardAvoiding
-  - Intercom
   - JSQMessagesViewController
   - Kingfisher
   - libPhoneNumber-iOS (~> 0.8)
@@ -222,11 +172,10 @@ DEPENDENCIES:
   - LMGeocoder
   - Masonry (~> 0.6)
   - Mixpanel-swift
-  - MRCountryPicker (~> 0.0.5)
   - NUI (~> 0.5)
+  - NVActivityIndicatorView
   - ObjectiveSugar
   - OCMock (= 3.1.2)
-  - ORStackView
   - Parse
   - ParseFacebookUtilsV4
   - ParseUI
@@ -241,61 +190,56 @@ DEPENDENCIES:
   - SSDataSources (~> 0.8)
   - Stripe
   - SVProgressHUD
-  - SVPullToRefresh
+  - SwiftMessages
   - TextFieldEffects
-  - THContactPicker (~> 1.2)
   - TPKeyboardAvoiding
   - TTTAttributedLabel
   - Typhoon (~> 3.3)
   - Whisper
-  - YapDatabase (~> 2.7)
   - YLMoment (~> 0.2.0)
 
 SPEC CHECKSUMS:
   APAddressBook: 2a91bf05999548bea210ec9d1a68073f4dc8bfce
   AutoCoding: 56fa46dbfa89d44189a26ce64e6a470ed8ff4661
-  BFKit: c8f1a85a04f8d350089da8693806a472d475d1f8
+  BFKit: e581dc0609b462aea9ceb02417ceb5b26ede3316
   BLKFlexibleHeightBar: b27572a69633d8e33f1f2bbc486b04d8e86f742d
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   Bolts-Swift: fa98d1b59fc1acea9b21a21306dcdca1c85e3737
-  Branch: d74f14f69a04cd3c405ed11dab14c9a331ad3971
-  CocoaLumberjack: aa9dcab71bdf9eaf2a63bbd9ddc87863efe45457
+  Branch: 75ed1785250502588cfb4a5de40a5136bdaa1573
+  CocoaLumberjack: c823149bccc5519a9447aeb433be7b1212a7d6a5
   DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
   DGActivityIndicatorView: ff2c76073d79692f724863c8dd38685866a03cb6
   EKAlgorithms: 83488651734ba3a63956fcb783b10e82d2ec3388
-  FBSDKCoreKit: 30a21d2d7b92984b3d80497113433c00824c35e9
-  FBSDKLoginKit: 42b7129ac0373ca99eaf4cbebf4d07bd42371f59
+  Eureka: d014adf16406745e1a78d5790ea37ed130a0a8e5
+  FBSDKCoreKit: 15fef8804a4629f98c6f4e55e81a76c9d725d85e
+  FBSDKLoginKit: 6773073e970b2b15fb12e451ce7f11da0532b880
   FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
-  FLKAutoLayout: 9db6b30c2008d230da608e62c607b11c23b942e6
   FormatterKit: 11ad17b983200629246a5a466f6f1bfa2df823cb
   FXLabel: 877f56a3e0ef76b223c67dea3f442c12d3a1d55c
   GCDObjC: 0c31898f34d8605196ac0343c65b496609d7dee6
   Gizou: 93853bf634a9382c257795db052aa9a75e972c43
-  Harpy: 7248e2b2307209de79d2a3215e08a9ed97a418bf
+  Harpy: 4afe4976f2bcf61bd25969ecb266dd17043d065a
   IHKeyboardAvoiding: d2541ee56dad83e160cd9aed0468c52247af6f49
-  Intercom: 78d09a9452f18631c7a256fa5674c61ea5b180ee
   JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
-  Kingfisher: 64ef28c6d3d6f344e3ae2d7f5c9da80439505d99
-  libPhoneNumber-iOS: 9f083847f8cb9b81064cff2ed2c98cbf18d9f9f2
+  Kingfisher: 821466474ad7ffc375a4aecadfa05068cfed67b3
+  libPhoneNumber-iOS: 81ad1e6bfcf46e668636333269afbfe60399a55b
   LinqToObjectiveC: f0e40c137a458b6b9725c4c7b6a575c0c72e3aec
   LMGeocoder: 7682148ce0bc55e483ceaa0eefdae4494d7102be
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
-  Mixpanel-swift: 8bd335e85ea645dd5eacc1bb61f4b418fb4998d7
-  MRCountryPicker: 0610c8a019b4f8bd2695d42607fde026a0082d90
+  Mixpanel-swift: 49966d4beec714aee3a026d39085b62b26eca081
   NUI: 53de7278003235deb2a375fe6f04c7a3aa3e49eb
   NUIParse: 2e3885ba7807477266396292626bd387d34c2338
+  NVActivityIndicatorView: 9f47e8a4affb860ef729aeec99b1550219e6c233
   ObjectiveSugar: a6a25f23d657c19df0a0b972466d5b5ca9f5295c
   OCMock: a10ea9f0a6e921651f96f78b6faee95ebc813b92
-  ORStackView: a1bb52748cd0ae29891c140baf22ff8972fb363c
   Parse: 4335d65f40cb3d43190d723144bbe1afb9c38230
   ParseFacebookUtilsV4: 2f30c2b7021c8005d3042781da7ef87d06589421
   ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
   PermissionScope: a30c16e015779ba27c97c124e7539e27b5829de2
-  PhoneNumberKit: 0b5ea9a5454d201656db766343e9d768f8542496
+  PhoneNumberKit: 59da40656353c5267aa69a3ae3b240c4e57cff97
   PopupDialog: 9890441b81105b9076757af2afe2b037be682f3e
-  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   ReflectableEnum: dc2fa83bba1e74df3a2f319c2ffaea55fd95887e
   Reveal-iOS-SDK: e2250b3c155bcfac53ae223ddc1f76d08f206c33
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
@@ -303,17 +247,15 @@ SPEC CHECKSUMS:
   Socket.IO-Client-Swift: 542d82e6708f9901b3f6c1d134fb60fa0d09d4d1
   SSDataSources: b01170fb23b82acf0649194e9189b0bf5f702681
   Stripe: a47770e82db059d0e7e160f9aabc2997055ee911
-  SVProgressHUD: bfde85ed6c573ea802b9cb37894ed9b629034f1b
-  SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
+  SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
+  SwiftMessages: 1216ea6bdf8d92ff0f6f98a23e5442711b1e71ac
   TextFieldEffects: ef594746f17997c813e07633f8ae5acaf9b04f27
-  THContactPicker: e723f7c6ab6e1d6d10d59d618322ab8bfcb00365
-  TPKeyboardAvoiding: a5138f318c06fb3e151f886e18ce4a72695d9cbe
+  TPKeyboardAvoiding: 0d6af20e95e2850f4c621841225b59ec7d8dd852
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
-  Typhoon: c0950bb9f2e835eb8a7dc6983160109b6baf2dda
+  Typhoon: 551cc8fae881d0f4b20ddafc6d276da3e867f61f
   Whisper: 08be92623311f8e53201e62e17f6d7b9599a4714
-  YapDatabase: b1e43555a34a5298e23a045be96817a5ef0da58f
   YLMoment: af44d9d402790049e5490fa6eae9585b89b4090b
 
-PODFILE CHECKSUM: 5757abc7f69f6fd65568b7e8338d03254559e7a4
+PODFILE CHECKSUM: c57683f8ecc3c62745a11c22627d420c62eee90d
 
 COCOAPODS: 1.1.1

@@ -10,7 +10,6 @@
 #import "THLActionButton.h"
 #import "THLAppearanceConstants.h"
 #import <Parse/Parse.h>
-#import "Intercom/intercom.h"
 
 @interface THLPermissionRequestViewController()
 <

@@ -10,6 +10,8 @@ import UIKit
 import Contacts
 import PopupDialog
 import Branch
+import NVActivityIndicatorView
+
 public protocol EPPickerDelegate {
 	func epContactPicker(_: EPContactsPicker, didContactFetchFailed error: NSError)
     func epContactPicker(_: EPContactsPicker, didCancel error: NSError)
@@ -17,7 +19,6 @@ public protocol EPPickerDelegate {
 	func epContactPicker(_: EPContactsPicker, didSelectMultipleContacts contacts: [EPContact])
     func epContactPicker(_: EPContactsPicker, didSubmitInvitesAndWantsToShowInquiry: PFObject)
     func epContactPickerDidSubmitInvitesAndWantsToShowEvent()
-
 }
 
 public extension EPPickerDelegate {
@@ -37,7 +38,13 @@ public enum SubtitleCellValue{
     case organization
 }
 
-open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
+public enum PartyType{
+    case generalAdmission
+    case tableReservation
+    case connect
+}
+
+open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate, NVActivityIndicatorViewable {
     
     // MARK: - Properties
     
@@ -48,11 +55,12 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
     var resultSearchController = UISearchController()
     var orderedContacts = [String: [CNContact]]() //Contacts ordered in dicitonary alphabetically
     var sortedContactKeys = [String]()
-    
+    var activityIndicator:NVActivityIndicatorView?
     var selectedContacts = [EPContact]()
     var filteredContacts = [CNContact]()
     
     var subtitleCellValue = SubtitleCellValue.phoneNumber
+    var partyType = PartyType.generalAdmission
     var multiSelectEnabled: Bool = false //Default is single selection contact
     
     // MARK: - Lifecycle Methods
@@ -76,6 +84,11 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
             controller.dimsBackgroundDuringPresentation = false
             controller.searchBar.sizeToFit()
             controller.searchBar.delegate = self
+            controller.searchBar.setValue("Done", forKey: "_cancelButtonText")
+            let textFieldInsideSearchBar = controller.searchBar.value(forKey: "searchField") as? UITextField
+            
+            textFieldInsideSearchBar?.textColor = UIColor.black
+            
             self.tableView.tableHeaderView = controller.searchBar
             self.navigationController?.extendedLayoutIncludesOpaqueBars = true
             return controller
@@ -87,7 +100,7 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
 //        self.navigationItem.leftBarButtonItem = cancelButton
         
         if multiSelectEnabled {
-            let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(onTouchDoneButton))
+            let doneButton = UIBarButtonItem(title: "Submit", style: UIBarButtonItemStyle.done, target: self, action: #selector(onTouchDoneButton))
             self.navigationItem.rightBarButtonItem = doneButton
             
         }
@@ -127,24 +140,27 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
     
     convenience public init(delegate: EPPickerDelegate?, multiSelection : Bool) {
         self.init(style: .plain)
+        self.partyType = .generalAdmission
         self.multiSelectEnabled = multiSelection
         contactDelegate = delegate
     }
 
-    convenience public init(delegate: EPPickerDelegate?, multiSelection : Bool, subtitleCellType: SubtitleCellValue, event: PFObject, guestlistId: String) {
+    convenience public init(delegate: EPPickerDelegate?, partyType: PartyType, multiSelection : Bool, subtitleCellType: SubtitleCellValue, event: PFObject, guestlistId: String) {
         self.init(style: .plain)
         self.multiSelectEnabled = multiSelection
         contactDelegate = delegate
         subtitleCellValue = subtitleCellType
+        self.partyType = partyType
         self.event = event
         self.guestlistId = guestlistId
     }
     
-    convenience public init(delegate: EPPickerDelegate?, multiSelection : Bool, subtitleCellType: SubtitleCellValue, event: PFObject) {
+    convenience public init(delegate: EPPickerDelegate?, partyType: PartyType, multiSelection : Bool, subtitleCellType: SubtitleCellValue, event: PFObject) {
         self.init(style: .plain)
         self.multiSelectEnabled = multiSelection
         contactDelegate = delegate
         subtitleCellValue = subtitleCellType
+        self.partyType = partyType
         self.event = event
     }
     
@@ -360,11 +376,27 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
         contactDelegate?.epContactPicker(self, didCancel: NSError(domain: "EPContactPickerErrorDomain", code: 2, userInfo: [ NSLocalizedDescriptionKey: "User Canceled Selection"]))
         dismiss(animated: true, completion: nil)
     }
-    
+
     func onTouchDoneButton() {
 //        contactDelegate?.epContactPicker(self, didSelectMultipleContacts: selectedContacts)
 //        dismiss(animated: true, completion: nil)
+        self.activityIndicator = NVActivityIndicatorView(frame: view.frame, type: NVActivityIndicatorType.ballPulse, color: UIColor.white, padding: 0)
+
+        //self.activityIndicator?.startAnimating()
+        let size = CGSize(width: 30, height:30)
         
+        startAnimating(size, message: "Loading...", type: NVActivityIndicatorType(rawValue: 0) )
+
+        if (partyType == .generalAdmission) {
+            
+            self.sendOutInvitations()
+        } else {
+            self.submitConnectInquiry()
+            
+        }
+    }
+    
+    func sendOutInvitations() {
         let guestPhoneNumbers = selectedContacts.map { $0.phoneNumbers[0].phoneNumber }
         
         let eventId:String = (event?.objectId)!
@@ -372,12 +404,12 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
         let location:PFObject = event?.value(forKey: "location") as! PFObject
         let locationName:String = location.value(forKey: "name") as! String
         let locationInfo:String = location.value(forKey: "info") as! String
-
+        
         let branchUniversalObject: BranchUniversalObject = BranchUniversalObject(canonicalIdentifier: "event/\(event?.objectId)")
         branchUniversalObject.title = locationName
         branchUniversalObject.contentDescription = locationInfo
         branchUniversalObject.addMetadataKey("eventID", value: (event?.objectId)!)
-//        branchUniversalObject.addMetadataKey("admissionOption", value: "GeneralAdmission")
+        //        branchUniversalObject.addMetadataKey("admissionOption", value: "GeneralAdmission")
         
         let linkProperties: BranchLinkProperties = BranchLinkProperties()
         linkProperties.feature = "sharing"
@@ -388,71 +420,83 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
         branchUniversalObject.getShortUrl(with: linkProperties, andCallback: {
             (url, error) in
             if error == nil {
-                PFCloud.callFunction(inBackground: "sendOutInvitations", withParameters: ["eventId": eventId, "eventName": locationName, "eventTime": eventDate, "guestPhoneNumbers": guestPhoneNumbers, "guestlistId": self.guestlistId, "branchUrl": url]) {
+                PFCloud.callFunction(inBackground: "sendOutInvitations", withParameters: ["eventId": eventId, "eventName": locationName, "eventTime": eventDate, "guestPhoneNumbers": guestPhoneNumbers, "guestlistId": self.guestlistId!, "branchUrl": url]) {
                     (response, cloudError) in
-                        if cloudError == nil {
-                            self.dismiss(animated: true, completion: {
-                                self.contactDelegate?.epContactPickerDidSubmitInvitesAndWantsToShowEvent()
-                            })
+                    if cloudError == nil {
+                        print("DONE")
+                        self.dismiss(animated: true, completion: {
+                            self.contactDelegate?.epContactPickerDidSubmitInvitesAndWantsToShowEvent()
+                            //self.activityIndicator?.stopAnimating()
+                            self.stopAnimating()
 
-                        }
-                        else {
-                            
-                        }
+                        })
+                    } else {
+                        
+                    }
                 }
             }
-
+            
         })
-
+    }
+    
+    func submitConnectInquiry() {
+        let guestPhoneNumbers = selectedContacts.map { $0.phoneNumbers[0].phoneNumber }
         
+        let eventId:String = (event?.objectId)!
+        let eventDate:Date = event?.value(forKey: "date") as! Date
+        let location:PFObject = event?.value(forKey: "location") as! PFObject
+        let locationName:String = location.value(forKey: "name") as! String
+        let locationInfo:String = location.value(forKey: "info") as! String
+        print("SUBMITTED")
+        PFCloud.callFunction(inBackground: "submitConnectInquiry", withParameters: ["guestPhoneNumbers": guestPhoneNumbers,
+                                                                                    "eventId": eventId,
+                                                                                    "eventTime":eventDate,
+                                                                                    "description":"Hype Connect",
+                                                                                    "admissionOptionId":"ExadEhXujO"]) {
+                                                                                        (guestlistInvite, error) in
+                                                                                        if error == nil {
+                                                                                            (guestlistInvite as! PFObject).pinInBackground()
+                                                                                            let guestlist = (guestlistInvite as! PFObject).value(forKey: "Guestlist") as! PFObject
+                                                                                            self.guestlistId = guestlist.objectId!
+                                                                                            
+                                                                                            //                                let guestlist = (guestlistInvite as! PFObject).value(forKey: "Guestlist") as! PFObject
+                                                                                            //                                let inquiry = guestlist.value(forKey: "Inquiry") as! PFObject
+                                                                                            // Prepare the popup assets
+                                                                                            let title = "SUCCESS"
+                                                                                            let message = "Your inquiry was submitted!"
+                                                                                            
+                                                                                            // Create the dialog
+                                                                                            let popup = PopupDialog(title: title, message: message)
+                                                                                            
+                                                                                            // Create buttons
+                                                                                            let buttonOne = CancelButton(title: "OK") {
+                                                                                                self.sendOutInvitations()
+                                                                                            }
+                                                                                            
+                                                                                            popup.addButton(buttonOne)
+                                                                                            
+                                                                                            // Present dialog
+                                                                                            self.present(popup, animated: true, completion: nil)
+                                                                                        } else {
+                                                                                            // Prepare the popup assets
+                                                                                            let title = "ERROR"
+                                                                                            let message = "There was an issue with creating your inquiry. Please try again later!"
+                                                                                            
+                                                                                            // Create the dialog
+                                                                                            let popup = PopupDialog(title: title, message: message)
+                                                                                            
+                                                                                            // Create buttons
+                                                                                            let buttonOne = CancelButton(title: "OK") {
+                                                                                                print("You canceled the car dialog.")
+                                                                                            }
+                                                                                            
+                                                                                            popup.addButton(buttonOne)
+                                                                                            
+                                                                                            // Present dialog
+                                                                                            self.present(popup, animated: true, completion: nil)
+                                                                                        }
+        }
 
-//                PFCloud.callFunction(inBackground: "submitConnectInquiry", withParameters: ["guestPhoneNumbers": guestPhoneNumbers,
-//                                                                                                "eventId": eventId,
-//                                                                                                "eventTime":eventDate,
-//                                                                                                "description":"Hype Connect",
-//                                                                                                "admissionOptionId":"5m9RI5T9Mr"]) {
-//                        (guestlistInvite, error) in
-//                            if error == nil {
-//                                (guestlistInvite as! PFObject).pinInBackground()
-////                                let guestlist = (guestlistInvite as! PFObject).value(forKey: "Guestlist") as! PFObject
-////                                let inquiry = guestlist.value(forKey: "Inquiry") as! PFObject
-//                                // Prepare the popup assets
-//                                let title = "SUCCESS"
-//                                let message = "Your inquiry was submitted!"
-//                                
-//                                // Create the dialog
-//                                let popup = PopupDialog(title: title, message: message)
-//                                
-//                                // Create buttons
-//                                let buttonOne = CancelButton(title: "OK") {
-//                                    self.contactDelegate?.epContactPicker(self, didSubmitInvitesAndWantsToShowInquiry: (guestlistInvite as! PFObject))
-//                                }
-//                                
-//                                popup.addButton(buttonOne)
-//                                
-//                                // Present dialog
-//                                self.present(popup, animated: true, completion: nil)
-//                            } else {
-//                                // Prepare the popup assets
-//                                let title = "ERROR"
-//                                let message = "There was an issue with creating your inquiry. Please try again later!"
-//                                
-//                                // Create the dialog
-//                                let popup = PopupDialog(title: title, message: message)
-//                                
-//                                // Create buttons
-//                                let buttonOne = CancelButton(title: "OK") {
-//                                    print("You canceled the car dialog.")
-//                                }
-//                                
-//                                popup.addButton(buttonOne)
-//                                
-//                                // Present dialog
-//                                self.present(popup, animated: true, completion: nil)
-//                            }
-//                }
-//            }
-//        })
     }
     
     // MARK: - Search Actions

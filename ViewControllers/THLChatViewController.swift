@@ -34,8 +34,7 @@ class THLChatViewController : JSQMessagesViewController {
         setupAvatars()
         listenForMessageHistory()
         listenForMessages()
-        (self.navigationController?.navigationBar as! THLBoldNavigationBar).titleLabel.text = ""
-        (self.navigationController?.navigationBar as! THLBoldNavigationBar).subtitleLabel.text = "CHAT WITH " + chatMateName!
+        (self.navigationController?.navigationBar as! THLBoldNavigationBar).titleLabel.text = "CHAT WITH " + chatMateName!
 
     }
     

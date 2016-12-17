@@ -13,8 +13,6 @@
 #import <ParseUI/PFImageView.h>
 #import "THLParseQueryFactory.h"
 
-#import "Intercom/intercom.h"
-
 #import "THLAppearanceConstants.h"
 #import "TTTAttributedLabel.h"
 #import "THLUser.h"

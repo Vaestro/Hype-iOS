@@ -9,10 +9,9 @@ target 'Hype' do
 pod 'CocoaLumberjack'
 pod 'Masonry', '~> 0.6'
 pod 'NUI', '~> 0.5'
-pod 'Bolts'
 pod 'BFKit'
+pod 'Bolts'
 pod 'DateTools', '~> 1.6'
-pod 'YapDatabase', '~> 2.7'
 pod 'EKAlgorithms', '~> 0.2'
 pod 'AutoCoding', '~> 2.2'
 pod 'SDWebImage', '~> 3.7'
@@ -20,6 +19,9 @@ pod 'FormatterKit', '~> 1.8'
 pod 'Typhoon', '~> 3.3'
 pod 'Mixpanel-swift'
 pod 'Socket.IO-Client-Swift'
+pod 'libPhoneNumber-iOS', '~> 0.8'
+pod 'LMGeocoder'
+pod 'APAddressBook', '~> 0.2.1’
 
 #SWIFT
 pod 'SnapKit', '~> 3.0'
@@ -28,9 +30,9 @@ pod 'PopupDialog', '~> 0.5'
 pod 'Kingfisher'
 pod "TextFieldEffects"
 pod 'PhoneNumberKit', '~> 1.0'
-pod 'MRCountryPicker', '~> 0.0.5'
 pod 'PermissionScope'
-
+pod 'Eureka', '~> 2.0.0-beta.1'
+pod 'NVActivityIndicatorView'
 #Debugging
 pod 'FLEX', '~> 2.0', :configurations => ['Debug']
 pod 'Reveal-iOS-SDK', :configurations => ['Debug']
@@ -48,9 +50,6 @@ pod 'ParseFacebookUtilsV4'
 pod 'ParseUI'
 pod 'FBSDKCoreKit'
 
-#Intercom
-pod 'Intercom'
-
 pod 'Stripe'
 
 #Branch
@@ -59,25 +58,19 @@ pod 'Branch'
 #Helpers
 pod 'SSDataSources', '~> 0.8'
 pod 'YLMoment', '~> 0.2.0'
-pod 'APAddressBook', '~> 0.2.1’
-pod 'libPhoneNumber-iOS', '~> 0.8'
-pod 'LMGeocoder'
 pod 'TTTAttributedLabel'
 pod 'Harpy'
 
 #UI
-pod 'SVPullToRefresh'
 pod 'DGActivityIndicatorView'
-pod 'ORStackView'
 pod 'SVProgressHUD'
-pod 'THContactPicker', '~> 1.2'
 pod 'IHKeyboardAvoiding'
 pod 'FXLabel'
 pod 'BLKFlexibleHeightBar'
 pod 'JSQMessagesViewController'
 pod 'TPKeyboardAvoiding'
 pod 'Whisper'
-
+pod 'SwiftMessages'
 end
 
 target 'HypeTests' do

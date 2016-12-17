@@ -9,6 +9,7 @@ import Stripe
 import ParseFacebookUtilsV4
 import Mixpanel
 import Branch
+import AVFoundation
 
 #if DEBUG
     let stripePublishableKey = "pk_test_cGZ7E1Im6VPKQHYUXIkR6sEe"
@@ -31,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Parse.initialize(with: ParseClientConfiguration(block: { (configuration: ParseMutableClientConfiguration) -> Void in
             configuration.server = "https://powerful-tundra-19716.herokuapp.com/parse/" // '/' important after 'parse'
+            //configuration.server = "https://358ed5dd.ngrok.io/parse/"
             configuration.applicationId = "5t3F1S3wKnVGIKHob1Qj0Je3sygnFiwqAu6PP400"
             configuration.clientKey = "xn4Mces2HcFCQYXF2VRj4W1Ot0zIBELl6fHKLGPk"
             configuration.isLocalDatastoreEnabled = true

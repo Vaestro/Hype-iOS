@@ -13,7 +13,6 @@
 #import <Bolts/Bolts.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
-#import "Intercom/intercom.h"
 #import <Branch/Branch.h>
 #import <Branch/BranchUniversalObject.h>
 #import <Branch/BranchLinkProperties.h>
@@ -58,3 +57,4 @@
 #import "THLTablePackageDetailsViewController.h"
 #import "THLPaymentViewController.h"
 
+#import "THLPartyViewController.h"

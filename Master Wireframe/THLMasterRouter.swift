@@ -16,10 +16,7 @@ import Parse
     public func partyViewControllerWantsToPresentInvitationController(for event: THLEvent!, guestlistId: String!, currentGuestsPhoneNumbers: [Any]!) {
         
     }
-    
-    
-    
-    
+
     var window: UIWindow
     
     override init() {
@@ -144,13 +141,13 @@ import Parse
         inquiryDiscoveryNavigationController.addChildViewController(inquiryDiscoveryView)
         
         inquiryDiscoveryNavigationController.tabBarItem.image = UIImage(named: "Home Icon")!
-        
+
         let guestProfileView = THLGuestProfileViewController()
         guestProfileView.delegate = self
         let profileNavigationController = UINavigationController()
         profileNavigationController.pushViewController(guestProfileView, animated: false)
         profileNavigationController.tabBarItem.image = UIImage(named: "Profile Icon")!
-        
+
         let conversationsNavigationController = UINavigationController(navigationBarClass: THLBoldNavigationBar.self, toolbarClass: nil)
         let conversationsView = THLChatEntryTableViewController()
         conversationsNavigationController.pushViewController(conversationsView, animated: false)
@@ -197,7 +194,6 @@ import Parse
             let guestlist:PFObject = guestlistInvite.value(forKey: "Guestlist") as! PFObject
             let admissionOption:PFObject = guestlist.value(forKey: "admissionOption") as! PFObject
             let admissionType:Int = admissionOption.value(forKey: "type") as! Int
-            
             if (admissionType == 2) {
                 let inquiry = guestlist.value(forKey: "Inquiry") as! PFObject
                 if ((inquiry.value(forKey: "connected") as! Bool) == true) {
@@ -236,7 +232,7 @@ import Parse
         let topView = self.topViewController() as! UINavigationController
         topView.pushViewController(contactPickerScene, animated: true)
     }
-    
+
     
     // MARK: Checkout View Controller
     internal func presentCheckoutViewController(_ event: PFObject, guestlistInvite: THLGuestlistInvite, admissionOption: PFObject) {
@@ -420,6 +416,7 @@ import Parse
     }
     internal func didSelectViewTableReservation(_ guestlistInvite: PFObject) {
         self.presentPartyNavigationControllerforTableReservation(invite: guestlistInvite)
+
     }
     
     internal func didSelectViewInquiryMenuView(_ inquiry:PFObject) {
@@ -433,13 +430,14 @@ import Parse
         window.rootViewController!.present(navigationController, animated: true, completion: { _ in })
         
     }
+
     internal func presentPartyMenuforConnect(_ invite: PFObject) {
         let partyMenu = THLPartyMenuController(guestlistInvite: invite)
         let navigationVC = UINavigationController(navigationBarClass: THLBoldNavigationBar.self, toolbarClass: nil)
         navigationVC.addChildViewController(partyMenu)
         partyMenu.delegate = self
         let tabBarController = window.rootViewController as! UITabBarController
-        
+
         if self.topViewController() != tabBarController {
             tabBarController.dismiss(animated: true, completion: { _ in })
         }
@@ -494,7 +492,7 @@ import Parse
     
     internal func didSubmitInquiryOffer() {
         let tabBarController = window.rootViewController as! UITabBarController
-        
+
         if self.topViewController() != tabBarController {
             tabBarController.dismiss(animated: true, completion: { _ in })
         }
@@ -529,8 +527,9 @@ import Parse
     //            return BFTask(result: nil)
     //        }
     //    }
+
     // MARK: - LogOut Handler
-    
+
     func logOutUser() {
         THLUserManager.logUserOut()
         Branch.getInstance().logout()

@@ -40,6 +40,7 @@
 
 - (void)addContentText:(NSString *)text {
     self.contentTextLabel.text = text;
+    self.contentTextLabel.textColor = [UIColor whiteColor];
     [self.contentTextLabel makeConstraints:^(MASConstraintMaker *make) {
         make.top.insets(kTHLEdgeInsetsLow());
         make.bottom.left.right.equalTo(kTHLEdgeInsetsNone());
@@ -59,6 +60,7 @@
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = THLNUILabel(kTHLNUISectionTitle);
+        _titleLabel.textColor = [UIColor whiteColor];
         _titleLabel.adjustsFontSizeToFitWidth = true;
         [self addSubview:_titleLabel];
     }

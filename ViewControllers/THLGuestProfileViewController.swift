@@ -13,13 +13,23 @@ import Kingfisher
     func didSelectViewInquiry(_ guestlistInvite: PFObject)
     func didSelectViewEventTicket(_ guestlistInvite: PFObject)
     func didSelectViewHostedEvent(_ guestlistInvite: PFObject)
+    func didSelectViewTableReservation(_ guestlistInvite: PFObject)
+    func didSelectViewInquiryMenuView(_ inquiry: PFObject)
 
     func userProfileViewControllerWantsToLogout()
     func userProfileViewControllerWantsToPresentPaymentViewController()
 
 }
 
-class THLGuestProfileViewController: UIViewController, THLMyUpcomingEventsViewControllerDelegate, THLUserProfileViewControllerDelegate, THLMyInvitesViewControllerDelegate {
+class THLGuestProfileViewController: UIViewController, THLMyUpcomingEventsViewControllerDelegate, THLUserProfileViewControllerDelegate, THLMyInvitesViewControllerDelegate, THLHostUpcomingEventsViewControllerDelegate, THLPendingInquiryOffersViewControllerDelegate {
+    internal func didSelectViewInquiryMenuView(_ inquiry: PFObject) {
+        self.delegate?.didSelectViewInquiryMenuView(inquiry)
+    }
+
+    internal func didSelectViewTableReservation(_ guestlistInvite: PFObject) {
+        self.delegate?.didSelectViewTableReservation(guestlistInvite)
+    }
+
     public func userProfileViewControllerWantsToPresentPaymentViewController() {
         delegate?.userProfileViewControllerWantsToPresentPaymentViewController()
     }
@@ -46,7 +56,6 @@ class THLGuestProfileViewController: UIViewController, THLMyUpcomingEventsViewCo
     var delegate: THLGuestProfileViewControllerDelegate?
 
     var pageMenu : CAPSPageMenu?
-    var myEventsViewController : THLMyUpcomingEventsViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,15 +72,30 @@ class THLGuestProfileViewController: UIViewController, THLMyUpcomingEventsViewCo
         // Initialize view controllers to display and place in array
         var controllerArray : [UIViewController] = []
         
-        myEventsViewController = THLMyUpcomingEventsViewController()
-        myEventsViewController?.delegate = self;
-        myEventsViewController?.title = "MY EVENTS"
-        controllerArray.append(myEventsViewController!)
+        if THLUser.current()?.type == THLUserType.host {
+            let myEventsViewController = THLHostUpcomingEventsViewController()
+            myEventsViewController.delegate = self;
+            myEventsViewController.title = "MY EVENTS"
+            controllerArray.append(myEventsViewController)
+            
+            
+            let controller2 : THLPendingInquiryOffersViewController = THLPendingInquiryOffersViewController()
+            controller2.title = "PENDING"
+            controller2.delegate = self;
+            controllerArray.append(controller2)
+        } else {
+            let myEventsViewController = THLMyUpcomingEventsViewController()
+            myEventsViewController.delegate = self;
+            myEventsViewController.title = "MY EVENTS"
+            controllerArray.append(myEventsViewController)
+            
+            let controller2 : THLMyInvitesViewController = THLMyInvitesViewController()
+            controller2.title = "INVITES"
+            controller2.delegate = self;
+            controllerArray.append(controller2)
+        }
         
-        let controller2 : THLMyInvitesViewController = THLMyInvitesViewController()
-        controller2.title = "INVITES"
-        controller2.delegate = self;
-        controllerArray.append(controller2)
+
         
         // Initialize scroll menu
         let rect = CGRect(x: 0.0, y: 150.0, width: self.view.frame.width, height: self.view.frame.height - 150.0)

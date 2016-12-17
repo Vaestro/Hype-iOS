@@ -97,6 +97,7 @@ static CGFloat MAPVIEW_METERS = 1000;
 - (UILabel *)venueNameLabel {
     if (!_venueNameLabel) {
         _venueNameLabel = THLNUILabel(kTHLNUIDetailBoldTitle);
+        _venueNameLabel.textColor = [UIColor whiteColor];
         _venueNameLabel.numberOfLines = 1;
         [self addSubview:_venueNameLabel];
     }
@@ -107,6 +108,8 @@ static CGFloat MAPVIEW_METERS = 1000;
 - (UILabel *)addressLabel {
     if (!_addressLabel) {
         _addressLabel = THLNUILabel(kTHLNUIDetailTitle);
+        _addressLabel.textColor = [UIColor whiteColor];
+
         _addressLabel.numberOfLines = 1;
         [self addSubview:_addressLabel];
     }

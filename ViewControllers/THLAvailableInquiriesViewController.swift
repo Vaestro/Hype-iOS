@@ -11,15 +11,26 @@ import UIKit
 import Parse
 import ParseUI
 
-class THLAvailableInquiriesViewController: PFQueryTableViewController {
+protocol THLAvailableInquiriesViewControllerDelegate: class {
+    func didWantToPresentInquiryMenuFor(inquiry: PFObject)
+}
+
+
+class THLAvailableInquiriesViewController: PFQueryTableViewController, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
     
     // MARK: Init
+    var delegate:THLAvailableInquiriesViewControllerDelegate?
     
     convenience init() {
         self.init(style: .plain, className: "Inquiry")
         
         pullToRefreshEnabled = true
         paginationEnabled = false
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.loadObjects()
     }
     
     // MARK: UIViewController
@@ -29,14 +40,24 @@ class THLAvailableInquiriesViewController: PFQueryTableViewController {
         tableView?.register(THLInquiryTableViewCell.self, forCellReuseIdentifier: "THLInquiryTableViewCell")
         tableView?.separatorStyle = UITableViewCellSeparatorStyle.none
         tableView?.backgroundColor = UIColor.black
+        
+        tableView?.emptyDataSetSource = self
+        tableView?.emptyDataSetDelegate = self
+        
+        (self.navigationController?.navigationBar as! THLBoldNavigationBar).titleLabel.text = "INQUIRIES"
+        (self.navigationController?.navigationBar as! THLBoldNavigationBar).subtitleLabel.text = ""
     }
     
     // MARK: Data
     
     override func queryForTable() -> PFQuery<PFObject> {
+        let date = NSDate().subtractingHours(4) as NSDate
+
         let query: PFQuery = super.queryForTable()
         
         query.addAscendingOrder("date")
+        query.whereKey("connected", notEqualTo: true)
+        query.whereKey("date", greaterThan: date)
         query.includeKey("Offers")
         query.includeKey("Event")
         query.includeKey("Event.location")
@@ -73,13 +94,23 @@ extension THLAvailableInquiriesViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let inquiry: PFObject? = super.object(at: indexPath)
+        self.delegate?.didWantToPresentInquiryMenuFor(inquiry: inquiry!)
 
-        let inquiryMenuController = THLInquiryMenuViewController(inquiry:inquiry!)
-        let navigationController = UINavigationController.init(navigationBarClass: THLBoldNavigationBar.self, toolbarClass: nil)
-        navigationController.setViewControllers([inquiryMenuController], animated: false)
-        self.present(navigationController, animated: true)
         
     }
+    
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString {
+        let str = "No Available Hype Connect Inquiries"
+        let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)]
+        return NSAttributedString(string: str, attributes: attrs)
+    }
+    
+    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString {
+        let str = "Any Hype Connect inquiries will be shown here"
+        let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)]
+        return NSAttributedString(string: str, attributes: attrs)
+    }
+    
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100.0;//Choose your custom row height

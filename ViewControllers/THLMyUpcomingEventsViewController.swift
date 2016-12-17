@@ -15,7 +15,7 @@ protocol THLMyUpcomingEventsViewControllerDelegate: class {
     func didSelectViewInquiry(_ guestlistInvite: PFObject)
     func didSelectViewHostedEvent(_ guestlistInvite: PFObject)
     func didSelectViewEventTicket(_ guestlistInvite: PFObject)
-
+    func didSelectViewTableReservation(_ guestlistInvite: PFObject)
 }
 
 class THLMyUpcomingEventsViewController: PFQueryTableViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
@@ -64,6 +64,9 @@ class THLMyUpcomingEventsViewController: PFQueryTableViewController, DZNEmptyDat
         query.includeKey("Guestlist.Owner")
         query.includeKey("Guestlist.Inquiry")
         query.includeKey("Guestlist.Inquiry.Offers")
+        query.includeKey("Guestlist.Inquiry.Offers.Venue")
+        query.includeKey("Guestlist.Inquiry.AcceptedOffer")
+        query.includeKey("Guestlist.Inquiry.AcceptedOffer.Venue")
         query.includeKey("Guestlist.Inquiry.Offers.Host")
         query.includeKey("Guestlist.admissionOption")
         query.includeKey("Guestlist.event.location")
@@ -80,16 +83,32 @@ extension THLMyUpcomingEventsViewController {
     
     //    override func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell? {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell:THLMyEventsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "THLMyEventsTableViewCell", for: indexPath) as! THLMyEventsTableViewCell
+
         let guestlistInvite: PFObject = super.object(at: indexPath) as PFObject!
         
         let event:PFObject = guestlistInvite.value(forKey: "event") as! PFObject
-        let venue:PFObject = event.value(forKey: "location") as! PFObject
-        let venueName:String = venue.value(forKey: "name") as! String
         let partyType:String = guestlistInvite.value(forKey: "admissionDescription") as! String
-        let eventTitle:String = "\(partyType) AT \(venueName)"
-        let date = guestlistInvite.value(forKey: "date") as? Date
+        var venue:PFObject = event.value(forKey: "location") as! PFObject
+        var venueName:String = venue.value(forKey: "name") as! String
+
+        var date = guestlistInvite.value(forKey: "date") as? Date
         
-        let cell:THLMyEventsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "THLMyEventsTableViewCell", for: indexPath) as! THLMyEventsTableViewCell
+        let guestlist = guestlistInvite.value(forKey: "Guestlist") as! PFObject
+        let admissionOption = guestlist.value(forKey: "admissionOption") as! PFObject
+        let admissionType:Int = admissionOption.value(forKey: "type") as! Int
+        if (admissionType == 2) {
+            let inquiry = guestlist.value(forKey: "Inquiry") as! PFObject
+            
+            if ((inquiry.value(forKey: "connected") as! Bool) == true) {
+                let acceptedOffer:PFObject = inquiry.value(forKey: "AcceptedOffer") as! PFObject
+                venue = acceptedOffer.value(forKey: "Venue") as! PFObject
+                venueName = venue.value(forKey: "name") as! String
+                date = acceptedOffer.value(forKey: "date") as? Date
+
+            }
+        }
+        let eventTitle:String = "\(partyType) AT \(venueName)"
         
         cell.eventTitleLabel.text = eventTitle.uppercased()
         cell.dateTimeLabel.text = (date! as NSDate).thl_weekdayString
@@ -107,13 +126,14 @@ extension THLMyUpcomingEventsViewController {
         let admissionType:Int = admissionOption.value(forKey: "type") as! Int
         
         if (admissionType == 2) {
-            let inquiry = guestlist.value(forKey: "Inquiry") as! PFObject
-
-            if ((inquiry.value(forKey: "connected") as! Bool) == true) {
-                delegate?.didSelectViewHostedEvent(guestlistInvite!)
-            } else {
-                delegate?.didSelectViewInquiry(guestlistInvite!)
-            }
+ 
+            
+            
+        
+            delegate?.didSelectViewInquiry(guestlistInvite!)
+            
+        } else if (admissionType == 1) {
+            delegate?.didSelectViewTableReservation(guestlistInvite!)
         } else {
             delegate?.didSelectViewEventTicket(guestlistInvite!)
         }

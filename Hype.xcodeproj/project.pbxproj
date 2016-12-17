@@ -18,10 +18,7 @@
 		2133C9BF1C3329BA0020083A /* THLWaitlistEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 2133C9BE1C3329BA0020083A /* THLWaitlistEntry.m */; };
 		2133C9D31C333DDC0020083A /* NSString+EmailAddresses.m in Sources */ = {isa = PBXBuildFile; fileRef = 2133C9D11C333DDC0020083A /* NSString+EmailAddresses.m */; };
 		213CE1131BB8D22D00054A2C /* THLLocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 213CE1121BB8D22D00054A2C /* THLLocationService.m */; };
-		215A42AC1BAA2A1700D03C35 /* THLFacebookProfilePictureURLFetchService.m in Sources */ = {isa = PBXBuildFile; fileRef = 215A42AB1BAA2A1700D03C35 /* THLFacebookProfilePictureURLFetchService.m */; };
 		21775F361B8CF72B00609D39 /* THLTitledContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21775F351B8CF72B00609D39 /* THLTitledContentView.m */; };
-		21775F5D1B8E169500609D39 /* THLAddressBookPermissionsRequestService.m in Sources */ = {isa = PBXBuildFile; fileRef = 21775F5C1B8E169500609D39 /* THLAddressBookPermissionsRequestService.m */; };
-		21775F631B8E17A300609D39 /* THLAddressBookEntryFetchService.m in Sources */ = {isa = PBXBuildFile; fileRef = 21775F621B8E17A300609D39 /* THLAddressBookEntryFetchService.m */; };
 		217DC6531BBB77AC00332174 /* THLUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 217DC6521BBB77AC00332174 /* THLUserManager.m */; };
 		218AF3441BB7391B00AFAEBF /* THLEventService.m in Sources */ = {isa = PBXBuildFile; fileRef = 218AF3431BB7391B00AFAEBF /* THLEventService.m */; };
 		219E32A81B8EA63D00214C85 /* THLEventNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 219E32A71B8EA63D00214C85 /* THLEventNavigationBar.m */; };
@@ -52,7 +49,6 @@
 		7928ADA11D19C98400DFC443 /* THLUserProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928ADA01D19C98400DFC443 /* THLUserProfileTableViewCell.m */; };
 		7928ADA91D19C9E200DFC443 /* THLUserProfileFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928ADA61D19C9E200DFC443 /* THLUserProfileFooterView.m */; };
 		7928ADAA1D19C9E200DFC443 /* THLUserProfileHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928ADA81D19C9E200DFC443 /* THLUserProfileHeaderView.m */; };
-		7928ADAD1D19CA0D00DFC443 /* THLPerkDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928ADAC1D19CA0D00DFC443 /* THLPerkDetailViewController.m */; };
 		7928ADB31D19CB1900DFC443 /* THLPopupNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928ADB21D19CB1900DFC443 /* THLPopupNotificationView.m */; };
 		7928ADB61D19CB5300DFC443 /* THLEventDetailsMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7928ADB51D19CB5300DFC443 /* THLEventDetailsMapView.m */; };
 		792BB4D11DB1507900B673B8 /* THLInquiryOfferDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792BB4D01DB1507900B673B8 /* THLInquiryOfferDetailsView.swift */; };
@@ -82,6 +78,7 @@
 		795569C01DA70ECF006E4049 /* THLInquiryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795569BF1DA70ECF006E4049 /* THLInquiryTableViewCell.swift */; };
 		795569C21DA71403006E4049 /* THLInquiry.m in Sources */ = {isa = PBXBuildFile; fileRef = 795569C11DA71403006E4049 /* THLInquiry.m */; };
 		795569C51DA81BA4006E4049 /* THLInquiryMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795569C41DA81BA3006E4049 /* THLInquiryMenuViewController.swift */; };
+		7955B20C1DF3217700CA0A07 /* THLHostUpcomingEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7955B20B1DF3217700CA0A07 /* THLHostUpcomingEventsViewController.swift */; };
 		7964645D1DAE95A000DA1F51 /* THLInquiryOffersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7964645C1DAE95A000DA1F51 /* THLInquiryOffersViewController.swift */; };
 		79651F581DD8F3870057AD63 /* THLPhoneNumberVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79651F571DD8F3870057AD63 /* THLPhoneNumberVerificationViewController.swift */; };
 		79651F5A1DD933DE0057AD63 /* THLSwiftLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79651F591DD933DE0057AD63 /* THLSwiftLoginViewController.swift */; };
@@ -97,7 +94,6 @@
 		798402E31D21BD79006F463B /* THLSwiftAdmissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798402E21D21BD79006F463B /* THLSwiftAdmissionsViewController.swift */; };
 		798650A41BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 798650A31BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m */; };
 		7989D7E41DDE3E4F00E38E25 /* THLDiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7989D7E31DDE3E4F00E38E25 /* THLDiscoveryViewController.swift */; };
-		7996E2051D00D010006FFDDC /* THLPerkCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7996E2041D00D010006FFDDC /* THLPerkCollectionViewController.m */; };
 		799831181D4AC50900BB5BFE /* THLSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 799831171D4AC50900BB5BFE /* THLSelectView.m */; };
 		7998311B1D4B9E6500BB5BFE /* THLReservationRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7998311A1D4B9E6500BB5BFE /* THLReservationRequestViewController.m */; };
 		7998311E1D4C06CA00BB5BFE /* THLTablePackageDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7998311D1D4C06CA00BB5BFE /* THLTablePackageDetailView.m */; };
@@ -164,6 +160,7 @@
 		79EB0C331DC942A200E0AD9E /* THLConnectedHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EB0C321DC942A200E0AD9E /* THLConnectedHostViewController.swift */; };
 		79F462D11DA6A6E6004BB49C /* CAPSPageMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F462D01DA6A6E6004BB49C /* CAPSPageMenu.swift */; };
 		79F462D31DA6AAA0004BB49C /* THLHostDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F462D21DA6AAA0004BB49C /* THLHostDashboardViewController.swift */; };
+		79F4905D1DF3870B00A0CCDE /* THLPendingInquiryOffersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F4905C1DF3870B00A0CCDE /* THLPendingInquiryOffersViewController.swift */; };
 		79F877421DE233DC006892D2 /* THLSwiftCheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F877411DE233DB006892D2 /* THLSwiftCheckoutViewController.swift */; };
 		79FBFCCF1D30513500F291E7 /* THLEventHeaderStyleBehaviorDefiner.m in Sources */ = {isa = PBXBuildFile; fileRef = 79FBFCCE1D30513500F291E7 /* THLEventHeaderStyleBehaviorDefiner.m */; };
 		AAD9436FBD9DAF1F610FAB73 /* Pods_HypeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83D794813D7BCA4185F2A377 /* Pods_HypeTests.framework */; };
@@ -228,14 +225,8 @@
 		213CE1111BB8D22D00054A2C /* THLLocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLLocationService.h; sourceTree = "<group>"; };
 		213CE1121BB8D22D00054A2C /* THLLocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLLocationService.m; sourceTree = "<group>"; };
 		213CE1141BB8D23900054A2C /* THLLocationServiceInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLLocationServiceInterface.h; sourceTree = "<group>"; };
-		215A42AA1BAA2A1700D03C35 /* THLFacebookProfilePictureURLFetchService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLFacebookProfilePictureURLFetchService.h; sourceTree = "<group>"; };
-		215A42AB1BAA2A1700D03C35 /* THLFacebookProfilePictureURLFetchService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLFacebookProfilePictureURLFetchService.m; sourceTree = "<group>"; };
 		21775F341B8CF72B00609D39 /* THLTitledContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLTitledContentView.h; sourceTree = "<group>"; };
 		21775F351B8CF72B00609D39 /* THLTitledContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLTitledContentView.m; sourceTree = "<group>"; };
-		21775F5B1B8E169500609D39 /* THLAddressBookPermissionsRequestService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLAddressBookPermissionsRequestService.h; sourceTree = "<group>"; };
-		21775F5C1B8E169500609D39 /* THLAddressBookPermissionsRequestService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLAddressBookPermissionsRequestService.m; sourceTree = "<group>"; };
-		21775F611B8E17A300609D39 /* THLAddressBookEntryFetchService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLAddressBookEntryFetchService.h; sourceTree = "<group>"; };
-		21775F621B8E17A300609D39 /* THLAddressBookEntryFetchService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLAddressBookEntryFetchService.m; sourceTree = "<group>"; };
 		217DC6511BBB77AC00332174 /* THLUserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserManager.h; sourceTree = "<group>"; };
 		217DC6521BBB77AC00332174 /* THLUserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLUserManager.m; sourceTree = "<group>"; };
 		218AF3421BB7391B00AFAEBF /* THLEventService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventService.h; sourceTree = "<group>"; };
@@ -299,8 +290,6 @@
 		7928ADA61D19C9E200DFC443 /* THLUserProfileFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLUserProfileFooterView.m; sourceTree = "<group>"; };
 		7928ADA71D19C9E200DFC443 /* THLUserProfileHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLUserProfileHeaderView.h; sourceTree = "<group>"; };
 		7928ADA81D19C9E200DFC443 /* THLUserProfileHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLUserProfileHeaderView.m; sourceTree = "<group>"; };
-		7928ADAB1D19CA0D00DFC443 /* THLPerkDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkDetailViewController.h; sourceTree = "<group>"; };
-		7928ADAC1D19CA0D00DFC443 /* THLPerkDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPerkDetailViewController.m; sourceTree = "<group>"; };
 		7928ADB11D19CB1900DFC443 /* THLPopupNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPopupNotificationView.h; sourceTree = "<group>"; };
 		7928ADB21D19CB1900DFC443 /* THLPopupNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPopupNotificationView.m; sourceTree = "<group>"; };
 		7928ADB41D19CB5300DFC443 /* THLEventDetailsMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLEventDetailsMapView.h; sourceTree = "<group>"; };
@@ -339,6 +328,7 @@
 		795569C11DA71403006E4049 /* THLInquiry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLInquiry.m; sourceTree = "<group>"; };
 		795569C31DA7140F006E4049 /* THLInquiry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLInquiry.h; sourceTree = "<group>"; };
 		795569C41DA81BA3006E4049 /* THLInquiryMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLInquiryMenuViewController.swift; sourceTree = "<group>"; };
+		7955B20B1DF3217700CA0A07 /* THLHostUpcomingEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLHostUpcomingEventsViewController.swift; sourceTree = "<group>"; };
 		7964645C1DAE95A000DA1F51 /* THLInquiryOffersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLInquiryOffersViewController.swift; sourceTree = "<group>"; };
 		79651F571DD8F3870057AD63 /* THLPhoneNumberVerificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLPhoneNumberVerificationViewController.swift; sourceTree = "<group>"; };
 		79651F591DD933DE0057AD63 /* THLSwiftLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLSwiftLoginViewController.swift; sourceTree = "<group>"; };
@@ -360,8 +350,6 @@
 		798650A21BEDDC2D0032A661 /* CAGradientLayer+THLGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAGradientLayer+THLGradient.h"; sourceTree = "<group>"; };
 		798650A31BEDDC2D0032A661 /* CAGradientLayer+THLGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAGradientLayer+THLGradient.m"; sourceTree = "<group>"; };
 		7989D7E31DDE3E4F00E38E25 /* THLDiscoveryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLDiscoveryViewController.swift; sourceTree = "<group>"; };
-		7996E2031D00D010006FFDDC /* THLPerkCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THLPerkCollectionViewController.h; sourceTree = "<group>"; };
-		7996E2041D00D010006FFDDC /* THLPerkCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLPerkCollectionViewController.m; sourceTree = "<group>"; };
 		799831161D4AC4F400BB5BFE /* THLSelectView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLSelectView.h; sourceTree = "<group>"; };
 		799831171D4AC50900BB5BFE /* THLSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLSelectView.m; sourceTree = "<group>"; };
 		799831191D4B9E5900BB5BFE /* THLReservationRequestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLReservationRequestViewController.h; sourceTree = "<group>"; };
@@ -456,6 +444,7 @@
 		79EB0C321DC942A200E0AD9E /* THLConnectedHostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLConnectedHostViewController.swift; sourceTree = "<group>"; };
 		79F462D01DA6A6E6004BB49C /* CAPSPageMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAPSPageMenu.swift; sourceTree = "<group>"; };
 		79F462D21DA6AAA0004BB49C /* THLHostDashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLHostDashboardViewController.swift; sourceTree = "<group>"; };
+		79F4905C1DF3870B00A0CCDE /* THLPendingInquiryOffersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLPendingInquiryOffersViewController.swift; sourceTree = "<group>"; };
 		79F877411DE233DB006892D2 /* THLSwiftCheckoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = THLSwiftCheckoutViewController.swift; sourceTree = "<group>"; };
 		79FBFCCD1D30511F00F291E7 /* THLEventHeaderStyleBehaviorDefiner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = THLEventHeaderStyleBehaviorDefiner.h; sourceTree = "<group>"; };
 		79FBFCCE1D30513500F291E7 /* THLEventHeaderStyleBehaviorDefiner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THLEventHeaderStyleBehaviorDefiner.m; sourceTree = "<group>"; };
@@ -680,15 +669,6 @@
 			path = THLLocationService;
 			sourceTree = "<group>";
 		};
-		215A42A91BAA29A200D03C35 /* Facebook Image Fetching */ = {
-			isa = PBXGroup;
-			children = (
-				215A42AA1BAA2A1700D03C35 /* THLFacebookProfilePictureURLFetchService.h */,
-				215A42AB1BAA2A1700D03C35 /* THLFacebookProfilePictureURLFetchService.m */,
-			);
-			path = "Facebook Image Fetching";
-			sourceTree = "<group>";
-		};
 		2174A05B1B863F6A006826D7 = {
 			isa = PBXGroup;
 			children = (
@@ -710,32 +690,6 @@
 				79259D6E1CAA4C6C00409040 /* Hype.app */,
 				79259D6F1CAA4C6C00409040 /* Hype.xctest */,
 			);
-			sourceTree = "<group>";
-		};
-		21775F571B8E15E400609D39 /* Permissions Request */ = {
-			isa = PBXGroup;
-			children = (
-				21775F5F1B8E177B00609D39 /* Address Book Permissions */,
-			);
-			path = "Permissions Request";
-			sourceTree = "<group>";
-		};
-		21775F5F1B8E177B00609D39 /* Address Book Permissions */ = {
-			isa = PBXGroup;
-			children = (
-				21775F5B1B8E169500609D39 /* THLAddressBookPermissionsRequestService.h */,
-				21775F5C1B8E169500609D39 /* THLAddressBookPermissionsRequestService.m */,
-			);
-			path = "Address Book Permissions";
-			sourceTree = "<group>";
-		};
-		21775F601B8E178100609D39 /* Address Book Fetching */ = {
-			isa = PBXGroup;
-			children = (
-				21775F611B8E17A300609D39 /* THLAddressBookEntryFetchService.h */,
-				21775F621B8E17A300609D39 /* THLAddressBookEntryFetchService.m */,
-			);
-			path = "Address Book Fetching";
 			sourceTree = "<group>";
 		};
 		217DC64D1BBB75E000332174 /* THLUserManager */ = {
@@ -813,21 +767,10 @@
 			children = (
 				FF30597E1DA86D80009DDC93 /* Chat */,
 				2118920A1BAA039700E8A11F /* Authentication */,
-				21CCEDEF1B87CE210066CDAC /* Fetching */,
-				21775F571B8E15E400609D39 /* Permissions Request */,
 				7928AD841D19C79300DFC443 /* THLParseQueryFactory.h */,
 				7928AD851D19C79300DFC443 /* THLParseQueryFactory.m */,
 			);
 			path = Services;
-			sourceTree = "<group>";
-		};
-		21CCEDEF1B87CE210066CDAC /* Fetching */ = {
-			isa = PBXGroup;
-			children = (
-				21775F601B8E178100609D39 /* Address Book Fetching */,
-				215A42A91BAA29A200D03C35 /* Facebook Image Fetching */,
-			);
-			path = Fetching;
 			sourceTree = "<group>";
 		};
 		21CE05F71BB84032004D10BB /* THLEventNavigationBar */ = {
@@ -913,15 +856,6 @@
 			path = THLPartyViewController;
 			sourceTree = "<group>";
 		};
-		7928ADBA1D19CC1300DFC443 /* THLPerkCollectionViewController */ = {
-			isa = PBXGroup;
-			children = (
-				7996E2031D00D010006FFDDC /* THLPerkCollectionViewController.h */,
-				7996E2041D00D010006FFDDC /* THLPerkCollectionViewController.m */,
-			);
-			path = THLPerkCollectionViewController;
-			sourceTree = "<group>";
-		};
 		7928ADBB1D19CC1B00DFC443 /* THLSingleLineTextField */ = {
 			isa = PBXGroup;
 			children = (
@@ -974,15 +908,6 @@
 				799862451C97B6AF004C5326 /* THLTextEntryViewController.m */,
 			);
 			path = THLTextEntryViewController;
-			sourceTree = "<group>";
-		};
-		7928ADC51D19CC9B00DFC443 /* THLPerkDetailViewController */ = {
-			isa = PBXGroup;
-			children = (
-				7928ADAB1D19CA0D00DFC443 /* THLPerkDetailViewController.h */,
-				7928ADAC1D19CA0D00DFC443 /* THLPerkDetailViewController.m */,
-			);
-			path = THLPerkDetailViewController;
 			sourceTree = "<group>";
 		};
 		7928ADC71D19CCAD00DFC443 /* THLTablePackageAdmissionCell */ = {
@@ -1048,8 +973,6 @@
 				7928ADBD1D19CC3500DFC443 /* THLPartyNavigationController */,
 				7928ADB91D19CC0900DFC443 /* THLPartyViewController */,
 				C8D1D2A11CD3E836006ADC6A /* THLPaymentViewController */,
-				7928ADBA1D19CC1300DFC443 /* THLPerkCollectionViewController */,
-				7928ADC51D19CC9B00DFC443 /* THLPerkDetailViewController */,
 				7928ADBC1D19CC2700DFC443 /* THLPermissionRequestViewController */,
 				C8FEE3D21D038C5800244252 /* THLTablePackageDetailsViewController */,
 				7928ADC01D19CC5900DFC443 /* THLTableReservationViewController */,
@@ -1080,7 +1003,9 @@
 				79651F591DD933DE0057AD63 /* THLSwiftLoginViewController.swift */,
 				7941BC1D1DBFA05600A84F54 /* THLPartyMenuController.swift */,
 				FF3541821DC9670C004DD268 /* THLProfilePicChooserViewController.swift */,
+				7955B20B1DF3217700CA0A07 /* THLHostUpcomingEventsViewController.swift */,
 				797DB4871DD5126E00C772C7 /* THLAccountRegistrationViewController.swift */,
+				79F4905C1DF3870B00A0CCDE /* THLPendingInquiryOffersViewController.swift */,
 				79EB0C321DC942A200E0AD9E /* THLConnectedHostViewController.swift */,
 				793222C41DD2475E008462EC /* THLWelcomeViewController.swift */,
 				7989D7E31DDE3E4F00E38E25 /* THLDiscoveryViewController.swift */,
@@ -1588,7 +1513,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = THL;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = Hypelist;
 				TargetAttributes = {
 					2174A0631B863F6A006826D7 = {
@@ -1903,7 +1828,6 @@
 				79CEDF3B1D23213400DFB654 /* THLEventPickerViewController.swift in Sources */,
 				7928AD9B1D19C8D800DFC443 /* THLUserProfileInfoView.m in Sources */,
 				793222C51DD2475E008462EC /* THLWelcomeViewController.swift in Sources */,
-				21775F5D1B8E169500609D39 /* THLAddressBookPermissionsRequestService.m in Sources */,
 				C8F2FB271BF81A8E004E00B6 /* THLInformationViewController.m in Sources */,
 				C88A01591D04A9E200152B37 /* THLTablePackageDetailCell.m in Sources */,
 				79CD27FD1C520293009BC119 /* THLResourceManager.m in Sources */,
@@ -1940,7 +1864,6 @@
 				79651F581DD8F3870057AD63 /* THLPhoneNumberVerificationViewController.swift in Sources */,
 				7998311B1D4B9E6500BB5BFE /* THLReservationRequestViewController.m in Sources */,
 				799B06A61D2EA9580091B4CD /* THLEventFlexibleHeaderView.swift in Sources */,
-				21775F631B8E17A300609D39 /* THLAddressBookEntryFetchService.m in Sources */,
 				219E32A81B8EA63D00214C85 /* THLEventNavigationBar.m in Sources */,
 				C8EE96CE1CE677580040A1F0 /* THLStripeTokenService.m in Sources */,
 				21CE06241BB86995004D10BB /* THLAppearanceUtils.m in Sources */,
@@ -1951,6 +1874,7 @@
 				7941BC201DC10F4A00A84F54 /* THLSubmitInquiryOfferViewController.swift in Sources */,
 				7941BC1E1DBFA05600A84F54 /* THLPartyMenuController.swift in Sources */,
 				211BB0D81B8CC6DA0068FD50 /* UIView+AddSubviews.m in Sources */,
+				7955B20C1DF3217700CA0A07 /* THLHostUpcomingEventsViewController.swift in Sources */,
 				798402D41D217157006F463B /* THLEntity.m in Sources */,
 				79E945B91DBA911E00EC753D /* THLMyEventsTableViewCell.swift in Sources */,
 				7928ADA11D19C98400DFC443 /* THLUserProfileTableViewCell.m in Sources */,
@@ -1966,7 +1890,6 @@
 				C88A01561D04A44200152B37 /* THLCollectionReusableView.m in Sources */,
 				79319DD41D9AED88000DEE69 /* EPConstants.swift in Sources */,
 				7928ADA91D19C9E200DFC443 /* THLUserProfileFooterView.m in Sources */,
-				7928ADAD1D19CA0D00DFC443 /* THLPerkDetailViewController.m in Sources */,
 				794483041BEC5B5D00EABE23 /* THLStatusView.m in Sources */,
 				798402DB1D2171E0006F463B /* THLGuestEntity.m in Sources */,
 				7964645D1DAE95A000DA1F51 /* THLInquiryOffersViewController.swift in Sources */,
@@ -1974,11 +1897,11 @@
 				79060B461D0B339A00D1A00C /* THLAdmissionOption.m in Sources */,
 				7917C0F11D1B3C2F0054BDB0 /* THLVenueDiscoveryViewController.m in Sources */,
 				C80372DA1D00DD68008848CA /* THLAdmissionOptionCell.m in Sources */,
-				7996E2051D00D010006FFDDC /* THLPerkCollectionViewController.m in Sources */,
 				21E402D91BBF80E6001D0C2C /* THLGuestlist.m in Sources */,
 				794DCCB51BF555020037A03D /* FXBlurView.m in Sources */,
 				794208281BD82641009B86FA /* UIView+DimView.m in Sources */,
 				7928AD981D19C88E00DFC443 /* THLUserProfileViewController.m in Sources */,
+				79F4905D1DF3870B00A0CCDE /* THLPendingInquiryOffersViewController.swift in Sources */,
 				C8D1D2A41CD3E864006ADC6A /* THLPaymentViewController.m in Sources */,
 				79CEDF3F1D257A6700DFB654 /* UIColorExtensions.swift in Sources */,
 				79B59F061D5E78CB00E374A4 /* THLHypeConciergeInfoView.m in Sources */,
@@ -2018,7 +1941,6 @@
 				799831181D4AC50900BB5BFE /* THLSelectView.m in Sources */,
 				794DA4311DB6D988000C5F67 /* THLBoldNavigationBar.swift in Sources */,
 				C8FEE3D51D038C8700244252 /* THLTablePackageDetailsViewController.m in Sources */,
-				215A42AC1BAA2A1700D03C35 /* THLFacebookProfilePictureURLFetchService.m in Sources */,
 				21E402E01BBF8371001D0C2C /* THLGuestlistService.m in Sources */,
 				2133BFC21B877C08002C1DA9 /* THLUser.m in Sources */,
 				C85EE3BC1C1BCC190008C14B /* THLPerkStoreItem.m in Sources */,

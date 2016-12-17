@@ -25,6 +25,7 @@ class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UIT
     var inquiry: PFObject
     
     var offers: [PFObject]
+
     
     
     let offersTableViewIdentifier = "offersTableViewIdentifier"
@@ -39,7 +40,6 @@ class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UIT
         self.inquiry = guestlist.value(forKey: "Inquiry") as! PFObject
         
         
-        
         self.offers = Array()
         offersTableView = UITableView.init(frame: CGRect.zero)
         super.init(nibName: nil, bundle: nil)
@@ -51,7 +51,7 @@ class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UIT
     
     //  MARK: -
     //  MARK: UIViewController
-    
+
     
     override func loadView() {
         super.loadView()
@@ -77,6 +77,7 @@ class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UIT
         self.view.addSubview(offersTableView)
         
     }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,8 +88,6 @@ class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UIT
         //        layout.itemSize = CGSize(width: self.view.frame.size.width - 25, height: 55)
         //        layout.headerReferenceSize = CGSize(width: admissionOptionCollectionView.bounds.width, height: 70.0)
     }
-    
-    
     
     func dismiss() {
         self.dismiss(animated: true, completion: nil)

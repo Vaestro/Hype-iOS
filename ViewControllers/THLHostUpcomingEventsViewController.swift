@@ -1,8 +1,8 @@
 //
-//  THLMyInvitesViewController.swift
+//  THLHostUpcomingEventsViewController.swift
 //  Hype
 //
-//  Created by Edgar Li on 11/3/16.
+//  Created by Edgar Li on 12/3/16.
 //  Copyright © 2016 Hypelist. All rights reserved.
 //
 
@@ -10,27 +10,22 @@ import UIKit
 
 import Parse
 import ParseUI
-
-protocol THLMyInvitesViewControllerDelegate: class {
-    func didSelectViewInquiry(_ guestlistInvite: PFObject)
-    func didSelectViewHostedEvent(_ guestlistInvite: PFObject)
-    func didSelectViewEventTicket(_ guestlistInvite: PFObject)
-    
+protocol THLHostUpcomingEventsViewControllerDelegate: class {
+    func didSelectViewInquiryMenuView(_ inquiry: PFObject)
 }
 
-class THLMyInvitesViewController: PFQueryTableViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
+class THLHostUpcomingEventsViewController: PFQueryTableViewController, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
     // MARK: Init
-    var delegate: THLMyInvitesViewControllerDelegate?
+    var delegate: THLHostUpcomingEventsViewControllerDelegate?
     
     convenience init() {
-        self.init(style: .plain, className: "GuestlistInvite")
+        self.init(style: .plain, className: "Inquiry")
         
         pullToRefreshEnabled = true
         paginationEnabled = false
     }
     
-    // MARK: UIViewController
     override func loadView() {
         super.loadView()
         
@@ -46,51 +41,40 @@ class THLMyInvitesViewController: PFQueryTableViewController, DZNEmptyDataSetSou
         super.viewWillAppear(animated)
         self.loadObjects()
     }
-    
     // MARK: Data
     
     override func queryForTable() -> PFQuery<PFObject> {
+        let date = NSDate().subtractingHours(4) as NSDate
+        let currentUserId = THLUser.current()!.objectId
         let query: PFQuery = super.queryForTable()
         
-        let user:PFUser = PFUser.current()!
-        let date = NSDate().subtractingHours(4) as NSDate
-        
-        query.whereKey("Guest", equalTo: user)
-        query.whereKey("date", greaterThan: date)
-        query.whereKey("response", equalTo: 2)
-
-        query.includeKey("Guest")
-        query.includeKey("Guest.event")
-        query.includeKey("Guestlist.Owner")
-        query.includeKey("Guestlist.Inquiry")
-        query.includeKey("Guestlist.Inquiry.Offers")
-        query.includeKey("Guestlist.Inquiry.Offers.Host")
-        query.includeKey("Guestlist.admissionOption")
-        query.includeKey("Guestlist.event.location")
-        
         query.addAscendingOrder("date")
-        
+        query.whereKey("acceptedHostId", equalTo: currentUserId!)
+        query.whereKey("connected", equalTo: true)
+        query.whereKey("date", greaterThan: date)
+        query.includeKey("Sender")
+        query.includeKey("AcceptedOffer")
+        query.includeKey("AcceptedOffer.Venue")
+
         return query
     }
 }
 
-extension THLMyInvitesViewController {
+extension THLHostUpcomingEventsViewController {
     
     // MARK: TableView
     
     //    override func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell? {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let guestlistInvite: PFObject = super.object(at: indexPath) as PFObject!
-        
-        let event:PFObject = guestlistInvite.value(forKey: "event") as! PFObject
-        let venue:PFObject = event.value(forKey: "location") as! PFObject
+        let inquiry: PFObject = super.object(at: indexPath) as PFObject!
+        let acceptedOffer: PFObject = inquiry.value(forKey:"AcceptedOffer") as! PFObject
+        let venue:PFObject = acceptedOffer.value(forKey: "Venue") as! PFObject
         let venueName:String = venue.value(forKey: "name") as! String
-        let partyType:String = guestlistInvite.value(forKey: "admissionDescription") as! String
-        let sender:PFObject = guestlistInvite.value(forKey: "sender") as! PFObject
+        let sender:PFObject = inquiry.value(forKey: "Sender") as! PFObject
         let senderName:String = sender.value(forKey: "firstName") as! String
-        
-        let eventTitle:String = "\(senderName) INVITED YOU TO PARTY AT \(venueName)"
-        let date = guestlistInvite.value(forKey: "date") as? Date
+
+        let eventTitle:String = "\(senderName) IS COMING TO \(venueName)"
+        let date = acceptedOffer.value(forKey: "date") as? Date
         
         let cell:THLMyEventsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "THLMyEventsTableViewCell", for: indexPath) as! THLMyEventsTableViewCell
         
@@ -103,17 +87,9 @@ extension THLMyInvitesViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let guestlistInvite = object(at: indexPath) as PFObject!
-        let guestlist = guestlistInvite?.value(forKey: "Guestlist") as! PFObject
+        let inquiry: PFObject? = super.object(at: indexPath)
         
-        let admissionOption = guestlist.value(forKey: "admissionOption") as! PFObject
-        let admissionType:Int = admissionOption.value(forKey: "type") as! Int
-        
-        if (admissionType == 2) {
-            delegate?.didSelectViewInquiry(guestlistInvite!)
-        } else {
-            delegate?.didSelectViewEventTicket(guestlistInvite!)
-        }
+        self.delegate?.didSelectViewInquiryMenuView(inquiry!)
         
     }
     
@@ -121,15 +97,14 @@ extension THLMyInvitesViewController {
         return 125.0;//Choose your custom row height
     }
     
-    
     func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString {
-        let str = "No Invites"
+        let str = "No Upcoming Events"
         let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)]
         return NSAttributedString(string: str, attributes: attrs)
     }
     
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString {
-        let str = "When you get invited to a party by your friends, it will show up here"
+        let str = "Any parties you're hosting will show up here"
         let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)]
         return NSAttributedString(string: str, attributes: attrs)
     }

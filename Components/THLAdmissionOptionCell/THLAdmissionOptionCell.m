@@ -48,6 +48,8 @@
 {
     if (!_titleLabel) {
         _titleLabel = THLNUILabel(kTHLNUIDetailBoldTitle);
+        _titleLabel.textColor = [UIColor whiteColor];
+
         _titleLabel.backgroundColor = kTHLNUIPrimaryBackgroundColor;
         _titleLabel.adjustsFontSizeToFitWidth = TRUE;
         

@@ -10,7 +10,7 @@
 #import "THLActionButton.h"
 #import "THLAppearanceConstants.h"
 #import "TTTAttributedLabel.h"
-#import "Intercom/intercom.h"
+
 
 @interface THLHypeConciergeInfoView()
 @property (nonatomic, strong) TTTAttributedLabel *titleLabel;
@@ -95,7 +95,7 @@
 }
 
 - (void)continueButtonTapped {
-    [Intercom presentMessageComposer];
+//    [Intercom presentMessageComposer];
 }
 
 #pragma mark - Constructors

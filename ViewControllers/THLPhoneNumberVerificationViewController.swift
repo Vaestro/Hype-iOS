@@ -109,6 +109,7 @@ class THLPhoneNumberVerificationViewController: UIViewController {
     
     func constructTextField() -> UITextField {
         let textField = HoshiTextField(frame: CGRect.zero)
+        textField.textColor = UIColor.white
         textField.placeholderColor = UIColor.lightGray
         textField.borderInactiveColor = UIColor.lightGray
         textField.borderActiveColor = UIColor.white

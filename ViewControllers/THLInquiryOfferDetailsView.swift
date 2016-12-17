@@ -193,7 +193,6 @@ class THLInquiryOfferDetailsView: UIViewController {
     
     func handleConnect() {
         inquiryOffer["accepted"] = true
-        
         inquiry["connected"] = true
         inquiry["AcceptedOffer"] = inquiryOffer
         inquiry["acceptedHostId"] = host.objectId

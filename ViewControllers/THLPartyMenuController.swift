@@ -31,8 +31,7 @@ class THLPartyMenuController: UIViewController, THLConnectedHostViewControllerDe
         inquiryOfferDetailsView.delegate = self
         self.navigationController?.pushViewController(inquiryOfferDetailsView, animated: true)
     }
-    
-    
+
     var delegate : THLPartyMenuControllerDelegate?
     var pageMenu : CAPSPageMenu?
     var guestlistInvite : PFObject
@@ -52,7 +51,7 @@ class THLPartyMenuController: UIViewController, THLConnectedHostViewControllerDe
         self.guestlist = guestlistInvite.value(forKey: "Guestlist") as! PFObject
         self.inquiry = guestlist.value(forKey: "Inquiry") as! PFObject
         self.event = inquiry.value(forKey: "Event") as! PFObject?
-        
+
         self.acceptedInquiryOffer = inquiry.value(forKey: "AcceptedOffer") as! PFObject?
         self.venue = acceptedInquiryOffer?.value(forKey: "Venue") as! PFObject?
         if (acceptedInquiryOffer?.value(forKey: "Event") as! PFObject?) != nil {
@@ -72,7 +71,7 @@ class THLPartyMenuController: UIViewController, THLConnectedHostViewControllerDe
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.black
-        
+
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancel_button"), style: .plain, target: self, action: #selector(THLPartyMenuController.dismiss as (THLPartyMenuController) -> () -> ()))
         
         // Initialize view controllers to display and place in array
@@ -106,7 +105,6 @@ class THLPartyMenuController: UIViewController, THLConnectedHostViewControllerDe
             controllerArray.append(controller3)
         }
         
-        
         // Initialize scroll menu
         let rect = CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: self.view.frame.height)
         
@@ -126,7 +124,7 @@ class THLPartyMenuController: UIViewController, THLConnectedHostViewControllerDe
             .selectionIndicatorHeight(2.0),
             .menuItemSeparatorPercentageHeight(0.1)
         ]
-        
+
         pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: rect, pageMenuOptions: parameters)
         
         self.view.addSubview(pageMenu!.view)
@@ -172,7 +170,6 @@ class THLPartyMenuController: UIViewController, THLConnectedHostViewControllerDe
             config.duration = .forever
             SwiftMessages.show(config: config, view: inviteMessage)
         }
-        
     }
     
     func handleAcceptInvite() {
@@ -222,7 +219,7 @@ class THLPartyMenuController: UIViewController, THLConnectedHostViewControllerDe
         let guestlistInviteStatus = guestlistInvite.value(forKey: "response") as! Int
         if guestlistInviteStatus != 1 {
             SwiftMessages.hide()
-            
+
         }
         self.dismiss(animated: true, completion: nil)
     }

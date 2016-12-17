@@ -51,7 +51,7 @@ class THLGuestlistTableViewController: PFQueryTableViewController {
         
         
     }
-    
+
     override func viewDidLayoutSubviews() {
         inviteFriendsButton.frame = CGRect(x:0,y:self.view.frame.size.height - 60, width:self.view.frame.size.width,height:60)
     }
@@ -83,8 +83,9 @@ extension THLGuestlistTableViewController {
         let guestlistInvite: PFObject = super.object(at: indexPath) as PFObject!
         
         //        let guest:PFObject? = guestlistInvite.value(forKey: "Guest") as? PFObject
+
         let cell:THLMyEventsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "THLMyEventsTableViewCell", for: indexPath) as! THLMyEventsTableViewCell
-        
+
         if let guest = guestlistInvite.value(forKey: "Guest") as? PFObject {
             let guestName:String? = guest.value(forKey: "firstName") as? String
             cell.eventTitleLabel.text = guestName?.uppercased()
@@ -94,8 +95,6 @@ extension THLGuestlistTableViewController {
             cell.eventTitleLabel.text = "Pending Signup"
             cell.venueImageView.image = UIImage.init(named: "default_profile_image")
         }
-        
-        
         
         
         return cell
