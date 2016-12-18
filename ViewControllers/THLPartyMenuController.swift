@@ -8,6 +8,8 @@
 
 
 import UIKit
+import SwiftMessages
+import PopupDialog
 
 protocol THLPartyMenuControllerDelegate {
     func didAcceptInquiryOfferAndWantsToPresentPartyMenuWithInvite(_ guestlistInvite: PFObject)
@@ -35,7 +37,8 @@ class THLPartyMenuController: UIViewController, THLConnectedHostViewControllerDe
     var acceptedInquiryOffer : PFObject?
     var venue : PFObject?
     var event : PFObject?
-    
+    var popup:PopupDialog
+    var inviteMessage:MessageView
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -51,7 +54,14 @@ class THLPartyMenuController: UIViewController, THLConnectedHostViewControllerDe
         if (acceptedInquiryOffer?.value(forKey: "Event") as! PFObject?) != nil {
             self.event = acceptedInquiryOffer?.value(forKey: "Event") as! PFObject?
         }
-
+        self.inviteMessage = MessageView.viewFromNib(layout: .CardView)
+        
+        let title = "HYPE CONNECT"
+        let message = "Hype Connect allows you to connect with hosts at multiple venues every night where you can take advantage of some of the perks of going with a host like VIP walk-in, complimentary drinks, etc."
+        let image = UIImage(named: "hype_connect_promo")
+        
+        // Create the dialog
+        self.popup = PopupDialog(title: title, message: message, image: image)
         super.init(nibName:nil, bundle:nil)
     }
     
@@ -116,6 +126,88 @@ class THLPartyMenuController: UIViewController, THLConnectedHostViewControllerDe
         pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: rect, pageMenuOptions: parameters)
         
         self.view.addSubview(pageMenu!.view)
+        
+        let guestlistInviteStatus = guestlistInvite.value(forKey: "response") as! Int
+        if guestlistInviteStatus != 1 {
+            // Create buttons
+            let buttonOne = CancelButton(title: "CANCEL") {
+                var config = SwiftMessages.Config()
+                config.presentationStyle = .bottom
+                config.duration = .forever
+                SwiftMessages.show(config: config, view: self.inviteMessage)
+            }
+            
+            let buttonTwo = DefaultButton(title: "LET'S GO") {
+                self.handleHypeConnectOption()
+            }
+            
+            // Add buttons to dialog
+            // Alternatively, you can use popup.addButton(buttonOne)
+            // to add a single button
+            popup.addButtons([buttonOne, buttonTwo])
+            // Instantiate a message view from the provided card view layout. SwiftMessages searches for nib
+            // files in the main bundle first, so you can easily copy them into your project and make changes.
+            
+            
+            // Theme message elements with the warning style.
+            inviteMessage.configureTheme(.warning)
+            
+            // Add a drop shadow.
+            inviteMessage.configureDropShadow()
+            
+            
+            // Set message title, body, and icon. Here, we're overriding the default warning
+            // image with an emoji character.
+            let iconText = ["🎉", "👯", "🎊"].sm_random()!
+            inviteMessage.configureContent(title: "Pending Invite", body: "Please let your party know that you will be attending", iconText: iconText)
+            inviteMessage.button?.setTitle("GO", for: .normal)
+            inviteMessage.buttonTapHandler = { _ in self.handleAcceptInvite() }
+            // Show the message.
+            var config = SwiftMessages.Config()
+            config.presentationStyle = .bottom
+            config.duration = .forever
+            SwiftMessages.show(config: config, view: inviteMessage)
+        }
+
+    }
+    
+    func handleAcceptInvite() {
+        // Prepare the popup assets
+        SwiftMessages.hide()
+        self.present(popup, animated: true, completion: nil)
+    }
+    
+    func handleHypeConnectOption() {
+        if(THLUser.current()?.value(forKey: "image") == nil){
+            let vc = THLProfilePicChooserViewController()
+            vc.messageView.text = "Please add a profile picture that clearly shows your face so that your Hype host can locate you at the venue!"
+            
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            guestlistInvite["response"] = 1
+            guestlistInvite.saveInBackground{(success, error) in
+                if (success) {
+                    self.popup.dismiss()
+                    self.showAcceptedInviteMessage()
+                }
+            }
+        }
+    }
+    
+    func showAcceptedInviteMessage() {
+        let title = "SUCCESS"
+        let message = "You have accepted your invite!"
+        
+        // Create the dialog
+        let successPopup = PopupDialog(title: title, message: message)
+        
+        // Create buttons
+        let buttonOne = CancelButton(title: "OK") {}
+        successPopup.addButton(buttonOne)
+        
+        self.present(successPopup, animated: true, completion: nil)
+        
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         (self.navigationController?.navigationBar as! THLBoldNavigationBar).titleLabel.text = ""
@@ -123,6 +215,11 @@ class THLPartyMenuController: UIViewController, THLConnectedHostViewControllerDe
     }
     
     func dismiss() {
+        let guestlistInviteStatus = guestlistInvite.value(forKey: "response") as! Int
+        if guestlistInviteStatus != 1 {
+            SwiftMessages.hide()
+
+        }
         self.dismiss(animated: true, completion: nil)
     }
     

@@ -90,7 +90,7 @@ class THLInquiryOfferDetailsView: UIViewController {
         
         let button = UIButton()
         button.setTitle("CONNECT", for: .normal)
-        button.addTarget(self, action: #selector(handleConnect), for: UIControlEvents.touchUpInside)
+        button.addTarget(self, action: #selector(handleConnectButton), for: UIControlEvents.touchUpInside)
         button.backgroundColor = UIColor.customGoldColor()
         superview.addSubview(button)
         
@@ -158,6 +158,37 @@ class THLInquiryOfferDetailsView: UIViewController {
             make.centerX.equalTo(superview.snp.centerX)
         }
         // Do any additional setup after loading the view.
+    }
+    
+    
+    
+    
+    func handleConnectButton() {
+        if checkForInquiryOwner() {
+            handleConnect()
+        } else {
+            // Prepare the popup assets
+            let title = "OOPS"
+            let message = "Only the creator of your party can accept a Host's offer!"
+            
+            // Create the dialog
+            let popup = PopupDialog(title: title, message: message)
+            
+            // Create buttons
+            let buttonOne = CancelButton(title: "OK") {
+            }
+            
+            popup.addButton(buttonOne)
+            
+            // Present dialog
+            self.present(popup, animated: true, completion: nil)
+        }
+    }
+    
+    func checkForInquiryOwner() -> Bool {
+        let inquiryOwner:PFObject = inquiry.value(forKey:"Sender") as! PFObject
+        let currentUser = THLUser.current()
+        return inquiryOwner.objectId == currentUser!.objectId
     }
     
     func handleConnect() {

@@ -218,6 +218,7 @@ class THLSwiftAdmissionsViewController: UIViewController, THLEventPickerViewCont
     func handleHypeConnectOption() {
         if(THLUser.current()?.value(forKey: "image") == nil){
             let vc = THLProfilePicChooserViewController()
+            vc.messageView.text = "Please add a profile picture that clearly shows your face so that your Hype host can locate you at the venue!"
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
             self.delegate?.didSelectHypeConnectForEvent(self.event!)

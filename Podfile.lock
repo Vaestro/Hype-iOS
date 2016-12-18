@@ -128,6 +128,7 @@ PODS:
   - SSDataSources (0.8.5)
   - Stripe (9.2.0)
   - SVProgressHUD (2.1.2)
+  - SwiftMessages (3.1.1)
   - TextFieldEffects (1.3.0)
   - TPKeyboardAvoiding (1.3.1)
   - TTTAttributedLabel (2.0.0)
@@ -189,6 +190,7 @@ DEPENDENCIES:
   - SSDataSources (~> 0.8)
   - Stripe
   - SVProgressHUD
+  - SwiftMessages
   - TextFieldEffects
   - TPKeyboardAvoiding
   - TTTAttributedLabel
@@ -246,6 +248,7 @@ SPEC CHECKSUMS:
   SSDataSources: b01170fb23b82acf0649194e9189b0bf5f702681
   Stripe: a47770e82db059d0e7e160f9aabc2997055ee911
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
+  SwiftMessages: 1216ea6bdf8d92ff0f6f98a23e5442711b1e71ac
   TextFieldEffects: ef594746f17997c813e07633f8ae5acaf9b04f27
   TPKeyboardAvoiding: 0d6af20e95e2850f4c621841225b59ec7d8dd852
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
@@ -253,6 +256,6 @@ SPEC CHECKSUMS:
   Whisper: 08be92623311f8e53201e62e17f6d7b9599a4714
   YLMoment: af44d9d402790049e5490fa6eae9585b89b4090b
 
-PODFILE CHECKSUM: 596092cedc4d3d04f6e82c33e3467e623659e141
+PODFILE CHECKSUM: c57683f8ecc3c62745a11c22627d420c62eee90d
 
 COCOAPODS: 1.0.1
