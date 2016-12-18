@@ -9,12 +9,13 @@
 import UIKit
 import PopupDialog
 import Eureka
+import NVActivityIndicatorView
 
 protocol THLSubmitInquiryOfferViewControllerDelegate: class {
     func didSubmitInquiryOffer()
 }
 
-class THLSubmitInquiryOfferViewController: FormViewController {
+class THLSubmitInquiryOfferViewController: FormViewController, NVActivityIndicatorViewable {
     
     var delegate: THLSubmitInquiryOfferViewControllerDelegate?
     var inquiry: PFObject!
@@ -130,7 +131,9 @@ class THLSubmitInquiryOfferViewController: FormViewController {
         let dateTime:Date = valuesDictionary["dateField"] as! Date
         let inquiryId:String = self.inquiry.objectId!
         let guestlistId:String = self.inquiry.value(forKey: "guestlistId") as! String
-
+        let size = CGSize(width: 30, height:30)
+        
+        startAnimating(size, message: "Loading...", type: NVActivityIndicatorType(rawValue: 0) )
         PFCloud.callFunction(inBackground: "submitOfferForInquiry", withParameters: ["message": messageText,
                                                                                     "venueName": venueName,
                                                                                     "dateTime": dateTime,
@@ -147,6 +150,7 @@ class THLSubmitInquiryOfferViewController: FormViewController {
 //                }
 //                self.inquiry?["Offers"] = offers
 //                self.inquiry?.saveInBackground()
+                self.stopAnimating()
                 let title = "SUCCESS"
                 let message = "Your offer was submitted!"
                 
@@ -164,6 +168,7 @@ class THLSubmitInquiryOfferViewController: FormViewController {
                 // Present dialog
                 self.present(popup, animated: true, completion: nil)
             } else {
+                self.stopAnimating()
                 print(error ?? "Server error when submitting offer")
 
                 // Prepare the popup assets

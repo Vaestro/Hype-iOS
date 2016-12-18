@@ -27,11 +27,11 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
-  - Branch (0.12.19):
-    - Branch/Core (= 0.12.19)
-    - Branch/without-IDFA (= 0.12.19)
-  - Branch/Core (0.12.19)
-  - Branch/without-IDFA (0.12.19)
+  - Branch (0.12.20):
+    - Branch/Core (= 0.12.20)
+    - Branch/without-IDFA (= 0.12.20)
+  - Branch/Core (0.12.20)
+  - Branch/without-IDFA (0.12.20)
   - CocoaLumberjack (3.0.0):
     - CocoaLumberjack/Default (= 3.0.0)
     - CocoaLumberjack/Extensions (= 3.0.0)
@@ -204,7 +204,7 @@ SPEC CHECKSUMS:
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   Bolts-Swift: fa98d1b59fc1acea9b21a21306dcdca1c85e3737
-  Branch: 75ed1785250502588cfb4a5de40a5136bdaa1573
+  Branch: a2c085213fd3953c241ad63aa49f4435bfc84da7
   CocoaLumberjack: c823149bccc5519a9447aeb433be7b1212a7d6a5
   DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
   DGActivityIndicatorView: ff2c76073d79692f724863c8dd38685866a03cb6
