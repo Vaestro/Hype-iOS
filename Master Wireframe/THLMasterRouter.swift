@@ -14,7 +14,7 @@ import Parse
 @objc class THLMasterRouter: NSObject, THLWelcomeViewDelegate, THLAccountRegistrationViewControllerDelegate, THLSwiftLoginViewControllerDelegate, THLDiscoveryViewControllerDelegate, THLGuestProfileViewControllerDelegate, THLEventDetailsViewControllerDelegate, THLSwiftAdmissionsViewControllerDelegate, THLPartyViewControllerDelegate, THLCheckoutViewControllerDelegate, THLTablePackageControllerDelegate, EPPickerDelegate, THLUserProfileViewControllerDelegate, THLAvailableInquiriesViewControllerDelegate, THLInquiryMenuViewControllerDelegate, THLSubmitInquiryOfferViewControllerDelegate, THLPartyMenuControllerDelegate {
     
     public func partyViewControllerWantsToPresentInvitationController(for event: THLEvent!, guestlistId: String!, currentGuestsPhoneNumbers: [Any]!) {
-        
+        self.presentInvitationViewController(event, guestlistId: guestlistId, guestlistInvite:nil, currentGuestsPhoneNumbers: [])
     }
 
     var window: UIWindow
@@ -195,12 +195,7 @@ import Parse
             let admissionOption:PFObject = guestlist.value(forKey: "admissionOption") as! PFObject
             let admissionType:Int = admissionOption.value(forKey: "type") as! Int
             if (admissionType == 2) {
-                let inquiry = guestlist.value(forKey: "Inquiry") as! PFObject
-                if ((inquiry.value(forKey: "connected") as! Bool) == true) {
-                    self.presentPartyMenuforConnect(guestlistInvite)
-                } else {
-                    self.presentInquiryMenu(forInquiry: inquiry)
-                }
+                self.presentPartyMenuforConnect(guestlistInvite)
             } else {
                 self.presentPartyNavigationControllerforTicket(invite: guestlistInvite)
             }
@@ -247,8 +242,8 @@ import Parse
         self.presentPaymentViewController(on: topViewController())
     }
     
-    internal func checkoutViewControllerDidFinishCheckout(for event: THLEvent, withGuestlistId guestlistId: String) {
-        self.presentInvitationViewController(event, guestlistId: guestlistId, currentGuestsPhoneNumbers: [])
+    internal func checkoutViewControllerDidFinishCheckout(for event: THLEvent, withGuestlistId guestlistId: String, guestlistInvite:PFObject) {
+        self.presentInvitationViewController(event, guestlistId: guestlistId, guestlistInvite:guestlistInvite, currentGuestsPhoneNumbers: [])
     }
     
     public func checkoutViewController(_ checkoutView: THLCheckoutViewController!, didFinishPurchasingForGuestlistInvite guestlistInviteId: String!) {
@@ -261,8 +256,8 @@ import Parse
     
     // MARK: PartyInvitationViewController
     
-    func presentInvitationViewController(_ event: THLEvent, guestlistId: String, currentGuestsPhoneNumbers: [Any]) {
-        let contactPickerScene = EPContactsPicker(delegate: self, partyType: .generalAdmission, multiSelection:true, subtitleCellType: SubtitleCellValue.phoneNumber, event: event, guestlistId: guestlistId)
+    func presentInvitationViewController(_ event: THLEvent, guestlistId: String, guestlistInvite:PFObject?, currentGuestsPhoneNumbers: [Any]) {
+        let contactPickerScene = EPContactsPicker(delegate: self, partyType: .generalAdmission, multiSelection:true, subtitleCellType: SubtitleCellValue.phoneNumber, event: event, guestlistId: guestlistId, guestlistInvite: guestlistInvite)
         let topView = self.topViewController() as! UINavigationController
         topView.pushViewController(contactPickerScene, animated: true)
     }
@@ -346,7 +341,7 @@ import Parse
     }
     
     internal func guestlistTableViewWantsToPresentInvitationController(for event: PFObject!, guestlistId: String!, currentGuestsPhoneNumbers: [Any]!) {
-        let contactPickerScene = EPContactsPicker(delegate: self, partyType: .generalAdmission, multiSelection:true, subtitleCellType: SubtitleCellValue.phoneNumber, event: event, guestlistId: guestlistId)
+        let contactPickerScene = EPContactsPicker(delegate: self, partyType: .generalAdmission, multiSelection:true, subtitleCellType: SubtitleCellValue.phoneNumber, event: event, guestlistId: guestlistId, guestlistInvite:nil)
         let topView = self.topViewController() as! UINavigationController
         topView.pushViewController(contactPickerScene, animated: true)
     }
@@ -379,7 +374,7 @@ import Parse
         
     }
     
-    public func epContactPickerDidSubmitInvitesAndWantsToShowEvent() {
+    public func epContactPickerDidSubmitInvitesAndWantsToShowEventForInvite(guestlistInvite: PFObject?) {
         let tabBarController = window.rootViewController as! UITabBarController
         
         if self.topViewController() != tabBarController {
@@ -388,6 +383,20 @@ import Parse
         if tabBarController.selectedIndex != 2 {
             tabBarController.selectedIndex = 2
         }
+        
+        if let guestlistInvite = guestlistInvite {
+            let guestlist:PFObject = guestlistInvite.value(forKey: "Guestlist") as! PFObject
+            let admissionOption:PFObject = guestlist.value(forKey: "admissionOption") as! PFObject
+            let admissionType:Int = admissionOption.value(forKey: "type") as! Int
+            if (admissionType == 2) {
+                self.presentPartyMenuforConnect(guestlistInvite)
+            } else {
+                self.presentPartyNavigationControllerforTicket(invite: guestlistInvite)
+            }
+            
+        }
+        
+
     }
     
     public func epContactPicker(_: EPContactsPicker, didSubmitInvitesAndWantsToShowInquiry: PFObject) {

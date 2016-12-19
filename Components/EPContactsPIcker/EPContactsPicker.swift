@@ -11,6 +11,7 @@ import Contacts
 import PopupDialog
 import Branch
 import NVActivityIndicatorView
+import SwiftMessages
 
 public protocol EPPickerDelegate {
 	func epContactPicker(_: EPContactsPicker, didContactFetchFailed error: NSError)
@@ -18,7 +19,7 @@ public protocol EPPickerDelegate {
     func epContactPicker(_: EPContactsPicker, didSelectContact contact: EPContact)
 	func epContactPicker(_: EPContactsPicker, didSelectMultipleContacts contacts: [EPContact])
     func epContactPicker(_: EPContactsPicker, didSubmitInvitesAndWantsToShowInquiry: PFObject)
-    func epContactPickerDidSubmitInvitesAndWantsToShowEvent()
+    func epContactPickerDidSubmitInvitesAndWantsToShowEventForInvite(guestlistInvite:PFObject?)
 }
 
 public extension EPPickerDelegate {
@@ -50,6 +51,7 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
     
     open var contactDelegate: EPPickerDelegate?
     var event: PFObject?
+    var guestlistInvite: PFObject?
     var guestlistId: String?
     var contactsStore: CNContactStore?
     var resultSearchController = UISearchController()
@@ -71,10 +73,41 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
         self.view.backgroundColor = UIColor.black
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         
+        
         registerContactCell()
         inititlizeBarButtons()
         initializeSearchBar()
         reloadContacts()
+        
+        // Instantiate a message view from the provided card view layout. SwiftMessages searches for nib
+        // files in the main bundle first, so you can easily copy them into your project and make changes.
+        let view = MessageView.viewFromNib(layout: .CardView)
+        
+        // Theme message elements with the warning style.
+        view.configureTheme(.success)
+        
+        // Add a drop shadow.
+        view.configureDropShadow()
+        
+        // Set message title, body, and icon. Here, we're overriding the default warning
+        // image with an emoji character.
+        let iconText = ["🎉", "👯", "🎊"].sm_random()!
+        view.configureContent(title: "Make it a party!", body: "Who do you want to invite to join your party?", iconText: iconText)
+        view.button?.isHidden = true
+        var config = SwiftMessages.Config()
+        
+        // Slide up from the bottom.
+        config.presentationStyle = .bottom
+
+        // Disable the default auto-hiding behavior.
+        config.duration = .forever
+        // Show the message.
+        SwiftMessages.show(config:config, view: view)
+    }
+    
+    override open func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        SwiftMessages.hide()
     }
     
     func initializeSearchBar() {
@@ -100,7 +133,7 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
 //        self.navigationItem.leftBarButtonItem = cancelButton
         
         if multiSelectEnabled {
-            let doneButton = UIBarButtonItem(title: "Submit", style: UIBarButtonItemStyle.done, target: self, action: #selector(onTouchDoneButton))
+            let doneButton = UIBarButtonItem(title: "Next", style: UIBarButtonItemStyle.done, target: self, action: #selector(onTouchDoneButton))
             self.navigationItem.rightBarButtonItem = doneButton
             
         }
@@ -145,7 +178,7 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
         contactDelegate = delegate
     }
 
-    convenience public init(delegate: EPPickerDelegate?, partyType: PartyType, multiSelection : Bool, subtitleCellType: SubtitleCellValue, event: PFObject, guestlistId: String) {
+    convenience public init(delegate: EPPickerDelegate?, partyType: PartyType, multiSelection : Bool, subtitleCellType: SubtitleCellValue, event: PFObject, guestlistId: String, guestlistInvite:PFObject?) {
         self.init(style: .plain)
         self.multiSelectEnabled = multiSelection
         contactDelegate = delegate
@@ -153,6 +186,7 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
         self.partyType = partyType
         self.event = event
         self.guestlistId = guestlistId
+        self.guestlistInvite = guestlistInvite
     }
     
     convenience public init(delegate: EPPickerDelegate?, partyType: PartyType, multiSelection : Bool, subtitleCellType: SubtitleCellValue, event: PFObject) {
@@ -424,14 +458,26 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
                     (response, cloudError) in
                     if cloudError == nil {
                         print("DONE")
-                        self.dismiss(animated: true, completion: {
-                            self.contactDelegate?.epContactPickerDidSubmitInvitesAndWantsToShowEvent()
-                            //self.activityIndicator?.stopAnimating()
-                            self.stopAnimating()
-
-                        })
+                        self.stopAnimating()
+                        self.contactDelegate?.epContactPickerDidSubmitInvitesAndWantsToShowEventForInvite(guestlistInvite: self.guestlistInvite)
                     } else {
+                        self.stopAnimating()
                         
+                        let title = "ERROR"
+                        let message = "There was an issue with sending invites. Please try again later!"
+                        
+                        // Create the dialog
+                        let popup = PopupDialog(title: title, message: message)
+                        
+                        // Create buttons
+                        let buttonOne = CancelButton(title: "OK") {
+
+                        }
+                        
+                        popup.addButton(buttonOne)
+                        
+                        // Present dialog
+                        self.present(popup, animated: true, completion: nil)
                     }
                 }
             }
@@ -455,30 +501,16 @@ open class EPContactsPicker: UITableViewController, UISearchResultsUpdating, UIS
                                                                                     "admissionOptionId":"ExadEhXujO"]) {
                                                                                         (guestlistInvite, error) in
                                                                                         if error == nil {
-                                                                                            (guestlistInvite as! PFObject).pinInBackground()
-                                                                                            let guestlist = (guestlistInvite as! PFObject).value(forKey: "Guestlist") as! PFObject
+                                                                                            self.guestlistInvite = guestlistInvite as? PFObject
+                                                                                            self.guestlistInvite?.pinInBackground()
+                                                                                            let guestlist = self.guestlistInvite?.value(forKey: "Guestlist") as! PFObject
                                                                                             self.guestlistId = guestlist.objectId!
                                                                                             
-                                                                                            //                                let guestlist = (guestlistInvite as! PFObject).value(forKey: "Guestlist") as! PFObject
-                                                                                            //                                let inquiry = guestlist.value(forKey: "Inquiry") as! PFObject
-                                                                                            // Prepare the popup assets
-                                                                                            let title = "SUCCESS"
-                                                                                            let message = "Your inquiry was submitted!"
-                                                                                            
-                                                                                            // Create the dialog
-                                                                                            let popup = PopupDialog(title: title, message: message)
-                                                                                            
-                                                                                            // Create buttons
-                                                                                            let buttonOne = CancelButton(title: "OK") {
-                                                                                                self.sendOutInvitations()
-                                                                                            }
-                                                                                            
-                                                                                            popup.addButton(buttonOne)
-                                                                                            
-                                                                                            // Present dialog
-                                                                                            self.present(popup, animated: true, completion: nil)
+                                                                                            self.sendOutInvitations()
+                                                                                 
                                                                                         } else {
-                                                                                            // Prepare the popup assets
+                                                                                            self.stopAnimating()
+
                                                                                             let title = "ERROR"
                                                                                             let message = "There was an issue with creating your inquiry. Please try again later!"
                                                                                             

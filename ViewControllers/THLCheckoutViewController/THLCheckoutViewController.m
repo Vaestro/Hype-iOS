@@ -508,7 +508,7 @@ TTTAttributedLabelDelegate
         if (!queryError) {
             [guestlistInvite pinInBackground];
             PFObject *guestlist = guestlistInvite[@"Guestlist"];
-            [self.delegate checkoutViewControllerDidFinishCheckoutForEvent:_event withGuestlistId:guestlist.objectId];
+            [self.delegate checkoutViewControllerDidFinishCheckoutForEvent:_event withGuestlistId:guestlist.objectId guestlistInvite:guestlistInvite];
         } else {
             
         }
@@ -587,7 +587,7 @@ TTTAttributedLabelDelegate
                                             }
                                             
                                             [_guestlistInvite pinInBackground];
-                                            [self.delegate checkoutViewControllerDidFinishCheckoutForEvent:_event withGuestlistId:guestlist.objectId];
+                                            [self.delegate checkoutViewControllerDidFinishCheckoutForEvent:_event withGuestlistId:guestlist.objectId guestlistInvite:_guestlistInvite];
                                     }
                                 }];
     } else {

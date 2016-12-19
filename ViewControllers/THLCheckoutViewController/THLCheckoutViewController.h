@@ -12,7 +12,7 @@
 @class THLCheckoutViewController;
 @protocol THLCheckoutViewControllerDelegate <NSObject>
 
--(void)checkoutViewControllerDidFinishCheckoutForEvent:(THLEvent *)event withGuestlistId:(NSString *)guestlistId;
+-(void)checkoutViewControllerDidFinishCheckoutForEvent:(THLEvent *)event withGuestlistId:(NSString *)guestlistId guestlistInvite:(PFObject *)guestlistInvite;
 -(void)checkoutViewControllerWantsToPresentPaymentViewController;
 -(void)checkoutViewController:(THLCheckoutViewController *)checkoutView didFinishPurchasingForGuestlistInvite:(NSString *)guestlistInviteId;
 -(void)checkoutViewControllerDidFinishTableReservationForEvent:(PFObject *)invite;
