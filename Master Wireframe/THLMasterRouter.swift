@@ -346,7 +346,7 @@ import Parse
     }
     
     internal func guestlistTableViewWantsToPresentInvitationController(for event: PFObject!, guestlistId: String!, currentGuestsPhoneNumbers: [Any]!) {
-        let contactPickerScene = EPContactsPicker(delegate: self, partyType: .connect, multiSelection:true, subtitleCellType: SubtitleCellValue.phoneNumber, event: event, guestlistId: guestlistId)
+        let contactPickerScene = EPContactsPicker(delegate: self, partyType: .generalAdmission, multiSelection:true, subtitleCellType: SubtitleCellValue.phoneNumber, event: event, guestlistId: guestlistId)
         let topView = self.topViewController() as! UINavigationController
         topView.pushViewController(contactPickerScene, animated: true)
     }
