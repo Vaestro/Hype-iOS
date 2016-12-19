@@ -16,19 +16,22 @@ protocol THLPartyMenuControllerDelegate {
     func guestlistTableViewWantsToPresentInvitationController(for event: PFObject!, guestlistId: String!, currentGuestsPhoneNumbers: [Any]!)
 }
 
-class THLPartyMenuController: UIViewController, THLConnectedHostViewControllerDelegate, THLInquiryOffersViewControllerDelegate, THLGuestlistTableViewControllerDelegate {
+class THLPartyMenuController: UIViewController, THLConnectedHostViewControllerDelegate, THLInquiryOffersViewControllerDelegate, THLGuestlistTableViewControllerDelegate, THLInquiryOfferDetailsViewDelegate {
     internal func guestlistTableViewWantsToPresentInvitationController(for event: PFObject!, guestlistId: String!, currentGuestsPhoneNumbers: [Any]!) {
         self.delegate?.guestlistTableViewWantsToPresentInvitationController(for: event, guestlistId: guestlistId, currentGuestsPhoneNumbers: currentGuestsPhoneNumbers)
-
-    }
-
-    internal func didAcceptInquiryOfferAndWantsToPresentPartyMenuWithInvite(_ guestlistInvite: PFObject) {
-        self.delegate?.didAcceptInquiryOfferAndWantsToPresentPartyMenuWithInvite(guestlistInvite)
+        
     }
     
     internal func didAcceptInquiryOffer() {
-        
+        self.delegate?.didAcceptInquiryOfferAndWantsToPresentPartyMenuWithInvite(guestlistInvite)
     }
+    
+    internal func didSelectInquiryOffer(inquiry:PFObject, offer:PFObject) {
+        let inquiryOfferDetailsView = THLInquiryOfferDetailsView(inquiry: inquiry, offer: offer)
+        inquiryOfferDetailsView.delegate = self
+        self.navigationController?.pushViewController(inquiryOfferDetailsView, animated: true)
+    }
+
     var delegate : THLPartyMenuControllerDelegate?
     var pageMenu : CAPSPageMenu?
     var guestlistInvite : PFObject
@@ -101,7 +104,6 @@ class THLPartyMenuController: UIViewController, THLConnectedHostViewControllerDe
             controller3.title = "PARTY"
             controllerArray.append(controller3)
         }
-
         
         // Initialize scroll menu
         let rect = CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: self.view.frame.height)
@@ -122,7 +124,7 @@ class THLPartyMenuController: UIViewController, THLConnectedHostViewControllerDe
             .selectionIndicatorHeight(2.0),
             .menuItemSeparatorPercentageHeight(0.1)
         ]
-        
+
         pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: rect, pageMenuOptions: parameters)
         
         self.view.addSubview(pageMenu!.view)
@@ -168,7 +170,6 @@ class THLPartyMenuController: UIViewController, THLConnectedHostViewControllerDe
             config.duration = .forever
             SwiftMessages.show(config: config, view: inviteMessage)
         }
-
     }
     
     func handleAcceptInvite() {

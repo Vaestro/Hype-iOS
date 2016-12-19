@@ -11,14 +11,11 @@ import Bolts
 import Branch
 import Parse
 
-@objc class THLMasterRouter: NSObject, THLWelcomeViewDelegate, THLAccountRegistrationViewControllerDelegate, THLSwiftLoginViewControllerDelegate, THLDiscoveryViewControllerDelegate, THLGuestProfileViewControllerDelegate, THLEventDetailsViewControllerDelegate, THLSwiftAdmissionsViewControllerDelegate, THLPartyViewControllerDelegate, THLCheckoutViewControllerDelegate, THLTablePackageControllerDelegate, EPPickerDelegate, THLInquiryOffersViewControllerDelegate, THLUserProfileViewControllerDelegate, THLAvailableInquiriesViewControllerDelegate, THLInquiryMenuViewControllerDelegate, THLSubmitInquiryOfferViewControllerDelegate, THLPartyMenuControllerDelegate {
-
+@objc class THLMasterRouter: NSObject, THLWelcomeViewDelegate, THLAccountRegistrationViewControllerDelegate, THLSwiftLoginViewControllerDelegate, THLDiscoveryViewControllerDelegate, THLGuestProfileViewControllerDelegate, THLEventDetailsViewControllerDelegate, THLSwiftAdmissionsViewControllerDelegate, THLPartyViewControllerDelegate, THLCheckoutViewControllerDelegate, THLTablePackageControllerDelegate, EPPickerDelegate, THLUserProfileViewControllerDelegate, THLAvailableInquiriesViewControllerDelegate, THLInquiryMenuViewControllerDelegate, THLSubmitInquiryOfferViewControllerDelegate, THLPartyMenuControllerDelegate {
+    
     public func partyViewControllerWantsToPresentInvitationController(for event: THLEvent!, guestlistId: String!, currentGuestsPhoneNumbers: [Any]!) {
         
     }
-
-
-
 
     var window: UIWindow
     
@@ -84,7 +81,7 @@ import Parse
     func accountRegistrationViewDidCompleteRegistration() {
         THLChatSocketManager.sharedInstance.createSupportChatRoom()
         presentGuestInterface()
-    
+        
     }
     
     // MARK: Login View Controller Delegate
@@ -100,16 +97,16 @@ import Parse
     }
     
     func presentGuestInterface() {
-
+        
         // Connect to chat server socket first
         THLChatSocketManager.sharedInstance.establishConnection()
         THLChatSocketManager.sharedInstance.checkAndCreateSupportChat()
         let guestMainTabBarController = UITabBarController()
-
+        
         let discoveryView = THLDiscoveryViewController()
         discoveryView.delegate = self
-//        let discoveryNavigationController = UINavigationController(navigationBarClass: THLBoldNavigationBar.self, toolbarClass: nil)
-//        discoveryNavigationController.pushViewController(discoveryView, animated: false)
+        //        let discoveryNavigationController = UINavigationController(navigationBarClass: THLBoldNavigationBar.self, toolbarClass: nil)
+        //        discoveryNavigationController.pushViewController(discoveryView, animated: false)
         
         let guestProfileView = THLGuestProfileViewController()
         guestProfileView.delegate = self
@@ -197,7 +194,6 @@ import Parse
             let guestlist:PFObject = guestlistInvite.value(forKey: "Guestlist") as! PFObject
             let admissionOption:PFObject = guestlist.value(forKey: "admissionOption") as! PFObject
             let admissionType:Int = admissionOption.value(forKey: "type") as! Int
-
             if (admissionType == 2) {
                 let inquiry = guestlist.value(forKey: "Inquiry") as! PFObject
                 if ((inquiry.value(forKey: "connected") as! Bool) == true) {
@@ -302,7 +298,7 @@ import Parse
                     let paymentView = THLPaymentViewController(paymentInfo: cardInfo as! [[AnyHashable: Any]])
                     paymentView?.hidesBottomBarWhenPushed = true
                     let topView = self.topViewController() as! UINavigationController
-
+                    
                     topView.pushViewController(paymentView!, animated: true)
                 }
             }
@@ -325,7 +321,7 @@ import Parse
         partyNavVC.addChildViewController(partyNavigationController!)
         window.rootViewController!.present(partyNavVC, animated: true, completion: { _ in })
         let tabBarController = window.rootViewController as! UITabBarController
-
+        
         if tabBarController.selectedIndex != 2 {
             tabBarController.selectedIndex = 2
         }
@@ -339,7 +335,7 @@ import Parse
         partyNavVC.addChildViewController(partyNavigationController!)
         
         let tabBarController = window.rootViewController as! UITabBarController
-
+        
         if self.topViewController() != tabBarController {
             tabBarController.dismiss(animated: true, completion: { _ in })
         }
@@ -350,7 +346,7 @@ import Parse
     }
     
     internal func guestlistTableViewWantsToPresentInvitationController(for event: PFObject!, guestlistId: String!, currentGuestsPhoneNumbers: [Any]!) {
-        let contactPickerScene = EPContactsPicker(delegate: self, partyType: .connect, multiSelection:true, subtitleCellType: SubtitleCellValue.phoneNumber, event: event, guestlistId: guestlistId)
+        let contactPickerScene = EPContactsPicker(delegate: self, partyType: .generalAdmission, multiSelection:true, subtitleCellType: SubtitleCellValue.phoneNumber, event: event, guestlistId: guestlistId)
         let topView = self.topViewController() as! UINavigationController
         topView.pushViewController(contactPickerScene, animated: true)
     }
@@ -378,7 +374,7 @@ import Parse
         let topView = self.topViewController() as! UINavigationController
         topView.pushViewController(checkoutView!, animated: true)
     }
-
+    
     public func didLoadObjects() {
         
     }
@@ -404,17 +400,9 @@ import Parse
             tabBarController.selectedIndex = 2
         }
         
-        self.presentOffersForInquiryWithGuestlistInvite(guestlistInvite: didSubmitInvitesAndWantsToShowInquiry)
+        self.presentPartyMenuforConnect(didSubmitInvitesAndWantsToShowInquiry)
     }
     
-    func presentOffersForInquiryWithGuestlistInvite(guestlistInvite: PFObject) {
-        let offersView = THLInquiryOffersViewController(guestlistInvite: guestlistInvite)
-        offersView.delegate = self
-        let navigationVC = UINavigationController(navigationBarClass: THLBoldNavigationBar.self, toolbarClass: nil)
-        navigationVC.addChildViewController(offersView)
-        window.rootViewController!.present(navigationVC, animated: true, completion: { _ in })
-    }
-
     internal func didSelectViewInquiry(_ guestlistInvite: PFObject) {
         presentPartyMenuforConnect(guestlistInvite)
     }
@@ -422,12 +410,13 @@ import Parse
     internal func didSelectViewEventTicket(_ guestlistInvite: PFObject) {
         self.presentPartyNavigationControllerforTicket(invite: guestlistInvite)
     }
-
+    
     internal func didSelectViewHostedEvent(_ guestlistInvite: PFObject) {
         presentPartyMenuforConnect(guestlistInvite)
     }
     internal func didSelectViewTableReservation(_ guestlistInvite: PFObject) {
         self.presentPartyNavigationControllerforTableReservation(invite: guestlistInvite)
+
     }
     
     internal func didSelectViewInquiryMenuView(_ inquiry:PFObject) {
@@ -439,8 +428,9 @@ import Parse
         let navigationController = UINavigationController.init(navigationBarClass: THLBoldNavigationBar.self, toolbarClass: nil)
         navigationController.setViewControllers([inquiryMenuController], animated: false)
         window.rootViewController!.present(navigationController, animated: true, completion: { _ in })
-
+        
     }
+
     internal func presentPartyMenuforConnect(_ invite: PFObject) {
         let partyMenu = THLPartyMenuController(guestlistInvite: invite)
         let navigationVC = UINavigationController(navigationBarClass: THLBoldNavigationBar.self, toolbarClass: nil)
@@ -511,32 +501,33 @@ import Parse
         }
     }
     
-//    func handlePushNotification(_ pushInfo: [AnyHashable: Any]) -> BFTask {
-//        if (pushInfo["guestlistInviteId"] as! String) {
-//            var guestlistInviteId = pushInfo["guestlistInviteId"]
-//            return
-//                dependencyManager.guestlistService().fetchGuestlistInvite(withId: guestlistInviteId)
-//            BFExecutor.mainThread()
-//            var Nullable: Any?
-//            do {
-//                var invite = task.isResult
-//                var popupView = THLPopupNotificationView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH * 0.87, height: SCREEN_HEIGHT * 0.67))
-//                popupView.messageLabelText = "\(invite.sender.firstName) has invited you\nto party with friends at\n\(invite.event.location.name)\n\(invite.date!.thl_weekdayString) at \(invite.date!.thl_timeString)"
-//                popupView.setImageViewWithURL(URL(string: invite.event.location.image.url)!)
-//                popupView.iconURL = URL(string: invite.sender.image.url)!
-//                popupView.buttonTitle = "View Invite"
-//                popupView.setButtonTarget(self, action: #selector(self.viewInvites), forControlEvents: .touchUpInside)
-//                var popup = KLCPopup(contentView: popupView, showType: KLCPopupShowTypeBounceIn, dismissType: KLCPopupDismissTypeBounceOut, maskType: KLCPopupMaskTypeDimmed, dismissOnBackgroundTouch: true, dismissOnContentTouch: true)
-//                popup.dimmedMaskAlpha = 0.8
-//                popup.show()
-//                return task
-//            }
-//        }
-//        else {
-//            print("Notification was not a guestlistInvite")
-//            return BFTask(result: nil)
-//        }
-//    }
+    //    func handlePushNotification(_ pushInfo: [AnyHashable: Any]) -> BFTask {
+    //        if (pushInfo["guestlistInviteId"] as! String) {
+    //            var guestlistInviteId = pushInfo["guestlistInviteId"]
+    //            return
+    //                dependencyManager.guestlistService().fetchGuestlistInvite(withId: guestlistInviteId)
+    //            BFExecutor.mainThread()
+    //            var Nullable: Any?
+    //            do {
+    //                var invite = task.isResult
+    //                var popupView = THLPopupNotificationView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH * 0.87, height: SCREEN_HEIGHT * 0.67))
+    //                popupView.messageLabelText = "\(invite.sender.firstName) has invited you\nto party with friends at\n\(invite.event.location.name)\n\(invite.date!.thl_weekdayString) at \(invite.date!.thl_timeString)"
+    //                popupView.setImageViewWithURL(URL(string: invite.event.location.image.url)!)
+    //                popupView.iconURL = URL(string: invite.sender.image.url)!
+    //                popupView.buttonTitle = "View Invite"
+    //                popupView.setButtonTarget(self, action: #selector(self.viewInvites), forControlEvents: .touchUpInside)
+    //                var popup = KLCPopup(contentView: popupView, showType: KLCPopupShowTypeBounceIn, dismissType: KLCPopupDismissTypeBounceOut, maskType: KLCPopupMaskTypeDimmed, dismissOnBackgroundTouch: true, dismissOnContentTouch: true)
+    //                popup.dimmedMaskAlpha = 0.8
+    //                popup.show()
+    //                return task
+    //            }
+    //        }
+    //        else {
+    //            print("Notification was not a guestlistInvite")
+    //            return BFTask(result: nil)
+    //        }
+    //    }
+
     // MARK: - LogOut Handler
 
     func logOutUser() {

@@ -21,7 +21,6 @@ import Parse
 import ParseUI
 
 @objc protocol THLConnectedHostViewControllerDelegate {
-    func didAcceptInquiryOffer()
     func openMessageView(ctrl: THLChatViewController)
 }
 

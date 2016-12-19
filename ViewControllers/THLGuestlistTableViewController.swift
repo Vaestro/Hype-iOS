@@ -43,9 +43,13 @@ class THLGuestlistTableViewController: PFQueryTableViewController {
         inviteFriendsButton.setTitleColor(UIColor.black, for: UIControlState.normal)
         inviteFriendsButton.addTarget(self, action: #selector(handleInviteFriends), for: UIControlEvents.touchUpInside)
         inviteFriendsButton.backgroundColor = UIColor.customGoldColor()
-        self.view.addSubview(inviteFriendsButton)
         
-
+        let currentUser = THLUser.current()
+        if currentUser?.type == .guest {
+            self.view.addSubview(inviteFriendsButton)
+        }
+        
+        
     }
 
     override func viewDidLayoutSubviews() {
@@ -78,7 +82,8 @@ extension THLGuestlistTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let guestlistInvite: PFObject = super.object(at: indexPath) as PFObject!
         
-//        let guest:PFObject? = guestlistInvite.value(forKey: "Guest") as? PFObject
+        //        let guest:PFObject? = guestlistInvite.value(forKey: "Guest") as? PFObject
+
         let cell:THLMyEventsTableViewCell = tableView.dequeueReusableCell(withIdentifier: "THLMyEventsTableViewCell", for: indexPath) as! THLMyEventsTableViewCell
 
         if let guest = guestlistInvite.value(forKey: "Guest") as? PFObject {
@@ -91,8 +96,6 @@ extension THLGuestlistTableViewController {
             cell.venueImageView.image = UIImage.init(named: "default_profile_image")
         }
         
-        
-     
         
         return cell
     }

@@ -8,14 +8,11 @@
 
 import UIKit
 
-@objc protocol THLInquiryOffersViewControllerDelegate {
-    func didAcceptInquiryOfferAndWantsToPresentPartyMenuWithInvite(_ guestlistInvite: PFObject)
+protocol THLInquiryOffersViewControllerDelegate {
+    func didSelectInquiryOffer(inquiry:PFObject, offer:PFObject)
 }
 
-class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, THLInquiryOfferDetailsViewDelegate {
-    public func didAcceptInquiryOffer() {
-        self.delegate?.didAcceptInquiryOfferAndWantsToPresentPartyMenuWithInvite(guestlistInvite)
-    }
+class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
     //  MARK: -
     //  MARK: Init
@@ -30,6 +27,7 @@ class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UIT
     var offers: [PFObject]
 
     
+    
     let offersTableViewIdentifier = "offersTableViewIdentifier"
     
     required init?(coder aDecoder: NSCoder) {
@@ -40,13 +38,12 @@ class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UIT
         self.guestlistInvite = guestlistInvite
         self.guestlist = guestlistInvite.value(forKey: "Guestlist") as! PFObject
         self.inquiry = guestlist.value(forKey: "Inquiry") as! PFObject
-
         
         
         self.offers = Array()
         offersTableView = UITableView.init(frame: CGRect.zero)
         super.init(nibName: nil, bundle: nil)
-
+        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancel_icon"), style: .plain, target: self, action: #selector(THLInquiryOffersViewController.dismiss as (THLInquiryOffersViewController) -> () -> ()))
         offersTableView.delegate = self
     }
@@ -58,9 +55,9 @@ class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UIT
     
     override func loadView() {
         super.loadView()
-
-
-
+        
+        
+        
         offersTableView = UITableView(frame: UIScreen.main.bounds, style: UITableViewStyle.plain)
         offersTableView.backgroundColor = UIColor.black
         offersTableView.delegate = self
@@ -79,7 +76,8 @@ class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UIT
         
         self.view.addSubview(offersTableView)
         
-            }
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,19 +85,17 @@ class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UIT
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-//        layout.itemSize = CGSize(width: self.view.frame.size.width - 25, height: 55)
-//        layout.headerReferenceSize = CGSize(width: admissionOptionCollectionView.bounds.width, height: 70.0)
+        //        layout.itemSize = CGSize(width: self.view.frame.size.width - 25, height: 55)
+        //        layout.headerReferenceSize = CGSize(width: admissionOptionCollectionView.bounds.width, height: 70.0)
     }
-    
-
     
     func dismiss() {
         self.dismiss(animated: true, completion: nil)
     }
-
+    
     //  MARK: -
     //  MARK: Responding to events
-
+    
     
     /*
      ==========================================================================================
@@ -124,7 +120,7 @@ class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UIT
         cell.eventTitleLabel.text = venueName.uppercased()
         cell.dateTimeLabel.text = offerDateTime.thl_weekdayString
         cell.messagePreviewLabel.text = inquiryOffer.value(forKey: "message") as! String?
-
+        
         cell.hostImageView.file = host["image"] as! PFFile?
         cell.hostImageView.loadInBackground()
         return cell
@@ -133,10 +129,7 @@ class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UIT
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let offer = offers[indexPath.row]
-        let inquiryOfferDetailsView = THLInquiryOfferDetailsView(inquiry: inquiry, offer: offer)
-        inquiryOfferDetailsView.delegate = self
-        self.navigationController?.pushViewController(inquiryOfferDetailsView, animated: true)
-        
+        self.delegate?.didSelectInquiryOffer(inquiry: inquiry, offer: offer)
     }
     
     
@@ -158,9 +151,9 @@ class THLInquiryOffersViewController: UIViewController, UITableViewDelegate, UIT
         return NSAttributedString(string: str, attributes: attrs)
     }
     
-//    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString {
-//        let str = "Please check another event or contact your concierge for help"
-//        let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)]
-//        return NSAttributedString(string: str, attributes: attrs)
-//    }
+    //    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString {
+    //        let str = "Please check another event or contact your concierge for help"
+    //        let attrs = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)]
+    //        return NSAttributedString(string: str, attributes: attrs)
+    //    }
 }

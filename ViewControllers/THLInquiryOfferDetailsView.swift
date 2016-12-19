@@ -12,7 +12,7 @@ import PopupDialog
 import Parse
 import ParseUI
 
-@objc protocol THLInquiryOfferDetailsViewDelegate {
+protocol THLInquiryOfferDetailsViewDelegate {
     func didAcceptInquiryOffer()
 }
 
@@ -33,7 +33,7 @@ class THLInquiryOfferDetailsView: UIViewController {
         self.inquiry = inquiry
         self.host = inquiryOffer.value(forKey:"Host") as! PFObject
         self.venue = inquiryOffer.value(forKey:"Venue") as! PFObject
-
+        
         super.init(nibName:nil, bundle:nil)
     }
     
@@ -123,7 +123,7 @@ class THLInquiryOfferDetailsView: UIViewController {
             make.top.equalTo(offerMessageLabel.snp.bottom).offset(10)
             make.left.equalTo(superview.snp.left).offset(10)
             make.right.equalTo(superview.snp.right).offset(-10)
-
+            
             make.height.equalTo(100)
         }
         
@@ -193,7 +193,6 @@ class THLInquiryOfferDetailsView: UIViewController {
     
     func handleConnect() {
         inquiryOffer["accepted"] = true
-    
         inquiry["connected"] = true
         inquiry["AcceptedOffer"] = inquiryOffer
         inquiry["acceptedHostId"] = host.objectId
@@ -252,7 +251,7 @@ class THLInquiryOfferDetailsView: UIViewController {
         label.textColor = UIColor.white
         return label
     }
-
+    
     func constructBodyTitleLabel() -> UILabel {
         let label = UILabel()
         label.font = UIFont(name:"OpenSans-Bold",size:16)
@@ -286,7 +285,7 @@ class THLInquiryOfferDetailsView: UIViewController {
         return imageView
     }
     
-
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
