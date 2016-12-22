@@ -7,7 +7,7 @@
 //
 
 #import "THLTextEntryViewController.h"
-#import "IHKeyboardAvoiding.h"
+@import IHKeyboardAvoiding;
 #import "THLAppearanceConstants.h"
 #import "THLSingleLineTextField.h"
 #import "NSString+EmailAddresses.h"
@@ -124,7 +124,7 @@ UITextFieldDelegate
     if (!_containerView) {
         _containerView = [UIView new];
         //    TODO: Keyboard avoiding doesnt work on re-opening
-        [IHKeyboardAvoiding setAvoidingView:_containerView];
+        [KeyboardAvoiding setAvoidingView:_containerView];
         [self.view addSubview:_containerView];
     }
     return _containerView;

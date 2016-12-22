@@ -79,7 +79,6 @@ import Parse
     
     // MARK: Account Registration View Controller Delegate
     func accountRegistrationViewDidCompleteRegistration() {
-        THLChatSocketManager.sharedInstance.createSupportChatRoom()
         presentGuestInterface()
         
     }
